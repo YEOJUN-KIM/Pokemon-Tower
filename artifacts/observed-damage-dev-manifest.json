@@ -1,0 +1,57 @@
+{
+  "createdAt": "2026-10-10T12:13:59.332Z",
+  "stage": "dev",
+  "source": "artifacts/support-ablation-validation-courses.json",
+  "files": [
+    "src/battle/observed-damage.ts",
+    "src/battle/damage-aware-support-player-policy.ts",
+    "src/battle/support-player-policy.ts",
+    "src/battle/switch-policy.ts",
+    "scripts/simulate-observed-damage.ts",
+    "scripts/simulate-observed-damage-climb.ts",
+    "artifacts/support-player-cases.json",
+    "artifacts/support-recheck-climb-cases.json",
+    "artifacts/support-ablation-validation-courses.json"
+  ],
+  "hash": "9bc3d50545121fa18fb79e104ba713f31ebdbc30867b51213706f76541db65ef",
+  "selection": null,
+  "jobs": [
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "v9",
+      "phase": "observed-damage-dev-basic-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "observed",
+      "phase": "observed-damage-dev-basic-observed"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "v9",
+      "phase": "observed-damage-dev-tera-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "observed",
+      "phase": "observed-damage-dev-tera-observed"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "v9",
+      "phase": "observed-damage-dev-chaos-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "observed",
+      "phase": "observed-damage-dev-chaos-observed"
+    }
+  ],
+  "selectionRule": "Development total wins over basic/tera/chaos; only one fixed observed-damage candidate. Validation proceeds regardless of development gain; no tuning after validation."
+}

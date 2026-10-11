@@ -1,0 +1,10 @@
+# Use with compose.yaml and the separate tower-preview project.
+services:
+  game:
+    image: tower-preview-game:local
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate --protocol http2 --url http://game:3000
+    restart: "no"
+    depends_on:
+      - game

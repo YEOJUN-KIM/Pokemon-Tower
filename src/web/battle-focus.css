@@ -1,0 +1,27 @@
+/* Keep the cursor clear without the old double yellow frame. */
+body .battle-live button[data-game-cursor=true],
+body .battle-live button:focus-visible,
+body:has(.battle-live) dialog button[data-game-cursor=true],
+body:has(.battle-live) dialog button:focus-visible{
+  outline:2px solid #98efd1!important;
+  outline-offset:2px!important;
+  border-color:#98efd1!important;
+  box-shadow:none!important;
+}
+body .battle-live :is(.action-button,.pokemon-choice,.battle-party-option)[data-game-cursor=true],
+body .battle-live :is(.action-button,.pokemon-choice,.battle-party-option):focus-visible,
+body:has(.battle-live) dialog .dex-action-options button[data-game-cursor=true],
+body:has(.battle-live) dialog .dex-action-options button:focus-visible{
+  background:#405d59!important;
+  color:#f3fff8!important;
+}
+body .battle-live :is(.action-button,.pokemon-choice)[data-game-cursor=true] strong{
+  color:#f3fff8!important;
+}
+body .battle-live .battle-choice-arrow{color:#98efd1}
+body .battle-live :is(.gimmick-dock,.tera-command-side) button[data-game-cursor=true],
+body .battle-live :is(.gimmick-dock,.tera-command-side) button:focus-visible{
+  outline-offset:2px!important;
+  border-radius:50%;
+  box-shadow:none!important;
+}

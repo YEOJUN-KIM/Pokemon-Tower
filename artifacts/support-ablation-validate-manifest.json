@@ -1,0 +1,143 @@
+{
+  "createdAt": "2026-10-10T11:35:39.282Z",
+  "stage": "validate",
+  "source": "artifacts/support-ablation-validation-courses.json",
+  "files": [
+    "src/battle/ablation-support-player-policy.ts",
+    "src/battle/support-player-policy.ts",
+    "src/battle/switch-policy.ts",
+    "scripts/simulate-support-ablation.ts",
+    "scripts/simulate-ablation-climb.ts",
+    "artifacts/support-player-cases.json",
+    "artifacts/support-recheck-climb-cases.json",
+    "artifacts/support-ablation-validation-courses.json"
+  ],
+  "hash": "9436f4b4bedfefa7309895ee7e666688bbb6b36776710f97c6501e8222b51408",
+  "selection": {
+    "candidate": "wall",
+    "scores": [
+      {
+        "mode": "v9",
+        "wins": 1688
+      },
+      {
+        "mode": "wall",
+        "wins": 1689
+      },
+      {
+        "mode": "handoff",
+        "wins": 1687
+      },
+      {
+        "mode": "setup",
+        "wins": 1679
+      },
+      {
+        "mode": "damage",
+        "wins": 1676
+      }
+    ],
+    "developmentGain": 1,
+    "developmentHash": "68f741de39084161b987c0e8b0dcc011c184ca93ccb1a9e739ec1f6f639e8956",
+    "rule": "Single candidate; development pooled wins, stable tie order. Not proof of superiority."
+  },
+  "jobs": [
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "v9",
+      "phase": "support-ablation-validate-basic-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "wall",
+      "phase": "support-ablation-validate-basic-wall"
+    },
+    {
+      "kind": "battle",
+      "rule": "mega",
+      "mode": "v9",
+      "phase": "support-ablation-validate-mega-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "mega",
+      "mode": "wall",
+      "phase": "support-ablation-validate-mega-wall"
+    },
+    {
+      "kind": "battle",
+      "rule": "dynamax",
+      "mode": "v9",
+      "phase": "support-ablation-validate-dynamax-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "dynamax",
+      "mode": "wall",
+      "phase": "support-ablation-validate-dynamax-wall"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "v9",
+      "phase": "support-ablation-validate-tera-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "wall",
+      "phase": "support-ablation-validate-tera-wall"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "v9",
+      "phase": "support-ablation-validate-chaos-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "wall",
+      "phase": "support-ablation-validate-chaos-wall"
+    },
+    {
+      "kind": "climb",
+      "rule": "basic",
+      "mode": "v9",
+      "phase": "ablation-climb-basic-v9"
+    },
+    {
+      "kind": "climb",
+      "rule": "basic",
+      "mode": "wall",
+      "phase": "ablation-climb-basic-wall"
+    },
+    {
+      "kind": "climb",
+      "rule": "tera",
+      "mode": "v9",
+      "phase": "ablation-climb-tera-v9"
+    },
+    {
+      "kind": "climb",
+      "rule": "tera",
+      "mode": "wall",
+      "phase": "ablation-climb-tera-wall"
+    },
+    {
+      "kind": "climb",
+      "rule": "chaos",
+      "mode": "v9",
+      "phase": "ablation-climb-chaos-v9"
+    },
+    {
+      "kind": "climb",
+      "rule": "chaos",
+      "mode": "wall",
+      "phase": "ablation-climb-chaos-wall"
+    }
+  ],
+  "selectionRule": "Development total wins over basic/tera/chaos; tie order wall, handoff, setup, damage. Select one candidate even if all lose; no combination or tuning after validation."
+}

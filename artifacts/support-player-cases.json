@@ -1,0 +1,700 @@
+[
+  {
+    "id": "espeon-screen",
+    "team": [
+      "Espeon",
+      "Gyarados",
+      "Scizor"
+    ],
+    "moves": {
+      "Espeon": [
+        "Psychic",
+        "Reflect",
+        "Light Screen",
+        "Baton Pass"
+      ],
+      "Gyarados": [
+        "Waterfall",
+        "Ice Fang",
+        "Earthquake",
+        "Dragon Dance"
+      ],
+      "Scizor": [
+        "Bullet Punch",
+        "U-turn",
+        "Roost",
+        "Swords Dance"
+      ]
+    },
+    "profiles": {
+      "Espeon": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Psychic",
+          "Reflect",
+          "Light Screen",
+          "Baton Pass"
+        ],
+        "ability": "Synchronize",
+        "nature": "Modest",
+        "teraType": "Psychic",
+        "statSystem": "points"
+      },
+      "Gyarados": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Waterfall",
+          "Ice Fang",
+          "Earthquake",
+          "Dragon Dance"
+        ],
+        "ability": "Intimidate",
+        "nature": "Adamant",
+        "teraType": "Water",
+        "statSystem": "points"
+      },
+      "Scizor": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Bullet Punch",
+          "U-turn",
+          "Roost",
+          "Swords Dance"
+        ],
+        "ability": "Technician",
+        "nature": "Adamant",
+        "teraType": "Bug",
+        "statSystem": "points"
+      }
+    },
+    "items": {
+      "Espeon": "Light Clay"
+    }
+  },
+  {
+    "id": "grimmsnarl-screen",
+    "team": [
+      "Grimmsnarl",
+      "Garchomp",
+      "Volcarona"
+    ],
+    "moves": {
+      "Grimmsnarl": [
+        "Spirit Break",
+        "Reflect",
+        "Light Screen",
+        "Parting Shot"
+      ],
+      "Garchomp": [
+        "Earthquake",
+        "Dragon Claw",
+        "Rock Slide",
+        "Swords Dance"
+      ],
+      "Volcarona": [
+        "Fiery Dance",
+        "Bug Buzz",
+        "Giga Drain",
+        "Quiver Dance"
+      ]
+    },
+    "profiles": {
+      "Grimmsnarl": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 0,
+          "def": 16,
+          "spa": 0,
+          "spd": 18,
+          "spe": 0
+        },
+        "moves": [
+          "Spirit Break",
+          "Reflect",
+          "Light Screen",
+          "Parting Shot"
+        ],
+        "ability": "Prankster",
+        "nature": "Careful",
+        "teraType": "Dark",
+        "statSystem": "points"
+      },
+      "Garchomp": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Earthquake",
+          "Dragon Claw",
+          "Rock Slide",
+          "Swords Dance"
+        ],
+        "ability": "Rough Skin",
+        "nature": "Adamant",
+        "teraType": "Dragon",
+        "statSystem": "points"
+      },
+      "Volcarona": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Fiery Dance",
+          "Bug Buzz",
+          "Giga Drain",
+          "Quiver Dance"
+        ],
+        "ability": "Flame Body",
+        "nature": "Modest",
+        "teraType": "Bug",
+        "statSystem": "points"
+      }
+    },
+    "items": {
+      "Grimmsnarl": "Light Clay"
+    }
+  },
+  {
+    "id": "klefki-screen",
+    "team": [
+      "Klefki",
+      "Dragonite",
+      "Azumarill"
+    ],
+    "moves": {
+      "Klefki": [
+        "Foul Play",
+        "Reflect",
+        "Light Screen",
+        "Thunder Wave"
+      ],
+      "Dragonite": [
+        "Dragon Claw",
+        "Earthquake",
+        "Roost",
+        "Dragon Dance"
+      ],
+      "Azumarill": [
+        "Waterfall",
+        "Play Rough",
+        "Aqua Jet",
+        "Ice Punch"
+      ]
+    },
+    "profiles": {
+      "Klefki": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 0,
+          "def": 16,
+          "spa": 0,
+          "spd": 18,
+          "spe": 0
+        },
+        "moves": [
+          "Foul Play",
+          "Reflect",
+          "Light Screen",
+          "Thunder Wave"
+        ],
+        "ability": "Prankster",
+        "nature": "Careful",
+        "teraType": "Steel",
+        "statSystem": "points"
+      },
+      "Dragonite": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Dragon Claw",
+          "Earthquake",
+          "Roost",
+          "Dragon Dance"
+        ],
+        "ability": "Multiscale",
+        "nature": "Adamant",
+        "teraType": "Dragon",
+        "statSystem": "points"
+      },
+      "Azumarill": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Waterfall",
+          "Play Rough",
+          "Aqua Jet",
+          "Ice Punch"
+        ],
+        "ability": "Huge Power",
+        "nature": "Modest",
+        "teraType": "Water",
+        "statSystem": "points"
+      }
+    },
+    "items": {
+      "Klefki": "Light Clay"
+    }
+  },
+  {
+    "id": "snow-veil",
+    "team": [
+      "Abomasnow",
+      "Gyarados",
+      "Garchomp"
+    ],
+    "moves": {
+      "Abomasnow": [
+        "Blizzard",
+        "Giga Drain",
+        "Ice Shard",
+        "Aurora Veil"
+      ],
+      "Gyarados": [
+        "Waterfall",
+        "Ice Fang",
+        "Earthquake",
+        "Dragon Dance"
+      ],
+      "Garchomp": [
+        "Earthquake",
+        "Dragon Claw",
+        "Rock Slide",
+        "Swords Dance"
+      ]
+    },
+    "profiles": {
+      "Abomasnow": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 0,
+          "def": 0,
+          "spa": 2,
+          "spd": 0,
+          "spe": 32
+        },
+        "moves": [
+          "Blizzard",
+          "Giga Drain",
+          "Ice Shard",
+          "Aurora Veil"
+        ],
+        "ability": "Snow Warning",
+        "nature": "Timid",
+        "teraType": "Grass",
+        "statSystem": "points"
+      },
+      "Gyarados": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Waterfall",
+          "Ice Fang",
+          "Earthquake",
+          "Dragon Dance"
+        ],
+        "ability": "Intimidate",
+        "nature": "Adamant",
+        "teraType": "Water",
+        "statSystem": "points"
+      },
+      "Garchomp": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Earthquake",
+          "Dragon Claw",
+          "Rock Slide",
+          "Swords Dance"
+        ],
+        "ability": "Rough Skin",
+        "nature": "Adamant",
+        "teraType": "Dragon",
+        "statSystem": "points"
+      }
+    },
+    "items": {
+      "Abomasnow": "Light Clay"
+    }
+  },
+  {
+    "id": "attack-control",
+    "team": [
+      "Garchomp",
+      "Gyarados",
+      "Gengar"
+    ],
+    "moves": {
+      "Garchomp": [
+        "Earthquake",
+        "Dragon Claw",
+        "Rock Slide",
+        "Swords Dance"
+      ],
+      "Gyarados": [
+        "Waterfall",
+        "Ice Fang",
+        "Earthquake",
+        "Dragon Dance"
+      ],
+      "Gengar": [
+        "Shadow Ball",
+        "Sludge Bomb",
+        "Thunderbolt",
+        "Dazzling Gleam"
+      ]
+    },
+    "profiles": {
+      "Garchomp": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Earthquake",
+          "Dragon Claw",
+          "Rock Slide",
+          "Swords Dance"
+        ],
+        "ability": "Rough Skin",
+        "nature": "Adamant",
+        "teraType": "Dragon",
+        "statSystem": "points"
+      },
+      "Gyarados": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Waterfall",
+          "Ice Fang",
+          "Earthquake",
+          "Dragon Dance"
+        ],
+        "ability": "Intimidate",
+        "nature": "Adamant",
+        "teraType": "Water",
+        "statSystem": "points"
+      },
+      "Gengar": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Shadow Ball",
+          "Sludge Bomb",
+          "Thunderbolt",
+          "Dazzling Gleam"
+        ],
+        "ability": "Cursed Body",
+        "nature": "Modest",
+        "teraType": "Ghost",
+        "statSystem": "points"
+      }
+    },
+    "items": {}
+  },
+  {
+    "id": "room-control",
+    "team": [
+      "Slowbro",
+      "Snorlax",
+      "Torkoal"
+    ],
+    "moves": {
+      "Slowbro": [
+        "Scald",
+        "Psychic",
+        "Slack Off",
+        "Trick Room"
+      ],
+      "Snorlax": [
+        "Body Slam",
+        "Crunch",
+        "Curse",
+        "Rest"
+      ],
+      "Torkoal": [
+        "Flamethrower",
+        "Earth Power",
+        "Solar Beam",
+        "Protect"
+      ]
+    },
+    "profiles": {
+      "Slowbro": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 0,
+          "def": 2,
+          "spa": 32,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Scald",
+          "Psychic",
+          "Slack Off",
+          "Trick Room"
+        ],
+        "ability": "Oblivious",
+        "nature": "Quiet",
+        "teraType": "Water",
+        "statSystem": "points"
+      },
+      "Snorlax": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 32,
+          "def": 2,
+          "spa": 0,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Body Slam",
+          "Crunch",
+          "Curse",
+          "Rest"
+        ],
+        "ability": "Immunity",
+        "nature": "Brave",
+        "teraType": "Normal",
+        "statSystem": "points"
+      },
+      "Torkoal": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 32,
+          "def": 2,
+          "spa": 0,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Flamethrower",
+          "Earth Power",
+          "Solar Beam",
+          "Protect"
+        ],
+        "ability": "White Smoke",
+        "nature": "Brave",
+        "teraType": "Fire",
+        "statSystem": "points"
+      }
+    },
+    "items": {}
+  }
+]

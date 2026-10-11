@@ -1,0 +1,133 @@
+import {test, expect} from '@playwright/test';
+import {randomBytes} from 'node:crypto';
+import {TowerStore} from '../src/server/tower-store';
+import {playerKey} from '../src/server/tower-service';
+import {starters, opponentTeam} from '../src/data/teams';
+import {selectStarters} from './select-starters';
+import {runBattle} from '../src/battle/run';
+import {DamagePolicy} from '../src/battle/policy';
+import {classicCollection} from '../tests/classic-team-fixture';
+import {Accounts} from '../src/server/accounts';
+
+test('title, persisted sound settings and continuing a saved battle', async ({page}) => {
+  await page.goto('/');
+  await expect(page.getByRole('heading', {name:'POKÉMON TOWER.'})).toBeVisible();
+  await expect(page.getByRole('link', {name:'게임 시작'})).toBeVisible();
+  await page.screenshot({path:'test-results/title-desktop.png', fullPage:true});
+  await page.getByRole('link', {name:'설정', exact:true}).click();
+  const muted = page.getByRole('checkbox', {name:'전체 음소거'});
+  await expect(muted).toBeChecked();
+  await muted.uncheck();
+  await page.getByRole('slider', {name:'효과음 크기'}).fill('65');
+  await page.reload();
+  await expect(muted).not.toBeChecked();
+  await expect(page.getByRole('slider', {name:'효과음 크기'})).toHaveValue('65');
+  await expect(page.getByText('게스트', {exact:true})).toBeVisible();
+  await page.getByRole('link', {name:'타이틀로'}).click();
+  await page.getByRole('link', {name:'게임 시작'}).click();
+  await expect(page.getByTestId('team-preview').locator('.preview-empty')).toHaveCount(3);
+  await expect(page.locator('.dex-card.in-party')).toHaveCount(0);
+  await expect(page.getByRole('button',{name:'새 도전 시작'})).toBeDisabled();
+  await selectStarters(page);
+  await page.getByRole('button', {name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Enter',exact:true}).click();
+  await expect(page.getByTestId('action-grid')).toBeVisible();
+  const before = await page.request.get('/api/battle').then(r => r.json());
+  await expect(page.locator('.arena')).toHaveAttribute('data-playing','false',{timeout:20000});
+  await page.keyboard.press('x');await page.getByRole('button',{name:'타이틀',exact:true}).click();
+  await page.getByRole('link', {name:'이어하기'}).click();
+  await expect(page.getByTestId('action-grid')).toBeVisible();
+  const after = await page.request.get('/api/battle').then(r => r.json());
+  expect(after.battle.id).toBe(before.battle.id);
+  expect(after.battle.requestId).toBe(before.battle.requestId);
+  await page.keyboard.press('x');await page.getByRole('button',{name:'타이틀',exact:true}).click();
+  await page.getByRole('button', {name:'새로하기',exact:true}).click();
+  const restartPopup=page.getByRole('dialog',{name:'새로하기',exact:true});
+  await expect(restartPopup).toContainText('받을 성장 포인트 +0P');
+  await restartPopup.getByRole('button',{name:'취소',exact:true}).click();
+  const canceled = await page.request.get('/api/battle').then(r => r.json());
+  expect(canceled.battle.id).toBe(before.battle.id);
+  expect(canceled.tower.run.state).toBe('battle');
+  await page.screenshot({path:'test-results/title-continue-new.png',fullPage:true});
+  await page.getByRole('button', {name:'새로하기',exact:true}).click();
+  await restartPopup.getByRole('button',{name:'종료하고 새로 시작',exact:true}).click();
+  await expect(page).toHaveURL(/\/battle$/);
+  await expect(page.getByTestId('team-selection')).toBeVisible();
+  const abandoned = await page.request.get('/api/battle').then(r => r.json());
+  expect(abandoned.tower.run.id).toBe(before.tower.run.id);
+  expect(abandoned.tower.run.state).toBe('abandoned');
+  expect(abandoned.tower.coins).toBe(0); expect(abandoned.tower.growthPoints).toBeGreaterThanOrEqual(before.tower.growthPoints);
+  expect(abandoned.tower.unlocked).toEqual(before.tower.unlocked);
+  await expect(page.getByTestId('team-preview').locator('.preview-empty')).toHaveCount(3);
+  await expect(page.getByRole('button',{name:'새 도전 시작'})).toBeDisabled();
+  await selectStarters(page);
+  await page.getByRole('button', {name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Enter',exact:true}).click();
+  await expect(page.getByTestId('action-grid')).toBeVisible();
+  const fresh = await page.request.get('/api/battle').then(r => r.json());
+  expect(fresh.tower.run.id).not.toBe(before.tower.run.id);
+  expect(fresh.tower.run.floor).toBe(1);
+});
+
+for(const width of [1280,390])test('restart confirmation shows the earned amount and settlement matches it at '+width,async({page,context})=>{
+  await page.setViewportSize({width,height:900});
+  const token=randomBytes(32).toString('hex'),owner=playerKey(token);
+  const store=new TowerStore('.data/e2e.sqlite');
+  try {
+    store.ensurePlayer(owner);classicCollection(store,owner);const id=store.start(owner,starters);
+    store.db.prepare('UPDATE battles SET seed=?,opponent_team=? WHERE id=?').run('[1,2,3,4]',opponentTeam,id);
+    const row=store.battle(id);
+    const log=await runBattle({teams:{p1:row.player_team,p2:row.opponent_team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
+    expect(log.winner).toBe('Player');
+    store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
+    const account=await new Accounts(store.db).register('restart_'+token.slice(0,8),'restart-password',owner,undefined);
+    await context.addCookies([{name:'tower_auth',value:account.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
+    await page.goto('/');
+    await page.getByRole('button',{name:'새로하기',exact:true}).click();
+    const confirmation=page.getByRole('dialog',{name:'새로하기',exact:true});
+    await expect(confirmation).toBeVisible();
+    await expect(confirmation).toContainText('현재 도전을 종료하고 새로 시작할까요?');
+    await expect(confirmation).toContainText('받을 성장 포인트 +20P');
+    await expect(confirmation).not.toContainText('타워 코인');
+    await expect(confirmation).not.toContainText('패배 보너스');
+    expect(await confirmation.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
+    await confirmation.screenshot({path:'test-results/title-restart-popup-'+width+'.png'});
+    await page.keyboard.press('x');await expect(confirmation).toHaveCount(0);
+    expect(store.view(owner).run!.state).not.toBe('abandoned');
+    await page.getByRole('button',{name:'새로하기',exact:true}).click();
+    await confirmation.getByRole('button',{name:'종료하고 새로 시작',exact:true}).click();
+    await expect(page.getByTestId('team-selection')).toBeVisible();
+    await expect(page.getByTestId('growth-wallet')).toContainText('20P');
+    expect(store.view(owner).coins).toBe(0);
+    expect(store.view(owner).run!.growthReward).toBe(20);
+  } finally {store.close();}
+});
+
+test('title and settings fit a mobile screen', async ({page}) => {
+  await page.setViewportSize({width:390,height:844});
+  await page.goto('/');
+  await expect(page.getByRole('link', {name:'게임 시작'})).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({path:'test-results/title-mobile.png',fullPage:true});
+  await page.getByRole('link', {name:'설정',exact:true}).click();
+  await expect(page.getByRole('heading', {name:'계정과 저장'})).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({path:'test-results/settings-mobile.png',fullPage:true});
+});
+
+test('legacy three-floor continuation keeps its target in the title and battle room',async ({page,context}) => {
+  const token = randomBytes(32).toString('hex');
+  const owner = playerKey(token);
+  const store = new TowerStore('.data/e2e.sqlite');
+  try {
+    store.ensurePlayer(owner);
+    const id = store.start(owner,starters);
+    const row = store.battle(id);
+    store.db.prepare('UPDATE runs SET total_floors = 3 WHERE id = ?').run(row.run_id);
+    store.db.prepare('UPDATE battles SET opponent_team = ? WHERE id = ?').run(opponentTeam,id);
+  } finally {store.close();}
+  await context.addCookies([{name:'tower_session',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
+  await page.goto('/');
+  await expect(page.locator('.title-save strong')).toContainText('1 / 3층');
+  await page.getByRole('link',{name:'이어하기'}).click();
+  await expect(page.locator('.panel-top')).toContainText('1 / 3층');
+  await expect(page.getByTestId('action-grid')).toBeVisible();
+});

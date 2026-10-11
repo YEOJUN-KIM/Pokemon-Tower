@@ -1,0 +1,51 @@
+import {test, expect} from '@playwright/test';
+import {randomBytes} from 'node:crypto';
+import {TowerStore} from '../src/server/tower-store';
+import {playerKey} from '../src/server/tower-service';
+import {starters,packTeam} from '../src/data/teams';
+import {runBattle} from '../src/battle/run';
+import {DamagePolicy} from '../src/battle/policy';
+import {selectStarters} from './select-starters';
+
+test('defeat shows a clear mobile result and confirms into retry without changing savings', async ({page,context}) => {
+  const token = randomBytes(32).toString('hex');
+  const owner = playerKey(token);
+  const store = new TowerStore('.data/e2e.sqlite');
+  try {
+    store.ensurePlayer(owner);
+    store.db.prepare('UPDATE players SET growth_points = 250 WHERE id = ?').run(owner);
+    const id = store.start(owner,starters);
+    store.db.prepare('UPDATE battles SET seed = ?,opponent_team=? WHERE id = ?').run('[1,2,3,4]',packTeam(['Garchomp','Tyranitar','Metagross']),id);
+    const row = store.battle(id);
+    const log = await runBattle({teams:{p1:row.player_team,p2:row.opponent_team},seed:[1,2,3,4],opponent:new DamagePolicy(),player:{choose:o => o.legalActions.find(a=>a.command.startsWith('switch'))?.command ?? o.legalActions.filter(a => a.command.startsWith('move')).at(-1)?.command ?? o.legalActions[0].command}});
+    expect(log.winner).toBe('Tower AI');
+    store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
+  } finally {store.close();}
+  await context.addCookies([{name:'tower_session',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
+  await page.setViewportSize({width:390,height:844});
+  await page.goto('/battle');
+  const dialog = page.getByTestId('result-dialog');
+  await expect(dialog.getByRole('heading', {name:'패배',exact:true})).toBeVisible();
+  await expect(dialog).toContainText('이번 타워 도전은 여기까지입니다.');
+  await expect(page.getByTestId('growth-wallet')).toContainText('260P');
+  await page.screenshot({path:'test-results/defeat-mobile.png',fullPage:true});
+  await page.getByRole('button', {name:'새 도전 준비',exact:true}).click();
+  await expect(dialog).toHaveCount(0);
+  await expect(page.getByTestId('dex-list')).toBeVisible();
+  await expect(page.getByRole('button', {name:'새 도전 시작'})).toBeDisabled();
+  await expect(page.getByTestId('growth-wallet')).toContainText('260P');
+  await page.goto('/');
+  await page.getByRole('link',{name:'게임 시작'}).click();
+  await expect(page.getByTestId('team-selection')).toBeVisible();
+  await expect(page.getByTestId('result-dialog')).toHaveCount(0);
+  await expect(page.getByTestId('battle-result')).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByTestId('team-selection')).toBeVisible();
+  await expect(page.getByTestId('result-dialog')).toHaveCount(0);
+  await expect(page.getByLabel('출발 파티')).toBeVisible();
+  await expect(page.getByTestId('team-preview').locator('.preview-empty')).toHaveCount(3);
+  await selectStarters(page);
+  await page.getByRole('button', {name:/^(배틀 시작|새 도전 시작)/}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+  await expect(page.getByTestId('action-grid')).toBeVisible();
+  await expect(page.getByTestId('battle-result')).toHaveCount(0);
+});

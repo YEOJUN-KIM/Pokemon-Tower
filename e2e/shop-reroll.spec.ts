@@ -1,0 +1,19 @@
+import {test,expect} from '@playwright/test';
+import {randomBytes} from 'node:crypto';
+import {TowerStore} from '../src/server/tower-store';
+import {playerKey} from '../src/server/tower-service';
+import {starters} from '../src/data/teams';
+for(const width of [1280,390])test('shop rerolls and fixed vitamins persist at '+width+'px',async({page,context})=>{
+ const token=randomBytes(32).toString('hex'),owner=playerKey(token),store=new TowerStore('.data/e2e.sqlite');try{
+ store.ensurePlayer(owner);const id=store.battle(store.start(owner,starters)).run_id;store.db.prepare("UPDATE runs SET total_floors=50,floor=6,state='select' WHERE id=?").run(id);store.db.prepare('UPDATE players SET coins=20000 WHERE id=?').run(owner);const initial=store.view(owner).run!,vit=initial.vitaminShop!.offers[0];
+ await context.addCookies([{name:'tower_session',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);await page.setViewportSize({width,height:width===390?844:1050});await page.goto('/battle');
+ await page.getByRole('button',{name:'육성',exact:true}).click();await expect(page.locator('[data-vitamin]')).toHaveCount(4);await expect(page.getByTestId('shop-reroll')).toHaveCount(0);await expect(page.locator('.shop-consumable-icon')).toHaveCount(4);
+ await page.getByRole('button',{name:'일반 상점',exact:true}).click();const consumables=await page.locator('.consumable-products strong').allTextContents();await expect(page.locator('.consumable-products .shop-product')).toHaveCount(3);await page.reload();await expect(page.locator('.consumable-products .shop-product')).toHaveCount(3);expect(await page.locator('.consumable-products strong').allTextContents()).toEqual(consumables);expect(await page.locator('.shop-consumable-icon').evaluateAll(imgs=>imgs.every(img=>img instanceof HTMLImageElement&&img.complete&&img.naturalWidth===30))).toBe(true);
+ await page.getByRole('dialog',{name:'6층 출전 준비'}).screenshot({path:'test-results/consumable-vitamins-'+width+'.png'});
+ await page.getByRole('button',{name:'육성',exact:true}).click();await page.locator('[data-vitamin="'+vit.stat+'"]').click();await page.locator('[data-vitamin-target="Charizard"]').click();await expect(page.getByRole('status').filter({hasText:'능력치 강화 완료!'})).toBeVisible();expect(store.view(owner).run!.vitaminShop!.bonuses.Charizard[vit.stat]).toBe(5);await page.keyboard.press('x');
+ await page.getByRole('button',{name:'기술머신',exact:true}).click();const before=store.view(owner).coins,vitaminsAfterPurchase=store.view(owner).run!.vitaminShop!.offers;await expect(page.getByTestId('shop-reroll')).toHaveText('↻ 기술머신 리롤 · 무료');await page.getByTestId('shop-reroll').click();await expect(page.getByTestId('shop-reroll')).toHaveText('리롤 사용 완료');expect(store.view(owner).coins).toBe(before);expect(store.view(owner).run!.vitaminShop!.offers).toEqual(vitaminsAfterPurchase);
+ const state=store.view(owner).run!.machineShop!.offers;await page.reload();await page.getByRole('button',{name:'기술머신',exact:true}).click();await expect(page.getByTestId('shop-reroll')).toHaveText('리롤 사용 완료');expect(store.view(owner).run!.machineShop!.offers).toEqual(state);
+ await page.getByRole('button',{name:'일반 상점',exact:true}).click();await expect(page.getByTestId('shop-reroll')).toContainText('무료');await page.getByTestId('shop-reroll').click();await expect(page.getByTestId('shop-reroll')).toHaveText('리롤 사용 완료');await expect(page.locator('[data-held-item]')).toHaveCount(4);await page.getByRole('dialog',{name:'6층 출전 준비'}).screenshot({path:'test-results/item-reroll-'+width+'.png'});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.getByRole('button',{name:'육성',exact:true}).click();await expect(page.getByTestId('shop-reroll')).toHaveCount(0);expect(store.view(owner).run!.vitaminShop!.offers.map(x=>x.stat)).toEqual(initial.vitaminShop!.offers.map(x=>x.stat));
+ }finally{store.close();}
+});

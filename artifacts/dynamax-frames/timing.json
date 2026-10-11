@@ -1,0 +1,205 @@
+{
+  "frames": [
+    {
+      "path": "artifacts/dynamax-frames/000.png",
+      "time": 1791553103016
+    },
+    {
+      "path": "artifacts/dynamax-frames/001.png",
+      "time": 1791553103364
+    },
+    {
+      "path": "artifacts/dynamax-frames/002.png",
+      "time": 1791553103648
+    },
+    {
+      "path": "artifacts/dynamax-frames/003.png",
+      "time": 1791553103942
+    },
+    {
+      "path": "artifacts/dynamax-frames/004.png",
+      "time": 1791553104203
+    },
+    {
+      "path": "artifacts/dynamax-frames/005.png",
+      "time": 1791553104488
+    },
+    {
+      "path": "artifacts/dynamax-frames/006.png",
+      "time": 1791553104798
+    },
+    {
+      "path": "artifacts/dynamax-frames/007.png",
+      "time": 1791553105111
+    },
+    {
+      "path": "artifacts/dynamax-frames/008.png",
+      "time": 1791553105374
+    },
+    {
+      "path": "artifacts/dynamax-frames/009.png",
+      "time": 1791553105658
+    },
+    {
+      "path": "artifacts/dynamax-frames/010.png",
+      "time": 1791553105979
+    },
+    {
+      "path": "artifacts/dynamax-frames/011.png",
+      "time": 1791553106237
+    },
+    {
+      "path": "artifacts/dynamax-frames/012.png",
+      "time": 1791553106443
+    },
+    {
+      "path": "artifacts/dynamax-frames/013.png",
+      "time": 1791553106631
+    },
+    {
+      "path": "artifacts/dynamax-frames/014.png",
+      "time": 1791553106806
+    },
+    {
+      "path": "artifacts/dynamax-frames/015.png",
+      "time": 1791553106998
+    },
+    {
+      "path": "artifacts/dynamax-frames/016.png",
+      "time": 1791553107222
+    },
+    {
+      "path": "artifacts/dynamax-frames/017.png",
+      "time": 1791553107432
+    },
+    {
+      "path": "artifacts/dynamax-frames/018.png",
+      "time": 1791553107637
+    },
+    {
+      "path": "artifacts/dynamax-frames/019.png",
+      "time": 1791553107806
+    },
+    {
+      "path": "artifacts/dynamax-frames/020.png",
+      "time": 1791553108063
+    },
+    {
+      "path": "artifacts/dynamax-frames/021.png",
+      "time": 1791553108261
+    },
+    {
+      "path": "artifacts/dynamax-frames/022.png",
+      "time": 1791553108452
+    },
+    {
+      "path": "artifacts/dynamax-frames/023.png",
+      "time": 1791553108678
+    },
+    {
+      "path": "artifacts/dynamax-frames/024.png",
+      "time": 1791553108889
+    },
+    {
+      "path": "artifacts/dynamax-frames/025.png",
+      "time": 1791553109092
+    },
+    {
+      "path": "artifacts/dynamax-frames/026.png",
+      "time": 1791553109306
+    },
+    {
+      "path": "artifacts/dynamax-frames/027.png",
+      "time": 1791553109482
+    },
+    {
+      "path": "artifacts/dynamax-frames/028.png",
+      "time": 1791553109672
+    },
+    {
+      "path": "artifacts/dynamax-frames/029.png",
+      "time": 1791553109866
+    },
+    {
+      "path": "artifacts/dynamax-frames/030.png",
+      "time": 1791553110045
+    },
+    {
+      "path": "artifacts/dynamax-frames/031.png",
+      "time": 1791553110232
+    },
+    {
+      "path": "artifacts/dynamax-frames/032.png",
+      "time": 1791553110595
+    },
+    {
+      "path": "artifacts/dynamax-frames/033.png",
+      "time": 1791553110841
+    },
+    {
+      "path": "artifacts/dynamax-frames/034.png",
+      "time": 1791553111008
+    },
+    {
+      "path": "artifacts/dynamax-frames/035.png",
+      "time": 1791553111211
+    },
+    {
+      "path": "artifacts/dynamax-frames/036.png",
+      "time": 1791553111415
+    },
+    {
+      "path": "artifacts/dynamax-frames/037.png",
+      "time": 1791553111604
+    },
+    {
+      "path": "artifacts/dynamax-frames/038.png",
+      "time": 1791553111800
+    },
+    {
+      "path": "artifacts/dynamax-frames/039.png",
+      "time": 1791553112002
+    },
+    {
+      "path": "artifacts/dynamax-frames/040.png",
+      "time": 1791553112197
+    },
+    {
+      "path": "artifacts/dynamax-frames/041.png",
+      "time": 1791553112399
+    },
+    {
+      "path": "artifacts/dynamax-frames/042.png",
+      "time": 1791553112595
+    },
+    {
+      "path": "artifacts/dynamax-frames/043.png",
+      "time": 1791553112814
+    },
+    {
+      "path": "artifacts/dynamax-frames/044.png",
+      "time": 1791553113018
+    },
+    {
+      "path": "artifacts/dynamax-frames/045.png",
+      "time": 1791553113237
+    },
+    {
+      "path": "artifacts/dynamax-frames/046.png",
+      "time": 1791553113439
+    },
+    {
+      "path": "artifacts/dynamax-frames/047.png",
+      "time": 1791553113623
+    },
+    {
+      "path": "artifacts/dynamax-frames/048.png",
+      "time": 1791553113821
+    },
+    {
+      "path": "artifacts/dynamax-frames/049.png",
+      "time": 1791553113955
+    }
+  ],
+  "boundary": 32
+}

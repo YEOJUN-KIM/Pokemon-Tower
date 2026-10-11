@@ -1,0 +1,701 @@
+{
+  "phase": "regional-replay-check",
+  "behavior": "balanced",
+  "prices": {
+    "rerollBase": 200,
+    "rerollStep": 200,
+    "rerollCurve": 100,
+    "vitaminBase": 1000,
+    "vitaminStep": 80,
+    "consumable": 200,
+    "machine": {
+      "uncommon": 100,
+      "rare": 200,
+      "unique": 400,
+      "epic": 650,
+      "legendary": 1000
+    },
+    "itemMultiplier": 1,
+    "itemPrices": {
+      "Sitrus Berry": 150,
+      "Leftovers": 400,
+      "Charcoal": 200,
+      "Mystic Water": 200,
+      "Miracle Seed": 200,
+      "Silk Scarf": 200,
+      "Magnet": 200,
+      "Never-Melt Ice": 200,
+      "Black Belt": 200,
+      "Poison Barb": 200,
+      "Soft Sand": 200,
+      "Sharp Beak": 200,
+      "Twisted Spoon": 200,
+      "Silver Powder": 200,
+      "Hard Stone": 200,
+      "Spell Tag": 200,
+      "Dragon Fang": 200,
+      "Black Glasses": 200,
+      "Metal Coat": 200,
+      "Fairy Feather": 200,
+      "Life Orb": 900,
+      "Choice Band": 900,
+      "Choice Specs": 900,
+      "Choice Scarf": 900,
+      "Expert Belt": 600,
+      "Muscle Band": 400,
+      "Wise Glasses": 400,
+      "Focus Sash": 900,
+      "Assault Vest": 900,
+      "Rocky Helmet": 600,
+      "Eviolite": 900,
+      "Heavy-Duty Boots": 600,
+      "Wide Lens": 400,
+      "Scope Lens": 400,
+      "Light Clay": 600,
+      "Abomasite": 2500,
+      "Absolite": 2500,
+      "Aerodactylite": 2500,
+      "Aggronite": 2500,
+      "Alakazite": 2500,
+      "Altarianite": 2500,
+      "Ampharosite": 2500,
+      "Audinite": 2500,
+      "Banettite": 2500,
+      "Beedrillite": 2500,
+      "Blastoisinite": 2500,
+      "Blazikenite": 2500,
+      "Cameruptite": 2500,
+      "Charizardite X": 2500,
+      "Charizardite Y": 2500,
+      "Diancite": 2500,
+      "Galladite": 2500,
+      "Garchompite": 2500,
+      "Gardevoirite": 2500,
+      "Gengarite": 2500,
+      "Glalitite": 2500,
+      "Gyaradosite": 2500,
+      "Heracronite": 2500,
+      "Houndoominite": 2500,
+      "Kangaskhanite": 2500,
+      "Latiasite": 2500,
+      "Latiosite": 2500,
+      "Lopunnite": 2500,
+      "Lucarionite": 2500,
+      "Manectite": 2500,
+      "Mawilite": 2500,
+      "Medichamite": 2500,
+      "Metagrossite": 2500,
+      "Mewtwonite X": 2500,
+      "Mewtwonite Y": 2500,
+      "Pidgeotite": 2500,
+      "Pinsirite": 2500,
+      "Sablenite": 2500,
+      "Salamencite": 2500,
+      "Sceptilite": 2500,
+      "Scizorite": 2500,
+      "Sharpedonite": 2500,
+      "Slowbronite": 2500,
+      "Steelixite": 2500,
+      "Swampertite": 2500,
+      "Tyranitarite": 2500,
+      "Venusaurite": 2500,
+      "Dynamax Band": 2500
+    }
+  },
+  "engineVersion": "0.11.11",
+  "format": "gen9nationaldexag@@@Max Team Size = 3,Adjust Level = 50",
+  "courses": 9,
+  "opponentAI": "v6",
+  "playerAI": "v6",
+  "perTheme": 1,
+  "notes": "Stratified equal samples of actual randomized regional runs; frozen live enemy teams, IVs, seeds, trainers, rewards and organization assignments. Every continued run assumes earlier wins, so recording ends villain events after the first boss. Both sides use public-information policies; player v6, opponent selected v6/v5. Initial player tera ticket 1, opponent 1 per battle; consumes actual tera protocol, buys 900-coin ticket when empty after useful gear/TMs and before consumables, preserving 400 reserve. Own-stat/type team selection, best-BST capture, six-member collection approximation, full recovery per floor, primary-type tera defaults. Current price and shop hash conventions, exact stock sizes, at most 2 vitamins and 4 rerolls/category. No future enemy knowledge. Simulated strategies, not human win rates; regional sampling intentionally differs from random population weighting.",
+  "stages": [
+    {
+      "stage": "fresh",
+      "byTheme": {
+        "kanto": {
+          "samples": 1,
+          "averageCleared": 8,
+          "finished": 0,
+          "failures": {
+            "9": 1
+          }
+        },
+        "johto": {
+          "samples": 1,
+          "averageCleared": 2,
+          "finished": 0,
+          "failures": {
+            "3": 1
+          }
+        },
+        "hoenn": {
+          "samples": 1,
+          "averageCleared": 3,
+          "finished": 0,
+          "failures": {
+            "4": 1
+          }
+        },
+        "sinnoh": {
+          "samples": 1,
+          "averageCleared": 1,
+          "finished": 0,
+          "failures": {
+            "2": 1
+          }
+        },
+        "unova": {
+          "samples": 1,
+          "averageCleared": 4,
+          "finished": 0,
+          "failures": {
+            "5": 1
+          }
+        },
+        "kalos": {
+          "samples": 1,
+          "averageCleared": 6,
+          "finished": 0,
+          "failures": {
+            "7": 1
+          }
+        },
+        "alola": {
+          "samples": 1,
+          "averageCleared": 1,
+          "finished": 0,
+          "failures": {
+            "2": 1
+          }
+        },
+        "galar": {
+          "samples": 1,
+          "averageCleared": 0,
+          "finished": 0,
+          "failures": {
+            "1": 1
+          }
+        },
+        "paldea": {
+          "samples": 1,
+          "averageCleared": 3,
+          "finished": 0,
+          "failures": {
+            "4": 1
+          }
+        }
+      },
+      "battles": 37,
+      "playerTera": 9,
+      "enemyTera": 37,
+      "playerSwitches": 15,
+      "enemySwitches": 11,
+      "villainBossWins": 0,
+      "climbs": [
+        {
+          "id": "00ba515a-4064-4b2e-bec6-4db9ec94456b",
+          "theme": "kanto",
+          "organization": "rocket",
+          "battles": 9,
+          "playerTera": 1,
+          "enemyTera": 9,
+          "playerSwitches": 3,
+          "enemySwitches": 2,
+          "teraTickets": 0,
+          "villainBossWins": 0,
+          "failedRole": "trainer",
+          "cleared": 8,
+          "coins": 1650,
+          "earned": 2350,
+          "spent": 700,
+          "bossGimmickActivations": 0,
+          "playerGimmickActivations": 0,
+          "shops": [
+            {
+              "floor": 5,
+              "startCoins": 1150,
+              "endCoins": 450,
+              "blocked": 7,
+              "stock": [
+                "guard",
+                "specialDefense",
+                "specialAttack"
+              ],
+              "vitaminOffers": [
+                "spa",
+                "def",
+                "spe",
+                "spd"
+              ],
+              "vitaminPrice": 1400,
+              "purchases": [
+                {
+                  "floor": 5,
+                  "kind": "item",
+                  "name": "Wide Lens",
+                  "price": 400,
+                  "target": "Gengar"
+                },
+                {
+                  "floor": 5,
+                  "kind": "machine",
+                  "name": "Solar Beam",
+                  "price": 100,
+                  "target": "Charizard"
+                },
+                {
+                  "floor": 5,
+                  "kind": "consumable",
+                  "name": "guard",
+                  "price": 200
+                }
+              ]
+            }
+          ],
+          "purchases": [
+            {
+              "floor": 5,
+              "kind": "item",
+              "name": "Wide Lens",
+              "price": 400,
+              "target": "Gengar"
+            },
+            {
+              "floor": 5,
+              "kind": "machine",
+              "name": "Solar Beam",
+              "price": 100,
+              "target": "Charizard"
+            },
+            {
+              "floor": 5,
+              "kind": "consumable",
+              "name": "guard",
+              "price": 200
+            }
+          ],
+          "failedFloor": 9,
+          "failedTrainer": "normal-water",
+          "finalParty": [
+            "Golisopod",
+            "Charizard",
+            "Pangoro"
+          ],
+          "items": {},
+          "bonus": {}
+        },
+        {
+          "id": "8fbe15be-3999-4815-b76d-a208a88be3a7",
+          "theme": "johto",
+          "organization": "rocket",
+          "battles": 3,
+          "playerTera": 1,
+          "enemyTera": 3,
+          "playerSwitches": 1,
+          "enemySwitches": 1,
+          "teraTickets": 0,
+          "villainBossWins": 0,
+          "failedRole": "trainer",
+          "cleared": 2,
+          "coins": 250,
+          "earned": 250,
+          "spent": 0,
+          "bossGimmickActivations": 0,
+          "playerGimmickActivations": 0,
+          "shops": [],
+          "purchases": [],
+          "failedFloor": 3,
+          "failedTrainer": "normal-flying",
+          "finalParty": [
+            "Charizard",
+            "Venusaur",
+            "Ribombee"
+          ],
+          "items": {},
+          "bonus": {}
+        },
+        {
+          "id": "c003b377-b234-42d2-bc01-f022c31a33b3",
+          "theme": "hoenn",
+          "organization": "magma",
+          "battles": 4,
+          "playerTera": 1,
+          "enemyTera": 4,
+          "playerSwitches": 1,
+          "enemySwitches": 0,
+          "teraTickets": 0,
+          "villainBossWins": 0,
+          "failedRole": "trainer",
+          "cleared": 3,
+          "coins": 450,
+          "earned": 450,
+          "spent": 0,
+          "bossGimmickActivations": 0,
+          "playerGimmickActivations": 0,
+          "shops": [],
+          "purchases": [],
+          "failedFloor": 4,
+          "failedTrainer": "normal-electric",
+          "finalParty": [
+            "Charizard",
+            "Venusaur",
+            "Blastoise"
+          ],
+          "items": {},
+          "bonus": {}
+        },
+        {
+          "id": "2aed29c1-1b32-4ca5-a236-f38dd9ca8db4",
+          "theme": "sinnoh",
+          "organization": "galactic",
+          "battles": 2,
+          "playerTera": 1,
+          "enemyTera": 2,
+          "playerSwitches": 1,
+          "enemySwitches": 0,
+          "teraTickets": 0,
+          "villainBossWins": 0,
+          "failedRole": "trainer",
+          "cleared": 1,
+          "coins": 100,
+          "earned": 100,
+          "spent": 0,
+          "bossGimmickActivations": 0,
+          "playerGimmickActivations": 0,
+          "shops": [],
+          "purchases": [],
+          "failedFloor": 2,
+          "failedTrainer": "normal-bug",
+          "finalParty": [
+            "Charizard",
+            "Venusaur",
+            "Blastoise"
+          ],
+          "items": {},
+          "bonus": {}
+        },
+        {
+          "id": "5b615b41-a775-46ae-87cf-b12c4269786a",
+          "theme": "unova",
+          "organization": "plasma",
+          "battles": 5,
+          "playerTera": 1,
+          "enemyTera": 5,
+          "playerSwitches": 1,
+          "enemySwitches": 2,
+          "teraTickets": 0,
+          "villainBossWins": 0,
+          "failedRole": "gym",
+          "cleared": 4,
+          "coins": 700,
+          "earned": 700,
+          "spent": 0,
+          "bossGimmickActivations": 0,
+          "playerGimmickActivations": 0,
+          "shops": [],
+          "purchases": [],
+          "failedFloor": 5,
+          "failedTrainer": "named-brycen",
+          "finalParty": [
+            "Charizard",
+            "Venusaur",
+            "Runerigus"
+          ],
+          "items": {},
+          "bonus": {}
+        },
+        {
+          "id": "4cc46fee-c58d-445a-b123-258517509edd",
+          "theme": "kalos",
+          "organization": "flare",
+          "battles": 7,
+          "playerTera": 1,
+          "enemyTera": 7,
+          "playerSwitches": 4,
+          "enemySwitches": 4,
+          "teraTickets": 0,
+          "villainBossWins": 0,
+          "failedRole": "trainer",
+          "cleared": 6,
+          "coins": 800,
+          "earned": 1500,
+          "spent": 700,
+          "bossGimmickActivations": 0,
+          "playerGimmickActivations": 0,
+          "shops": [
+            {
+              "floor": 5,
+              "startCoins": 1150,
+              "endCoins": 450,
+              "blocked": 6,
+              "stock": [
+                "accuracy",
+                "specialDefense",
+                "speed"
+              ],
+              "vitaminOffers": [
+                "spa",
+                "spd",
+                "spe",
+                "hp"
+              ],
+              "vitaminPrice": 1400,
+              "purchases": [
+                {
+                  "floor": 5,
+                  "kind": "item",
+                  "name": "Silk Scarf",
+                  "price": 200,
+                  "target": "Charizard"
+                },
+                {
+                  "floor": 5,
+                  "kind": "machine",
+                  "name": "Solar Beam",
+                  "price": 100,
+                  "target": "Charizard"
+                },
+                {
+                  "floor": 5,
+                  "kind": "consumable",
+                  "name": "accuracy",
+                  "price": 200
+                },
+                {
+                  "floor": 5,
+                  "kind": "consumable",
+                  "name": "specialDefense",
+                  "price": 200
+                }
+              ]
+            }
+          ],
+          "purchases": [
+            {
+              "floor": 5,
+              "kind": "item",
+              "name": "Silk Scarf",
+              "price": 200,
+              "target": "Charizard"
+            },
+            {
+              "floor": 5,
+              "kind": "machine",
+              "name": "Solar Beam",
+              "price": 100,
+              "target": "Charizard"
+            },
+            {
+              "floor": 5,
+              "kind": "consumable",
+              "name": "accuracy",
+              "price": 200
+            },
+            {
+              "floor": 5,
+              "kind": "consumable",
+              "name": "specialDefense",
+              "price": 200
+            }
+          ],
+          "failedFloor": 7,
+          "failedTrainer": "normal-rock",
+          "finalParty": [
+            "Obstagoon",
+            "Charizard",
+            "Venusaur"
+          ],
+          "items": {
+            "Charizard": "Silk Scarf"
+          },
+          "bonus": {}
+        },
+        {
+          "id": "104d8adc-a99d-43b2-9a5b-a8768019cf17",
+          "theme": "alola",
+          "organization": "skull",
+          "battles": 2,
+          "playerTera": 1,
+          "enemyTera": 2,
+          "playerSwitches": 1,
+          "enemySwitches": 0,
+          "teraTickets": 0,
+          "villainBossWins": 0,
+          "failedRole": "trainer",
+          "cleared": 1,
+          "coins": 100,
+          "earned": 100,
+          "spent": 0,
+          "bossGimmickActivations": 0,
+          "playerGimmickActivations": 0,
+          "shops": [],
+          "purchases": [],
+          "failedFloor": 2,
+          "failedTrainer": "normal-psychic",
+          "finalParty": [
+            "Charizard",
+            "Venusaur",
+            "Stonjourner"
+          ],
+          "items": {},
+          "bonus": {}
+        },
+        {
+          "id": "8cf3f3de-b58b-400d-9623-9d9b43719bd8",
+          "theme": "galar",
+          "organization": "macrocosmos",
+          "battles": 1,
+          "playerTera": 1,
+          "enemyTera": 1,
+          "playerSwitches": 1,
+          "enemySwitches": 0,
+          "teraTickets": 0,
+          "villainBossWins": 0,
+          "failedRole": "trainer",
+          "cleared": 0,
+          "coins": 0,
+          "earned": 0,
+          "spent": 0,
+          "bossGimmickActivations": 0,
+          "playerGimmickActivations": 0,
+          "shops": [],
+          "purchases": [],
+          "failedFloor": 1,
+          "failedTrainer": "normal-electric",
+          "finalParty": [
+            "Charizard",
+            "Venusaur",
+            "Blastoise"
+          ],
+          "items": {},
+          "bonus": {}
+        },
+        {
+          "id": "417b222c-729d-488b-955d-d78a69536023",
+          "theme": "paldea",
+          "organization": "star",
+          "battles": 4,
+          "playerTera": 1,
+          "enemyTera": 4,
+          "playerSwitches": 2,
+          "enemySwitches": 2,
+          "teraTickets": 0,
+          "villainBossWins": 0,
+          "failedRole": "trainer",
+          "cleared": 3,
+          "coins": 450,
+          "earned": 450,
+          "spent": 0,
+          "bossGimmickActivations": 0,
+          "playerGimmickActivations": 0,
+          "shops": [],
+          "purchases": [],
+          "failedFloor": 4,
+          "failedTrainer": "normal-fire",
+          "finalParty": [
+            "Charizard",
+            "Venusaur",
+            "Jynx"
+          ],
+          "items": {},
+          "bonus": {}
+        }
+      ],
+      "averageCleared": 3.111111111111111,
+      "finished": 0,
+      "averageEarned": 655.5555555555555,
+      "averageSpent": 155.55555555555554,
+      "averageRemaining": 500,
+      "shopVisits": 2,
+      "categories": {
+        "item": {
+          "count": 2,
+          "spent": 600,
+          "perVisit": 1
+        },
+        "machine": {
+          "count": 2,
+          "spent": 200,
+          "perVisit": 1
+        },
+        "consumable": {
+          "count": 3,
+          "spent": 600,
+          "perVisit": 1.5
+        },
+        "vitamin": {
+          "count": 0,
+          "spent": 0,
+          "perVisit": 0
+        },
+        "reroll": {
+          "count": 0,
+          "spent": 0,
+          "perVisit": 0
+        },
+        "tera": {
+          "count": 0,
+          "spent": 0,
+          "perVisit": 0
+        }
+      },
+      "checkpointWallets": {
+        "5": {
+          "visits": 2,
+          "before": 1150,
+          "after": 450,
+          "blocked": 6.5
+        },
+        "10": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "15": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "20": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "25": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "30": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "35": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "40": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "45": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        }
+      }
+    }
+  ]
+}

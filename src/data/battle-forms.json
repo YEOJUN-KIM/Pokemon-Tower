@@ -1,0 +1,255 @@
+{
+  "Castform-Sunny": {
+    "id": 10013,
+    "baseSpecies": "Castform",
+    "types": [
+      "Fire"
+    ],
+    "forme": "Sunny"
+  },
+  "Castform-Rainy": {
+    "id": 10014,
+    "baseSpecies": "Castform",
+    "types": [
+      "Water"
+    ],
+    "forme": "Rainy"
+  },
+  "Castform-Snowy": {
+    "id": 10015,
+    "baseSpecies": "Castform",
+    "types": [
+      "Ice"
+    ],
+    "forme": "Snowy"
+  },
+  "Darmanitan-Zen": {
+    "id": 10017,
+    "baseSpecies": "Darmanitan",
+    "types": [
+      "Fire",
+      "Psychic"
+    ],
+    "forme": "Zen"
+  },
+  "Meloetta-Pirouette": {
+    "id": 10018,
+    "baseSpecies": "Meloetta",
+    "types": [
+      "Normal",
+      "Fighting"
+    ],
+    "forme": "Pirouette"
+  },
+  "Aegislash-Blade": {
+    "id": 10026,
+    "baseSpecies": "Aegislash",
+    "types": [
+      "Steel",
+      "Ghost"
+    ],
+    "forme": "Blade"
+  },
+  "Greninja-Ash": {
+    "id": 10117,
+    "baseSpecies": "Greninja",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "forme": "Ash"
+  },
+  "Zygarde-Complete": {
+    "id": 10120,
+    "baseSpecies": "Zygarde",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "forme": "Complete"
+  },
+  "Wishiwashi-School": {
+    "id": 10127,
+    "baseSpecies": "Wishiwashi",
+    "types": [
+      "Water"
+    ],
+    "forme": "School"
+  },
+  "Mimikyu-Busted": {
+    "id": 10143,
+    "baseSpecies": "Mimikyu",
+    "types": [
+      "Ghost",
+      "Fairy"
+    ],
+    "forme": "Busted"
+  },
+  "Necrozma-Ultra": {
+    "id": 10157,
+    "baseSpecies": "Necrozma",
+    "types": [
+      "Psychic",
+      "Dragon"
+    ],
+    "forme": "Ultra"
+  },
+  "Darmanitan-Galar-Zen": {
+    "id": 10178,
+    "baseSpecies": "Darmanitan",
+    "types": [
+      "Ice",
+      "Fire"
+    ],
+    "forme": "Galar-Zen"
+  },
+  "Cramorant-Gulping": {
+    "id": 10182,
+    "baseSpecies": "Cramorant",
+    "types": [
+      "Flying",
+      "Water"
+    ],
+    "forme": "Gulping"
+  },
+  "Cramorant-Gorging": {
+    "id": 10183,
+    "baseSpecies": "Cramorant",
+    "types": [
+      "Flying",
+      "Water"
+    ],
+    "forme": "Gorging"
+  },
+  "Eiscue-Noice": {
+    "id": 10185,
+    "baseSpecies": "Eiscue",
+    "types": [
+      "Ice"
+    ],
+    "forme": "Noice"
+  },
+  "Morpeko-Hangry": {
+    "id": 10187,
+    "baseSpecies": "Morpeko",
+    "types": [
+      "Electric",
+      "Dark"
+    ],
+    "forme": "Hangry"
+  },
+  "Zacian-Crowned": {
+    "id": 10188,
+    "baseSpecies": "Zacian",
+    "types": [
+      "Fairy",
+      "Steel"
+    ],
+    "forme": "Crowned"
+  },
+  "Zamazenta-Crowned": {
+    "id": 10189,
+    "baseSpecies": "Zamazenta",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "forme": "Crowned"
+  },
+  "Palafin-Hero": {
+    "id": 10256,
+    "baseSpecies": "Palafin",
+    "types": [
+      "Water"
+    ],
+    "forme": "Hero"
+  },
+  "Terapagos-Terastal": {
+    "id": 10276,
+    "baseSpecies": "Terapagos",
+    "types": [
+      "Normal"
+    ],
+    "forme": "Terastal"
+  },
+  "Terapagos-Stellar": {
+    "id": 10277,
+    "baseSpecies": "Terapagos",
+    "types": [
+      "Normal"
+    ],
+    "forme": "Stellar"
+  },
+  "Cherrim-Sunshine": {
+    "id": 421,
+    "baseSpecies": "Cherrim",
+    "types": [
+      "Grass"
+    ],
+    "forme": "Sunshine",
+    "spriteKey": "421-sunshine"
+  },
+  "Minior-Meteor": {
+    "id": 774,
+    "baseSpecies": "Minior",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "forme": "Meteor"
+  },
+  "Mimikyu-Busted-Totem": {
+    "id": 778,
+    "baseSpecies": "Mimikyu",
+    "types": [
+      "Ghost",
+      "Fairy"
+    ],
+    "forme": "Busted-Totem"
+  },
+  "Ogerpon-Teal-Tera": {
+    "id": 1017,
+    "baseSpecies": "Ogerpon",
+    "types": [
+      "Grass"
+    ],
+    "forme": "Teal-Tera"
+  },
+  "Ogerpon-Wellspring-Tera": {
+    "id": 1017,
+    "baseSpecies": "Ogerpon",
+    "types": [
+      "Grass",
+      "Water"
+    ],
+    "forme": "Wellspring-Tera"
+  },
+  "Ogerpon-Hearthflame-Tera": {
+    "id": 1017,
+    "baseSpecies": "Ogerpon",
+    "types": [
+      "Grass",
+      "Fire"
+    ],
+    "forme": "Hearthflame-Tera"
+  },
+  "Ogerpon-Cornerstone-Tera": {
+    "id": 1017,
+    "baseSpecies": "Ogerpon",
+    "types": [
+      "Grass",
+      "Rock"
+    ],
+    "forme": "Cornerstone-Tera"
+  },
+  "Minior": {
+    "id": 774,
+    "spriteKey": "10136",
+    "baseSpecies": "Minior",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "forme": ""
+  }
+}

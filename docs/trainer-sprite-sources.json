@@ -1,0 +1,1013 @@
+{
+  "source": "Pokémon Showdown trainer sprite directory",
+  "portraits": [
+    {
+      "portrait": "youngster-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/youngster-gen4.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "firebreather-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/firebreather.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "fisherman-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/fisherman-gen4.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "guitarist-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/guitarist-gen4.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "aromalady-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/aromalady.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "skier-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/skier.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "blackbelt-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/blackbelt-gen4.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "scientist-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/scientist-gen4.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "ruinmaniac-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/ruinmaniac.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "birdkeeper-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/birdkeeper.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "psychic-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/psychic-gen4.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "bugcatcher-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/bugcatcher.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "hiker-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/hiker-gen4.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "channeler-gen3",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/channeler-gen3.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "dragon-tamer-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/dragontamer.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "roughneck-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/roughneck-gen4.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "worker-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/worker-gen4.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "fairytalegirl",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/fairytalegirl.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "acetrainer-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/acetrainer-gen4.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "brock",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/brock.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "giovanni",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/giovanni.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "blue",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/blue.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "falkner",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/falkner.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "archer",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/archer.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "lance",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/lance.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "flannery",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/flannery.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "maxie",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/maxie-gen3.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "steven",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/steven.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "volkner",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/volkner.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "cyrus",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/cyrus.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "cynthia",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/cynthia.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "elesa",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/elesa.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "ghetsis",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/ghetsis.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "alder",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/alder.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "valerie",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/valerie.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "lysandre",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/lysandre.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "diantha",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/diantha.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "kiawe",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/kiawe.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "lusamine",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/lusamine.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "kukui",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/kukui.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "nessa",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/nessa.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "rose",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/rose.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "leon",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/leon.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "iono",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/iono.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "giacomo",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/giacomo.png",
+      "status": "existing",
+      "artist": "ZacWeavile",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "geeta",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/geeta.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "bugsy",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/bugsy.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "whitney",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/whitney.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "morty",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/morty.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "chuck",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/chuck.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "jasmine",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/jasmine.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "pryce",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/pryce.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "clair",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/clair.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "will",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/will.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "koga",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/koga.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "bruno",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/bruno.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "karen",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/karen.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "red",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/red.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "misty",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/misty.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "ltsurge",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/ltsurge.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "erika",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/erika.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "sabrina",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/sabrina.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "blaine",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/blaine.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "lorelei",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/lorelei-gen3.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "agatha",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/agatha-gen3.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "roxanne",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/roxanne.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "brawly",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/brawly.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "wattson",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/wattson.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "norman",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/norman.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "winona",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/winona.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "tateandliza",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/tateandliza-gen3.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "wallace",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/wallace.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "juan",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/juan.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "sidney",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/sidney.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "phoebe",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/phoebe-gen3.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "glacia",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/glacia.png",
+      "status": "existing",
+      "artist": "Grapo",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "drake",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/drake-gen3.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "archie",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/archie-gen3.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "roark",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/roark.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "gardenia",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/gardenia.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "maylene",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/maylene.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "crasherwake",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/crasherwake.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "fantina",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/fantina.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "byron",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/byron.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "candice",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/candice.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "aaron",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/aaron.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "bertha",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/bertha.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "flint",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/flint.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "lucian",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/lucian.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "barry",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/barry.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "cilan",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/cilan.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "chili",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/chili.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "cress",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/cress.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "lenora",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/lenora.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "burgh",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/burgh.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "clay",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/clay.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "skyla",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/skyla.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "brycen",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/brycen.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "drayden",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/drayden.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "cheren",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/cheren.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "roxie",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/roxie.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "marlon",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/marlon.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "shauntal",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/shauntal.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "marshal",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/marshal.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "grimsley",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/grimsley.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "caitlin",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/caitlin.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "iris",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/iris.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "viola",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/viola.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "grant",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/grant.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "korrina",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/korrina.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "ramos",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/ramos.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "clemont",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/clemont.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "olympia",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/olympia.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "wulfric",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/wulfric.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "malva",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/malva.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "siebold",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/siebold.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "wikstrom",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/wikstrom.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "drasna",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/drasna.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "serena",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/serena.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "ilima",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/ilima.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "lana",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/lana.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "mallow",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/mallow.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "sophocles",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/sophocles.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "acerola",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/acerola.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "mina",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/mina.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "molayne",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/molayne.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "olivia",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/olivia.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "kahili",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/kahili.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "hau",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/hau.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "milo",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/milo.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "kabu",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/kabu.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "bea",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/bea.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "allister",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/allister.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "opal",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/opal.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "gordie",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/gordie.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "melony",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/melony.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "piers",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/piers.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "raihan",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/raihan.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "marnie",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/marnie.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "hop",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/hop.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "bede",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/bede.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "oleana",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/oleana.png",
+      "status": "existing",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "katy",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/katy.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "brassius",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/brassius.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "kofu",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/kofu.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "larry",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/larry.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "ryme",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/ryme.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "tulip",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/tulip.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "grusha",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/grusha.png",
+      "status": "existing",
+      "artist": "ZacWeavile",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "rika",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/rika.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "poppy",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/poppy.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "hassel",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/hassel.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "nemona",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/nemona-s.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "penny",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/penny.png",
+      "status": "existing",
+      "artist": "ZacWeavile",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "rocketgrunt",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/rocketgrunt.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "magmagrunt",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/magmagrunt.png",
+      "status": "existing",
+      "artist": "ZacWeavile",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "galacticgrunt",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/galacticgrunt.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "plasmagrunt",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/plasmagrunt.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "flaregrunt",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/flaregrunt.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "skullgrunt",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/skullgrunt.png",
+      "status": "existing",
+      "artist": "ZacWeavile",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "aquagrunt",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/aquagrunt.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "aetherfoundation",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/aetherfoundation.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "officeworker",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/officeworker.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "teamstargrunt",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/stargrunt-s.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "tabitha",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/tabitha.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "mars",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/mars.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "zinzolin",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/zinzolin.png",
+      "status": "existing"
+    },
+    {
+      "portrait": "xerosic",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/xerosic.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "plumeria",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/plumeria.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "guzma",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/guzma.png",
+      "status": "existing",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "matt",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/matt.png",
+      "status": "existing",
+      "artist": "kyledove",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "faba",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/faba.png",
+      "status": "existing",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    }
+  ]
+}

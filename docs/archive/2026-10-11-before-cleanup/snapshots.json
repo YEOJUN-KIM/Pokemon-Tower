@@ -1,0 +1,42 @@
+[
+  {
+    "original": "README.md",
+    "snapshot": "docs/archive/2026-10-11-before-cleanup/PROJECT_README.md",
+    "sha256": "bc461ddeff0d0a44b219c16b84f8f650ec9f5aac4f12791762d449b12c148933"
+  },
+  {
+    "original": "docs/README.md",
+    "snapshot": "docs/archive/2026-10-11-before-cleanup/README.md",
+    "sha256": "028634f156b5e2f155e1471b33ea4bcbe62054f47d539f611a6e37da6dd2b967"
+  },
+  {
+    "original": "docs/STATUS.md",
+    "snapshot": "docs/archive/2026-10-11-before-cleanup/STATUS.md",
+    "sha256": "c7b076d8cd26368fcc09850bbf56f980ea1d54a65794429a65ef157e6b116b10"
+  },
+  {
+    "original": "docs/SESSION_HANDOFF.md",
+    "snapshot": "docs/archive/2026-10-11-before-cleanup/SESSION_HANDOFF.md",
+    "sha256": "848e9f0f84ae2284b28098d3bb5037af39587f66882dbdb87ba4b5e2835325cf"
+  },
+  {
+    "original": "docs/ROADMAP.md",
+    "snapshot": "docs/archive/2026-10-11-before-cleanup/ROADMAP.md",
+    "sha256": "40fa53807235721f810443f3754a1a62cb39fc7208b313279fc07524924d2763"
+  },
+  {
+    "original": "docs/PRD.md",
+    "snapshot": "docs/archive/2026-10-11-before-cleanup/PRD.md",
+    "sha256": "343125c8298ad8fd8af62be9d00aab893d3e63c9db218a65df646474f572f735"
+  },
+  {
+    "original": "docs/UI_FLOW.md",
+    "snapshot": "docs/archive/2026-10-11-before-cleanup/UI_FLOW.md",
+    "sha256": "f407e694bcb788853d12f5ab99a71c9a92e0f3dcf4859a812809f0c219341389"
+  },
+  {
+    "original": "docs/SETUP.md",
+    "snapshot": "docs/archive/2026-10-11-before-cleanup/SETUP.md",
+    "sha256": "f7554e7fbd7d48d449b6576c26e388f2a4a12ebd71c4e0aa79242c4597587c36"
+  }
+]

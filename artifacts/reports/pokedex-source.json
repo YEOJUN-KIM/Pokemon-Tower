@@ -1,0 +1,15 @@
+{
+  "importedAt": "2026-10-05T04:16:57.309Z",
+  "count": 1025,
+  "files": [
+    "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_species.csv",
+    "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_species_names.csv",
+    "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon.csv",
+    "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_types.csv",
+    "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/type_names.csv",
+    "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/pokemon_abilities.csv",
+    "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/abilities.csv",
+    "https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/ability_names.csv"
+  ],
+  "forms": "One default entry per species; Mega, Gigantamax and regional forms are excluded."
+}

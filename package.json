@@ -1,0 +1,44 @@
+{
+  "name": "pokemon-tower",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "deploy:package": "next build && node scripts/package-deploy.mjs",
+    "deploy:verify": "node scripts/verify-deploy.mjs",
+    "deploy:verify:docker": "node scripts/verify-container.mjs",
+    "preview:start": "node scripts/preview.mjs start",
+    "preview:stop": "node scripts/preview.mjs stop",
+    "preview:status": "node scripts/preview.mjs status",
+    "db:backup": "node scripts/backup-db.mjs",
+    "start": "next start --hostname 127.0.0.1",
+    "test:e2e": "playwright test",
+    "battle": "tsx src/cli.ts",
+    "battle:auto": "tsx src/cli.ts --auto",
+    "tower:audit": "tsx src/tower-audit.ts",
+    "data:import": "tsx scripts/import-battle-roster.ts",
+    "battle:audit": "tsx scripts/audit-battle-roster.ts",
+    "sprites:audit": "node scripts/audit-sprite-assets.mjs",
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "next": "16.3.8",
+    "pokemon-showdown": "0.11.11",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "26.6.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  }
+}

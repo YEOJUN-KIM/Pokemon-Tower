@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+  <defs>
+    <linearGradient id="rainbow" x1="0" y1="0" x2="0.15" y2="1">
+      <stop offset="0" stop-color="#f5dce9"/>
+      <stop offset=".2" stop-color="#dccbea"/>
+      <stop offset=".4" stop-color="#b0dfef"/>
+      <stop offset=".58" stop-color="#ade5da"/>
+      <stop offset=".77" stop-color="#c8e8b7"/>
+      <stop offset="1" stop-color="#f7edbc"/>
+    </linearGradient>
+    <radialGradient id="glass" cx=".35" cy=".23" r=".8">
+      <stop offset="0" stop-color="white" stop-opacity=".38"/>
+      <stop offset=".35" stop-color="white" stop-opacity="0"/>
+      <stop offset=".76" stop-color="white" stop-opacity="0"/>
+      <stop offset=".92" stop-color="white" stop-opacity=".18"/>
+      <stop offset="1" stop-color="white" stop-opacity=".85"/>
+    </radialGradient>
+    <filter id="glow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+  <circle cx="120" cy="120" r="108" fill="#fff4ff" opacity=".65" filter="url(#glow)"/>
+  <circle cx="120" cy="120" r="105" fill="url(#rainbow)"/>
+  <!-- A twisting ribbon with three openings keeps the rainbow visible inside. -->
+  <path fill="#677a85" opacity=".68" fill-rule="evenodd" d="M146 28C113 38 77 51 58 80C39 110 52 135 82 154C111 173 119 191 107 213C134 200 174 184 185 153C198 118 174 94 153 74C140 61 138 47 146 28ZM129 51L117 67L145 83C135 72 130 62 129 51ZM84 76L73 86C95 103 125 110 160 122C157 113 151 107 143 102ZM67 105L67 118C94 135 126 145 165 153L169 141C130 132 96 120 67 105ZM83 143L99 160C114 167 130 173 143 179L155 168C130 162 106 154 83 143Z"/>
+  <circle cx="120" cy="120" r="105" fill="url(#glass)"/>
+  <circle cx="120" cy="120" r="105" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="3"/>
+</svg>

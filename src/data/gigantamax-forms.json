@@ -1,0 +1,138 @@
+{
+  "Venusaur-Gmax": {
+    "baseSpecies": "Venusaur",
+    "spriteKey": "10195"
+  },
+  "Charizard-Gmax": {
+    "baseSpecies": "Charizard",
+    "spriteKey": "10196"
+  },
+  "Blastoise-Gmax": {
+    "baseSpecies": "Blastoise",
+    "spriteKey": "10197"
+  },
+  "Butterfree-Gmax": {
+    "baseSpecies": "Butterfree",
+    "spriteKey": "10198"
+  },
+  "Pikachu-Gmax": {
+    "baseSpecies": "Pikachu",
+    "spriteKey": "10199"
+  },
+  "Meowth-Gmax": {
+    "baseSpecies": "Meowth",
+    "spriteKey": "10200"
+  },
+  "Machamp-Gmax": {
+    "baseSpecies": "Machamp",
+    "spriteKey": "10201"
+  },
+  "Gengar-Gmax": {
+    "baseSpecies": "Gengar",
+    "spriteKey": "10202"
+  },
+  "Kingler-Gmax": {
+    "baseSpecies": "Kingler",
+    "spriteKey": "10203"
+  },
+  "Lapras-Gmax": {
+    "baseSpecies": "Lapras",
+    "spriteKey": "10204"
+  },
+  "Eevee-Gmax": {
+    "baseSpecies": "Eevee",
+    "spriteKey": "10205"
+  },
+  "Snorlax-Gmax": {
+    "baseSpecies": "Snorlax",
+    "spriteKey": "10206"
+  },
+  "Garbodor-Gmax": {
+    "baseSpecies": "Garbodor",
+    "spriteKey": "10207"
+  },
+  "Melmetal-Gmax": {
+    "baseSpecies": "Melmetal",
+    "spriteKey": "10208"
+  },
+  "Rillaboom-Gmax": {
+    "baseSpecies": "Rillaboom",
+    "spriteKey": "10209"
+  },
+  "Cinderace-Gmax": {
+    "baseSpecies": "Cinderace",
+    "spriteKey": "10210"
+  },
+  "Inteleon-Gmax": {
+    "baseSpecies": "Inteleon",
+    "spriteKey": "10211"
+  },
+  "Corviknight-Gmax": {
+    "baseSpecies": "Corviknight",
+    "spriteKey": "10212"
+  },
+  "Orbeetle-Gmax": {
+    "baseSpecies": "Orbeetle",
+    "spriteKey": "10213"
+  },
+  "Drednaw-Gmax": {
+    "baseSpecies": "Drednaw",
+    "spriteKey": "10214"
+  },
+  "Coalossal-Gmax": {
+    "baseSpecies": "Coalossal",
+    "spriteKey": "10215"
+  },
+  "Flapple-Gmax": {
+    "baseSpecies": "Flapple",
+    "spriteKey": "10216"
+  },
+  "Appletun-Gmax": {
+    "baseSpecies": "Appletun",
+    "spriteKey": "10217"
+  },
+  "Sandaconda-Gmax": {
+    "baseSpecies": "Sandaconda",
+    "spriteKey": "10218"
+  },
+  "Toxtricity-Gmax": {
+    "baseSpecies": "Toxtricity",
+    "spriteKey": "10219"
+  },
+  "Toxtricity-Low-Key-Gmax": {
+    "baseSpecies": "Toxtricity",
+    "spriteKey": "10228"
+  },
+  "Centiskorch-Gmax": {
+    "baseSpecies": "Centiskorch",
+    "spriteKey": "10220"
+  },
+  "Hatterene-Gmax": {
+    "baseSpecies": "Hatterene",
+    "spriteKey": "10221"
+  },
+  "Grimmsnarl-Gmax": {
+    "baseSpecies": "Grimmsnarl",
+    "spriteKey": "10222"
+  },
+  "Alcremie-Gmax": {
+    "baseSpecies": "Alcremie",
+    "spriteKey": "10223"
+  },
+  "Copperajah-Gmax": {
+    "baseSpecies": "Copperajah",
+    "spriteKey": "10224"
+  },
+  "Duraludon-Gmax": {
+    "baseSpecies": "Duraludon",
+    "spriteKey": "10225"
+  },
+  "Urshifu-Gmax": {
+    "baseSpecies": "Urshifu",
+    "spriteKey": "10226"
+  },
+  "Urshifu-Rapid-Strike-Gmax": {
+    "baseSpecies": "Urshifu",
+    "spriteKey": "10227"
+  }
+}

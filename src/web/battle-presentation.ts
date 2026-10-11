@@ -1,0 +1,117 @@
+import {teraNames} from '../data/tera';
+import type {BattleView} from './contracts';
+import {describeLine, moves, pokemonName, statNames} from './catalog';
+import {effectNotice, type EffectNotice} from './battle-effects';
+import {advanceField,emptyField} from './battle-field';
+import {itemName} from '../data/held-items';
+
+export type Motion = {kind: 'move' | 'hit' | 'heal' | 'switch' | 'faint' | 'stat-up' | 'stat-down' | 'mega-charge' | 'mega-shell' | 'mega-burst' | 'mega-flash' | 'mega-reveal' | 'dynamax-recall' | 'dynamax-ball' | 'dynamax-release' | 'dynamax-grow' | 'dynamax-end' | 'tera-charge' | 'tera-shell' | 'tera-burst' | 'tera-reveal'; sendOut?:boolean;side: 'player' | 'enemy'; color: string; move?: string; label?:string;impact?:'weak'|'strong'|'critical'};
+export type Frame = {view: BattleView; motion: Motion | null; duration: number; notice?:EffectNotice; announcement?:string};
+
+// Protocol windows can be truncated at 300 lines. Match the largest overlap,
+// including repeated events, instead of assuming that message counts increase.
+export function newLines(before: string[], after: string[]) {
+  for (let n = Math.min(before.length, after.length); n > 0; n--) {
+    if (before.slice(-n).every((line, i) => line === after[i])) return after.slice(n);
+  }
+  return after;
+}
+
+export function presentationFrames(before: BattleView, after: BattleView): Frame[] {
+  if (before.id !== after.id) return [];
+  let view: BattleView = structuredClone(before);
+  const frames: Frame[] = [];
+  let lastNotice = '';
+  let impact:Motion['impact'];
+  const lines=newLines(before.messages,after.messages);
+  for (const [index,line] of lines.entries()) {
+    view = structuredClone(view);
+    view.messages = [...view.messages, line].slice(-300);
+    view.field=advanceField(view.field ?? emptyField(),line);
+    const [, event, actor, value, condition] = line.split('|');
+    if(['move','switch','drag','turn'].includes(event))lastNotice='';
+    const candidate=effectNotice(line);
+    const noticeKey=candidate ? `${candidate.actor}:${candidate.kind}:${candidate.name}` : '';
+    const notice=candidate && noticeKey !== lastNotice ? candidate : undefined;
+    if(candidate)lastNotice=noticeKey;
+    const side = actor?.startsWith('p1') ? 'player' : actor?.startsWith('p2') ? 'enemy' : null;
+    let motion: Motion | null = null;
+    const own = side === 'player' ? (view.team.find(p=>p.active)?.species==='Zoroark' ? view.team.find(p=>p.active) : view.team.find(p => p.species === actor.split(': ')[1])) : undefined;
+    const pokemon = side === 'enemy' ? view.opponent : own;
+    const absorbs = event === '-heal' && candidate && ['Water Absorb','Volt Absorb'].includes(candidate.name);
+    if(absorbs) {
+      const subject = `${side === 'enemy' ? '상대 ' : ''}${pokemonName(actor.split(': ')[1])}`;
+      frames.push({view:structuredClone(view),motion:null,notice,announcement:`${subject}에게 ${candidate.name === 'Water Absorb' ? '물' : '전기'} 기술은 효과가 없다!`,duration:1200});
+    }
+    if(event==='move')impact=undefined;
+    if(event==='-supereffective')impact='strong';
+    if(event==='-resisted')impact='weak';
+    if(event==='-crit')impact='critical';
+    if (side && event === 'move') motion = {kind:'move', side, color:value==='Tera Blast' && pokemon?.terastallized ? pokemon.terastallized.toLowerCase() : moves[value]?.color ?? 'normal', move:value};
+    if (side && ['switch','drag','replace'].includes(event)) {
+      const name = value.split(',')[0];
+      if (side === 'enemy') view.opponent = {shiny:value.split(', ').includes('shiny'),species:name,terastallized:value.match(/tera:([A-Za-z]+)/)?.[1],condition:condition ?? view.opponent?.condition ?? '100/100'};
+      else {
+        const actual=after.team.find(p=>p.active)?.species==='Zoroark' ? 'Zoroark' : actor.split(': ')[1];
+        view.team=view.team.map(p=>p.species===actual ? {...p,active:true,displaySpecies:name,condition:condition ?? p.condition} : {...p,active:false});
+      }
+      motion = {kind:'switch',side,color:'normal',sendOut:event!=='replace'};
+    }
+    if(pokemon && ['detailschange','-formechange'].includes(event)){
+      const form=value.split(',')[0];
+      if(form.includes('-Mega')){
+        const megaLine=lines.slice(index).find(l=>l.startsWith('|-mega|'+actor+'|')),stone=megaLine?.split('|')[4];
+        const reaction=`${side==='enemy' ? '상대 ' : ''}${pokemonName(pokemon.species)}의 ${itemName(stone)}이 키스톤에 반응하고 있다!`;
+        frames.push({view:structuredClone(view),motion:null,announcement:reaction,duration:1000});
+        frames.push({view:structuredClone(view),motion:{kind:'mega-charge',side:side!,color:'psychic'},announcement:reaction,duration:950});
+        frames.push({view:structuredClone(view),motion:{kind:'mega-shell',side:side!,color:'psychic'},announcement:reaction,duration:650});
+        pokemon.displaySpecies=form;
+        frames.push({view:structuredClone(view),motion:{kind:'mega-burst',side:side!,color:'psychic'},announcement:reaction,duration:400});
+        frames.push({view:structuredClone(view),motion:{kind:'mega-flash',side:side!,color:'psychic'},announcement:reaction,duration:250});
+        frames.push({view:structuredClone(view),motion:{kind:'mega-reveal',side:side!,color:'psychic'},announcement:`${pokemonName(form)}로 메가진화했다!`,duration:850});
+      }else pokemon.displaySpecies=form;
+    }
+    if(pokemon && ['-start','-end'].includes(event) && value==='Dynamax'){
+      const start=event==='-start';
+      if(start){
+        const subject=(side==='enemy' ? '상대 ' : '')+pokemonName(pokemon.species);
+        frames.push({view:structuredClone(view),motion:{kind:'dynamax-recall',side:side!,color:'fairy'},announcement:subject+'의 다이맥스밴드가 빛나기 시작했다!',duration:800});
+        frames.push({view:structuredClone(view),motion:{kind:'dynamax-ball',side:side!,color:'fairy'},announcement:subject+'에게 다이맥스 에너지가 모이고 있다!',duration:850});
+        frames.push({view:structuredClone(view),motion:{kind:'dynamax-release',side:side!,color:'fairy'},announcement:subject+'에게 다이맥스 에너지가 모이고 있다!',duration:450});
+      }
+      pokemon.dynamax=start;
+      motion={kind:start ? 'dynamax-grow' : 'dynamax-end',side:side!,color:'fairy'};
+    }
+    if(pokemon && event==='-terastallize'){
+      const subject=(side==='enemy'?'상대 ':'')+pokemonName(pokemon.species),color=value.toLowerCase();
+      frames.push({view:structuredClone(view),motion:{kind:'tera-charge',side:side!,color},announcement:subject+'에게 테라 에너지가 모이고 있다!',duration:700});
+      frames.push({view:structuredClone(view),motion:{kind:'tera-shell',side:side!,color},announcement:subject+'의 몸이 결정으로 감싸였다!',duration:650});
+      pokemon.terastallized=value;
+      if(side==='player')view.teraTickets=Math.max(0,(view.teraTickets ?? 0)-1);
+      frames.push({view:structuredClone(view),motion:{kind:'tera-burst',side:side!,color},announcement:subject+'의 결정이 빛나기 시작했다!',duration:400});
+      frames.push({view:structuredClone(view),motion:{kind:'tera-reveal',side:side!,color},announcement:subject+'가 '+(teraNames[value] ?? value)+' 타입으로 테라스탈했다!',duration:850});
+    }
+    if(pokemon && event==='-transform') {
+      const target=side==='player' ? view.opponent : view.team.find(p=>p.active);
+      if(target)pokemon.displaySpecies=target.displaySpecies ?? target.species;
+    }
+    // The spectator protocol exposes percentages. Keep these as percentages
+    // during playback; replace with the server's exact own HP at the end.
+    if (pokemon && ['-damage','-heal'].includes(event)) {
+      pokemon.condition = value;
+      if(!line.split('|').includes('[silent]'))motion = {kind:event === '-damage' ? 'hit' : 'heal',side:side!,color:'normal',label:event === '-heal' ? 'HP 회복' : undefined,impact:event==='-damage' ? impact : undefined};
+      if(event==='-damage')impact=undefined;
+    }
+    if(side && ['-boost','-unboost'].includes(event) && Number(condition) > 0) {
+      const increase=event === '-boost';
+      motion={kind:increase ? 'stat-up' : 'stat-down',side,color:'normal',label:`${statNames[value] ?? value} ${increase ? '상승' : '하락'}`};
+    }
+    if (pokemon && event === 'faint') {pokemon.condition = '0 fnt'; motion = {kind:'faint',side:side!,color:'normal'};}
+    if (pokemon && event === '-status') pokemon.condition = `${pokemon.condition.split(' ')[0]} ${value}`;
+    if (pokemon && event === '-curestatus') pokemon.condition = pokemon.condition.split(' ')[0];
+    if (event === 'turn') view.turn = Number(actor);
+    const motionDuration = motion?.kind === 'dynamax-grow' ? 1150 : motion?.kind === 'dynamax-end' ? 600 : motion?.kind === 'switch' ? (motion.sendOut && (view.opponent?.shiny || view.team.find(p=>p.active)?.shiny) ? 1400 : 800) : motion?.kind === 'move' ? 800 : motion?.kind === 'hit' ? 360 : motion ? 220 : 0;
+    frames.push({view, motion, notice:absorbs ? undefined : notice, duration:Math.max(motionDuration, notice && !absorbs ? 1200 : describeLine(line) ? 750 : 0)});
+  }
+  return frames;
+}

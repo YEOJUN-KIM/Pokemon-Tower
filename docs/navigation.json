@@ -1,0 +1,278 @@
+{
+  "date": "2026-10-11",
+  "notes": "Documentation relocation only. Source, frozen experiments and archived original bytes preserved. Historical report generators retain their original output paths; see scripts/README.md.",
+  "moves": [
+    {
+      "from": "docs/ABILITY_LEARNING_VALIDATION.md",
+      "to": "docs/experiments/ai/ABILITY_LEARNING_VALIDATION.md"
+    },
+    {
+      "from": "docs/ADAPTIVE_COVERAGE_AI.md",
+      "to": "docs/experiments/ai/ADAPTIVE_COVERAGE_AI.md"
+    },
+    {
+      "from": "docs/ARCHITECTURE.md",
+      "to": "docs/engineering/ARCHITECTURE.md"
+    },
+    {
+      "from": "docs/AUTO_SAMPLE_SUITE.md",
+      "to": "docs/experiments/samples/AUTO_SAMPLE_SUITE.md"
+    },
+    {
+      "from": "docs/BALANCE_30_FLOORS.md",
+      "to": "docs/experiments/balance/BALANCE_30_FLOORS.md"
+    },
+    {
+      "from": "docs/BALANCE_50_FLOORS.md",
+      "to": "docs/experiments/balance/BALANCE_50_FLOORS.md"
+    },
+    {
+      "from": "docs/BATTLE_AUDIO.md",
+      "to": "docs/gameplay/BATTLE_AUDIO.md"
+    },
+    {
+      "from": "docs/BATTLE_GIMMICKS.md",
+      "to": "docs/gameplay/BATTLE_GIMMICKS.md"
+    },
+    {
+      "from": "docs/BATTLE_ITEMS_MAINTENANCE.md",
+      "to": "docs/gameplay/BATTLE_ITEMS_MAINTENANCE.md"
+    },
+    {
+      "from": "docs/BATTLE_RULE_MODES.md",
+      "to": "docs/archive/history/BATTLE_RULE_MODES.md"
+    },
+    {
+      "from": "docs/BATTLE_RULE_SELECTION.md",
+      "to": "docs/gameplay/BATTLE_RULE_SELECTION.md"
+    },
+    {
+      "from": "docs/BOSS_GIMMICK_BALANCE.md",
+      "to": "docs/experiments/balance/BOSS_GIMMICK_BALANCE.md"
+    },
+    {
+      "from": "docs/CLIMB_TIME_ESTIMATE.md",
+      "to": "docs/experiments/balance/CLIMB_TIME_ESTIMATE.md"
+    },
+    {
+      "from": "docs/COMPOSITION_DIAGNOSTICS.md",
+      "to": "docs/experiments/samples/COMPOSITION_DIAGNOSTICS.md"
+    },
+    {
+      "from": "docs/COMPOSITION_SIMULATION.md",
+      "to": "docs/experiments/samples/COMPOSITION_SIMULATION.md"
+    },
+    {
+      "from": "docs/CONTENT.md",
+      "to": "docs/archive/history/CONTENT.md"
+    },
+    {
+      "from": "docs/COVERAGE_FACTOR_COMPARISON.md",
+      "to": "docs/experiments/ai/COVERAGE_FACTOR_COMPARISON.md"
+    },
+    {
+      "from": "docs/CURRENT_DIFFICULTY_SIMULATION.md",
+      "to": "docs/experiments/balance/CURRENT_DIFFICULTY_SIMULATION.md"
+    },
+    {
+      "from": "docs/CURRENT_SIX_Z_SIMULATION.md",
+      "to": "docs/experiments/balance/CURRENT_SIX_Z_SIMULATION.md"
+    },
+    {
+      "from": "docs/DATABASE.md",
+      "to": "docs/engineering/DATABASE.md"
+    },
+    {
+      "from": "docs/decisions/001-initial-scope.md",
+      "to": "docs/engineering/decisions/001-initial-scope.md"
+    },
+    {
+      "from": "docs/decisions/002-web-battle.md",
+      "to": "docs/engineering/decisions/002-web-battle.md"
+    },
+    {
+      "from": "docs/decisions/003-tower-persistence.md",
+      "to": "docs/engineering/decisions/003-tower-persistence.md"
+    },
+    {
+      "from": "docs/DEVLOG.md",
+      "to": "docs/archive/history/DEVLOG.md"
+    },
+    {
+      "from": "docs/DIVERSE_TEAM_SIMULATION.md",
+      "to": "docs/experiments/samples/DIVERSE_TEAM_SIMULATION.md"
+    },
+    {
+      "from": "docs/EXPERIMENTS.md",
+      "to": "docs/experiments/README.md"
+    },
+    {
+      "from": "docs/HELD_ITEMS.md",
+      "to": "docs/gameplay/HELD_ITEMS.md"
+    },
+    {
+      "from": "docs/HUNDRED_FLOORS.md",
+      "to": "docs/gameplay/HUNDRED_FLOORS.md"
+    },
+    {
+      "from": "docs/IMMUNITY_RECHECK.md",
+      "to": "docs/experiments/ai/IMMUNITY_RECHECK.md"
+    },
+    {
+      "from": "docs/ITEM_SHOP.md",
+      "to": "docs/gameplay/ITEM_SHOP.md"
+    },
+    {
+      "from": "docs/JOHTO_THEME.md",
+      "to": "docs/gameplay/JOHTO_THEME.md"
+    },
+    {
+      "from": "docs/MACHINE_SHOP.md",
+      "to": "docs/gameplay/MACHINE_SHOP.md"
+    },
+    {
+      "from": "docs/MAINTENANCE.md",
+      "to": "docs/engineering/MAINTENANCE.md"
+    },
+    {
+      "from": "docs/NAMED_TRAINER_BUILDS.md",
+      "to": "docs/gameplay/NAMED_TRAINER_BUILDS.md"
+    },
+    {
+      "from": "docs/OBSERVED_DAMAGE_AI.md",
+      "to": "docs/experiments/ai/OBSERVED_DAMAGE_AI.md"
+    },
+    {
+      "from": "docs/OPPONENT_IMMUNITY_LEARNING.md",
+      "to": "docs/experiments/ai/OPPONENT_IMMUNITY_LEARNING.md"
+    },
+    {
+      "from": "docs/OPPONENT_LEARNING_BALANCE_COMPARISON.md",
+      "to": "docs/experiments/balance/OPPONENT_LEARNING_BALANCE_COMPARISON.md"
+    },
+    {
+      "from": "docs/PLAYTEST_USABILITY.md",
+      "to": "docs/archive/history/PLAYTEST_USABILITY.md"
+    },
+    {
+      "from": "docs/POKEROGUE_REFERENCE.md",
+      "to": "docs/references/POKEROGUE_REFERENCE.md"
+    },
+    {
+      "from": "docs/PORTFOLIO.md",
+      "to": "docs/references/PORTFOLIO.md"
+    },
+    {
+      "from": "docs/PRD.md",
+      "to": "docs/current/PRD.md"
+    },
+    {
+      "from": "docs/PRESENTATION_PLAN.md",
+      "to": "docs/references/PRESENTATION_PLAN.md"
+    },
+    {
+      "from": "docs/REFERENCE_GAMES.md",
+      "to": "docs/references/REFERENCE_GAMES.md"
+    },
+    {
+      "from": "docs/REGIONAL_SIMULATION.md",
+      "to": "docs/experiments/balance/REGIONAL_SIMULATION.md"
+    },
+    {
+      "from": "docs/REGIONAL_THEMES.md",
+      "to": "docs/gameplay/REGIONAL_THEMES.md"
+    },
+    {
+      "from": "docs/RESOURCE_RESEARCH.md",
+      "to": "docs/references/RESOURCE_RESEARCH.md"
+    },
+    {
+      "from": "docs/ROADMAP.md",
+      "to": "docs/current/ROADMAP.md"
+    },
+    {
+      "from": "docs/ROOM_SAMPLE_CORRECTION.md",
+      "to": "docs/experiments/samples/ROOM_SAMPLE_CORRECTION.md"
+    },
+    {
+      "from": "docs/RULE_BALANCE_COMPARISON.md",
+      "to": "docs/experiments/balance/RULE_BALANCE_COMPARISON.md"
+    },
+    {
+      "from": "docs/SAMPLE_HOLDOUT_VALIDATION.md",
+      "to": "docs/experiments/samples/SAMPLE_HOLDOUT_VALIDATION.md"
+    },
+    {
+      "from": "docs/SAMPLE_WALL_FACTOR_COMPARISON.md",
+      "to": "docs/experiments/samples/SAMPLE_WALL_FACTOR_COMPARISON.md"
+    },
+    {
+      "from": "docs/SETUP.md",
+      "to": "docs/current/SETUP.md"
+    },
+    {
+      "from": "docs/SHOP_ECONOMY_50.md",
+      "to": "docs/experiments/balance/SHOP_ECONOMY_50.md"
+    },
+    {
+      "from": "docs/SHOP_PRICE_DISCOUNT.md",
+      "to": "docs/experiments/balance/SHOP_PRICE_DISCOUNT.md"
+    },
+    {
+      "from": "docs/SHOP_RARITIES.md",
+      "to": "docs/gameplay/SHOP_RARITIES.md"
+    },
+    {
+      "from": "docs/SHOP_REROLL_AND_VITAMINS.md",
+      "to": "docs/gameplay/SHOP_REROLL_AND_VITAMINS.md"
+    },
+    {
+      "from": "docs/SHOP_SIMULATION_50.md",
+      "to": "docs/experiments/balance/SHOP_SIMULATION_50.md"
+    },
+    {
+      "from": "docs/SIX_Z_OPPONENTS.md",
+      "to": "docs/gameplay/SIX_Z_OPPONENTS.md"
+    },
+    {
+      "from": "docs/SUPPORT_ABLATION.md",
+      "to": "docs/experiments/ai/SUPPORT_ABLATION.md"
+    },
+    {
+      "from": "docs/SUPPORT_PLAYER_DATA.md",
+      "to": "docs/experiments/ai/SUPPORT_PLAYER_DATA.md"
+    },
+    {
+      "from": "docs/SUPPORT_RECHECK.md",
+      "to": "docs/experiments/ai/SUPPORT_RECHECK.md"
+    },
+    {
+      "from": "docs/SUPPORT_SAMPLE_CORRECTION.md",
+      "to": "docs/experiments/samples/SUPPORT_SAMPLE_CORRECTION.md"
+    },
+    {
+      "from": "docs/SWITCH_AI.md",
+      "to": "docs/gameplay/SWITCH_AI.md"
+    },
+    {
+      "from": "docs/TECH_STACK.md",
+      "to": "docs/engineering/TECH_STACK.md"
+    },
+    {
+      "from": "docs/TERASTALLIZATION.md",
+      "to": "docs/gameplay/TERASTALLIZATION.md"
+    },
+    {
+      "from": "docs/THIRD_PARTY.md",
+      "to": "docs/references/THIRD_PARTY.md"
+    },
+    {
+      "from": "docs/UI_FLOW.md",
+      "to": "docs/current/UI_FLOW.md"
+    },
+    {
+      "from": "docs/VILLAIN_EVENTS.md",
+      "to": "docs/gameplay/VILLAIN_EVENTS.md"
+    }
+  ]
+}

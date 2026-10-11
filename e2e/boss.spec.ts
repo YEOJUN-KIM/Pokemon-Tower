@@ -1,0 +1,103 @@
+import {test,expect} from '@playwright/test';
+import {randomBytes} from 'node:crypto';
+import {TowerStore} from '../src/server/tower-store';
+import {playerKey} from '../src/server/tower-service';
+import {packTeam} from '../src/data/teams';
+import {floors} from '../src/data/floors';
+import {runBattle} from '../src/battle/run';
+import {classicCollection} from '../tests/classic-team-fixture';
+import {DamagePolicy} from '../src/battle/policy';
+
+test('trainers enter the arena, throw balls, support skip and do not replay on reload',async({page,context})=>{
+  await page.setViewportSize({width:390,height:844});
+  const token=randomBytes(32).toString('hex');const owner=playerKey(token);
+  const store=new TowerStore('.data/e2e.sqlite');const team=['Garchomp','Metagross','Dragonite'];
+  let runId='';
+  try {
+    store.ensurePlayer(owner);classicCollection(store,owner);
+    team.forEach(name=>store.db.prepare('INSERT OR IGNORE INTO unlocks VALUES (?,?)').run(owner,name));
+    runId=store.battle(store.start(owner,team)).run_id;
+    store.db.prepare("UPDATE runs SET floor=5,state='select' WHERE id=?").run(runId);
+    const boss=store.view(owner).run!.boss!;
+    await context.addCookies([{name:'tower_session',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
+    await page.goto('/battle');
+    await expect(page.getByText('특수 공격의 시험')).toHaveCount(0);
+    await page.getByRole('button',{name:'5층 보스 도전'}).click();
+    await expect(page.getByTestId('boss-introduction')).toHaveCount(0);
+    await expect(page.getByTestId('trainer-entrance')).toHaveAttribute('data-phase','enter');
+    await expect(page.locator('.arena .player-position,.arena .enemy-position,.arena .health-card')).toHaveCount(0);
+    await expect(page.getByRole('log')).toContainText(boss.name);
+    await expect(page.locator('.arena .sprite')).toHaveCount(0);
+    const player=page.getByRole('img',{name:'플레이어 지우 (성도편 뒷모습)'});
+    await expect(player).toBeVisible();
+    await expect(player).toHaveCSS('background-image',/ash-johto-back-sheet\.png/);
+    expect((await page.request.get('/sprites/trainers/ash-johto-back-sheet.png')).ok()).toBe(true);
+    const portrait=page.getByTestId('trainer-entrance').locator('img.npc-portrait');
+    await expect(portrait).toHaveAttribute('src',`/sprites/trainers/${boss.portrait}.png`);
+    await expect(portrait).toHaveJSProperty('complete',true);
+    expect(await portrait.evaluate(image=>(image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+    await expect(page.locator('.intro-enemy')).toHaveCSS('opacity','1');
+    await expect(page.locator('.intro-player')).toHaveCSS('opacity','1');
+    await page.screenshot({path:'test-results/boss-introduction-mobile.png',fullPage:true});
+    // The old automatic delay must no longer advance the trainer introduction.
+    await page.waitForTimeout(1800);
+    await expect(page.getByTestId('trainer-entrance')).toHaveAttribute('data-phase','enter');
+    await expect(page.locator('.action-grid button')).toHaveCount(0);
+    await page.keyboard.press('Enter');
+    await expect(page.getByTestId('trainer-entrance')).toHaveAttribute('data-phase','throw');
+    await expect(page.locator('.arena .player-position,.arena .enemy-position,.arena .health-card')).toHaveCount(0);
+    await expect(page.locator('.ash-back-sprite')).toHaveCSS('animation-name','ash-throw-frames');
+    await page.keyboard.press('Shift');
+    await expect(page.getByTestId('trainer-entrance')).toHaveCount(0);
+    await expect(page.locator('.enemy-trainer')).toContainText(`${boss.title} ${boss.name}`);
+    await page.reload();
+    await expect(page.getByTestId('boss-introduction')).toHaveCount(0);
+    await expect(page.getByTestId('trainer-entrance')).toHaveCount(0);
+    await expect(page.locator('.enemy-trainer')).toContainText('BOSS');
+    const id=store.currentBattle(owner)!.id;
+    const row=store.battle(id);
+    const fixture=packTeam([...floors[4].opponents]);
+    store.db.prepare('UPDATE battles SET opponent_team=? WHERE id=?').run(fixture,id);
+    const log=await runBattle({teams:{p1:row.player_team,p2:fixture},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
+    expect(log.winner).toBe('Player');
+    store.db.prepare('UPDATE battles SET seed=? WHERE id=?').run(JSON.stringify(log.seed),id);
+    const view={id,status:'complete' as const,requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null};
+    store.complete(id,log,view);store.complete(id,log,view);
+    await page.reload();
+    await expect(page.getByTestId('result-dialog')).toContainText(`${boss.title} ${boss.name}`);
+    await expect(page.getByTestId('result-dialog')).not.toContainText('좋은 호흡이네');
+    await expect(page.getByTestId('result-dialog')).toContainText('+450코인');
+    await page.getByRole('button',{name:'영입으로 계속'}).click();
+    await page.getByRole('button',{name:'영입 없이 계속'}).click();
+    await expect(page.getByTestId('tower-shop')).toHaveCount(0);
+    await expect(page.getByRole('heading',{name:'6층에 출전할 3마리를 선택하세요.'})).toBeVisible();
+    await expect(page.getByTestId('wallet')).toHaveText('450코인');
+    await page.reload();
+    expect(store.view(owner).run!.floor).toBe(6);
+    expect(store.view(owner).run!.boss).toBe(null);
+  } finally {store.close();}
+});
+
+test('A random champion and the temporary player throw balls before Pokemon appear without a confirmation popup',async({page,context})=>{
+  const token=randomBytes(32).toString('hex'),owner=playerKey(token),store=new TowerStore('.data/e2e.sqlite');
+  try {
+    store.ensurePlayer(owner);classicCollection(store,owner);
+    const id=store.start(owner,['Charizard','Blastoise','Venusaur']),runId=store.battle(id).run_id;
+    store.db.prepare("UPDATE runs SET floor=10,state='select' WHERE id=?").run(runId);
+    const boss=store.view(owner).run!.boss!;
+    await context.addCookies([{name:'tower_session',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
+    await page.goto('/battle');
+    await page.getByRole('button',{name:'10층 보스 도전'}).click();
+    await expect(page.getByRole('log')).toContainText(boss.name);
+    await expect(page.locator('.intro-enemy img')).toHaveAttribute('src',`/sprites/trainers/${boss.portrait}.png`);
+    await expect(page.locator('.intro-enemy')).toHaveCSS('opacity','1');
+    await page.screenshot({path:'test-results/champion-introduction.png',fullPage:true});
+    await page.getByRole('button',{name:'포켓몬 내보내기 · Enter',exact:true}).click();
+    await expect(page.getByTestId('trainer-entrance')).toHaveAttribute('data-phase','throw');
+    await expect(page.locator('.trainer-thrown-ball')).toHaveCount(2);
+    await expect(page.getByTestId('trainer-entrance')).toHaveCount(0);
+    await expect(page.locator('.arena .sprite')).toHaveCount(2);
+    await expect(page.locator('.action-grid button').first()).toBeEnabled();
+    await expect(page.locator('dialog[open]')).toHaveCount(0);
+  }finally{store.close();}
+});

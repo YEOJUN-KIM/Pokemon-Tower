@@ -1,0 +1,2126 @@
+[
+  {
+    "id": "auto-gen1",
+    "category": "generation-starters",
+    "team": [
+      "Charizard",
+      "Blastoise",
+      "Venusaur"
+    ],
+    "profiles": {
+      "Charizard": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Blast Burn",
+          "Hyper Beam",
+          "Hurricane",
+          "Dragon Pulse"
+        ],
+        "ability": "Blaze",
+        "nature": "Modest",
+        "teraType": "Fire",
+        "statSystem": "points"
+      },
+      "Blastoise": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Water Spout",
+          "Hyper Beam",
+          "Ice Beam",
+          "Dragon Pulse"
+        ],
+        "ability": "Torrent",
+        "nature": "Modest",
+        "teraType": "Water",
+        "statSystem": "points"
+      },
+      "Venusaur": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Frenzy Plant",
+          "Hyper Beam",
+          "Sludge Bomb",
+          "Earth Power"
+        ],
+        "ability": "Overgrow",
+        "nature": "Modest",
+        "teraType": "Grass",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Charizard": [
+        "Blast Burn",
+        "Hyper Beam",
+        "Hurricane",
+        "Dragon Pulse"
+      ],
+      "Blastoise": [
+        "Water Spout",
+        "Hyper Beam",
+        "Ice Beam",
+        "Dragon Pulse"
+      ],
+      "Venusaur": [
+        "Frenzy Plant",
+        "Hyper Beam",
+        "Sludge Bomb",
+        "Earth Power"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-gen2",
+    "category": "generation-starters",
+    "team": [
+      "Meganium",
+      "Typhlosion",
+      "Feraligatr"
+    ],
+    "profiles": {
+      "Meganium": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Frenzy Plant",
+          "Hyper Beam",
+          "Outrage",
+          "Ancient Power"
+        ],
+        "ability": "Overgrow",
+        "nature": "Modest",
+        "teraType": "Grass",
+        "statSystem": "points"
+      },
+      "Typhlosion": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Eruption",
+          "Hyper Beam",
+          "Focus Blast",
+          "Extrasensory"
+        ],
+        "ability": "Blaze",
+        "nature": "Modest",
+        "teraType": "Fire",
+        "statSystem": "points"
+      },
+      "Feraligatr": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Focus Punch",
+          "Giga Impact",
+          "Liquidation",
+          "Outrage"
+        ],
+        "ability": "Torrent",
+        "nature": "Adamant",
+        "teraType": "Water",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Meganium": [
+        "Frenzy Plant",
+        "Hyper Beam",
+        "Outrage",
+        "Ancient Power"
+      ],
+      "Typhlosion": [
+        "Eruption",
+        "Hyper Beam",
+        "Focus Blast",
+        "Extrasensory"
+      ],
+      "Feraligatr": [
+        "Focus Punch",
+        "Giga Impact",
+        "Liquidation",
+        "Outrage"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-gen3",
+    "category": "generation-starters",
+    "team": [
+      "Sceptile",
+      "Blaziken",
+      "Swampert"
+    ],
+    "profiles": {
+      "Sceptile": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Frenzy Plant",
+          "Hyper Beam",
+          "Dragon Pulse",
+          "Focus Blast"
+        ],
+        "ability": "Overgrow",
+        "nature": "Modest",
+        "teraType": "Grass",
+        "statSystem": "points"
+      },
+      "Blaziken": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Focus Punch",
+          "Flare Blitz",
+          "Last Resort",
+          "Brave Bird"
+        ],
+        "ability": "Blaze",
+        "nature": "Adamant",
+        "teraType": "Fire",
+        "statSystem": "points"
+      },
+      "Swampert": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Earthquake",
+          "Focus Punch",
+          "Giga Impact",
+          "Liquidation"
+        ],
+        "ability": "Torrent",
+        "nature": "Adamant",
+        "teraType": "Water",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Sceptile": [
+        "Frenzy Plant",
+        "Hyper Beam",
+        "Dragon Pulse",
+        "Focus Blast"
+      ],
+      "Blaziken": [
+        "Focus Punch",
+        "Flare Blitz",
+        "Last Resort",
+        "Brave Bird"
+      ],
+      "Swampert": [
+        "Earthquake",
+        "Focus Punch",
+        "Giga Impact",
+        "Liquidation"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-gen4",
+    "category": "generation-starters",
+    "team": [
+      "Torterra",
+      "Infernape",
+      "Empoleon"
+    ],
+    "profiles": {
+      "Torterra": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Headlong Rush",
+          "Wood Hammer",
+          "Giga Impact",
+          "Outrage"
+        ],
+        "ability": "Overgrow",
+        "nature": "Adamant",
+        "teraType": "Grass",
+        "statSystem": "points"
+      },
+      "Infernape": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Focus Punch",
+          "Flare Blitz",
+          "Giga Impact",
+          "Earthquake"
+        ],
+        "ability": "Blaze",
+        "nature": "Adamant",
+        "teraType": "Fire",
+        "statSystem": "points"
+      },
+      "Empoleon": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Hydro Cannon",
+          "Steel Beam",
+          "Hyper Beam",
+          "Ice Beam"
+        ],
+        "ability": "Torrent",
+        "nature": "Modest",
+        "teraType": "Water",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Torterra": [
+        "Headlong Rush",
+        "Wood Hammer",
+        "Giga Impact",
+        "Outrage"
+      ],
+      "Infernape": [
+        "Focus Punch",
+        "Flare Blitz",
+        "Giga Impact",
+        "Earthquake"
+      ],
+      "Empoleon": [
+        "Hydro Cannon",
+        "Steel Beam",
+        "Hyper Beam",
+        "Ice Beam"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-gen5",
+    "category": "generation-starters",
+    "team": [
+      "Serperior",
+      "Emboar",
+      "Samurott"
+    ],
+    "profiles": {
+      "Serperior": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Giga Impact",
+          "Leaf Blade",
+          "Outrage",
+          "Aqua Tail"
+        ],
+        "ability": "Overgrow",
+        "nature": "Adamant",
+        "teraType": "Grass",
+        "statSystem": "points"
+      },
+      "Emboar": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Focus Punch",
+          "Flare Blitz",
+          "Giga Impact",
+          "Head Smash"
+        ],
+        "ability": "Blaze",
+        "nature": "Adamant",
+        "teraType": "Fire",
+        "statSystem": "points"
+      },
+      "Samurott": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Hydro Cannon",
+          "Hyper Beam",
+          "Ice Beam",
+          "Air Slash"
+        ],
+        "ability": "Torrent",
+        "nature": "Modest",
+        "teraType": "Water",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Serperior": [
+        "Giga Impact",
+        "Leaf Blade",
+        "Outrage",
+        "Aqua Tail"
+      ],
+      "Emboar": [
+        "Focus Punch",
+        "Flare Blitz",
+        "Giga Impact",
+        "Head Smash"
+      ],
+      "Samurott": [
+        "Hydro Cannon",
+        "Hyper Beam",
+        "Ice Beam",
+        "Air Slash"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-gen6",
+    "category": "generation-starters",
+    "team": [
+      "Chesnaught",
+      "Delphox",
+      "Greninja"
+    ],
+    "profiles": {
+      "Chesnaught": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Focus Punch",
+          "Wood Hammer",
+          "Giga Impact",
+          "Earthquake"
+        ],
+        "ability": "Overgrow",
+        "nature": "Adamant",
+        "teraType": "Grass",
+        "statSystem": "points"
+      },
+      "Delphox": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Blast Burn",
+          "Future Sight",
+          "Hyper Beam",
+          "Focus Blast"
+        ],
+        "ability": "Blaze",
+        "nature": "Modest",
+        "teraType": "Fire",
+        "statSystem": "points"
+      },
+      "Greninja": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Hydro Cannon",
+          "Hyper Beam",
+          "Dark Pulse",
+          "Sludge Wave"
+        ],
+        "ability": "Torrent",
+        "nature": "Modest",
+        "teraType": "Water",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Chesnaught": [
+        "Focus Punch",
+        "Wood Hammer",
+        "Giga Impact",
+        "Earthquake"
+      ],
+      "Delphox": [
+        "Blast Burn",
+        "Future Sight",
+        "Hyper Beam",
+        "Focus Blast"
+      ],
+      "Greninja": [
+        "Hydro Cannon",
+        "Hyper Beam",
+        "Dark Pulse",
+        "Sludge Wave"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-gen7",
+    "category": "generation-starters",
+    "team": [
+      "Decidueye",
+      "Incineroar",
+      "Primarina"
+    ],
+    "profiles": {
+      "Decidueye": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Poltergeist",
+          "Giga Impact",
+          "Leaf Blade",
+          "Brave Bird"
+        ],
+        "ability": "Overgrow",
+        "nature": "Adamant",
+        "teraType": "Grass",
+        "statSystem": "points"
+      },
+      "Incineroar": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Flare Blitz",
+          "Focus Punch",
+          "Giga Impact",
+          "Darkest Lariat"
+        ],
+        "ability": "Blaze",
+        "nature": "Adamant",
+        "teraType": "Fire",
+        "statSystem": "points"
+      },
+      "Primarina": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Hydro Cannon",
+          "Misty Explosion",
+          "Hyper Beam",
+          "Energy Ball"
+        ],
+        "ability": "Torrent",
+        "nature": "Modest",
+        "teraType": "Water",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Decidueye": [
+        "Poltergeist",
+        "Giga Impact",
+        "Leaf Blade",
+        "Brave Bird"
+      ],
+      "Incineroar": [
+        "Flare Blitz",
+        "Focus Punch",
+        "Giga Impact",
+        "Darkest Lariat"
+      ],
+      "Primarina": [
+        "Hydro Cannon",
+        "Misty Explosion",
+        "Hyper Beam",
+        "Energy Ball"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-gen8",
+    "category": "generation-starters",
+    "team": [
+      "Rillaboom",
+      "Cinderace",
+      "Inteleon"
+    ],
+    "profiles": {
+      "Rillaboom": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Wood Hammer",
+          "Focus Punch",
+          "Giga Impact",
+          "Earthquake"
+        ],
+        "ability": "Overgrow",
+        "nature": "Adamant",
+        "teraType": "Grass",
+        "statSystem": "points"
+      },
+      "Cinderace": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Flare Blitz",
+          "Giga Impact",
+          "High Jump Kick",
+          "Gunk Shot"
+        ],
+        "ability": "Blaze",
+        "nature": "Adamant",
+        "teraType": "Fire",
+        "statSystem": "points"
+      },
+      "Inteleon": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Hydro Cannon",
+          "Hyper Beam",
+          "Ice Beam",
+          "Dark Pulse"
+        ],
+        "ability": "Torrent",
+        "nature": "Modest",
+        "teraType": "Water",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Rillaboom": [
+        "Wood Hammer",
+        "Focus Punch",
+        "Giga Impact",
+        "Earthquake"
+      ],
+      "Cinderace": [
+        "Flare Blitz",
+        "Giga Impact",
+        "High Jump Kick",
+        "Gunk Shot"
+      ],
+      "Inteleon": [
+        "Hydro Cannon",
+        "Hyper Beam",
+        "Ice Beam",
+        "Dark Pulse"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-gen9",
+    "category": "generation-starters",
+    "team": [
+      "Meowscarada",
+      "Skeledirge",
+      "Quaquaval"
+    ],
+    "profiles": {
+      "Meowscarada": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Foul Play",
+          "Giga Impact",
+          "Petal Blizzard",
+          "Play Rough"
+        ],
+        "ability": "Overgrow",
+        "nature": "Adamant",
+        "teraType": "Grass",
+        "statSystem": "points"
+      },
+      "Skeledirge": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Blast Burn",
+          "Hyper Beam",
+          "Shadow Ball",
+          "Belch"
+        ],
+        "ability": "Blaze",
+        "nature": "Modest",
+        "teraType": "Fire",
+        "statSystem": "points"
+      },
+      "Quaquaval": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Close Combat",
+          "Wave Crash",
+          "Last Resort",
+          "Brave Bird"
+        ],
+        "ability": "Torrent",
+        "nature": "Adamant",
+        "teraType": "Water",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Meowscarada": [
+        "Foul Play",
+        "Giga Impact",
+        "Petal Blizzard",
+        "Play Rough"
+      ],
+      "Skeledirge": [
+        "Blast Burn",
+        "Hyper Beam",
+        "Shadow Ball",
+        "Belch"
+      ],
+      "Quaquaval": [
+        "Close Combat",
+        "Wave Crash",
+        "Last Resort",
+        "Brave Bird"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-screens-1",
+    "category": "screens",
+    "team": [
+      "Espeon",
+      "Spectrier",
+      "Yanmega"
+    ],
+    "profiles": {
+      "Espeon": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 0,
+          "def": 16,
+          "spa": 0,
+          "spd": 18,
+          "spe": 0
+        },
+        "moves": [
+          "Reflect",
+          "Light Screen",
+          "Future Sight",
+          "Hyper Beam"
+        ],
+        "ability": "Synchronize",
+        "nature": "Calm",
+        "teraType": "Psychic",
+        "statSystem": "points"
+      },
+      "Spectrier": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Hyper Beam",
+          "Shadow Ball",
+          "Psychic",
+          "Dark Pulse"
+        ],
+        "ability": "Grim Neigh",
+        "nature": "Modest",
+        "teraType": "Ghost",
+        "statSystem": "points"
+      },
+      "Yanmega": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Bug Buzz",
+          "Hyper Beam",
+          "Air Slash",
+          "Dream Eater"
+        ],
+        "ability": "Speed Boost",
+        "nature": "Modest",
+        "teraType": "Bug",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Espeon": [
+        "Reflect",
+        "Light Screen",
+        "Future Sight",
+        "Hyper Beam"
+      ],
+      "Spectrier": [
+        "Hyper Beam",
+        "Shadow Ball",
+        "Psychic",
+        "Dark Pulse"
+      ],
+      "Yanmega": [
+        "Bug Buzz",
+        "Hyper Beam",
+        "Air Slash",
+        "Dream Eater"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-screens-2",
+    "category": "screens",
+    "team": [
+      "Grimmsnarl",
+      "Dugtrio",
+      "Misdreavus"
+    ],
+    "profiles": {
+      "Grimmsnarl": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 0,
+          "def": 16,
+          "spa": 0,
+          "spd": 18,
+          "spe": 0
+        },
+        "moves": [
+          "Reflect",
+          "Light Screen",
+          "Focus Punch",
+          "Foul Play"
+        ],
+        "ability": "Prankster",
+        "nature": "Careful",
+        "teraType": "Dark",
+        "statSystem": "points"
+      },
+      "Dugtrio": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Earthquake",
+          "Giga Impact",
+          "Foul Play",
+          "Stone Edge"
+        ],
+        "ability": "Sand Veil",
+        "nature": "Adamant",
+        "teraType": "Ground",
+        "statSystem": "points"
+      },
+      "Misdreavus": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Hyper Beam",
+          "Future Sight",
+          "Shadow Ball",
+          "Energy Ball"
+        ],
+        "ability": "Levitate",
+        "nature": "Modest",
+        "teraType": "Ghost",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Grimmsnarl": [
+        "Reflect",
+        "Light Screen",
+        "Focus Punch",
+        "Foul Play"
+      ],
+      "Dugtrio": [
+        "Earthquake",
+        "Giga Impact",
+        "Foul Play",
+        "Stone Edge"
+      ],
+      "Misdreavus": [
+        "Hyper Beam",
+        "Future Sight",
+        "Shadow Ball",
+        "Energy Ball"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-screens-3",
+    "category": "screens",
+    "team": [
+      "Klefki",
+      "Floatzel",
+      "Scyther"
+    ],
+    "profiles": {
+      "Klefki": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 0,
+          "def": 16,
+          "spa": 0,
+          "spd": 18,
+          "spe": 0
+        },
+        "moves": [
+          "Reflect",
+          "Light Screen",
+          "Last Resort",
+          "Play Rough"
+        ],
+        "ability": "Prankster",
+        "nature": "Careful",
+        "teraType": "Steel",
+        "statSystem": "points"
+      },
+      "Floatzel": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Wave Crash",
+          "Focus Punch",
+          "Giga Impact",
+          "Crunch"
+        ],
+        "ability": "Swift Swim",
+        "nature": "Adamant",
+        "teraType": "Water",
+        "statSystem": "points"
+      },
+      "Scyther": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Giga Impact",
+          "Close Combat",
+          "Lunge",
+          "Aerial Ace"
+        ],
+        "ability": "Swarm",
+        "nature": "Adamant",
+        "teraType": "Bug",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Klefki": [
+        "Reflect",
+        "Light Screen",
+        "Last Resort",
+        "Play Rough"
+      ],
+      "Floatzel": [
+        "Wave Crash",
+        "Focus Punch",
+        "Giga Impact",
+        "Crunch"
+      ],
+      "Scyther": [
+        "Giga Impact",
+        "Close Combat",
+        "Lunge",
+        "Aerial Ace"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-room-1",
+    "category": "room",
+    "team": [
+      "Bronzong",
+      "Alomomola",
+      "Carbink"
+    ],
+    "profiles": {
+      "Bronzong": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 32,
+          "def": 2,
+          "spa": 0,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Trick Room",
+          "Explosion",
+          "Steel Roller",
+          "Earthquake"
+        ],
+        "ability": "Levitate",
+        "nature": "Brave",
+        "teraType": "Steel",
+        "statSystem": "points"
+      },
+      "Alomomola": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 32,
+          "def": 2,
+          "spa": 0,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Giga Impact",
+          "Liquidation",
+          "Play Rough",
+          "Zen Headbutt"
+        ],
+        "ability": "Healer",
+        "nature": "Brave",
+        "teraType": "Water",
+        "statSystem": "points"
+      },
+      "Carbink": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 32,
+          "def": 2,
+          "spa": 0,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Explosion",
+          "Stone Edge",
+          "Misty Explosion",
+          "Body Press"
+        ],
+        "ability": "Clear Body",
+        "nature": "Brave",
+        "teraType": "Rock",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Bronzong": [
+        "Trick Room",
+        "Explosion",
+        "Steel Roller",
+        "Earthquake"
+      ],
+      "Alomomola": [
+        "Giga Impact",
+        "Liquidation",
+        "Play Rough",
+        "Zen Headbutt"
+      ],
+      "Carbink": [
+        "Explosion",
+        "Stone Edge",
+        "Misty Explosion",
+        "Body Press"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-room-2",
+    "category": "room",
+    "team": [
+      "Bronzong",
+      "Bellossom",
+      "Rhyperior"
+    ],
+    "profiles": {
+      "Bronzong": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 32,
+          "def": 2,
+          "spa": 0,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Trick Room",
+          "Explosion",
+          "Steel Roller",
+          "Earthquake"
+        ],
+        "ability": "Levitate",
+        "nature": "Brave",
+        "teraType": "Steel",
+        "statSystem": "points"
+      },
+      "Bellossom": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 0,
+          "def": 2,
+          "spa": 32,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Petal Dance",
+          "Hyper Beam",
+          "Moonblast",
+          "Pollen Puff"
+        ],
+        "ability": "Chlorophyll",
+        "nature": "Quiet",
+        "teraType": "Grass",
+        "statSystem": "points"
+      },
+      "Rhyperior": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 32,
+          "def": 2,
+          "spa": 0,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Rock Wrecker",
+          "Earthquake",
+          "Focus Punch",
+          "Giga Impact"
+        ],
+        "ability": "Lightning Rod",
+        "nature": "Brave",
+        "teraType": "Ground",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Bronzong": [
+        "Trick Room",
+        "Explosion",
+        "Steel Roller",
+        "Earthquake"
+      ],
+      "Bellossom": [
+        "Petal Dance",
+        "Hyper Beam",
+        "Moonblast",
+        "Pollen Puff"
+      ],
+      "Rhyperior": [
+        "Rock Wrecker",
+        "Earthquake",
+        "Focus Punch",
+        "Giga Impact"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-room-3",
+    "category": "room",
+    "team": [
+      "Reuniclus",
+      "Dipplin",
+      "Tyranitar"
+    ],
+    "profiles": {
+      "Reuniclus": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 32,
+          "def": 2,
+          "spa": 0,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Trick Room",
+          "Future Sight",
+          "Explosion",
+          "Energy Ball"
+        ],
+        "ability": "Overcoat",
+        "nature": "Brave",
+        "teraType": "Psychic",
+        "statSystem": "points"
+      },
+      "Dipplin": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 0,
+          "def": 2,
+          "spa": 32,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Draco Meteor",
+          "Leaf Storm",
+          "Hyper Beam",
+          "Pollen Puff"
+        ],
+        "ability": "Supersweet Syrup",
+        "nature": "Quiet",
+        "teraType": "Grass",
+        "statSystem": "points"
+      },
+      "Tyranitar": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 0
+        },
+        "evs": {
+          "hp": 32,
+          "atk": 32,
+          "def": 2,
+          "spa": 0,
+          "spd": 0,
+          "spe": 0
+        },
+        "moves": [
+          "Focus Punch",
+          "Foul Play",
+          "Giga Impact",
+          "Outrage"
+        ],
+        "ability": "Sand Stream",
+        "nature": "Brave",
+        "teraType": "Rock",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Reuniclus": [
+        "Trick Room",
+        "Future Sight",
+        "Explosion",
+        "Energy Ball"
+      ],
+      "Dipplin": [
+        "Draco Meteor",
+        "Leaf Storm",
+        "Hyper Beam",
+        "Pollen Puff"
+      ],
+      "Tyranitar": [
+        "Focus Punch",
+        "Foul Play",
+        "Giga Impact",
+        "Outrage"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-mixed-1",
+    "category": "mixed",
+    "team": [
+      "Masquerain",
+      "Wugtrio",
+      "Ambipom"
+    ],
+    "profiles": {
+      "Masquerain": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Bug Buzz",
+          "Hyper Beam",
+          "Hurricane",
+          "Energy Ball"
+        ],
+        "ability": "Intimidate",
+        "nature": "Modest",
+        "teraType": "Bug",
+        "statSystem": "points"
+      },
+      "Wugtrio": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Giga Impact",
+          "Liquidation",
+          "Foul Play",
+          "Stomping Tantrum"
+        ],
+        "ability": "Gooey",
+        "nature": "Adamant",
+        "teraType": "Water",
+        "statSystem": "points"
+      },
+      "Ambipom": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Last Resort",
+          "Focus Punch",
+          "Gunk Shot",
+          "Foul Play"
+        ],
+        "ability": "Technician",
+        "nature": "Adamant",
+        "teraType": "Normal",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Masquerain": [
+        "Bug Buzz",
+        "Hyper Beam",
+        "Hurricane",
+        "Energy Ball"
+      ],
+      "Wugtrio": [
+        "Giga Impact",
+        "Liquidation",
+        "Foul Play",
+        "Stomping Tantrum"
+      ],
+      "Ambipom": [
+        "Last Resort",
+        "Focus Punch",
+        "Gunk Shot",
+        "Foul Play"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-mixed-2",
+    "category": "mixed",
+    "team": [
+      "Raikou",
+      "Slurpuff",
+      "Orbeetle"
+    ],
+    "profiles": {
+      "Raikou": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Hyper Beam",
+          "Thunderbolt",
+          "Aura Sphere",
+          "Extrasensory"
+        ],
+        "ability": "Pressure",
+        "nature": "Modest",
+        "teraType": "Electric",
+        "statSystem": "points"
+      },
+      "Slurpuff": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Misty Explosion",
+          "Hyper Beam",
+          "Dream Eater",
+          "Energy Ball"
+        ],
+        "ability": "Sweet Veil",
+        "nature": "Modest",
+        "teraType": "Fairy",
+        "statSystem": "points"
+      },
+      "Orbeetle": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Future Sight",
+          "Bug Buzz",
+          "Hyper Beam",
+          "Energy Ball"
+        ],
+        "ability": "Swarm",
+        "nature": "Modest",
+        "teraType": "Bug",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Raikou": [
+        "Hyper Beam",
+        "Thunderbolt",
+        "Aura Sphere",
+        "Extrasensory"
+      ],
+      "Slurpuff": [
+        "Misty Explosion",
+        "Hyper Beam",
+        "Dream Eater",
+        "Energy Ball"
+      ],
+      "Orbeetle": [
+        "Future Sight",
+        "Bug Buzz",
+        "Hyper Beam",
+        "Energy Ball"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  },
+  {
+    "id": "auto-mixed-3",
+    "category": "mixed",
+    "team": [
+      "Urshifu",
+      "Dialga",
+      "Raticate"
+    ],
+    "profiles": {
+      "Urshifu": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Focus Punch",
+          "Foul Play",
+          "Giga Impact",
+          "Iron Head"
+        ],
+        "ability": "Unseen Fist",
+        "nature": "Adamant",
+        "teraType": "Fighting",
+        "statSystem": "points"
+      },
+      "Dialga": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 0,
+          "def": 0,
+          "spa": 32,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Roar of Time",
+          "Steel Beam",
+          "Hyper Beam",
+          "Overheat"
+        ],
+        "ability": "Pressure",
+        "nature": "Modest",
+        "teraType": "Steel",
+        "statSystem": "points"
+      },
+      "Raticate": {
+        "ivs": {
+          "hp": 31,
+          "atk": 31,
+          "def": 31,
+          "spa": 31,
+          "spd": 31,
+          "spe": 31
+        },
+        "evs": {
+          "hp": 13,
+          "atk": 32,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 21
+        },
+        "moves": [
+          "Last Resort",
+          "Wild Charge",
+          "Crunch",
+          "Iron Tail"
+        ],
+        "ability": "Run Away",
+        "nature": "Adamant",
+        "teraType": "Normal",
+        "statSystem": "points"
+      }
+    },
+    "moves": {
+      "Urshifu": [
+        "Focus Punch",
+        "Foul Play",
+        "Giga Impact",
+        "Iron Head"
+      ],
+      "Dialga": [
+        "Roar of Time",
+        "Steel Beam",
+        "Hyper Beam",
+        "Overheat"
+      ],
+      "Raticate": [
+        "Last Resort",
+        "Wild Charge",
+        "Crunch",
+        "Iron Tail"
+      ]
+    },
+    "iv": 31,
+    "points": 66,
+    "recruitment": "adaptive"
+  }
+]

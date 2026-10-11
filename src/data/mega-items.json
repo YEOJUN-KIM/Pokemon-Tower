@@ -1,0 +1,378 @@
+{
+  "Abomasite": {
+    "name": "눈설왕나이트",
+    "species": "Abomasnow",
+    "forme": "Abomasnow-Mega",
+    "price": 5000,
+    "description": "눈설왕에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Absolite": {
+    "name": "앱솔나이트",
+    "species": "Absol",
+    "forme": "Absol-Mega",
+    "price": 5000,
+    "description": "앱솔에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Aerodactylite": {
+    "name": "프테라나이트",
+    "species": "Aerodactyl",
+    "forme": "Aerodactyl-Mega",
+    "price": 5000,
+    "description": "프테라에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Aggronite": {
+    "name": "보스로라나이트",
+    "species": "Aggron",
+    "forme": "Aggron-Mega",
+    "price": 5000,
+    "description": "보스로라에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Alakazite": {
+    "name": "후딘나이트",
+    "species": "Alakazam",
+    "forme": "Alakazam-Mega",
+    "price": 5000,
+    "description": "후딘에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Altarianite": {
+    "name": "파비코리나이트",
+    "species": "Altaria",
+    "forme": "Altaria-Mega",
+    "price": 5000,
+    "description": "파비코리에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Ampharosite": {
+    "name": "전룡나이트",
+    "species": "Ampharos",
+    "forme": "Ampharos-Mega",
+    "price": 5000,
+    "description": "전룡에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Audinite": {
+    "name": "다부니나이트",
+    "species": "Audino",
+    "forme": "Audino-Mega",
+    "price": 5000,
+    "description": "다부니에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Banettite": {
+    "name": "다크펫나이트",
+    "species": "Banette",
+    "forme": "Banette-Mega",
+    "price": 5000,
+    "description": "다크펫에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Beedrillite": {
+    "name": "독침붕나이트",
+    "species": "Beedrill",
+    "forme": "Beedrill-Mega",
+    "price": 5000,
+    "description": "독침붕에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Blastoisinite": {
+    "name": "거북왕나이트",
+    "species": "Blastoise",
+    "forme": "Blastoise-Mega",
+    "price": 5000,
+    "description": "거북왕에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Blazikenite": {
+    "name": "번치코나이트",
+    "species": "Blaziken",
+    "forme": "Blaziken-Mega",
+    "price": 5000,
+    "description": "번치코에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Cameruptite": {
+    "name": "폭타나이트",
+    "species": "Camerupt",
+    "forme": "Camerupt-Mega",
+    "price": 5000,
+    "description": "폭타에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Charizardite X": {
+    "name": "리자몽나이트X",
+    "species": "Charizard",
+    "forme": "Charizard-Mega-X",
+    "price": 5000,
+    "description": "리자몽에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Charizardite Y": {
+    "name": "리자몽나이트Y",
+    "species": "Charizard",
+    "forme": "Charizard-Mega-Y",
+    "price": 5000,
+    "description": "리자몽에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Diancite": {
+    "name": "디안시나이트",
+    "species": "Diancie",
+    "forme": "Diancie-Mega",
+    "price": 5000,
+    "description": "디안시에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Galladite": {
+    "name": "엘레이드나이트",
+    "species": "Gallade",
+    "forme": "Gallade-Mega",
+    "price": 5000,
+    "description": "엘레이드에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Garchompite": {
+    "name": "한카리아스나이트",
+    "species": "Garchomp",
+    "forme": "Garchomp-Mega",
+    "price": 5000,
+    "description": "한카리아스에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Gardevoirite": {
+    "name": "가디안나이트",
+    "species": "Gardevoir",
+    "forme": "Gardevoir-Mega",
+    "price": 5000,
+    "description": "가디안에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Gengarite": {
+    "name": "팬텀나이트",
+    "species": "Gengar",
+    "forme": "Gengar-Mega",
+    "price": 5000,
+    "description": "팬텀에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Glalitite": {
+    "name": "얼음귀신나이트",
+    "species": "Glalie",
+    "forme": "Glalie-Mega",
+    "price": 5000,
+    "description": "얼음귀신에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Gyaradosite": {
+    "name": "갸라도스나이트",
+    "species": "Gyarados",
+    "forme": "Gyarados-Mega",
+    "price": 5000,
+    "description": "갸라도스에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Heracronite": {
+    "name": "헤라크로스나이트",
+    "species": "Heracross",
+    "forme": "Heracross-Mega",
+    "price": 5000,
+    "description": "헤라크로스에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Houndoominite": {
+    "name": "헬가나이트",
+    "species": "Houndoom",
+    "forme": "Houndoom-Mega",
+    "price": 5000,
+    "description": "헬가에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Kangaskhanite": {
+    "name": "캥카나이트",
+    "species": "Kangaskhan",
+    "forme": "Kangaskhan-Mega",
+    "price": 5000,
+    "description": "캥카에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Latiasite": {
+    "name": "라티아스나이트",
+    "species": "Latias",
+    "forme": "Latias-Mega",
+    "price": 5000,
+    "description": "라티아스에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Latiosite": {
+    "name": "라티오스나이트",
+    "species": "Latios",
+    "forme": "Latios-Mega",
+    "price": 5000,
+    "description": "라티오스에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Lopunnite": {
+    "name": "이어롭나이트",
+    "species": "Lopunny",
+    "forme": "Lopunny-Mega",
+    "price": 5000,
+    "description": "이어롭에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Lucarionite": {
+    "name": "루카리오나이트",
+    "species": "Lucario",
+    "forme": "Lucario-Mega",
+    "price": 5000,
+    "description": "루카리오에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Manectite": {
+    "name": "썬더볼트나이트",
+    "species": "Manectric",
+    "forme": "Manectric-Mega",
+    "price": 5000,
+    "description": "썬더볼트에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Mawilite": {
+    "name": "입치트나이트",
+    "species": "Mawile",
+    "forme": "Mawile-Mega",
+    "price": 5000,
+    "description": "입치트에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Medichamite": {
+    "name": "요가램나이트",
+    "species": "Medicham",
+    "forme": "Medicham-Mega",
+    "price": 5000,
+    "description": "요가램에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Metagrossite": {
+    "name": "메타그로스나이트",
+    "species": "Metagross",
+    "forme": "Metagross-Mega",
+    "price": 5000,
+    "description": "메타그로스에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Mewtwonite X": {
+    "name": "뮤츠나이트X",
+    "species": "Mewtwo",
+    "forme": "Mewtwo-Mega-X",
+    "price": 5000,
+    "description": "뮤츠에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Mewtwonite Y": {
+    "name": "뮤츠나이트Y",
+    "species": "Mewtwo",
+    "forme": "Mewtwo-Mega-Y",
+    "price": 5000,
+    "description": "뮤츠에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Pidgeotite": {
+    "name": "피죤투나이트",
+    "species": "Pidgeot",
+    "forme": "Pidgeot-Mega",
+    "price": 5000,
+    "description": "피죤투에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Pinsirite": {
+    "name": "쁘사이저나이트",
+    "species": "Pinsir",
+    "forme": "Pinsir-Mega",
+    "price": 5000,
+    "description": "쁘사이저에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Sablenite": {
+    "name": "깜까미나이트",
+    "species": "Sableye",
+    "forme": "Sableye-Mega",
+    "price": 5000,
+    "description": "깜까미에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Salamencite": {
+    "name": "보만다나이트",
+    "species": "Salamence",
+    "forme": "Salamence-Mega",
+    "price": 5000,
+    "description": "보만다에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Sceptilite": {
+    "name": "나무킹나이트",
+    "species": "Sceptile",
+    "forme": "Sceptile-Mega",
+    "price": 5000,
+    "description": "나무킹에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Scizorite": {
+    "name": "핫삼나이트",
+    "species": "Scizor",
+    "forme": "Scizor-Mega",
+    "price": 5000,
+    "description": "핫삼에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Sharpedonite": {
+    "name": "샤크니아나이트",
+    "species": "Sharpedo",
+    "forme": "Sharpedo-Mega",
+    "price": 5000,
+    "description": "샤크니아에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Slowbronite": {
+    "name": "야도란나이트",
+    "species": "Slowbro",
+    "forme": "Slowbro-Mega",
+    "price": 5000,
+    "description": "야도란에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Steelixite": {
+    "name": "강철톤나이트",
+    "species": "Steelix",
+    "forme": "Steelix-Mega",
+    "price": 5000,
+    "description": "강철톤에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Swampertite": {
+    "name": "대짱이나이트",
+    "species": "Swampert",
+    "forme": "Swampert-Mega",
+    "price": 5000,
+    "description": "대짱이에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Tyranitarite": {
+    "name": "마기라스나이트",
+    "species": "Tyranitar",
+    "forme": "Tyranitar-Mega",
+    "price": 5000,
+    "description": "마기라스에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  },
+  "Venusaurite": {
+    "name": "이상해꽃나이트",
+    "species": "Venusaur",
+    "forme": "Venusaur-Mega",
+    "price": 5000,
+    "description": "이상해꽃에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
+    "consumable": false
+  }
+}

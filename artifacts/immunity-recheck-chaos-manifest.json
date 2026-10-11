@@ -1,0 +1,28 @@
+{
+  "rule": "chaos",
+  "source": "artifacts/observed-damage-validate-chaos-v9-battles.jsonl",
+  "sourceHash": "b429b06ea37c11d07f43074a0d002a084d2e9bc735ec4cf5635311911bed83c7",
+  "files": [
+    {
+      "path": "src/battle/matchup-aware-support-player-policy.ts",
+      "sha256": "2feaa4971b428b8d8a4003af9a935c22baff3d6559faa15395b8e93b3f9caa07"
+    },
+    {
+      "path": "src/battle/revealed-immunity.ts",
+      "sha256": "b87a832bbccdcf54be0b43d093afe6bbdf3b07fe5ee036fb9a7f3c13f80d9aca"
+    },
+    {
+      "path": "src/data/type-effectiveness.ts",
+      "sha256": "c4a1220f1416168fb6839a622221c599b54c177fa706235696b2e71333b8c094"
+    },
+    {
+      "path": "src/data/type-chart.json",
+      "sha256": "e43e394d355879d5765f33379a29964fd79fc1ddb78c440693a9218706a80acd"
+    },
+    {
+      "path": "scripts/simulate-immunity-recheck.ts",
+      "sha256": "afdbd3343369e181511d5aece51c28bfeed7175b90b09eb9c0f9f3298642b35c"
+    }
+  ],
+  "scope": "Seen development courses; no new held-out performance claim. Same profiles, teams, items, seed and live opponent v7. Only experimental player differs."
+}

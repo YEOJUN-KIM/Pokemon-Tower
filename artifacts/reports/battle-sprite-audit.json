@@ -1,0 +1,311 @@
+{
+  "checkedAt": "2026-10-05T10:35:00.639Z",
+  "source": "https://api.github.com/repos/PokeAPI/sprites/git/trees/a3a1432e688ea028f12c51371d5253037cb9f17b?recursive=1",
+  "commit": "a3a1432e688ea028f12c51371d5253037cb9f17b",
+  "total": 605,
+  "front": 605,
+  "back": 605,
+  "animatedBoth": 591,
+  "missingBase": [],
+  "battleForms": 29,
+  "sharedBaseArt": [
+    "Mimikyu-Busted-Totem",
+    "Ogerpon-Teal-Tera",
+    "Ogerpon-Wellspring-Tera",
+    "Ogerpon-Hearthflame-Tera",
+    "Ogerpon-Cornerstone-Tera"
+  ],
+  "formsWithBaseFallback": [],
+  "forms": [
+    {
+      "species": "Castform-Sunny",
+      "id": 10013,
+      "spriteKey": 10013,
+      "baseId": 351,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Castform-Rainy",
+      "id": 10014,
+      "spriteKey": 10014,
+      "baseId": 351,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Castform-Snowy",
+      "id": 10015,
+      "spriteKey": 10015,
+      "baseId": 351,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Darmanitan-Zen",
+      "id": 10017,
+      "spriteKey": 10017,
+      "baseId": 555,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Meloetta-Pirouette",
+      "id": 10018,
+      "spriteKey": 10018,
+      "baseId": 648,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Aegislash-Blade",
+      "id": 10026,
+      "spriteKey": 10026,
+      "baseId": 681,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Greninja-Ash",
+      "id": 10117,
+      "spriteKey": 10117,
+      "baseId": 658,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": true
+    },
+    {
+      "species": "Zygarde-Complete",
+      "id": 10120,
+      "spriteKey": 10120,
+      "baseId": 718,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": true
+    },
+    {
+      "species": "Wishiwashi-School",
+      "id": 10127,
+      "spriteKey": 10127,
+      "baseId": 746,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Mimikyu-Busted",
+      "id": 10143,
+      "spriteKey": 10143,
+      "baseId": 778,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Necrozma-Ultra",
+      "id": 10157,
+      "spriteKey": 10157,
+      "baseId": 800,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Darmanitan-Galar-Zen",
+      "id": 10178,
+      "spriteKey": 10178,
+      "baseId": 555,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Cramorant-Gulping",
+      "id": 10182,
+      "spriteKey": 10182,
+      "baseId": 845,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": true
+    },
+    {
+      "species": "Cramorant-Gorging",
+      "id": 10183,
+      "spriteKey": 10183,
+      "baseId": 845,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": true
+    },
+    {
+      "species": "Eiscue-Noice",
+      "id": 10185,
+      "spriteKey": 10185,
+      "baseId": 875,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Morpeko-Hangry",
+      "id": 10187,
+      "spriteKey": 10187,
+      "baseId": 877,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Zacian-Crowned",
+      "id": 10188,
+      "spriteKey": 10188,
+      "baseId": 888,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Zamazenta-Crowned",
+      "id": 10189,
+      "spriteKey": 10189,
+      "baseId": 889,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Palafin-Hero",
+      "id": 10256,
+      "spriteKey": 10256,
+      "baseId": 964,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": true
+    },
+    {
+      "species": "Terapagos-Terastal",
+      "id": 10276,
+      "spriteKey": 10276,
+      "baseId": 1024,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": false
+    },
+    {
+      "species": "Terapagos-Stellar",
+      "id": 10277,
+      "spriteKey": 10277,
+      "baseId": 1024,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": false
+    },
+    {
+      "species": "Cherrim-Sunshine",
+      "id": 421,
+      "spriteKey": "421-sunshine",
+      "baseId": 421,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Minior-Meteor",
+      "id": 774,
+      "spriteKey": 774,
+      "baseId": 774,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Mimikyu-Busted-Totem",
+      "id": 778,
+      "spriteKey": 778,
+      "baseId": 778,
+      "front": true,
+      "back": true,
+      "dotBoth": true,
+      "showdownBoth": true
+    },
+    {
+      "species": "Ogerpon-Teal-Tera",
+      "id": 1017,
+      "spriteKey": 1017,
+      "baseId": 1017,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": false
+    },
+    {
+      "species": "Ogerpon-Wellspring-Tera",
+      "id": 1017,
+      "spriteKey": 1017,
+      "baseId": 1017,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": false
+    },
+    {
+      "species": "Ogerpon-Hearthflame-Tera",
+      "id": 1017,
+      "spriteKey": 1017,
+      "baseId": 1017,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": false
+    },
+    {
+      "species": "Ogerpon-Cornerstone-Tera",
+      "id": 1017,
+      "spriteKey": 1017,
+      "baseId": 1017,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": false
+    },
+    {
+      "species": "Minior",
+      "id": 774,
+      "spriteKey": "10136",
+      "baseId": 774,
+      "front": true,
+      "back": true,
+      "dotBoth": false,
+      "showdownBoth": true
+    }
+  ]
+}

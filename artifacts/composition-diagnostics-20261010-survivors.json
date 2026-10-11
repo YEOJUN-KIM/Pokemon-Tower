@@ -1,0 +1,1067 @@
+{
+  "repeatImmuneTerminalLosses": 66,
+  "groups": [
+    {
+      "kind": "no-static-direct-answer-among-survivors",
+      "losses": 65,
+      "immuneEvents": 252
+    },
+    {
+      "kind": "static-answer-only-on-bench",
+      "losses": 53,
+      "immuneEvents": 72
+    },
+    {
+      "kind": "static-answer-on-current-pokemon",
+      "losses": 4,
+      "immuneEvents": 5
+    }
+  ],
+  "initialSlots": 54,
+  "initialSlotsWithRecharge": 42,
+  "initialMoves": [
+    {
+      "caseId": "auto-gen1",
+      "species": "Charizard",
+      "recharge": [
+        "Blast Burn",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen1",
+      "species": "Blastoise",
+      "recharge": [
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen1",
+      "species": "Venusaur",
+      "recharge": [
+        "Frenzy Plant",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen2",
+      "species": "Meganium",
+      "recharge": [
+        "Frenzy Plant",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen2",
+      "species": "Typhlosion",
+      "recharge": [
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen2",
+      "species": "Feraligatr",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen3",
+      "species": "Sceptile",
+      "recharge": [
+        "Frenzy Plant",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen3",
+      "species": "Blaziken",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-gen3",
+      "species": "Swampert",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen4",
+      "species": "Torterra",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen4",
+      "species": "Infernape",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen4",
+      "species": "Empoleon",
+      "recharge": [
+        "Hydro Cannon",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen5",
+      "species": "Serperior",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen5",
+      "species": "Emboar",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen5",
+      "species": "Samurott",
+      "recharge": [
+        "Hydro Cannon",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen6",
+      "species": "Chesnaught",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen6",
+      "species": "Delphox",
+      "recharge": [
+        "Blast Burn",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen6",
+      "species": "Greninja",
+      "recharge": [
+        "Hydro Cannon",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen7",
+      "species": "Decidueye",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen7",
+      "species": "Incineroar",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen7",
+      "species": "Primarina",
+      "recharge": [
+        "Hydro Cannon",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen8",
+      "species": "Rillaboom",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen8",
+      "species": "Cinderace",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen8",
+      "species": "Inteleon",
+      "recharge": [
+        "Hydro Cannon",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen9",
+      "species": "Meowscarada",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-gen9",
+      "species": "Skeledirge",
+      "recharge": [
+        "Blast Burn",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-gen9",
+      "species": "Quaquaval",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-screens-1",
+      "species": "Grimmsnarl",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-screens-1",
+      "species": "Turtonator",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-screens-1",
+      "species": "Rotom",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-screens-2",
+      "species": "Espeon",
+      "recharge": [
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-screens-2",
+      "species": "Basculegion",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-screens-2",
+      "species": "Sharpedo",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-screens-3",
+      "species": "Espeon",
+      "recharge": [
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-screens-3",
+      "species": "Aromatisse",
+      "recharge": [
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-screens-3",
+      "species": "Eternatus",
+      "recharge": [
+        "Eternabeam",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-room-1",
+      "species": "Bronzong",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-room-1",
+      "species": "Cofagrigus",
+      "recharge": [
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-room-1",
+      "species": "Incineroar",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-room-2",
+      "species": "Slowbro",
+      "recharge": [
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-room-2",
+      "species": "Probopass",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-room-2",
+      "species": "Clawitzer",
+      "recharge": [
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-room-3",
+      "species": "Slowbro",
+      "recharge": [
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-room-3",
+      "species": "Huntail",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-room-3",
+      "species": "Turtonator",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-mixed-1",
+      "species": "Skeledirge",
+      "recharge": [
+        "Blast Burn",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-mixed-1",
+      "species": "Empoleon",
+      "recharge": [
+        "Hydro Cannon",
+        "Hyper Beam"
+      ]
+    },
+    {
+      "caseId": "auto-mixed-1",
+      "species": "Armaldo",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-mixed-2",
+      "species": "Togedemaru",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-mixed-2",
+      "species": "Toxapex",
+      "recharge": [
+        "Giga Impact"
+      ]
+    },
+    {
+      "caseId": "auto-mixed-2",
+      "species": "Lunatone",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-mixed-3",
+      "species": "Sealeo",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-mixed-3",
+      "species": "Pachirisu",
+      "recharge": []
+    },
+    {
+      "caseId": "auto-mixed-3",
+      "species": "Salamence",
+      "recharge": [
+        "Giga Impact"
+      ]
+    }
+  ],
+  "losses": [
+    {
+      "rule": "basic",
+      "caseId": "auto-gen1",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 3,
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-gen1",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 4
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-gen1",
+      "courseId": "1ac3e29b-18e9-413f-a79e-672ec43ca5a2",
+      "floor": 3,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 6
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-gen1",
+      "courseId": "8d81ad79-ad8a-4a4b-a760-d243082e5e3b",
+      "floor": 79,
+      "signals": {
+        "static-answer-on-current-pokemon": 2
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-gen1",
+      "courseId": "cd59a351-25d0-4c96-bf88-5cd90cc37053",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 3,
+        "no-static-direct-answer-among-survivors": 2
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-gen3",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-gen3",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-gen3",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-gen4",
+      "courseId": "ad4e07fa-4993-4653-9e00-4a0313bbe4f8",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-gen4",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-gen4",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-gen4",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 6
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-room-2",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-room-2",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 2,
+        "no-static-direct-answer-among-survivors": 1
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-room-2",
+      "courseId": "8d81ad79-ad8a-4a4b-a760-d243082e5e3b",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-mixed-2",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 7,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-mixed-2",
+      "courseId": "90509d5f-6df6-46ce-998d-b34e0ee98490",
+      "floor": 7,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-mixed-2",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 7,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 4
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-mixed-2",
+      "courseId": "1ac3e29b-18e9-413f-a79e-672ec43ca5a2",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 2
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-mixed-2",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 2
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-mixed-2",
+      "courseId": "cd59a351-25d0-4c96-bf88-5cd90cc37053",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-mixed-3",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "static-answer-on-current-pokemon": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen1",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 3,
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen1",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 4
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen1",
+      "courseId": "1ac3e29b-18e9-413f-a79e-672ec43ca5a2",
+      "floor": 3,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 6
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen1",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 3,
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen1",
+      "courseId": "cd59a351-25d0-4c96-bf88-5cd90cc37053",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 3,
+        "no-static-direct-answer-among-survivors": 2
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen3",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen3",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen3",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen4",
+      "courseId": "ad4e07fa-4993-4653-9e00-4a0313bbe4f8",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen4",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen4",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen4",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 6
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-room-2",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-room-2",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 2,
+        "no-static-direct-answer-among-survivors": 1
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-room-2",
+      "courseId": "8d81ad79-ad8a-4a4b-a760-d243082e5e3b",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-mixed-2",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 7,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-mixed-2",
+      "courseId": "90509d5f-6df6-46ce-998d-b34e0ee98490",
+      "floor": 7,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-mixed-2",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 7,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 4
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-mixed-2",
+      "courseId": "1ac3e29b-18e9-413f-a79e-672ec43ca5a2",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 2
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-mixed-2",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 2
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-mixed-2",
+      "courseId": "cd59a351-25d0-4c96-bf88-5cd90cc37053",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-mixed-3",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "static-answer-on-current-pokemon": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen1",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 3,
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen1",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 4
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen1",
+      "courseId": "1ac3e29b-18e9-413f-a79e-672ec43ca5a2",
+      "floor": 3,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 6
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen1",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 3,
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen1",
+      "courseId": "cd59a351-25d0-4c96-bf88-5cd90cc37053",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 3,
+        "no-static-direct-answer-among-survivors": 2
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen3",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen3",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen3",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen4",
+      "courseId": "ad4e07fa-4993-4653-9e00-4a0313bbe4f8",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen4",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen4",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen4",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 6
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-room-2",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-room-2",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 2,
+        "no-static-direct-answer-among-survivors": 1
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-room-2",
+      "courseId": "8d81ad79-ad8a-4a4b-a760-d243082e5e3b",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-mixed-2",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 7,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-mixed-2",
+      "courseId": "90509d5f-6df6-46ce-998d-b34e0ee98490",
+      "floor": 7,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-mixed-2",
+      "courseId": "879f6cb3-2083-41bc-874c-87bfbd80a3ca",
+      "floor": 7,
+      "signals": {
+        "no-static-direct-answer-among-survivors": 4
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-mixed-2",
+      "courseId": "1ac3e29b-18e9-413f-a79e-672ec43ca5a2",
+      "floor": 3,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 2
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-mixed-2",
+      "courseId": "b2a14ead-2255-4082-b272-cd45bc247968",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 2
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-mixed-2",
+      "courseId": "cd59a351-25d0-4c96-bf88-5cd90cc37053",
+      "floor": 2,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "no-static-direct-answer-among-survivors": 3
+      }
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-mixed-3",
+      "courseId": "c2164c2e-0de1-48e7-a96b-f352ed3bcf21",
+      "floor": 1,
+      "signals": {
+        "static-answer-only-on-bench": 1,
+        "static-answer-on-current-pokemon": 1,
+        "no-static-direct-answer-among-survivors": 5
+      }
+    }
+  ],
+  "notes": "Overlapping groups at actual public immune events; answers reconstructed from living members, public enemy types/ability and stored own moves. Ignores PP/disable/own Tera Blast/item/entry survival and does not prove an available switch or winning action. Descriptive, not causal. Initial slots deduplicate courses/rules but not species between teams.",
+  "files": [
+    {
+      "path": "scripts/audit-composition-survivors.ts",
+      "sha256": "cf3d387f7216dde524e76e60c1e7f1a2d9d086091cb0fb023e41854f7c2e7b14"
+    },
+    {
+      "path": "scripts/lib/immune-loss-signals.ts",
+      "sha256": "5e13c5393eae2f8e165cc7ec1f098f45009a9cb5b53347190a824dc3e2c29f43"
+    },
+    {
+      "path": "artifacts/composition-diagnostics-20261010-basic-battles.jsonl",
+      "sha256": "1f81463d663116d68538669ea40cc80c7e61e4d49ec2348379e8fe1223dc749e"
+    },
+    {
+      "path": "artifacts/composition-diagnostics-20261010-tera-battles.jsonl",
+      "sha256": "116fcfbc2e8d7678aa0d9ca7f89a283da0c751dfb5c79ad45a0ed5f76e58f836"
+    },
+    {
+      "path": "artifacts/composition-diagnostics-20261010-chaos-battles.jsonl",
+      "sha256": "444c2eb33c6389f31a61ac6ec43bebb6fa185f0f28612d0380e4c8a67011d19c"
+    }
+  ]
+}

@@ -1,0 +1,2677 @@
+{
+  "seed": "20261010",
+  "catalogSpecies": 612,
+  "catalogAudit": [
+    {
+      "species": "Abomasnow",
+      "issues": []
+    },
+    {
+      "species": "Absol",
+      "issues": []
+    },
+    {
+      "species": "Accelgor",
+      "issues": []
+    },
+    {
+      "species": "Aegislash",
+      "issues": []
+    },
+    {
+      "species": "Aerodactyl",
+      "issues": []
+    },
+    {
+      "species": "Aggron",
+      "issues": []
+    },
+    {
+      "species": "Alakazam",
+      "issues": []
+    },
+    {
+      "species": "Alcremie",
+      "issues": []
+    },
+    {
+      "species": "Alomomola",
+      "issues": []
+    },
+    {
+      "species": "Altaria",
+      "issues": []
+    },
+    {
+      "species": "Ambipom",
+      "issues": []
+    },
+    {
+      "species": "Amoonguss",
+      "issues": []
+    },
+    {
+      "species": "Ampharos",
+      "issues": []
+    },
+    {
+      "species": "Annihilape",
+      "issues": []
+    },
+    {
+      "species": "Appletun",
+      "issues": []
+    },
+    {
+      "species": "Araquanid",
+      "issues": []
+    },
+    {
+      "species": "Arbok",
+      "issues": []
+    },
+    {
+      "species": "Arboliva",
+      "issues": []
+    },
+    {
+      "species": "Arcanine",
+      "issues": []
+    },
+    {
+      "species": "Arceus",
+      "issues": []
+    },
+    {
+      "species": "Archaludon",
+      "issues": []
+    },
+    {
+      "species": "Archeops",
+      "issues": []
+    },
+    {
+      "species": "Arctovish",
+      "issues": []
+    },
+    {
+      "species": "Arctozolt",
+      "issues": []
+    },
+    {
+      "species": "Ariados",
+      "issues": []
+    },
+    {
+      "species": "Armaldo",
+      "issues": []
+    },
+    {
+      "species": "Armarouge",
+      "issues": []
+    },
+    {
+      "species": "Aromatisse",
+      "issues": []
+    },
+    {
+      "species": "Articuno",
+      "issues": []
+    },
+    {
+      "species": "Audino",
+      "issues": []
+    },
+    {
+      "species": "Aurorus",
+      "issues": []
+    },
+    {
+      "species": "Avalugg",
+      "issues": []
+    },
+    {
+      "species": "Azelf",
+      "issues": []
+    },
+    {
+      "species": "Azumarill",
+      "issues": []
+    },
+    {
+      "species": "Banette",
+      "issues": []
+    },
+    {
+      "species": "Barbaracle",
+      "issues": []
+    },
+    {
+      "species": "Barraskewda",
+      "issues": []
+    },
+    {
+      "species": "Basculegion",
+      "issues": []
+    },
+    {
+      "species": "Basculin",
+      "issues": []
+    },
+    {
+      "species": "Bastiodon",
+      "issues": []
+    },
+    {
+      "species": "Baxcalibur",
+      "issues": []
+    },
+    {
+      "species": "Beartic",
+      "issues": []
+    },
+    {
+      "species": "Beautifly",
+      "issues": []
+    },
+    {
+      "species": "Beedrill",
+      "issues": []
+    },
+    {
+      "species": "Beheeyem",
+      "issues": []
+    },
+    {
+      "species": "Bellibolt",
+      "issues": []
+    },
+    {
+      "species": "Bellossom",
+      "issues": []
+    },
+    {
+      "species": "Bewear",
+      "issues": []
+    },
+    {
+      "species": "Bibarel",
+      "issues": []
+    },
+    {
+      "species": "Bisharp",
+      "issues": []
+    },
+    {
+      "species": "Blacephalon",
+      "issues": []
+    },
+    {
+      "species": "Blastoise",
+      "issues": []
+    },
+    {
+      "species": "Blaziken",
+      "issues": []
+    },
+    {
+      "species": "Blissey",
+      "issues": []
+    },
+    {
+      "species": "Boltund",
+      "issues": []
+    },
+    {
+      "species": "Bombirdier",
+      "issues": []
+    },
+    {
+      "species": "Bouffalant",
+      "issues": []
+    },
+    {
+      "species": "Brambleghast",
+      "issues": []
+    },
+    {
+      "species": "Braviary",
+      "issues": []
+    },
+    {
+      "species": "Breloom",
+      "issues": []
+    },
+    {
+      "species": "Bronzong",
+      "issues": []
+    },
+    {
+      "species": "Brute Bonnet",
+      "issues": []
+    },
+    {
+      "species": "Bruxish",
+      "issues": []
+    },
+    {
+      "species": "Butterfree",
+      "issues": []
+    },
+    {
+      "species": "Buzzwole",
+      "issues": []
+    },
+    {
+      "species": "Cacturne",
+      "issues": []
+    },
+    {
+      "species": "Calyrex",
+      "issues": []
+    },
+    {
+      "species": "Camerupt",
+      "issues": []
+    },
+    {
+      "species": "Carbink",
+      "issues": []
+    },
+    {
+      "species": "Carnivine",
+      "issues": []
+    },
+    {
+      "species": "Carracosta",
+      "issues": []
+    },
+    {
+      "species": "Castform",
+      "issues": []
+    },
+    {
+      "species": "Celebi",
+      "issues": []
+    },
+    {
+      "species": "Celesteela",
+      "issues": []
+    },
+    {
+      "species": "Centiskorch",
+      "issues": []
+    },
+    {
+      "species": "Ceruledge",
+      "issues": []
+    },
+    {
+      "species": "Cetitan",
+      "issues": []
+    },
+    {
+      "species": "Chandelure",
+      "issues": []
+    },
+    {
+      "species": "Chansey",
+      "issues": []
+    },
+    {
+      "species": "Charizard",
+      "issues": []
+    },
+    {
+      "species": "Charjabug",
+      "issues": []
+    },
+    {
+      "species": "Chatot",
+      "issues": []
+    },
+    {
+      "species": "Cherrim",
+      "issues": []
+    },
+    {
+      "species": "Chesnaught",
+      "issues": []
+    },
+    {
+      "species": "Chi-Yu",
+      "issues": []
+    },
+    {
+      "species": "Chien-Pao",
+      "issues": []
+    },
+    {
+      "species": "Chimecho",
+      "issues": []
+    },
+    {
+      "species": "Cinccino",
+      "issues": []
+    },
+    {
+      "species": "Cinderace",
+      "issues": []
+    },
+    {
+      "species": "Clawitzer",
+      "issues": []
+    },
+    {
+      "species": "Claydol",
+      "issues": []
+    },
+    {
+      "species": "Clefable",
+      "issues": []
+    },
+    {
+      "species": "Clefairy",
+      "issues": []
+    },
+    {
+      "species": "Clodsire",
+      "issues": []
+    },
+    {
+      "species": "Cloyster",
+      "issues": []
+    },
+    {
+      "species": "Coalossal",
+      "issues": []
+    },
+    {
+      "species": "Cobalion",
+      "issues": []
+    },
+    {
+      "species": "Cofagrigus",
+      "issues": []
+    },
+    {
+      "species": "Comfey",
+      "issues": []
+    },
+    {
+      "species": "Conkeldurr",
+      "issues": []
+    },
+    {
+      "species": "Copperajah",
+      "issues": []
+    },
+    {
+      "species": "Corsola",
+      "issues": []
+    },
+    {
+      "species": "Corviknight",
+      "issues": []
+    },
+    {
+      "species": "Crabominable",
+      "issues": []
+    },
+    {
+      "species": "Cradily",
+      "issues": []
+    },
+    {
+      "species": "Cramorant",
+      "issues": []
+    },
+    {
+      "species": "Crawdaunt",
+      "issues": []
+    },
+    {
+      "species": "Cresselia",
+      "issues": []
+    },
+    {
+      "species": "Crobat",
+      "issues": []
+    },
+    {
+      "species": "Crustle",
+      "issues": []
+    },
+    {
+      "species": "Cryogonal",
+      "issues": []
+    },
+    {
+      "species": "Cursola",
+      "issues": []
+    },
+    {
+      "species": "Cyclizar",
+      "issues": []
+    },
+    {
+      "species": "Dachsbun",
+      "issues": []
+    },
+    {
+      "species": "Darkrai",
+      "issues": []
+    },
+    {
+      "species": "Darmanitan",
+      "issues": []
+    },
+    {
+      "species": "Decidueye",
+      "issues": []
+    },
+    {
+      "species": "Dedenne",
+      "issues": []
+    },
+    {
+      "species": "Delcatty",
+      "issues": []
+    },
+    {
+      "species": "Delibird",
+      "issues": []
+    },
+    {
+      "species": "Delphox",
+      "issues": []
+    },
+    {
+      "species": "Deoxys",
+      "issues": []
+    },
+    {
+      "species": "Dewgong",
+      "issues": []
+    },
+    {
+      "species": "Dhelmise",
+      "issues": []
+    },
+    {
+      "species": "Dialga",
+      "issues": []
+    },
+    {
+      "species": "Diancie",
+      "issues": []
+    },
+    {
+      "species": "Diggersby",
+      "issues": []
+    },
+    {
+      "species": "Dipplin",
+      "issues": []
+    },
+    {
+      "species": "Ditto",
+      "issues": [
+        {
+          "kind": "no-direct-attack",
+          "detail": "Support-only; requires an ally or indirect damage plan."
+        }
+      ]
+    },
+    {
+      "species": "Dodrio",
+      "issues": []
+    },
+    {
+      "species": "Dondozo",
+      "issues": []
+    },
+    {
+      "species": "Donphan",
+      "issues": []
+    },
+    {
+      "species": "Doublade",
+      "issues": []
+    },
+    {
+      "species": "Dracovish",
+      "issues": []
+    },
+    {
+      "species": "Dracozolt",
+      "issues": []
+    },
+    {
+      "species": "Dragalge",
+      "issues": []
+    },
+    {
+      "species": "Dragapult",
+      "issues": []
+    },
+    {
+      "species": "Dragonair",
+      "issues": []
+    },
+    {
+      "species": "Dragonite",
+      "issues": []
+    },
+    {
+      "species": "Drampa",
+      "issues": []
+    },
+    {
+      "species": "Drapion",
+      "issues": []
+    },
+    {
+      "species": "Drednaw",
+      "issues": []
+    },
+    {
+      "species": "Drifblim",
+      "issues": []
+    },
+    {
+      "species": "Druddigon",
+      "issues": []
+    },
+    {
+      "species": "Dubwool",
+      "issues": []
+    },
+    {
+      "species": "Dudunsparce",
+      "issues": []
+    },
+    {
+      "species": "Dugtrio",
+      "issues": []
+    },
+    {
+      "species": "Duraludon",
+      "issues": []
+    },
+    {
+      "species": "Durant",
+      "issues": []
+    },
+    {
+      "species": "Dusclops",
+      "issues": []
+    },
+    {
+      "species": "Dusknoir",
+      "issues": []
+    },
+    {
+      "species": "Dustox",
+      "issues": []
+    },
+    {
+      "species": "Eelektross",
+      "issues": []
+    },
+    {
+      "species": "Eiscue",
+      "issues": []
+    },
+    {
+      "species": "Eldegoss",
+      "issues": []
+    },
+    {
+      "species": "Electabuzz",
+      "issues": []
+    },
+    {
+      "species": "Electivire",
+      "issues": []
+    },
+    {
+      "species": "Electrode",
+      "issues": []
+    },
+    {
+      "species": "Emboar",
+      "issues": []
+    },
+    {
+      "species": "Emolga",
+      "issues": []
+    },
+    {
+      "species": "Empoleon",
+      "issues": []
+    },
+    {
+      "species": "Enamorus",
+      "issues": []
+    },
+    {
+      "species": "Entei",
+      "issues": []
+    },
+    {
+      "species": "Escavalier",
+      "issues": []
+    },
+    {
+      "species": "Espathra",
+      "issues": []
+    },
+    {
+      "species": "Espeon",
+      "issues": []
+    },
+    {
+      "species": "Eternatus",
+      "issues": []
+    },
+    {
+      "species": "Excadrill",
+      "issues": []
+    },
+    {
+      "species": "Exeggutor",
+      "issues": []
+    },
+    {
+      "species": "Exploud",
+      "issues": []
+    },
+    {
+      "species": "Falinks",
+      "issues": []
+    },
+    {
+      "species": "Farfetch’d",
+      "issues": []
+    },
+    {
+      "species": "Farigiraf",
+      "issues": []
+    },
+    {
+      "species": "Fearow",
+      "issues": []
+    },
+    {
+      "species": "Feraligatr",
+      "issues": []
+    },
+    {
+      "species": "Ferroseed",
+      "issues": []
+    },
+    {
+      "species": "Ferrothorn",
+      "issues": []
+    },
+    {
+      "species": "Fezandipiti",
+      "issues": []
+    },
+    {
+      "species": "Flamigo",
+      "issues": []
+    },
+    {
+      "species": "Flapple",
+      "issues": []
+    },
+    {
+      "species": "Flareon",
+      "issues": []
+    },
+    {
+      "species": "Floatzel",
+      "issues": []
+    },
+    {
+      "species": "Florges",
+      "issues": []
+    },
+    {
+      "species": "Flutter Mane",
+      "issues": []
+    },
+    {
+      "species": "Flygon",
+      "issues": []
+    },
+    {
+      "species": "Forretress",
+      "issues": []
+    },
+    {
+      "species": "Froslass",
+      "issues": []
+    },
+    {
+      "species": "Frosmoth",
+      "issues": []
+    },
+    {
+      "species": "Furfrou",
+      "issues": []
+    },
+    {
+      "species": "Furret",
+      "issues": []
+    },
+    {
+      "species": "Gallade",
+      "issues": []
+    },
+    {
+      "species": "Galvantula",
+      "issues": []
+    },
+    {
+      "species": "Garbodor",
+      "issues": []
+    },
+    {
+      "species": "Garchomp",
+      "issues": []
+    },
+    {
+      "species": "Gardevoir",
+      "issues": []
+    },
+    {
+      "species": "Garganacl",
+      "issues": []
+    },
+    {
+      "species": "Gastrodon",
+      "issues": []
+    },
+    {
+      "species": "Genesect",
+      "issues": []
+    },
+    {
+      "species": "Gengar",
+      "issues": []
+    },
+    {
+      "species": "Gholdengo",
+      "issues": []
+    },
+    {
+      "species": "Gigalith",
+      "issues": []
+    },
+    {
+      "species": "Girafarig",
+      "issues": []
+    },
+    {
+      "species": "Giratina",
+      "issues": []
+    },
+    {
+      "species": "Glaceon",
+      "issues": []
+    },
+    {
+      "species": "Glalie",
+      "issues": []
+    },
+    {
+      "species": "Glastrier",
+      "issues": []
+    },
+    {
+      "species": "Gligar",
+      "issues": []
+    },
+    {
+      "species": "Glimmora",
+      "issues": []
+    },
+    {
+      "species": "Gliscor",
+      "issues": []
+    },
+    {
+      "species": "Gogoat",
+      "issues": []
+    },
+    {
+      "species": "Golbat",
+      "issues": []
+    },
+    {
+      "species": "Golduck",
+      "issues": []
+    },
+    {
+      "species": "Golem",
+      "issues": []
+    },
+    {
+      "species": "Golisopod",
+      "issues": []
+    },
+    {
+      "species": "Golurk",
+      "issues": []
+    },
+    {
+      "species": "Goodra",
+      "issues": []
+    },
+    {
+      "species": "Gorebyss",
+      "issues": []
+    },
+    {
+      "species": "Gothitelle",
+      "issues": []
+    },
+    {
+      "species": "Gouging Fire",
+      "issues": []
+    },
+    {
+      "species": "Gourgeist",
+      "issues": []
+    },
+    {
+      "species": "Grafaiai",
+      "issues": []
+    },
+    {
+      "species": "Granbull",
+      "issues": []
+    },
+    {
+      "species": "Grapploct",
+      "issues": []
+    },
+    {
+      "species": "Great Tusk",
+      "issues": []
+    },
+    {
+      "species": "Greedent",
+      "issues": []
+    },
+    {
+      "species": "Greninja",
+      "issues": []
+    },
+    {
+      "species": "Grimmsnarl",
+      "issues": []
+    },
+    {
+      "species": "Groudon",
+      "issues": []
+    },
+    {
+      "species": "Grumpig",
+      "issues": []
+    },
+    {
+      "species": "Gumshoos",
+      "issues": []
+    },
+    {
+      "species": "Gurdurr",
+      "issues": []
+    },
+    {
+      "species": "Guzzlord",
+      "issues": []
+    },
+    {
+      "species": "Gyarados",
+      "issues": []
+    },
+    {
+      "species": "Hariyama",
+      "issues": []
+    },
+    {
+      "species": "Hatterene",
+      "issues": []
+    },
+    {
+      "species": "Haunter",
+      "issues": []
+    },
+    {
+      "species": "Hawlucha",
+      "issues": []
+    },
+    {
+      "species": "Haxorus",
+      "issues": []
+    },
+    {
+      "species": "Heatmor",
+      "issues": []
+    },
+    {
+      "species": "Heatran",
+      "issues": []
+    },
+    {
+      "species": "Heliolisk",
+      "issues": []
+    },
+    {
+      "species": "Heracross",
+      "issues": []
+    },
+    {
+      "species": "Hippowdon",
+      "issues": []
+    },
+    {
+      "species": "Hitmonchan",
+      "issues": []
+    },
+    {
+      "species": "Hitmonlee",
+      "issues": []
+    },
+    {
+      "species": "Hitmontop",
+      "issues": []
+    },
+    {
+      "species": "Ho-Oh",
+      "issues": []
+    },
+    {
+      "species": "Honchkrow",
+      "issues": []
+    },
+    {
+      "species": "Hoopa",
+      "issues": []
+    },
+    {
+      "species": "Houndoom",
+      "issues": []
+    },
+    {
+      "species": "Houndstone",
+      "issues": []
+    },
+    {
+      "species": "Huntail",
+      "issues": []
+    },
+    {
+      "species": "Hydrapple",
+      "issues": []
+    },
+    {
+      "species": "Hydreigon",
+      "issues": []
+    },
+    {
+      "species": "Hypno",
+      "issues": []
+    },
+    {
+      "species": "Illumise",
+      "issues": []
+    },
+    {
+      "species": "Incineroar",
+      "issues": []
+    },
+    {
+      "species": "Indeedee",
+      "issues": []
+    },
+    {
+      "species": "Infernape",
+      "issues": []
+    },
+    {
+      "species": "Inteleon",
+      "issues": []
+    },
+    {
+      "species": "Iron Boulder",
+      "issues": []
+    },
+    {
+      "species": "Iron Bundle",
+      "issues": []
+    },
+    {
+      "species": "Iron Crown",
+      "issues": []
+    },
+    {
+      "species": "Iron Hands",
+      "issues": []
+    },
+    {
+      "species": "Iron Jugulis",
+      "issues": []
+    },
+    {
+      "species": "Iron Leaves",
+      "issues": []
+    },
+    {
+      "species": "Iron Moth",
+      "issues": []
+    },
+    {
+      "species": "Iron Thorns",
+      "issues": []
+    },
+    {
+      "species": "Iron Treads",
+      "issues": []
+    },
+    {
+      "species": "Iron Valiant",
+      "issues": []
+    },
+    {
+      "species": "Jellicent",
+      "issues": []
+    },
+    {
+      "species": "Jirachi",
+      "issues": []
+    },
+    {
+      "species": "Jolteon",
+      "issues": []
+    },
+    {
+      "species": "Jumpluff",
+      "issues": []
+    },
+    {
+      "species": "Jynx",
+      "issues": []
+    },
+    {
+      "species": "Kabutops",
+      "issues": []
+    },
+    {
+      "species": "Kangaskhan",
+      "issues": []
+    },
+    {
+      "species": "Kartana",
+      "issues": []
+    },
+    {
+      "species": "Kecleon",
+      "issues": []
+    },
+    {
+      "species": "Keldeo",
+      "issues": []
+    },
+    {
+      "species": "Kilowattrel",
+      "issues": []
+    },
+    {
+      "species": "Kingambit",
+      "issues": []
+    },
+    {
+      "species": "Kingdra",
+      "issues": []
+    },
+    {
+      "species": "Kingler",
+      "issues": []
+    },
+    {
+      "species": "Klawf",
+      "issues": []
+    },
+    {
+      "species": "Kleavor",
+      "issues": []
+    },
+    {
+      "species": "Klefki",
+      "issues": []
+    },
+    {
+      "species": "Klinklang",
+      "issues": []
+    },
+    {
+      "species": "Komala",
+      "issues": []
+    },
+    {
+      "species": "Kommo-o",
+      "issues": []
+    },
+    {
+      "species": "Koraidon",
+      "issues": []
+    },
+    {
+      "species": "Kricketune",
+      "issues": []
+    },
+    {
+      "species": "Krookodile",
+      "issues": []
+    },
+    {
+      "species": "Kyogre",
+      "issues": []
+    },
+    {
+      "species": "Kyurem",
+      "issues": []
+    },
+    {
+      "species": "Landorus",
+      "issues": []
+    },
+    {
+      "species": "Lanturn",
+      "issues": []
+    },
+    {
+      "species": "Lapras",
+      "issues": []
+    },
+    {
+      "species": "Latias",
+      "issues": []
+    },
+    {
+      "species": "Latios",
+      "issues": []
+    },
+    {
+      "species": "Leafeon",
+      "issues": []
+    },
+    {
+      "species": "Leavanny",
+      "issues": []
+    },
+    {
+      "species": "Ledian",
+      "issues": []
+    },
+    {
+      "species": "Lickilicky",
+      "issues": []
+    },
+    {
+      "species": "Liepard",
+      "issues": []
+    },
+    {
+      "species": "Lilligant",
+      "issues": []
+    },
+    {
+      "species": "Linoone",
+      "issues": []
+    },
+    {
+      "species": "Lokix",
+      "issues": []
+    },
+    {
+      "species": "Lopunny",
+      "issues": []
+    },
+    {
+      "species": "Lucario",
+      "issues": []
+    },
+    {
+      "species": "Ludicolo",
+      "issues": []
+    },
+    {
+      "species": "Lugia",
+      "issues": []
+    },
+    {
+      "species": "Lumineon",
+      "issues": []
+    },
+    {
+      "species": "Lunala",
+      "issues": []
+    },
+    {
+      "species": "Lunatone",
+      "issues": []
+    },
+    {
+      "species": "Lurantis",
+      "issues": []
+    },
+    {
+      "species": "Luvdisc",
+      "issues": []
+    },
+    {
+      "species": "Luxray",
+      "issues": []
+    },
+    {
+      "species": "Lycanroc",
+      "issues": []
+    },
+    {
+      "species": "Mabosstiff",
+      "issues": []
+    },
+    {
+      "species": "Machamp",
+      "issues": []
+    },
+    {
+      "species": "Magcargo",
+      "issues": []
+    },
+    {
+      "species": "Magearna",
+      "issues": []
+    },
+    {
+      "species": "Magmar",
+      "issues": []
+    },
+    {
+      "species": "Magmortar",
+      "issues": []
+    },
+    {
+      "species": "Magneton",
+      "issues": []
+    },
+    {
+      "species": "Magnezone",
+      "issues": []
+    },
+    {
+      "species": "Malamar",
+      "issues": []
+    },
+    {
+      "species": "Mamoswine",
+      "issues": []
+    },
+    {
+      "species": "Manaphy",
+      "issues": []
+    },
+    {
+      "species": "Mandibuzz",
+      "issues": []
+    },
+    {
+      "species": "Manectric",
+      "issues": []
+    },
+    {
+      "species": "Mantine",
+      "issues": []
+    },
+    {
+      "species": "Maractus",
+      "issues": []
+    },
+    {
+      "species": "Marowak",
+      "issues": []
+    },
+    {
+      "species": "Marshadow",
+      "issues": []
+    },
+    {
+      "species": "Masquerain",
+      "issues": []
+    },
+    {
+      "species": "Maushold",
+      "issues": []
+    },
+    {
+      "species": "Mawile",
+      "issues": []
+    },
+    {
+      "species": "Medicham",
+      "issues": []
+    },
+    {
+      "species": "Meganium",
+      "issues": []
+    },
+    {
+      "species": "Melmetal",
+      "issues": []
+    },
+    {
+      "species": "Meloetta",
+      "issues": []
+    },
+    {
+      "species": "Meltan",
+      "issues": []
+    },
+    {
+      "species": "Meowscarada",
+      "issues": []
+    },
+    {
+      "species": "Meowstic",
+      "issues": []
+    },
+    {
+      "species": "Mesprit",
+      "issues": []
+    },
+    {
+      "species": "Metagross",
+      "issues": []
+    },
+    {
+      "species": "Mew",
+      "issues": []
+    },
+    {
+      "species": "Mewtwo",
+      "issues": []
+    },
+    {
+      "species": "Mienshao",
+      "issues": []
+    },
+    {
+      "species": "Mightyena",
+      "issues": []
+    },
+    {
+      "species": "Milotic",
+      "issues": []
+    },
+    {
+      "species": "Miltank",
+      "issues": []
+    },
+    {
+      "species": "Mimikyu",
+      "issues": []
+    },
+    {
+      "species": "Minior",
+      "issues": []
+    },
+    {
+      "species": "Minun",
+      "issues": []
+    },
+    {
+      "species": "Miraidon",
+      "issues": []
+    },
+    {
+      "species": "Misdreavus",
+      "issues": []
+    },
+    {
+      "species": "Mismagius",
+      "issues": []
+    },
+    {
+      "species": "Moltres",
+      "issues": []
+    },
+    {
+      "species": "Morpeko",
+      "issues": []
+    },
+    {
+      "species": "Mothim",
+      "issues": []
+    },
+    {
+      "species": "Mr. Mime",
+      "issues": []
+    },
+    {
+      "species": "Mr. Rime",
+      "issues": []
+    },
+    {
+      "species": "Mudsdale",
+      "issues": []
+    },
+    {
+      "species": "Muk",
+      "issues": []
+    },
+    {
+      "species": "Munchlax",
+      "issues": []
+    },
+    {
+      "species": "Munkidori",
+      "issues": []
+    },
+    {
+      "species": "Murkrow",
+      "issues": []
+    },
+    {
+      "species": "Musharna",
+      "issues": []
+    },
+    {
+      "species": "Naganadel",
+      "issues": []
+    },
+    {
+      "species": "Necrozma",
+      "issues": []
+    },
+    {
+      "species": "Nidoking",
+      "issues": []
+    },
+    {
+      "species": "Nidoqueen",
+      "issues": []
+    },
+    {
+      "species": "Nihilego",
+      "issues": []
+    },
+    {
+      "species": "Ninetales",
+      "issues": []
+    },
+    {
+      "species": "Ninjask",
+      "issues": []
+    },
+    {
+      "species": "Noctowl",
+      "issues": []
+    },
+    {
+      "species": "Noivern",
+      "issues": []
+    },
+    {
+      "species": "Obstagoon",
+      "issues": []
+    },
+    {
+      "species": "Octillery",
+      "issues": []
+    },
+    {
+      "species": "Ogerpon",
+      "issues": []
+    },
+    {
+      "species": "Oinkologne",
+      "issues": []
+    },
+    {
+      "species": "Okidogi",
+      "issues": []
+    },
+    {
+      "species": "Omastar",
+      "issues": []
+    },
+    {
+      "species": "Onix",
+      "issues": []
+    },
+    {
+      "species": "Oranguru",
+      "issues": []
+    },
+    {
+      "species": "Orbeetle",
+      "issues": []
+    },
+    {
+      "species": "Oricorio",
+      "issues": []
+    },
+    {
+      "species": "Orthworm",
+      "issues": []
+    },
+    {
+      "species": "Overqwil",
+      "issues": []
+    },
+    {
+      "species": "Pachirisu",
+      "issues": []
+    },
+    {
+      "species": "Palafin",
+      "issues": []
+    },
+    {
+      "species": "Palkia",
+      "issues": []
+    },
+    {
+      "species": "Palossand",
+      "issues": []
+    },
+    {
+      "species": "Pangoro",
+      "issues": []
+    },
+    {
+      "species": "Parasect",
+      "issues": []
+    },
+    {
+      "species": "Passimian",
+      "issues": []
+    },
+    {
+      "species": "Pawmot",
+      "issues": []
+    },
+    {
+      "species": "Pecharunt",
+      "issues": []
+    },
+    {
+      "species": "Pelipper",
+      "issues": []
+    },
+    {
+      "species": "Perrserker",
+      "issues": []
+    },
+    {
+      "species": "Persian",
+      "issues": []
+    },
+    {
+      "species": "Pheromosa",
+      "issues": []
+    },
+    {
+      "species": "Phione",
+      "issues": []
+    },
+    {
+      "species": "Pidgeot",
+      "issues": []
+    },
+    {
+      "species": "Pikachu",
+      "issues": []
+    },
+    {
+      "species": "Piloswine",
+      "issues": []
+    },
+    {
+      "species": "Pincurchin",
+      "issues": []
+    },
+    {
+      "species": "Pinsir",
+      "issues": []
+    },
+    {
+      "species": "Plusle",
+      "issues": []
+    },
+    {
+      "species": "Politoed",
+      "issues": []
+    },
+    {
+      "species": "Poliwrath",
+      "issues": []
+    },
+    {
+      "species": "Polteageist",
+      "issues": []
+    },
+    {
+      "species": "Porygon-Z",
+      "issues": []
+    },
+    {
+      "species": "Porygon2",
+      "issues": []
+    },
+    {
+      "species": "Primarina",
+      "issues": []
+    },
+    {
+      "species": "Primeape",
+      "issues": []
+    },
+    {
+      "species": "Probopass",
+      "issues": []
+    },
+    {
+      "species": "Purugly",
+      "issues": []
+    },
+    {
+      "species": "Pyroar",
+      "issues": []
+    },
+    {
+      "species": "Pyukumuku",
+      "issues": [
+        {
+          "kind": "no-direct-attack",
+          "detail": "Support-only; requires an ally or indirect damage plan."
+        }
+      ]
+    },
+    {
+      "species": "Quagsire",
+      "issues": []
+    },
+    {
+      "species": "Quaquaval",
+      "issues": []
+    },
+    {
+      "species": "Qwilfish",
+      "issues": []
+    },
+    {
+      "species": "Rabsca",
+      "issues": []
+    },
+    {
+      "species": "Raging Bolt",
+      "issues": []
+    },
+    {
+      "species": "Raichu",
+      "issues": []
+    },
+    {
+      "species": "Raikou",
+      "issues": []
+    },
+    {
+      "species": "Rampardos",
+      "issues": []
+    },
+    {
+      "species": "Rapidash",
+      "issues": []
+    },
+    {
+      "species": "Raticate",
+      "issues": []
+    },
+    {
+      "species": "Rayquaza",
+      "issues": []
+    },
+    {
+      "species": "Regice",
+      "issues": []
+    },
+    {
+      "species": "Regidrago",
+      "issues": []
+    },
+    {
+      "species": "Regieleki",
+      "issues": []
+    },
+    {
+      "species": "Regigigas",
+      "issues": []
+    },
+    {
+      "species": "Regirock",
+      "issues": []
+    },
+    {
+      "species": "Registeel",
+      "issues": []
+    },
+    {
+      "species": "Relicanth",
+      "issues": []
+    },
+    {
+      "species": "Reshiram",
+      "issues": []
+    },
+    {
+      "species": "Reuniclus",
+      "issues": []
+    },
+    {
+      "species": "Revavroom",
+      "issues": []
+    },
+    {
+      "species": "Rhydon",
+      "issues": []
+    },
+    {
+      "species": "Rhyperior",
+      "issues": []
+    },
+    {
+      "species": "Ribombee",
+      "issues": []
+    },
+    {
+      "species": "Rillaboom",
+      "issues": []
+    },
+    {
+      "species": "Roaring Moon",
+      "issues": []
+    },
+    {
+      "species": "Roselia",
+      "issues": []
+    },
+    {
+      "species": "Roserade",
+      "issues": []
+    },
+    {
+      "species": "Rotom",
+      "issues": []
+    },
+    {
+      "species": "Runerigus",
+      "issues": []
+    },
+    {
+      "species": "Sableye",
+      "issues": []
+    },
+    {
+      "species": "Salamence",
+      "issues": []
+    },
+    {
+      "species": "Salazzle",
+      "issues": []
+    },
+    {
+      "species": "Samurott",
+      "issues": []
+    },
+    {
+      "species": "Sandaconda",
+      "issues": []
+    },
+    {
+      "species": "Sandslash",
+      "issues": []
+    },
+    {
+      "species": "Sandy Shocks",
+      "issues": []
+    },
+    {
+      "species": "Sawk",
+      "issues": []
+    },
+    {
+      "species": "Sawsbuck",
+      "issues": []
+    },
+    {
+      "species": "Sceptile",
+      "issues": []
+    },
+    {
+      "species": "Scizor",
+      "issues": []
+    },
+    {
+      "species": "Scolipede",
+      "issues": []
+    },
+    {
+      "species": "Scovillain",
+      "issues": []
+    },
+    {
+      "species": "Scrafty",
+      "issues": []
+    },
+    {
+      "species": "Scream Tail",
+      "issues": []
+    },
+    {
+      "species": "Scyther",
+      "issues": []
+    },
+    {
+      "species": "Seaking",
+      "issues": []
+    },
+    {
+      "species": "Sealeo",
+      "issues": []
+    },
+    {
+      "species": "Seismitoad",
+      "issues": []
+    },
+    {
+      "species": "Serperior",
+      "issues": []
+    },
+    {
+      "species": "Seviper",
+      "issues": []
+    },
+    {
+      "species": "Sharpedo",
+      "issues": []
+    },
+    {
+      "species": "Shaymin",
+      "issues": []
+    },
+    {
+      "species": "Shedinja",
+      "issues": []
+    },
+    {
+      "species": "Shiftry",
+      "issues": []
+    },
+    {
+      "species": "Shiinotic",
+      "issues": []
+    },
+    {
+      "species": "Shuckle",
+      "issues": []
+    },
+    {
+      "species": "Sigilyph",
+      "issues": []
+    },
+    {
+      "species": "Silvally",
+      "issues": []
+    },
+    {
+      "species": "Simipour",
+      "issues": []
+    },
+    {
+      "species": "Simisage",
+      "issues": []
+    },
+    {
+      "species": "Simisear",
+      "issues": []
+    },
+    {
+      "species": "Sinistcha",
+      "issues": []
+    },
+    {
+      "species": "Sirfetch’d",
+      "issues": []
+    },
+    {
+      "species": "Skarmory",
+      "issues": []
+    },
+    {
+      "species": "Skeledirge",
+      "issues": []
+    },
+    {
+      "species": "Skuntank",
+      "issues": []
+    },
+    {
+      "species": "Slaking",
+      "issues": []
+    },
+    {
+      "species": "Slither Wing",
+      "issues": []
+    },
+    {
+      "species": "Slowbro",
+      "issues": []
+    },
+    {
+      "species": "Slowking",
+      "issues": []
+    },
+    {
+      "species": "Slurpuff",
+      "issues": []
+    },
+    {
+      "species": "Smeargle",
+      "issues": [
+        {
+          "kind": "no-direct-attack",
+          "detail": "Support-only; requires an ally or indirect damage plan."
+        }
+      ]
+    },
+    {
+      "species": "Sneasler",
+      "issues": []
+    },
+    {
+      "species": "Snorlax",
+      "issues": []
+    },
+    {
+      "species": "Solgaleo",
+      "issues": []
+    },
+    {
+      "species": "Solrock",
+      "issues": []
+    },
+    {
+      "species": "Spectrier",
+      "issues": []
+    },
+    {
+      "species": "Spidops",
+      "issues": []
+    },
+    {
+      "species": "Spinda",
+      "issues": []
+    },
+    {
+      "species": "Spiritomb",
+      "issues": []
+    },
+    {
+      "species": "Squawkabilly",
+      "issues": []
+    },
+    {
+      "species": "Stakataka",
+      "issues": []
+    },
+    {
+      "species": "Staraptor",
+      "issues": []
+    },
+    {
+      "species": "Starmie",
+      "issues": []
+    },
+    {
+      "species": "Steelix",
+      "issues": []
+    },
+    {
+      "species": "Stonjourner",
+      "issues": []
+    },
+    {
+      "species": "Stoutland",
+      "issues": []
+    },
+    {
+      "species": "Stunfisk",
+      "issues": []
+    },
+    {
+      "species": "Sudowoodo",
+      "issues": []
+    },
+    {
+      "species": "Suicune",
+      "issues": []
+    },
+    {
+      "species": "Sunflora",
+      "issues": []
+    },
+    {
+      "species": "Swalot",
+      "issues": []
+    },
+    {
+      "species": "Swampert",
+      "issues": []
+    },
+    {
+      "species": "Swanna",
+      "issues": []
+    },
+    {
+      "species": "Swellow",
+      "issues": []
+    },
+    {
+      "species": "Swoobat",
+      "issues": []
+    },
+    {
+      "species": "Sylveon",
+      "issues": []
+    },
+    {
+      "species": "Talonflame",
+      "issues": []
+    },
+    {
+      "species": "Tangela",
+      "issues": []
+    },
+    {
+      "species": "Tangrowth",
+      "issues": []
+    },
+    {
+      "species": "Tapu Bulu",
+      "issues": []
+    },
+    {
+      "species": "Tapu Fini",
+      "issues": []
+    },
+    {
+      "species": "Tapu Koko",
+      "issues": []
+    },
+    {
+      "species": "Tapu Lele",
+      "issues": []
+    },
+    {
+      "species": "Tatsugiri",
+      "issues": []
+    },
+    {
+      "species": "Tauros",
+      "issues": []
+    },
+    {
+      "species": "Tentacruel",
+      "issues": []
+    },
+    {
+      "species": "Terapagos",
+      "issues": []
+    },
+    {
+      "species": "Terrakion",
+      "issues": []
+    },
+    {
+      "species": "Thievul",
+      "issues": []
+    },
+    {
+      "species": "Throh",
+      "issues": []
+    },
+    {
+      "species": "Thundurus",
+      "issues": []
+    },
+    {
+      "species": "Ting-Lu",
+      "issues": []
+    },
+    {
+      "species": "Tinkaton",
+      "issues": []
+    },
+    {
+      "species": "Toedscruel",
+      "issues": []
+    },
+    {
+      "species": "Togedemaru",
+      "issues": []
+    },
+    {
+      "species": "Togekiss",
+      "issues": []
+    },
+    {
+      "species": "Togetic",
+      "issues": []
+    },
+    {
+      "species": "Torkoal",
+      "issues": []
+    },
+    {
+      "species": "Tornadus",
+      "issues": []
+    },
+    {
+      "species": "Torracat",
+      "issues": []
+    },
+    {
+      "species": "Torterra",
+      "issues": []
+    },
+    {
+      "species": "Toucannon",
+      "issues": []
+    },
+    {
+      "species": "Toxapex",
+      "issues": []
+    },
+    {
+      "species": "Toxicroak",
+      "issues": []
+    },
+    {
+      "species": "Toxtricity",
+      "issues": []
+    },
+    {
+      "species": "Trevenant",
+      "issues": []
+    },
+    {
+      "species": "Tropius",
+      "issues": []
+    },
+    {
+      "species": "Tsareena",
+      "issues": []
+    },
+    {
+      "species": "Turtonator",
+      "issues": []
+    },
+    {
+      "species": "Type: Null",
+      "issues": []
+    },
+    {
+      "species": "Typhlosion",
+      "issues": []
+    },
+    {
+      "species": "Tyranitar",
+      "issues": []
+    },
+    {
+      "species": "Tyrantrum",
+      "issues": []
+    },
+    {
+      "species": "Umbreon",
+      "issues": []
+    },
+    {
+      "species": "Unfezant",
+      "issues": []
+    },
+    {
+      "species": "Unown",
+      "issues": []
+    },
+    {
+      "species": "Ursaluna",
+      "issues": []
+    },
+    {
+      "species": "Ursaring",
+      "issues": []
+    },
+    {
+      "species": "Urshifu",
+      "issues": []
+    },
+    {
+      "species": "Uxie",
+      "issues": []
+    },
+    {
+      "species": "Vanilluxe",
+      "issues": []
+    },
+    {
+      "species": "Vaporeon",
+      "issues": []
+    },
+    {
+      "species": "Veluza",
+      "issues": []
+    },
+    {
+      "species": "Venomoth",
+      "issues": []
+    },
+    {
+      "species": "Venusaur",
+      "issues": []
+    },
+    {
+      "species": "Vespiquen",
+      "issues": []
+    },
+    {
+      "species": "Victini",
+      "issues": []
+    },
+    {
+      "species": "Victreebel",
+      "issues": []
+    },
+    {
+      "species": "Vigoroth",
+      "issues": []
+    },
+    {
+      "species": "Vikavolt",
+      "issues": []
+    },
+    {
+      "species": "Vileplume",
+      "issues": []
+    },
+    {
+      "species": "Virizion",
+      "issues": []
+    },
+    {
+      "species": "Vivillon",
+      "issues": []
+    },
+    {
+      "species": "Volbeat",
+      "issues": []
+    },
+    {
+      "species": "Volcanion",
+      "issues": []
+    },
+    {
+      "species": "Volcarona",
+      "issues": []
+    },
+    {
+      "species": "Wailord",
+      "issues": []
+    },
+    {
+      "species": "Walking Wake",
+      "issues": []
+    },
+    {
+      "species": "Walrein",
+      "issues": []
+    },
+    {
+      "species": "Watchog",
+      "issues": []
+    },
+    {
+      "species": "Weavile",
+      "issues": []
+    },
+    {
+      "species": "Weepinbell",
+      "issues": []
+    },
+    {
+      "species": "Weezing",
+      "issues": []
+    },
+    {
+      "species": "Whimsicott",
+      "issues": []
+    },
+    {
+      "species": "Whiscash",
+      "issues": []
+    },
+    {
+      "species": "Wigglytuff",
+      "issues": []
+    },
+    {
+      "species": "Wishiwashi",
+      "issues": []
+    },
+    {
+      "species": "Wo-Chien",
+      "issues": []
+    },
+    {
+      "species": "Wobbuffet",
+      "issues": []
+    },
+    {
+      "species": "Wormadam",
+      "issues": []
+    },
+    {
+      "species": "Wugtrio",
+      "issues": []
+    },
+    {
+      "species": "Wyrdeer",
+      "issues": []
+    },
+    {
+      "species": "Xatu",
+      "issues": []
+    },
+    {
+      "species": "Xerneas",
+      "issues": []
+    },
+    {
+      "species": "Xurkitree",
+      "issues": []
+    },
+    {
+      "species": "Yanmega",
+      "issues": []
+    },
+    {
+      "species": "Yveltal",
+      "issues": []
+    },
+    {
+      "species": "Zacian",
+      "issues": []
+    },
+    {
+      "species": "Zamazenta",
+      "issues": []
+    },
+    {
+      "species": "Zangoose",
+      "issues": []
+    },
+    {
+      "species": "Zapdos",
+      "issues": []
+    },
+    {
+      "species": "Zarude",
+      "issues": []
+    },
+    {
+      "species": "Zebstrika",
+      "issues": []
+    },
+    {
+      "species": "Zekrom",
+      "issues": []
+    },
+    {
+      "species": "Zeraora",
+      "issues": []
+    },
+    {
+      "species": "Zoroark",
+      "issues": []
+    },
+    {
+      "species": "Zygarde",
+      "issues": []
+    }
+  ],
+  "fixtures": [
+    {
+      "source": "artifacts/support-recheck-climb-cases.json",
+      "caseId": "espeon-screen",
+      "issues": [],
+      "gaps": [
+        {
+          "target": "Shedinja",
+          "ability": "Wonder Guard",
+          "kind": "no-static-direct-answer"
+        }
+      ]
+    },
+    {
+      "source": "artifacts/support-recheck-climb-cases.json",
+      "caseId": "grimmsnarl-screen",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "source": "artifacts/support-recheck-climb-cases.json",
+      "caseId": "klefki-screen",
+      "issues": [
+        {
+          "kind": "training-category-mismatch",
+          "detail": "Physical moves, more special investment.",
+          "species": "Azumarill"
+        },
+        {
+          "kind": "nature-category-mismatch",
+          "detail": "Modest",
+          "species": "Azumarill"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "source": "artifacts/support-recheck-climb-cases.json",
+      "caseId": "snow-veil",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "source": "artifacts/support-recheck-climb-cases.json",
+      "caseId": "attack-control",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "source": "artifacts/support-recheck-climb-cases.json",
+      "caseId": "room-control",
+      "issues": [
+        {
+          "kind": "training-category-mismatch",
+          "detail": "Special moves, more physical investment.",
+          "species": "Torkoal"
+        }
+      ],
+      "gaps": []
+    },
+    {
+      "source": "artifacts/support-corrected-climb-cases.json",
+      "caseId": "espeon-screen",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "source": "artifacts/support-corrected-climb-cases.json",
+      "caseId": "grimmsnarl-screen",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "source": "artifacts/support-corrected-climb-cases.json",
+      "caseId": "klefki-screen",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "source": "artifacts/support-corrected-climb-cases.json",
+      "caseId": "snow-veil",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "source": "artifacts/support-corrected-climb-cases.json",
+      "caseId": "attack-control",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "source": "artifacts/support-corrected-climb-cases.json",
+      "caseId": "room-control",
+      "issues": [],
+      "gaps": []
+    }
+  ],
+  "generatedAudit": [
+    {
+      "caseId": "auto-gen1",
+      "category": "generation-starters",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-gen2",
+      "category": "generation-starters",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-gen3",
+      "category": "generation-starters",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-gen4",
+      "category": "generation-starters",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-gen5",
+      "category": "generation-starters",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-gen6",
+      "category": "generation-starters",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-gen7",
+      "category": "generation-starters",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-gen8",
+      "category": "generation-starters",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-gen9",
+      "category": "generation-starters",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-screens-1",
+      "category": "screens",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-screens-2",
+      "category": "screens",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-screens-3",
+      "category": "screens",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-room-1",
+      "category": "room",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-room-2",
+      "category": "room",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-room-3",
+      "category": "room",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-mixed-1",
+      "category": "mixed",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-mixed-2",
+      "category": "mixed",
+      "issues": [],
+      "gaps": []
+    },
+    {
+      "caseId": "auto-mixed-3",
+      "category": "mixed",
+      "issues": [],
+      "gaps": []
+    }
+  ],
+  "notes": "Offline static diagnostics; all target abilities are hypothetical scenarios, never player inputs. Gaps may be solved by status/weather/teammates in battle. Warnings do not automatically mutate samples."
+}

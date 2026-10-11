@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "manifests": [
+    "observed-damage-dev-manifest.json",
+    "observed-damage-validate-manifest.json"
+  ],
+  "inputFields": [
+    "observation",
+    "context"
+  ],
+  "targetFields": [
+    "action",
+    "reason"
+  ],
+  "diagnosticFields": [
+    "diagnostics"
+  ],
+  "outcomeFields": [
+    "outcome"
+  ],
+  "groupField": "courseId",
+  "joinField": "battleKey",
+  "modelTrained": false,
+  "notes": "Dev baseline reproduces previous validation episodes; deduplicate if combining historical datasets. Validation courses generated after freezing candidate. Outcome and post-choice diagnostics are not model inputs."
+}

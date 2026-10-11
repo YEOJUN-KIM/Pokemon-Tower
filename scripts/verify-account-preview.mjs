@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import {randomUUID} from 'node:crypto';
+import {readFile} from 'node:fs/promises';
+const origin=(await readFile('.data/preview.env','utf8')).match(/^TOWER_ORIGIN=(.*)$/m)?.[1].trim();
+assert.ok(/^https:\/\/[a-z0-9-]+\.trycloudflare\.com$/.test(origin));
+const request=(path,options={})=>fetch(`${origin}${path}`,{...options,signal:AbortSignal.timeout(20000)});
+const entry=await request('/');assert.match(entry.url,/\/account\?next=/);
+assert.equal(entry.status,200);
+async function json(response) {assert.equal(response.status,200,await response.clone().text());return response.json();}
+const cookies=response=>response.headers.getSetCookie().map(value=>value.split(';')[0]).join('; ');
+const first=await request('/api/battle?view=collection');
+const state=await json(first.clone());assert.equal(state.tower.unlocked.length,27);
+const guest=cookies(first);
+const post=(cookie,body,path='/api/account')=>request(path,{method:'POST',headers:{Cookie:cookie,Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)});
+await json(await post(guest,{type:'favorite',species:'Greninja',enabled:true},'/api/battle'));
+const username=`verify_${randomUUID().slice(0,8)}`,password=randomUUID();
+const created=await post(guest,{action:'register',username,password});
+await json(created.clone());assert.match(created.headers.get('set-cookie'),/; Secure/i);
+const account=cookies(created);
+const before=await json(await request('/api/battle?view=collection',{headers:{Cookie:account}}));
+assert.ok(before.tower.favorites.includes('Greninja'));
+const login=await post('',{action:'login',username,password});await json(login.clone());
+assert.deepEqual((await json(await request('/api/battle?view=collection',{headers:{Cookie:cookies(login)}}))).tower,before.tower);
+await json(await post(account,{action:'logout'}));
+assert.equal((await json(await request('/api/account',{headers:{Cookie:account}}))).username,null);
+assert.ok(!(await json(await request('/api/battle?view=collection',{headers:{Cookie:guest}}))).tower.favorites.includes('Greninja'));
+await json(await post(cookies(login),{action:'logout'}));
+console.log('PASS: external HTTPS registration, secure session, guest save transfer, second-device login, logout and old guest-cookie protection; 27 starter partners.');

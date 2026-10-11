@@ -1,0 +1,111 @@
+import {dexSearch,dexFilter} from './dex-filters';
+import {test,expect} from '@playwright/test';
+import {randomBytes} from 'node:crypto';
+import {TowerStore} from '../src/server/tower-store';
+import {playerKey} from '../src/server/tower-service';
+import {starters} from '../src/data/teams';
+
+test('collection shows the national dex, unlock filters, details and title/battle navigation',async ({page}) => {
+  await page.goto('/');
+  await page.getByRole('link',{name:'포켓몬 도감',exact:true}).click();
+  await expect(page.getByTestId('dex-progress')).toHaveText('27 / 612');
+  await expect(page.getByTestId('dex-list').getByRole('button',{name:/상세 보기$/})).not.toHaveCount(0);
+  await dexSearch(page).fill('한카리아스');await page.getByRole('button',{name:'한카리아스 상세 보기'}).click();
+  await page.getByRole('button',{name:'취소',exact:true}).click();
+  await page.locator('.dex-inspect-button').click();
+  const detail = page.getByTestId('dex-detail');
+  await expect(detail).not.toContainText('미해금 · 다음 도전에서 선택 불가');
+  await expect(detail).toContainText('까칠한피부');
+  await expect(detail.locator('.summary-moves li')).toHaveCount(4);
+  await expect(detail).toContainText('드래곤클로');
+  await page.getByRole('button',{name:'한카리아스 기본 정보 닫기'}).click();
+  await dexSearch(page).fill('');await dexFilter(page,'표시').selectOption('owned');
+  await expect(page.getByTestId('dex-list').getByRole('button',{name:/상세 보기$/})).toHaveCount(27);
+  await page.getByRole('button',{name:'리자몽 상세 보기'}).click();
+  await page.getByRole('button',{name:'취소',exact:true}).click();
+  await page.locator('.dex-inspect-button').click();
+  await expect(detail).not.toContainText('다음 도전에서 선택 가능');
+  await expect(detail).not.toContainText('진행 중인 도전 없음');
+  await page.getByRole('button',{name:'리자몽 기본 정보 닫기'}).click();
+  await dexFilter(page,'표시').selectOption('unowned');
+  await expect(page.getByTestId('dex-list').getByRole('button',{name:/상세 보기$/})).not.toHaveCount(0);
+  await dexSearch(page).fill('없는포켓몬');
+  await expect(page.getByText('조건에 맞는 포켓몬이 없습니다.')).toBeVisible();
+  await dexSearch(page).fill('고스트');
+  await expect(page.getByTestId('dex-list').getByRole('button',{name:/상세 보기$/})).toHaveCount(0);
+  await dexSearch(page).fill('');
+  await dexFilter(page,'세대').selectOption('4');
+  await expect(page.getByTestId('dex-list').getByRole('button',{name:/상세 보기$/})).not.toHaveCount(0);
+  await dexFilter(page,'타입').selectOption('드래곤');
+  await expect(page.getByTestId('dex-list').getByRole('button',{name:/상세 보기$/})).toHaveCount(4);
+  await page.getByRole('button',{name:'필터 초기화 · R',exact:true}).click();
+  await page.getByRole('button',{name:'메가진화 가능',exact:true}).click();
+  await page.getByRole('button',{name:'거다이맥스 가능',exact:true}).click();
+  await expect(page.getByTestId('dex-list').getByRole('button',{name:/상세 보기$/})).toHaveCount(4);
+  await page.getByRole('button',{name:'필터 초기화 · R',exact:true}).click();
+  for(const query of ['피카츄','피','피카','ㅍㅋㅊ','ㅍㅋ','vlzkcb','vlzk','Pikachu']) {
+    await dexSearch(page).fill(query);
+    await expect(page.getByTestId('dex-list').getByRole('button',{name:'피카츄 상세 보기'})).toBeVisible();
+    if(query==='피카츄' || query==='Pikachu')await expect(page.getByTestId('dex-list').getByRole('button',{name:/상세 보기$/})).toHaveCount(1);
+  }
+  await page.getByRole('button',{name:'필터 초기화 · R',exact:true}).click();
+  await dexFilter(page,'타입').selectOption('고스트');
+  await expect(page.getByTestId('dex-list').getByRole('button',{name:'팬텀 상세 보기',exact:true})).toBeVisible();
+  await dexFilter(page,'타입').selectOption('all');
+  await dexFilter(page,'표시').selectOption('all');
+  await dexSearch(page).fill('');
+  await page.screenshot({path:'test-results/pokedex-desktop.png',fullPage:true});
+  await page.getByRole('link',{name:'새 도전 준비'}).click();
+  await expect(page.getByTestId('team-selection')).toBeVisible();
+  await page.getByRole('link',{name:'← 타이틀로',exact:true}).click();await page.getByRole('link',{name:'포켓몬 도감',exact:true}).click();
+  await expect(page.getByTestId('dex-progress')).toHaveText('27 / 612');
+});
+
+test('collection separates permanent unlocks from current roster without resuming the battle engine',async ({page,context}) => {
+  const token = randomBytes(32).toString('hex');
+  const owner = playerKey(token);
+  const store = new TowerStore('.data/e2e.sqlite');
+  try {
+    store.ensurePlayer(owner);
+    const id = store.start(owner,starters);
+    const runId = store.battle(id).run_id;
+    for (const name of ['Pikachu','Garchomp']) store.db.prepare('INSERT INTO unlocks VALUES (?, ?)').run(owner,name);
+    store.db.prepare('INSERT INTO members VALUES (?, 3, ?)').run(runId,'Pikachu');
+    store.db.prepare('UPDATE battles SET engine_version = ? WHERE id = ?').run('unavailable-test-version',id);
+  } finally {store.close();}
+  await context.addCookies([{name:'tower_session',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
+  await page.goto('/pokedex');
+  await expect(page.getByTestId('dex-progress')).toHaveText('29 / 612');
+  await dexSearch(page).fill('한카리아스');await page.getByRole('button',{name:'한카리아스 상세 보기'}).click();
+  await page.getByRole('button',{name:'취소',exact:true}).click();
+  await page.locator('.dex-inspect-button').click();
+  await expect(page.getByTestId('dex-detail')).not.toContainText('다음 도전에서 선택 가능');
+  await expect(page.getByTestId('dex-detail')).not.toContainText('이번 도전에는 보유하지 않음');
+  await page.getByRole('button',{name:'한카리아스 기본 정보 닫기'}).click();
+  await dexSearch(page).fill('피카츄');await page.getByRole('button',{name:'피카츄 상세 보기'}).click();
+  await page.getByRole('button',{name:'취소',exact:true}).click();
+  await page.locator('.dex-inspect-button').click();
+  await expect(page.getByTestId('dex-detail')).not.toContainText('이번 도전 보유 멤버');
+  await page.getByRole('button',{name:'피카츄 기본 정보 닫기'}).click();
+  await dexSearch(page).fill('');await dexFilter(page,'표시').selectOption('owned');
+  await expect(page.getByTestId('dex-list').getByRole('button',{name:/상세 보기$/})).toHaveCount(29);
+  const collection = await page.request.get('/api/battle?view=collection');
+  expect(collection.status()).toBe(200);
+  expect((await collection.json()).battle).toBeNull();
+  expect((await page.request.get('/api/battle')).status()).toBe(409);
+  await page.reload();
+  await expect(page.getByTestId('dex-progress')).toHaveText('29 / 612');
+});
+
+test('mobile collection remains usable when sprite downloads fail',async ({page}) => {
+  await page.setViewportSize({width:390,height:844});
+  await page.route('https://raw.githubusercontent.com/**',route => route.abort());
+  await page.goto('/pokedex');
+  await expect(page.getByTestId('dex-progress')).toHaveText('27 / 612');
+  await page.getByRole('button',{name:'리자몽 상세 보기'}).click();
+  await page.getByRole('button',{name:'취소',exact:true}).click();
+  await page.locator('.dex-inspect-button').click();await expect(page.getByTestId('dex-detail').getByRole('heading',{name:'리자몽',exact:true})).toBeVisible();
+  await expect(page.getByTestId('dex-detail').getByLabel('리자몽 이미지 없음')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({path:'test-results/pokedex-mobile.png',fullPage:true});
+});

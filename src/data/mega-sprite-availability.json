@@ -1,0 +1,237 @@
+{
+  "10033": {
+    "key": "venusaur-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10034": {
+    "key": "charizard-megax",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10035": {
+    "key": "charizard-megay",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10036": {
+    "key": "blastoise-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10037": {
+    "key": "alakazam-mega",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10038": {
+    "key": "gengar-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10039": {
+    "key": "kangaskhan-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10040": {
+    "key": "pinsir-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10041": {
+    "key": "gyarados-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10042": {
+    "key": "aerodactyl-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10043": {
+    "key": "mewtwo-megax",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10044": {
+    "key": "mewtwo-megay",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10045": {
+    "key": "ampharos-mega",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10046": {
+    "key": "scizor-mega",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10047": {
+    "key": "heracross-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10048": {
+    "key": "houndoom-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10049": {
+    "key": "tyranitar-mega",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10050": {
+    "key": "blaziken-mega",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10051": {
+    "key": "gardevoir-mega",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10052": {
+    "key": "mawile-mega",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10053": {
+    "key": "aggron-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10054": {
+    "key": "medicham-mega",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10055": {
+    "key": "manectric-mega",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10056": {
+    "key": "banette-mega",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10057": {
+    "key": "absol-mega",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10058": {
+    "key": "garchomp-mega",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10059": {
+    "key": "lucario-mega",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10060": {
+    "key": "abomasnow-mega",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10062": {
+    "key": "latias-mega",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10063": {
+    "key": "latios-mega",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10064": {
+    "key": "swampert-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10065": {
+    "key": "sceptile-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10066": {
+    "key": "sableye-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10067": {
+    "key": "altaria-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10068": {
+    "key": "gallade-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10069": {
+    "key": "audino-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10070": {
+    "key": "sharpedo-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10071": {
+    "key": "slowbro-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10072": {
+    "key": "steelix-mega",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10073": {
+    "key": "pidgeot-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10074": {
+    "key": "glalie-mega",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10075": {
+    "key": "diancie-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10076": {
+    "key": "metagross-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10087": {
+    "key": "camerupt-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10088": {
+    "key": "lopunny-mega",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10089": {
+    "key": "salamence-mega",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10090": {
+    "key": "beedrill-mega",
+    "animatedFront": true,
+    "animatedBack": false
+  }
+}

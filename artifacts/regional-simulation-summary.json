@@ -1,0 +1,1050 @@
+{
+  "date": "2026-10-10",
+  "runs": 873,
+  "battles": 14520,
+  "validation": "All accounting/campaign/replay invariants passed; related tests 18/18; strict simulator typecheck passed",
+  "pairedAIComparison": {
+    "trained": {
+      "averageClearedDelta": -0.8958333333333334,
+      "more": 30,
+      "same": 70,
+      "less": 44
+    },
+    "collector": {
+      "averageClearedDelta": -0.375,
+      "more": 26,
+      "same": 87,
+      "less": 31
+    }
+  },
+  "current": [
+    {
+      "stage": "fresh",
+      "byTheme": {
+        "kanto": {
+          "samples": 16,
+          "averageCleared": 2.8125,
+          "finished": 0,
+          "failures": {
+            "1": 2,
+            "2": 6,
+            "4": 3,
+            "5": 2,
+            "6": 1,
+            "9": 1,
+            "10": 1
+          }
+        },
+        "johto": {
+          "samples": 16,
+          "averageCleared": 1.9375,
+          "finished": 0,
+          "failures": {
+            "2": 6,
+            "3": 6,
+            "4": 3,
+            "5": 1
+          }
+        },
+        "hoenn": {
+          "samples": 16,
+          "averageCleared": 3.5,
+          "finished": 0,
+          "failures": {
+            "2": 2,
+            "3": 4,
+            "4": 3,
+            "5": 2,
+            "6": 3,
+            "8": 2
+          }
+        },
+        "sinnoh": {
+          "samples": 16,
+          "averageCleared": 2.5,
+          "finished": 0,
+          "failures": {
+            "1": 3,
+            "2": 3,
+            "3": 2,
+            "4": 3,
+            "5": 2,
+            "6": 2,
+            "7": 1
+          }
+        },
+        "unova": {
+          "samples": 16,
+          "averageCleared": 1.375,
+          "finished": 0,
+          "failures": {
+            "1": 3,
+            "2": 7,
+            "3": 4,
+            "4": 1,
+            "5": 1
+          }
+        },
+        "kalos": {
+          "samples": 16,
+          "averageCleared": 1.8125,
+          "finished": 0,
+          "failures": {
+            "1": 2,
+            "2": 6,
+            "3": 5,
+            "4": 1,
+            "5": 1,
+            "7": 1
+          }
+        },
+        "alola": {
+          "samples": 16,
+          "averageCleared": 2.375,
+          "finished": 0,
+          "failures": {
+            "1": 1,
+            "2": 4,
+            "3": 4,
+            "4": 4,
+            "5": 1,
+            "6": 2
+          }
+        },
+        "galar": {
+          "samples": 16,
+          "averageCleared": 1.9375,
+          "finished": 0,
+          "failures": {
+            "1": 2,
+            "2": 4,
+            "3": 5,
+            "4": 3,
+            "5": 2
+          }
+        },
+        "paldea": {
+          "samples": 16,
+          "averageCleared": 3.0625,
+          "finished": 0,
+          "failures": {
+            "1": 1,
+            "2": 4,
+            "3": 4,
+            "4": 2,
+            "5": 2,
+            "6": 1,
+            "10": 2
+          }
+        }
+      },
+      "battles": 485,
+      "playerTera": 144,
+      "enemyTera": 478,
+      "playerSwitches": 243,
+      "enemySwitches": 179,
+      "villainBossWins": 0,
+      "averageCleared": 2.3680555555555554,
+      "finished": 0,
+      "averageEarned": 422.9166666666667,
+      "averageSpent": 77.77777777777777,
+      "averageRemaining": 345.1388888888889,
+      "shopVisits": 17,
+      "categories": {
+        "item": {
+          "count": 26,
+          "spent": 5900,
+          "perVisit": 1.5294117647058822
+        },
+        "machine": {
+          "count": 11,
+          "spent": 1700,
+          "perVisit": 0.6470588235294118
+        },
+        "consumable": {
+          "count": 18,
+          "spent": 3600,
+          "perVisit": 1.0588235294117647
+        },
+        "vitamin": {
+          "count": 0,
+          "spent": 0,
+          "perVisit": 0
+        },
+        "reroll": {
+          "count": 0,
+          "spent": 0,
+          "perVisit": 0
+        },
+        "tera": {
+          "count": 0,
+          "spent": 0,
+          "perVisit": 0
+        }
+      },
+      "checkpointWallets": {
+        "5": {
+          "visits": 17,
+          "before": 1150,
+          "after": 491.1764705882353,
+          "blocked": 7.411764705882353
+        },
+        "10": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "15": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "20": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "25": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "30": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "35": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "40": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "45": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        }
+      }
+    },
+    {
+      "stage": "mid",
+      "byTheme": {
+        "kanto": {
+          "samples": 16,
+          "averageCleared": 5.6875,
+          "finished": 0,
+          "failures": {
+            "2": 3,
+            "3": 1,
+            "4": 3,
+            "5": 2,
+            "7": 1,
+            "9": 1,
+            "10": 2,
+            "11": 2,
+            "18": 1
+          }
+        },
+        "johto": {
+          "samples": 16,
+          "averageCleared": 4.625,
+          "finished": 0,
+          "failures": {
+            "2": 2,
+            "3": 2,
+            "4": 5,
+            "5": 2,
+            "6": 1,
+            "7": 2,
+            "9": 1,
+            "21": 1
+          }
+        },
+        "hoenn": {
+          "samples": 16,
+          "averageCleared": 5.0625,
+          "finished": 0,
+          "failures": {
+            "1": 1,
+            "2": 1,
+            "3": 1,
+            "4": 1,
+            "5": 4,
+            "6": 1,
+            "7": 2,
+            "8": 1,
+            "9": 1,
+            "10": 3
+          }
+        },
+        "sinnoh": {
+          "samples": 16,
+          "averageCleared": 5.75,
+          "finished": 0,
+          "failures": {
+            "1": 2,
+            "2": 2,
+            "4": 1,
+            "5": 1,
+            "6": 1,
+            "7": 2,
+            "8": 1,
+            "9": 2,
+            "11": 1,
+            "12": 3
+          }
+        },
+        "unova": {
+          "samples": 16,
+          "averageCleared": 6.875,
+          "finished": 0,
+          "failures": {
+            "2": 2,
+            "3": 2,
+            "4": 1,
+            "5": 3,
+            "6": 1,
+            "7": 1,
+            "8": 1,
+            "12": 1,
+            "13": 1,
+            "14": 2,
+            "23": 1
+          }
+        },
+        "kalos": {
+          "samples": 16,
+          "averageCleared": 4.375,
+          "finished": 0,
+          "failures": {
+            "1": 2,
+            "2": 1,
+            "3": 5,
+            "4": 2,
+            "5": 1,
+            "8": 1,
+            "9": 2,
+            "13": 1,
+            "15": 1
+          }
+        },
+        "alola": {
+          "samples": 16,
+          "averageCleared": 6.0625,
+          "finished": 0,
+          "failures": {
+            "2": 1,
+            "3": 1,
+            "4": 2,
+            "5": 1,
+            "6": 2,
+            "7": 2,
+            "9": 5,
+            "10": 1,
+            "14": 1
+          }
+        },
+        "galar": {
+          "samples": 16,
+          "averageCleared": 4.6875,
+          "finished": 0,
+          "failures": {
+            "2": 2,
+            "3": 3,
+            "4": 3,
+            "5": 5,
+            "6": 1,
+            "9": 1,
+            "26": 1
+          }
+        },
+        "paldea": {
+          "samples": 16,
+          "averageCleared": 7.875,
+          "finished": 0,
+          "failures": {
+            "2": 2,
+            "3": 2,
+            "4": 1,
+            "5": 3,
+            "6": 1,
+            "7": 1,
+            "10": 1,
+            "11": 1,
+            "14": 1,
+            "20": 1,
+            "22": 1,
+            "23": 1
+          }
+        }
+      },
+      "battles": 960,
+      "playerTera": 177,
+      "enemyTera": 937,
+      "playerSwitches": 460,
+      "enemySwitches": 345,
+      "villainBossWins": 0,
+      "averageCleared": 5.666666666666667,
+      "finished": 0,
+      "averageEarned": 1878.8194444444443,
+      "averageSpent": 985.4166666666666,
+      "averageRemaining": 893.4027777777778,
+      "shopVisits": 100,
+      "categories": {
+        "item": {
+          "count": 138,
+          "spent": 38600,
+          "perVisit": 1.38
+        },
+        "machine": {
+          "count": 68,
+          "spent": 12400,
+          "perVisit": 0.68
+        },
+        "consumable": {
+          "count": 174,
+          "spent": 34800,
+          "perVisit": 1.74
+        },
+        "vitamin": {
+          "count": 9,
+          "spent": 22600,
+          "perVisit": 0.09
+        },
+        "reroll": {
+          "count": 14,
+          "spent": 3800,
+          "perVisit": 0.14
+        },
+        "tera": {
+          "count": 33,
+          "spent": 29700,
+          "perVisit": 0.33
+        }
+      },
+      "checkpointWallets": {
+        "5": {
+          "visits": 65,
+          "before": 1150,
+          "after": 497.6923076923077,
+          "blocked": 7.384615384615385
+        },
+        "10": {
+          "visits": 22,
+          "before": 2752.2727272727275,
+          "after": 654.5454545454545,
+          "blocked": 5.7272727272727275
+        },
+        "15": {
+          "visits": 7,
+          "before": 4271.428571428572,
+          "after": 700,
+          "blocked": 4.571428571428571
+        },
+        "20": {
+          "visits": 5,
+          "before": 5470,
+          "after": 930,
+          "blocked": 4.4
+        },
+        "25": {
+          "visits": 1,
+          "before": 7050,
+          "after": 1400,
+          "blocked": 3
+        },
+        "30": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "35": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "40": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "45": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        }
+      }
+    },
+    {
+      "stage": "trained",
+      "byTheme": {
+        "kanto": {
+          "samples": 16,
+          "averageCleared": 17.6875,
+          "finished": 0,
+          "failures": {
+            "5": 1,
+            "7": 1,
+            "9": 1,
+            "10": 3,
+            "14": 1,
+            "16": 1,
+            "17": 1,
+            "20": 1,
+            "25": 2,
+            "28": 1,
+            "30": 1,
+            "35": 1,
+            "38": 1
+          }
+        },
+        "johto": {
+          "samples": 16,
+          "averageCleared": 18.5,
+          "finished": 0,
+          "failures": {
+            "5": 2,
+            "9": 1,
+            "13": 1,
+            "18": 1,
+            "20": 2,
+            "21": 3,
+            "24": 1,
+            "25": 2,
+            "26": 1,
+            "27": 1,
+            "32": 1
+          }
+        },
+        "hoenn": {
+          "samples": 16,
+          "averageCleared": 17,
+          "finished": 0,
+          "failures": {
+            "5": 1,
+            "8": 1,
+            "10": 2,
+            "12": 1,
+            "15": 2,
+            "16": 1,
+            "19": 2,
+            "21": 1,
+            "23": 1,
+            "27": 1,
+            "28": 1,
+            "29": 1,
+            "31": 1
+          }
+        },
+        "sinnoh": {
+          "samples": 16,
+          "averageCleared": 15.375,
+          "finished": 0,
+          "failures": {
+            "1": 1,
+            "9": 1,
+            "10": 1,
+            "12": 2,
+            "13": 2,
+            "15": 1,
+            "16": 1,
+            "19": 2,
+            "20": 1,
+            "21": 1,
+            "25": 1,
+            "28": 1,
+            "29": 1
+          }
+        },
+        "unova": {
+          "samples": 16,
+          "averageCleared": 14.1875,
+          "finished": 0,
+          "failures": {
+            "3": 1,
+            "4": 1,
+            "5": 1,
+            "8": 1,
+            "12": 1,
+            "14": 2,
+            "16": 2,
+            "17": 2,
+            "18": 1,
+            "23": 1,
+            "24": 1,
+            "25": 1,
+            "27": 1
+          }
+        },
+        "kalos": {
+          "samples": 16,
+          "averageCleared": 15.5,
+          "finished": 0,
+          "failures": {
+            "4": 1,
+            "7": 1,
+            "8": 1,
+            "10": 2,
+            "14": 1,
+            "15": 1,
+            "16": 1,
+            "17": 1,
+            "19": 2,
+            "20": 3,
+            "28": 1,
+            "37": 1
+          }
+        },
+        "alola": {
+          "samples": 16,
+          "averageCleared": 13.625,
+          "finished": 0,
+          "failures": {
+            "3": 1,
+            "5": 2,
+            "9": 1,
+            "10": 2,
+            "12": 1,
+            "14": 1,
+            "17": 1,
+            "18": 1,
+            "19": 2,
+            "20": 1,
+            "23": 1,
+            "24": 1,
+            "26": 1
+          }
+        },
+        "galar": {
+          "samples": 16,
+          "averageCleared": 14.3125,
+          "finished": 0,
+          "failures": {
+            "2": 1,
+            "3": 1,
+            "8": 1,
+            "10": 1,
+            "12": 2,
+            "13": 1,
+            "17": 1,
+            "18": 1,
+            "19": 2,
+            "20": 1,
+            "21": 1,
+            "22": 1,
+            "23": 1,
+            "26": 1
+          }
+        },
+        "paldea": {
+          "samples": 16,
+          "averageCleared": 16.3125,
+          "finished": 0,
+          "failures": {
+            "1": 1,
+            "8": 1,
+            "10": 1,
+            "14": 1,
+            "16": 1,
+            "17": 2,
+            "18": 1,
+            "19": 1,
+            "20": 2,
+            "21": 1,
+            "23": 3,
+            "27": 1
+          }
+        }
+      },
+      "battles": 2424,
+      "playerTera": 402,
+      "enemyTera": 2386,
+      "playerSwitches": 938,
+      "enemySwitches": 768,
+      "villainBossWins": 0,
+      "averageCleared": 15.833333333333334,
+      "finished": 0,
+      "averageEarned": 9218.75,
+      "averageSpent": 6643.402777777777,
+      "averageRemaining": 2575.347222222222,
+      "shopVisits": 389,
+      "categories": {
+        "item": {
+          "count": 544,
+          "spent": 173550,
+          "perVisit": 1.398457583547558
+        },
+        "machine": {
+          "count": 193,
+          "spent": 39800,
+          "perVisit": 0.4961439588688946
+        },
+        "consumable": {
+          "count": 913,
+          "spent": 182600,
+          "perVisit": 2.347043701799486
+        },
+        "vitamin": {
+          "count": 92,
+          "spent": 246000,
+          "perVisit": 0.2365038560411311
+        },
+        "reroll": {
+          "count": 248,
+          "spent": 82500,
+          "perVisit": 0.6375321336760925
+        },
+        "tera": {
+          "count": 258,
+          "spent": 232200,
+          "perVisit": 0.6632390745501285
+        }
+      },
+      "checkpointWallets": {
+        "5": {
+          "visits": 129,
+          "before": 1150,
+          "after": 496.51162790697674,
+          "blocked": 7.3565891472868215
+        },
+        "10": {
+          "visits": 106,
+          "before": 2749.056603773585,
+          "after": 697.1698113207547,
+          "blocked": 5.509433962264151
+        },
+        "15": {
+          "visits": 85,
+          "before": 4348.823529411765,
+          "after": 912.3529411764706,
+          "blocked": 4.8
+        },
+        "20": {
+          "visits": 43,
+          "before": 5673.2558139534885,
+          "after": 996.5116279069767,
+          "blocked": 4.209302325581396
+        },
+        "25": {
+          "visits": 19,
+          "before": 7250,
+          "after": 1336.842105263158,
+          "blocked": 3.473684210526316
+        },
+        "30": {
+          "visits": 5,
+          "before": 8480,
+          "after": 1760,
+          "blocked": 2.4
+        },
+        "35": {
+          "visits": 2,
+          "before": 10750,
+          "after": 2900,
+          "blocked": 1.5
+        },
+        "40": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        },
+        "45": {
+          "visits": 0,
+          "before": 0,
+          "after": 0,
+          "blocked": 0
+        }
+      }
+    },
+    {
+      "stage": "collector",
+      "byTheme": {
+        "kanto": {
+          "samples": 16,
+          "averageCleared": 20,
+          "finished": 1,
+          "failures": {
+            "7": 1,
+            "9": 1,
+            "10": 3,
+            "11": 1,
+            "12": 1,
+            "13": 1,
+            "16": 1,
+            "17": 1,
+            "22": 1,
+            "24": 1,
+            "35": 1,
+            "41": 1,
+            "48": 1
+          }
+        },
+        "johto": {
+          "samples": 16,
+          "averageCleared": 27.3125,
+          "finished": 2,
+          "failures": {
+            "7": 1,
+            "17": 1,
+            "18": 2,
+            "19": 1,
+            "21": 2,
+            "24": 2,
+            "31": 1,
+            "36": 2,
+            "39": 1,
+            "40": 1
+          }
+        },
+        "hoenn": {
+          "samples": 16,
+          "averageCleared": 25.9375,
+          "finished": 1,
+          "failures": {
+            "10": 1,
+            "11": 2,
+            "12": 1,
+            "17": 2,
+            "23": 1,
+            "26": 1,
+            "27": 1,
+            "29": 1,
+            "36": 1,
+            "38": 1,
+            "40": 1,
+            "41": 1,
+            "42": 1
+          }
+        },
+        "sinnoh": {
+          "samples": 16,
+          "averageCleared": 32.3125,
+          "finished": 3,
+          "failures": {
+            "11": 1,
+            "14": 1,
+            "19": 1,
+            "24": 2,
+            "28": 1,
+            "29": 2,
+            "30": 1,
+            "33": 1,
+            "43": 1,
+            "46": 1,
+            "50": 1
+          }
+        },
+        "unova": {
+          "samples": 16,
+          "averageCleared": 34.8125,
+          "finished": 6,
+          "failures": {
+            "14": 1,
+            "17": 1,
+            "18": 1,
+            "19": 1,
+            "21": 1,
+            "24": 1,
+            "33": 1,
+            "38": 1,
+            "41": 1,
+            "42": 1
+          }
+        },
+        "kalos": {
+          "samples": 16,
+          "averageCleared": 32.0625,
+          "finished": 1,
+          "failures": {
+            "18": 2,
+            "24": 1,
+            "25": 2,
+            "29": 2,
+            "32": 1,
+            "34": 2,
+            "37": 1,
+            "42": 2,
+            "43": 1,
+            "46": 1
+          }
+        },
+        "alola": {
+          "samples": 16,
+          "averageCleared": 21.375,
+          "finished": 0,
+          "failures": {
+            "9": 1,
+            "12": 1,
+            "13": 1,
+            "15": 2,
+            "17": 1,
+            "18": 1,
+            "21": 2,
+            "23": 1,
+            "24": 1,
+            "25": 2,
+            "37": 1,
+            "40": 1,
+            "43": 1
+          }
+        },
+        "galar": {
+          "samples": 16,
+          "averageCleared": 22.6875,
+          "finished": 0,
+          "failures": {
+            "1": 1,
+            "12": 1,
+            "14": 1,
+            "17": 1,
+            "19": 1,
+            "22": 2,
+            "23": 2,
+            "24": 1,
+            "25": 1,
+            "27": 2,
+            "29": 1,
+            "44": 1,
+            "50": 1
+          }
+        },
+        "paldea": {
+          "samples": 16,
+          "averageCleared": 25.8125,
+          "finished": 3,
+          "failures": {
+            "8": 2,
+            "13": 1,
+            "14": 1,
+            "15": 1,
+            "17": 1,
+            "19": 1,
+            "20": 2,
+            "27": 1,
+            "29": 1,
+            "41": 1,
+            "45": 1
+          }
+        }
+      },
+      "battles": 4004,
+      "playerTera": 707,
+      "enemyTera": 3974,
+      "playerSwitches": 666,
+      "enemySwitches": 911,
+      "villainBossWins": 9,
+      "averageCleared": 26.92361111111111,
+      "finished": 17,
+      "averageEarned": 25261.11111111111,
+      "averageSpent": 20366.319444444445,
+      "averageRemaining": 4894.791666666667,
+      "shopVisits": 707,
+      "categories": {
+        "item": {
+          "count": 833,
+          "spent": 296700,
+          "perVisit": 1.1782178217821782
+        },
+        "machine": {
+          "count": 360,
+          "spent": 85550,
+          "perVisit": 0.5091937765205092
+        },
+        "consumable": {
+          "count": 1745,
+          "spent": 349000,
+          "perVisit": 2.468175388967468
+        },
+        "vitamin": {
+          "count": 441,
+          "spent": 1496600,
+          "perVisit": 0.6237623762376238
+        },
+        "reroll": {
+          "count": 577,
+          "spent": 198200,
+          "perVisit": 0.8161244695898161
+        },
+        "tera": {
+          "count": 563,
+          "spent": 506700,
+          "perVisit": 0.7963224893917963
+        }
+      },
+      "checkpointWallets": {
+        "5": {
+          "visits": 143,
+          "before": 1150,
+          "after": 494.05594405594405,
+          "blocked": 8.531468531468532
+        },
+        "10": {
+          "visits": 133,
+          "before": 2743.9849624060153,
+          "after": 712.781954887218,
+          "blocked": 5.954887218045113
+        },
+        "15": {
+          "visits": 115,
+          "before": 4365.652173913043,
+          "after": 871.304347826087,
+          "blocked": 5.278260869565218
+        },
+        "20": {
+          "visits": 93,
+          "before": 5625.806451612903,
+          "after": 917.2043010752689,
+          "blocked": 4.225806451612903
+        },
+        "25": {
+          "visits": 67,
+          "before": 7081.3432835820895,
+          "after": 1208.2089552238806,
+          "blocked": 3.8059701492537314
+        },
+        "30": {
+          "visits": 53,
+          "before": 8529.245283018869,
+          "after": 1712.2641509433963,
+          "blocked": 2.8867924528301887
+        },
+        "35": {
+          "visits": 46,
+          "before": 10527.173913043478,
+          "after": 1989.1304347826087,
+          "blocked": 1.1956521739130435
+        },
+        "40": {
+          "visits": 35,
+          "before": 12064.285714285714,
+          "after": 2347.1428571428573,
+          "blocked": 0.4857142857142857
+        },
+        "45": {
+          "visits": 22,
+          "before": 13806.818181818182,
+          "after": 2834.090909090909,
+          "blocked": 0.18181818181818182
+        }
+      }
+    }
+  ]
+}

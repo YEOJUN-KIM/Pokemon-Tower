@@ -1,0 +1,339 @@
+{
+  "sampleRate": 48000,
+  "original": true,
+  "clips": [
+    {
+      "id": "cursor",
+      "name": "커서 이동",
+      "key": "cursor",
+      "rawPeak": 0.06765268743038177,
+      "rawRMS": 0.020415152689907907,
+      "gain": 3.2,
+      "outputPeak": 0.21648859977722168
+    },
+    {
+      "id": "click",
+      "name": "결정",
+      "key": "click",
+      "rawPeak": 0.09777241945266724,
+      "rawRMS": 0.024048774144305635,
+      "gain": 3.1186620802357528,
+      "outputPeak": 0.3049191370399378
+    },
+    {
+      "id": "cancel",
+      "name": "취소",
+      "key": "cancel",
+      "rawPeak": 0.09972807765007019,
+      "rawRMS": 0.026633936223951517,
+      "gain": 2.8159562810904974,
+      "outputPeak": 0.280829906659796
+    },
+    {
+      "id": "hit",
+      "name": "일반 피격",
+      "key": "hit",
+      "rawPeak": 0.2544707655906677,
+      "rawRMS": 0.033744887618728195,
+      "gain": 1.5097918641845134,
+      "outputPeak": 0.38419789156159456
+    },
+    {
+      "id": "strong",
+      "name": "효과가 굉장한 피격",
+      "key": "hit",
+      "rawPeak": 0.2945433557033539,
+      "rawRMS": 0.03455251443391892,
+      "gain": 1.5097918641845134,
+      "outputPeak": 0.4446991620905289
+    },
+    {
+      "id": "critical",
+      "name": "급소 피격",
+      "key": "hit",
+      "rawPeak": 0.4305229187011719,
+      "rawRMS": 0.04022350263617189,
+      "gain": 1.5097918641845134,
+      "outputPeak": 0.65
+    },
+    {
+      "id": "weak",
+      "name": "효과가 약한 피격",
+      "key": "hit",
+      "rawPeak": 0.15206213295459747,
+      "rawRMS": 0.026108501519214587,
+      "gain": 1.5097918641845134,
+      "outputPeak": 0.22958217118539503
+    },
+    {
+      "id": "heal",
+      "name": "회복",
+      "key": "heal",
+      "rawPeak": 0.1094333678483963,
+      "rawRMS": 0.02915343950062289,
+      "gain": 2.5725952506700813,
+      "outputPeak": 0.2815277623916163
+    },
+    {
+      "id": "switch",
+      "name": "포켓몬 등장",
+      "key": "switch",
+      "rawPeak": 0.13798800110816956,
+      "rawRMS": 0.021668222609199393,
+      "gain": 3.2,
+      "outputPeak": 0.4415616035461426
+    },
+    {
+      "id": "faint",
+      "name": "기절",
+      "key": "faint",
+      "rawPeak": 0.14505784213542938,
+      "rawRMS": 0.027636558542885242,
+      "gain": 2.713796650318026,
+      "outputPeak": 0.39365748608948925
+    },
+    {
+      "id": "up",
+      "name": "능력 상승",
+      "key": "stat-up",
+      "rawPeak": 0.11240771412849426,
+      "rawRMS": 0.026052372112111304,
+      "gain": 2.878816549880837,
+      "outputPeak": 0.3236011877673833
+    },
+    {
+      "id": "down",
+      "name": "능력 하락",
+      "key": "stat-down",
+      "rawPeak": 0.12599824368953705,
+      "rawRMS": 0.02635583845955234,
+      "gain": 2.8456692855778676,
+      "outputPeak": 0.358549332104071
+    },
+    {
+      "id": "mega",
+      "name": "메가진화 충전",
+      "key": "mega-charge",
+      "rawPeak": 0.16509096324443817,
+      "rawRMS": 0.03792407351208457,
+      "gain": 1.9776356560457862,
+      "outputPeak": 0.3264897754031453
+    },
+    {
+      "id": "megaBurst",
+      "name": "메가진화 해방",
+      "key": "mega-burst",
+      "rawPeak": 0.18861588835716248,
+      "rawRMS": 0.028881510031620098,
+      "gain": 2.5968171303331573,
+      "outputPeak": 0.48980096993888583
+    },
+    {
+      "id": "dynamax",
+      "name": "다이맥스 에너지",
+      "key": "dynamax-ball",
+      "rawPeak": 0.17405840754508972,
+      "rawRMS": 0.04818654170979598,
+      "gain": 1.5564511861359214,
+      "outputPeak": 0.2709134148804845
+    },
+    {
+      "id": "dynamaxGrow",
+      "name": "다이맥스 등장",
+      "key": "dynamax-grow",
+      "rawPeak": 0.20038044452667236,
+      "rawRMS": 0.04314885345114205,
+      "gain": 1.7381690126464977,
+      "outputPeak": 0.3482950794165924
+    },
+    {
+      "id": "victory",
+      "name": "승리",
+      "key": "victory",
+      "rawPeak": 0.1094333678483963,
+      "rawRMS": 0.028191464621720817,
+      "gain": 2.6603796931577075,
+      "outputPeak": 0.29113430957773107
+    },
+    {
+      "id": "defeat",
+      "name": "패배",
+      "key": "defeat",
+      "rawPeak": 0.14399757981300354,
+      "rawRMS": 0.027422710153804822,
+      "gain": 2.7349594397982564,
+      "outputPeak": 0.39382754021767685
+    },
+    {
+      "id": "partner",
+      "name": "동료 영입",
+      "key": "partner",
+      "rawPeak": 0.1094333678483963,
+      "rawRMS": 0.029153439488006472,
+      "gain": 2.5725952517833957,
+      "outputPeak": 0.28152776251345
+    },
+    {
+      "id": "move-normal",
+      "name": "노말 기술",
+      "key": "move-normal",
+      "rawPeak": 0.06625925004482269,
+      "rawRMS": 0.013385184110988841,
+      "gain": 3.2,
+      "outputPeak": 0.21202960014343264
+    },
+    {
+      "id": "move-fire",
+      "name": "불꽃 기술",
+      "key": "move-fire",
+      "rawPeak": 0.09634380787611008,
+      "rawRMS": 0.017385716686674185,
+      "gain": 3.2,
+      "outputPeak": 0.3083001852035523
+    },
+    {
+      "id": "move-water",
+      "name": "물 기술",
+      "key": "move-water",
+      "rawPeak": 0.07070062309503555,
+      "rawRMS": 0.014684606018712758,
+      "gain": 3.2,
+      "outputPeak": 0.2262419939041138
+    },
+    {
+      "id": "move-grass",
+      "name": "풀 기술",
+      "key": "move-grass",
+      "rawPeak": 0.08688734471797943,
+      "rawRMS": 0.015127293100169078,
+      "gain": 3.2,
+      "outputPeak": 0.27803950309753417
+    },
+    {
+      "id": "move-electric",
+      "name": "전기 기술",
+      "key": "move-electric",
+      "rawPeak": 0.12658663094043732,
+      "rawRMS": 0.02099390917711619,
+      "gain": 3.2,
+      "outputPeak": 0.4050772190093994
+    },
+    {
+      "id": "move-ice",
+      "name": "얼음 기술",
+      "key": "move-ice",
+      "rawPeak": 0.11412300169467926,
+      "rawRMS": 0.01848209258466625,
+      "gain": 3.2,
+      "outputPeak": 0.36519360542297363
+    },
+    {
+      "id": "move-fighting",
+      "name": "격투 기술",
+      "key": "move-fighting",
+      "rawPeak": 0.12498485296964645,
+      "rawRMS": 0.024851873652024674,
+      "gain": 3.0178811082877757,
+      "outputPeak": 0.37718942659922133
+    },
+    {
+      "id": "move-poison",
+      "name": "독 기술",
+      "key": "move-poison",
+      "rawPeak": 0.07399428635835648,
+      "rawRMS": 0.01863934677029297,
+      "gain": 3.2,
+      "outputPeak": 0.23678171634674072
+    },
+    {
+      "id": "move-ground",
+      "name": "땅 기술",
+      "key": "move-ground",
+      "rawPeak": 0.1103244498372078,
+      "rawRMS": 0.025679020215719866,
+      "gain": 2.920672181802615,
+      "outputPeak": 0.32222155161221083
+    },
+    {
+      "id": "move-flying",
+      "name": "비행 기술",
+      "key": "move-flying",
+      "rawPeak": 0.23281320929527283,
+      "rawRMS": 0.0315237934679751,
+      "gain": 2.3791552903108637,
+      "outputPeak": 0.5538987785490987
+    },
+    {
+      "id": "move-psychic",
+      "name": "에스퍼 기술",
+      "key": "move-psychic",
+      "rawPeak": 0.1142180785536766,
+      "rawRMS": 0.02529065506785964,
+      "gain": 2.965522237314958,
+      "outputPeak": 0.33871625185431464
+    },
+    {
+      "id": "move-bug",
+      "name": "벌레 기술",
+      "key": "move-bug",
+      "rawPeak": 0.09290049970149994,
+      "rawRMS": 0.013781511012946933,
+      "gain": 3.2,
+      "outputPeak": 0.29728159904479984
+    },
+    {
+      "id": "move-rock",
+      "name": "바위 기술",
+      "key": "move-rock",
+      "rawPeak": 0.130240797996521,
+      "rawRMS": 0.02232312979828251,
+      "gain": 3.2,
+      "outputPeak": 0.4167705535888672
+    },
+    {
+      "id": "move-ghost",
+      "name": "고스트 기술",
+      "key": "move-ghost",
+      "rawPeak": 0.1015356034040451,
+      "rawRMS": 0.02792850670461988,
+      "gain": 2.685428218315505,
+      "outputPeak": 0.2726665745449146
+    },
+    {
+      "id": "move-dragon",
+      "name": "드래곤 기술",
+      "key": "move-dragon",
+      "rawPeak": 0.14827081561088562,
+      "rawRMS": 0.02583685354501307,
+      "gain": 2.9028302486343662,
+      "outputPeak": 0.4304050085449674
+    },
+    {
+      "id": "move-dark",
+      "name": "악 기술",
+      "key": "move-dark",
+      "rawPeak": 0.15136350691318512,
+      "rawRMS": 0.022808765348253095,
+      "gain": 3.2,
+      "outputPeak": 0.4843632221221924
+    },
+    {
+      "id": "move-steel",
+      "name": "강철 기술",
+      "key": "move-steel",
+      "rawPeak": 0.16337323188781738,
+      "rawRMS": 0.02430634676134171,
+      "gain": 3.08561384137268,
+      "outputPeak": 0.5041067056228378
+    },
+    {
+      "id": "move-fairy",
+      "name": "페어리 기술",
+      "key": "move-fairy",
+      "rawPeak": 0.07149700820446014,
+      "rawRMS": 0.01887190556806329,
+      "gain": 3.2,
+      "outputPeak": 0.22879042625427248
+    }
+  ]
+}

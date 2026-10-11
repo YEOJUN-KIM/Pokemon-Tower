@@ -1,0 +1,16 @@
+✔ first ten floors use six zero IVs and later floors and legacy profiles retain their ranges (38.6987ms)
+✔ random pools retain exactly the chosen unevolved exceptions and Red alone keeps Pikachu (1.6259ms)
+✔ all named samples have three distinct legal allowed opponents after evolution and deduplication (561.4017ms)
+✔ all nine themes use regional signatures, distinct milestones and valid organization pools (24.2041ms)
+✔ new runs save a random theme and matching organization while existing Johto saves stay unchanged (481.7384ms)
+✔ each theme persists its real preview and legal champion/final team without rerolling (556.9057ms)
+✔ every theme finishes real v6 battles with its milestone teams (444.2019ms)
+✔ regional organizations draw all three ranks with supported teams (112.9597ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2852.1634

@@ -1,0 +1,11 @@
+import {readFile,writeFile} from 'node:fs/promises';
+import Showdown from 'pokemon-showdown';
+const dex=JSON.parse(await readFile('src/data/pokedex.json','utf8')) as {id:number;species:string}[];
+const forms=JSON.parse(await readFile('src/data/battle-forms.json','utf8')) as Record<string,{id:number;spriteKey?:string|number}>;
+const names=[...dex.map(entry=>entry.species),...Object.keys(forms)];
+const heights=Object.fromEntries(names.map(name=>[name,Showdown.Dex.species.get(name).heightm]));
+const missing=names.filter(name=>!Number.isFinite(heights[name]) || heights[name]<=0);
+if(missing.length)throw new Error(`Missing heights: ${missing.join(', ')}`);
+await writeFile('src/data/pokemon-heights.json',JSON.stringify(heights,null,2)+'\n');
+await writeFile('artifacts/reports/pokemon-size-coverage.json',JSON.stringify({source:'Installed pokemon-showdown Dex species.heightm',checkedAt:new Date().toISOString(),species:names.length,missing,smallest:Object.entries(heights).sort((a,b)=>a[1]-b[1]).slice(0,20),largest:Object.entries(heights).sort((a,b)=>b[1]-a[1]).slice(0,20)},null,2)+'\n');
+console.log({species:names.length,missing,tatsugiri:heights.Tatsugiri,charizard:heights.Charizard,wailord:heights.Wailord});

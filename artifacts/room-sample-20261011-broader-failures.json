@@ -1,0 +1,100 @@
+{
+  "scope": "Only terminal loss logs; raw -fail events are not all harmful. Existing v8 benchmark, post-hoc diagnosis.",
+  "source": "artifacts/opponent-learning-20261011-manifest.json",
+  "losses": 1509,
+  "moves": [
+    {
+      "move": "Steel Roller",
+      "failEvents": 973,
+      "usesInLosses": 973,
+      "byCase": {
+        "auto-gen2": 3,
+        "auto-gen3": 27,
+        "auto-gen5": 21,
+        "auto-gen8": 41,
+        "auto-screens-2": 23,
+        "auto-screens-3": 30,
+        "auto-room-1": 327,
+        "auto-mixed-2": 421,
+        "auto-mixed-3": 69,
+        "auto-gen1": 8,
+        "auto-screens-1": 3
+      }
+    },
+    {
+      "move": "Future Sight",
+      "failEvents": 671,
+      "usesInLosses": 1299,
+      "byCase": {
+        "auto-gen3": 5,
+        "auto-gen5": 14,
+        "auto-gen6": 134,
+        "auto-screens-2": 88,
+        "auto-screens-3": 113,
+        "auto-room-1": 30,
+        "auto-room-2": 107,
+        "auto-room-3": 79,
+        "auto-mixed-2": 84,
+        "auto-mixed-3": 17
+      }
+    },
+    {
+      "move": "Burn Up",
+      "failEvents": 381,
+      "usesInLosses": 471,
+      "byCase": {
+        "auto-gen2": 381
+      }
+    },
+    {
+      "move": "Poltergeist",
+      "failEvents": 147,
+      "usesInLosses": 154,
+      "byCase": {
+        "auto-gen7": 147
+      }
+    },
+    {
+      "move": "Last Resort",
+      "failEvents": 63,
+      "usesInLosses": 63,
+      "byCase": {
+        "auto-gen1": 25,
+        "auto-room-3": 15,
+        "auto-mixed-3": 23
+      }
+    },
+    {
+      "move": "Overheat",
+      "failEvents": 5,
+      "usesInLosses": 442,
+      "byCase": {
+        "auto-screens-1": 5
+      }
+    },
+    {
+      "move": "Moonblast",
+      "failEvents": 2,
+      "usesInLosses": 57,
+      "byCase": {
+        "auto-gen7": 2
+      }
+    },
+    {
+      "move": "Max Ooze",
+      "failEvents": 1,
+      "usesInLosses": 6,
+      "byCase": {
+        "auto-gen1": 1
+      }
+    },
+    {
+      "move": "Max Overgrowth",
+      "failEvents": 1,
+      "usesInLosses": 7,
+      "byCase": {
+        "auto-gen1": 1
+      }
+    }
+  ]
+}

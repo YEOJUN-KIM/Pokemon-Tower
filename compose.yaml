@@ -1,0 +1,16 @@
+services:
+  game:
+    build: .
+    restart: unless-stopped
+    init: true
+    ports:
+      - "127.0.0.1:${TOWER_PORT:-3000}:3000"
+    environment:
+      TOWER_ORIGIN: ${TOWER_ORIGIN:-http://127.0.0.1:3000}
+      TOWER_DB_PATH: /data/tower.sqlite
+    volumes:
+      - tower-data:/data
+    stop_grace_period: 30s
+
+volumes:
+  tower-data:

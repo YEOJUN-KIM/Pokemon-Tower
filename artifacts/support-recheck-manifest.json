@@ -1,0 +1,161 @@
+{
+  "createdAt": "2026-10-10T11:20:38.570Z",
+  "source": "artifacts/support-recheck-fresh-courses.json",
+  "files": [
+    "src/battle/measured-support-player-policy.ts",
+    "src/battle/support-player-policy.ts",
+    "src/battle/composition-policy.ts",
+    "scripts/simulate-support-recheck.ts",
+    "scripts/simulate-support-climb.ts",
+    "artifacts/support-player-cases.json",
+    "artifacts/support-recheck-climb-cases.json",
+    "artifacts/support-recheck-fresh-courses.json"
+  ],
+  "hash": "2c1944846f0c7a63e8091019e1e9cce8d21634ed65773c787eadb8f7b0f086bb",
+  "jobs": [
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "v8",
+      "phase": "support-recheck-new-basic-v8"
+    },
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "v9",
+      "phase": "support-recheck-new-basic-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "v10",
+      "phase": "support-recheck-new-basic-v10"
+    },
+    {
+      "kind": "battle",
+      "rule": "mega",
+      "mode": "v8",
+      "phase": "support-recheck-new-mega-v8"
+    },
+    {
+      "kind": "battle",
+      "rule": "mega",
+      "mode": "v9",
+      "phase": "support-recheck-new-mega-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "mega",
+      "mode": "v10",
+      "phase": "support-recheck-new-mega-v10"
+    },
+    {
+      "kind": "battle",
+      "rule": "dynamax",
+      "mode": "v8",
+      "phase": "support-recheck-new-dynamax-v8"
+    },
+    {
+      "kind": "battle",
+      "rule": "dynamax",
+      "mode": "v9",
+      "phase": "support-recheck-new-dynamax-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "dynamax",
+      "mode": "v10",
+      "phase": "support-recheck-new-dynamax-v10"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "v8",
+      "phase": "support-recheck-new-tera-v8"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "v9",
+      "phase": "support-recheck-new-tera-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "v10",
+      "phase": "support-recheck-new-tera-v10"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "v8",
+      "phase": "support-recheck-new-chaos-v8"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "v9",
+      "phase": "support-recheck-new-chaos-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "v10",
+      "phase": "support-recheck-new-chaos-v10"
+    },
+    {
+      "kind": "climb",
+      "rule": "basic",
+      "mode": "v8",
+      "phase": "support-climb-basic-v8"
+    },
+    {
+      "kind": "climb",
+      "rule": "basic",
+      "mode": "v9",
+      "phase": "support-climb-basic-v9"
+    },
+    {
+      "kind": "climb",
+      "rule": "basic",
+      "mode": "v10",
+      "phase": "support-climb-basic-v10"
+    },
+    {
+      "kind": "climb",
+      "rule": "tera",
+      "mode": "v8",
+      "phase": "support-climb-tera-v8"
+    },
+    {
+      "kind": "climb",
+      "rule": "tera",
+      "mode": "v9",
+      "phase": "support-climb-tera-v9"
+    },
+    {
+      "kind": "climb",
+      "rule": "tera",
+      "mode": "v10",
+      "phase": "support-climb-tera-v10"
+    },
+    {
+      "kind": "climb",
+      "rule": "chaos",
+      "mode": "v8",
+      "phase": "support-climb-chaos-v8"
+    },
+    {
+      "kind": "climb",
+      "rule": "chaos",
+      "mode": "v9",
+      "phase": "support-climb-chaos-v9"
+    },
+    {
+      "kind": "climb",
+      "rule": "chaos",
+      "mode": "v10",
+      "phase": "support-climb-chaos-v10"
+    }
+  ]
+}

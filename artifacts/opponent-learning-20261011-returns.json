@@ -1,0 +1,514 @@
+{
+  "postHoc": true,
+  "sourceAudit": "artifacts/opponent-learning-20261011-audit.json",
+  "battles": 12,
+  "returns": 12,
+  "opponentChanged": 12,
+  "currentAllAttacksBlocked": 7,
+  "cases": [
+    {
+      "rule": "basic",
+      "caseId": "auto-gen7",
+      "courseId": "6b77250e-787d-4b45-a6cf-e41c42fad1e4",
+      "floor": 48,
+      "returns": [
+        {
+          "turn": 5,
+          "from": "p2: Lucario",
+          "to": "p2: Bewear",
+          "departedTurn": 1,
+          "oldOpponent": "Decidueye",
+          "opponent": "Incineroar",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Aura Sphere",
+              "blocked": false
+            },
+            {
+              "move": "Flash Cannon",
+              "blocked": false
+            },
+            {
+              "move": "Brick Break",
+              "blocked": false
+            },
+            {
+              "move": "Drain Punch",
+              "blocked": false
+            }
+          ],
+          "receiverMoves": [
+            "megapunch",
+            "bodypress",
+            "brickbreak",
+            "strength"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    },
+    {
+      "rule": "basic",
+      "caseId": "auto-screens-2",
+      "courseId": "8745276f-6735-41bf-8c20-f635cadd76ec",
+      "floor": 39,
+      "returns": [
+        {
+          "turn": 7,
+          "from": "p2: Hariyama",
+          "to": "p2: Pangoro",
+          "departedTurn": 3,
+          "oldOpponent": "Hariyama",
+          "opponent": "Basculegion",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Body Press",
+              "blocked": true
+            },
+            {
+              "move": "Mega Punch",
+              "blocked": true
+            },
+            {
+              "move": "Low Kick",
+              "blocked": true
+            },
+            {
+              "move": "Reversal",
+              "blocked": true
+            }
+          ],
+          "receiverMoves": [
+            "brickbreak",
+            "crunch",
+            "drainpunch",
+            "throatchop"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    },
+    {
+      "rule": "mega",
+      "caseId": "auto-gen7",
+      "courseId": "6b77250e-787d-4b45-a6cf-e41c42fad1e4",
+      "floor": 48,
+      "returns": [
+        {
+          "turn": 5,
+          "from": "p2: Lucario",
+          "to": "p2: Bewear",
+          "departedTurn": 1,
+          "oldOpponent": "Decidueye",
+          "opponent": "Incineroar",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Aura Sphere",
+              "blocked": false
+            },
+            {
+              "move": "Flash Cannon",
+              "blocked": false
+            },
+            {
+              "move": "Brick Break",
+              "blocked": false
+            },
+            {
+              "move": "Drain Punch",
+              "blocked": false
+            }
+          ],
+          "receiverMoves": [
+            "megapunch",
+            "bodypress",
+            "brickbreak",
+            "strength"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    },
+    {
+      "rule": "mega",
+      "caseId": "auto-screens-2",
+      "courseId": "8745276f-6735-41bf-8c20-f635cadd76ec",
+      "floor": 39,
+      "returns": [
+        {
+          "turn": 7,
+          "from": "p2: Hariyama",
+          "to": "p2: Pangoro",
+          "departedTurn": 3,
+          "oldOpponent": "Hariyama",
+          "opponent": "Basculegion",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Body Press",
+              "blocked": true
+            },
+            {
+              "move": "Mega Punch",
+              "blocked": true
+            },
+            {
+              "move": "Low Kick",
+              "blocked": true
+            },
+            {
+              "move": "Reversal",
+              "blocked": true
+            }
+          ],
+          "receiverMoves": [
+            "brickbreak",
+            "crunch",
+            "drainpunch",
+            "throatchop"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    },
+    {
+      "rule": "dynamax",
+      "caseId": "auto-gen7",
+      "courseId": "6b77250e-787d-4b45-a6cf-e41c42fad1e4",
+      "floor": 48,
+      "returns": [
+        {
+          "turn": 5,
+          "from": "p2: Lucario",
+          "to": "p2: Bewear",
+          "departedTurn": 1,
+          "oldOpponent": "Decidueye",
+          "opponent": "Incineroar",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Aura Sphere",
+              "blocked": false
+            },
+            {
+              "move": "Flash Cannon",
+              "blocked": false
+            },
+            {
+              "move": "Brick Break",
+              "blocked": false
+            },
+            {
+              "move": "Drain Punch",
+              "blocked": false
+            }
+          ],
+          "receiverMoves": [
+            "megapunch",
+            "bodypress",
+            "brickbreak",
+            "strength"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    },
+    {
+      "rule": "dynamax",
+      "caseId": "auto-screens-2",
+      "courseId": "8745276f-6735-41bf-8c20-f635cadd76ec",
+      "floor": 39,
+      "returns": [
+        {
+          "turn": 7,
+          "from": "p2: Hariyama",
+          "to": "p2: Pangoro",
+          "departedTurn": 3,
+          "oldOpponent": "Hariyama",
+          "opponent": "Basculegion",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Body Press",
+              "blocked": true
+            },
+            {
+              "move": "Mega Punch",
+              "blocked": true
+            },
+            {
+              "move": "Low Kick",
+              "blocked": true
+            },
+            {
+              "move": "Reversal",
+              "blocked": true
+            }
+          ],
+          "receiverMoves": [
+            "brickbreak",
+            "crunch",
+            "drainpunch",
+            "throatchop"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-gen7",
+      "courseId": "6b77250e-787d-4b45-a6cf-e41c42fad1e4",
+      "floor": 48,
+      "returns": [
+        {
+          "turn": 5,
+          "from": "p2: Lucario",
+          "to": "p2: Bewear",
+          "departedTurn": 1,
+          "oldOpponent": "Decidueye",
+          "opponent": "Incineroar",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Aura Sphere",
+              "blocked": false
+            },
+            {
+              "move": "Flash Cannon",
+              "blocked": false
+            },
+            {
+              "move": "Brick Break",
+              "blocked": false
+            },
+            {
+              "move": "Drain Punch",
+              "blocked": false
+            }
+          ],
+          "receiverMoves": [
+            "megapunch",
+            "bodypress",
+            "brickbreak",
+            "strength"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-screens-2",
+      "courseId": "8745276f-6735-41bf-8c20-f635cadd76ec",
+      "floor": 39,
+      "returns": [
+        {
+          "turn": 7,
+          "from": "p2: Hariyama",
+          "to": "p2: Pangoro",
+          "departedTurn": 3,
+          "oldOpponent": "Hariyama",
+          "opponent": "Basculegion",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Body Press",
+              "blocked": true
+            },
+            {
+              "move": "Mega Punch",
+              "blocked": true
+            },
+            {
+              "move": "Low Kick",
+              "blocked": true
+            },
+            {
+              "move": "Reversal",
+              "blocked": true
+            }
+          ],
+          "receiverMoves": [
+            "brickbreak",
+            "crunch",
+            "drainpunch",
+            "throatchop"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    },
+    {
+      "rule": "tera",
+      "caseId": "auto-room-1",
+      "courseId": "6b77250e-787d-4b45-a6cf-e41c42fad1e4",
+      "floor": 37,
+      "returns": [
+        {
+          "turn": 6,
+          "from": "p2: Medicham",
+          "to": "p2: Hawlucha",
+          "departedTurn": 2,
+          "oldOpponent": "Bronzong",
+          "opponent": "Cofagrigus",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Brick Break",
+              "blocked": true
+            },
+            {
+              "move": "Mega Punch",
+              "blocked": true
+            },
+            {
+              "move": "Drain Punch",
+              "blocked": true
+            },
+            {
+              "move": "Low Sweep",
+              "blocked": true
+            }
+          ],
+          "receiverMoves": [
+            "submission",
+            "aerialace",
+            "bodypress",
+            "lowkick"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-gen7",
+      "courseId": "6b77250e-787d-4b45-a6cf-e41c42fad1e4",
+      "floor": 48,
+      "returns": [
+        {
+          "turn": 5,
+          "from": "p2: Lucario",
+          "to": "p2: Bewear",
+          "departedTurn": 1,
+          "oldOpponent": "Decidueye",
+          "opponent": "Incineroar",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Aura Sphere",
+              "blocked": false
+            },
+            {
+              "move": "Flash Cannon",
+              "blocked": false
+            },
+            {
+              "move": "Brick Break",
+              "blocked": false
+            },
+            {
+              "move": "Drain Punch",
+              "blocked": false
+            }
+          ],
+          "receiverMoves": [
+            "megapunch",
+            "bodypress",
+            "brickbreak",
+            "strength"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-screens-2",
+      "courseId": "8745276f-6735-41bf-8c20-f635cadd76ec",
+      "floor": 39,
+      "returns": [
+        {
+          "turn": 7,
+          "from": "p2: Hariyama",
+          "to": "p2: Pangoro",
+          "departedTurn": 3,
+          "oldOpponent": "Hariyama",
+          "opponent": "Basculegion",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Body Press",
+              "blocked": true
+            },
+            {
+              "move": "Mega Punch",
+              "blocked": true
+            },
+            {
+              "move": "Low Kick",
+              "blocked": true
+            },
+            {
+              "move": "Reversal",
+              "blocked": true
+            }
+          ],
+          "receiverMoves": [
+            "brickbreak",
+            "crunch",
+            "drainpunch",
+            "throatchop"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    },
+    {
+      "rule": "chaos",
+      "caseId": "auto-room-1",
+      "courseId": "6b77250e-787d-4b45-a6cf-e41c42fad1e4",
+      "floor": 37,
+      "returns": [
+        {
+          "turn": 6,
+          "from": "p2: Medicham",
+          "to": "p2: Hawlucha",
+          "departedTurn": 2,
+          "oldOpponent": "Bronzong",
+          "opponent": "Cofagrigus",
+          "opponentChanged": true,
+          "currentAttacks": [
+            {
+              "move": "Brick Break",
+              "blocked": true
+            },
+            {
+              "move": "Mega Punch",
+              "blocked": true
+            },
+            {
+              "move": "Drain Punch",
+              "blocked": true
+            },
+            {
+              "move": "Low Sweep",
+              "blocked": true
+            }
+          ],
+          "receiverMoves": [
+            "submission",
+            "aerialace",
+            "bodypress",
+            "lowkick"
+          ],
+          "publicAbility": ""
+        }
+      ]
+    }
+  ]
+}

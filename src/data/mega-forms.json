@@ -1,0 +1,510 @@
+{
+  "Abomasnow-Mega": {
+    "id": 460,
+    "baseSpecies": "Abomasnow",
+    "spriteKey": "10060",
+    "types": [
+      "Grass",
+      "Ice"
+    ],
+    "heightm": 2.7,
+    "key": "abomasnow-mega"
+  },
+  "Absol-Mega": {
+    "id": 359,
+    "baseSpecies": "Absol",
+    "spriteKey": "10057",
+    "types": [
+      "Dark"
+    ],
+    "heightm": 1.2,
+    "key": "absol-mega"
+  },
+  "Aerodactyl-Mega": {
+    "id": 142,
+    "baseSpecies": "Aerodactyl",
+    "spriteKey": "10042",
+    "types": [
+      "Rock",
+      "Flying"
+    ],
+    "heightm": 2.1,
+    "key": "aerodactyl-mega"
+  },
+  "Aggron-Mega": {
+    "id": 306,
+    "baseSpecies": "Aggron",
+    "spriteKey": "10053",
+    "types": [
+      "Steel"
+    ],
+    "heightm": 2.2,
+    "key": "aggron-mega"
+  },
+  "Alakazam-Mega": {
+    "id": 65,
+    "baseSpecies": "Alakazam",
+    "spriteKey": "10037",
+    "types": [
+      "Psychic"
+    ],
+    "heightm": 1.2,
+    "key": "alakazam-mega"
+  },
+  "Altaria-Mega": {
+    "id": 334,
+    "baseSpecies": "Altaria",
+    "spriteKey": "10067",
+    "types": [
+      "Dragon",
+      "Fairy"
+    ],
+    "heightm": 1.5,
+    "key": "altaria-mega"
+  },
+  "Ampharos-Mega": {
+    "id": 181,
+    "baseSpecies": "Ampharos",
+    "spriteKey": "10045",
+    "types": [
+      "Electric",
+      "Dragon"
+    ],
+    "heightm": 1.4,
+    "key": "ampharos-mega"
+  },
+  "Audino-Mega": {
+    "id": 531,
+    "baseSpecies": "Audino",
+    "spriteKey": "10069",
+    "types": [
+      "Normal",
+      "Fairy"
+    ],
+    "heightm": 1.5,
+    "key": "audino-mega"
+  },
+  "Banette-Mega": {
+    "id": 354,
+    "baseSpecies": "Banette",
+    "spriteKey": "10056",
+    "types": [
+      "Ghost"
+    ],
+    "heightm": 1.2,
+    "key": "banette-mega"
+  },
+  "Beedrill-Mega": {
+    "id": 15,
+    "baseSpecies": "Beedrill",
+    "spriteKey": "10090",
+    "types": [
+      "Bug",
+      "Poison"
+    ],
+    "heightm": 1.4,
+    "key": "beedrill-mega"
+  },
+  "Blastoise-Mega": {
+    "id": 9,
+    "baseSpecies": "Blastoise",
+    "spriteKey": "10036",
+    "types": [
+      "Water"
+    ],
+    "heightm": 1.6,
+    "key": "blastoise-mega"
+  },
+  "Blaziken-Mega": {
+    "id": 257,
+    "baseSpecies": "Blaziken",
+    "spriteKey": "10050",
+    "types": [
+      "Fire",
+      "Fighting"
+    ],
+    "heightm": 1.9,
+    "key": "blaziken-mega"
+  },
+  "Camerupt-Mega": {
+    "id": 323,
+    "baseSpecies": "Camerupt",
+    "spriteKey": "10087",
+    "types": [
+      "Fire",
+      "Ground"
+    ],
+    "heightm": 2.5,
+    "key": "camerupt-mega"
+  },
+  "Charizard-Mega-X": {
+    "id": 6,
+    "baseSpecies": "Charizard",
+    "spriteKey": "10034",
+    "types": [
+      "Fire",
+      "Dragon"
+    ],
+    "heightm": 1.7,
+    "key": "charizard-megax"
+  },
+  "Charizard-Mega-Y": {
+    "id": 6,
+    "baseSpecies": "Charizard",
+    "spriteKey": "10035",
+    "types": [
+      "Fire",
+      "Flying"
+    ],
+    "heightm": 1.7,
+    "key": "charizard-megay"
+  },
+  "Diancie-Mega": {
+    "id": 719,
+    "baseSpecies": "Diancie",
+    "spriteKey": "10075",
+    "types": [
+      "Rock",
+      "Fairy"
+    ],
+    "heightm": 1.1,
+    "key": "diancie-mega"
+  },
+  "Gallade-Mega": {
+    "id": 475,
+    "baseSpecies": "Gallade",
+    "spriteKey": "10068",
+    "types": [
+      "Psychic",
+      "Fighting"
+    ],
+    "heightm": 1.6,
+    "key": "gallade-mega"
+  },
+  "Garchomp-Mega": {
+    "id": 445,
+    "baseSpecies": "Garchomp",
+    "spriteKey": "10058",
+    "types": [
+      "Dragon",
+      "Ground"
+    ],
+    "heightm": 1.9,
+    "key": "garchomp-mega"
+  },
+  "Gardevoir-Mega": {
+    "id": 282,
+    "baseSpecies": "Gardevoir",
+    "spriteKey": "10051",
+    "types": [
+      "Psychic",
+      "Fairy"
+    ],
+    "heightm": 1.6,
+    "key": "gardevoir-mega"
+  },
+  "Gengar-Mega": {
+    "id": 94,
+    "baseSpecies": "Gengar",
+    "spriteKey": "10038",
+    "types": [
+      "Ghost",
+      "Poison"
+    ],
+    "heightm": 1.4,
+    "key": "gengar-mega"
+  },
+  "Glalie-Mega": {
+    "id": 362,
+    "baseSpecies": "Glalie",
+    "spriteKey": "10074",
+    "types": [
+      "Ice"
+    ],
+    "heightm": 2.1,
+    "key": "glalie-mega"
+  },
+  "Gyarados-Mega": {
+    "id": 130,
+    "baseSpecies": "Gyarados",
+    "spriteKey": "10041",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "heightm": 6.5,
+    "key": "gyarados-mega"
+  },
+  "Heracross-Mega": {
+    "id": 214,
+    "baseSpecies": "Heracross",
+    "spriteKey": "10047",
+    "types": [
+      "Bug",
+      "Fighting"
+    ],
+    "heightm": 1.7,
+    "key": "heracross-mega"
+  },
+  "Houndoom-Mega": {
+    "id": 229,
+    "baseSpecies": "Houndoom",
+    "spriteKey": "10048",
+    "types": [
+      "Dark",
+      "Fire"
+    ],
+    "heightm": 1.9,
+    "key": "houndoom-mega"
+  },
+  "Kangaskhan-Mega": {
+    "id": 115,
+    "baseSpecies": "Kangaskhan",
+    "spriteKey": "10039",
+    "types": [
+      "Normal"
+    ],
+    "heightm": 2.2,
+    "key": "kangaskhan-mega"
+  },
+  "Latias-Mega": {
+    "id": 380,
+    "baseSpecies": "Latias",
+    "spriteKey": "10062",
+    "types": [
+      "Dragon",
+      "Psychic"
+    ],
+    "heightm": 1.8,
+    "key": "latias-mega"
+  },
+  "Latios-Mega": {
+    "id": 381,
+    "baseSpecies": "Latios",
+    "spriteKey": "10063",
+    "types": [
+      "Dragon",
+      "Psychic"
+    ],
+    "heightm": 2.3,
+    "key": "latios-mega"
+  },
+  "Lopunny-Mega": {
+    "id": 428,
+    "baseSpecies": "Lopunny",
+    "spriteKey": "10088",
+    "types": [
+      "Normal",
+      "Fighting"
+    ],
+    "heightm": 1.3,
+    "key": "lopunny-mega"
+  },
+  "Lucario-Mega": {
+    "id": 448,
+    "baseSpecies": "Lucario",
+    "spriteKey": "10059",
+    "types": [
+      "Fighting",
+      "Steel"
+    ],
+    "heightm": 1.3,
+    "key": "lucario-mega"
+  },
+  "Manectric-Mega": {
+    "id": 310,
+    "baseSpecies": "Manectric",
+    "spriteKey": "10055",
+    "types": [
+      "Electric"
+    ],
+    "heightm": 1.8,
+    "key": "manectric-mega"
+  },
+  "Mawile-Mega": {
+    "id": 303,
+    "baseSpecies": "Mawile",
+    "spriteKey": "10052",
+    "types": [
+      "Steel",
+      "Fairy"
+    ],
+    "heightm": 1,
+    "key": "mawile-mega"
+  },
+  "Medicham-Mega": {
+    "id": 308,
+    "baseSpecies": "Medicham",
+    "spriteKey": "10054",
+    "types": [
+      "Fighting",
+      "Psychic"
+    ],
+    "heightm": 1.3,
+    "key": "medicham-mega"
+  },
+  "Metagross-Mega": {
+    "id": 376,
+    "baseSpecies": "Metagross",
+    "spriteKey": "10076",
+    "types": [
+      "Steel",
+      "Psychic"
+    ],
+    "heightm": 2.5,
+    "key": "metagross-mega"
+  },
+  "Mewtwo-Mega-X": {
+    "id": 150,
+    "baseSpecies": "Mewtwo",
+    "spriteKey": "10043",
+    "types": [
+      "Psychic",
+      "Fighting"
+    ],
+    "heightm": 2.3,
+    "key": "mewtwo-megax"
+  },
+  "Mewtwo-Mega-Y": {
+    "id": 150,
+    "baseSpecies": "Mewtwo",
+    "spriteKey": "10044",
+    "types": [
+      "Psychic"
+    ],
+    "heightm": 1.5,
+    "key": "mewtwo-megay"
+  },
+  "Pidgeot-Mega": {
+    "id": 18,
+    "baseSpecies": "Pidgeot",
+    "spriteKey": "10073",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "heightm": 2.2,
+    "key": "pidgeot-mega"
+  },
+  "Pinsir-Mega": {
+    "id": 127,
+    "baseSpecies": "Pinsir",
+    "spriteKey": "10040",
+    "types": [
+      "Bug",
+      "Flying"
+    ],
+    "heightm": 1.7,
+    "key": "pinsir-mega"
+  },
+  "Sableye-Mega": {
+    "id": 302,
+    "baseSpecies": "Sableye",
+    "spriteKey": "10066",
+    "types": [
+      "Dark",
+      "Ghost"
+    ],
+    "heightm": 0.5,
+    "key": "sableye-mega"
+  },
+  "Salamence-Mega": {
+    "id": 373,
+    "baseSpecies": "Salamence",
+    "spriteKey": "10089",
+    "types": [
+      "Dragon",
+      "Flying"
+    ],
+    "heightm": 1.8,
+    "key": "salamence-mega"
+  },
+  "Sceptile-Mega": {
+    "id": 254,
+    "baseSpecies": "Sceptile",
+    "spriteKey": "10065",
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "heightm": 1.9,
+    "key": "sceptile-mega"
+  },
+  "Scizor-Mega": {
+    "id": 212,
+    "baseSpecies": "Scizor",
+    "spriteKey": "10046",
+    "types": [
+      "Bug",
+      "Steel"
+    ],
+    "heightm": 2,
+    "key": "scizor-mega"
+  },
+  "Sharpedo-Mega": {
+    "id": 319,
+    "baseSpecies": "Sharpedo",
+    "spriteKey": "10070",
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "heightm": 2.5,
+    "key": "sharpedo-mega"
+  },
+  "Slowbro-Mega": {
+    "id": 80,
+    "baseSpecies": "Slowbro",
+    "spriteKey": "10071",
+    "types": [
+      "Water",
+      "Psychic"
+    ],
+    "heightm": 2,
+    "key": "slowbro-mega"
+  },
+  "Steelix-Mega": {
+    "id": 208,
+    "baseSpecies": "Steelix",
+    "spriteKey": "10072",
+    "types": [
+      "Steel",
+      "Ground"
+    ],
+    "heightm": 10.5,
+    "key": "steelix-mega"
+  },
+  "Swampert-Mega": {
+    "id": 260,
+    "baseSpecies": "Swampert",
+    "spriteKey": "10064",
+    "types": [
+      "Water",
+      "Ground"
+    ],
+    "heightm": 1.9,
+    "key": "swampert-mega"
+  },
+  "Tyranitar-Mega": {
+    "id": 248,
+    "baseSpecies": "Tyranitar",
+    "spriteKey": "10049",
+    "types": [
+      "Rock",
+      "Dark"
+    ],
+    "heightm": 2.5,
+    "key": "tyranitar-mega"
+  },
+  "Venusaur-Mega": {
+    "id": 3,
+    "baseSpecies": "Venusaur",
+    "spriteKey": "10033",
+    "types": [
+      "Grass",
+      "Poison"
+    ],
+    "heightm": 2.4,
+    "key": "venusaur-mega"
+  }
+}

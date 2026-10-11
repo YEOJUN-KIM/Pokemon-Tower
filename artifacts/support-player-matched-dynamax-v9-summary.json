@@ -1,0 +1,640 @@
+{
+  "schemaVersion": 1,
+  "phase": "support-player-matched-dynamax-v9",
+  "mode": "v9",
+  "rule": "dynamax",
+  "cohort": "matched",
+  "source": "artifacts/hundred-floor-six-z-courses.json",
+  "sourceHash": "7a240beeed763aa25fdd4acea8776a6ef6fdadfcf7f143a3e1571b02996b4a34",
+  "engineVersion": "0.11.11",
+  "format": "gen9nationaldexag@@@Max Team Size = 3,Adjust Level = 50",
+  "floors": [
+    1,
+    5,
+    10,
+    20,
+    30,
+    40,
+    50,
+    60,
+    75,
+    90,
+    100
+  ],
+  "courses": [
+    {
+      "id": "ec342bc0-1b6d-4918-b716-e706c922a3b9",
+      "theme": "kanto"
+    },
+    {
+      "id": "a726185c-9fab-444c-a3c2-8f55b487ca9a",
+      "theme": "johto"
+    },
+    {
+      "id": "de597a61-f5cb-4f2c-bd37-2fb34ee44861",
+      "theme": "hoenn"
+    },
+    {
+      "id": "c5b047d4-2c26-4745-84af-b9bcc69ad8c6",
+      "theme": "sinnoh"
+    },
+    {
+      "id": "d9133bc2-e5ff-45f2-9403-995f116e4aaa",
+      "theme": "unova"
+    },
+    {
+      "id": "02db989b-6b04-46aa-9121-402af80080dd",
+      "theme": "kalos"
+    },
+    {
+      "id": "a1a65a9d-e3eb-43c0-8e82-5844354c56a3",
+      "theme": "alola"
+    },
+    {
+      "id": "744482bb-8a85-450b-9b32-c39eed1fac8c",
+      "theme": "galar"
+    },
+    {
+      "id": "ec5ededd-b27e-495b-bc78-7ce83eb41a88",
+      "theme": "paldea"
+    }
+  ],
+  "cases": [
+    {
+      "id": "espeon-screen",
+      "battles": 99,
+      "wins": 93,
+      "winRate": 0.9393939393939394,
+      "averageTurns": 8.131313131313131,
+      "handoffs": 98,
+      "protectedSetups": 104,
+      "screenAttempts": 101,
+      "screenActivations": 101,
+      "roomActivations": 0,
+      "byFloor": {
+        "1": {
+          "battles": 9,
+          "wins": 6
+        },
+        "5": {
+          "battles": 9,
+          "wins": 9
+        },
+        "10": {
+          "battles": 9,
+          "wins": 9
+        },
+        "20": {
+          "battles": 9,
+          "wins": 9
+        },
+        "30": {
+          "battles": 9,
+          "wins": 9
+        },
+        "40": {
+          "battles": 9,
+          "wins": 9
+        },
+        "50": {
+          "battles": 9,
+          "wins": 9
+        },
+        "60": {
+          "battles": 9,
+          "wins": 9
+        },
+        "75": {
+          "battles": 9,
+          "wins": 9
+        },
+        "90": {
+          "battles": 9,
+          "wins": 8
+        },
+        "100": {
+          "battles": 9,
+          "wins": 7
+        }
+      },
+      "byTheme": {
+        "kanto": {
+          "battles": 11,
+          "wins": 11
+        },
+        "johto": {
+          "battles": 11,
+          "wins": 10
+        },
+        "hoenn": {
+          "battles": 11,
+          "wins": 10
+        },
+        "sinnoh": {
+          "battles": 11,
+          "wins": 10
+        },
+        "unova": {
+          "battles": 11,
+          "wins": 10
+        },
+        "kalos": {
+          "battles": 11,
+          "wins": 11
+        },
+        "alola": {
+          "battles": 11,
+          "wins": 11
+        },
+        "galar": {
+          "battles": 11,
+          "wins": 10
+        },
+        "paldea": {
+          "battles": 11,
+          "wins": 10
+        }
+      }
+    },
+    {
+      "id": "grimmsnarl-screen",
+      "battles": 99,
+      "wins": 96,
+      "winRate": 0.9696969696969697,
+      "averageTurns": 7.101010101010101,
+      "handoffs": 99,
+      "protectedSetups": 73,
+      "screenAttempts": 111,
+      "screenActivations": 111,
+      "roomActivations": 0,
+      "byFloor": {
+        "1": {
+          "battles": 9,
+          "wins": 9
+        },
+        "5": {
+          "battles": 9,
+          "wins": 9
+        },
+        "10": {
+          "battles": 9,
+          "wins": 9
+        },
+        "20": {
+          "battles": 9,
+          "wins": 9
+        },
+        "30": {
+          "battles": 9,
+          "wins": 9
+        },
+        "40": {
+          "battles": 9,
+          "wins": 9
+        },
+        "50": {
+          "battles": 9,
+          "wins": 9
+        },
+        "60": {
+          "battles": 9,
+          "wins": 9
+        },
+        "75": {
+          "battles": 9,
+          "wins": 8
+        },
+        "90": {
+          "battles": 9,
+          "wins": 8
+        },
+        "100": {
+          "battles": 9,
+          "wins": 8
+        }
+      },
+      "byTheme": {
+        "kanto": {
+          "battles": 11,
+          "wins": 11
+        },
+        "johto": {
+          "battles": 11,
+          "wins": 11
+        },
+        "hoenn": {
+          "battles": 11,
+          "wins": 9
+        },
+        "sinnoh": {
+          "battles": 11,
+          "wins": 11
+        },
+        "unova": {
+          "battles": 11,
+          "wins": 11
+        },
+        "kalos": {
+          "battles": 11,
+          "wins": 11
+        },
+        "alola": {
+          "battles": 11,
+          "wins": 11
+        },
+        "galar": {
+          "battles": 11,
+          "wins": 11
+        },
+        "paldea": {
+          "battles": 11,
+          "wins": 10
+        }
+      }
+    },
+    {
+      "id": "klefki-screen",
+      "battles": 99,
+      "wins": 90,
+      "winRate": 0.9090909090909091,
+      "averageTurns": 9.444444444444445,
+      "handoffs": 89,
+      "protectedSetups": 82,
+      "screenAttempts": 124,
+      "screenActivations": 124,
+      "roomActivations": 0,
+      "byFloor": {
+        "1": {
+          "battles": 9,
+          "wins": 9
+        },
+        "5": {
+          "battles": 9,
+          "wins": 9
+        },
+        "10": {
+          "battles": 9,
+          "wins": 8
+        },
+        "20": {
+          "battles": 9,
+          "wins": 9
+        },
+        "30": {
+          "battles": 9,
+          "wins": 9
+        },
+        "40": {
+          "battles": 9,
+          "wins": 9
+        },
+        "50": {
+          "battles": 9,
+          "wins": 8
+        },
+        "60": {
+          "battles": 9,
+          "wins": 9
+        },
+        "75": {
+          "battles": 9,
+          "wins": 8
+        },
+        "90": {
+          "battles": 9,
+          "wins": 8
+        },
+        "100": {
+          "battles": 9,
+          "wins": 4
+        }
+      },
+      "byTheme": {
+        "kanto": {
+          "battles": 11,
+          "wins": 10
+        },
+        "johto": {
+          "battles": 11,
+          "wins": 10
+        },
+        "hoenn": {
+          "battles": 11,
+          "wins": 10
+        },
+        "sinnoh": {
+          "battles": 11,
+          "wins": 11
+        },
+        "unova": {
+          "battles": 11,
+          "wins": 10
+        },
+        "kalos": {
+          "battles": 11,
+          "wins": 11
+        },
+        "alola": {
+          "battles": 11,
+          "wins": 9
+        },
+        "galar": {
+          "battles": 11,
+          "wins": 10
+        },
+        "paldea": {
+          "battles": 11,
+          "wins": 9
+        }
+      }
+    },
+    {
+      "id": "snow-veil",
+      "battles": 99,
+      "wins": 95,
+      "winRate": 0.9595959595959596,
+      "averageTurns": 6.696969696969697,
+      "handoffs": 0,
+      "protectedSetups": 0,
+      "screenAttempts": 0,
+      "screenActivations": 0,
+      "roomActivations": 0,
+      "byFloor": {
+        "1": {
+          "battles": 9,
+          "wins": 9
+        },
+        "5": {
+          "battles": 9,
+          "wins": 9
+        },
+        "10": {
+          "battles": 9,
+          "wins": 7
+        },
+        "20": {
+          "battles": 9,
+          "wins": 9
+        },
+        "30": {
+          "battles": 9,
+          "wins": 9
+        },
+        "40": {
+          "battles": 9,
+          "wins": 9
+        },
+        "50": {
+          "battles": 9,
+          "wins": 9
+        },
+        "60": {
+          "battles": 9,
+          "wins": 9
+        },
+        "75": {
+          "battles": 9,
+          "wins": 9
+        },
+        "90": {
+          "battles": 9,
+          "wins": 9
+        },
+        "100": {
+          "battles": 9,
+          "wins": 7
+        }
+      },
+      "byTheme": {
+        "kanto": {
+          "battles": 11,
+          "wins": 10
+        },
+        "johto": {
+          "battles": 11,
+          "wins": 10
+        },
+        "hoenn": {
+          "battles": 11,
+          "wins": 11
+        },
+        "sinnoh": {
+          "battles": 11,
+          "wins": 10
+        },
+        "unova": {
+          "battles": 11,
+          "wins": 11
+        },
+        "kalos": {
+          "battles": 11,
+          "wins": 11
+        },
+        "alola": {
+          "battles": 11,
+          "wins": 11
+        },
+        "galar": {
+          "battles": 11,
+          "wins": 11
+        },
+        "paldea": {
+          "battles": 11,
+          "wins": 10
+        }
+      }
+    },
+    {
+      "id": "attack-control",
+      "battles": 99,
+      "wins": 98,
+      "winRate": 0.98989898989899,
+      "averageTurns": 5.070707070707071,
+      "handoffs": 0,
+      "protectedSetups": 0,
+      "screenAttempts": 0,
+      "screenActivations": 0,
+      "roomActivations": 0,
+      "byFloor": {
+        "1": {
+          "battles": 9,
+          "wins": 9
+        },
+        "5": {
+          "battles": 9,
+          "wins": 9
+        },
+        "10": {
+          "battles": 9,
+          "wins": 9
+        },
+        "20": {
+          "battles": 9,
+          "wins": 9
+        },
+        "30": {
+          "battles": 9,
+          "wins": 9
+        },
+        "40": {
+          "battles": 9,
+          "wins": 9
+        },
+        "50": {
+          "battles": 9,
+          "wins": 9
+        },
+        "60": {
+          "battles": 9,
+          "wins": 9
+        },
+        "75": {
+          "battles": 9,
+          "wins": 9
+        },
+        "90": {
+          "battles": 9,
+          "wins": 9
+        },
+        "100": {
+          "battles": 9,
+          "wins": 8
+        }
+      },
+      "byTheme": {
+        "kanto": {
+          "battles": 11,
+          "wins": 11
+        },
+        "johto": {
+          "battles": 11,
+          "wins": 11
+        },
+        "hoenn": {
+          "battles": 11,
+          "wins": 11
+        },
+        "sinnoh": {
+          "battles": 11,
+          "wins": 11
+        },
+        "unova": {
+          "battles": 11,
+          "wins": 11
+        },
+        "kalos": {
+          "battles": 11,
+          "wins": 11
+        },
+        "alola": {
+          "battles": 11,
+          "wins": 10
+        },
+        "galar": {
+          "battles": 11,
+          "wins": 11
+        },
+        "paldea": {
+          "battles": 11,
+          "wins": 11
+        }
+      }
+    },
+    {
+      "id": "room-control",
+      "battles": 99,
+      "wins": 82,
+      "winRate": 0.8282828282828283,
+      "averageTurns": 8.343434343434344,
+      "handoffs": 0,
+      "protectedSetups": 0,
+      "screenAttempts": 0,
+      "screenActivations": 0,
+      "roomActivations": 100,
+      "byFloor": {
+        "1": {
+          "battles": 9,
+          "wins": 9
+        },
+        "5": {
+          "battles": 9,
+          "wins": 9
+        },
+        "10": {
+          "battles": 9,
+          "wins": 8
+        },
+        "20": {
+          "battles": 9,
+          "wins": 9
+        },
+        "30": {
+          "battles": 9,
+          "wins": 9
+        },
+        "40": {
+          "battles": 9,
+          "wins": 7
+        },
+        "50": {
+          "battles": 9,
+          "wins": 7
+        },
+        "60": {
+          "battles": 9,
+          "wins": 9
+        },
+        "75": {
+          "battles": 9,
+          "wins": 7
+        },
+        "90": {
+          "battles": 9,
+          "wins": 4
+        },
+        "100": {
+          "battles": 9,
+          "wins": 4
+        }
+      },
+      "byTheme": {
+        "kanto": {
+          "battles": 11,
+          "wins": 10
+        },
+        "johto": {
+          "battles": 11,
+          "wins": 9
+        },
+        "hoenn": {
+          "battles": 11,
+          "wins": 10
+        },
+        "sinnoh": {
+          "battles": 11,
+          "wins": 8
+        },
+        "unova": {
+          "battles": 11,
+          "wins": 6
+        },
+        "kalos": {
+          "battles": 11,
+          "wins": 10
+        },
+        "alola": {
+          "battles": 11,
+          "wins": 10
+        },
+        "galar": {
+          "battles": 11,
+          "wins": 10
+        },
+        "paldea": {
+          "battles": 11,
+          "wins": 9
+        }
+      }
+    }
+  ]
+}

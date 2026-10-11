@@ -1,0 +1,17 @@
+node_modules/
+.pnpm-store/
+logs/
+dist/
+.next/
+.data/
+next-env.d.ts
+*.tsbuildinfo
+test-results/
+playwright-report/
+.env*
+!.env.example
+
+# Local conversation attachments and large reproducible experiment logs.
+.codex-remote-attachments/
+artifacts/**/*-trace.jsonl
+artifacts/opponent-learning-20261011-audit.json

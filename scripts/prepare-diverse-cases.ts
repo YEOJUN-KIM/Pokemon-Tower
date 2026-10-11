@@ -1,0 +1,13 @@
+import {writeFileSync,mkdirSync} from 'node:fs';
+import {pokemonSets,packTeam} from '../src/data/teams';
+import {defaultProfile} from '../src/server/training';
+import {runBattle} from '../src/battle/run';
+import {DamagePolicy} from '../src/battle/policy';
+const starters=[['Venusaur','Charizard','Blastoise'],['Meganium','Typhlosion','Feraligatr'],['Sceptile','Blaziken','Swampert'],['Torterra','Infernape','Empoleon'],['Serperior','Emboar','Samurott'],['Chesnaught','Delphox','Greninja'],['Decidueye','Incineroar','Primarina'],['Rillaboom','Cinderace','Inteleon'],['Meowscarada','Skeledirge','Quaquaval']];
+const mixed=[{id:'physical-mixed',label:'물리 중심 혼합',team:['Garchomp','Lucario','Mamoswine']},{id:'special-mixed',label:'특수 중심 혼합',team:['Gengar','Alakazam','Magnezone']},{id:'bulky-mixed',label:'내구 중심 혼합',team:['Snorlax','Slowbro','Corviknight']},{id:'rain-core',label:'비 조합 후보',team:['Pelipper','Kingdra','Ferrothorn']},{id:'balanced-mixed',label:'균형 혼합',team:['Arcanine','Gardevoir','Gastrodon']},{id:'prepared-core',label:'준비된 강팀',team:['Garchomp','Gyarados','Gengar'],moves:{Garchomp:['Earthquake','Dragon Claw','Rock Slide','Swords Dance'],Gyarados:['Waterfall','Ice Fang','Earthquake','Dragon Dance'],Gengar:['Shadow Ball','Sludge Bomb','Thunderbolt','Dazzling Gleam']}}];
+const cases=[...starters.flatMap((team,i)=>[{id:'gen'+(i+1)+'-fresh',label:(i+1)+'세대 미육성 스타터',category:'starter',team,iv:0,points:0,recruitment:'fixed'}, {id:'gen'+(i+1)+'-trained',label:(i+1)+'세대 완전 육성 스타터',category:'starter',team,iv:31,points:66,recruitment:'fixed'}]),...mixed.map(c=>({...c,category:'mixed',iv:31,points:66,recruitment:'fixed'})),{id:'gen1-trained-adaptive',label:'1세대 육성 스타터 영입 전략 비교',category:'control',team:['Charizard','Blastoise','Venusaur'],iv:31,points:66,recruitment:'adaptive'}];
+// Keep the same lead/order as the previous baseline for the direct strategy comparison.
+cases.find(c=>c.id==='gen1-trained')!.team=['Charizard','Blastoise','Venusaur'];cases.find(c=>c.id==='gen1-fresh')!.team=['Charizard','Blastoise','Venusaur'];
+for(const c of cases){for(const name of c.team)if(!pokemonSets[name])throw Error('Missing battle species '+name);const profiles=Object.fromEntries(c.team.map(n=>[n,defaultProfile(n)]));if('moves' in c&&c.moves)for(const [name,moves] of Object.entries(c.moves))profiles[name].moves=moves;
+ const team=packTeam(c.team,profiles);await runBattle({rule:'basic',teams:{p1:team,p2:team},player:new DamagePolicy(),opponent:new DamagePolicy()});console.log('Validated '+c.id+' '+c.team.join('/'));}
+mkdirSync('artifacts',{recursive:true});writeFileSync('artifacts/diverse-team-cases.json',JSON.stringify(cases,null,2));

@@ -1,0 +1,390 @@
+{
+  "Venusaur-Mega": {
+    "baseSpecies": "Venusaur",
+    "spriteKey": "10033"
+  },
+  "Charizard-Mega-X": {
+    "baseSpecies": "Charizard",
+    "spriteKey": "10034"
+  },
+  "Charizard-Mega-Y": {
+    "baseSpecies": "Charizard",
+    "spriteKey": "10035"
+  },
+  "Blastoise-Mega": {
+    "baseSpecies": "Blastoise",
+    "spriteKey": "10036"
+  },
+  "Beedrill-Mega": {
+    "baseSpecies": "Beedrill",
+    "spriteKey": "10090"
+  },
+  "Pidgeot-Mega": {
+    "baseSpecies": "Pidgeot",
+    "spriteKey": "10073"
+  },
+  "Raichu-Mega-X": {
+    "baseSpecies": "Raichu",
+    "spriteKey": "10304"
+  },
+  "Raichu-Mega-Y": {
+    "baseSpecies": "Raichu",
+    "spriteKey": "10305"
+  },
+  "Clefable-Mega": {
+    "baseSpecies": "Clefable",
+    "spriteKey": "10278"
+  },
+  "Alakazam-Mega": {
+    "baseSpecies": "Alakazam",
+    "spriteKey": "10037"
+  },
+  "Victreebel-Mega": {
+    "baseSpecies": "Victreebel",
+    "spriteKey": "10279"
+  },
+  "Slowbro-Mega": {
+    "baseSpecies": "Slowbro",
+    "spriteKey": "10071"
+  },
+  "Gengar-Mega": {
+    "baseSpecies": "Gengar",
+    "spriteKey": "10038"
+  },
+  "Kangaskhan-Mega": {
+    "baseSpecies": "Kangaskhan",
+    "spriteKey": "10039"
+  },
+  "Starmie-Mega": {
+    "baseSpecies": "Starmie",
+    "spriteKey": "10280"
+  },
+  "Pinsir-Mega": {
+    "baseSpecies": "Pinsir",
+    "spriteKey": "10040"
+  },
+  "Gyarados-Mega": {
+    "baseSpecies": "Gyarados",
+    "spriteKey": "10041"
+  },
+  "Aerodactyl-Mega": {
+    "baseSpecies": "Aerodactyl",
+    "spriteKey": "10042"
+  },
+  "Dragonite-Mega": {
+    "baseSpecies": "Dragonite",
+    "spriteKey": "10281"
+  },
+  "Mewtwo-Mega-X": {
+    "baseSpecies": "Mewtwo",
+    "spriteKey": "10043"
+  },
+  "Mewtwo-Mega-Y": {
+    "baseSpecies": "Mewtwo",
+    "spriteKey": "10044"
+  },
+  "Meganium-Mega": {
+    "baseSpecies": "Meganium",
+    "spriteKey": "10282"
+  },
+  "Feraligatr-Mega": {
+    "baseSpecies": "Feraligatr",
+    "spriteKey": "10283"
+  },
+  "Ampharos-Mega": {
+    "baseSpecies": "Ampharos",
+    "spriteKey": "10045"
+  },
+  "Steelix-Mega": {
+    "baseSpecies": "Steelix",
+    "spriteKey": "10072"
+  },
+  "Scizor-Mega": {
+    "baseSpecies": "Scizor",
+    "spriteKey": "10046"
+  },
+  "Heracross-Mega": {
+    "baseSpecies": "Heracross",
+    "spriteKey": "10047"
+  },
+  "Skarmory-Mega": {
+    "baseSpecies": "Skarmory",
+    "spriteKey": "10284"
+  },
+  "Houndoom-Mega": {
+    "baseSpecies": "Houndoom",
+    "spriteKey": "10048"
+  },
+  "Tyranitar-Mega": {
+    "baseSpecies": "Tyranitar",
+    "spriteKey": "10049"
+  },
+  "Sceptile-Mega": {
+    "baseSpecies": "Sceptile",
+    "spriteKey": "10065"
+  },
+  "Blaziken-Mega": {
+    "baseSpecies": "Blaziken",
+    "spriteKey": "10050"
+  },
+  "Swampert-Mega": {
+    "baseSpecies": "Swampert",
+    "spriteKey": "10064"
+  },
+  "Gardevoir-Mega": {
+    "baseSpecies": "Gardevoir",
+    "spriteKey": "10051"
+  },
+  "Sableye-Mega": {
+    "baseSpecies": "Sableye",
+    "spriteKey": "10066"
+  },
+  "Mawile-Mega": {
+    "baseSpecies": "Mawile",
+    "spriteKey": "10052"
+  },
+  "Aggron-Mega": {
+    "baseSpecies": "Aggron",
+    "spriteKey": "10053"
+  },
+  "Medicham-Mega": {
+    "baseSpecies": "Medicham",
+    "spriteKey": "10054"
+  },
+  "Manectric-Mega": {
+    "baseSpecies": "Manectric",
+    "spriteKey": "10055"
+  },
+  "Sharpedo-Mega": {
+    "baseSpecies": "Sharpedo",
+    "spriteKey": "10070"
+  },
+  "Camerupt-Mega": {
+    "baseSpecies": "Camerupt",
+    "spriteKey": "10087"
+  },
+  "Altaria-Mega": {
+    "baseSpecies": "Altaria",
+    "spriteKey": "10067"
+  },
+  "Banette-Mega": {
+    "baseSpecies": "Banette",
+    "spriteKey": "10056"
+  },
+  "Chimecho-Mega": {
+    "baseSpecies": "Chimecho",
+    "spriteKey": "10306"
+  },
+  "Absol-Mega": {
+    "baseSpecies": "Absol",
+    "spriteKey": "10057"
+  },
+  "Absol-Mega-Z": {
+    "baseSpecies": "Absol",
+    "spriteKey": "10307"
+  },
+  "Glalie-Mega": {
+    "baseSpecies": "Glalie",
+    "spriteKey": "10074"
+  },
+  "Salamence-Mega": {
+    "baseSpecies": "Salamence",
+    "spriteKey": "10089"
+  },
+  "Metagross-Mega": {
+    "baseSpecies": "Metagross",
+    "spriteKey": "10076"
+  },
+  "Latias-Mega": {
+    "baseSpecies": "Latias",
+    "spriteKey": "10062"
+  },
+  "Latios-Mega": {
+    "baseSpecies": "Latios",
+    "spriteKey": "10063"
+  },
+  "Rayquaza-Mega": {
+    "baseSpecies": "Rayquaza",
+    "spriteKey": "10079"
+  },
+  "Staraptor-Mega": {
+    "baseSpecies": "Staraptor",
+    "spriteKey": "10308"
+  },
+  "Lopunny-Mega": {
+    "baseSpecies": "Lopunny",
+    "spriteKey": "10088"
+  },
+  "Garchomp-Mega": {
+    "baseSpecies": "Garchomp",
+    "spriteKey": "10058"
+  },
+  "Garchomp-Mega-Z": {
+    "baseSpecies": "Garchomp",
+    "spriteKey": "10309"
+  },
+  "Lucario-Mega": {
+    "baseSpecies": "Lucario",
+    "spriteKey": "10059"
+  },
+  "Lucario-Mega-Z": {
+    "baseSpecies": "Lucario",
+    "spriteKey": "10310"
+  },
+  "Abomasnow-Mega": {
+    "baseSpecies": "Abomasnow",
+    "spriteKey": "10060"
+  },
+  "Gallade-Mega": {
+    "baseSpecies": "Gallade",
+    "spriteKey": "10068"
+  },
+  "Froslass-Mega": {
+    "baseSpecies": "Froslass",
+    "spriteKey": "10285"
+  },
+  "Heatran-Mega": {
+    "baseSpecies": "Heatran",
+    "spriteKey": "10311"
+  },
+  "Darkrai-Mega": {
+    "baseSpecies": "Darkrai",
+    "spriteKey": "10312"
+  },
+  "Emboar-Mega": {
+    "baseSpecies": "Emboar",
+    "spriteKey": "10286"
+  },
+  "Excadrill-Mega": {
+    "baseSpecies": "Excadrill",
+    "spriteKey": "10287"
+  },
+  "Audino-Mega": {
+    "baseSpecies": "Audino",
+    "spriteKey": "10069"
+  },
+  "Scolipede-Mega": {
+    "baseSpecies": "Scolipede",
+    "spriteKey": "10288"
+  },
+  "Scrafty-Mega": {
+    "baseSpecies": "Scrafty",
+    "spriteKey": "10289"
+  },
+  "Eelektross-Mega": {
+    "baseSpecies": "Eelektross",
+    "spriteKey": "10290"
+  },
+  "Chandelure-Mega": {
+    "baseSpecies": "Chandelure",
+    "spriteKey": "10291"
+  },
+  "Golurk-Mega": {
+    "baseSpecies": "Golurk",
+    "spriteKey": "10313"
+  },
+  "Chesnaught-Mega": {
+    "baseSpecies": "Chesnaught",
+    "spriteKey": "10292"
+  },
+  "Delphox-Mega": {
+    "baseSpecies": "Delphox",
+    "spriteKey": "10293"
+  },
+  "Greninja-Mega": {
+    "baseSpecies": "Greninja",
+    "spriteKey": "10294"
+  },
+  "Pyroar-Mega": {
+    "baseSpecies": "Pyroar",
+    "spriteKey": "10295"
+  },
+  "Floette-Mega": {
+    "baseSpecies": "Floette",
+    "spriteKey": "10296"
+  },
+  "Meowstic-M-Mega": {
+    "baseSpecies": "Meowstic",
+    "spriteKey": "10314"
+  },
+  "Meowstic-F-Mega": {
+    "baseSpecies": "Meowstic",
+    "spriteKey": "10326"
+  },
+  "Malamar-Mega": {
+    "baseSpecies": "Malamar",
+    "spriteKey": "10297"
+  },
+  "Barbaracle-Mega": {
+    "baseSpecies": "Barbaracle",
+    "spriteKey": "10298"
+  },
+  "Dragalge-Mega": {
+    "baseSpecies": "Dragalge",
+    "spriteKey": "10299"
+  },
+  "Hawlucha-Mega": {
+    "baseSpecies": "Hawlucha",
+    "spriteKey": "10300"
+  },
+  "Zygarde-Mega": {
+    "baseSpecies": "Zygarde",
+    "spriteKey": "10301"
+  },
+  "Diancie-Mega": {
+    "baseSpecies": "Diancie",
+    "spriteKey": "10075"
+  },
+  "Crabominable-Mega": {
+    "baseSpecies": "Crabominable",
+    "spriteKey": "10315"
+  },
+  "Golisopod-Mega": {
+    "baseSpecies": "Golisopod",
+    "spriteKey": "10316"
+  },
+  "Drampa-Mega": {
+    "baseSpecies": "Drampa",
+    "spriteKey": "10302"
+  },
+  "Magearna-Mega": {
+    "baseSpecies": "Magearna",
+    "spriteKey": "10317"
+  },
+  "Magearna-Original-Mega": {
+    "baseSpecies": "Magearna",
+    "spriteKey": "10318"
+  },
+  "Zeraora-Mega": {
+    "baseSpecies": "Zeraora",
+    "spriteKey": "10319"
+  },
+  "Falinks-Mega": {
+    "baseSpecies": "Falinks",
+    "spriteKey": "10303"
+  },
+  "Scovillain-Mega": {
+    "baseSpecies": "Scovillain",
+    "spriteKey": "10320"
+  },
+  "Glimmora-Mega": {
+    "baseSpecies": "Glimmora",
+    "spriteKey": "10321"
+  },
+  "Tatsugiri-Curly-Mega": {
+    "baseSpecies": "Tatsugiri",
+    "spriteKey": "10322"
+  },
+  "Tatsugiri-Droopy-Mega": {
+    "baseSpecies": "Tatsugiri",
+    "spriteKey": "10323"
+  },
+  "Tatsugiri-Stretchy-Mega": {
+    "baseSpecies": "Tatsugiri",
+    "spriteKey": "10324"
+  },
+  "Baxcalibur-Mega": {
+    "baseSpecies": "Baxcalibur",
+    "spriteKey": "10325"
+  }
+}

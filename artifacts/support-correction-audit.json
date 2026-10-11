@@ -1,0 +1,269 @@
+{
+  "totalBattles": 11664,
+  "replays": 115,
+  "unchangedClimbs": 81,
+  "results": [
+    {
+      "rule": "basic",
+      "battles": 4167,
+      "before": {
+        "finished": 19,
+        "passed50": 35,
+        "averageCleared": 65.81481481481482
+      },
+      "after": {
+        "finished": 19,
+        "passed50": 41,
+        "averageCleared": 76.51851851851852
+      },
+      "higher": 14,
+      "lower": 5,
+      "same": 35,
+      "repeatedLosses": 2,
+      "preventableBlocked": 0,
+      "teams": [
+        {
+          "caseId": "espeon-screen",
+          "before": {
+            "finished": 0,
+            "averageCleared": 0.5555555555555556
+          },
+          "after": {
+            "finished": 0,
+            "averageCleared": 66.44444444444444
+          }
+        },
+        {
+          "caseId": "grimmsnarl-screen",
+          "before": {
+            "finished": 7,
+            "averageCleared": 98.33333333333333
+          },
+          "after": {
+            "finished": 7,
+            "averageCleared": 98.33333333333333
+          }
+        },
+        {
+          "caseId": "klefki-screen",
+          "before": {
+            "finished": 1,
+            "averageCleared": 75.66666666666667
+          },
+          "after": {
+            "finished": 1,
+            "averageCleared": 62.888888888888886
+          }
+        },
+        {
+          "caseId": "snow-veil",
+          "before": {
+            "finished": 3,
+            "averageCleared": 86
+          },
+          "after": {
+            "finished": 3,
+            "averageCleared": 86
+          }
+        },
+        {
+          "caseId": "attack-control",
+          "before": {
+            "finished": 8,
+            "averageCleared": 99.44444444444444
+          },
+          "after": {
+            "finished": 8,
+            "averageCleared": 99.44444444444444
+          }
+        },
+        {
+          "caseId": "room-control",
+          "before": {
+            "finished": 0,
+            "averageCleared": 34.888888888888886
+          },
+          "after": {
+            "finished": 0,
+            "averageCleared": 46
+          }
+        }
+      ]
+    },
+    {
+      "rule": "tera",
+      "battles": 3733,
+      "before": {
+        "finished": 14,
+        "passed50": 32,
+        "averageCleared": 62.074074074074076
+      },
+      "after": {
+        "finished": 14,
+        "passed50": 34,
+        "averageCleared": 68.3888888888889
+      },
+      "higher": 15,
+      "lower": 3,
+      "same": 36,
+      "repeatedLosses": 3,
+      "preventableBlocked": 0,
+      "teams": [
+        {
+          "caseId": "espeon-screen",
+          "before": {
+            "finished": 0,
+            "averageCleared": 0.5555555555555556
+          },
+          "after": {
+            "finished": 0,
+            "averageCleared": 46.44444444444444
+          }
+        },
+        {
+          "caseId": "grimmsnarl-screen",
+          "before": {
+            "finished": 5,
+            "averageCleared": 88.44444444444444
+          },
+          "after": {
+            "finished": 5,
+            "averageCleared": 88.44444444444444
+          }
+        },
+        {
+          "caseId": "klefki-screen",
+          "before": {
+            "finished": 0,
+            "averageCleared": 74.66666666666667
+          },
+          "after": {
+            "finished": 0,
+            "averageCleared": 56.77777777777778
+          }
+        },
+        {
+          "caseId": "snow-veil",
+          "before": {
+            "finished": 3,
+            "averageCleared": 78.33333333333333
+          },
+          "after": {
+            "finished": 3,
+            "averageCleared": 78.33333333333333
+          }
+        },
+        {
+          "caseId": "attack-control",
+          "before": {
+            "finished": 6,
+            "averageCleared": 92.44444444444444
+          },
+          "after": {
+            "finished": 6,
+            "averageCleared": 92.44444444444444
+          }
+        },
+        {
+          "caseId": "room-control",
+          "before": {
+            "finished": 0,
+            "averageCleared": 38
+          },
+          "after": {
+            "finished": 0,
+            "averageCleared": 47.888888888888886
+          }
+        }
+      ]
+    },
+    {
+      "rule": "chaos",
+      "battles": 3764,
+      "before": {
+        "finished": 12,
+        "passed50": 32,
+        "averageCleared": 61.24074074074074
+      },
+      "after": {
+        "finished": 14,
+        "passed50": 36,
+        "averageCleared": 68.96296296296296
+      },
+      "higher": 16,
+      "lower": 4,
+      "same": 34,
+      "repeatedLosses": 3,
+      "preventableBlocked": 0,
+      "teams": [
+        {
+          "caseId": "espeon-screen",
+          "before": {
+            "finished": 0,
+            "averageCleared": 0.5555555555555556
+          },
+          "after": {
+            "finished": 1,
+            "averageCleared": 47.55555555555556
+          }
+        },
+        {
+          "caseId": "grimmsnarl-screen",
+          "before": {
+            "finished": 5,
+            "averageCleared": 87.33333333333333
+          },
+          "after": {
+            "finished": 5,
+            "averageCleared": 87.33333333333333
+          }
+        },
+        {
+          "caseId": "klefki-screen",
+          "before": {
+            "finished": 0,
+            "averageCleared": 75
+          },
+          "after": {
+            "finished": 1,
+            "averageCleared": 58.22222222222222
+          }
+        },
+        {
+          "caseId": "snow-veil",
+          "before": {
+            "finished": 1,
+            "averageCleared": 76.11111111111111
+          },
+          "after": {
+            "finished": 1,
+            "averageCleared": 76.11111111111111
+          }
+        },
+        {
+          "caseId": "attack-control",
+          "before": {
+            "finished": 6,
+            "averageCleared": 91.55555555555556
+          },
+          "after": {
+            "finished": 6,
+            "averageCleared": 91.55555555555556
+          }
+        },
+        {
+          "caseId": "room-control",
+          "before": {
+            "finished": 0,
+            "averageCleared": 36.888888888888886
+          },
+          "after": {
+            "finished": 0,
+            "averageCleared": 53
+          }
+        }
+      ]
+    }
+  ],
+  "notes": "Same experimental policy, frozen nine courses, seeds, enemies, prices. Three fixture changes in three different teams; 81 unchanged control climbs reproduced exactly. Seen data diagnostic, not held-out or human win rates. Opponent full teams are offline replay inputs only."
+}

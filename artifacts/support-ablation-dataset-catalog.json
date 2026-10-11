@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "devManifest": "support-ablation-dev-manifest.json",
+  "validationManifest": "support-ablation-validate-manifest.json",
+  "selection": "support-ablation-selection.json",
+  "inputFields": [
+    "observation",
+    "context"
+  ],
+  "targetFields": [
+    "action",
+    "reason"
+  ],
+  "outcomeFields": [
+    "outcome"
+  ],
+  "groupField": "courseId",
+  "joinField": "battleKey",
+  "modelTrained": false,
+  "notes": "Previous validation courses used as development. New courses were generated after candidate selection. Validation outcomes must not feed policy inputs. Action labels are heuristic, not optimal-action proofs."
+}

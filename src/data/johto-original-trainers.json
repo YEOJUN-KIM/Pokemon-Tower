@@ -1,0 +1,1108 @@
+{
+  "falkner": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Gym rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Falkner",
+    "sets": [
+      {
+        "species": "Staraptor",
+        "level": 50,
+        "ability": "Intimidate",
+        "item": "",
+        "moves": [
+          "U-turn",
+          "Close Combat",
+          "Brave Bird",
+          "Attract"
+        ]
+      },
+      {
+        "species": "Noctowl",
+        "level": 52,
+        "ability": "Insomnia",
+        "item": "",
+        "moves": [
+          "Air Slash",
+          "Shadow Ball",
+          "FeatherDance",
+          "Roost"
+        ]
+      },
+      {
+        "species": "Swellow",
+        "level": 52,
+        "ability": "Guts",
+        "item": "Flame Orb",
+        "moves": [
+          "Protect",
+          "Double Team",
+          "Facade",
+          "Endeavor"
+        ]
+      },
+      {
+        "species": "Honchkrow",
+        "level": 54,
+        "ability": "Insomnia",
+        "item": "",
+        "moves": [
+          "Dark Pulse",
+          "Night Slash",
+          "Sucker Punch",
+          "Thunder Wave"
+        ]
+      },
+      {
+        "species": "Pelipper",
+        "level": 48,
+        "ability": "Keen Eye",
+        "item": "",
+        "moves": [
+          "Surf",
+          "Ice Beam",
+          "Hidden Power",
+          "Tailwind"
+        ]
+      },
+      {
+        "species": "Pidgeot",
+        "level": 56,
+        "ability": "Keen Eye",
+        "item": "",
+        "moves": [
+          "Return",
+          "Double Team",
+          "Swagger",
+          "Roost"
+        ]
+      }
+    ]
+  },
+  "koga": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Koga",
+    "sets": [
+      {
+        "species": "Skuntank",
+        "level": 61,
+        "ability": "Aftermath",
+        "item": "",
+        "moves": [
+          "Toxic",
+          "Dig",
+          "Sucker Punch",
+          "Explosion"
+        ]
+      },
+      {
+        "species": "Venomoth",
+        "level": 63,
+        "ability": "Tinted Lens",
+        "item": "",
+        "moves": [
+          "Baton Pass",
+          "Double Team",
+          "Silver Wind",
+          "Psychic"
+        ]
+      },
+      {
+        "species": "Toxicroak",
+        "level": 60,
+        "ability": "Dry Skin",
+        "item": "",
+        "moves": [
+          "Swagger",
+          "X-Scissor",
+          "Cross Chop",
+          "Gunk Shot"
+        ]
+      },
+      {
+        "species": "Swalot",
+        "level": 62,
+        "ability": "Sticky Hold",
+        "item": "Leftovers",
+        "moves": [
+          "Sludge Bomb",
+          "Amnesia",
+          "Pain Split",
+          "Yawn"
+        ]
+      },
+      {
+        "species": "Crobat",
+        "level": 64,
+        "ability": "Inner Focus",
+        "item": "",
+        "moves": [
+          "Fly",
+          "Cross Poison",
+          "Mean Look",
+          "Toxic"
+        ]
+      },
+      {
+        "species": "Muk",
+        "level": 62,
+        "ability": "Sticky Hold",
+        "item": "Black Sludge",
+        "moves": [
+          "Minimize",
+          "Screech",
+          "Swagger",
+          "Toxic"
+        ]
+      }
+    ]
+  },
+  "bruno": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Bruno",
+    "sets": [
+      {
+        "species": "Hitmontop",
+        "level": 62,
+        "ability": "Technician",
+        "item": "",
+        "moves": [
+          "Close Combat",
+          "Earthquake",
+          "Counter",
+          "Quick Attack"
+        ]
+      },
+      {
+        "species": "Hitmonlee",
+        "level": 61,
+        "ability": "Reckless",
+        "item": "",
+        "moves": [
+          "Close Combat",
+          "Blaze Kick",
+          "Reversal",
+          "Swagger"
+        ]
+      },
+      {
+        "species": "Hitmonchan",
+        "level": 61,
+        "ability": "Iron Fist",
+        "item": "",
+        "moves": [
+          "Close Combat",
+          "Drain Punch",
+          "Bullet Punch",
+          "Substitute"
+        ]
+      },
+      {
+        "species": "Hariyama",
+        "level": 62,
+        "ability": "Guts",
+        "item": "Sitrus Berry",
+        "moves": [
+          "Bulk Up",
+          "Low Kick",
+          "Payback",
+          "Bullet Punch"
+        ]
+      },
+      {
+        "species": "Lucario",
+        "level": 64,
+        "ability": "Inner Focus",
+        "item": "",
+        "moves": [
+          "Close Combat",
+          "Iron Tail",
+          "Counter",
+          "ExtremeSpeed"
+        ]
+      },
+      {
+        "species": "Machamp",
+        "level": 64,
+        "ability": "No Guard",
+        "item": "",
+        "moves": [
+          "DynamicPunch",
+          "Stone Edge",
+          "Bullet Punch",
+          "Foresight"
+        ]
+      }
+    ]
+  },
+  "whitney": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Whitney",
+    "sets": [
+      {
+        "species": "Girafarig",
+        "level": 52,
+        "ability": "Inner Focus",
+        "item": "",
+        "moves": [
+          "Calm Mind",
+          "Baton Pass",
+          "Shadow Ball",
+          "Psychic"
+        ]
+      },
+      {
+        "species": "Lickilicky",
+        "level": 50,
+        "ability": "Own Tempo",
+        "item": "",
+        "moves": [
+          "Wring Out",
+          "Flamethrower",
+          "Thunderbolt",
+          "Ice Beam"
+        ]
+      },
+      {
+        "species": "Bibarel",
+        "level": 54,
+        "ability": "Simple",
+        "item": "",
+        "moves": [
+          "Double Team",
+          "Surf",
+          "Charge Beam",
+          "Ice Beam"
+        ]
+      },
+      {
+        "species": "Delcatty",
+        "level": 54,
+        "ability": "Normalize",
+        "item": "",
+        "moves": [
+          "Fake Out",
+          "Baton Pass",
+          "Assist",
+          "Calm Mind"
+        ]
+      },
+      {
+        "species": "Clefable",
+        "level": 52,
+        "ability": "Magic Guard",
+        "item": "",
+        "moves": [
+          "Calm Mind",
+          "Fire Blast",
+          "Thunder",
+          "Blizzard"
+        ]
+      },
+      {
+        "species": "Miltank",
+        "level": 58,
+        "ability": "Scrappy",
+        "item": "Lum Berry",
+        "moves": [
+          "Body Slam",
+          "Attract",
+          "Rest",
+          "Sleep Talk"
+        ]
+      }
+    ]
+  },
+  "chuck": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Chuck",
+    "sets": [
+      {
+        "species": "Medicham",
+        "level": 54,
+        "ability": "Pure Power",
+        "item": "Sitrus Berry",
+        "moves": [
+          "Attract",
+          "Psycho Cut",
+          "ThunderPunch",
+          "Hi Jump Kick"
+        ]
+      },
+      {
+        "species": "Hitmonchan",
+        "level": 52,
+        "ability": "Iron Fist",
+        "item": "",
+        "moves": [
+          "Swagger",
+          "Double Team",
+          "Mach Punch",
+          "Focus Punch"
+        ]
+      },
+      {
+        "species": "Hitmonlee",
+        "level": 55,
+        "ability": "Reckless",
+        "item": "",
+        "moves": [
+          "Fake Out",
+          "Bulk Up",
+          "Blaze Kick",
+          "Hi Jump Kick"
+        ]
+      },
+      {
+        "species": "Breloom",
+        "level": 54,
+        "ability": "Poison Heal",
+        "item": "Toxic Orb",
+        "moves": [
+          "Substitute",
+          "Stone Edge",
+          "Drain Punch",
+          "Focus Punch"
+        ]
+      },
+      {
+        "species": "Primeape",
+        "level": 56,
+        "ability": "Anger Point",
+        "item": "",
+        "moves": [
+          "Swagger",
+          "Payback",
+          "ThunderPunch",
+          "Close Combat"
+        ]
+      },
+      {
+        "species": "Poliwrath",
+        "level": 60,
+        "ability": "Water Absorb",
+        "item": "Sitrus Berry",
+        "moves": [
+          "Substitute",
+          "Double Team",
+          "Waterfall",
+          "Focus Punch"
+        ]
+      }
+    ]
+  },
+  "pryce": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Pryce",
+    "sets": [
+      {
+        "species": "Abomasnow",
+        "level": 56,
+        "ability": "Snow Warning",
+        "item": "",
+        "moves": [
+          "Ice Shard",
+          "Wood Hammer",
+          "Earthquake",
+          "Blizzard"
+        ]
+      },
+      {
+        "species": "Dewgong",
+        "level": 58,
+        "ability": "Thick Fat",
+        "item": "Lum Berry",
+        "moves": [
+          "Dive",
+          "Rest",
+          "Sleep Talk",
+          "Sheer Cold"
+        ]
+      },
+      {
+        "species": "Glalie",
+        "level": 52,
+        "ability": "Inner Focus",
+        "item": "",
+        "moves": [
+          "Torment",
+          "Payback",
+          "Attract",
+          "Blizzard"
+        ]
+      },
+      {
+        "species": "Froslass",
+        "level": 52,
+        "ability": "Snow Cloak",
+        "item": "",
+        "moves": [
+          "Ice Shard",
+          "Confuse Ray",
+          "Attract",
+          "Blizzard"
+        ]
+      },
+      {
+        "species": "Walrein",
+        "level": 54,
+        "ability": "Ice Body",
+        "item": "",
+        "moves": [
+          "Swagger",
+          "Hail",
+          "Body Slam",
+          "Blizzard"
+        ]
+      },
+      {
+        "species": "Mamoswine",
+        "level": 60,
+        "ability": "Snow Cloak",
+        "item": "Sitrus Berry",
+        "moves": [
+          "Earthquake",
+          "Double Team",
+          "Stone Edge",
+          "Avalanche"
+        ]
+      }
+    ]
+  },
+  "lance": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Lance",
+    "sets": [
+      {
+        "species": "Salamence",
+        "level": 72,
+        "ability": "Intimidate",
+        "item": "Lum Berry",
+        "moves": [
+          "Dragon Claw",
+          "Flamethrower",
+          "Shadow Claw",
+          "Rest"
+        ]
+      },
+      {
+        "species": "Gyarados",
+        "level": 68,
+        "ability": "Intimidate",
+        "item": "",
+        "moves": [
+          "Dragon Dance",
+          "Waterfall",
+          "Ice Fang",
+          "Thunder Wave"
+        ]
+      },
+      {
+        "species": "Garchomp",
+        "level": 72,
+        "ability": "Sand Veil",
+        "item": "",
+        "moves": [
+          "Outrage",
+          "Swords Dance",
+          "Earthquake",
+          "Roar"
+        ]
+      },
+      {
+        "species": "Altaria",
+        "level": 73,
+        "ability": "Natural Cure",
+        "item": "",
+        "moves": [
+          "Double Team",
+          "DragonBreath",
+          "Perish Song",
+          "Hyper Beam"
+        ]
+      },
+      {
+        "species": "Charizard",
+        "level": 68,
+        "ability": "Blaze",
+        "item": "",
+        "moves": [
+          "Flamethrower",
+          "Hyper Beam",
+          "Dragon Claw",
+          "Air Slash"
+        ]
+      },
+      {
+        "species": "Dragonite",
+        "level": 75,
+        "ability": "Inner Focus",
+        "item": "Sitrus Berry",
+        "moves": [
+          "Draco Meteor",
+          "Safeguard",
+          "Fire Blast",
+          "Hyper Beam"
+        ]
+      }
+    ]
+  },
+  "will": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Will",
+    "sets": [
+      {
+        "species": "Bronzong",
+        "level": 58,
+        "ability": "Heatproof",
+        "item": "",
+        "moves": [
+          "Gravity",
+          "Reflect",
+          "Payback",
+          "Psychic"
+        ]
+      },
+      {
+        "species": "Jynx",
+        "level": 60,
+        "ability": "Forewarn",
+        "item": "",
+        "moves": [
+          "Fake Tears",
+          "Lovely Kiss",
+          "Dream Eater",
+          "Blizzard"
+        ]
+      },
+      {
+        "species": "Grumpig",
+        "level": 59,
+        "ability": "Own Tempo",
+        "item": "",
+        "moves": [
+          "Confuse Ray",
+          "Signal Beam",
+          "Power Gem",
+          "Psychic"
+        ]
+      },
+      {
+        "species": "Slowbro",
+        "level": 60,
+        "ability": "Own Tempo",
+        "item": "",
+        "moves": [
+          "Curse",
+          "Amnesia",
+          "Body Slam",
+          "Psychic"
+        ]
+      },
+      {
+        "species": "Gardevoir",
+        "level": 61,
+        "ability": "Trace",
+        "item": "",
+        "moves": [
+          "Calm Mind",
+          "Charge Beam",
+          "Focus Blast",
+          "Psychic"
+        ]
+      },
+      {
+        "species": "Xatu",
+        "level": 62,
+        "ability": "Early Bird",
+        "item": "Sitrus Berry",
+        "moves": [
+          "Confuse Ray",
+          "Quick Attack",
+          "Shadow Ball",
+          "Psychic"
+        ]
+      }
+    ]
+  },
+  "karen": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Karen",
+    "sets": [
+      {
+        "species": "Weavile",
+        "level": 62,
+        "ability": "Pressure",
+        "item": "",
+        "moves": [
+          "Ice Punch",
+          "Night Slash",
+          "Low Kick",
+          "Ice Shard"
+        ]
+      },
+      {
+        "species": "Absol",
+        "level": 62,
+        "ability": "Super Luck",
+        "item": "",
+        "moves": [
+          "Detect",
+          "Perish Song",
+          "Night Slash",
+          "Psycho Cut"
+        ]
+      },
+      {
+        "species": "Spiritomb",
+        "level": 62,
+        "ability": "Pressure",
+        "item": "",
+        "moves": [
+          "Curse",
+          "Confuse Ray",
+          "Pain Split",
+          "Sucker Punch"
+        ]
+      },
+      {
+        "species": "Houndoom",
+        "level": 63,
+        "ability": "Flash Fire",
+        "item": "",
+        "moves": [
+          "Nasty Plot",
+          "Dark Pulse",
+          "Flamethrower",
+          "Sludge Bomb"
+        ]
+      },
+      {
+        "species": "Honchkrow",
+        "level": 64,
+        "ability": "Super Luck",
+        "item": "",
+        "moves": [
+          "Thunder Wave",
+          "Whirlwind",
+          "Drill Peck",
+          "Sucker Punch"
+        ]
+      },
+      {
+        "species": "Umbreon",
+        "level": 64,
+        "ability": "Synchronize",
+        "item": "Sitrus Berry",
+        "moves": [
+          "Confuse Ray",
+          "Curse",
+          "Payback",
+          "Sucker Punch"
+        ]
+      }
+    ]
+  },
+  "clair": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Clair",
+    "sets": [
+      {
+        "species": "Gyarados",
+        "level": 56,
+        "ability": "Intimidate",
+        "item": "Wacan Berry",
+        "moves": [
+          "Dragon Dance",
+          "Waterfall",
+          "Earthquake",
+          "Dragon Pulse"
+        ]
+      },
+      {
+        "species": "Dragonair",
+        "level": 52,
+        "ability": "Shed Skin",
+        "item": "",
+        "moves": [
+          "Dragon Rush",
+          "Thunder Wave",
+          "Thunderbolt",
+          "Flamethrower"
+        ]
+      },
+      {
+        "species": "Aerodactyl",
+        "level": 52,
+        "ability": "Rock Head",
+        "item": "",
+        "moves": [
+          "Rock Slide",
+          "Thunder Fang",
+          "Earthquake",
+          "Roar"
+        ]
+      },
+      {
+        "species": "Kingdra",
+        "level": 56,
+        "ability": "Sniper",
+        "item": "",
+        "moves": [
+          "DragonBreath",
+          "Hydro Pump",
+          "Ice Beam",
+          "Yawn"
+        ]
+      },
+      {
+        "species": "Charizard",
+        "level": 52,
+        "ability": "Blaze",
+        "item": "",
+        "moves": [
+          "Dragon Claw",
+          "Shadow Claw",
+          "Fire Fang",
+          "Air Slash"
+        ]
+      },
+      {
+        "species": "Dragonite",
+        "level": 60,
+        "ability": "Inner Focus",
+        "item": "Sitrus Berry",
+        "moves": [
+          "DragonBreath",
+          "Safeguard",
+          "Thunder",
+          "Hyper Beam"
+        ]
+      }
+    ]
+  },
+  "bugsy": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Bugsy",
+    "sets": [
+      {
+        "species": "Scizor",
+        "level": 56,
+        "ability": "Technician",
+        "item": "Sitrus Berry",
+        "moves": [
+          "X-Scissor",
+          "Swords Dance",
+          "Bullet Punch",
+          "Superpower"
+        ]
+      },
+      {
+        "species": "Shedinja",
+        "level": 48,
+        "ability": "Wonder Guard",
+        "item": "",
+        "moves": [
+          "X-Scissor",
+          "Shadow Sneak",
+          "Swagger",
+          "Toxic"
+        ]
+      },
+      {
+        "species": "Yanmega",
+        "level": 52,
+        "ability": "Tinted Lens",
+        "item": "",
+        "moves": [
+          "Bug Buzz",
+          "Air Slash",
+          "Detect",
+          "AncientPower"
+        ]
+      },
+      {
+        "species": "Pinsir",
+        "level": 55,
+        "ability": "Mold Breaker",
+        "item": "",
+        "moves": [
+          "X-Scissor",
+          "Rock Tomb",
+          "Earthquake",
+          "Guillotine"
+        ]
+      },
+      {
+        "species": "Heracross",
+        "level": 54,
+        "ability": "Guts",
+        "item": "",
+        "moves": [
+          "Megahorn",
+          "Counter",
+          "Stone Edge",
+          "Close Combat"
+        ]
+      },
+      {
+        "species": "Vespiquen",
+        "level": 52,
+        "ability": "Pressure",
+        "item": "Sitrus Berry",
+        "moves": [
+          "Attack Order",
+          "Defend Order",
+          "Protect",
+          "Confuse Ray"
+        ]
+      }
+    ]
+  },
+  "morty": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Morty",
+    "sets": [
+      {
+        "species": "Drifblim",
+        "level": 52,
+        "ability": "Unburden",
+        "item": "Sitrus Berry",
+        "moves": [
+          "Shadow Ball",
+          "Substitute",
+          "Thunderbolt",
+          "Destiny Bond"
+        ]
+      },
+      {
+        "species": "Dusknoir",
+        "level": 52,
+        "ability": "Pressure",
+        "item": "",
+        "moves": [
+          "Will-O-Wisp",
+          "Substitute",
+          "Pain Split",
+          "Payback"
+        ]
+      },
+      {
+        "species": "Sableye",
+        "level": 52,
+        "ability": "Stall",
+        "item": "",
+        "moves": [
+          "Fake Out",
+          "Ice Punch",
+          "Brick Break",
+          "Sucker Punch"
+        ]
+      },
+      {
+        "species": "Mismagius",
+        "level": 54,
+        "ability": "Levitate",
+        "item": "",
+        "moves": [
+          "Astonish",
+          "Mean Look",
+          "Perish Song",
+          "Confuse Ray"
+        ]
+      },
+      {
+        "species": "Gengar",
+        "level": 57,
+        "ability": "Levitate",
+        "item": "",
+        "moves": [
+          "Shadow Ball",
+          "Hypnosis",
+          "Focus Blast",
+          "Confuse Ray"
+        ]
+      },
+      {
+        "species": "Gengar",
+        "level": 57,
+        "ability": "Levitate",
+        "item": "",
+        "moves": [
+          "Shadow Ball",
+          "Substitute",
+          "Thunderbolt",
+          "Destiny Bond"
+        ]
+      }
+    ]
+  },
+  "jasmine": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Rematch",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Jasmine",
+    "sets": [
+      {
+        "species": "Metagross",
+        "level": 52,
+        "ability": "Clear Body",
+        "item": "",
+        "moves": [
+          "Meteor Mash",
+          "Gravity",
+          "Bullet Punch",
+          "Explosion"
+        ]
+      },
+      {
+        "species": "Magnezone",
+        "level": 56,
+        "ability": "Sturdy",
+        "item": "",
+        "moves": [
+          "Metal Sound",
+          "Mirror Coat",
+          "Lock-On",
+          "Zap Cannon"
+        ]
+      },
+      {
+        "species": "Skarmory",
+        "level": 52,
+        "ability": "Sturdy",
+        "item": "",
+        "moves": [
+          "Steel Wing",
+          "Night Slash",
+          "Air Slash",
+          "Spikes"
+        ]
+      },
+      {
+        "species": "Bronzong",
+        "level": 50,
+        "ability": "Heatproof",
+        "item": "",
+        "moves": [
+          "Gyro Ball",
+          "Gravity",
+          "Hypnosis",
+          "Dream Eater"
+        ]
+      },
+      {
+        "species": "Empoleon",
+        "level": 52,
+        "ability": "Torrent",
+        "item": "",
+        "moves": [
+          "Hydro Pump",
+          "Blizzard",
+          "Aqua Jet",
+          "Roar"
+        ]
+      },
+      {
+        "species": "Steelix",
+        "level": 62,
+        "ability": "Sturdy",
+        "item": "",
+        "moves": [
+          "Iron Tail",
+          "Stone Edge",
+          "Stealth Rock",
+          "Roar"
+        ]
+      }
+    ]
+  },
+  "red": {
+    "game": "HeartGold/SoulSilver",
+    "battle": "Mt. Silver",
+    "url": "https://bulbapedia.bulbagarden.net/wiki/Red_(game)",
+    "sets": [
+      {
+        "species": "Pikachu",
+        "level": 88,
+        "ability": "Static",
+        "item": "Light Ball",
+        "moves": [
+          "Volt Tackle",
+          "Iron Tail",
+          "Quick Attack",
+          "Thunderbolt"
+        ]
+      },
+      {
+        "species": "Lapras",
+        "level": 80,
+        "ability": "Shell Armor",
+        "item": "",
+        "moves": [
+          "Body Slam",
+          "Brine",
+          "Blizzard",
+          "Psychic"
+        ]
+      },
+      {
+        "species": "Snorlax",
+        "level": 82,
+        "ability": "Thick Fat",
+        "item": "",
+        "moves": [
+          "Shadow Ball",
+          "Crunch",
+          "Blizzard",
+          "Giga Impact"
+        ]
+      },
+      {
+        "species": "Venusaur",
+        "level": 84,
+        "ability": "Overgrow",
+        "item": "",
+        "moves": [
+          "Frenzy Plant",
+          "Giga Drain",
+          "Sludge Bomb",
+          "Sleep Powder"
+        ]
+      },
+      {
+        "species": "Charizard",
+        "level": 84,
+        "ability": "Blaze",
+        "item": "",
+        "moves": [
+          "Blast Burn",
+          "Flare Blitz",
+          "Air Slash",
+          "Dragon Pulse"
+        ]
+      },
+      {
+        "species": "Blastoise",
+        "level": 84,
+        "ability": "Torrent",
+        "item": "",
+        "moves": [
+          "Hydro Cannon",
+          "Blizzard",
+          "Flash Cannon",
+          "Focus Blast"
+        ]
+      }
+    ]
+  }
+}

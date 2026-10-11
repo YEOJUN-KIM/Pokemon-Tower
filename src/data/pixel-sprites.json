@@ -1,0 +1,5242 @@
+{
+  "1": {
+    "key": "bulbasaur",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "2": {
+    "key": "ivysaur",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "3": {
+    "key": "venusaur",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "4": {
+    "key": "charmander",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "5": {
+    "key": "charmeleon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "6": {
+    "key": "charizard",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "7": {
+    "key": "squirtle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "8": {
+    "key": "wartortle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "9": {
+    "key": "blastoise",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10": {
+    "key": "caterpie",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "11": {
+    "key": "metapod",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "12": {
+    "key": "butterfree",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "13": {
+    "key": "weedle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "14": {
+    "key": "kakuna",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "15": {
+    "key": "beedrill",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "16": {
+    "key": "pidgey",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "17": {
+    "key": "pidgeotto",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "18": {
+    "key": "pidgeot",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "19": {
+    "key": "rattata",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "20": {
+    "key": "raticate",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "21": {
+    "key": "spearow",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "22": {
+    "key": "fearow",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "23": {
+    "key": "ekans",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "24": {
+    "key": "arbok",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "25": {
+    "key": "pikachu",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "26": {
+    "key": "raichu",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "27": {
+    "key": "sandshrew",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "28": {
+    "key": "sandslash",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "29": {
+    "key": "nidoranf",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "30": {
+    "key": "nidorina",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "31": {
+    "key": "nidoqueen",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "32": {
+    "key": "nidoranm",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "33": {
+    "key": "nidorino",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "34": {
+    "key": "nidoking",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "35": {
+    "key": "clefairy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "36": {
+    "key": "clefable",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "37": {
+    "key": "vulpix",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "38": {
+    "key": "ninetales",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "39": {
+    "key": "jigglypuff",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "40": {
+    "key": "wigglytuff",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "41": {
+    "key": "zubat",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "42": {
+    "key": "golbat",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "43": {
+    "key": "oddish",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "44": {
+    "key": "gloom",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "45": {
+    "key": "vileplume",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "46": {
+    "key": "paras",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "47": {
+    "key": "parasect",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "48": {
+    "key": "venonat",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "49": {
+    "key": "venomoth",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "50": {
+    "key": "diglett",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "51": {
+    "key": "dugtrio",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "52": {
+    "key": "meowth",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "53": {
+    "key": "persian",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "54": {
+    "key": "psyduck",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "55": {
+    "key": "golduck",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "56": {
+    "key": "mankey",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "57": {
+    "key": "primeape",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "58": {
+    "key": "growlithe",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "59": {
+    "key": "arcanine",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "60": {
+    "key": "poliwag",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "61": {
+    "key": "poliwhirl",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "62": {
+    "key": "poliwrath",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "63": {
+    "key": "abra",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "64": {
+    "key": "kadabra",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "65": {
+    "key": "alakazam",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "66": {
+    "key": "machop",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "67": {
+    "key": "machoke",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "68": {
+    "key": "machamp",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "69": {
+    "key": "bellsprout",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "70": {
+    "key": "weepinbell",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "71": {
+    "key": "victreebel",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "72": {
+    "key": "tentacool",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "73": {
+    "key": "tentacruel",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "74": {
+    "key": "geodude",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "75": {
+    "key": "graveler",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "76": {
+    "key": "golem",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "77": {
+    "key": "ponyta",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "78": {
+    "key": "rapidash",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "79": {
+    "key": "slowpoke",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "80": {
+    "key": "slowbro",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "81": {
+    "key": "magnemite",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "82": {
+    "key": "magneton",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "83": {
+    "key": "farfetchd",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "84": {
+    "key": "doduo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "85": {
+    "key": "dodrio",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "86": {
+    "key": "seel",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "87": {
+    "key": "dewgong",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "88": {
+    "key": "grimer",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "89": {
+    "key": "muk",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "90": {
+    "key": "shellder",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "91": {
+    "key": "cloyster",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "92": {
+    "key": "gastly",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "93": {
+    "key": "haunter",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "94": {
+    "key": "gengar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "95": {
+    "key": "onix",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "96": {
+    "key": "drowzee",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "97": {
+    "key": "hypno",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "98": {
+    "key": "krabby",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "99": {
+    "key": "kingler",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "100": {
+    "key": "voltorb",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "101": {
+    "key": "electrode",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "102": {
+    "key": "exeggcute",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "103": {
+    "key": "exeggutor",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "104": {
+    "key": "cubone",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "105": {
+    "key": "marowak",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "106": {
+    "key": "hitmonlee",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "107": {
+    "key": "hitmonchan",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "108": {
+    "key": "lickitung",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "109": {
+    "key": "koffing",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "110": {
+    "key": "weezing",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "111": {
+    "key": "rhyhorn",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "112": {
+    "key": "rhydon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "113": {
+    "key": "chansey",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "114": {
+    "key": "tangela",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "115": {
+    "key": "kangaskhan",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "116": {
+    "key": "horsea",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "117": {
+    "key": "seadra",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "118": {
+    "key": "goldeen",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "119": {
+    "key": "seaking",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "120": {
+    "key": "staryu",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "121": {
+    "key": "starmie",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "122": {
+    "key": "mrmime",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "123": {
+    "key": "scyther",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "124": {
+    "key": "jynx",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "125": {
+    "key": "electabuzz",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "126": {
+    "key": "magmar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "127": {
+    "key": "pinsir",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "128": {
+    "key": "tauros",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "129": {
+    "key": "magikarp",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "130": {
+    "key": "gyarados",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "131": {
+    "key": "lapras",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "132": {
+    "key": "ditto",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "133": {
+    "key": "eevee",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "134": {
+    "key": "vaporeon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "135": {
+    "key": "jolteon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "136": {
+    "key": "flareon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "137": {
+    "key": "porygon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "138": {
+    "key": "omanyte",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "139": {
+    "key": "omastar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "140": {
+    "key": "kabuto",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "141": {
+    "key": "kabutops",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "142": {
+    "key": "aerodactyl",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "143": {
+    "key": "snorlax",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "144": {
+    "key": "articuno",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "145": {
+    "key": "zapdos",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "146": {
+    "key": "moltres",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "147": {
+    "key": "dratini",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "148": {
+    "key": "dragonair",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "149": {
+    "key": "dragonite",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "150": {
+    "key": "mewtwo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "151": {
+    "key": "mew",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "152": {
+    "key": "chikorita",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "153": {
+    "key": "bayleef",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "154": {
+    "key": "meganium",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "155": {
+    "key": "cyndaquil",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "156": {
+    "key": "quilava",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "157": {
+    "key": "typhlosion",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "158": {
+    "key": "totodile",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "159": {
+    "key": "croconaw",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "160": {
+    "key": "feraligatr",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "161": {
+    "key": "sentret",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "162": {
+    "key": "furret",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "163": {
+    "key": "hoothoot",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "164": {
+    "key": "noctowl",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "165": {
+    "key": "ledyba",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "166": {
+    "key": "ledian",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "167": {
+    "key": "spinarak",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "168": {
+    "key": "ariados",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "169": {
+    "key": "crobat",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "170": {
+    "key": "chinchou",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "171": {
+    "key": "lanturn",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "172": {
+    "key": "pichu",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "173": {
+    "key": "cleffa",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "174": {
+    "key": "igglybuff",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "175": {
+    "key": "togepi",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "176": {
+    "key": "togetic",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "177": {
+    "key": "natu",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "178": {
+    "key": "xatu",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "179": {
+    "key": "mareep",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "180": {
+    "key": "flaaffy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "181": {
+    "key": "ampharos",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "182": {
+    "key": "bellossom",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "183": {
+    "key": "marill",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "184": {
+    "key": "azumarill",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "185": {
+    "key": "sudowoodo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "186": {
+    "key": "politoed",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "187": {
+    "key": "hoppip",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "188": {
+    "key": "skiploom",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "189": {
+    "key": "jumpluff",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "190": {
+    "key": "aipom",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "191": {
+    "key": "sunkern",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "192": {
+    "key": "sunflora",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "193": {
+    "key": "yanma",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "194": {
+    "key": "wooper",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "195": {
+    "key": "quagsire",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "196": {
+    "key": "espeon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "197": {
+    "key": "umbreon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "198": {
+    "key": "murkrow",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "199": {
+    "key": "slowking",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "200": {
+    "key": "misdreavus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "201": {
+    "key": "unown",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "202": {
+    "key": "wobbuffet",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "203": {
+    "key": "girafarig",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "204": {
+    "key": "pineco",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "205": {
+    "key": "forretress",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "206": {
+    "key": "dunsparce",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "207": {
+    "key": "gligar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "208": {
+    "key": "steelix",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "209": {
+    "key": "snubbull",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "210": {
+    "key": "granbull",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "211": {
+    "key": "qwilfish",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "212": {
+    "key": "scizor",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "213": {
+    "key": "shuckle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "214": {
+    "key": "heracross",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "215": {
+    "key": "sneasel",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "216": {
+    "key": "teddiursa",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "217": {
+    "key": "ursaring",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "218": {
+    "key": "slugma",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "219": {
+    "key": "magcargo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "220": {
+    "key": "swinub",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "221": {
+    "key": "piloswine",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "222": {
+    "key": "corsola",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "223": {
+    "key": "remoraid",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "224": {
+    "key": "octillery",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "225": {
+    "key": "delibird",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "226": {
+    "key": "mantine",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "227": {
+    "key": "skarmory",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "228": {
+    "key": "houndour",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "229": {
+    "key": "houndoom",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "230": {
+    "key": "kingdra",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "231": {
+    "key": "phanpy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "232": {
+    "key": "donphan",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "233": {
+    "key": "porygon2",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "234": {
+    "key": "stantler",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "235": {
+    "key": "smeargle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "236": {
+    "key": "tyrogue",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "237": {
+    "key": "hitmontop",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "238": {
+    "key": "smoochum",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "239": {
+    "key": "elekid",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "240": {
+    "key": "magby",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "241": {
+    "key": "miltank",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "242": {
+    "key": "blissey",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "243": {
+    "key": "raikou",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "244": {
+    "key": "entei",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "245": {
+    "key": "suicune",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "246": {
+    "key": "larvitar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "247": {
+    "key": "pupitar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "248": {
+    "key": "tyranitar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "249": {
+    "key": "lugia",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "250": {
+    "key": "hooh",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "251": {
+    "key": "celebi",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "252": {
+    "key": "treecko",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "253": {
+    "key": "grovyle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "254": {
+    "key": "sceptile",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "255": {
+    "key": "torchic",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "256": {
+    "key": "combusken",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "257": {
+    "key": "blaziken",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "258": {
+    "key": "mudkip",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "259": {
+    "key": "marshtomp",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "260": {
+    "key": "swampert",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "261": {
+    "key": "poochyena",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "262": {
+    "key": "mightyena",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "263": {
+    "key": "zigzagoon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "264": {
+    "key": "linoone",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "265": {
+    "key": "wurmple",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "266": {
+    "key": "silcoon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "267": {
+    "key": "beautifly",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "268": {
+    "key": "cascoon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "269": {
+    "key": "dustox",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "270": {
+    "key": "lotad",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "271": {
+    "key": "lombre",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "272": {
+    "key": "ludicolo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "273": {
+    "key": "seedot",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "274": {
+    "key": "nuzleaf",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "275": {
+    "key": "shiftry",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "276": {
+    "key": "taillow",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "277": {
+    "key": "swellow",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "278": {
+    "key": "wingull",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "279": {
+    "key": "pelipper",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "280": {
+    "key": "ralts",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "281": {
+    "key": "kirlia",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "282": {
+    "key": "gardevoir",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "283": {
+    "key": "surskit",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "284": {
+    "key": "masquerain",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "285": {
+    "key": "shroomish",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "286": {
+    "key": "breloom",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "287": {
+    "key": "slakoth",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "288": {
+    "key": "vigoroth",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "289": {
+    "key": "slaking",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "290": {
+    "key": "nincada",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "291": {
+    "key": "ninjask",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "292": {
+    "key": "shedinja",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "293": {
+    "key": "whismur",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "294": {
+    "key": "loudred",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "295": {
+    "key": "exploud",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "296": {
+    "key": "makuhita",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "297": {
+    "key": "hariyama",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "298": {
+    "key": "azurill",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "299": {
+    "key": "nosepass",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "300": {
+    "key": "skitty",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "301": {
+    "key": "delcatty",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "302": {
+    "key": "sableye",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "303": {
+    "key": "mawile",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "304": {
+    "key": "aron",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "305": {
+    "key": "lairon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "306": {
+    "key": "aggron",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "307": {
+    "key": "meditite",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "308": {
+    "key": "medicham",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "309": {
+    "key": "electrike",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "310": {
+    "key": "manectric",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "311": {
+    "key": "plusle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "312": {
+    "key": "minun",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "313": {
+    "key": "volbeat",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "314": {
+    "key": "illumise",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "315": {
+    "key": "roselia",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "316": {
+    "key": "gulpin",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "317": {
+    "key": "swalot",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "318": {
+    "key": "carvanha",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "319": {
+    "key": "sharpedo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "320": {
+    "key": "wailmer",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "321": {
+    "key": "wailord",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "322": {
+    "key": "numel",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "323": {
+    "key": "camerupt",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "324": {
+    "key": "torkoal",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "325": {
+    "key": "spoink",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "326": {
+    "key": "grumpig",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "327": {
+    "key": "spinda",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "328": {
+    "key": "trapinch",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "329": {
+    "key": "vibrava",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "330": {
+    "key": "flygon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "331": {
+    "key": "cacnea",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "332": {
+    "key": "cacturne",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "333": {
+    "key": "swablu",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "334": {
+    "key": "altaria",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "335": {
+    "key": "zangoose",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "336": {
+    "key": "seviper",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "337": {
+    "key": "lunatone",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "338": {
+    "key": "solrock",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "339": {
+    "key": "barboach",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "340": {
+    "key": "whiscash",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "341": {
+    "key": "corphish",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "342": {
+    "key": "crawdaunt",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "343": {
+    "key": "baltoy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "344": {
+    "key": "claydol",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "345": {
+    "key": "lileep",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "346": {
+    "key": "cradily",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "347": {
+    "key": "anorith",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "348": {
+    "key": "armaldo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "349": {
+    "key": "feebas",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "350": {
+    "key": "milotic",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "351": {
+    "key": "castform",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "352": {
+    "key": "kecleon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "353": {
+    "key": "shuppet",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "354": {
+    "key": "banette",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "355": {
+    "key": "duskull",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "356": {
+    "key": "dusclops",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "357": {
+    "key": "tropius",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "358": {
+    "key": "chimecho",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "359": {
+    "key": "absol",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "360": {
+    "key": "wynaut",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "361": {
+    "key": "snorunt",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "362": {
+    "key": "glalie",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "363": {
+    "key": "spheal",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "364": {
+    "key": "sealeo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "365": {
+    "key": "walrein",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "366": {
+    "key": "clamperl",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "367": {
+    "key": "huntail",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "368": {
+    "key": "gorebyss",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "369": {
+    "key": "relicanth",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "370": {
+    "key": "luvdisc",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "371": {
+    "key": "bagon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "372": {
+    "key": "shelgon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "373": {
+    "key": "salamence",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "374": {
+    "key": "beldum",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "375": {
+    "key": "metang",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "376": {
+    "key": "metagross",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "377": {
+    "key": "regirock",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "378": {
+    "key": "regice",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "379": {
+    "key": "registeel",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "380": {
+    "key": "latias",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "381": {
+    "key": "latios",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "382": {
+    "key": "kyogre",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "383": {
+    "key": "groudon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "384": {
+    "key": "rayquaza",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "385": {
+    "key": "jirachi",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "386": {
+    "key": "deoxys",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "387": {
+    "key": "turtwig",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "388": {
+    "key": "grotle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "389": {
+    "key": "torterra",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "390": {
+    "key": "chimchar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "391": {
+    "key": "monferno",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "392": {
+    "key": "infernape",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "393": {
+    "key": "piplup",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "394": {
+    "key": "prinplup",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "395": {
+    "key": "empoleon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "396": {
+    "key": "starly",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "397": {
+    "key": "staravia",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "398": {
+    "key": "staraptor",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "399": {
+    "key": "bidoof",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "400": {
+    "key": "bibarel",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "401": {
+    "key": "kricketot",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "402": {
+    "key": "kricketune",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "403": {
+    "key": "shinx",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "404": {
+    "key": "luxio",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "405": {
+    "key": "luxray",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "406": {
+    "key": "budew",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "407": {
+    "key": "roserade",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "408": {
+    "key": "cranidos",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "409": {
+    "key": "rampardos",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "410": {
+    "key": "shieldon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "411": {
+    "key": "bastiodon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "412": {
+    "key": "burmy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "413": {
+    "key": "wormadam",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "414": {
+    "key": "mothim",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "415": {
+    "key": "combee",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "416": {
+    "key": "vespiquen",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "417": {
+    "key": "pachirisu",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "418": {
+    "key": "buizel",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "419": {
+    "key": "floatzel",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "420": {
+    "key": "cherubi",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "421": {
+    "key": "cherrim",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "422": {
+    "key": "shellos",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "423": {
+    "key": "gastrodon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "424": {
+    "key": "ambipom",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "425": {
+    "key": "drifloon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "426": {
+    "key": "drifblim",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "427": {
+    "key": "buneary",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "428": {
+    "key": "lopunny",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "429": {
+    "key": "mismagius",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "430": {
+    "key": "honchkrow",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "431": {
+    "key": "glameow",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "432": {
+    "key": "purugly",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "433": {
+    "key": "chingling",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "434": {
+    "key": "stunky",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "435": {
+    "key": "skuntank",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "436": {
+    "key": "bronzor",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "437": {
+    "key": "bronzong",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "438": {
+    "key": "bonsly",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "439": {
+    "key": "mimejr",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "440": {
+    "key": "happiny",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "441": {
+    "key": "chatot",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "442": {
+    "key": "spiritomb",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "443": {
+    "key": "gible",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "444": {
+    "key": "gabite",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "445": {
+    "key": "garchomp",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "446": {
+    "key": "munchlax",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "447": {
+    "key": "riolu",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "448": {
+    "key": "lucario",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "449": {
+    "key": "hippopotas",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "450": {
+    "key": "hippowdon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "451": {
+    "key": "skorupi",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "452": {
+    "key": "drapion",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "453": {
+    "key": "croagunk",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "454": {
+    "key": "toxicroak",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "455": {
+    "key": "carnivine",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "456": {
+    "key": "finneon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "457": {
+    "key": "lumineon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "458": {
+    "key": "mantyke",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "459": {
+    "key": "snover",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "460": {
+    "key": "abomasnow",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "461": {
+    "key": "weavile",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "462": {
+    "key": "magnezone",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "463": {
+    "key": "lickilicky",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "464": {
+    "key": "rhyperior",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "465": {
+    "key": "tangrowth",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "466": {
+    "key": "electivire",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "467": {
+    "key": "magmortar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "468": {
+    "key": "togekiss",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "469": {
+    "key": "yanmega",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "470": {
+    "key": "leafeon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "471": {
+    "key": "glaceon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "472": {
+    "key": "gliscor",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "473": {
+    "key": "mamoswine",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "474": {
+    "key": "porygonz",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "475": {
+    "key": "gallade",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "476": {
+    "key": "probopass",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "477": {
+    "key": "dusknoir",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "478": {
+    "key": "froslass",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "479": {
+    "key": "rotom",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "480": {
+    "key": "uxie",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "481": {
+    "key": "mesprit",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "482": {
+    "key": "azelf",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "483": {
+    "key": "dialga",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "484": {
+    "key": "palkia",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "485": {
+    "key": "heatran",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "486": {
+    "key": "regigigas",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "487": {
+    "key": "giratina",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "488": {
+    "key": "cresselia",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "489": {
+    "key": "phione",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "490": {
+    "key": "manaphy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "491": {
+    "key": "darkrai",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "492": {
+    "key": "shaymin",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "493": {
+    "key": "arceus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "494": {
+    "key": "victini",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "495": {
+    "key": "snivy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "496": {
+    "key": "servine",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "497": {
+    "key": "serperior",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "498": {
+    "key": "tepig",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "499": {
+    "key": "pignite",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "500": {
+    "key": "emboar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "501": {
+    "key": "oshawott",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "502": {
+    "key": "dewott",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "503": {
+    "key": "samurott",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "504": {
+    "key": "patrat",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "505": {
+    "key": "watchog",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "506": {
+    "key": "lillipup",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "507": {
+    "key": "herdier",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "508": {
+    "key": "stoutland",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "509": {
+    "key": "purrloin",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "510": {
+    "key": "liepard",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "511": {
+    "key": "pansage",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "512": {
+    "key": "simisage",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "513": {
+    "key": "pansear",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "514": {
+    "key": "simisear",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "515": {
+    "key": "panpour",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "516": {
+    "key": "simipour",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "517": {
+    "key": "munna",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "518": {
+    "key": "musharna",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "519": {
+    "key": "pidove",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "520": {
+    "key": "tranquill",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "521": {
+    "key": "unfezant",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "522": {
+    "key": "blitzle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "523": {
+    "key": "zebstrika",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "524": {
+    "key": "roggenrola",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "525": {
+    "key": "boldore",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "526": {
+    "key": "gigalith",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "527": {
+    "key": "woobat",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "528": {
+    "key": "swoobat",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "529": {
+    "key": "drilbur",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "530": {
+    "key": "excadrill",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "531": {
+    "key": "audino",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "532": {
+    "key": "timburr",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "533": {
+    "key": "gurdurr",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "534": {
+    "key": "conkeldurr",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "535": {
+    "key": "tympole",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "536": {
+    "key": "palpitoad",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "537": {
+    "key": "seismitoad",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "538": {
+    "key": "throh",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "539": {
+    "key": "sawk",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "540": {
+    "key": "sewaddle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "541": {
+    "key": "swadloon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "542": {
+    "key": "leavanny",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "543": {
+    "key": "venipede",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "544": {
+    "key": "whirlipede",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "545": {
+    "key": "scolipede",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "546": {
+    "key": "cottonee",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "547": {
+    "key": "whimsicott",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "548": {
+    "key": "petilil",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "549": {
+    "key": "lilligant",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "550": {
+    "key": "basculin",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "551": {
+    "key": "sandile",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "552": {
+    "key": "krokorok",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "553": {
+    "key": "krookodile",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "554": {
+    "key": "darumaka",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "555": {
+    "key": "darmanitan",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "556": {
+    "key": "maractus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "557": {
+    "key": "dwebble",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "558": {
+    "key": "crustle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "559": {
+    "key": "scraggy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "560": {
+    "key": "scrafty",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "561": {
+    "key": "sigilyph",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "562": {
+    "key": "yamask",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "563": {
+    "key": "cofagrigus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "564": {
+    "key": "tirtouga",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "565": {
+    "key": "carracosta",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "566": {
+    "key": "archen",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "567": {
+    "key": "archeops",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "568": {
+    "key": "trubbish",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "569": {
+    "key": "garbodor",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "570": {
+    "key": "zorua",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "571": {
+    "key": "zoroark",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "572": {
+    "key": "minccino",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "573": {
+    "key": "cinccino",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "574": {
+    "key": "gothita",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "575": {
+    "key": "gothorita",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "576": {
+    "key": "gothitelle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "577": {
+    "key": "solosis",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "578": {
+    "key": "duosion",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "579": {
+    "key": "reuniclus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "580": {
+    "key": "ducklett",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "581": {
+    "key": "swanna",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "582": {
+    "key": "vanillite",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "583": {
+    "key": "vanillish",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "584": {
+    "key": "vanilluxe",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "585": {
+    "key": "deerling",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "586": {
+    "key": "sawsbuck",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "587": {
+    "key": "emolga",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "588": {
+    "key": "karrablast",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "589": {
+    "key": "escavalier",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "590": {
+    "key": "foongus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "591": {
+    "key": "amoonguss",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "592": {
+    "key": "frillish",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "593": {
+    "key": "jellicent",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "594": {
+    "key": "alomomola",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "595": {
+    "key": "joltik",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "596": {
+    "key": "galvantula",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "597": {
+    "key": "ferroseed",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "598": {
+    "key": "ferrothorn",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "599": {
+    "key": "klink",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "600": {
+    "key": "klang",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "601": {
+    "key": "klinklang",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "602": {
+    "key": "tynamo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "603": {
+    "key": "eelektrik",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "604": {
+    "key": "eelektross",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "605": {
+    "key": "elgyem",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "606": {
+    "key": "beheeyem",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "607": {
+    "key": "litwick",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "608": {
+    "key": "lampent",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "609": {
+    "key": "chandelure",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "610": {
+    "key": "axew",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "611": {
+    "key": "fraxure",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "612": {
+    "key": "haxorus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "613": {
+    "key": "cubchoo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "614": {
+    "key": "beartic",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "615": {
+    "key": "cryogonal",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "616": {
+    "key": "shelmet",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "617": {
+    "key": "accelgor",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "618": {
+    "key": "stunfisk",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "619": {
+    "key": "mienfoo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "620": {
+    "key": "mienshao",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "621": {
+    "key": "druddigon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "622": {
+    "key": "golett",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "623": {
+    "key": "golurk",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "624": {
+    "key": "pawniard",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "625": {
+    "key": "bisharp",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "626": {
+    "key": "bouffalant",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "627": {
+    "key": "rufflet",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "628": {
+    "key": "braviary",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "629": {
+    "key": "vullaby",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "630": {
+    "key": "mandibuzz",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "631": {
+    "key": "heatmor",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "632": {
+    "key": "durant",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "633": {
+    "key": "deino",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "634": {
+    "key": "zweilous",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "635": {
+    "key": "hydreigon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "636": {
+    "key": "larvesta",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "637": {
+    "key": "volcarona",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "638": {
+    "key": "cobalion",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "639": {
+    "key": "terrakion",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "640": {
+    "key": "virizion",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "641": {
+    "key": "tornadus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "642": {
+    "key": "thundurus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "643": {
+    "key": "reshiram",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "644": {
+    "key": "zekrom",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "645": {
+    "key": "landorus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "646": {
+    "key": "kyurem",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "647": {
+    "key": "keldeo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "648": {
+    "key": "meloetta",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "649": {
+    "key": "genesect",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "650": {
+    "key": "chespin",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "651": {
+    "key": "quilladin",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "652": {
+    "key": "chesnaught",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "653": {
+    "key": "fennekin",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "654": {
+    "key": "braixen",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "655": {
+    "key": "delphox",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "656": {
+    "key": "froakie",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "657": {
+    "key": "frogadier",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "658": {
+    "key": "greninja",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "659": {
+    "key": "bunnelby",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "660": {
+    "key": "diggersby",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "661": {
+    "key": "fletchling",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "662": {
+    "key": "fletchinder",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "663": {
+    "key": "talonflame",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "664": {
+    "key": "scatterbug",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "665": {
+    "key": "spewpa",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "666": {
+    "key": "vivillon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "667": {
+    "key": "litleo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "668": {
+    "key": "pyroar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "669": {
+    "key": "flabebe",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "670": {
+    "key": "floette",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "671": {
+    "key": "florges",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "672": {
+    "key": "skiddo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "673": {
+    "key": "gogoat",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "674": {
+    "key": "pancham",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "675": {
+    "key": "pangoro",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "676": {
+    "key": "furfrou",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "677": {
+    "key": "espurr",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "678": {
+    "key": "meowstic",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "679": {
+    "key": "honedge",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "680": {
+    "key": "doublade",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "681": {
+    "key": "aegislash",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "682": {
+    "key": "spritzee",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "683": {
+    "key": "aromatisse",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "684": {
+    "key": "swirlix",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "685": {
+    "key": "slurpuff",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "686": {
+    "key": "inkay",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "687": {
+    "key": "malamar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "688": {
+    "key": "binacle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "689": {
+    "key": "barbaracle",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "690": {
+    "key": "skrelp",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "691": {
+    "key": "dragalge",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "692": {
+    "key": "clauncher",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "693": {
+    "key": "clawitzer",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "694": {
+    "key": "helioptile",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "695": {
+    "key": "heliolisk",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "696": {
+    "key": "tyrunt",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "697": {
+    "key": "tyrantrum",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "698": {
+    "key": "amaura",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "699": {
+    "key": "aurorus",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "700": {
+    "key": "sylveon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "701": {
+    "key": "hawlucha",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "702": {
+    "key": "dedenne",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "703": {
+    "key": "carbink",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "704": {
+    "key": "goomy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "705": {
+    "key": "sliggoo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "706": {
+    "key": "goodra",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "707": {
+    "key": "klefki",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "708": {
+    "key": "phantump",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "709": {
+    "key": "trevenant",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "710": {
+    "key": "pumpkaboo",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "711": {
+    "key": "gourgeist",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "712": {
+    "key": "bergmite",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "713": {
+    "key": "avalugg",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "714": {
+    "key": "noibat",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "715": {
+    "key": "noivern",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "716": {
+    "key": "xerneas",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "717": {
+    "key": "yveltal",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "718": {
+    "key": "zygarde",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "719": {
+    "key": "diancie",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "720": {
+    "key": "hoopa",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "721": {
+    "key": "volcanion",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "722": {
+    "key": "rowlet",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "723": {
+    "key": "dartrix",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "724": {
+    "key": "decidueye",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "725": {
+    "key": "litten",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "726": {
+    "key": "torracat",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "727": {
+    "key": "incineroar",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "728": {
+    "key": "popplio",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "729": {
+    "key": "brionne",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "730": {
+    "key": "primarina",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "731": {
+    "key": "pikipek",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "732": {
+    "key": "trumbeak",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "733": {
+    "key": "toucannon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "734": {
+    "key": "yungoos",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "735": {
+    "key": "gumshoos",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "736": {
+    "key": "grubbin",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "737": {
+    "key": "charjabug",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "738": {
+    "key": "vikavolt",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "739": {
+    "key": "crabrawler",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "740": {
+    "key": "crabominable",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "741": {
+    "key": "oricorio",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "742": {
+    "key": "cutiefly",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "743": {
+    "key": "ribombee",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "744": {
+    "key": "rockruff",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "745": {
+    "key": "lycanroc",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "746": {
+    "key": "wishiwashi",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "747": {
+    "key": "mareanie",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "748": {
+    "key": "toxapex",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "749": {
+    "key": "mudbray",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "750": {
+    "key": "mudsdale",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "751": {
+    "key": "dewpider",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "752": {
+    "key": "araquanid",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "753": {
+    "key": "fomantis",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "754": {
+    "key": "lurantis",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "755": {
+    "key": "morelull",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "756": {
+    "key": "shiinotic",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "757": {
+    "key": "salandit",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "758": {
+    "key": "salazzle",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "759": {
+    "key": "stufful",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "760": {
+    "key": "bewear",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "761": {
+    "key": "bounsweet",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "762": {
+    "key": "steenee",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "763": {
+    "key": "tsareena",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "764": {
+    "key": "comfey",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "765": {
+    "key": "oranguru",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "766": {
+    "key": "passimian",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "767": {
+    "key": "wimpod",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "768": {
+    "key": "golisopod",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "769": {
+    "key": "sandygast",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "770": {
+    "key": "palossand",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "771": {
+    "key": "pyukumuku",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "772": {
+    "key": "typenull",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "773": {
+    "key": "silvally",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "774": {
+    "key": "minior",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "775": {
+    "key": "komala",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "776": {
+    "key": "turtonator",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "777": {
+    "key": "togedemaru",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "778": {
+    "key": "mimikyu",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "779": {
+    "key": "bruxish",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "780": {
+    "key": "drampa",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "781": {
+    "key": "dhelmise",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "782": {
+    "key": "jangmoo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "783": {
+    "key": "hakamoo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "784": {
+    "key": "kommoo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "785": {
+    "key": "tapukoko",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "786": {
+    "key": "tapulele",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "787": {
+    "key": "tapubulu",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "788": {
+    "key": "tapufini",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "789": {
+    "key": "cosmog",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "790": {
+    "key": "cosmoem",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "791": {
+    "key": "solgaleo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "792": {
+    "key": "lunala",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "793": {
+    "key": "nihilego",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "794": {
+    "key": "buzzwole",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "795": {
+    "key": "pheromosa",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "796": {
+    "key": "xurkitree",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "797": {
+    "key": "celesteela",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "798": {
+    "key": "kartana",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "799": {
+    "key": "guzzlord",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "800": {
+    "key": "necrozma",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "801": {
+    "key": "magearna",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "802": {
+    "key": "marshadow",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "803": {
+    "key": "poipole",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "804": {
+    "key": "naganadel",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "805": {
+    "key": "stakataka",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "806": {
+    "key": "blacephalon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "807": {
+    "key": "zeraora",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "808": {
+    "key": "meltan",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "809": {
+    "key": "melmetal",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "810": {
+    "key": "grookey",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "811": {
+    "key": "thwackey",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "812": {
+    "key": "rillaboom",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "813": {
+    "key": "scorbunny",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "814": {
+    "key": "raboot",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "815": {
+    "key": "cinderace",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "816": {
+    "key": "sobble",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "817": {
+    "key": "drizzile",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "818": {
+    "key": "inteleon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "819": {
+    "key": "skwovet",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "820": {
+    "key": "greedent",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "821": {
+    "key": "rookidee",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "822": {
+    "key": "corvisquire",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "823": {
+    "key": "corviknight",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "824": {
+    "key": "blipbug",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "825": {
+    "key": "dottler",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "826": {
+    "key": "orbeetle",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "827": {
+    "key": "nickit",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "828": {
+    "key": "thievul",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "829": {
+    "key": "gossifleur",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "830": {
+    "key": "eldegoss",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "831": {
+    "key": "wooloo",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "832": {
+    "key": "dubwool",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "833": {
+    "key": "chewtle",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "834": {
+    "key": "drednaw",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "835": {
+    "key": "yamper",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "836": {
+    "key": "boltund",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "837": {
+    "key": "rolycoly",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "838": {
+    "key": "carkol",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "839": {
+    "key": "coalossal",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "840": {
+    "key": "applin",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "841": {
+    "key": "flapple",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "842": {
+    "key": "appletun",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "843": {
+    "key": "silicobra",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "844": {
+    "key": "sandaconda",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "845": {
+    "key": "cramorant",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "846": {
+    "key": "arrokuda",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "847": {
+    "key": "barraskewda",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "848": {
+    "key": "toxel",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "849": {
+    "key": "toxtricity",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "850": {
+    "key": "sizzlipede",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "851": {
+    "key": "centiskorch",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "852": {
+    "key": "clobbopus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "853": {
+    "key": "grapploct",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "854": {
+    "key": "sinistea",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "855": {
+    "key": "polteageist",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "856": {
+    "key": "hatenna",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "857": {
+    "key": "hattrem",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "858": {
+    "key": "hatterene",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "859": {
+    "key": "impidimp",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "860": {
+    "key": "morgrem",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "861": {
+    "key": "grimmsnarl",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "862": {
+    "key": "obstagoon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "863": {
+    "key": "perrserker",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "864": {
+    "key": "cursola",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "865": {
+    "key": "sirfetchd",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "866": {
+    "key": "mrrime",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "867": {
+    "key": "runerigus",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "868": {
+    "key": "milcery",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "869": {
+    "key": "alcremie",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "870": {
+    "key": "falinks",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "871": {
+    "key": "pincurchin",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "872": {
+    "key": "snom",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "873": {
+    "key": "frosmoth",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "874": {
+    "key": "stonjourner",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "875": {
+    "key": "eiscue",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "876": {
+    "key": "indeedee",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "877": {
+    "key": "morpeko",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "878": {
+    "key": "cufant",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "879": {
+    "key": "copperajah",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "880": {
+    "key": "dracozolt",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "881": {
+    "key": "arctozolt",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "882": {
+    "key": "dracovish",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "883": {
+    "key": "arctovish",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "884": {
+    "key": "duraludon",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "885": {
+    "key": "dreepy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "886": {
+    "key": "drakloak",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "887": {
+    "key": "dragapult",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "888": {
+    "key": "zacian",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "889": {
+    "key": "zamazenta",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "890": {
+    "key": "eternatus",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "891": {
+    "key": "kubfu",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "892": {
+    "key": "urshifu",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "893": {
+    "key": "zarude",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "894": {
+    "key": "regieleki",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "895": {
+    "key": "regidrago",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "896": {
+    "key": "glastrier",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "897": {
+    "key": "spectrier",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "898": {
+    "key": "calyrex",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "899": {
+    "key": "wyrdeer",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "900": {
+    "key": "kleavor",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "901": {
+    "key": "ursaluna",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "902": {
+    "key": "basculegion",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "903": {
+    "key": "sneasler",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "904": {
+    "key": "overqwil",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "905": {
+    "key": "enamorus",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "906": {
+    "key": "sprigatito",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "907": {
+    "key": "floragato",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "908": {
+    "key": "meowscarada",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "909": {
+    "key": "fuecoco",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "910": {
+    "key": "crocalor",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "911": {
+    "key": "skeledirge",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "912": {
+    "key": "quaxly",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "913": {
+    "key": "quaxwell",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "914": {
+    "key": "quaquaval",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "915": {
+    "key": "lechonk",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "916": {
+    "key": "oinkologne",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "917": {
+    "key": "tarountula",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "918": {
+    "key": "spidops",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "919": {
+    "key": "nymble",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "920": {
+    "key": "lokix",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "921": {
+    "key": "pawmi",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "922": {
+    "key": "pawmo",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "923": {
+    "key": "pawmot",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "924": {
+    "key": "tandemaus",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "925": {
+    "key": "maushold",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "926": {
+    "key": "fidough",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "927": {
+    "key": "dachsbun",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "928": {
+    "key": "smoliv",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "929": {
+    "key": "dolliv",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "930": {
+    "key": "arboliva",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "931": {
+    "key": "squawkabilly",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "932": {
+    "key": "nacli",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "933": {
+    "key": "naclstack",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "934": {
+    "key": "garganacl",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "935": {
+    "key": "charcadet",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "936": {
+    "key": "armarouge",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "937": {
+    "key": "ceruledge",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "938": {
+    "key": "tadbulb",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "939": {
+    "key": "bellibolt",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "940": {
+    "key": "wattrel",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "941": {
+    "key": "kilowattrel",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "942": {
+    "key": "maschiff",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "943": {
+    "key": "mabosstiff",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "944": {
+    "key": "shroodle",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "945": {
+    "key": "grafaiai",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "946": {
+    "key": "bramblin",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "947": {
+    "key": "brambleghast",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "948": {
+    "key": "toedscool",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "949": {
+    "key": "toedscruel",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "950": {
+    "key": "klawf",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "951": {
+    "key": "capsakid",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "952": {
+    "key": "scovillain",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "953": {
+    "key": "rellor",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "954": {
+    "key": "rabsca",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "955": {
+    "key": "flittle",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "956": {
+    "key": "espathra",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "957": {
+    "key": "tinkatink",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "958": {
+    "key": "tinkatuff",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "959": {
+    "key": "tinkaton",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "960": {
+    "key": "wiglett",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "961": {
+    "key": "wugtrio",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "962": {
+    "key": "bombirdier",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "963": {
+    "key": "finizen",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "964": {
+    "key": "palafin",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "965": {
+    "key": "varoom",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "966": {
+    "key": "revavroom",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "967": {
+    "key": "cyclizar",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "968": {
+    "key": "orthworm",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "969": {
+    "key": "glimmet",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "970": {
+    "key": "glimmora",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "971": {
+    "key": "greavard",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "972": {
+    "key": "houndstone",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "973": {
+    "key": "flamigo",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "974": {
+    "key": "cetoddle",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "975": {
+    "key": "cetitan",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "976": {
+    "key": "veluza",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "977": {
+    "key": "dondozo",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "978": {
+    "key": "tatsugiri",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "979": {
+    "key": "annihilape",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "980": {
+    "key": "clodsire",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "981": {
+    "key": "farigiraf",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "982": {
+    "key": "dudunsparce",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "983": {
+    "key": "kingambit",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "984": {
+    "key": "greattusk",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "985": {
+    "key": "screamtail",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "986": {
+    "key": "brutebonnet",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "987": {
+    "key": "fluttermane",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "988": {
+    "key": "slitherwing",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "989": {
+    "key": "sandyshocks",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "990": {
+    "key": "irontreads",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "991": {
+    "key": "ironbundle",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "992": {
+    "key": "ironhands",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "993": {
+    "key": "ironjugulis",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "994": {
+    "key": "ironmoth",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "995": {
+    "key": "ironthorns",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "996": {
+    "key": "frigibax",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "997": {
+    "key": "arctibax",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "998": {
+    "key": "baxcalibur",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "999": {
+    "key": "gimmighoul",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "1000": {
+    "key": "gholdengo",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "1001": {
+    "key": "wochien",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "1002": {
+    "key": "chienpao",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "1003": {
+    "key": "tinglu",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "1004": {
+    "key": "chiyu",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "1005": {
+    "key": "roaringmoon",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1006": {
+    "key": "ironvaliant",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "1007": {
+    "key": "koraidon",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1008": {
+    "key": "miraidon",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "1009": {
+    "key": "walkingwake",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1010": {
+    "key": "ironleaves",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1011": {
+    "key": "dipplin",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1012": {
+    "key": "poltchageist",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1013": {
+    "key": "sinistcha",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1014": {
+    "key": "okidogi",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1015": {
+    "key": "munkidori",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1016": {
+    "key": "fezandipiti",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1017": {
+    "key": "ogerpon",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1018": {
+    "key": "archaludon",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1019": {
+    "key": "hydrapple",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "1020": {
+    "key": "gougingfire",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "1021": {
+    "key": "ragingbolt",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1022": {
+    "key": "ironboulder",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1023": {
+    "key": "ironcrown",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "1024": {
+    "key": "terapagos",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "1025": {
+    "key": "pecharunt",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10013": {
+    "key": "castform-sunny",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10014": {
+    "key": "castform-rainy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10015": {
+    "key": "castform-snowy",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10017": {
+    "key": "darmanitan-zen",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10018": {
+    "key": "meloetta-pirouette",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10026": {
+    "key": "aegislash-blade",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10117": {
+    "key": "greninja-ash",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10120": {
+    "key": "zygarde-complete",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10127": {
+    "key": "wishiwashi-school",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10136": {
+    "key": "minior",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10143": {
+    "key": "mimikyu-busted",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10157": {
+    "key": "necrozma-ultra",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10178": {
+    "key": "darmanitan-galarzen",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10182": {
+    "key": "cramorant-gulping",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10183": {
+    "key": "cramorant-gorging",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10185": {
+    "key": "eiscue-noice",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10187": {
+    "key": "morpeko-hangry",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10188": {
+    "key": "zacian-crowned",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10189": {
+    "key": "zamazenta-crowned",
+    "animatedFront": true,
+    "animatedBack": true
+  },
+  "10256": {
+    "key": "palafin-hero",
+    "animatedFront": false,
+    "animatedBack": false
+  },
+  "10276": {
+    "key": "terapagos-terastal",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "10277": {
+    "key": "terapagos-stellar",
+    "animatedFront": true,
+    "animatedBack": false
+  },
+  "421-sunshine": {
+    "key": "cherrim-sunshine",
+    "animatedFront": true,
+    "animatedBack": true
+  }
+}

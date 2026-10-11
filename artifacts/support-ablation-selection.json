@@ -1,0 +1,28 @@
+{
+  "candidate": "wall",
+  "scores": [
+    {
+      "mode": "v9",
+      "wins": 1688
+    },
+    {
+      "mode": "wall",
+      "wins": 1689
+    },
+    {
+      "mode": "handoff",
+      "wins": 1687
+    },
+    {
+      "mode": "setup",
+      "wins": 1679
+    },
+    {
+      "mode": "damage",
+      "wins": 1676
+    }
+  ],
+  "developmentGain": 1,
+  "developmentHash": "68f741de39084161b987c0e8b0dcc011c184ca93ccb1a9e739ec1f6f639e8956",
+  "rule": "Single candidate; development pooled wins, stable tie order. Not proof of superiority."
+}

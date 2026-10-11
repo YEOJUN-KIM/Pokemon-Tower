@@ -8,7 +8,7 @@
 
 **612종 도감 · 3대3 싱글 배틀 · 100층 도전 · PC & 모바일**
 
-[게임 소개](#어떤-게임인가요) · [화면 둘러보기](#화면-둘러보기) · [실행하기](#직접-플레이하기) · [개발 문서](docs/README.md)
+[게임 소개](#어떤-게임인가요) · [화면 둘러보기](#화면-둘러보기)
 
 </div>
 
@@ -32,7 +32,7 @@
 
 ## 화면 둘러보기
 
-아래 이미지는 2026-10-12에 별도 시연 계정으로 촬영한 실제 게임 화면입니다.
+아래는 실제 게임 화면입니다.
 
 ### 나만의 출발 파티
 
@@ -57,44 +57,11 @@
 
 한 번 로그인하면 같은 브라우저에서 30일 동안 유지됩니다. 다른 기기에서도 같은 서버의 계정으로 로그인해 저장된 도전을 이어갈 수 있습니다.
 
-## 직접 플레이하기
-
-**Node.js 24 이상 · pnpm 11.19.0**
-
-```sh
-pnpm install --frozen-lockfile
-pnpm dev
-```
-
-[로컬 게임 열기](http://127.0.0.1:3000) → 회원가입 또는 로그인 → 게임 시작.
-
-현재 인터넷 테스트는 PC의 Docker 서버와 무료 Cloudflare Quick Tunnel을 사용합니다. 임시 주소는 바뀔 수 있으므로 이 문서에는 고정 플레이 링크를 두지 않습니다. [Docker·무료 테스트 배포 안내](docs/current/DEPLOYMENT.md)를 참고하세요.
-
-## 개발과 AI 실험
-
-Next.js · React · TypeScript로 화면과 게임 흐름을 구현하고, Pokémon Showdown으로 전투 규칙을 처리합니다. SQLite에 계정·도감·도전 상태를 저장합니다. 상대 AI는 관측한 무효·흡수 정보를 다음 행동 판단에 반영합니다.
-
-```sh
-pnpm typecheck
-pnpm test
-pnpm build
-```
-
-AI 비교 실험의 보고서와 재현 자료도 관리합니다. 자동 등반 결과는 사람의 승률과 구분하며, 전체 과거 브라우저 검사가 최신 UI와 일치한다고 가정하지 않습니다.
-
-| 문서 | 내용 |
-|---|---|
-| [현재 게임 상태](docs/STATUS.md) | 구현된 규칙·가격·검증 범위 |
-| [화면과 조작](docs/current/UI_FLOW.md) | PC 키보드와 모바일 터치 흐름 |
-| [설치·계정](docs/current/SETUP.md) / [배포](docs/current/DEPLOYMENT.md) | 실행·저장·Docker 운영 |
-| [AI 실험](docs/experiments/README.md) / [원자료](artifacts/README.md) | 비교 결과와 상세 분석 자료 |
-| [컴퓨터 이전](docs/current/COMPUTER_MOVE.md) / [작업 인계](docs/SESSION_HANDOFF.md) | 다른 컴퓨터에서 개발 이어가기 |
-
-**컴퓨터를 옮길 때:** Git에서 제외된 `artifacts/*-trace.jsonl`, 일부 대용량 audit와 `.data/backups/`는 직접 복사해야 합니다. 계정 백업은 공개 저장소에 올리지 않습니다.
-
 ## 출처
 
 비공식 팬 메이드 프로젝트입니다. 포켓몬 관련 권리는 해당 권리자에게 있습니다. 전투 엔진·스프라이트·데이터·음원의 출처는 [자산 및 라이선스 안내](docs/references/THIRD_PARTY.md)에 정리했습니다. Neo둥근모 폰트는 [OFL 라이선스](public/fonts/NEODGM-LICENSE.txt)를 포함합니다.
 
 온라인 대전과 Z기술은 현재 제공하지 않습니다.
+
+[개발 문서](docs/README.md)
 

@@ -39,13 +39,13 @@ Pokémon Tower는 포켓몬 3마리로 타워를 오르고, 상대를 영입하�
 
 서버 재시작 시연은 별도 테스트 저장으로 준비한다. 실제 사용자 진행을 초기화하거나 테스트용 조작을 정상 플레이 결과로 소개하지 않는다.
 
-## 개발 과정 화면
+## 현재 게임 화면
 
-다음 이미지는 보관된 개발 과정 캡처이며 최신 실행 화면을 새로 촬영한 것은 아니다. 최종 포트폴리오 제작 시 현재 빌드로 다시 캡처한다.
+2026-10-12에 별도 시연 저장으로 촬영했다. 최신 게임 소개는 [README](../../README.md)를 참고한다.
 
-![도감과 출발 파티](../../artifacts/screenshots/party-archive-desktop.png)
+![도감과 출발 파티](../images/pokedex.png)
 
-![밝은 풀밭 배틀 화면](../../artifacts/screenshots/grass-battle-desktop.png)
+![밝은 풀밭 배틀 화면](../images/battle.png)
 
 ## 더 읽을 자료
 

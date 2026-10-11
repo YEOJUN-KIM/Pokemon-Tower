@@ -8,7 +8,7 @@ import {abilityNames} from './pokedex-data';
 import {moves,pokemonName,species} from './catalog';
 import {moveInfo} from '../data/move-info';
 import {PokemonImage} from './pokemon-image';
-import {MoveDetails} from './recruit-move-picker';
+import {MoveDetails} from './move-details';
 import {selectGameCursor} from './game-keyboard';
 
 export function PartnerStats({name,partner}:{name:string;partner:MachinePartner}) {

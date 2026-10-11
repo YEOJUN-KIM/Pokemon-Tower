@@ -18,7 +18,7 @@ import {createPokemonNameIndex,preparePokemonNameQuery,matchesPokemonNameIndex} 
 import {useRouter} from 'next/navigation';
 import {PokedexDialog,PokemonActions} from './pokedex-dialog';
 import {DexFilterDialog} from './dex-filter-dialog';
-import {ivSummary} from './stat-details';
+import {ivSummary} from './iv-summary';
 
 function Types({types}:{types:string[]}) {
   return <span className="dex-type-pills">{types.map(type=><span key={type} className="dex-type-pill" style={{'--type-color':typeColors[type] ?? '#80909c'} as CSSProperties}>{type}</span>)}</span>;

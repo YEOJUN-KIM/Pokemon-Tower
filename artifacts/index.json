@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "files": 1297,
-  "bytes": 9577511762,
+  "files": 1378,
+  "bytes": 9586427599,
   "excludes": [
     "artifacts/index.json",
     "artifacts/index.md",
@@ -25,6 +25,26 @@
       "files": 48,
       "bytes": 6480162
     },
+    "artifacts/previews/pikachu-upscale": {
+      "files": 6,
+      "bytes": 264465
+    },
+    "artifacts/previews/shiny-entry/frames": {
+      "files": 22,
+      "bytes": 1972292
+    },
+    "artifacts/previews/shiny-entry/frames-final": {
+      "files": 22,
+      "bytes": 1971291
+    },
+    "artifacts/previews/shiny-entry/frames-sendout": {
+      "files": 22,
+      "bytes": 2481306
+    },
+    "artifacts/previews/shiny-entry": {
+      "files": 2,
+      "bytes": 1870254
+    },
     "artifacts/reports": {
       "files": 12,
       "bytes": 598789
@@ -34,16 +54,28 @@
       "bytes": 309712
     },
     "artifacts/screenshots": {
-      "files": 50,
-      "bytes": 7749856
+      "files": 42,
+      "bytes": 7072417
     },
     "artifacts/screenshots/battle-focus": {
       "files": 4,
       "bytes": 328764
     },
+    "artifacts/screenshots/egg-results-revised": {
+      "files": 4,
+      "bytes": 330272
+    },
     "artifacts/screenshots/gimmick-dock": {
       "files": 15,
       "bytes": 2283940
+    },
+    "artifacts/screenshots/permanent-upgrades": {
+      "files": 5,
+      "bytes": 376813
+    },
+    "artifacts/screenshots/permanent-upgrades-final": {
+      "files": 6,
+      "bytes": 411339
     },
     "artifacts/screenshots/pokedex-audit": {
       "files": 9,
@@ -55,7 +87,7 @@
     },
     "artifacts/screenshots/pokedex-updated": {
       "files": 22,
-      "bytes": 1863293
+      "bytes": 1864033
     },
     "artifacts/screenshots/regional-themes": {
       "files": 18,
@@ -71,7 +103,7 @@
     },
     "artifacts/screenshots/tera-ai-v6": {
       "files": 15,
-      "bytes": 2279027
+      "bytes": 2193531
     },
     "artifacts/screenshots/tera-ui": {
       "files": 15,
@@ -4032,6 +4064,524 @@
       "referencedBy": []
     },
     {
+      "path": "artifacts/previews/pikachu-upscale/comparison.png",
+      "bytes": 39072,
+      "extension": ".png",
+      "directory": "artifacts/previews/pikachu-upscale",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/pikachu-upscale/original-frame.png",
+      "bytes": 1117,
+      "extension": ".png",
+      "directory": "artifacts/previews/pikachu-upscale",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/pikachu-upscale/original.gif",
+      "bytes": 23958,
+      "extension": ".gif",
+      "directory": "artifacts/previews/pikachu-upscale",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/pikachu-upscale/README.md",
+      "bytes": 831,
+      "extension": ".md",
+      "directory": "artifacts/previews/pikachu-upscale",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/pikachu-upscale/scale4x-animation.gif",
+      "bytes": 195630,
+      "extension": ".gif",
+      "directory": "artifacts/previews/pikachu-upscale",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/pikachu-upscale/scale4x-frame.png",
+      "bytes": 3857,
+      "extension": ".png",
+      "directory": "artifacts/previews/pikachu-upscale",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/00.png",
+      "bytes": 76764,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/01.png",
+      "bytes": 77267,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/02.png",
+      "bytes": 77237,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/03.png",
+      "bytes": 79681,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/04.png",
+      "bytes": 84883,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/05.png",
+      "bytes": 90244,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/06.png",
+      "bytes": 95043,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/07.png",
+      "bytes": 98373,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/08.png",
+      "bytes": 100406,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/09.png",
+      "bytes": 101054,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/10.png",
+      "bytes": 100238,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/11.png",
+      "bytes": 100228,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/12.png",
+      "bytes": 100121,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/13.png",
+      "bytes": 100835,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/14.png",
+      "bytes": 98263,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/15.png",
+      "bytes": 95922,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/16.png",
+      "bytes": 92229,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/17.png",
+      "bytes": 87912,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/18.png",
+      "bytes": 83638,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/19.png",
+      "bytes": 78323,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/20.png",
+      "bytes": 77418,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames/21.png",
+      "bytes": 76213,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/00.png",
+      "bytes": 76961,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/01.png",
+      "bytes": 77468,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/02.png",
+      "bytes": 78647,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/03.png",
+      "bytes": 82272,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/04.png",
+      "bytes": 87552,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/05.png",
+      "bytes": 91830,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/06.png",
+      "bytes": 95916,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/07.png",
+      "bytes": 99265,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/08.png",
+      "bytes": 100205,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/09.png",
+      "bytes": 100607,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/10.png",
+      "bytes": 99929,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/11.png",
+      "bytes": 99878,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/12.png",
+      "bytes": 100259,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/13.png",
+      "bytes": 98813,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/14.png",
+      "bytes": 96688,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/15.png",
+      "bytes": 93929,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/16.png",
+      "bytes": 90812,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/17.png",
+      "bytes": 86440,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/18.png",
+      "bytes": 81502,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/19.png",
+      "bytes": 77910,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/20.png",
+      "bytes": 77318,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-final/21.png",
+      "bytes": 77090,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/00.png",
+      "bytes": 82044,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/01.png",
+      "bytes": 89613,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/02.png",
+      "bytes": 89835,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/03.png",
+      "bytes": 87419,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/04.png",
+      "bytes": 78860,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/05.png",
+      "bytes": 78713,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/06.png",
+      "bytes": 84242,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/07.png",
+      "bytes": 101471,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/08.png",
+      "bytes": 131679,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/09.png",
+      "bytes": 157367,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/10.png",
+      "bytes": 178177,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/11.png",
+      "bytes": 179061,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/12.png",
+      "bytes": 173046,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/13.png",
+      "bytes": 164240,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/14.png",
+      "bytes": 152522,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/15.png",
+      "bytes": 137379,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/16.png",
+      "bytes": 113237,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/17.png",
+      "bytes": 85890,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/18.png",
+      "bytes": 80531,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/19.png",
+      "bytes": 79486,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/20.png",
+      "bytes": 78699,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/frames-sendout/21.png",
+      "bytes": 77795,
+      "extension": ".png",
+      "directory": "artifacts/previews/shiny-entry/frames-sendout",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/README.md",
+      "bytes": 1095,
+      "extension": ".md",
+      "directory": "artifacts/previews/shiny-entry",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/previews/shiny-entry/shiny-entry.gif",
+      "bytes": 1869159,
+      "extension": ".gif",
+      "directory": "artifacts/previews/shiny-entry",
+      "referencedBy": []
+    },
+    {
       "path": "artifacts/regional-simulation-courses.json",
       "bytes": 4611489,
       "extension": ".json",
@@ -5249,20 +5799,6 @@
       "referencedBy": []
     },
     {
-      "path": "artifacts/screenshots/ash-back-desktop.png",
-      "bytes": 156557,
-      "extension": ".png",
-      "directory": "artifacts/screenshots",
-      "referencedBy": []
-    },
-    {
-      "path": "artifacts/screenshots/ash-back-mobile.png",
-      "bytes": 89521,
-      "extension": ".png",
-      "directory": "artifacts/screenshots",
-      "referencedBy": []
-    },
-    {
       "path": "artifacts/screenshots/battle-focus/moves-1280.png",
       "bytes": 132500,
       "extension": ".png",
@@ -5326,10 +5862,31 @@
       "referencedBy": []
     },
     {
-      "path": "artifacts/screenshots/dex-button-filters-mobile.png",
-      "bytes": 84315,
+      "path": "artifacts/screenshots/egg-results-revised/revised-1100.png",
+      "bytes": 126613,
       "extension": ".png",
-      "directory": "artifacts/screenshots",
+      "directory": "artifacts/screenshots/egg-results-revised",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/egg-results-revised/revised-390.png",
+      "bytes": 53565,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/egg-results-revised",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/egg-results-revised/sample-1100.png",
+      "bytes": 101133,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/egg-results-revised",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/egg-results-revised/sample-390.png",
+      "bytes": 48961,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/egg-results-revised",
       "referencedBy": []
     },
     {
@@ -5342,13 +5899,6 @@
     {
       "path": "artifacts/screenshots/expanded-gen9-battle.png",
       "bytes": 144609,
-      "extension": ".png",
-      "directory": "artifacts/screenshots",
-      "referencedBy": []
-    },
-    {
-      "path": "artifacts/screenshots/falkner-introduction-mobile.png",
-      "bytes": 32272,
       "extension": ".png",
       "directory": "artifacts/screenshots",
       "referencedBy": []
@@ -5501,22 +6051,8 @@
       "referencedBy": []
     },
     {
-      "path": "artifacts/screenshots/grass-battle-mobile.png",
-      "bytes": 63647,
-      "extension": ".png",
-      "directory": "artifacts/screenshots",
-      "referencedBy": []
-    },
-    {
       "path": "artifacts/screenshots/iv-comparison-mobile.png",
       "bytes": 33268,
-      "extension": ".png",
-      "directory": "artifacts/screenshots",
-      "referencedBy": []
-    },
-    {
-      "path": "artifacts/screenshots/lance-introduction.png",
-      "bytes": 78475,
       "extension": ".png",
       "directory": "artifacts/screenshots",
       "referencedBy": []
@@ -5589,6 +6125,83 @@
       "bytes": 260103,
       "extension": ".png",
       "directory": "artifacts/screenshots",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/permanent-upgrades/results-1280.png",
+      "bytes": 106653,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/permanent-upgrades",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/permanent-upgrades/results-390.png",
+      "bytes": 40288,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/permanent-upgrades",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/permanent-upgrades/shiny-battle.png",
+      "bytes": 101847,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/permanent-upgrades",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/permanent-upgrades/shop-1280.png",
+      "bytes": 66179,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/permanent-upgrades",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/permanent-upgrades/shop-390.png",
+      "bytes": 61846,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/permanent-upgrades",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/permanent-upgrades-final/results-1280.png",
+      "bytes": 87656,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/permanent-upgrades-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/permanent-upgrades-final/results-390.png",
+      "bytes": 31896,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/permanent-upgrades-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/permanent-upgrades-final/shiny-battle-idle.png",
+      "bytes": 93351,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/permanent-upgrades-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/permanent-upgrades-final/shiny-battle.png",
+      "bytes": 101826,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/permanent-upgrades-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/permanent-upgrades-final/shop-1280.png",
+      "bytes": 51529,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/permanent-upgrades-final",
+      "referencedBy": []
+    },
+    {
+      "path": "artifacts/screenshots/permanent-upgrades-final/shop-390.png",
+      "bytes": 45081,
+      "extension": ".png",
+      "directory": "artifacts/screenshots/permanent-upgrades-final",
       "referencedBy": []
     },
     {
@@ -5845,14 +6458,14 @@
     },
     {
       "path": "artifacts/screenshots/pokedex-updated/adjustment-1280.png",
-      "bytes": 112145,
+      "bytes": 109055,
       "extension": ".png",
       "directory": "artifacts/screenshots/pokedex-updated",
       "referencedBy": []
     },
     {
       "path": "artifacts/screenshots/pokedex-updated/adjustment-390.png",
-      "bytes": 57625,
+      "bytes": 52894,
       "extension": ".png",
       "directory": "artifacts/screenshots/pokedex-updated",
       "referencedBy": []
@@ -5873,42 +6486,42 @@
     },
     {
       "path": "artifacts/screenshots/pokedex-updated/full-width-1920.png",
-      "bytes": 203153,
+      "bytes": 203008,
       "extension": ".png",
       "directory": "artifacts/screenshots/pokedex-updated",
       "referencedBy": []
     },
     {
       "path": "artifacts/screenshots/pokedex-updated/full-width-2560.png",
-      "bytes": 231571,
+      "bytes": 235218,
       "extension": ".png",
       "directory": "artifacts/screenshots/pokedex-updated",
       "referencedBy": []
     },
     {
       "path": "artifacts/screenshots/pokedex-updated/moves-1280.png",
-      "bytes": 121387,
+      "bytes": 117073,
       "extension": ".png",
       "directory": "artifacts/screenshots/pokedex-updated",
       "referencedBy": []
     },
     {
       "path": "artifacts/screenshots/pokedex-updated/moves-390.png",
-      "bytes": 52326,
+      "bytes": 52995,
       "extension": ".png",
       "directory": "artifacts/screenshots/pokedex-updated",
       "referencedBy": []
     },
     {
       "path": "artifacts/screenshots/pokedex-updated/nature-1280.png",
-      "bytes": 94688,
+      "bytes": 98137,
       "extension": ".png",
       "directory": "artifacts/screenshots/pokedex-updated",
       "referencedBy": []
     },
     {
       "path": "artifacts/screenshots/pokedex-updated/nature-390.png",
-      "bytes": 55275,
+      "bytes": 58407,
       "extension": ".png",
       "directory": "artifacts/screenshots/pokedex-updated",
       "referencedBy": []
@@ -5985,14 +6598,14 @@
     },
     {
       "path": "artifacts/screenshots/pokedex-updated/traits-1280.png",
-      "bytes": 85792,
+      "bytes": 87436,
       "extension": ".png",
       "directory": "artifacts/screenshots/pokedex-updated",
       "referencedBy": []
     },
     {
       "path": "artifacts/screenshots/pokedex-updated/traits-390.png",
-      "bytes": 49956,
+      "bytes": 50435,
       "extension": ".png",
       "directory": "artifacts/screenshots/pokedex-updated",
       "referencedBy": []
@@ -6007,13 +6620,6 @@
     {
       "path": "artifacts/screenshots/recruit-iv-badges-mobile.png",
       "bytes": 75934,
-      "extension": ".png",
-      "directory": "artifacts/screenshots",
-      "referencedBy": []
-    },
-    {
-      "path": "artifacts/screenshots/recruit-move-comparison-mobile.png",
-      "bytes": 35794,
       "extension": ".png",
       "directory": "artifacts/screenshots",
       "referencedBy": []
@@ -6320,13 +6926,6 @@
       "referencedBy": []
     },
     {
-      "path": "artifacts/screenshots/stadium-small-desktop.png",
-      "bytes": 136858,
-      "extension": ".png",
-      "directory": "artifacts/screenshots",
-      "referencedBy": []
-    },
-    {
       "path": "artifacts/screenshots/stat-adjustment-desktop.png",
       "bytes": 242027,
       "extension": ".png",
@@ -6356,7 +6955,7 @@
     },
     {
       "path": "artifacts/screenshots/tera-ai-v6/dex-tera-type.png",
-      "bytes": 165452,
+      "bytes": 86728,
       "extension": ".png",
       "directory": "artifacts/screenshots/tera-ai-v6",
       "referencedBy": []
@@ -6433,7 +7032,7 @@
     },
     {
       "path": "artifacts/screenshots/tera-ai-v6/tera-grass.png",
-      "bytes": 127667,
+      "bytes": 129265,
       "extension": ".png",
       "directory": "artifacts/screenshots/tera-ai-v6",
       "referencedBy": []
@@ -6454,7 +7053,7 @@
     },
     {
       "path": "artifacts/screenshots/tera-ai-v6/tera-water.png",
-      "bytes": 130429,
+      "bytes": 122059,
       "extension": ".png",
       "directory": "artifacts/screenshots/tera-ai-v6",
       "referencedBy": []

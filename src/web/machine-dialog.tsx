@@ -3,7 +3,7 @@ import {useState} from 'react';
 import type {MachineOffer,RunView} from './contracts';
 import {moves,pokemonName} from './catalog';
 import {PokedexDialog} from './pokedex-dialog';
-import {MoveDetails} from './recruit-move-picker';
+import {MoveDetails} from './move-details';
 import {MoveLearningPanel} from './move-learning-panel';
 import {RunPartnerList} from './run-partner-list';
 import {selectGameCursor} from './game-keyboard';

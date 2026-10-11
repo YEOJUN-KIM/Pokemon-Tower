@@ -18,7 +18,7 @@
 
 ## 저장과 무료 공개
 
-인터넷 DB는 `tower-preview_tower-data` 볼륨의 `/data/tower.sqlite`. 로컬 개발 DB와 자동 동기화되지 않는다. 최신 백업 이름, 새 PC 복원 명령, 실행 순서는 [컴퓨터 이전 안내](current/COMPUTER_MOVE.md)에 있다. Docker 볼륨은 코드 폴더 복사에 따라가지 않는다. 최신 파일은 Git untracked가 많으므로 clone만으로 옮길 수 없다.
+인터넷 DB는 `tower-preview_tower-data` 볼륨의 `/data/tower.sqlite`. 로컬 개발 DB와 자동 동기화되지 않는다. 최신 백업 이름, 새 PC 복원 명령, 실행 순서는 [컴퓨터 이전 안내](current/COMPUTER_MOVE.md)에 있다. 코드는 GitHub에 올렸으나 Docker 볼륨·개인 백업·제외된 AI 상세 로그는 clone에 포함되지 않아 직접 복사해야 한다.
 
 임시 주소는 재시작 후 바뀔 수 있으며 `.data/preview.env`와 실제 터널 로그를 확인한다. 게임 자동 재시작은 설정돼 있지만 터널 자동 시작·정기 백업·고정 주소는 아직 미설정이다. `down -v`와 volume prune을 쓰지 않는다.
 

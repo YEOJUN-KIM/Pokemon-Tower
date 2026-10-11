@@ -29,7 +29,7 @@
 
 ## 무엇을 옮겨야 하나
 
-현재 대부분의 프로젝트 파일이 Git에서 untracked다. **git clone만 하면 최신 작업을 가져올 수 없다.** 아직 커밋/푸시했다고 가정하지 말고 이 프로젝트 폴더를 직접 복사한다.
+사용자가 GitHub에 코드를 올렸다. 새 컴퓨터에서는 저장소를 clone하고 최신 커밋을 확인한다. **Git에서 제외된 실험 원자료와 개인 저장은 clone에 포함되지 않으므로 직접 복사한다.** 이후 로컬 변경이 생기면 커밋/푸시 또는 폴더 복사로 함께 옮긴다.
 
 - 코드와 설정: `src/`, `public/`, `vendor/`, `scripts/`, `tests/`, `e2e/`, `docs/`, 루트 설정 파일, `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`, Dockerfile·Compose 파일.
 - 이전 연구까지 이어갈 경우 `artifacts/`와 문서 아카이브도 그대로 보존한다.

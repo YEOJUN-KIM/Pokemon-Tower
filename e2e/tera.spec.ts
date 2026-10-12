@@ -20,9 +20,9 @@ for(const width of [1280,390])for(const kind of ['mega','dynamax','tera'] as con
    await page.setViewportSize({width,height:width===390?844:900});await page.goto('/battle');
    await page.getByRole('button',{name:'싸운다',exact:true}).click();
    const tera=page.getByTestId('tera-toggle');await expect(tera).toBeEnabled();await expect(tera).toHaveAttribute('data-type','Fire');
-   await page.keyboard.press('t');await expect(tera).toHaveAttribute('aria-pressed','true');
+   await page.keyboard.press('a');if(kind!=='tera')await page.keyboard.press('a');await expect(tera).toHaveAttribute('aria-pressed','true');
    await page.keyboard.press('x');await page.getByRole('button',{name:'싸운다',exact:true}).click();await expect(tera).toHaveAttribute('aria-pressed','false');expect(store.view(owner).run!.teraTickets).toBe(1);
-   await page.keyboard.press(kind==='tera'?'t':'m');
+   await page.keyboard.press('a');
    if(kind!=='tera'){await expect(page.getByTestId('gimmick-toggle')).toHaveAttribute('aria-pressed','true');await expect(tera).toHaveAttribute('aria-pressed','false');}
    await expect(page.locator('.player-position img')).toBeVisible();
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

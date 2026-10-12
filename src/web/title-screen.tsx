@@ -50,15 +50,14 @@ export default function TitleScreen() {
       <h1><span>POKÉMON</span>TOWER<span className="brand-dot">.</span></h1>
       <p className="title-description">세 마리의 파트너와 함께.<br />한 층씩, 더 높이.</p>
       <div className="title-menu">
-        <Link className="primary-button title-play" href={continuing ? '/battle' : '/battle?prepare=1'} aria-disabled={busy} onClick={e => {if (busy) e.preventDefault();}}>{continuing ? '이어하기' : '게임 시작'} <span>↗</span></Link>
+        <Link className="primary-button title-play" href={continuing ? '/battle' : '/battle?prepare=1'} aria-disabled={busy} onClick={e => {if (busy) e.preventDefault();}}>{continuing ? '이어하기' : '게임 시작'}{continuing && <span className="title-run-progress">{tower.run!.floor} / {tower.run!.totalFloors}층</span>}<span aria-hidden="true">↗</span></Link>
         {continuing && <button className="secondary-button title-new-game" disabled={busy} onClick={() => {setError('');setRestartOpen(true);}}>{busy ? '새 도전 준비 중…' : '새로하기'}</button>}
         <Link className="secondary-button" href="/pokedex">포켓몬 도감</Link>
         <Link className="secondary-button" href="/upgrades">영구 업그레이드</Link>
         <Link className="secondary-button" href="/settings">설정</Link>
         <Link className="secondary-button" href="/account">{username?`계정 · ${username}`:'로그인 · 회원가입'}</Link>
       </div>
-      <div className="title-save" aria-live="polite">{error ? <p role="alert">{error} 새로고침하거나 배틀룸에서 다시 연결해 주세요.</p> : !tower ? '저장된 도전을 확인하는 중…' : continuing ? <><strong>{tower.run!.floor} / {tower.run!.totalFloors}층</strong><span>이어하기는 현재 도전을 계속합니다.<br />새로하기는 성장 포인트·도감을 유지하고 새 팀을 고릅니다.</span></> : <><strong>다음 도전을 준비하세요.</strong><span>성장 포인트 {tower.growthPoints.toLocaleString()}P · 영구 도감 {tower.unlocked.length}종 · 현재 {tower.totalFloors}층 타워</span></>}</div>
-      <small className="title-foot">방향키 이동 · Enter/Z 선택<br/>Fan-made · {username?'계정 저장':'게스트 저장'}</small>
+      {(!continuing || error) && <div className="title-save" aria-live="polite">{error ? <p role="alert">{error} 새로고침하거나 배틀룸에서 다시 연결해 주세요.</p> : !tower ? '저장된 도전을 확인하는 중…' : <><strong>다음 도전을 준비하세요.</strong><span>성장 포인트 {tower.growthPoints.toLocaleString()}P · 영구 도감 {tower.unlocked.length}종 · 현재 {tower.totalFloors}층 타워</span></>}</div>}
     </section>
     {restartOpen && continuing && <PokedexDialog title="새로하기" className="title-restart-dialog" returnFocus=".title-new-game" initialFocus=".restart-cancel" onClose={()=>{if(!busy)setRestartOpen(false);}}>
       <p>현재 도전을 종료하고 새로 시작할까요?</p>

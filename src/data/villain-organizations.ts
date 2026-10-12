@@ -1,7 +1,7 @@
 import {namedTrainerSamples,type TrainerSample} from './trainer-catalog';
 import {towerThemes,type TowerTheme} from './tower-themes';
 
-// First 30-floor pass: grunts only. Executive/boss unlock floors and weights are future content.
+// Organization rosters are independent of the tower's regional chapters.
 export const villainOrganizations=[
   {id:'rocket',name:'로켓단',portrait:'rocketgrunt',entries:['Raticate','Golbat','Arbok','Weezing','Persian','Muk']},
   {id:'magma',name:'마그마단',portrait:'magmagrunt',entries:['Mightyena','Golbat','Camerupt','Weezing','Magcargo','Sandslash']},
@@ -14,10 +14,10 @@ export const villainOrganizations=[
   {id:'macrocosmos',name:'매크로코스모스',portrait:'officeworker',entries:['Copperajah','Durant','Bronzong','Mawile','Ferroseed','Perrserker']},
   {id:'star',name:'스타단',portrait:'teamstargrunt',entries:['Murkrow','Houndoom','Torkoal','Skuntank','Revavroom','Primeape']},
 ] as const;
-export const VILLAIN_CHANCE=.08; // Provisional, not the example percentages from the design discussion.
+export const VILLAIN_CHANCE=.15;
 function ticket(key:string){let hash=2166136261;for(const char of key)hash=Math.imul(hash^char.charCodeAt(0),16777619);hash=Math.imul(hash^(hash>>>16),0x85ebca6b);hash=Math.imul(hash^(hash>>>13),0xc2b2ae35);return ((hash^(hash>>>16))>>>0)/4294967296;}
 export function runOrganization(runId:string,theme?:TowerTheme|null) {
- const candidates=theme?towerThemes[theme].organizations:villainOrganizations.slice(0,6).map(group=>group.id);
+ const candidates=theme?towerThemes[theme].organizations:villainOrganizations.map(group=>group.id);
  return candidates[Math.floor(ticket(`organization:${runId}`)*candidates.length)];
 }
 export function villainGrunt(runId:string,floor:number,organization:string,previousVillain=false):TrainerSample|null {
@@ -44,12 +44,23 @@ export const villainLeaders:Record<string,{executive:TrainerSample;boss:TrainerS
  macrocosmos:{executive:leader('oleana'),boss:leader('rose')},
  star:{executive:leader('giacomo'),boss:leader('penny')},
 };
-// Provisional conditional weights after the unchanged 8% event roll.
-export function villainRankWeights(floor:number):Record<VillainRank,number>{return floor<16?{grunt:1,executive:0,boss:0}:floor<31?{grunt:.65,executive:.35,boss:0}:{grunt:.35,executive:.4,boss:.25};}
-export function villainEncounter(runId:string,floor:number,organization:string,previousVillain=false,ended=false):{sample:TrainerSample;event:VillainEvent}|null {
+export type VillainProgress={gruntWins:number;executiveWins:number};
+// Victories shift the next draw upwards; a small chance for lower ranks remains.
+export function villainRankWeights(floor:number,progress:VillainProgress={gruntWins:0,executiveWins:0}):Record<VillainRank,number>{
+ if(floor<16)return {grunt:1,executive:0,boss:0};
+ if(floor<31){const grunt=Math.max(5,65-10*progress.gruntWins);return {grunt:grunt/100,executive:(100-grunt)/100,boss:0};}
+ const grunt=Math.max(5,35-8*progress.gruntWins);
+ const executive=Math.max(5,40+Math.floor((35-grunt)/2)-12*progress.executiveWins);
+ return {grunt:grunt/100,executive:executive/100,boss:(100-grunt-executive)/100};
+}
+export function villainEncounter(runId:string,floor:number,organization:string,previousVillain=false,ended=false,progress:VillainProgress={gruntWins:0,executiveWins:0},eligible:(sample:TrainerSample)=>boolean=()=>true):{sample:TrainerSample;event:VillainEvent}|null {
  if(ended)return null;
  const grunt=villainGrunt(runId,floor,organization,previousVillain);if(!grunt)return null;
- const weights=villainRankWeights(floor),roll=ticket(`villain-rank:${runId}:${floor}`),rank:VillainRank=roll<weights.grunt?'grunt':roll<weights.grunt+weights.executive?'executive':'boss';
+ const weights=villainRankWeights(floor,progress);
+ const candidates=(['grunt','executive','boss'] as const).filter(rank=>weights[rank]>0 && eligible(rank==='grunt'?grunt:villainLeaders[organization][rank]));
+ if(!candidates.length)return null;
+ let roll=ticket(`villain-rank:${runId}:${floor}`)*candidates.reduce((sum,rank)=>sum+weights[rank],0);
+ const rank=candidates.find(rank=>(roll-=weights[rank])<0) ?? candidates.at(-1)!;
  const group=villainOrganizations.find(g=>g.id===organization)!,base=rank==='grunt'?grunt:villainLeaders[organization][rank];
  return {sample:{...base,id:rank==='grunt'?grunt.id:`${organization}-${rank}-${base.portrait}`,title:`${group.name} ${rank==='grunt'?'':villainRankNames[rank]}`.trim(),role:'villain',minFloor:rank==='boss'?31:rank==='executive'?16:1},event:{organization,name:group.name,rank,bonus:villainBonuses[rank]}};
 }

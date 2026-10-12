@@ -17,9 +17,9 @@ for(const [item,kind]of [['Charizardite X','mega'],['Dynamax Band','dynamax']] a
    await page.setViewportSize({width,height:width===390?844:720});await page.goto('/battle');
    await expect(page.getByRole('button',{name:'싸운다',exact:true})).toHaveAttribute('data-game-cursor','true');await page.keyboard.press('Enter');
    const toggle=page.getByTestId('gimmick-toggle');await expect(toggle).toHaveAttribute('aria-pressed','false');
-   await page.keyboard.press('m');await expect(toggle).toHaveAttribute('aria-pressed','true');
+   await page.keyboard.press('a');await expect(toggle).toHaveAttribute('aria-pressed','true');
    if(kind==='dynamax'){await expect(page.locator('[data-command="move 1"]')).toContainText('다이번');await expect(page.getByTestId('battle-move-details')).toContainText('130');await expect(page.getByTestId('battle-move-details').getByRole('img',{name:'특수',exact:true})).toBeVisible();}
-   await page.keyboard.press('m');await expect(toggle).toHaveAttribute('aria-pressed','false');await page.keyboard.press('m');
+   await page.keyboard.press('a');await expect(toggle).toHaveAttribute('aria-pressed','false');await page.keyboard.press('a');
    await page.keyboard.press('ArrowDown');await expect(page.locator('[data-command="move 3"]')).toHaveAttribute('data-game-cursor','true');
    await page.keyboard.press('ArrowRight');await expect(page.locator('[data-command="move 4"]')).toHaveAttribute('data-game-cursor','true');
    await page.keyboard.press('ArrowLeft');await page.keyboard.press('ArrowUp');

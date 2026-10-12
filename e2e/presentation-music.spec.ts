@@ -28,7 +28,7 @@ test('music waits for loading, crossfades and mutes all overlapping tracks',asyn
     return meter.voices.map(v=>({paused:v.player.paused,time:v.player.currentTime,volume:v.master.gain.value,fade:(meter.edges.get(v.master) as GainNode).gain.value}));
   });
   await expect.poll(async()=> (await snapshot())[0]?.time ?? 0).toBeGreaterThan(.4);
-  await page.getByLabel('미리듣기 곡').selectOption('reward');await page.waitForTimeout(300);
+  await page.getByRole('button',{name:'미리듣기 곡',exact:true}).click();await page.getByRole('dialog',{name:'미리듣기 곡',exact:true}).getByRole('button',{name:musicNames['reward' as keyof typeof musicNames],exact:true}).click();await page.waitForTimeout(300);
   const loading=await snapshot();expect(loading[0].paused).toBe(false);expect(loading[0].fade).toBeCloseTo(1,2);expect(loading[1].fade).toBe(0);
   release();
   await expect.poll(async()=> (await snapshot())[1]?.time ?? 0).toBeGreaterThan(.15);
@@ -36,7 +36,7 @@ test('music waits for loading, crossfades and mutes all overlapping tracks',asyn
   await page.getByLabel('전체 음소거').check();
   await expect.poll(async()=> (await snapshot()).every(v=>v.volume<.001)).toBe(true);
   await page.getByLabel('전체 음소거').uncheck();
-  await page.getByLabel('미리듣기 곡').selectOption('gym');await page.getByLabel('미리듣기 곡').selectOption('villain');await page.getByLabel('미리듣기 곡').selectOption('clear');
+  await page.getByRole('button',{name:'미리듣기 곡',exact:true}).click();await page.getByRole('dialog',{name:'미리듣기 곡',exact:true}).getByRole('button',{name:musicNames['gym' as keyof typeof musicNames],exact:true}).click();await page.getByRole('button',{name:'미리듣기 곡',exact:true}).click();await page.getByRole('dialog',{name:'미리듣기 곡',exact:true}).getByRole('button',{name:musicNames['villain' as keyof typeof musicNames],exact:true}).click();await page.getByRole('button',{name:'미리듣기 곡',exact:true}).click();await page.getByRole('dialog',{name:'미리듣기 곡',exact:true}).getByRole('button',{name:musicNames['clear' as keyof typeof musicNames],exact:true}).click();
   await page.getByRole('button',{name:'미리듣기 정지'}).click();
   await expect.poll(async()=> (await snapshot()).every(v=>v.paused)).toBe(true);
 });
@@ -53,7 +53,7 @@ test('all music previews produce audio and respect mute, volume and leaving sett
   await page.getByLabel('전체 음소거').uncheck();await page.getByRole('button',{name:'BGM 들어보기',exact:true}).click();
   for(const track of Object.keys(musicNames)){
     const before=await page.evaluate(()=>(window as unknown as {audioStarts:number}).audioStarts);
-    await page.getByLabel('미리듣기 곡').selectOption(track);await expect(page.locator('body')).toHaveAttribute('data-music-track',track);
+    await page.getByRole('button',{name:'미리듣기 곡',exact:true}).click();await page.getByRole('dialog',{name:'미리듣기 곡',exact:true}).getByRole('button',{name:musicNames[track as keyof typeof musicNames],exact:true}).click();await expect(page.locator('body')).toHaveAttribute('data-music-track',track);
     if(track in musicFiles){
       await expect.poll(()=>page.evaluate(()=>{const player=(window as unknown as {bgmPlayers:HTMLMediaElement[]}).bgmPlayers.at(-1);return !!player && !player.paused && player.readyState>=2 && player.currentTime>0;})).toBe(true);
       const state=await page.evaluate(()=>{const player=(window as unknown as {bgmPlayers:HTMLMediaElement[]}).bgmPlayers.at(-1)!;return {src:new URL(player.src).pathname,loop:player.loop,time:player.currentTime};});
@@ -61,7 +61,7 @@ test('all music previews produce audio and respect mute, volume and leaving sett
       await expect.poll(()=>page.evaluate(()=>(window as unknown as {bgmPlayers:HTMLMediaElement[]}).bgmPlayers.at(-1)!.currentTime)).toBeGreaterThan(state.time);
     }else await expect.poll(()=>page.evaluate(()=>(window as unknown as {audioStarts:number}).audioStarts)).toBeGreaterThan(before);
   }
-  await page.getByLabel('미리듣기 곡').selectOption('trainer');
+  await page.getByRole('button',{name:'미리듣기 곡',exact:true}).click();await page.getByRole('dialog',{name:'미리듣기 곡',exact:true}).getByRole('button',{name:musicNames['trainer' as keyof typeof musicNames],exact:true}).click();
   await page.getByLabel('BGM 크기').fill('65');
   await expect.poll(()=>page.evaluate(()=>(window as unknown as {bgmGains:GainNode[]}).bgmGains.at(-1)?.gain.value)).toBeCloseTo(.65,2);
   await page.getByLabel('전체 음소거').check();await page.waitForTimeout(300);

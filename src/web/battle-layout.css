@@ -1,0 +1,87 @@
+/* Battle HUD uses a single palette; the arena stays clear of controls. */
+body .battle-live{padding:10px 14px;background:#101d27}
+body .battle-live .game-grid{gap:0}
+body .battle-live .right-column{position:absolute;left:16px;right:16px;top:12px;z-index:6;display:flex;flex-direction:row;align-items:flex-start;justify-content:space-between;gap:16px;max-width:none;padding:0;background:none;border:0;border-radius:0;pointer-events:none}
+body .battle-live .team-panel{gap:12px}
+body .battle-live .team-panel h2{padding:3px 5px;background:#e8f4f0cc;color:#28474f;border-radius:3px;font-size:11px}
+body .battle-live .team-member{width:52px;min-height:62px;background:#142935;border-color:#54737d;border-radius:5px}
+body .battle-live .team-member .sprite{width:48px;height:42px}
+body .battle-live .team-empty{height:42px;width:48px}
+body .battle-live .team-member.is-active{background:#204e46;border-color:#86dbc1}
+.opponent-heading{display:flex;flex-direction:column;align-items:flex-end;gap:5px;min-width:0;color:#edf8fa}
+.opponent-heading>small{display:none}
+body .battle-live .enemy-trainer{position:static;font-size:13px;line-height:1.5;letter-spacing:0;display:flex;align-items:center;gap:8px;text-align:right;color:#f4f5e9;text-shadow:none;background:#47534bed;border:2px solid #cbd1b8;border-radius:2px;padding:4px 10px 4px 5px;box-shadow:inset 0 0 0 1px #253b2e}
+body .battle-live .enemy-trainer .opponent-marker{font:700 9px monospace;padding:3px 5px;margin:0;border:0;background:#2e5149;color:#f5f8e9;border-radius:2px}
+body .battle-live .enemy-trainer[data-opponent-kind=boss]{border-color:#b1914b}
+body .battle-live .enemy-trainer[data-opponent-kind=boss] .opponent-marker{background:#796039}
+body .battle-live .battle-panel{grid-template-rows:44px minmax(0,1fr) 226px;border:1px solid #476574;border-radius:8px;box-shadow:none}
+body .battle-live .panel-top{min-height:44px;background:#172a36;padding:6px 16px}
+body .battle-live .battle-progress{font-size:16px;gap:20px;color:#f0f8fa}
+body .battle-live .battle-progress>span:not(.battle-coins){color:#b5d6dc;font-size:13px}
+body .battle-live .arena{--near-x:26%;--far-x:75%;--near-ground:7%;--far-ground:37%}
+body .battle-live .health-card{width:clamp(240px,22vw,340px);padding:8px 14px 8px;background:linear-gradient(180deg,#566259,#414e46);color:#f4f5e9;border:2px solid #cbd1b8;border-radius:2px;box-shadow:inset 0 0 0 2px #2c3a30;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px))}
+body .battle-live .enemy-health{left:4%;top:clamp(90px,18%,118px)}
+body .battle-live .player-health{right:4%;bottom:8%}
+body .battle-live .health-heading{gap:12px}
+body .battle-live .health-heading strong{font-size:18px;color:#f4f5e9;line-height:1.4}
+body .battle-live .health-heading>span{font-size:11px;color:#dce2cf}
+.pokemon-gender{font:700 14px Arial,sans-serif;margin-left:6px;vertical-align:middle}
+.pokemon-gender[data-gender=M]{color:#7cc7f5}
+.pokemon-gender[data-gender=F]{color:#f2a0ad}
+body .battle-live .hp-row{margin-top:5px;gap:0;border:2px solid #344b40;background:#344b40;border-radius:7px;padding:2px 3px}
+body .battle-live .hp-row>span{font:700 11px monospace;color:#e8c96c;padding:0 6px 0 2px}
+body .battle-live .hp-track{height:9px;background:#152e25;border:1px solid #9fbe91;border-radius:3px}
+body .battle-live .hp-track i{border-radius:1px;box-shadow:inset 0 2px 0 #ffffff40}
+body .battle-live .hp-number{font-size:12px;color:#f0f1e3;margin-top:4px}
+body .battle-live .hp-number{display:flex;justify-content:flex-end;align-items:center;gap:10px}
+body .battle-live .health-card[data-hp-state=critical]{border-color:#daa199;background:linear-gradient(180deg,#66574f,#51423f);animation:low-health-glow 2s ease-in-out infinite}
+body .battle-live .health-card[data-hp-state=critical] .hp-number{color:#ffb5aa}
+body .battle-live .health-card[data-hp-state=fainted]{border-color:#718079;background:#d2d8d1}
+@keyframes low-health-glow{0%,100%{box-shadow:0 0 0 1px #e7675530}50%{box-shadow:0 0 12px #e767554f}}
+@media(prefers-reduced-motion:reduce){body .battle-live .health-card[data-hp-state=critical]{animation:none;box-shadow:0 0 0 1px #e7675530}}
+body .battle-live .opponent-balls{border:0;margin-top:5px;padding-top:0;gap:6px}
+body .battle-live .battle-messages,body .battle-live .command-area{background:#1c3040;border-color:#476574;border-top-width:1px;padding:14px 18px}
+body .battle-live .message-heading{font-size:11px;color:#a9c7ce;gap:12px}
+.message-controls{display:flex;align-items:center;gap:12px;flex-shrink:0}
+body .battle-live .battle-messages .skip-motion{position:static;display:inline-flex!important;align-items:center;gap:4px;min-height:28px;padding:5px 9px;border:1px solid #799aab;border-radius:5px;background:#294552;color:#edf8fa;font-size:11px;box-shadow:none;white-space:nowrap}
+body .battle-live .current-messages{height:auto;min-height:72px;margin-top:12px}
+body .battle-live.battle-room .current-messages p{font-size:16px;line-height:1.55;color:#b9ced5}
+body .battle-live.battle-room .current-messages p.latest{font-size:clamp(20px,1.65vw,28px);line-height:1.55;color:#f0f8fa}
+body .battle-live .action-button{background:#243e4d;border:1px solid #688997;border-radius:6px;box-shadow:none;color:#f0f8fa}
+body .battle-live .action-button:hover:not(:disabled){background:#2f5060;transform:none}
+body .battle-live .battle-move-details{color:#b9ced5}
+body .battle-live .battle-move-details dd{color:#f2dc91}
+body .battle-live .battle-settings-trigger{background:#294552;border-color:#688997}
+body .battle-live footer{padding:8px 2px 0}
+body .battle-live.battle-room .workspace footer>.battle-keyboard-hints{display:flex!important;flex-wrap:wrap;gap:8px 20px}
+@media(max-width:760px){
+  body .battle-live.battle-room .workspace footer>.battle-keyboard-hints{display:none!important}
+  body .battle-live{padding:6px}
+  body .battle-live .game-grid{gap:0}
+  body .battle-live .right-column{left:8px;right:8px;top:8px;flex-wrap:wrap;gap:5px;padding:0;border-radius:0}
+  body .battle-live .team-panel{width:100%;justify-content:center}
+  body .battle-live .team-member{width:42px;min-height:49px}
+  body .battle-live .team-member .sprite,body .battle-live .team-empty{width:40px;height:32px}
+  body .battle-live .team-status{font-size:8px;line-height:14px}
+  .opponent-heading{width:100%;flex-direction:row;align-items:center;justify-content:flex-end;gap:8px}
+  body .battle-live .enemy-trainer{font-size:11px;gap:5px}
+  body .battle-live .enemy-trainer .opponent-marker{font-size:8px;padding:2px 4px}
+  body .battle-live .battle-panel{grid-template-rows:40px minmax(0,1fr) 92px 166px;border-radius:6px}
+  body .battle-live .battle-panel[data-command-mode=moves][data-resolving=false],body .battle-live .battle-panel[data-resolving=true]{grid-template-rows:40px minmax(0,1fr) 258px}
+  body .battle-live .panel-top{min-height:40px;padding:5px 10px}
+  body .battle-live .battle-progress{font-size:13px;gap:12px}
+  body .battle-live .battle-progress>span:not(.battle-coins){font-size:10px}
+  body .battle-live .health-card{width:174px;padding:7px 10px;border-radius:2px;border-width:2px}
+  body .battle-live .health-heading strong{font-size:13px}
+  body .battle-live .hp-number{font-size:10px;margin-top:4px}
+  body .battle-live .hp-track{height:7px}
+  body .battle-live .hp-row>span{font-size:9px;padding-right:5px}
+  body .battle-live .enemy-health{left:3%;top:98px}
+  body .battle-live .player-health{right:3%;bottom:7%}
+  body .battle-live .battle-messages,body .battle-live .command-area{padding:9px 10px}
+  body .battle-live .current-messages{min-height:40px;margin-top:6px}
+  body .battle-live.battle-room .current-messages p{font-size:13px;line-height:1.45}
+  body .battle-live.battle-room .current-messages p.latest{font-size:16px;line-height:1.45}
+  .message-controls{gap:7px}
+  body .battle-live .battle-messages .skip-motion{font-size:10px;min-height:24px;padding:3px 6px}
+}

@@ -91,5 +91,5 @@ for(const sample of namedTrainerSamples){
 namedTrainerSamples.push(...regionalTrainerSamples);
 export const trainerCatalog=[...normalTrainerSamples,...eliteTrainerSamples,...mixedTrainerSamples,...namedTrainerSamples];
 export function trainerView(sample:TrainerSample):BossView {
-  return {id:sample.id,name:sample.name,title:sample.title,introduction:'',victory:'',defeat:'',...(sample.role ? {role:sample.role} : {}),portrait:sample.portrait,kind:sample.kind,generation:sample.generation};
+  return {id:sample.id,name:sample.name,title:sample.title,introduction:'',victory:'',defeat:'',...(sample.role ? {role:sample.role} : {}),portrait:sample.portrait,kind:sample.kind,generation:sample.generation,specialty:sample.specialty};
 }

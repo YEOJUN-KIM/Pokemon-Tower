@@ -12,6 +12,9 @@ import '../web/account.css';
 import '../web/run-maintenance.css';
 import '../web/mobile-ui.css';
 import '../web/title-screen.css';
+import '../web/move-visuals.css';
+import '../web/battle-layout.css';
+import '../web/settings-screen.css';
 import {ClickSounds} from '../web/audio-settings';
 
 export const metadata: Metadata = {

@@ -11,6 +11,7 @@ import type { BattleView,PokemonView } from '../web/contracts';
 import type {UpgradeKind} from '../data/shop';
 import Showdown from 'pokemon-showdown';
 import {playerTeam} from '../data/teams';
+import {genderFromDetails} from '../data/gender';
 import {advanceField,emptyField} from '../web/battle-field';
 
 export class BattleRequestError extends Error {
@@ -170,7 +171,7 @@ export class BattleSession {
   private view(): BattleView {
     const team:PokemonView[] = this.observation?.ownTeam.map(p => ({
       ...this.ownDetails.get(p.ident.split(': ')[1]),
-      shiny:p.details.split(', ').includes('shiny'),species: p.ident.split(': ')[1], displaySpecies:p.details.split(',')[0], condition: this.status === 'complete' ? this.ownConditions.get(p.ident.split(': ')[1]) ?? p.condition : p.condition, active: p.active,
+      gender:genderFromDetails(p.details),shiny:p.details.split(', ').includes('shiny'),species: p.ident.split(': ')[1], displaySpecies:p.details.split(',')[0], condition: this.status === 'complete' ? this.ownConditions.get(p.ident.split(': ')[1]) ?? p.condition : p.condition, active: p.active,
     })) ?? [];
     let opponent:BattleView['opponent'] = this.observation?.opponent ? {...this.observation.opponent} : null;
     // Also apply the last turn after the last human request, including a final KO.
@@ -178,7 +179,7 @@ export class BattleSession {
       const [, event, actor, data, condition] = line.split('|');
       if (!actor || !['switch', 'drag', 'replace', '-damage', '-heal', 'faint', '-status', '-curestatus','-formechange','detailschange','-start','-end','-transform','-terastallize'].includes(event)) continue;
       if (actor.startsWith('p2a:')) {
-        if (['switch', 'drag', 'replace'].includes(event)) opponent = {shiny:data.split(', ').includes('shiny'),species: data.split(',')[0],terastallized:data.match(/tera:([A-Za-z]+)/)?.[1], condition:condition ?? opponent?.condition ?? '100/100'};
+        if (['switch', 'drag', 'replace'].includes(event)) opponent = {gender:genderFromDetails(data),shiny:data.split(', ').includes('shiny'),species: data.split(',')[0],terastallized:data.match(/tera:([A-Za-z]+)/)?.[1], condition:condition ?? opponent?.condition ?? '100/100'};
         else if (opponent && ['-damage', '-heal'].includes(event)) opponent.condition = data;
         else if (opponent && event === 'faint') opponent.condition = '0 fnt';
         else if (opponent && event === '-status') opponent.condition = `${opponent.condition.split(' ')[0]} ${data}`;

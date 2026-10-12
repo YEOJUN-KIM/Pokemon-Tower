@@ -31,6 +31,8 @@
 
 사용자가 GitHub에 코드를 올렸다. 새 컴퓨터에서는 저장소를 clone하고 최신 커밋을 확인한다. **Git에서 제외된 실험 원자료와 개인 저장은 clone에 포함되지 않으므로 직접 복사한다.** 이후 로컬 변경이 생기면 커밋/푸시 또는 폴더 복사로 함께 옮긴다.
 
+2026-10-12 커밋 정책: 새 `artifacts/` 파일은 `.gitignore`로 전체 제외한다. 이 PC에서 이미 추적 중인 artifacts는 `skip-worktree`로 변경 목록에서 숨겼으며, 로컬 원본과 기존 GitHub 파일은 유지한다. 이 설정은 로컬 Git 인덱스에만 적용되어 clone 시 전파되지 않는다. 다른 PC에서도 같은 방식이 필요하면 PowerShell에서 `git ls-files artifacts | git update-index --skip-worktree --stdin`을 실행한다. 변경 감지를 다시 켜려면 `git ls-files artifacts | git update-index --no-skip-worktree --stdin`으로 해제한다. 아래 일부 대용량 파일만 제외했다는 설명은 이전 정책 기록이며, 새 실험 자료·게임 DB·환경설정은 직접 보관한다.
+
 - 코드와 설정: `src/`, `public/`, `vendor/`, `scripts/`, `tests/`, `e2e/`, `docs/`, 루트 설정 파일, `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`, Dockerfile·Compose 파일.
 - 이전 연구까지 이어갈 경우 `artifacts/`와 문서 아카이브도 그대로 보존한다.
 - 대용량 실험 trace와 일부 audit는 GitHub 크기 제한 때문에 Git에서 제외한다. 커밋/푸시 후에도 해당 원자료는 직접 복사해야 한다.

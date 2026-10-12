@@ -51,6 +51,10 @@ pnpm.cmd start
 pnpm.cmd test:e2e
 ```
 
+2026-10-12 Windows 빌드: `pnpm build`는 프로젝트의 `scripts/windows-build-links.cjs`를 빌드 프로세스에만 적용한다. pnpm의 상대 경로 폴더 링크를 Next standalone에 복사할 때 권한 오류가 나면 Windows junction으로 생성한다. 관리자 실행·Windows 개발자 모드를 요구하지 않으며 Linux 빌드에는 영향을 주지 않는다.
+
+포켓몬 이미지는 `public/vendor/pokeapi/pokemon/`와 기존 Showdown·기믹·트레이너 폴더에서 제공한다. 정상 플레이 중 외부 이미지 사이트에 접속할 필요가 없다. 원본을 다시 가져올 때만 `node --import tsx scripts/import-local-pokemon-sprites.ts`를 실행하며 네트워크가 필요하다.
+
 E2E는 3001번 포트에 전용 서버를 시작하고 `.data/e2e.sqlite`를 사용한다. 실제 플레이용 3000번 서버와 DB는 건드리지 않는다.
 서버 재시작 테스트는 3002번 포트와 `.data/restart-tests/`의 별도 DB를 사용한다.
 테스트 전에 최신 코드를 빌드하고 3001·3002번 포트를 비워 둔다. Chrome이 없다면 설치하거나
@@ -101,7 +105,7 @@ CLI 로그 재현과 별개로, 웹은 저장된 초기 팀·시드·엔진/AI �
 - 변경 위치: `TOWER_DB_PATH`. 이 경로를 바꾸면 다른 저장 파일을 사용한다. 예시는 `.env.example` 참고.
 - SQLite WAL을 사용한다. 가장 단순한 백업은 서버를 정상 종료한 뒤 `.data` 폴더를 복사하는 것이다. 실행 중 본체 파일만 복사하지 않는다.
 - `.data`는 Git과 배포 파일 추적에서 제외된다. 테스트 DB 역시 커밋하지 않는다.
-- 현재 스키마는 v25이며 마이그레이션은 `src/server/schema.ts`와 `tower-store.ts`에 있다. 초기 v1 도전의 목표 층 수는 3으로 보존한다. 지원 버전보다 새 DB는 거부하며 이후 구조 변경에도 별도 마이그레이션이 필요하다.
+- 현재 스키마는 v26이며 같은 층의 챔피언/히든 보스 배틀을 stage로 구분하고 새 도전의 후반 테마를 run_routes에 저장한다. 기존 도전의 테마와 배치는 보존한다. 마이그레이션은 `src/server/schema.ts`와 `tower-store.ts`에 있다. 초기 v1 도전의 목표 층 수는 3으로 보존한다. 지원 버전보다 새 DB는 거부하며 이후 구조 변경에도 별도 마이그레이션이 필요하다.
 - 저장 파일 초기화/삭제는 자동으로 하지 않는다. 엔진 버전 불일치 시 자동 재계산하지 않고 복구를 거부한다.
 
 ## 환경별 실행 경로 예시

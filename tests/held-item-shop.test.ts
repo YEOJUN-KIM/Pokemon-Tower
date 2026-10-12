@@ -31,3 +31,13 @@ test('saved stock survives reloads, rejects unlisted purchases without spending,
     store.db.prepare("UPDATE runs SET floor=11 WHERE id=?").run(run);assert.equal(store.view('shop').run!.itemOffers!.length,4);assert.equal(store.db.prepare('SELECT COUNT(*) AS n FROM item_shops WHERE run_id=?').get(run)!.n,2);
   }finally{store.close();}
 });
+
+ test('depleted tiers still fill four distinct tools and saved short stock is filled once',()=>{
+  const rareOnly=heldItemKeys.filter(item=>itemShopRule(item).rarity==='rare');
+  for(const random of [()=>0,()=>.999999]){const offers=rollItemOffers(30,random,item=>rareOnly.includes(item));assert.equal(offers.length,4);assert.equal(new Set(offers).size,4);assert.ok(offers.every(item=>rareOnly.includes(item)));}
+  const store=new TowerStore(':memory:');try{store.ensurePlayer('fill');const run=store.battle(store.start('fill',starters,'basic')).run_id;store.db.prepare("UPDATE runs SET floor=11,state='select' WHERE id=?").run(run);
+    const old=['Light Clay','Heavy-Duty Boots','Spell Tag'];store.db.prepare('INSERT INTO item_shops VALUES (?,?,?)').run(run,11,JSON.stringify(old));
+    const stock=store.view('fill').run!.itemOffers!;assert.equal(stock.length,4);assert.equal(new Set(stock).size,4);assert.deepEqual(stock.slice(0,3),old);assert.deepEqual(store.view('fill').run!.itemOffers,stock);
+    store.db.prepare('INSERT INTO run_item_bag VALUES (?,?,?)').run(run,stock[3],1);assert.deepEqual(store.view('fill').run!.itemOffers,stock);
+  }finally{store.close();}
+ });

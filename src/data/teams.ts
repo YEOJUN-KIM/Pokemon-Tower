@@ -49,6 +49,7 @@ export function trainedSet(name:string,profile?:TrainingProfile) {
   if (!Object.hasOwn(pokemonSets, name)) throw new Error(`Unknown species: ${name}`);
   const base=structuredClone(pokemonSets[name as keyof typeof pokemonSets]);
   if(profile) {
+    if(profile.gender)base.gender=profile.gender;
     base.shiny=profile.shiny ?? false;
     base.ivs={...profile.ivs};base.evs={...profile.evs};base.moves=[...profile.moves];base.ability=profile.ability;base.nature=profile.nature ?? 'Serious';
     // Persist the stat-system version in Showdown's otherwise unused, losslessly packed ball metadata.

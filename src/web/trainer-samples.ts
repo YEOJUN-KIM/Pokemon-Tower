@@ -1,4 +1,11 @@
 import type {BossView} from './contracts';
+import {moveTypeNames} from '../data/move-info';
+export function trainerLabel(boss:BossView){
+  const named=boss.kind==='named'||/^(named-|gym-leader-|elite-four-|champion-)/.test(boss.id);
+  if(!named)return boss.kind==='elite'||boss.title==='엘리트 트레이너'?'엘리트 트레이너':boss.title||boss.name;
+  const title=boss.role==='gym'&&boss.specialty?`${moveTypeNames[boss.specialty] ?? boss.specialty}타입 관장`:boss.title;
+  return `${title} ${boss.name}`.trim();
+}
 
 export const trainerSamples = [
   {id:'youngster-gen4',name:'반바지 소년'},

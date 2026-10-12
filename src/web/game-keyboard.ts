@@ -4,6 +4,11 @@ import {useEffect,useRef} from 'react';
 import {effect} from './game-audio';
 
 type Select=(element:HTMLElement|null|undefined)=>void;
+function directionalButton(cursor:HTMLButtonElement,items:HTMLButtonElement[],key:string){
+  const origin=cursor.getBoundingClientRect(),x=origin.x+origin.width/2,y=origin.y+origin.height/2,horizontal=['arrowleft','arrowright'].includes(key),positive=['arrowright','arrowdown'].includes(key);
+  return items.filter(item=>item!==cursor).map(item=>{const rect=item.getBoundingClientRect(),dx=rect.x+rect.width/2-x,dy=rect.y+rect.height/2-y,along=horizontal?dx:dy,cross=horizontal?dy:dx,aligned=horizontal?rect.top<origin.bottom&&rect.bottom>origin.top:rect.left<origin.right&&rect.right>origin.left;
+    return {item,along,aligned,cost:Math.abs(along)+Math.abs(cross)*3};}).filter(item=>positive?item.along>2:item.along< -2).sort((a,b)=>Number(b.aligned)-Number(a.aligned)||a.cost-b.cost)[0]?.item;
+}
 export function selectGameCursor(element:HTMLElement|null|undefined) {
   if(element instanceof HTMLButtonElement && document.activeElement instanceof HTMLElement && document.activeElement.matches('input,select,textarea'))document.activeElement.blur();
   if(element)document.dispatchEvent(new CustomEvent('game-cursor-select',{detail:element}));
@@ -80,13 +85,7 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
       if(tabScope && cursor && event.key.startsWith('Arrow') && (tabProducts || cursor.matches('[data-keyboard-tab-utility]'))){
         event.preventDefault();let next:HTMLButtonElement|null|undefined=cursor;
         if(tabProducts){
-          const entries=Array.from(tabProducts.querySelectorAll<HTMLButtonElement>('button'));
-          const index=entries.indexOf(cursor),cols=getComputedStyle(tabProducts).gridTemplateColumns.split(' ').length;
-          const delta=key==='arrowdown'?cols:key==='arrowup'?-cols:key==='arrowright'?1:-1;
-          for(let i=index+delta;i>=0 && i<entries.length;i+=delta){
-            if(['arrowleft','arrowright'].includes(key) && Math.floor(i/cols)!==Math.floor(index/cols))break;
-            if(!entries[i].disabled){next=entries[i];break;}
-          }
+          next=directionalButton(cursor,buttons(tabProducts),key) ?? cursor;
         }else{
           const index=tabUtilities.indexOf(cursor);
           if(key==='arrowup')next=tabUtilities[index-1] ?? tabScope.querySelector<HTMLButtonElement>('[data-keyboard-tab][aria-pressed=true]');
@@ -158,20 +157,20 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
           if(previous){select(previous);previous.scrollIntoView({block:'nearest',inline:'nearest'});return;}
         }
         const horizontal=['ArrowLeft','ArrowRight'].includes(event.key),positive=['ArrowRight','ArrowDown'].includes(event.key);
-        const nearest=items.filter(item=>item!==cursor).map(item=>{const rect=item.getBoundingClientRect(),dx=rect.x+rect.width/2-x,dy=rect.y+rect.height/2-y,along=horizontal ? dx : dy,cross=horizontal ? dy : dx;
-          const aligned=horizontal ? rect.top<origin.bottom && rect.bottom>origin.top : rect.left<origin.right && rect.right>origin.left;
-          return {item,along,aligned,cost:Math.abs(along)+Math.abs(cross)*3};}).filter(item=>item.aligned && (positive ? item.along>2 : item.along< -2)).sort((a,b)=>Number(b.aligned)-Number(a.aligned) || a.cost-b.cost)[0];
-        if(nearest)select(nearest.item);
-        nearest?.item.scrollIntoView({block:'nearest',inline:'nearest'});
+        const nearest=(grid ? directionalButton(cursor,items.filter(item=>item.closest('[data-keyboard-grid]')===grid),key) : undefined) ?? directionalButton(cursor,items,key);
+        if(nearest)select(nearest);
+        nearest?.scrollIntoView({block:'nearest',inline:'nearest'});
       }
     }
     const commanded=(event:Event)=>draw((event as CustomEvent<HTMLElement>).detail);
-    const pointed=(event:Event)=>{const button=(event.target as HTMLElement).closest<HTMLButtonElement>('button,a[href]');if(button){document.body.dataset.gameInput='cursor';draw(button);}};
+    const pointed=(event:Event)=>{const button=(event.target as HTMLElement).closest<HTMLButtonElement>('button,a[href]');if(button){document.body.dataset.gameInput='pointer';draw(button);}};
+    let pointerPosition:{x:number;y:number}|null=null;
+    const moved=(event:PointerEvent)=>{const previous=pointerPosition;pointerPosition={x:event.clientX,y:event.clientY};if(previous&&previous.x===event.clientX&&previous.y===event.clientY)return;if(event.pointerType!=='mouse')return;pointed(event);};
     const focused=(event:Event)=>{if(document.body.dataset.gameInput!=='native')return;const button=(event.target as HTMLElement).closest<HTMLButtonElement>('button,a[href]');if(button)draw(button);};
     let queued=false;
     const observer=new MutationObserver(()=>{if(queued)return;queued=true;queueMicrotask(()=>{queued=false;draw();});});
     observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['open','disabled']});
-    document.addEventListener('keydown',handle);document.addEventListener('game-cursor-select',commanded);document.addEventListener('pointerdown',pointed,true);document.addEventListener('focusin',focused);draw();
-    return ()=>{observer.disconnect();document.removeEventListener('keydown',handle);document.removeEventListener('game-cursor-select',commanded);document.removeEventListener('pointerdown',pointed,true);document.removeEventListener('focusin',focused);marked.current?.removeAttribute('data-game-cursor');};
+    document.addEventListener('keydown',handle);document.addEventListener('game-cursor-select',commanded);document.addEventListener('pointerdown',pointed,true);document.addEventListener('pointermove',moved,true);document.addEventListener('focusin',focused);draw();
+    return ()=>{observer.disconnect();document.removeEventListener('keydown',handle);document.removeEventListener('game-cursor-select',commanded);document.removeEventListener('pointerdown',pointed,true);document.removeEventListener('pointermove',moved,true);document.removeEventListener('focusin',focused);marked.current?.removeAttribute('data-game-cursor');};
   },[selector,columns,enabled]);
 }

@@ -18,7 +18,6 @@ import {createPokemonNameIndex,preparePokemonNameQuery,matchesPokemonNameIndex} 
 import {useRouter} from 'next/navigation';
 import {PokedexDialog,PokemonActions} from './pokedex-dialog';
 import {DexFilterDialog} from './dex-filter-dialog';
-import {ivSummary} from './iv-summary';
 
 function Types({types}:{types:string[]}) {
   return <span className="dex-type-pills">{types.map(type=><span key={type} className="dex-type-pill" style={{'--type-color':typeColors[type] ?? '#80909c'} as CSSProperties}>{type}</span>)}</span>;
@@ -28,7 +27,7 @@ function Picture({entry,animated=false,shiny=false}: {entry:PokedexEntry;animate
   return <PokemonImage shiny={shiny} id={entry.id} name={entry.name} animated={animated} lazy fallback={<span className="dex-image-fallback" aria-label={`${entry.name} 이미지 없음`}>◇<small>{entry.name}</small></span>}/>;
 }
 
-export default function Pokedex({entries,initialTower,onStart,startError=''}: {entries:PokedexEntry[];initialTower?:TowerView;onStart?:(selected:string[],rule:BattleRule)=>Promise<void>;startError?:string}) {
+export default function Pokedex({entries,initialTower,onStart,startError='',returnToBattle=false}: {entries:PokedexEntry[];initialTower?:TowerView;onStart?:(selected:string[],rule:BattleRule)=>Promise<void>;startError?:string;returnToBattle?:boolean}) {
   const [rule,setRule]=useState<BattleRule>('basic');
   const [ruleMenu,setRuleMenu]=useState(false);
   const [returnToTitle,setReturnToTitle]=useState(false);
@@ -128,7 +127,7 @@ export default function Pokedex({entries,initialTower,onStart,startError=''}: {e
       if(event.key==='ArrowUp')select(toolbar.at(-1));else if(event.key==='ArrowDown')select(list.current?.querySelector<HTMLButtonElement>('.dex-card'));else select(actions[Math.max(0,Math.min(actions.length-1,actions.indexOf(focused)+(event.key==='ArrowRight' ? 1 : -1)))]);return true;
     }
     if(card && (key==='enter'||key==='z')){event.preventDefault();setSavedNotice('');setMenu(true);return true;}
-    if(key==='x'){event.preventDefault();setReturnToTitle(true);return true;}
+    if(key==='x'){event.preventDefault();if(returnToBattle)router.push('/battle');else setReturnToTitle(true);return true;}
     if(['PageDown','PageUp'].includes(event.key)){event.preventDefault();if(!event.repeat){const next=Math.max(0,Math.min(pageCount-1,currentPage+(event.key==='PageDown' ? 1 : -1)));if(next!==currentPage){pageCursor.current=0;setPage(next);}}return true;}
     const partyButtons=Array.from(document.querySelectorAll<HTMLButtonElement>('.dex-party-slot button,.dex-start-party>.primary-button')).filter(button=>!button.disabled);
     if(card && event.key.startsWith('Arrow')) {
@@ -168,7 +167,7 @@ export default function Pokedex({entries,initialTower,onStart,startError=''}: {e
     finally {startLock.current=false;setStarting(false);}
   }
   return <main className="pokedex-screen dex-console dex-center">
-    <nav className="dex-nav" aria-label="도감 메뉴"><Link href="/">← 타이틀로</Link><div className="dex-heading"><div><h1><span className="dex-device-light"/>포켓몬 도감</h1></div><div className="dex-heading-counters"><div className="dex-progress"><strong data-testid="dex-progress">{tower ? unlocked.length : '—'} / {entries.length}</strong><span>도감 보유</span></div><div className="dex-wallet" data-testid="growth-wallet"><span>성장 포인트</span><strong>{tower?.growthPoints.toLocaleString() ?? '…'}<small>P</small></strong></div></div></div><Link href="/upgrades">영구 업그레이드</Link><Link href={activeRun ? '/battle' : '/battle?prepare=1'}>{activeRun ? '게임 이어하기 ↗' : '새 도전 준비 ↗'}</Link></nav>
+    <nav className="dex-nav" aria-label="도감 메뉴"><Link href={returnToBattle ? "/battle" : "/"}>{returnToBattle ? "← 배틀로 돌아가기" : "← 타이틀로"}</Link><div className="dex-heading"><div><h1><span className="dex-device-light"/>포켓몬 도감</h1></div><div className="dex-heading-counters"><div className="dex-progress"><strong data-testid="dex-progress">{tower ? unlocked.length : '—'} / {entries.length}</strong><span>도감 보유</span></div><div className="dex-wallet" data-testid="growth-wallet"><span>성장 포인트</span><strong>{tower?.growthPoints.toLocaleString() ?? '…'}<small>P</small></strong></div></div></div><Link href="/upgrades">영구 업그레이드</Link><Link href={activeRun ? '/battle' : '/battle?prepare=1'}>{activeRun ? '게임 이어하기 ↗' : '새 도전 준비 ↗'}</Link></nav>
     {(error || startError) && <div className="error-banner" role="alert">{error || startError}<button disabled={busy} onClick={() => void refresh()}>다시 불러오기</button></div>}
     {busy && <p role="status">해금 상태를 불러오는 중…</p>}
     <div className="dex-toolbar" aria-label="도감 검색 및 필터">
@@ -184,7 +183,7 @@ export default function Pokedex({entries,initialTower,onStart,startError=''}: {e
       <header><span>No. {String(current.id).padStart(3,'0')}</span><span>{current.generation}세대</span></header>
       <div className="dex-partner-stage"><PokemonImage shiny={saved?.profile.shiny} id={current.id} name={current.name} animated maxPixelScale={2} width={160} height={160} fallback={<span className="dex-image-fallback">◇</span>}/></div>
       <h2>{current.name}{saved?.profile.shiny ? ' ✦' : ''}</h2><Types types={current.types}/>
-      {saved && <small className="dex-partner-ivs">개체값 {ivSummary(saved.profile)}</small>}<div className="dex-partner-stats"><span>종족값</span><BaseStatRadar stats={current.baseStats}/></div><dl className="dex-partner-traits"><div><dt>특성</dt><dd>{abilityNames[saved?.profile.ability??current.ability]??current.ability}</dd></div><div><dt>성격</dt><dd>{natureLabel(saved?.profile.nature??'Serious')}</dd></div></dl>
+      <div className="dex-partner-stats"><span>종족값</span><BaseStatRadar stats={current.baseStats}/></div><dl className="dex-partner-traits"><div><dt>특성</dt><dd>{abilityNames[saved?.profile.ability??current.ability]??current.ability}</dd></div><div><dt>성격</dt><dd>{natureLabel(saved?.profile.nature??'Serious')}</dd></div></dl>
       {(()=>{const allowed=teraTypesForSpecies(current.species),tera=saved?.profile.teraType??(allowed.length===1?allowed[0]:Object.keys(teraNames).find(t=>teraNames[t]===current.types[0])??'Normal');return <div className="dex-partner-tera"><span>테라 타입</span><strong style={{color:teraColors[tera]}}>{teraNames[tera]}</strong></div>;})()}
       <button className="dex-inspect-button" onClick={()=>setInspecting(true)}>{current.name} 기본 정보 ↗</button>
     </section>
@@ -201,6 +200,6 @@ export default function Pokedex({entries,initialTower,onStart,startError=''}: {e
     {menu && <PokemonActions shiny={saved?.profile.shiny} entry={current} canChoose={!!saved && party.length<3 && !party.includes(current.species)} canAdjust={!!saved} chosen={party.includes(current.species)} full={party.length>=3} onChoose={()=>{if(party.includes(current.species))setParty(values=>values.filter(name=>name!==current.species));else if(party.length<3){focusStart.current=party.length===2;setParty(values=>[...values,current.species]);}setMenu(false);}} onAdjust={()=>{setMenu(false);setAdjusting(true);}} onMoves={()=>{setMenu(false);setEditingMoves(true);}} onInfo={()=>{setMenu(false);setInspecting(true);}} onClose={()=>setMenu(false)}/>}
     {adjusting && saved && tower && <PokedexDialog title={`${current.name} 능력치 조정`} className="dex-settings-dialog" returnFocus='.dex-card[aria-pressed="true"]' large onClose={()=>setAdjusting(false)}><TrainingEditor key={`${saved.species}-${saved.revision}`} entry={saved} points={tower.growthPoints} onSave={saveTraining} showMoves={false}/>{savedNotice && <p role="status" className="dex-save-notice">{savedNotice}</p>}</PokedexDialog>}
     {editingMoves && saved && <PokedexDialog title={`${current.name} 기술배치`} className="dex-settings-dialog" returnFocus='.dex-card[aria-pressed="true"]' large onClose={()=>setEditingMoves(false)}><MoveEditor key={`${saved.species}-${saved.revision}`} entry={saved} onSave={saveTraining}/>{savedNotice && <p role="status" className="dex-save-notice">{savedNotice}</p>}</PokedexDialog>}
-    <footer><div className="dex-control-hints"><span><kbd>방향키</kbd> 이동</span><span><kbd>Enter / Z</kbd> 선택·설정</span><span><kbd>X</kbd> 타이틀·뒤로</span><span><kbd>F</kbd> 즐겨찾기</span><span><kbd>V</kbd> 즐겨찾기 목록</span><span><kbd>R</kbd> 필터 초기화</span><span><kbd>← / →</kbd> 목록 끝에서 페이지</span></div><span><a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noreferrer">Sprites: PokéAPI</a> / <a href="https://play.pokemonshowdown.com/sprites/" target="_blank" rel="noreferrer">Smogon</a></span></footer>
+    <footer><div className="dex-control-hints"><span><kbd>방향키</kbd> 이동</span><span><kbd>Enter / Z</kbd> 선택·설정</span><span><kbd>X</kbd> {returnToBattle ? "배틀·뒤로" : "타이틀·뒤로"}</span><span><kbd>F</kbd> 즐겨찾기</span><span><kbd>V</kbd> 즐겨찾기 목록</span><span><kbd>R</kbd> 필터 초기화</span><span><kbd>← / →</kbd> 목록 끝에서 페이지</span></div><span><a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noreferrer">Sprites: PokéAPI</a> / <a href="https://play.pokemonshowdown.com/sprites/" target="_blank" rel="noreferrer">Smogon</a></span></footer>
   </main>;
 }

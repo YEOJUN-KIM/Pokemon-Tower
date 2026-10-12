@@ -22,6 +22,46 @@ body .battle-live .battle-choice-arrow{color:#98efd1}
 body .battle-live :is(.gimmick-dock,.tera-command-side) button[data-game-cursor=true],
 body .battle-live :is(.gimmick-dock,.tera-command-side) button:focus-visible{
   outline-offset:2px!important;
-  border-radius:50%;
+  border-radius:8px;
   box-shadow:none!important;
 }
+
+/* Pointer clicks do not need a native focus frame; Tab remains visible. */
+body .battle-live .gimmick-icon-button:focus:not(:focus-visible):not([data-game-cursor=true]){
+  outline:none!important;
+}
+body[data-game-input=pointer] .battle-live .gimmick-icon-button{
+  outline:none!important;
+}
+
+.battle-live footer>.battle-keyboard-hints{display:flex!important;flex-wrap:wrap;gap:8px 20px;font-size:11px;color:#e3edf6}
+.battle-keyboard-hints>span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.battle-keyboard-hints kbd,.gimmick-cycle-hint kbd{border:1px solid #8a9cae;border-bottom-width:3px;border-radius:4px;background:#233648;color:#fff;padding:2px 6px;font:700 11px monospace}
+.gimmick-cycle-hint{position:absolute;left:12px;bottom:calc(100% + 4px);font-size:11px;color:#edf4ff;white-space:nowrap;text-shadow:0 1px 3px #101324}
+body .battle-live .right-column{left:16px;top:42px;max-width:calc(100% - 32px)}
+body .battle-live .team-panel{overflow:visible}
+body .battle-live .team-panel>.section-heading{display:block}
+body .battle-live .team-panel h2{font-size:12px;color:#e5eef8;white-space:nowrap;background:#233648e6;padding:5px 7px;border-radius:4px}
+body .battle-live .team-list{gap:6px}
+body .battle-live .team-member{display:flex;flex-direction:column;gap:0;width:54px;min-height:68px;flex:none;border:1px solid #b5c9dd40;border-radius:6px;background:#233648bf}
+body .battle-live .team-member .sprite{width:50px;height:46px}
+body .battle-live .team-status{display:block;font-size:10px;line-height:18px;margin:0;color:#e1ecf7;padding:0 4px}
+body .battle-live .team-member.is-muted .sprite{filter:grayscale(1);opacity:.45}
+body .battle-live .team-member.is-muted .team-status{color:#aab5c0}
+body .battle-live .team-member.is-active{border-color:#98efd1}
+body .battle-live .team-empty{display:grid;place-items:center;height:46px;width:50px;color:#8393a4;font-size:22px}
+body .battle-live .enemy-trainer{font-size:12px;letter-spacing:.3px;top:18px;right:20px}
+body .battle-live .enemy-health{top:24%}
+@media(max-width:760px){
+  body .battle-live .right-column{left:8px;top:36px;max-width:calc(100% - 16px)}
+  body .battle-live .team-panel>.section-heading{display:none}
+  body .battle-live .team-list{gap:4px;width:auto}
+  body .battle-live .team-member{width:42px;min-height:52px}
+  body .battle-live .team-member .sprite,body .battle-live .team-empty{width:40px;height:34px}
+  body .battle-live .team-status{font-size:8px;line-height:15px;padding:0 2px}
+  body .battle-live .enemy-trainer{font-size:10px;top:62px;right:12px}
+  body .battle-live .enemy-health{top:30%}
+  .gimmick-cycle-hint{font-size:9px}
+}
+.battle-live .effect-notice{animation:notice-enter .16s ease-out both}
+@keyframes notice-enter{from{opacity:0;transform:translateX(var(--notice-slide))}to{opacity:1;transform:translateX(0)}}

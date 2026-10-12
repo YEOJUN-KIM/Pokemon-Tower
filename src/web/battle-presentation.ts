@@ -1,11 +1,13 @@
+import {genderFromDetails} from '../data/gender';
 import {teraNames} from '../data/tera';
 import type {BattleView} from './contracts';
 import {describeLine, moves, pokemonName, statNames} from './catalog';
 import {effectNotice, type EffectNotice} from './battle-effects';
 import {advanceField,emptyField} from './battle-field';
 import {itemName} from '../data/held-items';
+import {moveAnimationPlan} from './move-animation-plan';
 
-export type Motion = {kind: 'move' | 'hit' | 'heal' | 'switch' | 'faint' | 'stat-up' | 'stat-down' | 'mega-charge' | 'mega-shell' | 'mega-burst' | 'mega-flash' | 'mega-reveal' | 'dynamax-recall' | 'dynamax-ball' | 'dynamax-release' | 'dynamax-grow' | 'dynamax-end' | 'tera-charge' | 'tera-shell' | 'tera-burst' | 'tera-reveal'; sendOut?:boolean;side: 'player' | 'enemy'; color: string; move?: string; label?:string;impact?:'weak'|'strong'|'critical'};
+export type Motion = {kind: 'move' | 'hit' | 'heal' | 'switch' | 'faint' | 'stat-up' | 'stat-down' | 'mega-charge' | 'mega-shell' | 'mega-burst' | 'mega-flash' | 'mega-reveal' | 'dynamax-recall' | 'dynamax-ball' | 'dynamax-release' | 'dynamax-grow' | 'dynamax-end' | 'tera-charge' | 'tera-shell' | 'tera-burst' | 'tera-reveal'; targetSide?:'player'|'enemy';missed?:boolean;blocked?:boolean;sendOut?:boolean;side: 'player' | 'enemy'; color: string; move?: string; label?:string;impact?:'weak'|'strong'|'critical'};
 export type Frame = {view: BattleView; motion: Motion | null; duration: number; notice?:EffectNotice; announcement?:string};
 
 // Protocol windows can be truncated at 300 lines. Match the largest overlap,
@@ -47,13 +49,19 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
     if(event==='-supereffective')impact='strong';
     if(event==='-resisted')impact='weak';
     if(event==='-crit')impact='critical';
-    if (side && event === 'move') motion = {kind:'move', side, color:value==='Tera Blast' && pokemon?.terastallized ? pokemon.terastallized.toLowerCase() : moves[value]?.color ?? 'normal', move:value};
+    if (side && event === 'move') {
+      const nextMove=lines.findIndex((next,i)=>i>index&&next.startsWith('|move|'));
+      const following=lines.slice(index+1,nextMove<0?lines.length:nextMove);
+      const color=value==='Tera Blast' && pokemon?.terastallized ? pokemon.terastallized.toLowerCase() : moves[value]?.color ?? 'normal';
+      const defaultTarget=moveAnimationPlan(value,color).style==='support'?side:side==='player'?'enemy':'player';
+      motion = {kind:'move', side, targetSide:condition?.startsWith('p1')?'player':condition?.startsWith('p2')?'enemy':defaultTarget, missed:following.some(next=>next.startsWith('|-miss|')), blocked:following.some(next=>/^\|-(immune|fail)\|/.test(next)||next.includes('[from] ability: Water Absorb')||next.includes('[from] ability: Volt Absorb')||next.includes('[from] ability: Dry Skin')), color, move:value};
+    }
     if (side && ['switch','drag','replace'].includes(event)) {
       const name = value.split(',')[0];
-      if (side === 'enemy') view.opponent = {shiny:value.split(', ').includes('shiny'),species:name,terastallized:value.match(/tera:([A-Za-z]+)/)?.[1],condition:condition ?? view.opponent?.condition ?? '100/100'};
+      if (side === 'enemy') view.opponent = {gender:genderFromDetails(value),shiny:value.split(', ').includes('shiny'),species:name,terastallized:value.match(/tera:([A-Za-z]+)/)?.[1],condition:condition ?? view.opponent?.condition ?? '100/100'};
       else {
         const actual=after.team.find(p=>p.active)?.species==='Zoroark' ? 'Zoroark' : actor.split(': ')[1];
-        view.team=view.team.map(p=>p.species===actual ? {...p,active:true,displaySpecies:name,condition:condition ?? p.condition} : {...p,active:false});
+        view.team=view.team.map(p=>p.species===actual ? {...p,active:true,gender:genderFromDetails(value),displaySpecies:name,condition:condition ?? p.condition} : {...p,active:false});
       }
       motion = {kind:'switch',side,color:'normal',sendOut:event!=='replace'};
     }
@@ -110,7 +118,7 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
     if (pokemon && event === '-status') pokemon.condition = `${pokemon.condition.split(' ')[0]} ${value}`;
     if (pokemon && event === '-curestatus') pokemon.condition = pokemon.condition.split(' ')[0];
     if (event === 'turn') view.turn = Number(actor);
-    const motionDuration = motion?.kind === 'dynamax-grow' ? 1150 : motion?.kind === 'dynamax-end' ? 600 : motion?.kind === 'switch' ? (motion.sendOut && (view.opponent?.shiny || view.team.find(p=>p.active)?.shiny) ? 1400 : 800) : motion?.kind === 'move' ? 800 : motion?.kind === 'hit' ? 360 : motion ? 220 : 0;
+    const motionDuration = motion?.kind === 'dynamax-grow' ? 1150 : motion?.kind === 'dynamax-end' ? 600 : motion?.kind === 'switch' ? (motion.sendOut && (view.opponent?.shiny || view.team.find(p=>p.active)?.shiny) ? 1400 : 800) : motion?.kind === 'move' ? moveAnimationPlan(motion.move ?? '',motion.color).duration : motion?.kind === 'hit' ? 360 : motion ? 220 : 0;
     frames.push({view, motion, notice:absorbs ? undefined : notice, duration:Math.max(motionDuration, notice && !absorbs ? 1200 : describeLine(line) ? 750 : 0)});
   }
   return frames;

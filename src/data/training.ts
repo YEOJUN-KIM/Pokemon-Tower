@@ -22,8 +22,8 @@ export function natureLabel(id:string) {
   return `${nature.name} · ${nature.plus && nature.minus ? `${statNames[nature.plus]} ↑ / ${statNames[nature.minus]} ↓` : '능력치 보정 없음'}`;
 }
 // evs stores stat points for new profiles; unmarked snapshots retain legacy EV rules.
-export type TrainingProfile={shiny?:boolean;ivs:StatBlock;evs:StatBlock;moves:string[];ability:string;nature:string;teraType?:import('./tera').TeraType;statSystem?:'points';runBonuses?:Partial<StatBlock>};
-export type TrainingView={species:string;profile:TrainingProfile;revision:number;abilities:string[];learnableMoves:string[];selfMoves:string[];unlockedMoves:string[];baseStats:StatBlock};
+export type TrainingProfile={gender?:import('./gender').PokemonGender;shiny?:boolean;ivs:StatBlock;evs:StatBlock;moves:string[];ability:string;nature:string;teraType?:import('./tera').TeraType;statSystem?:'points';runBonuses?:Partial<StatBlock>};
+export type TrainingView={genders?:import('./gender').PokemonGender[];species:string;profile:TrainingProfile;revision:number;abilities:string[];learnableMoves:string[];selfMoves:string[];unlockedMoves:string[];baseStats:StatBlock};
 export function trainedStat(base:number,iv:number,points:number,key:StatKey,natureId:string) {
   if(key==='hp' && base===1)return 1;
   const neutral=base+Math.floor(iv/2)+points+(key==='hp' ? 60 : 5);

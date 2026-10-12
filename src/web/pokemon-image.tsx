@@ -6,20 +6,21 @@ import {missingDotAnimation} from '../data/sprite-animation';
 import formAvailability from '../data/form-sprite-availability.json' with {type:'json'};
 import {pixelSpriteSources} from '../data/pixel-sprites';
 import {animationFraming} from './sprite-framing';
+import {localPokemonSources} from '../data/local-pokemon-sprites';
 
 const posters=new Map<string,{png:string;style:CSSProperties;heightFraction?:number}>();
 const readyFrames=new Set<string>();
-const root='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
 export function pokemonImageSources(id:number,back=false,animated=false,spriteKey:string|number=id,shiny=false):string[] {
-  if(shiny){const side=back?'back/':'';return id<650 ? [`${root}versions/generation-v/black-white/animated/${side}shiny/${spriteKey}.gif`,`${root}${side}shiny/${spriteKey}.png`] : [`${root}${side}shiny/${spriteKey}.png`];}
+  const local=(paths:string[])=>localPokemonSources(paths,id,spriteKey,back,shiny);
+  if(shiny){const side=back?'back/':'';return local(id<650 ? [`versions/generation-v/black-white/animated/${side}shiny/${spriteKey}.gif`,`${side}shiny/${spriteKey}.png`] : [`${side}shiny/${spriteKey}.png`]);}
   const mega=(megaSprites as Record<string,{key:string;animatedFront:boolean;animatedBack:boolean}>)[spriteKey];
   if(mega){const base='/sprites/gimmicks/'+(back?'back/':'front/')+mega.key;return animated && (back?mega.animatedBack:mega.animatedFront) ? [base+'.gif',base+'.png'] : [base+'.png'];}
   // Modern species use community pixel sprites, never the model-rendered GIF fallback.
   if(id>=650){const pixel=pixelSpriteSources(spriteKey,back,animated);if(pixel.length)return pixel;}
-  const side=back ? 'back/' : '',png=`${root}${side}${spriteKey}.png`;
+  const side=back ? 'back/' : '',png=`${side}${spriteKey}.png`;
   const form=(formAvailability as Record<string,{dotBoth:boolean;showdownBoth:boolean}>)[spriteKey];
-  if(!animated || (form ? !form.dotBoth : missingDotAnimation.has(id)))return [png];
-  return [`${root}versions/generation-v/black-white/animated/${side}${spriteKey}.gif`,png];
+  if(!animated || (form ? !form.dotBoth : missingDotAnimation.has(id)))return local([png]);
+  return local([`versions/generation-v/black-white/animated/${side}${spriteKey}.gif`,png]);
 }
 
 export function PokemonImage({shiny=false,id,spriteKey=id,name,back=false,animated=false,width=96,height=96,lazy=false,sizeScale=1,stableFrame=false,matchBaseHeight=false,maxPixelScale,onVisibleTop,fallback}:{shiny?:boolean;id:number;spriteKey?:string|number;name:string;back?:boolean;animated?:boolean;width?:number;height?:number;lazy?:boolean;sizeScale?:number;stableFrame?:boolean;matchBaseHeight?:boolean;maxPixelScale?:number;onVisibleTop?:(top:number)=>void;fallback:ReactNode}) {

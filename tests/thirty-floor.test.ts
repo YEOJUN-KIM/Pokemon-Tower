@@ -10,7 +10,6 @@ import {starters,packTeam,pokemonSets} from '../src/data/teams';
 import {isShopFloor} from '../src/data/shop';
 import {towerTrainerEncounter} from '../src/data/tower-trainers';
 import {villainOrganizations,runOrganization,villainGrunt} from '../src/data/villain-organizations';
-import {randomTowerTheme} from '../src/data/tower-themes';
 import {encounterPool,generateOpponentTeam} from '../src/server/opponent-team';
 import {runBattle,FORMAT} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
@@ -19,6 +18,9 @@ test('one hundred real battle results progress through every checkpoint and only
   const store=new TowerStore(':memory:');
   try{
     store.ensurePlayer('climb');let id=store.start('climb',starters);const run=store.battle(id).run_id;
+    // Hidden Kanto/Johto rematches have separate route tests; this fixture counts 100 battles.
+    store.db.prepare("UPDATE run_themes SET theme='hoenn' WHERE run_id=?").run(run);
+    store.db.prepare("UPDATE run_routes SET second_theme='sinnoh' WHERE run_id=?").run(run);
     assert.equal(store.view('climb').run!.totalFloors,100);
     for(let floor=1;floor<=100;floor++){
       if(floor>1){
@@ -35,7 +37,7 @@ test('one hundred real battle results progress through every checkpoint and only
       }
       const row=store.battle(id),original=Showdown.Teams.unpack(row.opponent_team)!;
       assert.equal(original.length,3);assert.equal(new Set(original.map(set=>set.species)).size,3);
-      const boss=floor%5===0 ? towerTrainerEncounter(floor,run,store.view('climb').run!.theme!)!.boss : null;
+      const boss=floor%5===0 ? towerTrainerEncounter(floor,run,store.view('climb').run!.theme!,true)!.boss : null;
       assert.deepEqual(row.boss ? JSON.parse(row.boss) : null,boss);
       assert.equal(original.reduce((sum,set)=>sum+Object.values((set.evs ?? {}) as Record<string,number>).reduce((s,n)=>s+n,0),0),3*towerDifficulty(floor).points);
       // Weak deterministic opponents isolate progression from win-rate tuning. No winner is injected.
@@ -82,7 +84,7 @@ test('villain grunts belong to one saved organization, avoid milestones and cons
       if(sample){assert.equal(sample.title,villainOrganizations.find(g=>g.id===organization)!.name);assert.equal(sample.role,'villain');}
     }
   }
-  assert.equal(seen.size,6); // Legacy unthemed organization pool.
+  assert.equal(seen.size,10);
   for(const group of villainOrganizations){
     for(const name of group.entries)assert.ok(pokemonSets[name],`${group.id}: ${name}`);
     const sample={id:'fixture',name:'조직원',title:group.name,kind:'normal' as const,role:'villain' as const,generation:null,specialty:null,tactic:'status' as const,portrait:group.portrait,minFloor:1,concept:'fixture',entries:group.entries.filter(name=>encounterPool(9).includes(name))};
@@ -90,5 +92,5 @@ test('villain grunts belong to one saved organization, avoid milestones and cons
     const team=generateOpponentTeam(9,[1,2,3,4],[],null,sample);assert.equal(team.length,3);
     const unpacked=Showdown.Teams.unpack(packTeam(team.map(p=>p.name)))!;unpacked.forEach((set,i)=>{set.moves=team[i].moves;});assert.equal(validator.validateTeam(unpacked),null);
   }
-  const store=new TowerStore(':memory:');try{store.ensurePlayer('saved');const run=store.battle(store.start('saved',starters)).run_id;assert.equal((store.db.prepare('SELECT organization FROM run_villains WHERE run_id=?').get(run) as {organization:string}).organization,runOrganization(run,randomTowerTheme(run)));}finally{store.close();}
+  const store=new TowerStore(':memory:');try{store.ensurePlayer('saved');const run=store.battle(store.start('saved',starters)).run_id;assert.equal((store.db.prepare('SELECT organization FROM run_villains WHERE run_id=?').get(run) as {organization:string}).organization,runOrganization(run));}finally{store.close();}
 });

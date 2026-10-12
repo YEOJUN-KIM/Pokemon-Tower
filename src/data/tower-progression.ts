@@ -7,7 +7,7 @@ export function towerDifficulty(floor:number) {
   if(!Number.isSafeInteger(floor)||floor<1||floor>100)throw Error('Unsupported progression floor');
   if(floor<=50)return {
     chapter:1,localFloor:floor,
-    bstCeiling:Math.min(550,360+floor*3.8),
+    bstCeiling:Math.min(600,470+floor*2.6),
     ivCap:floor<=10?0:Math.min(12,Math.floor(1+floor*.22)),
     points:Math.max(0,Math.floor((floor-10)*.2)),
     legendary:false,mythical:false,
@@ -15,7 +15,7 @@ export function towerDifficulty(floor:number) {
   const localFloor=floor-50;
   return {
     chapter:2,localFloor,
-    bstCeiling:localFloor<=10?480+(localFloor-1)*40/9:Math.min(690,525+(localFloor-11)*165/39),
+    bstCeiling:localFloor<=10?550+(localFloor-1)*30/9:Math.min(720,585+(localFloor-11)*135/39),
     ivCap:localFloor<=10?Math.floor(7+(localFloor-1)*3/9):Math.floor(11+(localFloor-11)*20/39),
     points:localFloor<=10?Math.floor(3+(localFloor-1)*4/9):Math.floor(8+(localFloor-11)*58/39),
     legendary:floor>=75,mythical:floor>=90,

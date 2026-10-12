@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
-    "build": "next build",
-    "deploy:package": "next build && node scripts/package-deploy.mjs",
+    "build": "node --require ./scripts/windows-build-links.cjs node_modules/next/dist/bin/next build",
+    "deploy:package": "pnpm build && node scripts/package-deploy.mjs",
     "deploy:verify": "node scripts/verify-deploy.mjs",
     "deploy:verify:docker": "node scripts/verify-container.mjs",
     "preview:start": "node scripts/preview.mjs start",

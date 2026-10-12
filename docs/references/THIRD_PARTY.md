@@ -12,6 +12,8 @@
 
 사용자 요청으로 위 지우의 복장을 참고한 2D 뒷모습 4프레임을 이미지 생성 도구로 제작했다: `public/sprites/trainers/ash-johto-back-sheet.png`. 등장·투구에 사용하는 이 시트는 공식 원작 또는 Showdown에서 제공한 뒷모습이 아닌 생성 이미지다.
 
+2026-10-12 플레이어 등장·투구 스프라이트는 이미지 생성 도구로 제작한 오리지널 트레이너로 교체했다: `public/sprites/trainers/player-back-sheet.png`. 청록색 모자·노란 재킷의 뒷모습 4프레임이며, 기존 트레이너와 도트 크기를 맞추기 위해 96×128 프레임과 제한된 색상으로 변환했다. 생성 원본은 `artifacts/previews/player-trainer/original-sheet.png`에 보존한다. 이전 지우 시트도 보존하지만 현재 화면에서는 사용하지 않는다.
+
 임시 NPC 비상·목호 이미지는 Showdown에서 받아 `public/sprites/trainers/`에 포함했다: [비상 원본](https://play.pokemonshowdown.com/sprites/trainers/falkner.png), [목호 원본](https://play.pokemonshowdown.com/sprites/trainers/lance.png). 로딩 실패 시 임시 트레이너 이미지로 대체한다. 포켓몬/NPC 원작 권리는 해당 권리자에게 있으며 Showdown 엔진 라이선스와 이미지 권리는 별개다.
 
 2026-10-06 일반 NPC 샘플도 수정 없이 같은 폴더에 저장했다: [반바지 소년](https://play.pokemonshowdown.com/sprites/trainers/youngster-gen4.png), [등산가](https://play.pokemonshowdown.com/sprites/trainers/hiker-gen4.png), [낚시꾼](https://play.pokemonshowdown.com/sprites/trainers/fisherman-gen4.png), [엘리트 트레이너](https://play.pokemonshowdown.com/sprites/trainers/acetrainer-gen4.png). 파일 이름은 제공원의 식별자이며 세대별 콘텐츠 배치가 완료됐다는 뜻은 아니다.
@@ -41,11 +43,11 @@ Next.js·React·React DOM(MIT), Playwright(Apache-2.0)를 추가했다.
 
 - PokéAPI: https://pokeapi.co/docs/v2
 - 이미지 출처 후보: https://github.com/PokeAPI/sprites
-- 실행 중 종마다 PokéAPI REST를 호출하지 않는다. 이름·학습 자료는 가져오기 단계에서 수집하고, 기본 PNG 및 애니메이션 GIF는 PokeAPI/sprites의 외부 URL로 표시한다.
-- URL: https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{id}.png 와 back/{id}.png.
+- 실행 중 종마다 PokéAPI REST를 호출하지 않는다. 이름·학습 자료는 가져오기 단계에서 수집한다. 2026-10-12부터 기본·이로치 PNG와 기존 도트 애니메이션 GIF도 `public/vendor/pokeapi/pokemon/`에서 로컬 제공한다.
+- 가져온 원본은 기존 감사 버전 `a3a1432e688ea028f12c51371d5253037cb9f17b`에 고정했다. `node --import tsx scripts/import-local-pokemon-sprites.ts`로 재실행하며 파일별 SHA-256과 원본에 없는 변형은 `artifacts/reports/local-pokemon-sprites.json`에 기록한다. 없는 변형은 로컬 기본 종 이미지로 대체한다.
 - 현재 일반 도감 605종에 앞·뒷모습을 연결한다. 초기 7종/20종 ID 목록은 개발 이력이며 전체 지원 범위는 이미지 검사 JSON을 따른다.
 - [저장소 고지](https://github.com/PokeAPI/sprites/blob/master/LICENCE.txt)는 저장소 CC0 1.0 배포와 이미지 콘텐츠의 The Pokémon Company 저작권을 함께 명시한다. 캐릭터·이미지가 자유 이용으로 전환됐다고 해석하지 않는다.
-- 화면 하단에 이미지·엔진 출처를 표시한다. 1~5세대 포켓몬은 기존 외부 URL을 사용하며, 최신 세대는 아래의 로컬 Showdown 도트 자료를 사용한다. GIF의 도감 정지 프레임은 브라우저에서 만든다. 로컬 트레이너 PNG와 생성 지우 시트는 위 항목에 별도로 기록한다.
+- 화면 하단에 이미지·엔진 출처를 표시한다. 1~5세대 포켓몬은 로컬에 저장한 기존 PokeAPI 도트 자료를 사용하며, 최신 세대는 아래의 로컬 Showdown 도트 자료를 사용한다. GIF의 도감 정지 프레임은 브라우저에서 만든다. 로컬 트레이너 PNG와 생성 플레이어 시트는 위 항목에 별도로 기록한다.
 - 이미지 네트워크 실패 시 이름·대체 아이콘으로 계속 플레이할 수 있다.
 - 데이터/API/이미지/전투 연출을 동일한 라이선스나 제공 범위로 가정하지 않는다.
 
@@ -53,7 +55,7 @@ Next.js·React·React DOM(MIT), Playwright(Apache-2.0)를 추가했다.
 
 아래의 3층·7종·20종 설명은 초기 개발 이력이다. 현재 범위는 605종·10층·영구 성장·강화 상점·키보드 커서·트레이너 등장이며 README와 UI_FLOW를 기준으로 읽는다. 이후 데이터·스프라이트 확장 출처는 이 문서의 각 후속 항목에 기록한다.
 
-2026-10-04 추가 조사로 Showdown 연출 원본 2개·CC0 효과 이미지 22개 및 Kenney Impact Sounds CC0 공식 팩을 검토용으로 확보했다. 아직 게임에서 사용하지 않는다. 파일별 라이선스·전체 클라이언트와의 차이·이미지 예외·툴 전환 대안은 [RESOURCE_RESEARCH.md](RESOURCE_RESEARCH.md), 원본 출처와 해시는 `artifacts/reports/resource-manifest.json`에 기록한다. 기존의 자체 CSS/합성음과 이 확보 자료는 별개다.
+2026-10-04 추가 조사로 Showdown 연출 원본 2개·CC0 효과 이미지 22개 및 Kenney Impact Sounds CC0 공식 팩을 검토용으로 확보했다. 2026-10-12에는 CC0 효과 PNG 22개와 기술별 구성을 참고해 현재 배틀의 Canvas 연출에 연결했다. 별도 라이선스 이미지와 전체 클라이언트는 가져오지 않았고, Kenney 팩은 아직 연결하지 않았다. [현재 기술 연출](../gameplay/MOVE_EFFECTS.md), 파일별 조건과 당시 조사 내용은 [RESOURCE_RESEARCH.md](RESOURCE_RESEARCH.md)를 참고한다. 기존 원본 출처와 해시는 `artifacts/reports/resource-manifest.json`, 현재 연결 목록은 `artifacts/reports/move-effects-integration.json`에 기록한다.
 
 배틀 타입별 CSS 모션·공개 로그 순차 재생·Web Audio 임시 BGM/기술/승패 효과음은 직접 구현했다. 공식 음원이나 샘플을 포함하지 않았다. 2026-10-04 [Pokémon Game Sound Library 가이드라인](https://soundlibrary.pokemon.co.jp/en/download)은 게임·앱·소프트웨어 이용을 제외하므로 이 프로젝트의 음원 제공원으로 사용하지 않았다. 세부 확인과 음원 교체 방법은 [BATTLE_AUDIO.md](../gameplay/BATTLE_AUDIO.md)를 참고한다.
 

@@ -16,3 +16,4 @@ export function themeLabel(theme:TowerTheme|null|undefined){return theme?`${towe
 export function themeTicket(key:string){let hash=2166136261;for(const char of key)hash=Math.imul(hash^char.charCodeAt(0),16777619);hash=Math.imul(hash^(hash>>>16),0x85ebca6b);hash=Math.imul(hash^(hash>>>13),0xc2b2ae35);return ((hash^(hash>>>16))>>>0)/4294967296;}
 // Chosen once from a cryptographically random run ID, then persisted with the run.
 export function randomTowerTheme(runId:string):TowerTheme{const themes=Object.keys(towerThemes) as TowerTheme[];return themes[Math.floor(themeTicket(`theme:${runId}`)*themes.length)];}
+export function secondTowerTheme(runId:string,first:TowerTheme):TowerTheme{const themes=(Object.keys(towerThemes) as TowerTheme[]).filter(theme=>theme!==first);return themes[Math.floor(themeTicket(`theme:${runId}:chapter:2`)*themes.length)];}

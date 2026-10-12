@@ -1,4 +1,5 @@
 'use client';
+import {genderNames} from '../data/gender';
 import {useState,type CSSProperties} from 'react';
 import {teraTypesForSpecies,teraNames,type TeraType} from '../data/tera';
 import {TeraCrystal} from './tera-crystal';
@@ -14,7 +15,7 @@ import abilityDescriptions from '../data/ability-descriptions.json' with {type:'
 export function TrainingEditor({entry,points,onSave,showMoves=true,inRun=false}:{inRun?:boolean;entry:TrainingView;points:number;onSave:(entry:TrainingView,profile:TrainingProfile)=>Promise<void>;showMoves?:boolean}) {
   const [draft,setDraft]=useState(()=>structuredClone(entry.profile));
   const [tab,setTab]=useState('stats');
-  const [picker,setPicker]=useState<'nature'|'ability'|'tera'|null>(null);
+  const [picker,setPicker]=useState<'nature'|'ability'|'tera'|'gender'|null>(null);
   const tabs=[['stats','능력치'],['traits','성격·특성·테라스탈'],...(showMoves?[['moves','기술']]:[])];
   const [busy,setBusy]=useState(false),[message,setMessage]=useState('');
   const total=statKeys.reduce((sum,key)=>sum+draft.evs[key],0),cost=trainingCost(entry.profile,draft);
@@ -42,9 +43,11 @@ export function TrainingEditor({entry,points,onSave,showMoves=true,inRun=false}:
     })}</div>
     </div></div></div>
     <div role="tabpanel" id="training-panel-traits" aria-labelledby="training-tab-traits" hidden={tab!=='traits'}>
+    <div className="training-choice training-gender"><span>성별</span><button className="training-trait-button" data-trait="gender" aria-label="성별 선택" disabled={busy || (entry.genders?.length ?? 1)<2} onClick={()=>setPicker("gender")}>{genderNames[draft.gender ?? entry.genders?.[0] ?? "N"]}<span>{(entry.genders?.length ?? 1)<2?"고정":"선택 ▸"}</span></button></div>
     <div className="training-choice training-nature"><span>성격</span><button className="training-trait-button" data-trait="nature" aria-label="성격 선택" disabled={busy} onClick={()=>setPicker('nature')}>{natureLabel(draft.nature)}<span>선택 ▸</span></button></div>
     <div className="training-choice training-ability"><span>특성</span><button className="training-trait-button" data-trait="ability" aria-label="특성 선택" disabled={busy} onClick={()=>setPicker('ability')}>{abilityNames[draft.ability] ?? draft.ability}<span>선택 ▸</span></button></div>
     <div className="training-choice training-tera"><span><TeraCrystal type={draft.teraType ?? 'Normal'}/>테라스탈</span><button className="training-trait-button" data-trait="tera" aria-label="테라스탈 선택" disabled={busy} onClick={()=>setPicker('tera')}>{teraNames[draft.teraType ?? 'Normal']}<span>선택 ▸</span></button></div></div>
+    {picker==='gender' && <PokedexDialog title="성별 선택" className="training-picker" returnFocus='.training-trait-button[data-trait="gender"]' onClose={()=>setPicker(null)}><p>성별 변경은 무료이며 저장한 설정부터 적용합니다.</p><div className="training-ability-options">{entry.genders?.map(gender=><button key={gender} aria-pressed={draft.gender===gender} onClick={()=>{setDraft(current=>({...current,gender}));setPicker(null);}}>{gender==='M'?'♂':'♀'} {genderNames[gender]}</button>)}</div></PokedexDialog>}
     {picker==='nature' && <PokedexDialog title="성격 선택" large className="training-picker training-nature-picker dex-settings-dialog" initialFocus='.nature-matrix button[aria-pressed=true]' returnFocus='.training-trait-button[data-trait="nature"]' onClose={()=>setPicker(null)}><NatureMatrix value={draft.nature} disabled={busy} onChange={nature=>{setDraft(current=>({...current,nature}));setPicker(null);}}/></PokedexDialog>}
     {picker==='ability' && <PokedexDialog title="특성 선택" className="training-picker" returnFocus='.training-trait-button[data-trait="ability"]' onClose={()=>setPicker(null)}><div className="training-ability-options" data-keyboard-list>{entry.abilities.map(ability=><button key={ability} data-initial-focus={draft.ability===ability || undefined} aria-pressed={draft.ability===ability} aria-label={abilityNames[ability] ?? ability} onClick={()=>{setDraft(current=>({...current,ability}));setPicker(null);}}><strong>{abilityNames[ability] ?? ability}</strong><small>{(abilityDescriptions as Record<string,string>)[ability]}</small></button>)}</div></PokedexDialog>}
     {picker==='tera' && <PokedexDialog title="테라스탈 선택" className="training-picker" returnFocus='.training-trait-button[data-trait="tera"]' onClose={()=>setPicker(null)}><div className="training-tera-options" data-keyboard-grid>{teraTypesForSpecies(entry.species).map(type=><button key={type} data-initial-focus={(draft.teraType ?? 'Normal')===type || undefined} aria-pressed={(draft.teraType ?? 'Normal')===type} aria-label={teraNames[type]} onClick={()=>{setDraft(current=>({...current,teraType:type}));setPicker(null);}}><TeraCrystal type={type}/><TypeBadge type={type}/></button>)}</div></PokedexDialog>}

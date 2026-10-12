@@ -28,10 +28,10 @@ test('trainers enter the arena, throw balls, support skip and do not replay on r
     await expect(page.locator('.arena .player-position,.arena .enemy-position,.arena .health-card')).toHaveCount(0);
     await expect(page.getByRole('log')).toContainText(boss.name);
     await expect(page.locator('.arena .sprite')).toHaveCount(0);
-    const player=page.getByRole('img',{name:'플레이어 지우 (성도편 뒷모습)'});
+    const player=page.getByRole('img',{name:'플레이어 트레이너 (뒷모습)'});
     await expect(player).toBeVisible();
-    await expect(player).toHaveCSS('background-image',/ash-johto-back-sheet\.png/);
-    expect((await page.request.get('/sprites/trainers/ash-johto-back-sheet.png')).ok()).toBe(true);
+    await expect(player).toHaveCSS('background-image',/player-back-sheet\.png/);
+    expect((await page.request.get('/sprites/trainers/player-back-sheet.png')).ok()).toBe(true);
     const portrait=page.getByTestId('trainer-entrance').locator('img.npc-portrait');
     await expect(portrait).toHaveAttribute('src',`/sprites/trainers/${boss.portrait}.png`);
     await expect(portrait).toHaveJSProperty('complete',true);
@@ -46,7 +46,7 @@ test('trainers enter the arena, throw balls, support skip and do not replay on r
     await page.keyboard.press('Enter');
     await expect(page.getByTestId('trainer-entrance')).toHaveAttribute('data-phase','throw');
     await expect(page.locator('.arena .player-position,.arena .enemy-position,.arena .health-card')).toHaveCount(0);
-    await expect(page.locator('.ash-back-sprite')).toHaveCSS('animation-name','ash-throw-frames');
+    await expect(page.locator('.player-back-sprite')).toHaveCSS('animation-name','player-throw-frames');
     await page.keyboard.press('Shift');
     await expect(page.getByTestId('trainer-entrance')).toHaveCount(0);
     await expect(page.locator('.enemy-trainer')).toContainText(`${boss.title} ${boss.name}`);

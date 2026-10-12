@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {pokemonImageSources} from '../src/web/pokemon-image';
 import {pokedexEntries} from '../src/server/pokedex-entries';
-import {species} from '../src/web/catalog';
+import {species,spriteUrl} from '../src/web/catalog';
 import {pixelSprites} from '../src/data/pixel-sprites';
 import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
@@ -53,6 +53,27 @@ test('all modern dex orientations resolve to actual local PNG or GIF files',()=>
       const bytes=readFileSync(resolve('public',url.slice(1)));
       if(url.endsWith('.gif'))assert.equal(bytes.subarray(0,4).toString(),'GIF8',url);
       else assert.equal(bytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a',url);
+    }
+  }
+});
+
+test('all playable, shiny and preview images resolve locally without external fallback',()=>{
+  for(const entry of pokedexEntries()) {
+    const variants=[entry.id,species[entry.species]?.spriteKey ?? entry.id,...(entry.forms ?? []).map(form=>form.spriteKey)];
+    for(const spriteKey of variants)for(const back of [false,true])for(const shiny of [false,true]) {
+      const sources=pokemonImageSources(entry.id,back,true,spriteKey,shiny);
+      assert.ok(sources.length,`${entry.species}/${spriteKey}/${back}/${shiny}`);
+      for(const url of sources) {
+        assert.ok(url.startsWith('/'),url);
+        const bytes=readFileSync(resolve('public',url.slice(1)));
+        if(url.endsWith('.gif'))assert.equal(bytes.subarray(0,4).toString(),'GIF8',url);
+        else assert.equal(bytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a',url);
+      }
+    }
+    for(const back of [false,true]) {
+      const url=spriteUrl(entry.species,back);
+      assert.ok(url.startsWith('/'),url);
+      assert.ok(readFileSync(resolve('public',url.slice(1))).length>0,url);
     }
   }
 });

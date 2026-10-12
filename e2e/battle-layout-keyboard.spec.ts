@@ -39,7 +39,7 @@ test('keyboard archive navigation and a full viewport stadium with keyboard batt
   await expect(page.getByRole('button',{name:'싸운다',exact:true})).toHaveAttribute('data-game-cursor','true');
   await page.keyboard.press('Enter');
   await expect(page.locator('[data-command="move 1"]')).toHaveAttribute('data-game-cursor','true');
-  await page.keyboard.press('a');await expect(page.locator('[data-command="switch 2"]')).toBeVisible();
+  await page.keyboard.press('x');await page.getByRole('button',{name:'교체',exact:true}).click();await expect(page.locator('[data-command="switch 2"]')).toBeVisible();
   await page.keyboard.press('x');await page.getByRole('button',{name:'싸운다',exact:true}).click();await expect(page.locator('[data-command="move 1"]')).toHaveAttribute('data-game-cursor','true');
   await page.keyboard.press('s');await expect(page.getByRole('dialog',{name:'배틀 기록'})).toBeVisible();await page.keyboard.press('x');
   await page.keyboard.press('x');await expect(page.getByRole('button',{name:'싸운다',exact:true})).toBeVisible();await page.keyboard.press('x');await expect(page.getByRole('dialog',{name:'배틀 메뉴'})).toBeVisible();await expect(page.getByRole('dialog')).toContainText('도전 포기');await page.keyboard.press('x');await page.getByRole('button',{name:'싸운다',exact:true}).click();

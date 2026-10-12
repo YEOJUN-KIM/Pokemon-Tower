@@ -36,17 +36,17 @@ test('all nine themes use regional signatures, distinct milestones and valid org
  for(const count of counts.values())assert.ok(count>850 && count<1150,`unexpected theme distribution ${count}`);
 });
 
-test('new runs save a random theme and matching organization while existing Johto saves stay unchanged',()=>{
+test('new runs save a random theme and independent organization while existing Johto saves stay unchanged',()=>{
  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);
  try{
   store.ensurePlayer('regions');let first='';
   for(let i=0;i<24;i++){const id=store.start('regions',starters),run=store.battle(id).run_id,theme=store.view('regions').run!.theme!;
    assert.equal(theme,randomTowerTheme(run));assert.equal(store.view('regions').run!.trainer!.generation,towerThemes[theme].generation);
-   assert.equal(store.db.prepare('SELECT organization FROM run_villains WHERE run_id=?').get(run)!.organization,runOrganization(run,theme));
+   assert.equal(store.db.prepare('SELECT organization FROM run_villains WHERE run_id=?').get(run)!.organization,runOrganization(run));
    if(i===23){first=id;break;}store.abandon('regions',run);
   }
   const before=store.view('regions');store.close();store=new TowerStore(path);assert.deepEqual(store.view('regions'),before);
-  const run=store.battle(first).run_id;store.db.prepare('UPDATE run_themes SET theme=? WHERE run_id=?').run('johto',run);
+  const run=store.battle(first).run_id;store.db.prepare('DELETE FROM run_routes WHERE run_id=?').run(run);store.db.prepare('UPDATE run_themes SET theme=? WHERE run_id=?').run('johto',run);
   store.db.prepare("UPDATE runs SET state='select',floor=40 WHERE id=?").run(run);const preview=store.view('regions');assert.equal(preview.run!.boss!.name,'목호');
   store.close();store=new TowerStore(path);assert.deepEqual(store.view('regions'),preview);
  }finally{store.close();}
@@ -58,7 +58,7 @@ test('each theme persists its real preview and legal champion/final team without
   for(const theme of themes){const run=store.battle(store.start('preview',starters)).run_id;store.db.prepare('UPDATE run_themes SET theme=? WHERE run_id=?').run(theme,run);
    for(const floor of [5,10,40,50]){
     store.db.prepare("UPDATE runs SET floor=?,state='select' WHERE id=?").run(floor,run);
-    const expected=towerTrainerEncounter(floor,run,theme)!,preview=store.view('preview').run!.boss;assert.deepEqual(preview,expected.boss);
+    const expected=towerTrainerEncounter(floor,run,theme,true)!,preview=store.view('preview').run!.boss;assert.deepEqual(preview,expected.boss);
     const row=store.battle(store.enter('preview',run,floor,starters)),team=Showdown.Teams.unpack(row.opponent_team)!;
     assert.equal(team.length,3);const red=expected.boss.id==='named-red';assert.ok(team.some(p=>p.species===evolvedOpponentSpecies(expected.ace!,red)));assert.ok(team.every(p=>expected.entries.map(name=>evolvedOpponentSpecies(name,red)).includes(p.species)));
     assert.equal(new Set(team.map(p=>p.species)).size,3);

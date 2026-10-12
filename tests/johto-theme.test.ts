@@ -30,14 +30,14 @@ test('new Johto preview and generated triple persist, while a v15 legacy run rem
     store.db.prepare('UPDATE run_themes SET theme=? WHERE run_id=?').run('johto',run);
     for(const floor of [5,10,40,50]){
       store.db.prepare("UPDATE runs SET floor=?,state='select' WHERE id=?").run(floor,run);
-      const preview=store.view('johto').run!.boss!,encounter=towerTrainerEncounter(floor,run,'johto')!;
+      const preview=store.view('johto').run!.boss!,encounter=towerTrainerEncounter(floor,run,'johto',true)!;
       assert.equal(store.view('johto').run!.theme,'johto');assert.deepEqual(preview,encounter.boss);
       const id=store.enter('johto',run,floor,starters),row=store.battle(id),team=Showdown.Teams.unpack(row.opponent_team)!;
       assert.equal(team.length,3);assert.equal(new Set(team.map(p=>p.species)).size,3);
       assert.ok(team.some(p=>p.species===encounter.ace));
       const equipped=team.map(p=>p.item).filter(Boolean);assert.equal(new Set(equipped).size,equipped.length);
-      if(floor===50)assert.equal(team.find(p=>p.species==='Pikachu')!.item,'Dynamax Band');
-      if(floor===40)assert.equal(team.find(p=>p.species==='Dragonite')!.item,'Dynamax Band');
+      if(floor===50)assert.equal(team.find(p=>p.species==='Dragonite')!.item,'Dynamax Band');
+      
       for(const p of team){assert.ok(encounter.entries.includes(p.species));const original=johtoOriginalBuild(preview.id,p.species)!;assert.equal(p.ability,original.ability);const adjusted=equipBossGimmick([{name:p.species,...original}],preview.id,floor)[0];assert.deepEqual(p.moves.map(m=>Showdown.Dex.moves.get(m).name),adjusted.moves);}
       store.close();store=new TowerStore(path);assert.deepEqual(store.battle(id),row);assert.deepEqual(store.view('johto').run!.boss,preview);
     }

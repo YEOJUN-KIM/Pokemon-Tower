@@ -1,5 +1,5 @@
 'use client';
-import {battleRules} from '../data/run-rules';
+import {battleRules,allowsGimmick} from '../data/run-rules';
 import {themeLabel} from '../data/tower-themes';
 import {progressionLabel} from '../data/tower-progression';
 import {teraColors} from '../data/tera';
@@ -10,13 +10,14 @@ import {megaStones,type Gimmick} from '../data/gimmicks';
 import { useEffect, useRef, useState } from 'react';
 import type { BattleResponse, BattleView, PokemonView, TowerView, BossView } from './contracts';
 import {BossPortrait,PlayerPortrait,trainerAppearance} from './boss-dialog';
-import {battleTrainer} from './trainer-samples';
+import {battleTrainer,trainerLabel} from './trainer-samples';
 import {TowerControls} from './tower-controls';
 import {BattleResultDialog, ResultBanner} from './battle-result';
 import {TowerClear} from './tower-clear';
 import {useRouter} from 'next/navigation';
 import { health, pokemonName, species } from './catalog';
 import {PokemonImage} from './pokemon-image';
+import {MoveVisuals} from './move-visuals';
 import {pokemonBattleScale} from '../data/pokemon-size';
 import {BattleMessages} from './battle-messages';
 import {RecruitCelebration,type Recruitment} from './recruit-dialog';
@@ -37,6 +38,7 @@ import {battleStatus,battleStatusNames} from './battle-status';
 import {arenaTheme,arenaNames,trainerMusic,revealedRare,strongerRare} from './encounter-presentation';
 import type {MusicTrack} from './music-score';
 import {BattleCommands,type CommandMode} from './battle-commands';
+import {readPlaybackSpeed,playbackDuration,type PlaybackSpeed} from './playback-settings';
 import {useTouchHold} from './use-touch-hold';
 
 function Ball({small = false}: {small?: boolean}) {
@@ -62,15 +64,16 @@ function Sprite({shiny=false,name, back = false, animated=false,className = '',c
   return <span className={`sprite ${className} ${dynamax ? 'dynamaxed' : ''} ${terastallized ? 'terastallized' : ''}`} style={{['--dynamax-scale' as string]:growth,['--tera-color' as string]:teraColors[terastallized ?? ''],['--tera-crown-top' as string]:crownTop+'%'}} data-tera={terastallized || undefined} data-dynamax={dynamax || undefined} data-status={status || undefined} title={status ? `${pokemonName(name)} · ${battleStatusNames[status]}` : undefined}>{id ? <PokemonImage shiny={shiny} id={id} spriteKey={species[name]?.spriteKey} name={pokemonName(name)} back={back} animated={animated} sizeScale={animated ? pokemonBattleScale(name) : 1} stableFrame={animated} onVisibleTop={terastallized ? setCrownTop : undefined} matchBaseHeight={animated && name.includes("-Mega")} fallback={fallback}/> : fallback}{terastallized && <span className="tera-crown"><TeraCrystal type={terastallized}/></span>}</span>;
 }
 
-function HealthCard({pokemon, enemy = false, percentage = false,field}: {pokemon: Pick<PokemonView, 'species' | 'displaySpecies' | 'condition'>; enemy?: boolean; percentage?:boolean;field?:BattleView['field']}) {
+function HealthCard({pokemon, enemy = false, percentage = false,field,team}: {pokemon: Pick<PokemonView, 'species' | 'displaySpecies' | 'condition' | 'gender'>; enemy?: boolean; percentage?:boolean;field?:BattleView['field'];team?:PokemonView[]}) {
   const hp = health(pokemon.condition);
-  return <div className={`health-card ${enemy ? 'enemy-health' : 'player-health'}`}>
-    <div className="health-heading"><strong>{pokemonName(pokemon.displaySpecies ?? pokemon.species)}</strong><span>Lv. 50</span></div>
+  const critical=hp.percent>0 && hp.percent<=30;
+  return <div className={`health-card ${enemy ? 'enemy-health' : 'player-health'}`} data-hp-state={hp.percent===0?'fainted':critical?'critical':hp.percent<50?'caution':'healthy'}>
+    <div className="health-heading"><strong>{pokemonName(pokemon.displaySpecies ?? pokemon.species)}{pokemon.gender && pokemon.gender!=='N' && <i className="pokemon-gender" data-gender={pokemon.gender} aria-label={pokemon.gender==='M'?'수컷':'암컷'}>{pokemon.gender==='M'?'♂':'♀'}</i>}</strong><span>Lv. 50</span></div>
     {hp.status && <div className="health-status"><b data-status={battleStatus(pokemon.condition)}>{hp.status}</b></div>}
     <div className="hp-row"><span>HP</span><div className="hp-track" role="progressbar" aria-label={`${pokemonName(pokemon.species)} HP`} aria-valuenow={Math.round(hp.percent)} aria-valuemin={0} aria-valuemax={100}>
-      <i style={{width: `${hp.percent}%`, background: hp.percent < 25 ? '#e26553' : hp.percent < 50 ? '#e7ad47' : '#3d977d'}} /></div></div>
-    <div className="hp-number">{enemy || percentage ? `${Math.ceil(hp.percent)}%` : hp.text}</div>
-    {enemy && <div className="opponent-balls" role="group" aria-label={`상대 남은 포켓몬 ${(field?.opponentSize ?? 3)-(field?.faintedOpponents.length ?? 0)} / ${field?.opponentSize ?? 3}`}>{Array.from({length:field?.opponentSize ?? 3},(_,index)=><span key={index} className={index>=(field?.opponentSize ?? 3)-(field?.faintedOpponents.length ?? 0) ? 'ball-fainted' : ''} aria-label={index>=(field?.opponentSize ?? 3)-(field?.faintedOpponents.length ?? 0) ? '기절' : '생존'}><Ball small/></span>)}</div>}
+      <i style={{width: `${hp.percent}%`, background: hp.percent <= 30 ? '#ef6661' : hp.percent < 50 ? '#e7ad47' : '#55bd98'}} /></div></div>
+    <div className="hp-number"><span>{enemy || percentage ? `${Math.ceil(hp.percent)}%` : hp.text}</span></div>
+    {(enemy || team) && <div className={enemy ? 'opponent-balls' : 'opponent-balls player-balls'} role="group" aria-label={enemy ? `상대 남은 포켓몬 ${(field?.opponentSize ?? 3)-(field?.faintedOpponents.length ?? 0)} / ${field?.opponentSize ?? 3}` : `내 남은 포켓몬 ${team!.filter(member=>health(member.condition).percent>0).length} / ${team!.length}`}>{Array.from({length:enemy ? field?.opponentSize ?? 3 : team!.length},(_,index)=>{const fainted=enemy ? index>=(field?.opponentSize ?? 3)-(field?.faintedOpponents.length ?? 0) : health(team![index].condition).percent===0;return <span key={index} className={fainted ? 'ball-fainted' : ''} aria-label={fainted ? '기절' : '생존'}><Ball small/></span>;})}</div>}
   </div>;
 }
 
@@ -96,7 +99,9 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
   },[trainerIntro?.phase]);
   function skipPlayback(){skip.current=true;introContinue.current?.();playbackWait.current?.();stopCry();stopEffects();}
   useEffect(()=>{if(trainerIntro?.phase!=='enter')return;const confirm=(event:KeyboardEvent)=>{if(!['enter','z'].includes(event.key.toLowerCase()) || event.ctrlKey || event.altKey || event.metaKey)return;event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)introContinue.current?.();};document.addEventListener('keydown',confirm,true);return ()=>document.removeEventListener('keydown',confirm,true);},[trainerIntro?.phase]);
-  const waitPlayback=(duration:number)=>new Promise<void>(resolve=>{const done=()=>{clearTimeout(timer);playbackWait.current=null;resolve();};const timer=setTimeout(done,duration);playbackWait.current=done;});
+  const playbackSpeed=useRef<PlaybackSpeed>(1);
+  useEffect(()=>{if(!playing)return;const frame=requestAnimationFrame(()=>{document.querySelector('.arena')?.getAnimations({subtree:true}).forEach(animation=>{const target=(animation.effect as KeyframeEffect|null)?.target;animation.updatePlaybackRate(target instanceof Element && (target.closest('.effect-notice')||target.matches('.health-card'))?1:playbackSpeed.current);});});return ()=>cancelAnimationFrame(frame);},[playing,frameNumber]);
+  const waitPlayback=(duration:number,notice=false)=>new Promise<void>(resolve=>{const done=()=>{clearTimeout(timer);playbackWait.current=null;resolve();};const timer=setTimeout(done,playbackDuration(duration,playbackSpeed.current,notice));playbackWait.current=done;});
   const mounted = useRef(true);
   const [error, setError] = useState('');
   const [acknowledgedResult, setAcknowledgedResult] = useState<string | null>(null);
@@ -140,7 +145,8 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
   const run = tower?.run;
   const hasResult = done && tower && run && ['recruit', 'lost', 'cleared'].includes(run.state);
   const preparing = !battle || !run || !['battle', 'recruit'].includes(run.state);
-  const team:PokemonView[] = preparing ? (run?.state === 'select' ? run.roster : selected).map(name => ({species: name, condition: '1/1', active: false})) : battle.team;
+  const team:PokemonView[] = (run?.roster ?? selected).map(name => (!preparing ? battle?.team.find(p=>p.species===name) : undefined) ?? {species:name,condition:'1/1',active:false});
+  const gimmickHint=({mega:'메가진화',dynamax:'다이맥스',tera:'테라스탈',chaos:'변신 선택',basic:''} as const)[run?.rule ?? 'chaos'];
   const active = battle?.team.find(p => p.active);
   const encounterMusic=trainerMusic(run?.boss ?? run?.trainer);
   const scenery=arenaTheme(run?.floor ?? 1,run?.totalFloors ?? 10,encounterMusic);
@@ -195,7 +201,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     if(!isAction)setTower(data.tower);
     const initialView={...data.battle,field:emptyField(),messages:[],opponent:null,team:data.battle.team.map(p=>({...p,active:false})),turn:0};
     const frames=presentationFrames(isAction && battle ? battle : initialView,data.battle);
-    skip.current=false;setPlaying(true);
+    playbackSpeed.current=readPlaybackSpeed();skip.current=false;setPlaying(true);
     if(!isAction) {
       const boss=battleTrainer(data.battle.id,data.tower.run?.boss ?? data.tower.run?.trainer);
       setStageOpen(false);setBattle(initialView);setTrainerIntro({boss,phase:'enter'});setAnnouncement(trainerAppearance(boss));
@@ -214,7 +220,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
           if(name && species[name])playCry(species[name].id);
         }
       }
-      if(frame.duration)await waitPlayback(frame.duration);
+      if(frame.duration || frame.notice)await waitPlayback(frame.duration,!!frame.notice);
     }
     if(skip.current)stopCry();
     if(mounted.current){setMotion(null);setNotice(null);setAnnouncement(null);setPlaying(false);setBattle(data.battle);}
@@ -241,7 +247,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
       setMotion(null);setNotice(null);setAnnouncement(null);setPlaying(false);setBattle(data.battle);
       setTower(data.tower);
       if(body.type === 'recruit' && typeof body.chosen === 'string' && data.tower.run && (body.collectOnly || data.tower.run.roster.includes(body.chosen))) {
-        setRecruitment({archiveOnly:body.collectOnly===true,chosen:body.chosen,replaced:typeof body.replaced === 'string' ? body.replaced : null,roster:data.tower.run.roster,cleared:data.tower.run.state === 'cleared',ivGain:data.tower.run.lastIVGain,moveGain:data.tower.run.lastMoveGain,alreadyOwned:run?.roster.includes(body.chosen)});
+        setRecruitment({archiveOnly:body.collectOnly===true,chosen:body.chosen,replaced:typeof body.replaced === 'string' ? body.replaced : null,roster:data.tower.run.roster,cleared:data.tower.run.state === 'cleared',ivGain:data.tower.run.lastIVGain,moveGain:data.tower.run.lastMoveGain,alreadyOwned:run?.roster.includes(body.chosen),newSpecies:!tower?.unlocked.includes(body.chosen),hiddenBossPending:data.tower.run.hiddenBossPending});
       }
       if(body.type === 'action' && data.battle?.status === 'complete') effect(data.battle.winner === 'Player' ? 'victory' : 'defeat');
       if (body.type === 'start' && prepareNewRun) router.replace('/battle', {scroll:false});
@@ -254,15 +260,16 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
   useEffect(()=>{if(run?.state==='battle' && !busy && !playing && battle?.status==='waiting')selectAction();},[battle?.requestId,busy,playing,tab,run?.state]);
   useEffect(()=>{if(run && ['recruit','select'].includes(run.state) && !recruitment && (!hasResult || acknowledgedResult===battle?.id))setStageOpen(true);else setStageOpen(false);},[run?.state,run?.floor,recruitment,acknowledgedResult,battle?.id]);
   useGameKeyboard('.battle-room .action-grid button,.battle-room .battle-command-back,.battle-room .gimmick-toggle,.battle-room .tera-toggle,.battle-room .command-area>.primary-button',2,!!tower && !!run && (['battle','select','recruit'].includes(run.state) || (!!hasResult && acknowledgedResult!==battle?.id && run.state!=='cleared')),(event,cursor)=>{
-    const key=event.key.toLowerCase();if(!['x','a','s','c','m','t'].includes(key))return false;
+    const key=event.key.toLowerCase();if(!['x','a','s','c'].includes(key))return false;
     event.preventDefault();if(event.repeat)return true;
     if(key==='c' && battle){fieldHeld.current=true;setShowField('hold');return true;}
     if(key==='s'){setShowLog(true);return true;}
     if(busy || playing)return true;
-    if(key==='t' && tab==='moves'){document.querySelector<HTMLButtonElement>('.tera-toggle')?.click();return true;}
-    if(key==='m' && tab==='moves'){const button=document.querySelector<HTMLButtonElement>('.gimmick-toggle:not(:disabled)');button?.click();return true;}
+    if(key==='a' && tab==='moves' && battle){
+      const kinds=(['mega','dynamax','terastallize'] as const).filter(kind=>allowsGimmick(run?.rule ?? 'chaos',kind) && battle.actions.some(action=>action.command.endsWith(' '+kind)));
+      setGimmick(kinds[kinds.indexOf(gimmick as Gimmick)+1] ?? null);return true;
+    }
     if(key==='x'){effect('cancel');if(showField){fieldHeld.current=false;setShowField(null);}else if(tab!=='root' && !forceSwitch){setGimmick(null);setTab('root');}else setBattleMenu(true);}
-    if(key==='a' && run?.state==='battle'){setTab('switch');focusAction();}
     return true;
   },cursor=>{if(cursor.dataset.command)setFocusedCommand(cursor.dataset.command);});
 
@@ -285,13 +292,24 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
         {hasResult && acknowledgedResult !== battle!.id && <BattleResultDialog key={battle!.id} battle={battle!} tower={tower} onContinue={() => setAcknowledgedResult(battle!.id)} />}
         {recruitment && <RecruitCelebration recruitment={recruitment} onContinue={()=>setRecruitment(null)} />}
         {stageOpen && tower && run && ['recruit','select'].includes(run.state) && <PokedexDialog title={run.state==='recruit' ? '승리 · 동료 영입' : `${run.floor}층 출전 준비`} large onClose={()=>{setStageOpen(false);focusAction();}}><TowerControls key={`${run.id}-${run.floor}-${run.state}`} tower={tower} selected={selected} setSelected={setSelected} busy={busy} submit={submit} error={error}/></PokedexDialog>}
-        {battleMenu && <PokedexDialog title="배틀 메뉴" onClose={()=>{setBattleMenu(false);}}><div className="dex-action-options"><button onClick={()=>router.push('/settings')}>설정</button><button disabled={busy} onClick={()=>{setBattleMenu(false);setAbandonConfirm(true);}}>도전 포기</button><button onClick={()=>router.push('/')}>타이틀</button><button onClick={()=>{setBattleMenu(false);}}>계속하기</button></div></PokedexDialog>}
+        {battleMenu && <PokedexDialog title="배틀 메뉴" onClose={()=>{setBattleMenu(false);}}><div className="dex-action-options"><button data-initial-focus onClick={()=>{setBattleMenu(false);}}>계속하기</button><button disabled={busy} onClick={()=>{setBattleMenu(false);setAbandonConfirm(true);}}>도전 포기</button><button onClick={()=>router.push('/pokedex?from=battle')}>포켓몬 도감</button><button onClick={()=>router.push('/settings')}>설정</button><button onClick={()=>router.push('/')}>타이틀</button></div></PokedexDialog>}
         {abandonConfirm && tower && run && <PokedexDialog title="도전을 포기할까요?" onClose={()=>setAbandonConfirm(false)}><p>{restartNotice(tower)}</p><div className="dex-action-options"><button onClick={()=>setAbandonConfirm(false)}>계속 도전</button><button disabled={busy} onClick={()=>{setAbandonConfirm(false);void submit({type:'abandon',runId:run.id});}}>포기하기</button></div></PokedexDialog>}
         {showLog && <PokedexDialog title="배틀 기록" large onClose={()=>{setShowLog(false);}}><BattleMessages messages={battle?.messages ?? []} playing={false} turn={battle?.turn ?? 0} historyOnly/></PokedexDialog>}
         <div className="game-grid">
           <section className="battle-panel" aria-label="배틀" data-command-mode={tab} data-resolving={busy || playing}>
             <div className="panel-top"><div className="battle-progress"><strong>{run ? `${run.floor} / ${run.totalFloors}층` : '타워 도전'}</strong><span data-testid="battle-rule">{battleRules[run?.rule??'chaos'].name}</span><span className="battle-coins">{tower?.coins.toLocaleString() ?? 0}코인</span></div><button className="battle-menu-trigger battle-settings-trigger" onClick={()=>setBattleMenu(true)} aria-label="배틀 메뉴 · 설정"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2"><path d="m9 3-1 3-3 1-2 3 2 2-1 3 2 3 3-1 3 2 3-2 3 1 2-3-1-3 2-2-2-3-3-1-1-3H9Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
             <div className="arena" data-playing={playing} data-scenery={scenery} {...fieldTouch} onPointerDown={event=>{if(!(event.target as HTMLElement).closest('.battle-field-overlay,button'))fieldTouch.onPointerDown(event);}}>
+          <aside className="right-column">
+            <section className="team-panel" aria-label="보유 포켓몬 6칸"><div className="team-list">{Array.from({length:6},(_,i)=>{
+              const pokemon=team[i];
+              if(!pokemon)return <div className="team-member is-empty" key={i} aria-label={`${i+1}번 빈 슬롯`}><span className="team-empty">＋</span><span className="team-status">빈 슬롯</span></div>;
+              const entered=preparing ? selected.includes(pokemon.species) : !!battle?.team.some(p=>p.species===pokemon.species),fainted=entered && health(pokemon.condition).percent===0;
+              const state=!entered?'미출전':fainted?'기절':pokemon.active?'출전 중':'출전';
+              return <div className={`team-member ${!entered || fainted ? "is-muted" : ""} ${pokemon.active && !fainted ? "is-active" : ""}`} key={pokemon.species} title={`${pokemonName(pokemon.species)} · ${state}`} aria-label={`${pokemonName(pokemon.species)} · ${state}`} data-team-state={state}><Sprite shiny={pokemon.shiny} name={pokemon.species}/><span className="team-status">{state}</span></div>;
+            })}</div></section>
+            {battle && <div className="opponent-heading"><div className="enemy-trainer" data-opponent-kind={run?.boss ? "boss" : run?.trainer?.kind ?? "normal"}><span className="opponent-marker" aria-hidden="true">VS</span><strong>{trainerLabel(run?.boss ?? run?.trainer ?? battleTrainer(battle.id))}</strong></div></div>}
+            <div className="tip"><span>TRAINER TIP</span><p>상대의 약점을 노려보세요.<br />타입 상성에 따라 공격의 효과가 달라집니다.</p></div>
+          </aside>
               {battle && <FieldInspection battle={battle} open={!!showField} held={showField==='hold'} touchHeld={showField==='touch'} onClose={()=>{fieldHeld.current=false;setShowField(null);}}/>}
               <div className="stadium-backdrop" aria-hidden="true"><div className="stadium-lights"/><div className="field-horizon"/><div className="stadium-field"/><div className="stadium-details"><i/><i/><i/></div></div><span className="arena-label">{String(run?.floor ?? 1).padStart(2,'0')}F / {arenaNames[scenery]}</span>
               <div className="arena-orbit orbit-one" aria-hidden="true" /><div className="arena-orbit orbit-two" aria-hidden="true" />
@@ -304,32 +322,27 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
                 {motion?.kind.startsWith('tera-') && <div className={`tera-atmosphere atmosphere-${motion.kind}`} style={{['--tera-color' as string]:teraColors[motion.color[0].toUpperCase()+motion.color.slice(1)]}} aria-hidden="true"/>}
                 {motion?.kind.startsWith('mega-') && <div className={`mega-atmosphere atmosphere-${motion.kind}`} aria-hidden="true"/>}
                 {motion?.kind==='mega-flash' && <div className="mega-arena-flash" aria-hidden="true"/>}
-                <HealthCard pokemon={active} percentage={playing} />
+                <MoveVisuals motion={motion} speed={playbackSpeed.current}/>
+                <HealthCard pokemon={active} percentage={playing} team={battle.team} />
                 {notice && <div key={`notice-${frameNumber}`} className={`effect-notice notice-${notice.side} notice-${notice.kind}`} role="status" data-testid="effect-notice"><span>{notice.kind === 'ability' ? '특성' : '도구'}</span><p>{notice.side === 'enemy' ? '상대 ' : ''}{pokemonName(notice.actor.split(': ')[1])}의<strong>{notice.label}</strong></p></div>}
-                <div className="enemy-trainer">{run?.boss ? `${run.boss.title} ${run.boss.name}` : run?.trainer ? `${run.trainer.title} ${run.trainer.name}`.trim() : battleTrainer(battle.id).name} <span>{run?.boss ? 'BOSS' : run?.villainEvent ? run.villainEvent.rank==='boss' ? 'BOSS' : run.villainEvent.rank==='executive' ? 'EXECUTIVE' : 'GRUNT' : run?.trainer?.kind==='elite' ? 'ELITE' : 'TRAINER'}</span></div>
+
               </> : run && ['battle','recruit','select'].includes(run.state) ? null : <div className="arena-preview"><span className="preview-number">{String(run?.floor ?? 1).padStart(2, '0')}</span><div className="preview-sprites" data-testid="team-preview" role="group" aria-label="선택한 출전 팀">
                 {[0, 1, 2].map(slot => selected[slot] ? <Sprite key={slot} name={selected[slot]} /> : <span key={slot} className="sprite preview-empty" aria-label={`${slot + 1}번 미선택`}><span><Ball /><small>{slot + 1}번 미선택</small></span></span>)}
               </div><div className="preview-caption"><span>YOUR SELECTED THREE</span><strong>준비됐나요, 트레이너?</strong></div></div>}
               {trainerIntro && <div className="trainer-entrance" data-testid="trainer-entrance" data-phase={trainerIntro.phase}><div className="intro-trainer intro-enemy"><BossPortrait boss={trainerIntro.boss}/><span className="trainer-thrown-ball"><Ball/></span></div><div className="intro-trainer intro-player"><PlayerPortrait/><span className="trainer-thrown-ball"><Ball/></span></div></div>}
               {trainerIntro?.phase==='enter' && <button className="trainer-intro-confirm" onClick={()=>introContinue.current?.()}>포켓몬 내보내기<span className="keyboard-shortcut"> · Enter</span></button>}
-              {playing && <button className="skip-motion" data-silent onClick={skipPlayback}>연출 건너뛰기 · Shift</button>}
+
             </div>
-            <BattleMessages key={battle?.id ?? 'preparing'} messages={battle?.messages ?? []} playing={playing} turn={battle?.turn ?? 0} announcement={announcement ?? (!busy && !done && tab==='root' && active ? `${pokemonName(active.species)}, 무엇을 할까요?` : null)} />
+            <BattleMessages onSkip={skipPlayback} key={battle?.id ?? 'preparing'} messages={battle?.messages ?? []} playing={playing} turn={battle?.turn ?? 0} announcement={announcement ?? (!busy && !done && tab==='root' && active ? `${pokemonName(active.species)}, 무엇을 할까요?` : null)} />
             {!(busy || playing) && <div className="command-area">
               {!battle || done || broken ? loading || !tower ? <p>저장된 도전을 불러오는 중…</p> : broken ? <div><p role="alert">{battle?.error}</p><button className="secondary-button" onClick={() => refresh().catch(e => setError(e.message))}>배틀 다시 불러오기</button></div> : <button className="primary-button" onClick={()=>setStageOpen(true)}>{run?.state==='recruit' ? '영입 선택' : '다음 층 준비'}<span className="keyboard-shortcut"> · Enter</span></button>
               : <BattleCommands rule={run?.rule} itemBag={run?.battleItems} battle={battle} mode={tab} busy={busy} forceSwitch={forceSwitch} focused={focusedCommand} gimmick={gimmick} onGimmick={setGimmick} onMode={mode=>{setGimmick(null);setTab(mode);}} onFocus={setFocusedCommand} onSend={send}/>}
             </div>}
           </section>
 
-          <aside className="right-column">
-            <section className="team-panel"><div className="section-heading"><h2>{preparing && run?.state === 'select' ? '이번 도전의 보유 멤버' : preparing ? '선택한 출전 팀' : '나의 파트너'}</h2><span>{String(team.length).padStart(2,'0')}</span></div><p className="section-subtitle">{preparing ? run?.state === 'select' ? `보유 ${team.length} / 6마리 · 출전 ${selected.length} / 3마리` : `새 도전 출전 ${selected.length} / 3마리` : `출전 3마리 · 보유 ${run?.roster.length ?? 3} / 6마리`}</p><div className="team-list">{team.map((pokemon, i) => {
-              const info = species[pokemon.species]; const hp = health(pokemon.condition);
-              return <div className={`team-member ${pokemon.active && !done ? 'is-active' : ''} ${hp.percent === 0 ? 'is-fainted' : ''}`} key={pokemon.species}><span className="team-index">0{i + 1}</span><Sprite shiny={pokemon.shiny} name={pokemon.species} condition={pokemon.condition}/><div className="team-details"><strong>{info?.name ?? pokemon.species}</strong><div>{info?.types.map(type => <span key={type}>{type}</span>)}</div></div><span className="team-status">{preparing ? selected.includes(pokemon.species) ? `${selected.indexOf(pokemon.species) + 1}번` : '대기' : hp.percent === 0 ? '기절' : hp.status || (pokemon.active ? '출전' : '대기')}</span></div>;
-            })}</div></section>
-            <div className="tip"><span>TRAINER TIP</span><p>상대의 약점을 노려보세요.<br />타입 상성에 따라 공격의 효과가 달라집니다.</p></div>
-          </aside>
+
         </div>
-        <footer><span className="battle-keyboard-hints">방향키 이동 · Enter/Z 결정 · X 취소/메뉴 · A 교체 · S 로그 · C 누르기 필드 · M 메가/다이맥스 · T 테라 · Shift 건너뛰기</span><span>Fan-made · <a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noreferrer">Sprites: PokéAPI</a> / <a href="https://play.pokemonshowdown.com/sprites/" target="_blank" rel="noreferrer">Smogon</a> · <a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noreferrer">Battle: Showdown</a></span></footer>
+        <footer><span className="battle-keyboard-hints"><span><kbd>Enter / Z</kbd> 결정</span><span><kbd>X</kbd> 취소/메뉴</span>{gimmickHint && <span title="기술 선택 화면에서 사용 · 기술 결정 시 발동"><kbd>A</kbd> {gimmickHint}</span>}<span><kbd>S</kbd> 로그</span><span><kbd>C</kbd> 필드</span><span><kbd>Shift</kbd> 건너뛰기</span></span><span>Fan-made · <a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noreferrer">Sprites: PokéAPI</a> / <a href="https://play.pokemonshowdown.com/sprites/" target="_blank" rel="noreferrer">Smogon</a> · <a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noreferrer">Battle: Showdown</a></span></footer>
       </main>
     </div>
   </div>;

@@ -10,8 +10,8 @@ test('new hundred-floor shops open every ten floors; legacy short saves retain t
   assert.deepEqual(Array.from({length:100},(_,i)=>i+1).filter(f=>isShopFloor(f,100)),[11,21,31,41,51,61,71,81,91]);
   assert.equal(isShopFloor(6,50),true);
 });
-test('sold-out common tiers leave empty slots without turning into guaranteed mega stones',()=>{
-  assert.deepEqual(rollItemOffers(30,()=>0,item=>!!megaStones[item]),[]);
+test('sold-out tiers fall back to stocked tiers and exhaust small pools without duplicates',()=>{
+  const megaOnly=rollItemOffers(30,()=>0,item=>!!megaStones[item]);assert.equal(megaOnly.length,4);assert.equal(new Set(megaOnly).size,4);assert.ok(megaOnly.every(item=>!!megaStones[item]));
   let n=0;const rareDraw=rollItemOffers(30,()=>n++%2===0?.999:0,item=>item==='Charizardite X');
   assert.deepEqual(rareDraw,['Charizardite X']);
   assert.equal(itemShopRule(rareDraw[0]).rarity,'legendary');

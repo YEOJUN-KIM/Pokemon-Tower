@@ -3,17 +3,17 @@ import type {UpgradeKind} from '../data/shop';
 import type {ItemRarity} from '../data/held-item-shop';
 import type {TrainingView} from '../data/training';
 import type {StatBlock,IVGain,MoveGain} from '../data/training';
-export type PokemonView = {shiny?:boolean;species: string; displaySpecies?:string; condition: string; active: boolean; stats?:StatBlock; ability?:string; nature?:string; moves?:string[];item?:string;dynamax?:boolean;teraType?:string;terastallized?:string;berryUsed?:boolean};
+export type PokemonView = {gender?:import('../data/gender').PokemonGender;shiny?:boolean;species: string; displaySpecies?:string; condition: string; active: boolean; stats?:StatBlock; ability?:string; nature?:string; moves?:string[];item?:string;dynamax?:boolean;teraType?:string;terastallized?:string;berryUsed?:boolean};
 export type FieldEffect={id:string;name:string;scope:'weather'|'field'|'p1'|'p2';started:number;duration:number|null;maxDuration:number|null;layers?:number};
 export type PublicField={turn:number;effects:FieldEffect[];opponentSize:number;faintedOpponents:string[];boosts?:Record<'p1'|'p2',Record<string,number>>};
-export type BossView = {id: string; name: string; title: string; introduction: string; victory: string; defeat: string;role?:'gym'|'villain'|'champion'|'elite';portrait?:string;kind?:'normal'|'elite'|'named';generation?:number|null};
+export type BossView = {id: string; name: string; title: string; introduction: string; victory: string; defeat: string;role?:'gym'|'villain'|'champion'|'elite';portrait?:string;kind?:'normal'|'elite'|'named';generation?:number|null;specialty?:string|null};
 export type BattleView = {
   id: string;
   requestId: number;
   status: 'waiting' | 'complete' | 'error';
   turn: number;
   team: PokemonView[];
-  opponent: {shiny?:boolean;species: string; displaySpecies?:string; condition: string;dynamax?:boolean;terastallized?:string} | null;
+  opponent: {gender?:import('../data/gender').PokemonGender;shiny?:boolean;species: string; displaySpecies?:string; condition: string;dynamax?:boolean;terastallized?:string} | null;
   actions: {command: string; label: string}[];
   messages: string[];
   winner: string | null;
@@ -24,6 +24,7 @@ export type BattleView = {
   teraTickets?:number;
 };
 export type RunView = {
+  hiddenBossPending?:boolean;hiddenBossNext?:boolean;
   rule?:import('../data/run-rules').BattleRule;
   theme?:import('../data/tower-themes').TowerTheme|null;
   id: string; floor: number; totalFloors: number; floorName: string; state: 'select' | 'battle' | 'recruit' | 'lost' | 'cleared' | 'abandoned';

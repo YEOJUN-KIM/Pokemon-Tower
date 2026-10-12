@@ -117,9 +117,9 @@ body .battle-room .health-heading strong{font-size:20px}body .battle-room .healt
 .intro-trainer>.boss-portrait,.intro-trainer>.player-trainer-portrait{width:100%;height:100%;object-fit:contain;object-position:center bottom;image-rendering:pixelated;filter:drop-shadow(0 8px 2px #17252966)}
 .intro-enemy{--trainer-width:min(24vw,300px,44cqh);left:calc(var(--far-x) - var(--trainer-width)/2);bottom:var(--far-ground);animation:trainer-enter-enemy .65s steps(12) both}
 .intro-player{left:calc(var(--near-x) - var(--trainer-width)/2);animation:trainer-enter-player .65s steps(12) both}
-.intro-player>.ash-back-sprite{position:absolute;inset:0;display:block;background-image:url('/sprites/trainers/ash-johto-back-sheet.png');background-size:400% 100%;background-repeat:no-repeat;background-position:0 0;transform:translateY(12%)}
-.trainer-entrance[data-phase=throw] .intro-player>.ash-back-sprite{animation:ash-throw-frames var(--throw-duration) steps(1,end) both}
-@keyframes ash-throw-frames{0%{background-position:33.333333% 0}38%{background-position:66.666667% 0}75%,100%{background-position:100% 0}}
+.intro-player>.player-back-sprite{position:absolute;inset:0;display:block;background-image:url('/sprites/trainers/player-back-sheet.png');background-size:400% 100%;background-repeat:no-repeat;background-position:0 0;transform:translateY(12%)}
+.trainer-entrance[data-phase=throw] .intro-player>.player-back-sprite{animation:player-throw-frames var(--throw-duration) steps(1,end) both}
+@keyframes player-throw-frames{0%{background-position:33.333333% 0}38%{background-position:66.666667% 0}75%,100%{background-position:100% 0}}
 @media(max-width:760px){.intro-trainer{--trainer-width:min(43vw,175px,40cqh)}.intro-enemy{--trainer-width:min(41vw,165px,36cqh)}}
 .trainer-thrown-ball{position:absolute;right:8%;top:43%;opacity:0}
 .trainer-thrown-ball>.pokeball{width:26px;height:26px}
@@ -133,7 +133,7 @@ body .battle-room .health-heading strong{font-size:20px}body .battle-room .healt
 @keyframes trainer-enter-player{from{transform:translateX(-220px);opacity:0}to{transform:translateX(0);opacity:1}}
 @keyframes trainer-windup{0%{transform:translateX(0) rotate(0)}20%{transform:translateX(-8px) rotate(-5deg)}45%{transform:translateX(10px) rotate(5deg);opacity:1}100%{transform:translateX(0);opacity:0}}
 @keyframes trainer-ball-throw{0%,20%{opacity:0;transform:translate(0,0)}25%{opacity:1}60%{opacity:1;transform:translate(calc(var(--throw-x)*.5),-90px) rotate(180deg)}100%{opacity:0;transform:translate(var(--throw-x),var(--throw-y)) rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.intro-trainer,.trainer-entrance[data-phase=throw] .intro-trainer,.trainer-entrance[data-phase=throw] .trainer-thrown-ball,.trainer-entrance[data-phase=throw] .intro-player>.ash-back-sprite{animation:none}.trainer-entrance[data-phase=throw] .trainer-thrown-ball{opacity:1}.trainer-entrance[data-phase=throw] .intro-player>.ash-back-sprite{background-position:66.666667% 0}}
+@media(prefers-reduced-motion:reduce){.intro-trainer,.trainer-entrance[data-phase=throw] .intro-trainer,.trainer-entrance[data-phase=throw] .trainer-thrown-ball,.trainer-entrance[data-phase=throw] .intro-player>.player-back-sprite{animation:none}.trainer-entrance[data-phase=throw] .trainer-thrown-ball{opacity:1}.trainer-entrance[data-phase=throw] .intro-player>.player-back-sprite{background-position:66.666667% 0}}
 .recruit-new-moves{display:inline-block;padding:4px 7px;background:#493b21;border:1px solid #e8bf65;color:#ffe9a0;font-size:11px}
 .recruit-mode-buttons,.recruit-move-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .recruit-moves button{white-space:normal;min-height:44px;text-align:left}

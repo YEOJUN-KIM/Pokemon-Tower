@@ -11,10 +11,10 @@ test('every effect preview schedules audio and mute stops active sources',async(
  await page.goto('/settings');const preview=page.getByRole('button',{name:'효과음 들어보기',exact:true});await expect(preview).toBeDisabled();
  await page.getByLabel('전체 음소거').uncheck();await expect(preview).toBeEnabled();
  for(const id of Object.keys(effectPreviews)){
- await page.getByLabel('미리듣기 효과음').selectOption(id);const before=await page.evaluate(()=>(window as unknown as {sfxStarts:number}).sfxStarts);await preview.click();
+ await page.getByRole('button',{name:'미리듣기 효과음',exact:true}).click();await page.getByRole('dialog',{name:'미리듣기 효과음',exact:true}).getByRole('button',{name:effectPreviews[id].name,exact:true}).click();const before=await page.evaluate(()=>(window as unknown as {sfxStarts:number}).sfxStarts);await preview.click();
  await expect.poll(()=>page.evaluate(()=>(window as unknown as {sfxStarts:number}).sfxStarts)).toBeGreaterThan(before);
  }
- await page.getByLabel('미리듣기 효과음').selectOption('dynamaxGrow');await preview.click();await page.getByLabel('전체 음소거').check();await expect(preview).toBeDisabled();
+ await page.getByRole('button',{name:'미리듣기 효과음',exact:true}).click();await page.getByRole('dialog',{name:'미리듣기 효과음',exact:true}).getByRole('button',{name:effectPreviews['dynamaxGrow'].name,exact:true}).click();await preview.click();await page.getByLabel('전체 음소거').check();await expect(preview).toBeDisabled();
  await expect.poll(()=>page.evaluate(()=>(window as unknown as {activeSfx:number}).activeSfx)).toBe(0);
  await page.getByLabel('전체 음소거').uncheck();await page.getByLabel('효과음 크기').fill('0');await expect(preview).toBeDisabled();
  expect(errors).toEqual([]);

@@ -29,7 +29,7 @@ export function BattleResultDialog({battle, tower, onContinue}: {battle: BattleV
     <div className="result-emblem" aria-hidden="true">{result.icon}</div><span className="result-english">{result.english}</span>
     <h2 id="result-title">{result.label}</h2>
     {(tower.run?.boss || tower.run?.villainEvent) && <div className="boss-result"><BossPortrait boss={tower.run.boss ?? tower.run.trainer ?? undefined}/><strong>{(tower.run.boss ?? tower.run.trainer)?.title} {(tower.run.boss ?? tower.run.trainer)?.name}</strong></div>}
-    <p id="result-description">{halfway ? '50층 관문을 넘었습니다! 다음은 잠시 숨을 고르는 구간입니다. 파트너들과 100층을 향해 계속 올라가세요.' : result.kind === 'win' ? '상대 팀을 모두 쓰러뜨렸습니다.' : result.kind === 'loss' ? '우리 팀이 모두 쓰러졌습니다. 이번 타워 도전은 여기까지입니다.' : '승부를 가리지 못했습니다. 이번 도전이 종료되었습니다.'}</p>
+    <p id="result-description">{tower.run?.hiddenBossNext ? '챔피언을 쓰러뜨렸습니다! 영입 선택 후 히든 보스 레드가 기다립니다. 레드까지 이겨야 이 구간을 마칩니다.' : halfway ? '50층 관문을 넘었습니다! 다음은 잠시 숨을 고르는 구간입니다. 파트너들과 100층을 향해 계속 올라가세요.' : result.kind === 'win' ? '상대 팀을 모두 쓰러뜨렸습니다.' : result.kind === 'loss' ? '우리 팀이 모두 쓰러졌습니다. 이번 타워 도전은 여기까지입니다.' : '승부를 가리지 못했습니다. 이번 도전이 종료되었습니다.'}</p>
     <div className="result-stats"><span>{tower.run?.floor}층 배틀</span><strong>{battle.turn}턴</strong></div>
     {recruiting && <VillainOutcome event={tower.run?.villainEvent}/>}
     {recruiting ? <div className="result-reward"><span>타워 코인 지급 완료</span><strong>+{tower.run!.reward}코인</strong><small>상대 포켓몬 1마리를 영입하거나 다음 층으로 진행할 수 있습니다.</small></div> : <p className="result-retained">성장 포인트 +{tower.run?.growthReward ?? 0}P 지급 완료<br />성장 포인트와 도감 해금은 유지됩니다. 새 도전은 타워 코인 0부터 시작합니다.</p>}

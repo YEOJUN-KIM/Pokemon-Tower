@@ -1,4 +1,6 @@
 body dialog.title-restart-dialog{width:min(480px,calc(100vw - 32px));box-sizing:border-box;padding:24px;background:#3d354b;color:#f5f4e9}
+.title-menu .title-play{gap:12px}
+.title-run-progress{margin-left:auto;padding:4px 7px;border:1px solid #f0c8ae60;background:#572d3660;color:#fce7d1;font-size:11px;white-space:nowrap}
 body dialog.title-restart-dialog>.dex-dialog-heading{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:16px}
 body dialog.title-restart-dialog>.dex-dialog-heading h2{margin:0;font-size:18px;text-align:left}
 body dialog.title-restart-dialog>.dex-dialog-heading>button{flex:0 0 30px;width:30px;height:30px;min-height:30px;padding:0;margin:0;line-height:1}

@@ -22,15 +22,15 @@ export function itemRarityWeights(clearedFloor:number):Record<ItemRarity,number>
   if(clearedFloor>=10)return {uncommon:74,rare:20,unique:5,epic:0.9,legendary:0.1};
   return {uncommon:85,rare:13,unique:1.7,epic:0.29,legendary:0.01};
 }
-// Keep rarity odds even when a tier is sold out: that draw leaves an empty slot.
-export function rollItemOffers(clearedFloor:number,random:()=>number=Math.random,eligible:(item:HeldItem)=>boolean=()=>true):HeldItem[]{
-  const remaining=heldItemKeys.filter(item=>itemShopRule(item).minClearedFloor<=clearedFloor && eligible(item)),result:HeldItem[]=[],weights=itemRarityWeights(clearedFloor);
-  const groups=Object.entries(weights) as [ItemRarity,number][];
-  for(let slot=0;slot<4;slot++){
+// Sold-out tiers are excluded; keep the relative weights of the stocked tiers.
+// Existing stock is retained when filling a previously saved short shop.
+export function rollItemOffers(clearedFloor:number,random:()=>number=Math.random,eligible:(item:HeldItem)=>boolean=()=>true,existing:readonly HeldItem[]=[]):HeldItem[]{
+  const result=[...new Set(existing)].slice(0,4),remaining=heldItemKeys.filter(item=>!result.includes(item) && itemShopRule(item).minClearedFloor<=clearedFloor && eligible(item)),weights=itemRarityWeights(clearedFloor);
+  while(result.length<4 && remaining.length){
+    const groups=(Object.entries(weights) as [ItemRarity,number][]).filter(([rarity])=>remaining.some(item=>itemShopRule(item).rarity===rarity));
     let pick=random()*groups.reduce((sum,[,weight])=>sum+weight,0),rarity=groups.at(-1)![0];
     for(const [candidate,weight] of groups){pick-=weight;if(pick<0){rarity=candidate;break;}}
     const candidates=remaining.filter(item=>itemShopRule(item).rarity===rarity);
-    if(!candidates.length)continue;
     const item=candidates[Math.floor(random()*candidates.length)];result.push(item);remaining.splice(remaining.indexOf(item),1);
   }
   return result;

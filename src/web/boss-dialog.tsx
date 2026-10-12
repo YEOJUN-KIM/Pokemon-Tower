@@ -1,7 +1,7 @@
 'use client';
 import {useState} from 'react';
 import type {BossView} from './contracts';
-import {trainerSamples} from './trainer-samples';
+import {trainerSamples,trainerLabel} from './trainer-samples';
 
 export function BossPortrait({boss}: {boss?: BossView}) {
   const [failed,setFailed]=useState<string|null>(null);
@@ -21,10 +21,10 @@ export function BossPortrait({boss}: {boss?: BossView}) {
 
 export function trainerAppearance(boss?:BossView) {
   if(!boss)return '상대 트레이너가 나타났다!';
-  const last=boss.name.charCodeAt(boss.name.length-1)-0xac00;
-  return `${boss.title==='체육관 관장' ? '관장' : boss.title} ${boss.name}${last>=0 && last<=11171 && last%28!==0 ? '이' : '가'} 나타났다!`.trim();
+  const label=trainerLabel(boss),last=label.charCodeAt(label.length-1)-0xac00;
+  return `${label}${last>=0 && last<=11171 && last%28!==0 ? '이' : '가'} 나타났다!`;
 }
 
 export function PlayerPortrait(){
-  return <span className="player-trainer-portrait ash-back-sprite" role="img" aria-label="플레이어 지우 (성도편 뒷모습)"/>;
+  return <span className="player-trainer-portrait player-back-sprite" role="img" aria-label="플레이어 트레이너 (뒷모습)"/>;
 }

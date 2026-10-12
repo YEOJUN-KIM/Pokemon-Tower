@@ -4,6 +4,7 @@ logs/
 dist/
 .next/
 .data/
+pokemon-backups/
 next-env.d.ts
 *.tsbuildinfo
 test-results/
@@ -13,5 +14,5 @@ playwright-report/
 
 # Local conversation attachments and large reproducible experiment logs.
 .codex-remote-attachments/
-artifacts/**/*-trace.jsonl
-artifacts/opponent-learning-20261011-audit.json
+# Experiment outputs stay local; tracked history is preserved.
+artifacts/

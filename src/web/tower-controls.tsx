@@ -44,7 +44,7 @@ export function TowerControls({tower, selected, setSelected, busy, submit,error}
   if(shopping && run?.state==='select' && isShopFloor(run.floor,run.totalFloors))return <RunMaintenance tower={tower} busy={busy} submit={submit} error={error} onContinue={()=>setShopping(false)}/>;
   return <section className="tower-controls" data-testid={recruiting ? 'recruitment' : 'team-selection'}>
     {replacing && chosen && run && <RecruitReplacementPicker chosen={chosen} roster={run.roster} busy={busy} onCancel={()=>{setReplacing(false);setReplaced(null);}} onChoose={name=>{setReplaced(name);setConfirming(true);}}/>}
-    {confirming && chosen && <RecruitConfirmation archiveOnly={collectOnly} chosen={chosen} replaced={!collectOnly && needsReplacement ? replaced : null} incoming={run?.candidateIVs[chosen]} previous={run?.collectionIVs[chosen]} alreadyOwned={alreadyOwned} incomingMoves={run?.candidateMoves[chosen]} knownMoves={run?.collectionMoves[chosen]} currentMoves={run?.currentMoves[chosen]} onCancel={()=>setConfirming(false)} onConfirm={swap=>{setConfirming(false);setReplacing(false);void recruit(false,swap);}} />}
+    {confirming && chosen && <RecruitConfirmation newSpecies={!tower.unlocked.includes(chosen)} archiveOnly={collectOnly} chosen={chosen} replaced={!collectOnly && needsReplacement ? replaced : null} incoming={run?.candidateIVs[chosen]} previous={run?.collectionIVs[chosen]} alreadyOwned={alreadyOwned} incomingMoves={run?.candidateMoves[chosen]} knownMoves={run?.collectionMoves[chosen]} currentMoves={run?.currentMoves[chosen]} onCancel={()=>setConfirming(false)} onConfirm={swap=>{setConfirming(false);setReplacing(false);void recruit(false,swap);}} />}
     {recruiting && <VillainOutcome event={run.villainEvent}/>}
     <div className="selection-title"><div><div className="eyebrow">{recruiting ? 'A NEW PARTNER' : choosingNext ? (run.theme ? themeLabel(run.theme) : 'NEXT FLOOR') : 'BUILD YOUR TEAM'}</div>
       <h2>{recruiting ? '새로운 동료를 선택하세요.' : choosingNext ? `${run.floor}층에 출전할 3마리를 선택하세요.` : run?.state === 'cleared' ? `${run.totalFloors}층 타워를 정복했어요!` : '함께 출발할 3마리를 선택하세요.'}</h2>
@@ -60,13 +60,15 @@ export function TowerControls({tower, selected, setSelected, busy, submit,error}
         <span className="choice-order">{picked ? recruiting ? '✓' : `${selected.indexOf(name) + 1}번` : '+'}</span>
         <img src={spriteUrl(name)} alt="" width={80} height={80} onError={e => { e.currentTarget.style.visibility = 'hidden'; }} />
         <strong>{pokemonName(name)}</strong><small>{species[name]?.types.join(' · ')}</small>
+        {recruiting && <span className={tower.unlocked.includes(name) ? "recruit-known-species" : "recruit-new-species"}>{tower.unlocked.includes(name) ? "도감 등록됨" : "새 포켓몬 · 도감 미등록"}</span>}
         {improvements.length>0 && <span className="recruit-iv-up" title={improvements.map(stat=>`${statNames[stat]} ${previous![stat]} → ${incoming![stat]}`).join(' · ')}>↑ 개체값 상승 · {improvements.length}개</span>}
-        {newMoves.length>0 && <span className="recruit-new-moves">NEW · 새 기술 {newMoves.length}개</span>}
+        {newMoves.length>0 && <span className="recruit-new-moves">기술 수집 · 새 기술 {newMoves.length}개</span>}
       </button>;
     })}</div>
     {!recruiting && !choosingNext && <RulePicker value={rule} onChange={setRule} disabled={busy}/>}
+    {run?.hiddenBossPending && <p className="selection-note">히든 보스 레드가 등장했습니다! 같은 층에서 추가 대결합니다. HP·PP·상태를 회복하고 출전 팀을 다시 고릅니다.</p>}
     <div className="selection-actions">{recruiting ? <><button className="secondary-button" disabled={busy} onClick={() => recruit(true)}>영입 없이 계속</button><button className="secondary-button" disabled={busy || !chosen} onClick={()=>{setCollectOnly(true);setConfirming(true);}}>도감에 등록</button><button ref={confirmButton} data-recruit-continue className="primary-button" disabled={busy || !chosen} onClick={() => {setCollectOnly(false);setReplaced(null);if(needsReplacement)setReplacing(true);else setConfirming(true);}}>{alreadyOwned ? '성장 이어받기' : full ? '교체하고 데려가기' : '동료로 데려가기'} ↗</button></>
-      : <button ref={confirmButton} data-keyboard-next className="primary-button" disabled={busy || selected.length !== 3} onClick={() => void start()}>{busy ? '준비 중…' : choosingNext ? `${run.floor}층 ${run.boss ? '보스 도전' : '배틀 시작'}` : run ? '새 도전 시작' : '배틀 시작'} ↗</button>}</div>
+      : <button ref={confirmButton} data-keyboard-next className="primary-button" disabled={busy || selected.length !== 3} onClick={() => void start()}>{busy ? '준비 중…' : choosingNext ? `${run.floor}층 ${run.hiddenBossPending ? '히든 보스 도전' : run.boss ? '보스 도전' : '배틀 시작'}` : run ? '새 도전 시작' : '배틀 시작'} ↗</button>}</div>
     {!choosingNext && <p className="selection-note">{recruiting ? full ? '새 동료를 영입하려면 기존 멤버 1마리를 내보내야 합니다. 내보낸 포켓몬의 영구 도감 해금은 유지됩니다.' : '이번 도전에는 최대 6마리까지 보유할 수 있습니다. 영입은 1마리만 가능합니다.' : '도감 해금은 보유 멤버와 별개입니다. 새 도전은 선택한 3마리로 시작하며, 등반 중 영입하여 최대 6마리까지 보유합니다.'}</p>}
   </section>;
 }

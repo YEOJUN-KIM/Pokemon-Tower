@@ -22,20 +22,22 @@ function shuffled(ids:string[],seed:string){
   return result;
 }
 function hash(value:string){let result=2166136261;for(const char of value)result=Math.imul(result^char.charCodeAt(0),16777619);return result>>>0;}
-export function towerTrainerEncounter(floor:number,runId='prototype',theme:TowerTheme|null=null):TrainerEncounter|null {
+export function towerTrainerEncounter(floor:number,runId='prototype',theme:TowerTheme|null=null,splitRoute=false,hidden=false):TrainerEncounter|null {
   if(theme){
     if(floor<1 || floor>100 || floor%5!==0)return null;
     const localFloor=(floor-1)%50+1;
     const chapterRun=floor>50?`${runId}:chapter:2`:runId;
     let id:string;
     const config=towerThemes[theme];
-    if(localFloor===50)id=config.final;
-    else if(localFloor===40)id=config.champion;
+    if(hidden)id=config.final;
+    else if(localFloor===50)id=splitRoute?config.champion:config.final;
+    else if(localFloor===40)id=splitRoute?shuffled([...config.elites],`${chapterRun}:${theme}:elite`)[3]:config.champion;
     else if(localFloor%10===0)id=shuffled([...config.elites],`${chapterRun}:${theme}:elite`)[localFloor/10-1];
     else id=shuffled([...config.gyms],`${chapterRun}:${theme}:gym`)[Math.floor(localFloor/10)];
     const sample=namedTrainerSamples.find(s=>s.id===id)!;
     const boss=trainerView(sample);
-    if(theme==='johto' && id==='named-lance'){boss.role='elite';boss.title='사천왕급 트레이너';}
+    if(theme==='johto' && id==='named-lance' && !splitRoute){boss.role='elite';boss.title='사천왕급 트레이너';}
+    if(hidden)boss.title='히든 보스';
     if(theme==='galar' && localFloor===50)boss.title='챔피언 재대결';
     return {boss,entries:sample.entries!,tactic:sample.tactic,ace:sample.ace,champion:sample.role==='champion'};
   }

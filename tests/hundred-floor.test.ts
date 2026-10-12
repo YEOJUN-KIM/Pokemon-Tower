@@ -81,7 +81,7 @@ test('real v20 migration preserves fifty-floor saves and future old difficulty, 
   assert.equal(store.view('new').run!.totalFloors,100);
   assert.equal(store.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(fresh.run_id)!.version,CURRENT_PROGRESSION);
   assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,26);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,27);
  }finally{store.close();}
 });
 

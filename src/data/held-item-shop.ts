@@ -1,3 +1,4 @@
+import {zCrystals} from './z-crystals';
 import megaItems from './mega-items.json' with {type:'json'};
 import {heldItemKeys,type HeldItem} from './held-items';
 
@@ -8,6 +9,7 @@ const unique=new Set<HeldItem>(['Expert Belt','Rocky Helmet','Heavy-Duty Boots',
 const epic=new Set<HeldItem>(['Choice Band','Choice Specs','Choice Scarf','Focus Sash','Assault Vest','Eviolite','Life Orb']);
 const legendary=new Set<HeldItem>();
 export function itemShopRule(item:HeldItem):{rarity:ItemRarity;minClearedFloor:number}{
+  if(zCrystals[item])return {rarity:'legendary',minClearedFloor:5};
   if(legendary.has(item) || Object.hasOwn(megaItems,item) || item==='Dynamax Band')return {rarity:'legendary',minClearedFloor:5};
   if(epic.has(item))return {rarity:'epic',minClearedFloor:5};
   if(unique.has(item))return {rarity:'unique',minClearedFloor:5};

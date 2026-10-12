@@ -10,7 +10,7 @@ export type OwnPokemon = {
 export type Request = {
   wait?: boolean; teamPreview?: boolean; forceSwitch?: boolean[];
   side: {pokemon: OwnPokemon[]};
-  active?: {trapped?: boolean;maybeTrapped?:boolean; canMegaEvo?:boolean;canDynamax?:boolean;canTerastallize?:string;maxMoves?:{maxMoves:{move:string;disabled?:boolean}[]}; moves: {id: string; move: string; pp?: number; disabled?: boolean | string}[]}[];
+  active?: {trapped?: boolean;maybeTrapped?:boolean; canMegaEvo?:boolean;canDynamax?:boolean;canTerastallize?:string;canZMove?:({move:string;target:string}|null)[];maxMoves?:{maxMoves:{move:string;disabled?:boolean}[]}; moves: {id: string; move: string; pp?: number; disabled?: boolean | string}[]}[];
 };
 export type Observation = {
   turn: number;
@@ -52,6 +52,13 @@ export function legalActions(request: Request, opponent?: string): Action[] {
   const own = request.side.pokemon.find(p => p.active);
   if (!request.forceSwitch?.[0] && own) {
     request.active?.[0].moves.forEach((move, index) => {
+      const z=request.active![0].canZMove?.[index];
+      if(z && (move.pp===undefined || move.pp>0)){
+        const base=Dex.moves.get(move.id),zMove=Dex.moves.get(z.move);
+        const power=base.category==='Status'?0:zMove.basePower>1?zMove.basePower:base.zMove?.basePower || 0;
+        const score=base.category==='Status'?0:estimateDamage(move.id,own,opponent)*power/Math.max(1,base.basePower);
+        actions.push({command:`move ${index+1} zmove`,label:z.move,estimatedDamage:score});
+      }
       if (!move.disabled && (move.pp === undefined || move.pp > 0)) {
         const active=request.active![0],max=active.maxMoves?.maxMoves[index],isMax=!!active.maxMoves && !active.canDynamax;
         const label=isMax && max ? Dex.moves.get(max.move).name : move.move;

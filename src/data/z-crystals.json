@@ -1,0 +1,337 @@
+{
+  "Aloraichium Z": {
+    "name": "알로라이츄Z",
+    "type": "Electric",
+    "users": [
+      "Raichu-Alola"
+    ],
+    "from": "Thunderbolt",
+    "move": "Stoked Sparksurfer",
+    "description": "Raichu-Alola의 10만볼트을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Buginium Z": {
+    "name": "벌레Z",
+    "type": "Bug",
+    "description": "벌레 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Darkinium Z": {
+    "name": "악Z",
+    "type": "Dark",
+    "description": "악 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Decidium Z": {
+    "name": "모크나이퍼Z",
+    "type": "Ghost",
+    "users": [
+      "Decidueye"
+    ],
+    "from": "Spirit Shackle",
+    "move": "Sinister Arrow Raid",
+    "description": "모크나이퍼의 그림자꿰매기을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Dragonium Z": {
+    "name": "드래곤Z",
+    "type": "Dragon",
+    "description": "드래곤 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Eevium Z": {
+    "name": "이브이Z",
+    "type": "Normal",
+    "users": [
+      "Eevee"
+    ],
+    "from": "Last Resort",
+    "move": "Extreme Evoboost",
+    "description": "이브이의 비장의무기을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Electrium Z": {
+    "name": "전기Z",
+    "type": "Electric",
+    "description": "전기 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Fairium Z": {
+    "name": "페어리Z",
+    "type": "Fairy",
+    "description": "페어리 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Fightinium Z": {
+    "name": "격투Z",
+    "type": "Fighting",
+    "description": "격투 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Firium Z": {
+    "name": "불꽃Z",
+    "type": "Fire",
+    "description": "불꽃 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Flyinium Z": {
+    "name": "비행Z",
+    "type": "Flying",
+    "description": "비행 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Ghostium Z": {
+    "name": "고스트Z",
+    "type": "Ghost",
+    "description": "고스트 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Grassium Z": {
+    "name": "풀Z",
+    "type": "Grass",
+    "description": "풀 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Groundium Z": {
+    "name": "땅Z",
+    "type": "Ground",
+    "description": "땅 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Icium Z": {
+    "name": "얼음Z",
+    "type": "Ice",
+    "description": "얼음 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Incinium Z": {
+    "name": "어흥염Z",
+    "type": "Dark",
+    "users": [
+      "Incineroar"
+    ],
+    "from": "Darkest Lariat",
+    "move": "Malicious Moonsault",
+    "description": "어흥염의 DD래리어트을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Kommonium Z": {
+    "name": "짜랑고우거Z",
+    "type": "Dragon",
+    "users": [
+      "Kommo-o",
+      "Kommo-o-Totem"
+    ],
+    "from": "Clanging Scales",
+    "move": "Clangorous Soulblaze",
+    "description": "짜랑고우거 / Kommo-o-Totem의 스케일노이즈을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Lunalium Z": {
+    "name": "루나아라Z",
+    "type": "Ghost",
+    "users": [
+      "Lunala",
+      "Necrozma-Dawn-Wings"
+    ],
+    "from": "Moongeist Beam",
+    "move": "Menacing Moonraze Maelstrom",
+    "description": "루나아라 / Necrozma-Dawn-Wings의 섀도레이을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Lycanium Z": {
+    "name": "루가루암Z",
+    "type": "Rock",
+    "users": [
+      "Lycanroc",
+      "Lycanroc-Midnight",
+      "Lycanroc-Dusk"
+    ],
+    "from": "Stone Edge",
+    "move": "Splintered Stormshards",
+    "description": "루가루암 / Lycanroc-Midnight / Lycanroc-Dusk의 스톤에지을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Marshadium Z": {
+    "name": "마샤도Z",
+    "type": "Ghost",
+    "users": [
+      "Marshadow"
+    ],
+    "from": "Spectral Thief",
+    "move": "Soul-Stealing 7-Star Strike",
+    "description": "마샤도의 섀도스틸을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Mewnium Z": {
+    "name": "뮤Z",
+    "type": "Psychic",
+    "users": [
+      "Mew"
+    ],
+    "from": "Psychic",
+    "move": "Genesis Supernova",
+    "description": "뮤의 사이코키네시스을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Mimikium Z": {
+    "name": "따라큐Z",
+    "type": "Fairy",
+    "users": [
+      "Mimikyu",
+      "Mimikyu-Busted",
+      "Mimikyu-Totem",
+      "Mimikyu-Busted-Totem"
+    ],
+    "from": "Play Rough",
+    "move": "Let's Snuggle Forever",
+    "description": "따라큐 / Mimikyu-Busted / Mimikyu-Totem / Mimikyu-Busted-Totem의 치근거리기을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Normalium Z": {
+    "name": "노말Z",
+    "type": "Normal",
+    "description": "노말 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Pikanium Z": {
+    "name": "피카츄Z",
+    "type": "Electric",
+    "users": [
+      "Pikachu"
+    ],
+    "from": "Volt Tackle",
+    "move": "Catastropika",
+    "description": "피카츄의 볼트태클을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Pikashunium Z": {
+    "name": "지우피카츄Z",
+    "type": "Electric",
+    "users": [
+      "Pikachu-Original",
+      "Pikachu-Hoenn",
+      "Pikachu-Sinnoh",
+      "Pikachu-Unova",
+      "Pikachu-Kalos",
+      "Pikachu-Alola",
+      "Pikachu-Partner"
+    ],
+    "from": "Thunderbolt",
+    "move": "10,000,000 Volt Thunderbolt",
+    "description": "Pikachu-Original / Pikachu-Hoenn / Pikachu-Sinnoh / Pikachu-Unova / Pikachu-Kalos / Pikachu-Alola / Pikachu-Partner의 10만볼트을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Poisonium Z": {
+    "name": "독Z",
+    "type": "Poison",
+    "description": "독 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Primarium Z": {
+    "name": "누리레느Z",
+    "type": "Water",
+    "users": [
+      "Primarina"
+    ],
+    "from": "Sparkling Aria",
+    "move": "Oceanic Operetta",
+    "description": "누리레느의 물거품아리아을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Psychium Z": {
+    "name": "에스퍼Z",
+    "type": "Psychic",
+    "description": "에스퍼 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Rockium Z": {
+    "name": "바위Z",
+    "type": "Rock",
+    "description": "바위 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Snorlium Z": {
+    "name": "잠만보Z",
+    "type": "Normal",
+    "users": [
+      "Snorlax"
+    ],
+    "from": "Giga Impact",
+    "move": "Pulverizing Pancake",
+    "description": "잠만보의 기가임팩트을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Solganium Z": {
+    "name": "솔가레오Z",
+    "type": "Steel",
+    "users": [
+      "Solgaleo",
+      "Necrozma-Dusk-Mane"
+    ],
+    "from": "Sunsteel Strike",
+    "move": "Searing Sunraze Smash",
+    "description": "솔가레오 / Necrozma-Dusk-Mane의 메테오드라이브을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Steelium Z": {
+    "name": "강철Z",
+    "type": "Steel",
+    "description": "강철 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Tapunium Z": {
+    "name": "카푸Z",
+    "type": "Fairy",
+    "users": [
+      "Tapu Koko",
+      "Tapu Lele",
+      "Tapu Bulu",
+      "Tapu Fini"
+    ],
+    "from": "Nature's Madness",
+    "move": "Guardian of Alola",
+    "description": "카푸꼬꼬꼭 / 카푸나비나 / 카푸브루루 / 카푸느지느의 자연의분노을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  },
+  "Waterium Z": {
+    "name": "물Z",
+    "type": "Water",
+    "description": "물 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "price": 3000,
+    "consumable": false
+  }
+}

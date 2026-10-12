@@ -28,10 +28,11 @@ import {pokedexEntries} from './pokedex-entries';
 import Showdown from 'pokemon-showdown';
 import {upgrades,UPGRADE_FLOORS,SHOP_REROLL_LIMIT,machineMoves,isShopFloor,rerollPrice,vitamins,vitaminPrice,VITAMIN_BOOST,type UpgradeKind} from '../data/shop';
 import {collectionGender,speciesGender,genderOptions} from './pokemon-gender';
+import {matchingZCrystals,zCrystals} from '../data/z-crystals';
 import {defaultProfile,trainingOptions,validateProfile} from './training';
 import {trainingCost,statKeys,trainedStat,natures,type StatBlock,type IVGain,type MoveGain,type MoveSwap,type TrainingProfile,type TrainingView} from '../data/training';
 
-export const AI_VERSION = 'tower-policy-v8';
+export const AI_VERSION = 'tower-policy-v9';
 const favoriteSpecies=new Set(pokedexEntries().map(entry=>entry.species));
 type RunRow = {id: string; player_id: string; floor: number; state: RunView['state']; total_floors: number};
 export type BattleRow = {
@@ -46,9 +47,9 @@ export class TowerStore {
     this.db = new DatabaseSync(path);
     this.db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
     const version = this.db.prepare('PRAGMA user_version').get() as {user_version: number};
-    if (version.user_version > 26) throw new Error('Unsupported database schema');
+    if (version.user_version > 27) throw new Error('Unsupported database schema');
     // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
-    if(version.user_version<26)this.db.exec('PRAGMA foreign_keys=OFF');
+    if(version.user_version<27)this.db.exec('PRAGMA foreign_keys=OFF');
     try {this.tx(() => {
       this.db.exec(schema);
       const playerColumns=this.db.prepare('PRAGMA table_info(players)').all() as {name:string}[];
@@ -118,6 +119,10 @@ export class TowerStore {
       }
       const upgradeSQL=(this.db.prepare("SELECT sql FROM sqlite_master WHERE name='run_upgrades'").get() as {sql:string}).sql;
       if(!upgradeSQL.includes("'critical'")){this.db.exec("ALTER TABLE run_upgrades RENAME TO run_upgrades_old; CREATE TABLE run_upgrades(run_id TEXT NOT NULL REFERENCES runs(id),kind TEXT NOT NULL CHECK(kind IN ('attack','speed','guard','defense','specialAttack','specialDefense','accuracy','critical')),start_floor INTEGER NOT NULL,end_floor INTEGER NOT NULL,PRIMARY KEY(run_id,kind)) STRICT; INSERT INTO run_upgrades SELECT * FROM run_upgrades_old; DROP TABLE run_upgrades_old;");}
+      const ruleSQL=(this.db.prepare("SELECT sql FROM sqlite_master WHERE name='run_rules'").get() as {sql:string}).sql;
+      if(!ruleSQL.includes("'z'")){
+        this.db.exec("CREATE TABLE run_rules_z(run_id TEXT PRIMARY KEY REFERENCES runs(id),rule TEXT NOT NULL CHECK(rule IN ('basic','mega','dynamax','tera','z','chaos'))) STRICT; INSERT INTO run_rules_z SELECT * FROM run_rules; DROP TABLE run_rules; ALTER TABLE run_rules_z RENAME TO run_rules;");
+      }
       this.repairArchivedOwnership();
     });} finally {this.db.exec('PRAGMA foreign_keys=ON');}
   }
@@ -354,6 +359,17 @@ export class TowerStore {
     const eligible=filteredVillain && (!filteredVillain.ace || filteredVillain.entries.includes(filteredVillain.ace)) ? filteredVillain : null;
     const sample=trainer ? undefined : eligible && eligible.entries.length>=3 ? eligible : selectTrainerSample(floor,seed,previous.flatMap(row=>{const saved=row.trainer ? JSON.parse(row.trainer) : null;const entry=trainerCatalog.find(s=>s.id===saved?.id);return entry ? [{id:entry.id,specialty:entry.specialty}] : [];}),progression);
     const encounter=generateOpponentTeam(floor,seed,previous.flatMap(row=>(Showdown.Teams.unpack(row.opponent_team) ?? []).map(set=>set.species)),trainer,sample,progression);
+    // Per-NPC signature presets remain a later data task. Z-only named/elite
+    // teams get one compatible carrier without changing their species/moves.
+    if(rule==='z' && (trainer || sample?.kind==='named' || sample?.kind==='elite' && floor>=25)){
+      for(const entry of encounter){
+        const choices=matchingZCrystals(entry.name,entry.moves).filter(item=>entry.moves.some(name=>{
+          const move=Showdown.Dex.moves.get(name),crystal=zCrystals[item];
+          return crystal.from ? crystal.from===move.name : move.type===crystal.type && !!move.zMove;
+        })).sort((a,b)=>Number(!!zCrystals[b].from)-Number(!!zCrystals[a].from));
+        if(choices.length){entry.item=choices[0];break;}
+      }
+    }
     const opponents=encounter.map(entry=>entry.name);
     const opponentProfiles=Object.fromEntries(encounter.map(({name,moves,ability})=>{
       return [name,{shiny:this.roll(8192)===0,...opponentProfile(name,moves,floor,Object.fromEntries(statKeys.map(stat=>[stat,randomBytes(1)[0]%32])) as StatBlock,progression),gender:speciesGender(name,this.roll(1000000)/1000000),...(ability ? {ability} : {})}];
@@ -436,7 +452,7 @@ export class TowerStore {
   }
   private setHeldItem(runId:string,species:string,item:string|null) {
     if(item&&!allowsRuleItem(this.runRule(runId),item))throw new BattleRequestError('이 룰에서는 사용할 수 없는 도구입니다.',409);
-    if(item && !canEquipGimmick(species,item))throw new BattleRequestError('이 포켓몬에게 맞는 메가스톤이 아니거나 다이맥스할 수 없습니다.',400);
+    if(item && !canEquipGimmick(species,item))throw new BattleRequestError('이 포켓몬에게 맞는 기믹 도구가 아닙니다.',400);
     const old=this.heldItems(runId)[species];if(old===item)return;
     if(item && this.db.prepare('SELECT 1 FROM run_held_items WHERE run_id=? AND item=? AND species<>?').get(runId,item,species))throw new BattleRequestError('같은 종류의 도구는 한 마리만 장착할 수 있습니다. 먼저 다른 포켓몬의 도구를 해제하세요.',409);
     if(item && !this.db.prepare('UPDATE run_item_bag SET quantity=quantity-1 WHERE run_id=? AND item=? AND quantity>0').run(runId,item).changes)throw new BattleRequestError('가방에 없는 도구입니다.',409);

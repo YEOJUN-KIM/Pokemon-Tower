@@ -29,6 +29,8 @@
 
 ## 무엇을 옮겨야 하나
 
+2026-10-12 후속 정리: 기존 `artifacts/` 로그·경기 JSONL·중간 이미지/GIF·미리보기 WAV 920개를 Git 추적에서 제외하고 로컬 파일은 보존했다. 팀 샘플·manifest·실험 요약·검증 보고서와 현재 문서에서 직접 링크한 캡처 등 기존 408개는 유지한다. 오늘 Z기술 구현을 다른 PC에서 이어가는 데 새 `.data/`나 전체 `artifacts/` 복사는 필요하지 않다. 기존 저장이 해당 PC에 있다는 전제이며, 과거 실험 재생·감사를 이어갈 때만 로컬 원자료를 별도로 옮긴다. 아래 전체 자료 이전 절차는 개인 저장과 과거 연구까지 함께 옮길 때 적용한다.
+
 사용자가 GitHub에 코드를 올렸다. 새 컴퓨터에서는 저장소를 clone하고 최신 커밋을 확인한다. **Git에서 제외된 실험 원자료와 개인 저장은 clone에 포함되지 않으므로 직접 복사한다.** 이후 로컬 변경이 생기면 커밋/푸시 또는 폴더 복사로 함께 옮긴다.
 
 2026-10-12 커밋 정책: 새 `artifacts/` 파일은 `.gitignore`로 전체 제외한다. 이 PC에서 이미 추적 중인 artifacts는 `skip-worktree`로 변경 목록에서 숨겼으며, 로컬 원본과 기존 GitHub 파일은 유지한다. 이 설정은 로컬 Git 인덱스에만 적용되어 clone 시 전파되지 않는다. 다른 PC에서도 같은 방식이 필요하면 PowerShell에서 `git ls-files artifacts | git update-index --skip-worktree --stdin`을 실행한다. 변경 감지를 다시 켜려면 `git ls-files artifacts | git update-index --no-skip-worktree --stdin`으로 해제한다. 아래 일부 대용량 파일만 제외했다는 설명은 이전 정책 기록이며, 새 실험 자료·게임 DB·환경설정은 직접 보관한다.

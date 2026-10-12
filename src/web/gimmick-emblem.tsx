@@ -1,10 +1,10 @@
 import {useId} from 'react';
 
 // Original vector emblems for the battle command dock.
-export function GimmickEmblem({kind}:{kind:'mega'|'dynamax'}){
+export function GimmickEmblem({kind}:{kind:'mega'|'dynamax'|'zmove'}){
  const gradient=useId();
  return <svg className="gimmick-emblem" viewBox="0 0 72 72" aria-hidden="true">
-  {kind==='mega' ? <>
+  {kind==='zmove' ? <><path d="M36 3 62 20 55 53 36 69 17 53 10 20Z" fill="#eac953" stroke="#fff6c7" strokeWidth="3"/><path d="M22 23h29L22 49h29" fill="none" stroke="#655326" strokeWidth="7" strokeLinejoin="round"/></> : kind==='mega' ? <>
    <defs>
     <linearGradient id={gradient} x1="0" y1="0" x2="0" y2="1"><stop stopColor="#ffbed8"/><stop offset=".2" stopColor="#cba5df"/><stop offset=".43" stopColor="#19b8d8"/><stop offset=".67" stopColor="#00b872"/><stop offset=".87" stopColor="#97d734"/><stop offset="1" stopColor="#eff589"/></linearGradient>
     <radialGradient id={`${gradient}-shine`} cx=".35" cy=".23" r=".76"><stop stopColor="#fff" stopOpacity=".35"/><stop offset=".55" stopColor="#fff" stopOpacity="0"/><stop offset=".88" stopColor="#fff" stopOpacity=".05"/><stop offset="1" stopColor="#fff" stopOpacity=".65"/></radialGradient>

@@ -1,8 +1,10 @@
 # 실행 스크립트 안내
 
-2026-10-11 기준. 저장소 루트에서 실행한다. `package.json`의 dev/test/typecheck/build는 게임 개발 명령이고, 아래 실험 runner는 별도로 실행해야 한다. 실험 결과의 현재 상태는 [EXPERIMENTS](../docs/experiments/README.md)를 따른다.
+2026-10-12 기준. 저장소 루트에서 실행한다. `package.json`의 dev/test/typecheck/build는 게임 개발 명령이고, 아래 실험 runner는 별도로 실행해야 한다. 실험 결과의 현재 상태는 [EXPERIMENTS](../docs/experiments/README.md)를 따른다.
 
 ## 최근 실험
+
+현재 Z기술 UI 확인은 `node --import tsx node_modules/@playwright/test/cli.js test e2e/z-moves.spec.ts --grep 'Z selection'`로 실행한다. Node.js 24.19.0에서 기본 Playwright 실행의 JSON import attribute 수집 오류를 피하기 위해 tsx를 먼저 로드한다. 이 명령은 PC·모바일 선택/발동 테스트 2개와 `artifacts/screenshots/z-moves/` 캡처를 갱신하며 크리스탈 구매 테스트는 포함하지 않는다. 최신 빌드가 먼저 필요하고 테스트 서버는 `.data/e2e.sqlite`를 사용한다.
 
 | runner | 범위 | 입력·정책 |
 |---|---|---|
@@ -17,6 +19,8 @@
 `simulate-*.ts`는 각 runner의 하위 실행기다. 환경 변수를 생략하면 과거 기본 정책/층수로 실행될 수 있다. 어떤 실행기는 결과 파일을 덮어쓰므로 직접 실행 전 출력 경로를 확인한다. `audit-*.ts`도 결과 존재/소스 해시 조건이 있으므로 읽기 전용이라고 가정하지 않는다.
 
 ## 유지보수와 자료 가져오기
+
+2026-10-12 Git 정리 이후 과거 실험의 `.jsonl`·`.log` 원자료와 중간 미디어는 로컬 보관이다. 새 clone에서 과거 재생·감사 runner를 실행하려면 해당 입력을 먼저 복사한다. Git에 남긴 팀 샘플·manifest·요약만으로 원자료 전체가 복원되지는 않는다.
 
 - `node scripts/index-artifacts.mjs`: 원자료를 옮기지 않고 파일 목록·용량·manifest 참조를 갱신.
 - `pnpm data:import`, `pnpm battle:audit`, `pnpm sprites:audit`: 현재 데이터 가져오기와 검사. 가져오기는 데이터를 변경한다.

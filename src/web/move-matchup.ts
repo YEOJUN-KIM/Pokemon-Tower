@@ -16,6 +16,7 @@ export function moveMatchup(battle:BattleView,move:MovePP,teraSelected=false){
   if(event==='-endability')ability='';
   if(['-immune','-heal','-activate'].includes(event)){const revealed=line.match(/\[from\] ability: ([^|]+)/)?.[1]??(event==='-activate'?value.match(/^ability: (.*)/)?.[1]:undefined);if(revealed)ability=revealed;}
  }
+ if(enemy.types)types=[...enemy.types];
  if(enemy.terastallized&&enemy.terastallized!=='Stellar')types=[enemy.terastallized];
  if(!types.length)return null;
  let type=move.type??info.type;

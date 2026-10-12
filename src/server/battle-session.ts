@@ -1,3 +1,6 @@
+import {applyPublicTypes} from '../web/battle-types';
+import {ZMovePolicy} from '../battle/z-move-policy';
+import {moveInfo} from '../data/move-info';
 import {TeraPolicy,GimmickPolicy,LegacyGimmickPolicy} from '../battle/gimmick-policy';
 import {SwitchingPolicy,CautiousSwitchingPolicy} from '../battle/switch-policy';
 import {LearningOpponentPolicy} from '../battle/learning-opponent-policy';
@@ -13,6 +16,9 @@ import Showdown from 'pokemon-showdown';
 import {playerTeam} from '../data/teams';
 import {genderFromDetails} from '../data/gender';
 import {advanceField,emptyField} from '../web/battle-field';
+
+const zStatNames:Record<string,string>={atk:'공격',def:'방어',spa:'특수공격',spd:'특수방어',spe:'스피드',accuracy:'명중률',evasion:'회피율'};
+const zStatusEffects:Record<string,string>={heal:'자신의 HP를 전부 회복',healreplacement:'다음에 등장하는 포켓몬의 HP를 전부 회복',clearnegativeboost:'낮아진 능력치 랭크를 복구',redirect:'상대 공격을 자신에게 유도',crit2:'급소 확률 상승',curse:'고스트 타입은 HP 전부 회복, 그 외 타입은 공격 1단계 상승'};
 
 export class BattleRequestError extends Error {
   constructor(message: string, public status: number) { super(message); }
@@ -36,6 +42,7 @@ export class BattleSession {
   private initialTeraTickets=0;
   private teraSpent=false;
   private maxMovePP:BattleView['maxMovePP'];
+  private zMovePP:BattleView['zMovePP'];
   private failure: string | null = null;
   private disposed = false;
   private listeners = new Set<() => void>();
@@ -55,7 +62,7 @@ export class BattleSession {
       format:options.format,
       teams: options.teams,
       rule:options.rule,battleItems:options.battleItems,upgrades:options.upgrades,teraTickets:options.teraTickets,
-      opponent: options.aiVersion==='tower-policy-v8' ? new LearningOpponentPolicy() : options.aiVersion==='damage-policy-v1' ? new DamagePolicy() : options.aiVersion==='tower-policy-v7' ? new CautiousSwitchingPolicy() : options.aiVersion==='tower-policy-v6' ? new SwitchingPolicy() : options.aiVersion==='tower-policy-v5' ? new TeraPolicy() : options.aiVersion==='tower-policy-v4' ? new GimmickPolicy() : options.aiVersion==='tower-policy-v3' ? new LegacyGimmickPolicy() : new TowerPolicy(),
+      opponent: options.aiVersion==='tower-policy-v9' ? new ZMovePolicy() : options.aiVersion==='tower-policy-v8' ? new LearningOpponentPolicy() : options.aiVersion==='damage-policy-v1' ? new DamagePolicy() : options.aiVersion==='tower-policy-v7' ? new CautiousSwitchingPolicy() : options.aiVersion==='tower-policy-v6' ? new SwitchingPolicy() : options.aiVersion==='tower-policy-v5' ? new TeraPolicy() : options.aiVersion==='tower-policy-v4' ? new GimmickPolicy() : options.aiVersion==='tower-policy-v3' ? new LegacyGimmickPolicy() : new TowerPolicy(),
       player: {choose: observation => {
         if (observation.legalActions[0]?.command.startsWith('team ')) return 'team 123';
         this.observation = observation;
@@ -87,6 +94,13 @@ export class BattleSession {
           this.movePP=(request.active?.[0]?.moves ?? []).map((move:{id:string;pp:number;maxpp:number})=>{
             const base=Showdown.Dex.moves.get(move.id);
             return {name:base.name,pp:move.pp,maxpp:move.maxpp,...(move.id==='terablast' && tera ? {type:tera,power:tera==='Stellar'?100:80,accuracy:true,category:current.stats.atk>current.stats.spa?'Physical' as const:'Special' as const} : {})};
+          });
+          this.zMovePP=request.active?.[0]?.canZMove?.map((option:{move:string}|null,index:number)=>{
+            if(!option)return null;
+            const base=Showdown.Dex.moves.get(request.active[0].moves[index].id),z=Showdown.Dex.moves.get(option.move);
+            const status=option.move.startsWith('Z-');
+            const effect=base.zMove?.boost ? '추가 효과: '+Object.entries(base.zMove.boost).map(([stat,value])=>(zStatNames[stat] ?? stat)+' '+value+'단계').join(' · ') : base.zMove?.effect ? '추가 효과: '+(zStatusEffects[base.zMove.effect] ?? base.zMove.effect) : '';
+            return {...this.movePP[index],name:option.move,displayName:status?'Z-'+(moveInfo[base.name]?.name ?? base.name):moveInfo[z.name]?.name ?? z.name,type:status?base.type:z.type,category:status?'Status' as const:z.basePower===1?base.category:z.category,power:status?0:z.basePower===1?base.zMove?.basePower || 0:z.basePower,accuracy:status?base.accuracy:z.accuracy,description:status?effect+' · '+(moveInfo[base.name]?.description ?? ''):moveInfo[z.name]?.description ?? '팀당 배틀 한 번 사용하는 Z기술입니다.'};
           });
           this.maxMovePP=request.active?.[0]?.maxMoves?.maxMoves.map((max:{move:string},index:number)=>{
             const base=Showdown.Dex.moves.get(request.active[0].moves[index].id),move=Showdown.Dex.moves.get(max.move);
@@ -201,13 +215,15 @@ export class BattleSession {
         if (pokemon && event === 'faint') pokemon.condition = '0 fnt';
       }
     }
+    const typeView={team,opponent} as BattleView;
+    for(const line of this.messages)applyPublicTypes(typeView,line);
     return {
       id: this.id, requestId: this.requestId,
       status: this.status === 'processing' ? 'waiting' : this.status,
       turn: this.turns, team, opponent,
       actions: this.status === 'waiting' ? this.observation?.legalActions.map(({command, label}) => ({command, label})) ?? [] : [],
       messages: this.messages.slice(-300), winner: this.winner, error: this.failure,
-      teraTickets:Math.max(0,this.initialTeraTickets-(this.teraSpent?1:0)),field:structuredClone(this.field),maxMovePP:this.maxMovePP,movePP:this.movePP.map(move=>({...move})),
+      teraTickets:Math.max(0,this.initialTeraTickets-(this.teraSpent?1:0)),field:structuredClone(this.field),maxMovePP:this.maxMovePP,zMovePP:this.zMovePP,movePP:this.movePP.map(move=>({...move})),
     };
   }
 }

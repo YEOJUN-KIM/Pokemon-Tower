@@ -24,7 +24,7 @@ export function MoveVisuals({motion,speed=1}:{motion:Motion|null;speed?:number})
     context.clearRect(0,0,element.width,element.height);
     if(motion?.kind!=='move'||!motion.move)return;
     const blocked=motion.blocked;
-    const plan=moveAnimationPlan(motion.move,motion.color),reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+    const plan=moveAnimationPlan(motion.move,motion.color,motion.category?{category:motion.category}:undefined),reduced=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
     let cancelled=false,frame=0;const animations:Animation[]=[];
     const bounds=arena.getBoundingClientRect(),ratio=Math.min(devicePixelRatio||1,2);
     element.width=Math.round(bounds.width*ratio);element.height=Math.round(bounds.height*ratio);

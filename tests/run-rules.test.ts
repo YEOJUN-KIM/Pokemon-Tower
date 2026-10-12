@@ -26,6 +26,6 @@ test('rules persist, filter shops and opponents, preserve legacy climbs and reje
  if(!allowsGimmick(rule,'terastallize'))assert.throws(()=>s.purchaseTera(rule,row.run_id,11),/룰/);
  s.db.prepare("UPDATE runs SET floor=50,state='select' WHERE id=?").run(row.run_id);const boss=s.battle(s.enter(rule,row.run_id,50,starters));assert.equal(boss.rule,rule);for(const p of Showdown.Teams.unpack(boss.opponent_team)!)if(rule==='basic'||rule==='tera')assert.notEqual(p.item,DYNAMAX_ITEM);
  s.db.prepare('DELETE FROM run_rules WHERE run_id=?').run(row.run_id);assert.equal(s.view(rule).run!.rule,'chaos');}
- s.ensurePlayer('invalid');assert.throws(()=>s.start('invalid',starters,'z'),/룰/);assert.equal(s.view('invalid').run,null);
+ s.ensurePlayer('invalid');assert.throws(()=>s.start('invalid',starters,'invalid'),/룰/);assert.equal(s.view('invalid').run,null);
  }finally{s.close();}
 });

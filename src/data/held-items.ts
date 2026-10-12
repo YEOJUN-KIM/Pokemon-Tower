@@ -1,3 +1,5 @@
+import zItems from './z-crystals.json' with {type:'json'};
+import {zCrystals} from './z-crystals';
 import megaItems from './mega-items.json' with {type:'json'};
 export const baseHeldItems={
   'Sitrus Berry':{name:'자뭉열매',description:'배틀마다 1회, HP가 절반 이하가 되면 최대 HP의 1/4을 회복합니다. 다음 층에서 다시 사용할 수 있습니다.',price:225,consumable:false},
@@ -36,12 +38,12 @@ export const baseHeldItems={
   'Scope Lens':{name:'초점렌즈',description:'급소에 맞힐 확률의 랭크가 1단계 올라갑니다.',price:600,consumable:false},
   'Light Clay':{name:'빛의점토',description:'리플렉터·빛의장막·오로라베일의 지속 시간을 5턴에서 8턴으로 늘립니다.',price:900,consumable:false},
 } as const;
-export const heldItems={...baseHeldItems,...megaItems,'Dynamax Band':{name:'다이맥스밴드',description:'지닌 포켓몬이 3턴 동안 다이맥스합니다. HP가 늘고 기술이 다이맥스 기술로 바뀝니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.',price:5000,consumable:false}} as const;
+export const heldItems={...baseHeldItems,...megaItems,...zItems,'Dynamax Band':{name:'다이맥스밴드',description:'지닌 포켓몬이 3턴 동안 다이맥스합니다. HP가 늘고 기술이 다이맥스 기술로 바뀝니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.',price:5000,consumable:false}} as const;
 export type HeldItem=keyof typeof heldItems;
 export const heldItemKeys=Object.keys(heldItems) as HeldItem[];
-export function itemIcon(item:HeldItem){return Object.hasOwn(megaItems,item) ? 'mega-stone' : item.toLowerCase().replaceAll(' ','-');}
+export function itemIcon(item:HeldItem){return zCrystals[item] ? 'z-crystal' : Object.hasOwn(megaItems,item) ? 'mega-stone' : item.toLowerCase().replaceAll(' ','-');}
 export function isHeldItem(value:unknown):value is HeldItem{return typeof value==='string' && Object.hasOwn(heldItems,value);}
 export const npcItemNames:Record<string,string>={'Light Ball':'전기구슬','Flame Orb':'화염구슬','Toxic Orb':'맹독구슬','Black Sludge':'검은진흙','Lum Berry':'리샘열매','Wacan Berry':'초나열매'};
 export function itemName(value?:string|null){return value && isHeldItem(value) ? heldItems[value].name : value ? npcItemNames[value] ?? value : '없음';}
 
-export function itemIconExtension(item:string){return ['Fairy Feather','Heavy-Duty Boots','Dynamax Band'].includes(item) || Object.hasOwn(megaItems,item) ? 'svg' : 'png';}
+export function itemIconExtension(item:string){return !!zCrystals[item] || ['Fairy Feather','Heavy-Duty Boots','Dynamax Band'].includes(item) || Object.hasOwn(megaItems,item) ? 'svg' : 'png';}

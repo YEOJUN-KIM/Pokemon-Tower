@@ -24,8 +24,8 @@ const defaults:Record<string,string>={fire:'flame',water:'waterbeam',electric:'t
 const physicalDefaults:Record<string,string>={fire:'firepunch',electric:'electricpunch',ice:'icepunch',grass:'leafslash',ghost:'claw',dark:'bite',dragon:'claw',fighting:'punches',steel:'slash',bug:'crossslash'};
 const statusRecipes:Record<string,string>={WillOWisp:'blueflame',Toxic:'poisonorb',PoisonPowder:'poisonpulse',ThunderWave:'electricorb',LeechSeed:'greenorb',SleepPowder:'leaves',Spore:'greenorb'};
 
-export function moveAnimationPlan(move:string,color?:string):MoveAnimationPlan {
-  const info=moveInfo[move],type=color ?? info?.type.toLowerCase() ?? 'normal';
+export function moveAnimationPlan(move:string,color?:string,override?:{category:string}):MoveAnimationPlan {
+  const info=override?{...moveInfo[move],...override}:moveInfo[move],type=color ?? info?.type.toLowerCase() ?? 'normal';
   const key=move.replace(/[^a-zA-Z]/g,'');
   const style=info?.category==='Status'?statusRecipes[key] ?? 'support':recipes[key] ?? (info?.category==='Physical'?physicalDefaults[type] ?? 'impact':defaults[type] ?? 'impact');
   const particles:MoveParticle[]=[];

@@ -65,6 +65,9 @@ export async function runBattle(options: {
       // Collection IVs are earned here, independent of cartridge event/transfer IV guarantees.
       // Validate move/species/ability origins with a legal IV proxy; use real saved IVs in battle.
       set.ivs={hp:31,atk:31,def:31,spa:31,spd:31,spe:31};
+      // Gender is freely selectable in the collection, just like earned IVs.
+      // Check event origins with a gender proxy; use the saved sex in battles/replays.
+      set.gender='';
     }
     const errors = new TeamValidator(format).validateTeam(legality);
     if (errors?.length) throw new Error(errors.join('\n'));

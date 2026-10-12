@@ -1,4 +1,6 @@
 'use client';
+import {currentTypes} from './battle-types';
+import {TypeBadge} from './type-badge';
 import {battleRules,allowsGimmick} from '../data/run-rules';
 import {themeLabel} from '../data/tower-themes';
 import {progressionLabel} from '../data/tower-progression';
@@ -64,11 +66,11 @@ function Sprite({shiny=false,name, back = false, animated=false,className = '',c
   return <span className={`sprite ${className} ${dynamax ? 'dynamaxed' : ''} ${terastallized ? 'terastallized' : ''}`} style={{['--dynamax-scale' as string]:growth,['--tera-color' as string]:teraColors[terastallized ?? ''],['--tera-crown-top' as string]:crownTop+'%'}} data-tera={terastallized || undefined} data-dynamax={dynamax || undefined} data-status={status || undefined} title={status ? `${pokemonName(name)} · ${battleStatusNames[status]}` : undefined}>{id ? <PokemonImage shiny={shiny} id={id} spriteKey={species[name]?.spriteKey} name={pokemonName(name)} back={back} animated={animated} sizeScale={animated ? pokemonBattleScale(name) : 1} stableFrame={animated} onVisibleTop={terastallized ? setCrownTop : undefined} matchBaseHeight={animated && name.includes("-Mega")} fallback={fallback}/> : fallback}{terastallized && <span className="tera-crown"><TeraCrystal type={terastallized}/></span>}</span>;
 }
 
-function HealthCard({pokemon, enemy = false, percentage = false,field,team}: {pokemon: Pick<PokemonView, 'species' | 'displaySpecies' | 'condition' | 'gender'>; enemy?: boolean; percentage?:boolean;field?:BattleView['field'];team?:PokemonView[]}) {
+function HealthCard({pokemon, enemy = false, percentage = false,field,team}: {pokemon: Pick<PokemonView, 'species' | 'displaySpecies' | 'condition' | 'gender' | 'types' | 'terastallized'>; enemy?: boolean; percentage?:boolean;field?:BattleView['field'];team?:PokemonView[]}) {
   const hp = health(pokemon.condition);
   const critical=hp.percent>0 && hp.percent<=30;
   return <div className={`health-card ${enemy ? 'enemy-health' : 'player-health'}`} data-hp-state={hp.percent===0?'fainted':critical?'critical':hp.percent<50?'caution':'healthy'}>
-    <div className="health-heading"><strong>{pokemonName(pokemon.displaySpecies ?? pokemon.species)}{pokemon.gender && pokemon.gender!=='N' && <i className="pokemon-gender" data-gender={pokemon.gender} aria-label={pokemon.gender==='M'?'수컷':'암컷'}>{pokemon.gender==='M'?'♂':'♀'}</i>}</strong><span>Lv. 50</span></div>
+    <div className="health-heading"><strong>{pokemonName(pokemon.displaySpecies ?? pokemon.species)}{pokemon.gender && pokemon.gender!=='N' && <i className="pokemon-gender" data-gender={pokemon.gender} aria-label={pokemon.gender==='M'?'수컷':'암컷'}>{pokemon.gender==='M'?'♂':'♀'}</i>}<span className="health-types" aria-label="현재 타입">{currentTypes(pokemon).map(type=><TypeBadge key={type} type={type}/>)}</span></strong><span>Lv. 50</span></div>
     {hp.status && <div className="health-status"><b data-status={battleStatus(pokemon.condition)}>{hp.status}</b></div>}
     <div className="hp-row"><span>HP</span><div className="hp-track" role="progressbar" aria-label={`${pokemonName(pokemon.species)} HP`} aria-valuenow={Math.round(hp.percent)} aria-valuemin={0} aria-valuemax={100}>
       <i style={{width: `${hp.percent}%`, background: hp.percent <= 30 ? '#ef6661' : hp.percent < 50 ? '#e7ad47' : '#55bd98'}} /></div></div>
@@ -146,7 +148,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
   const hasResult = done && tower && run && ['recruit', 'lost', 'cleared'].includes(run.state);
   const preparing = !battle || !run || !['battle', 'recruit'].includes(run.state);
   const team:PokemonView[] = (run?.roster ?? selected).map(name => (!preparing ? battle?.team.find(p=>p.species===name) : undefined) ?? {species:name,condition:'1/1',active:false});
-  const gimmickHint=({mega:'메가진화',dynamax:'다이맥스',tera:'테라스탈',chaos:'변신 선택',basic:''} as const)[run?.rule ?? 'chaos'];
+  const gimmickHint=({mega:'메가진화',dynamax:'다이맥스',tera:'테라스탈',z:'Z기술',chaos:'변신 선택',basic:''} as const)[run?.rule ?? 'chaos'];
   const active = battle?.team.find(p => p.active);
   const encounterMusic=trainerMusic(run?.boss ?? run?.trainer);
   const scenery=arenaTheme(run?.floor ?? 1,run?.totalFloors ?? 10,encounterMusic);
@@ -254,7 +256,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     } catch (e) { setError(e instanceof Error ? e.message : '서버에 연결할 수 없습니다. 새로고침해 주세요.'); }
     finally { if(mounted.current){setBusy(false);setPlaying(false);setTrainerIntro(null);setMotion(null);setNotice(null);setAnnouncement(null);} requestLock.current = false; }
   }
-  const send = (action: string) => {if(action.startsWith('move ') && gimmick && battle?.actions.some(a=>a.command===action+' '+gimmick))action+=' '+gimmick;setGimmick(null);setTab('root');if(action.startsWith('move '))lastMove.current=action.replace(/ (mega|dynamax|terastallize)$/,'');return submit({type: 'action', battleId: battle?.id, requestId: battle?.requestId, action});};
+  const send = (action: string) => {if(action.startsWith('move ') && gimmick && battle?.actions.some(a=>a.command===action+' '+gimmick))action+=' '+gimmick;setGimmick(null);setTab('root');if(action.startsWith('move '))lastMove.current=action.replace(/ (mega|dynamax|terastallize|zmove)$/,'');return submit({type: 'action', battleId: battle?.id, requestId: battle?.requestId, action});};
   const selectAction=()=>{if(document.querySelector('dialog[open]'))return;const buttons=Array.from(document.querySelectorAll<HTMLButtonElement>('.action-grid button:not(:disabled)'));selectGameCursor(buttons.find(button=>button.dataset.command===lastMove.current) ?? buttons[0] ?? document.querySelector<HTMLButtonElement>('.battle-panel .command-area>.primary-button'));};
   const focusAction=()=>requestAnimationFrame(selectAction);
   useEffect(()=>{if(run?.state==='battle' && !busy && !playing && battle?.status==='waiting')selectAction();},[battle?.requestId,busy,playing,tab,run?.state]);
@@ -266,7 +268,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     if(key==='s'){setShowLog(true);return true;}
     if(busy || playing)return true;
     if(key==='a' && tab==='moves' && battle){
-      const kinds=(['mega','dynamax','terastallize'] as const).filter(kind=>allowsGimmick(run?.rule ?? 'chaos',kind) && battle.actions.some(action=>action.command.endsWith(' '+kind)));
+      const kinds=(['mega','dynamax','terastallize','zmove'] as const).filter(kind=>allowsGimmick(run?.rule ?? 'chaos',kind) && battle.actions.some(action=>action.command.endsWith(' '+kind)));
       setGimmick(kinds[kinds.indexOf(gimmick as Gimmick)+1] ?? null);return true;
     }
     if(key==='x'){effect('cancel');if(showField){fieldHeld.current=false;setShowField(null);}else if(tab!=='root' && !forceSwitch){setGimmick(null);setTab('root');}else setBattleMenu(true);}

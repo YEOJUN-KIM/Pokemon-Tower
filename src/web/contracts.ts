@@ -3,7 +3,7 @@ import type {UpgradeKind} from '../data/shop';
 import type {ItemRarity} from '../data/held-item-shop';
 import type {TrainingView} from '../data/training';
 import type {StatBlock,IVGain,MoveGain} from '../data/training';
-export type PokemonView = {gender?:import('../data/gender').PokemonGender;shiny?:boolean;species: string; displaySpecies?:string; condition: string; active: boolean; stats?:StatBlock; ability?:string; nature?:string; moves?:string[];item?:string;dynamax?:boolean;teraType?:string;terastallized?:string;berryUsed?:boolean};
+export type PokemonView = {types?:string[];gender?:import('../data/gender').PokemonGender;shiny?:boolean;species: string; displaySpecies?:string; condition: string; active: boolean; stats?:StatBlock; ability?:string; nature?:string; moves?:string[];item?:string;dynamax?:boolean;teraType?:string;terastallized?:string;berryUsed?:boolean};
 export type FieldEffect={id:string;name:string;scope:'weather'|'field'|'p1'|'p2';started:number;duration:number|null;maxDuration:number|null;layers?:number};
 export type PublicField={turn:number;effects:FieldEffect[];opponentSize:number;faintedOpponents:string[];boosts?:Record<'p1'|'p2',Record<string,number>>};
 export type BossView = {id: string; name: string; title: string; introduction: string; victory: string; defeat: string;role?:'gym'|'villain'|'champion'|'elite';portrait?:string;kind?:'normal'|'elite'|'named';generation?:number|null;specialty?:string|null};
@@ -13,7 +13,7 @@ export type BattleView = {
   status: 'waiting' | 'complete' | 'error';
   turn: number;
   team: PokemonView[];
-  opponent: {gender?:import('../data/gender').PokemonGender;shiny?:boolean;species: string; displaySpecies?:string; condition: string;dynamax?:boolean;terastallized?:string} | null;
+  opponent: {types?:string[];gender?:import('../data/gender').PokemonGender;shiny?:boolean;species: string; displaySpecies?:string; condition: string;dynamax?:boolean;terastallized?:string} | null;
   actions: {command: string; label: string}[];
   messages: string[];
   winner: string | null;
@@ -21,6 +21,7 @@ export type BattleView = {
   field?:PublicField;
   movePP?:MovePP[];
   maxMovePP?:MovePP[];
+  zMovePP?:(MovePP|null)[];
   teraTickets?:number;
 };
 export type RunView = {
@@ -55,4 +56,4 @@ export type MachinePartner={stats:StatBlock;level:number;ability:string;nature:s
 export type TowerView = {permanent?:import('../data/permanent-upgrades').PermanentView;coins: number; growthPoints:number; unlocked: string[]; favorites:string[]; totalFloors: number; run: RunView | null};
 export type BattleResponse = {permanentResult?:import('../data/permanent-upgrades').PermanentResult;battle: BattleView | null; tower: TowerView; training?:TrainingView[]; error?: string};
 
-export type MovePP={name:string;pp:number;maxpp:number;power?:number;category?:'Physical'|'Special'|'Status';type?:string;accuracy?:number|true};
+export type MovePP={displayName?:string;description?:string;name:string;pp:number;maxpp:number;power?:number;category?:'Physical'|'Special'|'Status';type?:string;accuracy?:number|true};

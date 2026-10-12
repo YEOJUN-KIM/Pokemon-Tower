@@ -9,6 +9,8 @@
 
 작업을 이어받는 개발자는 [작업 인계](SESSION_HANDOFF.md)까지 읽으면 됩니다.
 
+2026-10-12 최신 기능 안내: [Z기술과 선택 화면](gameplay/Z_MOVES.md), [특성 발동과 타입 변경 재생](gameplay/ABILITY_EFFECT_TIMING.md). 여섯 룰·상대 AI v9·저장 스키마 v27을 기준으로 읽으세요.
+
 ## 필요할 때 찾아보기
 
 | 폴더 | 이런 때 읽어요 |

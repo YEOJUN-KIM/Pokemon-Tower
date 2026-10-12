@@ -10,6 +10,11 @@ export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:
  Object.defineProperty(localDex,'items',{value:localItems});battle.dex=localDex;
  const used=new Set<string>();
  const teraUsed=new Set<string>();
+ const originalZRequest=battle.actions.canZMove.bind(battle.actions);
+ const originalZMove=battle.actions.getZMove.bind(battle.actions);
+ const canZ=(pokemon:import('pokemon-showdown').Pokemon)=>allowsGimmick(rule,'zmove') && !pokemon.terastallized && !pokemon.volatiles.dynamax && !pokemon.species.isMega;
+ battle.actions.canZMove=pokemon=>canZ(pokemon)?originalZRequest(pokemon):undefined;
+ battle.actions.getZMove=(move,pokemon,skipChecks)=>canZ(pokemon)?originalZMove(move,pokemon,skipChecks):undefined;
  const originalStart=battle.start.bind(battle);
  let installed=false;
  battle.start=()=>{
@@ -22,7 +27,7 @@ export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:
      // The team owns the ticket; a held mega stone does not block a still-normal Pokemon.
      let tera:string|false|null=pokemon.teraType;
      Object.defineProperty(pokemon,'canTerastallize',{configurable:true,get:()=>
-      allowsGimmick(rule,'terastallize') && (tickets?.[side.id as 'p1'|'p2'] ?? 0)>0 && !teraUsed.has(side.id) && !pokemon.species.isMega && !pokemon.volatiles.dynamax && !pokemon.terastallized ? tera : null,
+      allowsGimmick(rule,'terastallize') && !pokemon.getItem().zMove && (tickets?.[side.id as 'p1'|'p2'] ?? 0)>0 && !teraUsed.has(side.id) && !pokemon.species.isMega && !pokemon.volatiles.dynamax && !pokemon.terastallized ? tera : null,
       set:(value:string|false|null)=>{tera=value;}});
      const entry=teams[side.id as 'p1'|'p2'].find(s=>(s.name||s.species)===pokemon.name);
      const original=pokemon.getDynamaxRequest.bind(pokemon);

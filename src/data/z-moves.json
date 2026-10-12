@@ -1,0 +1,317 @@
+{
+  "10,000,000 Volt Thunderbolt": {
+    "name": "1000만볼트",
+    "type": "Electric",
+    "category": "Special",
+    "power": 195,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Acid Downpour": {
+    "name": "애시드포이즌딜리트",
+    "type": "Poison",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "All-Out Pummeling": {
+    "name": "전력무쌍격렬권",
+    "type": "Fighting",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Black Hole Eclipse": {
+    "name": "블랙홀이클립스",
+    "type": "Dark",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Bloom Doom": {
+    "name": "블룸샤인엑스트라",
+    "type": "Grass",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Breakneck Blitz": {
+    "name": "울트라대시어택",
+    "type": "Normal",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Catastropika": {
+    "name": "필살피카슛",
+    "type": "Electric",
+    "category": "Physical",
+    "power": 210,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Clangorous Soulblaze": {
+    "name": "브레이징소울비트",
+    "type": "Dragon",
+    "category": "Special",
+    "power": 185,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Continental Crush": {
+    "name": "월즈엔드폴",
+    "type": "Rock",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Corkscrew Crash": {
+    "name": "초월나선연격",
+    "type": "Steel",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Devastating Drake": {
+    "name": "알티메이트드래곤번",
+    "type": "Dragon",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Extreme Evoboost": {
+    "name": "나인이볼부스트",
+    "type": "Normal",
+    "category": "Status",
+    "power": 0,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Genesis Supernova": {
+    "name": "오리진즈슈퍼노바",
+    "type": "Psychic",
+    "category": "Special",
+    "power": 185,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Gigavolt Havoc": {
+    "name": "스파킹기가볼트",
+    "type": "Electric",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Guardian of Alola": {
+    "name": "알로라의수호자",
+    "type": "Fairy",
+    "category": "Special",
+    "power": 0,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Hydro Vortex": {
+    "name": "슈퍼아쿠아토네이도",
+    "type": "Water",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Inferno Overdrive": {
+    "name": "다이내믹풀플레임",
+    "type": "Fire",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Let's Snuggle Forever": {
+    "name": "투닥투닥프렌드타임",
+    "type": "Fairy",
+    "category": "Physical",
+    "power": 190,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Light That Burns the Sky": {
+    "name": "하늘을태우는멸망의빛",
+    "type": "Psychic",
+    "category": "Special",
+    "power": 200,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Malicious Moonsault": {
+    "name": "하이퍼다크크러셔",
+    "type": "Dark",
+    "category": "Physical",
+    "power": 180,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Menacing Moonraze Maelstrom": {
+    "name": "문라이트블래스터",
+    "type": "Ghost",
+    "category": "Special",
+    "power": 200,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Never-Ending Nightmare": {
+    "name": "무한암야로의유인",
+    "type": "Ghost",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Oceanic Operetta": {
+    "name": "바다의심포니",
+    "type": "Water",
+    "category": "Special",
+    "power": 195,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Pulverizing Pancake": {
+    "name": "진심의공격",
+    "type": "Normal",
+    "category": "Physical",
+    "power": 210,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Savage Spin-Out": {
+    "name": "절대포식회전참",
+    "type": "Bug",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Searing Sunraze Smash": {
+    "name": "선샤인스매셔",
+    "type": "Steel",
+    "category": "Physical",
+    "power": 200,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Shattered Psyche": {
+    "name": "맥시멈사이브레이커",
+    "type": "Psychic",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Sinister Arrow Raid": {
+    "name": "섀도애로우즈스트라이크",
+    "type": "Ghost",
+    "category": "Physical",
+    "power": 180,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Soul-Stealing 7-Star Strike": {
+    "name": "칠성탈혼퇴",
+    "type": "Ghost",
+    "category": "Physical",
+    "power": 195,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Splintered Stormshards": {
+    "name": "레이디얼에지스톰",
+    "type": "Rock",
+    "category": "Physical",
+    "power": 190,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Stoked Sparksurfer": {
+    "name": "라이트닝서프라이드",
+    "type": "Electric",
+    "category": "Special",
+    "power": 175,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Subzero Slammer": {
+    "name": "레이징지오프리즈",
+    "type": "Ice",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Supersonic Skystrike": {
+    "name": "슈퍼소닉스카이스트라이크",
+    "type": "Flying",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Tectonic Rage": {
+    "name": "라이징랜드오버",
+    "type": "Ground",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  },
+  "Twinkle Tackle": {
+    "name": "러블리스타임팩트",
+    "type": "Fairy",
+    "category": "Physical",
+    "power": 1,
+    "accuracy": true,
+    "pp": 1,
+    "description": "팀당 배틀 한 번 사용할 수 있는 Z기술입니다. 공격 Z기술은 방어 중인 상대에게도 피해의 1/4을 줍니다."
+  }
+}

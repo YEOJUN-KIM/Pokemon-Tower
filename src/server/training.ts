@@ -35,7 +35,7 @@ export function validateProfile(name:string,value:unknown):TrainingProfile {
   if(!options.abilities.includes(profile.ability))throw new BattleRequestError('이 포켓몬이 사용할 수 있는 특성을 선택하세요.',400);
   const clean:TrainingProfile={ivs:Object.fromEntries(statKeys.map(key=>[key,profile.ivs[key]])) as TrainingProfile['ivs'],evs:Object.fromEntries(statKeys.map(key=>[key,profile.evs[key]])) as TrainingProfile['evs'],moves:[...profile.moves],ability:profile.ability,nature:profile.nature,teraType:profile.teraType ?? defaultProfile(name).teraType,statSystem:'points'};
   if(profile.gender)clean.gender=profile.gender;
-  const legality=trainedSet(name,clean);legality.ivs={hp:31,atk:31,def:31,spa:31,spd:31,spe:31};legality.pokeball='';legality.evs={hp:1,atk:0,def:0,spa:0,spd:0,spe:0};
+  const legality=trainedSet(name,clean);legality.ivs={hp:31,atk:31,def:31,spa:31,spd:31,spe:31};legality.gender='';legality.pokeball='';legality.evs={hp:1,atk:0,def:0,spa:0,spd:0,spe:0};
   if(new Showdown.TeamValidator(FORMAT).validateSet(legality,{}))throw new BattleRequestError('현재 배틀 규칙에서 사용할 수 없는 설정입니다.',400);
   return clean;
 }

@@ -6,6 +6,7 @@ import existingLearnsets from '../src/data/move-learnsets.json' with {type:'json
 import existingMoves from '../src/data/move-catalog.json' with {type:'json'};
 import {evioliteSpecies,namedReferenceSpecies} from '../src/data/pokedex-roster';
 import {FORMAT} from '../src/data/battle-rules';
+import abilityLocalization from '../src/data/ability-localization.json' with {type:'json'};
 
 const originals=new Set(['Charizard','Blastoise','Venusaur','Pikachu','Gyarados','Snorlax','Arcanine','Raichu','Cloyster','Espeon','Gengar','Lucario','Golem','Lapras','Jolteon','Scizor','Dragonite','Tyranitar','Metagross','Garchomp']);
 const roster=dex.filter(entry=>originals.has(entry.species) || evioliteSpecies.has(entry.species) || namedReferenceSpecies.has(entry.species) || !Showdown.Dex.species.get(entry.aliases[0]).nfe);
@@ -79,6 +80,7 @@ await writeFile('src/data/battle-forms.json',JSON.stringify(forms,null,2)+'\n');
 await writeFile('src/data/battle-roster.json',JSON.stringify(sets,null,2)+'\n');
 await writeFile('src/data/move-learnsets.json',JSON.stringify(learnsets,null,2)+'\n');
 await writeFile('src/data/move-catalog.json',JSON.stringify(metadata,null,2)+'\n');
+Object.assign(abilityNames,abilityLocalization.names);
 await writeFile('src/data/ability-names.json',JSON.stringify(abilityNames,null,2)+'\n');
 await writeFile('artifacts/reports/battle-data-source.json',JSON.stringify({importedAt:new Date().toISOString(),engineVersion:JSON.parse(await readFile('node_modules/pokemon-showdown/package.json','utf8')).version,format:FORMAT,count:Object.keys(sets).length,sources:sourceRecords,selfMovePolicy:'Latest supported PokeAPI level-up version; existing 20 starters preserve their previous self moves. Legal move domain and mechanics from installed Showdown. No Mega, Gigantamax or regional forms.',exceptions},null,2)+'\n');
 console.log(`Imported ${Object.keys(sets).length} battle species, ${Object.keys(metadata).length} moves and ${Object.keys(abilityNames).length} ability names; ${exceptions.length} specialist/short learnsets.`);

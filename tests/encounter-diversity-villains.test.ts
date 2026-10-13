@@ -23,24 +23,24 @@ test('broader early pools substantially increase eligible species without changi
 });
 
 test('victories shift rank chances upward while keeping floor gates and random outcomes',()=>{
- const baseline=villainRankWeights(40),grunt=villainRankWeights(40,{gruntWins:1,executiveWins:0}),executive=villainRankWeights(40,{gruntWins:1,executiveWins:1});
+ const baseline=villainRankWeights(80),grunt=villainRankWeights(80,{gruntWins:1,executiveWins:0}),executive=villainRankWeights(80,{gruntWins:1,executiveWins:1});
  assert.ok(grunt.grunt<baseline.grunt && grunt.executive>baseline.executive && grunt.boss>baseline.boss);
  assert.equal(executive.grunt,grunt.grunt);assert.ok(executive.executive<grunt.executive && executive.boss>grunt.boss);
- for(const floor of [1,16,31,51,100])for(const gruntWins of [0,1,4,100])for(const executiveWins of [0,1,5,100]){
+ for(const floor of [1,16,31,51,74,75,100])for(const gruntWins of [0,1,4,100])for(const executiveWins of [0,1,5,100]){
   const weights=villainRankWeights(floor,{gruntWins,executiveWins});
   assert.ok(Math.abs(Object.values(weights).reduce((a,b)=>a+b,0)-1)<1e-12);
   assert.ok(Object.values(weights).every(value=>value>=0 && value<=1));
-  if(floor<31)assert.equal(weights.boss,0);
+  if(floor<75)assert.equal(weights.boss,0);
   if(floor<16)assert.equal(weights.executive,0);
  }
  let events=0,bosses=0;const bossFloors=new Set<number>();
  for(let n=0;n<1000;n++){
   if(villainEncounter(`rate-${n}`,41,'rocket'))events++;
-  const event=villainEncounter(`boss-${n}`,31+n%69,'rocket',false,false,{gruntWins:10,executiveWins:10});
-  if(event?.event.rank==='boss'){bosses++;bossFloors.add(31+n%69);}
+  const event=villainEncounter(`boss-${n}`,75+n%25,'rocket',false,false,{gruntWins:10,executiveWins:10});
+  if(event?.event.rank==='boss'){bosses++;bossFloors.add(75+n%25);}
  }
  assert.equal(VILLAIN_CHANCE,.15);assert.ok(events>110 && events<190);
- assert.ok(bosses>80 && bosses<190);assert.ok(bossFloors.size>20);
+ assert.ok(bosses>80 && bosses<190);assert.equal(bossFloors.size,20);
 });
 
 test('unavailable leaders redistribute the event draw to eligible ranks',()=>{
@@ -67,6 +67,7 @@ test('won events persist and drive subsequent rank draws, with one organization 
   // Shift the next encounter to a floor where one victory actually changes the rank draw.
   let floor=0;
   for(let f=31;f<=99;f++){
+   if(f===row.floor)continue;
    const allowed=encounterPool(f,CURRENT_PROGRESSION),accept=(sample:import('../src/data/trainer-catalog').TrainerSample)=>sample.entries!.filter(name=>allowed.includes(name)).length>=3 && (!sample.ace || allowed.includes(sample.ace));
    const before=villainEncounter(row.run_id,f,organization,false,false,undefined,accept);
    const after=villainEncounter(row.run_id,f,organization,false,false,{gruntWins:1,executiveWins:0},accept);
@@ -74,6 +75,7 @@ test('won events persist and drive subsequent rank draws, with one organization 
   }
   // A deterministic fixture run need not contain a changed draw; any eligible event still verifies the saved input.
   if(!floor)for(let f=31;f<=99;f++){
+   if(f===row.floor)continue;
    const pool=encounterPool(f,CURRENT_PROGRESSION),eligible=(sample:import('../src/data/trainer-catalog').TrainerSample)=>sample.entries!.filter(name=>pool.includes(name)).length>=3 && (!sample.ace || pool.includes(sample.ace));
    if(villainEncounter(row.run_id,f,organization,false,false,{gruntWins:1,executiveWins:0},eligible)){floor=f;break;}
   }

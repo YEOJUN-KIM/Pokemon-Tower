@@ -1,4 +1,6 @@
 import {equipBossGimmick} from '../data/boss-gimmicks';
+import {npcGimmick,equipNpcGimmick,npcExtraCandidates,npcSpecies,stripNpcGimmicks} from '../data/npc-gimmicks';
+import {normalNpcCategory,normalNpcGimmicksEnabled} from '../data/normal-mode-stages';
 import {johtoOriginalBuild} from '../data/johto-builds';
 import Showdown from 'pokemon-showdown';
 import {pokemonSets,type PokemonSpecies} from '../data/teams';
@@ -12,6 +14,9 @@ import {normalTrainerSamples,eliteTrainerSamples,mixedTrainerSamples,type Traine
 import {towerDifficulty,eliteChance,type TowerProgression} from '../data/tower-progression';
 import {megaStones,DYNAMAX_ITEM,canEquipGimmick} from '../data/gimmicks';
 import {allowedOpponentSpecies,evolvedOpponentSpecies} from '../data/opponent-species';
+import {normalNpcTemplate,templateProfile} from './npc-templates';
+import type {TrainingProfile} from '../data/training';
+import {separateForms} from '../data/selectable-forms';
 
 export function encounterRandom(seed:Seed) {
   let state=seed.reduce((value,part)=>(Math.imul(value,31)+part)>>>0,2166136261);
@@ -50,7 +55,8 @@ export function opponentMoves(name:PokemonSpecies,random:()=>number,tactic?:Trai
   return moves;
 }
 type RosterEntry={bst:number;specialist:boolean;legendary?:boolean;mythical?:boolean};
-const data:Record<string,RosterEntry>=roster;
+const data:Record<string,RosterEntry>={...roster,...Object.fromEntries(Object.entries(separateForms).map(([name,form])=>[name,{...form,specialist:false}]))};
+export function normalOpponentSpecies(name:string){return !data[name].legendary && !data[name].mythical && !Showdown.Dex.species.get(name).tags.some(tag=>['Paradox','Ultra Beast','Sub-Legendary','Restricted Legendary','Mythical'].includes(tag));}
 export function encounterPool(floor:number,progression:TowerProgression='legacy') {
   const difficulty=progression==='legacy'?null:towerDifficulty(floor);
   const ceiling=difficulty?.bstCeiling ?? Math.min(780,470+Math.max(0,floor-1)*15);
@@ -61,7 +67,7 @@ export function encounterPool(floor:number,progression:TowerProgression='legacy'
 }
 export function selectTrainerSample(floor:number,seed:Seed,previous:{id:string;specialty:string|null}[]=[],progression:TowerProgression='legacy'):TrainerSample {
   const random=encounterRandom(seed),pool=encounterPool(floor,progression);
-  const eligible=(sample:TrainerSample)=>sample.minFloor<=floor && (!sample.specialty || pool.filter(name=>Showdown.Dex.species.get(name).types.includes(sample.specialty!)).length>=3);
+  const eligible=(sample:TrainerSample)=>sample.minFloor<=floor && (!sample.specialty || pool.filter(name=>(progression==='legacy'||sample.kind==='elite'||normalOpponentSpecies(name)) && Showdown.Dex.species.get(name).types.includes(sample.specialty!)).length>=3);
   const elite=floor>=(progression==='legacy'?4:11) && random()<(progression==='legacy'?.25:eliteChance(floor)),mixed=random()<.2;
   let candidates=(mixed ? mixedTrainerSamples.filter(s=>(s.kind==='elite')===elite) : elite ? eliteTrainerSamples : normalTrainerSamples).filter(eligible);
   if(!candidates.length)candidates=normalTrainerSamples.filter(eligible);
@@ -72,13 +78,13 @@ export function selectTrainerSample(floor:number,seed:Seed,previous:{id:string;s
   return candidates[Math.floor(random()*candidates.length)];
 }
 // Enumerate the small candidate pool, keeping the ace and favouring complementary partners.
-export function selectNamedEntries(entries:readonly string[],random:()=>number,ace?:string):string[] {
+export function selectNamedEntries(entries:readonly string[],random:()=>number,ace?:string,carrier?:string):string[] {
   if(entries.length<3 || new Set(entries).size!==entries.length || entries.some(name=>!pokemonSets[name]))throw Error('Invalid named trainer entries');
   if(ace && !entries.includes(ace))throw Error('Trainer ace is missing from entries');
   const combinations:{names:string[];weight:number}[]=[];
   for(let a=0;a<entries.length-2;a++)for(let b=a+1;b<entries.length-1;b++)for(let c=b+1;c<entries.length;c++){
     const names=[entries[a],entries[b],entries[c]],species=names.map(name=>Showdown.Dex.species.get(name));
-    if(ace && !names.includes(ace))continue;
+    if(ace && !names.includes(ace) || carrier && !names.includes(carrier))continue;
     const coverage=new Set(species.flatMap(s=>s.types)).size;
     const physical=species.some(s=>s.baseStats.atk>s.baseStats.spa),special=species.some(s=>s.baseStats.spa>s.baseStats.atk);
     const speed=species.some(s=>s.baseStats.spe>=90),bulk=species.some(s=>s.baseStats.hp+s.baseStats.def+s.baseStats.spd>=270);
@@ -91,7 +97,7 @@ export function selectNamedEntries(entries:readonly string[],random:()=>number,a
   for(let i=selected.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[selected[i],selected[j]]=[selected[j],selected[i]];}
   return selected;
 }
-export type OpponentEntry={name:string;moves:string[];item?:string;ability?:string};
+export type OpponentEntry={name:string;moves:string[];item?:string;ability?:string;gigantamax?:boolean;profile?:TrainingProfile};
 const typeItems:Record<string,string>={Normal:'Silk Scarf',Fire:'Charcoal',Water:'Mystic Water',Electric:'Magnet',Grass:'Miracle Seed',Ice:'Never-Melt Ice',Fighting:'Black Belt',Poison:'Poison Barb',Ground:'Soft Sand',Flying:'Sharp Beak',Psychic:'Twisted Spoon',Bug:'Silver Powder',Rock:'Hard Stone',Ghost:'Spell Tag',Dragon:'Dragon Fang',Dark:'Black Glasses',Steel:'Metal Coat',Fairy:'Fairy Feather'};
 function equipNamedTeam(team:OpponentEntry[],ace:string|undefined,champion:boolean,original=false){
   const used=new Set<string>();
@@ -110,32 +116,53 @@ function equipNamedTeam(team:OpponentEntry[],ace:string|undefined,champion:boole
   }
   return team;
 }
-export function generateOpponentTeam(floor:number,seed:Seed,previous:string[]=[],trainer=towerTrainerEncounter(floor,seed.join(':')) as TrainerEncounter|null,sample?:TrainerSample,progression:TowerProgression='legacy'):OpponentEntry[] {
+export function generateOpponentTeam(floor:number,seed:Seed,previous:string[]=[],trainer=towerTrainerEncounter(floor,seed.join(':')) as TrainerEncounter|null,sample?:TrainerSample,progression:TowerProgression='legacy',options:{templates?:boolean}={}):OpponentEntry[] {
   if(!Number.isSafeInteger(floor) || floor<1)throw Error('Invalid encounter floor');
   const random=encounterRandom(seed);
+  if(options.templates!==false && progression!=='legacy' && (trainer || sample?.kind==='named')){
+    const template=normalNpcTemplate(sample?.id ?? trainer!.boss.id,floor,sample?.role ?? trainer?.boss.role);
+    if(template){
+      const team=template.team.map(p=>{const profile=templateProfile(p.profile,floor);return {name:p.species,moves:profile.moves,item:p.item,ability:profile.ability,gigantamax:p.gigantamax,profile};});
+      // Fixed membership/builds; only the lead order varies with the saved seed.
+      for(let i=team.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[team[i],team[j]]=[team[j],team[i]];}
+      return normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'))?team:stripNpcGimmicks(team);
+    }
+  }
   let entries=sample?.entries ?? trainer?.entries;
   if(entries){
     const named=!!trainer || sample?.kind==='named',champion=sample?.role==='champion' || !!trainer?.champion;
     let ace=sample?.ace ?? trainer?.ace;
     if(progression!=='legacy'){
-      const red=(sample?.id ?? trainer?.boss.id)==='named-red';
-      entries=[...new Set(entries.map(name=>evolvedOpponentSpecies(name,red)))];
-      if(ace)ace=evolvedOpponentSpecies(ace,red);
+      if(named)entries=[...new Set([...entries,...(npcExtraCandidates[sample?.id ?? trainer?.boss.id ?? ''] ?? [])])];
+      const red=['named-red','named-red-kanto'].includes(sample?.id ?? trainer?.boss.id ?? '');
+      const id=sample?.id ?? trainer?.boss.id ?? '',generation=sample?.generation ?? trainer?.boss.generation ?? null;
+      entries=[...new Set(entries.map(name=>named?npcSpecies(name,id,generation):evolvedOpponentSpecies(name,red)))];
+      if(ace)ace=named?npcSpecies(ace,id,generation):evolvedOpponentSpecies(ace,red);
       if(entries.length<3){const types=new Set(entries.flatMap(name=>Showdown.Dex.species.get(name).types));
         const fillers=Object.keys(pokemonSets).filter(name=>allowedOpponentSpecies(name,red)&&!entries!.includes(name)&&Showdown.Dex.species.get(name).types.some(type=>types.has(type))&&!data[name].legendary&&!data[name].mythical);
         entries=[...entries,...fillers.slice(0,3-entries.length)];}
     }
-    const team:OpponentEntry[]=selectNamedEntries(entries,random,ace).map(name=>({name,...(johtoOriginalBuild(sample?.id ?? trainer?.boss.id ?? '',name) ?? {moves:champion && championMoves[name] ? [...championMoves[name]] : opponentMoves(name,random,sample?.tactic ?? trainer?.tactic)})}));
+    const signature=progression!=='legacy' && named?npcGimmick(sample?.id ?? trainer!.boss.id,sample?.generation ?? trainer?.boss.generation ?? null,entries,ace):null;
+    const team:OpponentEntry[]=selectNamedEntries(entries,random,ace,signature?.species).map(name=>({name,...(johtoOriginalBuild(sample?.id ?? trainer?.boss.id ?? '',name) ?? {moves:champion && championMoves[name] ? [...championMoves[name]] : opponentMoves(name,random,sample?.tactic ?? trainer?.tactic)})}));
     const equipped=named ? equipNamedTeam(equipBossGimmick(team,trainer?.boss.id ?? sample?.id ?? '',floor),ace,champion,!!team[0].ability) : team;
-    return progression!=='legacy' && floor<=60?gentleMoves(equipped):equipped;
+    const result=progression!=='legacy' && floor<=60?gentleMoves(equipped):equipped;
+    if(progression!=='legacy' && !normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named')))return stripNpcGimmicks(result);
+    return signature?equipNpcGimmick(result,signature):result;
   }
-  let pool=encounterPool(floor,progression),fresh=pool.filter(name=>!previous.includes(name));
-  if(sample?.specialty){pool=pool.filter(name=>Showdown.Dex.species.get(name).types.includes(sample.specialty!));fresh=pool.filter(name=>!previous.includes(name));}
+  let pool=encounterPool(floor,progression);
+  if(progression!=='legacy' && sample?.kind!=='elite')pool=pool.filter(normalOpponentSpecies);
+  let fresh=pool.filter(name=>!previous.includes(name));
+  if(sample?.specialty && (sample.kind!=='elite'||progression==='legacy')){pool=pool.filter(name=>Showdown.Dex.species.get(name).types.includes(sample.specialty!));fresh=pool.filter(name=>!previous.includes(name));}
   if(fresh.length>=3)pool=fresh;
   const selected:string[]=[];
   while(selected.length<3) {
+    const elite=sample?.kind==='elite' && progression!=='legacy';
+    const specialty=sample?.specialty;
+    const core=elite && specialty && selected.length===0?pool.filter(name=>Showdown.Dex.species.get(name).types.includes(specialty)):[];
+    const partners=elite && specialty && selected.length>0?pool.filter(name=>!Showdown.Dex.species.get(name).types.includes(specialty)):[];
+    const candidates=core.length?core:partners.length?partners:pool;
     const lastTypes=selected.flatMap(name=>Showdown.Dex.species.get(name).types);
-    const weighted=pool.map(name=>({name,weight:(Showdown.Dex.species.get(name).types.some(type=>lastTypes.includes(type)) ? .4 : 1)
+    const weighted=candidates.map(name=>({name,weight:(Showdown.Dex.species.get(name).types.some(type=>lastTypes.includes(type)) ? .4 : 1)
       *(floor<10 ? 1 : Math.max(.15,data[name].bst/600))
       *(sample?.tactic==='speed' ? Math.max(.3,Showdown.Dex.species.get(name).baseStats.spe/70) : sample?.tactic==='bulk' ? Math.max(.3,(Showdown.Dex.species.get(name).baseStats.hp+Showdown.Dex.species.get(name).baseStats.def+Showdown.Dex.species.get(name).baseStats.spd)/200) : 1)}));
     let ticket=random()*weighted.reduce((sum,entry)=>sum+entry.weight,0);
@@ -144,10 +171,10 @@ export function generateOpponentTeam(floor:number,seed:Seed,previous:string[]=[]
     selected.push(chosen);pool=pool.filter(name=>name!==chosen);
   }
   const team:OpponentEntry[]=selected.map(name=>({name,moves:opponentMoves(name,random,sample?.tactic)}));
-  if(progression!=='legacy' && sample?.kind==='elite' && floor>=25 && !(floor>=51&&floor<=60)){
+  if(progression!=='legacy' && sample?.kind==='elite' && normalNpcGimmicksEnabled(floor,'elite') && !(floor>=51&&floor<=60)){
     const mode=random(),mega=team.flatMap(entry=>Object.keys(megaStones).filter(item=>canEquipGimmick(entry.name,item)).map(item=>({entry,item})))[0];
     if(mega && mode<.5)mega.entry.item=mega.item;
-    else if(floor>=35 && mode<.75){const entry=team.find(p=>canEquipGimmick(p.name,DYNAMAX_ITEM));if(entry)entry.item=DYNAMAX_ITEM;}
+    else if(floor>=35 && mode<.75){const entry=team.find(p=>!!Showdown.Dex.species.get(p.name).canGigantamax && canEquipGimmick(p.name,DYNAMAX_ITEM));if(entry){entry.item=DYNAMAX_ITEM;entry.gigantamax=true;}}
   }
   return progression!=='legacy' && floor<=60?gentleMoves(team):team;
 }

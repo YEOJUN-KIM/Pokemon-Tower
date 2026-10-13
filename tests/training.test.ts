@@ -78,13 +78,13 @@ test('recruitment merges each actual opponent IV, never lowers saved IVs and upd
   const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);
   try {
     store.ensurePlayer('capture');
-    const old=defaultProfile('Pikachu');old.ivs={hp:31,atk:12,def:2,spa:20,spd:0,spe:25};
-    store.db.prepare('INSERT INTO unlocks VALUES (?,?)').run('capture','Pikachu');
-    store.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,1)').run('capture','Pikachu',JSON.stringify(old));
-    const id=store.start('capture',['Pikachu','Blastoise','Venusaur']),row=store.battle(id);
-    const opponent=defaultProfile('Pikachu');opponent.ivs={hp:3,atk:20,def:31,spa:2,spd:11,spe:28};
+    const old=defaultProfile('Raichu');old.ivs={hp:31,atk:12,def:2,spa:20,spd:0,spe:25};
+    store.db.prepare('INSERT INTO unlocks VALUES (?,?)').run('capture','Raichu');
+    store.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,1)').run('capture','Raichu',JSON.stringify(old));
+    const id=store.start('capture',['Raichu','Blastoise','Venusaur']),row=store.battle(id);
+    const opponent=defaultProfile('Raichu');opponent.ivs={hp:3,atk:20,def:31,spa:2,spd:11,spe:28};
     // Known, real opponent IV fixture; legal player team remains the persisted snapshot.
-    const opponentTeam=packTeam(['Pikachu','Golem','Cloyster'],{Pikachu:opponent});
+    const opponentTeam=packTeam(['Raichu','Golem','Cloyster'],{Raichu:opponent});
     store.db.prepare('UPDATE battles SET opponent_team=? WHERE id=?').run(opponentTeam,id);
     let won=false;
     for(let seed=1;seed<=50;seed++) {
@@ -93,16 +93,16 @@ test('recruitment merges each actual opponent IV, never lowers saved IVs and upd
       store.db.prepare('UPDATE battles SET seed=? WHERE id=?').run(JSON.stringify(log.seed),id);
       store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});won=true;break;
     }
-    assert.ok(won);assert.deepEqual(store.view('capture').run!.candidateIVs.Pikachu,opponent.ivs);
-    store.recruit('capture',row.run_id,id,'Pikachu',null);
+    assert.ok(won);assert.deepEqual(store.view('capture').run!.candidateIVs.Raichu,opponent.ivs);
+    store.recruit('capture',row.run_id,id,'Raichu',null);
     const expected:StatBlock={hp:31,atk:20,def:31,spa:20,spd:11,spe:28};
-    assert.deepEqual(store.trainingCollection('capture').find(entry=>entry.species==='Pikachu')!.profile.ivs,expected);
+    assert.deepEqual(store.trainingCollection('capture').find(entry=>entry.species==='Raichu')!.profile.ivs,expected);
     assert.equal(store.roster(row.run_id).length,3);
     assert.equal(store.view('capture').run!.lastIVGain!.changes.length,4);
-    assert.throws(()=>store.recruit('capture',row.run_id,id,'Pikachu',null),/이미 처리/);
+    assert.throws(()=>store.recruit('capture',row.run_id,id,'Raichu',null),/이미 처리/);
     store.close();store=new TowerStore(path);
-    assert.deepEqual(store.trainingCollection('capture').find(entry=>entry.species==='Pikachu')!.profile.ivs,expected);
-    const next=store.enter('capture',row.run_id,2,['Pikachu','Blastoise','Venusaur']);
+    assert.deepEqual(store.trainingCollection('capture').find(entry=>entry.species==='Raichu')!.profile.ivs,expected);
+    const next=store.enter('capture',row.run_id,2,['Raichu','Blastoise','Venusaur']);
     assert.deepEqual(Showdown.Teams.unpack(store.battle(next).player_team)![0].ivs,expected);
     assert.ok(statKeys.every(key=>expected[key]>=old.ivs[key]));
   } finally{store.close();}

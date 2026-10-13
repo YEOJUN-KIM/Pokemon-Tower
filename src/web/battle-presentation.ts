@@ -1,4 +1,5 @@
 import {applyPublicTypes} from './battle-types';
+import {dynamaxDisplaySpecies} from '../data/selectable-forms';
 import {genderFromDetails} from '../data/gender';
 import {teraNames} from '../data/tera';
 import type {BattleView} from './contracts';
@@ -116,6 +117,8 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
         frames.push({view:structuredClone(view),motion:{kind:'dynamax-release',side:side!,color:'fairy'},announcement:subject+'에게 다이맥스 에너지가 모이고 있다!',duration:450});
       }
       pokemon.dynamax=start;
+      if(start && condition==='Gmax')pokemon.displaySpecies=dynamaxDisplaySpecies(pokemon.displaySpecies??pokemon.species,true);
+      else if(!start && pokemon.displaySpecies?.endsWith('-Gmax'))pokemon.displaySpecies=dynamaxDisplaySpecies(pokemon.displaySpecies,false);
       motion={kind:start ? 'dynamax-grow' : 'dynamax-end',side:side!,color:'fairy'};
     }
     if(pokemon && event==='-terastallize'){

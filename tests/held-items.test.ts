@@ -9,15 +9,17 @@ import {DamagePolicy} from '../src/battle/policy';
 import {BattleSession} from '../src/server/battle-session';
 import {heldItemKeys,itemIcon,heldItems,baseHeldItems,itemIconExtension} from '../src/data/held-items';
 import {existsSync} from 'node:fs';
+import {primalOrbs} from '../src/data/primal-forms';
 function stock(store:TowerStore,run:string,floor:number,items:string[]){store.db.prepare('INSERT OR REPLACE INTO item_shops VALUES (?,?,?)').run(run,floor,JSON.stringify(items));}
 
 test('all standard shop tools are supported by the engine, have icons, and persist through purchases',()=>{
-  assert.equal(Object.keys(baseHeldItems).length,35);
+  assert.equal(Object.keys(baseHeldItems).length,57);
+  const standardItems=(Object.keys(baseHeldItems) as (keyof typeof baseHeldItems)[]).filter(item=>!primalOrbs[item]);
   const store=new TowerStore(':memory:');try{
     store.ensurePlayer('catalog');const run=store.battle(store.start('catalog',starters)).run_id;
     store.db.prepare("UPDATE runs SET total_floors=50,floor=26,state='select' WHERE id=?").run(run);store.db.prepare('UPDATE players SET coins=100000 WHERE id=?').run('catalog');
-    for(const item of Object.keys(baseHeldItems) as (keyof typeof baseHeldItems)[]){assert.equal(Showdown.Dex.items.get(item).exists,true,item);const ext=itemIconExtension(item);assert.ok(existsSync(`public/sprites/items/${itemIcon(item)}.${ext}`),item);stock(store,run,26,[item,...heldItemKeys.filter(other=>other!==item).slice(0,3)]);store.purchaseItem('catalog',run,26,item,'Charizard');}
-    const view=store.view('catalog');assert.equal(Object.keys(view.run!.itemBag!).length,34);assert.equal(view.run!.heldItems!.Charizard,'Light Clay');assert.equal(view.coins,100000-Object.values(baseHeldItems).reduce((sum,item)=>sum+item.price,0));
+    for(const item of standardItems){assert.equal(Showdown.Dex.items.get(item).exists,true,item);const ext=itemIconExtension(item);assert.ok(existsSync(`public/sprites/items/${itemIcon(item)}.${ext}`),item);stock(store,run,26,[item,...heldItemKeys.filter(other=>other!==item).slice(0,3)]);store.purchaseItem('catalog',run,26,item,'Charizard');}
+    const view=store.view('catalog');assert.equal(Object.keys(view.run!.itemBag!).length,standardItems.length-1);assert.equal(view.run!.heldItems!.Charizard,standardItems.at(-1));assert.equal(view.coins,100000-standardItems.reduce((sum,item)=>sum+baseHeldItems[item].price,0));
   }finally{store.close();}
 });
 
@@ -39,7 +41,7 @@ test('v12 migration adds empty inventories without changing saved battle teams',
     store.close();store=new TowerStore(path);
     assert.deepEqual(store.battle(id),before);
     assert.deepEqual(store.view('migration').run!.heldItems,{});
-    assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,27);
+    assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,28);
     assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
   }finally{store.close();}
 });

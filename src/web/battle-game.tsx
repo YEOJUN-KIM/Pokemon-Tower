@@ -1,5 +1,6 @@
 'use client';
 import {currentTypes} from './battle-types';
+import {collectionSpecies} from '../data/selectable-forms';
 import {TypeBadge} from './type-badge';
 import {battleRules,allowsGimmick} from '../data/run-rules';
 import {themeLabel} from '../data/tower-themes';
@@ -147,7 +148,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
   const run = tower?.run;
   const hasResult = done && tower && run && ['recruit', 'lost', 'cleared'].includes(run.state);
   const preparing = !battle || !run || !['battle', 'recruit'].includes(run.state);
-  const team:PokemonView[] = (run?.roster ?? selected).map(name => (!preparing ? battle?.team.find(p=>p.species===name) : undefined) ?? {species:name,condition:'1/1',active:false});
+  const team:PokemonView[] = (run?.roster ?? selected).map(name => (!preparing ? battle?.team.find(p=>collectionSpecies(p.species)===name) : undefined) ?? {species:name,displaySpecies:run?.partnerForms?.[name],condition:'1/1',active:false});
   const gimmickHint=({mega:'메가진화',dynamax:'다이맥스',tera:'테라스탈',z:'Z기술',chaos:'변신 선택',basic:''} as const)[run?.rule ?? 'chaos'];
   const active = battle?.team.find(p => p.active);
   const encounterMusic=trainerMusic(run?.boss ?? run?.trainer);
@@ -248,6 +249,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
       if(!mounted.current)return;
       setMotion(null);setNotice(null);setAnnouncement(null);setPlaying(false);setBattle(data.battle);
       setTower(data.tower);
+      if(body.type==='finish-loss'&&data.battle)setAcknowledgedResult(data.battle.id);
       if(body.type === 'recruit' && typeof body.chosen === 'string' && data.tower.run && (body.collectOnly || data.tower.run.roster.includes(body.chosen))) {
         setRecruitment({archiveOnly:body.collectOnly===true,chosen:body.chosen,replaced:typeof body.replaced === 'string' ? body.replaced : null,roster:data.tower.run.roster,cleared:data.tower.run.state === 'cleared',ivGain:data.tower.run.lastIVGain,moveGain:data.tower.run.lastMoveGain,alreadyOwned:run?.roster.includes(body.chosen),newSpecies:!tower?.unlocked.includes(body.chosen),hiddenBossPending:data.tower.run.hiddenBossPending});
       }
@@ -291,7 +293,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
         {error && <div className="error-banner" role="alert">{error}<button onClick={() => { setLoading(true); refresh().then(() => setError('')).catch(e => setError(e.message)).finally(() => setLoading(false)); }}>다시 연결</button></div>}
         {run && ['select','battle','recruit'].includes(run.state) && run.upgrades.length>0 && <div className="upgrade-status" aria-label="구매한 강화">{run.upgrades.map(upgrade=><span key={upgrade.kind}>{upgrades[upgrade.kind].name} · {upgrade.remainingFloors>0 ? `${upgrade.remainingFloors}개 층 남음${run.state==='battle' ? ' (현재 층 포함)' : ''}` : '사용 완료'}</span>)}</div>}
         {hasResult && <ResultBanner battle={battle!} tower={tower} />}
-        {hasResult && acknowledgedResult !== battle!.id && <BattleResultDialog key={battle!.id} battle={battle!} tower={tower} onContinue={() => setAcknowledgedResult(battle!.id)} />}
+        {hasResult && acknowledgedResult !== battle!.id && <BattleResultDialog key={battle!.id} battle={battle!} tower={tower} busy={busy} onRetry={()=>void submit({type:'retry',runId:run!.id,battleId:battle!.id})} onContinue={() => {if(run?.retries?.canRetry)void submit({type:'finish-loss',runId:run.id});else setAcknowledgedResult(battle!.id);}} />}
         {recruitment && <RecruitCelebration recruitment={recruitment} onContinue={()=>setRecruitment(null)} />}
         {stageOpen && tower && run && ['recruit','select'].includes(run.state) && <PokedexDialog title={run.state==='recruit' ? '승리 · 동료 영입' : `${run.floor}층 출전 준비`} large onClose={()=>{setStageOpen(false);focusAction();}}><TowerControls key={`${run.id}-${run.floor}-${run.state}`} tower={tower} selected={selected} setSelected={setSelected} busy={busy} submit={submit} error={error}/></PokedexDialog>}
         {battleMenu && <PokedexDialog title="배틀 메뉴" onClose={()=>{setBattleMenu(false);}}><div className="dex-action-options"><button data-initial-focus onClick={()=>{setBattleMenu(false);}}>계속하기</button><button disabled={busy} onClick={()=>{setBattleMenu(false);setAbandonConfirm(true);}}>도전 포기</button><button onClick={()=>router.push('/pokedex?from=battle')}>포켓몬 도감</button><button onClick={()=>router.push('/settings')}>설정</button><button onClick={()=>router.push('/')}>타이틀</button></div></PokedexDialog>}
@@ -305,7 +307,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
             <section className="team-panel" aria-label="보유 포켓몬 6칸"><div className="team-list">{Array.from({length:6},(_,i)=>{
               const pokemon=team[i];
               if(!pokemon)return <div className="team-member is-empty" key={i} aria-label={`${i+1}번 빈 슬롯`}><span className="team-empty">＋</span><span className="team-status">빈 슬롯</span></div>;
-              const entered=preparing ? selected.includes(pokemon.species) : !!battle?.team.some(p=>p.species===pokemon.species),fainted=entered && health(pokemon.condition).percent===0;
+              const entered=preparing ? selected.includes(collectionSpecies(pokemon.species)) : !!battle?.team.some(p=>p.species===pokemon.species),fainted=entered && health(pokemon.condition).percent===0;
               const state=!entered?'미출전':fainted?'기절':pokemon.active?'출전 중':'출전';
               return <div className={`team-member ${!entered || fainted ? "is-muted" : ""} ${pokemon.active && !fainted ? "is-active" : ""}`} key={pokemon.species} title={`${pokemonName(pokemon.species)} · ${state}`} aria-label={`${pokemonName(pokemon.species)} · ${state}`} data-team-state={state}><Sprite shiny={pokemon.shiny} name={pokemon.species}/><span className="team-status">{state}</span></div>;
             })}</div></section>

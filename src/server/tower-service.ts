@@ -10,7 +10,7 @@ export class TowerService {
   private sessions = new Map<string, {session: BattleSession; accessed: number}>();
   constructor(readonly store: TowerStore) {}
   private session(owner: string, row: BattleRow): BattleSession {
-    if (row.engine_version !== engineVersion || !supportedFormats.includes(row.format) || ![AI_VERSION,'tower-policy-v8','tower-policy-v7','tower-policy-v6','tower-policy-v5','tower-policy-v4','tower-policy-v3','tower-policy-v2','damage-policy-v1'].includes(row.ai_version)) {
+    if (row.engine_version !== engineVersion || !supportedFormats.includes(row.format) || ![AI_VERSION,'tower-policy-v9','tower-policy-v8','tower-policy-v7','tower-policy-v6','tower-policy-v5','tower-policy-v4','tower-policy-v3','tower-policy-v2','damage-policy-v1'].includes(row.ai_version)) {
       throw new BattleRequestError('이 배틀을 만든 엔진·규칙 버전과 현재 버전이 다릅니다. 기존 버전에서 복구하거나 도전을 종료해 주세요.', 409);
     }
     const cached = this.sessions.get(row.id);
@@ -22,11 +22,13 @@ export class TowerService {
       }
     }
     if (this.sessions.size >= 128) throw new BattleRequestError('동시 배틀 한도에 도달했습니다. 잠시 후 다시 시도해 주세요.', 503);
+    const savedNpc=JSON.parse(row.boss ?? row.trainer ?? 'null') as import('../web/contracts').BossView|null;
     const session = new BattleSession(async (log, id, view) => {
       this.store.complete(id, log, view);
     }, JSON.parse(row.seed) as Seed, {
       id: row.id, format:row.format,aiVersion:row.ai_version,teams: {p1: row.player_team, p2: row.opponent_team},
       rule:row.rule,battleItems:JSON.parse(row.battle_items),upgrades:JSON.parse(row.upgrades),teraTickets:JSON.parse(row.tera_tickets),
+      opponentTeraSpecies:row.ai_version===AI_VERSION && savedNpc?.gimmick?.rule==='tera' ? savedNpc.gimmick.species : undefined,
       history: this.store.history(row.id),
       saveInput: (requestId, command) => this.store.input(owner, row.id, requestId, command),
     });
@@ -72,9 +74,9 @@ const globalStore = globalThis as typeof globalThis & {towerPersistentService?: 
 export function getTowerService() {
   // Refresh the development singleton once when this schema/behavior version changes.
   // Its recorded inputs recover the battle in the new service without spending tickets twice.
-  if(globalStore.towerPersistentServiceVersion!==34){
+  if(globalStore.towerPersistentServiceVersion!==47){
     const previous=globalStore.towerPersistentService;
-    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=34;
+    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=47;
     if(previous)void previous.dispose().then(()=>previous.store.close()).catch(error=>console.error('Previous tower service shutdown failed',error));
   }
   // Runtime save data must not be traced into the deployment bundle.

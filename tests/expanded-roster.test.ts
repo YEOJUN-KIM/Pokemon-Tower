@@ -24,7 +24,7 @@ test('every default profile is self-taught, legal, untrained and has all six nat
   assert.deepEqual(defaultProfile('Ditto').moves,['Transform']);assert.deepEqual(defaultProfile('Unown').moves,['Hidden Power']);
 });
 test('encounters avoid the last three teams, scale across 100 floors and gate legendaries',()=>{
-  assert.ok(encounterPool(1).length>100);assert.equal(encounterPool(100).length,612);
+  assert.ok(encounterPool(1).length>100);assert.equal(encounterPool(100).length,Object.keys(pokemonSets).length);
   assert.ok(!encounterPool(1).includes('Mewtwo'));assert.ok(encounterPool(20).includes('Mewtwo'));
   assert.ok(!encounterPool(20).includes('Mew'));assert.ok(encounterPool(30).includes('Mew'));
   const previous=[1,2,3].flatMap(n=>generateOpponentTeam(n,[n,2,3,4]).map(p=>p.name));

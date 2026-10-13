@@ -24,7 +24,7 @@ test('v17 migration preserves previously bought upgrades and permits new consuma
  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);
  try{store.ensurePlayer('old');const id=store.battle(store.start('old',starters)).run_id;
  store.db.exec("DROP TABLE run_upgrades; CREATE TABLE run_upgrades(run_id TEXT NOT NULL REFERENCES runs(id),kind TEXT NOT NULL CHECK(kind IN ('attack','speed','guard')),start_floor INTEGER NOT NULL,end_floor INTEGER NOT NULL,PRIMARY KEY(run_id,kind)) STRICT; PRAGMA user_version=17;");store.db.prepare('INSERT INTO run_upgrades VALUES (?,?,?,?)').run(id,'attack',6,10);store.close();store=new TowerStore(path);
- assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,27);assert.equal(store.db.prepare('SELECT kind FROM run_upgrades WHERE run_id=?').get(id)!.kind,'attack');store.db.prepare('INSERT INTO run_upgrades VALUES (?,?,?,?)').run(id,'critical',6,10);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
+ assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,28);assert.equal(store.db.prepare('SELECT kind FROM run_upgrades WHERE run_id=?').get(id)!.kind,'attack');store.db.prepare('INSERT INTO run_upgrades VALUES (?,?,?,?)').run(id,'critical',6,10);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
  }finally{store.close();}
 });
 

@@ -1,4 +1,16 @@
 {
+  "Kyogre-Primal": {
+    "id": 10077,
+    "baseSpecies": "Kyogre",
+    "types": ["Water"],
+    "forme": "Primal"
+  },
+  "Groudon-Primal": {
+    "id": 10078,
+    "baseSpecies": "Groudon",
+    "types": ["Ground", "Fire"],
+    "forme": "Primal"
+  },
   "Castform-Sunny": {
     "id": 10013,
     "baseSpecies": "Castform",

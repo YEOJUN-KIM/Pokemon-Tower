@@ -15,10 +15,12 @@ import {upgrades,type UpgradeKind} from '../data/shop';
 
 const require = createRequire(import.meta.url);
 export const engineVersion: string = require('pokemon-showdown/package.json').version;
-import {FORMAT,PRE_TERA_FORMAT,supportedFormats} from '../data/battle-rules';
+import {FORMAT,PRE_TERA_FORMAT,PRE_NPC_FORMAT,supportedFormats} from '../data/battle-rules';
 export {FORMAT} from '../data/battle-rules';
 export type Seed = [number, number, number, number];
 export type BattleLog = {
+  opponentRule?:BattleRule;
+  opponentTeraSpecies?:string;
   rule?:BattleRule;
   battleItems?:BattleItemBag;
   schemaVersion: 1; engineVersion: string; format: string; seed: Seed;
@@ -30,6 +32,8 @@ export type BattleLog = {
 };
 
 export async function runBattle(options: {
+  opponentRule?:BattleRule;
+  opponentTeraSpecies?:string;
   rule?:BattleRule;
   battleItems?:BattleItemBag;
   player: Policy; opponent: Policy; seed?: Seed; format?:string;
@@ -40,13 +44,15 @@ export async function runBattle(options: {
   teraTickets?:import('../data/tera').TeraTickets;
 }): Promise<BattleLog> {
   if(options.rule!==undefined&&!isBattleRule(options.rule))throw Error('Invalid battle rule');
+  if(options.opponentRule!==undefined&&!isBattleRule(options.opponentRule))throw Error('Invalid opponent rule');
   const seed: Seed = options.seed ?? [1, 2, 3, 4];
   if (seed.length !== 4 || seed.some(n => !Number.isInteger(n) || n < 0 || n > 65535)) throw new Error('Invalid seed');
   const format=options.format ?? FORMAT;if(!supportedFormats.includes(format))throw Error('Unsupported battle format');
+  const towerFormat=[FORMAT,PRE_NPC_FORMAT,PRE_TERA_FORMAT].includes(format);
   if(options.teraTickets && ['p1','p2'].some(side=>!Number.isSafeInteger(options.teraTickets![side as 'p1'|'p2']) || options.teraTickets![side as 'p1'|'p2']<0))throw Error('Invalid tera tickets');
   const teams = options.teams ?? {p1: playerTeam, p2: opponentTeam};
   const packed=Object.fromEntries(Object.entries(teams).map(([side,team])=>[side,Teams.unpack(team)!])) as Record<'p1'|'p2',NonNullable<ReturnType<typeof Teams.unpack>>>;
-  if(format===FORMAT || format===PRE_TERA_FORMAT)for(const set of Object.values(packed).flat())if(!canEquipGimmick(set.species,set.item))throw Error('Incompatible gimmick item');
+  if(towerFormat)for(const set of Object.values(packed).flat())if(!canEquipGimmick(set.species,set.item))throw Error('Incompatible gimmick item');
   const engineTeams=teams;
   const active=[...new Set(options.upgrades ?? [])].sort() as UpgradeKind[];
   if(active.some(kind=>!Object.hasOwn(upgrades,kind))) throw new Error('Invalid upgrade');
@@ -55,7 +61,7 @@ export async function runBattle(options: {
     if (!unpacked || unpacked.length !== 3) throw new Error('Expected fixed 3-Pokemon team');
     const legality=structuredClone(unpacked);
     for(const set of legality) {
-      if((format===FORMAT || format===PRE_TERA_FORMAT) && Showdown.toID(set.item)==='dynamaxband')set.item='';
+      if(towerFormat && Showdown.toID(set.item)==='dynamaxband')set.item='';
       if(Showdown.toID(set.pokeball).startsWith('towerlegacyboost')){pointBonuses(Showdown.toID(set.pokeball));set.pokeball='';continue;}
       if(Showdown.toID(set.pokeball)!==POINT_TEAM_MARKER && !Showdown.toID(set.pokeball).startsWith(POINT_TEAM_MARKER+'boost'))continue;
       pointBonuses(Showdown.toID(set.pokeball));
@@ -75,6 +81,8 @@ export async function runBattle(options: {
   const log: BattleLog = {schemaVersion: 1, engineVersion, format, seed: [...seed], teams,
     decisions: [], publicProtocol: [], winner: null, turns: 0};
   if(options.rule)log.rule=options.rule;
+  if(options.opponentRule)log.opponentRule=options.opponentRule;
+  if(options.opponentTeraSpecies)log.opponentTeraSpecies=options.opponentTeraSpecies;
   if(active.length) log.upgrades=active;
   if(options.teraTickets)log.teraTickets={...options.teraTickets};
   let itemController:ReturnType<typeof installBattleItems>|undefined;
@@ -84,7 +92,7 @@ export async function runBattle(options: {
       super._writeLine(type,message);
       if(type!=='start' || !this.battle) return;
       if(options.battleItems)itemController=installBattleItems(this.battle,options.battleItems);
-      if(format===FORMAT || format===PRE_TERA_FORMAT)installTowerGimmicks(this.battle,packed,format===FORMAT ? options.teraTickets : undefined,options.rule);
+      if(towerFormat)installTowerGimmicks(this.battle,packed,format!==PRE_TERA_FORMAT ? options.teraTickets : undefined,options.rule,options.opponentRule,options.opponentTeraSpecies);
       const original=this.battle.statModify.bind(this.battle);
       this.battle.statModify=(base,set,key)=>Showdown.toID(set.pokeball).startsWith(POINT_TEAM_MARKER)
         ? key==='hp' && base.hp===1 ? 1 : trainedStat(base[key],set.ivs[key],set.evs[key]+(pointBonuses(Showdown.toID(set.pokeball))[key as keyof import("../data/training").StatBlock]??0),key,set.nature)
@@ -92,7 +100,7 @@ export async function runBattle(options: {
       // Register on this battle only; the shared Dex and other players are untouched.
       const usedBerries=new WeakSet<object>();
       this.battle.onEvent('UseItem',this.battle.format,(item:{id:string},pokemon:{side:{id:string}})=>{
-        if((format===FORMAT || format===PRE_TERA_FORMAT || pokemon.side.id==='p1') && item.id==='sitrusberry' && usedBerries.has(pokemon))return false;
+        if((towerFormat || pokemon.side.id==='p1') && item.id==='sitrusberry' && usedBerries.has(pokemon))return false;
       });
       this.battle.onEvent('EatItem',this.battle.format,(item:{id:string},pokemon:{side:{id:string}})=>{
         if(pokemon.side.id==='p1' && item.id==='sitrusberry')usedBerries.add(pokemon);
@@ -205,7 +213,7 @@ export async function replayBattle(record: BattleLog): Promise<BattleLog> {
       return next.action;
     }};
   };
-  const result = await runBattle({seed: record.seed, rule:record.rule,format:record.format, teams: record.teams, battleItems:record.battleItems,upgrades:record.upgrades,teraTickets:record.teraTickets, player: makePolicy('p1'), opponent: makePolicy('p2')});
+  const result = await runBattle({seed: record.seed, rule:record.rule,opponentRule:record.opponentRule,opponentTeraSpecies:record.opponentTeraSpecies,format:record.format, teams: record.teams, battleItems:record.battleItems,upgrades:record.upgrades,teraTickets:record.teraTickets, player: makePolicy('p1'), opponent: makePolicy('p2')});
   if (JSON.stringify(battleEvents(result.publicProtocol)) !== JSON.stringify(battleEvents(record.publicProtocol))) throw new Error('Replay diverged');
   if (result.winner !== record.winner || result.turns !== record.turns) throw new Error('Replay result mismatch');
   if (result.decisions.length !== record.decisions.length) throw new Error('Unused replay actions');

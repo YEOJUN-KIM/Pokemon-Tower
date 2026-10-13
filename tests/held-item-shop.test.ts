@@ -15,10 +15,10 @@ test('shops always draw four different eligible tools; higher floors increase ep
   }
   assert.ok(epicCounts[0]>0);assert.ok(epicCounts[2]>epicCounts[0]);assert.ok(epicCounts[3]>epicCounts[2]*2);
 });
-test('all five rarities can appear in the first shop, including extremely rare legendary rolls',()=>{
+test('all five rarities can appear in the first shop, with reachable legendary rolls',()=>{
   const weights=itemRarityWeights(5);let cumulative=0;
   for(const rarity of Object.keys(weights) as ItemRarity[]){assert.ok(weights[rarity]>0);let call=0;const pick=(cumulative+weights[rarity]/2)/100;const result=rollItemOffers(5,()=>call++===0 ? pick : 0);assert.equal(itemShopRule(result[0]).rarity,rarity);cumulative+=weights[rarity];}
-  assert.equal(weights.legendary,0.01);
+  assert.equal(weights.legendary,3);
 });
 test('saved stock survives reloads, rejects unlisted purchases without spending, and changes at the next shop',()=>{
   const store=new TowerStore(':memory:');try{

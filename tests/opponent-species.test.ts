@@ -25,6 +25,7 @@ test('all named samples have three distinct legal allowed opponents after evolut
  const validator=new Showdown.TeamValidator(FORMAT);
  for(const sample of namedTrainerSamples){
   const team=generateOpponentTeam(50,[1,2,3,4],[],null,sample,'hundred-floor-v1');assert.equal(new Set(team.map(p=>p.name)).size,3);
-  for(const entry of team){assert.ok(allowedOpponentSpecies(entry.name,sample.id==='named-red'),sample.id+': '+entry.name);assert.equal(validator.validateSet({...structuredClone(pokemonSets[entry.name]),moves:entry.moves,...(entry.ability?{ability:entry.ability}:{}),item:entry.item==='Dynamax Band'?'':entry.item??''},{}),null,sample.id+': '+entry.name);}
+  // The fixed Galar roster keeps Duraludon even before its Gmax is unlocked.
+  for(const entry of team){assert.ok(allowedOpponentSpecies(entry.name,['named-red','named-red-kanto'].includes(sample.id)) || sample.generation===8 && entry.name==='Duraludon',sample.id+': '+entry.name);assert.equal(validator.validateSet({...structuredClone(pokemonSets[entry.name]),moves:entry.moves,...(entry.ability?{ability:entry.ability}:{}),item:entry.item==='Dynamax Band'?'':entry.item??''},{}),null,sample.id+': '+entry.name);}
  }
 });

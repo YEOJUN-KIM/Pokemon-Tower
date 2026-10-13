@@ -1,11 +1,18 @@
 import inventory from './pixel-sprites.json' with {type:'json'};
 import frontOnlyBacks from './front-only-back-sprites.json' with {type:'json'};
+import nonPixelFronts from './non-pixel-front-sprites.json' with {type:'json'};
 const invalidBacks=new Set<string>(frontOnlyBacks);
-export const pixelSprites:Record<string,{key:string;animatedFront:boolean;animatedBack:boolean}>=inventory;
+const invalidFronts=new Set<string>(nonPixelFronts);
+export const pixelSprites:Record<string,{key:string;animatedFront:boolean;animatedBack:boolean;animatedShinyFront?:boolean;animatedShinyBack?:boolean;front?:boolean;back?:boolean;shinyFront?:boolean;shinyBack?:boolean}>=inventory;
 const root='/vendor/showdown/pokemon/';
-export function pixelSpriteSources(spriteKey:string|number,back=false,animated=false):string[] {
+export function pixelSpriteSources(spriteKey:string|number,back=false,animated=false,shiny=false):string[] {
   const sprite=pixelSprites[spriteKey];if(!sprite)return [];
+  // These gen5 PNGs are downscaled illustrations, not pixel sprites. Use local PokeAPI art.
+  if(!back && !shiny && invalidFronts.has(String(spriteKey)))return [];
   if(back && invalidBacks.has(String(spriteKey)))return [];
-  const png=`${root}gen5${back ? '-back' : ''}/${sprite.key}.png`;
-  return animated && (back ? sprite.animatedBack : sprite.animatedFront) ? [`${root}gen5ani${back ? '-back' : ''}/${sprite.key}.gif`,png] : [png];
+  if(shiny && !(back?sprite.shinyBack:sprite.shinyFront))return [];
+  if(!shiny && (back?sprite.back===false:sprite.front===false))return [];
+  const suffix=(back?'-back':'')+(shiny?'-shiny':''),png=`${root}gen5${suffix}/${sprite.key}.png`;
+  const available=shiny?(back?sprite.animatedShinyBack:sprite.animatedShinyFront):(back?sprite.animatedBack:sprite.animatedFront);
+  return animated && available ? [`${root}gen5ani${suffix}/${sprite.key}.gif`,png] : [png];
 }

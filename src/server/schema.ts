@@ -55,7 +55,8 @@ CREATE TABLE IF NOT EXISTS battles (
   reward INTEGER NOT NULL CHECK(reward >= 0), candidates TEXT NOT NULL,
   log TEXT, view TEXT, boss TEXT, trainer TEXT, upgrades TEXT NOT NULL DEFAULT '[]',
   stage INTEGER NOT NULL DEFAULT 0 CHECK(stage IN (0,1)),
-  UNIQUE(run_id, floor, stage)
+  attempt INTEGER NOT NULL DEFAULT 0 CHECK(attempt>=0),
+  UNIQUE(run_id, floor, stage, attempt)
 ) STRICT;
 CREATE TABLE IF NOT EXISTS actions (
   battle_id TEXT NOT NULL REFERENCES battles(id),
@@ -140,5 +141,7 @@ CREATE TABLE IF NOT EXISTS run_rules(run_id TEXT PRIMARY KEY REFERENCES runs(id)
 CREATE TABLE IF NOT EXISTS permanent_upgrades(player_id TEXT PRIMARY KEY REFERENCES players(id),reroll_level INTEGER NOT NULL DEFAULT 0 CHECK(reroll_level BETWEEN 0 AND 2),shiny_tickets INTEGER NOT NULL DEFAULT 0 CHECK(shiny_tickets>=0),egg_tickets INTEGER NOT NULL DEFAULT 0 CHECK(egg_tickets>=0)) STRICT;
 CREATE TABLE IF NOT EXISTS permanent_receipts(player_id TEXT NOT NULL REFERENCES players(id),request_id TEXT NOT NULL,payload TEXT NOT NULL,result TEXT NOT NULL,PRIMARY KEY(player_id,request_id)) STRICT;
 CREATE TABLE IF NOT EXISTS run_routes(run_id TEXT PRIMARY KEY REFERENCES runs(id),second_theme TEXT NOT NULL,pending_boss INTEGER NOT NULL DEFAULT 0) STRICT;
-  PRAGMA user_version = 27;
+CREATE TABLE IF NOT EXISTS permanent_retry_upgrades(player_id TEXT PRIMARY KEY REFERENCES players(id),level INTEGER NOT NULL DEFAULT 0 CHECK(level BETWEEN 0 AND 3)) STRICT;
+CREATE TABLE IF NOT EXISTS run_retries(run_id TEXT PRIMARY KEY REFERENCES runs(id),retry_limit INTEGER NOT NULL CHECK(retry_limit BETWEEN 0 AND 3),used INTEGER NOT NULL DEFAULT 0 CHECK(used BETWEEN 0 AND 3),pending_battle_id TEXT REFERENCES battles(id)) STRICT;
+  PRAGMA user_version = 28;
 `;

@@ -11,7 +11,7 @@ export function findVillainBattle(store:TowerStore,owner:string,rank:VillainRank
   const first=store.battle(store.start(owner,starters)),run=first.run_id;
   const previous=!!first.trainer && JSON.parse(first.trainer).role==='villain';
   const organization=store.db.prepare('SELECT organization FROM run_villains WHERE run_id=?').get(run)!.organization as string;
-  for(let floor=rank==='boss'?31:rank==='executive'?16:2;floor<50;floor++){
+  for(let floor=rank==='boss'?75:rank==='executive'?16:2;floor<100;floor++){
    const drawn=villainEncounter(run,floor,organization,previous);if(drawn?.event.rank!==rank)continue;
    store.db.prepare("UPDATE runs SET floor=?,state='select' WHERE id=?").run(floor,run);
    const row=store.battle(store.enter(owner,run,floor,starters));

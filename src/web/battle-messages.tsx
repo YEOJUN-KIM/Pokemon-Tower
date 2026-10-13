@@ -14,7 +14,10 @@ export function BattleMessages({messages, playing, turn, announcement,historyOnl
   });
   const lastEntry = entries.at(-1)?.key;
   useEffect(() => {
-    if (expanded && history.current) history.current.scrollTop = history.current.scrollHeight;
+    if(!expanded)return;
+    // The parent dialog opens after child effects; scroll after it has a layout.
+    const frame=requestAnimationFrame(()=>{if(history.current)history.current.scrollTop=history.current.scrollHeight;});
+    return ()=>cancelAnimationFrame(frame);
   }, [lastEntry, expanded]);
 
   return <section className="battle-messages" aria-label="배틀 상황">

@@ -18256,5 +18256,1087 @@
     ],
     "bst": 600,
     "specialist": false
+  },
+  "Rotom-Heat": {
+    "id": 10008,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Levitate",
+    "moves": [
+      "Overheat",
+      "Thunderbolt",
+      "Discharge",
+      "Thunder"
+    ],
+    "abilities": [
+      "Levitate"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 107,
+      "spa": 105,
+      "spd": 107,
+      "spe": 86
+    },
+    "bst": 520,
+    "types": [
+      "Electric",
+      "Fire"
+    ],
+    "specialist": false
+  },
+  "Rotom-Wash": {
+    "id": 10009,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Levitate",
+    "moves": [
+      "Hydro Pump",
+      "Thunderbolt",
+      "Discharge",
+      "Thunder"
+    ],
+    "abilities": [
+      "Levitate"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 107,
+      "spa": 105,
+      "spd": 107,
+      "spe": 86
+    },
+    "bst": 520,
+    "types": [
+      "Electric",
+      "Water"
+    ],
+    "specialist": false
+  },
+  "Rotom-Frost": {
+    "id": 10010,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Levitate",
+    "moves": [
+      "Blizzard",
+      "Thunderbolt",
+      "Discharge",
+      "Thunder"
+    ],
+    "abilities": [
+      "Levitate"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 107,
+      "spa": 105,
+      "spd": 107,
+      "spe": 86
+    },
+    "bst": 520,
+    "types": [
+      "Electric",
+      "Ice"
+    ],
+    "specialist": false
+  },
+  "Rotom-Fan": {
+    "id": 10011,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Levitate",
+    "moves": [
+      "Air Slash",
+      "Thunderbolt",
+      "Discharge",
+      "Thunder"
+    ],
+    "abilities": [
+      "Levitate"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 107,
+      "spa": 105,
+      "spd": 107,
+      "spe": 86
+    },
+    "bst": 520,
+    "types": [
+      "Electric",
+      "Flying"
+    ],
+    "specialist": false
+  },
+  "Rotom-Mow": {
+    "id": 10012,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Levitate",
+    "moves": [
+      "Leaf Storm",
+      "Thunderbolt",
+      "Discharge",
+      "Thunder"
+    ],
+    "abilities": [
+      "Levitate"
+    ],
+    "baseStats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 107,
+      "spa": 105,
+      "spd": 107,
+      "spe": 86
+    },
+    "bst": 520,
+    "types": [
+      "Electric",
+      "Grass"
+    ],
+    "specialist": false
+  },
+  "Raticate-Alola": {
+    "id": 10092,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Gluttony",
+    "moves": [
+      "Last Resort",
+      "Double-Edge",
+      "Crunch",
+      "Throat Chop"
+    ],
+    "abilities": [
+      "Gluttony",
+      "Hustle",
+      "Thick Fat"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 71,
+      "def": 70,
+      "spa": 40,
+      "spd": 80,
+      "spe": 77
+    },
+    "bst": 413,
+    "types": [
+      "Dark",
+      "Normal"
+    ],
+    "specialist": false
+  },
+  "Raichu-Alola": {
+    "id": 10100,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Surge Surfer",
+    "moves": [
+      "Future Sight",
+      "Volt Tackle",
+      "Psychic",
+      "Thunderbolt"
+    ],
+    "abilities": [
+      "Surge Surfer"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 85,
+      "def": 50,
+      "spa": 95,
+      "spd": 85,
+      "spe": 110
+    },
+    "bst": 485,
+    "types": [
+      "Electric",
+      "Psychic"
+    ],
+    "specialist": false
+  },
+  "Sandslash-Alola": {
+    "id": 10102,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Snow Cloak",
+    "moves": [
+      "Steel Roller",
+      "Focus Punch",
+      "Double-Edge",
+      "Ice Spinner"
+    ],
+    "abilities": [
+      "Snow Cloak",
+      "Slush Rush"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 100,
+      "def": 120,
+      "spa": 25,
+      "spd": 65,
+      "spe": 65
+    },
+    "bst": 450,
+    "types": [
+      "Ice",
+      "Steel"
+    ],
+    "specialist": false
+  },
+  "Ninetales-Alola": {
+    "id": 10104,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Snow Cloak",
+    "moves": [
+      "Moonblast",
+      "Ice Beam",
+      "Dazzling Gleam",
+      "Blizzard"
+    ],
+    "abilities": [
+      "Snow Cloak",
+      "Snow Warning"
+    ],
+    "baseStats": {
+      "hp": 73,
+      "atk": 67,
+      "def": 75,
+      "spa": 81,
+      "spd": 100,
+      "spe": 109
+    },
+    "bst": 505,
+    "types": [
+      "Ice",
+      "Fairy"
+    ],
+    "specialist": false
+  },
+  "Dugtrio-Alola": {
+    "id": 10106,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Sand Veil",
+    "moves": [
+      "Earthquake",
+      "High Horsepower",
+      "Double-Edge",
+      "Iron Head"
+    ],
+    "abilities": [
+      "Sand Veil",
+      "Tangling Hair",
+      "Sand Force"
+    ],
+    "baseStats": {
+      "hp": 35,
+      "atk": 100,
+      "def": 60,
+      "spa": 50,
+      "spd": 70,
+      "spe": 110
+    },
+    "bst": 425,
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "specialist": false
+  },
+  "Persian-Alola": {
+    "id": 10108,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Fur Coat",
+    "moves": [
+      "Dark Pulse",
+      "Foul Play",
+      "Last Resort",
+      "Dream Eater"
+    ],
+    "abilities": [
+      "Fur Coat",
+      "Technician",
+      "Rattled"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 60,
+      "def": 60,
+      "spa": 75,
+      "spd": 65,
+      "spe": 115
+    },
+    "bst": 440,
+    "types": [
+      "Dark"
+    ],
+    "specialist": false
+  },
+  "Arcanine-Hisui": {
+    "id": 10230,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Intimidate",
+    "moves": [
+      "Flare Blitz",
+      "Head Smash",
+      "Raging Fury",
+      "Overheat"
+    ],
+    "abilities": [
+      "Intimidate",
+      "Flash Fire",
+      "Rock Head"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 115,
+      "def": 80,
+      "spa": 95,
+      "spd": 80,
+      "spe": 90
+    },
+    "bst": 555,
+    "types": [
+      "Fire",
+      "Rock"
+    ],
+    "specialist": false
+  },
+  "Golem-Alola": {
+    "id": 10111,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Magnet Pull",
+    "moves": [
+      "Focus Punch",
+      "Supercell Slam",
+      "Wild Charge",
+      "Double-Edge"
+    ],
+    "abilities": [
+      "Magnet Pull",
+      "Sturdy",
+      "Galvanize"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 130,
+      "spa": 55,
+      "spd": 65,
+      "spe": 45
+    },
+    "bst": 495,
+    "types": [
+      "Rock",
+      "Electric"
+    ],
+    "specialist": false
+  },
+  "Rapidash-Galar": {
+    "id": 10163,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Run Away",
+    "moves": [
+      "Future Sight",
+      "Play Rough",
+      "Double-Edge",
+      "Thrash"
+    ],
+    "abilities": [
+      "Run Away",
+      "Pastel Veil",
+      "Anticipation"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 100,
+      "def": 70,
+      "spa": 80,
+      "spd": 80,
+      "spe": 105
+    },
+    "bst": 500,
+    "types": [
+      "Psychic",
+      "Fairy"
+    ],
+    "specialist": false
+  },
+  "Slowbro-Galar": {
+    "id": 10165,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Quick Draw",
+    "moves": [
+      "Future Sight",
+      "Belch",
+      "Gunk Shot",
+      "Sludge Wave"
+    ],
+    "abilities": [
+      "Quick Draw",
+      "Own Tempo",
+      "Regenerator"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 100,
+      "def": 95,
+      "spa": 100,
+      "spd": 70,
+      "spe": 30
+    },
+    "bst": 490,
+    "types": [
+      "Poison",
+      "Psychic"
+    ],
+    "specialist": false
+  },
+  "Muk-Alola": {
+    "id": 10113,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Poison Touch",
+    "moves": [
+      "Focus Punch",
+      "Gunk Shot",
+      "Foul Play",
+      "Crunch"
+    ],
+    "abilities": [
+      "Poison Touch",
+      "Gluttony",
+      "Power of Alchemy"
+    ],
+    "baseStats": {
+      "hp": 105,
+      "atk": 105,
+      "def": 75,
+      "spa": 65,
+      "spd": 100,
+      "spe": 50
+    },
+    "bst": 500,
+    "types": [
+      "Poison",
+      "Dark"
+    ],
+    "specialist": false
+  },
+  "Electrode-Hisui": {
+    "id": 10232,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Soundproof",
+    "moves": [
+      "Chloroblast",
+      "Leaf Storm",
+      "Energy Ball",
+      "Thunderbolt"
+    ],
+    "abilities": [
+      "Soundproof",
+      "Static",
+      "Aftermath"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 50,
+      "def": 70,
+      "spa": 80,
+      "spd": 80,
+      "spe": 150
+    },
+    "bst": 490,
+    "types": [
+      "Electric",
+      "Grass"
+    ],
+    "specialist": false
+  },
+  "Exeggutor-Alola": {
+    "id": 10114,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Frisk",
+    "moves": [
+      "Draco Meteor",
+      "Leaf Storm",
+      "Outrage",
+      "Wood Hammer"
+    ],
+    "abilities": [
+      "Frisk",
+      "Harvest"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 105,
+      "def": 85,
+      "spa": 125,
+      "spd": 75,
+      "spe": 45
+    },
+    "bst": 530,
+    "types": [
+      "Grass",
+      "Dragon"
+    ],
+    "specialist": false
+  },
+  "Marowak-Alola": {
+    "id": 10115,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Cursed Body",
+    "moves": [
+      "Flare Blitz",
+      "Focus Punch",
+      "Poltergeist",
+      "Shadow Bone"
+    ],
+    "abilities": [
+      "Cursed Body",
+      "Lightning Rod",
+      "Rock Head"
+    ],
+    "baseStats": {
+      "hp": 60,
+      "atk": 80,
+      "def": 110,
+      "spa": 50,
+      "spd": 80,
+      "spe": 45
+    },
+    "bst": 425,
+    "types": [
+      "Fire",
+      "Ghost"
+    ],
+    "specialist": false
+  },
+  "Weezing-Galar": {
+    "id": 10167,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Levitate",
+    "moves": [
+      "Belch",
+      "Gunk Shot",
+      "Sludge Wave",
+      "Sludge Bomb"
+    ],
+    "abilities": [
+      "Levitate",
+      "Neutralizing Gas",
+      "Misty Surge"
+    ],
+    "baseStats": {
+      "hp": 65,
+      "atk": 90,
+      "def": 120,
+      "spa": 85,
+      "spd": 70,
+      "spe": 60
+    },
+    "bst": 490,
+    "types": [
+      "Poison",
+      "Fairy"
+    ],
+    "specialist": false
+  },
+  "Tauros-Paldea-Combat": {
+    "id": 10250,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Intimidate",
+    "moves": [
+      "Close Combat",
+      "Body Press",
+      "Double-Edge",
+      "Outrage"
+    ],
+    "abilities": [
+      "Intimidate",
+      "Anger Point",
+      "Cud Chew"
+    ],
+    "baseStats": {
+      "hp": 75,
+      "atk": 110,
+      "def": 105,
+      "spa": 30,
+      "spd": 70,
+      "spe": 100
+    },
+    "bst": 490,
+    "types": [
+      "Fighting"
+    ],
+    "specialist": false
+  },
+  "Articuno-Galar": {
+    "id": 10169,
+    "legendary": true,
+    "mythical": false,
+    "ability": "Competitive",
+    "moves": [
+      "Future Sight",
+      "Dream Eater",
+      "Freezing Glare",
+      "Psychic"
+    ],
+    "abilities": [
+      "Competitive"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 85,
+      "def": 85,
+      "spa": 125,
+      "spd": 100,
+      "spe": 95
+    },
+    "bst": 580,
+    "types": [
+      "Psychic",
+      "Flying"
+    ],
+    "specialist": false
+  },
+  "Zapdos-Galar": {
+    "id": 10170,
+    "legendary": true,
+    "mythical": false,
+    "ability": "Defiant",
+    "moves": [
+      "Brave Bird",
+      "Close Combat",
+      "Superpower",
+      "Thunderous Kick"
+    ],
+    "abilities": [
+      "Defiant"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 125,
+      "def": 90,
+      "spa": 85,
+      "spd": 90,
+      "spe": 100
+    },
+    "bst": 580,
+    "types": [
+      "Fighting",
+      "Flying"
+    ],
+    "specialist": false
+  },
+  "Moltres-Galar": {
+    "id": 10171,
+    "legendary": true,
+    "mythical": false,
+    "ability": "Berserk",
+    "moves": [
+      "Brave Bird",
+      "Fiery Wrath",
+      "Foul Play",
+      "Dark Pulse"
+    ],
+    "abilities": [
+      "Berserk"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 85,
+      "def": 90,
+      "spa": 100,
+      "spd": 125,
+      "spe": 90
+    },
+    "bst": 580,
+    "types": [
+      "Dark",
+      "Flying"
+    ],
+    "specialist": false
+  },
+  "Typhlosion-Hisui": {
+    "id": 10233,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Blaze",
+    "moves": [
+      "Eruption",
+      "Burn Up",
+      "Overheat",
+      "Fire Blast"
+    ],
+    "abilities": [
+      "Blaze",
+      "Frisk"
+    ],
+    "baseStats": {
+      "hp": 73,
+      "atk": 84,
+      "def": 78,
+      "spa": 119,
+      "spd": 85,
+      "spe": 95
+    },
+    "bst": 534,
+    "types": [
+      "Fire",
+      "Ghost"
+    ],
+    "specialist": false
+  },
+  "Slowking-Galar": {
+    "id": 10172,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Curious Medicine",
+    "moves": [
+      "Future Sight",
+      "Belch",
+      "Sludge Wave",
+      "Psychic"
+    ],
+    "abilities": [
+      "Curious Medicine",
+      "Own Tempo",
+      "Regenerator"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 65,
+      "def": 80,
+      "spa": 110,
+      "spd": 110,
+      "spe": 30
+    },
+    "bst": 490,
+    "types": [
+      "Poison",
+      "Psychic"
+    ],
+    "specialist": false
+  },
+  "Samurott-Hisui": {
+    "id": 10236,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Torrent",
+    "moves": [
+      "Liquidation",
+      "Surf",
+      "Hydro Pump",
+      "Aqua Tail"
+    ],
+    "abilities": [
+      "Torrent",
+      "Sharpness"
+    ],
+    "baseStats": {
+      "hp": 90,
+      "atk": 108,
+      "def": 80,
+      "spa": 100,
+      "spd": 65,
+      "spe": 85
+    },
+    "bst": 528,
+    "types": [
+      "Water",
+      "Dark"
+    ],
+    "specialist": false
+  },
+  "Lilligant-Hisui": {
+    "id": 10237,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Chlorophyll",
+    "moves": [
+      "Close Combat",
+      "Axe Kick",
+      "Leaf Blade",
+      "Petal Blizzard"
+    ],
+    "abilities": [
+      "Chlorophyll",
+      "Hustle",
+      "Leaf Guard"
+    ],
+    "baseStats": {
+      "hp": 70,
+      "atk": 105,
+      "def": 75,
+      "spa": 50,
+      "spd": 75,
+      "spe": 105
+    },
+    "bst": 480,
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "specialist": false
+  },
+  "Darmanitan-Galar": {
+    "id": 10177,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Gorilla Tactics",
+    "moves": [
+      "Focus Punch",
+      "Flare Blitz",
+      "Superpower",
+      "Thrash"
+    ],
+    "abilities": [
+      "Gorilla Tactics",
+      "Zen Mode"
+    ],
+    "baseStats": {
+      "hp": 105,
+      "atk": 140,
+      "def": 55,
+      "spa": 30,
+      "spd": 55,
+      "spe": 95
+    },
+    "bst": 480,
+    "types": [
+      "Ice"
+    ],
+    "specialist": false
+  },
+  "Zoroark-Hisui": {
+    "id": 10239,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Illusion",
+    "moves": [
+      "Hyper Voice",
+      "Focus Punch",
+      "Shadow Ball",
+      "Tera Blast"
+    ],
+    "abilities": [
+      "Illusion"
+    ],
+    "baseStats": {
+      "hp": 55,
+      "atk": 100,
+      "def": 60,
+      "spa": 125,
+      "spd": 60,
+      "spe": 110
+    },
+    "bst": 510,
+    "types": [
+      "Normal",
+      "Ghost"
+    ],
+    "specialist": false
+  },
+  "Stunfisk-Galar": {
+    "id": 10180,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Mimicry",
+    "moves": [
+      "Steel Beam",
+      "Earthquake",
+      "Stomping Tantrum",
+      "Earth Power"
+    ],
+    "abilities": [
+      "Mimicry"
+    ],
+    "baseStats": {
+      "hp": 109,
+      "atk": 81,
+      "def": 99,
+      "spa": 66,
+      "spd": 84,
+      "spe": 32
+    },
+    "bst": 471,
+    "types": [
+      "Ground",
+      "Steel"
+    ],
+    "specialist": false
+  },
+  "Braviary-Hisui": {
+    "id": 10240,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Keen Eye",
+    "moves": [
+      "Future Sight",
+      "Psychic",
+      "Brave Bird",
+      "Esper Wing"
+    ],
+    "abilities": [
+      "Keen Eye",
+      "Sheer Force",
+      "Tinted Lens"
+    ],
+    "baseStats": {
+      "hp": 110,
+      "atk": 83,
+      "def": 70,
+      "spa": 112,
+      "spd": 70,
+      "spe": 65
+    },
+    "bst": 510,
+    "types": [
+      "Psychic",
+      "Flying"
+    ],
+    "specialist": false
+  },
+  "Goodra-Hisui": {
+    "id": 10242,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Sap Sipper",
+    "moves": [
+      "Steel Beam",
+      "Draco Meteor",
+      "Outrage",
+      "Dragon Pulse"
+    ],
+    "abilities": [
+      "Sap Sipper",
+      "Shell Armor",
+      "Gooey"
+    ],
+    "baseStats": {
+      "hp": 80,
+      "atk": 100,
+      "def": 100,
+      "spa": 110,
+      "spd": 150,
+      "spe": 60
+    },
+    "bst": 600,
+    "types": [
+      "Steel",
+      "Dragon"
+    ],
+    "specialist": false
+  },
+  "Avalugg-Hisui": {
+    "id": 10243,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Strong Jaw",
+    "moves": [
+      "Mountain Gale",
+      "Double-Edge",
+      "Ice Spinner",
+      "Stone Edge"
+    ],
+    "abilities": [
+      "Strong Jaw",
+      "Ice Body",
+      "Sturdy"
+    ],
+    "baseStats": {
+      "hp": 95,
+      "atk": 127,
+      "def": 184,
+      "spa": 34,
+      "spd": 36,
+      "spe": 38
+    },
+    "bst": 514,
+    "types": [
+      "Ice",
+      "Rock"
+    ],
+    "specialist": false
+  },
+  "Decidueye-Hisui": {
+    "id": 10244,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Overgrow",
+    "moves": [
+      "Focus Punch",
+      "Close Combat",
+      "Leaf Storm",
+      "Leaf Blade"
+    ],
+    "abilities": [
+      "Overgrow",
+      "Scrappy"
+    ],
+    "baseStats": {
+      "hp": 88,
+      "atk": 112,
+      "def": 80,
+      "spa": 95,
+      "spd": 95,
+      "spe": 60
+    },
+    "bst": 530,
+    "types": [
+      "Grass",
+      "Fighting"
+    ],
+    "specialist": false
+  },
+  "Ursaluna-Bloodmoon": {
+    "id": 10272,
+    "legendary": false,
+    "mythical": false,
+    "ability": "Mind's Eye",
+    "moves": [
+      "Blood Moon",
+      "Earth Power",
+      "Hyper Voice",
+      "Uproar"
+    ],
+    "abilities": [
+      "Mind's Eye"
+    ],
+    "baseStats": {
+      "hp": 113,
+      "atk": 70,
+      "def": 120,
+      "spa": 135,
+      "spd": 65,
+      "spe": 52
+    },
+    "bst": 555,
+    "types": [
+      "Ground",
+      "Normal"
+    ],
+    "specialist": false
   }
 }

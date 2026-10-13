@@ -6,6 +6,7 @@ import {species} from '../src/web/catalog';
 import {missingDotAnimation} from '../src/data/sprite-animation';
 import {pixelSprites} from '../src/data/pixel-sprites';
 import forms from '../src/data/form-sprite-availability.json' with {type:'json'};
+import removedIds from '../src/data/removed-pokemon-sprite-ids.json' with {type:'json'};
 
 // Use the revision already audited by this project, rather than changing art
 // when the upstream master branch changes. Never overwrite existing assets.
@@ -13,7 +14,8 @@ const commit='a3a1432e688ea028f12c51371d5253037cb9f17b';
 const source=`https://raw.githubusercontent.com/PokeAPI/sprites/${commit}/sprites/pokemon/`;
 const destination='public/vendor/pokeapi/pokemon';
 const keys=new Map<string,number>();
-const addKey=(key:string|number,id:number)=>keys.set(String(key),Math.min(keys.get(String(key)) ?? id,id));
+const removed=new Set<string>(removedIds);
+const addKey=(key:string|number,id:number)=>{if(!removed.has(String(key)))keys.set(String(key),Math.min(keys.get(String(key)) ?? id,id));};
 for(const entry of pokedexEntries()) {
   addKey(entry.id,entry.id);
   for(const form of entry.forms ?? [])addKey(form.spriteKey,entry.id);

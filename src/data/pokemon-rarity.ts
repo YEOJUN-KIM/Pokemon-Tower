@@ -1,9 +1,10 @@
-import rarity from './music-rarity.json';
+import rarity from './music-rarity.json' with {type:'json'};
+import {separateForms} from './selectable-forms';
 export type PokemonRarity='normal'|'sublegendary'|'legendary'|'mythical';
 export const pokemonRarityNames:Record<PokemonRarity,string>={normal:'일반',sublegendary:'준전설',legendary:'전설',mythical:'환상'};
 export const eggRarityWeights:Record<PokemonRarity,number>={normal:9500,sublegendary:350,legendary:100,mythical:50};
 export function pokemonRarity(species:string):PokemonRarity{
- const value=(rarity as Record<string,string>)[species];
+ const value=(rarity as Record<string,string>)[species]??(rarity as Record<string,string>)[separateForms[species]?.baseSpecies];
  return value==='sublegendary'||value==='legendary'||value==='mythical'?value:'normal';
 }
 export function eggRarity(roll:number):PokemonRarity{

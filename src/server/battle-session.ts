@@ -1,4 +1,5 @@
 import {applyPublicTypes} from '../web/battle-types';
+import {packedNpcRule} from '../data/npc-gimmicks';
 import {ZMovePolicy} from '../battle/z-move-policy';
 import {moveInfo} from '../data/move-info';
 import {TeraPolicy,GimmickPolicy,LegacyGimmickPolicy} from '../battle/gimmick-policy';
@@ -14,6 +15,7 @@ import type { BattleView,PokemonView } from '../web/contracts';
 import type {UpgradeKind} from '../data/shop';
 import Showdown from 'pokemon-showdown';
 import {playerTeam} from '../data/teams';
+import {dynamaxDisplaySpecies} from '../data/selectable-forms';
 import {genderFromDetails} from '../data/gender';
 import {advanceField,emptyField} from '../web/battle-field';
 
@@ -37,9 +39,12 @@ export class BattleSession {
   private ownConditions = new Map<string, string>();
   private ownActiveSpecies:string|null=null;
   private ownDetails=new Map<string,Partial<PokemonView>>();
+  private initialSpecies=new Map<string,string>();
   private movePP:NonNullable<BattleView['movePP']>=[];
   private field=emptyField();
   private initialTeraTickets=0;
+  private opponentRule?:import('../data/run-rules').BattleRule;
+  private opponentPrimal=false;
   private teraSpent=false;
   private maxMovePP:BattleView['maxMovePP'];
   private zMovePP:BattleView['zMovePP'];
@@ -50,10 +55,18 @@ export class BattleSession {
   private saveInput?: (requestId: number, action: string) => void;
 
   constructor(save: (log: BattleLog, id: string, view: BattleView) => Promise<void>, seed?: Seed,
-    options: {rule?:import('../data/run-rules').BattleRule;id?: string; format?:string; aiVersion?:string; teams?: {p1: string; p2: string}; history?: string[]; battleItems?:import('../data/battle-items').BattleItemBag; upgrades?:UpgradeKind[];teraTickets?:import('../data/tera').TeraTickets; saveInput?: (requestId: number, action: string) => void} = {}) {
+    options: {rule?:import('../data/run-rules').BattleRule;opponentTeraSpecies?:string;id?: string; format?:string; aiVersion?:string; teams?: {p1: string; p2: string}; history?: string[]; battleItems?:import('../data/battle-items').BattleItemBag; upgrades?:UpgradeKind[];teraTickets?:import('../data/tera').TeraTickets; saveInput?: (requestId: number, action: string) => void} = {}) {
     this.id = options.id ?? randomUUID();
     this.initialTeraTickets=options.teraTickets?.p1 ?? 0;
-    for(const set of Showdown.Teams.unpack(options.teams?.p1 ?? playerTeam) ?? [])this.ownDetails.set(set.name || set.species,{nature:set.nature,ability:set.ability,item:set.item,teraType:set.teraType ?? Showdown.Dex.species.get(set.species).types[0],moves:set.moves.map(move=>Showdown.Dex.moves.get(move).name)});
+    if(options.aiVersion==='tower-policy-v10'){
+      const team=Showdown.Teams.unpack(options.teams?.p2 ?? '') ?? [];
+      this.opponentRule=packedNpcRule(team,options.teraTickets?.p2 ?? 0);
+      this.opponentPrimal=team.some(p=>p.species==='Groudon' && p.item==='Red Orb' || p.species==='Kyogre' && p.item==='Blue Orb');
+    }
+    for(const set of Showdown.Teams.unpack(options.teams?.p1 ?? playerTeam) ?? []){
+      this.initialSpecies.set(set.name || set.species,set.species);
+      this.ownDetails.set(set.name || set.species,{nature:set.nature,ability:set.ability,item:set.item,teraType:set.teraType ?? Showdown.Dex.species.get(set.species).types[0],moves:set.moves.map(move=>Showdown.Dex.moves.get(move).name)});
+    }
     this.saveInput = options.saveInput;
     const random = randomBytes(8);
     const battleSeed: Seed = seed ?? [0, 2, 4, 6].map(i => random.readUInt16BE(i)) as Seed;
@@ -61,8 +74,8 @@ export class BattleSession {
       seed: battleSeed,
       format:options.format,
       teams: options.teams,
-      rule:options.rule,battleItems:options.battleItems,upgrades:options.upgrades,teraTickets:options.teraTickets,
-      opponent: options.aiVersion==='tower-policy-v9' ? new ZMovePolicy() : options.aiVersion==='tower-policy-v8' ? new LearningOpponentPolicy() : options.aiVersion==='damage-policy-v1' ? new DamagePolicy() : options.aiVersion==='tower-policy-v7' ? new CautiousSwitchingPolicy() : options.aiVersion==='tower-policy-v6' ? new SwitchingPolicy() : options.aiVersion==='tower-policy-v5' ? new TeraPolicy() : options.aiVersion==='tower-policy-v4' ? new GimmickPolicy() : options.aiVersion==='tower-policy-v3' ? new LegacyGimmickPolicy() : new TowerPolicy(),
+      rule:options.rule,opponentRule:this.opponentRule,opponentTeraSpecies:options.opponentTeraSpecies,battleItems:options.battleItems,upgrades:options.upgrades,teraTickets:options.teraTickets,
+      opponent: ['tower-policy-v10','tower-policy-v9'].includes(options.aiVersion ?? '') ? new ZMovePolicy() : options.aiVersion==='tower-policy-v8' ? new LearningOpponentPolicy() : options.aiVersion==='damage-policy-v1' ? new DamagePolicy() : options.aiVersion==='tower-policy-v7' ? new CautiousSwitchingPolicy() : options.aiVersion==='tower-policy-v6' ? new SwitchingPolicy() : options.aiVersion==='tower-policy-v5' ? new TeraPolicy() : options.aiVersion==='tower-policy-v4' ? new GimmickPolicy() : options.aiVersion==='tower-policy-v3' ? new LegacyGimmickPolicy() : new TowerPolicy(),
       player: {choose: observation => {
         if (observation.legalActions[0]?.command.startsWith('team ')) return 'team 123';
         this.observation = observation;
@@ -199,7 +212,11 @@ export class BattleSession {
         else if (opponent && event === '-status') opponent.condition = `${opponent.condition.split(' ')[0]} ${data}`;
         else if (opponent && event === '-curestatus') opponent.condition = opponent.condition.split(' ')[0];
         else if(opponent && ['-formechange','detailschange'].includes(event))opponent.displaySpecies=data.split(',')[0];
-        else if(opponent && ['-start','-end'].includes(event) && data==='Dynamax')opponent.dynamax=event==='-start';
+        else if(opponent && ['-start','-end'].includes(event) && data==='Dynamax'){
+          opponent.dynamax=event==='-start';
+          if(event==='-start' && condition==='Gmax')opponent.displaySpecies=dynamaxDisplaySpecies(opponent.species,true);
+          else if(event==='-end' && opponent.displaySpecies?.endsWith('-Gmax'))opponent.displaySpecies=dynamaxDisplaySpecies(opponent.displaySpecies,false);
+        }
         else if(opponent && event==='-terastallize')opponent.terastallized=data;
         else if(opponent && event==='-transform'){const target=team.find(p=>p.species===data.split(': ')[1]);if(target)opponent.displaySpecies=target.displaySpecies ?? target.species;}
       }
@@ -209,13 +226,14 @@ export class BattleSession {
         if(pokemon && event==='-transform' && opponent)pokemon.displaySpecies=opponent.displaySpecies ?? opponent.species;
       }
       if(actor.startsWith('p1a:') && event==='-terastallize'){const p=team.find(p=>p.species===actor.split(': ')[1]);if(p)p.terastallized=data;}
-      if(actor.startsWith('p1a:') && ['-start','-end'].includes(event) && data==='Dynamax'){const p=team.find(p=>p.species===actor.split(': ')[1]);if(p)p.dynamax=event==='-start';}
+      if(actor.startsWith('p1a:') && ['-start','-end'].includes(event) && data==='Dynamax'){const p=team.find(p=>p.species===actor.split(': ')[1]);if(p){p.dynamax=event==='-start';if(event==='-start' && condition==='Gmax')p.displaySpecies=dynamaxDisplaySpecies(this.initialSpecies.get(p.species)??p.species,true);else if(event==='-end' && p.displaySpecies?.endsWith('-Gmax'))p.displaySpecies=dynamaxDisplaySpecies(p.displaySpecies,false);}}
       if (actor.startsWith('p1a:') && this.status === 'complete') {
         const pokemon = team.find(p => p.species === actor.split(': ')[1]);
         if (pokemon && event === 'faint') pokemon.condition = '0 fnt';
       }
     }
     const typeView={team,opponent} as BattleView;
+    for(const pokemon of team){const form=Showdown.Dex.species.get(pokemon.displaySpecies ?? pokemon.species);if(form.isPrimal)pokemon.ability=form.abilities[0];}
     for(const line of this.messages)applyPublicTypes(typeView,line);
     return {
       id: this.id, requestId: this.requestId,
@@ -223,7 +241,7 @@ export class BattleSession {
       turn: this.turns, team, opponent,
       actions: this.status === 'waiting' ? this.observation?.legalActions.map(({command, label}) => ({command, label})) ?? [] : [],
       messages: this.messages.slice(-300), winner: this.winner, error: this.failure,
-      teraTickets:Math.max(0,this.initialTeraTickets-(this.teraSpent?1:0)),field:structuredClone(this.field),maxMovePP:this.maxMovePP,zMovePP:this.zMovePP,movePP:this.movePP.map(move=>({...move})),
+      opponentPrimal:this.opponentPrimal || undefined,opponentRule:this.opponentRule,teraTickets:Math.max(0,this.initialTeraTickets-(this.teraSpent?1:0)),field:structuredClone(this.field),maxMovePP:this.maxMovePP,zMovePP:this.zMovePP,movePP:this.movePP.map(move=>({...move})),
     };
   }
 }

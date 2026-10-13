@@ -193,3 +193,5 @@ body .dex-center .dex-partner-stage img,body:has(.dex-center) :is(.dex-menu-spri
 .summary-ability{position:relative;cursor:help}
 .summary-ability-tooltip{box-sizing:border-box;display:none;position:absolute;z-index:5;top:calc(100% + 8px);left:0;width:min(320px,calc(100vw - 80px));padding:12px 14px;border:1px solid #8eb5a7;border-radius:8px;background:#203c36;color:#f2fff9;font-size:13px;line-height:1.7;word-break:keep-all;box-shadow:0 5px 16px #10251f40}
 .summary-ability:is(:hover,:focus-within) .summary-ability-tooltip{display:block}
+
+.dex-region-label{display:inline-block;padding:2px 5px;border:1px solid #a5bca5;border-radius:4px;background:#deeadb;color:#47624b;font-size:.9em;line-height:1.2;white-space:nowrap}.dex-partner-origin{display:flex;align-items:center;gap:6px}.dex-card-bottom>small{display:flex;align-items:center;gap:3px;flex-wrap:wrap}

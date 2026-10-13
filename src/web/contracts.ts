@@ -6,8 +6,10 @@ import type {StatBlock,IVGain,MoveGain} from '../data/training';
 export type PokemonView = {types?:string[];gender?:import('../data/gender').PokemonGender;shiny?:boolean;species: string; displaySpecies?:string; condition: string; active: boolean; stats?:StatBlock; ability?:string; nature?:string; moves?:string[];item?:string;dynamax?:boolean;teraType?:string;terastallized?:string;berryUsed?:boolean};
 export type FieldEffect={id:string;name:string;scope:'weather'|'field'|'p1'|'p2';started:number;duration:number|null;maxDuration:number|null;layers?:number};
 export type PublicField={turn:number;effects:FieldEffect[];opponentSize:number;faintedOpponents:string[];boosts?:Record<'p1'|'p2',Record<string,number>>};
-export type BossView = {id: string; name: string; title: string; introduction: string; victory: string; defeat: string;role?:'gym'|'villain'|'champion'|'elite';portrait?:string;kind?:'normal'|'elite'|'named';generation?:number|null;specialty?:string|null};
+export type BossView = {gimmick?:import('../data/npc-gimmicks').NpcGimmick;id: string; name: string; title: string; introduction: string; victory: string; defeat: string;role?:'gym'|'villain'|'champion'|'elite';portrait?:string;kind?:'normal'|'elite'|'named';generation?:number|null;specialty?:string|null};
 export type BattleView = {
+  opponentPrimal?:boolean;
+  opponentRule?:import('../data/run-rules').BattleRule;
   id: string;
   requestId: number;
   status: 'waiting' | 'complete' | 'error';
@@ -25,6 +27,7 @@ export type BattleView = {
   teraTickets?:number;
 };
 export type RunView = {
+  retries?:{limit:number;used:number;remaining:number;canRetry:boolean;preparing:boolean;opponents:{species:string;moves:string[];item:string}[]};
   hiddenBossPending?:boolean;hiddenBossNext?:boolean;
   rule?:import('../data/run-rules').BattleRule;
   theme?:import('../data/tower-themes').TowerTheme|null;
@@ -40,13 +43,15 @@ export type RunView = {
   upgrades: {kind:UpgradeKind; remainingFloors:number}[];
   consumableOffers?:UpgradeKind[];
   heldItems?:Record<string,string>;
+  partnerForms?:Record<string,string>;
   itemBag?:Record<string,number>;
   teraTickets?:number;
   teraShop?:{price:number;purchased:boolean}|null;
   itemPurchases?:string[];
   itemOffers?:string[];
   shopRerolls?:Record<'items'|'machines',{count:number;price:number;limit?:number}>;
-  vitaminShop?:{offers:{stat:import('../data/training').StatKey;price:number;purchased:boolean}[];bonuses:Record<string,Partial<StatBlock>>;partners:Record<string,MachinePartner>}|null;
+  vitaminShop?:{offers:{stat:import('../data/training').StatKey;price:number;purchased:boolean}[];bonuses:Record<string,Partial<StatBlock>>;partners:Record<string,MachinePartner>;counts?:Record<string,number>;limit?:number}|null;
+  candidateDetails?:Record<string,{ability:string;nature:string;moves:string[];baseStats:StatBlock}>;
   machineShop?: {offers:MachineOffer[];currentMoves:Record<string,string[]>;partners:Record<string,MachinePartner>} | null;
   candidateMoves:Record<string,string[]>; collectionMoves:Record<string,string[]>; currentMoves:Record<string,string[]>; lastMoveGain:MoveGain|null;
   candidateIVs:Record<string,StatBlock>; collectionIVs:Record<string,StatBlock>; lastIVGain:IVGain|null;

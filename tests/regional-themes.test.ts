@@ -1,4 +1,4 @@
-import {evolvedOpponentSpecies} from '../src/data/opponent-species';
+import {normalNpcTemplate} from '../src/server/npc-templates';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
@@ -60,7 +60,8 @@ test('each theme persists its real preview and legal champion/final team without
     store.db.prepare("UPDATE runs SET floor=?,state='select' WHERE id=?").run(floor,run);
     const expected=towerTrainerEncounter(floor,run,theme,true)!,preview=store.view('preview').run!.boss;assert.deepEqual(preview,expected.boss);
     const row=store.battle(store.enter('preview',run,floor,starters)),team=Showdown.Teams.unpack(row.opponent_team)!;
-    assert.equal(team.length,3);const red=expected.boss.id==='named-red';assert.ok(team.some(p=>p.species===evolvedOpponentSpecies(expected.ace!,red)));assert.ok(team.every(p=>expected.entries.map(name=>evolvedOpponentSpecies(name,red)).includes(p.species)));
+    assert.equal(team.length,3);const template=normalNpcTemplate(expected.boss.id,floor,expected.boss.role)!;
+    assert.ok(team.some(p=>p.species===template.ace));assert.deepEqual(team.map(p=>p.species).sort(),template.team.map(p=>p.species).sort());
     assert.equal(new Set(team.map(p=>p.species)).size,3);
     const saved=store.view('preview');store.close();store=new TowerStore(path);assert.deepEqual(store.view('preview'),saved);assert.deepEqual(store.battle(row.id),row);
    }
@@ -82,7 +83,7 @@ test('every theme finishes real v6 battles with its milestone teams',async()=>{
 test('regional organizations draw all three ranks with supported teams',()=>{
  const seen=new Set<string>();
  for(const theme of themes)for(const organization of towerThemes[theme].organizations){const ranks=new Set<string>();
-  for(let i=0;i<300 && ranks.size<3;i++)for(const floor of [9,19,39]){
+  for(let i=0;i<300 && ranks.size<3;i++)for(const floor of [9,19,79]){
    const event=villainEncounter(`rank-${i}`,floor,organization);if(!event)continue;ranks.add(event.event.rank);seen.add(organization);
    for(const name of event.sample.entries!)assert.ok(pokemonSets[name]);
    assert.equal(generateOpponentTeam(floor,[i+1,2,3,4],[],null,event.sample).length,3);

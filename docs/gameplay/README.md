@@ -3,6 +3,8 @@
 특정 기능이 궁금할 때 골라 읽어요. 최신 공통 규칙은 [현재 상태](../STATUS.md)를 먼저 확인하세요. 문서 안의 검증 수치와 옛 가격은 당시 기록입니다.
 
 - [여섯 배틀 룰과 적용 범위](BATTLE_RULE_SELECTION.md)
+- [2026-10-13 플레이 피드백8건 반영](PLAYTEST_2026_10_13.md)
+- [선택 폼·출전 순서·거다이맥스·매 층 도구 관리 후속](FORM_EQUIPMENT_FIXES.md)
 - [Z기술·크리스탈·선택 화면 강조](Z_MOVES.md)
 - [특성 발동·타입 변경·화면 재생 순서](ABILITY_EFFECT_TIMING.md)
 - [100층 플레이 피드백·NPC 기믹·영양제·Z기술 구현 기준](../current/BATTLE_REBALANCE_PLAN.md)

@@ -2,6 +2,7 @@ import Showdown from 'pokemon-showdown';
 import {teraTypesForSpecies} from './tera';
 import roster from './battle-roster.json' with {type:'json'};
 import {statKeys,type TrainingProfile} from './training';
+import {separateForms,selectedForm} from './selectable-forms';
 export const POINT_TEAM_MARKER='towerpointsv1';
 const { Teams } = Showdown;
 
@@ -37,7 +38,7 @@ export const legacySets = {
   Metagross: set('Metagross', 'Clear Body', ['Meteor Mash', 'Zen Headbutt', 'Earthquake', 'Bullet Punch']),
   Garchomp: set('Garchomp', 'Rough Skin', ['Dragon Claw', 'Earthquake', 'Rock Slide', 'Fire Fang']),
 };
-export const pokemonSets:Record<string,ReturnType<typeof set>>={...Object.fromEntries(Object.entries(roster).map(([name,entry])=>[name,set(name,entry.ability,entry.moves)])),...legacySets};
+export const pokemonSets:Record<string,ReturnType<typeof set>>={...Object.fromEntries(Object.entries(roster).map(([name,entry])=>[name,set(name,entry.ability,entry.moves)])),...Object.fromEntries(Object.entries(separateForms).map(([name,entry])=>[name,set(name,entry.ability,entry.moves)])),...legacySets};
 export type PokemonSpecies = string;
 export const starters = ['Charizard', 'Blastoise', 'Venusaur'];
 export const initialPartners = [
@@ -48,6 +49,11 @@ export const initialPartners = [
 export function trainedSet(name:string,profile?:TrainingProfile) {
   if (!Object.hasOwn(pokemonSets, name)) throw new Error(`Unknown species: ${name}`);
   const base=structuredClone(pokemonSets[name as keyof typeof pokemonSets]);
+  const form=selectedForm(name,profile?.forme);
+  if(profile?.forme&&!form)throw Error('Invalid selected form');
+  if(form){base.species=profile!.forme!;base.item=form.requiredItem??'';}
+  // Keep a stable, legal nickname across the three Paldean breeds.
+  if(name==='Tauros-Paldea-Combat')base.name='Tauros-Paldea';
   if(profile) {
     if(profile.gender)base.gender=profile.gender;
     base.shiny=profile.shiny ?? false;
@@ -59,10 +65,11 @@ export function trainedSet(name:string,profile?:TrainingProfile) {
     // A harmless 1 HP EV acknowledges an intentionally untrained set to the validator.
     if(!base.pokeball && Object.values(base.evs).every(value=>value===0))base.evs.hp=1;
   }
-  const types=teraTypesForSpecies(name);
+  const types=teraTypesForSpecies(base.species);
   return {...base,teraType:profile?.teraType ?? (types.length===1?types[0]:Showdown.Dex.species.get(name).types[0])};
 }
-export const packTeam = (names: string[],profiles:Record<string,TrainingProfile>={},items:Record<string,string>={}) => Teams.pack(names.map(name=>({...trainedSet(name,profiles[name]),item:items[name] ?? ''})));
+export const packTeam = (names: string[],profiles:Record<string,TrainingProfile>={},items:Record<string,string>={},gigantamax:string[]=[]) => Teams.pack(names.map(name=>({...trainedSet(name,profiles[name]),item:selectedForm(name,profiles[name]?.forme)?.requiredItem??items[name]??'',...(gigantamax.includes(name)?{gigantamax:true}:{})})));
+export const packPlayerTeam = (names:string[],profiles:Record<string,TrainingProfile>={},items:Record<string,string>={}) => packTeam(names,profiles,items,names.filter(name=>items[name]==='Dynamax Band' && !!Showdown.Dex.species.get(profiles[name]?.forme??name).canGigantamax));
 export const playerTeam = packTeam(starters);
 export const opponentTeam = packTeam(['Pikachu', 'Gyarados', 'Snorlax']);
 

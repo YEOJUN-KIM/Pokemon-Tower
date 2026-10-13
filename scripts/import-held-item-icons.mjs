@@ -1,9 +1,9 @@
 import {mkdir,writeFile,access} from 'node:fs/promises';
-import {heldItemKeys,itemIcon} from '../src/data/held-items.ts';
+import {heldItemKeys,itemIcon,itemIconExtension} from '../src/data/held-items.ts';
 
 await mkdir('public/sprites/items',{recursive:true});
 for(const item of heldItemKeys){
-  if(['Fairy Feather','Heavy-Duty Boots'].includes(item))continue; // Original local SVGs; upstream PNGs are unavailable.
+  if(itemIconExtension(item)==='svg')continue; // Original local SVGs and shared gimmick icons.
   const file=`${itemIcon(item)}.png`,path=`public/sprites/items/${file}`;
   try{await access(path);continue;}catch{}
   const response=await fetch(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${file}`);

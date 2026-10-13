@@ -30,4 +30,5 @@ export const machineMoves = [
 export const rerollPrice=(count:number)=>0;
 export const vitamins={hp:{name:"맥스업",icon:"hp-up"},atk:{name:"타우린",icon:"protein"},def:{name:"사포닌",icon:"iron"},spa:{name:"리보플라빈",icon:"calcium"},spd:{name:"키토산",icon:"zinc"},spe:{name:"알칼로이드",icon:"carbos"}} as const;
 export const VITAMIN_BOOST=5;
+export const VITAMIN_LIMIT=3;
 export const vitaminPrice=(floor:number)=>1400+100*(floor-1);

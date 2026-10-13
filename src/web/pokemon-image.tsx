@@ -12,11 +12,11 @@ const posters=new Map<string,{png:string;style:CSSProperties;heightFraction?:num
 const readyFrames=new Set<string>();
 export function pokemonImageSources(id:number,back=false,animated=false,spriteKey:string|number=id,shiny=false):string[] {
   const local=(paths:string[])=>localPokemonSources(paths,id,spriteKey,back,shiny);
-  if(shiny){const side=back?'back/':'';return local(id<650 ? [`versions/generation-v/black-white/animated/${side}shiny/${spriteKey}.gif`,`${side}shiny/${spriteKey}.png`] : [`${side}shiny/${spriteKey}.png`]);}
+  if(shiny){const pixel=pixelSpriteSources(spriteKey,back,animated,true);if(pixel.length)return pixel;const side=back?'back/':'';return local(id<650 ? [`versions/generation-v/black-white/animated/${side}shiny/${spriteKey}.gif`,`${side}shiny/${spriteKey}.png`] : [`${side}shiny/${spriteKey}.png`]);}
   const mega=(megaSprites as Record<string,{key:string;animatedFront:boolean;animatedBack:boolean}>)[spriteKey];
   if(mega){const base='/sprites/gimmicks/'+(back?'back/':'front/')+mega.key;return animated && (back?mega.animatedBack:mega.animatedFront) ? [base+'.gif',base+'.png'] : [base+'.png'];}
   // Modern species use community pixel sprites, never the model-rendered GIF fallback.
-  if(id>=650){const pixel=pixelSpriteSources(spriteKey,back,animated);if(pixel.length)return pixel;}
+  if(id>=650 || String(spriteKey)!==String(id)){const pixel=pixelSpriteSources(spriteKey,back,animated);if(pixel.length)return pixel;}
   const side=back ? 'back/' : '',png=`${side}${spriteKey}.png`;
   const form=(formAvailability as Record<string,{dotBoth:boolean;showdownBoth:boolean}>)[spriteKey];
   if(!animated || (form ? !form.dotBoth : missingDotAnimation.has(id)))return local([png]);

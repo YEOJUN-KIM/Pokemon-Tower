@@ -84,12 +84,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(await service.state(player),{headers});
     }
     if(body.type==='equip-item' && typeof body.runId==='string' && Number.isSafeInteger(body.floor)) {
-      service.store.equipItem(player,body.runId,body.floor,body.species,body.item);
+      service.store.equipItem(player,body.runId,body.floor,body.species,body.item,body.swapFrom);
       return NextResponse.json(await service.state(player),{headers});
     }
     if (body.type === 'start') {
       service.store.start(player, body.selected,body.rule ?? 'basic');
       return NextResponse.json(await service.state(player), {headers});
+    }
+    if(body.type==='retry'&&typeof body.runId==='string'&&typeof body.battleId==='string'){
+      service.store.retry(player,body.runId,body.battleId);
+      return NextResponse.json(await service.state(player),{headers});
+    }
+    if(body.type==='finish-loss'&&typeof body.runId==='string'){
+      service.store.finishLoss(player,body.runId);
+      return NextResponse.json(await service.state(player),{headers});
     }
     if (body.type === 'enter' && typeof body.runId === 'string' && Number.isSafeInteger(body.floor)) {
       service.store.enter(player, body.runId, body.floor, body.selected);

@@ -44,7 +44,7 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
       if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','PageUp','PageDown','Enter'].includes(event.key) || ['z','x','c','a','s','q','e','v','f','r'].includes(event.key.toLowerCase()))document.body.dataset.gameInput='cursor';
       const key=event.key.toLowerCase(),scope=context(),cursor=draw();
       if(event.repeat && (['enter','z','x','c','q','e'].includes(key)||/^[1-5]$/.test(key))){event.preventDefault();return;}
-      if(/^[1-5]$/.test(key)&&scope instanceof HTMLDialogElement){const button=scope.querySelector<HTMLButtonElement>(`button[data-number-shortcut="${key}"]`);if(button){event.preventDefault();if(!button.disabled&&button.getClientRects().length){document.body.dataset.gameInput='cursor';select(button);button.click();}return;}}
+      if(/^[1-9]$/.test(key)&&scope instanceof HTMLDialogElement){const button=scope.querySelector<HTMLButtonElement>(`button[data-number-shortcut="${key}"]`);if(button){event.preventDefault();if(!button.disabled&&button.getClientRects().length){document.body.dataset.gameInput='cursor';select(button);button.click();}return;}}
       if(key==='x' && cursor?.closest('[data-keyboard-zone=library]')){
         event.preventDefault();effect('cancel');
         const slot=cursor.closest('[data-keyboard-zones]')?.querySelector<HTMLButtonElement>('[data-keyboard-zone=slots] button.selected:not(:disabled)');
@@ -132,6 +132,12 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
       if(key==='enter'||key==='z'){event.preventDefault();cursor?.click();return;}
       if(!event.key.startsWith('Arrow') || !cursor)return;
       event.preventDefault();const items=buttons(scope),index=items.indexOf(cursor);
+      const horizontalGroup=cursor.closest<HTMLElement>('[data-keyboard-horizontal]');
+      if(horizontalGroup){
+        const entries=items.filter(item=>item.closest('[data-keyboard-horizontal]')===horizontalGroup),position=entries.indexOf(cursor);
+        const delta=event.key==='ArrowRight'?1:event.key==='ArrowLeft'?-1:0;
+        select(entries[Math.max(0,Math.min(entries.length-1,position+delta))]);return;
+      }
       if(cursor.matches('[data-keyboard-list-next]') && event.key==='ArrowUp'){
         const previous=items.filter(item=>item.closest('[data-keyboard-list]')).at(-1);select(previous);previous?.scrollIntoView({block:'nearest'});return;
       }

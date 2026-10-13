@@ -1,11 +1,13 @@
 import {itemName} from '../data/held-items';
 import megaForms from '../data/mega-forms.json' with {type:'json'};
+import gigantamaxForms from '../data/gigantamax-forms.json' with {type:'json'};
 import forms from '../data/battle-forms.json' with {type:'json'};
 import nationalDex from '../data/pokedex.json' with {type:'json'};
 import {moveInfo,moveTypeNames} from '../data/move-info';
 import {effectNotice} from './battle-effects';
 import {pixelSpriteSources} from '../data/pixel-sprites';
 import {localPokemonPng} from '../data/local-pokemon-sprites';
+import {selectableForms} from '../data/selectable-forms';
 
 const legacySpecies: Record<string, {id: number; name: string; types: string[]; color: string}> = {
   Charizard: {id: 6, name: '리자몽', types: ['불꽃', '비행'], color: 'fire'},
@@ -30,8 +32,15 @@ const legacySpecies: Record<string, {id: number; name: string; types: string[]; 
   Garchomp: {id: 445, name: '한카리아스', types: ['드래곤', '땅'], color: 'dragon'},
 };
 export const species:Record<string,{id:number;name:string;types:string[];color:string;spriteKey?:string}>={...Object.fromEntries(nationalDex.map(entry=>[entry.species,{id:entry.id,name:entry.name,types:entry.types,color:(Object.keys(moveTypeNames).find(type=>moveTypeNames[type]===entry.types[0]) ?? 'Normal').toLowerCase()}])),...legacySpecies};
-for(const [name,form] of Object.entries(forms)){const base=species[form.baseSpecies];if(base)species[name]={...base,id:form.id,spriteKey:('spriteKey' in form ? form.spriteKey as string : undefined),types:form.types.map(type=>moveTypeNames[type] ?? type)};}
+for(const [name,form] of Object.entries(forms)){const base=species[form.baseSpecies];if(base)species[name]={...base,id:form.id,...(form.forme==='Primal'?{name:'원시'+base.name}:{}),spriteKey:('spriteKey' in form ? form.spriteKey as string : undefined),types:form.types.map(type=>moveTypeNames[type] ?? type)};}
+for(const [name,form] of Object.entries(selectableForms)){const base=species[form.baseSpecies];if(base)species[name]={...base,id:form.id,spriteKey:String(form.id),name:form.name,types:form.displayTypes};}
+for(const name of ['Ogerpon-Teal-Tera','Ogerpon-Wellspring-Tera','Ogerpon-Hearthflame-Tera','Ogerpon-Cornerstone-Tera']){
+ const normal=name==='Ogerpon-Teal-Tera'?'Ogerpon':name.replace(/-Tera$/,'');
+ species[name]={...species[normal],types:species[name].types};
+}
+species['Tauros-Paldea']=species['Tauros-Paldea-Combat'];
 for(const [name,form] of Object.entries(megaForms)){const base=species[form.baseSpecies];if(base)species[name]={...base,spriteKey:form.spriteKey,name:'메가'+base.name+(name.endsWith('-X')?'X':name.endsWith('-Y')?'Y':''),types:form.types.map(type=>moveTypeNames[type]??type)};}
+for(const [name,form] of Object.entries(gigantamaxForms)){const base=species[name.replace(/-Gmax$/,'')]??species[form.baseSpecies];if(base)species[name]={...base,spriteKey:form.spriteKey,name:'거다이맥스 '+base.name};}
 const presetMoves: Record<string, {name: string; type: string; color: string}> = {
   Flamethrower: {name: '화염방사', type: '불꽃', color: 'fire'},
   'Air Slash': {name: '에어슬래시', type: '비행', color: 'flying'},
@@ -98,7 +107,7 @@ export function health(condition: string) {
 }
 import {teraNames} from '../data/tera';
 export function describeLine(line: string): string | null {
-  const [, event, actor, value] = line.split('|');
+  const [, event, actor, value,condition] = line.split('|');
   const subject = actor?.includes(': ') ? `${actor.startsWith('p2') ? '상대 ' : ''}${pokemonName(actor.split(': ')[1])}` : '';
   const trigger = effectNotice(line);
   const owner = trigger ? `${trigger.side === 'enemy' ? '상대 ' : ''}${pokemonName(trigger.actor.split(': ')[1])}` : '';
@@ -106,7 +115,8 @@ export function describeLine(line: string): string | null {
   if(event==='-zpower')return `${subject}는 Z파워를 해방했다!`;
   if(event==='-zbroken')return `${subject}의 방어를 뚫고 Z기술이 명중했다!`;
   if(event==='-mega')return `${subject}는 메가진화했다!`;
-  if(event==='-start' && value==='Dynamax')return `${subject}가 다이맥스했다!`;
+  if(event==='-primal')return `${subject} 원시회귀!`;
+  if(event==='-start' && value==='Dynamax')return `${subject}가 ${condition==='Gmax'?'거다이맥스':'다이맥스'}했다!`;
   if(event==='-terastallize')return `${subject}가 ${teraNames[value] ?? value} 타입으로 테라스탈했다!`;
   if(event==='-end' && value==='Dynamax')return `${subject}의 다이맥스가 끝났다.`;
   if (event === '-ability' && trigger?.name === 'Sturdy') return `${subject}는 옹골참으로 버텼다!`;
@@ -139,7 +149,7 @@ export function describeLine(line: string): string | null {
   if (event === '-fail' && value === 'unboost' && trigger) return `${subject}의 능력치는 ${trigger.label} 덕분에 떨어지지 않았다!`;
   if (event === '-fail') return `${subject}의 기술은 실패했다.${cause}`;
   if (event === '-weather') {
-    const weather: Record<string,string> = {Sandstorm:'모래바람이 불고 있다.', RainDance:'비가 내리고 있다.', SunnyDay:'햇살이 강하다.', Hail:'싸라기눈이 내리고 있다.', Snow:'눈이 내리고 있다.', none:'날씨가 원래대로 돌아왔다.'};
+    const weather: Record<string,string> = {Sandstorm:'모래바람이 불고 있다.', RainDance:'비가 내리고 있다.', SunnyDay:'햇살이 강하다.',DesolateLand:'햇살이 매우 강해졌다.',PrimordialSea:'강한 비가 내리기 시작했다.', Hail:'싸라기눈이 내리고 있다.', Snow:'눈이 내리고 있다.', none:'날씨가 원래대로 돌아왔다.'};
     return weather[actor] ? `${weather[actor]}${cause}` : null;
   }
   if (event === 'win') return actor === 'Player' ? '승리! 상대 팀을 모두 쓰러뜨렸습니다.' : '패배. 다시 도전해 보세요.';

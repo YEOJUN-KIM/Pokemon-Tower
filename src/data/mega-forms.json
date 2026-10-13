@@ -496,6 +496,14 @@
     "heightm": 2.5,
     "key": "tyranitar-mega"
   },
+  "Dragonite-Mega": {
+    "id": 149,
+    "baseSpecies": "Dragonite",
+    "spriteKey": "10281",
+    "types": ["Dragon", "Flying"],
+    "heightm": 2.2,
+    "key": "dragonite-mega"
+  },
   "Venusaur-Mega": {
     "id": 3,
     "baseSpecies": "Venusaur",

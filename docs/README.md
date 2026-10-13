@@ -9,7 +9,7 @@
 
 작업을 이어받는 개발자는 [작업 인계](SESSION_HANDOFF.md)까지 읽으면 됩니다.
 
-2026-10-12 최신 기능 안내: [Z기술과 선택 화면](gameplay/Z_MOVES.md), [특성 발동과 타입 변경 재생](gameplay/ABILITY_EFFECT_TIMING.md). 여섯 룰·상대 AI v9·저장 스키마 v27을 기준으로 읽으세요.
+2026-10-13 최신 기능 안내: [플레이 피드백 반영](gameplay/PLAYTEST_2026_10_13.md), [선택 폼·거다이맥스·매 층 도구 관리](gameplay/FORM_EQUIPMENT_FIXES.md), [패배 후 다시하기](gameplay/BATTLE_RETRY.md). 새 일반 모드 상대 AI v10·저장 스키마 v28을 기준으로 읽으세요. 기존 배틀은 당시 AI와 팀 기록을 유지합니다.
 
 ## 필요할 때 찾아보기
 

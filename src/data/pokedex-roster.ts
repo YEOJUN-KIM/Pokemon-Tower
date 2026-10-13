@@ -1,10 +1,10 @@
-// Curated Eviolite strategies, rather than every species that can hold Eviolite.
+import Showdown from 'pokemon-showdown';
+// Only these unevolved species remain collectible.
+export const evioliteSpecies=new Set(['Porygon2','Scyther']);
+export function isCollectibleSpecies(name:string){
+ const species=Showdown.Dex.species.get(name);
+ return species.exists&&(!species.nfe||evioliteSpecies.has(species.name));
+}
 // Preserve unevolved members of original named trainer parties as well.
 export const namedReferenceSpecies=new Set(['Girafarig','Dragonair','Onix','Haunter','Sealeo','Weepinbell','Ursaring']);
-// Regional forms have separate entries and will be added in a later catalog pass.
-export const evioliteSpecies=new Set([
-  'Chansey','Porygon2','Dusclops','Doublade','Scyther','Gligar','Murkrow','Bisharp',
-  'Magneton','Type: Null','Tangela','Piloswine','Rhydon','Gurdurr','Togetic','Clefairy',
-  'Vigoroth','Ferroseed','Misdreavus','Roselia','Duraludon','Primeape','Dipplin',
-  'Golbat','Electabuzz','Magmar','Munchlax','Charjabug','Torracat',
-]);
+// Regional variants follow the same evolution policy and use separate collection entries.

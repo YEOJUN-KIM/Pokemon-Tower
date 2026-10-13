@@ -1,8 +1,11 @@
 import zItems from './z-crystals.json' with {type:'json'};
 import {zCrystals} from './z-crystals';
 import megaItems from './mega-items.json' with {type:'json'};
+import {additionalHeldItems} from './additional-held-items';
 export const baseHeldItems={
-  'Sitrus Berry':{name:'자뭉열매',description:'배틀마다 1회, HP가 절반 이하가 되면 최대 HP의 1/4을 회복합니다. 다음 층에서 다시 사용할 수 있습니다.',price:225,consumable:false},
+  'Red Orb':{name:'주홍구슬',description:'그란돈에게 지니게 하면 등장할 때 원시그란돈으로 원시회귀합니다. 메가진화·혼합 룰에서 팀의 메가진화/다이맥스 공용 사용권을 소비합니다.',price:5000,consumable:false},
+  'Blue Orb':{name:'쪽빛구슬',description:'가이오가에게 지니게 하면 등장할 때 원시가이오가로 원시회귀합니다. 메가진화·혼합 룰에서 팀의 메가진화/다이맥스 공용 사용권을 소비합니다.',price:5000,consumable:false},
+  'Sitrus Berry':{name:'자뭉열매',description:'배틀마다 1회, HP가 절반 이하가 되면 최대 HP의 1/4을 회복합니다.',price:225,consumable:false},
   Leftovers:{name:'먹다남은음식',description:'매 턴 종료 시 최대 HP의 1/16을 회복합니다.',price:600,consumable:false},
   Charcoal:{name:'목탄',description:'불꽃 타입 공격 기술의 위력이 20% 증가합니다.',price:300,consumable:false},
   'Mystic Water':{name:'신비의물방울',description:'물 타입 공격 기술의 위력이 20% 증가합니다.',price:300,consumable:false},
@@ -29,7 +32,7 @@ export const baseHeldItems={
   'Expert Belt':{name:'달인의띠',description:'효과가 굉장한 공격 기술의 위력이 20% 증가합니다.',price:900,consumable:false},
   'Muscle Band':{name:'힘의머리띠',description:'물리 공격 기술의 위력이 10% 증가합니다.',price:600,consumable:false},
   'Wise Glasses':{name:'박식안경',description:'특수 공격 기술의 위력이 10% 증가합니다.',price:600,consumable:false},
-  'Focus Sash':{name:'기합의띠',description:'HP가 가득 찼을 때 쓰러질 공격을 받아도 HP 1로 버팁니다. 발동하면 소모됩니다.',price:1350,consumable:true},
+  'Focus Sash':{name:'기합의띠',description:'HP가 가득 찼을 때 쓰러질 공격을 받아도 HP 1로 버팁니다. 배틀마다 1회 발동합니다.',price:1350,consumable:false},
   'Assault Vest':{name:'돌격조끼',description:'특수방어가 50% 증가하지만 변화 기술을 사용할 수 없습니다.',price:1350,consumable:false},
   'Rocky Helmet':{name:'울퉁불퉁멧',description:'접촉 공격을 받으면 상대 최대 HP의 1/6만큼 피해를 줍니다.',price:900,consumable:false},
   Eviolite:{name:'진화의휘석',description:'아직 진화할 수 있는 포켓몬의 방어와 특수방어가 50% 증가합니다.',price:1350,consumable:false},
@@ -37,13 +40,14 @@ export const baseHeldItems={
   'Wide Lens':{name:'광각렌즈',description:'기술의 명중률이 기존 명중률의 1.1배가 됩니다.',price:600,consumable:false},
   'Scope Lens':{name:'초점렌즈',description:'급소에 맞힐 확률의 랭크가 1단계 올라갑니다.',price:600,consumable:false},
   'Light Clay':{name:'빛의점토',description:'리플렉터·빛의장막·오로라베일의 지속 시간을 5턴에서 8턴으로 늘립니다.',price:900,consumable:false},
+  ...additionalHeldItems,
 } as const;
 export const heldItems={...baseHeldItems,...megaItems,...zItems,'Dynamax Band':{name:'다이맥스밴드',description:'지닌 포켓몬이 3턴 동안 다이맥스합니다. HP가 늘고 기술이 다이맥스 기술로 바뀝니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.',price:5000,consumable:false}} as const;
 export type HeldItem=keyof typeof heldItems;
 export const heldItemKeys=Object.keys(heldItems) as HeldItem[];
 export function itemIcon(item:HeldItem){return zCrystals[item] ? 'z-crystal' : Object.hasOwn(megaItems,item) ? 'mega-stone' : item.toLowerCase().replaceAll(' ','-');}
 export function isHeldItem(value:unknown):value is HeldItem{return typeof value==='string' && Object.hasOwn(heldItems,value);}
-export const npcItemNames:Record<string,string>={'Light Ball':'전기구슬','Flame Orb':'화염구슬','Toxic Orb':'맹독구슬','Black Sludge':'검은진흙','Lum Berry':'리샘열매','Wacan Berry':'초나열매'};
+export const npcItemNames:Record<string,string>={'Red Orb':'주홍구슬','Light Ball':'전기구슬','Flame Orb':'화염구슬','Toxic Orb':'맹독구슬','Black Sludge':'검은진흙','Lum Berry':'리샘열매','Wacan Berry':'초나열매'};
 export function itemName(value?:string|null){return value && isHeldItem(value) ? heldItems[value].name : value ? npcItemNames[value] ?? value : '없음';}
 
 export function itemIconExtension(item:string){return !!zCrystals[item] || ['Fairy Feather','Heavy-Duty Boots','Dynamax Band'].includes(item) || Object.hasOwn(megaItems,item) ? 'svg' : 'png';}

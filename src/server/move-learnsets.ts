@@ -2,8 +2,10 @@ import Showdown from 'pokemon-showdown';
 import learnsets from '../data/move-learnsets.json' with {type:'json'};
 import {pokemonSets} from '../data/teams';
 import {FORMAT} from '../data/battle-rules';
+import {separateForms,selectedForm} from '../data/selectable-forms';
 export type MoveLearnset={version:string;selfMoves:string[];legalMoves:string[]};
-export const moveLearnsets:Record<string,MoveLearnset>=learnsets;
+export const moveLearnsets:Record<string,MoveLearnset>={...learnsets,...Object.fromEntries(Object.entries(separateForms).map(([name,form])=>[name,{version:'native-form',selfMoves:form.selfMoves,legalMoves:form.legalMoves}]))};
+export function profileLearnset(name:string,forme?:string):MoveLearnset{const form=selectedForm(name,forme);return form?{version:'native-form',selfMoves:form.selfMoves,legalMoves:form.legalMoves}:moveLearnsets[name];}
 const startingCache=new Map<string,string[]>();
 export function startingMoves(name:string):string[] {
   const cached=startingCache.get(name);if(cached)return [...cached];

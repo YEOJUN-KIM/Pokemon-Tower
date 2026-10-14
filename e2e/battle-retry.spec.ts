@@ -12,7 +12,7 @@ for(const width of [1280,390])test(`retry purchase, preparation, reload and same
  await context.addCookies([{name:authCookie,value:account.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
  await page.setViewportSize({width,height:900});await page.goto('/upgrades');
  const product=page.locator('.permanent-products section').filter({has:page.getByRole('heading',{name:'다시하기 확장'})});
- await expect(product).toContainText('도전당 0회');await product.getByRole('button',{name:'1회로 확장 · 500P'}).click();await expect(page.getByRole('dialog')).toContainText('다음 도전부터');await page.getByRole('button',{name:'확인 · Z'}).click();
+ await expect(product).toContainText('도전당 0회');await product.getByRole('button',{name:'1회로 확장 · 500P'}).click();await expect(page.getByRole('dialog')).toContainText('다음 도전부터');await page.getByRole('button',{name:'확인'}).click();
  const id=s.start(owner,starters,'basic'),before=s.battle(id),run=before.run_id;
  const view={id,status:'complete',requestId:1,turn:5,team:[],opponent:null,actions:[],messages:[],winner:'Tower AI',error:null};
  s.db.prepare("UPDATE battles SET status='complete',view=? WHERE id=?").run(JSON.stringify(view),id);s.db.prepare("UPDATE runs SET state='lost' WHERE id=?").run(run);

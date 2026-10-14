@@ -4,6 +4,7 @@ import {useGameKeyboard,selectGameCursor} from './game-keyboard';
 import {BaseStatRadar} from './base-stat-radar';
 import {PokemonSummary} from './pokemon-summary';
 import {teraNames,teraColors,teraTypesForSpecies} from '../data/tera';
+import {TeraTypeIcon} from './tera-type-icon';
 import {RulePicker} from './rule-picker';
 import {type BattleRule} from '../data/run-rules';
 import {useEffect, useMemo, useRef, useState,type CSSProperties} from 'react';
@@ -188,7 +189,7 @@ export default function Pokedex({entries,initialTower,onStart,startError='',retu
       <div className="dex-partner-stage"><PokemonImage shiny={saved?.profile.shiny} id={current.id} spriteKey={selectedPreview?.spriteKey??species[current.species]?.spriteKey??current.id} name={shownCurrent.name} animated maxPixelScale={2} width={160} height={160} fallback={<span className="dex-image-fallback">◇</span>}/></div>
       <h2>{shownCurrent.name}{saved?.profile.shiny ? ' ✦' : ''}</h2><Types types={shownCurrent.types}/>
       <div className="dex-partner-stats"><span>종족값</span><BaseStatRadar stats={shownCurrent.baseStats}/></div><dl className="dex-partner-traits"><div><dt>특성</dt><dd>{abilityNames[saved?.profile.ability??current.ability]??current.ability}</dd></div><div><dt>성격</dt><dd>{natures.find(nature=>nature.id===(saved?.profile.nature??'Serious'))?.name??'성실'}</dd></div></dl>
-      {(()=>{const allowed=teraTypesForSpecies(current.species),tera=saved?.profile.teraType??(allowed.length===1?allowed[0]:Object.keys(teraNames).find(t=>teraNames[t]===current.types[0])??'Normal');return <div className="dex-partner-tera"><span>테라스탈 타입</span><strong style={{color:teraColors[tera]}}>{teraNames[tera]}</strong></div>;})()}
+      {(()=>{const allowed=teraTypesForSpecies(current.species),tera=saved?.profile.teraType??(allowed.length===1?allowed[0]:Object.keys(teraNames).find(t=>teraNames[t]===current.types[0])??'Normal');return <div className="dex-partner-tera"><span>테라스탈 타입</span><strong style={{color:teraColors[tera]}}><TeraTypeIcon type={tera} size={32}/>{teraNames[tera]}</strong></div>;})()}
       <button className="dex-inspect-button" onClick={()=>setInspecting(true)}>{current.name} 기본 정보 ↗</button>
     </section>
     <aside className="dex-right-panel"><section className="dex-start-party" data-testid="team-selection" aria-label="출발 파티"><div className="dex-catalog-heading"><h2>출발 파티</h2><span>{party.length} / 3</span></div><div className="dex-party-slots" data-testid="team-preview">{[0,1,2].map(slot=>{

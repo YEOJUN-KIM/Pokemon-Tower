@@ -110,7 +110,7 @@ for(const width of [1280,390])test('maintenance, free reroll and zero-turn battl
   await page.getByRole('button',{name:'리자몽 능력치 조정 닫기',exact:true}).click();await page.keyboard.press('x');await page.keyboard.press('x');
   await page.getByRole('button',{name:'출전 팀 선택 →',exact:true}).click();
   await page.getByRole('button',{name:/11층 (배틀 시작|보스 도전)/}).click();
-  await page.getByRole('button',{name:'포켓몬 내보내기 · Enter',exact:true}).click();await page.keyboard.press('Shift');
+  await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();await page.keyboard.press('Shift');
   await expect(page.getByRole('button',{name:'도구',exact:true})).toBeVisible();
   const before=await page.request.get('/api/battle').then(r=>r.json());
   await page.getByRole('button',{name:'도구',exact:true}).click();await expect(page.getByRole('dialog',{name:'배틀 도구'})).toContainText('턴 소모 없음');

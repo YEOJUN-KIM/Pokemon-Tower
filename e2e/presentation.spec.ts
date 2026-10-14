@@ -12,7 +12,7 @@ test('attack and hit feedback without projectiles; sound and settings persist',a
   await page.route('**/audio/battle-bgm.mp3',route=>route.fulfill({status:404,body:''}));
   await page.goto('/battle');
   await selectStarters(page);
-  await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+  await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.locator('.send-out')).toBeVisible();
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
   await expect(page.getByTestId('action-grid')).toBeVisible();

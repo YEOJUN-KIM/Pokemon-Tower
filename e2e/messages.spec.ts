@@ -7,7 +7,7 @@ test('bottom dialogue follows playback, expands history, survives reload and fit
   const dialogue = page.getByRole('region',{name:'배틀 상황',exact:true});
   const current = page.getByRole('log',{name:'현재 배틀 상황'});
   await selectStarters(page);
-  await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+  await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
   await expect(current).toContainText('등장!');
   const arenaBox = await page.locator('.arena').boundingBox();

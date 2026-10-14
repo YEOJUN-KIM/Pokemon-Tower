@@ -655,9 +655,9 @@
   background: #e1eadc;
   color: #355342;
 }
-:where(.scope) :global(.training-tera-options .tera-crystal) {
-  width: 32px;
-  height: 36px;
+:where(.scope) :global(.training-tera-options .tera-type-icon) {
+  width: 48px;
+  height: 48px;
 }
 :global(body) :where(.scope) :global(.training-picker button[aria-pressed=true]) {
   border: 2px solid #54846b;

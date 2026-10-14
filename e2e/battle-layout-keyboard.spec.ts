@@ -22,7 +22,7 @@ test('keyboard archive navigation and a full viewport stadium with keyboard batt
   await expect(page.getByRole('button',{name:'파티에서 제외',exact:true})).toHaveAttribute('data-game-cursor','true');await page.keyboard.press('Enter');await expect(page.getByRole('button',{name:'리자몽 파티 메뉴'})).toHaveCount(0);
   await page.keyboard.press('x');await expect(cards.nth(1)).toHaveAttribute('data-game-cursor','true');
   const search=page.getByRole('searchbox',{name:'검색',exact:true});await search.focus();await page.keyboard.type('Pikachu');await page.keyboard.press('ArrowLeft');await expect(search).toBeFocused();await search.fill('');await page.keyboard.press('Enter');
-  await selectStarters(page);await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+  await selectStarters(page);await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
   for(const size of [{width:1920,height:960},{width:1280,height:720},{width:390,height:844}]) {
     await page.setViewportSize(size);

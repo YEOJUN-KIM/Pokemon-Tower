@@ -34,7 +34,7 @@ test('free learned move editing and a consistent archive/battle theme on desktop
   await page.keyboard.press('c');await page.getByRole('button',{name:'능력치 조정',exact:true}).click();await page.keyboard.press('x');
   await expect(page.getByRole('button',{name:'리자몽 상세 보기'})).toHaveAttribute('data-game-cursor','true');
   await page.goto('/battle?prepare=1');await selectStarters(page);
-  await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+  await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.getByTestId('action-grid').getByRole('button').first()).toBeEnabled();
   expect(await page.locator('.app-shell').evaluate(el=>getComputedStyle(el).backgroundColor)).toBe(palette);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
@@ -81,7 +81,7 @@ for(const archiveOnly of [false,true])test(archiveOnly ? 'archive-only collectio
     await page.setViewportSize({width:390,height:844});expect(await dialog.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
     await dialog.getByLabel('기술 교체 비교').scrollIntoViewIfNeeded();await page.screenshot({path:'test-results/collect-move.png'});await page.getByRole('button',{name:'영입하기',exact:true}).click();
     await expect(page.getByTestId('recruit-celebration')).toHaveAttribute('data-phase','joined');await expect(page.getByTestId('recruit-celebration')).toContainText('베어가르기 → 지진');
-    await page.getByRole('button',{name:'다음 층 준비',exact:true}).click();let previews=0;await page.exposeFunction('reportPreview',()=>previews++);await page.evaluate(()=>{new MutationObserver(()=>{if(document.querySelector('.arena-preview'))(window as unknown as {reportPreview:()=>void}).reportPreview();}).observe(document.body,{subtree:true,childList:true});});await page.getByRole('button',{name:'2층 배틀 시작'}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();await expect(page.getByTestId('action-grid')).toBeVisible();await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');expect(previews).toBe(0);
+    await page.getByRole('button',{name:'다음 층 준비',exact:true}).click();let previews=0;await page.exposeFunction('reportPreview',()=>previews++);await page.evaluate(()=>{new MutationObserver(()=>{if(document.querySelector('.arena-preview'))(window as unknown as {reportPreview:()=>void}).reportPreview();}).observe(document.body,{subtree:true,childList:true});});await page.getByRole('button',{name:'2층 배틀 시작'}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();await expect(page.getByTestId('action-grid')).toBeVisible();await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');expect(previews).toBe(0);
     const active=store.currentBattle(owner)!;expect(Showdown.Teams.unpack(active.player_team)![0].moves[3]).toBe('Earthquake');
     expect(store.trainingCollection(owner).find(entry=>entry.species==='Charizard')!.profile.moves[3]).toBe('Slash');
   }finally{store.close();}

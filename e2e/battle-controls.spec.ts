@@ -18,11 +18,11 @@ for(const width of [1280,390])for(const rule of ['basic','mega','dynamax','tera'
     const kinds=rule==='chaos'?['mega','dynamax','terastallize']:rule==='basic'?[]:[rule==='tera'?'terastallize':rule];
     const roster=['Charizard','Blastoise','Venusaur','Pikachu','Gengar','Garchomp'];
     const data={battle:{id:'controls',requestId:1,status:'waiting',turn:3,
-      team:[{species:'Charizard',gender:'F',condition:'120/155',active:true,moves:['Flamethrower']},{species:'Blastoise',condition:'0 fnt',active:false},{species:'Venusaur',condition:'155/155',active:false}],
+      team:[{species:'Charizard',gender:'F',item:rule==='mega'||rule==='chaos'?'Charizardite X':'',condition:'120/155',active:true,moves:['Flamethrower']},{species:'Blastoise',condition:'0 fnt',active:false},{species:'Venusaur',condition:'155/155',active:false}],
       opponent:{species:'Snorlax',gender:'M',condition:'100/100'},actions:['move 1','switch 3',...kinds.map(kind=>'move 1 '+kind)].map(command=>({command,label:command})),
       messages:['|turn|3'],winner:null,error:null,teraTickets:1,movePP:[{name:'Flamethrower',pp:14,maxpp:24}],maxMovePP:[{name:'Max Flare',pp:14,maxpp:24}],
       field:{turn:3,effects:[],opponentSize:3,faintedOpponents:[]}},
-      tower:{coins:0,growthPoints:0,unlocked:roster,favorites:[],totalFloors:100,run:{id:'run',rule,floor:1,totalFloors:100,state:'battle',roster,suggestedTeam:[],battleId:'controls',upgrades:[],boss:null}}};
+      tower:{coins:0,growthPoints:0,unlocked:roster,favorites:[],totalFloors:100,run:{id:'run',rule,floor:1,totalFloors:100,state:'battle',roster,suggestedTeam:[],battleId:'controls',upgrades:[],boss:null,trainerEquipment:[...(rule==='dynamax'||rule==='chaos'?['Dynamax Band']:[]),...(rule==='tera'||rule==='chaos'?['Tera Orb']:[])]}}};
     await page.route('**/api/battle',route=>route.fulfill({json:data}));
     await page.setViewportSize({width,height:844});await page.goto('/battle');
     await expect(page.locator('.arena .right-column')).toHaveCount(1);await expect(page.locator('.team-panel')).not.toContainText('나의 팀');await expect(page.locator('.player-health .pokemon-gender')).toHaveText('♀');await expect(page.locator('.enemy-health .pokemon-gender')).toHaveText('♂');const team=page.locator('.team-list');await expect(team.locator('.team-member')).toHaveCount(6);

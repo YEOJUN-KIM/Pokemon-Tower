@@ -18,7 +18,7 @@ test('generation-nine partners have images, self moves, native abilities and key
     await dexSearch(page).fill(name);await page.getByRole('button',{name:`${name} 상세 보기`,exact:true}).click();
     await page.getByRole('button',{name:'포켓몬 선택하기',exact:true}).click();
   }
-  await page.getByRole('button',{name:/배틀 시작/}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+  await page.getByRole('button',{name:/배틀 시작/}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.getByTestId('action-grid')).toBeVisible();await expect(page.locator('.arena')).toHaveAttribute('data-playing','false',{timeout:30000});
   const sprite=page.locator('.player-position img');await expect(sprite).toHaveAttribute('src',/gen5-back\/meowscarada\.png$/);
   await expect.poll(()=>sprite.evaluate((img:HTMLImageElement)=>img.complete && img.naturalWidth>0)).toBe(true);

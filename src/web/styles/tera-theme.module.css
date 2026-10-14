@@ -211,10 +211,11 @@
   align-items: center;
   gap: 8px;
 }
-:where(.scope) :global(.training-tera .tera-crystal) {
-  width: 25px;
-  height: 29px;
+:where(.scope) :global(.training-tera .tera-type-icon) {
+  width: 32px;
+  height: 32px;
 }
+:where(.scope) :global(.tera-type-icon) {display:inline-block;object-fit:contain;vertical-align:middle;flex-shrink:0;}
 :where(.scope) :global(.training-tera>small) {
   font-size: 11px;
   color: #b7abc6;

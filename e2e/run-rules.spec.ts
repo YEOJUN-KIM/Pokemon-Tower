@@ -7,7 +7,7 @@ for(const width of [1280,390])test('select and persist battle rules at '+width+'
  await picker.locator('[data-rule=mega]').click();await picker.locator('[data-rule=dynamax]').click();await expect(picker.locator('[data-rule=dynamax]')).toHaveAttribute('aria-pressed','true');
  await picker.locator('[data-rule=mega]').click();await expect(picker.locator('[data-rule=mega]')).toHaveAttribute('aria-pressed','true');
  const chosen=width===390?'mega':'basic',label=width===390?'메가진화 룰':'기본 룰';await picker.locator(`[data-rule=${chosen}]`).click();await expect(picker.locator(`[data-rule=${chosen}]`)).toHaveAttribute('aria-pressed','true');await page.screenshot({path:'test-results/rule-selection-'+width+'.png',fullPage:true});
- await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await expect(page.getByRole('button',{name:'포켓몬 내보내기 · Enter',exact:true})).toBeVisible();await page.keyboard.press('z');
+ await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await expect(page.getByRole('button',{name:'포켓몬 내보내기',exact:true})).toBeVisible();await page.keyboard.press('z');
  await expect(page.getByTestId('battle-rule')).toHaveText(label);await page.getByRole('button',{name:'싸운다',exact:true}).click();
  await expect(page.getByTestId('tera-toggle')).toHaveCount(0);await expect(page.locator('.gimmick-toggle')).toHaveCount(0);
  const state=await page.request.get('/api/battle').then(r=>r.json());expect(state.tower.run.rule).toBe(chosen);expect(state.tower.run.teraTickets).toBe(0);

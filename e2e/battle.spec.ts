@@ -17,7 +17,7 @@ test('browser battle: start, switch, restore on reload, finish and retry', async
   await expect(page.getByRole('heading', {name: '포켓몬 도감'})).toBeVisible();
   await page.screenshot({path: 'test-results/lobby-desktop.png', fullPage: true});
   await selectStarters(page);
-  await page.getByRole('button', {name: '새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+  await page.getByRole('button', {name: '새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.getByTestId('action-grid')).toBeVisible();
   await page.getByRole('button', {name: '교체', exact: true}).click();
   await page.locator('[data-command="switch 2"]').click();
@@ -47,8 +47,8 @@ test('browser battle: start, switch, restore on reload, finish and retry', async
   await expect(resultDialog).toHaveCount(0);
   if (endState.tower.run.state === 'recruit') {
     await page.getByRole('button', {name: '영입 없이 계속'}).click();
-    await page.getByRole('button', {name: '2층 배틀 시작'}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
-  } else {await selectStarters(page);await page.getByRole('button', {name: '새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();}
+    await page.getByRole('button', {name: '2층 배틀 시작'}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
+  } else {await selectStarters(page);await page.getByRole('button', {name: '새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();}
   await expect(page.getByTestId('action-grid')).toBeVisible();
   expect(errors).toEqual([]);
 });
@@ -56,7 +56,7 @@ test('browser battle: start, switch, restore on reload, finish and retry', async
 test('HTTP validation: owner, origin, malformed and duplicate actions', async ({page, browser}) => {
   await page.goto('/battle');
   await selectStarters(page);
-  await page.getByRole('button', {name: '새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+  await page.getByRole('button', {name: '새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.getByTestId('action-grid')).toBeVisible();
   const {battle} = await page.request.get('/api/battle').then(r => r.json());
   const input = {type: 'action', battleId: battle.id, requestId: battle.requestId, action: 'move 1'};
@@ -129,7 +129,7 @@ test('victory reward, recruitment, reload and fielding the recruited Pokemon', a
   await page.getByRole('button', {name: '피카츄 선택', exact: true}).click();
   await expect(page.getByRole('button', {name:'피카츄 선택',exact:true})).toHaveAttribute('aria-pressed','true');
   await page.screenshot({path: 'test-results/tower-selection.png', fullPage: true});
-  await page.getByRole('button', {name: '2층 배틀 시작'}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+  await page.getByRole('button', {name: '2층 배틀 시작'}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.getByTestId('action-grid')).toBeVisible();
   const {battle, tower} = await page.request.get('/api/battle').then(r => r.json());
   expect(tower.run.floor).toBe(2);
@@ -145,7 +145,7 @@ test('mobile layout and unavailable images still allow play', async ({page}) => 
   await selectStarters(page);
   await expect(page.getByRole('button', {name: '새 도전 시작'})).toBeEnabled();
   await page.screenshot({path: 'test-results/lobby-mobile.png', fullPage: true});
-  await page.getByRole('button', {name: '새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+  await page.getByRole('button', {name: '새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.getByTestId('action-grid')).toBeVisible();
   await expect(page.locator('.sprite-fallback').first()).toBeVisible();
   await expect(page.locator('.sprite img')).toHaveCount(0);

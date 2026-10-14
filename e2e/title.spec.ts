@@ -29,7 +29,7 @@ test('title, persisted sound settings and continuing a saved battle', async ({pa
   await expect(page.locator('.dex-card.in-party')).toHaveCount(0);
   await expect(page.getByRole('button',{name:'새 도전 시작'})).toBeDisabled();
   await selectStarters(page);
-  await page.getByRole('button', {name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Enter',exact:true}).click();
+  await page.getByRole('button', {name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.getByTestId('action-grid')).toBeVisible();
   const before = await page.request.get('/api/battle').then(r => r.json());
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false',{timeout:20000});
@@ -60,7 +60,7 @@ test('title, persisted sound settings and continuing a saved battle', async ({pa
   await expect(page.getByTestId('team-preview').locator('.preview-empty')).toHaveCount(3);
   await expect(page.getByRole('button',{name:'새 도전 시작'})).toBeDisabled();
   await selectStarters(page);
-  await page.getByRole('button', {name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Enter',exact:true}).click();
+  await page.getByRole('button', {name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.getByTestId('action-grid')).toBeVisible();
   const fresh = await page.request.get('/api/battle').then(r => r.json());
   expect(fresh.tower.run.id).not.toBe(before.tower.run.id);

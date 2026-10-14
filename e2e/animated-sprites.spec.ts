@@ -5,7 +5,7 @@ import {selectStarters} from './select-starters';
 test('battle uses animated front/back sprites and falls back to PNG when GIFs fail',async({page})=>{
   const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
   await page.goto('/battle?prepare=1');await selectStarters(page);
-  await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();await expect(page.getByTestId('action-grid')).toBeVisible();
+  await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();await expect(page.getByTestId('action-grid')).toBeVisible();
   const player=page.locator('.player-position img'),enemy=page.locator('.enemy-position img');
   await expect(player).toHaveAttribute('src',/animated\/back\/6\.gif$/);
   await expect(enemy).toHaveAttribute('src',/\.(gif|png)$/);

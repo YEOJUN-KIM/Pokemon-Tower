@@ -1,4 +1,7 @@
 import {pokemonRarity,eggRarity} from '../data/pokemon-rarity';
+import {eggGradeWeights,superRareSpeciesCategory} from '../data/egg-grades';
+import {isEggKind,rareEggCategory,machinePokemonKind,machineShiny} from '../data/egg-kinds';
+import {rareEggSpeciesCategory,eggSpeciesGrade} from './egg-pool';
 import {isTrainerEquipment,type TrainerEquipment} from '../data/trainer-equipment';
 import {permanentPrices,EGG_SHINY_ODDS,type PermanentView,type PermanentResult,type EggResult} from '../data/permanent-upgrades';
 import {isBattleRule,allowsGimmick,allowsRuleItem,type BattleRule} from '../data/run-rules';
@@ -192,13 +195,20 @@ export class TowerStore {
     const row=this.db.prepare('SELECT reroll_level,shiny_tickets,egg_tickets FROM permanent_upgrades WHERE player_id=?').get(owner) as {reroll_level:number;shiny_tickets:number;egg_tickets:number}|undefined;
     return {retryLimit:(this.db.prepare('SELECT level FROM permanent_retry_upgrades WHERE player_id=?').get(owner) as {level:number}|undefined)?.level??0,rerollLevel:row?.reroll_level??0,rerollLimit:1+(row?.reroll_level??0),shinyTickets:row?.shiny_tickets??0,eggTickets:row?.egg_tickets??0};
   }
-  permanentAction(owner:string,requestId:unknown,action:unknown,product:unknown,count:unknown,species:unknown):PermanentResult {
+  permanentAction(owner:string,requestId:unknown,action:unknown,product:unknown,count:unknown,species:unknown,eggKind:unknown='normal'):PermanentResult {
     if(typeof requestId!=='string'||!/^[a-zA-Z0-9-]{16,80}$/.test(requestId))throw new BattleRequestError('구매 요청 번호가 올바르지 않습니다.',400);
     if(!['buy','hatch','shiny'].includes(String(action)) || !['reroll','retry','shiny','egg'].includes(String(product)) || (count!==1&&count!==10) || (action!=='hatch' && product!=='egg' && count!==1))throw new BattleRequestError('상품 요청이 올바르지 않습니다.',400);
-    const payload=JSON.stringify({action,product,count,species:species??null});
+    if((eggKind!=='machine'&&!isEggKind(eggKind))||(action!=='hatch'&&eggKind!=='normal'))throw new BattleRequestError('알 종류가 올바르지 않습니다.',400);
+    // Keep ordinary legacy receipt payloads identical so old retries remain idempotent.
+    const payload=JSON.stringify({action,product,count,species:species??null,...(eggKind!=='normal'?{eggKind}:{})});
     return this.tx(()=>{
       const old=this.db.prepare('SELECT payload,result FROM permanent_receipts WHERE player_id=? AND request_id=?').get(owner,requestId) as {payload:string;result:string}|undefined;
-      if(old){if(old.payload!==payload)throw new BattleRequestError('같은 요청 번호에 다른 구매를 보낼 수 없습니다.',409);return JSON.parse(old.result) as PermanentResult;}
+      if(old){
+        const previous=JSON.parse(old.payload);
+        const legacyHatch=eggKind==='machine'&&action==='hatch'&&previous.eggKind!=='machine'&&previous.action===action&&previous.product===product&&previous.count===count&&previous.species===(species??null);
+        if(old.payload!==payload&&!legacyHatch)throw new BattleRequestError('같은 요청 번호에 다른 구매를 보낼 수 없습니다.',409);
+        return JSON.parse(old.result) as PermanentResult;
+      }
       this.db.prepare('INSERT OR IGNORE INTO permanent_upgrades(player_id) VALUES (?)').run(owner);
       const before=this.permanentView(owner);let result:PermanentResult;
       if(action==='buy'){
@@ -224,20 +234,24 @@ export class TowerStore {
         this.db.prepare('UPDATE permanent_upgrades SET egg_tickets=egg_tickets-? WHERE player_id=?').run(tickets,owner);
         const pool=pokedexEntries().filter(entry=>entry.battleReady!==false).map(entry=>entry.species),eggs:EggResult[]=[];
         for(let i=0;i<count;i++){
-          const rarity=eggRarity(this.roll(10000)),candidates=pool.filter(name=>pokemonRarity(name)===rarity);
+          const kind=eggKind==='machine'?machinePokemonKind(this.roll(10000)):eggKind;
+          const normalMachine=eggKind==='machine'&&kind==='normal';
+          const rarity=kind==='superRare'?superRareSpeciesCategory(this.roll(eggGradeWeights.superRare)):kind==='rare'?rareEggCategory(this.roll(eggKind==='machine'?8500:10000)):normalMachine?'normal':eggRarity(this.roll(10000));
+          const candidates=pool.filter(name=>kind==='rare'||kind==='superRare'?rareEggSpeciesCategory(name)===rarity:normalMachine?eggSpeciesGrade(name)==='normal':pokemonRarity(name)===rarity);
           if(!candidates.length)throw new BattleRequestError('뽑기 대상 데이터를 확인해야 합니다.',500);
           const name=candidates[this.roll(candidates.length)],saved=this.savedTraining(owner,name),isNew=!this.db.prepare('SELECT 1 FROM unlocks WHERE player_id=? AND species=?').get(owner,name);
           const ivs=Object.fromEntries(statKeys.map(stat=>[stat,this.roll(32)])) as StatBlock;
           const improved=Object.fromEntries(statKeys.map(stat=>[stat,Math.max(saved.profile.ivs[stat],ivs[stat])])) as StatBlock;
           const ivGain:IVGain={species:name,changes:statKeys.filter(stat=>improved[stat]>saved.profile.ivs[stat]).map(stat=>({stat,from:saved.profile.ivs[stat],to:improved[stat]}))};
           const legal=trainingOptions(name).learnableMoves,known=this.unlockedMoves(owner,name),move=legal.length?legal[this.roll(legal.length)]:null,newMoves=move&&!known.includes(move)?[move]:[];
-          const shiny=this.roll(EGG_SHINY_ODDS)===0,newShiny=shiny&&!saved.profile.shiny;
+          const shiny=eggKind==='machine'?machineShiny(this.roll(10000)):kind==='shiny'||this.roll(EGG_SHINY_ODDS)===0,newShiny=shiny&&!saved.profile.shiny;
           this.db.prepare('INSERT OR IGNORE INTO unlocks VALUES (?,?)').run(owner,name);
           if(isNew||ivGain.changes.length||newShiny)this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,name,JSON.stringify({...saved.profile,ivs:improved,shiny:!!saved.profile.shiny||shiny}),saved.revision+1);
           for(const move of newMoves)this.db.prepare('INSERT OR IGNORE INTO move_unlocks VALUES (?,?,?)').run(owner,name,move);
-          eggs.push({species:name,ivs,isNew,ivGain,newMoves,shiny,newShiny});
+          const rareCategory=rareEggSpeciesCategory(name);
+          eggs.push({eggKind:shiny?'shiny':eggSpeciesGrade(name),...(rareCategory?{rareCategory}:{}),species:name,ivs,isNew,ivGain,newMoves,shiny,newShiny});
         }
-        result={message:`${count}개의 알이 부화했어요!`,eggs};
+        result={message:`${count}개의 알이 부화했어요!`,eggs,...(eggKind!=='machine'?{eggKind}:{})};
       }else throw new BattleRequestError('교환 요청이 올바르지 않습니다.',400);
       this.db.prepare('INSERT INTO permanent_receipts VALUES (?,?,?,?)').run(owner,requestId,payload,JSON.stringify(result));
       return result;

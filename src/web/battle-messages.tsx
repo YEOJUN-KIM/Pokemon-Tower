@@ -21,7 +21,7 @@ export function BattleMessages({messages, playing, turn, announcement,historyOnl
   }, [lastEntry, expanded]);
 
   return <section className="battle-messages" aria-label="배틀 상황">
-    <div className="message-heading"><span><i className="record-dot" />배틀 상황</span><div className="message-controls"><span>{playing ? '진행 중' : turn ? `${turn}턴` : '출발 준비'}</span>{playing && onSkip && !historyOnly && <button className="skip-motion" aria-label="연출 건너뛰기" data-silent onClick={onSkip}>건너뛰기<span className="keyboard-shortcut"> · Shift</span></button>}</div></div>
+    <div className="message-heading"><span><i className="record-dot" />배틀 상황</span><div className="message-controls"><span>{playing ? '진행 중' : turn ? `${turn}턴` : '출발 준비'}</span>{playing && onSkip && !historyOnly && <button className="skip-motion" aria-label="연출 건너뛰기" data-silent onClick={onSkip}>건너뛰기</button>}</div></div>
     {!historyOnly && <div className="current-messages" role="log" aria-label="현재 배틀 상황" aria-live="polite" aria-relevant="additions text">
       {announcement ? <p className="latest">{announcement}</p> : entries.length ? entries.slice(-2).map((entry, index, recent) => <p key={entry.key} className={index === recent.length - 1 ? 'latest' : ''}>{entry.text}</p>)
         : <p className="message-placeholder">파트너를 선택하고 배틀을 시작하세요.</p>}

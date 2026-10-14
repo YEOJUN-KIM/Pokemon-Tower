@@ -25,7 +25,7 @@ for(const width of [1280,390])for(const kind of ['mega','dynamax','tera','zmove'
    await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
    await page.setViewportSize({width,height:width===390?844:900});await page.goto('/battle');
    await page.getByRole('button',{name:'싸운다',exact:true}).click();
-   const tera=page.getByTestId('tera-toggle');if(kind==='zmove')await expect(tera).toBeDisabled();else await expect(tera).toBeEnabled();await expect(tera).toHaveAttribute('data-type','Fire');
+   const tera=page.getByTestId('tera-toggle');await expect(tera).toBeEnabled();await expect(tera).toHaveAttribute('data-type','Fire');
    await expect(page.locator('.gimmick-cycle-hint')).toHaveCount(0);
    const enabled=page.getByTestId('gimmick-dock').locator('button[data-gimmick]:not(:disabled)');
    for(const button of await enabled.all()){
@@ -36,7 +36,7 @@ for(const width of [1280,390])for(const kind of ['mega','dynamax','tera','zmove'
    await page.keyboard.press('a');await expect(enabled.first()).toHaveAttribute('aria-pressed','true');
    await page.keyboard.press('x');await page.getByRole('button',{name:'싸운다',exact:true}).click();await expect(tera).toHaveAttribute('aria-pressed','false');expect(store.view(owner).run!.teraTickets).toBe(0);
    await page.keyboard.press('a');
-   if(kind==='mega'||kind==='dynamax')await page.keyboard.press('a');
+   if(kind!=='tera')await page.keyboard.press('a');
    if(kind!=='tera'){await expect(page.getByTestId(kind==='zmove'?'zmove-toggle':'gimmick-toggle')).toHaveAttribute('aria-pressed','true');await expect(tera).toHaveAttribute('aria-pressed','false');}
    if(kind==='mega'||kind==='zmove'){
     const button=page.getByTestId(kind==='zmove'?'zmove-toggle':'gimmick-toggle'),image=button.locator('.gimmick-item-icon');
@@ -76,14 +76,14 @@ test('dex tera type is saved free and its Water/Grass colors reach the battle UI
  const auth=await new Accounts(store.db).register('tera_'+token.slice(0,12),'tera-test-password',owner,undefined);
  store.ensurePlayer(owner);await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
  await page.goto('/pokedex');await page.getByRole('button',{name:'리자몽 상세 보기'}).click();await page.getByRole('button',{name:'능력치 조정',exact:true}).click();
- const editor=page.getByTestId('training-editor');await editor.getByRole('tab',{name:'특성·테라스탈',exact:true}).click();await expect(editor.getByRole('button',{name:'테라스탈 선택',exact:true})).toContainText('불꽃');await editor.getByRole('button',{name:'테라스탈 선택',exact:true}).click();await page.getByRole('dialog',{name:'테라스탈 선택',exact:true}).getByRole('button',{name:'물',exact:true}).click();await editor.getByRole('button',{name:'0P로 설정 저장'}).click();
- await page.reload();await page.getByRole('button',{name:'리자몽 상세 보기'}).click();await page.getByRole('button',{name:'능력치 조정',exact:true}).click();await editor.getByRole('tab',{name:'특성·테라스탈',exact:true}).click();await expect(editor.getByRole('button',{name:'테라스탈 선택',exact:true})).toContainText('물');
+ const editor=page.getByTestId('training-editor');await editor.getByRole('tab',{name:'성격·특성·테라스탈',exact:true}).click();await expect(editor.getByRole('button',{name:'테라스탈 선택',exact:true})).toContainText('불꽃');await editor.getByRole('button',{name:'테라스탈 선택',exact:true}).click();const picker=page.getByRole('dialog',{name:'테라스탈 선택',exact:true});await expect(picker.locator('.tera-type-icon')).toHaveCount(19);await expect(picker.getByRole('button',{name:'풀',exact:true}).locator('img')).toHaveAttribute('src','/sprites/gimmicks/tera/TeraGrass.png');await expect.poll(()=>picker.locator('img').evaluateAll(images=>images.every(img=>(img as HTMLImageElement).complete&&(img as HTMLImageElement).naturalWidth>0))).toBe(true);await picker.screenshot({path:'test-results/tera-type-picker-1280.png'});await page.setViewportSize({width:390,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await picker.screenshot({path:'test-results/tera-type-picker-390.png'});await page.setViewportSize({width:1280,height:900});await picker.getByRole('button',{name:'물',exact:true}).click();await editor.getByRole('button',{name:'0P로 설정 저장'}).click();
+ await page.reload();await page.getByRole('button',{name:'리자몽 상세 보기'}).click();await expect(page.locator('.dex-partner-tera img')).toHaveAttribute('src','/sprites/gimmicks/tera/TeraWater.png');await page.getByRole('button',{name:'능력치 조정',exact:true}).click();await editor.getByRole('tab',{name:'성격·특성·테라스탈',exact:true}).click();await expect(editor.getByRole('button',{name:'테라스탈 선택',exact:true})).toContainText('물');
  await page.screenshot({path:`${capture}/dex-tera-type.png`,fullPage:true});
  const id=store.start(owner,starters),row=store.battle(id);expect(Showdown.Teams.unpack(row.player_team)![0].teraType).toBe('Water');
  store.db.prepare('INSERT INTO run_trainer_equipment(run_id,item) VALUES (?,?)').run(row.run_id,'Tera Orb');
  store.db.prepare('UPDATE battles SET trainer_equipment=? WHERE id=?').run('["Tera Orb"]',id);
  await page.goto('/battle');await page.getByRole('button',{name:'싸운다',exact:true}).click();await expect(page.getByTestId('tera-toggle')).toHaveAttribute('data-type','Water');await page.screenshot({path:`${capture}/tera-water.png`,fullPage:true});
- await page.getByRole('button',{name:'돌아가기 · X',exact:true}).click();await page.getByRole('button',{name:'교체',exact:true}).click();await page.locator('[data-command="switch 3"]').click();await expect(page.locator('.arena')).toHaveAttribute('data-playing','true');await page.keyboard.press('Shift');await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
+ await page.getByRole('button',{name:'돌아가기',exact:true}).click();await page.getByRole('button',{name:'교체',exact:true}).click();await page.locator('[data-command="switch 3"]').click();await expect(page.locator('.arena')).toHaveAttribute('data-playing','true');await page.keyboard.press('Shift');await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
  await page.getByRole('button',{name:'싸운다',exact:true}).click();await expect(page.getByTestId('tera-toggle')).toHaveAttribute('data-type','Grass');await page.screenshot({path:`${capture}/tera-grass.png`,fullPage:true});
  }finally{store.close();}
 });

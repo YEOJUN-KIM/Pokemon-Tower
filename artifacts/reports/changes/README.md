@@ -4,6 +4,9 @@
 
 | 주제 | 주요 기록 |
 |---|---|
+| 알 뽑기·이로치 교환·테라 아이콘·버튼 문구 | [수집·알 화면 개편](COLLECTION_EGG_UI.md) |
+| 알 등급별 전체 포켓몬 목록 | [뽑기 대상 분류](EGG_POOL_CLASSIFICATION.md) |
+| 트레이너 장비·기믹·PC/모바일 재검사 | [현재 장비 검증](TRAINER_EQUIPMENT_RECHECK.md) |
 | 도구 정산 | [통찰 공개와 획득 분리](FRISK_ITEM_SETTLEMENT.md) |
 | 선택 폼·출전 순서·도구 관리 | [폼·장비 수정](FORM_EQUIPMENT_FIXES.md) |
 | 수집 가능한 상대 | [미진화체 정책](OPPONENT_EVOLUTION_POLICY.md) |

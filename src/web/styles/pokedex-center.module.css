@@ -439,7 +439,9 @@
   justify-content: space-between;
   font-size: 12px;
   padding: 5px 0;
+  align-items: center;
 }
+:where(.scope) :global(.dex-partner-tera strong) {display:inline-flex;align-items:center;gap:8px;}
 :global(body) :where(.scope) :global(.dex-center .dex-inspect-button) {
   width: 100%;
   text-align: center;

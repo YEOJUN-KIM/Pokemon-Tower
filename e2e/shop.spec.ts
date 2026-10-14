@@ -29,7 +29,7 @@ test('legacy checkpoint purchases and restores battle item stock before entering
     expect(await dialog.evaluate(el=>el.getBoundingClientRect().height<=innerHeight)).toBe(true);
     await page.getByTestId('tower-shop').screenshot({path:'test-results/checkpoint-shop.png'});
     await page.getByRole('button',{name:'출전 팀 선택'}).click();
-    await page.getByRole('button',{name:'6층 배틀 시작'}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Enter',exact:true}).click();
+    await page.getByRole('button',{name:'6층 배틀 시작'}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
     await expect(page.getByTestId('tower-shop')).toHaveCount(0);
     const saved=store.currentBattle(owner)!;expect(JSON.parse(saved.battle_items)).toEqual({attack:1,speed:1});
     await page.reload();expect(store.view(owner).run!.battleItems).toEqual({attack:1,speed:1});

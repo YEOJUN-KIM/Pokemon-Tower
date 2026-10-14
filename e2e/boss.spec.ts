@@ -92,7 +92,7 @@ test('A random champion and the temporary player throw balls before Pokemon appe
     await expect(page.locator('.intro-enemy img')).toHaveAttribute('src',`/sprites/trainers/${boss.portrait}.png`);
     await expect(page.locator('.intro-enemy')).toHaveCSS('opacity','1');
     await page.screenshot({path:'test-results/champion-introduction.png',fullPage:true});
-    await page.getByRole('button',{name:'포켓몬 내보내기 · Enter',exact:true}).click();
+    await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
     await expect(page.getByTestId('trainer-entrance')).toHaveAttribute('data-phase','throw');
     await expect(page.locator('.trainer-thrown-ball')).toHaveCount(2);
     await expect(page.getByTestId('trainer-entrance')).toHaveCount(0);

@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
     const player = account?.player_id??playerKey(owner!);
     service.store.ensurePlayer(player);
     if(body.type==='permanent'){
-      const permanentResult=service.store.permanentAction(player,body.requestId,body.action,body.product,body.count,body.species);
+      const permanentResult=service.store.permanentAction(player,body.requestId,body.action,body.product,body.count,body.species,body.action==='hatch'?'machine':undefined);
       return NextResponse.json({battle:null,tower:service.store.view(player),training:service.store.trainingCollection(player),permanentResult},{headers});
     }
     if(body.type==='favorite') {

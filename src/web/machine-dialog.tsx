@@ -24,7 +24,7 @@ export function MachineDialog({run,offer,coins,busy,error,submit,onClose}:{run:R
         {stage==='moves' && partner && <MoveLearningPanel name={target} partner={partner} current={current} incoming={offer.move} busy={busy} onChoose={index=>{setSlot(index);setStage('confirm');focus('.machine-buy');}}/>}
         {stage==='confirm' && <section className="machine-replace-confirm" aria-label="기술머신 교체 확인"><h3>{slot===null ? `${pokemonName(target)}의 도감에 저장할까요?` : current[slot] ? `${moves[current[slot]]?.name ?? current[slot]}을 잊고 ${moves[offer.move]?.name ?? offer.move}을 배울까요?` : `${moves[offer.move]?.name ?? offer.move}을 배울까요?`}</h3><div className="recruit-move-comparison" aria-label="기술머신 교체 비교">{slot!==null && <MoveDetails name={current[slot]} label="잊을 기술"/>}<MoveDetails name={offer.move} label="배울 기술"/></div><p>{offer.price}코인을 사용합니다. 잊은 기술은 도감에서 다시 배치할 수 있어요.</p><button className="primary-button machine-buy" data-initial-focus disabled={busy || coins<offer.price} onClick={()=>void submit({type:'purchase-machine',revision:run.shopRerolls?.machines.count??0,runId:run.id,floor:run.floor,move:offer.move,species:target,slot})}>{busy ? '구매 중…' : `${offer.price}코인에 구매·${slot===null ? '저장' : '장착'}`}</button></section>}
         {error && <p className="error-banner" role="alert">{error}</p>}
-        <button className="secondary-button machine-back" disabled={busy} onClick={back}>{stage==='targets' ? '취소 · X' : '뒤로 · X'}</button>
+        <button className="secondary-button machine-back" disabled={busy} onClick={back}>{stage==='targets' ? '취소' : '뒤로'}</button>
       </>}
     </div>
   </PokedexDialog>;

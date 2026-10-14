@@ -22,6 +22,11 @@ artifacts/**
 !artifacts/**/*.md
 !artifacts/reports/**/*.json
 !artifacts/reports/npc/*.csv
+# Curated QA media referenced by current documentation.
+!artifacts/qa/previews/egg-results/background-colors.png
+!artifacts/qa/previews/egg-results/background-effects.gif
+!artifacts/qa/previews/egg-results/legendary-effects.gif
+!artifacts/qa/screenshots/flamethrower-prototype/frame-09.png
 # Raw logs and transient QA output stay local.
 artifacts/temporary/
 artifacts/**/*.jsonl

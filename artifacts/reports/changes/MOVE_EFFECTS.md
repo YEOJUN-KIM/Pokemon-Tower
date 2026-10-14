@@ -23,4 +23,4 @@
 - Chrome 1280px·390px에서 대표 기술 10종, 양쪽 공격 방향, 키보드/더블 터치 즉시 스킵과 Canvas 정리, 동작 감소: 브라우저 검사 3개.
 - Windows 프로덕션 빌드 통과. 실제 휴대폰의 성능과 사용자가 느끼는 연출 품질은 추가 플레이로 확인한다.
 
-[연출 비교 화면](../../qa/screenshots/move-effects), [검증 테스트](../../../e2e/move-visuals.spec.ts), [원재료 목록](../../qa/previews/showdown-fx/contact-sheet.png).
+[연출 비교 화면](../../qa/screenshots/move-effects), [검증 테스트](../../../e2e/move-visuals.spec.ts), [로컬 효과 자산](../../../public/vendor/showdown/fx). 과거 원재료 contact-sheet는 현재 보관돼 있지 않아 실제 사용하는 자산 경로로 연결한다.

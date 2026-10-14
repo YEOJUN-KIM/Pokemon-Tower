@@ -24,7 +24,7 @@ for(const width of [1280,390])for(const theme of Object.keys(towerThemes) as Tow
    await page.goto('/battle');await expect(page.getByTestId('team-selection')).toContainText(themeLabel(theme));
    await expect(page.getByTestId('team-selection')).toContainText(expected.boss.name);
    await page.getByRole('button',{name:`${floor}층 보스 도전`}).click();
-   await expect(page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true})).toBeVisible();
+   await expect(page.getByRole('button',{name:'포켓몬 내보내기',exact:true})).toBeVisible();
    const portrait=page.locator(`img[src="/sprites/trainers/${expected.boss.portrait}.png"]`);await expect(portrait).toBeVisible();
    await expect.poll(()=>portrait.evaluate(img=>(img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
    await page.keyboard.press('Shift');await expect(page.getByTestId('action-grid')).toBeVisible();

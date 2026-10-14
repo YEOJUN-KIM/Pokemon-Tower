@@ -18,7 +18,7 @@ test('Johto theme previews and saves Lance and Red with the right portraits',asy
       await page.goto('/battle');await expect(page.getByTestId('team-selection')).toContainText('성도 · 2세대 테마');
       await expect(page.getByTestId('team-selection')).toContainText(title+' '+name);
       await page.getByRole('button',{name:floor+'층 보스 도전'}).click();
-      await expect(page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true})).toBeVisible();
+      await expect(page.getByRole('button',{name:'포켓몬 내보내기',exact:true})).toBeVisible();
       const image=page.locator(`img[src="/sprites/trainers/${portrait}.png"]`);await expect(image).toBeVisible();await expect.poll(()=>image.evaluate(img=>(img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
       await page.keyboard.press('Shift');await expect(page.getByTestId('action-grid')).toBeVisible();
       await page.reload();expect(store.view(owner).run!.boss!.name).toBe(name);

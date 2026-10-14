@@ -163,3 +163,7 @@ PokéAPI item API에서 9종의 sprites.default 주소를 확인하고 PokeAPI/s
 트레이너 초상화는 총172종이다. 기존 Showdown 제공원의 PNG를 수정 없이 저장하고 원본 URL·표기된 모든 작가를 trainer-sprite-sources.json에 기록했다. 재현은 scripts/import-trainer-samples.mjs이며 디렉터리의 figure별 작가 표기를 함께 수집한다. 예: nemona-s·stargrunt-s는 kyledove, aetherfoundation·officeworker는 Beliot419다. 매크로코스모스 조직원은 회사원 이미지로 임시 표현한다. 원작 이미지를 자체 제작물로 설명하지 않는다.
 
 다이맥스밴드 아이콘은 PokeSprite, 테라스탈오브 아이콘은 PokeRogue 원본 PNG를 사용합니다. URL·SHA-256·크레딧 경로는 [장비 아이콘 출처](../../public/sprites/items/trainer-equipment-sources.json)에 기록합니다. PokeRogue 크레딧과 권리 고지는 `public/vendor/pokerogue/`에 보존하며, 게임 엔진 라이선스와 이미지 권리는 별개입니다.
+
+## 사용자 제공 알 이미지
+
+일반·레어·슈퍼레어·이로치 알 PNG 네 장과 뽑기 기계 PNG는 사용자가 2026-10-14 제공한 이미지를 수정 없이 사용합니다. public/sprites/eggs/에 보관하며 [파일별 출처와 SHA-256](../../public/sprites/eggs/sources.json)을 함께 기록합니다. 레어 알 오라·슈퍼레어 후광·이로치 반짝임·부화·기계 들썩임과 알 배출 효과는 화면 CSS에서 추가합니다.

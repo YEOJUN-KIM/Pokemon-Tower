@@ -97,7 +97,7 @@ test('keyboard machine purchase compares moves, persists once, and equips the ne
     expect(store.view(owner).run!.machineShop!.offers.map(item=>item.move)).toEqual(shop.offers.map(item=>item.move));
     await page.getByRole('button',{name:'출전 팀 선택'}).click();
     await page.getByRole('button',{name:'6층 배틀 시작'}).click();
-    await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+    await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
     const team=Showdown.Teams.unpack(store.currentBattle(owner)!.player_team)!;
     expect(team.find(set=>set.species===target)!.moves[0]).toBe(offer.move);
   } finally {store.close();}

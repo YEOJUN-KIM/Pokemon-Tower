@@ -25,7 +25,7 @@ export function RecruitReplacementPicker({chosen,roster,busy,onCancel,onChoose}:
       <p>{partnerWithParticle(chosen)} 맞이할 자리를 골라주세요.</p>
       <div className="recruit-replacement-grid">{roster.map((name,index)=><button className="pokemon-choice" key={name} data-initial-focus={index===0 ? true : undefined} data-replace-species={name} aria-label={`${pokemonName(name)} 교체 선택`} disabled={busy} onClick={()=>onChoose(name)}><PartnerImage name={name}/><strong>{pokemonName(name)}</strong></button>)}</div>
       <p className="selection-note">교체된 포켓몬의 영구 도감 해금은 유지됩니다.</p>
-      <button className="secondary-button" onClick={onCancel}>돌아가기 · X</button>
+      <button className="secondary-button" onClick={onCancel}>돌아가기</button>
     </div>
   </PokedexDialog>;
 }

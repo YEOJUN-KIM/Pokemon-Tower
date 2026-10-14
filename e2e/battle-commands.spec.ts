@@ -91,7 +91,7 @@ test('forced replacement cannot be cancelled or send the fainted Pokemon back in
     await page.getByRole('button',{name:'싸운다',exact:true}).click();await page.locator('[data-command="move 1"]').click();
     await expect(page.locator('.arena')).toHaveAttribute('data-playing','true');await page.keyboard.press('Shift');await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
     const dialog=page.getByRole('dialog',{name:'다음 포켓몬 선택'});await expect(dialog).toBeVisible();await expect(dialog).toContainText('기절');
-    await page.keyboard.press('x');await expect(dialog).toBeVisible();await expect(dialog.getByRole('button',{name:'돌아가기 · X',exact:true})).toBeDisabled();
+    await page.keyboard.press('x');await expect(dialog).toBeVisible();await expect(dialog.getByRole('button',{name:'돌아가기',exact:true})).toBeDisabled();
     await expect(page.locator('[data-command="switch 2"]')).toHaveAttribute('data-game-cursor','true');await page.keyboard.press('z');
     await expect(page.locator('.arena')).toHaveAttribute('data-playing','true');await page.keyboard.press('Shift');await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
     await expect(dialog).toHaveCount(0);expect((await page.request.get('/api/battle').then(r=>r.json())).battle.team.find((p:{active:boolean})=>p.active).species).toBe('Blastoise');

@@ -45,7 +45,7 @@ test('defeat shows a clear mobile result and confirms into retry without changin
   await expect(page.getByLabel('출발 파티')).toBeVisible();
   await expect(page.getByTestId('team-preview').locator('.preview-empty')).toHaveCount(3);
   await selectStarters(page);
-  await page.getByRole('button', {name:/^(배틀 시작|새 도전 시작)/}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();
+  await page.getByRole('button', {name:/^(배틀 시작|새 도전 시작)/}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.getByTestId('action-grid')).toBeVisible();
   await expect(page.getByTestId('battle-result')).toHaveCount(0);
 });

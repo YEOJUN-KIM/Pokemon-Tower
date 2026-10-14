@@ -32,7 +32,7 @@ test('later checkpoints renew upgrades, save machine purchases and enter the nex
       await page.setViewportSize({width:390,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
       await page.getByRole('button',{name:'출전 팀 선택'}).click();
       const start=page.getByRole('button',{name:`${floor}층 배틀 시작`});await page.keyboard.press('Tab');await start.focus();await page.keyboard.press('Enter');
-      await expect(page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true})).toBeVisible();await page.keyboard.press('Shift');
+      await expect(page.getByRole('button',{name:'포켓몬 내보내기',exact:true})).toBeVisible();await page.keyboard.press('Shift');
       await expect(page.getByTestId('action-grid')).toBeVisible();expect(JSON.parse(store.currentBattle(owner)!.upgrades)).toContain('attack');
       await page.setViewportSize({width:1280,height:800});
     }

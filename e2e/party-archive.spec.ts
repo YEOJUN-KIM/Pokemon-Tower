@@ -31,7 +31,7 @@ test('dense archive shares first-party selection, enforces three slots and start
     await page.getByRole('button',{name:'리자몽 능력치 조정 닫기',exact:true}).click();
     // Closing without saving does not spend points or change the saved nature.
     expect(store.trainingCollection(owner).find(entry=>entry.species==='Charizard')!.profile.nature).toBe('Serious');
-    await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기 · Z',exact:true}).click();await expect(page.getByTestId('action-grid')).toBeVisible();
+    await page.getByRole('button',{name:'새 도전 시작'}).click();await page.getByRole('button',{name:'이 룰로 도전 시작',exact:true}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();await expect(page.getByTestId('action-grid')).toBeVisible();
     expect(store.view(owner).run!.roster).toEqual(['Charizard','Venusaur','Blastoise']);
   }finally{store.close();}
 });

@@ -6,7 +6,7 @@ import {validateProfile} from '../src/server/training';
 import {moveLearnsets} from '../src/server/move-learnsets';
 import {packTeam} from '../src/data/teams';
 
-const source='artifacts/support-recheck-climb-cases.json';
+const source='artifacts/experiments/ai/support-recheck-climb-cases.json';
 const original=JSON.parse(readFileSync(source,'utf8'));
 const corrected=structuredClone(original);
 const changes:any[]=[];
@@ -41,7 +41,7 @@ for(const c of [ ...original.map((c:any)=>({...c,version:'original'})),...correc
  audit.push({version:c.version,caseId:c.id,mismatches,shedinjaAnswers});
 }
 assert.equal(changes.length,3);assert(audit.filter(a=>a.version==='corrected').every(a=>a.mismatches.length===0&&a.shedinjaAnswers.length>0));
-writeFileSync('artifacts/support-corrected-climb-cases.json',JSON.stringify(corrected,null,2));
-const files=[source,'artifacts/support-corrected-climb-cases.json','scripts/simulate-immunity-climb.ts','src/battle/matchup-aware-support-player-policy.ts'];
-writeFileSync('artifacts/support-correction-manifest.json',JSON.stringify({changes,audit,files:files.map(path=>({path,sha256:createHash('sha256').update(readFileSync(path)).digest('hex')})),notes:'Only experimental player fixtures corrected. Same policy, enemy, courses, economy. No live save changes.'},null,2));
+writeFileSync('artifacts/experiments/ai/support-corrected-climb-cases.json',JSON.stringify(corrected,null,2));
+const files=[source,'artifacts/experiments/ai/support-corrected-climb-cases.json','scripts/simulate-immunity-climb.ts','src/battle/matchup-aware-support-player-policy.ts'];
+writeFileSync('artifacts/experiments/ai/support-correction-manifest.json',JSON.stringify({changes,audit,files:files.map(path=>({path,sha256:createHash('sha256').update(readFileSync(path)).digest('hex')})),notes:'Only experimental player fixtures corrected. Same policy, enemy, courses, economy. No live save changes.'},null,2));
 console.log(JSON.stringify({changes:changes.map(c=>({caseId:c.caseId,species:c.species,reason:c.reason})),audit},null,2));

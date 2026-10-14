@@ -32,5 +32,5 @@ for(const [index,fixture] of abilityLearningCases.entries())for(let repeat=0;rep
 }
 const files=['scripts/check-ability-learning.ts','scripts/lib/ability-learning-cases.ts','src/battle/coverage-factor-policy.ts','src/battle/public-immunity-v2.ts','src/battle/run.ts','src/battle/switch-policy.ts','pnpm-lock.yaml'];
 const report={purpose:'Controlled first-attack probes; ability learning correctness, not win rate or machine learning training.',policy:'CoverageFactorPolicy immunity=true switching=false; live NPC unchanged',matches:rows.length,immunityCases:rows.filter(r=>!r.control).length,controls:rows.filter(r=>r.control).length,exactReplays:rows.length,sourceHashes:Object.fromEntries(files.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')])),rows};
-writeFileSync('artifacts/ability-learning-20261011.json',JSON.stringify(report,null,2),{flag:'wx'});
+writeFileSync('artifacts/experiments/ai/ability-learning-20261011.json',JSON.stringify(report,null,2),{flag:'wx'});
 console.log(JSON.stringify({matches:report.matches,immunityCases:report.immunityCases,controls:report.controls,exactReplays:report.exactReplays}));

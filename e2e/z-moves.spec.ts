@@ -24,10 +24,10 @@ for(const width of [1280,390])test(`Z selection, real power, activation, one use
   await expect(page.getByTestId('battle-move-details')).toContainText('175');
   if(width===1280)await expect(page.getByTestId('battle-move-details').getByRole('img',{name:'특수',exact:true})).toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  await page.screenshot({path:`artifacts/screenshots/z-moves/z-select-${width}.png`,fullPage:true});
+  await page.screenshot({path:`artifacts/qa/screenshots/z-moves/z-select-${width}.png`,fullPage:true});
   await page.locator('[data-command="move 1"]').click();
   await expect(page.locator('.motion-z-charge')).toBeVisible();
-  await page.screenshot({path:`artifacts/screenshots/z-moves/z-charge-${width}.png`,fullPage:true});
+  await page.screenshot({path:`artifacts/qa/screenshots/z-moves/z-charge-${width}.png`,fullPage:true});
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false',{timeout:30000});
   const response=await page.request.get('/api/battle').then(r=>r.json());
   expect(response.battle.messages.some((line:string)=>line.startsWith('|-zpower|p1'))).toBe(true);

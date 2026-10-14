@@ -18,15 +18,15 @@ const mode=process.env.SUPPORT_PLAYER??'v9';if(!['v9','observed'].includes(mode)
 const rule=process.env.SUPPORT_RULE??'basic';if(!isBattleRule(rule))throw Error('Unknown rule');
 const cohort=process.env.SUPPORT_COHORT??'matched';if(!['matched','new'].includes(cohort))throw Error('Unknown cohort');
 const phase=process.env.SUPPORT_PHASE??`observed-damage-${cohort}-${rule}-${mode}`;
-const source=process.env.SUPPORT_COURSES??(cohort==='new'?'artifacts/support-ai-new-courses.json':'artifacts/hundred-floor-six-z-courses.json');
+const source=process.env.SUPPORT_COURSES??(cohort==='new'?'artifacts/experiments/ai/support-ai-new-courses.json':'artifacts/experiments/balance/hundred-floor-six-z-courses.json');
 type Encounter={floor:number;enemy:string;seed:Seed;trainer:string;enemyTeraTickets?:number};
 type Course={id:string;theme:string;encounters:Encounter[]};
 const all:Course[]=JSON.parse(readFileSync(source,'utf8')).courses;
 const courses=Object.keys(towerThemes).map(theme=>{const course=all.find(c=>c.theme===theme);if(!course)throw Error('Missing theme');return course;});
 type Case={id:string;team:string[];profiles:Record<string,TrainingProfile>;items:Record<string,string>};
-const cases:Case[]=JSON.parse(readFileSync('artifacts/support-player-cases.json','utf8'));
+const cases:Case[]=JSON.parse(readFileSync('artifacts/experiments/ai/support-player-cases.json','utf8'));
 const floors=[1,5,10,20,30,40,50,60,75,90,100];
-const battleFile=`artifacts/${phase}-battles.jsonl`,turnFile=`artifacts/${phase}-turns.jsonl`;
+const battleFile=`artifacts/experiments/ai/${phase}-battles.jsonl`,turnFile=`artifacts/experiments/ai/${phase}-turns.jsonl`;
 writeFileSync(battleFile,'');writeFileSync(turnFile,'');
 const summary={schemaVersion:1,phase,mode,rule,cohort,source,sourceHash:createHash('sha256').update(readFileSync(source)).digest('hex'),engineVersion,format:FORMAT,floors,courses:courses.map(c=>({id:c.id,theme:c.theme})),cases:[] as unknown[]};
 for(const c of cases){
@@ -61,5 +61,5 @@ for(const c of cases){
   appendFileSync(turnFile,samples.map((sample,index)=>JSON.stringify({schemaVersion:1,battleKey:key,decisionIndex:index,cohort,rule,mode,caseId:c.id,courseId:course.id,theme:course.theme,floor,...sample,outcome:log.winner})).join('\n')+'\n');
  }
  summary.cases.push({id:c.id,battles:total,wins,winRate:wins/total,averageTurns:turns/total,handoffs,protectedSetups,screenAttempts,screenActivations,roomActivations,byFloor,byTheme});
- writeFileSync(`artifacts/${phase}-summary.json`,JSON.stringify(summary,null,2));console.log(`${c.id}: ${wins}/${total}, handoffs ${handoffs}, protected setups ${protectedSetups}`);
+ writeFileSync(`artifacts/experiments/ai/${phase}-summary.json`,JSON.stringify(summary,null,2));console.log(`${c.id}: ${wins}/${total}, handoffs ${handoffs}, protected setups ${protectedSetups}`);
 }

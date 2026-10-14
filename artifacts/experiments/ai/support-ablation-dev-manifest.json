@@ -1,0 +1,110 @@
+{
+  "createdAt": "2026-10-10T11:33:45.800Z",
+  "stage": "dev",
+  "source": "artifacts/experiments/ai/support-recheck-fresh-courses.json",
+  "files": [
+    "src/battle/ablation-support-player-policy.ts",
+    "src/battle/support-player-policy.ts",
+    "src/battle/switch-policy.ts",
+    "scripts/simulate-support-ablation.ts",
+    "scripts/simulate-ablation-climb.ts",
+    "artifacts/experiments/ai/support-player-cases.json",
+    "artifacts/experiments/ai/support-recheck-climb-cases.json",
+    "artifacts/experiments/ai/support-recheck-fresh-courses.json"
+  ],
+  "hash": "68f741de39084161b987c0e8b0dcc011c184ca93ccb1a9e739ec1f6f639e8956",
+  "selection": null,
+  "jobs": [
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "v9",
+      "phase": "support-ablation-dev-basic-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "wall",
+      "phase": "support-ablation-dev-basic-wall"
+    },
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "handoff",
+      "phase": "support-ablation-dev-basic-handoff"
+    },
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "setup",
+      "phase": "support-ablation-dev-basic-setup"
+    },
+    {
+      "kind": "battle",
+      "rule": "basic",
+      "mode": "damage",
+      "phase": "support-ablation-dev-basic-damage"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "v9",
+      "phase": "support-ablation-dev-tera-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "wall",
+      "phase": "support-ablation-dev-tera-wall"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "handoff",
+      "phase": "support-ablation-dev-tera-handoff"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "setup",
+      "phase": "support-ablation-dev-tera-setup"
+    },
+    {
+      "kind": "battle",
+      "rule": "tera",
+      "mode": "damage",
+      "phase": "support-ablation-dev-tera-damage"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "v9",
+      "phase": "support-ablation-dev-chaos-v9"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "wall",
+      "phase": "support-ablation-dev-chaos-wall"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "handoff",
+      "phase": "support-ablation-dev-chaos-handoff"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "setup",
+      "phase": "support-ablation-dev-chaos-setup"
+    },
+    {
+      "kind": "battle",
+      "rule": "chaos",
+      "mode": "damage",
+      "phase": "support-ablation-dev-chaos-damage"
+    }
+  ],
+  "selectionRule": "Development total wins over basic/tera/chaos; tie order wall, handoff, setup, damage. Select one candidate even if all lose; no combination or tuning after validation."
+}

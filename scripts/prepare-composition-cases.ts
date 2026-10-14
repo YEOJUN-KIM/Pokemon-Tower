@@ -7,7 +7,7 @@ import {DamagePolicy} from '../src/battle/policy';
 import {statKeys,type TrainingProfile} from '../src/data/training';
 import {moveLearnsets} from '../src/server/move-learnsets';
 
-const old=JSON.parse(readFileSync('artifacts/diverse-team-cases.json','utf8'));
+const old=JSON.parse(readFileSync('artifacts/experiments/samples/diverse-team-cases.json','utf8'));
 const cases=old.filter((c:{id:string;category:string})=>c.id.endsWith('-trained')||c.category==='mixed').map((c:object)=>({...c,recruitment:'adaptive'}));
 for(const g of [1,7,9]){const c=old.find((c:{id:string})=>c.id===`gen${g}-trained`);cases.push({...c,id:`gen${g}-mid`,label:`${g}세대 중간 육성`,iv:15,points:33,recruitment:'adaptive'});}
 cases.push({id:'screen-setup',label:'벽 + 랭크업',category:'roles',team:['Espeon','Gyarados','Scizor'],iv:31,points:66,recruitment:'adaptive',moves:{Espeon:['Psychic','Reflect','Light Screen','Baton Pass'],Gyarados:['Waterfall','Ice Fang','Earthquake','Dragon Dance'],Scizor:['Bullet Punch','U-turn','Roost','Swords Dance']}});
@@ -28,4 +28,4 @@ for(const c of cases){
  const team=packTeam(c.team,profiles);await runBattle({rule:'basic',teams:{p1:team,p2:team},player:new DamagePolicy(),opponent:new DamagePolicy()});
  console.log('Validated '+c.id+' '+c.team.join('/'));
 }
-writeFileSync('artifacts/composition-team-cases.json',JSON.stringify(cases,null,2));
+writeFileSync('artifacts/experiments/samples/composition-team-cases.json',JSON.stringify(cases,null,2));

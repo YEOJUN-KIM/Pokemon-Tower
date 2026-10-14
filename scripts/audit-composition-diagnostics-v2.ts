@@ -7,17 +7,17 @@ import {compositionSnapshot,compositionChanges} from './lib/composition-diagnost
 import {auditProfile} from './lib/sample-audit';
 
 const seed=process.argv[2]??'20261010';if(!/^\d{1,12}$/.test(seed))throw Error('Numeric seed required');
-const prefix=`artifacts/composition-diagnostics-${seed}`,read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
+const prefix=`artifacts/experiments/samples/composition-diagnostics-${seed}`,read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
 async function rows(path:string){const out:any[]=[];for await(const l of createInterface({input:createReadStream(path),crlfDelay:Infinity}))if(l.trim())out.push(JSON.parse(l));return out;}
 writeFileSync(prefix+'-audit-v2-manifest.json',JSON.stringify({files:['scripts/audit-composition-diagnostics-v2.ts','scripts/run-composition-diagnostics-v2.mjs'].map(path=>({path,sha256:createHash('sha256').update(readFileSync(path)).digest('hex')})),notes:'Original audit source preserved: syntax repair and supplementary recharge observation. Simulation source and data unchanged.'},null,2));
 const manifest=read(prefix+'-manifest.json');for(const f of manifest.files)assert.equal(createHash('sha256').update(readFileSync(f.path)).digest('hex'),f.sha256);
 const strip=(b:any)=>{const {phase,...rest}=b;return rest;},key=(r:any)=>[r.rule,r.caseId,r.courseId].join('|');
 let reproducedBattles=0,terminalLosses=0,rechargeTurns=0,rechargeLosses=0;const changes:any[]=[],terminals:any[]=[],battles:any[]=[],summaries:any[]=[],initials=new Map<string,any>();
 for(const rule of manifest.rules){
- const current=await rows(prefix+`-${rule}-battles.jsonl`),previous=await rows(`artifacts/coverage-factors-${seed}-${rule}-immunity-battles.jsonl`);
+ const current=await rows(prefix+`-${rule}-battles.jsonl`),previous=await rows(`artifacts/experiments/ai/coverage-factors-${seed}-${rule}-immunity-battles.jsonl`);
  assert.deepEqual(current.map(strip),previous.map(strip));reproducedBattles+=current.length;
  for(const b of current.filter(b=>b.winner!=='Player')){const n=b.publicProtocol.filter((l:string)=>l.startsWith('|cant|p1')&&l.includes('|recharge')).length;rechargeTurns+=n;rechargeLosses+=Number(n>0);}
- const report=read(`artifacts/simulation-composition-diagnostics-${seed}-${rule}-balanced.json`),old=read(`artifacts/simulation-coverage-factors-${seed}-${rule}-immunity-balanced.json`);
+ const report=read(`artifacts/experiments/balance/simulation-composition-diagnostics-${seed}-${rule}-balanced.json`),old=read(`artifacts/experiments/balance/simulation-coverage-factors-${seed}-${rule}-immunity-balanced.json`);
  assert.deepEqual(report.prices,old.prices);assert.deepEqual(report.stages,old.stages);
  summaries.push({rule,battles:current.length,climbs:report.stages.flatMap((s:any)=>s.climbs).length,finished:report.stages.reduce((s:number,c:any)=>s+c.finished,0)});
  const trace=await rows(prefix+`-${rule}-trace.jsonl`);let selections=0;

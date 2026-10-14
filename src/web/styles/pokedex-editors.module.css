@@ -1,0 +1,677 @@
+/* src/web/pokedex-editors.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
+/* The PC's adjustment screens share light panels and clear command tabs. */
+:global(body) :where(.scope) :global(dialog.dex-settings-dialog[open]:has(.training-editor)) {
+  display: flex;
+  flex-direction: column;
+  width: min(1040px,calc(100vw - 32px));
+  height: min(780px,calc(100dvh - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: hidden;
+}
+:global(body) :where(.scope) :global(dialog.dex-settings-dialog:has(.training-editor)>.dex-dialog-heading) {
+  flex-shrink: 0;
+}
+:global(body) :where(.scope) :global(dialog.dex-settings-dialog>.training-editor) {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px;
+}
+:global(body) :where(.scope) :global(dialog.dex-settings-dialog>.training-editor>.training-tabs),:global(body) :where(.scope) :global(dialog.dex-settings-dialog>.training-editor>.training-tab-hint) {
+  flex-shrink: 0;
+}
+:global(body) :where(.scope) :global(dialog.dex-settings-dialog>.training-editor>.training-save-bar) {
+  margin-top: auto;
+  flex-shrink: 0;
+}
+:global(body) :where(.scope) :global(.training-editor #training-panel-traits) {
+  padding: 20px 0;
+}
+:global(body) :where(.scope) :global(.training-editor .training-nature .training-trait-button) {
+  white-space: normal;
+  text-align: left;
+  word-break: keep-all;
+}
+:global(body) :where(.scope) :global(.training-editor .training-choice) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  max-width: none;
+}
+:global(body) :where(.scope) :global(.training-editor .training-choice>span) {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 29px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+:global(body) :where(.scope) :global(dialog.training-nature-picker) {
+  width: min(720px,calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  min-width: 0;
+  max-height: calc(100dvh - 32px);
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog) {
+  background: #eef2e9;
+  color: #355342;
+  border: 2px solid #a8b6ad;
+  border-radius: 12px;
+  outline: none;
+  box-shadow: 0 18px 70px #10151f90;
+  padding: 16px;
+  scrollbar-color: #8aac99 #dfe7dd;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .dex-dialog-heading) {
+  background: #852b35;
+  border: 0;
+  border-radius: 7px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .dex-dialog-heading h2) {
+  color: #f1f5e9;
+  font-size: 16px;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .dex-dialog-heading>button) {
+  border: 1px solid #d99196;
+  background: #a74751;
+  border-radius: 5px;
+  color: #f5eee8;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.training-tab-hint,.training-iv-summary,.training-save-bar>span,.training-help,.training-help p,.training-choice,.training-tera>small,.move-editor>p,.move-help,.move-search>span)) {
+  color: #637e6e;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-tabs button) {
+  background: #dce7da;
+  border: 1px solid #a4b8a7;
+  color: #476750;
+  border-radius: 6px;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-tabs button[aria-selected=true]) {
+  background: #467c66;
+  border-color: #32624f;
+  color: #f3fff8;
+  box-shadow: inset 0 -3px #a0d9ba;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.training-budget,.stat-radar,.nature-matrix)) {
+  background: #e0eadb;
+  border: 1px solid #b4c6b3;
+  border-radius: 8px;
+  color: #3e624b;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.training-section-title h3,.training-budget strong,.training-stat-name strong,.training-stat-value,.nature-matrix-heading>strong)) {
+  color: #355342;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.training-section-title>span,.training-stat-labels,.training-stat-name small,.training-budget span,.training-budget strong small,.nature-matrix caption,.nature-matrix-heading>span,.nature-matrix th)) {
+  color: #698272;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-budget-track) {
+  background: #bacdb8;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-budget-track i) {
+  background: #579e7e;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-stat) {
+  border-color: #ccdbcd;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-stepper) {
+  background: #f8faf2;
+  border-color: #a6bca7;
+  border-radius: 6px;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-stepper button) {
+  background: #d5e4d1;
+  color: #3b674b;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-stepper input) {
+  color: #355342;
+  background: #f8faf2;
+  border: 0;
+  border-radius: 0;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-point-slider) {
+  accent-color: #548e70;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  padding: 0;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-point-slider::-webkit-slider-runnable-track) {
+  background: #b0c8b0;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-point-slider::-webkit-slider-thumb) {
+  background: #548e70;
+  border-color: #f4fff2;
+  box-shadow: none;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .stat-radar figcaption) {
+  color: #42684f;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .stat-radar figcaption span) {
+  color: #76917b;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .radar-ring) {
+  stroke: #9ab8a080;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .radar-axis) {
+  stroke: #9ab8a060;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .radar-shape) {
+  fill: #70b59d70;
+  stroke: #3d886e;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.radar-label,.radar-value)) {
+  fill: #355342;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.radar-up .radar-label,.radar-up .radar-value)) {
+  fill: #a45651;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.radar-down .radar-label,.radar-down .radar-value)) {
+  fill: #416d9d;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.stat-up,.radar-legend>span:first-child)) {
+  color: #a45651;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.stat-down,.radar-legend>span:last-child)) {
+  color: #416d9d;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .nature-matrix button) {
+  background: #f2f6ec;
+  color: #456a50;
+  border: 1px solid #a4bca5;
+  border-radius: 5px;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .nature-matrix button[aria-pressed=true]) {
+  background: #467c66;
+  color: #f3fff8;
+  border-color: #32624f;
+  box-shadow: none;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(select,.move-search>input)) {
+  background-color: #f8faf2;
+  color: #355342;
+  border: 1px solid #a4b8a7;
+  border-radius: 6px;
+  padding: 9px 12px;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-save-bar) {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  border-color: #bfd1c0;
+  background: #e0e9dc;
+  border-radius: 7px;
+  box-shadow: 0 -5px 0 #eef2e9;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.training-save-bar .primary-button,.move-editor>.primary-button)) {
+  background: #467c66;
+  color: #f3fff8;
+  border: 1px solid #32624f;
+  border-radius: 6px;
+  box-shadow: none;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.training-save-bar .primary-button,.move-editor>.primary-button):disabled) {
+  background: #d5e0d2;
+  color: #859a86;
+  border-color: #b4c7b2;
+  opacity: 1;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .move-slots button) {
+  background: #e1eadc;
+  border: 1px solid #a8bea9;
+  color: #355342;
+  border-radius: 7px;
+  box-shadow: none;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .move-slots button.selected) {
+  background: #d1e8d9;
+  border-color: #59896c;
+  box-shadow: inset 0 -3px #88bba1;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .move-slots small) {
+  color: #68806e;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .move-library) {
+  background: #dbe6d9;
+  border: 1px solid #b4c6b3;
+  border-radius: 8px;
+  padding: 7px;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .move-library button) {
+  background: #f4f7ef;
+  border: 1px solid #bacdba;
+  color: #355342;
+  border-radius: 6px;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .move-library button.selected) {
+  background: #d1e8d9;
+  border-color: #59896c;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.move-library-heading small,.move-metadata,.move-description)) {
+  color: #68806e;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.move-slots strong,.move-library strong)) {
+  color: inherit;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .move-search>label) {
+  color: #637e6e;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .move-editor>.primary-button) {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  box-shadow: 0 -5px 0 #eef2e9;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.move-slots button,.move-library button)[data-game-cursor=true] :is(small,.move-metadata,.move-description)) {
+  color: #d8eee1;
+}
+@media(max-width:760px) {
+  :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog) {
+    padding: 10px;
+  }
+  :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .dex-dialog-heading) {
+    padding: 10px;
+  }
+  :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .dex-dialog-heading h2) {
+    font-size: 14px;
+  }
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog button) {
+  transition: none;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog button:is([data-game-cursor=true],:focus-visible)) {
+  background: #405d59!important;
+  color: #f3fff8!important;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-start-dialog) {
+  width: min(520px,calc(100% - 24px));
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-start-dialog :is(>p,.rule-picker p)) {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #4d6959;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-start-dialog .rule-picker-options) {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-start-dialog .rule-picker-options button) {
+  min-height: 45px;
+  padding: 9px;
+  background: #e1eadc;
+  border-color: #a4b8a7;
+  color: #355342;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-start-dialog .rule-picker-options button[aria-pressed=true]) {
+  background: #467c66;
+  border-color: #32624f;
+  color: #f3fff8;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-start-dialog>.primary-button) {
+  width: 100%;
+  margin-top: 12px;
+  background: #467c66;
+  border: 1px solid #32624f;
+  color: #f3fff8;
+  border-radius: 6px;
+  padding: 12px;
+}
+:global(body) :where(.scope) :global(.training-editor .training-point-panel :is(.training-stat,.training-stat-labels)) {
+  grid-template-columns: minmax(64px,1fr) 44px 68px 108px 48px;
+  gap: 8px;
+}
+:global(body) :where(.scope) :global(.training-editor .training-stat-name) {
+  grid-template-columns: 1fr;
+}
+:where(.scope) :global(.training-base-value),:where(.scope) :global(.training-iv-value) {
+  text-align: center;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+:where(.scope) :global(.training-iv-value) {
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 6px 2px;
+  background: #829c7c18;
+}
+:where(.scope) :global(.training-iv-value small) {
+  font-size: 9px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+:where(.scope) :global(.training-iv-value.iv-perfect) {
+  background: #dcefc8;
+  color: #326142;
+}
+:where(.scope) :global(.training-iv-value.iv-zero) {
+  background: #e0e5e7;
+  color: #596575;
+}
+:where(.scope) :global(.stat-details) {
+  margin-top: 18px;
+  border: 1px solid #718d82;
+  border-radius: 8px;
+  padding: 12px;
+}
+:where(.scope) :global(.stat-details header) {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+:where(.scope) :global(.stat-details h3) {
+  font-size: 14px;
+  margin: 0;
+  flex: 1;
+}
+:where(.scope) :global(.stat-details header>strong),:where(.scope) :global(.stat-details header>span) {
+  font-size: 11px;
+}
+:where(.scope) :global(.stat-details table) {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+:where(.scope) :global(.stat-details th),:where(.scope) :global(.stat-details td) {
+  padding: 8px 4px;
+  border-bottom: 1px solid #718d8245;
+}
+:where(.scope) :global(.stat-details th:first-child) {
+  text-align: left;
+  white-space: nowrap;
+}
+:where(.scope) :global(.stat-details th) {
+  font-weight: 500;
+}
+:where(.scope) :global(.stat-details td small) {
+  font-size: 9px;
+  white-space: nowrap;
+  opacity: .75;
+}
+:where(.scope) :global(.stat-details th small) {
+  display: block;
+  font-size: 8px;
+  opacity: .75;
+}
+:where(.scope) :global(.stat-details .iv-perfect) {
+  background: #b6da9930;
+}
+:where(.scope) :global(.stat-details .iv-zero) {
+  background: #8b9cab20;
+}
+:where(.scope) :global(.stat-details .stat-up) {
+  color: #bb6757;
+}
+:where(.scope) :global(.stat-details .stat-down) {
+  color: #628fbd;
+}
+:where(.scope) :global(.stat-details-note) {
+  display: block;
+  margin-top: 10px;
+  font-size: 10px;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+:where(.scope) :global(.dex-partner-ivs) {
+  font-size: 11px;
+  color: #537b61;
+  background: #dce8d8;
+  padding: 5px 9px;
+  border-radius: 5px;
+}
+/* Stat numbers use one clear font across the graph, inputs and readouts. */
+:global(body) :where(.scope) :global(.training-editor :is(.training-base-value,.training-iv-value,.training-stat-value,.training-stepper input,.training-budget strong,.training-budget strong small,.training-iv-value small,.radar-value)) {
+  font-family: Arial,sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-synthesis: weight;
+}
+:global(body) :where(.scope) :global(.training-editor :is(.training-base-value,.training-iv-value,.training-stepper input)) {
+  font-size: 18px;
+}
+:global(body) :where(.scope) :global(.training-editor .training-stat-value) {
+  font-size: 20px;
+}
+:global(body) :where(.scope) :global(.training-editor .radar-value) {
+  font-size: 22px;
+}
+:global(body) :where(.scope) :global(.training-editor .training-iv-value small) {
+  font-size: 12px;
+  font-weight: 400;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.training-base-value,.training-iv-value)) {
+  color: #223d2d;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-iv-value small) {
+  color: #526459;
+}
+:global(body) :where(.scope) :global(.training-editor .training-stat-labels) {
+  font-size: 11px;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-stat-labels) {
+  color: #405d49;
+}
+@media(max-width:540px) {
+  :global(body) :where(.scope) :global(.training-editor .training-point-panel :is(.training-stat,.training-stat-labels)) {
+    grid-template-columns: minmax(50px,1fr) 34px 51px 92px 42px;
+    gap: 4px;
+  }
+  :global(body) :where(.scope) :global(.training-editor .training-stepper) {
+    width: 92px;
+  }
+  :global(body) :where(.scope) :global(.training-editor .training-stepper button) {
+    width: 27px;
+  }
+  :global(body) :where(.scope) :global(.training-editor .training-stepper input) {
+    width: 36px;
+  }
+  :where(.scope) :global(.training-base-value),:where(.scope) :global(.training-iv-value) {
+    font-size: 12px;
+  }
+  :where(.scope) :global(.training-iv-value small) {
+    font-size: 8px;
+  }
+  :where(.scope) :global(.stat-details) {
+    padding: 9px;
+  }
+  :where(.scope) :global(.stat-details table) {
+    font-size: 10px;
+  }
+  :where(.scope) :global(.stat-details td small) {
+    font-size: 8px;
+  }
+  :where(.scope) :global(.stat-details th),:where(.scope) :global(.stat-details td) {
+    padding: 8px 2px;
+  }
+}
+@media(max-width:540px) {
+  :global(body) :where(.scope) :global(.training-editor :is(.training-base-value,.training-iv-value,.training-stepper input)) {
+    font-size: 16px;
+  }
+  :global(body) :where(.scope) :global(.training-editor .training-iv-value small) {
+    font-size: 10px;
+  }
+  :global(body) :where(.scope) :global(.training-editor .training-stat-labels) {
+    font-size: 10px;
+  }
+}
+:global(body) :where(.scope) :global(.training-editor .training-iv-value),:where(.scope) :global(.stat-details .stat-iv-value) {
+  background: linear-gradient(90deg,#fff0b0 0 var(--iv-fill),#e1e5e8 var(--iv-fill) 100%);
+  border: 1px solid #b9bfb8;
+  color: #293b31;
+}
+:global(body) :where(.scope) :global(.training-editor .training-iv-value.iv-perfect),:where(.scope) :global(.stat-details .stat-iv-value.iv-perfect) {
+  border-color: #bf9426;
+  box-shadow: inset 0 0 0 1px #eacb6e;
+  background: #ffe48c;
+  color: #624400;
+}
+:global(body) :where(.scope) :global(.training-editor .training-iv-value.iv-zero),:where(.scope) :global(.stat-details .stat-iv-value.iv-zero) {
+  background: #e1e5e8;
+  border-color: #bbc2c9;
+  color: #53606a;
+}
+:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-iv-value.iv-perfect) {
+  color: #624400;
+}
+:global(body) :where(.scope) :global(.training-editor .training-stat[data-maxed=true] .training-stepper) {
+  border: 2px solid #c59a25;
+  background: #fff0b0;
+  box-shadow: 0 0 0 2px #efcc6740;
+}
+:global(body) :where(.scope) :global(.training-editor .training-stat[data-maxed=true] .training-stepper input) {
+  background: #fff0b0;
+  color: #624400;
+}
+:global(body) :where(.scope) :global(.training-editor .training-stat[data-maxed=true] .training-stepper button) {
+  background: #f5dda0;
+  color: #725518;
+}
+:global(body) :where(.scope) :global(.training-editor .training-stat[data-maxed=true] .training-point-slider) {
+  accent-color: #bc9024;
+}
+:global(body) :where(.scope) :global(.training-editor .training-stat[data-maxed=true] .training-point-slider::-webkit-slider-runnable-track) {
+  background: #ddbd64;
+}
+:global(body) :where(.scope) :global(.training-editor .training-stat[data-maxed=true] .training-point-slider::-webkit-slider-thumb) {
+  background: #bd9223;
+  border-color: #fff0b0;
+}
+:global(body) :where(.scope) :global(.training-editor .radar-max-star) {
+  fill: #a4770b;
+  font-size: 15px;
+}
+:global(body) :where(.scope) :global(.training-editor .radar-max-point) {
+  fill: #ffdc66;
+  stroke: #a4770b;
+  stroke-width: 2;
+}
+:where(.scope) :global(.stat-details .stat-points-maxed) {
+  background: #fff0b0;
+  color: #624400;
+  font-weight: 700;
+}
+:global(body) :where(.scope) :global(.training-editor .training-stat-select) {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font-size: 12px;
+  text-align: left;
+  padding: 4px 2px;
+  min-height: 24px;
+  border-radius: 4px;
+}
+:where(.scope) :global(.training-stat:has(.training-stat-select[data-game-cursor=true])) {
+  background: #8ec4a625;
+  border-radius: 5px;
+}
+:global(body) :where(.scope) :global(.training-editor .training-trait-button) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px;
+  background: #e1eadc;
+  border: 1px solid #a8bea9;
+  border-radius: 6px;
+  color: #355342;
+  font-size: 14px;
+  text-align: left;
+}
+:where(.scope) :global(.training-trait-button>span) {
+  font-size: 11px;
+  opacity: .75;
+}
+:where(.scope) :global(.training-editor .training-choice) {
+  margin: 14px 0;
+}
+:global(body) :where(.scope) :global(.training-picker) {
+  width: min(560px,calc(100% - 24px));
+  padding: 16px;
+  background: #eef2e9;
+  color: #355342;
+  border: 2px solid #a8b6ad;
+  border-radius: 12px;
+}
+:global(body) :where(.scope) :global(.training-picker .dex-dialog-heading) {
+  background: #852b35;
+  padding: 12px;
+  border-radius: 6px;
+  border: 0;
+}
+:global(body) :where(.scope) :global(.training-picker .dex-dialog-heading h2) {
+  color: #f1f5e9;
+}
+:where(.scope) :global(.training-ability-options) {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+:global(body) :where(.scope) :global(.training-ability-options button) {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  text-align: left;
+  border: 1px solid #a8bea9;
+  border-radius: 7px;
+  background: #e1eadc;
+  color: #355342;
+}
+:where(.scope) :global(.training-ability-options strong) {
+  font-size: 16px;
+}
+:where(.scope) :global(.training-ability-options small) {
+  font-size: 13px;
+  line-height: 1.7;
+  word-break: keep-all;
+  color: inherit;
+}
+:where(.scope) :global(.training-tera-options) {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 9px;
+}
+:global(body) :where(.scope) :global(.training-tera-options button) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 85px;
+  border: 1px solid #a8bea9;
+  border-radius: 7px;
+  background: #e1eadc;
+  color: #355342;
+}
+:where(.scope) :global(.training-tera-options .tera-crystal) {
+  width: 32px;
+  height: 36px;
+}
+:global(body) :where(.scope) :global(.training-picker button[aria-pressed=true]) {
+  border: 2px solid #54846b;
+  background: #d1e8d9;
+}
+:global(body) :where(.scope) :global(.training-picker button[data-game-cursor=true]) {
+  background: #405d59!important;
+  color: #fff!important;
+}
+@media(max-width:540px) {
+  :where(.scope) :global(.training-tera-options) {
+    grid-template-columns: repeat(3,minmax(0,1fr));
+  }
+  :where(.scope) :global(.training-ability-options small) {
+    font-size: 12px;
+  }
+}

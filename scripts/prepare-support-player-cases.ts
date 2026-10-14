@@ -29,4 +29,4 @@ const cases:Case[]=definitions.map(c=>{
  if(errors?.length)throw Error(errors.join('\n'));console.log('Validated '+c.id);
  return {...c,profiles,items};
 });
-writeFileSync('artifacts/support-player-cases.json',JSON.stringify(cases,null,2));
+writeFileSync('artifacts/experiments/ai/support-player-cases.json',JSON.stringify(cases,null,2));

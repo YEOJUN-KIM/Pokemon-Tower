@@ -8,7 +8,7 @@ import {allowedOpponentSpecies} from '../src/data/opponent-species';
 import {packTeam} from '../src/data/teams';
 import type {TowerTheme} from '../src/data/tower-themes';
 import type {Seed} from '../src/battle/run';
-const input='artifacts/hundred-floor-release-courses.json',output='artifacts/hundred-floor-six-z-courses.json';
+const input='artifacts/experiments/balance/hundred-floor-release-courses.json',output='artifacts/experiments/balance/hundred-floor-six-z-courses.json';
 const report=JSON.parse(readFileSync(input,'utf8'));let regenerated=0,zeroed=0;
 for(const course of report.courses){const previous:string[][]=[];
  for(const encounter of course.encounters){

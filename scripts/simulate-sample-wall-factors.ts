@@ -42,7 +42,7 @@ const totalFloors=Number(process.env.BALANCE_FLOORS??50);
 if(![50,100].includes(totalFloors))throw Error('Expected 50 or 100 floors');
 const phase=process.argv[2]??'regional-v6',perTheme=Number(process.env.BALANCE_PER_THEME??16);
 if(!Number.isSafeInteger(perTheme)||perTheme<1)throw Error('Invalid per-theme sample count');
-const path=process.env.BALANCE_COURSES??'artifacts/regional-simulation-courses.json';mkdirSync('artifacts',{recursive:true});
+const path=process.env.BALANCE_COURSES??'artifacts/experiments/balance/regional-simulation-courses.json';mkdirSync('artifacts',{recursive:true});
 let courses:Course[];
 if(existsSync(path))courses=JSON.parse(readFileSync(path,'utf8')).courses;
 else{
@@ -182,6 +182,6 @@ for(const stage of stages.filter(stage=>!process.env.BALANCE_STAGES||process.env
  const categories=Object.fromEntries(['item','machine','consumable','vitamin','reroll','tera'].map(kind=>[kind,{count:purchased.filter(p=>p.kind===kind).length,spent:purchased.filter(p=>p.kind===kind).reduce((s,p)=>s+p.price,0),perVisit:purchased.filter(p=>p.kind===kind).length/Math.max(1,visits.length)}]));
  const byTheme=Object.fromEntries(Object.keys(towerThemes).map(theme=>{const rows=climbs.filter(c=>c.theme===theme);return [theme,{samples:rows.length,passed50:rows.filter(c=>c.cleared>=50).length,averageCleared:avg(rows.map(c=>c.cleared)),finished:rows.filter(c=>c.cleared===totalFloors).length,failures:Object.fromEntries([...new Set(rows.map(c=>c.failedFloor).filter(f=>f!==undefined))].sort((a,b)=>a!-b!).map(f=>[f,rows.filter(c=>c.failedFloor===f).length]))}];}));
  const result={stage:stage.id,label:stage.label,category:stage.category,initialTeam:stage.team,recruitment:stage.recruitment??'adaptive',passed10:climbs.filter(c=>c.cleared>=10).length,battleWinRate:climbs.reduce((sum,c)=>sum+c.cleared,0)/Math.max(1,climbs.reduce((sum,c)=>sum+c.battles,0)),passed50:climbs.filter(c=>c.cleared>=50).length,byTheme,battles:climbs.reduce((sum,c)=>sum+c.battles,0),playerTera:climbs.reduce((sum,c)=>sum+c.playerTera,0),enemyTera:climbs.reduce((sum,c)=>sum+c.enemyTera,0),playerSwitches:climbs.reduce((sum,c)=>sum+c.playerSwitches,0),enemySwitches:climbs.reduce((sum,c)=>sum+c.enemySwitches,0),villainBossWins:climbs.reduce((sum,c)=>sum+c.villainBossWins,0),climbs,averageCleared:avg(climbs.map(c=>c.cleared)),finished:climbs.filter(c=>c.cleared===totalFloors).length,averageEarned:avg(climbs.map(c=>c.earned)),averageSpent:avg(climbs.map(c=>c.spent)),averageRemaining:avg(climbs.map(c=>c.coins)),shopVisits:visits.length,categories,checkpointWallets:Object.fromEntries(Array.from({length:totalFloors/5-1},(_,i)=>(i+1)*5).map(floor=>{const rows=visits.filter(v=>v.floor===floor);return[floor,{visits:rows.length,before:avg(rows.map(v=>v.startCoins)),after:avg(rows.map(v=>v.endCoins)),blocked:avg(rows.map(v=>v.blocked))}];}))};
- report.stages.push(result);writeFileSync('artifacts/simulation-'+phase+'-'+behavior+'.json',JSON.stringify(report,null,2));console.log(JSON.stringify({...result,climbs:undefined}));
+ report.stages.push(result);writeFileSync('artifacts/experiments/balance/simulation-'+phase+'-'+behavior+'.json',JSON.stringify(report,null,2));console.log(JSON.stringify({...result,climbs:undefined}));
 }
-writeFileSync('artifacts/simulation-'+phase+'-'+behavior+'.json',JSON.stringify(report,null,2));
+writeFileSync('artifacts/experiments/balance/simulation-'+phase+'-'+behavior+'.json',JSON.stringify(report,null,2));

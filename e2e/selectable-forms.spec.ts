@@ -19,7 +19,7 @@ for(const width of [1280,390])test('Rotom forms and the training form tab save C
   await dialog.getByRole('button',{name:new RegExp(formName)}).click();await dialog.getByRole('button',{name:formSpecies==='Calyrex-Shadow'?'1P로 설정 저장':'0P로 설정 저장',exact:true}).click();await expect(dialog).toContainText('설정 저장 완료');
   await expect(dialog.getByRole('tab',{name:'모습 설정',exact:true})).toHaveAttribute('aria-selected','true');
   expect(await dialog.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
-  await dialog.screenshot({path:`artifacts/screenshots/selectable-forms/${formSpecies}-${width}.png`});
+  await dialog.screenshot({path:`artifacts/qa/screenshots/selectable-forms/${formSpecies}-${width}.png`});
   if(formSpecies==='Calyrex-Shadow'){await dialog.getByRole('tab',{name:'능력치',exact:true}).click();await expect(dialog.getByRole('spinbutton',{name:'HP 능력 포인트',exact:true})).toHaveValue('1');}
   await page.reload();await page.getByRole('searchbox',{name:'검색',exact:true}).fill(name);await page.getByRole('button',{name:name+' 상세 보기',exact:true}).click();await page.getByRole('button',{name:'기본 정보',exact:true}).click();
   await expect(page.getByTestId('dex-detail')).toHaveAttribute('data-preview-form',formSpecies);await expect(page.getByTestId('dex-detail').locator('h2')).toHaveText(formName);

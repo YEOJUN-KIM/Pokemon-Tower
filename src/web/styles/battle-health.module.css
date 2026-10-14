@@ -1,0 +1,498 @@
+/* Battle health HUD owner: base, theme, responsive layout and HP states. Keep changes here instead of other theme files. */
+:where(.scope[data-ui-screen="battle"]) :global(.health-card) {
+  position: absolute;
+  background: #ffffffeb;
+  border: 1px solid #d8e1d1;
+  border-radius: 9px;
+  z-index: 4;
+  padding: 13px 16px 9px;
+  width: 220px;
+  box-shadow: 0 4px 0 #92ad8020;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.enemy-health) {
+  left: 24px;
+  top: 53px;
+}
+:where(.scope) :global(.player-health) {
+  right: 24px;
+  bottom: 28px;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.health-heading) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.health-heading strong) {
+  font-size: 15px;
+  letter-spacing: -.4px;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.health-heading>span) {
+  font-size: 10px;
+  color: #8b9985;
+  font-family: monospace;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.hp-row) {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.hp-row>span) {
+  font-size: 8px;
+  letter-spacing: .5px;
+  font-weight: 800;
+  color: #899579;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.hp-track) {
+  background: #e6ebdf;
+  border-radius: 10px;
+  height: 6px;
+  overflow: hidden;
+  flex: 1;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.hp-track i) {
+  display: block;
+  height: 100%;
+  border-radius: 10px;
+  transition: width .6s ease;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.hp-number) {
+  text-align: right;
+  font-size: 9px;
+  color: #849278;
+  margin-top: 5px;
+  font-family: monospace;
+}
+@media(min-width:1450px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.enemy-health) {
+    top: 64px;
+    left: 35px;
+  }
+}
+@media(min-width:1450px) {
+  :where(.scope) :global(.player-health) {
+    bottom: 40px;
+    right: 35px;
+  }
+}
+@media(max-width:1150px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.health-card) {
+    width: 182px;
+  }
+}
+@media(max-width:940px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.health-card) {
+    width: 170px;
+  }
+}
+@media(max-width:940px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.enemy-health) {
+    left: 16px;
+    top: 48px;
+  }
+}
+@media(max-width:940px) {
+  :where(.scope) :global(.player-health) {
+    right: 16px;
+    bottom: 23px;
+  }
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.health-card) {
+    width: 210px;
+  }
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.enemy-health) {
+    left: 25px;
+    top: 55px;
+  }
+}
+@media(max-width:760px) {
+  :where(.scope) :global(.player-health) {
+    right: 25px;
+    bottom: 27px;
+  }
+}
+@media(max-width:540px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.health-card) {
+    width: 168px;
+    padding: 11px 12px 8px;
+  }
+}
+@media(max-width:540px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.health-heading strong) {
+    font-size: 13px;
+  }
+}
+@media(max-width:540px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.enemy-health) {
+    left: 14px;
+    top: 45px;
+  }
+}
+@media(max-width:540px) {
+  :where(.scope) :global(.player-health) {
+    right: 14px;
+    bottom: 25px;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  :where(.scope[data-ui-screen="battle"]) :global(.hp-track i) {
+    transition: none;
+  }
+}
+:where(.scope[data-ui-screen="battle"]) :global(.app-shell .health-card) {
+  background: #14212ef2;
+  border-color: #516578;
+  box-shadow: 0 4px 0 #101c2a66;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.app-shell .health-heading strong) {
+  color: #f1f6fb;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.app-shell .hp-track) {
+  background: #394b5c;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .enemy-health) {
+  top: 9%;
+  left: 4%;
+  width: 240px;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .player-health) {
+  right: 4%;
+  bottom: 9%;
+  width: 240px;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-card) {
+  background: #152c36ed;
+  border-color: #acc1a25c;
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-card) {
+    width: 145px;
+    padding: 8px 10px 6px;
+  }
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading strong) {
+    font-size: 11px;
+  }
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .enemy-health) {
+    left: 3%;
+    top: 9%;
+  }
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .player-health) {
+    right: 3%;
+    bottom: 7%;
+  }
+}
+@media(max-height:700px) and (min-width:761px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-card) {
+    padding: 9px 12px 6px;
+  }
+}
+@media(min-width:761px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .enemy-health) {
+    top: 4%;
+    width: 210px;
+    padding: 9px 12px 6px;
+  }
+}
+@media(min-width:761px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .player-health) {
+    bottom: 3%;
+    width: 210px;
+    padding: 9px 12px 6px;
+  }
+}
+@media(min-width:761px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-card .type-row) {
+    margin: 3px 0 6px;
+  }
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-health) {
+  top: 16%;
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-health) {
+    top: 17%;
+  }
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-party-health .hp-track) {
+  height: 12px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-card) {
+  background: #332f42f5;
+  border: 3px solid #d9d5bd;
+  box-shadow: inset 0 0 0 2px #756b82;
+  color: #fff9e5;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading strong) {
+  font-size: 16px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-number) {
+  font-size: 12px;
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading strong) {
+    font-size: 12px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-number) {
+    font-size: 10px;
+  }
+}
+:where(.scope) :global(.health-status) {
+  margin: 7px 0 4px;
+}
+:where(.scope) :global(.health-status b) {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 14px;
+  border: 2px solid currentColor;
+  background: #242031;
+}
+:where(.scope) :global(.health-status [data-status=par]) {
+  color: #ffe162;
+}
+:where(.scope) :global(.health-status [data-status=brn]) {
+  color: #ff8a75;
+}
+:where(.scope) :global(.health-status [data-status=psn]), :where(.scope) :global(.health-status [data-status=tox]) {
+  color: #d9a2ff;
+}
+:where(.scope) :global(.health-status [data-status=frz]) {
+  color: #a6eaff;
+}
+:where(.scope) :global(.health-status [data-status=slp]) {
+  color: #c3c3e3;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-card) {
+  width: clamp(245px,19vw,290px);
+  padding: 13px 16px 10px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading strong) {
+  font-size: 20px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading>span) {
+  font-size: 14px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-number) {
+  font-size: 16px;
+  margin-top: 6px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-row) {
+  margin-top: 11px;
+  gap: 8px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-row>span) {
+  font-size: 12px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-track) {
+  height: 11px;
+  border: 2px solid #151624;
+  border-radius: 0;
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-card) {
+    width: 160px;
+    padding: 9px 10px 7px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading strong) {
+    font-size: 14px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading>span) {
+    font-size: 10px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-number) {
+    font-size: 13px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-row) {
+    margin-top: 8px;
+    gap: 5px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-track) {
+    height: 10px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-row>span) {
+    font-size: 10px;
+  }
+}
+@media(max-width:760px) {
+  :where(.scope) :global(.health-status) {
+    margin: 4px 0 2px;
+  }
+}
+@media(max-width:760px) {
+  :where(.scope) :global(.health-status b) {
+    font-size: 11px;
+    padding: 2px 5px;
+  }
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-card) {
+  width: clamp(240px,22vw,340px);
+  padding: 8px 14px 8px;
+  background: linear-gradient(180deg,#566259,#414e46);
+  color: #f4f5e9;
+  border: 2px solid #cbd1b8;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 2px #2c3a30;
+  clip-path: polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-health) {
+  left: 4%;
+  top: clamp(90px,18%,118px);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .player-health) {
+  right: 4%;
+  bottom: 8%;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-heading strong) {
+  font-size: 18px;
+  color: #f4f5e9;
+  line-height: 1.4;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-heading>span) {
+  font-size: 11px;
+  color: #dce2cf;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-row) {
+  margin-top: 5px;
+  gap: 0;
+  border: 2px solid #344b40;
+  background: #344b40;
+  border-radius: 7px;
+  padding: 2px 3px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-row>span) {
+  font: 700 11px monospace;
+  color: #e8c96c;
+  padding: 0 6px 0 2px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-track) {
+  height: 9px;
+  background: #152e25;
+  border: 1px solid #9fbe91;
+  border-radius: 3px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-track i) {
+  border-radius: 1px;
+  box-shadow: inset 0 2px 0 #ffffff40;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-number) {
+  font-size: 12px;
+  color: #f0f1e3;
+  margin-top: 4px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-number) {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-card[data-hp-state=critical]) {
+  border-color: #daa199;
+  background: linear-gradient(180deg,#66574f,#51423f);
+  animation: low-health-glow 2s ease-in-out infinite;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-card[data-hp-state=critical] .hp-number) {
+  color: #ffb5aa;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-card[data-hp-state=fainted]) {
+  border-color: #718079;
+  background: #d2d8d1;
+}
+@media(prefers-reduced-motion:reduce) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-card[data-hp-state=critical]) {
+    animation: none;
+    box-shadow: 0 0 0 1px #e7675530;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-card) {
+    width: 174px;
+    padding: 7px 10px;
+    border-radius: 2px;
+    border-width: 2px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-heading strong) {
+    font-size: 13px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-number) {
+    font-size: 10px;
+    margin-top: 4px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-track) {
+    height: 7px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-row>span) {
+    font-size: 9px;
+    padding-right: 5px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-health) {
+    left: 3%;
+    top: 98px;
+  }
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .player-health) {
+    right: 3%;
+    bottom: 7%;
+  }
+}
+:where(.scope) :global(.health-types) {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-types .move-type-badge) {
+  font-size: 10px;
+  padding: 1px 3px;
+  gap: 2px;
+}
+:where(.scope) :global(.health-types .move-type-badge svg) {
+  width: 11px;
+  height: 11px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-heading) {
+  gap: 4px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-heading>span) {
+  flex-shrink: 0;
+}
+@keyframes low-health-glow {
+  0%,100% {
+    box-shadow: 0 0 0 1px #e7675530;
+  }
+  50% {
+    box-shadow: 0 0 12px #e767554f;
+  }
+}

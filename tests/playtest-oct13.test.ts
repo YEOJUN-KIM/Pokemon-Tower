@@ -95,6 +95,8 @@ test('candidate details only appear after victory and match the saved opponent a
   const row=store.battle(id),log=await runBattle({teams:{p1:row.player_team,p2:row.opponent_team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),rule:row.rule,teraTickets:{p1:0,p2:0}});
   assert.equal(log.winner,'Player');store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
   const saved=Showdown.Teams.unpack(row.opponent_team)![0],details=store.view('feedback').run!.candidateDetails![saved.species];
+  assert.deepEqual(details.types,Showdown.Dex.species.get(saved.species).types);
+  assert.equal(details.teraType,saved.teraType);assert.equal(details.shiny,!!saved.shiny);
   assert.equal(details.ability,saved.ability);assert.deepEqual(details.moves,saved.moves.map(m=>Showdown.Dex.moves.get(m).name));assert.deepEqual(details.baseStats,Showdown.Dex.species.get(saved.species).baseStats);
  }finally{store.close();}
 });

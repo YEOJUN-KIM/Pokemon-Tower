@@ -1,0 +1,559 @@
+/* src/web/gimmick-theme.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
+:where(.scope[data-ui-screen="battle"]) :global(.has-gimmick .battle-move-grid) {
+  grid-area: moves;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.has-gimmick .battle-move-details) {
+  grid-area: details;
+}
+:where(.scope) :global(.gimmick-preload) {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  left: -10000px;
+  top: 0;
+}
+:where(.scope) :global(.mega-atmosphere) {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 40% 65%,#827ba74d,#211b3e99);
+  animation: mega-darken .35s ease-out both;
+}
+:where(.scope) :global(.atmosphere-mega-reveal) {
+  animation: mega-clear .85s ease-out both;
+}
+:where(.scope) :global(.mega-arena-flash) {
+  position: absolute;
+  inset: 0;
+  background: #fffafc;
+  z-index: 12;
+  pointer-events: none;
+  animation: mega-arena-flash .25s ease-out both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-charge>.sprite) {
+  animation: mega-charge .95s ease-in both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-shell>.sprite),:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-burst>.sprite) {
+  opacity: 0;
+}
+:where(.scope) :global(:is(.motion-mega-charge,.motion-mega-shell,.motion-mega-burst):after) {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  z-index: 4;
+  background: url("/sprites/effects/mega-orb.svg") center/contain no-repeat;
+  filter: drop-shadow(0 0 15px #e2d3ff);
+  pointer-events: none;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-charge:after) {
+  animation: mega-orbit .95s ease-in both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-shell:after) {
+  animation: mega-shell .65s ease-in-out both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-burst:after) {
+  background-image: url('/sprites/effects/mega-shards.svg');
+  animation: mega-shatter .4s ease-out both;
+}
+:where(.scope) :global(:is(.motion-mega-charge,.motion-mega-shell,.motion-mega-burst,.motion-mega-reveal):before) {
+  content: "";
+  position: absolute;
+  inset: 1%;
+  z-index: 5;
+  border: 3px solid #eee4ffcc;
+  border-radius: 50%;
+  box-shadow: 0 0 18px #a7d6ff88,inset 0 0 15px #eccfff88;
+  pointer-events: none;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-charge:before) {
+  animation: mega-spark .95s ease-in both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-shell:before) {
+  border-style: dashed;
+  animation: mega-shell-ring .65s linear both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-burst:before) {
+  animation: mega-burst-ring .4s ease-out both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-reveal:before) {
+  animation: mega-reveal-ring .85s ease-out both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-reveal>.sprite) {
+  animation: mega-reveal .85s ease-out both;
+}
+:where(.scope) :global(.sprite.dynamaxed>.pokemon-image-frame) {
+  transform: scale(var(--dynamax-scale));
+  transform-origin: 50% 98%;
+  filter: drop-shadow(0 0 2px #ff64a6) drop-shadow(0 0 9px #ef327a) sepia(.12) saturate(1.45);
+}
+:where(.scope) :global(.sprite.dynamaxed:after) {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 12%;
+  left: 28%;
+  width: 44%;
+  height: 8%;
+  border-radius: 50%;
+  background: #ed3b7ad9;
+  box-shadow: 22px -10px 0 #f4619bbf,-20px -7px 0 #ca245eaa;
+  filter: blur(3px);
+  pointer-events: none;
+  animation: dynamax-cloud 2.5s ease-in-out infinite alternate;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-grow>.sprite>.pokemon-image-frame) {
+  animation: dynamax-grow 1.15s ease-out both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-end>.sprite>.pokemon-image-frame) {
+  animation: dynamax-end .6s ease-out both;
+  transform-origin: 50% 98%;
+}
+@keyframes mega-charge {
+  0% {
+    filter: brightness(1);
+  }
+  35% {
+    filter: brightness(2) drop-shadow(0 0 12px #cd9fff);
+  }
+  75% {
+    opacity: .7;
+  }
+  100% {
+    filter: brightness(3);
+    opacity: 0;
+  }
+}
+@keyframes mega-orbit {
+  0% {
+    opacity: 0;
+    transform: scale(.35);
+  }
+  40% {
+    opacity: .4;
+    transform: scale(.9);
+  }
+  75% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes mega-spark {
+  0% {
+    opacity: 0;
+    transform: rotate(-70deg) scale(1.5,.65);
+  }
+  35% {
+    opacity: .9;
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(30deg) scale(1,.65);
+  }
+}
+@keyframes mega-shell {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.04);
+    filter: brightness(1.15) drop-shadow(0 0 20px #e2d3ff);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1.7) drop-shadow(0 0 25px #fff);
+  }
+}
+@keyframes mega-shell-ring {
+  from {
+    transform: rotate(30deg) scale(1,.65);
+  }
+  to {
+    transform: rotate(200deg) scale(1,.65);
+  }
+}
+@keyframes mega-shatter {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1.7);
+  }
+  75% {
+    opacity: .8;
+    transform: scale(1.45);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.7);
+  }
+}
+@keyframes mega-burst-ring {
+  0% {
+    opacity: 1;
+    transform: scale(1,.65);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.8,1.1);
+  }
+}
+@keyframes mega-arena-flash {
+  0% {
+    opacity: .8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes mega-reveal {
+  0% {
+    opacity: 1;
+    filter: brightness(0) drop-shadow(0 0 15px #eeb3ff);
+  }
+  35% {
+    filter: brightness(.6) drop-shadow(0 0 18px #eeb3ff);
+  }
+  70% {
+    filter: brightness(1.4) drop-shadow(0 0 8px #efdcff);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+@keyframes mega-reveal-ring {
+  0% {
+    opacity: .9;
+    transform: scale(.8,.3);
+    border-color: #f9e7ff;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5,.5);
+  }
+}
+@keyframes mega-darken {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes mega-clear {
+  0%,35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes dynamax-grow {
+  0% {
+    opacity: 0;
+    transform: translateY(-18%) scale(.25);
+    filter: brightness(0) drop-shadow(0 0 20px #ff64a6);
+  }
+  18% {
+    opacity: 1;
+    filter: brightness(0) drop-shadow(0 0 24px #ff64a6);
+  }
+  65% {
+    opacity: 1;
+    transform: translateY(-5%) scale(var(--dynamax-scale));
+    filter: brightness(.3) drop-shadow(0 0 20px #ff64a6);
+  }
+  85% {
+    transform: translateY(0) scale(var(--dynamax-scale));
+    filter: brightness(.8) drop-shadow(0 0 12px #ff64a6);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(var(--dynamax-scale));
+    filter: drop-shadow(0 0 2px #ff64a6) drop-shadow(0 0 9px #ef327a);
+  }
+}
+@keyframes dynamax-end {
+  from {
+    transform: scale(var(--dynamax-scale));
+    filter: drop-shadow(0 0 12px #ff64a6);
+  }
+  to {
+    transform: scale(1);
+    filter: none;
+  }
+}
+@keyframes dynamax-cloud {
+  from {
+    opacity: .7;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(4px);
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  :where(.scope) :global(.mega-arena-flash) {
+    display: none;
+  }
+  :where(.scope[data-ui-screen="battle"]) :global(.motion-mega-charge>.sprite),:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-reveal>.sprite),:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-grow>.sprite>.pokemon-image-frame),:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-end>.sprite>.pokemon-image-frame),:where(.scope) :global(.sprite.dynamaxed:after) {
+    animation: none!important;
+  }
+  :where(.scope[data-ui-screen="battle"]) :global(.motion-mega-charge:before),:where(.scope[data-ui-screen="battle"]) :global(.motion-mega-charge:after) {
+    animation: none!important;
+  }
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena :is(.player-position,.enemy-position):has([class*="motion-mega-"])) {
+  z-index: 8;
+}
+/* Sword/Shield reference: recall, energized ball, burst, giant silhouette. */
+:where(.scope) :global(.dynamax-atmosphere) {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 20%,#8d174b44,#190d28aa);
+  animation: dynamax-darken .5s ease-out both;
+}
+:where(.scope) :global(.dynamax-atmosphere i) {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: -30%;
+  height: 75%;
+  border-radius: 50%;
+  background: repeating-conic-gradient(from 20deg,#ba286759 0deg 16deg,#3b13314a 25deg 45deg);
+  filter: blur(16px);
+  animation: dynamax-storm 3s linear infinite;
+}
+:where(.scope) :global(.dynamax-atmosphere b) {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 65%,#ff80c6cc,transparent 65%);
+  opacity: 0;
+}
+:where(.scope) :global(.atmosphere-dynamax-release b) {
+  animation: dynamax-burst .45s ease-out both;
+}
+:where(.scope) :global(.atmosphere-dynamax-grow) {
+  animation: dynamax-clear 1.15s ease-out both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena :is(.player-position,.enemy-position):has([class*="motion-dynamax-"])) {
+  z-index: 8;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-recall>.sprite) {
+  animation: dynamax-recall .8s ease-in both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-ball>.sprite),:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-release>.sprite) {
+  opacity: 0;
+}
+:where(.scope) :global(:is(.motion-dynamax-recall,.motion-dynamax-ball,.motion-dynamax-release):after) {
+  content: "";
+  position: absolute;
+  left: 29%;
+  bottom: 14%;
+  width: 42%;
+  aspect-ratio: 1;
+  z-index: 5;
+  background: url('/sprites/effects/dynamax-ball.svg') center/contain no-repeat;
+  filter: drop-shadow(0 0 15px #ff67bc);
+  pointer-events: none;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-recall:after) {
+  animation: dynamax-ball-gather .8s ease-in both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-ball:after) {
+  animation: dynamax-ball-launch .85s ease-in both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-release:after) {
+  animation: dynamax-ball-burst .45s ease-out both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-release:before) {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  z-index: 4;
+  background: radial-gradient(circle,#fff2fc 0%,#ff93cf88 28%,transparent 65%);
+  animation: dynamax-burst .45s ease-out both;
+  pointer-events: none;
+}
+@keyframes dynamax-recall {
+  0% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  35% {
+    filter: brightness(2) drop-shadow(0 0 15px #ff75bc);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(30%) scale(.05);
+    filter: brightness(3);
+  }
+}
+@keyframes dynamax-ball-gather {
+  0%,35% {
+    opacity: 0;
+    transform: scale(.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(.35);
+  }
+}
+@keyframes dynamax-ball-launch {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(.35);
+  }
+  60% {
+    transform: translateY(-70%) scale(1.15);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-45%) scale(1.3);
+  }
+}
+@keyframes dynamax-ball-burst {
+  0% {
+    opacity: 1;
+    transform: translateY(-45%) scale(1.3);
+    filter: brightness(2) drop-shadow(0 0 20px #ff67bc);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-45%) scale(1.8);
+    filter: brightness(4);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-45%) scale(2.3);
+  }
+}
+@keyframes dynamax-burst {
+  0% {
+    opacity: 0;
+    transform: scale(.7);
+  }
+  40% {
+    opacity: .9;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+@keyframes dynamax-darken {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes dynamax-clear {
+  0%,55% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes dynamax-storm {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(70deg);
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  :where(.scope) :global(.dynamax-atmosphere),:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-recall>.sprite),:where(.scope) :global(:is(.motion-dynamax-recall,.motion-dynamax-ball,.motion-dynamax-release):after),:where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-release:before) {
+    animation: none!important;
+  }
+  :where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-recall>.sprite) {
+    opacity: 0;
+  }
+  :where(.scope[data-ui-screen="battle"]) :global(.motion-dynamax-recall:after) {
+    opacity: 1;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  :where(.scope) :global(.mega-atmosphere),:where(.scope) :global(:is(.motion-mega-shell,.motion-mega-burst,.motion-mega-reveal):before),:where(.scope) :global(:is(.motion-mega-shell,.motion-mega-burst):after) {
+    animation: none!important;
+  }
+  :where(.scope[data-ui-screen="battle"]) :global(.motion-mega-burst:after) {
+    display: none;
+  }
+}
+:where(.scope) :global(.emblem-zmove) {
+  --gimmick-color: #edd15d;
+}
+:where(.scope) :global(.z-crystal) {
+  display: inline-block;
+  width: 64px;
+  height: 80px;
+  vertical-align: middle;
+}
+:where(.scope) :global(.held-item-label>.z-crystal) {
+  width: 24px;
+  height: 28px;
+  flex-shrink: 0;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-z-charge>.sprite) {
+  animation: z-power-charge .7s ease-in both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-z-release>.sprite) {
+  animation: z-power-release .45s ease-out both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-z-charge:before) {
+  content: "";
+  position: absolute;
+  inset: -12% 8% -4%;
+  z-index: 0;
+  background: linear-gradient(0deg,#7edfff88,#dffaffbb 55%,#9defff00);
+  clip-path: polygon(10% 100%,2% 64%,15% 77%,10% 37%,28% 65%,32% 8%,43% 48%,56% 0,64% 56%,82% 23%,79% 69%,98% 52%,92% 100%);
+  filter: blur(2px);
+  pointer-events: none;
+  animation: z-power-plume .7s ease-in both;
+}
+@keyframes z-power-charge {
+  from {
+    filter: brightness(1);
+  }
+  to {
+    filter: brightness(1.25) drop-shadow(0 0 12px #abedff);
+  }
+}
+@keyframes z-power-release {
+  from {
+    filter: brightness(1.6) drop-shadow(0 0 18px #abedff);
+  }
+  to {
+    filter: none;
+  }
+}
+@keyframes z-power-plume {
+  from {
+    opacity: 0;
+    transform: scale(.75,.4);
+    transform-origin: 50% 100%;
+  }
+  to {
+    opacity: .85;
+    transform: scale(1);
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  :where(.scope[data-ui-screen="battle"]) :global(.motion-z-charge>.sprite),:where(.scope[data-ui-screen="battle"]) :global(.motion-z-release>.sprite),:where(.scope[data-ui-screen="battle"]) :global(.motion-z-charge:before) {
+    animation: none!important;
+  }
+}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-z-charge>.sprite),:where(.scope[data-ui-screen="battle"]) :global(.motion-z-release>.sprite) {
+  position: relative;
+  z-index: 1;
+}

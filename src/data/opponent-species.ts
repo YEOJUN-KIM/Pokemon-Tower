@@ -1,7 +1,8 @@
 import Showdown from 'pokemon-showdown';
-export const retainedUnevolvedOpponents=new Set(['Porygon2','Chansey','Dusclops','Gligar','Scyther']);
-export function allowedOpponentSpecies(name:string,red=false){
- return !Showdown.Dex.species.get(name).nfe || retainedUnevolvedOpponents.has(name) || (red && name==='Pikachu');
+import {collectibleUnevolvedSpecies,isCollectibleSpecies} from './pokedex-roster';
+export const retainedUnevolvedOpponents=new Set(collectibleUnevolvedSpecies);
+export function allowedOpponentSpecies(name:string,_red=false){
+ return isCollectibleSpecies(name);
 }
 export function evolvedOpponentSpecies(name:string,red=false):string {
  if(allowedOpponentSpecies(name,red))return name;

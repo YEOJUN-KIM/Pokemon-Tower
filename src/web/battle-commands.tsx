@@ -12,7 +12,7 @@ import {useTouchHold} from './use-touch-hold';
 import {MoveCategoryBadge} from './move-category-badge';
 import type {Gimmick} from '../data/gimmicks';
 import type {BattleView,PokemonView,MovePP} from './contracts';
-import {health,pokemonName,species} from './catalog';
+import {health,battlePokemonName,species} from './catalog';
 import {moveInfo} from '../data/move-info';
 import {TypeBadge} from './type-badge';
 import {PokemonImage} from './pokemon-image';
@@ -43,7 +43,7 @@ export function BattleCommands({rule='chaos',battle,mode,busy,forceSwitch,focuse
       <aside className="battle-move-details" aria-label="선택한 기술 정보" data-testid="battle-move-details">
         <div className="battle-move-badges">{info && <TypeBadge type={info.type}/>}{info && <MoveCategoryBadge category={info.category}/>}</div>
         <dl><div><dt>PP</dt><dd>{selected ? `${selected.pp} / ${selected.maxpp}` : '—'}</dd></div><div><dt>위력</dt><dd>{info?.power || '—'}</dd></div><div><dt>명중률</dt><dd>{info?.accuracy===true ? '필중' : info ? `${info.accuracy}%` : '—'}</dd></div></dl>
-        <p>{info?.description ?? '기술을 선택하세요.'}</p><button className="secondary-button battle-command-back" disabled={busy} onClick={()=>onMode('root')}>돌아가기 · X</button>
+        {info?.description && <p>{info.description}</p>}<button className="secondary-button battle-command-back" disabled={busy} onClick={()=>onMode('root')}>돌아가기 · X</button>
       </aside>
       {allowsGimmick(rule,'terastallize') && <div className="tera-command-side" data-testid="tera-command-side">
         <button className={`gimmick-icon-button tera-toggle ${gimmick==='terastallize'?'is-selected':''}`} style={{'--gimmick-color':teraColors[teraType]} as CSSProperties} data-testid="tera-toggle" data-type={teraType} aria-label={`${teraNames[teraType]} 테라스탈 · A`} aria-pressed={gimmick==='terastallize'} title={canTera?`${teraNames[teraType]} 테라스탈 · A · 테라권 ${battle.teraTickets ?? 0}장 · 기술 결정 시 발동`:teraReason} disabled={busy||!canTera} onClick={()=>onGimmick(gimmick==='terastallize'?null:'terastallize')}><TeraCrystal type={teraType} showType/><span>테라스탈</span>{gimmick!=='terastallize' && <i aria-hidden="true">A</i>}</button>
@@ -53,7 +53,7 @@ export function BattleCommands({rule='chaos',battle,mode,busy,forceSwitch,focuse
         {(['zmove','dynamax','mega'] as const).filter(kind=>battle.actions.some(a=>a.command.endsWith(' '+kind))).map(kind=>{const usable=battle.actions.some(a=>a.command.endsWith(' '+kind)),name=kind==='zmove'?'Z기술':kind==='mega'?'메가진화':'다이맥스';return <button key={kind} className={`gimmick-icon-button gimmick-toggle emblem-${kind} ${gimmick===kind?'is-selected':''}`} style={{'--gimmick-color':kind==='zmove'?teraColors[zCrystals[active?.item ?? '']?.type ?? 'Normal']:kind==='mega'?'#bdafff':'#ff428c'} as CSSProperties} data-testid={kind==='zmove'?'zmove-toggle':available===kind?'gimmick-toggle':`${kind}-toggle`} aria-label={`${name} · A`} aria-pressed={gimmick===kind} title={usable?`${name} · A · 기술 결정 시 발동`:`${name} · 현재 사용 불가`} disabled={busy||!usable} onClick={()=>onGimmick(gimmick===kind?null:kind)}>{kind==='zmove'?<ZCrystal type={zCrystals[active?.item ?? '']?.type}/>:<GimmickEmblem kind={kind}/>}<span>{name}</span>{gimmick!==kind && <i aria-hidden="true">A</i>}</button>;})}
       </div>
     </div> : <div className="action-grid battle-root-menu" data-testid="action-grid"><button className="action-button" data-mode="moves" disabled={busy || forceSwitch} onClick={()=>onMode('moves')}><span className="battle-choice-arrow" aria-hidden="true">▶</span><strong>싸운다</strong></button><button className="action-button" data-mode="switch" disabled={busy || !battle.actions.some(a=>a.command.startsWith('switch '))} onClick={()=>onMode('switch')}><span className="battle-choice-arrow" aria-hidden="true">▶</span><strong>교체</strong></button><button className="action-button" data-mode="items" disabled={busy||forceSwitch} onClick={()=>onMode('items')}><span className="battle-choice-arrow" aria-hidden="true">▶</span><strong>도구</strong></button></div>}
-    {heldMove && <aside role="tooltip" className="mobile-move-tooltip"><h2>{heldInfo?.name ?? heldMove.name}</h2><div className="battle-move-badges">{heldInfo&&<><TypeBadge type={heldInfo.type}/><MoveCategoryBadge category={heldInfo.category}/></>}</div><p className="move-tooltip-values">PP {heldMove.pp} / {heldMove.maxpp} · 위력 {heldInfo?.power || '—'} · 명중률 {heldInfo?.accuracy===true?'필중':heldInfo?heldInfo.accuracy+'%':'—'}</p><p>{heldInfo?.description ?? '기술 설명이 없습니다.'}</p></aside>}
+    {heldMove && <aside role="tooltip" className="mobile-move-tooltip"><h2>{heldInfo?.name ?? heldMove.name}</h2><div className="battle-move-badges">{heldInfo&&<><TypeBadge type={heldInfo.type}/><MoveCategoryBadge category={heldInfo.category}/></>}</div><p className="move-tooltip-values">PP {heldMove.pp} / {heldMove.maxpp} · 위력 {heldInfo?.power || '—'} · 명중률 {heldInfo?.accuracy===true?'필중':heldInfo?heldInfo.accuracy+'%':'—'}</p>{heldInfo?.description && <p>{heldInfo.description}</p>}</aside>}
     {mode==='items' && <PokedexDialog title="배틀 도구" onClose={()=>onMode('root')} returnFocus="[data-mode=items]"><p>현재 출전 포켓몬에게 사용 · 턴 소모 없음 · 사용 후 기술 선택</p><div className="held-item-options">{(Object.keys(upgrades) as UpgradeKind[]).filter(kind=>(itemBag[kind]??0)>0).map(kind=><button key={kind} data-battle-item={kind} disabled={busy||!battle.actions.some(a=>a.command==='item '+kind)} onClick={()=>onSend('item '+kind)}><strong>{upgrades[kind].name} · {itemBag[kind]}개</strong><small>{battleItemDescription(kind)}</small></button>)}</div>{!Object.values(itemBag).some(count=>count!>0)&&<p>보유한 배틀 아이템이 없습니다. 정비 상점에서 구매하세요.</p>}</PokedexDialog>}
     {mode==='switch' && <PokedexDialog title={forceSwitch ? '다음 포켓몬 선택' : '포켓몬 교체'} large returnFocus="[data-mode=switch]" onClose={()=>{if(!forceSwitch)onMode('root');}}>
       <div className="battle-party" data-testid="battle-party"><div className="battle-party-active">{active && <PartyCard pokemon={active} current/>}</div><div className="battle-party-candidates">{battle.team.map((pokemon,slot)=>pokemon.active ? null : <button key={pokemon.species} className="battle-party-option" data-command={`switch ${slot+1}`} data-initial-focus disabled={busy || !battle.actions.some(a=>a.command===`switch ${slot+1}`)} onClick={()=>onSend(`switch ${slot+1}`)}><PartyCard pokemon={pokemon}/></button>)}</div></div>
@@ -63,10 +63,11 @@ export function BattleCommands({rule='chaos',battle,mode,busy,forceSwitch,focuse
 }
 
 function PartyCard({pokemon,current=false}:{pokemon:PokemonView;current?:boolean}){
-  const hp=health(pokemon.condition),data=species[pokemon.species];
+  const displaySpecies=pokemon.displaySpecies??pokemon.species;
+  const hp=health(pokemon.condition),data=species[displaySpecies];
   return <div className={`battle-party-card ${current ? 'is-current' : ''} ${hp.percent===0 ? 'is-fainted' : ''}`}>
-    <div className="battle-party-sprite">{data && <PokemonImage shiny={pokemon.shiny} id={data.id} spriteKey={data.spriteKey} name={pokemonName(pokemon.species)} animated width={current ? 140 : 90} height={current ? 140 : 90} fallback={<span>◇</span>}/>}</div>
-    <div className="battle-party-identity"><strong>{pokemonName(pokemon.species)}</strong><small>Lv. 50 · {current ? '현재 출전 중' : hp.percent===0 ? '기절' : hp.status || '교체 가능'}</small></div>
+    <div className="battle-party-sprite">{data && <PokemonImage shiny={pokemon.shiny} id={data.id} spriteKey={data.spriteKey} name={battlePokemonName(displaySpecies)} animated width={current ? 140 : 90} height={current ? 140 : 90} fallback={<span>◇</span>}/>}</div>
+    <div className="battle-party-identity"><strong>{battlePokemonName(displaySpecies)}</strong><small>Lv. 50 · {current ? '현재 출전 중' : hp.percent===0 ? '기절' : hp.status || '교체 가능'}</small></div>
     <div className="battle-party-health"><span>HP</span><div className="hp-track"><i style={{width:`${hp.percent}%`,background:hp.percent<25 ? '#e26553' : hp.percent<50 ? '#e7ad47' : '#54d5a1'}}/></div><strong>{hp.text}</strong></div>
   </div>;
 }

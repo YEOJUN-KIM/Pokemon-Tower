@@ -8,7 +8,7 @@ import {statKeys,type TrainingProfile} from '../src/data/training';
 import {auditProfile,auditTeam} from './lib/sample-audit';
 
 const seed=process.argv[2]??'20261010';if(!/^\d{1,12}$/.test(seed))throw Error('Use a numeric seed');
-const prefix=`artifacts/auto-suite-${seed}`;
+const prefix=`artifacts/experiments/samples/auto-suite-${seed}`;
 if(existsSync(prefix+'-cases.json'))throw Error('Existing suite preserved; choose a new seed');
 const pool=Object.keys(pokemonSets).sort();
 // Transformation/indirect-only species remain audited, but need a dedicated generation role.
@@ -53,12 +53,12 @@ for(const c of cases){
  c.moves=Object.fromEntries(c.team.map((n:string)=>[n,c.profiles[n].moves]));c.iv=31;c.points=66;c.recruitment='adaptive';
 }
 const catalogAudit=pool.map(species=>{try{return{species,issues:auditProfile(species,defaultProfile(species))};}catch(e){return{species,issues:[{kind:'default-profile-error',detail:String(e)}]};}});
-const sourceFiles=['artifacts/support-recheck-climb-cases.json','artifacts/support-corrected-climb-cases.json'];
+const sourceFiles=['artifacts/experiments/ai/support-recheck-climb-cases.json','artifacts/experiments/ai/support-corrected-climb-cases.json'];
 const fixtures=sourceFiles.flatMap(file=>JSON.parse(readFileSync(file,'utf8')).map((c:any)=>({source:file,caseId:c.id,...auditTeam(c.team,c.profiles,pool)})));
 const generatedAudit=cases.map(c=>({caseId:c.id,category:c.category,...auditTeam(c.team,c.profiles,pool)}));
 if(generatedAudit.some(a=>a.issues.some(i=>i.kind.startsWith('illegal'))))throw Error('Generated invalid cases');
 writeFileSync(prefix+'-cases.json',JSON.stringify(cases,null,2));
 writeFileSync(prefix+'-samples.json',JSON.stringify({seed,catalogSpecies:pool.length,catalogAudit,fixtures,generatedAudit,notes:'Offline static diagnostics; all target abilities are hypothetical scenarios, never player inputs. Gaps may be solved by status/weather/teammates in battle. Warnings do not automatically mutate samples.'},null,2));
-const files=['scripts/prepare-auto-suite-v2.ts','scripts/lib/sample-audit.ts','scripts/simulate-immunity-climb.ts','src/battle/matchup-aware-support-player-policy.ts','src/battle/revealed-immunity.ts','src/data/type-effectiveness.ts','src/data/type-chart.json','artifacts/observed-damage-validation-courses.json',prefix+'-cases.json'];
+const files=['scripts/prepare-auto-suite-v2.ts','scripts/lib/sample-audit.ts','scripts/simulate-immunity-climb.ts','src/battle/matchup-aware-support-player-policy.ts','src/battle/revealed-immunity.ts','src/data/type-effectiveness.ts','src/data/type-chart.json','artifacts/experiments/ai/observed-damage-validation-courses.json',prefix+'-cases.json'];
 writeFileSync(prefix+'-manifest.json',JSON.stringify({seed,caseCount:cases.length,courses:9,rules:['basic','tera','chaos'],files:files.map(path=>({path,sha256:createHash('sha256').update(readFileSync(path)).digest('hex')}))},null,2));
 console.log(JSON.stringify({seed,cases:cases.length,uniqueSpecies:new Set(cases.flatMap(c=>c.team)).size,catalogSpecies:pool.length,fixtureIssues:fixtures.flatMap(f=>f.issues).length,staticGapCases:generatedAudit.filter(a=>a.gaps.length).length}));

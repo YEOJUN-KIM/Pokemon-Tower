@@ -1,0 +1,48 @@
+{
+  "seed": "20261010",
+  "caseCount": 18,
+  "courses": 9,
+  "rules": [
+    "basic",
+    "tera",
+    "chaos"
+  ],
+  "files": [
+    {
+      "path": "scripts/prepare-auto-suite.ts",
+      "sha256": "f5df0e21d8c1c9f3a6f5757816fcfba8cdf1f6b70c958b04cd9871e925965d6a"
+    },
+    {
+      "path": "scripts/lib/sample-audit.ts",
+      "sha256": "fecef98ccc45a0b98df284631a612077848b471864dee6b64b7bf106648c0b25"
+    },
+    {
+      "path": "scripts/simulate-immunity-climb.ts",
+      "sha256": "919d449deb40c88431e26e3e433a4b80b0e549373d8f4593fbf11dfa14df7b0b"
+    },
+    {
+      "path": "src/battle/matchup-aware-support-player-policy.ts",
+      "sha256": "2feaa4971b428b8d8a4003af9a935c22baff3d6559faa15395b8e93b3f9caa07"
+    },
+    {
+      "path": "src/battle/revealed-immunity.ts",
+      "sha256": "b87a832bbccdcf54be0b43d093afe6bbdf3b07fe5ee036fb9a7f3c13f80d9aca"
+    },
+    {
+      "path": "src/data/type-effectiveness.ts",
+      "sha256": "c4a1220f1416168fb6839a622221c599b54c177fa706235696b2e71333b8c094"
+    },
+    {
+      "path": "src/data/type-chart.json",
+      "sha256": "e43e394d355879d5765f33379a29964fd79fc1ddb78c440693a9218706a80acd"
+    },
+    {
+      "path": "artifacts/experiments/ai/observed-damage-validation-courses.json",
+      "sha256": "cd814dab93690aac81447b55811ac411ffdd29ab4f2dff1c7fd175528281da16"
+    },
+    {
+      "path": "artifacts/experiments/samples/auto-suite-20261010-cases.json",
+      "sha256": "b4c72732edf48d7dfb1cc777c6dad8ab5e0804938c14d7b2c6ebb60dd014f5d6"
+    }
+  ]
+}

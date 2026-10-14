@@ -21,7 +21,7 @@ import {moveLearnsets} from '../src/server/move-learnsets';
 type Encounter={floor:number;seed:Seed;enemy:string;role:string;trainer:string;reward:number};
 type Course={id:string;encounters:Encounter[]};
 const phase=process.argv[2]??'before',count=Number(process.env.BALANCE_SAMPLES??32);
-const path='artifacts/balance-50-courses.json';mkdirSync('artifacts',{recursive:true});
+const path='artifacts/experiments/balance/balance-50-courses.json';mkdirSync('artifacts',{recursive:true});
 let courses:Course[];
 if(existsSync(path))courses=JSON.parse(readFileSync(path,'utf8')).courses;
 else{
@@ -83,5 +83,5 @@ for(const stage of stages.filter(stage=>!process.env.BALANCE_STAGES || process.e
  climbs.push({id:c.id,cleared,coins,spent,bossGimmickActivations,playerGimmickActivations,shopVisits,purchases,failedFloor:failedAt?.floor,failedTrainer:failedAt?.trainer,finalParty:chooseTeam(p),items});}
  const result={stage:stage.id,probe,climbs,averageCleared:climbs.reduce((s,c)=>s+c.cleared,0)/climbs.length,finished:climbs.filter(c=>c.cleared===50).length};report.stages.push(result);console.log(stage.id+': average '+result.averageCleared.toFixed(1)+', clears '+result.finished+'/'+climbs.length);
 }
-writeFileSync('artifacts/balance-50-'+phase+'.json',JSON.stringify(report,null,2));
+writeFileSync('artifacts/experiments/balance/balance-50-'+phase+'.json',JSON.stringify(report,null,2));
 

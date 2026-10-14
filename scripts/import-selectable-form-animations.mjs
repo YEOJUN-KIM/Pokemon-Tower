@@ -40,6 +40,6 @@ await Promise.all(Array.from({length:5},async()=>{
  }
 }));
 await writeFile('src/data/pixel-sprites.json',JSON.stringify(inventory,null,2)+'\n');await writeFile('src/data/form-sprite-availability.json',JSON.stringify(availability,null,2)+'\n');
-await mkdir('artifacts/reports',{recursive:true});const report={source,forms:records.sort((a,b)=>a.id-b.id),animatedFront:records.filter(r=>inventory[r.id]?.animatedFront).length,animatedBack:records.filter(r=>inventory[r.id]?.animatedBack).length};
-await writeFile('artifacts/reports/'+(battlePreviews?'battle-form-animations':process.argv.includes('--regional')?'regional-form-animations':'selectable-form-animations')+'.json',JSON.stringify(report,null,2)+'\n');
+await mkdir('artifacts/qa/assets/reports',{recursive:true});const report={source,forms:records.sort((a,b)=>a.id-b.id),animatedFront:records.filter(r=>inventory[r.id]?.animatedFront).length,animatedBack:records.filter(r=>inventory[r.id]?.animatedBack).length};
+await writeFile('artifacts/qa/assets/reports/'+(battlePreviews?'battle-form-animations':process.argv.includes('--regional')?'regional-form-animations':'selectable-form-animations')+'.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({forms:records.length,animatedFront:report.animatedFront,animatedBack:report.animatedBack,staticOnly:records.filter(r=>!inventory[r.id]?.animatedFront).map(r=>r.name)}));

@@ -1,0 +1,13 @@
+# Keep previously versioned reference files; other generated outputs stay local.
+!animated-sprite-coverage.json
+!battle-data-source.json
+!battle-roster-audit.json
+!battle-sprite-audit.json
+!mega-sprite-sources.json
+!move-data-source.json
+!pixel-sprite-assets.json
+!pixel-sprite-coverage.json
+!pokedex-source.json
+!pokemon-size-coverage.json
+!resource-manifest.json
+!sprite-coverage.json

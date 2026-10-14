@@ -21,7 +21,7 @@ for(const width of [1280,390])test(`licensed move effects, both directions and i
       await route.fulfill({json:{...initial,battle:{...initial.battle,requestId:initial.battle.requestId+1,messages:[...initial.battle.messages,`|move|${actor}|${selected}|${target}`,`|-damage|${target}|80/100`]}}});
     });
     const page=await context.newPage();const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
-    mkdirSync('artifacts/screenshots/move-effects',{recursive:true});
+    mkdirSync('artifacts/qa/screenshots/move-effects',{recursive:true});
     for(const move of moves) {
       selected=move;enemy=move==='Surf'||move==='Crunch';
       await page.goto(origin+'/battle');await page.getByRole('button',{name:'싸운다',exact:true}).click();
@@ -32,7 +32,7 @@ for(const width of [1280,390])test(`licensed move effects, both directions and i
         let visible=0;for(let i=3;i<pixels.length;i+=4)if(pixels[i]>25)visible++;return visible;
       })).toBeGreaterThan(10);
       await page.waitForTimeout(180);
-      await page.locator('.arena').screenshot({path:`artifacts/screenshots/move-effects/${move.replaceAll(' ','-')}-${width}.png`});
+      await page.locator('.arena').screenshot({path:`artifacts/qa/screenshots/move-effects/${move.replaceAll(' ','-')}-${width}.png`});
       if(width===390){const box=(await page.locator('.arena').boundingBox())!;await page.touchscreen.tap(box.x+box.width*.5,box.y+box.height*.5);await page.touchscreen.tap(box.x+box.width*.5,box.y+box.height*.5);}
       else await page.keyboard.press('Shift');
       await expect(canvas).toHaveAttribute('data-active','false');

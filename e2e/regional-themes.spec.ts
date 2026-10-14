@@ -33,7 +33,7 @@ for(const width of [1280,390])for(const theme of Object.keys(towerThemes) as Tow
   }
   const frames=page.locator('.player-position .pokemon-image-frame, .enemy-position .pokemon-image-frame');
   await expect(frames).toHaveCount(2);for(let i=0;i<2;i++){await expect(frames.nth(i)).toHaveAttribute('data-framing-ready','true',{timeout:15000});await expect.poll(()=>frames.nth(i).locator('img').evaluate(img=>(img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);}
-  mkdirSync('artifacts/screenshots/regional-themes-ready',{recursive:true});
-  await page.screenshot({path:`artifacts/screenshots/regional-themes-ready/${theme}-${width}.png`,fullPage:true,animations:'disabled'});
+  mkdirSync('artifacts/qa/screenshots/regional-themes-ready',{recursive:true});
+  await page.screenshot({path:`artifacts/qa/screenshots/regional-themes-ready/${theme}-${width}.png`,fullPage:true,animations:'disabled'});
  }finally{store.close();}
 });

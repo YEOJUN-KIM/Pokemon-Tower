@@ -2,11 +2,11 @@ import {spawn} from 'node:child_process';
 import {readFileSync,writeFileSync,readdirSync,existsSync,openSync,closeSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 
-const id=process.argv[2]??'20261011',prefix=`artifacts/opponent-learning-${id}`;
+const id=process.argv[2]??'20261011',prefix=`artifacts/experiments/ai/opponent-learning-${id}`;
 if(!/^\d{1,12}$/.test(id)||existsSync(prefix+'-manifest.json'))throw Error('Use a new numeric experiment ID');
 const digest=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
-const old=JSON.parse(readFileSync('artifacts/sample-holdout-20261011-manifest.json','utf8'));
-const courseFile='artifacts/sample-holdout-20261011-courses.json',caseFile='artifacts/reliable-samples-20261010-cases.json';
+const old=JSON.parse(readFileSync('artifacts/experiments/samples/sample-holdout-20261011-manifest.json','utf8'));
+const courseFile='artifacts/experiments/samples/sample-holdout-20261011-courses.json',caseFile='artifacts/experiments/samples/reliable-samples-20261010-cases.json';
 for(const path of [courseFile,caseFile]){const frozen=old.files.find(f=>f.path===path);if(!frozen||digest(path)!==frozen.sha256)throw Error('Changed fixture '+path);}
 const sources=dir=>readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?sources(dir+'/'+e.name):/\.(ts|tsx|json)$/.test(e.name)?[dir+'/'+e.name]:[]);
 const files=[...sources('src'),...sources('scripts/lib'),courseFile,caseFile,'pnpm-lock.yaml','scripts/simulate-opponent-learning.ts','scripts/run-opponent-learning.mjs','scripts/audit-opponent-learning.ts'];

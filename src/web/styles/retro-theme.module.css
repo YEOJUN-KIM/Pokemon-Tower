@@ -1,0 +1,1049 @@
+/* src/web/retro-theme.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
+/* A shared handheld-game skin. Local font works without a CDN at play time. */
+:where(.scope) :global(.npc-portrait) {
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+@font-face {
+  font-family: TowerPixel;
+  src: url('/fonts/neodgm.woff2') format('woff2');
+  font-display: swap;
+  font-weight: 100 900;
+  font-style: normal;
+}
+:global(body) :where(.scope) :global(button),:global(body) :where(.scope) :global(input),:global(body) :where(.scope) :global(select),:global(body) :where(.scope) :global(textarea),:global(body) :where(.scope) :global(h1),:global(body) :where(.scope) :global(h2),:global(body) :where(.scope) :global(h3),:global(body) :where(.scope) :global(strong),:global(body) :where(.scope) :global(small),:global(body) :where(.scope) :global(span) {
+  font-family: TowerPixel,monospace;
+  font-synthesis: none;
+  letter-spacing: 0;
+}
+:where(.scope) :global(.app-shell),:where(.scope) :global(.dex-screen),:where(.scope[data-ui-screen="settings"]) :global(.settings-page) {
+  background: var(--game-bg);
+}
+:global(body) :where(.scope) :global(:is(.dex-header,.page-heading,.title-hero,.title-panel,.dex-toolbar,.dex-catalog,.dex-right-panel,.dex-party-panel,.dex-pagination,.tower-summary,.team-panel,.command-area,.battle-messages,.tower-shop,.shop-product,.settings-card,.result-dialog,.boss-dialog,.recruit-dialog,.dex-dialog)) {
+  border-radius: 0;
+  box-shadow: none;
+}
+:global(body) :where(.scope) :global(:is(.dex-header,.page-heading)) {
+  background: #8c3849;
+  border: 3px solid #cf665b;
+  box-shadow: inset 0 0 0 2px #5a2938;
+}
+:global(body) :where(.scope) :global(:is(.dex-toolbar,.dex-pagination,.dex-party-panel,.dex-detail,.settings-card,.tower-shop,.shop-product)) {
+  background: #403b50;
+  border: 2px solid #76687c;
+  box-shadow: inset 0 0 0 2px #292535;
+}
+:global(body) :where(.scope) :global(:is(button,.dex-card,.dex-party-slot,.nav-item,.health-card)) {
+  border-radius: 0;
+}
+:global(body) :where(.scope) :global(:is(.dex-card,.dex-party-slot)) {
+  background: #454052;
+  border: 2px solid #807389;
+  box-shadow: inset 0 0 0 2px #302c40;
+}
+:global(body) :where(.scope) :global(.dex-card:hover) {
+  background: #554a62;
+}
+:global(body) :where(.scope) :global(.dex-card>strong) {
+  font-size: 12px;
+}
+:global(body) :where(.scope) :global(.dex-card .dex-number) {
+  font-size: 11px;
+}
+:global(body) :where(.scope) :global(:is(.dex-toolbar button,.dex-catalog-actions button,.dex-pagination button,.secondary-button,.command-tabs button)) {
+  background: #4b4258;
+  color: #f6f2e3;
+  border: 2px solid #9b879a;
+  box-shadow: inset 0 -3px #2b2434;
+}
+:global(body) :where(.scope) :global(:is(.primary-button,.command-tabs button.active)) {
+  background: #93404b;
+  color: #fff4d5;
+  border: 2px solid #dd8a6e;
+  box-shadow: inset 0 -3px #602936;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-panel) {
+  border-radius: 0;
+  border: 3px solid #302334;
+  box-shadow: 0 0 0 2px #9c7184;
+  overflow: hidden;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-panel .panel-top) {
+  background: #763344;
+  border-bottom: 3px solid #bd665d;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .command-area),:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-messages) {
+  background: #383246;
+  border-color: #bd665d;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .type-row) {
+  font-size: 12px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .action-button) {
+  background: #494051;
+  border: 2px solid #93829a;
+  border-radius: 0;
+  box-shadow: inset 0 -3px #2b2536;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .action-button strong) {
+  font-size: 16px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .action-button small) {
+  font-size: 12px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .current-messages p) {
+  font-size: 16px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .current-messages p.latest) {
+  font-size: 18px;
+}
+:global(body) :where(.scope) :global(.dex-dialog),:global(body) :where(.scope) :global(.result-dialog),:global(body) :where(.scope) :global(.boss-dialog),:global(body) :where(.scope) :global(.recruit-dialog) {
+  background: #393347;
+  color: #fff7df;
+  border: 4px solid #d0c6ae;
+  outline: 3px solid #563948;
+  box-shadow: inset 0 0 0 3px #74647d;
+  padding: 24px;
+  border-radius: 0;
+}
+:global(body) :where(.scope) :global(dialog::backdrop) {
+  background: #151322b8;
+  backdrop-filter: none;
+}
+:global(body) :where(.scope) :global(.dex-dialog-heading) {
+  border-bottom: 2px solid #8e7d96;
+}
+:global(body) :where(.scope) :global(.dex-action-options button),:global(body) :where(.scope) :global(.dex-filter-options button) {
+  border-radius: 0;
+  background: #4a4055;
+  border: 2px solid #8c7a92;
+  color: #fff7df;
+}
+:global(body) :where(.scope) :global(.dex-action-options small),:global(body) :where(.scope) :global(.dex-filter-options small) {
+  color: #c9bdcc;
+}
+:global(body) :where(.scope) :global(.dex-dialog input),:global(body) :where(.scope) :global(.dex-dialog select) {
+  background: #2c2638;
+  color: #fff7df;
+  border: 2px solid #9a899e;
+  border-radius: 0;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.effect-notice) {
+  border-radius: 0;
+  box-shadow: inset 0 0 0 2px #887584;
+  background: #393047f5;
+  border: 3px solid #e0c888;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .stadium-lights) {
+  height: 42%;
+  background: linear-gradient(#dceffa 0 22%,#d0e8f6 22% 46%,#c3e0f0 46% 70%,#b6d8e8 70%);
+  border-top: 0;
+}
+:where(.scope) :global(.field-horizon) {
+  position: absolute;
+  inset: 27% -2% auto;
+  height: 15%;
+  background: #659a69;
+  clip-path: polygon(0 36%,4% 36%,4% 22%,9% 22%,9% 40%,14% 40%,14% 12%,20% 12%,20% 29%,26% 29%,26% 43%,32% 43%,32% 21%,38% 21%,38% 33%,45% 33%,45% 12%,51% 12%,51% 30%,57% 30%,57% 44%,64% 44%,64% 23%,70% 23%,70% 36%,76% 36%,76% 10%,83% 10%,83% 25%,90% 25%,90% 40%,96% 40%,96% 20%,100% 20%,100% 100%,0 100%);
+}
+:where(.scope) :global(.stadium-details) {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+:where(.scope) :global(.stadium-details i) {
+  position: absolute;
+  display: block;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=hall]) {
+  background: #6f9998;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=night]) {
+  background: #597483;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=summit]) {
+  background: #8f8aaf;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=facility]) {
+  background: #707d83;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=meadow] .stadium-details i) {
+  top: 16%;
+  width: 13%;
+  height: 3%;
+  background: #f4fcf2;
+  box-shadow: 14px -7px #f4fcf2,-14px 5px #f4fcf2;
+  opacity: .7;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=meadow] .stadium-details i:nth-child(1)) {
+  left: 21%;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=meadow] .stadium-details i:nth-child(2)) {
+  left: 61%;
+  top: 23%;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=meadow] .stadium-details i:nth-child(3)) {
+  display: none;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=hall] .stadium-lights) {
+  background: repeating-linear-gradient(90deg,transparent 0 18%,#506b8326 18% 20%),linear-gradient(#38465d 0 12%,#6e859e 12% 15%,#c0d3db 15% 34%,#a2bac8 34% 100%);
+  border-top: 6px solid #667e97;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=hall] .field-horizon) {
+  clip-path: none;
+  top: 28%;
+  height: 12%;
+  background: repeating-linear-gradient(0deg,#607585 0 8px,#869aa7 8px 11px);
+  border-top: 5px solid #e3d9b4;
+  border-bottom: 5px solid #ddd7bc;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=hall] .stadium-field) {
+  background: repeating-linear-gradient(0deg,#648d91 0 48px,#6f9998 48px 96px);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=hall] .stadium-details i) {
+  top: 17%;
+  height: 3%;
+  width: 15%;
+  background: #fff6c4;
+  box-shadow: 0 5px #71838a;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=hall] .stadium-details i:nth-child(1)) {
+  left: 20%;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=hall] .stadium-details i:nth-child(2)) {
+  left: 65%;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=hall] .stadium-details i:nth-child(3)) {
+  display: none;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=night] .stadium-lights) {
+  background: linear-gradient(#252d54 0 25%,#354169 25% 55%,#506382 55% 100%);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=night] .field-horizon) {
+  background: repeating-linear-gradient(90deg,#7eabc866 0 3px,transparent 3px 26px),#344863;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=night] .stadium-field) {
+  background: repeating-linear-gradient(0deg,#506978 0 48px,#597483 48px 96px);
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=night] .stadium-details i:nth-child(1)) {
+  left: 78%;
+  top: 12%;
+  width: 24px;
+  height: 24px;
+  background: #f7e9ae;
+  box-shadow: -6px 0 #f7e9ae,0 -6px #f7e9ae,6px 0 #f7e9ae,0 6px #f7e9ae;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=night] .stadium-details i:nth-child(2)) {
+  left: 35%;
+  top: 16%;
+  width: 3px;
+  height: 3px;
+  background: #d9e7ed;
+  box-shadow: 55px -23px #d9e7ed,110px 9px #d9e7ed,180px -15px #d9e7ed,-40px -16px #d9e7ed,240px 12px #d9e7ed;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=night] .stadium-details i:nth-child(3)) {
+  display: none;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=summit] .stadium-lights) {
+  background: linear-gradient(#4d4271 0 22%,#756391 22% 48%,#b595ad 48% 72%,#e3b49d 72% 100%);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=summit] .field-horizon) {
+  clip-path: none;
+  top: 29%;
+  height: 11%;
+  background: repeating-linear-gradient(90deg,#d7c48b 0 4px,transparent 4px 13%),linear-gradient(#5e517d 0 70%,#b3a083 70% 85%,#6d608b 85%);
+  border-top: 4px solid #e0cc92;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=summit] .stadium-field) {
+  background: repeating-linear-gradient(0deg,#807ca1 0 48px,#8f8aaf 48px 96px);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=summit] .stadium-details i) {
+  top: 3%;
+  width: 10%;
+  height: 24%;
+  background: linear-gradient(90deg,#f8e6a722,#f8e6a705);
+  clip-path: polygon(42% 0,58% 0,100% 100%,0 100%);
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=summit] .stadium-details i:nth-child(1)) {
+  left: 21%;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=summit] .stadium-details i:nth-child(2)) {
+  left: 67%;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=summit] .stadium-details i:nth-child(3)) {
+  display: none;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=facility] .stadium-lights) {
+  background: repeating-linear-gradient(90deg,transparent 0 20%,#222c3c 20% 22%),linear-gradient(#29303e,#596371);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=facility] .field-horizon) {
+  clip-path: none;
+  background: repeating-linear-gradient(135deg,#b99c53 0 10px,#394451 10px 20px);
+  height: 5%;
+  top: 35%;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=facility] .stadium-field) {
+  background: repeating-linear-gradient(0deg,#66737a 0 48px,#707d83 48px 96px);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena[data-scenery=facility] .stadium-details i) {
+  top: 18%;
+  width: 12%;
+  height: 3%;
+  background: #df777a;
+  box-shadow: 0 5px #753e55;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=facility] .stadium-details i:nth-child(1)) {
+  left: 24%;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=facility] .stadium-details i:nth-child(2)) {
+  left: 65%;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.arena[data-scenery=facility] .stadium-details i:nth-child(3)) {
+  display: none;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena:is([data-scenery=hall],[data-scenery=night],[data-scenery=summit],[data-scenery=facility]) .arena-orbit) {
+  background: radial-gradient(ellipse,#d6d6c2 0 52%,#68777f 55% 71%,transparent 73%);
+  border-color: #e3dcab80;
+  box-shadow: 0 0 0 6px #25375030;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .stadium-field) {
+  top: 39%;
+  border-top: 0;
+  background: repeating-linear-gradient(0deg,#83b571 0 48px,#8dbc79 48px 96px);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .stadium-field:after) {
+  border-color: #d5ecc536;
+  box-shadow: 0 0 0 65px #daedca08;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena) {
+  container-type: size;
+  --near-x: 26%;
+  --far-x: 75%;
+  --near-ground: 7%;
+  --far-ground: 34%;
+  background: #8dbc79;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .player-position .sprite) {
+  width: min(29vw,420px,74cqh);
+  height: min(29vw,420px,74cqh);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .enemy-position .sprite) {
+  width: min(26vw,370px,60cqh);
+  height: min(26vw,370px,60cqh);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena-orbit) {
+  width: min(29vw,400px);
+  height: min(7vw,90px);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .orbit-two) {
+  width: min(26vw,350px);
+  height: min(6vw,76px);
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena) {
+    --near-x: 25%;
+    --far-x: 75%;
+    --near-ground: 7%;
+    --far-ground: 42%;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .player-position .sprite) {
+    width: min(46vw,190px,47cqh);
+    height: min(46vw,190px,47cqh);
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .enemy-position .sprite) {
+    width: min(42vw,175px,40cqh);
+    height: min(42vw,175px,40cqh);
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena-orbit) {
+    width: 43vw;
+    height: 40px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .orbit-two) {
+    width: 38vw;
+    height: 34px;
+  }
+}
+:global(body) :where(.scope) :global([data-game-cursor=true]) {
+  outline: 2px solid #ffe36c!important;
+  outline-offset: 2px!important;
+  box-shadow: none!important;
+}
+:global(body) :where(.scope) :global(:is(.dex-card,.action-button,.pokemon-choice,.dex-filter-options button)[data-game-cursor=true]) {
+  background: #655269!important;
+  border-color: #ffe36c!important;
+}
+:global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-heading) {
+  background: #8c3849;
+  border: 3px solid #cf665b;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 2px #5a2938;
+}
+:global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console :is(.dex-toolbar,.dex-party-panel,.dex-detail,.dex-pagination)) {
+  background: #403b50;
+  border: 2px solid #76687c;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 2px #292535;
+}
+:global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-card) {
+  background: #454052;
+  border: 2px solid #807389;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 2px #302c40;
+}
+:global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-card.selected) {
+  background: #655269;
+  border-color: #e5b975;
+  border-radius: 0;
+}
+:global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-card[data-game-cursor=true]) {
+  background: #655269!important;
+  border-color: #ffe36c!important;
+}
+:global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console :is(.dex-party-slot,.dex-nav a,.dex-basic-info,.dex-toolbar button)) {
+  border-radius: 0;
+}
+:global(body) :where(.scope[data-ui-screen="title"]) :global(.title-screen) {
+  background: #302c40;
+}
+:global(body) :where(.scope[data-ui-screen="title"]) :global(.title-screen .title-play) {
+  background: #93404b;
+  color: #fff4d5;
+  border: 3px solid #dd8a6e;
+  border-radius: 0;
+  box-shadow: inset 0 -4px #602936;
+}
+:global(body) :where(.scope[data-ui-screen="title"]) :global(.title-menu .secondary-button) {
+  border-radius: 0;
+}
+:global(body) :where(.scope[data-ui-screen="title"]) :global(.title-scene) {
+  background: none;
+}
+:global(body) :where(.scope[data-ui-screen="title"]) :global(.title-tower i) {
+  border-radius: 0;
+  transform: none;
+  box-shadow: 8px 8px #231f30;
+  background: #655a76;
+  border: 3px solid #ad98b1;
+}
+:global(body) :where(.scope[data-ui-screen="title"]) :global(.title-tower i:first-child) {
+  background: #a84552;
+  border-color: #d77870;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog) {
+  background: #393347;
+  color: #fff7df;
+  border: 4px solid #d0c6ae;
+  outline: 3px solid #563948;
+  box-shadow: inset 0 0 0 3px #74647d;
+  border-radius: 0;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .panel-top button) {
+  color: #fff0ca;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .panel-top .turn-counter) {
+  color: #fff0ca;
+}
+:global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-filter-button) {
+  background: #4b4258;
+  border: 2px solid #9b879a;
+  box-shadow: inset 0 -3px #2b2434;
+  color: #f6f2e3;
+}
+:global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console :is(.dex-start-party,.dex-inspect-button)) {
+  border-radius: 0;
+  background: #403b50;
+  border: 2px solid #76687c;
+  box-shadow: inset 0 0 0 2px #292535;
+}
+:global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-filter-control>button) {
+  background: #4b4258;
+  border: 2px solid #9b879a;
+  box-shadow: inset 0 -3px #2b2434;
+  color: #f6f2e3;
+}
+:global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-favorite-toggle), :global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-reset-filters) {
+  border-radius: 0;
+}
+:global(body) :where(.scope) :global(:is(.dex-dialog,.battle-result-dialog,.recruit-dialog,.boss-dialog)::backdrop) {
+  background: #151322c9;
+  backdrop-filter: none;
+}
+:global(body) :where(.scope) :global(.dex-dialog-heading>button) {
+  border-radius: 0;
+  background: #4b4258;
+  color: #f6f2e3;
+  border: 2px solid #9b879a;
+}
+:where(.scope) :global(.opponent-balls) {
+  display: flex;
+  gap: 8px;
+  margin-top: 7px;
+  border-top: 2px solid #827589;
+  padding-top: 6px;
+}
+:where(.scope) :global(.opponent-balls>span) {
+  display: inline-flex;
+}
+:where(.scope) :global(.opponent-balls .pokeball.small) {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #181823;
+  background: linear-gradient(#e8676c 0 43%,#242131 43% 58%,#fff1d9 58%);
+  box-shadow: none;
+}
+:where(.scope) :global(.opponent-balls .ball-fainted) {
+  filter: grayscale(1);
+  opacity: .38;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection),:where(.scope) :global(.field-inspection) {
+  font-size: 16px;
+  line-height: 1.7;
+}
+:where(.scope) :global(.inspection-stats) {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+:where(.scope) :global(.inspection-stats>div) {
+  padding: 10px;
+  background: #4a4055;
+  border: 2px solid #8b7990;
+}
+:where(.scope) :global(.inspection-stats span) {
+  display: block;
+  color: #cbbdcf;
+  font-size: 14px;
+}
+:where(.scope) :global(.inspection-stats strong) {
+  font-size: 20px;
+}
+:where(.scope) :global(.inspection-description) {
+  background: #292334;
+  padding: 16px;
+  border: 2px solid #8b7990;
+}
+:where(.scope) :global(.inspection-moves) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+:where(.scope) :global(.inspection-moves p) {
+  margin: 0;
+  padding: 8px;
+  border: 2px solid #8b7990;
+}
+:where(.scope) :global(.inspection-close) {
+  width: 100%;
+  margin-top: 20px;
+}
+:where(.scope) :global(.field-inspection section) {
+  margin: 15px 0;
+  padding: 12px;
+  border: 2px solid #8b7990;
+}
+:where(.scope) :global(.field-inspection h3) {
+  margin: 0 0 8px;
+  color: #ffe0a1;
+  font-size: 16px;
+}
+:where(.scope) :global(.field-effect-row) {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+:where(.scope) :global(.field-effect-row span) {
+  color: #c4ebb9;
+}
+:where(.scope) :global(.field-empty) {
+  color: #bfb2c9;
+  font-size: 14px;
+  margin: 0;
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .type-row) {
+    font-size: 10px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .action-button strong) {
+    font-size: 12px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .action-button small) {
+    font-size: 10px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .current-messages p) {
+    font-size: 12px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .current-messages p.latest) {
+    font-size: 14px;
+  }
+  :where(.scope) :global(.opponent-balls) {
+    margin-top: 3px;
+    padding-top: 3px;
+    gap: 5px;
+  }
+  :where(.scope) :global(.opponent-balls .pokeball.small) {
+    width: 14px;
+    height: 14px;
+  }
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection),:where(.scope) :global(.field-inspection) {
+    font-size: 14px;
+  }
+  :where(.scope) :global(.field-effect-row) {
+    flex-wrap: wrap;
+  }
+  :global(body) :where(.scope) :global(.dex-dialog) {
+    padding: 18px;
+  }
+  :where(.scope) :global(.inspection-stats) {
+    gap: 6px;
+  }
+  :where(.scope) :global(.inspection-stats>div) {
+    padding: 7px;
+  }
+}
+/* Tint only the creature pixels; the motion wrapper and HP colors stay independent. */
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .sprite[data-status=par]) {
+  --status-filter: sepia(.8) saturate(2.1) hue-rotate(0deg);
+  --status-color: #ffe162;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .sprite[data-status=brn]) {
+  --status-filter: sepia(.8) saturate(3) hue-rotate(315deg);
+  --status-color: #ff735c;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .sprite[data-status=psn]),:where(.scope[data-ui-screen="battle"]) :global(.battle-room .sprite[data-status=tox]) {
+  --status-filter: sepia(.7) saturate(2) hue-rotate(225deg);
+  --status-color: #cb87ef;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .sprite[data-status=frz]) {
+  --status-filter: sepia(.65) saturate(2) hue-rotate(155deg) brightness(1.12);
+  --status-color: #92e5ff;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .sprite[data-status=slp]) {
+  --status-filter: saturate(.3) brightness(.85);
+  --status-color: #a6a5ce;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .sprite[data-status]>.pokemon-image-frame) {
+  filter: var(--status-filter) drop-shadow(0 0 3px var(--status-color));
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .command-area) {
+  position: relative;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover) {
+  position: absolute;
+  left: 12px;
+  bottom: calc(100% - 40px);
+  width: min(420px,calc(100% - 24px));
+  max-height: min(380px,58dvh);
+  overflow: auto;
+  z-index: 15;
+  background: #393347;
+  color: #fff7df;
+  border: 3px solid #d0c6ae;
+  box-shadow: inset 0 0 0 2px #74647d;
+  padding: 14px;
+  overscroll-behavior: contain;
+}
+:where(.scope) :global(.inspection-heading) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border-bottom: 2px solid #8e7d96;
+  padding-bottom: 9px;
+}
+:where(.scope) :global(.inspection-heading>strong) {
+  font-size: 17px;
+}
+:where(.scope) :global(.inspection-heading>small) {
+  font-size: 11px;
+  color: #c1b9c9;
+}
+:where(.scope) :global(.inspection-heading>button) {
+  padding: 3px 8px;
+  background: #4b4258;
+  color: #fff7df;
+  border: 2px solid #9b879a;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .battle-inspection) {
+  font-size: 13px;
+  line-height: 1.6;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .battle-inspection>p) {
+  margin: 8px 0;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-stats) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 10px 0;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-stats>div) {
+  flex: 1;
+  min-width: 54px;
+  padding: 5px 7px;
+  border: 1px solid #8b7990;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-stats span) {
+  font-size: 11px;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-stats strong) {
+  font-size: 15px;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-description) {
+  margin: 0;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 14px;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover h3) {
+  font-size: 14px;
+  margin: 9px 0;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-moves) {
+  gap: 4px;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-moves p) {
+  padding: 4px;
+  border-width: 1px;
+  font-size: 12px;
+}
+:where(.scope) :global(.field-sections) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 12px 0;
+}
+:where(.scope) :global(.field-inspection .field-sections section) {
+  margin: 0;
+  padding: 12px;
+}
+:where(.scope) :global(.field-ranks) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  border-top: 1px solid #827589;
+  padding-top: 8px;
+  margin-top: 8px;
+}
+:where(.scope) :global(.field-ranks>span:not(.field-empty)) {
+  padding: 3px 6px;
+  border: 1px solid currentColor;
+  font-size: 13px;
+}
+:where(.scope) :global(.rank-up) {
+  color: #ffb18a;
+}
+:where(.scope) :global(.rank-down) {
+  color: #8fc9ff;
+}
+:where(.scope) :global(.held-field-hint) {
+  display: block;
+  color: #c1b9c9;
+  margin-top: 3px;
+  font-size: 12px;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-stats strong) {
+  white-space: nowrap;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-stats>div:last-child) {
+  min-width: 76px;
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover) {
+    padding: 10px;
+    left: 8px;
+    width: calc(100% - 16px);
+    bottom: calc(100% - 38px);
+  }
+  :where(.scope) :global(.inspection-heading>strong) {
+    font-size: 15px;
+  }
+  :where(.scope) :global(.inspection-heading>small) {
+    font-size: 10px;
+  }
+  :where(.scope) :global(.field-sections) {
+    grid-template-columns: 1fr;
+  }
+  :where(.scope) :global(.field-inspection .field-sections section) {
+    padding: 9px;
+  }
+  :where(.scope) :global(.field-ranks) {
+    margin-top: 5px;
+    padding-top: 5px;
+  }
+}
+/* Recruitment keeps move choices inside the game cursor's button navigation. */
+:where(.scope) :global(.trainer-entrance) {
+  --throw-duration: .55s;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 7;
+}
+:where(.scope) :global(.trainer-intro-confirm) {
+  position: absolute;
+  bottom: 14px;
+  right: 16px;
+  z-index: 8;
+  padding: 10px 16px;
+  background: #393347;
+  color: #fff0b0;
+  border: 3px solid #ffe36c;
+  box-shadow: inset 0 0 0 2px #655269;
+  font-size: 16px;
+}
+@media(max-width:760px) {
+  :where(.scope) :global(.trainer-intro-confirm) {
+    bottom: 8px;
+    right: 8px;
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+:where(.scope) :global(.intro-trainer) {
+  --trainer-width: min(26vw,320px,58cqh);
+  position: absolute;
+  bottom: var(--near-ground);
+  width: var(--trainer-width);
+  height: calc(var(--trainer-width)*1.3);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transform-origin: bottom center;
+}
+:where(.scope) :global(.intro-trainer>.boss-portrait),:where(.scope) :global(.intro-trainer>.player-trainer-portrait) {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 8px 2px #17252966);
+}
+:where(.scope) :global(.intro-enemy) {
+  --trainer-width: min(24vw,300px,44cqh);
+  left: calc(var(--far-x) - var(--trainer-width)/2);
+  bottom: var(--far-ground);
+  animation: trainer-enter-enemy .65s steps(12) both;
+}
+:where(.scope) :global(.intro-player) {
+  left: calc(var(--near-x) - var(--trainer-width)/2);
+  animation: trainer-enter-player .65s steps(12) both;
+}
+:where(.scope) :global(.intro-player>.player-back-sprite) {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background-image: url('/sprites/trainers/player-back-sheet.png');
+  background-size: 400% 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  transform: translateY(12%);
+}
+:where(.scope) :global(.trainer-entrance[data-phase=throw] .intro-player>.player-back-sprite) {
+  animation: player-throw-frames var(--throw-duration) steps(1,end) both;
+}
+@keyframes player-throw-frames {
+  0% {
+    background-position: 33.333333% 0;
+  }
+  38% {
+    background-position: 66.666667% 0;
+  }
+  75%,100% {
+    background-position: 100% 0;
+  }
+}
+@media(max-width:760px) {
+  :where(.scope) :global(.intro-trainer) {
+    --trainer-width: min(43vw,175px,40cqh);
+  }
+  :where(.scope) :global(.intro-enemy) {
+    --trainer-width: min(41vw,165px,36cqh);
+  }
+}
+:where(.scope) :global(.trainer-thrown-ball) {
+  position: absolute;
+  right: 8%;
+  top: 43%;
+  opacity: 0;
+}
+:where(.scope) :global(.trainer-thrown-ball>.pokeball) {
+  width: 26px;
+  height: 26px;
+}
+:where(.scope) :global(.trainer-entrance[data-phase=throw] .intro-trainer) {
+  animation: trainer-windup var(--throw-duration) ease-in-out both;
+}
+:where(.scope) :global(.trainer-entrance[data-phase=throw] .intro-player) {
+  animation: player-throw-exit var(--throw-duration) linear both;
+}
+@keyframes player-throw-exit {
+  0%,82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+:where(.scope) :global(.trainer-entrance[data-phase=throw] .trainer-thrown-ball) {
+  animation: trainer-ball-throw var(--throw-duration) ease-out both;
+}
+:where(.scope) :global(.trainer-entrance[data-phase=throw] .intro-player .trainer-thrown-ball) {
+  --throw-x: 160px;
+  --throw-y: -80px;
+  right: 6%;
+  top: 24%;
+  animation-duration: .34s;
+  animation-delay: .21s;
+}
+:where(.scope) :global(.trainer-entrance[data-phase=throw] .intro-enemy .trainer-thrown-ball) {
+  --throw-x: -120px;
+  --throw-y: 45px;
+}
+@keyframes trainer-enter-enemy {
+  from {
+    transform: translateX(220px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes trainer-enter-player {
+  from {
+    transform: translateX(-220px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes trainer-windup {
+  0% {
+    transform: translateX(0) rotate(0);
+  }
+  20% {
+    transform: translateX(-8px) rotate(-5deg);
+  }
+  45% {
+    transform: translateX(10px) rotate(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+}
+@keyframes trainer-ball-throw {
+  0%,20% {
+    opacity: 0;
+    transform: translate(0,0);
+  }
+  25% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+    transform: translate(calc(var(--throw-x)*.5),-90px) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--throw-x),var(--throw-y)) rotate(360deg);
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  :where(.scope) :global(.intro-trainer),:where(.scope) :global(.trainer-entrance[data-phase=throw] .intro-trainer),:where(.scope) :global(.trainer-entrance[data-phase=throw] .trainer-thrown-ball),:where(.scope) :global(.trainer-entrance[data-phase=throw] .intro-player>.player-back-sprite) {
+    animation: none;
+  }
+  :where(.scope) :global(.trainer-entrance[data-phase=throw] .trainer-thrown-ball) {
+    opacity: 1;
+  }
+  :where(.scope) :global(.trainer-entrance[data-phase=throw] .intro-player>.player-back-sprite) {
+    background-position: 66.666667% 0;
+  }
+}
+:where(.scope) :global(.recruit-new-moves) {
+  display: inline-block;
+  padding: 4px 7px;
+  background: #493b21;
+  border: 1px solid #e8bf65;
+  color: #ffe9a0;
+  font-size: 11px;
+}
+:where(.scope) :global(.recruit-mode-buttons),:where(.scope) :global(.recruit-move-options) {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 8px;
+}
+:where(.scope) :global(.recruit-moves button) {
+  white-space: normal;
+  min-height: 44px;
+  text-align: left;
+}
+:where(.scope) :global(.recruit-moves button[aria-pressed=true]) {
+  border-color: #ffe36c;
+  background: #51452e;
+  color: #fff4ba;
+}
+:where(.scope) :global(.recruit-move-options small) {
+  display: block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: #ffe9a0;
+}
+:where(.scope) :global(.recruit-moves h4) {
+  font-size: 14px;
+  margin: 18px 0 10px;
+}
+:where(.scope) :global(.recruit-move-comparison) {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+:where(.scope) :global(.recruit-move-detail) {
+  padding: 12px;
+  border: 2px solid #786b92;
+  background: #292438;
+  min-width: 0;
+}
+:where(.scope) :global(.recruit-move-detail:last-child) {
+  border-color: #d3af65;
+}
+:where(.scope) :global(.recruit-move-detail>small) {
+  display: block;
+  color: #c3b8d0;
+  margin-bottom: 8px;
+}
+:where(.scope) :global(.recruit-move-detail>strong) {
+  font-size: 18px;
+  color: #fff0be;
+}
+:where(.scope) :global(.recruit-move-detail dl) {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 10px 0;
+}
+:where(.scope) :global(.recruit-move-detail dt) {
+  font-size: 11px;
+  color: #c3b8d0;
+}
+:where(.scope) :global(.recruit-move-detail dd) {
+  margin: 4px 0 0;
+  font-size: 15px;
+}
+@media(max-width:480px) {
+  :where(.scope) :global(.recruit-move-detail) {
+    padding: 8px;
+  }
+  :where(.scope) :global(.recruit-move-detail>strong) {
+    font-size: 15px;
+  }
+  :where(.scope) :global(.recruit-mode-buttons) {
+    grid-template-columns: 1fr;
+  }
+}

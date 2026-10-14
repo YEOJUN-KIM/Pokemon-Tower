@@ -15,7 +15,7 @@ const inspect=(id:string,name:string)=>{
  removedIds.add(id);removedKeys.add(species.spriteid);
 };
 for(const entry of dex)inspect(String(entry.id),entry.species);
-for(const line of (await readFile('.data/form-import-cache/pokemon.csv','utf8')).trim().split(/\r?\n/).slice(1)){
+for(const line of (await readFile('.data/cache/forms/pokemon.csv','utf8')).trim().split(/\r?\n/).slice(1)){
  const [id,name]=line.split(',');inspect(id,name);
 }
 for(const [id,value] of Object.entries(pixelInventory))if(removedIds.has(id))removedKeys.add(value.key);
@@ -34,8 +34,8 @@ async function scan(directory:string,kind:number){
 }
 for(let i=0;i<roots.length;i++)await scan(resolve(roots[i]),i);
 const report={removedIds:[...removedIds].sort((a,b)=>Number(a)-Number(b)),requiredNpc:[...requiredNpc],files,bytes:files.reduce((n,f)=>n+f.bytes,0)};
-await mkdir('artifacts/reports',{recursive:true});
-await writeFile('artifacts/reports/unevolved-sprite-pruning.json',JSON.stringify(report,null,2)+'\n');
+await mkdir('artifacts/qa/assets/reports',{recursive:true});
+await writeFile('artifacts/qa/assets/reports/unevolved-sprite-pruning.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({ids:removedIds.size,files:files.length,bytes:report.bytes,apply:process.argv.includes('--apply')}));
 if(process.argv.includes('--apply')){
  for(const file of files){const path=resolve(file.path);if(!roots.some(root=>path.startsWith(resolve(root)+sep)))throw Error('Unsafe sprite deletion: '+path);await unlink(path);}

@@ -13,7 +13,7 @@ test('Mega Zygarde uses its own artwork instead of the base sprite',async({page,
  await expect(summary).toHaveAttribute('data-preview-form','Zygarde-Mega');
  await expect(summary.locator('.summary-sprite img')).toHaveAttribute('src','/vendor/pokeapi/pokemon/other/official-artwork/10301.png');
  await expect.poll(()=>summary.locator('.summary-sprite img').evaluate(img=>(img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
- await summary.screenshot({path:'artifacts/screenshots/mega-zygarde.png'});
+ await summary.screenshot({path:'artifacts/qa/screenshots/mega-zygarde.png'});
  await summary.getByRole('button',{name:'기본 모습',exact:true}).click();
  await expect(summary.locator('.summary-sprite img')).not.toHaveAttribute('src',/10301/);
 });

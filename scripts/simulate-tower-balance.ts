@@ -13,7 +13,7 @@ import {isShopFloor,upgrades,type UpgradeKind} from '../src/data/shop';
 type Encounter={floor:number;seed:Seed;enemy:string;role:string;trainer:string;reward:number};
 type Course={id:string;encounters:Encounter[]};
 const phase=process.argv[2] ?? 'before',count=Number(process.env.BALANCE_SAMPLES ?? 24);
-const path='artifacts/balance-courses.json';mkdirSync('artifacts',{recursive:true});
+const path='artifacts/experiments/balance/balance-courses.json';mkdirSync('artifacts',{recursive:true});
 let courses:Course[];
 if(existsSync(path))courses=JSON.parse(readFileSync(path,'utf8')).courses;
 else{
@@ -87,4 +87,4 @@ for(const stage of stages){
   const result={stage:stage.id,probe,climbs,averageCleared:climbs.reduce((s,c)=>s+c.cleared,0)/climbs.length,finished:climbs.filter(c=>c.cleared===30).length};
   report.stages.push(result);console.log(`${stage.id}: average ${result.averageCleared.toFixed(1)} floors, clears ${result.finished}/${climbs.length}; probe 1/5/10/20/30: ${[1,5,10,20,30].map(f=>probe[f-1].wins+'/'+courses.length).join(', ')}`);
 }
-writeFileSync(`artifacts/balance-${phase}.json`,JSON.stringify(report,null,2));
+writeFileSync(`artifacts/experiments/balance/balance-${phase}.json`,JSON.stringify(report,null,2));

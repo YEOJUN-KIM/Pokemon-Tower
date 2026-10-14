@@ -19,7 +19,7 @@ test('capture 2D Garchomp dynamax growth, max move and three-turn expiry',async(
   await page.setViewportSize({width:1280,height:720});await page.goto('/battle');
   const fight=page.getByRole('button',{name:'싸운다',exact:true});await expect(fight).toHaveAttribute('data-game-cursor','true');
   await page.keyboard.press('Enter');await page.keyboard.press('m');await expect(page.getByTestId('gimmick-toggle')).toHaveAttribute('aria-pressed','true');
-  const dir='artifacts/dynamax-frames';mkdirSync(dir,{recursive:true});const frames:{path:string;time:number}[]=[];
+  const dir='artifacts/experiments/balance/dynamax-frames';mkdirSync(dir,{recursive:true});const frames:{path:string;time:number}[]=[];
   const phases=new Set<string>();const capture=async()=>{for(const c of await page.locator('[class*="motion-dynamax-"]').evaluateAll(elements=>elements.map(e=>e.className)))phases.add(c);const path=dir+'/'+String(frames.length).padStart(3,'0')+'.png';await page.screenshot({path});frames.push({path,time:Date.now()});};
   const recordTurn=async()=>{const start=Date.now();while(Date.now()-start<20000){await capture();if(await page.locator('.arena').getAttribute('data-playing')==='false')break;await page.waitForTimeout(80);}await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');};
   await capture();await page.keyboard.press('Enter');await expect(page.locator('.arena')).toHaveAttribute('data-playing','true');await recordTurn();

@@ -91,6 +91,10 @@ const presetMoves: Record<string, {name: string; type: string; color: string}> =
 };
 export const moves:Record<string,{name:string;type:string;color:string}>={...Object.fromEntries(Object.entries(moveInfo).map(([key,value])=>[key,{name:value.name,type:moveTypeNames[value.type],color:value.type.toLowerCase()}])),...presetMoves};
 export const pokemonName = (name: string) => species[name]?.name ?? name;
+export function battlePokemonName(name:string){
+  if(/^Urshifu(?:-Rapid-Strike)?(?:-Gmax)?$/.test(name))return name.endsWith('-Gmax')?'거다이맥스 우라오스':'우라오스';
+  return pokemonName(name);
+}
 export const statNames: Record<string, string> = {atk:'공격', def:'방어', spa:'특수공격', spd:'특수방어', spe:'스피드', accuracy:'명중률', evasion:'회피율'};
 export const spriteUrl = (name: string, back = false, spriteId?:number) => {
   const id = spriteId ?? species[name]?.spriteKey ?? species[name]?.id;

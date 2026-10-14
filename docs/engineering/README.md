@@ -1,12 +1,13 @@
-# 개발 구조와 유지보수
+# 개발 문서
 
-게임을 플레이하는 데에는 읽지 않아도 됩니다. 구현을 수정하거나 저장 구조를 확인할 때 사용하세요.
+| 수정·확인할 것 | 문서 |
+|---|---|
+| 폴더·파일 위치와 삭제 기준 | [작업 공간 관리](WORKSPACE.md) |
+| 코드 영역과 연결 | [구조](ARCHITECTURE.md) |
+| 저장 DB·복구 | [데이터](DATABASE.md) |
+| 사용하는 기술 | [기술 구성](TECH_STACK.md) |
+| CSS 담당 위치와 규칙 | [CSS 관리](CSS_STRUCTURE.md) |
+| NPC 생성기·JSON·CSV | [NPC 데이터](NPC_DATA.md) |
+| 문서 작성·정리 규칙 | [문서 관리](MAINTENANCE.md) |
 
-- [코드와 서버 구조](ARCHITECTURE.md)
-- [DB 구조와 저장 검증](DATABASE.md)
-- [기술 구성](TECH_STACK.md)
-- [문서·파일 관리 원칙](MAINTENANCE.md)
-
-[기술 결정 기록](decisions/README.md)
-
-[문서 첫 화면으로](../README.md)
+[게임 안내](../gameplay/README.md) · [보고서](../../artifacts/README.md)

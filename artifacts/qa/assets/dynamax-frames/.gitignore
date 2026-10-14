@@ -1,0 +1,2 @@
+# Keep previously versioned reference files; other generated outputs stay local.
+!timing.json

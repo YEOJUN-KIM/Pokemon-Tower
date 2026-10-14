@@ -1,6 +1,6 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 const read=p=>JSON.parse(readFileSync(p,'utf8'));
-const audit=read('artifacts/support-player-audit.json'),replay=read('artifacts/support-player-replay-audit.json'),manifest=read('artifacts/support-player-manifest.json');
+const audit=read('artifacts/experiments/ai/support-player-audit.json'),replay=read('artifacts/experiments/ai/support-player-replay-audit.json'),manifest=read('artifacts/experiments/ai/support-player-manifest.json');
 const rate=n=>(n*100).toFixed(1)+'%';
 const aggregate=(cohort,rule,mode)=>audit.aggregates.find(a=>a.cohort===cohort&&a.rule===rule&&a.mode===mode);
 const rules={basic:'기본',mega:'메진',dynamax:'다맥',tera:'테라',chaos:'개판'};
@@ -57,11 +57,11 @@ ${caseTable}
 
 ## 데이터 형식과 다음 학습
 
-- \`artifacts/support-player-*-turns.jsonl\`: 행동 직전 자기 팀 상태, 공개 상대 상태, 합법 행동 목록, 공개 벽/트릭룸/날씨/랭크/이전 행동 맥락, 선택한 행동과 이유, 배틀 결과. 총 **${audit.decisions.toLocaleString()}개 플레이어 결정**.
+- \`artifacts/experiments/ai/support-player-*-turns.jsonl\`: 행동 직전 자기 팀 상태, 공개 상대 상태, 합법 행동 목록, 공개 벽/트릭룸/날씨/랭크/이전 행동 맥락, 선택한 행동과 이유, 배틀 결과. 총 **${audit.decisions.toLocaleString()}개 플레이어 결정**.
 - 입력은 \`observation\`과 행동 전 \`context\`만 사용한다. \`action/reason/outcome\`은 목표 또는 결과 라벨이다. \`outcome\`은 미래 정보이므로 입력에 넣지 않는다. \`reason\`은 기존 규칙의 설명이지 최적 행동의 증명은 아니다.
-- \`artifacts/support-player-*-battles.jsonl\`: 재생용 시드/양쪽 팀/행동/전체 공개 프로토콜. 여기에 저장된 상대 전체 팀은 오프라인 재생용이며 정책·모델 입력에 사용하지 않는다.
+- \`artifacts/experiments/ai/support-player-*-battles.jsonl\`: 재생용 시드/양쪽 팀/행동/전체 공개 프로토콜. 여기에 저장된 상대 전체 팀은 오프라인 재생용이며 정책·모델 입력에 사용하지 않는다.
 - 같은 \`courseId\`에 속한 모든 룰/정책/팀/층을 같은 학습 또는 검증 그룹에 둬야 한다. 턴별 무작위 분할은 같은 배틀과 코스가 양쪽에 섞인다. \`battleKey\`는 조인 키이며 숫자형 학습 특성으로 쓰지 않는다.
-- 같은 상대/시드에서 v7/v8/v9의 개선·악화·동률 쌍 비교는 \`artifacts/support-player-audit.json\`에 저장했다. 벽이 도움이 된 경우와 턴만 낭비한 경우를 모두 남겼다. 다음은 이 차이를 분류하고 실제 등반/정비/영입 조건에서도 검증하는 작업이다.
+- 같은 상대/시드에서 v7/v8/v9의 개선·악화·동률 쌍 비교는 \`artifacts/experiments/ai/support-player-audit.json\`에 저장했다. 벽이 도움이 된 경우와 턴만 낭비한 경우를 모두 남겼다. 다음은 이 차이를 분류하고 실제 등반/정비/영입 조건에서도 검증하는 작업이다.
 
 재실행: \`node scripts/run-support-player-simulation.mjs --resume\`. 실행 전에 해시를 비교하며 기존 파일은 완성된 동일 조건에만 재사용한다. 데이터 검증: \`node scripts/audit-support-player-data.mjs\`. 재생 검증: \`node node_modules/tsx/dist/cli.mjs scripts/audit-support-player-replays.ts\`.
 
@@ -71,8 +71,8 @@ ${caseTable}
 
 원본과 감사 결과: \`support-player-manifest.json\`, \`support-player-cases.json\`, \`support-player-audit.json\`, \`support-player-replay-audit.json\`.
 `;
-writeFileSync('docs/SUPPORT_PLAYER_DATA.md',document);
-const note=`최신 벽 활용 데이터: 실험용 플레이어v9에 벽 설치→딜러 교체→랭크업 추가. 6고정팀·5룰·v7/v8/v9·기존/새 코스 17,820독립배틀·164,948결정. v9 벽 설치${activations.toLocaleString()}회/교체2,885회/벽 중 랭크업2,590회. 새 코스 기본룰 v7 90.1%·v8 91.8%·v9 91.1%로 v8 대비 일관된 개선은 아님. 상대v7/게임 난이도 유지, 모델 학습 없음, 등반 성공률과 다름. 단위30개·타입검사·90배틀 전체 재생 일치. [실험과 입력/결과 분리](SUPPORT_PLAYER_DATA.md).`;
-for(const p of ['docs/STATUS.md','docs/SESSION_HANDOFF.md']){let text=readFileSync(p,'utf8');if(!text.includes(note)){const end=text.indexOf('\n');text=text.slice(0,end+1)+'\n'+note+'\n'+text.slice(end+1);writeFileSync(p,text);}}
-writeFileSync('artifacts/support-player-dataset-catalog.json',JSON.stringify({schemaVersion:1,manifest:'support-player-manifest.json',inputFields:['observation','context'],targetFields:['action','reason'],outcomeFields:['outcome'],groupField:'courseId',joinField:'battleKey',excludeInputs:['outcome','action','reason','teams','key','battleKey','courseId'],modelTrained:false,files:manifest.jobs.map(j=>({phase:j.phase,battles:`${j.phase}-battles.jsonl`,turns:`${j.phase}-turns.jsonl`,summary:`${j.phase}-summary.json`}))},null,2));
+writeFileSync('artifacts/experiments/ai/SUPPORT_PLAYER_DATA.md',document);
+// Current docs are maintained separately; a simulation writes only its report.
+
+writeFileSync('artifacts/experiments/ai/support-player-dataset-catalog.json',JSON.stringify({schemaVersion:1,manifest:'support-player-manifest.json',inputFields:['observation','context'],targetFields:['action','reason'],outcomeFields:['outcome'],groupField:'courseId',joinField:'battleKey',excludeInputs:['outcome','action','reason','teams','key','battleKey','courseId'],modelTrained:false,files:manifest.jobs.map(j=>({phase:j.phase,battles:`${j.phase}-battles.jsonl`,turns:`${j.phase}-turns.jsonl`,summary:`${j.phase}-summary.json`}))},null,2));
 console.log('Wrote support player report and dataset catalog');

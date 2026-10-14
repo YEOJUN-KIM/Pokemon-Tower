@@ -34,8 +34,8 @@ for(let generation=1;generation<=9;generation++)test(`audit every generation ${g
   }catch(error){issues.push(entry.species+': '+String(error));await page.goto('/pokedex');}
   if((index+1)%25===0)console.log(`Sprite audit generation ${generation}: ${index+1}/${group.length}`);
  }
- const directory='artifacts/reports/pokedex-sprites';await mkdir(directory,{recursive:true});
+ const directory='artifacts/qa/assets/reports/pokedex-sprites';await mkdir(directory,{recursive:true});
  await writeFile(`${directory}/generation-${generation}.json`,JSON.stringify({generation,expected:group.length,checked:records.length,issues,records},null,2));
- await preview.screenshot({path:`artifacts/screenshots/pokedex-audit/generation-${generation}.png`});
+ await preview.screenshot({path:`artifacts/qa/screenshots/pokedex-audit/generation-${generation}.png`});
  expect(issues,issues.join('\n')).toEqual([]);expect(records).toHaveLength(group.length);
 });

@@ -1,0 +1,181 @@
+/* src/web/battle-focus.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
+/* Keep the cursor clear without the old double yellow frame. */
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live button[data-game-cursor=true]),
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live button:focus-visible),
+:global(body:has(.battle-live)) :where(.scope) :global(dialog button[data-game-cursor=true]),
+:global(body:has(.battle-live)) :where(.scope) :global(dialog button:focus-visible) {
+  outline: 2px solid #98efd1!important;
+  outline-offset: 2px!important;
+  border-color: #98efd1!important;
+  box-shadow: none!important;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live :is(.action-button,.pokemon-choice,.battle-party-option)[data-game-cursor=true]),:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live :is(.action-button,.pokemon-choice,.battle-party-option):focus-visible),:global(body:has(.battle-live)) :where(.scope) :global(dialog .dex-action-options button[data-game-cursor=true]),:global(body:has(.battle-live)) :where(.scope) :global(dialog .dex-action-options button:focus-visible) {
+  background: #405d59!important;
+  color: #f3fff8!important;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live :is(.action-button,.pokemon-choice)[data-game-cursor=true] strong) {
+  color: #f3fff8!important;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-choice-arrow) {
+  color: #98efd1;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live :is(.gimmick-dock,.tera-command-side) button[data-game-cursor=true]),:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live :is(.gimmick-dock,.tera-command-side) button:focus-visible) {
+  outline-offset: 2px!important;
+  border-radius: 8px;
+  box-shadow: none!important;
+}
+/* Pointer clicks do not need a native focus frame; Tab remains visible. */
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .gimmick-icon-button:focus:not(:focus-visible):not([data-game-cursor=true])) {
+  outline: none!important;
+}
+:global(body[data-game-input=pointer]) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .gimmick-icon-button) {
+  outline: none!important;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-live footer>.battle-keyboard-hints) {
+  display: flex!important;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 11px;
+  color: #e3edf6;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-keyboard-hints>span) {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-keyboard-hints kbd),:where(.scope) :global(.gimmick-cycle-hint kbd) {
+  border: 1px solid #8a9cae;
+  border-bottom-width: 3px;
+  border-radius: 4px;
+  background: #233648;
+  color: #fff;
+  padding: 2px 6px;
+  font: 700 11px monospace;
+}
+:where(.scope) :global(.gimmick-cycle-hint) {
+  position: absolute;
+  left: 12px;
+  bottom: calc(100% + 4px);
+  font-size: 11px;
+  color: #edf4ff;
+  white-space: nowrap;
+  text-shadow: 0 1px 3px #101324;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .right-column) {
+  left: 16px;
+  top: 42px;
+  max-width: calc(100% - 32px);
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-panel) {
+  overflow: visible;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-panel>.section-heading) {
+  display: block;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-panel h2) {
+  font-size: 12px;
+  color: #e5eef8;
+  white-space: nowrap;
+  background: #233648e6;
+  padding: 5px 7px;
+  border-radius: 4px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-list) {
+  gap: 6px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member) {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 54px;
+  min-height: 68px;
+  flex: none;
+  border: 1px solid #b5c9dd40;
+  border-radius: 6px;
+  background: #233648bf;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member .sprite) {
+  width: 50px;
+  height: 46px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-status) {
+  display: block;
+  font-size: 10px;
+  line-height: 18px;
+  margin: 0;
+  color: #e1ecf7;
+  padding: 0 4px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member.is-muted .sprite) {
+  filter: grayscale(1);
+  opacity: .45;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member.is-muted .team-status) {
+  color: #aab5c0;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member.is-active) {
+  border-color: #98efd1;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-empty) {
+  display: grid;
+  place-items: center;
+  height: 46px;
+  width: 50px;
+  color: #8393a4;
+  font-size: 22px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-trainer) {
+  font-size: 12px;
+  letter-spacing: .3px;
+  top: 18px;
+  right: 20px;
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .right-column) {
+    left: 8px;
+    top: 36px;
+    max-width: calc(100% - 16px);
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-panel>.section-heading) {
+    display: none;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-list) {
+    gap: 4px;
+    width: auto;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member) {
+    width: 42px;
+    min-height: 52px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member .sprite),:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-empty) {
+    width: 40px;
+    height: 34px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-status) {
+    font-size: 8px;
+    line-height: 15px;
+    padding: 0 2px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-trainer) {
+    font-size: 10px;
+    top: 62px;
+    right: 12px;
+  }
+  :where(.scope) :global(.gimmick-cycle-hint) {
+    font-size: 9px;
+  }
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice) {
+  animation: notice-enter .16s ease-out both;
+}
+@keyframes notice-enter {
+  from {
+    opacity: 0;
+    transform: translateX(var(--notice-slide));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

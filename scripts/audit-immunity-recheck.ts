@@ -7,13 +7,13 @@ import {runBattle,replayBattle,battleEvents} from '../src/battle/run';
 
 const read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
 async function rows(path:string){const out:any[]=[];for await(const l of createInterface({input:createReadStream(path),crlfDelay:Infinity}))if(l.trim())out.push(JSON.parse(l));return out;}
-const source=read('artifacts/observed-damage-validation-courses.json').courses;
-const oldLosses=read('artifacts/tower-loss-diagnosis.json').climbs;
+const source=read('artifacts/experiments/ai/observed-damage-validation-courses.json').courses;
+const oldLosses=read('artifacts/experiments/balance/tower-loss-diagnosis.json').climbs;
 let fixedBattles=0,fixedDecisions=0,replays=0;const summaries:any[]=[],climbs:any[]=[];
 for(const rule of ['basic','tera','chaos']){
- const manifest=read(`artifacts/immunity-recheck-${rule}-manifest.json`);assert.equal(createHash('sha256').update(readFileSync(manifest.source)).digest('hex'),manifest.sourceHash);
+ const manifest=read(`artifacts/experiments/ai/immunity-recheck-${rule}-manifest.json`);assert.equal(createHash('sha256').update(readFileSync(manifest.source)).digest('hex'),manifest.sourceHash);
  for(const f of manifest.files)assert.equal(createHash('sha256').update(readFileSync(f.path)).digest('hex'),f.sha256);
- const summary=read(`artifacts/immunity-recheck-${rule}-summary.json`);summaries.push(summary);const records=await rows(`artifacts/immunity-recheck-${rule}-battles.jsonl`);assert.equal(records.length,1188);
+ const summary=read(`artifacts/experiments/ai/immunity-recheck-${rule}-summary.json`);summaries.push(summary);const records=await rows(`artifacts/experiments/ai/immunity-recheck-${rule}-battles.jsonl`);assert.equal(records.length,1188);
  for(const b of records){assert.equal(b.playerDecisions.length,b.decisions.filter((d:any)=>d.side==='p1').length);for(const d of b.playerDecisions){assert(d.observation.legalActions.some((a:any)=>a.command===d.action));assert(d.context.immunity.turn<=d.observation.turn);if(d.observation.opponent)assert(Object.keys(d.observation.opponent).every(k=>['species','condition'].includes(k)));fixedDecisions++;}}
  for(const mode of ['v9','matchup'])assert.equal(records.filter(b=>b.mode===mode&&b.winner==='Player').length,summary[mode].wins);
  fixedBattles+=records.length;
@@ -21,9 +21,9 @@ for(const rule of ['basic','tera','chaos']){
   const b=records.find(b=>b.mode==='matchup'&&b.caseId===pair.caseId&&b.courseId===pair.courseId&&b.floor===pair.floor)!;
   const log={...b,decisions:b.decisions.map((d:any)=>({...d,observation:{}}))};const replay=await replayBattle(log);assert.deepEqual(battleEvents(replay.publicProtocol),battleEvents(b.publicProtocol));replays++;
  }
- const report=read(`artifacts/simulation-immunity-climb-${rule}-matchup-balanced.json`),before=read(`artifacts/simulation-observed-climb-${rule}-v9-balanced.json`);
+ const report=read(`artifacts/experiments/balance/simulation-immunity-climb-${rule}-matchup-balanced.json`),before=read(`artifacts/experiments/balance/simulation-observed-climb-${rule}-v9-balanced.json`);
  assert.equal(report.stages.length,6);assert.deepEqual(report.prices,before.prices);assert.deepEqual(report.caseDefinitions,before.caseDefinitions);assert.equal(report.sourceCourseHash,before.sourceCourseHash);assert.equal(report.opponentAI,'v7');
- const battles=await rows(`artifacts/immunity-climb-${rule}-matchup-battles.jsonl`);assert.equal(battles.length,report.stages.reduce((s:number,c:any)=>s+c.battles,0));
+ const battles=await rows(`artifacts/experiments/ai/immunity-climb-${rule}-matchup-battles.jsonl`);assert.equal(battles.length,report.stages.reduce((s:number,c:any)=>s+c.battles,0));
  let finished=0,passed50=0,cleared=0,higher=0,lower=0,same=0,count=0,lossesWithRepeat=0,repeatLossAttacks=0,knownBlocked=0,preventableBlocked=0,losses=0;
  for(const st of report.stages){assert.equal(st.climbs.length,9);for(const c of st.climbs){count++;finished+=Number(c.cleared===100);passed50+=Number(c.cleared>=50);cleared+=c.cleared;
   assert.equal(c.coins,c.earned-c.spent);assert(c.coins>=0);const sequence=battles.filter(b=>b.caseId===st.stage&&b.courseId===c.id);assert.equal(sequence.length,c.cleared+(c.cleared<100?1:0));assert(sequence.every((b,i)=>b.floor===i+1));assert(sequence.slice(0,c.cleared).every(b=>b.winner==='Player'));
@@ -41,5 +41,5 @@ for(const rule of ['basic','tera','chaos']){
  console.log(`Audited ${rule}: ${battles.length} climb battles, ${losses} terminal loss replays`);
 }
 const files=['scripts/simulate-immunity-climb.ts','src/battle/matchup-aware-support-player-policy.ts','src/battle/revealed-immunity.ts','src/data/type-effectiveness.ts','src/data/type-chart.json'];
-writeFileSync('artifacts/immunity-recheck-audit.json',JSON.stringify({fixedBattles,fixedDecisions,replays,files:files.map(path=>({path,sha256:createHash('sha256').update(readFileSync(path)).digest('hex')})),summaries:summaries.map(({results,...s})=>s),climbs,notes:'Seen course diagnostic rerun, not held-out generalization. Rules share nine courses. No player profile or enemy AI/balance change. Climb exposure lengths differ; fixed battle pairs isolate teams/seeds and player-version change.'},null,2));
+writeFileSync('artifacts/experiments/ai/immunity-recheck-audit.json',JSON.stringify({fixedBattles,fixedDecisions,replays,files:files.map(path=>({path,sha256:createHash('sha256').update(readFileSync(path)).digest('hex')})),summaries:summaries.map(({results,...s})=>s),climbs,notes:'Seen course diagnostic rerun, not held-out generalization. Rules share nine courses. No player profile or enemy AI/balance change. Climb exposure lengths differ; fixed battle pairs isolate teams/seeds and player-version change.'},null,2));
 console.log(JSON.stringify({fixedBattles,fixedDecisions,replays,climbs},null,2));

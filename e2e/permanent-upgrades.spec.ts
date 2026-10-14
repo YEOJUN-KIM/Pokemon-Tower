@@ -13,10 +13,10 @@ for(const width of [1280,390])test(`upgrade shop purchases, 1/10 hatch and keybo
  await page.getByRole('button',{name:'2회로 확장 · 500P'}).click();await expect(page.getByRole('dialog')).toContainText('종류별 2회');await page.keyboard.press('z');await expect(page.getByRole('dialog')).not.toBeVisible();
  await page.getByRole('button',{name:'1장 구매 · 10,000P'}).click();await expect(page.getByRole('dialog')).toBeVisible();await page.keyboard.press('x');
  await page.getByRole('button',{name:'교환권 사용 · 포켓몬 선택'}).click();page.once('dialog',d=>d.accept());await page.getByRole('dialog').getByRole('button',{name:'리자몽',exact:true}).click();await expect(page.getByRole('dialog')).toContainText('이로치 외형을 해금');await page.keyboard.press('z');
- await page.getByRole('button',{name:'10회 뽑기 · 3장 + 1,400P'}).click();await expect(page.locator('.egg-station')).toHaveClass(/is-spinning/);await expect(page.getByTestId('egg-result')).toHaveCount(10);await expect(page.getByTestId('egg-result').first().locator('h3')).toHaveCSS('color','rgb(39, 60, 65)');await expect(page.getByRole('dialog')).not.toContainText('변화 없음');await page.screenshot({path:`artifacts/screenshots/permanent-upgrades-final/results-${width}.png`});await page.keyboard.press('x');
+ await page.getByRole('button',{name:'10회 뽑기 · 3장 + 1,400P'}).click();await expect(page.locator('.egg-station')).toHaveClass(/is-spinning/);await expect(page.getByTestId('egg-result')).toHaveCount(10);await expect(page.getByTestId('egg-result').first().locator('h3')).toHaveCSS('color','rgb(39, 60, 65)');await expect(page.getByRole('dialog')).not.toContainText('변화 없음');await page.screenshot({path:`artifacts/qa/screenshots/permanent-upgrades-final/results-${width}.png`});await page.keyboard.press('x');
  await page.getByRole('button',{name:'1회 뽑기 · 200P',exact:true}).click();await expect(page.getByTestId('egg-result')).toHaveCount(1);await page.keyboard.press('x');
  await page.reload();await expect(page.getByTestId('permanent-wallet')).toHaveText('7,900P');await expect(page.getByRole('button',{name:'1회 뽑기 · 200P',exact:true})).toBeEnabled();await expect(page.getByRole('button',{name:'교환권 사용 · 포켓몬 선택'})).toBeDisabled();
- expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:`artifacts/screenshots/permanent-upgrades-final/shop-${width}.png`,fullPage:true});await page.goto('/pokedex');await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.keyboard.press('x');await expect(page.locator('.dex-partner-stage img')).toHaveAttribute('src',/shiny/);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);await page.screenshot({path:`artifacts/qa/screenshots/permanent-upgrades-final/shop-${width}.png`,fullPage:true});await page.goto('/pokedex');await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.keyboard.press('x');await expect(page.locator('.dex-partner-stage img')).toHaveAttribute('src',/shiny/);
 });
 
 test('shiny battle entry is visible for both sides and capture animation',async({page,context})=>{
@@ -30,9 +30,9 @@ test('shiny battle entry is visible for both sides and capture animation',async(
  await page.clock.install();await page.clock.pauseAt(new Date(Date.now()+10000));
  await page.getByRole('button',{name:'포켓몬 내보내기 · Enter',exact:true}).click();await page.clock.runFor(1950);
  await expect(page.locator('.player-position img')).toBeVisible();await expect(page.locator('.arena .shiny-sendout')).toHaveCount(2);
- const frames='artifacts/previews/shiny-entry/frames-sendout';mkdirSync(frames,{recursive:true});
+ const frames='artifacts/qa/previews/shiny-entry/frames-sendout';mkdirSync(frames,{recursive:true});
  await page.evaluate(()=>{for(const a of document.getAnimations())if((a.effect as KeyframeEffect).target instanceof HTMLElement&&((a.effect as KeyframeEffect).target as HTMLElement).closest('.shiny-sparkles'))a.pause();});
  for(let i=0;i<22;i++){await page.evaluate(time=>{for(const a of document.getAnimations())if((a.effect as KeyframeEffect).target instanceof HTMLElement&&((a.effect as KeyframeEffect).target as HTMLElement).closest('.shiny-sparkles'))a.currentTime=time;},i*60);await page.locator('.arena').screenshot({path:`${frames}/${String(i).padStart(2,'0')}.png`});}
  await page.clock.runFor(5000);await expect(page.locator('.arena .shiny-sparkles')).toHaveCount(0);await page.reload();await expect(page.locator('.arena .shiny-sparkles')).toHaveCount(0);
- await page.screenshot({path:'artifacts/screenshots/permanent-upgrades-final/shiny-battle-idle.png'});
+ await page.screenshot({path:'artifacts/qa/screenshots/permanent-upgrades-final/shiny-battle-idle.png'});
 });

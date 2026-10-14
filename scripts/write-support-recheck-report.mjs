@@ -1,6 +1,6 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 const read=p=>JSON.parse(readFileSync(p,'utf8'));
-const audit=read('artifacts/support-recheck-audit.json'),diagnosis=read('artifacts/support-decision-diagnosis.json');
+const audit=read('artifacts/experiments/ai/support-recheck-audit.json'),diagnosis=read('artifacts/experiments/ai/support-decision-diagnosis.json');
 const get=(kind,rule,mode)=>audit.aggregates.find(a=>a.kind===kind&&a.rule===rule&&a.mode===mode);
 const modes=['v8','v9','v10'],rules={basic:'기본',mega:'메진',dynamax:'다맥',tera:'테라',chaos:'개판'};
 const battles=Object.entries(rules).map(([r,n])=>`| ${n} | ${modes.map(m=>{const a=get('battle',r,m);return `${a.wins}/594 (${(a.rate*100).toFixed(1)}%)`;}).join(' | ')} |`).join('\n');
@@ -11,7 +11,7 @@ const doc=`# 벽 판단의 실패 분석과 새 코스 재검증 · 2026-10-10
 
 ## 실패 기록에서 확인한 것
 
-이전 새 코스 기본룰에서 v9가 v8의 패배를 승리로 바꾼 경우10개, 반대로 승리를 패배로 바꾼 경우14개였다. 악화14개 중 벽 후 교체가 있었던 경우9개, 벽 중 랭크업이 있었던 경우10개, 트릭룸 사용이 있었던 경우4개였다. 이 항목들은 중복된다. 같은 시드라도 행동 변경 후 난수 소비와 상대 선택이 달라지므로 이 숫자만으로 원인을 단정하지 않았다. 비교 타임라인은 artifacts/support-decision-diagnosis.json에 개선과 악화 모두 보존했다.
+이전 새 코스 기본룰에서 v9가 v8의 패배를 승리로 바꾼 경우10개, 반대로 승리를 패배로 바꾼 경우14개였다. 악화14개 중 벽 후 교체가 있었던 경우9개, 벽 중 랭크업이 있었던 경우10개, 트릭룸 사용이 있었던 경우4개였다. 이 항목들은 중복된다. 같은 시드라도 행동 변경 후 난수 소비와 상대 선택이 달라지므로 이 숫자만으로 원인을 단정하지 않았다. 비교 타임라인은 artifacts/experiments/ai/support-decision-diagnosis.json에 개선과 악화 모두 보존했다.
 
 구체적인 문제:
 
@@ -24,7 +24,7 @@ const doc=`# 벽 판단의 실패 분석과 새 코스 재검증 · 2026-10-10
 
 공개 종족값에 기반한 피해 추정을 더 크게 잡고, 혼합 공격 가능성을 고려했다. 벽이 예상되는 주요 피해를 줄일 때만 보호로 인정한다. 교체 피해와 다음 공격까지 두 번 버틸 여유, 남은 벽3턴, 랭크업의 생존 여유를 확인한다. 물리 화상 랭크업과 행동 불가 마무리 분류도 제한했다. 무조건 보수적으로 하는 것이 좋다는 가정은 아래 비교로 검증했다.
 
-이전 기존/새 코스는 개발 데이터로 처리했다. 그들과 ID가 겹치지 않는 새9코스를 생성하고 실행 전 정책/팀/코스/하네스 해시를 고정했다. 재검증 결과를 본 뒤 v10을 추가 조정하지 않았다. 파일 artifacts/support-recheck-manifest.json에 조건을 남겼다.
+이전 기존/새 코스는 개발 데이터로 처리했다. 그들과 ID가 겹치지 않는 새9코스를 생성하고 실행 전 정책/팀/코스/하네스 해시를 고정했다. 재검증 결과를 본 뒤 v10을 추가 조정하지 않았다. 파일 artifacts/experiments/ai/support-recheck-manifest.json에 조건을 남겼다.
 
 ## 새 코스 독립 배틀
 
@@ -50,15 +50,15 @@ ${climbs}
 
 ## 저장과 검사
 
-- 새 행동/공개 상태/결과 데이터: artifacts/support-recheck-new-*-turns.jsonl 및 재생용 *-battles.jsonl.
-- 등반 데이터: artifacts/support-climb-*-battles.jsonl 및 simulation-support-climb-*-balanced.json. 기존 입력/결과 분리 규칙을 유지하며 상대 전체 팀은 재생 전용이다.
+- 새 행동/공개 상태/결과 데이터: artifacts/experiments/ai/support-recheck-new-*-turns.jsonl 및 재생용 *-battles.jsonl.
+- 등반 데이터: artifacts/experiments/ai/support-climb-*-battles.jsonl 및 simulation-support-climb-*-balanced.json. 기존 입력/결과 분리 규칙을 유지하며 상대 전체 팀은 재생 전용이다.
 - 관련 테스트35개와 TypeScript 검사 통과. 새 코스 중복/파일 해시/선택 순서/합법 행동/결과 합계/교체 제한, 등반 돈 수지·층 순서·패배 종료를 감사했다.
 - ${audit.replays}개 대표 배틀을 재생해 승패·턴·모든 행동이 일치했다. 독립 배틀은 전체 공개 프로토콜도 일치했다(시각 메타데이터 제외). 등반 JSONL은 전체 프로토콜을 저장하지 않으므로 그 검사를 주장하지 않는다.
 - 실행: node scripts/run-support-recheck.mjs. 재실행은 새 실험 파일을 덮어쓰므로 필요한 원본을 먼저 보존한다. 감사: node node_modules/tsx/dist/cli.mjs scripts/audit-support-recheck.ts. 보고서: node scripts/write-support-recheck-report.mjs.
 
 다음 실험은 벽 종류 구분만 적용한 버전, 교체 제한만 바꾼 버전, 랭크업 생존 조건만 바꾼 버전을 나눠 비교하는 것이다. 지금 결과에서는 벽 활용을 없애거나 상대에게 확대할 근거가 없다. 기존 v9와 새 후보의 성공/실패 데이터를 모두 유지한다.
 `;
-writeFileSync('docs/SUPPORT_RECHECK.md',doc);
-const note=`최신 벽 실패 분석: 보호 종류 혼동·피해 과소 추정·과한 랭크업을 확인하고 실험 후보v10 작성. 새9코스 8,910독립배틀·486등반(${audit.climbBattles.toLocaleString()}배틀) 재검증. 독립 배틀에서는 v10이 v9보다 모든 룰에서 악화되어 기본 정책 승격 보류. 실제 상대/게임 난이도 유지, 모델 학습 없음. 테스트35개·타입검사·${audit.replays}재생·돈/층/행동 데이터 감사 통과. [원인과 비교 결과](SUPPORT_RECHECK.md).`;
-for(const p of ['docs/STATUS.md','docs/SESSION_HANDOFF.md']){let s=readFileSync(p,'utf8');if(!s.includes(note)){const i=s.indexOf('\n');s=s.slice(0,i+1)+'\n'+note+'\n'+s.slice(i+1);writeFileSync(p,s);}}
+writeFileSync('artifacts/experiments/ai/SUPPORT_RECHECK.md',doc);
+// Current docs are maintained separately; a simulation writes only its report.
+
 console.log('Wrote support recheck report');

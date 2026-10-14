@@ -5,8 +5,8 @@ import megas from '../src/data/mega-sprite-availability.json' with {type:'json'}
 import forms from '../src/data/form-sprite-availability.json' with {type:'json'};
 const keys=[...new Set([...Object.keys(inventory),...Object.keys(megas),...Object.keys(forms)])];
 const data=keys.map(key=>({key,...Object.fromEntries([false,true].map(shiny=>[shiny?'shiny':'normal',Object.fromEntries([false,true].map(back=>[back?'back':'front',pokemonImageSources(Number(key),back,true,key,shiny)]))]))}));
-mkdirSync('artifacts/back-sprite-audit',{recursive:true});
-writeFileSync('artifacts/back-sprite-audit/selected-sources.json',JSON.stringify(data,null,2));
+mkdirSync('artifacts/qa/assets/back-sprite-audit',{recursive:true});
+writeFileSync('artifacts/qa/assets/back-sprite-audit/selected-sources.json',JSON.stringify(data,null,2));
 const missing=data.flatMap(row=>['normal','shiny'].flatMap(variant=>['front','back'].filter(side=>!(row as any)[variant][side].some((path:string)=>existsSync('public'+path))).map(side=>({key:row.key,variant,side}))));
 console.log(JSON.stringify({checkedSpeciesAndForms:data.length,missing}));
 if(missing.length)process.exitCode=1;

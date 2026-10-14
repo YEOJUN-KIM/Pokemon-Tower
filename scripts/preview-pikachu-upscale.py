@@ -6,7 +6,7 @@ Preview assets only; does not change game sprite sources.
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont, ImageSequence
 
-ROOT = Path(__file__).resolve().parents[1] / 'artifacts/previews/pikachu-upscale'
+ROOT = Path(__file__).resolve().parents[1] / 'artifacts/qa/previews/pikachu-upscale'
 
 
 def scale2x(image):

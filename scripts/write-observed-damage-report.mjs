@@ -1,6 +1,6 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 const read=p=>JSON.parse(readFileSync(p,'utf8'));
-const dev=read('artifacts/observed-damage-dev-audit.json'),v=read('artifacts/observed-damage-validate-audit.json'),selection=read('artifacts/observed-damage-selection.json');
+const dev=read('artifacts/experiments/ai/observed-damage-dev-audit.json'),v=read('artifacts/experiments/ai/observed-damage-validate-audit.json'),selection=read('artifacts/experiments/ai/observed-damage-selection.json');
 const get=(kind,rule,mode)=>v.aggregates.find(a=>a.kind===kind&&a.rule===rule&&a.mode===mode);
 const names={basic:'기본',mega:'메진',dynamax:'다맥',tera:'테라',chaos:'개판'};
 const battles=Object.entries(names).map(([r,n])=>{const a=get('battle',r,'v9'),b=get('battle',r,'observed'),p=v.comparisons.find(p=>p.rule===r);return `| ${n} | ${a.wins}/594 | ${b.wins}/594 | ${p.gained} / ${p.lost} | ${p.changedBattles} |`;}).join('\n');
@@ -59,12 +59,12 @@ ${climbs}
 - 새 테스트9개+관련 기존7개 및 TypeScript 검사 통과. 직접 피해/지속 피해/급소/기절/연속 공격/회복/벽 종료/고정 피해/상대 교체/상태/방어 변화/기록 만료/사적 입력 배제와 실제 배틀 재생을 검사했다.
 - 전체 행동 순서·합법 선택·입력 범위·관측의 과거 시점·교체 제한·승패 합계·돈 수지·층 순서·실패 종료 감사 통과. 대표 ${dev.replays+v.replays}배틀에서 승패/턴/모든 행동이 재생과 일치했고 독립 배틀은 전체 공개 프로토콜도 일치했다(시각 제외). 관측으로 보정한 실제 사례도 재생 표본에 포함했다.
 
-원본: artifacts/observed-damage-dev/validate-manifest.json, observed-damage-selection.json, observed-damage-dev/validate-audit.json 및 observed-damage-*-turns.jsonl / *-battles.jsonl. 등반은 observed-climb-*-battles.jsonl와 simulation-observed-climb-*-balanced.json에 저장했다.
+원본: artifacts/experiments/ai/observed-damage-dev/validate-manifest.json, observed-damage-selection.json, observed-damage-dev/validate-audit.json 및 observed-damage-*-turns.jsonl / *-battles.jsonl. 등반은 observed-climb-*-battles.jsonl와 simulation-observed-climb-*-balanced.json에 저장했다.
 
 실행: node scripts/run-observed-damage.mjs dev 또는 validate (--resume는 같은 해시의 완료 파일만 재사용). 이미 있는 검증 코스 파일을 재사용하며 결과 파일을 덮어쓸 수 있으니 새 실험은 새 경로에 원본을 보존한다. 감사: node node_modules/tsx/dist/cli.mjs scripts/audit-observed-damage.ts dev 또는 validate. 보고서: node scripts/write-observed-damage-report.mjs.
 `;
-writeFileSync('docs/OBSERVED_DAMAGE_AI.md',document);
-const note=`최신 실제 피해 실험: v9에 자기 직접 피해 기억(최근3턴/동일 아군 방어 상태/벽 정규화) 추가, 상대 교체/공격 변화 시 초기화. 급소·기절·지속 피해 제외, 공개 정보만 사용. 개발3,564배틀→새9코스5,940배틀·324등반(${v.climbBattles.toLocaleString()}배틀) 재검증. 개별 새 배틀 기존${oldWins}승/관측형${newWins}승. 새 테스트9+기존7·타입검사·${dev.replays+v.replays}재생·전체 데이터 감사 통과. 기본 정책/게임 상대/난이도 유지, 모델 학습 없음. [측정과 입력 분리](OBSERVED_DAMAGE_AI.md).`;
-for(const p of ['docs/STATUS.md','docs/SESSION_HANDOFF.md']){let s=readFileSync(p,'utf8');if(!s.includes(note)){const i=s.indexOf('\n');writeFileSync(p,s.slice(0,i+1)+'\n'+note+'\n'+s.slice(i+1));}}
-writeFileSync('artifacts/observed-damage-dataset-catalog.json',JSON.stringify({schemaVersion:1,manifests:['observed-damage-dev-manifest.json','observed-damage-validate-manifest.json'],inputFields:['observation','context'],targetFields:['action','reason'],diagnosticFields:['diagnostics'],outcomeFields:['outcome'],groupField:'courseId',joinField:'battleKey',modelTrained:false,notes:'Dev baseline reproduces previous validation episodes; deduplicate if combining historical datasets. Validation courses generated after freezing candidate. Outcome and post-choice diagnostics are not model inputs.'},null,2));
+writeFileSync('artifacts/experiments/ai/OBSERVED_DAMAGE_AI.md',document);
+// Current docs are maintained separately; a simulation writes only its report.
+
+writeFileSync('artifacts/experiments/ai/observed-damage-dataset-catalog.json',JSON.stringify({schemaVersion:1,manifests:['observed-damage-dev-manifest.json','observed-damage-validate-manifest.json'],inputFields:['observation','context'],targetFields:['action','reason'],diagnosticFields:['diagnostics'],outcomeFields:['outcome'],groupField:'courseId',joinField:'battleKey',modelTrained:false,notes:'Dev baseline reproduces previous validation episodes; deduplicate if combining historical datasets. Validation courses generated after freezing candidate. Outcome and post-choice diagnostics are not model inputs.'},null,2));
 console.log('Wrote observed damage report');

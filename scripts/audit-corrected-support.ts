@@ -7,19 +7,19 @@ import {runBattle,battleEvents} from '../src/battle/run';
 
 const read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
 async function rows(path:string){const out:any[]=[];for await(const l of createInterface({input:createReadStream(path),crlfDelay:Infinity}))if(l.trim())out.push(JSON.parse(l));return out;}
-const manifest=read('artifacts/support-correction-manifest.json');
+const manifest=read('artifacts/experiments/ai/support-correction-manifest.json');
 for(const f of manifest.files)assert.equal(createHash('sha256').update(readFileSync(f.path)).digest('hex'),f.sha256);
-const source=read('artifacts/observed-damage-validation-courses.json').courses;
+const source=read('artifacts/experiments/ai/observed-damage-validation-courses.json').courses;
 const changed=new Set(manifest.changes.map((c:any)=>c.caseId));
 let replays=0,totalBattles=0,unchangedClimbs=0;const results:any[]=[];
 for(const rule of ['basic','tera','chaos']){
- const before=read(`artifacts/simulation-immunity-climb-${rule}-matchup-balanced.json`);
- const after=read(`artifacts/simulation-support-corrected-${rule}-balanced.json`);
+ const before=read(`artifacts/experiments/balance/simulation-immunity-climb-${rule}-matchup-balanced.json`);
+ const after=read(`artifacts/experiments/balance/simulation-support-corrected-${rule}-balanced.json`);
  assert.deepEqual(after.prices,before.prices);assert.equal(after.sourceCourseHash,before.sourceCourseHash);
  assert.equal(after.playerAI,before.playerAI);assert.equal(after.opponentAI,before.opponentAI);
- assert.deepEqual(after.caseDefinitions,read('artifacts/support-corrected-climb-cases.json'));
- const battles=await rows(`artifacts/support-corrected-${rule}-battles.jsonl`);
- const oldBattles=await rows(`artifacts/immunity-climb-${rule}-matchup-battles.jsonl`);
+ assert.deepEqual(after.caseDefinitions,read('artifacts/experiments/ai/support-corrected-climb-cases.json'));
+ const battles=await rows(`artifacts/experiments/ai/support-corrected-${rule}-battles.jsonl`);
+ const oldBattles=await rows(`artifacts/experiments/ai/immunity-climb-${rule}-matchup-battles.jsonl`);
  assert.equal(battles.length,after.stages.reduce((s:number,c:any)=>s+c.battles,0));totalBattles+=battles.length;
  let repeatedLosses=0,preventableBlocked=0,higher=0,lower=0,same=0;
  const teams:any[]=[];
@@ -51,5 +51,5 @@ for(const rule of ['basic','tera','chaos']){
  console.log('Audited '+rule);
 }
 assert.equal(unchangedClimbs,81);
-writeFileSync('artifacts/support-correction-audit.json',JSON.stringify({totalBattles,replays,unchangedClimbs,results,notes:'Same experimental policy, frozen nine courses, seeds, enemies, prices. Three fixture changes in three different teams; 81 unchanged control climbs reproduced exactly. Seen data diagnostic, not held-out or human win rates. Opponent full teams are offline replay inputs only.'},null,2));
+writeFileSync('artifacts/experiments/ai/support-correction-audit.json',JSON.stringify({totalBattles,replays,unchangedClimbs,results,notes:'Same experimental policy, frozen nine courses, seeds, enemies, prices. Three fixture changes in three different teams; 81 unchanged control climbs reproduced exactly. Seen data diagnostic, not held-out or human win rates. Opponent full teams are offline replay inputs only.'},null,2));
 console.log(JSON.stringify({totalBattles,replays,unchangedClimbs,results:results.map(({teams,...r})=>r)},null,2));

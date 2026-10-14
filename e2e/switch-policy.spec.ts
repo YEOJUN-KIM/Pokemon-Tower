@@ -6,7 +6,7 @@ import {TowerStore} from '../src/server/tower-store';
 import {playerKey} from '../src/server/tower-service';
 import {packTeam} from '../src/data/teams';
 
-mkdirSync('artifacts/screenshots/switch-ai',{recursive:true});
+mkdirSync('artifacts/qa/screenshots/switch-ai',{recursive:true});
 for(const width of [1280,390])test(`v6 opponent voluntarily switches and reloads at ${width}px`,async({page,context})=>{
  const token=randomBytes(32).toString('hex'),owner=playerKey(token),store=new TowerStore('.data/e2e.sqlite');
  try{
@@ -24,6 +24,6 @@ for(const width of [1280,390])test(`v6 opponent voluntarily switches and reloads
   const health=(await page.locator('.enemy-health').textContent())!;await page.reload();await expect(page.locator('.enemy-health')).toHaveText(health);
   expect(store.history(id)).toEqual(['move 1']);expect(store.battle(id).ai_version).toBe('tower-policy-v6');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  await page.screenshot({path:`artifacts/screenshots/switch-ai/switch-${width}.png`,fullPage:true,animations:'disabled'});
+  await page.screenshot({path:`artifacts/qa/screenshots/switch-ai/switch-${width}.png`,fullPage:true,animations:'disabled'});
  }finally{store.close();}
 });

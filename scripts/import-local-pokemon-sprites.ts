@@ -62,7 +62,7 @@ await Promise.all(Array.from({length:8},async()=>{
   }
 }));
 records.sort((a,b)=>a.path.localeCompare(b.path));missing.sort();
-await mkdir('artifacts/reports',{recursive:true});
-await writeFile('artifacts/reports/local-pokemon-sprites.json',JSON.stringify({commit,source,files:records,missing},null,2)+'\n');
+await mkdir('artifacts/qa/assets/reports',{recursive:true});
+await writeFile('artifacts/qa/assets/reports/local-pokemon-sprites.json',JSON.stringify({commit,source,files:records,missing},null,2)+'\n');
 await writeFile('src/data/local-sprite-missing.json',JSON.stringify(missing,null,2)+'\n');
 console.log(`Imported ${records.length} local sprites (${records.reduce((sum,row)=>sum+row.bytes,0)} bytes); ${missing.length} optional variants absent upstream.`);

@@ -82,5 +82,5 @@ test('all playable, shiny and preview images resolve locally without external fa
  const forms=JSON.parse(readFileSync('src/data/mega-forms.json','utf8'));
  for(const entry of pokedexEntries())for(const back of [false,true])for(const url of pokemonImageSources(entry.id,back,true,species[entry.species]?.spriteKey ?? entry.id))assert.ok(!url.includes('other/showdown/'),url);
  for(const form of Object.values(forms) as {id:number;spriteKey:string}[])for(const back of [false,true])for(const url of pokemonImageSources(form.id,back,true,form.spriteKey)){assert.ok(!url.includes('other/showdown/'),url);assert.ok(url.startsWith('/sprites/gimmicks/')||url.startsWith('/vendor/showdown/pokemon/gen5')||url.startsWith('/vendor/pokeapi/pokemon/'),url);const data=readFileSync(resolve('public',url.slice(1)));assert.ok(data.length>100);}
- const sources=JSON.parse(readFileSync('artifacts/reports/mega-sprite-sources.json','utf8')).sources;for(const row of sources)if(row.path.endsWith('.gif'))assert.match(row.url,/\/gen5ani(?:-back)?\//);
+ const sources=JSON.parse(readFileSync('artifacts/qa/assets/reports/mega-sprite-sources.json','utf8')).sources;for(const row of sources)if(row.path.endsWith('.gif'))assert.match(row.url,/\/gen5ani(?:-back)?\//);
  });

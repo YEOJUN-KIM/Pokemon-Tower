@@ -13,7 +13,7 @@ for(const size of [{width:1920,height:902},{width:2560,height:1440}])test(`wide 
  const cards=list.locator('.dex-card');await cards.nth(9).click();await page.keyboard.press('x');await page.keyboard.press('ArrowRight');await expect(page.locator('.dex-pagination')).toContainText('2 /');await expect(cards.first()).toHaveAttribute('data-game-cursor','true');
  await page.keyboard.press('ArrowLeft');await expect(page.locator('.dex-pagination')).toContainText('1 /');await cards.first().click();await page.keyboard.press('x');
  await expect(cards.first()).toHaveCSS('background-color','rgb(214, 240, 223)');
- await page.screenshot({path:`artifacts/screenshots/pokedex-updated/full-width-${size.width}.png`});
+ await page.screenshot({path:`artifacts/qa/screenshots/pokedex-updated/full-width-${size.width}.png`});
 });
 
 for(const size of [{width:1280,height:720},{width:390,height:844}])test(`PC settings keep training and move saves at ${size.width}px`,async({page,context})=>{
@@ -27,12 +27,12 @@ for(const size of [{width:1280,height:720},{width:390,height:844}])test(`PC sett
   await expect(dialog).toHaveCSS('background-color','rgb(238, 242, 233)');
   await editor.getByLabel('특수공격 능력 포인트',{exact:true}).fill('12');
   const saveBounds=await editor.getByRole('button',{name:'12P로 설정 저장'}).boundingBox();expect(saveBounds!.y+saveBounds!.height).toBeLessThan(size.height);
-  await page.screenshot({path:`artifacts/screenshots/pokedex-updated/adjustment-${size.width}.png`});
+  await page.screenshot({path:`artifacts/qa/screenshots/pokedex-updated/adjustment-${size.width}.png`});
   await editor.getByRole('tab',{name:'성격',exact:true}).click();
-  await page.screenshot({path:`artifacts/screenshots/pokedex-updated/nature-${size.width}.png`});
+  await page.screenshot({path:`artifacts/qa/screenshots/pokedex-updated/nature-${size.width}.png`});
   await page.keyboard.press('e');await expect(editor.getByRole('tab',{name:'특성·테라스탈'})).toHaveAttribute('aria-selected','true');
   await editor.getByRole('button',{name:'테라스탈 선택',exact:true}).click();await page.getByRole('dialog',{name:'테라스탈 선택',exact:true}).getByRole('button',{name:'고스트',exact:true}).click();
-  await page.screenshot({path:`artifacts/screenshots/pokedex-updated/traits-${size.width}.png`});
+  await page.screenshot({path:`artifacts/qa/screenshots/pokedex-updated/traits-${size.width}.png`});
   await editor.getByRole('button',{name:'12P로 설정 저장'}).click();await expect(dialog.getByRole('status')).toContainText('설정 저장 완료');await page.keyboard.press('x');await expect(dialog).not.toBeVisible();
   await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await expect(page.getByRole('dialog',{name:'리자몽 선택 메뉴'})).toBeVisible();await page.getByRole('button',{name:'기술배치',exact:true}).click();
   const moves=page.getByRole('dialog',{name:'리자몽 기술배치'});
@@ -40,7 +40,7 @@ for(const size of [{width:1280,height:720},{width:390,height:844}])test(`PC sett
   const name=await replacement.locator('strong').innerText();await replacement.click();
   await expect(moves.locator('.move-slots button').first()).toContainText(name);
   expect(await moves.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
-  await page.screenshot({path:`artifacts/screenshots/pokedex-updated/moves-${size.width}.png`});
+  await page.screenshot({path:`artifacts/qa/screenshots/pokedex-updated/moves-${size.width}.png`});
   await moves.getByRole('button',{name:'기술배치 저장 · 무료'}).click();await expect(moves.getByRole('status')).toContainText('설정 저장 완료');await page.keyboard.press('x');await expect(moves).not.toBeVisible();
   await page.reload();await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await expect(page.getByRole('dialog',{name:'리자몽 선택 메뉴'})).toBeVisible();await page.getByRole('button',{name:'능력치 조정',exact:true}).click();
   await expect(editor.getByLabel('특수공격 능력 포인트',{exact:true})).toHaveValue('12');
@@ -59,7 +59,7 @@ test('tall PC preview shows a large radar and configured traits',async({page})=>
  await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.keyboard.press('x');
  await expect(preview.locator('svg title')).toContainText('특수공격 109');
  expect(await preview.evaluate(el=>el.scrollHeight<=el.clientHeight)).toBe(true);
- await page.screenshot({path:'artifacts/screenshots/pokedex-updated/radar-1920.png'});
+ await page.screenshot({path:'artifacts/qa/screenshots/pokedex-updated/radar-1920.png'});
 });
 
 for(const size of [{width:1280,height:720},{width:390,height:844}])test(`PC-style collection preserves menus and fits ${size.width}px`,async({page})=>{
@@ -70,7 +70,7 @@ for(const size of [{width:1280,height:720},{width:390,height:844}])test(`PC-styl
  await expect(preview).toContainText('이상해꽃');
  await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();
  await expect(page.getByRole('dialog',{name:'리자몽 선택 메뉴'})).toBeVisible();
- await page.getByRole('dialog',{name:'리자몽 선택 메뉴'}).screenshot({path:`artifacts/screenshots/pokedex-updated/partner-menu-${size.width}.png`});
+ await page.getByRole('dialog',{name:'리자몽 선택 메뉴'}).screenshot({path:`artifacts/qa/screenshots/pokedex-updated/partner-menu-${size.width}.png`});
  await page.keyboard.press('x');await expect(preview).toContainText('리자몽');
  await preview.getByRole('button',{name:'리자몽 기본 정보 ↗'}).click();
  await expect(page.getByTestId('dex-detail')).toContainText('종족값');
@@ -80,7 +80,7 @@ for(const size of [{width:1280,height:720},{width:390,height:844}])test(`PC-styl
  for(const locator of [preview,page.getByTestId('dex-list'),page.getByTestId('team-selection')]){
   const bounds=await locator.boundingBox();expect(bounds).not.toBeNull();expect(bounds!.y).toBeGreaterThanOrEqual(0);expect(bounds!.y+bounds!.height).toBeLessThanOrEqual(size.height);
  }
- await page.screenshot({path:`artifacts/screenshots/pokedex-updated/collection-${size.width}.png`});
+ await page.screenshot({path:`artifacts/qa/screenshots/pokedex-updated/collection-${size.width}.png`});
 });
 
 for(const size of [{width:1280,height:720},{width:390,height:844}])test(`party removal, visible cursor and ready focus at ${size.width}px`,async({page})=>{
@@ -93,8 +93,8 @@ for(const size of [{width:1280,height:720},{width:390,height:844}])test(`party r
  await page.keyboard.press('ArrowUp');
  const slot=page.getByRole('button',{name:'거북왕 파티 메뉴',exact:true});await expect(slot).toHaveAttribute('data-game-cursor','true');await expect(slot).toHaveCSS('background-color','rgba(0, 0, 0, 0)');
  await expect(slot.locator('..').getByText('거북왕',{exact:true})).toBeVisible();await expect(slot.locator('..').locator('img')).toBeVisible();await expect(slot.locator('..').locator('.pokemon-image-frame')).toHaveCSS('position','relative');
- await page.screenshot({path:`artifacts/screenshots/pokedex-updated/party-focus-${size.width}.png`});
- await expect(page.locator('.dex-rule-settings')).toHaveCount(0);await start.click();const settings=page.getByRole('dialog',{name:'새 도전 · 배틀 룰 선택',exact:true});await expect(settings).toBeVisible();await settings.getByRole('button',{name:'테라스탈 룰',exact:true}).click();await settings.screenshot({path:`artifacts/screenshots/pokedex-updated/start-rule-${size.width}.png`});await page.keyboard.press('x');await expect(page.getByTestId('rule-picker')).toHaveCount(0);await expect(start).toHaveAttribute('data-game-cursor','true');await page.keyboard.press('z');await expect(settings.getByRole('button',{name:'테라스탈 룰',exact:true})).toHaveAttribute('aria-pressed','true');await page.keyboard.press('x');
+ await page.screenshot({path:`artifacts/qa/screenshots/pokedex-updated/party-focus-${size.width}.png`});
+ await expect(page.locator('.dex-rule-settings')).toHaveCount(0);await start.click();const settings=page.getByRole('dialog',{name:'새 도전 · 배틀 룰 선택',exact:true});await expect(settings).toBeVisible();await settings.getByRole('button',{name:'테라스탈 룰',exact:true}).click();await settings.screenshot({path:`artifacts/qa/screenshots/pokedex-updated/start-rule-${size.width}.png`});await page.keyboard.press('x');await expect(page.getByTestId('rule-picker')).toHaveCount(0);await expect(start).toHaveAttribute('data-game-cursor','true');await page.keyboard.press('z');await expect(settings.getByRole('button',{name:'테라스탈 룰',exact:true})).toHaveAttribute('aria-pressed','true');await page.keyboard.press('x');
  await expect(start).toBeEnabled();
 });
 
@@ -117,5 +117,5 @@ for(const name of ['리자몽','피카츄','싸리용'])test(`large dex sprite l
  await expect(img.locator('..')).toHaveAttribute('data-animation-measured','true');
  await expect(img).toHaveCSS('image-rendering','pixelated');await expect(img).toHaveCSS('filter','none');
  await expect.poll(()=>img.evaluate((el:HTMLImageElement)=>el.getBoundingClientRect().width/el.naturalWidth)).toBeLessThanOrEqual(2.01);
- await preview.screenshot({path:`artifacts/screenshots/pokedex-updated/sprite-${name}.png`});
+ await preview.screenshot({path:`artifacts/qa/screenshots/pokedex-updated/sprite-${name}.png`});
 });

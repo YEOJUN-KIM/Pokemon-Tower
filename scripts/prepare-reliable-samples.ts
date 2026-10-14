@@ -5,8 +5,8 @@ import {reliableSampleMoves} from './lib/reliable-samples';
 import {validateProfile} from '../src/server/training';
 import {auditTeam} from './lib/sample-audit';
 const seed=process.argv[2]??'20261010';if(!/^\d{1,12}$/.test(seed))throw Error('Numeric seed');
-const prefix=`artifacts/reliable-samples-${seed}`;if(existsSync(prefix+'-cases.json'))throw Error('Preserve existing samples');
-const source=`artifacts/auto-suite-${seed}-cases.json`,original=JSON.parse(readFileSync(source,'utf8')),cases=structuredClone(original),changes:any[]=[];
+const prefix=`artifacts/experiments/samples/reliable-samples-${seed}`;if(existsSync(prefix+'-cases.json'))throw Error('Preserve existing samples');
+const source=`artifacts/experiments/samples/auto-suite-${seed}-cases.json`,original=JSON.parse(readFileSync(source,'utf8')),cases=structuredClone(original),changes:any[]=[];
 for(const c of cases)for(const name of c.team){const p=c.profiles[name],before=[...p.moves];p.moves=reliableSampleMoves(name,p);c.moves[name]=[...p.moves];validateProfile(name,p);changes.push({caseId:c.id,species:name,before,after:p.moves});}
 assert.deepEqual(cases.map((c:any)=>c.team),original.map((c:any)=>c.team));
 const audits=cases.map((c:any)=>({caseId:c.id,...auditTeam(c.team,c.profiles,['Shedinja'])}));assert(!audits.some((a:any)=>a.issues.some((i:any)=>i.kind.startsWith('illegal'))));

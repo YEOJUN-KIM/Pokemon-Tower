@@ -5,7 +5,7 @@ import {TowerStore} from '../src/server/tower-store';
 import {playerKey} from '../src/server/tower-service';
 import {findVillainBattle,villainResult} from '../tests/helpers/villain';
 
-const capture='artifacts/screenshots/villain-campaign';mkdirSync(capture,{recursive:true});
+const capture='artifacts/qa/screenshots/villain-campaign';mkdirSync(capture,{recursive:true});
 for(const width of [1280,390])for(const rank of ['executive','boss'] as const){
  test(`${rank} portrait, victory bonus and persisted campaign at ${width}px`,async({page,context})=>{
   const token=randomBytes(32).toString('hex'),owner=playerKey(token),store=new TowerStore('.data/e2e.sqlite');

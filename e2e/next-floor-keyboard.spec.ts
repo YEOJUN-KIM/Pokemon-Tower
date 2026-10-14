@@ -19,7 +19,7 @@ for(const width of [1280,390])test(`next-floor ready focus and direct down/up ro
   await page.keyboard.press('ArrowUp');await page.keyboard.press('z');await expect(next).toBeDisabled();await expect(dialog.locator('.selection-count')).toHaveText('2 / 3');
   await page.keyboard.press('z');await expect(next).toHaveAttribute('data-game-cursor','true');await expect(next).toBeEnabled();
   expect(store.view(owner).run!.state).toBe('select');
-  await dialog.screenshot({path:`artifacts/screenshots/battle-focus/next-floor-${width}.png`});
+  await dialog.screenshot({path:`artifacts/qa/screenshots/battle-focus/next-floor-${width}.png`});
   await page.keyboard.press('z');await expect.poll(()=>store.view(owner).run!.state).toBe('battle');expect(store.view(owner).run!.floor).toBe(2);
  }finally{store.close();}
 });

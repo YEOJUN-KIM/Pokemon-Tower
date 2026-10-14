@@ -1,0 +1,96 @@
+/* src/web/account.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
+:where(.scope[data-ui-screen="account"]) :global(.account-screen) {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #26343b;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card) {
+  width: min(100%,460px);
+  padding: 28px;
+  background: #eef2e8;
+  color: #294638;
+  border: 2px solid #91a99f;
+  border-radius: 12px;
+  display: grid;
+  gap: 18px;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card h1) {
+  font-size: 22px;
+  margin: 0;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card h2) {
+  font-size: 15px;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card p) {
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 0;
+  word-break: keep-all;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card nav) {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card nav button) {
+  flex: 1;
+  white-space: nowrap;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card nav button[aria-pressed=true]) {
+  background: #315f51;
+  color: white;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card form),:where(.scope[data-ui-screen="account"]) :global(.account-card label) {
+  display: grid;
+  gap: 10px;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card form) {
+  gap: 16px;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card label) {
+  font-size: 13px;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card input) {
+  width: 100%;
+  padding: 12px;
+  font: 16px Arial,sans-serif;
+  color: #243e31;
+  background: #fff;
+  border: 1px solid #93ac9b;
+  border-radius: 6px;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card small),:where(.scope[data-ui-screen="account"]) :global(.account-note) {
+  font-size: 11px;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card .primary-button),:where(.scope[data-ui-screen="account"]) :global(.account-card>a) {
+  text-align: center;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-recovery) {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  background: #fff4cc;
+  border: 1px solid #c2a44e;
+  border-radius: 8px;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-recovery code) {
+  font: 15px monospace;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card [role=alert]) {
+  color: #9d2936;
+}
+@media(max-width:540px) {
+  :where(.scope[data-ui-screen="account"]) :global(.account-screen) {
+    padding: 14px;
+  }
+  :where(.scope[data-ui-screen="account"]) :global(.account-card) {
+    padding: 20px;
+  }
+  :where(.scope[data-ui-screen="account"]) :global(.account-card h1) {
+    font-size: 19px;
+  }
+}

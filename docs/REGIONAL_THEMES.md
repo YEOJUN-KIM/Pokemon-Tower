@@ -1,3 +1,3 @@
-# 세대 테마 문서 위치
+# 지역 테마
 
-[게임 규칙 폴더의 세대 테마 설명](gameplay/REGIONAL_THEMES.md)으로 이동했다. 기존 생성 보고서 링크를 위해 이 안내를 유지한다. 전체 안내는 [문서 첫 화면](README.md)을 따른다.
+현재 진행 규칙은 [타워 진행](gameplay/PROGRESSION.md), 세부 배정 근거는 [지역 테마 기록](../artifacts/reports/changes/REGIONAL_THEMES.md)을 참고하세요.

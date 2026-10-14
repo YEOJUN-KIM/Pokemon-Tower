@@ -4,11 +4,11 @@ import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import Showdown from 'pokemon-showdown';
 
-const id=process.argv[2]??'20261011',prefix=`artifacts/room-sample-${id}`;
+const id=process.argv[2]??'20261011',prefix=`artifacts/experiments/samples/room-sample-${id}`;
 if(!/^\d{1,12}$/.test(id)||existsSync(prefix+'-manifest.json'))throw Error('Use a new numeric experiment ID');
-const baseFile='artifacts/reliable-samples-20261010-cases.json',courseFile='artifacts/sample-holdout-20261011-courses.json';
+const baseFile='artifacts/experiments/samples/reliable-samples-20261010-cases.json',courseFile='artifacts/experiments/samples/sample-holdout-20261011-courses.json';
 const digest=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
-const previous=JSON.parse(readFileSync('artifacts/opponent-learning-20261011-manifest.json','utf8'));
+const previous=JSON.parse(readFileSync('artifacts/experiments/ai/opponent-learning-20261011-manifest.json','utf8'));
 for(const path of [baseFile,courseFile])assert.equal(digest(path),previous.files.find(f=>f.path===path).sha256);
 const replacements={baseline:{},steel:{'Steel Roller':'Iron Head'},psychic:{'Future Sight':'Zen Headbutt'},both:{'Steel Roller':'Iron Head','Future Sight':'Zen Headbutt'}};
 const caseFiles={};

@@ -22,7 +22,7 @@ globalThis.renderResultCue=async function(track){
 const browser=await chromium.launch({channel:'chrome',headless:true});
 try{
   const page=await browser.newPage();await page.addScriptTag({content:stripTypeScriptTypes(code+'\n'+render)});
-  const sources=JSON.parse(readFileSync('docs/battle-music-sources.json','utf8')),results=[];
+  const sources=JSON.parse(readFileSync('public/audio/music-sources.json','utf8')),results=[];
   for(const id of ['trainer','elite','gym','villain','champion','rare','reward','clear','defeat']){
     const source=sources.find(s=>s.id===id),encoded=source ? readFileSync(source.path).toString('base64') : null;
     const result=await page.evaluate(async({id,encoded})=>{
@@ -46,5 +46,5 @@ try{
   }
   const anchor=results.find(r=>r.id==='trainer').weightedRms;
   const report={method:'400 ms block RMS, 1500 Hz +4 dB shelf, 38 Hz highpass, -20 dB relative silence gate. Whole file/result loop. Not LUFS.',anchor:'trainer',tracks:results.map(r=>({...r,recommendedGain:Number((anchor/r.weightedRms).toFixed(3))}))};
-  writeFileSync('artifacts/music-levels.json',JSON.stringify(report,null,2)+'\n');
+  writeFileSync('artifacts/qa/audio/music-levels.json',JSON.stringify(report,null,2)+'\n');
 }finally{await browser.close();}

@@ -29,5 +29,5 @@ await Promise.all(Array.from({length:6},async()=>{
   }
 }));
 report.sort((a,b)=>a.path.localeCompare(b.path));
-await writeFile('artifacts/reports/pixel-sprite-assets.json',JSON.stringify({importedAt:new Date().toISOString(),source,total:report.length,files:report},null,2)+'\n');
+await writeFile('artifacts/qa/assets/reports/pixel-sprite-assets.json',JSON.stringify({importedAt:new Date().toISOString(),source,total:report.length,files:report},null,2)+'\n');
 console.log(`Imported ${report.length} assets, ${report.reduce((sum,entry)=>sum+entry.bytes,0)} bytes`);

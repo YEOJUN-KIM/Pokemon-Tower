@@ -80,7 +80,7 @@ const rows=samples.map(original=>{
    return {species:p.name,name:pokemonName(p.name)+(region?' ('+region+')':''),item:p.item ?? '',itemName:itemName(p.item),gigantamax:!!p.gigantamax,profile:profiles[p.name],...(form?{battleForm:{species:form.name,name:pokemonName(form.name),ability:form.abilities[0],types:form.types}}:{})};
   })};
 });
-writeFileSync('docs/gameplay/npc-team-samples.json',JSON.stringify({status:'review-draft',floor:100,level:50,iv:31,statPoints:66,maxPointsPerStat:32,selection:'Best coverage/BST score among 32 deterministic existing-generator candidates; no battle balance optimization.',samples:rows},null,2)+'\n');
+writeFileSync('scripts/data/npc/npc-team-samples.json',JSON.stringify({status:'review-draft',floor:100,level:50,iv:31,statPoints:66,maxPointsPerStat:32,selection:'Best coverage/BST score among 32 deterministic existing-generator candidates; no battle balance optimization.',samples:rows},null,2)+'\n');
 const gimmicks={mega:'메가진화',dynamax:'거다이맥스',z:'Z기술',tera:'테라스탈',primal:'원시회귀'};
 const sections:string[]=['# NPC 최고 단계 팀 샘플 — 검토용','',
  '2026-10-13. 100층 최종 단계 기준: 레벨50, IV 전부31, 능력 포인트 총66·스탯당 최대32. 일반 관장도 같은 최고 단계로 표시한다. 초반부터 이 세팅을 쓰는 뜻은 아니다.',
@@ -97,5 +97,5 @@ for(const row of rows){
  if(row.signature.rule==='tera')sections.push('',`테라 담당 타입: ${sampleType(row.team,row.signature.species)}.`);
 }
 function sampleType(team:typeof rows[number]['team'],name:string){return team.find(p=>p.species===name)?.profile.teraType ?? '';}
-writeFileSync('docs/gameplay/NPC_TEAM_SAMPLES.md',sections.join('\n')+'\n');
+writeFileSync('artifacts/reports/npc/NPC_TEAM_SAMPLES.md',sections.join('\n')+'\n');
 console.log(`${rows.length} NPC drafts, ${rows.filter(r=>r.role==='gym').length} gym/captain drafts; all teams passed legality and 66-point checks.`);

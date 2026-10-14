@@ -6,20 +6,20 @@ import Showdown from 'pokemon-showdown';
 import {runBattle,battleEvents} from '../src/battle/run';
 import {compositionSnapshot,compositionChanges} from './lib/composition-diagnostics';
 const seed=process.argv[2]??'20261010';if(!/^\d{1,12}$/.test(seed))throw Error('Numeric seed');
-const prefix=`artifacts/sample-wall-factors-${seed}`,read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
+const prefix=`artifacts/experiments/samples/sample-wall-factors-${seed}`,read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
 async function rows(path:string){const out:any[]=[];for await(const l of createInterface({input:createReadStream(path),crlfDelay:Infinity}))if(l.trim())out.push(JSON.parse(l));return out;}
 const manifest=read(prefix+'-manifest.json');for(const f of manifest.files)assert.equal(createHash('sha256').update(readFileSync(f.path)).digest('hex'),f.sha256);
-const courses=read('artifacts/observed-damage-validation-courses.json').courses,cells:any[]=[],strip=(b:any)=>{const {phase,...rest}=b;return rest;};
+const courses=read('artifacts/experiments/ai/observed-damage-validation-courses.json').courses,cells:any[]=[],strip=(b:any)=>{const {phase,...rest}=b;return rest;};
 let totalBattles=0,reproducedBattles=0,replays=0,common:any;
 const normalizeCases=(cases:any[])=>cases.map(c=>{const {moves,profiles,...rest}=c;return {...rest,profiles:Object.fromEntries(Object.entries(profiles).map(([n,p]:any)=>{const {moves,...r}=p;return[n,r];}))};});
 for(const mode of manifest.modes)for(const rule of manifest.rules){
- const report=read(`artifacts/simulation-sample-wall-factors-${seed}-${rule}-${mode}-balanced.json`),data=await rows(prefix+`-${rule}-${mode}-battles.jsonl`);
+ const report=read(`artifacts/experiments/balance/simulation-sample-wall-factors-${seed}-${rule}-${mode}-balanced.json`),data=await rows(prefix+`-${rule}-${mode}-battles.jsonl`);
  const config={prices:report.prices,cases:normalizeCases(report.caseDefinitions),sourceCourseHash:report.sourceCourseHash,opponentAI:report.opponentAI,playerAI:report.playerAI,format:report.format,behavior:report.behavior,composition:report.composition,totalFloors:report.totalFloors};
  if(common)assert.deepEqual(config,common);common=config;assert.equal(report.opponentAI,'v7');assert.equal(report.playerAI,'immunity-experimental');
  totalBattles+=data.length;assert.equal(data.length,report.stages.reduce((s:number,c:any)=>s+c.battles,0));
  if(mode==='baseline'){
-  const previous=await rows(`artifacts/coverage-factors-${seed}-${rule}-immunity-battles.jsonl`);assert.deepEqual(data.map(strip),previous.map(strip));reproducedBattles+=data.length;
-  assert.deepEqual(report.stages,read(`artifacts/simulation-coverage-factors-${seed}-${rule}-immunity-balanced.json`).stages);
+  const previous=await rows(`artifacts/experiments/ai/coverage-factors-${seed}-${rule}-immunity-battles.jsonl`);assert.deepEqual(data.map(strip),previous.map(strip));reproducedBattles+=data.length;
+  assert.deepEqual(report.stages,read(`artifacts/experiments/balance/simulation-coverage-factors-${seed}-${rule}-immunity-balanced.json`).stages);
  }
  let pairLosses=0,roomLosses=0,coverageLosses=0,selectedGaps=0;const mutationCounts:Record<string,number>={};
  for await(const l of createInterface({input:createReadStream(prefix+`-${rule}-${mode}-trace.jsonl`),crlfDelay:Infinity})){

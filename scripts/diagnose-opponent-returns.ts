@@ -5,7 +5,7 @@ import Showdown from 'pokemon-showdown';
 import {runBattle,battleEvents} from '../src/battle/run';
 import {allowsGimmick} from '../src/data/run-rules';
 import {PublicImmunityV2} from '../src/battle/public-immunity-v2';
-const prefix='artifacts/opponent-learning-20261011';
+const prefix='artifacts/experiments/ai/opponent-learning-20261011';
 const manifest=JSON.parse(readFileSync(prefix+'-manifest.json','utf8'));
 const courses=JSON.parse(readFileSync(manifest.courseFile,'utf8')).courses;
 const cases:any[]=[];

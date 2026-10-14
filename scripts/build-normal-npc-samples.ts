@@ -19,7 +19,7 @@ import {npcEarlyReplacements,canonicalNpcId} from '../src/data/npc-review-preset
 
 type Member={species:string;name:string;item:string;itemName:string;gigantamax:boolean;profile:TrainingProfile;battleForm?:{species:string;name:string;ability:string;types:string[]}};
 type Source={id:string;name:string;generation:number|null;role:string;title:string;ace:string;signature:NpcGimmick;team:Member[];legendaryMinFloor?:number};
-const full=JSON.parse(readFileSync('docs/gameplay/npc-team-samples.json','utf8')) as {samples:Source[]};
+const full=JSON.parse(readFileSync('scripts/data/npc/npc-team-samples.json','utf8')) as {samples:Source[]};
 const validator=new Showdown.TeamValidator(FORMAT);
 const special=(item:string)=>!!megaStones[item] || !!zCrystals[item] || !!primalOrbs[item] || item===DYNAMAX_ITEM;
 function allocate(template:TrainingProfile['evs'],budget:number){
@@ -68,13 +68,13 @@ const samples=full.samples.flatMap(source=>{
   return {...source,ace,signature,team,packed,stage,stageName:policy.name,sampleTier:policy.sampleTier,gimmickEnabled:policy.gimmicks,referenceFloor:floor,iv:difficulty.ivCap,statPoints:difficulty.points,floorRange:category==='boss'?(policy.sampleTier===1?'50층 첫 관문·중간 보스':'100층 최종전'):(policy.sampleTier===1?'5~45층':'55~95층'),...(source.legendaryMinFloor && policy.sampleTier===1?{legendaryMinFloor:undefined}:{})};
  });
 });
-writeFileSync('docs/gameplay/normal-npc-samples.json',JSON.stringify({status:'normal-mode-template',training:'scaled-to-floor-curve',villainBossMinFloor:75,level:50,maxPointsPerStat:32,stages:normalModeStages,samples},null,2)+'\n');
+writeFileSync('scripts/data/npc/normal-npc-samples.json',JSON.stringify({status:'normal-mode-template',training:'scaled-to-floor-curve',villainBossMinFloor:75,level:50,maxPointsPerStat:32,stages:normalModeStages,samples},null,2)+'\n');
 const labels={mega:'메가진화',dynamax:'거다이맥스',tera:'테라스탈',z:'Z기술',primal:'원시회귀'};
 const sections=['# 일반 모드 NPC 두 단계 샘플','',
  '2026-10-13. 사용자 검토용 문서. 164종의 NPC마다 두 단계, 총328개다. 고정 3마리·기술·도구·특성·성격·역할별 육성을 새 일반 모드 배틀에 적용했다. CSV는 코드 활용·검증용이며 이 문서에서 팀을 확인하면 된다.',
  '', '| 구간 | 상대 | 샘플 | 기믹 |','|---|---|---|---|','| 5~45층 | 관장·사천왕 | 전반 | 없음 |','| 50층 | 챔피언 | 첫 관문 | 대표 기믹 첫 사용 |','| 55~95층 | 관장·사천왕 | 후반 | 대표 기믹 |','| 100층 | 챔피언·최종 보스 | 최종 | 대표 기믹 |',
  '', '51~54층은 기존 완화 구간으로 유지한다. 일반 트레이너·조직원은 기믹이 없다. 간부는55층 이후부터 허용한다. 빌런 보스는75층 이상에서만 등장하고 후반·최종 샘플을 사용한다. 빌런 보스의 첫 관문 표는 비교용으로 남겨 두며 실제로 배정하지 않는다. 5층 단위 관문과 연속 빌런 제외·보스 격파 후 조직 종료는 유지한다.',
- '', '표의 육성은 대표 층 기준이다: 전반45층 IV10·포인트7, 첫 관문50층 IV12·포인트8, 후반95층 IV28·포인트58, 최종100층 IV31·포인트66. 실제 배틀은 해당 층의 기존 IV·포인트 곡선을 상한으로 사용하고 표의 역할별 비율로 포인트를 배분한다. 낮은 층에 대표 층의 육성을 그대로 주지 않는다. 난이도 측정·10층별 추가 보정은 후속 작업이다. 이미 저장된 배틀·legacy 도전은 유지한다.',
+ '', '표의 육성은 템플릿 참고 기준이다: 전반45층 IV10·포인트7, 첫 관문50층 IV12·포인트8, 후반95층 IV28·포인트58, 최종100층 IV31·포인트66. 2026-10-14부터 실제 새 관장급 배틀의 IV는 총합 예산과 역할 가중치로 시드 기반 랜덤 배분한다. 표/JSON/CSV의 균등 IV는 참고값이며 실제 저장된 팀과 구분한다. 능력 포인트는 해당 층의 기존 곡선을 상한으로 역할별 비율을 유지한다. 일반·엘리트의 기존 IV는 변경하지 않는다. [관장급 개체값 배분](../changes/NAMED_OPPONENT_IVS.md). 새 난이도 측정·10층별 추가 보정은 후속 작업이다. 이미 저장된 배틀·legacy 도전은 유지한다.',
  '', '## NPC별 두 단계 비교','', '★는 기믹 담당 포켓몬이다. 관장·사천왕은 전반/후반, 챔피언·보스는 첫 관문/최종을 비교한다. 기술·도구·육성은 아래 상세 표에 있다.', '', '| NPC | 구분 | 전반·첫 관문 3마리 | 후반·최종 3마리 | 기믹 변화 |','|---|---|---|---|---|'];
 const teamLabel=(s:typeof samples[number])=>s.team.map(p=>(s.gimmickEnabled&&p.species===s.signature.species?'★':'')+p.name).join(' · ');
 const gimmickLabel=(s:typeof samples[number])=>s.gimmickEnabled?labels[s.signature.rule]:'없음';
@@ -82,5 +82,5 @@ for(let i=0;i<samples.length;i+=2){const early=samples[i],late=samples[i+1];sect
 for(const s of samples){sections.push('',`## ${s.name} · ${s.stageName}`,`ID: \`${s.id}\` · ${s.floorRange}`,'','| 포켓몬 | 기술 | 도구 | 성격 | 능력 포인트 |','|---|---|---|---|---|');
  for(const p of s.team)sections.push(`| ${p.name} | ${p.profile.moves.map(m=>moveInfo[m]?.name ?? m).join(' / ')} | ${p.itemName} | ${natureLabel(p.profile.nature)} | ${statKeys.filter(k=>p.profile.evs[k]).map(k=>statNames[k]+' '+p.profile.evs[k]).join(' · ')} |`);
 }
-writeFileSync('docs/gameplay/NORMAL_MODE_SAMPLES.md',sections.join('\n')+'\n');
+writeFileSync('artifacts/reports/npc/NORMAL_MODE_SAMPLES.md',sections.join('\n')+'\n');
 console.log(`${samples.length} normal-mode two-tier samples; every team passed legality and training budget checks.`);

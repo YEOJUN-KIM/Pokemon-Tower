@@ -1,0 +1,299 @@
+{
+  "G-Max Befuddle": {
+    "name": "거다이고혹",
+    "type": "Bug",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Cannonade": {
+    "name": "거다이포격",
+    "type": "Water",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 10,
+    "description": ""
+  },
+  "G-Max Centiferno": {
+    "name": "거다이백화",
+    "type": "Fire",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Chi Strike": {
+    "name": "거다이회심격",
+    "type": "Fighting",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Cuddle": {
+    "name": "거다이포옹",
+    "type": "Normal",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Depletion": {
+    "name": "거다이감쇠",
+    "type": "Dragon",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Drum Solo": {
+    "name": "거다이난타",
+    "type": "Grass",
+    "category": "Physical",
+    "power": 160,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Finale": {
+    "name": "거다이단원",
+    "type": "Fairy",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Fireball": {
+    "name": "거다이화염구",
+    "type": "Fire",
+    "category": "Physical",
+    "power": 160,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Foam Burst": {
+    "name": "거다이포말",
+    "type": "Water",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Gold Rush": {
+    "name": "거다이금화",
+    "type": "Normal",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Gravitas": {
+    "name": "거다이천도",
+    "type": "Psychic",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Hydrosnipe": {
+    "name": "거다이저격",
+    "type": "Water",
+    "category": "Physical",
+    "power": 160,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Malodor": {
+    "name": "거다이악취",
+    "type": "Poison",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Meltdown": {
+    "name": "거다이융격",
+    "type": "Steel",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max One Blow": {
+    "name": "거다이일격",
+    "type": "Dark",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Rapid Flow": {
+    "name": "거다이연격",
+    "type": "Water",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Replenish": {
+    "name": "거다이재생",
+    "type": "Normal",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Resonance": {
+    "name": "거다이선율",
+    "type": "Ice",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Sandblast": {
+    "name": "거다이사진",
+    "type": "Ground",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Smite": {
+    "name": "거다이천벌",
+    "type": "Fairy",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Snooze": {
+    "name": "거다이수마",
+    "type": "Dark",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Steelsurge": {
+    "name": "거다이강철진",
+    "type": "Steel",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Stonesurge": {
+    "name": "거다이암진",
+    "type": "Water",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 5,
+    "description": ""
+  },
+  "G-Max Stun Shock": {
+    "name": "거다이감전",
+    "type": "Electric",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 10,
+    "description": ""
+  },
+  "G-Max Sweetness": {
+    "name": "거다이감로",
+    "type": "Grass",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 10,
+    "description": ""
+  },
+  "G-Max Tartness": {
+    "name": "거다이산격",
+    "type": "Grass",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 10,
+    "description": ""
+  },
+  "G-Max Terror": {
+    "name": "거다이환영",
+    "type": "Ghost",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 10,
+    "description": ""
+  },
+  "G-Max Vine Lash": {
+    "name": "거다이편달",
+    "type": "Grass",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 10,
+    "description": ""
+  },
+  "G-Max Volcalith": {
+    "name": "거다이분석",
+    "type": "Rock",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 10,
+    "description": ""
+  },
+  "G-Max Volt Crash": {
+    "name": "거다이만뢰",
+    "type": "Electric",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 10,
+    "description": ""
+  },
+  "G-Max Wildfire": {
+    "name": "거다이옥염",
+    "type": "Fire",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 10,
+    "description": ""
+  },
+  "G-Max Wind Rage": {
+    "name": "거다이풍격",
+    "type": "Flying",
+    "category": "Physical",
+    "power": 10,
+    "accuracy": true,
+    "pp": 10,
+    "description": ""
+  }
+}

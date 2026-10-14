@@ -1,0 +1,20 @@
+{
+  "files": [
+    {
+      "path": "artifacts/experiments/samples/auto-suite-20261010-cases.json",
+      "sha256": "b4c72732edf48d7dfb1cc777c6dad8ab5e0804938c14d7b2c6ebb60dd014f5d6"
+    },
+    {
+      "path": "artifacts/experiments/samples/reliable-samples-20261010-cases.json",
+      "sha256": "8a271a4206e973eb7c933ff770317ae6cebcb795b78daefd400b1804217034a9"
+    },
+    {
+      "path": "scripts/prepare-reliable-samples.ts",
+      "sha256": "3f97d367a1a426944397bb3d122b61a380216fb855f3004c0e17e7ad86a3d341"
+    },
+    {
+      "path": "scripts/lib/reliable-samples.ts",
+      "sha256": "79ea2772b0dec333704ec0d263ac8dae1eeffe19db867f71709d789476f6c435"
+    }
+  ]
+}

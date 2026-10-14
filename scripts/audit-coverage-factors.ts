@@ -6,19 +6,19 @@ import Showdown from 'pokemon-showdown';
 import {runBattle,battleEvents} from '../src/battle/run';
 
 const seed=process.argv[2]??'20261010';if(!/^\d{1,12}$/.test(seed))throw Error('Numeric seed required');
-const prefix=`artifacts/coverage-factors-${seed}`,read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
+const prefix=`artifacts/experiments/ai/coverage-factors-${seed}`,read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
 async function rows(path:string){const out:any[]=[];for await(const l of createInterface({input:createReadStream(path),crlfDelay:Infinity}))if(l.trim())out.push(JSON.parse(l));return out;}
 const manifest=read(prefix+'-manifest.json');for(const f of manifest.files)assert.equal(createHash('sha256').update(readFileSync(f.path)).digest('hex'),f.sha256);
-const source=read('artifacts/observed-damage-validation-courses.json').courses;
+const source=read('artifacts/experiments/ai/observed-damage-validation-courses.json').courses;
 const cells:any[]=[];let totalBattles=0,replays=0,endpointBattlesReproduced=0;let common:any;
 const strip=(b:any)=>{const {phase,playerAI,...rest}=b;return rest;};
 for(const mode of manifest.modes)for(const rule of manifest.rules){
- const report=read(`artifacts/simulation-coverage-factors-${seed}-${rule}-${mode}-balanced.json`),battles=await rows(prefix+`-${rule}-${mode}-battles.jsonl`);
+ const report=read(`artifacts/experiments/balance/simulation-coverage-factors-${seed}-${rule}-${mode}-balanced.json`),battles=await rows(prefix+`-${rule}-${mode}-battles.jsonl`);
  const config={prices:report.prices,cases:report.caseDefinitions,sourceCourseHash:report.sourceCourseHash,opponentAI:report.opponentAI,format:report.format,behavior:report.behavior,composition:report.composition,totalFloors:report.totalFloors};
  if(common)assert.deepEqual(config,common);common=config;assert.equal(report.opponentAI,'v7');
  assert.equal(battles.length,report.stages.reduce((s:number,c:any)=>s+c.battles,0));assert.equal(report.stages.length,manifest.cases);totalBattles+=battles.length;
  if(['baseline','both'].includes(mode)){
-  const old=await rows(`artifacts/coverage-compare-${seed}-${rule}-${mode==='baseline'?'matchup':'adaptive'}-battles.jsonl`);
+  const old=await rows(`artifacts/experiments/ai/coverage-compare-${seed}-${rule}-${mode==='baseline'?'matchup':'adaptive'}-battles.jsonl`);
   assert.deepEqual(battles.map(strip),old.map(strip));endpointBattlesReproduced+=battles.length;
  }
  let repeatedLosses=0,knownBlocked=0,preventableBlocked=0,repeatAttacks=0;

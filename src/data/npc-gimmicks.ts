@@ -62,8 +62,7 @@ const regionalPartners:Record<string,Record<string,string>>={
 };
 export function npcSpecies(name:string,id:string,generation:number|null){
  name=regionalPartners[id]?.[name] ?? name;
- // Duraludon's Gigantamax is its representative form, not Archaludon.
- return generation===8 && name==='Duraludon'?name:evolvedOpponentSpecies(name,['named-red','named-red-kanto'].includes(id));
+ return evolvedOpponentSpecies(name);
 }
 const organizationGenerations:Record<string,number>={rocket:1,magma:3,aqua:3,galactic:4,plasma:5,flare:6,skull:7,aether:7,macrocosmos:8,star:9};
 // A first roster assignment, independent of the player's rule. Floor presets can

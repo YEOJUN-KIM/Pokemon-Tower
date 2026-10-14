@@ -5,7 +5,7 @@ import {TowerStore} from '../src/server/tower-store';
 import {playerKey} from '../src/server/tower-service';
 import {packTeam,starters} from '../src/data/teams';
 import {mkdirSync} from 'node:fs';
-const capture='artifacts/screenshots/tera-ai-v6';
+const capture='artifacts/qa/screenshots/tera-ai-v6';
 mkdirSync(capture,{recursive:true});
 for(const width of [1280,390])for(const kind of ['mega','dynamax','tera'] as const){
  test(`${kind} UI placement, keyboard, no overlap and refresh at ${width}px`,async({page,context})=>{

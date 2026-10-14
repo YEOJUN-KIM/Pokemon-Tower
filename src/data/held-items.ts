@@ -45,9 +45,11 @@ export const baseHeldItems={
 export const heldItems={...baseHeldItems,...megaItems,...zItems,'Dynamax Band':{name:'다이맥스밴드',description:'지닌 포켓몬이 3턴 동안 다이맥스합니다. HP가 늘고 기술이 다이맥스 기술로 바뀝니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.',price:5000,consumable:false}} as const;
 export type HeldItem=keyof typeof heldItems;
 export const heldItemKeys=Object.keys(heldItems) as HeldItem[];
+const heldItemsById=new Map(heldItemKeys.map(item=>[item.toLowerCase().replace(/[^a-z0-9]/g,''),item]));
+export function normalizeHeldItem(value:string){return heldItemsById.get(value.toLowerCase().replace(/[^a-z0-9]/g,''))??null;}
 export function itemIcon(item:HeldItem){return zCrystals[item] ? 'z-crystal' : Object.hasOwn(megaItems,item) ? 'mega-stone' : item.toLowerCase().replaceAll(' ','-');}
 export function isHeldItem(value:unknown):value is HeldItem{return typeof value==='string' && Object.hasOwn(heldItems,value);}
 export const npcItemNames:Record<string,string>={'Red Orb':'주홍구슬','Light Ball':'전기구슬','Flame Orb':'화염구슬','Toxic Orb':'맹독구슬','Black Sludge':'검은진흙','Lum Berry':'리샘열매','Wacan Berry':'초나열매'};
-export function itemName(value?:string|null){return value && isHeldItem(value) ? heldItems[value].name : value ? npcItemNames[value] ?? value : '없음';}
+export function itemName(value?:string|null){const item=value?normalizeHeldItem(value):null;return item ? heldItems[item].name : value ? npcItemNames[value] ?? value : '없음';}
 
 export function itemIconExtension(item:string){return !!zCrystals[item] || ['Fairy Feather','Heavy-Duty Boots','Dynamax Band'].includes(item) || Object.hasOwn(megaItems,item) ? 'svg' : 'png';}

@@ -2,7 +2,7 @@
 from pathlib import Path
 from PIL import Image
 
-root = Path(__file__).resolve().parents[1] / 'artifacts/previews/shiny-entry'
+root = Path(__file__).resolve().parents[1] / 'artifacts/qa/previews/shiny-entry'
 paths = sorted((root / 'frames-sendout').glob('*.png'))
 assert len(paths) == 22, 'Run the shiny entry browser capture first.'
 frames = [Image.open(path).convert('RGB') for path in paths]

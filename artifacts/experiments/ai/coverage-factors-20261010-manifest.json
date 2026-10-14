@@ -1,0 +1,59 @@
+{
+  "seed": "20261010",
+  "modes": [
+    "baseline",
+    "immunity",
+    "switching",
+    "both"
+  ],
+  "rules": [
+    "basic",
+    "tera",
+    "chaos"
+  ],
+  "cases": 18,
+  "courses": 9,
+  "files": [
+    {
+      "path": "scripts/run-coverage-factors.mjs",
+      "sha256": "10fccb37ab52e878b92777924d90863b7c6b673dc11b67e21e00c9434d4f2e2d"
+    },
+    {
+      "path": "scripts/simulate-coverage-factors.ts",
+      "sha256": "655d35b1fc95cbf8701e1a23b5a3f4ef5f3c43b7123504915053a531ac7de58e"
+    },
+    {
+      "path": "src/battle/coverage-factor-policy.ts",
+      "sha256": "abc0e62deed66ac70740da6be8dfedbdc76986279ad9b582621bb155744362a8"
+    },
+    {
+      "path": "src/battle/public-immunity-v2.ts",
+      "sha256": "9294fdbcd16cfae1165c05b8a59eb931c128cf469857665c2d56b2959750d50e"
+    },
+    {
+      "path": "src/battle/revealed-immunity.ts",
+      "sha256": "b87a832bbccdcf54be0b43d093afe6bbdf3b07fe5ee036fb9a7f3c13f80d9aca"
+    },
+    {
+      "path": "src/battle/adaptive-coverage-player-policy.ts",
+      "sha256": "31e198a00c673374cf1a562996c5a9375f25c18306cc8a524c8248b15e46d527"
+    },
+    {
+      "path": "src/battle/matchup-aware-support-player-policy.ts",
+      "sha256": "2feaa4971b428b8d8a4003af9a935c22baff3d6559faa15395b8e93b3f9caa07"
+    },
+    {
+      "path": "artifacts/experiments/samples/auto-suite-20261010-cases.json",
+      "sha256": "b4c72732edf48d7dfb1cc777c6dad8ab5e0804938c14d7b2c6ebb60dd014f5d6"
+    },
+    {
+      "path": "artifacts/experiments/ai/observed-damage-validation-courses.json",
+      "sha256": "cd814dab93690aac81447b55811ac411ffdd29ab4f2dff1c7fd175528281da16"
+    }
+  ],
+  "factors": {
+    "immunity": "Expanded public memory and blocked gimmick check",
+    "switching": "Forced replacement, emergency retreat, fallback voluntary/forced distinction"
+  },
+  "notes": "Four-cell factorial, identical fixtures/NPC/economy; original endpoints must exactly reproduce prior comparison."
+}

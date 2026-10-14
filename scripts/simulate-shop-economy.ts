@@ -25,7 +25,7 @@ import {moveLearnsets} from '../src/server/move-learnsets';
 type Encounter={floor:number;seed:Seed;enemy:string;role:string;trainer:string;reward:number};
 type Course={id:string;encounters:Encounter[]};
 const phase=process.argv[2]??'economy-current',count=Number(process.env.BALANCE_SAMPLES??32);
-const path=process.env.BALANCE_COURSES??'artifacts/balance-50-courses.json';mkdirSync('artifacts',{recursive:true});
+const path=process.env.BALANCE_COURSES??'artifacts/experiments/balance/balance-50-courses.json';mkdirSync('artifacts',{recursive:true});
 let courses:Course[];
 if(existsSync(path))courses=JSON.parse(readFileSync(path,'utf8')).courses;
 else{
@@ -126,4 +126,4 @@ for(const stage of stages.filter(stage=>!process.env.BALANCE_STAGES||process.env
  const result={stage:stage.id,climbs,averageCleared:avg(climbs.map(c=>c.cleared)),finished:climbs.filter(c=>c.cleared===50).length,averageEarned:avg(climbs.map(c=>c.earned)),averageSpent:avg(climbs.map(c=>c.spent)),averageRemaining:avg(climbs.map(c=>c.coins)),shopVisits:visits.length,categories,checkpointWallets:Object.fromEntries([5,10,15,20,25,30,35,40,45].map(floor=>{const rows=visits.filter(v=>v.floor===floor);return[floor,{visits:rows.length,before:avg(rows.map(v=>v.startCoins)),after:avg(rows.map(v=>v.endCoins)),blocked:avg(rows.map(v=>v.blocked))}];}))};
  report.stages.push(result);console.log(JSON.stringify({...result,climbs:undefined}));
 }
-writeFileSync('artifacts/balance-50-'+phase+'-'+behavior+'.json',JSON.stringify(report,null,2));
+writeFileSync('artifacts/experiments/balance/balance-50-'+phase+'-'+behavior+'.json',JSON.stringify(report,null,2));

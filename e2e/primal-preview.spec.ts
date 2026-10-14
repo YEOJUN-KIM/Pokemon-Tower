@@ -15,6 +15,6 @@ for(const width of [1280,390])test('both Primal forms appear in the owned Pokede
   await summary.getByRole('button',{name:form,exact:true}).click();await expect(summary.locator('h2')).toHaveText(form);await expect(summary.locator('.summary-types span')).toHaveText([...types]);await expect(summary.locator('.summary-traits')).toContainText(ability);
   await expect.poll(()=>summary.locator('.summary-sprite img').evaluate(img=>(img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
   expect(await summary.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
-  await summary.screenshot({path:`artifacts/screenshots/primal/${form.includes('그란돈')?'groudon':'kyogre'}-${width}.png`});
+  await summary.screenshot({path:`artifacts/qa/screenshots/primal/${form.includes('그란돈')?'groudon':'kyogre'}-${width}.png`});
  }
 });

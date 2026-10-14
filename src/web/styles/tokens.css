@@ -1,0 +1,17 @@
+/* Shared palette: one authoritative value per token. */
+:root {
+  --ink: var(--game-text);
+  --muted: #7b8988;
+  --line: var(--game-line);
+  --green: #8ed0b8;
+  --orange: var(--game-accent);
+  --paper: #272335;
+  --game-bg: #302c40;
+  --game-panel: #403b50;
+  --game-line: #76687c;
+  --game-text: #f6f2e3;
+  --game-muted: #c1b9c9;
+  --game-accent: #ffd26e;
+  --game-red: #aa4148;
+  color-scheme: dark;
+}

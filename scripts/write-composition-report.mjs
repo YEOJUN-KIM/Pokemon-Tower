@@ -1,6 +1,6 @@
 import {readFileSync,writeFileSync} from 'node:fs';
-const s=JSON.parse(readFileSync('artifacts/composition-simulation-summary.json','utf8'));
-const replay=JSON.parse(readFileSync('artifacts/composition-replay-audit.json','utf8'));
+const s=JSON.parse(readFileSync('artifacts/experiments/samples/composition-simulation-summary.json','utf8'));
+const replay=JSON.parse(readFileSync('artifacts/experiments/samples/composition-replay-audit.json','utf8'));
 const names={basic:'기본',mega:'메진',dynamax:'다맥',tera:'테라',chaos:'개판'};
 const lines=['# 조합을 고려한 자동 영입과 재검증','',`2026-10-10 · 주 비교 4,140회 + 대조/보조 실험 45회 = **${s.climbs.toLocaleString()}회 등반 · ${s.battles.toLocaleString()}배틀 · ${s.decisions.toLocaleString()}개의 양측 행동 기록**. 머신러닝 학습과 게임 난이도 변경은 하지 않았다.`,
 '','## 적용 범위와 구현','',
@@ -29,16 +29,14 @@ lines.push('','기존 기본룰의 드래피온/견고라스/라티아스 팀에
 '',
 '결과는 이 자동 전략들의 비교이지 사람의 승률이 아니다. 모든 조합이 좋아진다는 결론이나 라이브 난이도를 바로 낮추는 근거로 쓰지 않는다. 신규 코스도 이번에 결과를 확인했으므로 향후 머신러닝 최종 평가에는 별도의 새 코스를 남겨둔다.',
 '','## 저장과 검증','',
-'`artifacts/composition-team-cases.json`은 조건, `composition-experiment-manifest.json`은 작업·코스/실험 코드 해시, `composition-simulation-summary.json`은 룰/팀/코스별 비교와 파일별 해시를 보관한다. 각 `simulation-composition-*-balanced.json`에는 구매·실패 층·최종 팀과 후보별 영입 점수/역할/보완한 약점 기록이 있다. 각 `composition-*-battles.jsonl`에는 실제 팀·육성 인코딩·시드·재화·소모품·승패·턴·행동 순서·보조 시도를 저장했다. 상대 테라권 재현에는 매니페스트의 원본 코스 메타데이터를 함께 사용한다.',
+'`artifacts/experiments/samples/composition-team-cases.json`은 조건, `composition-experiment-manifest.json`은 작업·코스/실험 코드 해시, `composition-simulation-summary.json`은 룰/팀/코스별 비교와 파일별 해시를 보관한다. 각 `simulation-composition-*-balanced.json`에는 구매·실패 층·최종 팀과 후보별 영입 점수/역할/보완한 약점 기록이 있다. 각 `composition-*-battles.jsonl`에는 실제 팀·육성 인코딩·시드·재화·소모품·승패·턴·행동 순서·보조 시도를 저장했다. 상대 테라권 재현에는 매니페스트의 원본 코스 메타데이터를 함께 사용한다.',
 '',
 `8개 새 조합/보조 검사와 기존 교체·배틀·룰20개 검사, TypeScript 검사가 통과했다. 모든 배틀 생성 중 금지 기믹 활성화를 검사했다. 통합 검사에서 코스 분리·동일 코스 짝·배틀 수·층 순서·승리 수·재화·조합 점수 하락 방지와 이전 v7 대조군의 완전 일치를 확인했다. JSONL에서 선택한 ${replay.checked}배틀은 원본 코스 메타데이터를 합쳐 승패·턴·행동 수를 다시 재현했다. 새 실제 트릭룸 배틀의 전체 공개 프로토콜 리플레이도 별도 테스트에서 통과했다.`,
 '',
 '실행: `node node_modules/tsx/dist/cli.mjs scripts/prepare-composition-cases.ts`, `node scripts/run-composition-simulation.mjs --resume`, `node scripts/summarize-composition-simulation.mjs`, `node node_modules/tsx/dist/cli.mjs scripts/audit-composition-replays.ts`, `node scripts/write-composition-report.mjs`. 기존 산출물 경로는 고정이며 새 실험은 별도 phase/코스 파일을 사용한다. 재개는 코드/조건/원본 코스 해시와 완료된 조건 수가 맞는 작업만 건너뛴다.',
 '',
 '머신러닝 학습은 아직 하지 않았다. 코스 단위 분리, 패배 후 미관측 층 처리, 당시 공개 관측 추가, 대안 행동 비교가 필요하다. 현재 행동은 정답이 아니라 각 휴리스틱의 선택이다. 상대 전체 팀 정보는 오프라인 분석용이며 공개되지 않은 기술/도구/능력치를 실제 AI 입력에 넣지 않는다.');
-writeFileSync('docs/COMPOSITION_SIMULATION.md',lines.join('\n')+'\n');
-const news=`최신 조합 실험: 자동 테스트의 영입·파티·기술 평가를 육성/약점/공격 범위/벽·트릭룸 역할 기반으로 개선. 23조건·5룰·기존/새 코스·두 전략, 주 비교4,140회와 대조45회, ${s.battles.toLocaleString()}배틀. 실험용 플레이어v8·실제 상대v7 유지, 모델 학습/게임 난이도 변경 없음. [조합 비교·재검증](COMPOSITION_SIMULATION.md).`;
-for(const path of ['docs/STATUS.md','docs/SESSION_HANDOFF.md']){
- const text=readFileSync(path,'utf8').replace(/^최신 조합 실험:.*\n/gm,''),at=text.indexOf('\n');writeFileSync(path,text.slice(0,at+1)+'\n'+news+'\n'+text.slice(at+1));
-}
-console.log('Saved composition report and status');
+writeFileSync('artifacts/experiments/samples/COMPOSITION_SIMULATION.md',lines.join('\n')+'\n');
+// Current docs are maintained separately; a simulation writes only its report.
+
+console.log('Saved composition report');

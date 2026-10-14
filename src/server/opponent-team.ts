@@ -17,6 +17,8 @@ import {allowedOpponentSpecies,evolvedOpponentSpecies} from '../data/opponent-sp
 import {normalNpcTemplate,templateProfile} from './npc-templates';
 import type {TrainingProfile} from '../data/training';
 import {separateForms} from '../data/selectable-forms';
+import {namedOpponentIVs} from './named-opponent-ivs';
+import {opponentProfile} from './opponent-training';
 
 export function encounterRandom(seed:Seed) {
   let state=seed.reduce((value,part)=>(Math.imul(value,31)+part)>>>0,2166136261);
@@ -98,6 +100,13 @@ export function selectNamedEntries(entries:readonly string[],random:()=>number,a
   return selected;
 }
 export type OpponentEntry={name:string;moves:string[];item?:string;ability?:string;gigantamax?:boolean;profile?:TrainingProfile};
+function withNamedIVs(team:OpponentEntry[],floor:number,seed:Seed,progression:TowerProgression,named:boolean){
+ if(!named||progression==='legacy')return team;
+ return team.map(entry=>{
+  const profile=entry.profile??opponentProfile(entry.name,entry.moves,floor,{hp:0,atk:0,def:0,spa:0,spd:0,spe:0},progression);
+  return {...entry,profile:{...profile,ivs:namedOpponentIVs(entry.name,entry.moves,floor,seed,profile)}};
+ });
+}
 const typeItems:Record<string,string>={Normal:'Silk Scarf',Fire:'Charcoal',Water:'Mystic Water',Electric:'Magnet',Grass:'Miracle Seed',Ice:'Never-Melt Ice',Fighting:'Black Belt',Poison:'Poison Barb',Ground:'Soft Sand',Flying:'Sharp Beak',Psychic:'Twisted Spoon',Bug:'Silver Powder',Rock:'Hard Stone',Ghost:'Spell Tag',Dragon:'Dragon Fang',Dark:'Black Glasses',Steel:'Metal Coat',Fairy:'Fairy Feather'};
 function equipNamedTeam(team:OpponentEntry[],ace:string|undefined,champion:boolean,original=false){
   const used=new Set<string>();
@@ -125,7 +134,7 @@ export function generateOpponentTeam(floor:number,seed:Seed,previous:string[]=[]
       const team=template.team.map(p=>{const profile=templateProfile(p.profile,floor);return {name:p.species,moves:profile.moves,item:p.item,ability:profile.ability,gigantamax:p.gigantamax,profile};});
       // Fixed membership/builds; only the lead order varies with the saved seed.
       for(let i=team.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[team[i],team[j]]=[team[j],team[i]];}
-      return normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'))?team:stripNpcGimmicks(team);
+      return withNamedIVs(normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'))?team:stripNpcGimmicks(team),floor,seed,progression,true);
     }
   }
   let entries=sample?.entries ?? trainer?.entries;
@@ -147,7 +156,7 @@ export function generateOpponentTeam(floor:number,seed:Seed,previous:string[]=[]
     const equipped=named ? equipNamedTeam(equipBossGimmick(team,trainer?.boss.id ?? sample?.id ?? '',floor),ace,champion,!!team[0].ability) : team;
     const result=progression!=='legacy' && floor<=60?gentleMoves(equipped):equipped;
     if(progression!=='legacy' && !normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named')))return stripNpcGimmicks(result);
-    return signature?equipNpcGimmick(result,signature):result;
+    return withNamedIVs(signature?equipNpcGimmick(result,signature):result,floor,seed,progression,named);
   }
   let pool=encounterPool(floor,progression);
   if(progression!=='legacy' && sample?.kind!=='elite')pool=pool.filter(normalOpponentSpecies);

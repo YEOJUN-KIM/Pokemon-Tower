@@ -1,0 +1,352 @@
+/* src/web/battle-layout.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
+/* Battle HUD uses a single palette; the arena stays clear of controls. */
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live) {
+  padding: 10px 14px;
+  background: #101d27;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .game-grid) {
+  gap: 0;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .right-column) {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 12px;
+  z-index: 6;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: none;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  pointer-events: none;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-panel) {
+  gap: 12px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-panel h2) {
+  padding: 3px 5px;
+  background: #e8f4f0cc;
+  color: #28474f;
+  border-radius: 3px;
+  font-size: 11px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member) {
+  width: 52px;
+  min-height: 62px;
+  background: #142935;
+  border-color: #54737d;
+  border-radius: 5px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member .sprite) {
+  width: 48px;
+  height: 42px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-empty) {
+  height: 42px;
+  width: 48px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member.is-active) {
+  background: #204e46;
+  border-color: #86dbc1;
+}
+:where(.scope) :global(.opponent-heading) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  min-width: 0;
+  color: #edf8fa;
+}
+:where(.scope) :global(.opponent-heading>small) {
+  display: none;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-trainer) {
+  position: static;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: right;
+  color: #f4f5e9;
+  text-shadow: none;
+  background: #47534bed;
+  border: 2px solid #cbd1b8;
+  border-radius: 2px;
+  padding: 4px 10px 4px 5px;
+  box-shadow: inset 0 0 0 1px #253b2e;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-trainer .opponent-marker) {
+  font: 700 9px monospace;
+  padding: 3px 5px;
+  margin: 0;
+  border: 0;
+  background: #2e5149;
+  color: #f5f8e9;
+  border-radius: 2px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-trainer[data-opponent-kind=boss]) {
+  border-color: #b1914b;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-trainer[data-opponent-kind=boss] .opponent-marker) {
+  background: #796039;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel) {
+  grid-template-rows: 44px minmax(0,1fr) 226px;
+  border: 1px solid #476574;
+  border-radius: 8px;
+  box-shadow: none;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .panel-top) {
+  min-height: 44px;
+  background: #172a36;
+  padding: 6px 16px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-progress) {
+  font-size: 16px;
+  gap: 20px;
+  color: #f0f8fa;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-progress>span:not(.battle-coins)) {
+  color: #b5d6dc;
+  font-size: 13px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .arena) {
+  --near-x: 26%;
+  --far-x: 75%;
+  --near-ground: 7%;
+  --far-ground: 37%;
+}
+:where(.scope) :global(.pokemon-gender) {
+  font: 700 14px Arial,sans-serif;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+:where(.scope) :global(.pokemon-gender[data-gender=M]) {
+  color: #7cc7f5;
+}
+:where(.scope) :global(.pokemon-gender[data-gender=F]) {
+  color: #f2a0ad;
+}
+@keyframes low-health-glow {
+  0%,100% {
+    box-shadow: 0 0 0 1px #e7675530;
+  }
+  50% {
+    box-shadow: 0 0 12px #e767554f;
+  }
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .opponent-balls) {
+  border: 0;
+  margin-top: 5px;
+  padding-top: 0;
+  gap: 6px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-messages),:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .command-area) {
+  background: #1c3040;
+  border-color: #476574;
+  border-top-width: 1px;
+  padding: 14px 18px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .message-heading) {
+  font-size: 11px;
+  color: #a9c7ce;
+  gap: 12px;
+}
+:where(.scope) :global(.message-controls) {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-messages .skip-motion) {
+  position: static;
+  display: inline-flex!important;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  padding: 5px 9px;
+  border: 1px solid #799aab;
+  border-radius: 5px;
+  background: #294552;
+  color: #edf8fa;
+  font-size: 11px;
+  box-shadow: none;
+  white-space: nowrap;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .current-messages) {
+  height: auto;
+  min-height: 72px;
+  margin-top: 12px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live.battle-room .current-messages p) {
+  font-size: 16px;
+  line-height: 1.55;
+  color: #b9ced5;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live.battle-room .current-messages p.latest) {
+  font-size: clamp(20px,1.65vw,28px);
+  line-height: 1.55;
+  color: #f0f8fa;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .action-button) {
+  background: #243e4d;
+  border: 1px solid #688997;
+  border-radius: 6px;
+  box-shadow: none;
+  color: #f0f8fa;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .action-button:hover:not(:disabled)) {
+  background: #2f5060;
+  transform: none;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-button.is-z-powered) {
+  background: linear-gradient(120deg,#59431e,#302e29 75%);
+  border-color: #e6bc53;
+  box-shadow: inset 0 1px 0 #fff0b540,0 0 12px #efbe4326;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-button.is-z-powered:hover:not(:disabled)) {
+  background: linear-gradient(120deg,#745723,#403a2b 75%);
+  border-color: #ffe39a;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-button.is-z-powered:is([data-game-cursor=true],:focus-visible)) {
+  background: linear-gradient(120deg,#745723,#403a2b 75%)!important;
+  outline-color: #ffe39a!important;
+  border-color: #ffe39a!important;
+  box-shadow: inset 0 1px 0 #fff0b540,0 0 18px #efbe4359!important;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-button.is-z-powered strong) {
+  display: block;
+  font-family: 'Malgun Gothic','Apple SD Gothic Neo','Noto Sans KR',sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-synthesis: weight style;
+  letter-spacing: .035em;
+  color: #ffe7a0;
+  text-shadow: 1px 2px 0 #1c160d,0 0 10px #ffc84466;
+  padding-right: 3px;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-button.is-z-powered:is([data-game-cursor=true],:focus-visible) strong) {
+  color: #ffe7a0!important;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-move-button.is-z-powered .battle-choice-arrow) {
+  color: #ffe39a;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-details) {
+  color: #b9ced5;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-details dd) {
+  color: #f2dc91;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-settings-trigger) {
+  background: #294552;
+  border-color: #688997;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live footer) {
+  padding: 8px 2px 0;
+}
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live.battle-room .workspace footer>.battle-keyboard-hints) {
+  display: flex!important;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+@media(max-width:760px) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live.battle-room .workspace footer>.battle-keyboard-hints) {
+    display: none!important;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live) {
+    padding: 6px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .game-grid) {
+    gap: 0;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .right-column) {
+    left: 8px;
+    right: 8px;
+    top: 8px;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 0;
+    border-radius: 0;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-panel) {
+    width: 100%;
+    justify-content: center;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member) {
+    width: 42px;
+    min-height: 49px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-member .sprite),:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-empty) {
+    width: 40px;
+    height: 32px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-status) {
+    font-size: 8px;
+    line-height: 14px;
+  }
+  :where(.scope) :global(.opponent-heading) {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-trainer) {
+    font-size: 11px;
+    gap: 5px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-trainer .opponent-marker) {
+    font-size: 8px;
+    padding: 2px 4px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel) {
+    grid-template-rows: 40px minmax(0,1fr) 92px 166px;
+    border-radius: 6px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel[data-command-mode=moves][data-resolving=false]),:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel[data-resolving=true]) {
+    grid-template-rows: 40px minmax(0,1fr) 258px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .panel-top) {
+    min-height: 40px;
+    padding: 5px 10px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-progress) {
+    font-size: 13px;
+    gap: 12px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-progress>span:not(.battle-coins)) {
+    font-size: 10px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-messages),:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .command-area) {
+    padding: 9px 10px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .current-messages) {
+    min-height: 40px;
+    margin-top: 6px;
+  }
+  /* One owner for every mobile log row, including the latest message. */
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live.battle-room .current-messages p),
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live.battle-room .current-messages p.latest) {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  :where(.scope) :global(.message-controls) {
+    gap: 7px;
+  }
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-messages .skip-motion) {
+    font-size: 10px;
+    min-height: 24px;
+    padding: 3px 6px;
+  }
+}

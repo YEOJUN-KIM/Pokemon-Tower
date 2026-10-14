@@ -1,6 +1,5 @@
 import Pokedex from '../../web/pokedex';
 import {pokedexEntries} from '../../server/pokedex-entries';
-import '../../web/pokedex.css';
 import {requirePageAccount} from '../../server/page-account';
 
 export default async function Page({searchParams}: {searchParams: Promise<{from?:string}>}) {

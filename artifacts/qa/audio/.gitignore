@@ -1,0 +1,4 @@
+# Keep previously versioned reference files; other generated outputs stay local.
+!effect-levels.json
+!music-levels-before.json
+!music-levels.json

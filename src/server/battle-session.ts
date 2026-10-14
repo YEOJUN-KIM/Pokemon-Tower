@@ -6,6 +6,7 @@ import {TeraPolicy,GimmickPolicy,LegacyGimmickPolicy} from '../battle/gimmick-po
 import {SwitchingPolicy,CautiousSwitchingPolicy} from '../battle/switch-policy';
 import {LearningOpponentPolicy} from '../battle/learning-opponent-policy';
 import {DYNAMAX_ITEM} from '../data/gimmicks';
+import {normalizeHeldItem} from '../data/held-items';
 import { randomBytes, randomUUID } from 'node:crypto';
 import { setImmediate as settle } from 'node:timers/promises';
 import { DamagePolicy, type Observation } from '../battle/policy';
@@ -132,7 +133,7 @@ export class BattleSession {
         const name = event!=='switch' && this.ownActiveSpecies==='Zoroark' ? 'Zoroark' : actor.split(': ')[1];
         if(event==='-terastallize')this.ownDetails.set(name,{...this.ownDetails.get(name),terastallized:value});
         if(event==='-enditem')this.ownDetails.set(name,{...this.ownDetails.get(name),item:'',berryUsed:value==='Sitrus Berry' && line.split('|').includes('[eat]')});
-        if(event==='-item')this.ownDetails.set(name,{...this.ownDetails.get(name),item:value});
+        if(event==='-item')this.ownDetails.set(name,{...this.ownDetails.get(name),item:normalizeHeldItem(value)??value});
         if (event === 'switch') {this.ownActiveSpecies=name;this.ownConditions.set(name, condition);}
         if (['-damage', '-heal'].includes(event)) this.ownConditions.set(name, value);
         if (event === 'faint') this.ownConditions.set(name, '0 fnt');

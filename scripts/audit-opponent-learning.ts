@@ -6,7 +6,7 @@ import Showdown from 'pokemon-showdown';
 import {runBattle,battleEvents} from '../src/battle/run';
 import {allowsGimmick} from '../src/data/run-rules';
 
-const id=process.argv[2]??'20261011',prefix=`artifacts/opponent-learning-${id}`;
+const id=process.argv[2]??'20261011',prefix=`artifacts/experiments/ai/opponent-learning-${id}`;
 const read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
 const manifest=read(prefix+'-manifest.json');
 for(const f of manifest.files)assert.equal(createHash('sha256').update(readFileSync(f.path)).digest('hex'),f.sha256,f.path);
@@ -15,13 +15,13 @@ assert.equal(courses.length,18);assert.equal(cases.length,18);
 async function* rows(path:string){for await(const l of createInterface({input:createReadStream(path),crlfDelay:Infinity}))if(l.trim())yield JSON.parse(l);}
 const cells:any[]=[];let totalBattles=0,replays=0,reproducedBattles=0,common:any;
 for(const mode of manifest.modes)for(const rule of manifest.rules){
- const report=read(`artifacts/simulation-opponent-learning-${id}-${rule}-${mode}-balanced.json`);
+ const report=read(`artifacts/experiments/balance/simulation-opponent-learning-${id}-${rule}-${mode}-balanced.json`);
  const config={cases:report.caseDefinitions,prices:report.prices,sourceCourseHash:report.sourceCourseHash,playerAI:report.playerAI,format:report.format,behavior:report.behavior,composition:report.composition,totalFloors:report.totalFloors};
  if(common)assert.deepEqual(config,common);common=config;assert.equal(report.opponentAI,mode);
  assert.deepEqual(report.caseDefinitions,cases);
  const oldMode=mode==='v7'&&['basic','tera','chaos'].includes(rule);
- const previous=oldMode?rows(`artifacts/sample-holdout-20261011-${rule}-samples-battles.jsonl`)[Symbol.asyncIterator]():null;
- if(oldMode)assert.deepEqual(report.stages,read(`artifacts/simulation-sample-holdout-20261011-${rule}-samples-balanced.json`).stages);
+ const previous=oldMode?rows(`artifacts/experiments/samples/sample-holdout-20261011-${rule}-samples-battles.jsonl`)[Symbol.asyncIterator]():null;
+ if(oldMode)assert.deepEqual(report.stages,read(`artifacts/experiments/balance/simulation-sample-holdout-20261011-${rule}-samples-balanced.json`).stages);
  const sequences=new Map<string,{n:number;wins:number;loss:boolean}>();
  const metric={battles:0,npcDecisions:0,npcKnownBlocked:0,npcPreventableBlocked:0,npcImmune:0,npcRepeatImmune:0,npcSwitches:0,npcQuickReturns:0};
  for await(const b of rows(prefix+`-${rule}-${mode}-battles.jsonl`)){

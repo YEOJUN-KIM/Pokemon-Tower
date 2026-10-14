@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import drafts from '../docs/gameplay/npc-team-samples.json' with {type:'json'};
+import drafts from '../scripts/data/npc/npc-team-samples.json' with {type:'json'};
 import {BattleSession} from '../src/server/battle-session';
 import {packTeam,starters} from '../src/data/teams';
 import {defaultProfile} from '../src/server/training';

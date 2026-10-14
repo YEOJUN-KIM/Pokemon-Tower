@@ -25,4 +25,4 @@ for(const track of tracks){
   manifest.push({...track,license:'CC0-1.0',licenseUrl:'https://creativecommons.org/publicdomain/zero/1.0/',verifiedAt:'2026-10-09',path,bytes:bytes.length,sha256:createHash('sha256').update(bytes).digest('hex'),changes:'Original file, renamed only. Browser repeats the complete file; no seamless-loop guarantee.'});
   console.log(`${track.id}: ${bytes.length} bytes`);
 }
-await writeFile('docs/battle-music-sources.json',JSON.stringify(manifest,null,2)+'\n');
+await writeFile('public/audio/music-sources.json',JSON.stringify(manifest,null,2)+'\n');

@@ -4,6 +4,7 @@ import {normalNpcCategory,normalNpcStage,type NormalModeStage} from '../data/nor
 import {towerDifficulty} from '../data/tower-progression';
 import type {NpcGimmick} from '../data/npc-gimmicks';
 import {statKeys,type TrainingProfile,type StatBlock} from '../data/training';
+import {isCollectibleSpecies} from '../data/pokedex-roster';
 
 type Template={id:string;stage:NormalModeStage;role:string;ace:string;signature:NpcGimmick;gimmickEnabled:boolean;legendaryMinFloor?:number;team:{species:string;item:string;gigantamax:boolean;profile:TrainingProfile}[]};
 const templates=new Map((rows as unknown as Template[]).map(row=>[`${row.id}:${row.stage}`,row]));
@@ -16,6 +17,7 @@ export function normalNpcTemplate(id:string,floor:number,role?:string):Template|
  const stage=villainBoss&&floor>=75?'final-gate':normalNpcStage(floor,category);
  const row=templates.get(`${id}:${stage}`);
  if(!row)return null;
+ if(row.team.some(p=>!isCollectibleSpecies(p.species)))return null;
  const difficulty=towerDifficulty(floor);
  if(row.legendaryMinFloor && floor<row.legendaryMinFloor)return null;
  if(row.team.some(p=>species[p.species]?.legendary&&!difficulty.legendary || species[p.species]?.mythical&&!difficulty.mythical))return null;

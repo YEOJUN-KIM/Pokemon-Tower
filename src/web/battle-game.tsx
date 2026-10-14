@@ -18,7 +18,7 @@ import {TowerControls} from './tower-controls';
 import {BattleResultDialog, ResultBanner} from './battle-result';
 import {TowerClear} from './tower-clear';
 import {useRouter} from 'next/navigation';
-import { health, pokemonName, species } from './catalog';
+import { health, pokemonName, battlePokemonName, species } from './catalog';
 import {PokemonImage} from './pokemon-image';
 import {MoveVisuals} from './move-visuals';
 import {pokemonBattleScale} from '../data/pokemon-size';
@@ -71,9 +71,9 @@ function HealthCard({pokemon, enemy = false, percentage = false,field,team}: {po
   const hp = health(pokemon.condition);
   const critical=hp.percent>0 && hp.percent<=30;
   return <div className={`health-card ${enemy ? 'enemy-health' : 'player-health'}`} data-hp-state={hp.percent===0?'fainted':critical?'critical':hp.percent<50?'caution':'healthy'}>
-    <div className="health-heading"><strong>{pokemonName(pokemon.displaySpecies ?? pokemon.species)}{pokemon.gender && pokemon.gender!=='N' && <i className="pokemon-gender" data-gender={pokemon.gender} aria-label={pokemon.gender==='M'?'수컷':'암컷'}>{pokemon.gender==='M'?'♂':'♀'}</i>}<span className="health-types" aria-label="현재 타입">{currentTypes(pokemon).map(type=><TypeBadge key={type} type={type}/>)}</span></strong><span>Lv. 50</span></div>
+    <div className="health-heading"><strong>{battlePokemonName(pokemon.displaySpecies ?? pokemon.species)}{pokemon.gender && pokemon.gender!=='N' && <i className="pokemon-gender" data-gender={pokemon.gender} aria-label={pokemon.gender==='M'?'수컷':'암컷'}>{pokemon.gender==='M'?'♂':'♀'}</i>}<span className="health-types" aria-label="현재 타입">{currentTypes(pokemon).map(type=><TypeBadge key={type} type={type}/>)}</span></strong><span>Lv. 50</span></div>
     {hp.status && <div className="health-status"><b data-status={battleStatus(pokemon.condition)}>{hp.status}</b></div>}
-    <div className="hp-row"><span>HP</span><div className="hp-track" role="progressbar" aria-label={`${pokemonName(pokemon.species)} HP`} aria-valuenow={Math.round(hp.percent)} aria-valuemin={0} aria-valuemax={100}>
+    <div className="hp-row"><span>HP</span><div className="hp-track" role="progressbar" aria-label={`${battlePokemonName(pokemon.displaySpecies ?? pokemon.species)} HP`} aria-valuenow={Math.round(hp.percent)} aria-valuemin={0} aria-valuemax={100}>
       <i style={{width: `${hp.percent}%`, background: hp.percent <= 30 ? '#ef6661' : hp.percent < 50 ? '#e7ad47' : '#55bd98'}} /></div></div>
     <div className="hp-number"><span>{enemy || percentage ? `${Math.ceil(hp.percent)}%` : hp.text}</span></div>
     {(enemy || team) && <div className={enemy ? 'opponent-balls' : 'opponent-balls player-balls'} role="group" aria-label={enemy ? `상대 남은 포켓몬 ${(field?.opponentSize ?? 3)-(field?.faintedOpponents.length ?? 0)} / ${field?.opponentSize ?? 3}` : `내 남은 포켓몬 ${team!.filter(member=>health(member.condition).percent>0).length} / ${team!.length}`}>{Array.from({length:enemy ? field?.opponentSize ?? 3 : team!.length},(_,index)=>{const fainted=enemy ? index>=(field?.opponentSize ?? 3)-(field?.faintedOpponents.length ?? 0) : health(team![index].condition).percent===0;return <span key={index} className={fainted ? 'ball-fainted' : ''} aria-label={fainted ? '기절' : '생존'}><Ball small/></span>;})}</div>}
@@ -309,7 +309,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
               if(!pokemon)return <div className="team-member is-empty" key={i} aria-label={`${i+1}번 빈 슬롯`}><span className="team-empty">＋</span><span className="team-status">빈 슬롯</span></div>;
               const entered=preparing ? selected.includes(collectionSpecies(pokemon.species)) : !!battle?.team.some(p=>p.species===pokemon.species),fainted=entered && health(pokemon.condition).percent===0;
               const state=!entered?'미출전':fainted?'기절':pokemon.active?'출전 중':'출전';
-              return <div className={`team-member ${!entered || fainted ? "is-muted" : ""} ${pokemon.active && !fainted ? "is-active" : ""}`} key={pokemon.species} title={`${pokemonName(pokemon.species)} · ${state}`} aria-label={`${pokemonName(pokemon.species)} · ${state}`} data-team-state={state}><Sprite shiny={pokemon.shiny} name={pokemon.species}/><span className="team-status">{state}</span></div>;
+              return <div className={`team-member ${!entered || fainted ? "is-muted" : ""} ${pokemon.active && !fainted ? "is-active" : ""}`} key={pokemon.species} title={`${battlePokemonName(pokemon.displaySpecies??pokemon.species)} · ${state}`} aria-label={`${battlePokemonName(pokemon.displaySpecies??pokemon.species)} · ${state}`} data-team-state={state}><Sprite shiny={pokemon.shiny} name={pokemon.displaySpecies??pokemon.species}/><span className="team-status">{state}</span></div>;
             })}</div></section>
             {battle && <div className="opponent-heading"><div className="enemy-trainer" data-opponent-kind={run?.boss ? "boss" : run?.trainer?.kind ?? "normal"}><span className="opponent-marker" aria-hidden="true">VS</span><strong>{trainerLabel(run?.boss ?? run?.trainer ?? battleTrainer(battle.id))}</strong></div></div>}
             <div className="tip"><span>TRAINER TIP</span><p>상대의 약점을 노려보세요.<br />타입 상성에 따라 공격의 효과가 달라집니다.</p></div>

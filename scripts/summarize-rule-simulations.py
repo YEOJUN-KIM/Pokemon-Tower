@@ -5,8 +5,8 @@ from collections import Counter
 rules=['basic','mega','dynamax','tera','chaos']
 labels={'basic':'기본룰','mega':'메진룰','dynamax':'다맥룰','tera':'테라룰','chaos':'개판룰'}
 stages=['fresh','mid','trained','collector']
-reports={rule:json.loads(Path(f'artifacts/simulation-rule-{rule}-balanced.json').read_text(encoding='utf-8')) for rule in rules}
-source=Path('artifacts/hundred-floor-six-z-courses.json')
+reports={rule:json.loads(Path(f'artifacts/experiments/balance/simulation-rule-{rule}-balanced.json').read_text(encoding='utf-8')) for rule in rules}
+source=Path('artifacts/experiments/balance/hundred-floor-six-z-courses.json')
 source_hash=hashlib.sha256(source.read_bytes()).hexdigest()
 source_ids={c['id'] for c in json.loads(source.read_text(encoding='utf-8'))['courses']}
 summary={'source':str(source),'courseHash':source_hash,'samplesPerRuleStage':72,'totalClimbs':0,'totalBattles':0,'rows':[]}
@@ -31,8 +31,8 @@ for rule,report in reports.items():
   delta=[c['cleared']-reference[c['id']]['cleared'] for c in rows]
   result={'rule':rule,'stage':stage['stage'],'averageCleared':stage['averageCleared'],'passed10':stage['passed10'],'passed50':stage['passed50'],'finished':stage['finished'],'battleWinRate':stage['battleWinRate'],'battles':stage['battles'],'highestCleared':max(c['cleared'] for c in rows),'playerMegaDynamax':stage['playerGimmickActivations'] if 'playerGimmickActivations' in stage else sum(c['playerGimmickActivations'] for c in rows),'enemyMegaDynamax':sum(c['bossGimmickActivations'] for c in rows),'playerTera':stage['playerTera'],'enemyTera':stage['enemyTera'],'averageDeltaFromChaos':sum(delta)/72,'betterThanChaos':sum(d>0 for d in delta),'worseThanChaos':sum(d<0 for d in delta),'sameAsChaos':sum(d==0 for d in delta),'mostCommonFailureFloors':Counter(c.get('failedFloor') for c in rows if c.get('failedFloor')).most_common(5)}
   summary['rows'].append(result);summary['totalClimbs']+=72;summary['totalBattles']+=stage['battles']
-old=json.loads(Path('artifacts/simulation-current-six-z-balanced.json').read_text(encoding='utf-8'))
+old=json.loads(Path('artifacts/experiments/balance/simulation-current-six-z-balanced.json').read_text(encoding='utf-8'))
 summary['chaosMatchesPrevious']={s['stage']:s['climbs']==chaos[s['stage']]['climbs'] for s in old['stages']}
 assert all(summary['chaosMatchesPrevious'].values()),'Chaos comparison differs from previous baseline'
-Path('artifacts/rule-comparison-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
+Path('artifacts/experiments/balance/rule-comparison-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
 print(json.dumps(summary,ensure_ascii=False,indent=2))

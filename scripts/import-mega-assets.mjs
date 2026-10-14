@@ -1,7 +1,7 @@
 import {readFileSync,writeFileSync,mkdirSync,existsSync,unlinkSync} from 'node:fs';
 import Showdown from 'pokemon-showdown';
 const dex=JSON.parse(readFileSync('src/data/pokedex.json','utf8'));
-const ids=new Map(readFileSync('.data/import-cache/pokemon.csv','utf8').trim().split(/\r?\n/).slice(1).map(l=>{const p=l.split(',');return [Showdown.Dex.species.get(p[1]).name,Number(p[0])];}));
+const ids=new Map(readFileSync('.data/cache/import/pokemon.csv','utf8').trim().split(/\r?\n/).slice(1).map(l=>{const p=l.split(',');return [Showdown.Dex.species.get(p[1]).name,Number(p[0])];}));
 const items={},forms={},sources=[],animated=new Set();
 for(const item of Showdown.Dex.items.all().filter(i=>i.megaStone)){
  for(const [base,name] of Object.entries(item.megaStone)){
@@ -14,7 +14,7 @@ for(const item of Showdown.Dex.items.all().filter(i=>i.megaStone)){
   forms[name]={id:entry.id,baseSpecies:base,spriteKey:String(id),types:form.types,heightm:form.heightm,key:form.name.toLowerCase().replace(/-mega-([xy])$/,'-mega$1')};
  }
 }
-mkdirSync('artifacts/reports',{recursive:true});mkdirSync('public/sprites/gimmicks',{recursive:true});
+mkdirSync('artifacts/qa/assets/reports',{recursive:true});mkdirSync('public/sprites/gimmicks',{recursive:true});
 writeFileSync('src/data/mega-items.json',JSON.stringify(items,null,2)+'\n');
 writeFileSync('src/data/mega-forms.json',JSON.stringify(forms,null,2)+'\n');
 if(process.argv.includes('--metadata-only')){console.log(Object.keys(items).length+' stones');process.exit(0);}
@@ -29,6 +29,6 @@ for(const [name,form] of Object.entries(forms))for(const back of [false,true]){
 let next=0;await Promise.all(Array.from({length:6},async()=>{while(next<jobs.length)await jobs[next++]();}));
 const inventory={};for(const [name,f]of Object.entries(forms))inventory[f.spriteKey]={key:f.key,animatedFront:animated.has('public/sprites/gimmicks/front/'+f.key+'.gif'),animatedBack:animated.has('public/sprites/gimmicks/back/'+f.key+'.gif')};
 writeFileSync('src/data/mega-sprite-availability.json',JSON.stringify(inventory,null,2)+'\n');
-writeFileSync('artifacts/reports/mega-sprite-sources.json',JSON.stringify({source:'Pokemon Showdown sprite collection',importedAt:new Date().toISOString(),sources},null,2)+'\n');
+writeFileSync('artifacts/qa/assets/reports/mega-sprite-sources.json',JSON.stringify({source:'Pokemon Showdown sprite collection',importedAt:new Date().toISOString(),sources},null,2)+'\n');
 console.log('Imported '+Object.keys(items).length+' stones/forms and '+sources.length+' sprite files');
 

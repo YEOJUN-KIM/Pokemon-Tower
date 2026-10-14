@@ -22,7 +22,7 @@ export function immunityEvents(lines:string[]){
 }
 
 const rule=process.argv[2]??'basic';if(!['basic','tera','chaos'].includes(rule))throw Error('Invalid rule');
-const input=`artifacts/observed-damage-validate-${rule}-v9-battles.jsonl`,prefix=`artifacts/immunity-recheck-${rule}`;
+const input=`artifacts/experiments/ai/observed-damage-validate-${rule}-v9-battles.jsonl`,prefix=`artifacts/experiments/ai/immunity-recheck-${rule}`;
 const files=['src/battle/matchup-aware-support-player-policy.ts','src/battle/revealed-immunity.ts','src/data/type-effectiveness.ts','src/data/type-chart.json','scripts/simulate-immunity-recheck.ts'];
 writeFileSync(prefix+'-manifest.json',JSON.stringify({rule,source:input,sourceHash:createHash('sha256').update(readFileSync(input)).digest('hex'),files:files.map(path=>({path,sha256:createHash('sha256').update(readFileSync(path)).digest('hex')})),scope:'Seen development courses; no new held-out performance claim. Same profiles, teams, items, seed and live opponent v7. Only experimental player differs.'},null,2));
 writeFileSync(prefix+'-battles.jsonl','');const results:any[]=[];let replays=0;

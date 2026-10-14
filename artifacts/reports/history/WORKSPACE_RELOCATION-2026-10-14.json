@@ -1,0 +1,3281 @@
+{
+  "date": "2026-10-14",
+  "purpose": "Path relocation only. Source hashes in historical experiment manifests remain historical; source path edits do not establish new simulation results.",
+  "moves": [
+    {
+      "from": "docs/experiments/ai/ABILITY_LEARNING_VALIDATION.md",
+      "to": "artifacts/experiments/ai/ABILITY_LEARNING_VALIDATION.md",
+      "originalSha256": "2996eade9235ae1fa3dbd4b93568a30202a051dec73d89ead5092c060d4c7dc6"
+    },
+    {
+      "from": "docs/experiments/ai/ADAPTIVE_COVERAGE_AI.md",
+      "to": "artifacts/experiments/ai/ADAPTIVE_COVERAGE_AI.md",
+      "originalSha256": "d22126cf2048e42145bd8baa5ae4f684d652dc8da7bf3d7025d71b10e4b621a5"
+    },
+    {
+      "from": "docs/experiments/ai/COVERAGE_FACTOR_COMPARISON.md",
+      "to": "artifacts/experiments/ai/COVERAGE_FACTOR_COMPARISON.md",
+      "originalSha256": "5872495fb17e5b4ccbe12e889cd72c0526b3c9f2c611f2deeeb9c0bee2f6ad02"
+    },
+    {
+      "from": "docs/experiments/ai/IMMUNITY_RECHECK.md",
+      "to": "artifacts/experiments/ai/IMMUNITY_RECHECK.md",
+      "originalSha256": "46e60157bbe619ea28450d11cfbfc840b6b385b4ccb4fd778551fe1e26170f55"
+    },
+    {
+      "from": "docs/experiments/ai/OBSERVED_DAMAGE_AI.md",
+      "to": "artifacts/experiments/ai/OBSERVED_DAMAGE_AI.md",
+      "originalSha256": "a5901a967ec6aa53a84f5ce620deb608d0aacf4240623e423e7f122fb4e927f3"
+    },
+    {
+      "from": "docs/experiments/ai/OPPONENT_IMMUNITY_LEARNING.md",
+      "to": "artifacts/experiments/ai/OPPONENT_IMMUNITY_LEARNING.md",
+      "originalSha256": "fd6c13949ced7cd9d6c72e4ce144854d7f6878793fcc5b5c5bb2bf159e4db35f"
+    },
+    {
+      "from": "docs/experiments/ai/README.md",
+      "to": "artifacts/experiments/ai/README.md",
+      "originalSha256": "756adc0f6a5dc5d6fb610e977a5e6dfcd4804c71afd8b193f062998bd5dafa21"
+    },
+    {
+      "from": "docs/experiments/ai/SUPPORT_ABLATION.md",
+      "to": "artifacts/experiments/ai/SUPPORT_ABLATION.md",
+      "originalSha256": "6a5b32c3e533634448a74980ba416c36d0673039cc4d6fcf38b070c7988b636b"
+    },
+    {
+      "from": "docs/experiments/ai/SUPPORT_PLAYER_DATA.md",
+      "to": "artifacts/experiments/ai/SUPPORT_PLAYER_DATA.md",
+      "originalSha256": "2b2516bdc21980e075a7cd1e35fef1fa3b101ab7871fc78725b200cc7ec4261e"
+    },
+    {
+      "from": "docs/experiments/ai/SUPPORT_RECHECK.md",
+      "to": "artifacts/experiments/ai/SUPPORT_RECHECK.md",
+      "originalSha256": "fdbd2991d25029c2e06ae4dd3f163e08a95e53828a197013d194451ea3dd49d1"
+    },
+    {
+      "from": "docs/experiments/balance/BALANCE_30_FLOORS.md",
+      "to": "artifacts/experiments/balance/BALANCE_30_FLOORS.md",
+      "originalSha256": "5ce62f77994d7450b93045a879a6e623a67996d1845c8281f327abc085f5a871"
+    },
+    {
+      "from": "docs/experiments/balance/BALANCE_50_FLOORS.md",
+      "to": "artifacts/experiments/balance/BALANCE_50_FLOORS.md",
+      "originalSha256": "c001c80a4ac688f3dcdc48f804a70c6a03a9419f699ad507efadc97b4ee9f17d"
+    },
+    {
+      "from": "docs/experiments/balance/BOSS_GIMMICK_BALANCE.md",
+      "to": "artifacts/experiments/balance/BOSS_GIMMICK_BALANCE.md",
+      "originalSha256": "979a839b40a2c8ed954ae77852d3d95a8f10cabd46e6d9e32127ce5250f904f0"
+    },
+    {
+      "from": "docs/experiments/balance/CLIMB_TIME_ESTIMATE.md",
+      "to": "artifacts/experiments/balance/CLIMB_TIME_ESTIMATE.md",
+      "originalSha256": "49c2d3cf3cca34a9164645ab6ec0f52782063a268a21cb19429753ba08b67948"
+    },
+    {
+      "from": "docs/experiments/balance/CURRENT_DIFFICULTY_SIMULATION.md",
+      "to": "artifacts/experiments/balance/CURRENT_DIFFICULTY_SIMULATION.md",
+      "originalSha256": "ca458520d3c4f4033271badb5dea87b80255c582215883b96b3b7de563af5edc"
+    },
+    {
+      "from": "docs/experiments/balance/CURRENT_SIX_Z_SIMULATION.md",
+      "to": "artifacts/experiments/balance/CURRENT_SIX_Z_SIMULATION.md",
+      "originalSha256": "a41f0cd684e016261d41cb65b486b382940b45be1e35a0c031368356310e90fd"
+    },
+    {
+      "from": "docs/experiments/balance/OPPONENT_LEARNING_BALANCE_COMPARISON.md",
+      "to": "artifacts/experiments/balance/OPPONENT_LEARNING_BALANCE_COMPARISON.md",
+      "originalSha256": "65e2293b8e511afe36d0822b8fea0919f1a17774508afa146358970a1ed9c3c9"
+    },
+    {
+      "from": "docs/experiments/balance/README.md",
+      "to": "artifacts/experiments/balance/README.md",
+      "originalSha256": "974cfca69685ecb1c09e6123a71c16ea8caefdd64304fe94b25d4f63df96896c"
+    },
+    {
+      "from": "docs/experiments/balance/REGIONAL_SIMULATION.md",
+      "to": "artifacts/experiments/balance/REGIONAL_SIMULATION.md",
+      "originalSha256": "a77e98e046a15075792e103a3dddc07a82decd9ab5f4edbee190017c2d90ac7e"
+    },
+    {
+      "from": "docs/experiments/balance/RULE_BALANCE_COMPARISON.md",
+      "to": "artifacts/experiments/balance/RULE_BALANCE_COMPARISON.md",
+      "originalSha256": "3562f1d8d0b2920de59073fa4c8d6e5d2de4e74371bef18b00e5b00dbce04ca4"
+    },
+    {
+      "from": "docs/experiments/balance/SHOP_ECONOMY_50.md",
+      "to": "artifacts/experiments/balance/SHOP_ECONOMY_50.md",
+      "originalSha256": "4986855de23d12a1729eff4f0855e87b63b88f796e75c7b5c0d7907516064cf5"
+    },
+    {
+      "from": "docs/experiments/balance/SHOP_PRICE_DISCOUNT.md",
+      "to": "artifacts/experiments/balance/SHOP_PRICE_DISCOUNT.md",
+      "originalSha256": "60e5c3d9e9dd1f7871fb52240992df7dae675afb69d72420cd113e4b3ef7e6e0"
+    },
+    {
+      "from": "docs/experiments/balance/SHOP_SIMULATION_50.md",
+      "to": "artifacts/experiments/balance/SHOP_SIMULATION_50.md",
+      "originalSha256": "cdf4b5e633cc1365fe902f484ad828477a700139c271e9b45db4aafddf5c53af"
+    },
+    {
+      "from": "docs/experiments/README.md",
+      "to": "artifacts/experiments/README.md",
+      "originalSha256": "287d85c07da09aa86165441f6d7ecdef956fa6152c5bdcff074a0a766f075a5a"
+    },
+    {
+      "from": "docs/experiments/samples/AUTO_SAMPLE_SUITE.md",
+      "to": "artifacts/experiments/samples/AUTO_SAMPLE_SUITE.md",
+      "originalSha256": "d5d4f2a85ad2eb36a70cf14adfdbf0146dfbae339c89a7bef5b2cbd7709cbf2d"
+    },
+    {
+      "from": "docs/experiments/samples/COMPOSITION_DIAGNOSTICS.md",
+      "to": "artifacts/experiments/samples/COMPOSITION_DIAGNOSTICS.md",
+      "originalSha256": "1d3d0b80875fe8d61a41d0300c93721dd114e3fed4f076585878421acaa6e96f"
+    },
+    {
+      "from": "docs/experiments/samples/COMPOSITION_SIMULATION.md",
+      "to": "artifacts/experiments/samples/COMPOSITION_SIMULATION.md",
+      "originalSha256": "eea4295f870abf4d237af24fd78c66432b5973f1cceff7e39753ad215ea8f4e0"
+    },
+    {
+      "from": "docs/experiments/samples/DIVERSE_TEAM_SIMULATION.md",
+      "to": "artifacts/experiments/samples/DIVERSE_TEAM_SIMULATION.md",
+      "originalSha256": "0d6cfb797f5861d5681c87dada0dadc307ce508a8620fe746f5587f3e0582005"
+    },
+    {
+      "from": "docs/experiments/samples/README.md",
+      "to": "artifacts/experiments/samples/README.md",
+      "originalSha256": "40db5ecc1d6777d8e3eb5fb0fa0548f171ace9c7c0a15999f71949d18cc7533f"
+    },
+    {
+      "from": "docs/experiments/samples/ROOM_SAMPLE_CORRECTION.md",
+      "to": "artifacts/experiments/samples/ROOM_SAMPLE_CORRECTION.md",
+      "originalSha256": "f2748329d450baff6b6ffb914eee49db46cebe0ba142268d20eadc95f266b993"
+    },
+    {
+      "from": "docs/experiments/samples/SAMPLE_HOLDOUT_VALIDATION.md",
+      "to": "artifacts/experiments/samples/SAMPLE_HOLDOUT_VALIDATION.md",
+      "originalSha256": "c696a6a80610c17617ad379974769b1bcefec39814cc8a2928d95c03e18af546"
+    },
+    {
+      "from": "docs/experiments/samples/SAMPLE_WALL_FACTOR_COMPARISON.md",
+      "to": "artifacts/experiments/samples/SAMPLE_WALL_FACTOR_COMPARISON.md",
+      "originalSha256": "4ad0f6f678bedb31e531b2a525db363619a0958f1aacc68485fafdbdd9f0ef03"
+    },
+    {
+      "from": "docs/experiments/samples/SUPPORT_SAMPLE_CORRECTION.md",
+      "to": "artifacts/experiments/samples/SUPPORT_SAMPLE_CORRECTION.md",
+      "originalSha256": "d24a9971e43754b4365391730bac69aaa87be7080579f67ada9d16698adfde82"
+    },
+    {
+      "from": "docs/archive/2026-10-11-before-cleanup/PRD.md",
+      "to": "artifacts/reports/history/archive/2026-10-11-before-cleanup/PRD.md",
+      "originalSha256": "913635d4a7aabd80b22f35677320bbbc034f1febacc07628c5f59c442a535864"
+    },
+    {
+      "from": "docs/archive/2026-10-11-before-cleanup/PROJECT_README.md",
+      "to": "artifacts/reports/history/archive/2026-10-11-before-cleanup/PROJECT_README.md",
+      "originalSha256": "bc461ddeff0d0a44b219c16b84f8f650ec9f5aac4f12791762d449b12c148933"
+    },
+    {
+      "from": "docs/archive/2026-10-11-before-cleanup/README.md",
+      "to": "artifacts/reports/history/archive/2026-10-11-before-cleanup/README.md",
+      "originalSha256": "028634f156b5e2f155e1471b33ea4bcbe62054f47d539f611a6e37da6dd2b967"
+    },
+    {
+      "from": "docs/archive/2026-10-11-before-cleanup/ROADMAP.md",
+      "to": "artifacts/reports/history/archive/2026-10-11-before-cleanup/ROADMAP.md",
+      "originalSha256": "40fa53807235721f810443f3754a1a62cb39fc7208b313279fc07524924d2763"
+    },
+    {
+      "from": "docs/archive/2026-10-11-before-cleanup/SESSION_HANDOFF.md",
+      "to": "artifacts/reports/history/archive/2026-10-11-before-cleanup/SESSION_HANDOFF.md",
+      "originalSha256": "848e9f0f84ae2284b28098d3bb5037af39587f66882dbdb87ba4b5e2835325cf"
+    },
+    {
+      "from": "docs/archive/2026-10-11-before-cleanup/SETUP.md",
+      "to": "artifacts/reports/history/archive/2026-10-11-before-cleanup/SETUP.md",
+      "originalSha256": "81d6fcbfd9084fffc31b094cc7ea1fdce0fa9862b088fea4b1f7e8031e826b68"
+    },
+    {
+      "from": "docs/archive/2026-10-11-before-cleanup/snapshots.json",
+      "to": "artifacts/reports/history/archive/2026-10-11-before-cleanup/snapshots.json",
+      "originalSha256": "bb54f28ebbc3d4edc694e307706db0cd1e2e38f6a740c95f42a2befeef409be3"
+    },
+    {
+      "from": "docs/archive/2026-10-11-before-cleanup/STATUS.md",
+      "to": "artifacts/reports/history/archive/2026-10-11-before-cleanup/STATUS.md",
+      "originalSha256": "c7b076d8cd26368fcc09850bbf56f980ea1d54a65794429a65ef157e6b116b10"
+    },
+    {
+      "from": "docs/archive/2026-10-11-before-cleanup/UI_FLOW.md",
+      "to": "artifacts/reports/history/archive/2026-10-11-before-cleanup/UI_FLOW.md",
+      "originalSha256": "f407e694bcb788853d12f5ab99a71c9a92e0f3dcf4859a812809f0c219341389"
+    },
+    {
+      "from": "docs/archive/2026-10-11-before-computer-move/SESSION_HANDOFF.md",
+      "to": "artifacts/reports/history/archive/2026-10-11-before-computer-move/SESSION_HANDOFF.md",
+      "originalSha256": "93febc93dfa10136dd0f6cfd023929e00832c248fcb3901e0d392b05f1ac498c"
+    },
+    {
+      "from": "docs/archive/history/BATTLE_RULE_MODES.md",
+      "to": "artifacts/reports/history/archive/history/BATTLE_RULE_MODES.md",
+      "originalSha256": "b9d2c56219ccfeecdba5ada9c993dc3836384d77da2ecc19375f9e13b1694159"
+    },
+    {
+      "from": "docs/archive/history/CONTENT.md",
+      "to": "artifacts/reports/history/archive/history/CONTENT.md",
+      "originalSha256": "13ca79c1004d6b5c579dd960da186034fb6c40279bf2910ccd861a59e7335840"
+    },
+    {
+      "from": "docs/archive/history/DEVLOG.md",
+      "to": "artifacts/reports/history/archive/history/DEVLOG.md",
+      "originalSha256": "41c756b128784475ee5d0aaa00159ca4e5d339d7187402141b772af4b7814c3d"
+    },
+    {
+      "from": "docs/archive/history/PLAYTEST_USABILITY.md",
+      "to": "artifacts/reports/history/archive/history/PLAYTEST_USABILITY.md",
+      "originalSha256": "c97ed5c0d01d839268280649a0dbadca2791e1fe63bdb5e37aab4ba6cf72be74"
+    },
+    {
+      "from": "docs/archive/history/README.md",
+      "to": "artifacts/reports/history/archive/history/README.md",
+      "originalSha256": "9e1b470ced4cecc9eef6fc2b6e60f9873b343a4b17e2231b3b2cb3f9a8f98b60"
+    },
+    {
+      "from": "docs/archive/README.md",
+      "to": "artifacts/reports/history/archive/README.md",
+      "originalSha256": "9c749b4d41245a8af92f809f97cf0764368f83c27e607115f5ee5f22d759ed77"
+    },
+    {
+      "from": "docs/gameplay/ABILITY_EFFECT_TIMING.md",
+      "to": "artifacts/reports/changes/ABILITY_EFFECT_TIMING.md",
+      "originalSha256": "7fcb338ece2c0229d668c5aab8630e11f91a51e16b1f28324650989b97721246"
+    },
+    {
+      "from": "docs/gameplay/BATTLE_AUDIO.md",
+      "to": "artifacts/reports/changes/BATTLE_AUDIO.md",
+      "originalSha256": "0c826ba52e2ed49e0d13b4feef449e4d5ac7d11fb0b952bbd088e116a16fde34"
+    },
+    {
+      "from": "docs/gameplay/BATTLE_GIMMICKS.md",
+      "to": "artifacts/reports/changes/BATTLE_GIMMICKS.md",
+      "originalSha256": "05b94f429e5781a5761190322ece7711029231a8d51b4c7da8a745942d6ac5c8"
+    },
+    {
+      "from": "docs/gameplay/BATTLE_ITEMS_MAINTENANCE.md",
+      "to": "artifacts/reports/changes/BATTLE_ITEMS_MAINTENANCE.md",
+      "originalSha256": "8b0b5d7671cf038547b239e8eb8ca9788b66610839784f90ba301c17a58b028d"
+    },
+    {
+      "from": "docs/gameplay/BATTLE_RETRY.md",
+      "to": "artifacts/reports/changes/BATTLE_RETRY.md",
+      "originalSha256": "6fd5fd0a02beee2ed8593b4784e3d8e102209d9a584eeed84e1c026720b461f6"
+    },
+    {
+      "from": "docs/gameplay/BATTLE_RULE_SELECTION.md",
+      "to": "artifacts/reports/changes/BATTLE_RULE_SELECTION.md",
+      "originalSha256": "373f91a9c49ca44641d2d1fe98159fe7f133504b49e7a70fa3065b1f699d4dfb"
+    },
+    {
+      "from": "docs/gameplay/COLLECTION_ROSTER.md",
+      "to": "artifacts/reports/changes/COLLECTION_ROSTER.md",
+      "originalSha256": "9ef3c8fe66af0d773f15aa95a6e792ac81eda304d19d53141abbb2614b6d66a9"
+    },
+    {
+      "from": "docs/gameplay/FORM_EQUIPMENT_FIXES.md",
+      "to": "artifacts/reports/changes/FORM_EQUIPMENT_FIXES.md",
+      "originalSha256": "afc2212de47784548f60baef64707482ca3da621f7b35bfe5e54dff6e602aa40"
+    },
+    {
+      "from": "docs/gameplay/FRISK_ITEM_SETTLEMENT.md",
+      "to": "artifacts/reports/changes/FRISK_ITEM_SETTLEMENT.md",
+      "originalSha256": "ddfc36edb19acd62d03bd841359a3034757605f4db68e45cfdca87efbae8bc89"
+    },
+    {
+      "from": "docs/gameplay/HELD_ITEMS.md",
+      "to": "artifacts/reports/changes/HELD_ITEMS.md",
+      "originalSha256": "ebf848af6f6f07ae1d4a6f0ecb06e41668f64479f517116bf8f7948dde0cc87a"
+    },
+    {
+      "from": "docs/gameplay/HUNDRED_FLOORS.md",
+      "to": "artifacts/reports/changes/HUNDRED_FLOORS.md",
+      "originalSha256": "4d2c208bf6ad0a48c1c08be47099640fed516f91dc0e4a70bfa39bdbed119f71"
+    },
+    {
+      "from": "docs/gameplay/ITEM_SHOP.md",
+      "to": "artifacts/reports/changes/ITEM_SHOP.md",
+      "originalSha256": "57f4bcbc817819087974156939f9122e11607518885d0e9556dd853b3f50e587"
+    },
+    {
+      "from": "docs/gameplay/JOHTO_THEME.md",
+      "to": "artifacts/reports/changes/JOHTO_THEME.md",
+      "originalSha256": "260310d36657d2f854288684cb168aeca3631bf82c0d4e9516c46b7f243e4ceb"
+    },
+    {
+      "from": "docs/gameplay/MACHINE_SHOP.md",
+      "to": "artifacts/reports/changes/MACHINE_SHOP.md",
+      "originalSha256": "a197ceef6c7be36866b5a70b56a2783f75a6bf52b03850dfe6179619f9b9169f"
+    },
+    {
+      "from": "docs/gameplay/MOVE_EFFECTS.md",
+      "to": "artifacts/reports/changes/MOVE_EFFECTS.md",
+      "originalSha256": "05f4abbd88a5ab80071b043e6cd173644f7504ff4bf390133f08d932b03576f9"
+    },
+    {
+      "from": "docs/gameplay/NAMED_OPPONENT_IVS.md",
+      "to": "artifacts/reports/changes/NAMED_OPPONENT_IVS.md",
+      "originalSha256": "820a435f4242245076c5611d093429f9d8bd44f039c4351a37205726724bc6dc"
+    },
+    {
+      "from": "docs/gameplay/NAMED_TRAINER_BUILDS.md",
+      "to": "artifacts/reports/npc/NAMED_TRAINER_BUILDS.md",
+      "originalSha256": "7be27c6497af0956b1b440bea503d57c2dc5d56f22bef1e415fadc4bdd1e7a23"
+    },
+    {
+      "from": "docs/gameplay/normal-npc-details.csv",
+      "to": "artifacts/reports/npc/normal-npc-details.csv",
+      "originalSha256": "e5b6e689ab8ae8fb0faddbdcaa3585caa018275a1547ca4d716ee826def2c33e"
+    },
+    {
+      "from": "docs/gameplay/normal-npc-samples.json",
+      "to": "scripts/data/npc/normal-npc-samples.json",
+      "originalSha256": "2d2201f57370f6652aa19b1f1ec99aa8d0c4508a3875c0a1835e56ce2ba6be22"
+    },
+    {
+      "from": "docs/gameplay/normal-npc-summary.csv",
+      "to": "artifacts/reports/npc/normal-npc-summary.csv",
+      "originalSha256": "9dd0d1f879abd04d0ed370378836fa12ba80e4d16b9e9caf4785cf441bd6e696"
+    },
+    {
+      "from": "docs/gameplay/NORMAL_MODE_BALANCE_CHECK.md",
+      "to": "artifacts/experiments/balance/NORMAL_MODE_BALANCE_CHECK.md",
+      "originalSha256": "32de074dd482467af5dab965c87a349908468102c87ec50b02b2fdbc16cc8bba"
+    },
+    {
+      "from": "docs/gameplay/NORMAL_MODE_BALANCE_LEADS.md",
+      "to": "artifacts/experiments/balance/NORMAL_MODE_BALANCE_LEADS.md",
+      "originalSha256": "8a2fa38ff93fac8bd8294f15d352a8d8dd0c8bca04ff245765dc15625d11321c"
+    },
+    {
+      "from": "docs/gameplay/NORMAL_MODE_BALANCE_OUTLIERS.md",
+      "to": "artifacts/experiments/balance/NORMAL_MODE_BALANCE_OUTLIERS.md",
+      "originalSha256": "b123ed05d39f18a2e41069d7a3308e90ac73b67fcd6f0306d508cb8f7d7f7f1e"
+    },
+    {
+      "from": "docs/gameplay/NORMAL_MODE_BALANCE_REFRESH.md",
+      "to": "artifacts/experiments/balance/NORMAL_MODE_BALANCE_REFRESH.md",
+      "originalSha256": "2780abf45874976220ed9980b70ea5cc0d319cf5eeec9634589008b091c13a5f"
+    },
+    {
+      "from": "docs/gameplay/NORMAL_MODE_SAMPLES.md",
+      "to": "artifacts/reports/npc/NORMAL_MODE_SAMPLES.md",
+      "originalSha256": "c8cf69e49a329e5b51b8aa7841f7a29df597185e97bee2c29c54f27f8e7dc47c"
+    },
+    {
+      "from": "docs/gameplay/npc-team-details.csv",
+      "to": "artifacts/reports/npc/npc-team-details.csv",
+      "originalSha256": "8e02bd31ecb342cef3136fd1d7b1e2ae7e087b8665988b41bcf2b1542e03450a"
+    },
+    {
+      "from": "docs/gameplay/npc-team-samples.json",
+      "to": "scripts/data/npc/npc-team-samples.json",
+      "originalSha256": "570207168c1a7cd08e57c636d33bb281e92b50745564ddd02d0bcc95f97beeae"
+    },
+    {
+      "from": "docs/gameplay/npc-team-summary.csv",
+      "to": "artifacts/reports/npc/npc-team-summary.csv",
+      "originalSha256": "2227670ce3006b4327eaf745c645c157d70b942f080e4c0506a2fbe0697b2f24"
+    },
+    {
+      "from": "docs/gameplay/NPC_CSV_SCHEMA.md",
+      "to": "docs/engineering/NPC_DATA.md",
+      "originalSha256": "44764f43c6b047635e270eced5944e27f5d0fa85f24eaf8e974fadd8a8651d8d"
+    },
+    {
+      "from": "docs/gameplay/NPC_GIMMICKS.md",
+      "to": "artifacts/reports/changes/NPC_GIMMICKS.md",
+      "originalSha256": "45953db57d19d19728c7ff8b2d2098859966de38453fde618bdbd80733fe653f"
+    },
+    {
+      "from": "docs/gameplay/NPC_LINEUP_REFRESH.md",
+      "to": "artifacts/reports/changes/NPC_LINEUP_REFRESH.md",
+      "originalSha256": "6f19113ffa53719347ae78a4794d69b2bf67e1f6d3f6006274622ce7992683aa"
+    },
+    {
+      "from": "docs/gameplay/NPC_TEAM_SAMPLES.md",
+      "to": "artifacts/reports/npc/NPC_TEAM_SAMPLES.md",
+      "originalSha256": "31aa9395355f925e14f5a0881c5d6eb2f9ba904373c87f8278fde61dcd3a3441"
+    },
+    {
+      "from": "docs/gameplay/OPPONENT_EVOLUTION_POLICY.md",
+      "to": "artifacts/reports/changes/OPPONENT_EVOLUTION_POLICY.md",
+      "originalSha256": "b15410b048f482e1d5cb5605e8bbaa4f99ee44fb64c98da58b6553f6ee950e20"
+    },
+    {
+      "from": "docs/gameplay/PLAYTEST_2026_10_13.md",
+      "to": "artifacts/reports/changes/PLAYTEST_2026_10_13.md",
+      "originalSha256": "50d6b4f5c8faf4b83202fbd00e09516006414ef448704e9956ec377aed69c3f9"
+    },
+    {
+      "from": "docs/gameplay/PRIMAL_REVERSION.md",
+      "to": "artifacts/reports/changes/PRIMAL_REVERSION.md",
+      "originalSha256": "1f66a7e37c4720fc2bd38732d063735ee6324038de406586cbe6360ea676eaac"
+    },
+    {
+      "from": "docs/gameplay/RECRUIT_CANDIDATE_DETAILS.md",
+      "to": "artifacts/reports/changes/RECRUIT_CANDIDATE_DETAILS.md",
+      "originalSha256": "eafb142b37aed8e5e88dc99ac40892b7a7f7f4b6d79bfacdd7fe283c66eb60b7"
+    },
+    {
+      "from": "docs/gameplay/REGIONAL_THEMES.md",
+      "to": "artifacts/reports/changes/REGIONAL_THEMES.md",
+      "originalSha256": "3559b2cf7e44d0fff0d82d173dd5ebcec5739ed558cc76605e2a2eeff53266eb"
+    },
+    {
+      "from": "docs/gameplay/SELECTABLE_FORMS.md",
+      "to": "artifacts/reports/changes/SELECTABLE_FORMS.md",
+      "originalSha256": "900d6d071552022e5e41c6b7807745588f637057a9ef0f0d07a8df142f5c74e3"
+    },
+    {
+      "from": "docs/gameplay/SHOP_RARITIES.md",
+      "to": "artifacts/reports/changes/SHOP_RARITIES.md",
+      "originalSha256": "64e824d251b8744d3a0e5a9758394d5728de3258135c56777b34b4977325455b"
+    },
+    {
+      "from": "docs/gameplay/SHOP_REROLL_AND_VITAMINS.md",
+      "to": "artifacts/reports/changes/SHOP_REROLL_AND_VITAMINS.md",
+      "originalSha256": "ee5217fc207b17b955fadc4a9490e4c8590a1cf0f3ad362d8c4efbf9c583eedd"
+    },
+    {
+      "from": "docs/gameplay/SIX_Z_OPPONENTS.md",
+      "to": "artifacts/reports/changes/SIX_Z_OPPONENTS.md",
+      "originalSha256": "758192ee31e9fa88d3973505d56101dfa7897e31694646000a44f3c20415d664"
+    },
+    {
+      "from": "docs/gameplay/SWITCH_AI.md",
+      "to": "artifacts/reports/changes/SWITCH_AI.md",
+      "originalSha256": "2d75151e26e88b289efc340b2d823f23ddeb24f50de818bb9a862e7aae2f1717"
+    },
+    {
+      "from": "docs/gameplay/TERASTALLIZATION.md",
+      "to": "artifacts/reports/changes/TERASTALLIZATION.md",
+      "originalSha256": "42bef2e5997ab26657e6c0745a369f8c1a932f89d72093065564185a3db64da1"
+    },
+    {
+      "from": "docs/gameplay/VILLAIN_EVENTS.md",
+      "to": "artifacts/reports/changes/VILLAIN_EVENTS.md",
+      "originalSha256": "4ae81151242d5365d7099288d45b8f3fb167471924106585b32e564c75bb77ef"
+    },
+    {
+      "from": "docs/gameplay/Z_MOVES.md",
+      "to": "artifacts/reports/changes/Z_MOVES.md",
+      "originalSha256": "669200d9f85e11f2442daf39088d9f75b341154983073e4e418a767226e223ba"
+    },
+    {
+      "from": "docs/current/PRD.md",
+      "to": "artifacts/reports/planning/PRD.md",
+      "originalSha256": "8533c451d3a811eea0d3ef4899dd8fc0db0b5ff2d15c43314871b3cafff9dbc2"
+    },
+    {
+      "from": "docs/current/PERMANENT_PROGRESS_UI.md",
+      "to": "artifacts/reports/planning/PERMANENT_PROGRESS_UI.md",
+      "originalSha256": "efb1523d68f4184456b7481c858d0b3658005344f2dc93ffc60342ac9b4a822e"
+    },
+    {
+      "from": "docs/current/NORMAL_MODE_PLAN.md",
+      "to": "artifacts/reports/planning/NORMAL_MODE_PLAN.md",
+      "originalSha256": "dfc9ede08b8ad28300634919e3cf386510a6d3b46913a6a8dd5e539f73c50978"
+    },
+    {
+      "from": "docs/current/BATTLE_REBALANCE_PLAN.md",
+      "to": "artifacts/reports/planning/BATTLE_REBALANCE_PLAN.md",
+      "originalSha256": "d567da38c7fd9b2ef160711a7b7ca52ee66fb7303e8fac36222be6e4c3fb0bed"
+    },
+    {
+      "from": "pokemon-tower-plan.md",
+      "to": "artifacts/reports/planning/INITIAL_PLAN.md",
+      "originalSha256": "72e6d3480732d4718f48bcc0ea256c3248a450ac6ac5978813c3e7e6f7bc5aa5"
+    },
+    {
+      "from": "docs/navigation.json",
+      "to": "artifacts/reports/history/DOCUMENT_MOVES-2026-10-11.json",
+      "originalSha256": "d25d463b3472160e142a32062f472789e85c44d2b01ee03eaf5f0d966ea234ee"
+    },
+    {
+      "from": "docs/battle-music-sources.json",
+      "to": "public/audio/music-sources.json",
+      "originalSha256": "533fe2ca1e19e0e95321e3158b9c43dcaed428fd8a936206fa5610f3c6884017"
+    },
+    {
+      "from": "docs/trainer-sprite-sources.json",
+      "to": "public/sprites/trainers/sources.json",
+      "originalSha256": "5f43fc6abfc83ab08d607fafe419261d838d823e82774e3dbc69c7eefbf5b617"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013/audit.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013/audit.json",
+      "originalSha256": "99d0df7acf2b10a512b8dd6fd2cad55ffd4fcc45d8fe2a339ed3b25205d09633"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013/battles.jsonl",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013/battles.jsonl",
+      "originalSha256": "700f777ac995341ea9af25d1e1b81b79f3106fba50ad2749306a5b3d9b7409ad"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013/manifest.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013/manifest.json",
+      "originalSha256": "a3358c478db15e025875710cbcd0bedf7b73705de2686465af4ee622802a01c1"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013/report.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013/report.json",
+      "originalSha256": "692a330e249b95cbdf00c133d45c8b5710ec98f0dadda92fb5d6529bbdfeda72"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013/simulation-source.ts",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013/simulation-source.ts",
+      "originalSha256": "e209e58c68eacd6064ff1d7d4df7bd3083912ec924417a9f2c351d6cf8905e9f"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-leads/battles.jsonl",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-leads/battles.jsonl",
+      "originalSha256": "0e9fd06a206dc4411ceb638fe459ce795ca7af2ab4f52a22a88a20b3b49ee9ee"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-leads/manifest.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-leads/manifest.json",
+      "originalSha256": "ef7acd41e66327e0fb9b95f7f8dec4292f2ef97e24e16470d8ec817230fd208a"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-leads/report.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-leads/report.json",
+      "originalSha256": "ee027eb0a2ec536f0c8f7cce2126edf4fd5af7301af80a932b17953cdf63256a"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-leads/simulation-source.ts",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-leads/simulation-source.ts",
+      "originalSha256": "60ecfab2c7eb442da74efe818ac0baeba1ed21a7680979d7740610f0739e3748"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-lineup-refresh/battles.jsonl",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-lineup-refresh/battles.jsonl",
+      "originalSha256": "276b71e4b948b8b70687ca9f1e8b49e0d40f0fcd95925377382bd2a33e7a4d7f"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-lineup-refresh/manifest.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-lineup-refresh/manifest.json",
+      "originalSha256": "6dfa694943352f34a7dbb7bd9bc8297e2b196b838cba27a2aa0cfc5b160b2a8c"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-lineup-refresh/report.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-lineup-refresh/report.json",
+      "originalSha256": "4f9dbaef58ec8fe26d35aecc4b730ffc2dc794864b120818e04b129fe1aa3ae0"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-lineup-refresh/simulation-source.ts",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-lineup-refresh/simulation-source.ts",
+      "originalSha256": "3e41bf8ed063cd916263f8f035e8bef267c573177e30d800a1ce9c5d3ae28ab5"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-outliers/battles.jsonl",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-outliers/battles.jsonl",
+      "originalSha256": "62698416068e7a00b3d3c49f5f0addf4ec57589a29af2b5f2ce0c68a85d2b6e2"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-outliers/manifest.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-outliers/manifest.json",
+      "originalSha256": "f481c30f249dcad6a67d27b4ceb98b8d68a6ace13125022525efec7109248b48"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-outliers/report.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-outliers/report.json",
+      "originalSha256": "d986cee85d90a75fb2b11292a0d3dd184952d8ad271e7d785463a5abbe187fc3"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-outliers/simulation-source.ts",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-outliers/simulation-source.ts",
+      "originalSha256": "f22c3ec629b55f2bf66746b3a2aba5db7845bcacaf6361c41afaf3fc14c64b72"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-retry-order/battles.jsonl",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-retry-order/battles.jsonl",
+      "originalSha256": "6f72b4ab3a842539acbc15bf9540e7ca8979b0e4b1caa7d526d5b389be894792"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-retry-order/manifest.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-retry-order/manifest.json",
+      "originalSha256": "b1537fdb8e3d09de31b8dac031ea9388ee44a95b107676bd4a3ad167a54005de"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-retry-order/report.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-retry-order/report.json",
+      "originalSha256": "5e8b3a6d8b6d02d25d742ed081e6609c83d4a63621cbbeff665664ac6fbc4402"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-retry-order/retry-report.json",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-retry-order/retry-report.json",
+      "originalSha256": "2e8fe74d145178e08f37705da81ecda159fc2b11e259662d0fc976f3eac8186c"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-retry-order/samples.md",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-retry-order/samples.md",
+      "originalSha256": "e537304b0a5bd1deda6202f21084af9e7ef740ce374d0d20f095a38e7e41efb9"
+    },
+    {
+      "from": "artifacts/normal-mode-balance-20261013-retry-order/simulation-source.ts",
+      "to": "artifacts/experiments/balance/normal-mode-balance-20261013-retry-order/simulation-source.ts",
+      "originalSha256": "57b9cb9ad63fce8cfbf632baf919d8e794ed366cd7edd142c7191c7853c884e8"
+    },
+    {
+      "from": "artifacts/screenshots/ash-back-desktop.png",
+      "to": "artifacts/qa/screenshots/ash-back-desktop.png",
+      "originalSha256": "35d8278cca827e08422238a71f12343479c8b665e6e07d7e7a3b74d1499b8e3a"
+    },
+    {
+      "from": "artifacts/screenshots/ash-back-mobile.png",
+      "to": "artifacts/qa/screenshots/ash-back-mobile.png",
+      "originalSha256": "bbf0fdae284976cf969efcaea5e8551c525aa22e5439c539f79de9009fd3eb1e"
+    },
+    {
+      "from": "artifacts/screenshots/battle-forms/Palafin-Hero-1280.png",
+      "to": "artifacts/qa/screenshots/battle-forms/Palafin-Hero-1280.png",
+      "originalSha256": "4369c3e46f74b0e81731d828fcb9a063dcd05fdc9b0e7809ac184f27590508ea"
+    },
+    {
+      "from": "artifacts/screenshots/battle-forms/Palafin-Hero-390.png",
+      "to": "artifacts/qa/screenshots/battle-forms/Palafin-Hero-390.png",
+      "originalSha256": "e5b4e8de2b312bbb357f1e57080337e22041b4aed2e1966b7db7635d1330a46a"
+    },
+    {
+      "from": "artifacts/screenshots/battle-forms/Terapagos-Stellar-1280.png",
+      "to": "artifacts/qa/screenshots/battle-forms/Terapagos-Stellar-1280.png",
+      "originalSha256": "583237ddba638c022d16e2a01fb5af1537ee86c89fb99c605c196160636144ce"
+    },
+    {
+      "from": "artifacts/screenshots/battle-forms/Terapagos-Stellar-390.png",
+      "to": "artifacts/qa/screenshots/battle-forms/Terapagos-Stellar-390.png",
+      "originalSha256": "5af0eaa2c504ad77a42d3078d8c9fb66e3414ef11968af03cef2fe65a69b674f"
+    },
+    {
+      "from": "artifacts/screenshots/battle-forms/Wishiwashi-School-1280.png",
+      "to": "artifacts/qa/screenshots/battle-forms/Wishiwashi-School-1280.png",
+      "originalSha256": "5497bc9ec8fc53f9097283f14fd515763027e0d5174ae200f3dbca43eb3841d3"
+    },
+    {
+      "from": "artifacts/screenshots/battle-forms/Wishiwashi-School-390.png",
+      "to": "artifacts/qa/screenshots/battle-forms/Wishiwashi-School-390.png",
+      "originalSha256": "fb50c9428eb924849abe6e1427b9d04d6ac8898ca19b76aa0ffea391ce6d874a"
+    },
+    {
+      "from": "artifacts/screenshots/dex-button-filters-mobile.png",
+      "to": "artifacts/qa/screenshots/dex-button-filters-mobile.png",
+      "originalSha256": "cc7bcc33d17bdbe8bbca597606d47d5013eabca03ab4e15eed27f82b8d70a456"
+    },
+    {
+      "from": "artifacts/screenshots/falkner-introduction-mobile.png",
+      "to": "artifacts/qa/screenshots/falkner-introduction-mobile.png",
+      "originalSha256": "dadaf2e00ef77f954cd9ce0a223358591f6ac4366f98143cb747f84d07e8633f"
+    },
+    {
+      "from": "artifacts/screenshots/grass-battle-mobile.png",
+      "to": "artifacts/qa/screenshots/grass-battle-mobile.png",
+      "originalSha256": "e20694454ea11debaeb9895dd54cbd125c12bb4006b3cc535f65bfcfe1852a6d"
+    },
+    {
+      "from": "artifacts/screenshots/lance-introduction.png",
+      "to": "artifacts/qa/screenshots/lance-introduction.png",
+      "originalSha256": "360d5cc73f80bb74ab56ae75467fd85a11c92d75d73fc1f44ecb7848eaaed184"
+    },
+    {
+      "from": "artifacts/screenshots/local-assets/hatching-1280.png",
+      "to": "artifacts/qa/screenshots/local-assets/hatching-1280.png",
+      "originalSha256": "348fe8d1f494e432074e98172cad40f96136b7bed650fe151d046a3e1a658ccc"
+    },
+    {
+      "from": "artifacts/screenshots/local-assets/hatching-390.png",
+      "to": "artifacts/qa/screenshots/local-assets/hatching-390.png",
+      "originalSha256": "1f5f34ea79823c442e15a9c8e7efb653470e0668e185c286a54c409c920825ca"
+    },
+    {
+      "from": "artifacts/screenshots/local-assets/pokedex-1280.png",
+      "to": "artifacts/qa/screenshots/local-assets/pokedex-1280.png",
+      "originalSha256": "a571a460e6453f4a7f916f3ecc6118875ed085c21912a1c470fa32d5564aa91a"
+    },
+    {
+      "from": "artifacts/screenshots/local-assets/pokedex-390.png",
+      "to": "artifacts/qa/screenshots/local-assets/pokedex-390.png",
+      "originalSha256": "c3c49928646221a66cfb6a0e19faaab651f0f0dda94c839b28943cd491cefc04"
+    },
+    {
+      "from": "artifacts/screenshots/mega-zygarde.png",
+      "to": "artifacts/qa/screenshots/mega-zygarde.png",
+      "originalSha256": "83fb616908c267fdce8f177afdb17feb4ec352c8d36bba55dedd2049c4b1e6c6"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Close-Combat-1280.png",
+      "to": "artifacts/qa/screenshots/move-effects/Close-Combat-1280.png",
+      "originalSha256": "0feafdf3bd8b3f63c48f534c1ceead0acab33535e35a4a23bea45e62bd66780d"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Close-Combat-390.png",
+      "to": "artifacts/qa/screenshots/move-effects/Close-Combat-390.png",
+      "originalSha256": "db13f8a0cca0167fa279505ebd0b1f4a5f2f1506093d498ce4e6a222b4597655"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Crunch-1280.png",
+      "to": "artifacts/qa/screenshots/move-effects/Crunch-1280.png",
+      "originalSha256": "5a137bc31344fb0db8c6cae7a4c6e445c2f1020fe917a0bf521fe64c11fbe1b3"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Crunch-390.png",
+      "to": "artifacts/qa/screenshots/move-effects/Crunch-390.png",
+      "originalSha256": "302a289e6471253d362eeab2a8e49e7583a512dcfe28f9e40bfc4d3fba206f82"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Dragon-Claw-1280.png",
+      "to": "artifacts/qa/screenshots/move-effects/Dragon-Claw-1280.png",
+      "originalSha256": "039d9429d12312a02525a1feaeed2c189b4212e1795625aa3a1815b84e5b7780"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Dragon-Claw-390.png",
+      "to": "artifacts/qa/screenshots/move-effects/Dragon-Claw-390.png",
+      "originalSha256": "2a1b2ef953ea9659259d2a4628df9dd83fc1122c8f2a3e1dd755f49ad1595633"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Earthquake-1280.png",
+      "to": "artifacts/qa/screenshots/move-effects/Earthquake-1280.png",
+      "originalSha256": "4604e69e6372c890afb41f7bf2a29ebfe89de026d0ff1b48bd799edf19bf6eb4"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Earthquake-390.png",
+      "to": "artifacts/qa/screenshots/move-effects/Earthquake-390.png",
+      "originalSha256": "f55d6868284a6593d07513022dcf547696a0aa2401795564a5ae8ff6bc9c5990"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Flamethrower-1280.png",
+      "to": "artifacts/qa/screenshots/move-effects/Flamethrower-1280.png",
+      "originalSha256": "e754decbaa94530361115acfb7f1c4e9f15b3afc9f888ca956c524013210da2d"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Flamethrower-390.png",
+      "to": "artifacts/qa/screenshots/move-effects/Flamethrower-390.png",
+      "originalSha256": "54db9361180034d6d7f6d2b4ff193bb2a15ce73a034a1b8a2dab4b8c5e1a1986"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Ice-Beam-1280.png",
+      "to": "artifacts/qa/screenshots/move-effects/Ice-Beam-1280.png",
+      "originalSha256": "8bc80bae1c4cf853388251801a095794249170dac3322dd66f3606a8462fd4b3"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Ice-Beam-390.png",
+      "to": "artifacts/qa/screenshots/move-effects/Ice-Beam-390.png",
+      "originalSha256": "db643ec619bd265163c0c6ab907c6a094c209866f010db6f07608915f768b265"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Leaf-Storm-1280.png",
+      "to": "artifacts/qa/screenshots/move-effects/Leaf-Storm-1280.png",
+      "originalSha256": "03bf40eca5ce983096d84e44dc959ad93989c94e23171607c232e1c636beed4d"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Leaf-Storm-390.png",
+      "to": "artifacts/qa/screenshots/move-effects/Leaf-Storm-390.png",
+      "originalSha256": "d10d4ab832775682cf4b8658559263c30e96b62675edd640bab028dc16207482"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Shadow-Ball-1280.png",
+      "to": "artifacts/qa/screenshots/move-effects/Shadow-Ball-1280.png",
+      "originalSha256": "9cf4cb532576c146ee17b71be69fd65219b83b00f09e58486e5cfe0e6c75be36"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Shadow-Ball-390.png",
+      "to": "artifacts/qa/screenshots/move-effects/Shadow-Ball-390.png",
+      "originalSha256": "2fcd76d5231cbc1bddd03eb8f2b2357623a3a074d2939262f79673a8d55ca421"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Surf-1280.png",
+      "to": "artifacts/qa/screenshots/move-effects/Surf-1280.png",
+      "originalSha256": "83a81c8be8f2483d82f6af2b8a68b2b2a2a379d87c305f1afca8c170b81e8764"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Surf-390.png",
+      "to": "artifacts/qa/screenshots/move-effects/Surf-390.png",
+      "originalSha256": "82080a8221c0ae8fcd2caf19cd1aeefae4fb64dc071cd44c692c8b17aabee790"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Thunderbolt-1280.png",
+      "to": "artifacts/qa/screenshots/move-effects/Thunderbolt-1280.png",
+      "originalSha256": "31e9db813c0b95da014647eec97cfa89b4e512d83935169810d948c83215c84e"
+    },
+    {
+      "from": "artifacts/screenshots/move-effects/Thunderbolt-390.png",
+      "to": "artifacts/qa/screenshots/move-effects/Thunderbolt-390.png",
+      "originalSha256": "ba9e0e2ae8cea266dd6ff7b70041f8804ba680230988b373fd3b8d0503562e05"
+    },
+    {
+      "from": "artifacts/screenshots/player-trainer/intro-1280.png",
+      "to": "artifacts/qa/screenshots/player-trainer/intro-1280.png",
+      "originalSha256": "cdf005d218f426ca18b7371a468513664dfb61800167f04fde47a366032247d8"
+    },
+    {
+      "from": "artifacts/screenshots/player-trainer/intro-390.png",
+      "to": "artifacts/qa/screenshots/player-trainer/intro-390.png",
+      "originalSha256": "ac104d0705c8ff89744235275c9b0b4238139f8abca20f2516c8d33ee3d0952d"
+    },
+    {
+      "from": "artifacts/screenshots/player-trainer/throw-1280.png",
+      "to": "artifacts/qa/screenshots/player-trainer/throw-1280.png",
+      "originalSha256": "f03a4c91e27e6197f3f01b8482643ffe1406197256ebf4b87c7453d0f2dfac85"
+    },
+    {
+      "from": "artifacts/screenshots/pokedex-center/adjustment-1280.png",
+      "to": "artifacts/qa/screenshots/pokedex-center/adjustment-1280.png",
+      "originalSha256": "14812212eae976f136675023cdbbe328449c0c203b87008120c94a1124bd0529"
+    },
+    {
+      "from": "artifacts/screenshots/pokedex-center/collection-1280.png",
+      "to": "artifacts/qa/screenshots/pokedex-center/collection-1280.png",
+      "originalSha256": "3c4e15bd23d8b798132c12e89e0f92ed5e34b3f89f8358c3953235a2da630c10"
+    },
+    {
+      "from": "artifacts/screenshots/pokedex-center/collection-390.png",
+      "to": "artifacts/qa/screenshots/pokedex-center/collection-390.png",
+      "originalSha256": "ddae5bea5f96aca9c10c2f17f374567eb1661af73a72f7513e00607b534d4c18"
+    },
+    {
+      "from": "artifacts/screenshots/pokedex-center/full-width-1920.png",
+      "to": "artifacts/qa/screenshots/pokedex-center/full-width-1920.png",
+      "originalSha256": "680be4bede0138be2dd197f2c0c33755fb0936b7ec20c2633fdbb21f291612cf"
+    },
+    {
+      "from": "artifacts/screenshots/pokedex-center/moves-1280.png",
+      "to": "artifacts/qa/screenshots/pokedex-center/moves-1280.png",
+      "originalSha256": "a6df9a6aa934e99515460ba1b6370ad7de41d962b008d2f267a6f95b9254be25"
+    },
+    {
+      "from": "artifacts/screenshots/pokedex-center/radar-1920.png",
+      "to": "artifacts/qa/screenshots/pokedex-center/radar-1920.png",
+      "originalSha256": "9ba7be42fa47d312711206a6615c81b4023581b81c18925ab1c8bfd3bc6b281e"
+    },
+    {
+      "from": "artifacts/screenshots/primal/groudon-1280.png",
+      "to": "artifacts/qa/screenshots/primal/groudon-1280.png",
+      "originalSha256": "c705af9907dc278aea272f21e55ffb993fa4f32d5ad6528cabd50b7ea9afd478"
+    },
+    {
+      "from": "artifacts/screenshots/primal/groudon-390.png",
+      "to": "artifacts/qa/screenshots/primal/groudon-390.png",
+      "originalSha256": "fbc93cbeac22ac36bd487728bc618f1170ccb1e68dc3e1e3860a92bb2a0e4e16"
+    },
+    {
+      "from": "artifacts/screenshots/primal/kyogre-1280.png",
+      "to": "artifacts/qa/screenshots/primal/kyogre-1280.png",
+      "originalSha256": "133b8f5a6282287d378d84d5c1d5e9a5bde0fb538d2d318246329823b2d046c6"
+    },
+    {
+      "from": "artifacts/screenshots/primal/kyogre-390.png",
+      "to": "artifacts/qa/screenshots/primal/kyogre-390.png",
+      "originalSha256": "7b518c2eaf0bee7b4e08a369cced76e41bbce6cf1b51036a73abf8558a57f629"
+    },
+    {
+      "from": "artifacts/screenshots/recruit-move-comparison-mobile.png",
+      "to": "artifacts/qa/screenshots/recruit-move-comparison-mobile.png",
+      "originalSha256": "32262e567839e5f780556f652f74ededb390b094b49526c88f0ad1713c26e799"
+    },
+    {
+      "from": "artifacts/screenshots/recruit-summary-20261014/golem-1280.png",
+      "to": "artifacts/qa/screenshots/recruit-summary-20261014/golem-1280.png",
+      "originalSha256": "bef54afa1e864d9848a4d93b8f993c963bee11e5e6215bea67fa5c53ade5949e"
+    },
+    {
+      "from": "artifacts/screenshots/recruit-summary-20261014/golem-390.png",
+      "to": "artifacts/qa/screenshots/recruit-summary-20261014/golem-390.png",
+      "originalSha256": "437692461a9292c35ebc1e324614018acccaf8c34d4199bda56f08d992330016"
+    },
+    {
+      "from": "artifacts/screenshots/selectable-forms/Calyrex-Shadow-1280.png",
+      "to": "artifacts/qa/screenshots/selectable-forms/Calyrex-Shadow-1280.png",
+      "originalSha256": "a29ba2ed32539b5979ae64227a40a7d3e1e5acfd81cc22b9abdb2338ecda911d"
+    },
+    {
+      "from": "artifacts/screenshots/selectable-forms/Calyrex-Shadow-390.png",
+      "to": "artifacts/qa/screenshots/selectable-forms/Calyrex-Shadow-390.png",
+      "originalSha256": "14679c1e8489af4b94666e18c441e0417add125221d70a2edcbe8d832ae312c2"
+    },
+    {
+      "from": "artifacts/screenshots/selectable-forms/Kyurem-White-1280.png",
+      "to": "artifacts/qa/screenshots/selectable-forms/Kyurem-White-1280.png",
+      "originalSha256": "c7565385596dc3b4158c32bddcd715b5935e268924869e375e3ffa5c837e81fa"
+    },
+    {
+      "from": "artifacts/screenshots/selectable-forms/Kyurem-White-390.png",
+      "to": "artifacts/qa/screenshots/selectable-forms/Kyurem-White-390.png",
+      "originalSha256": "a6c2382f5eb2ef968dd4411be2f648bb63119445cbce54b39b5c6df9aac507d7"
+    },
+    {
+      "from": "artifacts/screenshots/stadium-small-desktop.png",
+      "to": "artifacts/qa/screenshots/stadium-small-desktop.png",
+      "originalSha256": "a01ce9f3d78c4087f26ad74cb8f1a67b53ec9bba3e54437a4cad6ae0ffb23adc"
+    },
+    {
+      "from": "artifacts/previews/pikachu-upscale/README.md",
+      "to": "artifacts/qa/previews/pikachu-upscale/README.md",
+      "originalSha256": "7f27153e899be7a675b45e3f04cb213cf6208fcec1e3fe1e2748d357635c0985"
+    },
+    {
+      "from": "artifacts/previews/player-trainer/original-sheet.png",
+      "to": "artifacts/qa/previews/player-trainer/original-sheet.png",
+      "originalSha256": "6b078aea2cf639c02c44fcb59c40cc4048ed28a244c2ce693e170a837c910d53"
+    },
+    {
+      "from": "artifacts/previews/shiny-entry/README.md",
+      "to": "artifacts/qa/previews/shiny-entry/README.md",
+      "originalSha256": "bd40bcbeb3b00d738a4015bcc569edac00ae0437146b8c888294c640f6112cac"
+    },
+    {
+      "from": "artifacts/previews/showdown-fx/contact-sheet.png",
+      "to": "artifacts/qa/previews/showdown-fx/contact-sheet.png",
+      "originalSha256": "37ebb3438f39e832a0cf099a7951052a36dc4edd1c68ef9d5f30f6eb7fd3d926"
+    },
+    {
+      "from": "artifacts/audio/effect-levels.json",
+      "to": "artifacts/qa/audio/effect-levels.json",
+      "originalSha256": "6afbf5313bf9f3dfb87429c1429c872d9140053e668e3ae2deded13a76c147bc"
+    },
+    {
+      "from": "artifacts/reports/animated-sprite-coverage.json",
+      "to": "artifacts/qa/assets/reports/animated-sprite-coverage.json",
+      "originalSha256": "0e456f2c0e5fd54f535ccc31342467d4a7d6518c1ea002a4e73c7ac406a98e12"
+    },
+    {
+      "from": "artifacts/reports/battle-data-source.json",
+      "to": "artifacts/qa/assets/reports/battle-data-source.json",
+      "originalSha256": "acf2186a7473a034c86293273cdb3c77a77a4d6229f5f560c2acbdb2fbe77f17"
+    },
+    {
+      "from": "artifacts/reports/battle-form-animations.json",
+      "to": "artifacts/qa/assets/reports/battle-form-animations.json",
+      "originalSha256": "ed4519551ccd32dfa6dac873d2c8844dcc5a71da8296f698f0176c094fcb80ec"
+    },
+    {
+      "from": "artifacts/reports/battle-roster-audit.json",
+      "to": "artifacts/qa/assets/reports/battle-roster-audit.json",
+      "originalSha256": "0b7a65e8b3d058932013e84f01def183fd9ae29bd5b3157c4860d00922843f1a"
+    },
+    {
+      "from": "artifacts/reports/battle-sprite-audit.json",
+      "to": "artifacts/qa/assets/reports/battle-sprite-audit.json",
+      "originalSha256": "431dfd96fa65c292643a0ced439ade83e9ebe48016917ef8c185f8aa064f7116"
+    },
+    {
+      "from": "artifacts/reports/local-pokemon-sprites.json",
+      "to": "artifacts/qa/assets/reports/local-pokemon-sprites.json",
+      "originalSha256": "0d278a400b9b48da0292197a5ce3f5b081a9613cd4ec67a730c3d5283ab7c24d"
+    },
+    {
+      "from": "artifacts/reports/mega-sprite-sources.json",
+      "to": "artifacts/qa/assets/reports/mega-sprite-sources.json",
+      "originalSha256": "b568e50521ea2b5c54c8fccbdb987975160bfbf6a027f252d643fc5adda12cac"
+    },
+    {
+      "from": "artifacts/reports/move-data-source.json",
+      "to": "artifacts/qa/assets/reports/move-data-source.json",
+      "originalSha256": "f919e40b12133060dc2f27ee0d9e8b906bee7e1151b312195db81004524be6e4"
+    },
+    {
+      "from": "artifacts/reports/move-effects-integration.json",
+      "to": "artifacts/qa/assets/reports/move-effects-integration.json",
+      "originalSha256": "5485f55fdcbf26dbc8a4f6f1a5b00d99ddf7b647f11038a72dab1f53c976e5fe"
+    },
+    {
+      "from": "artifacts/reports/pixel-sprite-assets.json",
+      "to": "artifacts/qa/assets/reports/pixel-sprite-assets.json",
+      "originalSha256": "da03f4fd7f91de68bc026c5ace3aebe3fd6155449b914b23ca4fcad2c1df4bc9"
+    },
+    {
+      "from": "artifacts/reports/pixel-sprite-coverage.json",
+      "to": "artifacts/qa/assets/reports/pixel-sprite-coverage.json",
+      "originalSha256": "a588ab307afc0bb30068fdaa1800c30e4713c10451916d46966a5c2339991b75"
+    },
+    {
+      "from": "artifacts/reports/pokedex-source.json",
+      "to": "artifacts/qa/assets/reports/pokedex-source.json",
+      "originalSha256": "d46fb737e8c3558a89aa8e9bacfdd9a75d87e6d4007f8268f5818056a8e57636"
+    },
+    {
+      "from": "artifacts/reports/pokedex-sprites/generation-1.json",
+      "to": "artifacts/qa/assets/reports/pokedex-sprites/generation-1.json",
+      "originalSha256": "e8d5fdc46ee31cf332ebec1b2312f4149fbd4d562d20ecb847ff10249a5e6a3b"
+    },
+    {
+      "from": "artifacts/reports/pokedex-sprites/generation-2.json",
+      "to": "artifacts/qa/assets/reports/pokedex-sprites/generation-2.json",
+      "originalSha256": "aca61c2fe6083116b287bce401dd4f2aa4113d46aeaaa4b05ef6296f9db3f9a8"
+    },
+    {
+      "from": "artifacts/reports/pokedex-sprites/generation-3.json",
+      "to": "artifacts/qa/assets/reports/pokedex-sprites/generation-3.json",
+      "originalSha256": "3b848a5948fc3d5c19df5330291ad12c6d0f4fe025f53684b1f5e0278cd4e833"
+    },
+    {
+      "from": "artifacts/reports/pokedex-sprites/generation-4.json",
+      "to": "artifacts/qa/assets/reports/pokedex-sprites/generation-4.json",
+      "originalSha256": "2642ea77b51a51ceda7ef1f90d5d774b564d4afba65ec42b087d53efb6af1f86"
+    },
+    {
+      "from": "artifacts/reports/pokedex-sprites/generation-5.json",
+      "to": "artifacts/qa/assets/reports/pokedex-sprites/generation-5.json",
+      "originalSha256": "8e7b5def4dab1a0280b7457d20a62063e2286608fdace5ca2dcf7da1a4480436"
+    },
+    {
+      "from": "artifacts/reports/pokedex-sprites/generation-6.json",
+      "to": "artifacts/qa/assets/reports/pokedex-sprites/generation-6.json",
+      "originalSha256": "dc578e7478dfb9f6eab5d1f966fa97b1cee9998e1cb6b93321bd35b940ee8913"
+    },
+    {
+      "from": "artifacts/reports/pokedex-sprites/generation-7.json",
+      "to": "artifacts/qa/assets/reports/pokedex-sprites/generation-7.json",
+      "originalSha256": "13ec89a8e427133e3fdd36c4a68926a1671e94fb4f2806eec9e70062523b9c25"
+    },
+    {
+      "from": "artifacts/reports/pokedex-sprites/generation-8.json",
+      "to": "artifacts/qa/assets/reports/pokedex-sprites/generation-8.json",
+      "originalSha256": "94a12495d6dcaa49bd11fa913d6c85ca4c97db721c6961c00a5a2917132f7477"
+    },
+    {
+      "from": "artifacts/reports/pokedex-sprites/generation-9.json",
+      "to": "artifacts/qa/assets/reports/pokedex-sprites/generation-9.json",
+      "originalSha256": "ede556d689ea6473cbed0159a63fa87e39b61628d252caf1fc1c9a60780048c1"
+    },
+    {
+      "from": "artifacts/reports/pokedex-sprites/README.md",
+      "to": "artifacts/qa/assets/reports/pokedex-sprites/README.md",
+      "originalSha256": "c5e736ecff983fbd37e353cfa18f2bf52ba3377941c40b6ed2f68591ff129329"
+    },
+    {
+      "from": "artifacts/reports/pokemon-size-coverage.json",
+      "to": "artifacts/qa/assets/reports/pokemon-size-coverage.json",
+      "originalSha256": "612f42a0203c0f2e353d48761dbca2c252784b3bbe1b978e1e07769248bd61f4"
+    },
+    {
+      "from": "artifacts/reports/resource-manifest.json",
+      "to": "artifacts/qa/assets/reports/resource-manifest.json",
+      "originalSha256": "26cd38a6f361c81bfab168fb6efd9aceaaa13fdbdffddabf51b8d70ff71f4efc"
+    },
+    {
+      "from": "artifacts/reports/selectable-form-animations.json",
+      "to": "artifacts/qa/assets/reports/selectable-form-animations.json",
+      "originalSha256": "4e73361e60d50c84a7c70ecb50176896995e6520052d3c116b59ab38a936db1f"
+    },
+    {
+      "from": "artifacts/reports/sprite-coverage.json",
+      "to": "artifacts/qa/assets/reports/sprite-coverage.json",
+      "originalSha256": "86a62a38ee097593ef2564f09a297b67566aaf0ee1a31142485bfaafa399954c"
+    },
+    {
+      "from": "artifacts/reports/unevolved-sprite-pruning.json",
+      "to": "artifacts/qa/assets/reports/unevolved-sprite-pruning.json",
+      "originalSha256": "1f344d345bd0006fa747ba07ffcbbf5c0ae8049ea1907eaeb4b5d34a363f8f13"
+    },
+    {
+      "from": "artifacts/back-sprite-audit/copied-fronts.json",
+      "to": "artifacts/qa/assets/back-sprite-audit/copied-fronts.json",
+      "originalSha256": "a3e136aec67d978e424b251ce5cf52cfbcdb0fa54cb40222847cecb15847c7ee"
+    },
+    {
+      "from": "artifacts/back-sprite-audit/inventory.json",
+      "to": "artifacts/qa/assets/back-sprite-audit/inventory.json",
+      "originalSha256": "fdf630ae963b19ac80095b36bf1365441c6820062604e3f2adaa4269be534ee9"
+    },
+    {
+      "from": "artifacts/back-sprite-audit/report.json",
+      "to": "artifacts/qa/assets/back-sprite-audit/report.json",
+      "originalSha256": "94a9c011a869d5e6638be1db7dd6c8b70b67e0963c74826a8349814f69a631b4"
+    },
+    {
+      "from": "artifacts/back-sprite-audit/selected-sources.json",
+      "to": "artifacts/qa/assets/back-sprite-audit/selected-sources.json",
+      "originalSha256": "739d0174775530c0df2efa5fbb79e32b180a4029962cf625a404582fe60d8534"
+    },
+    {
+      "from": "artifacts/back-sprite-audit/sheet-1.png",
+      "to": "artifacts/qa/assets/back-sprite-audit/sheet-1.png",
+      "originalSha256": "1876eee81d4d2a4bafc25717d9840c8ea31cf2254412dd864a801df99384b279"
+    },
+    {
+      "from": "artifacts/back-sprite-audit/sheet-2.png",
+      "to": "artifacts/qa/assets/back-sprite-audit/sheet-2.png",
+      "originalSha256": "3e13acfc8a0dcc495174cb98d2338c7fed459157275127bb6b1b8cfa882de9ed"
+    },
+    {
+      "from": "artifacts/back-sprite-audit/sheet-3.png",
+      "to": "artifacts/qa/assets/back-sprite-audit/sheet-3.png",
+      "originalSha256": "1ad952507914275b2701f2bee8fd881fadeddf6fa6bfc724f2daf7b3a5348ee0"
+    },
+    {
+      "from": "artifacts/back-sprite-audit/sheet-4.png",
+      "to": "artifacts/qa/assets/back-sprite-audit/sheet-4.png",
+      "originalSha256": "f4f022efbb59b0d3433c656f3a2a1be1764d2db3b92c20a0f66dabab19e4287d"
+    },
+    {
+      "from": "artifacts/dynamax-frames/timing.json",
+      "to": "artifacts/qa/assets/dynamax-frames/timing.json",
+      "originalSha256": "f60c6fa2bd8c49a10cfa03498a6aec284f748fa97c2881e11429618a73380321"
+    },
+    {
+      "from": "artifacts/garchomp-mega-frames/height-check.json",
+      "to": "artifacts/qa/assets/garchomp-mega-frames/height-check.json",
+      "originalSha256": "26490d033d84e14239b9ff673f006a8026847ad872265bd0e56ab57596f3e6d8"
+    },
+    {
+      "from": "artifacts/garchomp-mega-frames/timing.json",
+      "to": "artifacts/qa/assets/garchomp-mega-frames/timing.json",
+      "originalSha256": "55a2be7db61c2c81f5de5ccd58da9edd3b19513ee5f76c71de9578a4d925b021"
+    },
+    {
+      "from": "artifacts/estimate-climb-time-runner.ts",
+      "to": "scripts/estimate-climb-time.ts",
+      "originalSha256": "ad5b0e56e80860e30aa2c7bd4fba2a05a8a40044f21be27ef3424e2d5450de53"
+    },
+    {
+      "from": "artifacts/ability-learning-20261011.json",
+      "to": "artifacts/experiments/ai/ability-learning-20261011.json",
+      "originalSha256": "bd5ac48f7275c248e6429c86f51591334849fece5acbefebc06de82edef59491"
+    },
+    {
+      "from": "artifacts/auto-suite-20261010-cases.json",
+      "to": "artifacts/experiments/samples/auto-suite-20261010-cases.json",
+      "originalSha256": "b4c72732edf48d7dfb1cc777c6dad8ab5e0804938c14d7b2c6ebb60dd014f5d6"
+    },
+    {
+      "from": "artifacts/auto-suite-20261010-manifest.json",
+      "to": "artifacts/experiments/samples/auto-suite-20261010-manifest.json",
+      "originalSha256": "b4aa0e9fa329a6114fac8ee8d5b6f48f3f2d3dd749b88983cb754711384a5e41"
+    },
+    {
+      "from": "artifacts/auto-suite-20261010-report.md",
+      "to": "artifacts/experiments/samples/auto-suite-20261010-report.md",
+      "originalSha256": "444249d74fc875490f0c118314ca5f038e5aad76664c7d6069bb630ba0299bb4"
+    },
+    {
+      "from": "artifacts/auto-suite-20261010-samples.json",
+      "to": "artifacts/experiments/samples/auto-suite-20261010-samples.json",
+      "originalSha256": "acfce5ec49365b1c2a0eceb6def3c64e817a102d67c472b56a91577e6b41ce6e"
+    },
+    {
+      "from": "artifacts/auto-suite-20261010-summary.json",
+      "to": "artifacts/experiments/samples/auto-suite-20261010-summary.json",
+      "originalSha256": "97787289d55697221c5485f6816873479bdcc4fabeea4b2cbf89d2c20f030173"
+    },
+    {
+      "from": "artifacts/auto-suite-20261011-cases.json",
+      "to": "artifacts/experiments/samples/auto-suite-20261011-cases.json",
+      "originalSha256": "698461745400083d5151a028848e9fcf5ea749b0e4f4f938dab9b88495b7e563"
+    },
+    {
+      "from": "artifacts/auto-suite-20261011-manifest.json",
+      "to": "artifacts/experiments/samples/auto-suite-20261011-manifest.json",
+      "originalSha256": "8fe7ad896701ec0deda27e4ac1863ac5006b2b00996eaf6abb9690d54c122b08"
+    },
+    {
+      "from": "artifacts/auto-suite-20261011-samples.json",
+      "to": "artifacts/experiments/samples/auto-suite-20261011-samples.json",
+      "originalSha256": "fdb456dfebeb118c281dbfa9e772297ec416d2990e5edcaf5f3702b1f9bf318a"
+    },
+    {
+      "from": "artifacts/balance-50-after.json",
+      "to": "artifacts/experiments/balance/balance-50-after.json",
+      "originalSha256": "5ccb4cf9926c38aa9a2f15eae06db80ae6707d1fc5d5bd054ff1e98cfc2052cc"
+    },
+    {
+      "from": "artifacts/balance-50-before.json",
+      "to": "artifacts/experiments/balance/balance-50-before.json",
+      "originalSha256": "3286002dd8ab5cb82dfce1206e6d04435e48011df971149ef76b27091aa4dec9"
+    },
+    {
+      "from": "artifacts/balance-50-courses.json",
+      "to": "artifacts/experiments/balance/balance-50-courses.json",
+      "originalSha256": "b953783548c72fa7058ffb93bfdd9081560b10a72c0723944e11a79437edff4d"
+    },
+    {
+      "from": "artifacts/balance-50-economy-current-balanced.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-current-balanced.json",
+      "originalSha256": "b42ab16345b8404ad50511df392caa974e7791161065e96ab33bd483eecc7095"
+    },
+    {
+      "from": "artifacts/balance-50-economy-current-fishing.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-current-fishing.json",
+      "originalSha256": "c4abd632ced243c786b3d0544c15f4d9cdc531572923fba20f0e0f37323ed502"
+    },
+    {
+      "from": "artifacts/balance-50-economy-current-holdout-balanced.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-current-holdout-balanced.json",
+      "originalSha256": "5c6aa2034b58b94232fcb472514f71423eca90b6a8acbc3dac08658383ee3fc6"
+    },
+    {
+      "from": "artifacts/balance-50-economy-current-no-vitamins.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-current-no-vitamins.json",
+      "originalSha256": "770e2f11d8d9ce1aff3a2524581c87837a1b6aa48ee8a25299222d719578adc3"
+    },
+    {
+      "from": "artifacts/balance-50-economy-current-reroll-heavy.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-current-reroll-heavy.json",
+      "originalSha256": "e83a7bc334f3acd797d335732486e49a04a4db58fbd50c1b7c5a9cda26acef1c"
+    },
+    {
+      "from": "artifacts/balance-50-economy-current-vitamin-heavy.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-current-vitamin-heavy.json",
+      "originalSha256": "3748c209499ab85f8acbfd8324dfddc3212ba65e25e4884d588128f401109caf"
+    },
+    {
+      "from": "artifacts/balance-50-economy-current-vitamin-placebo.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-current-vitamin-placebo.json",
+      "originalSha256": "a81c46434b732164b3d044d8fe583be2161d6c3f54d8d45b1fe1537bf96a6e15"
+    },
+    {
+      "from": "artifacts/balance-50-economy-final-balanced.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-final-balanced.json",
+      "originalSha256": "87a84f642823e9ddaa1c6392095a3f55ef3b9b1d4dfa093a23b1cd48911c25e4"
+    },
+    {
+      "from": "artifacts/balance-50-economy-holdout-courses.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-holdout-courses.json",
+      "originalSha256": "b550c8de38436ff80467b5cd350f217b0027ca777d4b862d19aa653d2c4876a0"
+    },
+    {
+      "from": "artifacts/balance-50-economy-trial-balanced.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-trial-balanced.json",
+      "originalSha256": "bfa402cf1ea6b90a5723c7b9c8b7553612a6f7da23cb1320784f0aed0d684ca4"
+    },
+    {
+      "from": "artifacts/balance-50-economy-trial-fishing.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-trial-fishing.json",
+      "originalSha256": "06b0f31f23bf5507ddf0cbf0ca41c59c94b0fc1709fd96b17e121273ba5035d6"
+    },
+    {
+      "from": "artifacts/balance-50-economy-trial-holdout-balanced.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-trial-holdout-balanced.json",
+      "originalSha256": "c0bbfa3ecdd16c72dcd4af0752ecb2d35c9d959ed0dcc5f40722655a0b936ca9"
+    },
+    {
+      "from": "artifacts/balance-50-economy-trial-vitamin-heavy.json",
+      "to": "artifacts/experiments/balance/balance-50-economy-trial-vitamin-heavy.json",
+      "originalSha256": "cf95ce0641a21b66c15dc30637f02b644275eb6707bc89fc9ec8cb565ee21c62"
+    },
+    {
+      "from": "artifacts/balance-50-gimmick-baseline-initial.json",
+      "to": "artifacts/experiments/balance/balance-50-gimmick-baseline-initial.json",
+      "originalSha256": "8d824f6d1a3ad5ff6a5e34f0589c29130180bd771b85e09a023f308a2072caa2"
+    },
+    {
+      "from": "artifacts/balance-50-gimmick-baseline.json",
+      "to": "artifacts/experiments/balance/balance-50-gimmick-baseline.json",
+      "originalSha256": "8e6652d103cca1a3c4b775afcbf9d92f35b789b8cad8bbf6bec2a1c70a14de75"
+    },
+    {
+      "from": "artifacts/balance-50-gimmicks-initial.json",
+      "to": "artifacts/experiments/balance/balance-50-gimmicks-initial.json",
+      "originalSha256": "ffdbe64c4ac6e0f42f359f513a02cd30609ee118107e3afa06b11fe1b1696bd3"
+    },
+    {
+      "from": "artifacts/balance-50-gimmicks.json",
+      "to": "artifacts/experiments/balance/balance-50-gimmicks.json",
+      "originalSha256": "bf5be7b70e56f4d6b2322fec5fda7127950447d873fc572d6fb3cc7f10584a3c"
+    },
+    {
+      "from": "artifacts/balance-50-shop-basic.json",
+      "to": "artifacts/experiments/balance/balance-50-shop-basic.json",
+      "originalSha256": "a738d10e13c38ce996747c37825d7e5a6645c8b7dacad4f6d219a432c2a86586"
+    },
+    {
+      "from": "artifacts/balance-50-shop-current.json",
+      "to": "artifacts/experiments/balance/balance-50-shop-current.json",
+      "originalSha256": "4de74c2ec7881cf7ecf6814342271f1ab084f77cc4107a3755f19915b139a9c7"
+    },
+    {
+      "from": "artifacts/balance-50-shop-dynamax-control.json",
+      "to": "artifacts/experiments/balance/balance-50-shop-dynamax-control.json",
+      "originalSha256": "9901243eee5aba39c661f440bf13d7ae8bbe3d20a9e991e017d253b725e3eea6"
+    },
+    {
+      "from": "artifacts/balance-50-shop-mega-control.json",
+      "to": "artifacts/experiments/balance/balance-50-shop-mega-control.json",
+      "originalSha256": "0d42a6715b02006d124735e37129386cf9a165422da9a25387a00c95d762f65a"
+    },
+    {
+      "from": "artifacts/balance-after.json",
+      "to": "artifacts/experiments/balance/balance-after.json",
+      "originalSha256": "da53daaa7ee31fb02a2796cb3c8a2659f0d43fd6b3ce17c4d46f106f86470402"
+    },
+    {
+      "from": "artifacts/balance-before.json",
+      "to": "artifacts/experiments/balance/balance-before.json",
+      "originalSha256": "50ca4de0eb5794dcccf2a315681f053780eb82755a2216711840f5a497bc3904"
+    },
+    {
+      "from": "artifacts/balance-courses.json",
+      "to": "artifacts/experiments/balance/balance-courses.json",
+      "originalSha256": "061e652326b65ffe61f9471c5482f1bcb9f12e6ae8f185c2c6675c89abc1bf88"
+    },
+    {
+      "from": "artifacts/climb-time-estimate.json",
+      "to": "artifacts/experiments/balance/climb-time-estimate.json",
+      "originalSha256": "8c84012513f669ed7f10b57379005e39149d8a78e1e9f31a34d4a8672c63b4f0"
+    },
+    {
+      "from": "artifacts/climb-time-samples.json",
+      "to": "artifacts/experiments/balance/climb-time-samples.json",
+      "originalSha256": "9a318a0948294fb3f1e005f8a385c59d7e2fe690c588dba190b791e9e9680b98"
+    },
+    {
+      "from": "artifacts/composition-diagnostics-20261010-audit-v2-manifest.json",
+      "to": "artifacts/experiments/samples/composition-diagnostics-20261010-audit-v2-manifest.json",
+      "originalSha256": "d7225aa9a02c0d020a9ab30635bb6927b1e7ea90275fedad9984187cf95c0e84"
+    },
+    {
+      "from": "artifacts/composition-diagnostics-20261010-audit.json",
+      "to": "artifacts/experiments/samples/composition-diagnostics-20261010-audit.json",
+      "originalSha256": "8ed3321fcd06bb0284c0c1ccdbf685756fb3b685b727601b08bb3b02eee16700"
+    },
+    {
+      "from": "artifacts/composition-diagnostics-20261010-basic-trace.jsonl",
+      "to": "artifacts/experiments/samples/composition-diagnostics-20261010-basic-trace.jsonl",
+      "originalSha256": "7ad93818743038e1f211c9917cd97dde0b6127ea33ceb669f157bd58039fec35"
+    },
+    {
+      "from": "artifacts/composition-diagnostics-20261010-chaos-trace.jsonl",
+      "to": "artifacts/experiments/samples/composition-diagnostics-20261010-chaos-trace.jsonl",
+      "originalSha256": "ed138e562c56e48b75e5bfd891eb40aebd545287585dd0b887222c9aef4656e9"
+    },
+    {
+      "from": "artifacts/composition-diagnostics-20261010-manifest.json",
+      "to": "artifacts/experiments/samples/composition-diagnostics-20261010-manifest.json",
+      "originalSha256": "9b141a74ca4f2bfc499bce50858442336e5ce6112d28e5c46a66422fbeb1143b"
+    },
+    {
+      "from": "artifacts/composition-diagnostics-20261010-report.md",
+      "to": "artifacts/experiments/samples/composition-diagnostics-20261010-report.md",
+      "originalSha256": "6e0ca2fa69b4628193082d508136fdb76f8099ef56b0ebf7ce46e7a1b8de01ad"
+    },
+    {
+      "from": "artifacts/composition-diagnostics-20261010-survivors.json",
+      "to": "artifacts/experiments/samples/composition-diagnostics-20261010-survivors.json",
+      "originalSha256": "82e4a25ca37360ef160f6684f29f4e03a60c858af72e1e78f02691fd4da2154d"
+    },
+    {
+      "from": "artifacts/composition-diagnostics-20261010-tera-trace.jsonl",
+      "to": "artifacts/experiments/samples/composition-diagnostics-20261010-tera-trace.jsonl",
+      "originalSha256": "697865c7586e9463ab1a64cdadcc9663a48a0cb38e9246a18f0156d228dfc4ae"
+    },
+    {
+      "from": "artifacts/composition-experiment-manifest.json",
+      "to": "artifacts/experiments/samples/composition-experiment-manifest.json",
+      "originalSha256": "a239d208e2fe6cd7f9d290db44b7d53b5526e6c7348dc3a759aec18968b9c110"
+    },
+    {
+      "from": "artifacts/composition-new-courses.json",
+      "to": "artifacts/experiments/samples/composition-new-courses.json",
+      "originalSha256": "3948326d4fb5a7769d4d5b7c3deb6ceb08d65ea44a5eb90ac78fd441836d2cdc"
+    },
+    {
+      "from": "artifacts/composition-replay-audit.json",
+      "to": "artifacts/experiments/samples/composition-replay-audit.json",
+      "originalSha256": "c330f0ee326263fb408579ee8b98864e0bae3e0db90ecb916ab92e2799001cdd"
+    },
+    {
+      "from": "artifacts/composition-simulation-summary.json",
+      "to": "artifacts/experiments/samples/composition-simulation-summary.json",
+      "originalSha256": "d550c0a76490eda159dfe76b4a0f06a637ad36e271601cd7ad7cdad71e4e83ca"
+    },
+    {
+      "from": "artifacts/composition-team-cases.json",
+      "to": "artifacts/experiments/samples/composition-team-cases.json",
+      "originalSha256": "4f24651be0d38f38d69dc76af515982029af4ea5001bdf8abe98d6e109bf8bf3"
+    },
+    {
+      "from": "artifacts/coverage-compare-20261010-audit.json",
+      "to": "artifacts/experiments/ai/coverage-compare-20261010-audit.json",
+      "originalSha256": "deac1a1a776362f901475a229dd9dbecf940648085f71999f4f9dfe06ebc2ee2"
+    },
+    {
+      "from": "artifacts/coverage-compare-20261010-manifest.json",
+      "to": "artifacts/experiments/ai/coverage-compare-20261010-manifest.json",
+      "originalSha256": "039f5c41c096d9ef71dfec73d1b9331fbde8e41a51d6a0fe541c42c567b350be"
+    },
+    {
+      "from": "artifacts/coverage-compare-20261010-report.md",
+      "to": "artifacts/experiments/ai/coverage-compare-20261010-report.md",
+      "originalSha256": "3d2a95fc5ca5c29945bf7a9ef2fd5e9d90c6cbf51fea975a804076bd68bee79e"
+    },
+    {
+      "from": "artifacts/coverage-factors-20261010-audit.json",
+      "to": "artifacts/experiments/ai/coverage-factors-20261010-audit.json",
+      "originalSha256": "ca5abaacd71c79af8a7a1803fe5ad879aa1c287d2eec45bb003f4094c8a06b6a"
+    },
+    {
+      "from": "artifacts/coverage-factors-20261010-manifest.json",
+      "to": "artifacts/experiments/ai/coverage-factors-20261010-manifest.json",
+      "originalSha256": "a46554962808181b178ccf97d0f4ca3ee2e9cacb6b8ac12d29711ac35dce7a6d"
+    },
+    {
+      "from": "artifacts/coverage-factors-20261010-report.md",
+      "to": "artifacts/experiments/ai/coverage-factors-20261010-report.md",
+      "originalSha256": "d1b272a583e10fc945b573e6abef289e963513b01a41b281c365f7909bd62ec2"
+    },
+    {
+      "from": "artifacts/diverse-simulation-summary.json",
+      "to": "artifacts/experiments/samples/diverse-simulation-summary.json",
+      "originalSha256": "7cc1e45e719acfeb83e36d5e39a24df79e96f19a032b294a722eddbf2edc85ba"
+    },
+    {
+      "from": "artifacts/diverse-team-cases.json",
+      "to": "artifacts/experiments/samples/diverse-team-cases.json",
+      "originalSha256": "a79621f95f0c82f0e1bf69c70196b356a6977cca6214a74e04c4a55b3a9a00ff"
+    },
+    {
+      "from": "artifacts/hundred-floor-balanced-courses.json",
+      "to": "artifacts/experiments/balance/hundred-floor-balanced-courses.json",
+      "originalSha256": "57cef3c7a1aec9f99773a8afdfce72614af3b9668f79c67c0d270d5abef16471"
+    },
+    {
+      "from": "artifacts/hundred-floor-elites-courses.json",
+      "to": "artifacts/experiments/balance/hundred-floor-elites-courses.json",
+      "originalSha256": "dfd67d4388697e9cc97323bf157ea95d1c448215fb044d68d50525bcd87209ab"
+    },
+    {
+      "from": "artifacts/hundred-floor-final-courses.json",
+      "to": "artifacts/experiments/balance/hundred-floor-final-courses.json",
+      "originalSha256": "0e0568ef3a3d93c7c065672ecca8ba4f305a2c0e2d819efe52d9911411e09990"
+    },
+    {
+      "from": "artifacts/hundred-floor-release-courses.json",
+      "to": "artifacts/experiments/balance/hundred-floor-release-courses.json",
+      "originalSha256": "d5c56777a9367ea4bae72236a5913600a6f412954ddd9dda00bf146c94d2dede"
+    },
+    {
+      "from": "artifacts/hundred-floor-six-z-courses.json",
+      "to": "artifacts/experiments/balance/hundred-floor-six-z-courses.json",
+      "originalSha256": "7a240beeed763aa25fdd4acea8776a6ef6fdadfcf7f143a3e1571b02996b4a34"
+    },
+    {
+      "from": "artifacts/hundred-floor-v1-courses.json",
+      "to": "artifacts/experiments/balance/hundred-floor-v1-courses.json",
+      "originalSha256": "ad80b1dbc8ce4575dda71d87b1e92c5d7bf31263ccd6e80f0ca1f4dd369e93cd"
+    },
+    {
+      "from": "artifacts/immunity-recheck-audit.json",
+      "to": "artifacts/experiments/ai/immunity-recheck-audit.json",
+      "originalSha256": "b9388c0a793e6fd929228ecf81087281a2779e709a960c273c26cb6d97e78606"
+    },
+    {
+      "from": "artifacts/immunity-recheck-basic-manifest.json",
+      "to": "artifacts/experiments/ai/immunity-recheck-basic-manifest.json",
+      "originalSha256": "53e8260fc779228cdf2d2b4c6409285af23a17739568dea6d7aacf965a30cb51"
+    },
+    {
+      "from": "artifacts/immunity-recheck-basic-summary.json",
+      "to": "artifacts/experiments/ai/immunity-recheck-basic-summary.json",
+      "originalSha256": "fc8873ba76e2b80a99fe23ba2576e19b3cd927b902ad9952040115c273686dbc"
+    },
+    {
+      "from": "artifacts/immunity-recheck-chaos-manifest.json",
+      "to": "artifacts/experiments/ai/immunity-recheck-chaos-manifest.json",
+      "originalSha256": "1f11af3e4da4d51682685894539d2cfddaa20a12f25e0206dff0bc7f218bae6b"
+    },
+    {
+      "from": "artifacts/immunity-recheck-chaos-summary.json",
+      "to": "artifacts/experiments/ai/immunity-recheck-chaos-summary.json",
+      "originalSha256": "f1dc4e1a95c21f8861e397a370cd92c5edc90de91fd5966644a2a9f12d136fcb"
+    },
+    {
+      "from": "artifacts/immunity-recheck-tera-manifest.json",
+      "to": "artifacts/experiments/ai/immunity-recheck-tera-manifest.json",
+      "originalSha256": "04f3118060cc57754e61f77fe1c85a026475500150c088281a2e7595a52d67ac"
+    },
+    {
+      "from": "artifacts/immunity-recheck-tera-summary.json",
+      "to": "artifacts/experiments/ai/immunity-recheck-tera-summary.json",
+      "originalSha256": "a8346f82ac4856a5642f01bab200d6ba4a1c06631f20a73d23f03621995c77a8"
+    },
+    {
+      "from": "artifacts/music-levels-before.json",
+      "to": "artifacts/qa/audio/music-levels-before.json",
+      "originalSha256": "dbada672847ece6a1ef41b897b0471aa2067e3be4fa5d0dcd66f86eb844fcadb"
+    },
+    {
+      "from": "artifacts/music-levels.json",
+      "to": "artifacts/qa/audio/music-levels.json",
+      "originalSha256": "8ea7bbe34b5d8bf8700b161ee9c9d98a0e6f9951e450659aa0dbad98d2782870"
+    },
+    {
+      "from": "artifacts/observed-damage-dataset-catalog.json",
+      "to": "artifacts/experiments/ai/observed-damage-dataset-catalog.json",
+      "originalSha256": "93aedbceff943093f285d0ede164efbb4ff756d961b766f4fd7df0e6ec5bc853"
+    },
+    {
+      "from": "artifacts/observed-damage-dev-audit.json",
+      "to": "artifacts/experiments/ai/observed-damage-dev-audit.json",
+      "originalSha256": "7a5757d5920b170e09d076d32229477d6aee210e9e4fda960747c3a9e7045540"
+    },
+    {
+      "from": "artifacts/observed-damage-dev-basic-observed-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-dev-basic-observed-summary.json",
+      "originalSha256": "5bccc806756d6acbda9e83a8d4fa59f776eb1eb9cd7c4e71577bbfaf08afead5"
+    },
+    {
+      "from": "artifacts/observed-damage-dev-basic-v9-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-dev-basic-v9-summary.json",
+      "originalSha256": "dc6bc2cba4ab2fb5e36b7f8127f950444886d795f51ae75ce169e08b393881d2"
+    },
+    {
+      "from": "artifacts/observed-damage-dev-chaos-observed-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-dev-chaos-observed-summary.json",
+      "originalSha256": "0155e5e525f234abf70b2b07ac329950ce91ff65d1f6493987ab0c46e8a82bb6"
+    },
+    {
+      "from": "artifacts/observed-damage-dev-chaos-v9-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-dev-chaos-v9-summary.json",
+      "originalSha256": "6e6fa25c56577c3747ca24359e0093b3e8c678d370784dd4e227815e3880f233"
+    },
+    {
+      "from": "artifacts/observed-damage-dev-manifest.json",
+      "to": "artifacts/experiments/ai/observed-damage-dev-manifest.json",
+      "originalSha256": "9f2d0ae2ed6b698af7a22e033ec512275bc8a7e71fa812e0d3bea21fe18c3c10"
+    },
+    {
+      "from": "artifacts/observed-damage-dev-tera-observed-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-dev-tera-observed-summary.json",
+      "originalSha256": "dd58ccc9332fab25773435774d795cdd88f57925f724459f0b349a0463f4c7b1"
+    },
+    {
+      "from": "artifacts/observed-damage-dev-tera-v9-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-dev-tera-v9-summary.json",
+      "originalSha256": "f2820f4a7e401d140666d732ac2c30520cb038aa2e832d1a58065bafe1a5d017"
+    },
+    {
+      "from": "artifacts/observed-damage-selection.json",
+      "to": "artifacts/experiments/ai/observed-damage-selection.json",
+      "originalSha256": "acdd7693c0e045128c68a996f244636fa995797a825ecde2fbde8a20f4461ec4"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-audit.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-audit.json",
+      "originalSha256": "2c701180ebedf556a8919858a413cbbe4a38e99ece01f8ad1bcec214000afe63"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-basic-observed-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-basic-observed-summary.json",
+      "originalSha256": "07167cbc7e22590df1388f8aaba5bf4d388c4de42ed8e62f7e463b3e54b647a8"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-basic-v9-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-basic-v9-summary.json",
+      "originalSha256": "1bb78d6c0dcccb4fa07fb7a7eb2946f1b5e856f0ec28ec2c13f37f66fc912ff5"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-chaos-observed-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-chaos-observed-summary.json",
+      "originalSha256": "78858784c1f7105bc1644495d49c50db3a3d71a6c08606537dc020f9e49311ff"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-chaos-v9-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-chaos-v9-summary.json",
+      "originalSha256": "881d800bf93cab562303ec24361bac5b91073a6da194f434c437bb7edfd026b3"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-dynamax-observed-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-dynamax-observed-summary.json",
+      "originalSha256": "657dfda5ecaf872263d77676e8a3144fe87edc8b23b4416203c2da1060a3b0aa"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-dynamax-v9-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-dynamax-v9-summary.json",
+      "originalSha256": "095691cf02d5d47c65d7662db8c7d09f55d1e5b33d0939d8b866fae010d76123"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-manifest.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-manifest.json",
+      "originalSha256": "7d30fce841c6c51760400af3b896e49f8be198257015a86aa6030d0225972d92"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-mega-observed-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-mega-observed-summary.json",
+      "originalSha256": "522b25facef64fef81accf3e2c5e69319edff1a816b1e24f0a8bcc993265fdb3"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-mega-v9-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-mega-v9-summary.json",
+      "originalSha256": "bdbd0db05ab486e624cc42cc545bf01762329f186b395e761a939cabdb470ffb"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-tera-observed-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-tera-observed-summary.json",
+      "originalSha256": "7183df5c02a86fc7ac1e3e644dbfe683a8565ef1cb395e2eaed3d38cedfdc61b"
+    },
+    {
+      "from": "artifacts/observed-damage-validate-tera-v9-summary.json",
+      "to": "artifacts/experiments/ai/observed-damage-validate-tera-v9-summary.json",
+      "originalSha256": "6b74bb736db0141ca0884da94d828dd82543d74eb64d3f76259c2f534b279fc6"
+    },
+    {
+      "from": "artifacts/observed-damage-validation-courses.json",
+      "to": "artifacts/experiments/ai/observed-damage-validation-courses.json",
+      "originalSha256": "cd814dab93690aac81447b55811ac411ffdd29ab4f2dff1c7fd175528281da16"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-audit.json",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-audit.json",
+      "originalSha256": "312c94e15def61b8955db02b097c30f24840d908318e8e68fca7a27c2d05aa65"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-basic-v7-trace.jsonl",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-basic-v7-trace.jsonl",
+      "originalSha256": "e700e7e11ae2f67a62273e0e0102dc5a78df709bc73a63749d7e7b9477ba00ad"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-basic-v8-trace.jsonl",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-basic-v8-trace.jsonl",
+      "originalSha256": "6528000d5f784a8b300e28ec3fdf3e3f60c90588026caf631ecdf160a0892cd6"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-chaos-v7-trace.jsonl",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-chaos-v7-trace.jsonl",
+      "originalSha256": "9d6cc924964a58489812dc23488d49a3c899fc148baacf31578c1e6e50a39bc4"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-chaos-v8-trace.jsonl",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-chaos-v8-trace.jsonl",
+      "originalSha256": "85c0570e4128583e2a4f81ade7a0b21b9185771d855cc0c8efdc4454fb83c72d"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-dynamax-v7-trace.jsonl",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-dynamax-v7-trace.jsonl",
+      "originalSha256": "6b3cf7f0ff3ac581d01f1fa24bea1cd4cc4a8516ab0ed8cdf7479ec629d47230"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-dynamax-v8-trace.jsonl",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-dynamax-v8-trace.jsonl",
+      "originalSha256": "4ac1304f0cad2d7ce2815cad1133dc0888e724af9e94d630e940609bd485480c"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-manifest.json",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-manifest.json",
+      "originalSha256": "2ffb47433a31962b347813aafae43e173c479bf9de600df01681afd6a5d95d05"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-mega-v7-trace.jsonl",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-mega-v7-trace.jsonl",
+      "originalSha256": "afc2b5d07cbd0dd662adb46655825a5775acea880220d56d4266458a1bc17983"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-mega-v8-trace.jsonl",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-mega-v8-trace.jsonl",
+      "originalSha256": "faeffcea1d9144c5447881d767b2081ad8d163e7a25eefcd9b7f701237038657"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-pilot-trace.jsonl",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-pilot-trace.jsonl",
+      "originalSha256": "898d0b923a9856c82fb861afaf35df4468d4f40147f6463387b7de52e929f1bc"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-report.md",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-report.md",
+      "originalSha256": "af6ceeaca3cf73c471ca4cf46e1bb22f03ca0c7f041995e11c33ca406793025f"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-returns.json",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-returns.json",
+      "originalSha256": "a2dd9a5530e28a1d292b61f99225c5bb22a0f97f4e3a07fc79cb6ef2c2aa5927"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-tera-v7-trace.jsonl",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-tera-v7-trace.jsonl",
+      "originalSha256": "f1767b1059991e0ff56eeed171444500085b344b30f2731354dfcf83d14eedd9"
+    },
+    {
+      "from": "artifacts/opponent-learning-20261011-tera-v8-trace.jsonl",
+      "to": "artifacts/experiments/ai/opponent-learning-20261011-tera-v8-trace.jsonl",
+      "originalSha256": "c98585428aa99e8c66fb450b1215b7db16abf3a6e94da7366001ac3117867d05"
+    },
+    {
+      "from": "artifacts/prepare-hundred-release.ts",
+      "to": "artifacts/experiments/balance/prepare-hundred-release.ts",
+      "originalSha256": "efbda78539ef12b4e8a3175bcb77ec66eaf65ccd5b1929eab47de53b19c2d472"
+    },
+    {
+      "from": "artifacts/regional-simulation-courses.json",
+      "to": "artifacts/experiments/balance/regional-simulation-courses.json",
+      "originalSha256": "7eb3da5334ee49b5eed98b2e3c2647b1bfbfa520e01e2c978d03e877054e4e2a"
+    },
+    {
+      "from": "artifacts/regional-simulation-summary.json",
+      "to": "artifacts/experiments/balance/regional-simulation-summary.json",
+      "originalSha256": "19834112c7020283830a95f1cafe22729619a0d5faef7e715bf8c0b3c5238c11"
+    },
+    {
+      "from": "artifacts/reliable-samples-20261010-audit.json",
+      "to": "artifacts/experiments/samples/reliable-samples-20261010-audit.json",
+      "originalSha256": "c20b9e00ec7ee768453a43bcc36b4fa8343eaa22f7b6e4ca665ba829bc34efad"
+    },
+    {
+      "from": "artifacts/reliable-samples-20261010-cases.json",
+      "to": "artifacts/experiments/samples/reliable-samples-20261010-cases.json",
+      "originalSha256": "8a271a4206e973eb7c933ff770317ae6cebcb795b78daefd400b1804217034a9"
+    },
+    {
+      "from": "artifacts/reliable-samples-20261010-manifest.json",
+      "to": "artifacts/experiments/samples/reliable-samples-20261010-manifest.json",
+      "originalSha256": "681010d9a312d737942cfe68aad39796df9da41da61a1595e69d1618b777830a"
+    },
+    {
+      "from": "artifacts/reliable-samples-20261011-room-corrected-cases.json",
+      "to": "artifacts/experiments/samples/reliable-samples-20261011-room-corrected-cases.json",
+      "originalSha256": "d6633f631b11f360f0d514141ae555b72592d034599efa4d121d4eb364240e31"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-audit.json",
+      "to": "artifacts/experiments/samples/room-sample-20261011-audit.json",
+      "originalSha256": "37eba6b5e3c218a1538e6afe26dffa6cf8a2ca956cfaa7827645a3eef632f503"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-baseline-cases.json",
+      "to": "artifacts/experiments/samples/room-sample-20261011-baseline-cases.json",
+      "originalSha256": "8a271a4206e973eb7c933ff770317ae6cebcb795b78daefd400b1804217034a9"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-basic-baseline-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-basic-baseline-trace.jsonl",
+      "originalSha256": "66fe2bb4b94a6b172d3a89eca806441afa895f64d6bbef0257784c8c248b0a2d"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-basic-both-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-basic-both-trace.jsonl",
+      "originalSha256": "40ab8a3d05263ecb59e8e8fc24dec716a93271e51c93c16a04fab208c747e960"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-basic-psychic-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-basic-psychic-trace.jsonl",
+      "originalSha256": "3c1c8e3eaca07098ea59718dfe05726c12fb5b2f6c054d84a3be3cd9eda6f88c"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-basic-steel-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-basic-steel-trace.jsonl",
+      "originalSha256": "6e5ee20a4c582d46adbaaa0a4218e8c430177b3179b293801654a9e2d2ea3544"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-both-cases.json",
+      "to": "artifacts/experiments/samples/room-sample-20261011-both-cases.json",
+      "originalSha256": "3eff21283e42656ce1d354a08884f0fb48eeaa77e070a38d855698a6716e0c51"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-broader-failures.json",
+      "to": "artifacts/experiments/samples/room-sample-20261011-broader-failures.json",
+      "originalSha256": "1cd03a536dbd1513b767c833bcdab0b07c32a174bd8a418df4d0011176689d17"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-chaos-baseline-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-chaos-baseline-trace.jsonl",
+      "originalSha256": "10671c79ac0fea61fe9e9077cb986e3ec01b4c308ec2a90187fda1ac22196cd1"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-chaos-both-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-chaos-both-trace.jsonl",
+      "originalSha256": "540b922bf7a25e121c7b3597035ccf79be0219fdd1c7bb42b6353216c4cc65d4"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-chaos-psychic-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-chaos-psychic-trace.jsonl",
+      "originalSha256": "b8ea49c1dfd6cd4e55e21fe4e9fd60716c8685d18152759744989e2c713f513f"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-chaos-steel-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-chaos-steel-trace.jsonl",
+      "originalSha256": "e28aab5b0b15b90b56088130f476245fc5700b070ca1aa7d33f1232e8b0c9736"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-dynamax-baseline-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-dynamax-baseline-trace.jsonl",
+      "originalSha256": "d5de32e6c812d5e1d414a7968bee4f4cb14f60dc9d2189bab04a425ae58b39e2"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-dynamax-both-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-dynamax-both-trace.jsonl",
+      "originalSha256": "101e5b442d4968fdb376c166e73cc307f79f5fccc770c1f39a10d9f240e7d972"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-dynamax-psychic-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-dynamax-psychic-trace.jsonl",
+      "originalSha256": "c40a3f395419f2e9cd63773197a0bc6f081fb142585e9fbfb6a6b5721af81ef6"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-dynamax-steel-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-dynamax-steel-trace.jsonl",
+      "originalSha256": "0ed66abba40d43d40a81b2493412f4f7347b174e3a1ea92e6a469e9ac2f66fc6"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-manifest.json",
+      "to": "artifacts/experiments/samples/room-sample-20261011-manifest.json",
+      "originalSha256": "cf612e02f5718354c2a9168c77f918598f1f4a07abd4923ec6de6a1cc52364c9"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-mega-baseline-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-mega-baseline-trace.jsonl",
+      "originalSha256": "dd46cb2ac4f17dc5a31b911feaee46772b287e42d22e1972d91803f8ef06ce37"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-mega-both-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-mega-both-trace.jsonl",
+      "originalSha256": "a4c08c27c9ea38eb42b993fc726f43ef3c533f240fa6fb3167c9ec747e7cc31e"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-mega-psychic-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-mega-psychic-trace.jsonl",
+      "originalSha256": "f11c7b101317db99d95c624dec6dbd537e4e415fd74365bb418161490114270a"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-mega-steel-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-mega-steel-trace.jsonl",
+      "originalSha256": "5db89e042366f843a821897d7d7208d2ce08c3ada3687060c4854bc2956a7765"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-psychic-cases.json",
+      "to": "artifacts/experiments/samples/room-sample-20261011-psychic-cases.json",
+      "originalSha256": "3634c9b474b1ecf7b6897d4ef673f7125dc9d2f6ecdfaf2f84d10d8fb11a25ab"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-report.md",
+      "to": "artifacts/experiments/samples/room-sample-20261011-report.md",
+      "originalSha256": "3186ce0517c34b1c0c91eebda0fa23516b6965d8feba68b7373191672a42aa37"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-selection.json",
+      "to": "artifacts/experiments/samples/room-sample-20261011-selection.json",
+      "originalSha256": "86a4e0f5df010745023c2dd303baf19025ab4d05df4e43c6e6463e8220f95f41"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-steel-cases.json",
+      "to": "artifacts/experiments/samples/room-sample-20261011-steel-cases.json",
+      "originalSha256": "10a0ca08482200e4bce76b24a24b3e1e7d49f5a0c206698b82fa47724dbbcd40"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-tera-baseline-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-tera-baseline-trace.jsonl",
+      "originalSha256": "ff2d7af88d85fa945852f3f9365031d0a0cd266d78bcb5ff0e2bbd207065f0f4"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-tera-both-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-tera-both-trace.jsonl",
+      "originalSha256": "7f51f00c51adbf5752afb95f553543bfbdc5c79ef2bacf136473ffc14bee4c0e"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-tera-psychic-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-tera-psychic-trace.jsonl",
+      "originalSha256": "2106c950e3871bbb2619efcc9a2e14ac9207ea7d66cb7b3c5476f5c5c96c7c91"
+    },
+    {
+      "from": "artifacts/room-sample-20261011-tera-steel-trace.jsonl",
+      "to": "artifacts/experiments/samples/room-sample-20261011-tera-steel-trace.jsonl",
+      "originalSha256": "808ee78e1aebd77110ed1c4f1d42c050fd0e833a8af6cca046a3683bfd856dae"
+    },
+    {
+      "from": "artifacts/rule-comparison-summary.json",
+      "to": "artifacts/experiments/balance/rule-comparison-summary.json",
+      "originalSha256": "4746081167dd79471a7510e1274c2a222dad8ea564a30dae9188b029af165161"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-audit.json",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-audit.json",
+      "originalSha256": "101c774ccb01c7e3be8a5efb07b6f215b5b51524b9f9edca7d67af4ca7f584f1"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-basic-baseline-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-basic-baseline-trace.jsonl",
+      "originalSha256": "e1b788b9390ca7dd010a9a1a237b4f156ae4222e81960232e39380fec26fdc2d"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-basic-samples-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-basic-samples-trace.jsonl",
+      "originalSha256": "e700e7e11ae2f67a62273e0e0102dc5a78df709bc73a63749d7e7b9477ba00ad"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-chaos-baseline-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-chaos-baseline-trace.jsonl",
+      "originalSha256": "d66d9fdc1fd1ca6b0fe2186cb2fb5947865781d7cb43f4bc1531c8632de806c9"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-chaos-samples-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-chaos-samples-trace.jsonl",
+      "originalSha256": "9d6cc924964a58489812dc23488d49a3c899fc148baacf31578c1e6e50a39bc4"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-courses.json",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-courses.json",
+      "originalSha256": "e90205a797629e8e553ae449ae758208f0355573b91810a468f7bec51b16d7d8"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-freshness.json",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-freshness.json",
+      "originalSha256": "4ec71c2d1a36b7186c42557735c4f270330c53f0637d95a99e1c6e8d25f4fed2"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-manifest.json",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-manifest.json",
+      "originalSha256": "c1ebcf25c1f6df5d11e6c23ed74ed5990a50248fc4aace02b3a9740ac840edea"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-preregister.json",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-preregister.json",
+      "originalSha256": "2ef73847c866c89851b74bc4412a04349d50a9fd668850048bad9cc47d582b38"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-report.md",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-report.md",
+      "originalSha256": "e8282cc1979e56bda2caace6fcd7de6cd590e528bed92c658362256e13fe515b"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-tera-baseline-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-tera-baseline-trace.jsonl",
+      "originalSha256": "21b94e846a88f74cf57e6b9e2ea5510825ee3bd724bc0e39dde97ca6346fd86c"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-tera-samples-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-tera-samples-trace.jsonl",
+      "originalSha256": "f1767b1059991e0ff56eeed171444500085b344b30f2731354dfcf83d14eedd9"
+    },
+    {
+      "from": "artifacts/sample-holdout-20261011-theme-summary.json",
+      "to": "artifacts/experiments/samples/sample-holdout-20261011-theme-summary.json",
+      "originalSha256": "b96a0a2e1e3724697b9cc37dbc1d8e1c99b22199850839e59b61b6691ed9f542"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-audit.json",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-audit.json",
+      "originalSha256": "96ce1a1f08bbcd0b9765db7b6a1aec414f5348fab0e9a65163a67ae991671d6f"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-basic-baseline-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-basic-baseline-trace.jsonl",
+      "originalSha256": "7ad93818743038e1f211c9917cd97dde0b6127ea33ceb669f157bd58039fec35"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-basic-both-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-basic-both-trace.jsonl",
+      "originalSha256": "ef8abb5ead09ed4f0473320538d8dda33617eb82125e6524abd81caa41a6e269"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-basic-samples-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-basic-samples-trace.jsonl",
+      "originalSha256": "8d2ab7ad56d5c95d59f44d6a312f97f6881575b29d25203e97b3f66daa9049b3"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-basic-walls-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-basic-walls-trace.jsonl",
+      "originalSha256": "39ab65fd783e64f37eec764f6cc609703640a03e9da2e0445ffce37bcefe2103"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-chaos-baseline-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-chaos-baseline-trace.jsonl",
+      "originalSha256": "ed138e562c56e48b75e5bfd891eb40aebd545287585dd0b887222c9aef4656e9"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-chaos-both-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-chaos-both-trace.jsonl",
+      "originalSha256": "5765cbf612f4fa7638c8d90d249a0ea1c888acab65025f376cd8919addea038f"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-chaos-samples-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-chaos-samples-trace.jsonl",
+      "originalSha256": "2878fb0eb75ce03c6d7d8f6ee66d469520e48ee6490aea827e5a5b4830239b63"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-chaos-walls-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-chaos-walls-trace.jsonl",
+      "originalSha256": "2c48fe9debf09c65d64bd61c236e0a95e40377615c0fc220e55f1bb4a1329cff"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-manifest.json",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-manifest.json",
+      "originalSha256": "149b42fa5236e2bf62fd51e75be27f3fd8ca6696f78c912db16138e58ac7006d"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-report.md",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-report.md",
+      "originalSha256": "dcf7626d2a26940e2cb7d25934a77c5ad4f482e977b17c80119223a0a0362fff"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-tera-baseline-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-tera-baseline-trace.jsonl",
+      "originalSha256": "697865c7586e9463ab1a64cdadcc9663a48a0cb38e9246a18f0156d228dfc4ae"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-tera-both-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-tera-both-trace.jsonl",
+      "originalSha256": "2e3eff87c2c21eb28ca87906a74686fa88e875dbf27edea8d69521cc40fa6a83"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-tera-samples-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-tera-samples-trace.jsonl",
+      "originalSha256": "60509f50b384a57f5d4e0115e2270d4b9519c58fcfff8781ad7429a32654b8f3"
+    },
+    {
+      "from": "artifacts/sample-wall-factors-20261010-tera-walls-trace.jsonl",
+      "to": "artifacts/experiments/samples/sample-wall-factors-20261010-tera-walls-trace.jsonl",
+      "originalSha256": "d19b98223c610ad2fb9325622d38af23eed2e2ff678728f331b5987db207881a"
+    },
+    {
+      "from": "artifacts/shop-economy-summary.json",
+      "to": "artifacts/experiments/balance/shop-economy-summary.json",
+      "originalSha256": "12c29afebbc22c8bbf252df96185df1604fcb1666c6d3b88ca899f0dfc1b3217"
+    },
+    {
+      "from": "artifacts/shop-price-before.json",
+      "to": "artifacts/experiments/balance/shop-price-before.json",
+      "originalSha256": "bbfd3084fb05036857880ea3882b5123972677c64dc47c653bb92e6db9beb450"
+    },
+    {
+      "from": "artifacts/shop-price-trial.json",
+      "to": "artifacts/experiments/balance/shop-price-trial.json",
+      "originalSha256": "1f37104e0f9ec7e72e53962dd0eccee234a759c98fc8610c3ef19c66c6cb48f9"
+    },
+    {
+      "from": "artifacts/simulation-ablation-climb-basic-v9-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-ablation-climb-basic-v9-balanced.json",
+      "originalSha256": "ce3a1d10efc061b687d4496ecc9652baa134ce6876a02d58f8d86223ad0a4a6a"
+    },
+    {
+      "from": "artifacts/simulation-ablation-climb-basic-wall-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-ablation-climb-basic-wall-balanced.json",
+      "originalSha256": "5171239950840b90e3a3215aed22defc00703d2192db75d1d03038ff5a85d992"
+    },
+    {
+      "from": "artifacts/simulation-ablation-climb-chaos-v9-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-ablation-climb-chaos-v9-balanced.json",
+      "originalSha256": "bed9958e8f5089576d78cd10fbbdcca117fb29209fa14cbe7b76948127a9a334"
+    },
+    {
+      "from": "artifacts/simulation-ablation-climb-chaos-wall-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-ablation-climb-chaos-wall-balanced.json",
+      "originalSha256": "d2731d31470c81bedc69c803c1ce317786587feee8bac0e4f0dcfe94d419ed2e"
+    },
+    {
+      "from": "artifacts/simulation-ablation-climb-tera-v9-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-ablation-climb-tera-v9-balanced.json",
+      "originalSha256": "f226135fea15ad8c3277b76cc746ae8ccb60abf43bdfbd1999cef7b4ef6a4480"
+    },
+    {
+      "from": "artifacts/simulation-ablation-climb-tera-wall-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-ablation-climb-tera-wall-balanced.json",
+      "originalSha256": "d5d0f76a1384a1534f53066afc90fe451bd3ff34792afe429cd5071d4fd4b1d4"
+    },
+    {
+      "from": "artifacts/simulation-auto-suite-20261010-basic-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-auto-suite-20261010-basic-balanced.json",
+      "originalSha256": "20f40bd83d905f4ac18fe07fe0c728b363bc6783d8e3e474f7380f98023088cf"
+    },
+    {
+      "from": "artifacts/simulation-auto-suite-20261010-chaos-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-auto-suite-20261010-chaos-balanced.json",
+      "originalSha256": "ce9e0036854b19db351c876bd0c182800480625e22b09bac6d8c8906da2d8c59"
+    },
+    {
+      "from": "artifacts/simulation-auto-suite-20261010-tera-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-auto-suite-20261010-tera-balanced.json",
+      "originalSha256": "b1f507eec47620b1f15bfb0679103c656617009d9de0862cf4b17f135b53ed06"
+    },
+    {
+      "from": "artifacts/simulation-composition-diagnostics-20261010-basic-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-diagnostics-20261010-basic-balanced.json",
+      "originalSha256": "232c07f9a55f8205efc4cc99d432ae58149db85b1a841082a3ffb21a8c2d1178"
+    },
+    {
+      "from": "artifacts/simulation-composition-diagnostics-20261010-chaos-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-diagnostics-20261010-chaos-balanced.json",
+      "originalSha256": "6db8ef65fcd54f9644ca879306249526978bfdcc3af723f997e5c41e731cf8fc"
+    },
+    {
+      "from": "artifacts/simulation-composition-diagnostics-20261010-tera-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-diagnostics-20261010-tera-balanced.json",
+      "originalSha256": "b5b33351723aa735a3ff5e8888eb992809fe85ac068648cfd238871ef201e7df"
+    },
+    {
+      "from": "artifacts/simulation-composition-legacy-v7-check-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-legacy-v7-check-balanced.json",
+      "originalSha256": "6c0f0b85ba8f6aad467a0240987a8973d8d5baf1836209dfe1c75612ae243080"
+    },
+    {
+      "from": "artifacts/simulation-composition-matched-basic-legacy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-matched-basic-legacy-balanced.json",
+      "originalSha256": "432909e24a508d649399552363a075cfbe63125a5d061c726accd23579dd6fe2"
+    },
+    {
+      "from": "artifacts/simulation-composition-matched-basic-synergy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-matched-basic-synergy-balanced.json",
+      "originalSha256": "659f560ce3c13063ed5d7736240ce86a1ee100a7f7ddbf34497400e30d356f04"
+    },
+    {
+      "from": "artifacts/simulation-composition-matched-chaos-legacy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-matched-chaos-legacy-balanced.json",
+      "originalSha256": "e20bd1e51fb1b07cc3709adbf6e0e540c1f94a7f2107207c47445722a01ed12c"
+    },
+    {
+      "from": "artifacts/simulation-composition-matched-chaos-synergy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-matched-chaos-synergy-balanced.json",
+      "originalSha256": "f27555de12ac14dc9f058a612d74c223d2e350875a1fcaaf05b54bd4c223300f"
+    },
+    {
+      "from": "artifacts/simulation-composition-matched-dynamax-legacy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-matched-dynamax-legacy-balanced.json",
+      "originalSha256": "c965ccb78b3b3667b7db9013e3391e63a9b78cfeeba13a4e91f9d63e8c629f81"
+    },
+    {
+      "from": "artifacts/simulation-composition-matched-dynamax-synergy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-matched-dynamax-synergy-balanced.json",
+      "originalSha256": "182dc45261b9dce1795497e4548ccf684defd95805b0daa25071404b00a1f568"
+    },
+    {
+      "from": "artifacts/simulation-composition-matched-mega-legacy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-matched-mega-legacy-balanced.json",
+      "originalSha256": "e4749a051d18b54d3f6793cdddcdaf0171def2b6846c87193a36f5132c648194"
+    },
+    {
+      "from": "artifacts/simulation-composition-matched-mega-synergy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-matched-mega-synergy-balanced.json",
+      "originalSha256": "83e63990e5cdff29d216f65c3f0105e850b31d980892ca0323fadc2d9f048e64"
+    },
+    {
+      "from": "artifacts/simulation-composition-matched-tera-legacy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-matched-tera-legacy-balanced.json",
+      "originalSha256": "2305e37da48ce8be2a62fac166cfa61b421a5e3b7bd11ab69c62fb86127a17e7"
+    },
+    {
+      "from": "artifacts/simulation-composition-matched-tera-synergy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-matched-tera-synergy-balanced.json",
+      "originalSha256": "1e970a59a5cbae140be82637dd30d0281905e2e984e51ca46be96005a038252b"
+    },
+    {
+      "from": "artifacts/simulation-composition-new-basic-legacy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-new-basic-legacy-balanced.json",
+      "originalSha256": "ff75111272c50243ff7956561eda7a28870c076277be082611dc35052647b2b2"
+    },
+    {
+      "from": "artifacts/simulation-composition-new-basic-synergy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-new-basic-synergy-balanced.json",
+      "originalSha256": "004460c696a848b52c89d825578bcd38f3f07d5736a83146f358de7479fe5dd2"
+    },
+    {
+      "from": "artifacts/simulation-composition-new-chaos-legacy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-new-chaos-legacy-balanced.json",
+      "originalSha256": "8a3b16299e754d264c950633cc24e02b71a9ec6c32a04ee7a156ff3a4305e91c"
+    },
+    {
+      "from": "artifacts/simulation-composition-new-chaos-synergy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-new-chaos-synergy-balanced.json",
+      "originalSha256": "21bd37f9dda90373a9423a896262c59b8b19cf0a7a6be848018f9251330f0e0d"
+    },
+    {
+      "from": "artifacts/simulation-composition-new-dynamax-legacy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-new-dynamax-legacy-balanced.json",
+      "originalSha256": "6e4f9165981fdc69ac8cbb31909d5cf62eadb12707e5db3db92d975e3ea9ce29"
+    },
+    {
+      "from": "artifacts/simulation-composition-new-dynamax-synergy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-new-dynamax-synergy-balanced.json",
+      "originalSha256": "c8130e786f6dbb77003818443f4b2a87d8ea6bd0b6eb6e0e58209f53b0ed5255"
+    },
+    {
+      "from": "artifacts/simulation-composition-new-mega-legacy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-new-mega-legacy-balanced.json",
+      "originalSha256": "b7839e538462d288bef0656deb0bcf5eb6c2b9665ebc32b64220560afe409c5b"
+    },
+    {
+      "from": "artifacts/simulation-composition-new-mega-synergy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-new-mega-synergy-balanced.json",
+      "originalSha256": "a73f538bc61db12b0d27305be9d970804aeb86bd41ca59cdc015e1a7722670c3"
+    },
+    {
+      "from": "artifacts/simulation-composition-new-tera-legacy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-new-tera-legacy-balanced.json",
+      "originalSha256": "6a00cc80cdfc77bc4f00a06642d1f839ffa6aaf35d9bd6759903d1f760414281"
+    },
+    {
+      "from": "artifacts/simulation-composition-new-tera-synergy-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-new-tera-synergy-balanced.json",
+      "originalSha256": "7e1f54b0b660103575a8201a408ec9f8a17e7d523c66f0a4e60fd1fec8dad25e"
+    },
+    {
+      "from": "artifacts/simulation-composition-smoke-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-smoke-balanced.json",
+      "originalSha256": "883993962bdf1004eff9b97eb5496b164c1e32e9c7b7c9abcf62c23b89dea075"
+    },
+    {
+      "from": "artifacts/simulation-composition-support-v7-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-support-v7-balanced.json",
+      "originalSha256": "4ecb478058ac7cd58762848374e9f53c83303c6722863d4267671874a0b46628"
+    },
+    {
+      "from": "artifacts/simulation-composition-support-v8-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-composition-support-v8-balanced.json",
+      "originalSha256": "eaa62897df9647670e4cf5924e9cf0187a1e23369ffdbcf87273f6e66fb5fe91"
+    },
+    {
+      "from": "artifacts/simulation-coverage-compare-20261010-basic-adaptive-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-compare-20261010-basic-adaptive-balanced.json",
+      "originalSha256": "c7007c81aa7aa783a9c6ad0be73151892d9ded5c7f8a15598947aada8a016ee5"
+    },
+    {
+      "from": "artifacts/simulation-coverage-compare-20261010-basic-matchup-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-compare-20261010-basic-matchup-balanced.json",
+      "originalSha256": "2c0b09b881a66b8cca352c9a430c9b1dd28281c779f39693c4b72d3a57a82805"
+    },
+    {
+      "from": "artifacts/simulation-coverage-compare-20261010-chaos-adaptive-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-compare-20261010-chaos-adaptive-balanced.json",
+      "originalSha256": "5d6c0cef83108e8881236c65f92a6ce12c727ba298cb228973c424163da0fddb"
+    },
+    {
+      "from": "artifacts/simulation-coverage-compare-20261010-chaos-matchup-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-compare-20261010-chaos-matchup-balanced.json",
+      "originalSha256": "de1a9eae20e2ae6569bd4c960685b6f87f1393799696b1260493f233e813c5ec"
+    },
+    {
+      "from": "artifacts/simulation-coverage-compare-20261010-tera-adaptive-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-compare-20261010-tera-adaptive-balanced.json",
+      "originalSha256": "093f01619ab6437693cc814a70bcd41ca5653d2dbad8440283f753771ed02b50"
+    },
+    {
+      "from": "artifacts/simulation-coverage-compare-20261010-tera-matchup-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-compare-20261010-tera-matchup-balanced.json",
+      "originalSha256": "510477698b5957b45b88025a781e8373f6cff446a44d22d6b67e6452ef389178"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-basic-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-basic-baseline-balanced.json",
+      "originalSha256": "01d3606a18b820989009035a2d51edeff1e295634f904dfd0a76c0fc3f086749"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-basic-both-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-basic-both-balanced.json",
+      "originalSha256": "14422abe402676825732a4ded3693e0d438cc05277a6ce906d15095e9d5625b2"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-basic-immunity-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-basic-immunity-balanced.json",
+      "originalSha256": "0230bedb19c338db75efa8ee081a65565da5108df48083b3a0f5c2fb268c36bf"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-basic-switching-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-basic-switching-balanced.json",
+      "originalSha256": "807613a42a89d51938850c4f43c955a8a7d2c927205b7d099d3fb8e0db28d3a2"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-chaos-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-chaos-baseline-balanced.json",
+      "originalSha256": "f9ef19dac4cdac4c513a1cf58fc353a6a31f585e36ea3a7023d69bb976277906"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-chaos-both-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-chaos-both-balanced.json",
+      "originalSha256": "57119e4a632c3c9a8d8684149f68feac5b53191823152d91e41bdaaa208bdb2c"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-chaos-immunity-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-chaos-immunity-balanced.json",
+      "originalSha256": "ff698ab6bc99ddbe1a4e03b9d922afb20673a6955096c5d9b138a6d22f1cb998"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-chaos-switching-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-chaos-switching-balanced.json",
+      "originalSha256": "1ddaab670843ebaaa75178b6746efdc3812bf3ea8656ae5c989ee084ea58b888"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-tera-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-tera-baseline-balanced.json",
+      "originalSha256": "5af67eadbff76944124bee959ec4e19ff19305b41cbed81f8ada211167798b31"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-tera-both-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-tera-both-balanced.json",
+      "originalSha256": "39124d0f9499fb5da677e08acc1586fe4a3a611c0e5a11233a591954126b468a"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-tera-immunity-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-tera-immunity-balanced.json",
+      "originalSha256": "7cca8c3e413b99269b5736fa2ca9e79d3b3890a3a4c40ecd7321773b78c4c72a"
+    },
+    {
+      "from": "artifacts/simulation-coverage-factors-20261010-tera-switching-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-coverage-factors-20261010-tera-switching-balanced.json",
+      "originalSha256": "bb5fe15d375c70ad150d9e18c804c83e9f7f32fe972c16243a6d77784302a4c8"
+    },
+    {
+      "from": "artifacts/simulation-current-six-z-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-current-six-z-balanced.json",
+      "originalSha256": "c49edfb2cca1504eeb7e23466536360431bfea832e265d23cf79fada012121eb"
+    },
+    {
+      "from": "artifacts/simulation-difficulty-current-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-difficulty-current-balanced.json",
+      "originalSha256": "3bca4439bbee4cc11880a3fac04ba3e33939f86fbcdd8470f78012f9541497e3"
+    },
+    {
+      "from": "artifacts/simulation-diverse-fresh-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-diverse-fresh-balanced.json",
+      "originalSha256": "b660557e517922ff07229164392468253ae378f1ec570aa6c07f38b4e91e6141"
+    },
+    {
+      "from": "artifacts/simulation-diverse-mixed-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-diverse-mixed-balanced.json",
+      "originalSha256": "0477a74400610ec355c502c923ffc1095a4bc6a9d2e50162a021f66705847c8c"
+    },
+    {
+      "from": "artifacts/simulation-diverse-trained-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-diverse-trained-balanced.json",
+      "originalSha256": "4b795d7d36df08a237a185a3e2bde4c69caeeef64418c21b7f4a2dcf861df7c8"
+    },
+    {
+      "from": "artifacts/simulation-hundred-floor-balanced-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-hundred-floor-balanced-balanced.json",
+      "originalSha256": "bc23f2012ca80847e14e15b4b14333d76120c761ab2cf2afa86c8caf9bdd936d"
+    },
+    {
+      "from": "artifacts/simulation-hundred-floor-elites-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-hundred-floor-elites-balanced.json",
+      "originalSha256": "27f91ef0983a2c6a5e3a68d9b90ab884d7898d57265ba650930d2dbc1df9428a"
+    },
+    {
+      "from": "artifacts/simulation-hundred-floor-release-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-hundred-floor-release-balanced.json",
+      "originalSha256": "1bdfa05867d6bec219e060412edb61407f8df697483d26dbec7021737c6600d4"
+    },
+    {
+      "from": "artifacts/simulation-hundred-floor-trial-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-hundred-floor-trial-balanced.json",
+      "originalSha256": "089ed7f182a7bed135dc5576527e9c9e427e554ff148490a243f41a43b0395e1"
+    },
+    {
+      "from": "artifacts/simulation-hundred-floor-v1-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-hundred-floor-v1-balanced.json",
+      "originalSha256": "089ed7f182a7bed135dc5576527e9c9e427e554ff148490a243f41a43b0395e1"
+    },
+    {
+      "from": "artifacts/simulation-hundred-maintenance-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-hundred-maintenance-balanced.json",
+      "originalSha256": "026efc2e0f6e249180b4fd6311d01542840fa4e90d5401ff7369cdb708e5a9f8"
+    },
+    {
+      "from": "artifacts/simulation-hundred-shop10-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-hundred-shop10-balanced.json",
+      "originalSha256": "4ff8b8fb7acb919db05ac60bb5ef22b12573ec2f2b688b5e8b43d73c65f7e0c9"
+    },
+    {
+      "from": "artifacts/simulation-immunity-climb-basic-matchup-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-immunity-climb-basic-matchup-balanced.json",
+      "originalSha256": "d8ce6e7ad949dc80d3e2854f36ac0b7ef574685829f547d7a6aaa538690ae5ed"
+    },
+    {
+      "from": "artifacts/simulation-immunity-climb-chaos-matchup-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-immunity-climb-chaos-matchup-balanced.json",
+      "originalSha256": "07f0a1c4018ecd8384eb8b9baa082f0620daff5d41ab0cc9c1452e8371a8ba01"
+    },
+    {
+      "from": "artifacts/simulation-immunity-climb-tera-matchup-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-immunity-climb-tera-matchup-balanced.json",
+      "originalSha256": "03dbaedfd5942bc5540b992a86211a0a2647dc4b1697a9335d73facd170866fa"
+    },
+    {
+      "from": "artifacts/simulation-observed-climb-basic-observed-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-observed-climb-basic-observed-balanced.json",
+      "originalSha256": "c03a99f01dfdafce62a7d8be354eb0b3379de00d1b17e462a72d738a7d3f805a"
+    },
+    {
+      "from": "artifacts/simulation-observed-climb-basic-v9-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-observed-climb-basic-v9-balanced.json",
+      "originalSha256": "b35d6aede41d46c82d81af51a3159f7fd2084dd634b22ac5cb54f1bfbff2b43d"
+    },
+    {
+      "from": "artifacts/simulation-observed-climb-chaos-observed-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-observed-climb-chaos-observed-balanced.json",
+      "originalSha256": "20bfb3f4f2ef667f91fbf0bfc1d8718e613760001d3780b9c74fd8c463c6e402"
+    },
+    {
+      "from": "artifacts/simulation-observed-climb-chaos-v9-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-observed-climb-chaos-v9-balanced.json",
+      "originalSha256": "cb48de6af06904fcd634197486327c41bd8efb59b8d612a310c9b2cd5f4930f9"
+    },
+    {
+      "from": "artifacts/simulation-observed-climb-tera-observed-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-observed-climb-tera-observed-balanced.json",
+      "originalSha256": "87c4cef93a4bc9c5514f4e8fdf9677eaef4ce850056f0c64bdc6a12ce223a5d3"
+    },
+    {
+      "from": "artifacts/simulation-observed-climb-tera-v9-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-observed-climb-tera-v9-balanced.json",
+      "originalSha256": "01cedc58b0958ee71fd438d3375c1d2019150b275ae1a3ffbd606af004956019"
+    },
+    {
+      "from": "artifacts/simulation-opponent-learning-20261011-basic-v7-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-opponent-learning-20261011-basic-v7-balanced.json",
+      "originalSha256": "1a6294405b839bd250c87924d9e51d3697d7e718269c22ddb2e5766a9fa0030b"
+    },
+    {
+      "from": "artifacts/simulation-opponent-learning-20261011-basic-v8-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-opponent-learning-20261011-basic-v8-balanced.json",
+      "originalSha256": "af30d27d1fae536e68b70c3b1ff61c950559fd29485955698412f783f07ca578"
+    },
+    {
+      "from": "artifacts/simulation-opponent-learning-20261011-chaos-v7-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-opponent-learning-20261011-chaos-v7-balanced.json",
+      "originalSha256": "2ead89767492d5b3c9e9622c677776840de42f933b27f6b75009f5022c292e90"
+    },
+    {
+      "from": "artifacts/simulation-opponent-learning-20261011-chaos-v8-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-opponent-learning-20261011-chaos-v8-balanced.json",
+      "originalSha256": "2ebc3f96ff56766210214c12aa33e3ef800f9285f71924545336b6b64741eeb4"
+    },
+    {
+      "from": "artifacts/simulation-opponent-learning-20261011-dynamax-v7-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-opponent-learning-20261011-dynamax-v7-balanced.json",
+      "originalSha256": "976576c8b1d17defe3e36093892aa6901d287f72d8dbd657c56e6043304e915c"
+    },
+    {
+      "from": "artifacts/simulation-opponent-learning-20261011-dynamax-v8-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-opponent-learning-20261011-dynamax-v8-balanced.json",
+      "originalSha256": "336f18c92927edccb04d98b1f878470abb838afd81d042cff2de84e0a6fd3974"
+    },
+    {
+      "from": "artifacts/simulation-opponent-learning-20261011-mega-v7-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-opponent-learning-20261011-mega-v7-balanced.json",
+      "originalSha256": "74c3c97ff722fb96e9908b0d6e7bd2da51c19d0129ca89a296e80f8721c411fe"
+    },
+    {
+      "from": "artifacts/simulation-opponent-learning-20261011-mega-v8-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-opponent-learning-20261011-mega-v8-balanced.json",
+      "originalSha256": "4939466a1886c7f36c82d46e59d8b63c3d0cdd7c257ee1563b66fc39de85761b"
+    },
+    {
+      "from": "artifacts/simulation-opponent-learning-20261011-pilot-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-opponent-learning-20261011-pilot-balanced.json",
+      "originalSha256": "46a19333165cc2f95072353fb99c2e2ac78bb82a2ff85d30cadacd2dfbfe9569"
+    },
+    {
+      "from": "artifacts/simulation-opponent-learning-20261011-tera-v7-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-opponent-learning-20261011-tera-v7-balanced.json",
+      "originalSha256": "a8699ce33f9e321cdd19d01eec80cf6f40f8252fb504a56a4e08a82d8d13c1a0"
+    },
+    {
+      "from": "artifacts/simulation-opponent-learning-20261011-tera-v8-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-opponent-learning-20261011-tera-v8-balanced.json",
+      "originalSha256": "47d315965b46296f0df0e7a9594d8a84175722a3159e8db080a80312bb4de3ef"
+    },
+    {
+      "from": "artifacts/simulation-regional-replay-check-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-regional-replay-check-balanced.json",
+      "originalSha256": "22d1017e09e575f33ac1a8151b021d91126214e1b2701360d1c5aa3094588391"
+    },
+    {
+      "from": "artifacts/simulation-regional-v5-control-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-regional-v5-control-balanced.json",
+      "originalSha256": "92170e209845e69233ff47e369d6da0a3e6f857c00652f8588e6c349982da1a3"
+    },
+    {
+      "from": "artifacts/simulation-regional-v6-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-regional-v6-balanced.json",
+      "originalSha256": "b00139787e329932db65836cf829855f86ffa722e28814551ae16f20f30697bf"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-basic-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-basic-baseline-balanced.json",
+      "originalSha256": "2760c63df0d69dcfb7d0617b727dd5b13050ff5b7a5c1cb3ea286fd967a43035"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-basic-both-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-basic-both-balanced.json",
+      "originalSha256": "93a36ac9c18fd1ee3cca432d93f5f6d2cc60678c2451732749623841fd2c7f0e"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-basic-psychic-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-basic-psychic-balanced.json",
+      "originalSha256": "d39d0e202a0e1b306d3c3465f62da585a95cf46d261522b82b6de51b498bf579"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-basic-steel-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-basic-steel-balanced.json",
+      "originalSha256": "0eb32b4005a0742da462e851a16eca928cb8fb43d18dba30d90ef90a70aa71e5"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-chaos-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-chaos-baseline-balanced.json",
+      "originalSha256": "9aabeb33262efbb779b69b3bab8f376a6f657a4baf91931c729aa26af94c8a2b"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-chaos-both-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-chaos-both-balanced.json",
+      "originalSha256": "ea172048da316f06008d8ee64a22c66a81628659610a843267103e03d267214b"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-chaos-psychic-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-chaos-psychic-balanced.json",
+      "originalSha256": "bd92ab7a59adf6c14ec5efaa2ab62646a32fe0e52212fb7b5f89b8f53fa90ac8"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-chaos-steel-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-chaos-steel-balanced.json",
+      "originalSha256": "74a3b226672856c4304673672bb39c8e96a8d767a7c0bfa47b9c3b4cdc355d96"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-dynamax-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-dynamax-baseline-balanced.json",
+      "originalSha256": "8d267772b05a7b3e3e64fc921f110efc36321fd52514008e76903d63e953c2bb"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-dynamax-both-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-dynamax-both-balanced.json",
+      "originalSha256": "73e11b39ad1b1ea3341997a941067cd4f01143d5bda790cfc9da723b9ab8088e"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-dynamax-psychic-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-dynamax-psychic-balanced.json",
+      "originalSha256": "5b0314a96ab473a171937d2d340a3c386b6f067ba9aa8c8ebd7c00870350ae22"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-dynamax-steel-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-dynamax-steel-balanced.json",
+      "originalSha256": "84de2fcfeb570209c368a987a6b2a9d877884cc7d646017428da4dc6444976ce"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-mega-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-mega-baseline-balanced.json",
+      "originalSha256": "84997c552cc91b0121f60d96f3e6341ed753d70d65bd977091c6d6aa89692e0a"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-mega-both-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-mega-both-balanced.json",
+      "originalSha256": "b213f47e83ae9983494c1c97b7b760d2d8efee9a8fd61e37dd7fe38aee90044a"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-mega-psychic-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-mega-psychic-balanced.json",
+      "originalSha256": "9655d72fd4b794495dae705ba8b855a0e9f6f279a49708c150f73209b0f52a7f"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-mega-steel-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-mega-steel-balanced.json",
+      "originalSha256": "715b396e454024929a83699c7257d7798bea9a17ae726bcff9e5373fe41ba52a"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-tera-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-tera-baseline-balanced.json",
+      "originalSha256": "c5886541b5e309fa9b0e80d6619a983ecdc0e6a0fe339adb8eaea9f80a363b8b"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-tera-both-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-tera-both-balanced.json",
+      "originalSha256": "25b2517c561cea49c360c41fe0532c6d81d1af45d73606ad59a3374d424ae207"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-tera-psychic-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-tera-psychic-balanced.json",
+      "originalSha256": "743941834940bdb865a03ec2b0c767fcfbe35ed00f67b5dc3a173ba636334ae8"
+    },
+    {
+      "from": "artifacts/simulation-room-sample-20261011-tera-steel-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-room-sample-20261011-tera-steel-balanced.json",
+      "originalSha256": "c8ad7aa8474c1af7236cb5b7594e08c3622c8aa0ec1816c2cef5feed918fa2d6"
+    },
+    {
+      "from": "artifacts/simulation-rule-basic-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-rule-basic-balanced.json",
+      "originalSha256": "c290d85fe37a5d050d782ff3f6882fb3b344ce9d8ac0be678be7f5de858d06bc"
+    },
+    {
+      "from": "artifacts/simulation-rule-chaos-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-rule-chaos-balanced.json",
+      "originalSha256": "dc78ff08a66d3679f4a23830bcce9abf9a7b5c892e6ea9b84dd574d28e3f9928"
+    },
+    {
+      "from": "artifacts/simulation-rule-dynamax-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-rule-dynamax-balanced.json",
+      "originalSha256": "07336ea803f57d5ce01cd9f51e51b8c939bbef5dc6569c792da853e721899cf0"
+    },
+    {
+      "from": "artifacts/simulation-rule-mega-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-rule-mega-balanced.json",
+      "originalSha256": "81e29b722b0ac20943e813c5981a7468a7e0dfddd38dcb2a503957f3dccfd79b"
+    },
+    {
+      "from": "artifacts/simulation-rule-tera-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-rule-tera-balanced.json",
+      "originalSha256": "867187fadb0755cfeb7dcdfd21b9715e56fda08dd09ee5fbbaf3a9f8bdb93216"
+    },
+    {
+      "from": "artifacts/simulation-sample-holdout-20261011-basic-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-holdout-20261011-basic-baseline-balanced.json",
+      "originalSha256": "5372b144f4ca7de66455589a554eebea46a3d3ef31b9bd7600a9323010f57c75"
+    },
+    {
+      "from": "artifacts/simulation-sample-holdout-20261011-basic-samples-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-holdout-20261011-basic-samples-balanced.json",
+      "originalSha256": "683a7e55e570c3c6aa4bed024b35dd04f84e33e918d463ab34b963d1f0b1db45"
+    },
+    {
+      "from": "artifacts/simulation-sample-holdout-20261011-chaos-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-holdout-20261011-chaos-baseline-balanced.json",
+      "originalSha256": "2c163d9c2b5512f4b7a6718f1906d8904c08ac51628c1bf05eecc92a69470817"
+    },
+    {
+      "from": "artifacts/simulation-sample-holdout-20261011-chaos-samples-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-holdout-20261011-chaos-samples-balanced.json",
+      "originalSha256": "912462ef145f6c9af894cde948961c7a75d3c1f0f498978df0368e730f1f0fb6"
+    },
+    {
+      "from": "artifacts/simulation-sample-holdout-20261011-tera-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-holdout-20261011-tera-baseline-balanced.json",
+      "originalSha256": "8af980fd8d9fcba85e9f1040a28572c956a0cf85662cd0b13a24fa6ba617f9b3"
+    },
+    {
+      "from": "artifacts/simulation-sample-holdout-20261011-tera-samples-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-holdout-20261011-tera-samples-balanced.json",
+      "originalSha256": "664f897e1f3a0b59adf53f75b0993cfbe095de1ab4113623f99e3969f74a5076"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-basic-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-basic-baseline-balanced.json",
+      "originalSha256": "8606259e9b1d9ada67875b64ab6f634241c20a1afc50de2ccfe3be66162c158d"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-basic-both-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-basic-both-balanced.json",
+      "originalSha256": "6c3e128b2f6a36eb6485cc78d495805d3f377a9904173c502c79cd0c2a6f89ce"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-basic-samples-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-basic-samples-balanced.json",
+      "originalSha256": "85bad1eb319da43001546c2ad286f7410063bd28f4fe024649ad26059677df59"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-basic-walls-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-basic-walls-balanced.json",
+      "originalSha256": "008c217b02904e2220efd08edd172baccf9e4c02a9afae4abae7ca5fc0f57430"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-chaos-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-chaos-baseline-balanced.json",
+      "originalSha256": "773a67fd62aa985fba7d2349a2f63adfa87ab911881d0d9ccc8c1bdf9c509806"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-chaos-both-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-chaos-both-balanced.json",
+      "originalSha256": "f73f497c810ee47315f3b4a3cf7170883a335499334857b65e0da2bc5291b5e0"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-chaos-samples-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-chaos-samples-balanced.json",
+      "originalSha256": "bc23b79e731ec4f3c4d47bb09c0f3eabb8e1184cc84fb4f07eee4101e866460a"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-chaos-walls-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-chaos-walls-balanced.json",
+      "originalSha256": "e120766ff5a994798bb40ab5d00642c5a9ec17873eeec444f64534a38915a0ab"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-tera-baseline-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-tera-baseline-balanced.json",
+      "originalSha256": "e9c2f7856edbe7b32740359a053a7e790bf244e5734d266e04f5e97fd3e71d87"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-tera-both-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-tera-both-balanced.json",
+      "originalSha256": "51474592193ff4835450c328897f42a6826c83a6ee988c33792e8fd993452683"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-tera-samples-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-tera-samples-balanced.json",
+      "originalSha256": "e0ed3c7c75d90997c85eb7edede6ec25b237e9398de77424cafe05540ac9d65b"
+    },
+    {
+      "from": "artifacts/simulation-sample-wall-factors-20261010-tera-walls-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-sample-wall-factors-20261010-tera-walls-balanced.json",
+      "originalSha256": "d81a21ddc95740e1c823ffc1f8733350a0dfe60a578ee4d87e89e8215d24b0bc"
+    },
+    {
+      "from": "artifacts/simulation-shop-discount-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-shop-discount-balanced.json",
+      "originalSha256": "50d41b8d34e061a5d8c8b5582e3a1d589eb6e12c886c090acaeb67a4e3ed6e67"
+    },
+    {
+      "from": "artifacts/simulation-six-z-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-six-z-balanced.json",
+      "originalSha256": "57e87dd3d06ec8d772577f37eadd0e48a9f3168f0af610dd292f2e6252dd873e"
+    },
+    {
+      "from": "artifacts/simulation-support-climb-basic-v10-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-climb-basic-v10-balanced.json",
+      "originalSha256": "8263f5e0b559699b2ed03992ffab0934b54b1ad0a19937dba240fffbf808a36f"
+    },
+    {
+      "from": "artifacts/simulation-support-climb-basic-v8-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-climb-basic-v8-balanced.json",
+      "originalSha256": "6e396515b01cb18c1555d23e68fe059e1e8b9b14faaff081dab815212d7effea"
+    },
+    {
+      "from": "artifacts/simulation-support-climb-basic-v9-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-climb-basic-v9-balanced.json",
+      "originalSha256": "7e2480a20bb798d026ab128617aabf59d956d751e79f95c8023bfe6486bfe07d"
+    },
+    {
+      "from": "artifacts/simulation-support-climb-chaos-v10-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-climb-chaos-v10-balanced.json",
+      "originalSha256": "1f702589f9ab8bb9825eccc717b991395fe2b8027d3c3a3d60e34e85044288a1"
+    },
+    {
+      "from": "artifacts/simulation-support-climb-chaos-v8-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-climb-chaos-v8-balanced.json",
+      "originalSha256": "9f056bbfdfcc4028c3099792124cac4f3304a95f278b72653ce88904c5cbd16a"
+    },
+    {
+      "from": "artifacts/simulation-support-climb-chaos-v9-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-climb-chaos-v9-balanced.json",
+      "originalSha256": "7b6cc3eefcb3ad505bdfb2309250b4d23021037e5fe9233ad1fbb883168bfb6f"
+    },
+    {
+      "from": "artifacts/simulation-support-climb-tera-v10-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-climb-tera-v10-balanced.json",
+      "originalSha256": "847c26d2ad65aed7ead9021565ba234242e040b96ecee14113ce68b1de195fee"
+    },
+    {
+      "from": "artifacts/simulation-support-climb-tera-v8-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-climb-tera-v8-balanced.json",
+      "originalSha256": "a798c665d23aa6ab43c81444f5bae697e2d4f813e392072f98421ac8ca70f3e6"
+    },
+    {
+      "from": "artifacts/simulation-support-climb-tera-v9-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-climb-tera-v9-balanced.json",
+      "originalSha256": "80078b9e5874b2f86954ea5d0b4155f988b2bc18bd517b3d1ed0d23863000178"
+    },
+    {
+      "from": "artifacts/simulation-support-corrected-basic-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-corrected-basic-balanced.json",
+      "originalSha256": "f224403977df89efb7d4709f37797ca3060052121a69f5f7e23effc885b40ba6"
+    },
+    {
+      "from": "artifacts/simulation-support-corrected-chaos-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-corrected-chaos-balanced.json",
+      "originalSha256": "46076643038ea99b8ceb534423219e065ce33025e15bc59ad2fa3c7015bb2445"
+    },
+    {
+      "from": "artifacts/simulation-support-corrected-tera-balanced.json",
+      "to": "artifacts/experiments/balance/simulation-support-corrected-tera-balanced.json",
+      "originalSha256": "a176f77171781a390cd690ce748a7759c0ef520f26bc4fcf3d12aa689084ccb1"
+    },
+    {
+      "from": "artifacts/support-ablation-dataset-catalog.json",
+      "to": "artifacts/experiments/ai/support-ablation-dataset-catalog.json",
+      "originalSha256": "8b56d5cf544274b462fb3a2c4638ad83f525020afaec1a591b9bf3917db68035"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-audit.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-audit.json",
+      "originalSha256": "8ffa3a3282c4e340aa8b5d299ed6af52bc420b4bc3e15a58e6e2bdcd9f7f7214"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-basic-damage-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-basic-damage-summary.json",
+      "originalSha256": "20fca04770474e4431ee02463d11a06362be5c4af4fb0a4e9beff4f94ef06f2b"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-basic-handoff-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-basic-handoff-summary.json",
+      "originalSha256": "c1b6a535db69168829dc9cccb61e0e32680e1ff4efcdb0547a7518219c7c5ca9"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-basic-setup-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-basic-setup-summary.json",
+      "originalSha256": "2ef859e0cb99a213e2bfe2b70acf670ac8f13c3ce4e7d71fdd47ad778594f888"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-basic-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-basic-v9-summary.json",
+      "originalSha256": "9ffa6782a0865d9b4c484e83c41acc201507e4363dff9746d251d880898a0da6"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-basic-wall-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-basic-wall-summary.json",
+      "originalSha256": "3838dae360e1dd38ec7194cdf23ad74356cbc53bf3a4afb4e6e03919a0e3e441"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-chaos-damage-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-chaos-damage-summary.json",
+      "originalSha256": "d53c51df9124cc8098000fc36c44af68cf40e266719c3d7f27e3eb2cf40a6e46"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-chaos-handoff-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-chaos-handoff-summary.json",
+      "originalSha256": "b76c30cd4a3c06eba9bc6673f234fcf8015c1f46b9e5091a64420e6ba9480450"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-chaos-setup-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-chaos-setup-summary.json",
+      "originalSha256": "5d44e75566f22016ab008367febdeb5eddad306bfa1ac9032bde850e2962e13c"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-chaos-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-chaos-v9-summary.json",
+      "originalSha256": "9f63c4880a2bec2c2fde8d88afb1aa5e602cd6804224a168244d2d422abca127"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-chaos-wall-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-chaos-wall-summary.json",
+      "originalSha256": "93a209f0dcd10b6f0a5ad01a8056f5e4dac1a8685e75f23b79d50cbec9fdc6ff"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-manifest.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-manifest.json",
+      "originalSha256": "2799a0ab0a419c9756af72412c2900f9381c87486cf88c789e1eef38624e72b6"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-tera-damage-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-tera-damage-summary.json",
+      "originalSha256": "8429994e0ea7969ff23dceace8836f033a8cac6fda31435722fe5362a791d17f"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-tera-handoff-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-tera-handoff-summary.json",
+      "originalSha256": "354ea4198c52791e86a849571e7320237c04557c714c10f3a8281e7488af3ee3"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-tera-setup-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-tera-setup-summary.json",
+      "originalSha256": "3a8b2df2919327a2051c1746294d5d185df0c263ba883891ef7112bfd1016f6f"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-tera-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-tera-v9-summary.json",
+      "originalSha256": "9a51c40dfb80c9f28d92e3a6cbecb768cb8810ef68112d2d332d8c83695c3ab7"
+    },
+    {
+      "from": "artifacts/support-ablation-dev-tera-wall-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-dev-tera-wall-summary.json",
+      "originalSha256": "0c8a3d31720db5c778083bdeba89f0e677cc1a73e287190bcaef794ba0353cb9"
+    },
+    {
+      "from": "artifacts/support-ablation-selection.json",
+      "to": "artifacts/experiments/ai/support-ablation-selection.json",
+      "originalSha256": "ac26eabb14070c86757c56244b80a3187f9f97307f4a87495145702f7e9e331a"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-audit.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-audit.json",
+      "originalSha256": "38d2007cd80c85b1c58dc663c40b5c668b58709011ad8fe7853af29c604d99be"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-basic-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-basic-v9-summary.json",
+      "originalSha256": "eb3e957f2910e2799d5f3ad1b203057907666102db81941942f9808862958f57"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-basic-wall-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-basic-wall-summary.json",
+      "originalSha256": "b788bb9f2bb865730a7538c7cb6b3ebe02a23bb408d6eab0160655f7c5a5b07a"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-chaos-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-chaos-v9-summary.json",
+      "originalSha256": "735d5c0c40ddd31ece976cf784146c85bc05e15724ac9cf15d5db3e4383dccee"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-chaos-wall-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-chaos-wall-summary.json",
+      "originalSha256": "7c21af0147bb3b5145cd2c5303ed891190a6bc4738fc821fd0bd2df32761e792"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-dynamax-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-dynamax-v9-summary.json",
+      "originalSha256": "33c1ae80a7a338eeff39f0cd1b508790e0af1086af2c14558df8bd6e2a328378"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-dynamax-wall-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-dynamax-wall-summary.json",
+      "originalSha256": "9c5993e6282af46c3dac84f325925ba0a3ad3ddaf3d3deb738c9157ac0aa2bd4"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-manifest.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-manifest.json",
+      "originalSha256": "b7e7bf55c8b5dbf68b97fa17e9dc29750a6adbfc50ff800f4eed3ee4bda47631"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-mega-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-mega-v9-summary.json",
+      "originalSha256": "b8cdf944dd2c14ed03c668c48cf361d369be1c9ec340d5c0697717df08023549"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-mega-wall-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-mega-wall-summary.json",
+      "originalSha256": "f16f282b666f491fcae0304105aacb47b867a6e655923892833ef53bcafa3c94"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-tera-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-tera-v9-summary.json",
+      "originalSha256": "c5c89563b71c57e0fef5834c261d00b3cbf80d1521baae71101b9d2b9ddc7e35"
+    },
+    {
+      "from": "artifacts/support-ablation-validate-tera-wall-summary.json",
+      "to": "artifacts/experiments/ai/support-ablation-validate-tera-wall-summary.json",
+      "originalSha256": "d614fd4a1f80539a3f7d7135f3dceccb7912eeff1c6d4d305380a575f4cc3e95"
+    },
+    {
+      "from": "artifacts/support-ablation-validation-courses.json",
+      "to": "artifacts/experiments/ai/support-ablation-validation-courses.json",
+      "originalSha256": "65b89afc5ebcaf557c6332ff76fc3be96fcc1be82007bf58503e8d0cfa1cee4e"
+    },
+    {
+      "from": "artifacts/support-ai-new-courses.json",
+      "to": "artifacts/experiments/ai/support-ai-new-courses.json",
+      "originalSha256": "321b1353cd49807bc86b3cb4b038978b39fd6168d88068676517b060d08783af"
+    },
+    {
+      "from": "artifacts/support-corrected-climb-cases.json",
+      "to": "artifacts/experiments/ai/support-corrected-climb-cases.json",
+      "originalSha256": "fa780f17fb6d964dbd30b07236be76ae6c88171f3b740cc49309525ed549287d"
+    },
+    {
+      "from": "artifacts/support-correction-audit.json",
+      "to": "artifacts/experiments/ai/support-correction-audit.json",
+      "originalSha256": "855cd8b4d86fe684f630305171c0fc32a2e1c0bd2467f58ca0870e9821e44d96"
+    },
+    {
+      "from": "artifacts/support-correction-manifest.json",
+      "to": "artifacts/experiments/ai/support-correction-manifest.json",
+      "originalSha256": "62af357451eb7d4f9ab24783163f71a4f623054221ecc1d9eb78c3f33d42c59a"
+    },
+    {
+      "from": "artifacts/support-decision-diagnosis.json",
+      "to": "artifacts/experiments/ai/support-decision-diagnosis.json",
+      "originalSha256": "de99c6b73709e499d662f47fa1378c1f17e82c458ae92ba2e25fac8453434356"
+    },
+    {
+      "from": "artifacts/support-player-audit.json",
+      "to": "artifacts/experiments/ai/support-player-audit.json",
+      "originalSha256": "2e7b076d619bf80a883e23f1eed0dc47f9018cc0afe16ed2691b245161a05b17"
+    },
+    {
+      "from": "artifacts/support-player-cases.json",
+      "to": "artifacts/experiments/ai/support-player-cases.json",
+      "originalSha256": "b2972bf10b4e138c15107d8f5bc9e2a34a8db414bf7b4e651422d9d36068eec8"
+    },
+    {
+      "from": "artifacts/support-player-dataset-catalog.json",
+      "to": "artifacts/experiments/ai/support-player-dataset-catalog.json",
+      "originalSha256": "a28285c3ffbf78665468b0fa82ee6b6388f7eec5ae95826904e20226ae700c50"
+    },
+    {
+      "from": "artifacts/support-player-manifest.json",
+      "to": "artifacts/experiments/ai/support-player-manifest.json",
+      "originalSha256": "a90be52b16a63ed6bfd35b1d9bc00bce6d32e5398e70ca3dc24be6ab68e16b53"
+    },
+    {
+      "from": "artifacts/support-player-matched-basic-v7-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-basic-v7-summary.json",
+      "originalSha256": "2b53415446cc0df5339d16ba8b98c1848ca17ad7592b66c8057fc5e2ae639c1e"
+    },
+    {
+      "from": "artifacts/support-player-matched-basic-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-basic-v8-summary.json",
+      "originalSha256": "6627b4621589f768d8a39317cde1c5c577b4e373f9feb4e6e30839148cf6ad49"
+    },
+    {
+      "from": "artifacts/support-player-matched-basic-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-basic-v9-summary.json",
+      "originalSha256": "b01f75642f81a144517ce2a825a6c1f3fd661ff1eab261a7cc76e9982384b86a"
+    },
+    {
+      "from": "artifacts/support-player-matched-chaos-v7-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-chaos-v7-summary.json",
+      "originalSha256": "2bee40929f2bdbb7f90ca40996aba86b25cf8263eeb3e53d5193bdc661a38f3b"
+    },
+    {
+      "from": "artifacts/support-player-matched-chaos-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-chaos-v8-summary.json",
+      "originalSha256": "6d212092400145b31e8d1d9849499e21ebab2c3c04e2e52a321fc5039946f992"
+    },
+    {
+      "from": "artifacts/support-player-matched-chaos-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-chaos-v9-summary.json",
+      "originalSha256": "cfa046abda0c8b39e20d7ed4a6a3c134be02a3daf9059217e0426cb9bfe7f052"
+    },
+    {
+      "from": "artifacts/support-player-matched-dynamax-v7-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-dynamax-v7-summary.json",
+      "originalSha256": "3c17629fb0c7d1ec86932b0308589f03e17c069e7f26e0162379ef35af724426"
+    },
+    {
+      "from": "artifacts/support-player-matched-dynamax-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-dynamax-v8-summary.json",
+      "originalSha256": "81b25938d281835573378e9abbe280b8a24c9c56d13fd3e49a131e77219ebe5d"
+    },
+    {
+      "from": "artifacts/support-player-matched-dynamax-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-dynamax-v9-summary.json",
+      "originalSha256": "f3d0b8f2fce6691032aa88657aafdd9baa15d29aaa975a61ad052b8a1b8b5e6a"
+    },
+    {
+      "from": "artifacts/support-player-matched-mega-v7-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-mega-v7-summary.json",
+      "originalSha256": "b3cce98a18bdb830756b38291d3ff1c9d31d50fcd7e4684bcb9de4ff4310c16c"
+    },
+    {
+      "from": "artifacts/support-player-matched-mega-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-mega-v8-summary.json",
+      "originalSha256": "897556440e7f37b53ab3c457fa6bbe2cf5f8110ace498cc70730004a273b49db"
+    },
+    {
+      "from": "artifacts/support-player-matched-mega-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-mega-v9-summary.json",
+      "originalSha256": "3f98f5721e686916031fdee5f10b5ff8c572c61ad1204242daa4f1546eaca5b6"
+    },
+    {
+      "from": "artifacts/support-player-matched-tera-v7-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-tera-v7-summary.json",
+      "originalSha256": "2523872676e8a99f304940a852f8bf40833353aa1a08d2f553ccf0a13c85210d"
+    },
+    {
+      "from": "artifacts/support-player-matched-tera-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-tera-v8-summary.json",
+      "originalSha256": "54e544c642382eeb0c78c16fe537dc494a6669ed7ab7371380a2cbfd4a2b94aa"
+    },
+    {
+      "from": "artifacts/support-player-matched-tera-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-player-matched-tera-v9-summary.json",
+      "originalSha256": "38de27d44b0196bcfb09a48f2496fd5796f6e8088a0b7372ab3a1670b4c944e5"
+    },
+    {
+      "from": "artifacts/support-player-new-basic-v7-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-basic-v7-summary.json",
+      "originalSha256": "def243582bd6d646feb87f81aec736d0fd5193172b47918989a5f82ec6f3d186"
+    },
+    {
+      "from": "artifacts/support-player-new-basic-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-basic-v8-summary.json",
+      "originalSha256": "3fb6323b096387236f204ace11e58cd7878a59d8d82e359a88cd7de24de877fb"
+    },
+    {
+      "from": "artifacts/support-player-new-basic-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-basic-v9-summary.json",
+      "originalSha256": "94e42df48050a843d405779f2b5cf1c6527f1926e9921ad7713a37a10ddc90ee"
+    },
+    {
+      "from": "artifacts/support-player-new-chaos-v7-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-chaos-v7-summary.json",
+      "originalSha256": "209d75e5e2e17335278227b03d320367822c9fdf6fcab568d32f30203524ef68"
+    },
+    {
+      "from": "artifacts/support-player-new-chaos-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-chaos-v8-summary.json",
+      "originalSha256": "93fb91b3f7800e47828ea36709f2dc0998509102b1c4a8896bc3a141b965a4ab"
+    },
+    {
+      "from": "artifacts/support-player-new-chaos-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-chaos-v9-summary.json",
+      "originalSha256": "d3a9b060ddfc0a9d1ec479429c4bb823dbebaefcfcf2535c76d676f35746d82a"
+    },
+    {
+      "from": "artifacts/support-player-new-dynamax-v7-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-dynamax-v7-summary.json",
+      "originalSha256": "962cc527b35149243b020505a25346bcd3c61801cda62eadd20a03f3d1a137fb"
+    },
+    {
+      "from": "artifacts/support-player-new-dynamax-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-dynamax-v8-summary.json",
+      "originalSha256": "4a880e8f7f97c0f990470253190ffc54d37c5ff7ac3ba0373a5e6859257aee78"
+    },
+    {
+      "from": "artifacts/support-player-new-dynamax-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-dynamax-v9-summary.json",
+      "originalSha256": "12a8d5d4465a5e17641200e0261a4b509892a590eb349eaa2adeeb14d6a45334"
+    },
+    {
+      "from": "artifacts/support-player-new-mega-v7-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-mega-v7-summary.json",
+      "originalSha256": "11e6c27a82c03c86a09f9a167afeb8bd832d4c3f8604e2362ea0a81e3313a0d8"
+    },
+    {
+      "from": "artifacts/support-player-new-mega-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-mega-v8-summary.json",
+      "originalSha256": "80dbbaa4cc839ebe2e7346a9ccba27741ab3ce7e69389f10e64fbd313d6af18a"
+    },
+    {
+      "from": "artifacts/support-player-new-mega-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-mega-v9-summary.json",
+      "originalSha256": "777ec15f412499ac27b0da4fa91dcd3bb9e3a2116251b8a0646bb32ac1889341"
+    },
+    {
+      "from": "artifacts/support-player-new-tera-v7-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-tera-v7-summary.json",
+      "originalSha256": "9826c84c419a115919629792c997657f432bc54f829c1ca02d6dd50ce671515a"
+    },
+    {
+      "from": "artifacts/support-player-new-tera-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-tera-v8-summary.json",
+      "originalSha256": "4de77a19a91685386d58d7e98753e9a19f576ed6d3dfe6c41ef5b95b69abbf2d"
+    },
+    {
+      "from": "artifacts/support-player-new-tera-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-player-new-tera-v9-summary.json",
+      "originalSha256": "986b04fa1a414dc457b19175dacf5749abc72886e9d430055dc9b1324c7c403c"
+    },
+    {
+      "from": "artifacts/support-player-replay-audit.json",
+      "to": "artifacts/experiments/ai/support-player-replay-audit.json",
+      "originalSha256": "9d645768e415a0f5bae5544820e7f8e85f018c8a3d6f1e35b2762aefa1a57648"
+    },
+    {
+      "from": "artifacts/support-recheck-audit.json",
+      "to": "artifacts/experiments/ai/support-recheck-audit.json",
+      "originalSha256": "a17ca7adc60d1b5df7533509ae4dc54d50ad2e1817e7a81523b1182f2eddb30e"
+    },
+    {
+      "from": "artifacts/support-recheck-climb-cases.json",
+      "to": "artifacts/experiments/ai/support-recheck-climb-cases.json",
+      "originalSha256": "1c678e419aebd4a96d5b81d0ba2488b8f0ea6f28ff932b58473e8cc02cc2c363"
+    },
+    {
+      "from": "artifacts/support-recheck-fresh-courses.json",
+      "to": "artifacts/experiments/ai/support-recheck-fresh-courses.json",
+      "originalSha256": "4a2969f78639be44df4ac707504882f915da96f142287c4e085f3276984b6d58"
+    },
+    {
+      "from": "artifacts/support-recheck-manifest.json",
+      "to": "artifacts/experiments/ai/support-recheck-manifest.json",
+      "originalSha256": "9cc537ce0b1a00c4add56ad2a91738a9172d60458c110132723e78cb3760ecca"
+    },
+    {
+      "from": "artifacts/support-recheck-matched-basic-v10-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-matched-basic-v10-summary.json",
+      "originalSha256": "029f0c3869b0998f564d52d2c51d76ba59379a7fff2136264f4bdc56d9f68ac5"
+    },
+    {
+      "from": "artifacts/support-recheck-new-basic-v10-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-basic-v10-summary.json",
+      "originalSha256": "52325a377f25e1016dff8337a9b4a6cc9f2bb23d1ce7ce9476797fd47f5c5ed4"
+    },
+    {
+      "from": "artifacts/support-recheck-new-basic-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-basic-v8-summary.json",
+      "originalSha256": "775a316652a5bc330c9b437f816959b6de80657628374e6c7c4ac7ccbcba42a4"
+    },
+    {
+      "from": "artifacts/support-recheck-new-basic-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-basic-v9-summary.json",
+      "originalSha256": "a5698a85386e155136c5184b2af62fe49d71c145be1d18a1d1fecbf87a440aa8"
+    },
+    {
+      "from": "artifacts/support-recheck-new-chaos-v10-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-chaos-v10-summary.json",
+      "originalSha256": "0000a25d347e4130b6532232e736e19294258ab3b8b705cab366e4771416b62f"
+    },
+    {
+      "from": "artifacts/support-recheck-new-chaos-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-chaos-v8-summary.json",
+      "originalSha256": "07a6c21dcbabb6ba667b14cc3719c2eac3e6f777b424be34d1fb260b18f534f1"
+    },
+    {
+      "from": "artifacts/support-recheck-new-chaos-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-chaos-v9-summary.json",
+      "originalSha256": "c8489218690e5b443962e71377f688c2044af7dc94a4fdfaa94cbc314494d104"
+    },
+    {
+      "from": "artifacts/support-recheck-new-dynamax-v10-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-dynamax-v10-summary.json",
+      "originalSha256": "ca803db5a803bb9dcc5254ea48c24640ae863c5631cbfff6f42a883998cdc9bc"
+    },
+    {
+      "from": "artifacts/support-recheck-new-dynamax-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-dynamax-v8-summary.json",
+      "originalSha256": "d3d32f85165d9e77011ca8c1392cef8e29e105194f6acd9dfd361e5b45850554"
+    },
+    {
+      "from": "artifacts/support-recheck-new-dynamax-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-dynamax-v9-summary.json",
+      "originalSha256": "991f8507bf2c48e7841cb1f5d8f5b35b76d7e546dbd713d45a5bd67d68e8a4b6"
+    },
+    {
+      "from": "artifacts/support-recheck-new-mega-v10-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-mega-v10-summary.json",
+      "originalSha256": "e1cd933913d68a195dfaa085e25c165df4e440df508a2bc90f28a10202adb527"
+    },
+    {
+      "from": "artifacts/support-recheck-new-mega-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-mega-v8-summary.json",
+      "originalSha256": "93f5d95a8f09f1ce7b7b490863fea8d972d0e8b351c111642cbb4e1204e0b86f"
+    },
+    {
+      "from": "artifacts/support-recheck-new-mega-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-mega-v9-summary.json",
+      "originalSha256": "7425e4aa4a5d2b758085e1f1ef4566607e308a104b3fd3f6a6849cbb94051962"
+    },
+    {
+      "from": "artifacts/support-recheck-new-tera-v10-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-tera-v10-summary.json",
+      "originalSha256": "45fbb97920b5e8d32997c4df265537b486daa3120391c4a91843c2bcdac90376"
+    },
+    {
+      "from": "artifacts/support-recheck-new-tera-v8-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-tera-v8-summary.json",
+      "originalSha256": "abb56f34129667161812c0bab78b537edd4eb8aeeb6b891059eafc41523ed9c9"
+    },
+    {
+      "from": "artifacts/support-recheck-new-tera-v9-summary.json",
+      "to": "artifacts/experiments/ai/support-recheck-new-tera-v9-summary.json",
+      "originalSha256": "7fd2bd7aeffefead778b2a54ebaa0a49dba674a7bc3223e74a8db18805901450"
+    },
+    {
+      "from": "artifacts/tower-loss-diagnosis.json",
+      "to": "artifacts/experiments/balance/tower-loss-diagnosis.json",
+      "originalSha256": "2d9c392590c6afa20cbff29ee630a1b07a638004df23458389d2532004577768"
+    },
+    {
+      "from": "artifacts/tower-themes.json",
+      "to": "artifacts/reports/npc/tower-themes.json",
+      "originalSha256": "d085f7bb650074e4ef9d7c45f50e2a8105a582e9ea0f319b6fb5b794a5e53e93"
+    },
+    {
+      "from": "artifacts/tower-themes.md",
+      "to": "artifacts/reports/npc/tower-themes.md",
+      "originalSha256": "5ba7eff0b9d72ade332192818584403e7727f602eb59be05c56e21475b317525"
+    },
+    {
+      "from": "artifacts/trainer-samples.json",
+      "to": "artifacts/reports/npc/trainer-samples.json",
+      "originalSha256": "5dd7754edbc4ebb98f6d6744cce4a2c308f6a075b7e6ddecd2df84ecf1f01d6a"
+    },
+    {
+      "from": "artifacts/trainer-samples.md",
+      "to": "artifacts/reports/npc/trainer-samples.md",
+      "originalSha256": "03e16f2b27a6c57003c0c84207dfe948752f97d8c53b926d3cb7a78f123ca491"
+    },
+    {
+      "from": ".data/import-cache/abilities.csv",
+      "to": ".data/cache/import/abilities.csv",
+      "originalSha256": "74c3588ad48e08e54ff01f432899a4028c3e91508bbd53201df85e1f6b9e9ef3"
+    },
+    {
+      "from": ".data/import-cache/ability_flavor_text.csv",
+      "to": ".data/cache/import/ability_flavor_text.csv",
+      "originalSha256": "5ab2165547dce3897b1d88e654f0159511680b1d84f93fd4f265752b66904adb"
+    },
+    {
+      "from": ".data/form-import-cache/moves.csv",
+      "to": ".data/cache/forms/moves.csv",
+      "originalSha256": "8aafd37bf78f19471495c05b201545180f50f0a08a2a2a844d69f9837dd39ac9"
+    },
+    {
+      "from": ".data/form-import-cache/move_names.csv",
+      "to": ".data/cache/forms/move_names.csv",
+      "originalSha256": "99e23ee38ea53d1473474d463b87651deac3cd4928750f8186feae66da45c147"
+    },
+    {
+      "from": ".data/form-import-cache/pokemon.csv",
+      "to": ".data/cache/forms/pokemon.csv",
+      "originalSha256": "16c81c33188b0eac403aa2f759fcbe9e42c611f722d263f5b5a6a5bff9f8ce6b"
+    }
+  ]
+}

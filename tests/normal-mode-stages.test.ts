@@ -10,7 +10,7 @@ import {zCrystals} from '../src/data/z-crystals';
 import {npcGimmick,npcExtraCandidates} from '../src/data/npc-gimmicks';
 import {TowerStore} from '../src/server/tower-store';
 import {starters} from '../src/data/teams';
-import normalSamples from '../docs/gameplay/normal-npc-samples.json' with {type:'json'};
+import normalSamples from '../scripts/data/npc/normal-npc-samples.json' with {type:'json'};
 
 const special=(item:string)=>!!megaStones[item] || !!zCrystals[item] || !!primalOrbs[item] || item===DYNAMAX_ITEM;
 test('normal mode has two leader and two boss samples and exact 50/55/100 boundaries',()=>{

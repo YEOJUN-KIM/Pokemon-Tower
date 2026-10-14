@@ -13,7 +13,7 @@ for(const width of [1100,390])test(`egg result requested sample shows NEW, exact
  await page.reload();await page.getByRole('button',{name:'10회 뽑기 · 2,000P',exact:true}).click();await expect(page.getByTestId('egg-result')).toHaveCount(10);
  const cards=page.getByTestId('egg-result');await expect(cards.nth(0).locator('.egg-new-badge')).toHaveText('NEW!');await expect(cards.nth(1).locator('.egg-new-badge')).toHaveCount(0);await expect(cards.nth(1).locator('.egg-stat-improved dd')).toHaveText('31↑8');await expect(cards.nth(1).locator('.egg-stat-improved dd')).toHaveCSS('color','rgb(195, 67, 67)');await expect(cards.nth(1).locator('.egg-stat-delta')).toHaveCSS('color','rgb(123, 133, 139)');await expect(cards.nth(0)).toHaveAttribute('data-rarity','legendary');await expect(cards.nth(3).locator('.egg-new-moves')).toContainText('새 기술');await expect(page.getByRole('dialog')).not.toContainText('개체값 상승!');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
- await page.getByRole('dialog').screenshot({path:`artifacts/screenshots/egg-results-revised/revised-${width}.png`});
+ await page.getByRole('dialog').screenshot({path:`artifacts/qa/screenshots/egg-results-revised/revised-${width}.png`});
  // Other rarity palettes are checked with the same presentation-only fixture.
  eggs[0].species='Articuno';eggs[1].species='Mew';await page.keyboard.press('x');await page.getByRole('button',{name:'10회 뽑기 · 2,000P',exact:true}).click();await expect(cards.nth(0)).toHaveAttribute('data-rarity','sublegendary');await expect(cards.nth(1)).toHaveAttribute('data-rarity','mythical');
 });

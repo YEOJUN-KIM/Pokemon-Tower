@@ -6,10 +6,10 @@ import Showdown from 'pokemon-showdown';
 import {immuneLossSignals} from './lib/immune-loss-signals';
 
 const seed=process.argv[2]??'20261010';if(!/^\d{1,12}$/.test(seed))throw Error('Numeric seed required');
-const prefix=`artifacts/composition-diagnostics-${seed}`;
+const prefix=`artifacts/experiments/samples/composition-diagnostics-${seed}`;
 const manifest=JSON.parse(readFileSync(prefix+'-manifest.json','utf8'));
 for(const f of manifest.files)assert.equal(createHash('sha256').update(readFileSync(f.path)).digest('hex'),f.sha256);
-const cases=JSON.parse(readFileSync(`artifacts/auto-suite-${seed}-cases.json`,'utf8'));
+const cases=JSON.parse(readFileSync(`artifacts/experiments/samples/auto-suite-${seed}-cases.json`,'utf8'));
 const initialMoves=cases.flatMap((c:any)=>c.team.map((species:string)=>({caseId:c.id,species,recharge:c.profiles[species].moves.filter((m:string)=>Showdown.Dex.moves.get(m).flags.recharge)})));
 const losses:any[]=[];
 for(const rule of manifest.rules)for await(const l of createInterface({input:createReadStream(prefix+`-${rule}-battles.jsonl`),crlfDelay:Infinity})){

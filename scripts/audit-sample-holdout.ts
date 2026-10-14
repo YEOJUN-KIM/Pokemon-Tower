@@ -7,7 +7,7 @@ import {runBattle,battleEvents} from '../src/battle/run';
 import {compositionSnapshot,compositionChanges} from './lib/composition-diagnostics';
 import {assertFreshCourses} from './lib/course-freshness';
 const seed=process.argv[2]??'20261011';if(!/^\d{1,12}$/.test(seed))throw Error('Numeric seed');
-const prefix=`artifacts/sample-holdout-${seed}`,read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
+const prefix=`artifacts/experiments/samples/sample-holdout-${seed}`,read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
 async function rows(path:string){const out:any[]=[];for await(const l of createInterface({input:createReadStream(path),crlfDelay:Infinity}))if(l.trim())out.push(JSON.parse(l));return out;}
 const manifest=read(prefix+'-manifest.json');for(const f of manifest.files)assert.equal(createHash('sha256').update(readFileSync(f.path)).digest('hex'),f.sha256);
 const courses=read(manifest.courseFile).courses,cells:any[]=[],strip=(b:any)=>{const {phase,...rest}=b;return rest;};
@@ -18,7 +18,7 @@ assert.equal(new Set(courses.map((c:any)=>c.theme)).size,9);
 for(const t of new Set(courses.map((c:any)=>c.theme)))assert.equal(courses.filter((c:any)=>c.theme===t).length,2);
 const normalizeCases=(cases:any[])=>cases.map(c=>{const {moves,profiles,...rest}=c;return {...rest,profiles:Object.fromEntries(Object.entries(profiles).map(([n,p]:any)=>{const {moves,...r}=p;return[n,r];}))};});
 for(const mode of manifest.modes)for(const rule of manifest.rules){
- const report=read(`artifacts/simulation-sample-holdout-${seed}-${rule}-${mode}-balanced.json`),data=await rows(prefix+`-${rule}-${mode}-battles.jsonl`);
+ const report=read(`artifacts/experiments/balance/simulation-sample-holdout-${seed}-${rule}-${mode}-balanced.json`),data=await rows(prefix+`-${rule}-${mode}-battles.jsonl`);
  const config={prices:report.prices,cases:normalizeCases(report.caseDefinitions),sourceCourseHash:report.sourceCourseHash,opponentAI:report.opponentAI,playerAI:report.playerAI,format:report.format,behavior:report.behavior,composition:report.composition,totalFloors:report.totalFloors};
  if(common)assert.deepEqual(config,common);common=config;assert.equal(report.opponentAI,'v7');assert.equal(report.playerAI,'immunity-experimental');
  totalBattles+=data.length;assert.equal(data.length,report.stages.reduce((s:number,c:any)=>s+c.battles,0));

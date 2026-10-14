@@ -23,5 +23,5 @@ for(const {id,species} of [...dex,...Object.entries(forms).map(([species,form])=
 }
 await writeFile('src/data/pixel-sprites.json',JSON.stringify(sprites,null,2)+'\n');
 const coverage={checkedAt:new Date().toISOString(),source:root,folders,total:dex.length,staticBoth:dex.filter(entry=>sprites[entry.id]).length,animatedFront:dex.filter(entry=>sprites[entry.id]?.animatedFront).length,animatedBack:dex.filter(entry=>sprites[entry.id]?.animatedBack).length,animatedBoth:dex.filter(entry=>sprites[entry.id]?.animatedFront && sprites[entry.id]?.animatedBack).length,missing};
-await writeFile('artifacts/reports/pixel-sprite-coverage.json',JSON.stringify(coverage,null,2)+'\n');
+await writeFile('artifacts/qa/assets/reports/pixel-sprite-coverage.json',JSON.stringify(coverage,null,2)+'\n');
 console.log(JSON.stringify(coverage));

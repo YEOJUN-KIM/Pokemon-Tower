@@ -20,7 +20,7 @@ for(const width of [1280,390])test('battle form previews show transformed stats 
   await expect.poll(()=>summary.locator('.summary-sprite img').evaluate(img=>(img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
   if(species!=='Palafin-Hero')await expect(summary.locator('.summary-sprite img')).toHaveAttribute('src',/gen5ani\/.+\.gif$/);
   expect(await summary.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
-  await summary.screenshot({path:`artifacts/screenshots/battle-forms/${species}-${width}.png`});
+  await summary.screenshot({path:`artifacts/qa/screenshots/battle-forms/${species}-${width}.png`});
   await summary.getByRole('button',{name:'기본 모습',exact:true}).click();await expect(summary).not.toHaveAttribute('data-preview-form',species);
   await page.getByRole('button',{name:name+' 기본 정보 닫기',exact:true}).click();
   await page.getByRole('button',{name:name+' 상세 보기',exact:true}).click();await page.keyboard.press('2');

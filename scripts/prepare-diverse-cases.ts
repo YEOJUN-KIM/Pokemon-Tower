@@ -10,4 +10,4 @@ const cases=[...starters.flatMap((team,i)=>[{id:'gen'+(i+1)+'-fresh',label:(i+1)
 cases.find(c=>c.id==='gen1-trained')!.team=['Charizard','Blastoise','Venusaur'];cases.find(c=>c.id==='gen1-fresh')!.team=['Charizard','Blastoise','Venusaur'];
 for(const c of cases){for(const name of c.team)if(!pokemonSets[name])throw Error('Missing battle species '+name);const profiles=Object.fromEntries(c.team.map(n=>[n,defaultProfile(n)]));if('moves' in c&&c.moves)for(const [name,moves] of Object.entries(c.moves))profiles[name].moves=moves;
  const team=packTeam(c.team,profiles);await runBattle({rule:'basic',teams:{p1:team,p2:team},player:new DamagePolicy(),opponent:new DamagePolicy()});console.log('Validated '+c.id+' '+c.team.join('/'));}
-mkdirSync('artifacts',{recursive:true});writeFileSync('artifacts/diverse-team-cases.json',JSON.stringify(cases,null,2));
+mkdirSync('artifacts',{recursive:true});writeFileSync('artifacts/experiments/samples/diverse-team-cases.json',JSON.stringify(cases,null,2));

@@ -5,6 +5,7 @@ dist/
 .next/
 .data/
 pokemon-backups/
+.local-backups/
 next-env.d.ts
 *.tsbuildinfo
 test-results/
@@ -15,4 +16,13 @@ playwright-report/
 # Local conversation attachments and large reproducible experiment logs.
 .codex-remote-attachments/
 # Experiment outputs stay local; tracked history is preserved.
-artifacts/
+artifacts/**
+!artifacts/**/
+!artifacts/**/.gitignore
+!artifacts/**/*.md
+!artifacts/reports/**/*.json
+!artifacts/reports/npc/*.csv
+# Raw logs and transient QA output stay local.
+artifacts/temporary/
+artifacts/**/*.jsonl
+artifacts/**/*.log

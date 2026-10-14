@@ -27,7 +27,7 @@ import {runOrganization,villainGrunt,villainEncounter,villainLeaders,type Villai
 import {opponentProfile} from './opponent-training';
 import {normalNpcTemplate} from './npc-templates';
 import {primalOrbs} from '../data/primal-forms';
-import {heldItems,isHeldItem} from '../data/held-items';
+import {heldItems,isHeldItem,normalizeHeldItem} from '../data/held-items';
 import {itemShopRule,rollItemOffers} from '../data/held-item-shop';
 import {machinePrice,machineRarity,rollMachineOffers} from '../data/machine-rarities';
 import {trainerCatalog,trainerView,type TrainerSample} from '../data/trainer-catalog';
@@ -316,7 +316,7 @@ export class TowerStore {
       candidateIVs: row.state==='recruit' && battle ? Object.fromEntries((Showdown.Teams.unpack(battle.opponent_team) ?? []).map(set=>[set.species,set.ivs ?? pokemonSets[set.species as keyof typeof pokemonSets].ivs])) : {},
       collectionIVs:row.state==='recruit' && battle ? Object.fromEntries(((Showdown.Teams.unpack(battle.opponent_team) ?? []).map(set=>set.species)).map(name=>[name,this.savedTraining(owner,name).profile.ivs])) : {},
       candidateMoves: row.state==='recruit' && battle ? Object.fromEntries((Showdown.Teams.unpack(battle.opponent_team) ?? []).map(set=>[set.species,set.moves])) : {},
-      candidateDetails:row.state==='recruit' && battle?Object.fromEntries((Showdown.Teams.unpack(battle.opponent_team) ?? []).filter(set=>isCollectibleSpecies(set.species)).map(set=>[set.species,{ability:set.ability,nature:set.nature,moves:set.moves.map(m=>Showdown.Dex.moves.get(m).name),baseStats:{...Showdown.Dex.species.get(set.species).baseStats}}])):{},
+      candidateDetails:row.state==='recruit' && battle?Object.fromEntries((Showdown.Teams.unpack(battle.opponent_team) ?? []).filter(set=>isCollectibleSpecies(set.species)).map(set=>[set.species,{ability:set.ability,nature:set.nature,moves:set.moves.map(m=>Showdown.Dex.moves.get(m).name),baseStats:{...Showdown.Dex.species.get(set.species).baseStats},types:[...Showdown.Dex.species.get(set.species).types],teraType:set.teraType as import('../data/tera').TeraType|undefined,shiny:!!set.shiny}])):{},
       collectionMoves: row.state==='recruit' && battle ? Object.fromEntries((Showdown.Teams.unpack(battle.opponent_team) ?? []).map(set=>[set.species,this.unlockedMoves(owner,set.species)])) : {},
       currentMoves: row.state==='recruit' && battle ? Object.fromEntries((Showdown.Teams.unpack(battle.opponent_team) ?? []).map(set=>[set.species,(JSON.parse((this.db.prepare('SELECT profiles FROM runs WHERE id=?').get(row.id) as {profiles:string}).profiles)[set.species] ?? this.savedTraining(owner,set.species).profile).moves])) : Object.fromEntries(this.roster(row.id).map(name=>[name,this.runProfiles(row.id)[name]?.moves ?? this.savedTraining(owner,name).profile.moves])),
       lastMoveGain: (()=>{const saved=this.db.prepare('SELECT move_gain FROM recruitments JOIN battles ON battles.id=recruitments.battle_id WHERE battles.run_id=? ORDER BY battles.floor DESC, battles.stage DESC LIMIT 1').get(row.id) as {move_gain:string|null}|undefined;return saved?.move_gain ? JSON.parse(saved.move_gain) : null;})(),
@@ -672,8 +672,9 @@ export class TowerStore {
         const member=remaining.get(actor.split(': ')[1]);if(!member)continue;
         // Eating spends this battle's activation, not the equipped tool.
         // Other removal events (e.g. Knock Off) still remove the item.
-        if(event==='-enditem' && !retainsHeldItemAfterActivation(value,tags))member.item=null;
-        else if(event==='-item')member.item=isHeldItem(value) ? value : null;
+        if(event==='-enditem' && !retainsHeldItemAfterActivation(normalizeHeldItem(value)??value,tags))member.item=null;
+        // Frisk only reveals equipment; it never equips or removes a tool.
+        else if(event==='-item' && !tags.includes('[from] ability: Frisk'))member.item=normalizeHeldItem(value);
       }
       for(const member of remaining.values()){
         this.db.prepare('DELETE FROM run_held_items WHERE run_id=? AND species=?').run(run.id,member.species);

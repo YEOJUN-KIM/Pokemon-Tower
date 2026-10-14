@@ -22,7 +22,10 @@
     "battle:audit": "tsx scripts/audit-battle-roster.ts",
     "sprites:audit": "node scripts/audit-sprite-assets.mjs",
     "test": "tsx --test tests/*.test.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check:css": "node scripts/check-css-structure.mjs",
+    "check:workspace": "node scripts/check-workspace.mjs",
+    "clean:temp": "node scripts/clean-generated.mjs --apply"
   },
   "engines": {
     "node": ">=24"

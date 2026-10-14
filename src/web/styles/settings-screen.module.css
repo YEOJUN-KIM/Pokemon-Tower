@@ -1,0 +1,338 @@
+/* src/web/settings-screen.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
+:where(.scope[data-ui-screen="settings"]) :global(.settings-screen.settings-tabbed) {
+  max-width: 860px;
+  padding: 24px 28px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-heading) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-heading h1) {
+  margin: 0;
+  font-size: 30px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-back) {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 2px solid #778b9d;
+  background: #263a48;
+  color: #e3edf3;
+  font-size: 12px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-tabs) {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-tabs button) {
+  min-height: 46px;
+  border: 2px solid #647489;
+  background: #2b3545;
+  color: #b7c9d5;
+  font-size: 14px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-tabs button[aria-selected=true]) {
+  background: #254c50;
+  border-color: #85d8c2;
+  color: #edfff8;
+}
+:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-panel) {
+  padding: 18px 24px;
+  margin-bottom: 14px;
+  min-height: 180px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-panel .setting-row) {
+  padding: 10px 0;
+  margin-bottom: 8px;
+  gap: 14px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-panel .setting-row small) {
+  margin-top: 3px;
+  line-height: 1.5;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-panel .setting-note) {
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 12px 0 0;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-panel .secondary-button) {
+  padding: 9px 12px;
+  font-size: 12px;
+  margin-right: 10px;
+  margin-top: 6px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-key-hints) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  font-size: 11px;
+  color: #b7c9d5;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed kbd) {
+  display: inline-block;
+  background: #1c2937;
+  border: 1px solid #607789;
+  padding: 3px 5px;
+  color: #dbf5ec;
+  font-size: 10px;
+  margin-right: 5px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-panel :is(input,select)[data-game-cursor=true]) {
+  outline: 2px solid #a4ffe0;
+  outline-offset: 4px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-options) {
+  display: flex;
+  gap: 8px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-options button) {
+  min-width: 50px;
+  min-height: 36px;
+  border: 2px solid #718194;
+  background: #2b3545;
+  color: #cbdce6;
+  font-size: 12px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-options button[aria-pressed=true]) {
+  border-color: #85d8c2;
+  background: #254c50;
+  color: #edfff8;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-choice-trigger) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  max-width: 310px;
+  padding: 8px 10px;
+  background: #2b3545;
+  border: 1px solid #718194;
+  color: #dce9ed;
+  font-size: 12px;
+  text-align: left;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-panel .volume-control output) {
+  min-width: 40px;
+  font-size: 11px;
+  text-align: right;
+  color: #c4d1dc;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-choice-grid) {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 8px;
+  max-height: 55dvh;
+  overflow: auto;
+  padding: 5px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-choice-grid button) {
+  padding: 10px;
+  border: 1px solid #718194;
+  background: #2b3545;
+  color: #dce9ed;
+  text-align: left;
+  font-size: 12px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-choice-grid button[aria-pressed=true]) {
+  background: #254c50;
+  border-color: #85d8c2;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-volume-picker) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 20px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-volume-picker button) {
+  width: 48px;
+  height: 44px;
+  border: 1px solid #718194;
+  background: #2b3545;
+  color: #dce9ed;
+  font-size: 24px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-volume-picker output) {
+  font-size: 24px;
+  min-width: 70px;
+  text-align: center;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-account-actions) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-panel .settings-account-actions .secondary-button) {
+  margin-right: 0;
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-choice-trigger) {
+    max-width: 170px;
+    font-size: 11px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-options) {
+    gap: 5px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-options button) {
+    min-width: 43px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-choice-grid) {
+    grid-template-columns: 1fr;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .volume-control input) {
+    width: 76px;
+  }
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-screen.settings-tabbed) {
+    padding: 18px 14px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-heading h1) {
+    font-size: 25px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-tabs) {
+    gap: 7px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-tabs button) {
+    font-size: 12px;
+    min-height: 42px;
+  }
+  :global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-panel) {
+    padding: 14px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .setting-row) {
+    font-size: 12px;
+    flex-wrap: nowrap;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .setting-row>span:first-child) {
+    min-width: 0;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .volume-control) {
+    gap: 6px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .volume-control input) {
+    width: 90px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-panel select) {
+    max-width: 150px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-key-hints) {
+    gap: 10px 14px;
+    font-size: 10px;
+  }
+}
+:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed :is([data-game-cursor=true],button:focus-visible,a:focus-visible,input:focus-visible)) {
+  outline: 1px solid #90aab7!important;
+  outline-offset: 2px!important;
+  box-shadow: none!important;
+}
+:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed .dex-action-options button[data-game-cursor=true]) {
+  background: #354452!important;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-preview-actions) {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 128px;
+  align-items: stretch;
+  gap: 10px;
+  min-width: 0;
+  width: 390px;
+  max-width: 65%;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-preview-actions .settings-choice-trigger) {
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+  min-height: 36px;
+}
+:where(.scope[data-ui-screen="settings"]) :global(.settings-panel .settings-preview-actions .secondary-button) {
+  margin: 0;
+  min-height: 36px;
+  white-space: nowrap;
+  text-align: center;
+}
+:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed :is(.settings-volume-dialog,.settings-choice-dialog)) {
+  width: min(540px,calc(100vw - 32px));
+  max-height: 85dvh;
+  overflow: auto;
+  padding: 22px;
+  background: #343343;
+  color: #e3edf3;
+  border: 1px solid #718194;
+  box-sizing: border-box;
+}
+:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed .dex-dialog-heading) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 0 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid #627080;
+}
+:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed .dex-dialog-heading h2) {
+  margin: 0;
+  font-size: 18px;
+}
+:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed .dex-dialog-heading>button) {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  border: 1px solid #718194;
+  background: #2b3545;
+  color: #cbdce6;
+  font-size: 18px;
+}
+:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-dialog .dex-action-options) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-dialog .dex-action-options button) {
+  min-height: 44px;
+  padding: 12px;
+  border: 1px solid #718194;
+  background: #2b3545;
+  color: #e3edf3;
+  font-size: 14px;
+}
+:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-dialog .dex-action-options button:first-child) {
+  background: #29454a;
+  border-color: #718f91;
+}
+:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed dialog::backdrop) {
+  background: #131923a6;
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .setting-row:has(.settings-preview-actions)) {
+    display: block;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-preview-actions) {
+    max-width: 100%;
+    margin-top: 10px;
+    gap: 8px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-preview-actions .settings-choice-trigger) {
+    max-width: none;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .settings-preview-actions .secondary-button) {
+    font-size: 10px;
+    padding: 8px;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-picker) {
+    gap: 16px;
+    padding: 16px 0;
+  }
+  :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-dialog .setting-note) {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+}

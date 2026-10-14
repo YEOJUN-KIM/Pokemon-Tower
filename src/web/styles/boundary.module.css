@@ -1,0 +1,4 @@
+/* The boundary adds CSS ownership without adding a layout box. */
+.root {
+  display: contents;
+}

@@ -6,22 +6,22 @@ import Showdown from 'pokemon-showdown';
 import {runBattle,battleEvents} from '../src/battle/run';
 import {allowsGimmick} from '../src/data/run-rules';
 
-const id=process.argv[2]??'20261011',prefix=`artifacts/room-sample-${id}`;
+const id=process.argv[2]??'20261011',prefix=`artifacts/experiments/samples/room-sample-${id}`;
 const read=(p:string)=>JSON.parse(readFileSync(p,'utf8')),manifest=read(prefix+'-manifest.json');
 for(const f of manifest.files)assert.equal(createHash('sha256').update(readFileSync(f.path)).digest('hex'),f.sha256,f.path);
 const courses=read(manifest.courseFile).courses;
 async function* rows(path:string){for await(const line of createInterface({input:createReadStream(path),crlfDelay:Infinity}))if(line.trim())yield JSON.parse(line);}
 const cells:any[]=[];let totalBattles=0,replays=0,reproducedBattles=0;
 for(const mode of manifest.modes)for(const rule of manifest.rules){
- const report=read(`artifacts/simulation-room-sample-${id}-${rule}-${mode}-balanced.json`);
- const oldReport=read(`artifacts/simulation-opponent-learning-20261011-${rule}-v8-balanced.json`);
+ const report=read(`artifacts/experiments/balance/simulation-room-sample-${id}-${rule}-${mode}-balanced.json`);
+ const oldReport=read(`artifacts/experiments/balance/simulation-opponent-learning-20261011-${rule}-v8-balanced.json`);
  for(const key of ['prices','sourceCourseHash','playerAI','opponentAI','format','behavior','composition','totalFloors'])assert.deepEqual(report[key],oldReport[key],key);
  assert.deepEqual(report.caseDefinitions,read(manifest.caseFiles[mode]));assert.equal(report.stages.length,1);
  const stage=report.stages[0];assert.equal(stage.stage,manifest.caseId);assert.equal(stage.climbs.length,18);
  const oldBattles:any[]=[];
  if(mode==='baseline'){
   assert.deepEqual(stage,oldReport.stages.find((s:any)=>s.stage===manifest.caseId));
-  for await(const b of rows(`artifacts/opponent-learning-20261011-${rule}-v8-battles.jsonl`))if(b.caseId===manifest.caseId)oldBattles.push(b);
+  for await(const b of rows(`artifacts/experiments/ai/opponent-learning-20261011-${rule}-v8-battles.jsonl`))if(b.caseId===manifest.caseId)oldBattles.push(b);
  }
  const sequences=new Map<string,{n:number;wins:number;lost:boolean}>(),failures:Record<string,{uses:number;fails:number}>={};let battles=0,losses=0;
  for await(const b of rows(prefix+`-${rule}-${mode}-battles.jsonl`)){

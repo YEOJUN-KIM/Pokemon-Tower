@@ -1,6 +1,6 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 const read=p=>JSON.parse(readFileSync(p,'utf8'));
-const dev=read('artifacts/support-ablation-dev-audit.json'),validation=read('artifacts/support-ablation-validate-audit.json'),selection=read('artifacts/support-ablation-selection.json');
+const dev=read('artifacts/experiments/ai/support-ablation-dev-audit.json'),validation=read('artifacts/experiments/ai/support-ablation-validate-audit.json'),selection=read('artifacts/experiments/ai/support-ablation-selection.json');
 const names={v9:'기존 벽 활용 v9',wall:'벽 보호 판단만',handoff:'교체 조건만',setup:'랭크업 조건만',damage:'피해 추정만'};
 const rules={basic:'기본',mega:'메진',dynamax:'다맥',tera:'테라',chaos:'개판'};
 const candidate=selection.candidate;
@@ -31,7 +31,7 @@ const text=`# 벽·교체·랭크업·피해 추정 분리 비교 · 2026-10-10
 |---|---:|---:|
 ${devRows}
 
-실행 전 정한 총 승수/고정 동률 순서로 후보 하나만 골랐다. 선택은 **${names[candidate]}**. 개선 폭은 ${selection.developmentGain}승으로 작아 우월성의 근거로 삼지 않았다. 유리한 팀/층만 골라 집계하거나 결과를 본 뒤 조건을 튜닝하지 않았다. 후보 선택과 구현/하네스/코스 해시는 artifacts/support-ablation-selection.json 및 단계별 manifest.json에 저장했다.
+실행 전 정한 총 승수/고정 동률 순서로 후보 하나만 골랐다. 선택은 **${names[candidate]}**. 개선 폭은 ${selection.developmentGain}승으로 작아 우월성의 근거로 삼지 않았다. 유리한 팀/층만 골라 집계하거나 결과를 본 뒤 조건을 튜닝하지 않았다. 후보 선택과 구현/하네스/코스 해시는 artifacts/experiments/ai/support-ablation-selection.json 및 단계별 manifest.json에 저장했다.
 
 ## 새 코스 독립 배틀
 
@@ -67,8 +67,8 @@ ${climbRows}
 
 지금 근거로 교체/랭크업을 일괄 제한하거나 실제 상대를 강화하지 않는다. 다음 후보는 일괄 문턱 강화보다 공개된 실제 피해와 상대 교체 후 필요한 벽을 반영하는 방향으로 검토하되, 새 검증 코스를 별도로 확보해야 한다.
 `;
-writeFileSync('docs/SUPPORT_ABLATION.md',text);
-const note=`최신 분리 실험: 벽 보호/교체/랭크업/피해 추정 네 조건을 각각 비교. 개발8,910배틀에서 벽 보호만 +1승이라 단일 후보 선택, 새9코스 5룰5,940배틀·324등반(${validation.climbBattles.toLocaleString()}배틀) 검증. 새 독립 배틀 후보 ${candidateWins}승 vs v9 ${baselineWins}승. 기본 정책·게임 상대·난이도 유지, 모델 학습 없음. 분리 테스트5+기존7·타입검사·${dev.replays+validation.replays}재생 및 전체 기록 감사 통과. [분리 비교](SUPPORT_ABLATION.md).`;
-for(const p of ['docs/STATUS.md','docs/SESSION_HANDOFF.md']){let s=readFileSync(p,'utf8');if(!s.includes(note)){const i=s.indexOf('\n');writeFileSync(p,s.slice(0,i+1)+'\n'+note+'\n'+s.slice(i+1));}}
-writeFileSync('artifacts/support-ablation-dataset-catalog.json',JSON.stringify({schemaVersion:1,devManifest:'support-ablation-dev-manifest.json',validationManifest:'support-ablation-validate-manifest.json',selection:'support-ablation-selection.json',inputFields:['observation','context'],targetFields:['action','reason'],outcomeFields:['outcome'],groupField:'courseId',joinField:'battleKey',modelTrained:false,notes:'Previous validation courses used as development. New courses were generated after candidate selection. Validation outcomes must not feed policy inputs. Action labels are heuristic, not optimal-action proofs.'},null,2));
+writeFileSync('artifacts/experiments/ai/SUPPORT_ABLATION.md',text);
+// Current docs are maintained separately; a simulation writes only its report.
+
+writeFileSync('artifacts/experiments/ai/support-ablation-dataset-catalog.json',JSON.stringify({schemaVersion:1,devManifest:'support-ablation-dev-manifest.json',validationManifest:'support-ablation-validate-manifest.json',selection:'support-ablation-selection.json',inputFields:['observation','context'],targetFields:['action','reason'],outcomeFields:['outcome'],groupField:'courseId',joinField:'battleKey',modelTrained:false,notes:'Previous validation courses used as development. New courses were generated after candidate selection. Validation outcomes must not feed policy inputs. Action labels are heuristic, not optimal-action proofs.'},null,2));
 console.log('Wrote support ablation report');

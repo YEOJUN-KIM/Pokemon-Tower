@@ -3,11 +3,11 @@ import {createInterface} from 'node:readline';
 import Showdown from 'pokemon-showdown';
 import {runBattle} from '../src/battle/run';
 import type {Policy} from '../src/battle/policy';
-const manifest=JSON.parse(readFileSync('artifacts/composition-experiment-manifest.json','utf8'));
+const manifest=JSON.parse(readFileSync('artifacts/experiments/samples/composition-experiment-manifest.json','utf8'));
 let checked=0;
 for(const job of manifest.jobs){
  let first:any,deepest:any,room:any;
- for await(const line of createInterface({input:createReadStream(`artifacts/${job.phase}-battles.jsonl`),crlfDelay:Infinity})){
+ for await(const line of createInterface({input:createReadStream(`artifacts/experiments/samples/${job.phase}-battles.jsonl`),crlfDelay:Infinity})){
   const row=JSON.parse(line);first??=row;if(!deepest||row.floor>deepest.floor)deepest=row;
   if(!room&&row.supportMoves?.['Trick Room'])room=row;
  }
@@ -23,5 +23,5 @@ for(const job of manifest.jobs){
  }
  console.log('Replayed '+job.phase+': '+rows.length+' sampled battles');
 }
-writeFileSync('artifacts/composition-replay-audit.json',JSON.stringify({checked,notes:'First, deepest and first Trick Room battle per phase; exact winner, turns and action count reproduced from JSONL + frozen course metadata. Full public protocol is not stored in JSONL.'},null,2));
+writeFileSync('artifacts/experiments/samples/composition-replay-audit.json',JSON.stringify({checked,notes:'First, deepest and first Trick Room battle per phase; exact winner, turns and action count reproduced from JSONL + frozen course metadata. Full public protocol is not stored in JSONL.'},null,2));
 console.log('Replay samples passed: '+checked);

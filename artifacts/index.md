@@ -1,58 +1,63 @@
 # 실험 파일 목록
 
-<code>node scripts/index-artifacts.mjs</code> 생성. 1378개 파일, 8.93GiB. 안내문과 생성된 색인은 집계에서 제외한다. 전체 경로·크기·manifest 참조는 [index.json](index.json). 무결성 검증 결과나 삭제 가능 목록이 아니다.
+<code>node scripts/index-artifacts.mjs</code> 생성. 630개 파일, 5.09GiB. 안내문과 생성된 색인은 집계에서 제외한다. 전체 경로·크기·manifest 참조는 [index.json](index.json). 무결성 검증 결과나 삭제 가능 목록이 아니다.
 
 | 디렉터리 | 파일 수 | MiB |
 |---|---:|---:|
-| artifacts | 966 | 9095.0 |
-| artifacts/audio | 2 | 1.0 |
-| artifacts/dynamax-frames | 58 | 9.0 |
-| artifacts/garchomp-mega-frames | 48 | 6.2 |
-| artifacts/previews/pikachu-upscale | 6 | 0.3 |
-| artifacts/previews/shiny-entry | 2 | 1.8 |
-| artifacts/previews/shiny-entry/frames | 22 | 1.9 |
-| artifacts/previews/shiny-entry/frames-final | 22 | 1.9 |
-| artifacts/previews/shiny-entry/frames-sendout | 22 | 2.4 |
-| artifacts/reports | 12 | 0.6 |
-| artifacts/reports/pokedex-sprites | 10 | 0.3 |
-| artifacts/screenshots | 42 | 6.7 |
-| artifacts/screenshots/battle-focus | 4 | 0.3 |
-| artifacts/screenshots/egg-results-revised | 4 | 0.3 |
-| artifacts/screenshots/gimmick-dock | 15 | 2.2 |
-| artifacts/screenshots/permanent-upgrades | 5 | 0.4 |
-| artifacts/screenshots/permanent-upgrades-final | 6 | 0.4 |
-| artifacts/screenshots/pokedex-audit | 9 | 0.3 |
-| artifacts/screenshots/pokedex-center | 25 | 2.1 |
-| artifacts/screenshots/pokedex-updated | 22 | 1.8 |
-| artifacts/screenshots/regional-themes | 18 | 1.3 |
-| artifacts/screenshots/regional-themes-ready | 18 | 1.4 |
-| artifacts/screenshots/switch-ai | 2 | 0.1 |
-| artifacts/screenshots/tera-ai-v6 | 15 | 2.1 |
-| artifacts/screenshots/tera-ui | 15 | 1.9 |
-| artifacts/screenshots/villain-campaign | 8 | 0.8 |
+| artifacts/experiments | 1 | 0.0 |
+| artifacts/experiments/ai | 153 | 1958.5 |
+| artifacts/experiments/balance | 205 | 1636.4 |
+| artifacts/experiments/balance/normal-mode-balance-20261013 | 5 | 4.5 |
+| artifacts/experiments/balance/normal-mode-balance-20261013-leads | 4 | 1.2 |
+| artifacts/experiments/balance/normal-mode-balance-20261013-lineup-refresh | 4 | 4.5 |
+| artifacts/experiments/balance/normal-mode-balance-20261013-outliers | 4 | 1.0 |
+| artifacts/experiments/balance/normal-mode-balance-20261013-retry-order | 6 | 0.4 |
+| artifacts/experiments/samples | 89 | 1596.3 |
+| artifacts/qa/assets/back-sprite-audit | 8 | 2.5 |
+| artifacts/qa/assets/dynamax-frames | 2 | 0.0 |
+| artifacts/qa/assets/garchomp-mega-frames | 3 | 0.0 |
+| artifacts/qa/assets/reports | 18 | 2.2 |
+| artifacts/qa/assets/reports/pokedex-sprites | 11 | 0.3 |
+| artifacts/qa/audio | 4 | 0.0 |
+| artifacts/qa/previews/player-trainer | 1 | 0.8 |
+| artifacts/qa/previews/showdown-fx | 1 | 0.2 |
+| artifacts/qa/screenshots | 9 | 0.8 |
+| artifacts/qa/screenshots/battle-forms | 6 | 0.5 |
+| artifacts/qa/screenshots/local-assets | 4 | 0.4 |
+| artifacts/qa/screenshots/move-effects | 20 | 1.4 |
+| artifacts/qa/screenshots/player-trainer | 3 | 0.3 |
+| artifacts/qa/screenshots/pokedex-center | 7 | 0.8 |
+| artifacts/qa/screenshots/primal | 4 | 0.3 |
+| artifacts/qa/screenshots/recruit-summary-20261014 | 2 | 0.2 |
+| artifacts/qa/screenshots/selectable-forms | 4 | 0.2 |
+| artifacts/reports/changes | 32 | 0.2 |
+| artifacts/reports/history | 2 | 0.2 |
+| artifacts/reports/npc | 11 | 1.2 |
+| artifacts/reports/planning | 4 | 0.0 |
+| artifacts/reports/references | 3 | 0.0 |
 
 ## 재현 manifest
 
-- [auto-suite-20261010-manifest.json](auto-suite-20261010-manifest.json)
-- [auto-suite-20261011-manifest.json](auto-suite-20261011-manifest.json)
-- [composition-diagnostics-20261010-audit-v2-manifest.json](composition-diagnostics-20261010-audit-v2-manifest.json)
-- [composition-diagnostics-20261010-manifest.json](composition-diagnostics-20261010-manifest.json)
-- [composition-experiment-manifest.json](composition-experiment-manifest.json)
-- [coverage-compare-20261010-manifest.json](coverage-compare-20261010-manifest.json)
-- [coverage-factors-20261010-manifest.json](coverage-factors-20261010-manifest.json)
-- [immunity-recheck-basic-manifest.json](immunity-recheck-basic-manifest.json)
-- [immunity-recheck-chaos-manifest.json](immunity-recheck-chaos-manifest.json)
-- [immunity-recheck-tera-manifest.json](immunity-recheck-tera-manifest.json)
-- [observed-damage-dev-manifest.json](observed-damage-dev-manifest.json)
-- [observed-damage-validate-manifest.json](observed-damage-validate-manifest.json)
-- [opponent-learning-20261011-manifest.json](opponent-learning-20261011-manifest.json)
-- [reliable-samples-20261010-manifest.json](reliable-samples-20261010-manifest.json)
-- [resource-manifest.json](reports/resource-manifest.json)
-- [room-sample-20261011-manifest.json](room-sample-20261011-manifest.json)
-- [sample-holdout-20261011-manifest.json](sample-holdout-20261011-manifest.json)
-- [sample-wall-factors-20261010-manifest.json](sample-wall-factors-20261010-manifest.json)
-- [support-ablation-dev-manifest.json](support-ablation-dev-manifest.json)
-- [support-ablation-validate-manifest.json](support-ablation-validate-manifest.json)
-- [support-correction-manifest.json](support-correction-manifest.json)
-- [support-player-manifest.json](support-player-manifest.json)
-- [support-recheck-manifest.json](support-recheck-manifest.json)
+- [coverage-compare-20261010-manifest.json](experiments/ai/coverage-compare-20261010-manifest.json)
+- [coverage-factors-20261010-manifest.json](experiments/ai/coverage-factors-20261010-manifest.json)
+- [immunity-recheck-basic-manifest.json](experiments/ai/immunity-recheck-basic-manifest.json)
+- [immunity-recheck-chaos-manifest.json](experiments/ai/immunity-recheck-chaos-manifest.json)
+- [immunity-recheck-tera-manifest.json](experiments/ai/immunity-recheck-tera-manifest.json)
+- [observed-damage-dev-manifest.json](experiments/ai/observed-damage-dev-manifest.json)
+- [observed-damage-validate-manifest.json](experiments/ai/observed-damage-validate-manifest.json)
+- [opponent-learning-20261011-manifest.json](experiments/ai/opponent-learning-20261011-manifest.json)
+- [support-ablation-dev-manifest.json](experiments/ai/support-ablation-dev-manifest.json)
+- [support-ablation-validate-manifest.json](experiments/ai/support-ablation-validate-manifest.json)
+- [support-correction-manifest.json](experiments/ai/support-correction-manifest.json)
+- [support-player-manifest.json](experiments/ai/support-player-manifest.json)
+- [support-recheck-manifest.json](experiments/ai/support-recheck-manifest.json)
+- [auto-suite-20261010-manifest.json](experiments/samples/auto-suite-20261010-manifest.json)
+- [auto-suite-20261011-manifest.json](experiments/samples/auto-suite-20261011-manifest.json)
+- [composition-diagnostics-20261010-audit-v2-manifest.json](experiments/samples/composition-diagnostics-20261010-audit-v2-manifest.json)
+- [composition-diagnostics-20261010-manifest.json](experiments/samples/composition-diagnostics-20261010-manifest.json)
+- [composition-experiment-manifest.json](experiments/samples/composition-experiment-manifest.json)
+- [reliable-samples-20261010-manifest.json](experiments/samples/reliable-samples-20261010-manifest.json)
+- [room-sample-20261011-manifest.json](experiments/samples/room-sample-20261011-manifest.json)
+- [sample-holdout-20261011-manifest.json](experiments/samples/sample-holdout-20261011-manifest.json)
+- [sample-wall-factors-20261010-manifest.json](experiments/samples/sample-wall-factors-20261010-manifest.json)
+- [resource-manifest.json](qa/assets/reports/resource-manifest.json)

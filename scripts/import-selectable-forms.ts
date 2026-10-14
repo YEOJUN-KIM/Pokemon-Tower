@@ -27,7 +27,7 @@ for(const species of Showdown.Dex.species.all()){
  requested[species.name]=`${regions[region]} ${base.name}${breed[species.forme.split('-')[1]]?' '+breed[species.forme.split('-')[1]]:''}`;
 }
 mkdirSync('.data/form-import-cache',{recursive:true});
-async function source(name:string){const path=`.data/form-import-cache/${name}.csv`;if(existsSync(path))return readFileSync(path,'utf8');const response=await fetch(`https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/${name}.csv`);if(!response.ok)throw Error(name+': '+response.status);const text=await response.text();writeFileSync(path,text);return text;}
+async function source(name:string){const path=`.data/cache/forms/${name}.csv`;if(existsSync(path))return readFileSync(path,'utf8');const response=await fetch(`https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/${name}.csv`);if(!response.ok)throw Error(name+': '+response.status);const text=await response.text();writeFileSync(path,text);return text;}
 const pokemon=(await source('pokemon')).trim().split('\n').slice(1).map(line=>line.split(','));
 const formIds=new Map<string,number>();for(const row of pokemon){const species=Showdown.Dex.species.get(row[1].replace(/-breed$/,'').replace(/-galar-standard$/,'-galar'));if(species.exists&&!formIds.has(species.name))formIds.set(species.name,Number(row[0]));}
 const koreanMoves=new Map<string,string>(),moveIds=new Map<number,string>();

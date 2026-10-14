@@ -10,7 +10,7 @@ import type {Policy} from '../src/battle/policy';
 const read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
 async function rows(p:string){const out:any[]=[];for await(const l of createInterface({input:createReadStream(p),crlfDelay:Infinity}))if(l.trim())out.push(JSON.parse(l));return out;}
 const rules=['basic','tera','chaos'];
-const source=read('artifacts/observed-damage-validation-courses.json').courses;
+const source=read('artifacts/experiments/ai/observed-damage-validation-courses.json').courses;
 const inputs:string[]=[];
 function events(lines:string[]){
  let move:any,turn=0,entry=0;const attacks:any[]=[],supports:any[]=[],seenImmune=new Set<string>();
@@ -33,7 +33,7 @@ function teamFlags(sets:any[],enemies:any[]){
 }
 const fixed:any[]=[],climbs:any[]=[],summaries:any[]=[];
 for(const rule of rules){
- const fp=`artifacts/observed-damage-validate-${rule}-v9-battles.jsonl`,cp=`artifacts/observed-climb-${rule}-v9-battles.jsonl`,sp=`artifacts/simulation-observed-climb-${rule}-v9-balanced.json`;inputs.push(fp,cp,sp);
+ const fp=`artifacts/experiments/ai/observed-damage-validate-${rule}-v9-battles.jsonl`,cp=`artifacts/experiments/ai/observed-climb-${rule}-v9-battles.jsonl`,sp=`artifacts/experiments/balance/simulation-observed-climb-${rule}-v9-balanced.json`;inputs.push(fp,cp,sp);
  for(const b of await rows(fp)){const sets=Showdown.Teams.unpack(b.teams.p1)!,enemies=Showdown.Teams.unpack(b.teams.p2)!;fixed.push({rule,caseId:b.caseId,courseId:b.courseId,floor:b.floor,winner:b.winner,metrics:events(b.publicProtocol),...teamFlags(sets,enemies),traceHash:createHash('sha256').update(b.publicProtocol.filter((l:string)=>!l.startsWith('|t:')).join('\n')).digest('hex')});}
  const all=await rows(cp),report=read(sp);
  for(const st of report.stages)for(const c of st.climbs){summaries.push({rule,caseId:st.stage,courseId:c.id,cleared:c.cleared,failedFloor:c.failedFloor,coins:c.coins,spent:c.spent,shops:c.shops.length,purchases:c.purchases,finalParty:c.finalParty,recruitments:c.recruitments});if(c.cleared===100)continue;
@@ -51,5 +51,5 @@ const byCase=summaries.reduce((acc:any,c:any)=>{const a=acc[c.caseId]??={runs:0,
 for(const a of Object.values(byCase) as any[])a.averageCleared=a.cleared/a.runs;
 const uniqueFixed=[...new Map(fixed.map(b=>[`${b.caseId}/${b.courseId}/${b.floor}/${b.traceHash}`,b])).values()];
 const result={notes:['Overlapping observational flags, not mutually exclusive or causal explanations.','Baseline v9 only; candidate copies and Mega/Dynamax duplicate rules excluded. Other rule runs remain correlated.','Support without own damage can benefit teammates: this flag alone is not wasted play.','Coins/blocked purchases cannot establish price causality without controlled reruns.','Fixed strong-team isolated battles and adaptive climbs have different preparation/economy conditions.'],inputs:inputs.map(path=>({path,sha256:createHash('sha256').update(readFileSync(path)).digest('hex')})),terminalReplayCount:climbs.length,climbAttempts:summaries.length,finished:summaries.filter(c=>c.cleared===100).length,climbFlags:aggregate(climbs),byCase,fixed:{total:fixed.length,wins:aggregate(fixed.filter(b=>b.winner==='Player')),losses:aggregate(fixed.filter(b=>b.winner!=='Player')),deduplicatedCount:uniqueFixed.length,deduplicatedLosses:aggregate(uniqueFixed.filter(b=>b.winner!=='Player'))},climbs,summaries};
-writeFileSync('artifacts/tower-loss-diagnosis.json',JSON.stringify(result,null,2));
+writeFileSync('artifacts/experiments/balance/tower-loss-diagnosis.json',JSON.stringify(result,null,2));
 console.log(JSON.stringify({climbFlags:result.climbFlags,byCase,fixed:result.fixed},null,2));

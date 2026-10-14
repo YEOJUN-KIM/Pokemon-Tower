@@ -9,18 +9,18 @@ import {moveLearnsets} from '../src/server/move-learnsets';
 
 const read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
 test('room sample interventions preserve all data except the two specified move fields',()=>{
- const source=read('artifacts/reliable-samples-20261010-cases.json');
+ const source=read('artifacts/experiments/samples/reliable-samples-20261010-cases.json');
  const variants={baseline:{},steel:{'Steel Roller':'Iron Head'},psychic:{'Future Sight':'Zen Headbutt'},both:{'Steel Roller':'Iron Head','Future Sight':'Zen Headbutt'}};
  for(const [mode,replacements] of Object.entries(variants)){
   const expected=structuredClone(source),c=expected.find((c:any)=>c.id==='auto-room-1');
   c.moves.Bronzong=c.moves.Bronzong.map((m:string)=>(replacements as Record<string,string>)[m]??m);
   c.profiles.Bronzong.moves=[...c.moves.Bronzong];
-  assert.deepEqual(read(`artifacts/room-sample-20261011-${mode}-cases.json`),expected);
+  assert.deepEqual(read(`artifacts/experiments/samples/room-sample-20261011-${mode}-cases.json`),expected);
   for(const move of c.moves.Bronzong)assert(moveLearnsets.Bronzong.legalMoves.includes(move));
   const errors=new Showdown.TeamValidator(FORMAT).validateSet({species:'Bronzong',name:'Bronzong',level:50,ability:'Levitate',nature:'Brave',evs:{hp:1},moves:c.moves.Bronzong},{});
   assert(!errors,JSON.stringify(errors));
  }
- assert.deepEqual(read('artifacts/reliable-samples-20261011-room-corrected-cases.json'),read('artifacts/room-sample-20261011-both-cases.json'));
+ assert.deepEqual(read('artifacts/experiments/samples/reliable-samples-20261011-room-corrected-cases.json'),read('artifacts/experiments/samples/room-sample-20261011-both-cases.json'));
 });
 
 async function probe(move:string){

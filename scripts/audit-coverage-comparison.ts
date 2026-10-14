@@ -7,14 +7,14 @@ import {runBattle,battleEvents} from '../src/battle/run';
 import {immuneLossSignals} from './lib/immune-loss-signals';
 
 const seed=process.argv[2]??'20261010';if(!/^\d{1,12}$/.test(seed))throw Error('Numeric seed required');
-const prefix=`artifacts/coverage-compare-${seed}`,read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
+const prefix=`artifacts/experiments/ai/coverage-compare-${seed}`,read=(p:string)=>JSON.parse(readFileSync(p,'utf8'));
 async function rows(path:string){const out:any[]=[];for await(const l of createInterface({input:createReadStream(path),crlfDelay:Infinity}))if(l.trim())out.push(JSON.parse(l));return out;}
 const manifest=read(prefix+'-manifest.json');for(const f of manifest.files)assert.equal(createHash('sha256').update(readFileSync(f.path)).digest('hex'),f.sha256);
-const source=read('artifacts/observed-damage-validation-courses.json').courses;
+const source=read('artifacts/experiments/ai/observed-damage-validation-courses.json').courses;
 let replays=0,baselineBattlesReproduced=0,totalBattles=0;const results:any[]=[];
 for(const rule of manifest.rules){
- const original=await rows(`artifacts/auto-suite-${seed}-${rule}-battles.jsonl`);
- const before=read(`artifacts/simulation-coverage-compare-${seed}-${rule}-matchup-balanced.json`),after=read(`artifacts/simulation-coverage-compare-${seed}-${rule}-adaptive-balanced.json`);
+ const original=await rows(`artifacts/experiments/samples/auto-suite-${seed}-${rule}-battles.jsonl`);
+ const before=read(`artifacts/experiments/balance/simulation-coverage-compare-${seed}-${rule}-matchup-balanced.json`),after=read(`artifacts/experiments/balance/simulation-coverage-compare-${seed}-${rule}-adaptive-balanced.json`);
  const baseline=await rows(prefix+`-${rule}-matchup-battles.jsonl`),candidate=await rows(prefix+`-${rule}-adaptive-battles.jsonl`);
  assert.deepEqual(baseline.map(({phase,immunityDecisionMetrics,decisionReasons,...b})=>b),original.map(({phase,immunityDecisionMetrics,...b})=>b));baselineBattlesReproduced+=baseline.length;
  assert.deepEqual(before.caseDefinitions,after.caseDefinitions);assert.deepEqual(before.prices,after.prices);assert.equal(before.sourceCourseHash,after.sourceCourseHash);assert.equal(before.opponentAI,after.opponentAI);assert.equal(before.opponentAI,'v7');

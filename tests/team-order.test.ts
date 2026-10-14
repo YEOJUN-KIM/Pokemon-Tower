@@ -11,7 +11,7 @@ import type {BattleView} from '../src/web/contracts';
 
 function win(store:TowerStore,id:string,publicProtocol:string[]=[]){
   const row=store.battle(id);
-  const log:BattleLog={schemaVersion:1,engineVersion:row.engine_version,format:row.format,teams:{p1:row.player_team,p2:row.opponent_team},seed:JSON.parse(row.seed),rule:row.rule,upgrades:JSON.parse(row.upgrades),teraTickets:JSON.parse(row.tera_tickets),decisions:[],publicProtocol,winner:'Player',turns:5};
+  const log:BattleLog={schemaVersion:1,engineVersion:row.engine_version,format:row.format,trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:row.opponent_team},seed:JSON.parse(row.seed),rule:row.rule,upgrades:JSON.parse(row.upgrades),teraTickets:JSON.parse(row.tera_tickets),decisions:[],publicProtocol,winner:'Player',turns:5};
   const view:BattleView={id,status:'complete',requestId:1,turn:5,team:[],opponent:null,actions:[],messages:[],winner:'Player',error:null};
   store.complete(id,log,view);
   store.recruit('order',row.run_id,id,null,null);

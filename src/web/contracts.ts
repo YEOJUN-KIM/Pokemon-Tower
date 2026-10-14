@@ -8,6 +8,9 @@ export type FieldEffect={id:string;name:string;scope:'weather'|'field'|'p1'|'p2'
 export type PublicField={turn:number;effects:FieldEffect[];opponentSize:number;faintedOpponents:string[];boosts?:Record<'p1'|'p2',Record<string,number>>};
 export type BossView = {gimmick?:import('../data/npc-gimmicks').NpcGimmick;id: string; name: string; title: string; introduction: string; victory: string; defeat: string;role?:'gym'|'villain'|'champion'|'elite';portrait?:string;kind?:'normal'|'elite'|'named';generation?:number|null;specialty?:string|null};
 export type BattleView = {
+  trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];
+  // Playback-only: zero HP has been shown, but its faint event has not played.
+  pendingFaints?:('player'|'enemy')[];
   opponentPrimal?:boolean;
   opponentRule?:import('../data/run-rules').BattleRule;
   id: string;
@@ -27,6 +30,7 @@ export type BattleView = {
   teraTickets?:number;
 };
 export type RunView = {
+  trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];
   retries?:{limit:number;used:number;remaining:number;canRetry:boolean;preparing:boolean;opponents:{species:string;moves:string[];item:string}[]};
   hiddenBossPending?:boolean;hiddenBossNext?:boolean;
   rule?:import('../data/run-rules').BattleRule;

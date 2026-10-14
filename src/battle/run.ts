@@ -1,4 +1,5 @@
 import {isBattleRule,type BattleRule} from '../data/run-rules';
+import {isTrainerEquipment} from '../data/trainer-equipment';
 import {installBattleItems} from './battle-items';
 import type {BattleItemBag} from '../data/battle-items';
 import {setImmediate as settleItem} from 'node:timers/promises';
@@ -29,6 +30,7 @@ export type BattleLog = {
   publicProtocol: string[]; winner: string | null; turns: number;
   upgrades?: UpgradeKind[];
   teraTickets?:import('../data/tera').TeraTickets;
+  trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];
 };
 
 export async function runBattle(options: {
@@ -42,9 +44,11 @@ export async function runBattle(options: {
   onPlayerLine?: (line: string) => void;
   upgrades?: UpgradeKind[];
   teraTickets?:import('../data/tera').TeraTickets;
+  trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];
 }): Promise<BattleLog> {
   if(options.rule!==undefined&&!isBattleRule(options.rule))throw Error('Invalid battle rule');
   if(options.opponentRule!==undefined&&!isBattleRule(options.opponentRule))throw Error('Invalid opponent rule');
+  if(options.trainerEquipment!==undefined&&(!Array.isArray(options.trainerEquipment)||options.trainerEquipment.some(item=>!isTrainerEquipment(item))||new Set(options.trainerEquipment).size!==options.trainerEquipment.length))throw Error('Invalid trainer equipment');
   const seed: Seed = options.seed ?? [1, 2, 3, 4];
   if (seed.length !== 4 || seed.some(n => !Number.isInteger(n) || n < 0 || n > 65535)) throw new Error('Invalid seed');
   const format=options.format ?? FORMAT;if(!supportedFormats.includes(format))throw Error('Unsupported battle format');
@@ -84,6 +88,7 @@ export async function runBattle(options: {
   if(options.opponentRule)log.opponentRule=options.opponentRule;
   if(options.opponentTeraSpecies)log.opponentTeraSpecies=options.opponentTeraSpecies;
   if(active.length) log.upgrades=active;
+  if(options.trainerEquipment!==undefined)log.trainerEquipment=[...options.trainerEquipment];
   if(options.teraTickets)log.teraTickets={...options.teraTickets};
   let itemController:ReturnType<typeof installBattleItems>|undefined;
   if(options.battleItems)log.battleItems={...options.battleItems};
@@ -92,7 +97,7 @@ export async function runBattle(options: {
       super._writeLine(type,message);
       if(type!=='start' || !this.battle) return;
       if(options.battleItems)itemController=installBattleItems(this.battle,options.battleItems);
-      if(towerFormat)installTowerGimmicks(this.battle,packed,format!==PRE_TERA_FORMAT ? options.teraTickets : undefined,options.rule,options.opponentRule,options.opponentTeraSpecies);
+      if(towerFormat)installTowerGimmicks(this.battle,packed,format!==PRE_TERA_FORMAT ? options.teraTickets : undefined,options.rule,options.opponentRule,options.opponentTeraSpecies,options.trainerEquipment);
       const original=this.battle.statModify.bind(this.battle);
       this.battle.statModify=(base,set,key)=>Showdown.toID(set.pokeball).startsWith(POINT_TEAM_MARKER)
         ? key==='hp' && base.hp===1 ? 1 : trainedStat(base[key],set.ivs[key],set.evs[key]+(pointBonuses(Showdown.toID(set.pokeball))[key as keyof import("../data/training").StatBlock]??0),key,set.nature)
@@ -213,7 +218,7 @@ export async function replayBattle(record: BattleLog): Promise<BattleLog> {
       return next.action;
     }};
   };
-  const result = await runBattle({seed: record.seed, rule:record.rule,opponentRule:record.opponentRule,opponentTeraSpecies:record.opponentTeraSpecies,format:record.format, teams: record.teams, battleItems:record.battleItems,upgrades:record.upgrades,teraTickets:record.teraTickets, player: makePolicy('p1'), opponent: makePolicy('p2')});
+  const result = await runBattle({seed: record.seed, rule:record.rule,opponentRule:record.opponentRule,opponentTeraSpecies:record.opponentTeraSpecies,format:record.format, teams: record.teams, battleItems:record.battleItems,upgrades:record.upgrades,teraTickets:record.teraTickets,trainerEquipment:record.trainerEquipment, player: makePolicy('p1'), opponent: makePolicy('p2')});
   if (JSON.stringify(battleEvents(result.publicProtocol)) !== JSON.stringify(battleEvents(record.publicProtocol))) throw new Error('Replay diverged');
   if (result.winner !== record.winner || result.turns !== record.turns) throw new Error('Replay result mismatch');
   if (result.decisions.length !== record.decisions.length) throw new Error('Unused replay actions');

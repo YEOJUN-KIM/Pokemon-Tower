@@ -27,7 +27,7 @@ export class TowerService {
       this.store.complete(id, log, view);
     }, JSON.parse(row.seed) as Seed, {
       id: row.id, format:row.format,aiVersion:row.ai_version,teams: {p1: row.player_team, p2: row.opponent_team},
-      rule:row.rule,battleItems:JSON.parse(row.battle_items),upgrades:JSON.parse(row.upgrades),teraTickets:JSON.parse(row.tera_tickets),
+      trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),rule:row.rule,battleItems:JSON.parse(row.battle_items),upgrades:JSON.parse(row.upgrades),teraTickets:JSON.parse(row.tera_tickets),
       opponentTeraSpecies:row.ai_version===AI_VERSION && savedNpc?.gimmick?.rule==='tera' ? savedNpc.gimmick.species : undefined,
       history: this.store.history(row.id),
       saveInput: (requestId, command) => this.store.input(owner, row.id, requestId, command),
@@ -40,7 +40,11 @@ export class TowerService {
     let battle: BattleView | null = null;
     if (row?.status === 'complete') battle = JSON.parse(row.view!) as BattleView;
     else if (row) battle = await this.session(owner, row).ready();
-    return {battle, tower: this.store.view(owner)};
+    const tower=this.store.view(owner),equipment=tower.run?.trainerEquipment??[];
+    if(battle)battle={...battle,trainerEquipment:equipment,actions:battle.actions.filter(action=>
+      (!action.command.endsWith(' dynamax')||equipment.includes('Dynamax Band'))&&
+      (!action.command.endsWith(' terastallize')||equipment.includes('Tera Orb')))};
+    return {battle,tower};
   }
   async action(owner: string, id: string, requestId: number, action: string) {
     const current = this.store.currentBattle(owner);
@@ -74,9 +78,9 @@ const globalStore = globalThis as typeof globalThis & {towerPersistentService?: 
 export function getTowerService() {
   // Refresh the development singleton once when this schema/behavior version changes.
   // Its recorded inputs recover the battle in the new service without spending tickets twice.
-  if(globalStore.towerPersistentServiceVersion!==51){
+  if(globalStore.towerPersistentServiceVersion!==60){
     const previous=globalStore.towerPersistentService;
-    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=51;
+    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=60;
     if(previous)void previous.dispose().then(()=>previous.store.close()).catch(error=>console.error('Previous tower service shutdown failed',error));
   }
   // Runtime save data must not be traced into the deployment bundle.

@@ -33,7 +33,7 @@ for(const width of [1280,390])for(const rule of ['basic','mega','dynamax','tera'
     await page.keyboard.press('a');await expect(page.getByTestId('battle-party')).toHaveCount(0);
     await page.getByRole('button',{name:'싸운다',exact:true}).click();
     const toggles=page.locator('.gimmick-icon-button');
-    for(const kind of kinds){await page.keyboard.press('a');const selected=page.locator('.gimmick-icon-button[aria-pressed=true]');await expect(selected).toHaveCount(1);await expect(selected).toHaveClass(new RegExp(kind==='terastallize'?'tera-toggle':'emblem-'+kind));}
+    for(const button of await page.getByTestId('gimmick-dock').locator('button[data-gimmick]:not(:disabled)').all()){await page.keyboard.press('a');const selected=page.locator('.gimmick-icon-button[aria-pressed=true]');await expect(selected).toHaveCount(1);await expect(button).toHaveAttribute('aria-pressed','true');}
     await page.keyboard.press('a');await expect(page.locator('.gimmick-icon-button[aria-pressed=true]')).toHaveCount(0);
     if(kinds.length){await toggles.first().click();await expect(toggles.first()).toHaveAttribute('aria-pressed','true');expect(await toggles.first().evaluate(el=>getComputedStyle(el).outlineStyle)).toBe('none');await toggles.first().click();await page.keyboard.press('ArrowUp');await expect(page.locator('body')).toHaveAttribute('data-game-input','cursor');}
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

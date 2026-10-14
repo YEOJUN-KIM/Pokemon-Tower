@@ -27,6 +27,19 @@
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-panel) {
   gap: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+:where(.scope) :global(.trainer-equipment) {display:flex;flex-wrap:wrap;gap:5px;align-items:center;pointer-events:auto;max-width:120px;}
+:where(.scope) :global(.trainer-equipment-slot) {display:grid;place-items:center;width:38px;height:42px;border:1px solid #54737d;border-radius:5px;background:#142935;}
+:where(.scope) :global(.trainer-equipment-slot .held-item-label>span) {display:none;}
+:where(.scope) :global(.trainer-equipment-slot .held-item-icon) {width:32px;height:32px;flex-basis:32px;}
+@media(max-width:760px) {
+ :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-panel) {gap:5px;}
+ :where(.scope) :global(.trainer-equipment) {gap:3px;max-width:60px;}
+ :where(.scope) :global(.trainer-equipment-slot) {width:27px;height:32px;}
+ :where(.scope) :global(.trainer-equipment-slot .held-item-icon) {width:25px;height:25px;flex-basis:25px;}
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-panel h2) {
   padding: 3px 5px;

@@ -1,0 +1,3326 @@
+{
+  "70": {
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/70.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/70.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/70.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/70.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/70.gif",
+      "png": "/vendor/pokerogue/pokemon/front/70.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/70.gif",
+      "png": "/vendor/pokerogue/pokemon/back/70.png"
+    }
+  },
+  "93": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/93.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/93.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/93.gif",
+      "png": "/vendor/pokerogue/pokemon/front/93.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/93.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/93.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/93.gif",
+      "png": "/vendor/pokerogue/pokemon/back/93.png"
+    }
+  },
+  "95": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/95.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/95.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/95.gif",
+      "png": "/vendor/pokerogue/pokemon/front/95.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/95.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/95.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/95.gif",
+      "png": "/vendor/pokerogue/pokemon/back/95.png"
+    }
+  },
+  "148": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/148.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/148.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/148.gif",
+      "png": "/vendor/pokerogue/pokemon/back/148.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/148.gif",
+      "png": "/vendor/pokerogue/pokemon/front/148.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/148.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/148.png"
+    }
+  },
+  "203": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/203.gif",
+      "png": "/vendor/pokerogue/pokemon/front/203.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/203.gif",
+      "png": "/vendor/pokerogue/pokemon/back/203.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/203.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/203.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/203.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/203.png"
+    }
+  },
+  "217": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/217.gif",
+      "png": "/vendor/pokerogue/pokemon/back/217.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/217.gif",
+      "png": "/vendor/pokerogue/pokemon/front/217.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/217.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/217.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/217.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/217.png"
+    }
+  },
+  "364": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/364.gif",
+      "png": "/vendor/pokerogue/pokemon/front/364.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/364.gif",
+      "png": "/vendor/pokerogue/pokemon/back/364.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/364.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/364.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/364.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/364.png"
+    }
+  },
+  "658": {
+    "shinyFront": {
+      "gif": "/vendor/showdown/pokemon/gen5ani-shiny/greninja.gif",
+      "png": "/vendor/showdown/pokemon/gen5-shiny/greninja.png"
+    }
+  },
+  "660": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/660.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/660.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/660.gif",
+      "png": "/vendor/pokerogue/pokemon/back/660.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/660.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/660.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/660.gif",
+      "png": "/vendor/pokerogue/pokemon/front/660.png"
+    }
+  },
+  "663": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/663.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/663.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/663.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/663.png"
+    }
+  },
+  "666": {
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/666.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/666.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/666.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/666.png"
+    }
+  },
+  "668": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/668.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/668.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/668.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/668.png"
+    }
+  },
+  "671": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/671.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/671.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/671.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/671.png"
+    }
+  },
+  "673": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/673.gif",
+      "png": "/vendor/pokerogue/pokemon/front/673.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/673.gif",
+      "png": "/vendor/pokerogue/pokemon/back/673.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/673.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/673.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/673.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/673.png"
+    }
+  },
+  "675": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/675.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/675.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/675.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/675.png"
+    }
+  },
+  "676": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/676.gif",
+      "png": "/vendor/pokerogue/pokemon/front/676.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/676.gif",
+      "png": "/vendor/pokerogue/pokemon/back/676.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/676.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/676.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/676.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/676.png"
+    }
+  },
+  "681": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/681.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/681.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/681.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/681.png"
+    }
+  },
+  "683": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/683.gif",
+      "png": "/vendor/pokerogue/pokemon/front/683.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/683.gif",
+      "png": "/vendor/pokerogue/pokemon/back/683.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/683.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/683.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/683.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/683.png"
+    }
+  },
+  "685": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/685.gif",
+      "png": "/vendor/pokerogue/pokemon/back/685.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/685.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/685.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/685.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/685.png"
+    }
+  },
+  "687": {
+    "shinyFront": {
+      "gif": "/vendor/showdown/pokemon/gen5ani-shiny/malamar.gif",
+      "png": "/vendor/showdown/pokemon/gen5-shiny/malamar.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/showdown/pokemon/gen5ani-back-shiny/malamar.gif",
+      "png": "/vendor/showdown/pokemon/gen5-back-shiny/malamar.png"
+    }
+  },
+  "691": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/691.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/691.png"
+    }
+  },
+  "693": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/693.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/693.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/693.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/693.png"
+    }
+  },
+  "695": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/695.gif",
+      "png": "/vendor/pokerogue/pokemon/front/695.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/695.gif",
+      "png": "/vendor/pokerogue/pokemon/back/695.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/695.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/695.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/695.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/695.png"
+    }
+  },
+  "697": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/697.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/697.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/697.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/697.png"
+    }
+  },
+  "699": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/699.gif",
+      "png": "/vendor/pokerogue/pokemon/front/699.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/699.gif",
+      "png": "/vendor/pokerogue/pokemon/back/699.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/699.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/699.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/699.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/699.png"
+    }
+  },
+  "700": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/700.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/700.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/700.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/700.png"
+    }
+  },
+  "702": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/702.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/702.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/702.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/702.png"
+    }
+  },
+  "703": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/703.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/703.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/703.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/703.png"
+    }
+  },
+  "706": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/706.gif",
+      "png": "/vendor/pokerogue/pokemon/back/706.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/706.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/706.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/706.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/706.png"
+    }
+  },
+  "707": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/707.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/707.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/707.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/707.png"
+    }
+  },
+  "709": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/709.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/709.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/709.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/709.png"
+    }
+  },
+  "711": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/711.gif",
+      "png": "/vendor/pokerogue/pokemon/front/711.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/711.gif",
+      "png": "/vendor/pokerogue/pokemon/back/711.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/711.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/711.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/711.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/711.png"
+    }
+  },
+  "713": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/713.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/713.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/713.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/713.png"
+    }
+  },
+  "715": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/715.gif",
+      "png": "/vendor/pokerogue/pokemon/back/715.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/715.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/715.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/715.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/715.png"
+    }
+  },
+  "716": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/716.gif",
+      "png": "/vendor/pokerogue/pokemon/back/716.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/716.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/716.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/716.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/716.png"
+    }
+  },
+  "717": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/717.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/717.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/717.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/717.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/717.gif",
+      "png": "/vendor/pokerogue/pokemon/back/717.png"
+    }
+  },
+  "718": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/718.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/718.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/718.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/718.png"
+    }
+  },
+  "719": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/719.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/719.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/719.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/719.png"
+    }
+  },
+  "720": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/720.gif",
+      "png": "/vendor/pokerogue/pokemon/back/720.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/720.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/720.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/720.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/720.png"
+    }
+  },
+  "721": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/721.gif",
+      "png": "/vendor/pokerogue/pokemon/back/721.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/721.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/721.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/721.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/721.png"
+    }
+  },
+  "724": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/724.gif",
+      "png": "/vendor/pokerogue/pokemon/front/724.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/724.gif",
+      "png": "/vendor/pokerogue/pokemon/back/724.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/724.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/724.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/724.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/724.png"
+    }
+  },
+  "727": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/727.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/727.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/727.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/727.png"
+    }
+  },
+  "730": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/730.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/730.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/730.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/730.png"
+    }
+  },
+  "733": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/733.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/733.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/733.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/733.png"
+    }
+  },
+  "735": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/735.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/735.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/735.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/735.png"
+    }
+  },
+  "738": {
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/738.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/738.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/738.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/738.png"
+    }
+  },
+  "740": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/740.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/740.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/740.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/740.png"
+    }
+  },
+  "741": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/741.gif",
+      "png": "/vendor/pokerogue/pokemon/front/741.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/741.gif",
+      "png": "/vendor/pokerogue/pokemon/back/741.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/741.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/741.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/741.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/741.png"
+    }
+  },
+  "743": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/743.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/743.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/743.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/743.png"
+    }
+  },
+  "745": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/745.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/745.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/745.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/745.png"
+    }
+  },
+  "746": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/746.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/746.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/746.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/746.png"
+    }
+  },
+  "748": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/748.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/748.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/748.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/748.png"
+    }
+  },
+  "750": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/750.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/750.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/750.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/750.png"
+    }
+  },
+  "752": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/752.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/752.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/752.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/752.png"
+    }
+  },
+  "754": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/754.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/754.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/754.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/754.png"
+    }
+  },
+  "756": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/756.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/756.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/756.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/756.png"
+    }
+  },
+  "760": {
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/760.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/760.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/760.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/760.png"
+    }
+  },
+  "763": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/763.gif",
+      "png": "/vendor/pokerogue/pokemon/front/763.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/763.gif",
+      "png": "/vendor/pokerogue/pokemon/back/763.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/763.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/763.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/763.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/763.png"
+    }
+  },
+  "764": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/764.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/764.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/764.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/764.png"
+    }
+  },
+  "765": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/765.gif",
+      "png": "/vendor/pokerogue/pokemon/front/765.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/765.gif",
+      "png": "/vendor/pokerogue/pokemon/back/765.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/765.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/765.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/765.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/765.png"
+    }
+  },
+  "766": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/766.gif",
+      "png": "/vendor/pokerogue/pokemon/front/766.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/766.gif",
+      "png": "/vendor/pokerogue/pokemon/back/766.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/766.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/766.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/766.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/766.png"
+    }
+  },
+  "770": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/770.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/770.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/770.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/770.png"
+    }
+  },
+  "771": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/771.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/771.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/771.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/771.png"
+    }
+  },
+  "773": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/773.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/773.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/773.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/773.png"
+    }
+  },
+  "775": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/775.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/775.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/775.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/775.png"
+    }
+  },
+  "776": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/776.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/776.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/776.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/776.png"
+    }
+  },
+  "777": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/777.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/777.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/777.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/777.png"
+    }
+  },
+  "778": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/778.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/778.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/778.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/778.png"
+    }
+  },
+  "779": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/779.gif",
+      "png": "/vendor/pokerogue/pokemon/back/779.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/779.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/779.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/779.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/779.png"
+    }
+  },
+  "780": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/780.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/780.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/780.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/780.png"
+    }
+  },
+  "781": {
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/781.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/781.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/781.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/781.png"
+    }
+  },
+  "784": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/784.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/784.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/784.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/784.png"
+    }
+  },
+  "785": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/785.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/785.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/785.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/785.png"
+    }
+  },
+  "786": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/786.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/786.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/786.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/786.png"
+    }
+  },
+  "787": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/787.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/787.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/787.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/787.png"
+    }
+  },
+  "788": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/788.gif",
+      "png": "/vendor/pokerogue/pokemon/front/788.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/788.gif",
+      "png": "/vendor/pokerogue/pokemon/back/788.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/788.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/788.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/788.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/788.png"
+    }
+  },
+  "791": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/791.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/791.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/791.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/791.png"
+    }
+  },
+  "792": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/792.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/792.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/792.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/792.png"
+    }
+  },
+  "793": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/793.gif",
+      "png": "/vendor/pokerogue/pokemon/back/793.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/793.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/793.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/793.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/793.png"
+    }
+  },
+  "794": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/794.gif",
+      "png": "/vendor/pokerogue/pokemon/back/794.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/794.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/794.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/794.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/794.png"
+    }
+  },
+  "795": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/795.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/795.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/795.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/795.png"
+    }
+  },
+  "796": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/796.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/796.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/796.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/796.png"
+    }
+  },
+  "797": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/797.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/797.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/797.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/797.png"
+    }
+  },
+  "798": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/798.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/798.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/798.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/798.png"
+    }
+  },
+  "799": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/799.gif",
+      "png": "/vendor/pokerogue/pokemon/front/799.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/799.gif",
+      "png": "/vendor/pokerogue/pokemon/back/799.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/799.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/799.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/799.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/799.png"
+    }
+  },
+  "800": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/800.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/800.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/800.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/800.png"
+    }
+  },
+  "801": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/801.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/801.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/801.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/801.png"
+    }
+  },
+  "802": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/802.gif",
+      "png": "/vendor/pokerogue/pokemon/back/802.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/802.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/802.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/802.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/802.png"
+    }
+  },
+  "804": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/804.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/804.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/804.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/804.png"
+    }
+  },
+  "805": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/805.gif",
+      "png": "/vendor/pokerogue/pokemon/back/805.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/805.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/805.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/805.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/805.png"
+    }
+  },
+  "806": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/806.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/806.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/806.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/806.png"
+    }
+  },
+  "807": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/807.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/807.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/807.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/807.png"
+    }
+  },
+  "808": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/808.gif",
+      "png": "/vendor/pokerogue/pokemon/back/808.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/808.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/808.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/808.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/808.png"
+    }
+  },
+  "809": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/809.gif",
+      "png": "/vendor/pokerogue/pokemon/back/809.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/809.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/809.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/809.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/809.png"
+    }
+  },
+  "812": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/812.gif",
+      "png": "/vendor/pokerogue/pokemon/front/812.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/812.gif",
+      "png": "/vendor/pokerogue/pokemon/back/812.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/812.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/812.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/812.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/812.png"
+    }
+  },
+  "815": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/815.gif",
+      "png": "/vendor/pokerogue/pokemon/front/815.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/815.gif",
+      "png": "/vendor/pokerogue/pokemon/back/815.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/815.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/815.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/815.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/815.png"
+    }
+  },
+  "818": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/818.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/818.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/818.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/818.png"
+    }
+  },
+  "820": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/820.gif",
+      "png": "/vendor/pokerogue/pokemon/back/820.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/820.gif",
+      "png": "/vendor/pokerogue/pokemon/front/820.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/820.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/820.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/820.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/820.png"
+    }
+  },
+  "823": {
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/823.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/823.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/823.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/823.png"
+    }
+  },
+  "826": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/826.gif",
+      "png": "/vendor/pokerogue/pokemon/front/826.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/826.gif",
+      "png": "/vendor/pokerogue/pokemon/back/826.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/826.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/826.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/826.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/826.png"
+    }
+  },
+  "828": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/828.gif",
+      "png": "/vendor/pokerogue/pokemon/back/828.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/828.gif",
+      "png": "/vendor/pokerogue/pokemon/front/828.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/828.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/828.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/828.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/828.png"
+    }
+  },
+  "830": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/830.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/830.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/830.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/830.png"
+    }
+  },
+  "832": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/832.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/832.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/832.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/832.png"
+    }
+  },
+  "834": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/834.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/834.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/834.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/834.png"
+    }
+  },
+  "836": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/836.gif",
+      "png": "/vendor/pokerogue/pokemon/front/836.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/836.gif",
+      "png": "/vendor/pokerogue/pokemon/back/836.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/836.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/836.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/836.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/836.png"
+    }
+  },
+  "839": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/839.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/839.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/839.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/839.png"
+    }
+  },
+  "841": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/841.gif",
+      "png": "/vendor/pokerogue/pokemon/front/841.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/841.gif",
+      "png": "/vendor/pokerogue/pokemon/back/841.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/841.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/841.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/841.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/841.png"
+    }
+  },
+  "842": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/842.gif",
+      "png": "/vendor/pokerogue/pokemon/front/842.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/842.gif",
+      "png": "/vendor/pokerogue/pokemon/back/842.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/842.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/842.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/842.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/842.png"
+    }
+  },
+  "844": {
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/844.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/844.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/844.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/844.png"
+    }
+  },
+  "845": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/845.gif",
+      "png": "/vendor/pokerogue/pokemon/back/845.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/845.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/845.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/845.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/845.png"
+    }
+  },
+  "847": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/847.gif",
+      "png": "/vendor/pokerogue/pokemon/back/847.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/847.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/847.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/847.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/847.png"
+    }
+  },
+  "849": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/849.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/849.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/849.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/849.png"
+    }
+  },
+  "851": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/851.gif",
+      "png": "/vendor/pokerogue/pokemon/front/851.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/851.gif",
+      "png": "/vendor/pokerogue/pokemon/back/851.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/851.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/851.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/851.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/851.png"
+    }
+  },
+  "853": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/853.gif",
+      "png": "/vendor/pokerogue/pokemon/front/853.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/853.gif",
+      "png": "/vendor/pokerogue/pokemon/back/853.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/853.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/853.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/853.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/853.png"
+    }
+  },
+  "855": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/855.gif",
+      "png": "/vendor/pokerogue/pokemon/front/855.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/855.gif",
+      "png": "/vendor/pokerogue/pokemon/back/855.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/855.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/855.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/855.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/855.png"
+    }
+  },
+  "858": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/858.gif",
+      "png": "/vendor/pokerogue/pokemon/back/858.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/858.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/858.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/858.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/858.png"
+    }
+  },
+  "861": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/861.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/861.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/861.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/861.png"
+    }
+  },
+  "862": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/862.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/862.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/862.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/862.png"
+    }
+  },
+  "863": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/863.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/863.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/863.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/863.png"
+    }
+  },
+  "864": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/864.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/864.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/864.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/864.png"
+    }
+  },
+  "865": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/865.gif",
+      "png": "/vendor/pokerogue/pokemon/front/865.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/865.gif",
+      "png": "/vendor/pokerogue/pokemon/back/865.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/865.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/865.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/865.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/865.png"
+    }
+  },
+  "866": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/866.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/866.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/866.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/866.png"
+    }
+  },
+  "867": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/867.gif",
+      "png": "/vendor/pokerogue/pokemon/back/867.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/867.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/867.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/867.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/867.png"
+    }
+  },
+  "869": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/869.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/869.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/869.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/869.png"
+    }
+  },
+  "871": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/871.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/871.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/871.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/871.png"
+    }
+  },
+  "873": {
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/873.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/873.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/873.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/873.png"
+    }
+  },
+  "874": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/874.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/874.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/874.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/874.png"
+    }
+  },
+  "875": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/875.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/875.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/875.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/875.png"
+    }
+  },
+  "876": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/876.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/876.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/876.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/876.png"
+    }
+  },
+  "877": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/877.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/877.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/877.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/877.png"
+    }
+  },
+  "879": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/879.gif",
+      "png": "/vendor/pokerogue/pokemon/front/879.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/879.gif",
+      "png": "/vendor/pokerogue/pokemon/back/879.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/879.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/879.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/879.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/879.png"
+    }
+  },
+  "880": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/880.gif",
+      "png": "/vendor/pokerogue/pokemon/back/880.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/880.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/880.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/880.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/880.png"
+    }
+  },
+  "881": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/881.gif",
+      "png": "/vendor/pokerogue/pokemon/front/881.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/881.gif",
+      "png": "/vendor/pokerogue/pokemon/back/881.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/881.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/881.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/881.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/881.png"
+    }
+  },
+  "882": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/882.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/882.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/882.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/882.png"
+    }
+  },
+  "883": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/883.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/883.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/883.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/883.png"
+    }
+  },
+  "884": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/884.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/884.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/884.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/884.png"
+    }
+  },
+  "887": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/887.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/887.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/887.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/887.png"
+    }
+  },
+  "888": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/888.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/888.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/888.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/888.png"
+    }
+  },
+  "889": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/889.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/889.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/889.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/889.png"
+    }
+  },
+  "890": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/890.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/890.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/890.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/890.png"
+    }
+  },
+  "892": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/892.gif",
+      "png": "/vendor/pokerogue/pokemon/front/892.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/892.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/892.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/892.gif",
+      "png": "/vendor/pokerogue/pokemon/back/892.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/892.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/892.png"
+    }
+  },
+  "893": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/893.gif",
+      "png": "/vendor/pokerogue/pokemon/front/893.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/893.gif",
+      "png": "/vendor/pokerogue/pokemon/back/893.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/893.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/893.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/893.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/893.png"
+    }
+  },
+  "894": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/894.gif",
+      "png": "/vendor/pokerogue/pokemon/front/894.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/894.gif",
+      "png": "/vendor/pokerogue/pokemon/back/894.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/894.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/894.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/894.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/894.png"
+    }
+  },
+  "895": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/895.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/895.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/895.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/895.png"
+    }
+  },
+  "896": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/896.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/896.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/896.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/896.png"
+    }
+  },
+  "897": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/897.gif",
+      "png": "/vendor/pokerogue/pokemon/front/897.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/897.gif",
+      "png": "/vendor/pokerogue/pokemon/back/897.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/897.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/897.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/897.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/897.png"
+    }
+  },
+  "898": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/898.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/898.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/898.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/898.png"
+    }
+  },
+  "899": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/899.gif",
+      "png": "/vendor/pokerogue/pokemon/back/899.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/899.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/899.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/899.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/899.png"
+    }
+  },
+  "900": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/900.gif",
+      "png": "/vendor/pokerogue/pokemon/back/900.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/900.gif",
+      "png": "/vendor/pokerogue/pokemon/front/900.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/900.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/900.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/900.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/900.png"
+    }
+  },
+  "901": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/901.gif",
+      "png": "/vendor/pokerogue/pokemon/back/901.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/901.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/901.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/901.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/901.png"
+    }
+  },
+  "902": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/902.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/902.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/902.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/902.png"
+    }
+  },
+  "903": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/903.gif",
+      "png": "/vendor/pokerogue/pokemon/front/903.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/903.gif",
+      "png": "/vendor/pokerogue/pokemon/back/903.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/903.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/903.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/903.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/903.png"
+    }
+  },
+  "904": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/904.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/904.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/904.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/904.png"
+    }
+  },
+  "908": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/908.gif",
+      "png": "/vendor/pokerogue/pokemon/front/908.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/908.gif",
+      "png": "/vendor/pokerogue/pokemon/back/908.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/908.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/908.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/908.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/908.png"
+    }
+  },
+  "911": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/911.gif",
+      "png": "/vendor/pokerogue/pokemon/front/911.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/911.gif",
+      "png": "/vendor/pokerogue/pokemon/back/911.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/911.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/911.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/911.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/911.png"
+    }
+  },
+  "914": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/914.gif",
+      "png": "/vendor/pokerogue/pokemon/front/914.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/914.gif",
+      "png": "/vendor/pokerogue/pokemon/back/914.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/914.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/914.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/914.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/914.png"
+    }
+  },
+  "916": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/916.gif",
+      "png": "/vendor/pokerogue/pokemon/front/916.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/916.gif",
+      "png": "/vendor/pokerogue/pokemon/back/916.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/916.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/916.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/916.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/916.png"
+    }
+  },
+  "918": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/918.gif",
+      "png": "/vendor/pokerogue/pokemon/front/918.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/918.gif",
+      "png": "/vendor/pokerogue/pokemon/back/918.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/918.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/918.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/918.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/918.png"
+    }
+  },
+  "920": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/920.gif",
+      "png": "/vendor/pokerogue/pokemon/back/920.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/920.gif",
+      "png": "/vendor/pokerogue/pokemon/front/920.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/920.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/920.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/920.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/920.png"
+    }
+  },
+  "923": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/923.gif",
+      "png": "/vendor/pokerogue/pokemon/front/923.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/923.gif",
+      "png": "/vendor/pokerogue/pokemon/back/923.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/923.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/923.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/923.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/923.png"
+    }
+  },
+  "925": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/925.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/925.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/925.gif",
+      "png": "/vendor/pokerogue/pokemon/back/925.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/925.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/925.png"
+    }
+  },
+  "927": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/927.gif",
+      "png": "/vendor/pokerogue/pokemon/back/927.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/927.gif",
+      "png": "/vendor/pokerogue/pokemon/front/927.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/927.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/927.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/927.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/927.png"
+    }
+  },
+  "930": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/930.gif",
+      "png": "/vendor/pokerogue/pokemon/front/930.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/930.gif",
+      "png": "/vendor/pokerogue/pokemon/back/930.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/930.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/930.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/930.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/930.png"
+    }
+  },
+  "934": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/934.gif",
+      "png": "/vendor/pokerogue/pokemon/front/934.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/934.gif",
+      "png": "/vendor/pokerogue/pokemon/back/934.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/934.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/934.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/934.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/934.png"
+    }
+  },
+  "939": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/939.gif",
+      "png": "/vendor/pokerogue/pokemon/front/939.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/939.gif",
+      "png": "/vendor/pokerogue/pokemon/back/939.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/939.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/939.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/939.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/939.png"
+    }
+  },
+  "941": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/941.gif",
+      "png": "/vendor/pokerogue/pokemon/front/941.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/941.gif",
+      "png": "/vendor/pokerogue/pokemon/back/941.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/941.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/941.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/941.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/941.png"
+    }
+  },
+  "943": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/943.gif",
+      "png": "/vendor/pokerogue/pokemon/front/943.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/943.gif",
+      "png": "/vendor/pokerogue/pokemon/back/943.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/943.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/943.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/943.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/943.png"
+    }
+  },
+  "945": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/945.gif",
+      "png": "/vendor/pokerogue/pokemon/back/945.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/945.gif",
+      "png": "/vendor/pokerogue/pokemon/front/945.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/945.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/945.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/945.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/945.png"
+    }
+  },
+  "947": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/947.gif",
+      "png": "/vendor/pokerogue/pokemon/front/947.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/947.gif",
+      "png": "/vendor/pokerogue/pokemon/back/947.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/947.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/947.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/947.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/947.png"
+    }
+  },
+  "949": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/949.gif",
+      "png": "/vendor/pokerogue/pokemon/front/949.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/949.gif",
+      "png": "/vendor/pokerogue/pokemon/back/949.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/949.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/949.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/949.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/949.png"
+    }
+  },
+  "950": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/950.gif",
+      "png": "/vendor/pokerogue/pokemon/front/950.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/950.gif",
+      "png": "/vendor/pokerogue/pokemon/back/950.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/950.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/950.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/950.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/950.png"
+    }
+  },
+  "954": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/954.gif",
+      "png": "/vendor/pokerogue/pokemon/front/954.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/954.gif",
+      "png": "/vendor/pokerogue/pokemon/back/954.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/954.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/954.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/954.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/954.png"
+    }
+  },
+  "956": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/956.gif",
+      "png": "/vendor/pokerogue/pokemon/front/956.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/956.gif",
+      "png": "/vendor/pokerogue/pokemon/back/956.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/956.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/956.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/956.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/956.png"
+    }
+  },
+  "959": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/959.gif",
+      "png": "/vendor/pokerogue/pokemon/back/959.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/959.gif",
+      "png": "/vendor/pokerogue/pokemon/front/959.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/959.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/959.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/959.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/959.png"
+    }
+  },
+  "961": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/961.gif",
+      "png": "/vendor/pokerogue/pokemon/front/961.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/961.gif",
+      "png": "/vendor/pokerogue/pokemon/back/961.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/961.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/961.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/961.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/961.png"
+    }
+  },
+  "962": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/962.gif",
+      "png": "/vendor/pokerogue/pokemon/front/962.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/962.gif",
+      "png": "/vendor/pokerogue/pokemon/back/962.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/962.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/962.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/962.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/962.png"
+    }
+  },
+  "964": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/964.gif",
+      "png": "/vendor/pokerogue/pokemon/front/964.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/964.gif",
+      "png": "/vendor/pokerogue/pokemon/back/964.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/964.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/964.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/964.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/964.png"
+    }
+  },
+  "966": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/966.gif",
+      "png": "/vendor/pokerogue/pokemon/front/966.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/966.gif",
+      "png": "/vendor/pokerogue/pokemon/back/966.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/966.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/966.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/966.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/966.png"
+    }
+  },
+  "967": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/967.gif",
+      "png": "/vendor/pokerogue/pokemon/front/967.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/967.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/967.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/967.gif",
+      "png": "/vendor/pokerogue/pokemon/back/967.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/967.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/967.png"
+    }
+  },
+  "968": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/968.gif",
+      "png": "/vendor/pokerogue/pokemon/front/968.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/968.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/968.png"
+    }
+  },
+  "972": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/972.gif",
+      "png": "/vendor/pokerogue/pokemon/front/972.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/972.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/972.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/972.gif",
+      "png": "/vendor/pokerogue/pokemon/back/972.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/972.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/972.png"
+    }
+  },
+  "973": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/973.gif",
+      "png": "/vendor/pokerogue/pokemon/front/973.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/973.gif",
+      "png": "/vendor/pokerogue/pokemon/back/973.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/973.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/973.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/973.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/973.png"
+    }
+  },
+  "975": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/975.gif",
+      "png": "/vendor/pokerogue/pokemon/front/975.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/975.gif",
+      "png": "/vendor/pokerogue/pokemon/back/975.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/975.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/975.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/975.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/975.png"
+    }
+  },
+  "977": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/977.gif",
+      "png": "/vendor/pokerogue/pokemon/front/977.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/977.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/977.png"
+    }
+  },
+  "978": {
+    "shinyFront": {
+      "gif": "/vendor/showdown/pokemon/gen5ani-shiny/tatsugiri.gif",
+      "png": "/vendor/showdown/pokemon/gen5-shiny/tatsugiri.png"
+    }
+  },
+  "980": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/980.gif",
+      "png": "/vendor/pokerogue/pokemon/back/980.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/980.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/980.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/980.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/980.png"
+    }
+  },
+  "981": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/981.gif",
+      "png": "/vendor/pokerogue/pokemon/back/981.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/981.gif",
+      "png": "/vendor/pokerogue/pokemon/front/981.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/981.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/981.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/981.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/981.png"
+    }
+  },
+  "982": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/982.gif",
+      "png": "/vendor/pokerogue/pokemon/front/982.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/982.gif",
+      "png": "/vendor/pokerogue/pokemon/back/982.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/982.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/982.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/982.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/982.png"
+    }
+  },
+  "983": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/983.gif",
+      "png": "/vendor/pokerogue/pokemon/front/983.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/983.gif",
+      "png": "/vendor/pokerogue/pokemon/back/983.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/983.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/983.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/983.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/983.png"
+    }
+  },
+  "984": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/984.gif",
+      "png": "/vendor/pokerogue/pokemon/back/984.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/984.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/984.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/984.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/984.png"
+    }
+  },
+  "986": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/986.gif",
+      "png": "/vendor/pokerogue/pokemon/front/986.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/986.gif",
+      "png": "/vendor/pokerogue/pokemon/back/986.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/986.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/986.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/986.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/986.png"
+    }
+  },
+  "987": {
+    "shinyFront": {
+      "gif": "/vendor/showdown/pokemon/gen5ani-shiny/fluttermane.gif",
+      "png": "/vendor/showdown/pokemon/gen5-shiny/fluttermane.png"
+    }
+  },
+  "989": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/989.gif",
+      "png": "/vendor/pokerogue/pokemon/back/989.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/989.gif",
+      "png": "/vendor/pokerogue/pokemon/front/989.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/989.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/989.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/989.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/989.png"
+    }
+  },
+  "990": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/990.gif",
+      "png": "/vendor/pokerogue/pokemon/front/990.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/990.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/990.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/990.gif",
+      "png": "/vendor/pokerogue/pokemon/back/990.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/990.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/990.png"
+    }
+  },
+  "991": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/991.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/991.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/991.gif",
+      "png": "/vendor/pokerogue/pokemon/front/991.png"
+    }
+  },
+  "992": {
+    "shinyFront": {
+      "gif": "/vendor/showdown/pokemon/gen5ani-shiny/ironhands.gif",
+      "png": "/vendor/showdown/pokemon/gen5-shiny/ironhands.png"
+    }
+  },
+  "993": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/993.gif",
+      "png": "/vendor/pokerogue/pokemon/front/993.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/993.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/993.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/993.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/993.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/993.gif",
+      "png": "/vendor/pokerogue/pokemon/back/993.png"
+    }
+  },
+  "994": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/994.gif",
+      "png": "/vendor/pokerogue/pokemon/back/994.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/994.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/994.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/994.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/994.png"
+    }
+  },
+  "995": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/995.gif",
+      "png": "/vendor/pokerogue/pokemon/back/995.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/995.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/995.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/995.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/995.png"
+    }
+  },
+  "1000": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/1000.gif",
+      "png": "/vendor/pokerogue/pokemon/back/1000.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/1000.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/1000.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/1000.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/1000.png"
+    }
+  },
+  "1001": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/1001.gif",
+      "png": "/vendor/pokerogue/pokemon/back/1001.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/1001.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/1001.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/1001.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/1001.png"
+    }
+  },
+  "1002": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/1002.gif",
+      "png": "/vendor/pokerogue/pokemon/back/1002.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/1002.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/1002.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/1002.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/1002.png"
+    }
+  },
+  "1003": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/1003.gif",
+      "png": "/vendor/pokerogue/pokemon/back/1003.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/1003.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/1003.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/1003.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/1003.png"
+    }
+  },
+  "1004": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/1004.gif",
+      "png": "/vendor/pokerogue/pokemon/back/1004.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/1004.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/1004.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/1004.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/1004.png"
+    }
+  },
+  "1005": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/1005.gif",
+      "png": "/vendor/pokerogue/pokemon/front/1005.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/1005.gif",
+      "png": "/vendor/pokerogue/pokemon/back/1005.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/1005.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/1005.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/1005.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/1005.png"
+    }
+  },
+  "1006": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/1006.gif",
+      "png": "/vendor/pokerogue/pokemon/back/1006.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/1006.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/1006.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/1006.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/1006.png"
+    }
+  },
+  "1008": {
+    "shinyFront": {
+      "gif": "/vendor/showdown/pokemon/gen5ani-shiny/miraidon.gif",
+      "png": "/vendor/showdown/pokemon/gen5-shiny/miraidon.png"
+    }
+  },
+  "1019": {
+    "shinyFront": {
+      "gif": "/vendor/showdown/pokemon/gen5ani-shiny/hydrapple.gif",
+      "png": "/vendor/showdown/pokemon/gen5-shiny/hydrapple.png"
+    }
+  },
+  "1020": {
+    "shinyFront": {
+      "gif": "/vendor/showdown/pokemon/gen5ani-shiny/gougingfire.gif",
+      "png": "/vendor/showdown/pokemon/gen5-shiny/gougingfire.png"
+    }
+  },
+  "1024": {
+    "shinyFront": {
+      "gif": "/vendor/showdown/pokemon/gen5ani-shiny/terapagos.gif",
+      "png": "/vendor/showdown/pokemon/gen5-shiny/terapagos.png"
+    }
+  },
+  "10039": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10039.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10039.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10039.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10039.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10039.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10039.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10039.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10039.png"
+    }
+  },
+  "10075": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10075.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10075.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10075.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10075.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10075.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10075.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10075.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10075.png"
+    }
+  },
+  "10086": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10086.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10086.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10086.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10086.png"
+    }
+  },
+  "10136": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10136.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10136.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10136.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10136.png"
+    }
+  },
+  "10143": {
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10143.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10143.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10143.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10143.png"
+    }
+  },
+  "10163": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10163.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10163.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10163.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10163.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10163.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10163.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10163.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10163.png"
+    }
+  },
+  "10165": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10165.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10165.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10165.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10165.png"
+    }
+  },
+  "10167": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10167.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10167.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10167.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10167.png"
+    }
+  },
+  "10169": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10169.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10169.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10169.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10169.png"
+    }
+  },
+  "10171": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10171.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10171.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10171.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10171.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10171.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10171.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10171.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10171.png"
+    }
+  },
+  "10172": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10172.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10172.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10172.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10172.png"
+    }
+  },
+  "10177": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10177.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10177.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10177.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10177.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10177.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10177.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10177.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10177.png"
+    }
+  },
+  "10180": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10180.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10180.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10180.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10180.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10180.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10180.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10180.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10180.png"
+    }
+  },
+  "10182": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10182.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10182.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10182.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10182.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10182.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10182.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10182.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10182.png"
+    }
+  },
+  "10183": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10183.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10183.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10183.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10183.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10183.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10183.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10183.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10183.png"
+    }
+  },
+  "10187": {
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10187.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10187.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10187.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10187.png"
+    }
+  },
+  "10191": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10191.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10191.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10191.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10191.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10191.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10191.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10191.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10191.png"
+    }
+  },
+  "10194": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10194.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10194.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10194.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10194.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10194.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10194.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10194.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10194.png"
+    }
+  },
+  "10210": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10210.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10210.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10210.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10210.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10210.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10210.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10210.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10210.png"
+    }
+  },
+  "10215": {
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10215.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10215.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10215.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10215.png"
+    }
+  },
+  "10230": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10230.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10230.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10230.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10230.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10230.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10230.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10230.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10230.png"
+    }
+  },
+  "10232": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10232.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10232.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10232.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10232.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10232.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10232.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10232.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10232.png"
+    }
+  },
+  "10233": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10233.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10233.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10233.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10233.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10233.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10233.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10233.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10233.png"
+    }
+  },
+  "10237": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10237.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10237.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10237.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10237.png"
+    }
+  },
+  "10239": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10239.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10239.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10239.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10239.png"
+    }
+  },
+  "10240": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10240.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10240.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10240.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10240.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10240.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10240.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10240.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10240.png"
+    }
+  },
+  "10243": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10243.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10243.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10243.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10243.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10243.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10243.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10243.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10243.png"
+    }
+  },
+  "10244": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10244.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10244.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10244.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10244.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10244.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10244.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10244.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10244.png"
+    }
+  },
+  "10246": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10246.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10246.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10246.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10246.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10246.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10246.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10246.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10246.png"
+    }
+  },
+  "10250": {
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10250.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10250.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10250.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10250.png"
+    },
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10250.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10250.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10250.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10250.png"
+    }
+  },
+  "10251": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10251.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10251.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10251.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10251.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10251.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10251.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10251.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10251.png"
+    }
+  },
+  "10252": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10252.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10252.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10252.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10252.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10252.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10252.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10252.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10252.png"
+    }
+  },
+  "10256": {
+    "front": {
+      "gif": "/vendor/pokerogue/pokemon/front/10256.gif",
+      "png": "/vendor/pokerogue/pokemon/front/10256.png"
+    },
+    "back": {
+      "gif": "/vendor/pokerogue/pokemon/back/10256.gif",
+      "png": "/vendor/pokerogue/pokemon/back/10256.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/pokerogue/pokemon/shinyFront/10256.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyFront/10256.png"
+    },
+    "shinyBack": {
+      "gif": "/vendor/pokerogue/pokemon/shinyBack/10256.gif",
+      "png": "/vendor/pokerogue/pokemon/shinyBack/10256.png"
+    }
+  },
+  "10272": {
+    "front": {
+      "gif": "/vendor/showdown/pokemon/gen5ani/ursaluna-bloodmoon.gif",
+      "png": "/vendor/showdown/pokemon/gen5/ursaluna-bloodmoon.png"
+    },
+    "shinyFront": {
+      "gif": "/vendor/showdown/pokemon/gen5ani-shiny/ursaluna-bloodmoon.gif",
+      "png": "/vendor/showdown/pokemon/gen5-shiny/ursaluna-bloodmoon.png"
+    }
+  }
+}

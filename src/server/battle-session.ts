@@ -43,6 +43,7 @@ export class BattleSession {
   private initialSpecies=new Map<string,string>();
   private movePP:NonNullable<BattleView['movePP']>=[];
   private field=emptyField();
+  private trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];
   private initialTeraTickets=0;
   private opponentRule?:import('../data/run-rules').BattleRule;
   private opponentPrimal=false;
@@ -56,8 +57,9 @@ export class BattleSession {
   private saveInput?: (requestId: number, action: string) => void;
 
   constructor(save: (log: BattleLog, id: string, view: BattleView) => Promise<void>, seed?: Seed,
-    options: {rule?:import('../data/run-rules').BattleRule;opponentTeraSpecies?:string;id?: string; format?:string; aiVersion?:string; teams?: {p1: string; p2: string}; history?: string[]; battleItems?:import('../data/battle-items').BattleItemBag; upgrades?:UpgradeKind[];teraTickets?:import('../data/tera').TeraTickets; saveInput?: (requestId: number, action: string) => void} = {}) {
+    options: {trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];rule?:import('../data/run-rules').BattleRule;opponentTeraSpecies?:string;id?: string; format?:string; aiVersion?:string; teams?: {p1: string; p2: string}; history?: string[]; battleItems?:import('../data/battle-items').BattleItemBag; upgrades?:UpgradeKind[];teraTickets?:import('../data/tera').TeraTickets; saveInput?: (requestId: number, action: string) => void} = {}) {
     this.id = options.id ?? randomUUID();
+    this.trainerEquipment=options.trainerEquipment;
     this.initialTeraTickets=options.teraTickets?.p1 ?? 0;
     if(options.aiVersion==='tower-policy-v10'){
       const team=Showdown.Teams.unpack(options.teams?.p2 ?? '') ?? [];
@@ -75,7 +77,7 @@ export class BattleSession {
       seed: battleSeed,
       format:options.format,
       teams: options.teams,
-      rule:options.rule,opponentRule:this.opponentRule,opponentTeraSpecies:options.opponentTeraSpecies,battleItems:options.battleItems,upgrades:options.upgrades,teraTickets:options.teraTickets,
+      rule:options.rule,opponentRule:this.opponentRule,opponentTeraSpecies:options.opponentTeraSpecies,battleItems:options.battleItems,upgrades:options.upgrades,teraTickets:options.teraTickets,trainerEquipment:options.trainerEquipment,
       opponent: ['tower-policy-v10','tower-policy-v9'].includes(options.aiVersion ?? '') ? new ZMovePolicy() : options.aiVersion==='tower-policy-v8' ? new LearningOpponentPolicy() : options.aiVersion==='damage-policy-v1' ? new DamagePolicy() : options.aiVersion==='tower-policy-v7' ? new CautiousSwitchingPolicy() : options.aiVersion==='tower-policy-v6' ? new SwitchingPolicy() : options.aiVersion==='tower-policy-v5' ? new TeraPolicy() : options.aiVersion==='tower-policy-v4' ? new GimmickPolicy() : options.aiVersion==='tower-policy-v3' ? new LegacyGimmickPolicy() : new TowerPolicy(),
       player: {choose: observation => {
         if (observation.legalActions[0]?.command.startsWith('team ')) return 'team 123';
@@ -242,7 +244,7 @@ export class BattleSession {
       turn: this.turns, team, opponent,
       actions: this.status === 'waiting' ? this.observation?.legalActions.map(({command, label}) => ({command, label})) ?? [] : [],
       messages: this.messages.slice(-300), winner: this.winner, error: this.failure,
-      opponentPrimal:this.opponentPrimal || undefined,opponentRule:this.opponentRule,teraTickets:Math.max(0,this.initialTeraTickets-(this.teraSpent?1:0)),field:structuredClone(this.field),maxMovePP:this.maxMovePP,zMovePP:this.zMovePP,movePP:this.movePP.map(move=>({...move})),
+      trainerEquipment:this.trainerEquipment,opponentPrimal:this.opponentPrimal || undefined,opponentRule:this.opponentRule,teraTickets:Math.max(0,this.initialTeraTickets-(this.teraSpent?1:0)),field:structuredClone(this.field),maxMovePP:this.maxMovePP,zMovePP:this.zMovePP,movePP:this.movePP.map(move=>({...move})),
     };
   }
 }

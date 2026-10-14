@@ -20,7 +20,7 @@ async function winningResult(store: TowerStore, row: BattleRow) {
   store.db.prepare('UPDATE battles SET opponent_team=? WHERE id=?').run(row.opponent_team,row.id);
   for (let n = 1; n <= 30; n++) {
     const seed: Seed = [n, 2, 3, 4];
-    const log = await runBattle({teams: {p1: row.player_team, p2: row.opponent_team}, seed, player: new DamagePolicy(), opponent: new DamagePolicy()});
+    const log = await runBattle({trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams: {p1: row.player_team, p2: row.opponent_team}, seed, player: new DamagePolicy(), opponent: new DamagePolicy()});
     if (log.winner === 'Player') {
       store.db.prepare('UPDATE battles SET seed = ? WHERE id = ?').run(JSON.stringify(seed), row.id);
       return log;
@@ -137,7 +137,7 @@ test('disk restart replays accepted actions and recovers an uncommitted final re
     await assert.rejects(service.action('alice', id, 1, 'move 1'), /이미 처리/);
     await service.dispose();
     const row = store.battle(id);
-    const log = await runBattle({seed:[1,2,3,4], teams:{p1:row.player_team,p2:row.opponent_team},teraTickets:JSON.parse(row.tera_tickets), player:new DamagePolicy(), opponent:new SwitchingPolicy()});
+    const log = await runBattle({seed:[1,2,3,4], trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:row.opponent_team},teraTickets:JSON.parse(row.tera_tickets), player:new DamagePolicy(), opponent:new SwitchingPolicy()});
     // Simulate a crash after journal commits but before the completion transaction.
     store.db.prepare('DELETE FROM actions WHERE battle_id = ?').run(id);
     log.decisions.filter(d => d.side === 'p1' && !d.action.startsWith('team')).forEach((d, index) => store.input('alice', id, index + 1, d.action));
@@ -165,7 +165,7 @@ test('loss ends the run without erasing earned money or unlocks', async () => {
     const battle = store.battle(second);
     const seed: Seed = [1,2,3,4];
     store.db.prepare('UPDATE battles SET seed = ? WHERE id = ?').run(JSON.stringify(seed), second);
-    const loss = await runBattle({teams:{p1:battle.player_team,p2:battle.opponent_team},seed,opponent:new DamagePolicy(),
+    const loss = await runBattle({trainerEquipment:battle.trainer_equipment==null?undefined:JSON.parse(battle.trainer_equipment),teams:{p1:battle.player_team,p2:battle.opponent_team},seed,opponent:new DamagePolicy(),
       player:{choose: o => o.legalActions.filter(a => a.command.startsWith('move')).at(-1)?.command ?? o.legalActions[0].command}});
     assert.equal(loss.winner, 'Tower AI');
     store.complete(second, loss, fakeView(second, loss));

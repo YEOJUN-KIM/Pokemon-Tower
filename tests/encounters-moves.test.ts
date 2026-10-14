@@ -60,7 +60,7 @@ test('capture registers missing moves permanently, optionally swaps the run only
       const rival=defaultProfile('Charizard');rival.moves=['Flamethrower','Air Slash','Earthquake','Dragon Pulse'];
       const team=packTeam(['Charizard','Pikachu','Golem'],{Charizard:rival,Pikachu:defaultProfile('Pikachu'),Golem:defaultProfile('Golem')});
       store.db.prepare('UPDATE battles SET opponent_team=?,seed=? WHERE id=?').run(team,'[1,2,3,4]',id);
-      const log=await runBattle({teams:{p1:row.player_team,p2:team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});assert.equal(log.winner,'Player');
+      const log=await runBattle({trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});assert.equal(log.winner,'Player');
       store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
       const before=store.view('collector');assert.ok(before.run!.candidateMoves.Charizard.includes('Earthquake'));
       assert.deepEqual(before.run!.currentMoves.Golem,golemMoves,'a new teammate previews its saved archive loadout');
@@ -86,7 +86,7 @@ test('archive-only collection preserves a full party while owning the chosen spe
     const rival=defaultProfile('Golem');rival.moves=['Earthquake','Stone Edge','Fire Punch','Explosion'];
     const team=packTeam(['Charizard','Pikachu','Golem'],{Charizard:defaultProfile('Charizard'),Pikachu:defaultProfile('Pikachu'),Golem:rival});
     store.db.prepare('UPDATE battles SET opponent_team=?,seed=? WHERE id=?').run(team,'[1,2,3,4]',id);
-    const log=await runBattle({teams:{p1:row.player_team,p2:team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});assert.equal(log.winner,'Player');
+    const log=await runBattle({trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});assert.equal(log.winner,'Player');
     store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
     const before=store.view(owner),profiles=store.db.prepare('SELECT profiles FROM runs WHERE id=?').get(row.run_id);
     const training=store.db.prepare('SELECT * FROM pokemon_training WHERE player_id=? AND species!=?').all(owner,'Golem');

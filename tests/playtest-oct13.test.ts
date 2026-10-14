@@ -66,7 +66,7 @@ test('Focus Sash activates once in a real battle, replays identically and remain
   store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(run,'Charizard','Focus Sash');
   const id=store.enter('feedback',run,11,starters),enemy=Showdown.Teams.unpack(packTeam(['Golem','Snorlax','Blastoise']))!;enemy[0].moves=['Rock Slide'];
   store.db.prepare('UPDATE battles SET opponent_team=?,seed=?,tera_tickets=? WHERE id=?').run(Showdown.Teams.pack(enemy),'[1,2,3,4]','{"p1":0,"p2":0}',id);
-  const row=store.battle(id),log=await runBattle({teams:{p1:row.player_team,p2:row.opponent_team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),rule:row.rule,teraTickets:{p1:0,p2:0}});
+  const row=store.battle(id),log=await runBattle({trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:row.opponent_team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),rule:row.rule,teraTickets:{p1:0,p2:0}});
   assert.equal(log.publicProtocol.filter(line=>line.startsWith('|-enditem|p1a: Charizard|Focus Sash')).length,1);
   assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
   store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
@@ -81,7 +81,7 @@ test('Focus Sash removed by Knock Off is not mistaken for natural activation',as
   store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(run,'Charizard','Focus Sash');
   const id=store.enter('feedback',run,11,starters),enemy=Showdown.Teams.unpack(packTeam(['Tyranitar','Snorlax','Blastoise']))!;enemy[0].moves=['Knock Off'];
   store.db.prepare('UPDATE battles SET opponent_team=?,seed=?,tera_tickets=? WHERE id=?').run(Showdown.Teams.pack(enemy),'[1,2,3,4]','{"p1":0,"p2":0}',id);
-  const row=store.battle(id),log=await runBattle({teams:{p1:row.player_team,p2:row.opponent_team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),rule:row.rule,teraTickets:{p1:0,p2:0}});
+  const row=store.battle(id),log=await runBattle({trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:row.opponent_team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),rule:row.rule,teraTickets:{p1:0,p2:0}});
   assert.ok(log.publicProtocol.some(line=>line.startsWith('|-enditem|p1a: Charizard|Focus Sash|[from] move: Knock Off')));
   store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
   assert.equal(store.view('feedback').run!.heldItems!.Charizard,undefined);
@@ -92,7 +92,7 @@ test('candidate details only appear after victory and match the saved opponent a
  const {store,run}=setup();try{
   const id=store.enter('feedback',run,11,starters);assert.deepEqual(store.view('feedback').run!.candidateDetails,{});
   store.db.prepare('UPDATE battles SET opponent_team=?,seed=?,tera_tickets=? WHERE id=?').run(packTeam(['Unown','Luvdisc','Delibird']),'[1,2,3,4]','{"p1":0,"p2":0}',id);
-  const row=store.battle(id),log=await runBattle({teams:{p1:row.player_team,p2:row.opponent_team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),rule:row.rule,teraTickets:{p1:0,p2:0}});
+  const row=store.battle(id),log=await runBattle({trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:row.opponent_team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),rule:row.rule,teraTickets:{p1:0,p2:0}});
   assert.equal(log.winner,'Player');store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
   const saved=Showdown.Teams.unpack(row.opponent_team)![0],details=store.view('feedback').run!.candidateDetails![saved.species];
   assert.deepEqual(details.types,Showdown.Dex.species.get(saved.species).types);

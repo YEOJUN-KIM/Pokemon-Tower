@@ -143,5 +143,6 @@ CREATE TABLE IF NOT EXISTS permanent_receipts(player_id TEXT NOT NULL REFERENCES
 CREATE TABLE IF NOT EXISTS run_routes(run_id TEXT PRIMARY KEY REFERENCES runs(id),second_theme TEXT NOT NULL,pending_boss INTEGER NOT NULL DEFAULT 0) STRICT;
 CREATE TABLE IF NOT EXISTS permanent_retry_upgrades(player_id TEXT PRIMARY KEY REFERENCES players(id),level INTEGER NOT NULL DEFAULT 0 CHECK(level BETWEEN 0 AND 3)) STRICT;
 CREATE TABLE IF NOT EXISTS run_retries(run_id TEXT PRIMARY KEY REFERENCES runs(id),retry_limit INTEGER NOT NULL CHECK(retry_limit BETWEEN 0 AND 3),used INTEGER NOT NULL DEFAULT 0 CHECK(used BETWEEN 0 AND 3),pending_battle_id TEXT REFERENCES battles(id)) STRICT;
-  PRAGMA user_version = 28;
+CREATE TABLE IF NOT EXISTS run_trainer_equipment(run_id TEXT NOT NULL REFERENCES runs(id),item TEXT NOT NULL CHECK(item IN ('Dynamax Band','Tera Orb')),PRIMARY KEY(run_id,item)) STRICT;
+  PRAGMA user_version = 31;
 `;

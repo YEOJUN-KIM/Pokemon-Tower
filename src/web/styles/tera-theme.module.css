@@ -22,6 +22,70 @@
   align-items: end;
   gap: 18px;
 }
+:where(.scope) :global(.gimmick-dock .tera-type-icon) {
+  display: block;
+  width: 88px;
+  height: 94px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 5px var(--gimmick-color));
+}
+:where(.scope) :global(.gimmick-item-visual) {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  width: 88px;
+  height: 94px;
+  isolation: isolate;
+}
+:where(.scope) :global(.gimmick-item-icon) {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  object-fit: fill;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 3px color-mix(in srgb,var(--gimmick-color),transparent 45%));
+}
+:where(.scope) :global(.gimmick-item-visual:before),:where(.scope) :global(.gimmick-item-visual:after) {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+}
+:where(.scope) :global(.is-selected .gimmick-item-visual:before) {
+  background: conic-gradient(from 25deg,transparent 0deg,color-mix(in srgb,var(--gimmick-color),transparent 15%) 65deg,transparent 125deg,var(--gimmick-color) 205deg,transparent 280deg,var(--gimmick-color) 335deg,transparent 360deg);
+  filter: blur(9px);
+  border-radius: 42% 58% 54% 46%;
+  animation: gimmick-item-wave 2.3s ease-in-out infinite;
+}
+:where(.scope) :global(.is-selected .gimmick-item-visual:after) {
+  inset: 5px;
+  background: radial-gradient(ellipse,#fff8d5 0%,color-mix(in srgb,var(--gimmick-color),transparent 25%) 35%,transparent 70%);
+  filter: blur(5px);
+  animation: gimmick-aura-breathe 1.7s ease-in-out infinite;
+}
+:where(.scope) :global(.is-selected .gimmick-item-icon) {
+  animation: gimmick-item-radiance 1.5s ease-in-out infinite;
+}
+@keyframes gimmick-item-radiance {
+  0%,100% {filter: brightness(1.08) saturate(1.1) drop-shadow(0 0 2px #fff9e5) drop-shadow(-2px -3px 8px var(--gimmick-color));}
+  45% {filter: brightness(1.28) saturate(1.2) drop-shadow(0 0 4px #fff) drop-shadow(2px -5px 14px var(--gimmick-color));}
+  75% {filter: brightness(1.14) saturate(1.15) drop-shadow(0 0 2px #fff9e5) drop-shadow(-3px -2px 10px var(--gimmick-color));}
+}
+@keyframes gimmick-item-wave {
+  0%,100% {opacity: .45;transform: translate(-2px,2px) rotate(-12deg) scale(.94);border-radius: 42% 58% 54% 46%;}
+  35% {opacity: .72;transform: translate(3px,-3px) rotate(8deg) scale(1.06);border-radius: 58% 42% 38% 62%;}
+  70% {opacity: .52;transform: translate(-3px,-1px) rotate(-5deg) scale(1.02);border-radius: 46% 54% 63% 37%;}
+}
+@media(prefers-reduced-motion:reduce) {
+  :where(.scope) :global(.is-selected .gimmick-item-icon),:where(.scope) :global(.is-selected .gimmick-item-visual:before),:where(.scope) :global(.is-selected .gimmick-item-visual:after) {animation: none;}
+  :where(.scope) :global(.is-selected .gimmick-item-visual:before),:where(.scope) :global(.is-selected .gimmick-item-visual:after) {opacity: .5;}
+  :where(.scope) :global(.is-selected .gimmick-item-icon) {filter: brightness(1.15) drop-shadow(0 0 8px var(--gimmick-color));}
+}
 :where(.scope) :global(:is(.gimmick-dock,.tera-command-side) .gimmick-icon-button) {
   --gimmick-color: #dfb7ff;
   position: relative;
@@ -97,7 +161,7 @@
   background: radial-gradient(ellipse,color-mix(in srgb,var(--gimmick-color),transparent 38%),transparent 70%);
   animation: gimmick-aura-breathe 1.7s ease-in-out infinite;
 }
-:where(.scope) :global(:is(.gimmick-dock,.tera-command-side) .gimmick-icon-button.is-selected>svg) {
+:where(.scope) :global(:is(.gimmick-dock,.tera-command-side) .gimmick-icon-button.is-selected>:is(svg,img)) {
   transform: scale(1.08);
   filter: drop-shadow(0 0 2px #fff7dc) drop-shadow(0 0 8px var(--gimmick-color)) drop-shadow(0 -5px 16px var(--gimmick-color));
   animation: gimmick-outline-heat 1.35s ease-in-out infinite;
@@ -127,7 +191,7 @@
   }
 }
 @media(prefers-reduced-motion:reduce) {
-  :where(.scope) :global(:is(.gimmick-dock,.tera-command-side) .gimmick-icon-button.is-selected:before),:where(.scope) :global(:is(.gimmick-dock,.tera-command-side) .gimmick-icon-button.is-selected>svg) {
+  :where(.scope) :global(:is(.gimmick-dock,.tera-command-side) .gimmick-icon-button.is-selected:before),:where(.scope) :global(:is(.gimmick-dock,.tera-command-side) .gimmick-icon-button.is-selected>:is(svg,img)) {
     animation: none;
   }
 }
@@ -308,6 +372,14 @@
     left: 0;
     gap: 8px;
   }
+  :where(.scope) :global(.gimmick-dock .tera-type-icon) {
+    width: 62px;
+    height: 66px;
+  }
+  :where(.scope) :global(.gimmick-item-visual) {
+    width: 62px;
+    height: 66px;
+  }
   :where(.scope) :global(:is(.gimmick-dock,.tera-command-side) .gimmick-icon-button) {
     width: 76px;
     height: 86px;
@@ -360,19 +432,19 @@
     display: none;
   }
 }
-:where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-menu.without-tera) {
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-menu.gimmicks-in-dock) {
   grid-template-columns: minmax(0,1fr) 240px;
   grid-template-areas: "moves details";
 }
 @media(max-width:760px) {
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-menu.without-tera) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-menu.gimmicks-in-dock) {
     grid-template-columns: minmax(0,1fr) 88px;
   }
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-menu.has-gimmick) {
   grid-template-columns: minmax(0,1fr) 156px 340px;
 }
-:where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-menu.without-tera) {
+:where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-menu.gimmicks-in-dock) {
   grid-template-columns: minmax(0,1fr) 340px;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-move-row) {
@@ -440,7 +512,7 @@
     grid-template-areas: "moves moves" "tera details";
     gap: 8px;
   }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-menu.without-tera) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-menu.gimmicks-in-dock) {
     grid-template-columns: minmax(0,1fr);
     grid-template-areas: "moves" "details";
   }

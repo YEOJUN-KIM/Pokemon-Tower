@@ -52,14 +52,14 @@ test('old Gligar battles keep their saved team; the next battle offers three col
   const id=store.start('evolution',starters,'basic'),row=store.battle(id);
   const oldTeam=packTeam(['Gligar','Golem','Mamoswine']);
   store.db.prepare('UPDATE battles SET opponent_team=? WHERE id=?').run(oldTeam,id);
-  const log:BattleLog={schemaVersion:1,engineVersion:row.engine_version,format:row.format,teams:{p1:row.player_team,p2:oldTeam},seed:JSON.parse(row.seed),rule:row.rule,upgrades:JSON.parse(row.upgrades),teraTickets:JSON.parse(row.tera_tickets),decisions:[],publicProtocol:[],winner:'Player',turns:1};
+  const log:BattleLog={schemaVersion:1,engineVersion:row.engine_version,format:row.format,trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:oldTeam},seed:JSON.parse(row.seed),rule:row.rule,upgrades:JSON.parse(row.upgrades),teraTickets:JSON.parse(row.tera_tickets),decisions:[],publicProtocol:[],winner:'Player',turns:1};
   store.complete(id,log,{id,status:'complete',requestId:1,turn:1,team:[],opponent:null,actions:[],messages:[],winner:'Player',error:null});
   assert.deepEqual(store.view('evolution').run!.candidates,['Golem','Mamoswine']);
   store.recruit('evolution',row.run_id,id,null,null);
   const nextId=store.enter('evolution',row.run_id,2,starters),next=store.battle(nextId);
   const members=Showdown.Teams.unpack(next.opponent_team)!;
   assert.equal(members.length,3);assert.ok(members.every(p=>isCollectibleSpecies(p.species)));
-  const nextLog:BattleLog={...log,teams:{p1:next.player_team,p2:next.opponent_team},seed:JSON.parse(next.seed),upgrades:JSON.parse(next.upgrades),teraTickets:JSON.parse(next.tera_tickets)};
+  const nextLog:BattleLog={...log,trainerEquipment:next.trainer_equipment==null?undefined:JSON.parse(next.trainer_equipment),teams:{p1:next.player_team,p2:next.opponent_team},seed:JSON.parse(next.seed),upgrades:JSON.parse(next.upgrades),teraTickets:JSON.parse(next.tera_tickets)};
   store.complete(nextId,nextLog,{id:nextId,status:'complete',requestId:1,turn:1,team:[],opponent:null,actions:[],messages:[],winner:'Player',error:null});
   assert.equal(store.view('evolution').run!.candidates.length,3);
   assert.equal(store.battle(id).opponent_team,oldTeam);

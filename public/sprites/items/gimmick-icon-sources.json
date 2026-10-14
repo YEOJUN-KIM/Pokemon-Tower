@@ -1,0 +1,746 @@
+{
+  "source": "PokeAPI/sprites",
+  "commit": "0dc105d5b12416932f29b594078282ab4be045f5",
+  "importedAt": "2026-10-14T05:57:30.593Z",
+  "transformation": "None; original PNG bytes with local item filenames.",
+  "files": [
+    {
+      "item": "Abomasite",
+      "path": "public/sprites/items/abomasite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/abomasite.png",
+      "bytes": 232,
+      "width": 30,
+      "height": 30,
+      "sha256": "aafd139f67341e59304e10dcca5c1ae5f6dfe39d2dbe26feb5026835b6fa3efc"
+    },
+    {
+      "item": "Absolite",
+      "path": "public/sprites/items/absolite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/absolite.png",
+      "bytes": 228,
+      "width": 30,
+      "height": 30,
+      "sha256": "f3a0d6c1c3a12d29f47abf9f840442b3d6c068dc1b98af4bb897a873b360ffee"
+    },
+    {
+      "item": "Aerodactylite",
+      "path": "public/sprites/items/aerodactylite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/aerodactylite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "1842bbe60b9c2d6f13de8e154752415c21feac838c791b27f6f7c4b9ce12308f"
+    },
+    {
+      "item": "Aggronite",
+      "path": "public/sprites/items/aggronite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/aggronite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "dc4582a9a5868e02c55a8006d5434e7d17942af0a9e92ca8a2b1be322d6b294e"
+    },
+    {
+      "item": "Alakazite",
+      "path": "public/sprites/items/alakazite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/alakazite.png",
+      "bytes": 235,
+      "width": 30,
+      "height": 30,
+      "sha256": "6052147b1734cffa5f4e3bf99674ffe70f433e0fb6a2e03287d75789bfce0a3d"
+    },
+    {
+      "item": "Aloraichium Z",
+      "path": "public/sprites/items/aloraichium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/aloraichium-z--bag.png",
+      "bytes": 225,
+      "width": 30,
+      "height": 30,
+      "sha256": "025e5479499c6182b43245385133242e60a251e527cc8a90a08cf019491a3ea3"
+    },
+    {
+      "item": "Altarianite",
+      "path": "public/sprites/items/altarianite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/altarianite.png",
+      "bytes": 217,
+      "width": 30,
+      "height": 30,
+      "sha256": "02aacb2bc5f0310d2014f615f33b1694d604b1e0f70cd1230841ea5fc7224f2a"
+    },
+    {
+      "item": "Ampharosite",
+      "path": "public/sprites/items/ampharosite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/ampharosite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "1c806bfbd8797df5a022126438373ffe8f0dca0ce930954c7b3f7ace7d504f88"
+    },
+    {
+      "item": "Audinite",
+      "path": "public/sprites/items/audinite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/audinite.png",
+      "bytes": 232,
+      "width": 30,
+      "height": 30,
+      "sha256": "aee310e16c11af14fff4af9466fc1a5fda0e47f188304459667339c40f2f90fa"
+    },
+    {
+      "item": "Banettite",
+      "path": "public/sprites/items/banettite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/banettite.png",
+      "bytes": 235,
+      "width": 30,
+      "height": 30,
+      "sha256": "520d055cc5bac56acf6c9ea64b1afc66694f6919a35d0afe78a33cd15741134f"
+    },
+    {
+      "item": "Beedrillite",
+      "path": "public/sprites/items/beedrillite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/beedrillite.png",
+      "bytes": 230,
+      "width": 30,
+      "height": 30,
+      "sha256": "b771fe74adb5063c383f3301dc53d48c687382fb3666145b4d5db3f6744babfd"
+    },
+    {
+      "item": "Blastoisinite",
+      "path": "public/sprites/items/blastoisinite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/blastoisinite.png",
+      "bytes": 235,
+      "width": 30,
+      "height": 30,
+      "sha256": "825cd1d303a71ea1b8924eb429f2894584dbee948388e823ee9a8a28551ff228"
+    },
+    {
+      "item": "Blazikenite",
+      "path": "public/sprites/items/blazikenite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/blazikenite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "f0f54edfbfdc0d35f90c2dd78aa7dc8ec096720a5e6aaf41fd88b57a8001b41d"
+    },
+    {
+      "item": "Buginium Z",
+      "path": "public/sprites/items/buginium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/buginium-z--bag.png",
+      "bytes": 233,
+      "width": 30,
+      "height": 30,
+      "sha256": "71dd8b7e25e23aec4e4c8a08b6736978f141db72666e599df44e56dbaa68fa67"
+    },
+    {
+      "item": "Cameruptite",
+      "path": "public/sprites/items/cameruptite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/cameruptite.png",
+      "bytes": 234,
+      "width": 30,
+      "height": 30,
+      "sha256": "58a97583317836a2a778a9e2e23184dd29131c5cd0e4266d2fc066cc10255bb6"
+    },
+    {
+      "item": "Charizardite X",
+      "path": "public/sprites/items/charizardite-x.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/charizardite-x.png",
+      "bytes": 235,
+      "width": 30,
+      "height": 30,
+      "sha256": "fdfe49ccf80ed10c4a5f3f5ef30033087ba175bfabb1b37c0a6cea0827589919"
+    },
+    {
+      "item": "Charizardite Y",
+      "path": "public/sprites/items/charizardite-y.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/charizardite-y.png",
+      "bytes": 235,
+      "width": 30,
+      "height": 30,
+      "sha256": "78445bac6c148e7f214d6cb29f0ce554568a1e707ae98d18b4b072a87081b065"
+    },
+    {
+      "item": "Darkinium Z",
+      "path": "public/sprites/items/darkinium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/darkinium-z--bag.png",
+      "bytes": 233,
+      "width": 30,
+      "height": 30,
+      "sha256": "900849691edc81fc59d2bb847e7671558563eeb7a499e1e22f1e94b724b68477"
+    },
+    {
+      "item": "Decidium Z",
+      "path": "public/sprites/items/decidium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/decidium-z--bag.png",
+      "bytes": 223,
+      "width": 30,
+      "height": 30,
+      "sha256": "4a6c143d599f180f738bd7455ed45c036cb1fc1f80fd2c4dd336419251c18984"
+    },
+    {
+      "item": "Diancite",
+      "path": "public/sprites/items/diancite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/diancite.png",
+      "bytes": 229,
+      "width": 30,
+      "height": 30,
+      "sha256": "100190f12b8dc2ec8051304b14f36efd58866c335cb778e69c4b41b3bd3e1fb2"
+    },
+    {
+      "item": "Dragoninite",
+      "path": "public/sprites/items/dragoninite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/gen9/dragoninite.png",
+      "bytes": 7456,
+      "width": 160,
+      "height": 160,
+      "sha256": "b07d965766a412861ebb802751f1fd59cb6f6e92f6683db5fec042fbc2bc91a0"
+    },
+    {
+      "item": "Dragonium Z",
+      "path": "public/sprites/items/dragonium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/dragonium-z--bag.png",
+      "bytes": 225,
+      "width": 30,
+      "height": 30,
+      "sha256": "f28ff42a5017cce6cb21616df21741e905e2a3f53a6be3eea17b914974f80b5d"
+    },
+    {
+      "item": "Eevium Z",
+      "path": "public/sprites/items/eevium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/eevium-z--bag.png",
+      "bytes": 223,
+      "width": 30,
+      "height": 30,
+      "sha256": "60a0bcd58c2033c88f49000730446bf83b76bd7fc1128fa7d87841d5b40b897d"
+    },
+    {
+      "item": "Electrium Z",
+      "path": "public/sprites/items/electrium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/electrium-z--bag.png",
+      "bytes": 217,
+      "width": 30,
+      "height": 30,
+      "sha256": "6793cc568c017b6c1e3fcdcb2c4021b11391232cad6c0204c9075218b1b74232"
+    },
+    {
+      "item": "Fairium Z",
+      "path": "public/sprites/items/fairium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/fairium-z--bag.png",
+      "bytes": 224,
+      "width": 30,
+      "height": 30,
+      "sha256": "01e9697f93209cb4730763784e790c629d5d2bb694f0d3faaad283e9584d4f96"
+    },
+    {
+      "item": "Fightinium Z",
+      "path": "public/sprites/items/fightinium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/fightinium-z--bag.png",
+      "bytes": 225,
+      "width": 30,
+      "height": 30,
+      "sha256": "307bac144fa373e4ca06540748a771cf65c980b143cabb0706b50ed3cf0dad18"
+    },
+    {
+      "item": "Firium Z",
+      "path": "public/sprites/items/firium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/firium-z--bag.png",
+      "bytes": 227,
+      "width": 30,
+      "height": 30,
+      "sha256": "3be21d73129110b86175e285fdbef0c4a24a5a3fe8a502f17fbe31e715b45b67"
+    },
+    {
+      "item": "Flyinium Z",
+      "path": "public/sprites/items/flyinium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/flyinium-z--bag.png",
+      "bytes": 224,
+      "width": 30,
+      "height": 30,
+      "sha256": "8e6fc196b3a01e0ff858dea4cc83132808a102c3925e9173c36d279a00c17389"
+    },
+    {
+      "item": "Galladite",
+      "path": "public/sprites/items/galladite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/galladite.png",
+      "bytes": 228,
+      "width": 30,
+      "height": 30,
+      "sha256": "f239c96bd532a17ae64f63797b4077ca2daa70e838f0b4a25059f79a21cd6bf2"
+    },
+    {
+      "item": "Garchompite",
+      "path": "public/sprites/items/garchompite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/garchompite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "9ef7939915512bc4bf1e5c972deae0e6ae8539541d4d659eb030077b4d18bb2c"
+    },
+    {
+      "item": "Gardevoirite",
+      "path": "public/sprites/items/gardevoirite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/gardevoirite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "7d3c36c934f9ed9c7f486e5370bb8bdbcc7840becfdfd2fce0b27372983e3a42"
+    },
+    {
+      "item": "Gengarite",
+      "path": "public/sprites/items/gengarite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/gengarite.png",
+      "bytes": 235,
+      "width": 30,
+      "height": 30,
+      "sha256": "409a015448fed8d3a8a1d4b43cb3a8eb70e1f9bc0e83e9ac01f8337dda0f46b0"
+    },
+    {
+      "item": "Ghostium Z",
+      "path": "public/sprites/items/ghostium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/ghostium-z--bag.png",
+      "bytes": 231,
+      "width": 30,
+      "height": 30,
+      "sha256": "e4439ac682765706b5aef114df79a69c4f4a68c75d49752667e4bc4f401062cf"
+    },
+    {
+      "item": "Glalitite",
+      "path": "public/sprites/items/glalitite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/glalitite.png",
+      "bytes": 231,
+      "width": 30,
+      "height": 30,
+      "sha256": "3c2adb4503fea9481acc1b8fb2143889bf46ae3cb5a8a28c4724d5108bd1c7fd"
+    },
+    {
+      "item": "Grassium Z",
+      "path": "public/sprites/items/grassium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/grassium-z--bag.png",
+      "bytes": 219,
+      "width": 30,
+      "height": 30,
+      "sha256": "b30bff36891cda17e666e60ac8af9c266ef4c50946b9e2cf6ef8c1754e943aec"
+    },
+    {
+      "item": "Groundium Z",
+      "path": "public/sprites/items/groundium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/groundium-z--bag.png",
+      "bytes": 226,
+      "width": 30,
+      "height": 30,
+      "sha256": "3341462bac3ffd57b3fd43e47bbcb639dedbe056366202e1654814a5ed103fd0"
+    },
+    {
+      "item": "Gyaradosite",
+      "path": "public/sprites/items/gyaradosite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/gyaradosite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "35c5a85eeffff107caa731b855e13025646f485d70260a09710f2cba19e89b6b"
+    },
+    {
+      "item": "Heracronite",
+      "path": "public/sprites/items/heracronite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/heracronite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "da4e7360e9fbb7037cd7932683fdf7910f28f11bd7f580904761a3ed13202865"
+    },
+    {
+      "item": "Houndoominite",
+      "path": "public/sprites/items/houndoominite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/houndoominite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "ffb08e9980898c091aa9348c1cdfc788d2322e4d4c7410f9b590cc2e7cfb5ae6"
+    },
+    {
+      "item": "Icium Z",
+      "path": "public/sprites/items/icium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/icium-z--bag.png",
+      "bytes": 229,
+      "width": 30,
+      "height": 30,
+      "sha256": "b05b96b2d2b9c251aa9b9e3ff378b49be765c690b48b4ad4ec0fb9243f132184"
+    },
+    {
+      "item": "Incinium Z",
+      "path": "public/sprites/items/incinium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/incinium-z--bag.png",
+      "bytes": 231,
+      "width": 30,
+      "height": 30,
+      "sha256": "4b30793bb112f300d24cd845dc3aef166581623494f8b55359149eacd68bde46"
+    },
+    {
+      "item": "Kangaskhanite",
+      "path": "public/sprites/items/kangaskhanite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/kangaskhanite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "05890d1583eb75a58462c31de5e61809d59359b06632dc6bd01bdcb16597f718"
+    },
+    {
+      "item": "Kommonium Z",
+      "path": "public/sprites/items/kommonium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/kommonium-z--bag.png",
+      "bytes": 297,
+      "width": 30,
+      "height": 30,
+      "sha256": "9d373efe375a1bbc2666fc56027d9171be932f82bf3236202bc6643106b1e524"
+    },
+    {
+      "item": "Latiasite",
+      "path": "public/sprites/items/latiasite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/latiasite.png",
+      "bytes": 224,
+      "width": 30,
+      "height": 30,
+      "sha256": "1380b784f02adb65df53e607749e4f968c5d077e964a6ad252eeb8b512a1f1ad"
+    },
+    {
+      "item": "Latiosite",
+      "path": "public/sprites/items/latiosite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/latiosite.png",
+      "bytes": 224,
+      "width": 30,
+      "height": 30,
+      "sha256": "ef32a92d45cbc7fafe46aca66b9ed235e81d39363416437cf0b26df17d694f63"
+    },
+    {
+      "item": "Lopunnite",
+      "path": "public/sprites/items/lopunnite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/lopunnite.png",
+      "bytes": 231,
+      "width": 30,
+      "height": 30,
+      "sha256": "ef2b6e9b902e51529cb1fc6f340b17575421ec13a1d62f9ff34b1ba90777d690"
+    },
+    {
+      "item": "Lucarionite",
+      "path": "public/sprites/items/lucarionite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/lucarionite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "8e532ab9413ffd6386518a5d28e369b5168b5f6e6c8a19d1b73e58785f14c5a3"
+    },
+    {
+      "item": "Lunalium Z",
+      "path": "public/sprites/items/lunalium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/lunalium-z--bag.png",
+      "bytes": 297,
+      "width": 30,
+      "height": 30,
+      "sha256": "b5114d6b570efdf695da5a8f04ad486cff2d877e0b757eeba94db801763bace2"
+    },
+    {
+      "item": "Lycanium Z",
+      "path": "public/sprites/items/lycanium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/lycanium-z--bag.png",
+      "bytes": 302,
+      "width": 30,
+      "height": 30,
+      "sha256": "2a80c58c9942f17fdea085b11bcee810a28501c475d596652a844df2587c0c25"
+    },
+    {
+      "item": "Manectite",
+      "path": "public/sprites/items/manectite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/manectite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "2ad46694163bf0f7239eff1403e9c815246d31bd006e23bdc8767d5327163a71"
+    },
+    {
+      "item": "Marshadium Z",
+      "path": "public/sprites/items/marshadium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/marshadium-z--bag.png",
+      "bytes": 229,
+      "width": 30,
+      "height": 30,
+      "sha256": "ff1f2eec73768c7b0785c308f238f66f9b79c3fbdd3ddbd368b7c42f75e094c2"
+    },
+    {
+      "item": "Mawilite",
+      "path": "public/sprites/items/mawilite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/mawilite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "0cd8f95368091c38f2ed19478474a5a7a4601e9516dabed40a4b8cf907c70565"
+    },
+    {
+      "item": "Medichamite",
+      "path": "public/sprites/items/medichamite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/medichamite.png",
+      "bytes": 235,
+      "width": 30,
+      "height": 30,
+      "sha256": "b32872ceabc4f0a02fb474252f756cc1cd22429a5cfd5c296bf44e428345d606"
+    },
+    {
+      "item": "Metagrossite",
+      "path": "public/sprites/items/metagrossite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/metagrossite.png",
+      "bytes": 235,
+      "width": 30,
+      "height": 30,
+      "sha256": "078ec2936a167305d678b8f83d38bfc158fb9af9b60f34f51d492d1edf1e366a"
+    },
+    {
+      "item": "Mewnium Z",
+      "path": "public/sprites/items/mewnium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/mewnium-z--bag.png",
+      "bytes": 223,
+      "width": 30,
+      "height": 30,
+      "sha256": "5c5f24e612b3d425ed40d12f6f52ee1025eb6d6ba13a219b8b7cde2abdd2c9c3"
+    },
+    {
+      "item": "Mewtwonite X",
+      "path": "public/sprites/items/mewtwonite-x.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/mewtwonite-x.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "b800cc72097710f9efd65ac3c24a9b58803fad35ffd3549d7c208fdf7a990bec"
+    },
+    {
+      "item": "Mewtwonite Y",
+      "path": "public/sprites/items/mewtwonite-y.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/mewtwonite-y.png",
+      "bytes": 235,
+      "width": 30,
+      "height": 30,
+      "sha256": "a3d06934a54ffc3cbb5aa5dc9d841062ddc050e42824ea3a71b3ae269374b10a"
+    },
+    {
+      "item": "Mimikium Z",
+      "path": "public/sprites/items/mimikium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/mimikium-z--bag.png",
+      "bytes": 295,
+      "width": 30,
+      "height": 30,
+      "sha256": "a2cd0d544deedcca9b6414c511bd09c6b78b61139f1515e43a69cc458be8ab8c"
+    },
+    {
+      "item": "Normalium Z",
+      "path": "public/sprites/items/normalium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/normalium-z--bag.png",
+      "bytes": 240,
+      "width": 30,
+      "height": 30,
+      "sha256": "f5a08f04ef99b15779f7f52d8af309fd271a1db6a418b3fb23e108afc84259e0"
+    },
+    {
+      "item": "Pidgeotite",
+      "path": "public/sprites/items/pidgeotite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/pidgeotite.png",
+      "bytes": 233,
+      "width": 30,
+      "height": 30,
+      "sha256": "37030688ebfad9bf7d6e0f81badf8d4af81a9256e549eeffd4724c33eab54843"
+    },
+    {
+      "item": "Pikanium Z",
+      "path": "public/sprites/items/pikanium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/pikanium-z--bag.png",
+      "bytes": 224,
+      "width": 30,
+      "height": 30,
+      "sha256": "d9c80dcb20bd99bf4e1f3d8aa8456ffb878af295421615a7f8b8a640f19529ac"
+    },
+    {
+      "item": "Pikashunium Z",
+      "path": "public/sprites/items/pikashunium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/pikashunium-z--bag.png",
+      "bytes": 262,
+      "width": 30,
+      "height": 30,
+      "sha256": "44a9520fb4433de399a5c0d2a984f081d14582e03d78fd449606b458d5686a84"
+    },
+    {
+      "item": "Pinsirite",
+      "path": "public/sprites/items/pinsirite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/pinsirite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "31536834ac77dde6ff3b02023c68523f1320beba49f396dcfdafafd7a5dbe684"
+    },
+    {
+      "item": "Poisonium Z",
+      "path": "public/sprites/items/poisonium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/poisonium-z--bag.png",
+      "bytes": 225,
+      "width": 30,
+      "height": 30,
+      "sha256": "579161e30ac8c5156349faf9954cc158a01e931a23193ca6e390a2c6bc52a04a"
+    },
+    {
+      "item": "Primarium Z",
+      "path": "public/sprites/items/primarium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/primarium-z--bag.png",
+      "bytes": 229,
+      "width": 30,
+      "height": 30,
+      "sha256": "efefa9def30cba035b204bf81de25b7740cea30966172f7d573012396407116a"
+    },
+    {
+      "item": "Psychium Z",
+      "path": "public/sprites/items/psychium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/psychium-z--bag.png",
+      "bytes": 222,
+      "width": 30,
+      "height": 30,
+      "sha256": "873004d65f0773e8e9ccd2e8275315aee385b1842b5ec653fa2544fadd9c75ee"
+    },
+    {
+      "item": "Rockium Z",
+      "path": "public/sprites/items/rockium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/rockium-z--bag.png",
+      "bytes": 219,
+      "width": 30,
+      "height": 30,
+      "sha256": "ef769763b77eff3f67c82c3a5a01dca25bcebb4392e521c908eeefcc785ee1d6"
+    },
+    {
+      "item": "Sablenite",
+      "path": "public/sprites/items/sablenite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/sablenite.png",
+      "bytes": 230,
+      "width": 30,
+      "height": 30,
+      "sha256": "dabf9e46f0475ebb748c72fdb07d20eab9016010fea81b129cfdec426a8d363c"
+    },
+    {
+      "item": "Salamencite",
+      "path": "public/sprites/items/salamencite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/salamencite.png",
+      "bytes": 235,
+      "width": 30,
+      "height": 30,
+      "sha256": "a57e83a832627e256947c19bdd5dde9f35a4c8f0ee83b68954c75d41ac2621bf"
+    },
+    {
+      "item": "Sceptilite",
+      "path": "public/sprites/items/sceptilite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/sceptilite.png",
+      "bytes": 236,
+      "width": 30,
+      "height": 30,
+      "sha256": "119a333196f743da1d92b83d17c7aeb633f4bd24d394f994a669d2255928a5e4"
+    },
+    {
+      "item": "Scizorite",
+      "path": "public/sprites/items/scizorite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/scizorite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "dbc11c6bea1f179dad941129221e95c41f6abe85509fa1c92bd000eb23ce28ba"
+    },
+    {
+      "item": "Sharpedonite",
+      "path": "public/sprites/items/sharpedonite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/sharpedonite.png",
+      "bytes": 234,
+      "width": 30,
+      "height": 30,
+      "sha256": "b7728c7720222dd09ac4f46072665fd36b03266bf0a8eba3be0319d67c453dc1"
+    },
+    {
+      "item": "Slowbronite",
+      "path": "public/sprites/items/slowbronite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/slowbronite.png",
+      "bytes": 234,
+      "width": 30,
+      "height": 30,
+      "sha256": "a379cfdb764ee6cad86934f9a9a3fe0c647bb0216aee4fa3eb9fd1f04057b669"
+    },
+    {
+      "item": "Snorlium Z",
+      "path": "public/sprites/items/snorlium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/snorlium-z--bag.png",
+      "bytes": 220,
+      "width": 30,
+      "height": 30,
+      "sha256": "236512afe492b5de925302576986ca8eee6bb51cd9553dc1277c41b2e05fbcf2"
+    },
+    {
+      "item": "Solganium Z",
+      "path": "public/sprites/items/solganium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/solganium-z--bag.png",
+      "bytes": 298,
+      "width": 30,
+      "height": 30,
+      "sha256": "88e5db91173b9f371cd75587b92c7a01163cdd56b559749025621020f2b63202"
+    },
+    {
+      "item": "Steelium Z",
+      "path": "public/sprites/items/steelium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/steelium-z--bag.png",
+      "bytes": 222,
+      "width": 30,
+      "height": 30,
+      "sha256": "8bc84bcd7700f4b5be45aed39ef4d4e2a4ea5c6a60124d60d1d055e3bc391a6d"
+    },
+    {
+      "item": "Steelixite",
+      "path": "public/sprites/items/steelixite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/steelixite.png",
+      "bytes": 231,
+      "width": 30,
+      "height": 30,
+      "sha256": "2513175afe5af229a0080d45089514add6fe1dd4a9cf82f4ad530b0a35e0f264"
+    },
+    {
+      "item": "Swampertite",
+      "path": "public/sprites/items/swampertite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/swampertite.png",
+      "bytes": 224,
+      "width": 30,
+      "height": 30,
+      "sha256": "01e8cceab6fe711d54037e1a5bd4e2f9b21f78f491bc90d4282294d2bc06ef65"
+    },
+    {
+      "item": "Tapunium Z",
+      "path": "public/sprites/items/tapunium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/tapunium-z--bag.png",
+      "bytes": 225,
+      "width": 30,
+      "height": 30,
+      "sha256": "6ede679749cb6e34ee4e45dd2715db311972e5d7a644589956c72f1eb0ce6472"
+    },
+    {
+      "item": "Tyranitarite",
+      "path": "public/sprites/items/tyranitarite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/tyranitarite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "7e228618ac144db18472529c48bfb150bd1ca1768e9c725d1148b17bc5b851c7"
+    },
+    {
+      "item": "Venusaurite",
+      "path": "public/sprites/items/venusaurite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/venusaurite.png",
+      "bytes": 239,
+      "width": 30,
+      "height": 30,
+      "sha256": "4a79a6855a53e0bb4d451ac379a5544e616b0400a9818e551cd06a9bf2ae2f71"
+    },
+    {
+      "item": "Waterium Z",
+      "path": "public/sprites/items/waterium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items/waterium-z--bag.png",
+      "bytes": 223,
+      "width": 30,
+      "height": 30,
+      "sha256": "0baa25ceb7baae9e6058a3b0c2dfd4e5759180d00f82f414af3b7d25c46c185d"
+    }
+  ]
+}

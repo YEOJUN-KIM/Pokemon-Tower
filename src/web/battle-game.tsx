@@ -1,8 +1,9 @@
 'use client';
+import {TrainerEquipment} from './trainer-equipment';
 import {currentTypes} from './battle-types';
 import {collectionSpecies} from '../data/selectable-forms';
 import {TypeBadge} from './type-badge';
-import {battleRules,allowsGimmick} from '../data/run-rules';
+import {battleRules} from '../data/run-rules';
 import {themeLabel} from '../data/tower-themes';
 import {progressionLabel} from '../data/tower-progression';
 import {teraColors} from '../data/tera';
@@ -67,10 +68,10 @@ function Sprite({shiny=false,name, back = false, animated=false,className = '',c
   return <span className={`sprite ${className} ${dynamax ? 'dynamaxed' : ''} ${terastallized ? 'terastallized' : ''}`} style={{['--dynamax-scale' as string]:growth,['--tera-color' as string]:teraColors[terastallized ?? ''],['--tera-crown-top' as string]:crownTop+'%'}} data-tera={terastallized || undefined} data-dynamax={dynamax || undefined} data-status={status || undefined} title={status ? `${pokemonName(name)} · ${battleStatusNames[status]}` : undefined}>{id ? <PokemonImage shiny={shiny} id={id} spriteKey={species[name]?.spriteKey} name={pokemonName(name)} back={back} animated={animated} sizeScale={animated ? pokemonBattleScale(name) : 1} stableFrame={animated} onVisibleTop={terastallized ? setCrownTop : undefined} matchBaseHeight={animated && name.includes("-Mega")} fallback={fallback}/> : fallback}{terastallized && <span className="tera-crown"><TeraCrystal type={terastallized}/></span>}</span>;
 }
 
-function HealthCard({pokemon, enemy = false, percentage = false,field,team}: {pokemon: Pick<PokemonView, 'species' | 'displaySpecies' | 'condition' | 'gender' | 'types' | 'terastallized'>; enemy?: boolean; percentage?:boolean;field?:BattleView['field'];team?:PokemonView[]}) {
+function HealthCard({pokemon, enemy = false, percentage = false,field,team,faintPending=false}: {pokemon: Pick<PokemonView, 'species' | 'displaySpecies' | 'condition' | 'gender' | 'types' | 'terastallized'>; enemy?: boolean; percentage?:boolean;field?:BattleView['field'];team?:PokemonView[];faintPending?:boolean}) {
   const hp = health(pokemon.condition);
   const critical=hp.percent>0 && hp.percent<=30;
-  return <div className={`health-card ${enemy ? 'enemy-health' : 'player-health'}`} data-hp-state={hp.percent===0?'fainted':critical?'critical':hp.percent<50?'caution':'healthy'}>
+  return <div className={`health-card ${enemy ? 'enemy-health' : 'player-health'}`} data-hp-state={hp.percent===0&&!faintPending?'fainted':critical||faintPending?'critical':hp.percent<50?'caution':'healthy'}>
     <div className="health-heading"><strong>{battlePokemonName(pokemon.displaySpecies ?? pokemon.species)}{pokemon.gender && pokemon.gender!=='N' && <i className="pokemon-gender" data-gender={pokemon.gender} aria-label={pokemon.gender==='M'?'수컷':'암컷'}>{pokemon.gender==='M'?'♂':'♀'}</i>}<span className="health-types" aria-label="현재 타입">{currentTypes(pokemon).map(type=><TypeBadge key={type} type={type}/>)}</span></strong><span>Lv. 50</span></div>
     {hp.status && <div className="health-status"><b data-status={battleStatus(pokemon.condition)}>{hp.status}</b></div>}
     <div className="hp-row"><span>HP</span><div className="hp-track" role="progressbar" aria-label={`${battlePokemonName(pokemon.displaySpecies ?? pokemon.species)} HP`} aria-valuenow={Math.round(hp.percent)} aria-valuemin={0} aria-valuemax={100}>
@@ -270,7 +271,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     if(key==='s'){setShowLog(true);return true;}
     if(busy || playing)return true;
     if(key==='a' && tab==='moves' && battle){
-      const kinds=(['mega','dynamax','terastallize','zmove'] as const).filter(kind=>allowsGimmick(run?.rule ?? 'chaos',kind) && battle.actions.some(action=>action.command.endsWith(' '+kind)));
+      const kinds=Array.from(document.querySelectorAll<HTMLButtonElement>('.gimmick-dock button[data-gimmick]:not(:disabled)')).map(button=>button.dataset.gimmick as Gimmick);
       setGimmick(kinds[kinds.indexOf(gimmick as Gimmick)+1] ?? null);return true;
     }
     if(key==='x'){effect('cancel');if(showField){fieldHeld.current=false;setShowField(null);}else if(tab!=='root' && !forceSwitch){setGimmick(null);setTab('root');}else setBattleMenu(true);}
@@ -310,7 +311,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
               const entered=preparing ? selected.includes(collectionSpecies(pokemon.species)) : !!battle?.team.some(p=>p.species===pokemon.species),fainted=entered && health(pokemon.condition).percent===0;
               const state=!entered?'미출전':fainted?'기절':pokemon.active?'출전 중':'출전';
               return <div className={`team-member ${!entered || fainted ? "is-muted" : ""} ${pokemon.active && !fainted ? "is-active" : ""}`} key={pokemon.species} title={`${battlePokemonName(pokemon.displaySpecies??pokemon.species)} · ${state}`} aria-label={`${battlePokemonName(pokemon.displaySpecies??pokemon.species)} · ${state}`} data-team-state={state}><Sprite shiny={pokemon.shiny} name={pokemon.displaySpecies??pokemon.species}/><span className="team-status">{state}</span></div>;
-            })}</div></section>
+            })}</div><TrainerEquipment items={run?.trainerEquipment??[]}/></section>
             {battle && <div className="opponent-heading"><div className="enemy-trainer" data-opponent-kind={run?.boss ? "boss" : run?.trainer?.kind ?? "normal"}><span className="opponent-marker" aria-hidden="true">VS</span><strong>{trainerLabel(run?.boss ?? run?.trainer ?? battleTrainer(battle.id))}</strong></div></div>}
             <div className="tip"><span>TRAINER TIP</span><p>상대의 약점을 노려보세요.<br />타입 상성에 따라 공격의 효과가 달라집니다.</p></div>
           </aside>
@@ -318,16 +319,16 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
               <div className="stadium-backdrop" aria-hidden="true"><div className="stadium-lights"/><div className="field-horizon"/><div className="stadium-field"/><div className="stadium-details"><i/><i/><i/></div></div><span className="arena-label">{String(run?.floor ?? 1).padStart(2,'0')}F / {arenaNames[scenery]}</span>
               <div className="arena-orbit orbit-one" aria-hidden="true" /><div className="arena-orbit orbit-two" aria-hidden="true" />
               {!trainerIntro && !preparing && battle && active && battle.opponent ? <>
-                <HealthCard pokemon={battle.opponent} enemy field={battle.field} />
+                <HealthCard pokemon={battle.opponent} enemy field={battle.field} faintPending={battle.pendingFaints?.includes('enemy')} />
                 {motion && ['dynamax-recall','dynamax-ball','dynamax-release','dynamax-grow'].includes(motion.kind) && <div className={`dynamax-atmosphere atmosphere-${motion.kind}`} aria-hidden="true"><i/><b/></div>}
-                <div className="enemy-position"><span key={`enemy-${frameNumber}`} style={{['--tera-color' as string]:motion ? teraColors[motion.color[0].toUpperCase()+motion.color.slice(1)] : undefined}} className={`motion-wrap ${motion?.side === 'enemy' ? `motion-${motion.kind}` : ''}`}>{motion?.kind === 'switch' && motion.sendOut!==false && motion.side === 'enemy' && <SendOut />}<Sprite shiny={battle.opponent.shiny} name={battle.opponent.displaySpecies ?? battle.opponent.species} animated dynamax={battle.opponent.dynamax} terastallized={battle.opponent.terastallized} condition={battle.opponent.condition} className={health(battle.opponent.condition).percent === 0 ? 'fainted' : ''} /><PokemonFeedback motion={motion?.side === 'enemy' ? motion : null} /></span>{battle.opponent.shiny&&motion?.kind==='switch'&&motion.sendOut!==false&&(motion.side==='enemy'||battle.turn===0)&&<ShinySparkles key={'enemy-'+frameNumber}/>}</div>
-                <div className="player-position"><span key={`player-${frameNumber}`} style={{['--tera-color' as string]:motion ? teraColors[motion.color[0].toUpperCase()+motion.color.slice(1)] : undefined}} className={`motion-wrap ${motion?.side === 'player' ? `motion-${motion.kind}` : ''}`}>{motion?.kind === 'switch' && motion.sendOut!==false && motion.side === 'player' && <SendOut />}<Sprite shiny={active.shiny} name={active.displaySpecies ?? active.species} back animated dynamax={active.dynamax} terastallized={active.terastallized} condition={active.condition} className={health(active.condition).percent === 0 ? 'fainted' : ''} /><PokemonFeedback motion={motion?.side === 'player' ? motion : null} /></span>{active.shiny&&motion?.kind==='switch'&&motion.sendOut!==false&&(motion.side==='player'||battle.turn===0)&&<ShinySparkles key={'player-'+frameNumber}/>}</div>
+                <div className="enemy-position"><span key={`enemy-${frameNumber}`} style={{['--tera-color' as string]:motion ? teraColors[motion.color[0].toUpperCase()+motion.color.slice(1)] : undefined}} className={`motion-wrap ${motion?.side === 'enemy' ? `motion-${motion.kind}` : ''}`}>{motion?.kind === 'switch' && motion.sendOut!==false && motion.side === 'enemy' && <SendOut />}<Sprite shiny={battle.opponent.shiny} name={battle.opponent.displaySpecies ?? battle.opponent.species} animated dynamax={battle.opponent.dynamax} terastallized={battle.opponent.terastallized} condition={battle.opponent.condition} className={health(battle.opponent.condition).percent === 0 && !battle.pendingFaints?.includes('enemy') ? 'fainted' : ''} /><PokemonFeedback motion={motion?.side === 'enemy' ? motion : null} /></span>{battle.opponent.shiny&&motion?.kind==='switch'&&motion.sendOut!==false&&(motion.side==='enemy'||battle.turn===0)&&<ShinySparkles key={'enemy-'+frameNumber}/>}</div>
+                <div className="player-position"><span key={`player-${frameNumber}`} style={{['--tera-color' as string]:motion ? teraColors[motion.color[0].toUpperCase()+motion.color.slice(1)] : undefined}} className={`motion-wrap ${motion?.side === 'player' ? `motion-${motion.kind}` : ''}`}>{motion?.kind === 'switch' && motion.sendOut!==false && motion.side === 'player' && <SendOut />}<Sprite shiny={active.shiny} name={active.displaySpecies ?? active.species} back animated dynamax={active.dynamax} terastallized={active.terastallized} condition={active.condition} className={health(active.condition).percent === 0 && !battle.pendingFaints?.includes('player') ? 'fainted' : ''} /><PokemonFeedback motion={motion?.side === 'player' ? motion : null} /></span>{active.shiny&&motion?.kind==='switch'&&motion.sendOut!==false&&(motion.side==='player'||battle.turn===0)&&<ShinySparkles key={'player-'+frameNumber}/>}</div>
                 {active.item && megaStones[active.item] && <div className="gimmick-preload" aria-hidden="true"><Sprite name={megaStones[active.item].forme} back animated/></div>}
                 {motion?.kind.startsWith('tera-') && <div className={`tera-atmosphere atmosphere-${motion.kind}`} style={{['--tera-color' as string]:teraColors[motion.color[0].toUpperCase()+motion.color.slice(1)]}} aria-hidden="true"/>}
                 {motion?.kind.startsWith('mega-') && <div className={`mega-atmosphere atmosphere-${motion.kind}`} aria-hidden="true"/>}
                 {motion?.kind==='mega-flash' && <div className="mega-arena-flash" aria-hidden="true"/>}
                 <MoveVisuals motion={motion} speed={playbackSpeed.current}/>
-                <HealthCard pokemon={active} percentage={playing} team={battle.team} />
+                <HealthCard pokemon={active} percentage={playing} team={battle.team} faintPending={battle.pendingFaints?.includes('player')} />
                 {notice && <div key={`notice-${frameNumber}`} className={`effect-notice notice-${notice.side} notice-${notice.kind}`} role="status" data-testid="effect-notice"><span>{notice.kind === 'ability' ? '특성' : '도구'}</span><p>{notice.side === 'enemy' ? '상대 ' : ''}{pokemonName(notice.actor.split(': ')[1])}의<strong>{notice.label}</strong></p></div>}
 
               </> : run && ['battle','recruit','select'].includes(run.state) ? null : <div className="arena-preview"><span className="preview-number">{String(run?.floor ?? 1).padStart(2, '0')}</span><div className="preview-sprites" data-testid="team-preview" role="group" aria-label="선택한 출전 팀">
@@ -340,7 +341,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
             <BattleMessages onSkip={skipPlayback} key={battle?.id ?? 'preparing'} messages={battle?.messages ?? []} playing={playing} turn={battle?.turn ?? 0} announcement={announcement ?? (!busy && !done && tab==='root' && active ? `${pokemonName(active.species)}, 무엇을 할까요?` : null)} />
             {!(busy || playing) && <div className="command-area">
               {!battle || done || broken ? loading || !tower ? <p>저장된 도전을 불러오는 중…</p> : broken ? <div><p role="alert">{battle?.error}</p><button className="secondary-button" onClick={() => refresh().catch(e => setError(e.message))}>배틀 다시 불러오기</button></div> : <button className="primary-button" onClick={()=>setStageOpen(true)}>{run?.state==='recruit' ? '영입 선택' : '다음 층 준비'}<span className="keyboard-shortcut"> · Enter</span></button>
-              : <BattleCommands rule={run?.rule} itemBag={run?.battleItems} battle={battle} mode={tab} busy={busy} forceSwitch={forceSwitch} focused={focusedCommand} gimmick={gimmick} onGimmick={setGimmick} onMode={mode=>{setGimmick(null);setTab(mode);}} onFocus={setFocusedCommand} onSend={send}/>}
+              : <BattleCommands equipment={run?.trainerEquipment??[]} rule={run?.rule} itemBag={run?.battleItems} battle={battle} mode={tab} busy={busy} forceSwitch={forceSwitch} focused={focusedCommand} gimmick={gimmick} onGimmick={setGimmick} onMode={mode=>{setGimmick(null);setTab(mode);}} onFocus={setFocusedCommand} onSend={send}/>}
             </div>}
           </section>
 

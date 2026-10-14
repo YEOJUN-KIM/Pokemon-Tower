@@ -1,14 +1,15 @@
 'use client';
 import {useEffect,useRef} from 'react';
 import type {Motion} from './battle-presentation';
-import {effectAssets,moveAnimationPlan,type EffectPoint} from './move-animation-plan';
+import {effectAssets,flamethrowerBeam,moveAnimationPlan,type EffectPoint} from './move-animation-plan';
 
 const images=new Map<string,HTMLImageElement>();
 let loading:Promise<void>|undefined;
 function preload(){
-  return loading ??= Promise.all(effectAssets.map(asset=>new Promise<void>(resolve=>{
+  const assets=[...effectAssets.map(asset=>({asset,url:`/vendor/showdown/fx/${asset}.png`})),flamethrowerBeam];
+  return loading ??= Promise.all(assets.map(({asset,url})=>new Promise<void>(resolve=>{
     const image=new Image();image.onload=()=>{images.set(asset,image);resolve();};image.onerror=()=>resolve();
-    image.src=`/vendor/showdown/fx/${asset}.png`;
+    image.src=url;
   }))).then(()=>{});
 }
 type Position={x:number;y:number};
@@ -49,7 +50,24 @@ export function MoveVisuals({motion,speed=1}:{motion:Motion|null;speed?:number})
     function draw(elapsed:number){
       context!.clearRect(0,0,bounds.width,bounds.height);
       if(plan.wash&&!reduced){context!.globalAlpha=.12*Math.sin(Math.PI*Math.min(1,elapsed/plan.duration));context!.fillStyle=plan.wash;context!.fillRect(0,0,bounds.width,bounds.height);context!.globalAlpha=1;}
-      if(['flame','blueflame','icebeam','greenbeam','dragonbeam','waterbeam','beam'].includes(plan.style)&&elapsed>100&&elapsed<720&&!reduced){
+      const beamImage=plan.beam?images.get(plan.beam.asset):undefined;
+      if(plan.beam&&beamImage&&elapsed>=plan.beam.start&&elapsed<plan.beam.end){
+        const beam=plan.beam;
+        const growth=Math.max(0,Math.min(1,(elapsed-beam.start)/(beam.extended-beam.start)));
+        const length=reduced?1:.06+.94*(1-(1-growth)**3);
+        const fade=reduced?1:Math.max(0,Math.min(1,(beam.end-elapsed)/(beam.end-beam.fade)));
+        const dx=beam.tip.x-beam.origin.x,dy=beam.tip.y-beam.origin.y;
+        const distance=Math.hypot(target.x-source.x,target.y-source.y),nativeLength=Math.hypot(dx,dy);
+        // Rotate the PNG's diagonal into beam-local coordinates, then stretch
+        // along the attack axis. The tail stays anchored to the attacker.
+        context!.save();context!.imageSmoothingEnabled=false;
+        context!.globalAlpha=reduced?.65:Math.min(1,(elapsed-beam.start)/55)*fade;
+        context!.translate(source.x,source.y);context!.rotate(Math.atan2(target.y-source.y,target.x-source.x));
+        context!.scale(distance/nativeLength*length,unit*.85/240*(reduced?1:(.35+.65*growth)*(.7+.3*fade)));
+        context!.rotate(-Math.atan2(dy,dx));context!.translate(-beam.origin.x,-beam.origin.y);
+        context!.drawImage(beamImage,0,0);context!.restore();
+      }
+      if(!beamImage&&['flame','blueflame','icebeam','greenbeam','dragonbeam','waterbeam','beam'].includes(plan.style)&&elapsed>100&&elapsed<720&&!reduced){
         const t=Math.min(1,(elapsed-100)/380),x=interpolate(source.x,target.x,t),y=interpolate(source.y,target.y,t);
         const color=plan.style==='flame'?'#ff942d':plan.style==='blueflame'?'#68aaff':plan.style==='icebeam'?'#c5f7ff':plan.style==='greenbeam'?'#c7ff8a':plan.style==='waterbeam'?'#84dcff':plan.style==='dragonbeam'?'#90a4ff':'#fff5c0';
         context!.save();context!.globalAlpha=Math.min(1,(720-elapsed)/130)*.7;context!.strokeStyle=color;context!.lineWidth=unit*.22;context!.lineCap='round';context!.shadowColor=color;context!.shadowBlur=unit*.25;context!.beginPath();context!.moveTo(source.x,source.y);context!.lineTo(x,y);context!.stroke();context!.restore();
@@ -61,6 +79,7 @@ export function MoveVisuals({motion,speed=1}:{motion:Motion|null;speed?:number})
         }
       }
       for(const particle of plan.particles){
+        if(plan.beam&&(blocked||motion!.missed))continue;
         if(blocked&&(particle.asset==='impact'||particle.asset==='hitmarker'))continue;
         const t=(elapsed-particle.start)/(particle.end-particle.start);if(t<0||t>1)continue;
         const image=images.get(particle.asset);if(!image)continue;

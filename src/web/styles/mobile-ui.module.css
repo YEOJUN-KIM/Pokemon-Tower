@@ -88,7 +88,7 @@
     grid-template-areas: "moves tera";
     gap: 8px;
   }
-  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-menu.has-gimmick.without-tera) {
+  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-menu.has-gimmick.gimmicks-in-dock) {
     grid-template-columns: minmax(0,1fr);
     grid-template-areas: "moves";
   }

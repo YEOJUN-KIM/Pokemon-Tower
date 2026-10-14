@@ -41,7 +41,7 @@ test('v12 migration adds empty inventories without changing saved battle teams',
     store.close();store=new TowerStore(path);
     assert.deepEqual(store.battle(id),before);
     assert.deepEqual(store.view('migration').run!.heldItems,{});
-    assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,28);
+    assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,31);
     assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
   }finally{store.close();}
 });
@@ -112,7 +112,7 @@ test('berries activate once per battle and remain equipped for the next floor, w
       const enemy=packTeam(starters);
       store.db.prepare('UPDATE battles SET opponent_team=?,seed=? WHERE id=?').run(enemy,'[1,2,3,4]',id);
       const row=store.battle(id);
-      const log=await runBattle({teams:{p1:row.player_team,p2:row.opponent_team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
+      const log=await runBattle({trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:row.opponent_team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
       assert.ok(log.publicProtocol.some(line=>line.includes('|p1a: Charizard|') && line.includes(`item: ${item}`) && line.startsWith('|-heal|')),`${item} actually heals`);
       assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
       const view={id,status:'complete' as const,requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null};
@@ -124,7 +124,7 @@ test('berries activate once per battle and remain equipped for the next floor, w
         store.db.prepare("UPDATE runs SET floor=7,state='select' WHERE id=?").run(run);
         const next=store.battle(store.enter('items',run,7,starters));
         assert.equal(Showdown.Teams.unpack(next.player_team)![0].item,item);
-        const again=await runBattle({teams:{p1:next.player_team,p2:enemy},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
+        const again=await runBattle({trainerEquipment:next.trainer_equipment==null?undefined:JSON.parse(next.trainer_equipment),teams:{p1:next.player_team,p2:enemy},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
         assert.equal(again.publicProtocol.filter(line=>line.startsWith('|-enditem|p1a: Charizard|Sitrus Berry|[eat]')).length,1);
       }
     }finally{store.close();}

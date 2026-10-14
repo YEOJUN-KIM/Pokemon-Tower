@@ -11,7 +11,7 @@ const epic=new Set<HeldItem>(['Choice Band','Choice Specs','Choice Scarf','Focus
 const legendary=new Set<HeldItem>();
 export function itemShopRule(item:HeldItem):{rarity:ItemRarity;minClearedFloor:number}{
   if(zCrystals[item])return {rarity:'legendary',minClearedFloor:5};
-  if(legendary.has(item) || Object.hasOwn(megaItems,item) || primalOrbs[item] || item==='Dynamax Band')return {rarity:'legendary',minClearedFloor:5};
+  if(legendary.has(item) || Object.hasOwn(megaItems,item) || primalOrbs[item] || item==='Dynamax Band'||item==='Tera Orb')return {rarity:'legendary',minClearedFloor:5};
   if(epic.has(item))return {rarity:'epic',minClearedFloor:5};
   if(unique.has(item))return {rarity:'unique',minClearedFloor:5};
   if(rare.has(item))return {rarity:'rare',minClearedFloor:5};
@@ -25,7 +25,7 @@ export function itemRarityWeights(clearedFloor:number):Record<ItemRarity,number>
   if(clearedFloor>=10)return {uncommon:70.1,rare:20,unique:5,epic:0.9,legendary:4};
   return {uncommon:82.01,rare:13,unique:1.7,epic:0.29,legendary:3};
 }
-export function gimmickItemFamily(item:HeldItem){return Object.hasOwn(megaItems,item)?'mega':item==='Dynamax Band'?'dynamax':zCrystals[item]?'z':primalOrbs[item]?'primal':null;}
+export function gimmickItemFamily(item:HeldItem){return Object.hasOwn(megaItems,item)?'mega':item==='Dynamax Band'?'dynamax':item==='Tera Orb'?'tera':zCrystals[item]?'z':primalOrbs[item]?'primal':null;}
 // Sold-out tiers are excluded; keep the relative weights of the stocked tiers.
 // Existing stock is retained when filling a previously saved short shop.
 export function rollItemOffers(clearedFloor:number,random:()=>number=Math.random,eligible:(item:HeldItem)=>boolean=()=>true,existing:readonly HeldItem[]=[]):HeldItem[]{

@@ -43,7 +43,7 @@ test('one hundred real battle results progress through every checkpoint and only
       // Weak deterministic opponents isolate progression from win-rate tuning. No winner is injected.
       const enemy=packTeam(['Unown','Luvdisc','Delibird']);
       store.db.prepare('UPDATE battles SET opponent_team=?,seed=? WHERE id=?').run(enemy,'[1,2,3,4]',id);
-      const log=await runBattle({teams:{p1:row.player_team,p2:enemy},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),upgrades:JSON.parse(row.upgrades)});
+      const log=await runBattle({trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:enemy},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),upgrades:JSON.parse(row.upgrades)});
       assert.equal(log.winner,'Player');
       store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
       store.recruit('climb',run,id,null,null);

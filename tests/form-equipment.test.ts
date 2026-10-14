@@ -64,14 +64,14 @@ test('all selectable family forms keep equipment under the collection member aft
       store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(row.run_id,form.baseSpecies,item);
       row.player_team=packPlayerTeam([form.baseSpecies,'Blastoise','Venusaur'],{[form.baseSpecies]:defaultProfile(form.baseSpecies,forme)},{[form.baseSpecies]:item});
       store.db.prepare('UPDATE battles SET player_team=? WHERE id=?').run(row.player_team,row.id);
-      store.complete(row.id,{schemaVersion:1,engineVersion:row.engine_version,format:row.format,teams:{p1:row.player_team,p2:row.opponent_team},seed:JSON.parse(row.seed),rule:row.rule,upgrades:JSON.parse(row.upgrades),teraTickets:JSON.parse(row.tera_tickets),decisions:[],publicProtocol:[],winner:'Player',turns:1},{id:row.id,status:'complete',requestId:1,turn:1,team:[],opponent:null,actions:[],messages:[],winner:'Player',error:null});
+      store.complete(row.id,{schemaVersion:1,engineVersion:row.engine_version,format:row.format,teams:{p1:row.player_team,p2:row.opponent_team},seed:JSON.parse(row.seed),rule:row.rule,upgrades:JSON.parse(row.upgrades),trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teraTickets:JSON.parse(row.tera_tickets),decisions:[],publicProtocol:[],winner:'Player',turns:1},{id:row.id,status:'complete',requestId:1,turn:1,team:[],opponent:null,actions:[],messages:[],winner:'Player',error:null});
       assert.deepEqual(store.view('forms').run!.heldItems,{[form.baseSpecies]:item},forme);
       assert.equal(store.view('forms').run!.partnerForms![form.baseSpecies],forme);
     }finally{store.close();}
   }
 });
 
-test('24th floor preparation exposes equipment, transfers Urshifu band to Gengar and preserves fixed masks',()=>{
+test('24th floor preparation exposes equipment, transfers a held item to Gengar and preserves fixed masks',()=>{
   const store=new TowerStore(':memory:');
   try{
     store.ensurePlayer('prep');
@@ -82,20 +82,21 @@ test('24th floor preparation exposes equipment, transfers Urshifu band to Gengar
     }
     const row=store.battle(store.start('prep',['Urshifu','Gengar','Ogerpon'],'chaos'));
     store.db.prepare("UPDATE runs SET floor=24,state='select' WHERE id=?").run(row.run_id);
-    store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(row.run_id,'Urshifu','Dynamax Band');
+    store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(row.run_id,'Urshifu','Mystic Water');
     store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(row.run_id,'Gengar','Leftovers');
     const tower=store.view('prep');
     const html=renderToStaticMarkup(createElement(TowerControls,{tower,selected:['Urshifu','Gengar','Ogerpon'],setSelected:()=>{},busy:false,submit:async()=>{}}));
     assert.match(html,/data-testid="held-item-manager"/);
     assert.match(html,/24층/);
     assert.ok(html.includes(pokemonName('Urshifu-Rapid-Strike')));
-    store.equipItem('prep',row.run_id,24,'Gengar','Dynamax Band','Urshifu');
-    assert.deepEqual(store.view('prep').run!.heldItems,{Urshifu:'Leftovers',Gengar:'Dynamax Band',Ogerpon:'Hearthflame Mask'});
-    assert.throws(()=>store.equipItem('prep',row.run_id,24,'Ogerpon','Dynamax Band','Gengar'),/전용 도구/);
+    store.equipItem('prep',row.run_id,24,'Gengar','Mystic Water','Urshifu');
+    assert.deepEqual(store.view('prep').run!.heldItems,{Urshifu:'Leftovers',Gengar:'Mystic Water',Ogerpon:'Hearthflame Mask'});
+    assert.throws(()=>store.equipItem('prep',row.run_id,24,'Ogerpon','Mystic Water','Gengar'),/전용 도구/);
     assert.throws(()=>store.equipItem('prep',row.run_id,24,'Ogerpon',null),/전용 도구/);
+    store.db.prepare('INSERT INTO run_trainer_equipment VALUES (?,?)').run(row.run_id,'Dynamax Band');
     const next=store.battle(store.enter('prep',row.run_id,24,['Gengar','Urshifu','Ogerpon']));
     const team=Showdown.Teams.unpack(next.player_team)!;
-    assert.equal(team[0].item,'Dynamax Band');assert.equal(team[0].gigantamax,true);
+    assert.equal(team[0].item,'Mystic Water');assert.equal(team[0].gigantamax,true);
     assert.equal(team[1].species,'Urshifu-Rapid-Strike');assert.equal(team[1].item,'Leftovers');
     assert.equal(team[2].species,'Ogerpon-Hearthflame');assert.equal(team[2].item,'Hearthflame Mask');
   }finally{store.close();}

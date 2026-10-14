@@ -17,7 +17,7 @@ function setup(){
  const row=store.battle(store.start('frisk',['Urshifu','Blastoise','Venusaur'],'dynamax'));
  const player=packPlayerTeam(['Urshifu','Blastoise','Venusaur'],{Urshifu:defaultProfile('Urshifu','Urshifu-Rapid-Strike')},{Urshifu:'Dynamax Band'});
  store.db.prepare('UPDATE runs SET floor=40 WHERE id=?').run(row.run_id);
- store.db.prepare('UPDATE battles SET floor=40,player_team=? WHERE id=?').run(player,row.id);
+ store.db.prepare('UPDATE battles SET floor=40,trainer_equipment=NULL,player_team=? WHERE id=?').run(player,row.id);
  store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(row.run_id,'Urshifu','Dynamax Band');
  return {store,row:store.battle(row.id)};
 }

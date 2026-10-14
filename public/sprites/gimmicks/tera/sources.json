@@ -1,0 +1,159 @@
+{
+  "source": "Pokemon Showdown type sprites",
+  "importedAt": "2026-10-14T06:08:35.451Z",
+  "transformation": "None",
+  "files": [
+    {
+      "type": "Normal",
+      "path": "public/sprites/gimmicks/tera/TeraNormal.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraNormal.png",
+      "sha256": "8ee54a7b69d53c9a88b5569cc0935c880ee2baa59dc42cede59940e6acf90b1c",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Fire",
+      "path": "public/sprites/gimmicks/tera/TeraFire.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraFire.png",
+      "sha256": "9b635dbdc45a27f2fdcf01a5bb7eb0e93cdd7c228db1122cb6bed58e222b16fd",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Water",
+      "path": "public/sprites/gimmicks/tera/TeraWater.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraWater.png",
+      "sha256": "8ee0243359313b19560ef74c226aeedfe84025c0f41cb5384e5c18d241a80913",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Electric",
+      "path": "public/sprites/gimmicks/tera/TeraElectric.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraElectric.png",
+      "sha256": "81da8d68c375843ecb4b055a3a2fd269f59a002d103e77665fbd40b63170a96a",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Grass",
+      "path": "public/sprites/gimmicks/tera/TeraGrass.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraGrass.png",
+      "sha256": "2a8cd58ba64f94db8c315b7ac99044f5b26d92cb9b43e957379ff4f60a9961a9",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Ice",
+      "path": "public/sprites/gimmicks/tera/TeraIce.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraIce.png",
+      "sha256": "9180092ba89dd925026ae84f027024d31a8bd4640f1ec081a14f4c27f6707e94",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Fighting",
+      "path": "public/sprites/gimmicks/tera/TeraFighting.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraFighting.png",
+      "sha256": "4837ab62880b623f03a08f1dceb891659df11ef1e705447b0e54ac9f9376c184",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Poison",
+      "path": "public/sprites/gimmicks/tera/TeraPoison.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraPoison.png",
+      "sha256": "818ddc74664c4fd222ebcbc741dc3d121febaf7e7221f996ffe0b8289f0a3b67",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Ground",
+      "path": "public/sprites/gimmicks/tera/TeraGround.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraGround.png",
+      "sha256": "a5033a465d429be50b39bde03a835f876107dadc72f496b05ebcdb47aff2594d",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Flying",
+      "path": "public/sprites/gimmicks/tera/TeraFlying.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraFlying.png",
+      "sha256": "e65f2677c6ecc64e6235cc90a6c3c68fdb7ba260a05ff81254dd4f2b9be8030a",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Psychic",
+      "path": "public/sprites/gimmicks/tera/TeraPsychic.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraPsychic.png",
+      "sha256": "0e5778eba1364141d71ae9b365409e974631f272649be1d5739224a436628968",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Bug",
+      "path": "public/sprites/gimmicks/tera/TeraBug.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraBug.png",
+      "sha256": "6f25438d421ece2ed1640fb243ffbc6a5a164492104bb5f4564f63d26221a39c",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Rock",
+      "path": "public/sprites/gimmicks/tera/TeraRock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraRock.png",
+      "sha256": "1a3a0dbf2612a0ef853c7d29b6c81e004c7649667798a220fb25aa90f53bb15b",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Ghost",
+      "path": "public/sprites/gimmicks/tera/TeraGhost.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraGhost.png",
+      "sha256": "7da67206b873dde003be19b9b242777cdae85c4f3bb9b25b6e0507c0bf717473",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Dragon",
+      "path": "public/sprites/gimmicks/tera/TeraDragon.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraDragon.png",
+      "sha256": "3ecb32c2a2130cebb32d0e306d83890259df6a4ebf6f49b1bc956038c0c33f4c",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Dark",
+      "path": "public/sprites/gimmicks/tera/TeraDark.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraDark.png",
+      "sha256": "53d91f30228f303d3a94e36de1fb3b73f753c1cecc7b60cf500583ec7169686e",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Steel",
+      "path": "public/sprites/gimmicks/tera/TeraSteel.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraSteel.png",
+      "sha256": "a783e60202139a7f8e5d100f1aabec85ffb79a16765b2f17e6b30c002808fd03",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Fairy",
+      "path": "public/sprites/gimmicks/tera/TeraFairy.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraFairy.png",
+      "sha256": "2d62fe5b9c88d17510f813d03a92036f17c20759fe5b8dd3d59285da3997a8c4",
+      "width": 60,
+      "height": 60
+    },
+    {
+      "type": "Stellar",
+      "path": "public/sprites/gimmicks/tera/TeraStellar.png",
+      "url": "https://play.pokemonshowdown.com/sprites/types/TeraStellar.png",
+      "sha256": "0af504ebbd8908747731052e6be6f2f6f36a937770641ecc2b9467c8412b71ad",
+      "width": 60,
+      "height": 60
+    }
+  ]
+}

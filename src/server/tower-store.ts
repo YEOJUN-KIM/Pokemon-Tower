@@ -1,4 +1,5 @@
 import {pokemonRarity,eggRarity} from '../data/pokemon-rarity';
+import {isTrainerEquipment,type TrainerEquipment} from '../data/trainer-equipment';
 import {permanentPrices,EGG_SHINY_ODDS,type PermanentView,type PermanentResult,type EggResult} from '../data/permanent-upgrades';
 import {isBattleRule,allowsGimmick,allowsRuleItem,type BattleRule} from '../data/run-rules';
 import {TERA_TICKET_PRICE} from '../data/tera';
@@ -48,7 +49,7 @@ type RunRow = {id: string; player_id: string; floor: number; state: RunView['sta
 export type BattleRow = {
   rule:BattleRule;id: string; run_id: string; floor: number; player_team: string; opponent_team: string; seed: string;
   engine_version: string; format: string; ai_version: string; status: 'active' | 'complete';
-  reward: number; candidates: string; log: string | null; view: string | null; boss: string | null; trainer:string|null;upgrades:string;battle_items:string;tera_tickets:string;villain_event:string|null;
+  reward: number; candidates: string; log: string | null; view: string | null; boss: string | null; trainer:string|null;upgrades:string;battle_items:string;tera_tickets:string;trainer_equipment:string|null;villain_event:string|null;
 };
 export class TowerStore {
   readonly db: DatabaseSync;
@@ -57,7 +58,7 @@ export class TowerStore {
     this.db = new DatabaseSync(path);
     this.db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
     const version = this.db.prepare('PRAGMA user_version').get() as {user_version: number};
-    if (version.user_version > 28) throw new Error('Unsupported database schema');
+    if (version.user_version > 31) throw new Error('Unsupported database schema');
     // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
     if(version.user_version<28)this.db.exec('PRAGMA foreign_keys=OFF');
     try {this.tx(() => {
@@ -73,6 +74,7 @@ export class TowerStore {
         this.db.exec("INSERT OR IGNORE INTO growth_rewards SELECT id,0 FROM runs WHERE state IN ('lost','cleared','abandoned')");
       }
       const battleColumns = this.db.prepare('PRAGMA table_info(battles)').all() as {name: string}[];
+      if(!battleColumns.some(column=>column.name==='trainer_equipment'))this.db.exec('ALTER TABLE battles ADD COLUMN trainer_equipment TEXT');
       if (!battleColumns.some(column => column.name === 'boss')) this.db.exec('ALTER TABLE battles ADD COLUMN boss TEXT');
       if (!battleColumns.some(column => column.name === 'trainer')) this.db.exec('ALTER TABLE battles ADD COLUMN trainer TEXT');
       if (!battleColumns.some(column => column.name === 'upgrades')) this.db.exec("ALTER TABLE battles ADD COLUMN upgrades TEXT NOT NULL DEFAULT '[]'");
@@ -144,6 +146,16 @@ export class TowerStore {
       }
       this.repairArchivedOwnership();
       this.repairFormHeldItems();
+      if(version.user_version<31){
+        // Inventory and starter tickets do not prove a trainer-equipment purchase.
+        this.db.exec(`DELETE FROM run_held_items WHERE item='Dynamax Band';
+          DELETE FROM run_item_bag WHERE item IN ('Dynamax Band','Tera Orb');
+          DELETE FROM run_trainer_equipment WHERE NOT EXISTS (
+            SELECT 1 FROM shop_receipts p WHERE p.run_id=run_trainer_equipment.run_id AND p.kind='items' AND p.buyer IS NULL AND p.product=run_trainer_equipment.item
+          );
+          INSERT OR IGNORE INTO run_trainer_equipment
+            SELECT run_id,product FROM shop_receipts WHERE kind='items' AND buyer IS NULL AND product IN ('Dynamax Band','Tera Orb');`);
+      }
     });} finally {this.db.exec('PRAGMA foreign_keys=ON');}
   }
   private repairFormHeldItems(){
@@ -291,9 +303,9 @@ export class TowerStore {
       growthReward: (this.db.prepare('SELECT amount FROM growth_rewards WHERE run_id=?').get(row.id) as {amount:number}|undefined)?.amount ?? 0,
       restartReward:this.growthBase(row.id),
       upgrades: this.activeUpgrades(row.id,row.floor).map(upgrade=>({kind:upgrade.kind,remainingFloors:['recruit','cleared'].includes(row.state) ? Math.max(0,upgrade.end_floor-row.floor) : upgrade.end_floor-row.floor+1})),
-      heldItems:this.heldItems(row.id),
+      heldItems:this.heldItems(row.id),trainerEquipment:this.trainerEquipment(row.id),
       teraTickets:this.teraQuantity(row.id),
-      teraShop:allowsGimmick(this.runRule(row.id),'terastallize') && row.state==='select' && isShopFloor(row.floor,row.total_floors)?{price:TERA_TICKET_PRICE,purchased:!!this.db.prepare('SELECT 1 FROM tera_purchases WHERE run_id=? AND floor=?').get(row.id,row.floor)}:null,
+      teraShop:null,
       itemBag:Object.fromEntries((this.db.prepare('SELECT item,quantity FROM run_item_bag WHERE run_id=? AND quantity>0').all(row.id) as {item:string;quantity:number}[]).map(entry=>[entry.item,entry.quantity])),
       itemPurchases:this.itemPurchases(row),
       battleItems:this.battleItemBag(row.id),
@@ -357,7 +369,7 @@ export class TowerStore {
       this.db.prepare('INSERT INTO run_themes VALUES (?,?)').run(id,theme);
       this.db.prepare('INSERT INTO run_routes(run_id,second_theme) VALUES (?,?)').run(id,secondTowerTheme(id,theme));
       this.db.prepare('INSERT INTO run_progression VALUES (?,?)').run(id,CURRENT_PROGRESSION);
-      this.db.prepare('INSERT INTO run_tera_tickets VALUES (?,?)').run(id,allowsGimmick(rule,'terastallize')?1:0);
+      this.db.prepare('INSERT INTO run_tera_tickets VALUES (?,0)').run(id);
       selected.forEach((name, slot) => this.db.prepare('INSERT INTO members VALUES (?, ?, ?)').run(id, slot, name));
       const profiles=Object.fromEntries(this.trainingCollection(owner).map(entry=>[entry.species,entry.profile]));
       this.db.prepare('UPDATE runs SET profiles=? WHERE id=?').run(JSON.stringify(profiles),id);
@@ -392,10 +404,11 @@ export class TowerStore {
   private createRetryBattle(runId:string,selected:string[],previousId:string){
     const previous=this.battle(previousId),id=randomUUID(),rule=this.runRule(runId);
     const profiles=this.runProfiles(runId);
-    const player=packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))));
+    const player=packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band'));
     const attempt=(this.db.prepare('SELECT MAX(attempt) AS n FROM battles WHERE run_id=? AND floor=? AND stage=(SELECT stage FROM battles WHERE id=?)').get(runId,previous.floor,previousId) as {n:number}).n+1;
     this.db.prepare(`INSERT INTO battles(id,run_id,floor,player_team,opponent_team,seed,engine_version,format,ai_version,status,reward,candidates,boss,trainer,upgrades,battle_items,tera_tickets,villain_event,rule,stage,attempt)
       SELECT ?,run_id,floor,?,opponent_team,seed,engine_version,format,ai_version,'active',reward,candidates,boss,trainer,?,?,?,?,rule,stage,? FROM battles WHERE id=?`).run(id,player,JSON.stringify(this.activeUpgrades(runId,previous.floor).map(u=>u.kind).sort()),JSON.stringify(this.battleItemBag(runId)),JSON.stringify({...JSON.parse(previous.tera_tickets),p1:this.teraQuantity(runId)}),previous.villain_event,attempt,previousId);
+    this.db.prepare('UPDATE battles SET trainer_equipment=?,tera_tickets=? WHERE id=?').run(JSON.stringify(this.trainerEquipment(runId)),JSON.stringify({...JSON.parse(previous.tera_tickets),p1:0}),id);
     this.db.prepare('UPDATE run_retries SET pending_battle_id=NULL WHERE run_id=?').run(runId);
     this.db.prepare("UPDATE runs SET state='battle' WHERE id=?").run(runId);
     return id;
@@ -453,28 +466,21 @@ export class TowerStore {
     }));
     if(signature?.rule==='tera' && !template)opponentProfiles[signature.species].teraType=(sample?.specialty ?? trainer?.boss.specialty ?? Showdown.Dex.species.get(signature.species).types[0]) as import('../data/tera').TeraType;
     this.db.prepare(`INSERT INTO battles(id, run_id, floor, player_team, opponent_team, seed, engine_version, format, ai_version, status, reward, candidates, boss, stage)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, ?)`).run(id, runId, floor, packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item)))), packTeam(opponents,opponentProfiles,Object.fromEntries(encounter.map(entry=>[entry.name,entry.item && (progression!=='legacy' || allowsRuleItem(rule,entry.item))?entry.item:''])),encounter.filter(p=>p.gigantamax).map(p=>p.name)), JSON.stringify(seed), engineVersion, FORMAT, progression==='legacy'?'tower-policy-v9':AI_VERSION, config.reward+(sample===eligible && event ? event.event.bonus : 0), JSON.stringify(opponents), trainer ? JSON.stringify(trainer.boss) : null,this.route(runId)?.pending_boss===floor?1:0);
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, ?)`).run(id, runId, floor, packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band')), packTeam(opponents,opponentProfiles,Object.fromEntries(encounter.map(entry=>[entry.name,entry.item && (progression!=='legacy' || allowsRuleItem(rule,entry.item))?entry.item:''])),encounter.filter(p=>p.gigantamax).map(p=>p.name)), JSON.stringify(seed), engineVersion, FORMAT, progression==='legacy'?'tower-policy-v9':AI_VERSION, config.reward+(sample===eligible && event ? event.event.bonus : 0), JSON.stringify(opponents), trainer ? JSON.stringify(trainer.boss) : null,this.route(runId)?.pending_boss===floor?1:0);
     this.db.prepare('UPDATE battles SET rule=? WHERE id=?').run(rule,id);
     if(sample===eligible && event)this.db.prepare('UPDATE battles SET villain_event=? WHERE id=?').run(JSON.stringify(event.event),id);
     this.db.prepare('UPDATE battles SET battle_items=? WHERE id=?').run(JSON.stringify(this.battleItemBag(runId)),id);
     const hasNpcItem=encounter.some(p=>p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
     const npcTeraTickets=npcGimmicksAllowed?(signature?.rule==='tera'?1:!hasNpcItem && sample?.kind==='elite'?opponentTeraTickets(floor,'elite'):0):0;
-    this.db.prepare('UPDATE battles SET tera_tickets=? WHERE id=?').run(JSON.stringify({p1:this.teraQuantity(runId),p2:progression==='legacy'?(allowsGimmick(rule,'terastallize')?1:0):npcTeraTickets}),id);
+    this.db.prepare('UPDATE battles SET tera_tickets=?,trainer_equipment=? WHERE id=?').run(JSON.stringify({p1:0,p2:progression==='legacy'?(allowsGimmick(rule,'terastallize')?1:0):npcTeraTickets}),JSON.stringify(this.trainerEquipment(runId)),id);
     this.db.prepare("UPDATE runs SET state = 'battle' WHERE id = ?").run(runId);
     if(sample){const theme=this.runTheme(runId);this.db.prepare('UPDATE battles SET trainer=? WHERE id=?').run(JSON.stringify({...trainerView({...sample,...(theme?{generation:towerThemes[theme].generation}: {})}),...(signature?{gimmick:signature}:{})}),id);}
     this.db.prepare('UPDATE battles SET upgrades=? WHERE id=?').run(JSON.stringify(this.activeUpgrades(runId,floor).map(upgrade=>upgrade.kind).sort()),id);
     return id;
   }
+  trainerEquipment(runId:string):TrainerEquipment[]{return (this.db.prepare('SELECT item FROM run_trainer_equipment WHERE run_id=? ORDER BY item').all(runId) as {item:TrainerEquipment}[]).map(row=>row.item);}
   private teraQuantity(runId:string){return (this.db.prepare('SELECT quantity FROM run_tera_tickets WHERE run_id=?').get(runId) as {quantity:number}|undefined)?.quantity ?? 0;}
-  purchaseTera(owner:string,id:string,floor:number){this.tx(()=>{
-    if(!allowsGimmick(this.runRule(id),'terastallize'))throw new BattleRequestError('이 룰에서는 테라스탈을 사용할 수 없습니다.',409);
-    const run=this.ownedRun(owner,id);
-    if(run.state!=='select' || run.floor!==floor || !isShopFloor(floor,run.total_floors))throw new BattleRequestError('상점에서만 테라권을 구매할 수 있습니다.',409);
-    if(this.db.prepare('SELECT 1 FROM tera_purchases WHERE run_id=? AND floor=?').get(id,floor))throw new BattleRequestError('이미 구매한 테라권입니다.',409);
-    if(!this.db.prepare('UPDATE players SET coins=coins-? WHERE id=? AND coins>=?').run(TERA_TICKET_PRICE,owner,TERA_TICKET_PRICE).changes)throw new BattleRequestError('보유 자금이 부족합니다.',400);
-    this.db.prepare('INSERT INTO tera_purchases VALUES (?,?)').run(id,floor);
-    this.db.prepare('INSERT INTO run_tera_tickets VALUES (?,1) ON CONFLICT(run_id) DO UPDATE SET quantity=quantity+1').run(id);
-  });}
+  purchaseTera(owner:string,id:string,floor:number){this.ownedRun(owner,id);throw new BattleRequestError('테라권 판매는 종료되었습니다. 도구 상점에서 테라스탈오브를 구매하세요.',409);}
   private activeUpgrades(runId:string,floor:number) {
     return this.db.prepare('SELECT kind,end_floor FROM run_upgrades WHERE run_id=? AND start_floor<=? AND end_floor>=? ORDER BY kind').all(runId,floor,floor) as {kind:UpgradeKind;end_floor:number}[];
   }
@@ -483,7 +489,7 @@ export class TowerStore {
     for(const [name,profile] of Object.entries(this.runProfiles(runId))){const item=selectedForm(name,profile.forme)?.requiredItem;if(item&&this.roster(runId).includes(name))items[name]=item;}
     return items;
   }
-  private canHoldItem(runId:string,name:string,item:string){return !selectedForm(name,this.runProfiles(runId)[name]?.forme)?.requiredItem&&canEquipGimmick(name,item);}
+  private canHoldItem(runId:string,name:string,item:string){return isTrainerEquipment(item)||!selectedForm(name,this.runProfiles(runId)[name]?.forme)?.requiredItem&&canEquipGimmick(name,item);}
   private itemOffers(run:RunRow,regenerate=false):string[]{
     const saved=this.db.prepare('SELECT offers FROM item_shops WHERE run_id=? AND floor=?').get(run.id,run.floor) as {offers:string}|undefined;
     const roster=this.roster(run.id);
@@ -491,7 +497,7 @@ export class TowerStore {
     if(existing.length===4)return existing;
     let counter=0;const random=()=>createHash('sha256').update(`${run.id}:item-shop:${run.floor}:${this.shopRevision(run,"items") ? "roll"+this.shopRevision(run,"items")+":" : ""}${counter++}`).digest().readUInt32LE(0)/4294967296;
     const held=Object.values(this.heldItems(run.id));
-    const owned=(this.db.prepare('SELECT item FROM run_item_bag WHERE run_id=? AND quantity>0').all(run.id) as {item:string}[]).map(x=>x.item);
+    const owned=[...this.trainerEquipment(run.id),...(this.db.prepare('SELECT item FROM run_item_bag WHERE run_id=? AND quantity>0').all(run.id) as {item:string}[]).map(x=>x.item)];
     const offers=rollItemOffers(run.floor-1,random,item=>allowsRuleItem(this.runRule(run.id),item) && !owned.includes(item) && !held.includes(item) && roster.some(name=>this.canHoldItem(run.id,name,item)),existing);
     this.db.prepare('INSERT INTO item_shops VALUES (?,?,?) ON CONFLICT(run_id,floor) DO UPDATE SET offers=excluded.offers').run(run.id,run.floor,JSON.stringify(offers));
     return offers;
@@ -536,6 +542,7 @@ export class TowerStore {
     this.db.prepare('INSERT INTO run_item_bag VALUES (?,?,?) ON CONFLICT(run_id,item) DO UPDATE SET quantity=quantity+excluded.quantity').run(runId,item,quantity);
   }
   private setHeldItem(runId:string,species:string,item:string|null) {
+    if(isTrainerEquipment(item))throw new BattleRequestError('트레이너 장비는 포켓몬에게 장착하지 않습니다.',400);
     if(selectedForm(species,this.runProfiles(runId)[species]?.forme)?.requiredItem)throw new BattleRequestError('이 모습은 전용 도구가 고정되어 있습니다.',400);
     if(item&&!allowsRuleItem(this.runRule(runId),item))throw new BattleRequestError('이 룰에서는 사용할 수 없는 도구입니다.',409);
     if(item && !canEquipGimmick(species,item))throw new BattleRequestError('이 포켓몬에게 맞는 기믹 도구가 아닙니다.',400);
@@ -552,15 +559,17 @@ export class TowerStore {
       if(run.state!=='select' || run.floor!==expectedFloor || !isShopFloor(run.floor,run.total_floors))throw new BattleRequestError('도구는 체크포인트 클리어 후 상점에서 구매할 수 있습니다.',409);
       this.checkShopRevision(run,'items',revision);
       if(!isHeldItem(item) || (species!==null && (typeof species!=='string' || !this.roster(runId).includes(species))))throw new BattleRequestError('도구와 파티 포켓몬을 선택하세요.',400);
+      if(isTrainerEquipment(item)&&species!==null)throw new BattleRequestError('트레이너 장비는 포켓몬을 선택하지 않고 구매합니다.',400);
       if(itemShopRule(item).minClearedFloor>run.floor-1 || !this.itemOffers(run).includes(item))throw new BattleRequestError('이번 상점에서 판매하지 않는 도구입니다.',409);
-      if((this.db.prepare('SELECT 1 FROM run_item_bag WHERE run_id=? AND item=? AND quantity>0').get(runId,item)) || Object.values(this.heldItems(runId)).includes(item))throw new BattleRequestError('이미 보유한 도구입니다. 가방에서 장착하세요.',409);
+      if(this.trainerEquipment(runId).includes(item as TrainerEquipment)||(this.db.prepare('SELECT 1 FROM run_item_bag WHERE run_id=? AND item=? AND quantity>0').get(runId,item)) || Object.values(this.heldItems(runId)).includes(item))throw new BattleRequestError('이미 보유한 도구입니다.',409);
       if(!this.roster(runId).some(name=>this.canHoldItem(runId,name,item)))throw new BattleRequestError('파티에 맞는 포켓몬이 없는 도구입니다.',400);
       if(this.itemPurchases(run).includes(item))throw new BattleRequestError('이번 상점에서 이미 구매한 도구입니다.',409);
       const price=heldItems[item].price;
       if(!this.db.prepare('UPDATE players SET coins=coins-? WHERE id=? AND coins>=?').run(price,owner,price).changes)throw new BattleRequestError('보유 자금이 부족합니다.',400);
       this.db.prepare('INSERT OR IGNORE INTO item_purchases VALUES (?,?,?)').run(runId,run.floor,item);
       this.db.prepare('INSERT INTO shop_receipts VALUES (?,?,?,?,?,?)').run(runId,run.floor,'items',this.shopRevision(run,'items'),item,species);
-      this.bagItem(runId,item,1);if(typeof species==='string')this.setHeldItem(runId,species,item);
+      if(isTrainerEquipment(item))this.db.prepare('INSERT INTO run_trainer_equipment VALUES (?,?)').run(runId,item);
+      else {this.bagItem(runId,item,1);if(typeof species==='string')this.setHeldItem(runId,species,item);}
     });
   }
   equipItem(owner:string,runId:string,expectedFloor:number,species:unknown,item:unknown,swapFrom?:unknown) {
@@ -568,6 +577,7 @@ export class TowerStore {
       const run=this.ownedRun(owner,runId);
       if(run.state!=='select' || run.floor!==expectedFloor)throw new BattleRequestError('도구는 다음 층 준비에서 변경할 수 있습니다.',409);
       if(typeof species!=='string' || !this.roster(runId).includes(species) || (item!==null && !isHeldItem(item)))throw new BattleRequestError('도구와 파티 포켓몬을 선택하세요.',400);
+      if(isTrainerEquipment(item))throw new BattleRequestError('트레이너 장비는 포켓몬에게 장착하지 않습니다.',400);
       const holder=item?(this.db.prepare('SELECT species FROM run_held_items WHERE run_id=? AND item=? AND species<>?').get(runId,item,species) as {species:string}|undefined)?.species:undefined;
       if(holder){
         if(swapFrom!==holder)throw new BattleRequestError('같은 도구는 한 마리만 장착합니다. 현재 소지자를 확인하고 도구 이동·교환을 승인하세요.',409);
@@ -645,8 +655,10 @@ export class TowerStore {
       const run = this.ownedRun(owner, battle.run_id);
       const count = this.db.prepare('SELECT COUNT(*) AS n FROM actions WHERE battle_id = ?').get(id) as {n: number};
       if (battle.status !== 'active' || run.state !== 'battle' || requestId !== count.n + 1) throw new BattleRequestError('이미 처리된 행동입니다.', 409);
+      const equipment=command.endsWith(' dynamax')?'Dynamax Band':command.endsWith(' terastallize')?'Tera Orb':null;
+      if(battle.trainer_equipment!=null && equipment && !this.trainerEquipment(run.id).includes(equipment))throw new BattleRequestError('먼저 상점에서 해당 트레이너 장비를 구매해야 합니다.',409);
       if(command.startsWith('item ')){const kind=command.slice(5);if(!Object.hasOwn(upgrades,kind)||!this.db.prepare('UPDATE run_battle_items SET quantity=quantity-1 WHERE run_id=? AND kind=? AND quantity>0').run(run.id,kind).changes)throw new BattleRequestError('보유한 배틀 아이템이 없습니다.',409);}
-      if(command.endsWith(' terastallize')){
+      if(command.endsWith(' terastallize')&&battle.trainer_equipment==null){
         if(this.history(id).some(action=>action.endsWith(' terastallize')) || !this.db.prepare('UPDATE run_tera_tickets SET quantity=quantity-1 WHERE run_id=? AND quantity>0').run(run.id).changes)throw new BattleRequestError('사용할 테라권이 없습니다.',409);
       }
       this.db.prepare('INSERT INTO actions VALUES (?, ?, ?)').run(id, requestId, command);
@@ -661,6 +673,7 @@ export class TowerStore {
       if (run.state !== 'battle' || run.floor !== battle.floor || log.engineVersion !== battle.engine_version || log.format !== battle.format ||
         log.teams.p1 !== battle.player_team || log.teams.p2 !== battle.opponent_team || JSON.stringify(log.seed) !== battle.seed || JSON.stringify(log.upgrades ?? []) !== battle.upgrades ||
         (log.teraTickets ? JSON.stringify(log.teraTickets)!==battle.tera_tickets : log.publicProtocol.some(line=>line.startsWith('|-terastallize|')))) throw new Error('Battle result environment mismatch');
+    if(JSON.stringify(log.trainerEquipment??null)!==(battle.trainer_equipment??'null'))throw new Error('Battle equipment mismatch');
     if((log.rule??'chaos')!==battle.rule)throw new Error('Battle result rule mismatch');
       this.db.prepare("UPDATE battles SET status = 'complete', log = ?, view = ? WHERE id = ?").run(JSON.stringify(log), JSON.stringify(view), id);
       // Reconcile actual engine item events once, after the saved battle completes.

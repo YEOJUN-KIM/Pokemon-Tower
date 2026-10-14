@@ -23,7 +23,7 @@ test('18 type crystals and 16 signature crystals match installed engine and cost
   for(const item of Object.keys(zCrystals) as HeldItem[]){const c=zCrystals[item];
     const native=Showdown.Dex.items.get(item);assert.ok(native.zMove);
     assert.equal(c.price,3000);assert.equal(heldItems[item].consumable,false);
-    assert.equal(itemShopRule(item).rarity,'legendary');assert.equal(itemIcon(item),'z-crystal');assert.equal(itemIconExtension(item),'svg');
+    assert.equal(itemShopRule(item).rarity,'legendary');assert.equal(itemIcon(item),item.toLowerCase().replaceAll(' ','-'));assert.equal(itemIconExtension(item),'png');
     assert.equal(allowsRuleItem('basic',item),false);assert.equal(allowsRuleItem('z',item),true);assert.equal(allowsRuleItem('chaos',item),true);
     assert.deepEqual(c.users,native.itemUser);
   }

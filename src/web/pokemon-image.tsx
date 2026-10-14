@@ -7,10 +7,14 @@ import formAvailability from '../data/form-sprite-availability.json' with {type:
 import {pixelSpriteSources} from '../data/pixel-sprites';
 import {animationFraming} from './sprite-framing';
 import {localPokemonSources} from '../data/local-pokemon-sprites';
+import additionalAnimations from '../data/additional-animations.json' with {type:'json'};
 
 const posters=new Map<string,{png:string;style:CSSProperties;heightFraction?:number}>();
 const readyFrames=new Set<string>();
 export function pokemonImageSources(id:number,back=false,animated=false,spriteKey:string|number=id,shiny=false):string[] {
+  const view=shiny?(back?'shinyBack':'shinyFront'):(back?'back':'front');
+  const extra=(additionalAnimations as Record<string,Partial<Record<string,{gif:string;png:string}>>>)[spriteKey]?.[view];
+  if(animated && extra)return [extra.gif,extra.png];
   const local=(paths:string[])=>localPokemonSources(paths,id,spriteKey,back,shiny);
   if(shiny){const pixel=pixelSpriteSources(spriteKey,back,animated,true);if(pixel.length)return pixel;const side=back?'back/':'';return local(id<650 ? [`versions/generation-v/black-white/animated/${side}shiny/${spriteKey}.gif`,`${side}shiny/${spriteKey}.png`] : [`${side}shiny/${spriteKey}.png`]);}
   const mega=(megaSprites as Record<string,{key:string;animatedFront:boolean;animatedBack:boolean}>)[spriteKey];

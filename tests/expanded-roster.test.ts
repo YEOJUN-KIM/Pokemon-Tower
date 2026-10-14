@@ -45,7 +45,7 @@ test('a newly encountered species is recruitable, can be configured and carried 
   const store=new TowerStore(':memory:');try{
     store.ensurePlayer('expanded');const id=store.start('expanded',starters),row=store.battle(id);
     const team=packTeam(['Butterfree','Ditto','Unown']);store.db.prepare('UPDATE battles SET opponent_team=? WHERE id=?').run(team,id);
-    const log=await runBattle({teams:{p1:row.player_team,p2:team},seed:JSON.parse(row.seed),player:new TowerPolicy(),opponent:new TowerPolicy()});assert.equal(log.winner,'Player');
+    const log=await runBattle({trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:team},seed:JSON.parse(row.seed),player:new TowerPolicy(),opponent:new TowerPolicy()});assert.equal(log.winner,'Player');
     store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
     store.recruit('expanded',row.run_id,id,'Ditto',null);
     const ditto=store.trainingCollection('expanded').find(entry=>entry.species==='Ditto')!;assert.ok(ditto);assert.deepEqual(ditto.profile.moves,['Transform']);assert.equal(species.Ditto.name,'메타몽');

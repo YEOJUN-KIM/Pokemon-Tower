@@ -1,4 +1,5 @@
 import Showdown from 'pokemon-showdown';
+import {megaStones} from './gimmicks';
 import {teraTypesForSpecies} from './tera';
 import roster from './battle-roster.json' with {type:'json'};
 import {statKeys,type TrainingProfile} from './training';
@@ -69,7 +70,7 @@ export function trainedSet(name:string,profile?:TrainingProfile) {
   return {...base,teraType:profile?.teraType ?? (types.length===1?types[0]:Showdown.Dex.species.get(name).types[0])};
 }
 export const packTeam = (names: string[],profiles:Record<string,TrainingProfile>={},items:Record<string,string>={},gigantamax:string[]=[]) => Teams.pack(names.map(name=>({...trainedSet(name,profiles[name]),item:selectedForm(name,profiles[name]?.forme)?.requiredItem??items[name]??'',...(gigantamax.includes(name)?{gigantamax:true}:{})})));
-export const packPlayerTeam = (names:string[],profiles:Record<string,TrainingProfile>={},items:Record<string,string>={}) => packTeam(names,profiles,items,names.filter(name=>items[name]==='Dynamax Band' && !!Showdown.Dex.species.get(profiles[name]?.forme??name).canGigantamax));
+export const packPlayerTeam = (names:string[],profiles:Record<string,TrainingProfile>={},items:Record<string,string>={},trainerDynamax=false) => packTeam(names,profiles,items,names.filter(name=>(trainerDynamax||items[name]==='Dynamax Band') && !megaStones[items[name]] && !!Showdown.Dex.species.get(profiles[name]?.forme??name).canGigantamax));
 export const playerTeam = packTeam(starters);
 export const opponentTeam = packTeam(['Pikachu', 'Gyarados', 'Snorlax']);
 

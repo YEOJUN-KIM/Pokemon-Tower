@@ -1,16 +1,16 @@
 'use client';
-import {ZCrystal} from './z-crystal';
+import {GimmickItemIcon} from './gimmick-item-icon';
+import {isHeldItem} from '../data/held-items';
 import {zCrystals} from '../data/z-crystals';
 import {allowsGimmick,type BattleRule} from '../data/run-rules';
 import {upgrades,type UpgradeKind} from '../data/shop';
 import {battleItemDescription,type BattleItemBag} from '../data/battle-items';
 import {GimmickEmblem} from './gimmick-emblem';
-import {TeraCrystal} from './tera-crystal';
 import {teraNames,teraColors} from '../data/tera';
 import {useState,type CSSProperties} from 'react';
 import {useTouchHold} from './use-touch-hold';
 import {MoveCategoryBadge} from './move-category-badge';
-import type {Gimmick} from '../data/gimmicks';
+import {megaStones,type Gimmick} from '../data/gimmicks';
 import type {BattleView,PokemonView,MovePP} from './contracts';
 import {health,battlePokemonName,species} from './catalog';
 import {moveInfo} from '../data/move-info';
@@ -22,7 +22,7 @@ import {moveMatchup} from './move-matchup';
 
 export type CommandMode='root'|'moves'|'switch'|'items';
 function moveDetails(move:MovePP){const base=moveInfo[move.name];return {...base,name:move.displayName ?? base?.name ?? move.name,description:move.description ?? base?.description ?? '',...(move.power!==undefined?{power:move.power,category:move.category!,type:move.type!,accuracy:move.accuracy!}:{})};}
-export function BattleCommands({rule='chaos',battle,mode,busy,forceSwitch,focused,gimmick,onGimmick,onMode,onFocus,onSend,itemBag={}}:{rule?:BattleRule;itemBag?:BattleItemBag;battle:BattleView;mode:CommandMode;busy:boolean;forceSwitch:boolean;focused:string;gimmick:Gimmick|null;onGimmick:(kind:Gimmick|null)=>void;onMode:(mode:CommandMode)=>void;onFocus:(command:string)=>void;onSend:(command:string)=>void}){
+export function BattleCommands({equipment=[],rule='chaos',battle,mode,busy,forceSwitch,focused,gimmick,onGimmick,onMode,onFocus,onSend,itemBag={}}:{equipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];rule?:BattleRule;itemBag?:BattleItemBag;battle:BattleView;mode:CommandMode;busy:boolean;forceSwitch:boolean;focused:string;gimmick:Gimmick|null;onGimmick:(kind:Gimmick|null)=>void;onMode:(mode:CommandMode)=>void;onFocus:(command:string)=>void;onSend:(command:string)=>void}){
   const active=battle.team.find(p=>p.active),slots:(MovePP|null)[]=(gimmick==='zmove' ? battle.zMovePP : gimmick==='dynamax' ? battle.maxMovePP : battle.movePP) ?? active?.moves?.map(name=>({name,pp:0,maxpp:0})) ?? [];
   const index=Math.max(0,Number(focused.split(' ')[1])-1),selected=slots[index] ?? slots[0],info=selected ? moveDetails(selected) : undefined;
   const [heldMove,setHeldMove]=useState<MovePP|null>(null);
@@ -30,9 +30,9 @@ export function BattleCommands({rule='chaos',battle,mode,busy,forceSwitch,focuse
   const heldInfo=heldMove ? moveDetails(heldMove):undefined;
   const available=battle.actions.some(a=>a.command.endsWith(' mega')) ? 'mega' : battle.actions.some(a=>a.command.endsWith(' dynamax')) ? 'dynamax' : null;
   const teraType=active?.teraType ?? 'Normal',canTera=battle.actions.some(a=>a.command.endsWith(' terastallize'));
-  const teraReason=(battle.teraTickets ?? 0)<=0?'테라권 없음':active?.terastallized?'이미 테라스탈 중':active?.dynamax?'다이맥스 중에는 사용 불가':active?.displaySpecies?.includes('-Mega')?'메가진화 중에는 사용 불가':'현재 사용 불가';
+  const teraReason=active?.terastallized?'이미 테라스탈 중':active?.dynamax?'다이맥스 중에는 사용 불가':active?.displaySpecies?.includes('-Mega')?'메가진화 중에는 사용 불가':'이번 배틀에서 사용했거나 현재 사용할 수 없습니다.';
   return <>
-    {mode==='moves' ? <div className={`battle-move-menu has-gimmick ${allowsGimmick(rule,'terastallize')?'':'without-tera'}`} data-testid="battle-move-menu">
+    {mode==='moves' ? <div className="battle-move-menu has-gimmick gimmicks-in-dock" data-testid="battle-move-menu">
       <button className="secondary-button mobile-command-back" disabled={busy} onClick={()=>onMode('root')}>돌아가기</button>
       <div className="action-grid battle-move-grid" data-testid="action-grid">{Array.from({length:4},(_,slot)=>{
         const move=slots[slot],command=`move ${slot+1}`,legal=battle.actions.some(a=>a.command===command+(gimmick ? ' '+gimmick : '')),details=move ? moveDetails(move) : undefined;
@@ -45,12 +45,9 @@ export function BattleCommands({rule='chaos',battle,mode,busy,forceSwitch,focuse
         <dl><div><dt>PP</dt><dd>{selected ? `${selected.pp} / ${selected.maxpp}` : '—'}</dd></div><div><dt>위력</dt><dd>{info?.power || '—'}</dd></div><div><dt>명중률</dt><dd>{info?.accuracy===true ? '필중' : info ? `${info.accuracy}%` : '—'}</dd></div></dl>
         {info?.description && <p>{info.description}</p>}<button className="secondary-button battle-command-back" disabled={busy} onClick={()=>onMode('root')}>돌아가기 · X</button>
       </aside>
-      {allowsGimmick(rule,'terastallize') && <div className="tera-command-side" data-testid="tera-command-side">
-        <button className={`gimmick-icon-button tera-toggle ${gimmick==='terastallize'?'is-selected':''}`} style={{'--gimmick-color':teraColors[teraType]} as CSSProperties} data-testid="tera-toggle" data-type={teraType} aria-label={`${teraNames[teraType]} 테라스탈 · A`} aria-pressed={gimmick==='terastallize'} title={canTera?`${teraNames[teraType]} 테라스탈 · A · 테라권 ${battle.teraTickets ?? 0}장 · 기술 결정 시 발동`:teraReason} disabled={busy||!canTera} onClick={()=>onGimmick(gimmick==='terastallize'?null:'terastallize')}><TeraCrystal type={teraType} showType/><span>테라스탈</span>{gimmick!=='terastallize' && <i aria-hidden="true">A</i>}</button>
-      </div>}
-      {rule==='chaos' && <span className="gimmick-cycle-hint"><kbd>A</kbd> 변신 선택 · 다시 눌러 변경/해제</span>}
       <div className="gimmick-dock" role="group" aria-label="배틀 변신 선택" data-testid="gimmick-dock">
-        {(['zmove','dynamax','mega'] as const).filter(kind=>battle.actions.some(a=>a.command.endsWith(' '+kind))).map(kind=>{const usable=battle.actions.some(a=>a.command.endsWith(' '+kind)),name=kind==='zmove'?'Z기술':kind==='mega'?'메가진화':'다이맥스';return <button key={kind} className={`gimmick-icon-button gimmick-toggle emblem-${kind} ${gimmick===kind?'is-selected':''}`} style={{'--gimmick-color':kind==='zmove'?teraColors[zCrystals[active?.item ?? '']?.type ?? 'Normal']:kind==='mega'?'#bdafff':'#ff428c'} as CSSProperties} data-testid={kind==='zmove'?'zmove-toggle':available===kind?'gimmick-toggle':`${kind}-toggle`} aria-label={`${name} · A`} aria-pressed={gimmick===kind} title={usable?`${name} · A · 기술 결정 시 발동`:`${name} · 현재 사용 불가`} disabled={busy||!usable} onClick={()=>onGimmick(gimmick===kind?null:kind)}>{kind==='zmove'?<ZCrystal type={zCrystals[active?.item ?? '']?.type}/>:<GimmickEmblem kind={kind}/>}<span>{name}</span>{gimmick!==kind && <i aria-hidden="true">A</i>}</button>;})}
+        {equipment.includes('Tera Orb')&&allowsGimmick(rule,'terastallize') && <button className={`gimmick-icon-button tera-toggle ${gimmick==='terastallize'?'is-selected':''}`} style={{'--gimmick-color':teraColors[teraType]} as CSSProperties} data-testid="tera-toggle" data-gimmick="terastallize" data-type={teraType} aria-label={`${teraNames[teraType]} 테라스탈 · A`} aria-pressed={gimmick==='terastallize'} title={canTera?`${teraNames[teraType]} 테라스탈 · A · 기술 결정 시 발동`:teraReason} disabled={busy||!canTera} onClick={()=>onGimmick(gimmick==='terastallize'?null:'terastallize')}><img className="tera-type-icon" data-tera-symbol={teraType} src={`/sprites/gimmicks/tera/Tera${teraType}.png`} width={60} height={60} alt="" aria-hidden="true"/><span>테라스탈</span>{gimmick!=='terastallize' && <i aria-hidden="true">A</i>}</button>}
+        {(['zmove','dynamax','mega'] as const).filter(kind=>kind==='dynamax'?equipment.includes('Dynamax Band')&&allowsGimmick(rule,'dynamax'):kind==='mega'?allowsGimmick(rule,'mega')&&!!megaStones[active?.item??'']:battle.actions.some(a=>a.command.endsWith(' '+kind))).map(kind=>{const usable=battle.actions.some(a=>a.command.endsWith(' '+kind)),name=kind==='zmove'?'Z기술':kind==='mega'?'메가진화':'다이맥스';return <button key={kind} className={`gimmick-icon-button gimmick-toggle emblem-${kind} ${gimmick===kind?'is-selected':''}`} style={{'--gimmick-color':kind==='zmove'?teraColors[zCrystals[active?.item ?? '']?.type ?? 'Normal']:kind==='mega'?'#bdafff':'#ff428c'} as CSSProperties} data-gimmick={kind} data-testid={kind==='zmove'?'zmove-toggle':available===kind?'gimmick-toggle':`${kind}-toggle`} aria-label={`${name} · A`} aria-pressed={gimmick===kind} title={usable?`${name} · A · 기술 결정 시 발동`:`${name} · 현재 사용 불가`} disabled={busy||!usable} onClick={()=>onGimmick(gimmick===kind?null:kind)}>{(kind==='zmove'||kind==='mega')&&isHeldItem(active?.item)?<GimmickItemIcon item={active.item}/>:<GimmickEmblem kind={kind}/>}<span>{name}</span>{gimmick!==kind && <i aria-hidden="true">A</i>}</button>;})}
       </div>
     </div> : <div className="action-grid battle-root-menu" data-testid="action-grid"><button className="action-button" data-mode="moves" disabled={busy || forceSwitch} onClick={()=>onMode('moves')}><span className="battle-choice-arrow" aria-hidden="true">▶</span><strong>싸운다</strong></button><button className="action-button" data-mode="switch" disabled={busy || !battle.actions.some(a=>a.command.startsWith('switch '))} onClick={()=>onMode('switch')}><span className="battle-choice-arrow" aria-hidden="true">▶</span><strong>교체</strong></button><button className="action-button" data-mode="items" disabled={busy||forceSwitch} onClick={()=>onMode('items')}><span className="battle-choice-arrow" aria-hidden="true">▶</span><strong>도구</strong></button></div>}
     {heldMove && <aside role="tooltip" className="mobile-move-tooltip"><h2>{heldInfo?.name ?? heldMove.name}</h2><div className="battle-move-badges">{heldInfo&&<><TypeBadge type={heldInfo.type}/><MoveCategoryBadge category={heldInfo.category}/></>}</div><p className="move-tooltip-values">PP {heldMove.pp} / {heldMove.maxpp} · 위력 {heldInfo?.power || '—'} · 명중률 {heldInfo?.accuracy===true?'필중':heldInfo?heldInfo.accuracy+'%':'—'}</p>{heldInfo?.description && <p>{heldInfo.description}</p>}</aside>}

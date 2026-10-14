@@ -1,4 +1,5 @@
 'use client';
+import {isTrainerEquipment} from '../data/trainer-equipment';
 import {selectedForm} from '../data/selectable-forms';
 import {canEquipGimmick} from '../data/gimmicks';
 import {useState} from 'react';
@@ -17,7 +18,7 @@ export function HeldItemManager({run,busy,submit,error,targetSpecies}:Props & {t
   const fixedItem=activeTarget?selectedForm(activeTarget,run.partnerForms?.[activeTarget])?.requiredItem:undefined;
   const current=activeTarget ? run.heldItems?.[activeTarget] : null;
   const [transfer,setTransfer]=useState<{item:HeldItem;holder:string}|null>(null);
-  const owned=heldItemKeys.filter(item=>(run.itemBag?.[item] ?? 0)>0 || Object.values(run.heldItems ?? {}).includes(item));
+  const owned=heldItemKeys.filter(item=>!isTrainerEquipment(item)&&((run.itemBag?.[item] ?? 0)>0 || Object.values(run.heldItems ?? {}).includes(item)));
   async function equip(item:HeldItem|null,swapFrom?:string){await submit({type:'equip-item',runId:run.id,floor:run.floor,species:activeTarget,item,...(swapFrom?{swapFrom}:{})});setTransfer(null);}
   return <><button className="secondary-button" data-keyboard-tab-utility data-testid="held-item-manager" onClick={()=>{setTarget(null);setOpen(true);}}>지닌 도구 관리 · {Object.keys(run.heldItems ?? {}).length}마리 장착</button>
     {open && <PokedexDialog title="지닌 도구 관리" large className="maintenance-dialog" onClose={()=>target && !targetSpecies ? setTarget(null) : setOpen(false)} returnFocus="[data-testid=held-item-manager]">
@@ -34,11 +35,11 @@ export function HeldItemManager({run,busy,submit,error,targetSpecies}:Props & {t
 }
 export function HeldItemShop({run,coins,busy,submit,error}:Props & {coins:number}){
   const [chosen,setChosen]=useState<HeldItem|null>(null);
-  const compatible=(name:string,item:string)=>!selectedForm(name,run.partnerForms?.[name])?.requiredItem && canEquipGimmick(name,item);
+  const compatible=(name:string,item:string)=>isTrainerEquipment(item)||!selectedForm(name,run.partnerForms?.[name])?.requiredItem && canEquipGimmick(name,item);
   const offers=(run.itemOffers ?? []).filter(isHeldItem).filter(item=>run.roster.some(name=>compatible(name,item)));
   return <><div className="shop-products held-item-products" data-keyboard-tab-products data-testid="held-item-products">{offers.map(item=>{
-    const info=heldItems[item],purchased=run.itemPurchases?.includes(item),owned=(run.itemBag?.[item]??0)>0,holder=Object.entries(run.heldItems ?? {}).find(([,held])=>held===item)?.[0];
-    return <div className="shop-product" key={item}><strong><HeldItemLabel item={item} colored/></strong><p>{info.description}</p><button className="secondary-button" data-held-item={item} disabled={busy || purchased || owned || !!holder || coins<info.price} onClick={()=>setChosen(item)}>{holder ? `${pokemonName(run.partnerForms?.[holder]??holder)} 장착 중` : owned ? '가방에 보유 중' : purchased ? '구매 완료 ✓' : `${info.price}코인 · ${coins<info.price ? '자금 부족' : '구매·장착'}`}</button></div>;
+    const info=heldItems[item],purchased=run.itemPurchases?.includes(item),owned=(run.itemBag?.[item]??0)>0||!!run.trainerEquipment?.includes(item as 'Dynamax Band'|'Tera Orb'),holder=Object.entries(run.heldItems ?? {}).find(([,held])=>held===item)?.[0];
+    return <div className="shop-product" key={item}><strong><HeldItemLabel item={item} colored/></strong><p>{info.description}</p><button className="secondary-button" data-held-item={item} disabled={busy || purchased || owned || !!holder || coins<info.price} onClick={()=>isTrainerEquipment(item)?void submit({type:'purchase-item',revision:run.shopRerolls?.items.count??0,runId:run.id,floor:run.floor,item,species:null}):setChosen(item)}>{holder ? `${pokemonName(run.partnerForms?.[holder]??holder)} 장착 중` : owned ? '보유 중' : purchased ? '구매 완료 ✓' : `${info.price}코인 · ${coins<info.price ? '자금 부족' : isTrainerEquipment(item)?'구매':'구매·장착'}`}</button></div>;
   })}{Array.from({length:Math.max(0,4-offers.length)},(_,slot)=><div className="shop-product shop-sold-out" key={`sold-out-${slot}`} aria-label="품절 슬롯"><strong>품절</strong><p>추첨된 등급의 구매 가능한 도구가 없습니다.</p><small>보유·장착 중인 도구와 사용할 수 없는 기믹 도구는 제외됩니다.</small></div>)}</div>
     {chosen && <PokedexDialog title={`${heldItems[chosen].name} 구매·장착`} large className="maintenance-dialog" onClose={()=>setChosen(null)} returnFocus={`[data-held-item="${chosen}"]`}>
       <p><HeldItemLabel item={chosen}/></p><p>{heldItems[chosen].description}</p><p>보유 {coins.toLocaleString()}코인 · 가격 {heldItems[chosen].price}코인</p><p>교체되는 도구는 가방으로 돌아갑니다.</p>

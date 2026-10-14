@@ -20,9 +20,9 @@ test('2x and 4x retain 1.2 seconds for notices while normal frames remain accele
 });
 test('every species/form has local normal and shiny backs, and copied fronts are excluded',()=>{
   for(const key of Object.keys(inventory))for(const shiny of [false,true]){
-    const sources=pokemonImageSources(Number(key),true,true,key,shiny);
+    const sources=pokemonImageSources(Number.parseInt(key,10),true,true,key,shiny);
     assert.ok(sources.some(path=>existsSync('public'+path)),`${key} shiny=${shiny} missing back`);
     if(frontOnlyBacks.includes(key))assert.ok(sources.every(path=>!path.includes('/showdown/pokemon/gen5-back/')),`${key} copied front`);
   }
-  assert.equal(pokemonImageSources(925,true,true)[0],'/vendor/pokeapi/pokemon/back/925.png');
+  assert.ok(!pokemonImageSources(925,true,true)[0].includes('/showdown/pokemon/gen5-back/'));
 });

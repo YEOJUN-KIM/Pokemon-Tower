@@ -46,3 +46,22 @@ test('playback retains real attack direction, self target, miss and effect durat
   assert.equal(absorbed[0].motion?.blocked,true);
   assert.equal(absorbed[0].motion?.missed,false);
 });
+
+test('Flamethrower uses the supplied beam without changing damage order or shared fire recipes',()=>{
+  const plan=moveAnimationPlan('Flamethrower');
+  assert.equal(plan.duration,950);
+  assert.equal(plan.beam?.url,'/sprites/effects/flamethrower-beam.png');
+  assert.equal(moveAnimationPlan('Heat Wave').beam,undefined);
+  assert.equal(readFileSync('public/sprites/effects/flamethrower-beam.png').subarray(0,8).toString('hex'),'89504e470d0a1a0a');
+  const before:BattleView={id:'beam',requestId:1,status:'waiting',turn:1,team:[{species:'Charizard',condition:'100/100',active:true}],opponent:{species:'Blastoise',condition:'100/100'},actions:[],messages:['|turn|1'],winner:null,error:null};
+  const frames=presentationFrames(before,{...before,messages:[...before.messages,'|move|p1a: Charizard|Flamethrower|p2a: Blastoise','|-damage|p2a: Blastoise|80/100']});
+  assert.equal(frames[0].duration,950);
+  assert.equal(frames[0].view.opponent?.condition,'100/100');
+  assert.equal(frames[1].view.opponent?.condition,'80/100');
+  for(const result of ['|-immune|p2a: Blastoise','|-fail|p1a: Charizard']) {
+    const failed=presentationFrames(before,{...before,messages:[...before.messages,'|move|p1a: Charizard|Flamethrower|p2a: Blastoise',result]});
+    assert.equal(failed[0].motion?.blocked,true);
+    assert.equal(failed[0].duration,950);
+    assert.equal(failed[0].view.opponent?.condition,'100/100');
+  }
+});

@@ -29,7 +29,7 @@ test('primary type default, free saved tera choices, strict input and frozen run
  const saved=store.trainingCollection('tera').find(e=>e.species==='Charizard')!;
  store.train('tera','Charizard',saved.revision,{...saved.profile,teraType:'Grass'});
  assert.equal(JSON.parse(store.db.prepare('SELECT profiles FROM runs WHERE id=?').get(row.run_id)!.profiles as string).Charizard.teraType,'Water');
- assert.equal(store.view('tera').run!.teraTickets,1);
+ assert.equal(store.view('tera').run!.teraTickets,0);
  }finally{store.close();}
 });
 test('tera happens before attacking, changes Tera Blast, persists through switching, consumes only one team ticket',async()=>{
@@ -91,10 +91,11 @@ test('both sides tera once and real STAB changes damage, replay stays identical;
  const damage=(lines:string[])=>100-Number(lines.find(l=>l.startsWith('|-damage|p2'))!.split('|')[3].split('/')[0]);
  assert.ok(damage(boost.publicProtocol)>damage(normal.publicProtocol));
 });
-test('accepted tera spends a ticket atomically once, survives session reconstruction; shop purchases do not double-charge',async()=>{
+test('accepted tera spends a ticket atomically once, survives session reconstruction; retired ticket purchases cannot charge',async()=>{
  const store=new TowerStore(':memory:');let service=new TowerService(store);try{
  store.ensurePlayer('persist');const id=store.start('persist',['Charizard','Blastoise','Venusaur']),row=store.battle(id);
- store.db.prepare('UPDATE battles SET player_team=?,opponent_team=?,tera_tickets=? WHERE id=?').run(teams().p1,teams().p2,'{"p1":1,"p2":0}',id);
+ store.db.prepare('UPDATE battles SET trainer_equipment=NULL,player_team=?,opponent_team=?,tera_tickets=? WHERE id=?').run(teams().p1,teams().p2,'{"p1":1,"p2":0}',id);
+ store.db.prepare('UPDATE run_tera_tickets SET quantity=1 WHERE run_id=?').run(row.run_id);
  const before=(await service.state('persist')).battle!;
  await service.action('persist',id,before.requestId,'move 2 terastallize');assert.equal(store.view('persist').run!.teraTickets,0);
  await assert.rejects(service.action('persist',id,before.requestId,'move 2 terastallize'));
@@ -102,7 +103,6 @@ test('accepted tera spends a ticket atomically once, survives session reconstruc
  const restored=(await service.state('persist')).battle!;assert.equal(restored.team[0].terastallized,'Water');assert.equal(restored.teraTickets,0);
  await service.dispose();
  store.db.prepare("UPDATE runs SET total_floors=50,floor=6,state='select' WHERE id=?").run(row.run_id);store.db.prepare("UPDATE players SET coins=2000 WHERE id='persist'").run();
- store.purchaseTera('persist',row.run_id,6);assert.equal(store.view('persist').coins,650);assert.equal(store.view('persist').run!.teraTickets,1);
- assert.throws(()=>store.purchaseTera('persist',row.run_id,6),/이미 구매/);assert.equal(store.view('persist').coins,650);
+ assert.throws(()=>store.purchaseTera('persist',row.run_id,6),/테라권 판매는 종료/);assert.equal(store.view('persist').coins,2000);
  }finally{await service.dispose();store.close();}
 });

@@ -3,7 +3,7 @@ import {dynamaxDisplaySpecies} from '../data/selectable-forms';
 import {genderFromDetails} from '../data/gender';
 import {teraNames} from '../data/tera';
 import type {BattleView} from './contracts';
-import {describeLine, moves, pokemonName, statNames} from './catalog';
+import {describeLine, health, moves, pokemonName, statNames} from './catalog';
 import {effectNotice, type EffectNotice} from './battle-effects';
 import {advanceField,emptyField} from './battle-field';
 import {itemName} from '../data/held-items';
@@ -86,6 +86,7 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
       motion = {kind:'move', side, category:zDetails?.category, targetSide:condition?.startsWith('p1')?'player':condition?.startsWith('p2')?'enemy':defaultTarget, missed:following.some(next=>next.startsWith('|-miss|')), blocked:following.some(next=>/^\|-(immune|fail)\|/.test(next)||next.includes('[from] ability: Water Absorb')||next.includes('[from] ability: Volt Absorb')||next.includes('[from] ability: Dry Skin')), color, move:value};
     }
     if (side && ['switch','drag','replace'].includes(event)) {
+      view.pendingFaints=view.pendingFaints?.filter(pending=>pending!==side);
       const name = value.split(',')[0];
       if (side === 'enemy') view.opponent = {gender:genderFromDetails(value),shiny:value.split(', ').includes('shiny'),species:name,terastallized:value.match(/tera:([A-Za-z]+)/)?.[1],condition:condition ?? view.opponent?.condition ?? '100/100'};
       else {
@@ -138,6 +139,10 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
     // during playback; replace with the server's exact own HP at the end.
     if (pokemon && ['-damage','-heal'].includes(event)) {
       pokemon.condition = value;
+      if(side){
+        const pending=(view.pendingFaints ?? []).filter(pending=>pending!==side);
+        view.pendingFaints=event==='-damage'&&health(value).percent===0?[...pending,side]:pending;
+      }
       if(!line.split('|').includes('[silent]'))motion = {kind:event === '-damage' ? 'hit' : 'heal',side:side!,color:'normal',label:event === '-heal' ? 'HP 회복' : undefined,impact:event==='-damage' ? impact : undefined};
       if(event==='-damage')impact=undefined;
     }
@@ -145,7 +150,7 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
       const increase=event === '-boost';
       motion={kind:increase ? 'stat-up' : 'stat-down',side,color:'normal',label:`${statNames[value] ?? value} ${increase ? '상승' : '하락'}`};
     }
-    if (pokemon && event === 'faint') {pokemon.condition = '0 fnt'; motion = {kind:'faint',side:side!,color:'normal'};}
+    if (pokemon && event === 'faint') {view.pendingFaints=view.pendingFaints?.filter(pending=>pending!==side);pokemon.condition = '0 fnt'; motion = {kind:'faint',side:side!,color:'normal'};}
     if (pokemon && event === '-status') pokemon.condition = `${pokemon.condition.split(' ')[0]} ${value}`;
     if (pokemon && event === '-curestatus') pokemon.condition = pokemon.condition.split(' ')[0];
     applyPublicTypes(view,line);

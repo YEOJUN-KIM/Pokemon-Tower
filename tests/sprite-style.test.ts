@@ -4,13 +4,15 @@ import {existsSync} from 'node:fs';
 import {pokemonImageSources} from '../src/web/pokemon-image';
 import {pixelSpriteSources} from '../src/data/pixel-sprites';
 import nonPixelFronts from '../src/data/non-pixel-front-sprites.json' with {type:'json'};
+import additional from '../src/data/additional-animations.json' with {type:'json'};
 
 test('illustration placeholders use real local pixel PNGs for animated and static front views',()=>{
  for(const key of nonPixelFronts){
   assert.deepEqual(pixelSpriteSources(key,false,true),[]);
   for(const animated of [false,true]){
    const sources=pokemonImageSources(Number(key),false,animated,key);
-   assert.deepEqual(sources,[`/vendor/pokeapi/pokemon/${key}.png`]);
+   const added=(additional as Record<string,{front?:{gif:string;png:string}}>)[key]?.front;
+   assert.deepEqual(sources,animated&&added?[added.gif,added.png]:[`/vendor/pokeapi/pokemon/${key}.png`]);
    assert.ok(existsSync('public'+sources[0]));
   }
   for(const back of [false,true])for(const shiny of [false,true]){

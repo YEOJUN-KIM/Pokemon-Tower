@@ -104,7 +104,7 @@ test('natural Booster activation survives completion and next-floor packing, wit
   store.db.prepare("UPDATE runs SET floor=11,state='select' WHERE id=?").run(run);store.db.prepare('UPDATE players SET coins=10000 WHERE id=?').run('boost');
   store.db.prepare('INSERT INTO item_shops VALUES (?,?,?)').run(run,11,JSON.stringify(['Booster Energy','Leftovers','Charcoal','Miracle Seed']));
   store.purchaseItem('boost',run,11,'Booster Energy','Iron Valiant');const id=store.enter('boost',run,11,members),row=store.battle(id);
-  const log=await runBattle({teams:{p1:row.player_team,p2:row.opponent_team},format:row.format,rule:'basic',seed:JSON.parse(row.seed),player:new DamagePolicy(),opponent:new DamagePolicy()});
+  const log=await runBattle({teams:{p1:row.player_team,p2:row.opponent_team},trainerEquipment:JSON.parse(row.trainer_equipment!),format:row.format,rule:'basic',seed:JSON.parse(row.seed),player:new DamagePolicy(),opponent:new DamagePolicy()});
   assert.ok(log.publicProtocol.some(line=>line.startsWith('|-enditem|p1a: Iron Valiant|Booster Energy')));
   assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
   store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
@@ -117,7 +117,7 @@ test('natural Booster activation survives completion and next-floor packing, wit
 test('gimmick family draws keep Dynamax reachable alongside many Mega stones and exclude ineligible tools',()=>{
  let seed=7345;const random=()=>{seed^=seed<<13;seed^=seed>>>17;seed^=seed<<5;return (seed>>>0)/4294967296;};
  for(const floor of [10,30]){
-  const counts={mega:0,dynamax:0,z:0,primal:0};let shops=0;
+  const counts={mega:0,dynamax:0,z:0,primal:0,tera:0};let shops=0;
   for(let i=0;i<4000;i++){
    const offers=rollItemOffers(floor,random,item=>!['Red Orb','Blue Orb'].includes(item));
    let found=false;for(const item of offers){const family=gimmickItemFamily(item);if(family){counts[family]++;found=true;}}

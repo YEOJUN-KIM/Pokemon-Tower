@@ -10,9 +10,24 @@ test('presentation orders attacks, damage, faint and replacement without publish
   assert.deepEqual(frames.map(f=>f.motion?.kind??null),['move','hit','faint',null]);
   assert.equal(frames[0].view.opponent?.condition,'100/100');
   assert.equal(frames[1].view.opponent?.condition,'0 fnt');
+  assert.deepEqual(frames[1].view.pendingFaints,['enemy']);
+  assert.deepEqual(frames[2].view.pendingFaints,[]);
   assert.ok(frames.every(f=>f.view.status==='waiting'&&f.view.winner===null));
   assert.equal(before.opponent?.condition,'100/100');
   assert.equal(frames[0].motion?.color,'fire');
+});
+
+test('zero HP delays faint appearance across intermediate messages for either side',()=>{
+  for(const [actor,target,side] of [['p1a: Charizard','p2a: Pikachu','enemy'],['p2a: Pikachu','p1a: Charizard','player']]){
+    const frames=presentationFrames(before,{...before,messages:[...before.messages,`|move|${actor}|Flamethrower|${target}`,`|-damage|${target}|0 fnt`,`|-message|A pause before fainting`,`|faint|${target}`]});
+    assert.deepEqual(frames[1].view.pendingFaints,[side]);
+    assert.deepEqual(frames[2].view.pendingFaints,[side]);
+    assert.deepEqual(frames[3].view.pendingFaints,[]);
+  }
+  const revived=presentationFrames(before,{...before,messages:[...before.messages,'|-damage|p1a: Charizard|0 fnt','|-heal|p1a: Charizard|50/100']});
+  assert.deepEqual(revived[1].view.pendingFaints,[]);
+  const replaced=presentationFrames(before,{...before,messages:[...before.messages,'|-damage|p2a: Pikachu|0 fnt','|switch|p2a: Snorlax|Snorlax, L50|100/100']});
+  assert.deepEqual(replaced[1].view.pendingFaints,[]);
 });
 test('rolling public log and repeated events are matched by ordered overlap',()=>{
   assert.deepEqual(newLines(['a','a','b'],['a','b','c']),['c']);

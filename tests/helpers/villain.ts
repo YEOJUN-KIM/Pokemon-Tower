@@ -26,7 +26,7 @@ export async function villainResult(store:TowerStore,id:string,win=true){
  const own=win?before.player_team:weak,enemy=win?weak:before.player_team,seed:Seed=[1,2,3,4];
  store.db.prepare('UPDATE battles SET player_team=?,opponent_team=?,seed=? WHERE id=?').run(own,enemy,JSON.stringify(seed),id);
  const row=store.battle(id);
- const log=await runBattle({teams:{p1:own,p2:enemy},seed,player:new DamagePolicy(),opponent:new DamagePolicy(),format:row.format,upgrades:JSON.parse(row.upgrades),teraTickets:{p1:0,p2:0}});
+ const log=await runBattle({teams:{p1:own,p2:enemy},seed,player:new DamagePolicy(),opponent:new DamagePolicy(),format:row.format,trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),upgrades:JSON.parse(row.upgrades),teraTickets:{p1:0,p2:0}});
  // This fixture uses the saved environment; disable tickets in both row and engine.
  store.db.prepare('UPDATE battles SET tera_tickets=? WHERE id=?').run('{"p1":0,"p2":0}',id);
  const view={id,status:'complete' as const,requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null};

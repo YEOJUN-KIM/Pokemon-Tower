@@ -1,5 +1,11 @@
 # 출처와 재사용
 
+2026-10-14 테라스탈 선택 아이콘: [Pokémon Showdown 타입 이미지](https://play.pokemonshowdown.com/sprites/types/)의 `Tera{Type}.png` 19종을 수정 없이 `public/sprites/gimmicks/tera/`에 저장했다. 테라스탈 버튼에서 현재 타입의 보석 아이콘을 표시한다. [개별 URL·해시](../../public/sprites/gimmicks/tera/sources.json)를 보존하며 재현은 `scripts/import-tera-type-icons.mjs`다. 기존 Pokémon 이미지의 원작 권리 구분을 따른다.
+
+2026-10-14 기믹 도구 개별 아이콘: [PokeAPI/sprites 도구 자료](https://github.com/PokeAPI/sprites/tree/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items)에서 메가스톤 48개와 Z크리스탈 34개의 PNG를 수정 없이 저장했다. 메가스톤은 개별 이름의 PNG를 사용하고 망나뇽나이트는 gen9 자료를 사용한다. Z크리스탈은 타입별 18개·전용 16개의 가방 아이콘을 각 도구 이름에 연결했다. 출처 URL·고정 커밋·크기·SHA256은 [아이콘 출처 목록](../../public/sprites/items/gimmick-icon-sources.json)에 기록한다. 재현 도구는 `scripts/import-gimmick-item-icons.mjs`다. 기존 포켓몬 이미지의 권리 구분을 동일하게 따른다.
+
+2026-10-14 포켓몬 애니메이션 재점검: 기존 Showdown gen5ani 계열에 더해 [PokéRogue assets](https://github.com/pagefaultgames/pokerogue-assets/tree/325c7de68e6c323e12243271ea510c6b0e1b992e)의 도트 아틀라스를 GIF로 변환했다. 자르기 전 좌표와 투명도를 복원하고 PNG 대체 이미지도 저장했다. 244종·폼의 709개 방향/이로치 표시를 추가했다. 원본 URL·커밋·해시·변환 정보는 [출처 목록](../../public/vendor/pokerogue/sources.json), 제작자 크레딧과 원본 REUSE·CC BY-NC-SA 4.0·FAIR-USE 고지는 [자산 안내](../../public/vendor/pokerogue/README.md)와 같은 폴더에 보존한다. Showdown GIF는 수정 없이 저장하고 PNG 대체 이미지는 첫 프레임에서 추출했다. 엔진 소스의 라이선스를 그림에 적용하지 않는다.
+
 2026-10-09 30층 이벤트: 기존 Showdown 초상화 출처를 확장해 조직원 6종을 수정 없이 저장했다. [원본 디렉터리](https://play.pokemonshowdown.com/sprites/trainers/)에서 작가 표시를 확인했으며 magmagrunt·skullgrunt는 ZacWeavile, flaregrunt는 kyledove에게 크레딧을 표기한다. rocketgrunt·galacticgrunt·plasmagrunt에는 해당 디렉터리의 별도 작가 표시가 없었다. 원본 URL과 작가는 [출처 목록](../../public/sprites/trainers/sources.json)에 기록한다. 당시 초상화는 52종이었다. 성도 테마 추가로 관장·사천왕·레드 12종을 더 저장해 현재는 64종이다. 원본 URL은 같은 출처 목록에 기록한다.
 
 2026-10-09 트레이너 샘플 확장: Showdown 출처의 PNG를 수정 없이 저장해 샘플용 초상화 46종을 사용한다. 원본 URL과 로컬 파일명은 [초상화 출처 목록](../../public/sprites/trainers/sources.json)에 기록했다. 제공원의 실제 파일명을 로컬 식별자에 연결한 경우가 있어 `-gen4` 같은 로컬 이름만으로 그림 세대를 단정하지 않는다. 네임드의 출신 세대와 그림 파일의 버전은 별개다. 이는 기존 트레이너 자료의 확장이며 새로운 원작 이용 허락을 얻었다는 뜻은 아니다.
@@ -155,3 +161,5 @@ PokéAPI item API에서 9종의 sprites.default 주소를 확인하고 PokeAPI/s
 ## 2026-10-10 · 1~9세대 트레이너 확장
 
 트레이너 초상화는 총172종이다. 기존 Showdown 제공원의 PNG를 수정 없이 저장하고 원본 URL·표기된 모든 작가를 trainer-sprite-sources.json에 기록했다. 재현은 scripts/import-trainer-samples.mjs이며 디렉터리의 figure별 작가 표기를 함께 수집한다. 예: nemona-s·stargrunt-s는 kyledove, aetherfoundation·officeworker는 Beliot419다. 매크로코스모스 조직원은 회사원 이미지로 임시 표현한다. 원작 이미지를 자체 제작물로 설명하지 않는다.
+
+다이맥스밴드 아이콘은 PokeSprite, 테라스탈오브 아이콘은 PokeRogue 원본 PNG를 사용합니다. URL·SHA-256·크레딧 경로는 [장비 아이콘 출처](../../public/sprites/items/trainer-equipment-sources.json)에 기록합니다. PokeRogue 크레딧과 권리 고지는 `public/vendor/pokerogue/`에 보존하며, 게임 엔진 라이선스와 이미지 권리는 별개입니다.

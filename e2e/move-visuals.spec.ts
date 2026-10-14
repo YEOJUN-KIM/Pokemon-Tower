@@ -44,16 +44,78 @@ for(const width of [1280,390])test(`licensed move effects, both directions and i
   } finally {await context.close();}
 });
 
-test('reduced motion keeps a static cue and does not lunge',async({browser})=>{
+for(const move of ['Thunderbolt','Flamethrower'])test(`reduced motion keeps a static cue and does not lunge: ${move}`,async({browser})=>{
   const context=await browser.newContext({reducedMotion:'reduce'});
   try {
     const origin='http://127.0.0.1:3001';
     await context.request.post(origin+'/api/account',{headers:{Origin:origin},data:{action:'register',username:'reduced_'+randomUUID().slice(0,8),password:randomUUID()}});
     const initial=await context.request.post(origin+'/api/battle',{headers:{Origin:origin},data:{type:'start',selected:['Charizard','Blastoise','Venusaur']}}).then(r=>r.json());
-    await context.route('**/api/battle',async route=>route.request().method()==='POST'?route.fulfill({json:{...initial,battle:{...initial.battle,messages:[...initial.battle.messages,'|move|p1a: Charizard|Thunderbolt|p2a: Opponent']}}}):route.continue());
+    await context.route('**/api/battle',async route=>route.request().method()==='POST'?route.fulfill({json:{...initial,battle:{...initial.battle,messages:[...initial.battle.messages,`|move|p1a: Charizard|${move}|p2a: Opponent`]}}}):route.continue());
     const page=await context.newPage();await page.goto(origin+'/battle');await page.getByRole('button',{name:'싸운다',exact:true}).click();await page.locator('[data-command="move 1"]').click();
-    await expect(page.getByTestId('move-visuals')).toHaveAttribute('data-move','Thunderbolt');
+    await expect(page.getByTestId('move-visuals')).toHaveAttribute('data-move',move);
+    await expect.poll(()=>page.getByTestId('move-visuals').evaluate(element=>{const c=element as HTMLCanvasElement;return c.getContext('2d')!.getImageData(0,0,c.width,c.height).data.some((n,i)=>i%4===3&&n>25);})).toBe(true);
     expect(await page.locator('.motion-wrap').evaluateAll(elements=>elements.flatMap(element=>element.getAnimations()).length)).toBe(0);
     await page.keyboard.press('Shift');await expect(page.getByTestId('move-visuals')).toHaveAttribute('data-active','false');
+  } finally {await context.close();}
+});
+
+test('Flamethrower beam grows from Charizard, keeps HP ordering and clears on completion',async({browser})=>{
+  const origin='http://127.0.0.1:3001';
+  const context=await browser.newContext({viewport:{width:1000,height:800}});
+  try {
+    await context.request.post(origin+'/api/account',{headers:{Origin:origin},data:{action:'register',username:'beam_'+randomUUID().slice(0,8),password:randomUUID()}});
+    const initial=await context.request.post(origin+'/api/battle',{headers:{Origin:origin},data:{type:'start',selected:['Charizard','Blastoise','Venusaur']}}).then(r=>r.json());
+    let outcome='hit',enemy=false;
+    await context.route('**/api/battle',async route=>{
+      if(route.request().method()!=='POST'||route.request().postDataJSON().type!=='action')return route.continue();
+      const actor=enemy?'p2a: Opponent':'p1a: Charizard',target=enemy?'p1a: Charizard':'p2a: Opponent';
+      const result=outcome==='hit'?`|-damage|${target}|80/100`:outcome==='miss'?`|-miss|${actor}|${target}`:`|-immune|${target}`;
+      await route.fulfill({json:{...initial,battle:{...initial.battle,requestId:initial.battle.requestId+1,messages:[...initial.battle.messages,`|move|${actor}|Flamethrower|${target}`,result]}}});
+    });
+    const page=await context.newPage();
+    // The clock controls JS/RAF but CSS animation time can advance during
+    // screenshots. Record the defender animation when it is created instead.
+    await page.addInitScript(()=>{
+      const animate=Element.prototype.animate;
+      Element.prototype.animate=function(keyframes,options){
+        if(typeof options==='object'&&options.delay===600&&options.duration===240)this.setAttribute('data-test-shakes','1');
+        return animate.call(this,keyframes,options);
+      };
+    });
+    const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+    await page.goto(origin+'/battle');
+    await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
+    await page.clock.install();await page.clock.pauseAt(new Date());
+    const directory='artifacts/qa/screenshots/flamethrower-prototype';mkdirSync(directory,{recursive:true});
+    const canvas=page.getByTestId('move-visuals');
+    const pixels=()=>canvas.evaluate(element=>{
+      const c=element as HTMLCanvasElement,data=c.getContext('2d')!.getImageData(0,0,c.width,c.height).data;
+      let visible=0;for(let i=3;i<data.length;i+=4)if(data[i]>25)visible++;return visible;
+    });
+    for(const variant of ['hit','enemy','miss','immune']){
+      outcome=variant==='enemy'?'hit':variant;enemy=variant==='enemy';
+      if(variant!=='hit'){
+        await page.goto(origin+'/battle');await page.clock.runFor(200);
+      }
+      await page.getByRole('button',{name:'싸운다',exact:true}).click();await page.locator('[data-command="move 1"]').click();
+      await expect(canvas).toHaveAttribute('data-move','Flamethrower');
+      const hp=page.locator(enemy?'.player-health [role="progressbar"]':'.enemy-health [role="progressbar"]');
+      const originalHP=await hp.getAttribute('aria-valuenow');
+      let small=0,full=0;
+      for(let i=0;i<20;i++){
+        await page.clock.runFor(50);
+        if(i===2)small=await pixels();
+        if(i===10){full=await pixels();expect(full).toBeGreaterThan(small*2);expect(await hp.getAttribute('aria-valuenow')).toBe(originalHP);}
+        if(i===13){
+          const shake=await page.locator(enemy?'.player-position .motion-wrap':'.enemy-position .motion-wrap').getAttribute('data-test-shakes');
+          expect(shake).toBe(outcome==='hit'?'1':null);
+        }
+        if(variant==='hit')await page.locator('.arena').screenshot({path:`${directory}/frame-${String(i).padStart(2,'0')}.png`});
+      }
+      await page.clock.runFor(2500);
+      await expect(canvas).toHaveAttribute('data-active','false');expect(await pixels()).toBe(0);
+      await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
+    }
+    expect(errors).toEqual([]);
   } finally {await context.close();}
 });

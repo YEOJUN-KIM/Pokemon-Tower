@@ -91,7 +91,7 @@ test('v19 upgrade preserves old battles, inventory and grunt-only runs without a
  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);try{
   store.ensurePlayer('old');const row=store.battle(store.start('old',starters)),before=store.view('old');
   store.db.exec('DROP TABLE run_villain_campaigns; ALTER TABLE battles DROP COLUMN villain_event; PRAGMA user_version=19;');store.close();store=new TowerStore(path);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,28);assert.deepEqual(store.view('old'),before);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,31);assert.deepEqual(store.view('old'),before);
   assert.deepEqual(store.battle(row.id),row);assert.equal(store.db.prepare('SELECT COUNT(*) AS n FROM run_villain_campaigns').get()!.n,0);
   store.db.prepare("UPDATE runs SET floor=31,state='select' WHERE id=?").run(row.run_id);
   const next=store.battle(store.enter('old',row.run_id,31,starters));assert.equal(next.villain_event,null);assert.equal(next.reward,floors[30].reward);

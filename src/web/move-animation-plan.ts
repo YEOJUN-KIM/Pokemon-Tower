@@ -6,7 +6,8 @@ export const effectAssets=['blackwisp','bluefireball','bottombite','electroball'
 export type EffectAsset=typeof effectAssets[number];
 export type EffectPoint={anchor:'source'|'target';x:number;y:number};
 export type MoveParticle={asset:EffectAsset;start:number;end:number;from:EffectPoint;to:EffectPoint;size:number;grow:number;rotate:number;arc:number;opacity:number};
-export type MoveAnimationPlan={style:string;duration:number;contact:boolean;offensive:boolean;particles:MoveParticle[];lightning:boolean;wash:string|null};
+export const flamethrowerBeam={asset:'flamethrower-beam',url:'/sprites/effects/flamethrower-beam.png',start:80,extended:480,fade:680,end:840,origin:{x:30,y:993},tip:{x:1280,y:330}} as const;
+export type MoveAnimationPlan={style:string;duration:number;contact:boolean;offensive:boolean;particles:MoveParticle[];lightning:boolean;wash:string|null;beam?:typeof flamethrowerBeam};
 const point=(anchor:EffectPoint['anchor'],x=0,y=0):EffectPoint=>({anchor,x,y});
 const recipes:Record<string,string>={
   Flamethrower:'flame',FireBlast:'fireblast',HeatWave:'flame',Overheat:'fireblast',WillOWisp:'blueflame',
@@ -42,7 +43,12 @@ export function moveAnimationPlan(move:string,color?:string,override?:{category:
     for(let i=0;i<8;i++){const a=i*Math.PI/4;add('wisp',i*30,750+i*20,point('target',Math.cos(a)*1.5,Math.sin(a)*.8),point('target',Math.cos(a)*.5,-1.8),.28,.65,0,0,.65);}
     return plan;
   }
-  if(style==='flame'||style==='blueflame'){stream(style==='flame'?'fireball':'bluefireball',9);burst(style==='flame'?'fireball':'bluefireball',650);}
+  if(key==='Flamethrower') {
+    plan.beam=flamethrowerBeam;
+    burst('hitmarker',600,.55);
+    for(let i=0;i<6;i++){const angle=i*Math.PI/3;add('fireball',600+i*18,880+i*10,point('target'),point('target',Math.cos(angle)*.8,Math.sin(angle)*.6-.4),.16,.45,i*35,-.25,.8);}
+  }
+  else if(style==='flame'||style==='blueflame'){stream(style==='flame'?'fireball':'bluefireball',9);burst(style==='flame'?'fireball':'bluefireball',650);}
   else if(style==='fireblast') {stream('fireball',5);for(let i=0;i<5;i++){const a=i*2*Math.PI/5;add('fireball',420+i*25,880,point('target'),point('target',Math.cos(a)*1.4,Math.sin(a)*1.4),.85,1.3);}}
   else if(style==='wave'||style==='mudwave') {plan.wash='#0879cc';for(let i=0;i<9;i++)add(style==='wave'?'waterwisp':'mudwisp',i*35,580+i*35,point('source',(i-4)*.32,.6),point('target',(i-4)*.48,.1),1.2,2,0,-.7,.6);}
   else if(style==='waterbeam'){stream('waterwisp',10,.16);burst('waterwisp',680);}

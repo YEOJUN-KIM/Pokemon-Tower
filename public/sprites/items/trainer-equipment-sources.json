@@ -1,0 +1,24 @@
+{
+  "importedAt": "2026-10-14T06:34:05.147Z",
+  "files": [
+    {
+      "item": "Dynamax Band",
+      "url": "https://raw.githubusercontent.com/msikma/pokesprite/master/items/key-item/dynamax-band.png",
+      "source": "PokeSprite",
+      "credit": "https://github.com/msikma/pokesprite",
+      "path": "public/sprites/items/dynamax-band.png",
+      "sha256": "7acc0a9723c342fd4d51b848a2666cb747c42cbf76a84adfe564d9c0081e6c83",
+      "transformation": "None"
+    },
+    {
+      "item": "Tera Orb",
+      "url": "https://raw.githubusercontent.com/pagefaultgames/pokerogue-assets/325c7de68e6c323e12243271ea510c6b0e1b992e/images/items/tera_orb.png",
+      "source": "PokeRogue",
+      "credit": "public/vendor/pokerogue/CREDITS.md",
+      "notice": "public/vendor/pokerogue/source-images-REUSE.toml",
+      "path": "public/sprites/items/tera-orb.png",
+      "sha256": "407be2a97b0f4a463cceafc9549a539fbca1bd28d0ab9a41c4135bfc054856f9",
+      "transformation": "None"
+    }
+  ]
+}

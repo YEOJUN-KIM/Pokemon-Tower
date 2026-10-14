@@ -88,7 +88,7 @@ test('recruitment merges each actual opponent IV, never lowers saved IVs and upd
     store.db.prepare('UPDATE battles SET opponent_team=? WHERE id=?').run(opponentTeam,id);
     let won=false;
     for(let seed=1;seed<=50;seed++) {
-      const log=await runBattle({teams:{p1:row.player_team,p2:opponentTeam},seed:[seed,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
+      const log=await runBattle({trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:opponentTeam},seed:[seed,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
       if(log.winner!=='Player')continue;
       store.db.prepare('UPDATE battles SET seed=? WHERE id=?').run(JSON.stringify(log.seed),id);
       store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});won=true;break;

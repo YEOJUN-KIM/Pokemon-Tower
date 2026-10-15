@@ -5,6 +5,8 @@ import {TowerStore} from '../src/server/tower-store';
 import {starters} from '../src/data/teams';
 import {towerTrainerEncounter} from '../src/data/tower-trainers';
 import Showdown from 'pokemon-showdown';
+import {normalNpcTemplate} from '../src/server/npc-templates';
+import {npcExtraCandidates} from '../src/data/npc-gimmicks';
 
 test('boss preview becomes a persisted encounter and v2 migration preserves old battles',()=>{
   const path=`.data/tests/${randomUUID()}.sqlite`;
@@ -21,10 +23,12 @@ test('boss preview becomes a persisted encounter and v2 migration preserves old 
     assert.deepEqual(store.view('boss-test').run!.boss,preview);
     const id=store.enter('boss-test',run,5,starters);
     const opponents=Showdown.Teams.unpack(store.battle(id).opponent_team)!;
-    assert.equal(opponents.length,3);for(const set of opponents)assert.ok(encounter.entries.includes(set.species));
+    const template=normalNpcTemplate(preview.id,5,preview.role),pool=template?template.team.map(p=>p.species):[...encounter.entries,...(npcExtraCandidates[preview.id]??[])];
+    assert.equal(opponents.length,3);for(const set of opponents)assert.ok(pool.includes(set.species),set.species);
     const saved=store.view('boss-test');
     assert.equal(store.battle(id).reward,450);
-    assert.deepEqual(saved.run!.boss,preview);
+    const {gimmick,...identity}=saved.run!.boss!;assert.deepEqual(identity,preview);
+    if(gimmick)assert.ok(opponents.some(set=>set.species===gimmick.species));
     store.close();store=new TowerStore(path);
     assert.deepEqual(store.view('boss-test'),saved);
     // An encounter created before bosses retains its old reward and has no boss.
@@ -33,6 +37,6 @@ test('boss preview becomes a persisted encounter and v2 migration preserves old 
     store.close();store=new TowerStore(path);
     assert.equal(store.battle(id).reward,300);
     assert.equal(store.view('boss-test').run!.boss,null);
-    assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,31);
+    assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,33);
   } finally {store.close();}
 });

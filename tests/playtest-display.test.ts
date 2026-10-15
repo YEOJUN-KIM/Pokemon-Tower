@@ -26,3 +26,13 @@ test('every species/form has local normal and shiny backs, and copied fronts are
   }
   assert.ok(!pokemonImageSources(925,true,true)[0].includes('/showdown/pokemon/gen5-back/'));
 });
+
+test('fast playback preserves readable new dialogue without slowing hidden damage frames or 1x',()=>{
+ for(const speed of [2,4] as const){
+  assert.equal(playbackDuration(750,speed,false,'급소에 맞았다!'),750);
+  assert.ok(playbackDuration(1600,speed,false,'상대 잠만보의 몸에 맹독이 퍼지기 시작했다!')>=1000);
+  assert.equal(playbackDuration(750,speed),750/speed);
+ }
+ assert.equal(playbackDuration(750,1,false,'긴 문장'.repeat(30)),750);
+ assert.equal(playbackDuration(0,4),0);
+});

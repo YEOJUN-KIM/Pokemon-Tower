@@ -54,7 +54,7 @@ test('Smeargle can fill an empty move slot with a collected move and persist its
   try{store.ensurePlayer(owner);store.db.prepare('INSERT INTO unlocks VALUES (?,?)').run(owner,'Smeargle');store.db.prepare('INSERT INTO move_unlocks VALUES (?,?,?)').run(owner,'Smeargle','Flamethrower');}finally{store.close();}
   await context.addCookies([{name:'tower_session',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
   await page.goto('/pokedex');await dexSearch(page).fill('루브도');await page.getByRole('button',{name:'루브도 상세 보기',exact:true}).click();await page.getByRole('button',{name:'기술배치',exact:true}).click();
-  await page.locator('.move-slots button').nth(1).click();await page.locator('.move-library button').filter({has:page.getByText('화염방사',{exact:true})}).click();await page.getByRole('button',{name:'기술배치 저장 · 무료'}).click();
+  await page.locator('.move-slots button').nth(1).click();await page.locator('.move-library button').filter({has:page.getByText('화염방사',{exact:true})}).click();await expect(page.locator('.move-editor')).toHaveAttribute('aria-busy','false');
   await expect(page.getByRole('status')).toContainText('설정을 저장');await page.reload();
   const saved=await page.request.get('/api/battle?view=collection').then(r=>r.json());expect(saved.training.find((entry:{species:string})=>entry.species==='Smeargle').profile.moves).toEqual(['Sketch','Flamethrower']);
 });

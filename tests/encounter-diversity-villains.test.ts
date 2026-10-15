@@ -34,18 +34,18 @@ test('victories shift rank chances upward while keeping floor gates and random o
   if(floor<16)assert.equal(weights.executive,0);
  }
  let events=0,bosses=0;const bossFloors=new Set<number>();
- for(let n=0;n<1000;n++){
+ for(let n=0;n<4000;n++){
   if(villainEncounter(`rate-${n}`,41,'rocket'))events++;
   const event=villainEncounter(`boss-${n}`,75+n%25,'rocket',false,false,{gruntWins:10,executiveWins:10});
   if(event?.event.rank==='boss'){bosses++;bossFloors.add(75+n%25);}
  }
- assert.equal(VILLAIN_CHANCE,.15);assert.ok(events>110 && events<190);
- assert.ok(bosses>80 && bosses<190);assert.equal(bossFloors.size,20);
+ assert.equal(VILLAIN_CHANCE,.08);assert.ok(events>240 && events<400);
+ assert.ok(bosses>120 && bosses<340);assert.equal(bossFloors.size,20);
 });
 
 test('unavailable leaders redistribute the event draw to eligible ranks',()=>{
  let events=0;
- for(let n=0;n<300;n++){
+ for(let n=0;n<600;n++){
   const id=`eligible-${n}`,base=villainEncounter(id,41,'rocket');
   const event=villainEncounter(id,41,'rocket',false,false,{gruntWins:0,executiveWins:0},sample=>sample.kind==='normal');
   assert.equal(!!event,!!base);

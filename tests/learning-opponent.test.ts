@@ -7,7 +7,7 @@ import {DamagePolicy,type Observation,type OwnPokemon} from '../src/battle/polic
 import {runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {packTeam} from '../src/data/teams';
 import {abilityLearningCases} from '../scripts/lib/ability-learning-cases';
-import {TowerStore} from '../src/server/tower-store';
+import {TowerStore,AI_VERSION} from '../src/server/tower-store';
 import {TowerService} from '../src/server/tower-service';
 
 for(const [index,c] of abilityLearningCases.entries())for(const control of [false,true]){
@@ -71,12 +71,12 @@ test('when no ally has an answer, the enemy still returns a legal action',()=>{
  ai.observePublicLine('|-immune|p1a: Quagsire|[from] ability: Water Absorb');
  assert.equal(ai.choose(o),'move 1');
 });
-test('new battles run v8 and saved v7 battles remain resumable',async()=>{
- for(const version of ['tower-policy-v8','tower-policy-v7']){
+test('new battles run the current AI and saved v7 battles remain resumable',async()=>{
+ for(const version of [AI_VERSION,'tower-policy-v7']){
   const store=new TowerStore(':memory:'),service=new TowerService(store);
   try{
    store.ensurePlayer('learning');const id=store.start('learning',['Charizard','Blastoise','Venusaur']);
-   assert.equal(store.battle(id).ai_version,'tower-policy-v8');
+   assert.equal(store.battle(id).ai_version,AI_VERSION);
    if(version==='tower-policy-v7')store.db.prepare('UPDATE battles SET ai_version=? WHERE id=?').run(version,id);
    assert.equal((await service.state('learning')).battle!.status,'waiting');
    assert.equal(store.battle(id).ai_version,version);

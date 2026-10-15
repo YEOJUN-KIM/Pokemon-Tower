@@ -8,6 +8,7 @@ import {effectNotice} from './battle-effects';
 import {pixelSpriteSources} from '../data/pixel-sprites';
 import {localPokemonPng} from '../data/local-pokemon-sprites';
 import {selectableForms} from '../data/selectable-forms';
+import additionalAnimations from '../data/additional-animations.json' with {type:'json'};
 
 const legacySpecies: Record<string, {id: number; name: string; types: string[]; color: string}> = {
   Charizard: {id: 6, name: '리자몽', types: ['불꽃', '비행'], color: 'fire'},
@@ -99,7 +100,10 @@ export const statNames: Record<string, string> = {atk:'공격', def:'방어', sp
 export const spriteUrl = (name: string, back = false, spriteId?:number) => {
   const id = spriteId ?? species[name]?.spriteKey ?? species[name]?.id;
   if(id && Number(id)>=650){const pixel=pixelSpriteSources(id,back);if(pixel.length)return pixel[0];}
-  return id ? localPokemonPng(id,back) : '';
+  if(!id)return '';
+  const local=localPokemonPng(id,back);
+  const extra=(additionalAnimations as Record<string,Partial<Record<'front'|'back',{png:string}>>>)[id]?.[back?'back':'front'];
+  return local || extra?.png || '';
 };
 export function health(condition: string) {
   if (condition.includes('fnt')) return {percent: 0, text: '기절', status: ''};

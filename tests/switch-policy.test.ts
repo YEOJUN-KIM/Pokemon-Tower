@@ -7,7 +7,7 @@ import {PublicSwitchInformation} from '../src/battle/switch-information';
 import {type Observation,type OwnPokemon} from '../src/battle/policy';
 import {runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {packTeam,starters} from '../src/data/teams';
-import {TowerStore} from '../src/server/tower-store';
+import {TowerStore,AI_VERSION} from '../src/server/tower-store';
 import {TowerService} from '../src/server/tower-service';
 
 function pokemon(name:string,active=false,moves=['Thunderbolt']):OwnPokemon{return {ident:`p2: ${name}`,details:`${name}, L50`,condition:'140/140',active,moves,stats:{atk:100,spa:100,def:100,spd:100,spe:100}};}
@@ -78,9 +78,9 @@ test('real v6 battle voluntarily switches before fainting, keeps observations pr
  const replay=await replayBattle(log);assert.deepEqual(battleEvents(replay.publicProtocol),battleEvents(log.publicProtocol));
 });
 
-test('v5 saved battles restore with v5, while new battles record v8',async()=>{
+test('v5 saved battles restore with v5, while new battles record the current AI',async()=>{
  const store=new TowerStore(':memory:'),service=new TowerService(store);try{
-  store.ensurePlayer('legacy');const id=store.start('legacy',starters);assert.equal(store.battle(id).ai_version,'tower-policy-v8');
+  store.ensurePlayer('legacy');const id=store.start('legacy',starters);assert.equal(store.battle(id).ai_version,AI_VERSION);
   store.db.prepare('UPDATE battles SET ai_version=? WHERE id=?').run('tower-policy-v5',id);
   const response=await service.state('legacy');assert.equal(response.battle!.status,'waiting');assert.equal(store.battle(id).ai_version,'tower-policy-v5');
  }finally{await service.dispose();store.close();}

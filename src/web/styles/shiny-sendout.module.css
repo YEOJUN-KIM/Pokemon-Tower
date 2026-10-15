@@ -1,0 +1,109 @@
+.scope {position:absolute;inset:32% 12% 3%;pointer-events:none;z-index:10;display:block;}
+.scope i {position:absolute;font-style:normal;color:#fff0a1;opacity:0;left:15%;top:25%;}
+.scope i:nth-of-type(2) {left:70%;top:15%;}
+.scope i:nth-of-type(3) {left:80%;top:65%;}
+.scope i:nth-of-type(4) {left:25%;top:80%;}
+.scope i:nth-of-type(5) {left:42%;top:10%;}
+.scope i {
+  font-size: 42px;
+  animation: shiny-arrival-star .65s .4s both;
+  text-shadow: 0 0 5px white,0 0 15px #fff6b1,0 0 28px #ffe675;
+}
+.scope i:nth-of-type(2) {
+  animation-delay: .43s;
+}
+.scope i:nth-of-type(3) {
+  animation-delay: .46s;
+}
+.scope i:nth-of-type(4) {
+  animation-delay: .49s;
+}
+.scope i:nth-of-type(5) {
+  animation-delay: .52s;
+}
+.scope i:nth-of-type(6) {
+  left: 3%;
+  top: 58%;
+  font-size: 22px;
+  animation-delay: .55s;
+}
+.scope i:nth-of-type(7) {
+  left: 65%;
+  top: 85%;
+  font-size: 24px;
+  animation-delay: .58s;
+}
+.scope i:nth-of-type(8) {
+  left: 95%;
+  top: 38%;
+  font-size: 20px;
+  animation-delay: .51s;
+}
+.scope i:nth-of-type(9) {
+  left: 52%;
+  top: 50%;
+  font-size: 28px;
+  animation-delay: .61s;
+}
+.scope .shinyLightRing,.scope .shinyEntryFlash {
+  position: absolute;
+  inset: 12%;
+  display: block;
+  border-radius: 50%;
+  opacity: 0;
+  animation: shiny-arrival-ring .7s .35s both;
+}
+.scope .shinyLightRing {
+  border: 3px solid #fff6bd;
+  box-shadow: 0 0 14px #ffe985,inset 0 0 14px #fff6bb;
+}
+.scope .shinyEntryFlash {
+  background: radial-gradient(ellipse,#fffbe8bb,transparent 70%);
+  animation: shiny-arrival-flash .4s .35s both;
+}
+@keyframes shiny-arrival-star {
+  0% {
+    opacity: 0;
+    transform: scale(.1) rotate(-30deg);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.3) rotate(0);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(.8) rotate(40deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(.1) rotate(85deg);
+  }
+}
+@keyframes shiny-arrival-ring {
+  0% {
+    opacity: 0;
+    transform: scale(.3);
+  }
+  25% {
+    opacity: .85;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+@keyframes shiny-arrival-flash {
+  0% {
+    opacity: 0;
+    transform: scale(.4);
+  }
+  30% {
+    opacity: .8;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {.scope {display:none;}}

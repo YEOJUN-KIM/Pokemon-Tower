@@ -4,6 +4,15 @@ import {newLines,presentationFrames} from '../src/web/battle-presentation';
 import type {BattleView} from '../src/web/contracts';
 import {describeLine} from '../src/web/catalog';
 const before:BattleView={id:'battle',requestId:1,status:'waiting',turn:1,team:[{species:'Charizard',condition:'155/155',active:true},{species:'Blastoise',condition:'155/155',active:false}],opponent:{species:'Pikachu',condition:'100/100'},actions:[],messages:['|turn|1'],winner:null,error:null};
+
+test('critical dialogue precedes effectiveness without altering saved logs or losing critical hit feedback',()=>{
+ const messages=[...before.messages,'|move|p1a: Charizard|Flamethrower|p2a: Pikachu','|-supereffective|p2a: Pikachu','|-crit|p2a: Pikachu','|-damage|p2a: Pikachu|50/100'];
+ const after={...before,messages},frames=presentationFrames(before,after);
+ assert.deepEqual(frames.slice(0,4).map(frame=>frame.view.messages.at(-1)?.split('|')[1]),['move','-crit','-supereffective','-damage']);
+ assert.equal(frames.at(-1)!.motion?.impact,'critical');
+ assert.equal(after.messages[2],'|-supereffective|p2a: Pikachu');
+ assert.equal(after.messages[3],'|-crit|p2a: Pikachu');
+});
 test('presentation orders attacks, damage, faint and replacement without publishing final result early',()=>{
   const after:BattleView={...before,status:'complete',winner:'Player',requestId:2,messages:[...before.messages,'|move|p1a: Charizard|Flamethrower|p2a: Pikachu','|-damage|p2a: Pikachu|0 fnt','|faint|p2a: Pikachu','|win|Player']};
   const frames=presentationFrames(before,after);

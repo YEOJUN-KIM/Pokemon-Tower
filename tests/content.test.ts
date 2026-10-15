@@ -12,14 +12,16 @@ import {randomUUID} from 'node:crypto';
 import {TowerStore} from '../src/server/tower-store';
 import {TowerService} from '../src/server/tower-service';
 import type {BattleLog} from '../src/battle/run';
+import {pokemonImageSources} from '../src/web/pokemon-image';
+import {isCollectibleSpecies,namedReferenceSpecies} from '../src/data/pokedex-roster';
 import {classicCollection} from './classic-team-fixture';
 
 function orders(roster: string[]) {
   return roster.flatMap(a => roster.filter(b => b !== a).flatMap(b => roster.filter(c => c !== a && c !== b).map(c => [a,b,c])));
 }
 
-test('612 species and one hundred consecutive floors have legal sets and complete display data', () => {
-  assert.equal(Object.keys(pokemonSets).length,612);
+test('648 species and one hundred consecutive floors have legal sets and complete display data', () => {
+  assert.equal(Object.keys(pokemonSets).length,648);
   assert.equal(floors.length,100);
   const encountered = new Set<string>(starters);
   for (const [name,set] of Object.entries(pokemonSets)) {
@@ -27,9 +29,13 @@ test('612 species and one hundred consecutive floors have legal sets and complet
     const errors = new Showdown.TeamValidator(FORMAT).validateTeam(Showdown.Teams.unpack(packTeam([name,...partners]))!);
     assert.equal(errors,null,`${name}: ${errors?.join(', ')}`);
     assert.ok(species[name]?.name);
-    assert.equal(species[name].id,Showdown.Dex.species.get(name).num);
-    assert.ok(spriteUrl(name));
-    assert.ok(spriteUrl(name,true));
+    if(!Showdown.Dex.species.get(name).forme)assert.equal(species[name].id,Showdown.Dex.species.get(name).num);
+    else assert.ok(Number.isSafeInteger(species[name].id)&&species[name].id>0);
+    if(isCollectibleSpecies(name)||namedReferenceSpecies.has(name)){
+      assert.ok(pokemonImageSources(species[name].id,false,true,species[name].spriteKey).length,`${name}: front battle image`);
+      assert.ok(pokemonImageSources(species[name].id,true,true,species[name].spriteKey).length,`${name}: back battle image`);
+      assert.ok(spriteUrl(name),name);assert.ok(spriteUrl(name,true),name);
+    }
     assert.ok(abilityNames[set.ability],`${name}: missing ability translation`);
     for (const move of set.moves) assert.ok(moves[move],`${name}: missing translation for ${move}`);
   }
@@ -70,7 +76,7 @@ test('a saved ten-floor run completes real battles, replaces members, restores f
       let winning: {team: string[]; log: BattleLog} | undefined;
       // Offline integration search, not the in-game AI or a claim about human win rates.
       for (const team of index === 0 ? [starters] : orders(roster)) {
-        const log = await runBattle({teams:{p1:packTeam(team,profiles),p2:packTeam([...floor.opponents])},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
+        const log = await runBattle({trainerEquipment:store.trainerEquipment(runId),teams:{p1:packTeam(team,profiles),p2:packTeam([...floor.opponents])},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
         if (log.winner === 'Player') {winning = {team,log}; break;}
       }
       assert.ok(winning,`No winning fixed-seed team on floor ${floor.number} with ${roster}`);

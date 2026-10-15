@@ -8,6 +8,7 @@ import {effectNotice, type EffectNotice} from './battle-effects';
 import {advanceField,emptyField} from './battle-field';
 import {itemName} from '../data/held-items';
 import {moveAnimationPlan} from './move-animation-plan';
+import {effectActivationMessage,dialogueTextForLine} from './battle-message-data';
 
 export type Motion = {kind: 'z-charge' | 'z-release' | 'move' | 'hit' | 'heal' | 'switch' | 'faint' | 'stat-up' | 'stat-down' | 'mega-charge' | 'mega-shell' | 'mega-burst' | 'mega-flash' | 'mega-reveal' | 'dynamax-recall' | 'dynamax-ball' | 'dynamax-release' | 'dynamax-grow' | 'dynamax-end' | 'tera-charge' | 'tera-shell' | 'tera-burst' | 'tera-reveal'; category?:string;targetSide?:'player'|'enemy';missed?:boolean;blocked?:boolean;sendOut?:boolean;side: 'player' | 'enemy'; color: string; move?: string; label?:string;impact?:'weak'|'strong'|'critical'};
 export type Frame = {view: BattleView; motion: Motion | null; duration: number; notice?:EffectNotice; announcement?:string};
@@ -28,6 +29,11 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
   let lastNotice = '';
   let impact:Motion['impact'];
   const lines=[...newLines(before.messages,after.messages)];
+  // Presentation only: critical feedback precedes effectiveness; stored logs stay intact.
+  for(let index=0;index<lines.length-1;index++){
+    const first=lines[index].split('|'),next=lines[index+1].split('|');
+    if(['-supereffective','-resisted'].includes(first[1])&&next[1]==='-crit'&&first[2]===next[2])[lines[index],lines[index+1]]=[lines[index+1],lines[index]];
+  }
   // Show pre-attack activation before the attack animation, even though the
   // engine announces the move first. Battle mechanics and saved logs stay intact.
   for(let index=0;index<lines.length;index++){
@@ -65,17 +71,16 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
     const pokemon = side === 'enemy' ? view.opponent : own;
     const absorbs = event === '-heal' && candidate && ['Water Absorb','Volt Absorb'].includes(candidate.name);
     const changesState=['-damage','-heal','-boost','-unboost','-setboost','-status','-curestatus','-cureteam','-start','-end','-weather','-fieldstart','-fieldend'].includes(event);
-    const activationFirst=!!notice && changesState && !absorbs;
-    if(activationFirst)frames.push({view:structuredClone(view),motion:null,notice,duration:1200});
+    const activationFirst=!!notice && (changesState||['-immune','-fail','-block'].includes(event)) && !absorbs;
+    if(activationFirst)frames.push({view:structuredClone(view),motion:null,notice,announcement:effectActivationMessage(notice),duration:1200});
     if(absorbs) {
-      const subject = `${side === 'enemy' ? '상대 ' : ''}${pokemonName(actor.split(': ')[1])}`;
-      frames.push({view:structuredClone(view),motion:null,notice,announcement:`${subject}에게 ${candidate.name === 'Water Absorb' ? '물' : '전기'} 기술은 효과가 없다!`,duration:1200});
+      frames.push({view:structuredClone(view),motion:null,notice,announcement:effectActivationMessage(candidate),duration:1200});
     }
     view.messages = [...view.messages, line].slice(-300);
     view.field=advanceField(view.field ?? emptyField(),line);
     if(event==='move')impact=undefined;
-    if(event==='-supereffective')impact='strong';
-    if(event==='-resisted')impact='weak';
+    if(event==='-supereffective'&&impact!=='critical')impact='strong';
+    if(event==='-resisted'&&impact!=='critical')impact='weak';
     if(event==='-crit')impact='critical';
     if (side && event === 'move') {
       const nextMove=lines.findIndex((next,i)=>i>index&&next.startsWith('|move|'));
@@ -158,7 +163,7 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
       ? `${side==='enemy'?'상대 ':''}${pokemonName(pokemon.displaySpecies ?? pokemon.species)}의 타입이 ${condition.split('/').map(type=>teraNames[type] ?? type).join('·')}(으)로 바뀌었다!` : undefined;
     if (event === 'turn') view.turn = Number(actor);
     const motionDuration = motion?.kind === 'dynamax-grow' ? 1150 : motion?.kind === 'dynamax-end' ? 600 : motion?.kind === 'switch' ? (motion.sendOut && (view.opponent?.shiny || view.team.find(p=>p.active)?.shiny) ? 1400 : 800) : motion?.kind === 'move' ? moveAnimationPlan(motion.move ?? '',motion.color).duration : motion?.kind === 'hit' ? 360 : motion ? 220 : 0;
-    frames.push({view, motion, notice:absorbs || activationFirst ? undefined : notice, announcement:typeAnnouncement, duration:Math.max(motionDuration, typeAnnouncement ? 750 : notice && !absorbs && !activationFirst ? 1200 : describeLine(line) ? 750 : 0)});
+    frames.push({view, motion, notice:absorbs || activationFirst ? undefined : notice, announcement:typeAnnouncement, duration:Math.max(motionDuration, typeAnnouncement ? 750 : notice && !absorbs && !activationFirst ? 1200 : describeLine(line)||dialogueTextForLine(line,'') ? 750 : 0)});
   }
   return frames;
 }

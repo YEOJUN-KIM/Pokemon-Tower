@@ -41,7 +41,7 @@ for(const size of [{width:1280,height:720},{width:390,height:844}])test(`PC sett
   await expect(moves.locator('.move-slots button').first()).toContainText(name);
   expect(await moves.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
   await page.screenshot({path:`artifacts/qa/screenshots/pokedex-updated/moves-${size.width}.png`});
-  await moves.getByRole('button',{name:'기술배치 저장 · 무료'}).click();await expect(moves.getByRole('status')).toContainText('설정 저장 완료');await page.keyboard.press('x');await expect(moves).not.toBeVisible();
+  await expect(moves.locator('.move-editor')).toHaveAttribute('aria-busy','false');await expect(moves.getByRole('status')).toContainText('설정 저장 완료');await page.keyboard.press('x');await expect(moves).not.toBeVisible();
   await page.reload();await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await expect(page.getByRole('dialog',{name:'리자몽 선택 메뉴'})).toBeVisible();await page.getByRole('button',{name:'능력치 조정',exact:true}).click();
   await expect(editor.getByLabel('특수공격 능력 포인트',{exact:true})).toHaveValue('12');
   await editor.getByRole('tab',{name:'특성·테라스탈'}).click();await expect(editor.getByRole('button',{name:'테라스탈 선택',exact:true})).toContainText('고스트');

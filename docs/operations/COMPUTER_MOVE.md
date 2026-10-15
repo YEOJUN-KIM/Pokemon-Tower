@@ -1,6 +1,34 @@
 # 다른 컴퓨터에서 작업 이어가기
 
-갱신: 2026-10-14. 다른 컴퓨터로 코드와 개인 저장을 옮기는 안내입니다. 현재 로컬 이전은 아래 요약을 따릅니다. 뒤의 인터넷 서버·Docker 절차와 10월 11일 백업 이름·주소는 당시 운영 환경의 예시이며 현재 로컬 저장을 대신하지 않습니다.
+갱신: 2026-10-16. 다른 컴퓨터로 코드와 개인 저장을 옮기는 안내입니다. 현재 이전은 아래 개인 저장 묶음과 로컬/Docker 구분을 따릅니다. 뒤의 인터넷 서버·Docker 절차와 10월 11일 백업 이름·주소는 당시 운영 환경의 예시이며 현재 로컬 저장을 대신하지 않습니다.
+
+## 지금 GitHub와 별도로 챙길 것
+
+- 코드·게임 이미지·통합 실행 CMD/PowerShell/Node 스크립트·문서는 GitHub에 함께 올린다. 새로 추가한 파일도 커밋 대상인지 확인한다.
+- 개인 저장은 GitHub에 포함되지 않는다. `.data/transfers/pokemon-private-save-20261016-*.zip`에 현재 환경 설정과 두 저장의 SQLite backup API 스냅샷을 묶었다. 계정·진행이 들어 있으므로 개인적으로 보관한다. 이후 플레이한 기록은 이 ZIP에 없으므로 실제 이전 직전에 새로 백업한다.
+- ZIP 내부 `.env.local`과 `.data/dev-migrated.sqlite`는 개발용이다. 현재 스냅샷은 v32이며 새 코드가 다음 실행에 v33으로 이전한다.
+- ZIP 내부 `.data/docker-preview.sqlite`는 통합 실행기로 쓰는 Docker 저장(v33)이다. Docker 볼륨 `tower-preview_tower-data`의 `/data/tower.sqlite`에서 별도로 백업했다. 프로젝트 `.data` 폴더만 복사해도 Docker의 현재 진행이 포함되는 것은 아니다.
+- ZIP 내부 `.data/preview.env`, 이전 안내, 파일 해시·무결성 확인 manifest도 함께 보관한다. 두 DB는 `integrity_check=ok`를 확인했다. backup API 스냅샷에는 원본 WAL/SHM을 붙일 필요가 없다.
+- 계정 ID·비밀번호 및 별도로 보관한 복구 정보도 알아둔다. 브라우저 쿠키는 새 PC·새 터널 주소에 자동 이전되지 않으므로 계정으로 다시 로그인한다.
+- `node_modules/`, `.next/`, `dist/`, 테스트 DB·결과는 다시 만들 수 있어 가져갈 필요가 없다. Git에서 제외된 과거 실험 원자료가 필요할 때만 `artifacts/` 원자료를 추가로 가져간다.
+
+## 새 PC의 통합 실행기 저장 복원
+
+1. 최신 코드를 받고 Node.js 24와 Docker Desktop을 설치한다. Docker는 Linux 엔진을 사용한다.
+2. 개인 ZIP을 저장소 루트에 푼다. 새 PC에 기존 `.env.local`·저장이 있다면 먼저 백업하고 어느 저장을 이어갈지 정한다. 자동으로 합치거나 덮어쓰지 않는다.
+3. 로컬 개발은 해당 `.env.local`과 `.data/dev-migrated.sqlite`로 이어간다. 통합 실행기는 아래처럼 Docker 볼륨으로 **별도 복원**한다. 아직 복원하기 전에는 「서버 켜기」로 새 저장을 만들지 않는다.
+4. 아래 복원은 **게임을 중지하고 비어 있는 새 볼륨에만** 적용한다. DB가 이미 있으면 명령이 중단되며, 기존 저장도 백업하고 복원 대상을 다시 결정해야 한다.
+
+```powershell
+$towerCompose = @('compose','-p','tower-preview','--env-file','.data/preview.env','-f','compose.yaml','-f','compose.preview.yaml')
+docker @towerCompose stop game tunnel
+docker @towerCompose build game
+$towerRestoreRoot = (Resolve-Path -LiteralPath '.data').Path
+docker @towerCompose run --rm --no-deps --entrypoint node -v "${towerRestoreRoot}:/restore:ro" game -e "const fs=require('node:fs');if(fs.existsSync('/data/tower.sqlite'))throw new Error('Existing save: stop and back it up first.');fs.copyFileSync('/restore/docker-preview.sqlite','/data/tower.sqlite');"
+```
+
+5. `포켓몬타워 실행.cmd`를 더블클릭해 「서버 켜기 / 업데이트」를 누른다. 기존 계정으로 로그인해 도감·재화·진행 층을 확인한다. 주소는 실행기에서 확인·복사한다.
+6. 이전 PC와 새 PC에서 동시에 플레이하면 저장이 갈라진다. 이어갈 최신 저장을 정하고 한쪽에서 진행한다.
 
 ## 현재 로컬 작업을 다른 컴퓨터로 옮기기
 
@@ -36,7 +64,7 @@
 - 타이틀 새로하기: 브라우저 confirm 대신 종료/새 시작 질문과 받을 성장 포인트만 표시하는 팝업. X는 우상단, 두 버튼 글자는 중앙.
 - 도감: 설명성 구현 문구 정리, 선택 해제는 Z 메뉴로, X는 타이틀 복귀 확인. 기본 정보에 내 포켓몬 능력치 표를 넣지 않는다.
 - 기본 정보: 메가/거다이맥스 모습·타입·종족값·특성 미리보기. 성격은 이름만, 특성 설명은 마우스/포커스 툴팁.
-- 기술배치: 내 기술 칸에서 Z를 눌러야 아래 기술 목록으로 진입. 아래 키는 저장 버튼으로. 목록 맨 위에서 위를 눌러도 내 기술 칸으로 넘어가지 않으며, 선택 Z 또는 X로 돌아온다.
+- 기술배치: 내 기술 칸에서 Z 또는 아래 키로 기술 목록에 진입. 선택 즉시 무료 저장하며 별도 저장 버튼은 없다. 목록 맨 위에서 위를 눌러도 내 기술 칸으로 넘어가지 않으며, 선택 Z 또는 X로 돌아온다.
 - 능력치 조정: 능력치 / 성격·특성·테라스탈 두 탭. 좌우 키로 탭 내용을 즉시 바꾸고 Z로 세부 진입. 능력치는 위아래로 항목, 좌우로 노력치 조정. 성격·특성·테라스탈은 각각 선택 팝업.
 - 정비: 상위 메뉴에서 상점/포켓몬 조정. 6마리 모두 같은 크기의 스프라이트 카드, HP 표시 없음. 상점은 지닌 도구/배틀 아이템/기술머신/육성으로 분리. 탭에서 Z는 상품 목록, 아래 키는 관리/리롤. 정비 팝업 크기 통일.
 - 모바일: 키보드 안내·커서 표시·스킵 버튼·포켓몬 내보내기 버튼 숨김. 등장 연출에서 화면 아무 곳이나 터치하면 진행.
@@ -63,13 +91,13 @@
 - 백업은 모든 계정의 저장을 포함한 개인 파일이다. 공개 Git 저장소에 올리지 않는다.
 - Docker 볼륨은 프로젝트 폴더 복사에 포함되지 않는다. 아래 백업 복원이 필요하다.
 
-## 현재 저장 위치와 최신 백업
+## 이전 운영 기록 — 2026-10-11 참고용
 
 - 인터넷 서버: Compose 프로젝트 `tower-preview`, 볼륨 `tower-preview_tower-data`, 컨테이너 내부 `/data/tower.sqlite`.
 - 로컬 개발 저장: `.env.local`의 `TOWER_DB_PATH`를 확인한다. 기본 `.data/tower.sqlite`나 예전 `local-preview-20261011.sqlite`는 인터넷 서버와 자동 동기화되지 않는다.
 - 이번 인계용 최신 백업: `.data/backups/handoff-2026-10-11T14-15-08-743Z.sqlite` — SQLite backup API 생성 후 PC 복사 및 integrity_check 통과.
 - 인계 백업 이후 플레이한 진행은 이 파일에 없다. **실제 이전 직전에 기존 PC에서 다시 백업**해야 한다.
-- 현재 인터넷 주소: https://begun-defence-defined-taking.trycloudflare.com (고정 주소 아님).
+- 당시 임시 주소(현재 주소는 실행기에서 확인): https://begun-defence-defined-taking.trycloudflare.com (고정 주소 아님).
 - 두 컴퓨터를 동시에 운영하면 저장이 갈라진다. 기존 PC는 최신 백업 후 공개 서버를 중지하고 새 PC 하나만 운영한다.
 
 ## Windows 준비와 로컬 개발

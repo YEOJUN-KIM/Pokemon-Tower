@@ -5,6 +5,7 @@ import {createServer} from 'node:net';
 import {readdir, mkdir, copyFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {randomUUID} from 'node:crypto';
+import {DatabaseSync} from 'node:sqlite';
 
 const packages = (await readdir('dist')).filter(name=>name.startsWith('tower-')).sort();
 const directory = resolve(process.argv[2] || `dist/${packages.at(-1)}`);
@@ -100,7 +101,32 @@ try {
   environment.TOWER_DB_PATH=`${data}/restored.sqlite`;
   await boot();
   assert.deepEqual(comparable((await state(cookie)).body),comparable(before));
-  console.log(`PASS: packaged page/static/font, HTTPS cookie, origin protection, battle turn, restart, live backup and restore.\nPackage: ${directory}\nIsolated test database: ${data}`);
+  // Seed only this verifier's isolated restored database, with the packaged server stopped.
+  for(const kind of ['breeder-gift','traveling-merchant']){
+    await stop();
+    const db=new DatabaseSync(environment.TOWER_DB_PATH),eventId=randomUUID();let run;
+    try{
+      run=db.prepare('SELECT id,player_id FROM runs LIMIT 1').get();
+      assert.equal(db.prepare('PRAGMA user_version').get().user_version,33);
+      db.prepare("UPDATE runs SET state='select',floor=2 WHERE id=?").run(run.id);
+      db.prepare("UPDATE battles SET status='complete' WHERE run_id=?").run(run.id);
+      db.prepare('DELETE FROM run_events WHERE run_id=?').run(run.id);
+      db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status) VALUES (?,?,1,?,'choice')").run(eventId,run.id,kind);
+      db.prepare('UPDATE players SET coins=300 WHERE id=?').run(run.player_id);
+    }finally{db.close();}
+    await boot();
+    const initialEvent=(await state(cookie)).body.tower;
+    assert.equal(initialEvent.run.event.kind,kind);
+    for(let repeat=0;repeat<2;repeat++)assert.equal((await post(cookie,{type:'event-choice',runId:run.id,eventId,choice:'open'})).status,200);
+    const paid=(await state(cookie)).body.tower;
+    assert.equal(paid.coins,kind==='traveling-merchant'?0:300);
+    assert.equal(paid.permanent.eggTickets,initialEvent.permanent.eggTickets+1);
+    await stop();await boot();
+    assert.deepEqual((await state(cookie)).body.tower.run.event,paid.run.event);
+    assert.equal((await post(cookie,{type:'event-continue',runId:run.id,eventId})).status,200);
+    assert.equal((await state(cookie)).body.tower.run.event,null);
+  }
+  console.log(`PASS: packaged page/static/font, HTTPS cookie, origin protection, battle turn, restart, live backup/restore, event gifts and purchases with idempotency and restart.\nPackage: ${directory}\nIsolated test database: ${data}`);
 } catch(error) {
   console.error(output);
   throw error;

@@ -1,5 +1,8 @@
 /* src/web/battle-layout.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
 /* Battle HUD uses a single palette; the arena stays clear of controls. */
+:where(.scope) :global(.message-turn-group) {margin:12px 0;padding:12px 16px;border:1px solid #76938955;border-radius:7px;background:#ebf0e7;}
+:where(.scope) :global(.message-turn-group h3) {margin:0 0 7px;padding-bottom:7px;border-bottom:1px solid #b8c9bb;font-size:13px;color:#476b58;}
+:global(body) :where(.scope) :global(.message-history .message-turn-group p) {display:block;margin:0;padding:5px 0;color:#2a4439;font-size:14px;line-height:1.7;}
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live) {
   padding: 10px 14px;
   background: #101d27;
@@ -320,11 +323,11 @@
     padding: 2px 4px;
   }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel) {
-    grid-template-rows: 40px minmax(0,1fr) 92px 166px;
+    grid-template-rows: 40px minmax(0,1fr) 132px 166px;
     border-radius: 6px;
   }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel[data-command-mode=moves][data-resolving=false]),:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel[data-resolving=true]) {
-    grid-template-rows: 40px minmax(0,1fr) 258px;
+    grid-template-rows: 40px minmax(0,1fr) 298px;
   }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .panel-top) {
     min-height: 40px;
@@ -362,4 +365,9 @@
     min-height: 24px;
     padding: 3px 6px;
   }
+}
+
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel[data-event=true]) {grid-template-areas:'top top' 'arena arena' 'log log';grid-template-rows:44px minmax(0,1fr) 244px;}
+@media(max-width:760px) {
+ :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel[data-event=true]) {grid-template-rows:40px minmax(0,1fr) 298px;grid-template-areas:'top' 'arena' 'log';}
 }

@@ -112,13 +112,10 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
       if(editor && zone && cursor && event.key.startsWith('Arrow')){
         event.preventDefault();
         const slots=editor.querySelector('[data-keyboard-zone=slots]');
-        const ownSlot=slots?.querySelector<HTMLButtonElement>('button.selected:not(:disabled)');
         let next:HTMLButtonElement|null|undefined=cursor;
         if(zone.dataset.keyboardZone==='slots'){
-          if(key==='arrowdown')next=editor.querySelector<HTMLButtonElement>('[data-keyboard-zone=save] button');
+          if(key==='arrowdown')next=editor.querySelector<HTMLButtonElement>('[data-keyboard-zone=library] button.selected:not(:disabled)') ?? editor.querySelector<HTMLButtonElement>('[data-keyboard-zone=library] button:not(:disabled)');
           else if(['arrowleft','arrowright'].includes(key)){const entries=Array.from(slots?.querySelectorAll<HTMLButtonElement>('button:not(:disabled)') ?? []);next=entries[entries.indexOf(cursor)+(key==='arrowright'?1:-1)] ?? cursor;}
-        }else if(zone.dataset.keyboardZone==='save'){
-          if(key==='arrowup')next=ownSlot;
         }else{
           const entries=Array.from(zone.querySelectorAll<HTMLButtonElement>('button'));
           const position=entries.indexOf(cursor),cols=getComputedStyle(zone).gridTemplateColumns.split(' ').length;

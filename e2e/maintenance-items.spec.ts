@@ -62,9 +62,8 @@ for(const width of [1280,390])test('maintenance, free reroll and zero-turn battl
   await expect(moveDialog).toBeVisible();
   await expect(moveDialog.locator('[data-keyboard-zone=slots] button').first()).toHaveAttribute('data-game-cursor','true');
   await page.keyboard.press('ArrowDown');
-  await expect(moveDialog.locator('[data-keyboard-zone=save] button')).toHaveAttribute('data-game-cursor','true');
-  await expect(moveDialog.locator('[data-keyboard-zone=save] button')).toBeDisabled();
-  await expect(moveDialog.locator('[data-keyboard-zone=library] [data-game-cursor]')).toHaveCount(0);
+  await expect(moveDialog.locator('[data-keyboard-zone=save]')).toHaveCount(0);
+  await expect(moveDialog.locator('[data-keyboard-zone=library] [data-game-cursor]')).toHaveCount(1);
   await page.keyboard.press('z');await expect(moveDialog).toBeVisible();
   await page.keyboard.press('ArrowUp');await expect(moveDialog.locator('[data-keyboard-zone=slots] button').first()).toHaveAttribute('data-game-cursor','true');
   await page.keyboard.press('z');
@@ -122,9 +121,9 @@ for(const width of [1280,390])test('maintenance, free reroll and zero-turn battl
   await page.getByRole('button',{name:'기술배치',exact:true}).click();
   const dexMoves=page.locator('.move-editor');
   await expect(dexMoves.locator('[data-keyboard-zone=slots] button').first()).toHaveAttribute('data-game-cursor','true');
-  await page.keyboard.press('ArrowDown');await expect(dexMoves.locator('[data-keyboard-zone=save] button')).toHaveAttribute('data-game-cursor','true');
-  await expect(dexMoves.locator('[data-keyboard-zone=library] [data-game-cursor]')).toHaveCount(0);
-  await page.keyboard.press('ArrowUp');await page.keyboard.press('z');
+  await page.keyboard.press('ArrowDown');await expect(dexMoves.locator('[data-keyboard-zone=save]')).toHaveCount(0);
+  await expect(dexMoves.locator('[data-keyboard-zone=library] [data-game-cursor]')).toHaveCount(1);
+  await page.keyboard.press('x');await page.keyboard.press('z');
   await expect(dexMoves.locator('[data-keyboard-zone=library] [data-game-cursor]')).toHaveCount(1);
   for(let i=0;i<=await dexMoves.locator('.move-library button').count();i++){
     await page.keyboard.press('ArrowUp');

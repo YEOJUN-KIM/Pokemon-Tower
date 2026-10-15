@@ -1,6 +1,6 @@
 # 실행과 운영
 
-- [설치·로컬 실행·테스트](SETUP.md)
+- [더블클릭 실행·설치·테스트](SETUP.md)
 - [계정과 저장 가져오기](ACCOUNTS.md)
 - [배포와 복구](DEPLOYMENT.md)
 - [컴퓨터 이전](COMPUTER_MOVE.md)

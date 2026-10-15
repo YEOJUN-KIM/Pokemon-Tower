@@ -4,6 +4,7 @@
 
 | 주제 | 주요 기록 |
 |---|---|
+| 비전투 이벤트·배포 준비 | [이벤트와 배포 검증](NONCOMBAT_EVENTS_RELEASE.md) |
 | 알 뽑기·이로치 교환·테라 아이콘·버튼 문구 | [수집·알 화면 개편](COLLECTION_EGG_UI.md) |
 | 알 등급별 전체 포켓몬 목록 | [뽑기 대상 분류](EGG_POOL_CLASSIFICATION.md) |
 | 트레이너 장비·기믹·PC/모바일 재검사 | [현재 장비 검증](TRAINER_EQUIPMENT_RECHECK.md) |

@@ -65,13 +65,13 @@ test('stale retry delivery cannot reopen a new battle, and giving up prevents la
 test('v27 migration retains original teams, actions and foreign keys; retry preparation survives reopening',()=>{
  mkdirSync('.data/tests',{recursive:true});const path=`.data/tests/retry-${randomUUID()}.sqlite`;
  const old=new DatabaseSync(path);
- old.exec(schema.replace('  attempt INTEGER NOT NULL DEFAULT 0 CHECK(attempt>=0),\n','').replace('UNIQUE(run_id, floor, stage, attempt)','UNIQUE(run_id, floor, stage)').replace('PRAGMA user_version = 29','PRAGMA user_version = 27'));
+ old.exec(schema.replace('  attempt INTEGER NOT NULL DEFAULT 0 CHECK(attempt>=0),\n','').replace('UNIQUE(run_id, floor, stage, attempt)','UNIQUE(run_id, floor, stage)').replace(/PRAGMA user_version = \d+/, 'PRAGMA user_version = 27'));
  old.prepare('INSERT INTO players(id) VALUES (?)').run('legacy');old.prepare("INSERT INTO runs(id,player_id,floor,state,created_at) VALUES (?,?,1,'battle',1)").run('old-run','legacy');
  const packed=packTeam(starters);
  old.prepare("INSERT INTO battles(id,run_id,floor,player_team,opponent_team,seed,engine_version,format,ai_version,status,reward,candidates) VALUES ('old-battle','old-run',1,?,?, '[1,2,3,4]','old-engine','gen9nationaldexag','tower-policy-v9','active',100,'[]')").run(packed,packed);
  old.prepare("INSERT INTO actions VALUES ('old-battle',1,'move 1')").run();old.close();
  let s=new TowerStore(path);try{
-  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,31);assert.equal(s.battle('old-battle').player_team,packed);assert.deepEqual(s.history('old-battle'),['move 1']);assert.deepEqual(s.db.prepare('PRAGMA foreign_key_check').all(),[]);
+  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,33);assert.equal(s.battle('old-battle').player_team,packed);assert.deepEqual(s.history('old-battle'),['move 1']);assert.deepEqual(s.db.prepare('PRAGMA foreign_key_check').all(),[]);
   s.ensurePlayer('p');s.db.prepare('UPDATE players SET growth_points=500 WHERE id=?').run('p');s.permanentAction('p',randomUUID(),'buy','retry',1,null);
   const id=s.start('p',starters),run=lose(s,id).run_id;s.retry('p',run,id);s.close();s=new TowerStore(path);
   assert.equal(s.view('p').run!.retries!.preparing,true);assert.equal(s.view('p').run!.retries!.used,1);assert.ok(s.enter('p',run,1,starters));

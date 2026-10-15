@@ -14,7 +14,7 @@ export const villainOrganizations=[
   {id:'macrocosmos',name:'매크로코스모스',portrait:'officeworker',entries:['Copperajah','Durant','Bronzong','Mawile','Ferroseed','Perrserker']},
   {id:'star',name:'스타단',portrait:'teamstargrunt',entries:['Murkrow','Houndoom','Torkoal','Skuntank','Revavroom','Primeape']},
 ] as const;
-export const VILLAIN_CHANCE=.15;
+export const VILLAIN_CHANCE=.08;
 export const VILLAIN_BOSS_MIN_FLOOR=75;
 function ticket(key:string){let hash=2166136261;for(const char of key)hash=Math.imul(hash^char.charCodeAt(0),16777619);hash=Math.imul(hash^(hash>>>16),0x85ebca6b);hash=Math.imul(hash^(hash>>>13),0xc2b2ae35);return ((hash^(hash>>>16))>>>0)/4294967296;}
 export function runOrganization(runId:string,theme?:TowerTheme|null) {

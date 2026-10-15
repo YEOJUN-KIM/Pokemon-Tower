@@ -17,7 +17,7 @@ test('free learned move editing and a consistent archive/battle theme on desktop
   await page.getByRole('button',{name:'기술배치',exact:true}).click();
   const dialog=page.getByRole('dialog',{name:'리자몽 기술배치'});await expect(dialog).toBeVisible();
   await dialog.locator('.move-library button').filter({has:page.getByText('회오리불꽃',{exact:true})}).click();
-  await page.getByRole('button',{name:'기술배치 저장 · 무료'}).click();
+  await expect(page.locator('.move-editor')).toHaveAttribute('aria-busy','false');
   await expect(dialog.getByRole('status')).toContainText('설정 저장 완료');
   await page.getByRole('checkbox',{name:'해금한 기술만'}).uncheck();
   await page.getByRole('textbox',{name:'기술 이름 검색'}).fill('지진');

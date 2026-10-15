@@ -1,7 +1,7 @@
 'use client';
 import {selectGameCursor} from './game-keyboard';
 
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {pokemonName, spriteUrl, moves} from './catalog';
 import {effect} from './game-audio';
 import {PokedexDialog} from './pokedex-dialog';
@@ -50,7 +50,7 @@ export function RecruitCelebration({recruitment,onContinue}: {recruitment:Recrui
   const {chosen,replaced,roster,cleared}=recruitment;
   const dialog=useRef<HTMLDialogElement>(null);
   const [capturing,setCapturing]=useState(!recruitment.archiveOnly);
-  useEffect(()=>{
+  useLayoutEffect(()=>{
     const element=dialog.current;element?.showModal();
     const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const timer=setTimeout(()=>setCapturing(false),reduced ? 0 : 1400);

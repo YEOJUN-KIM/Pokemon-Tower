@@ -45,8 +45,8 @@ for(const width of [1280,390])test(`title, dex return and move zone keyboard nav
   await expect(editor.locator('.move-slots button.selected')).toHaveAttribute('data-game-cursor','true');
   await page.keyboard.press('z');await expect(move).toHaveAttribute('data-game-cursor','true');
   await page.keyboard.press('z');await expect(editor.locator('.move-slots button.selected')).toHaveAttribute('data-game-cursor','true');
-  await page.keyboard.press('ArrowDown');await expect(editor.getByRole('button',{name:'기술배치 저장 · 무료'})).toHaveAttribute('data-game-cursor','true');
-  await page.keyboard.press('ArrowUp');await expect(editor.locator('.move-slots button.selected')).toHaveAttribute('data-game-cursor','true');
+  await page.keyboard.press('ArrowDown');await expect(library.locator('[data-game-cursor=true]')).toHaveCount(1);
+  await page.keyboard.press('x');await expect(editor.locator('.move-slots button.selected')).toHaveAttribute('data-game-cursor','true');
   await page.keyboard.press('ArrowDown');
   await page.keyboard.press('z');await expect(page.getByRole('status')).toHaveText('설정 저장 완료');
   await expect(editor.locator('.move-help')).toHaveCount(0);

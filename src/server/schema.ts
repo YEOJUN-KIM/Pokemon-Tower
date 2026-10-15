@@ -144,5 +144,14 @@ CREATE TABLE IF NOT EXISTS run_routes(run_id TEXT PRIMARY KEY REFERENCES runs(id
 CREATE TABLE IF NOT EXISTS permanent_retry_upgrades(player_id TEXT PRIMARY KEY REFERENCES players(id),level INTEGER NOT NULL DEFAULT 0 CHECK(level BETWEEN 0 AND 3)) STRICT;
 CREATE TABLE IF NOT EXISTS run_retries(run_id TEXT PRIMARY KEY REFERENCES runs(id),retry_limit INTEGER NOT NULL CHECK(retry_limit BETWEEN 0 AND 3),used INTEGER NOT NULL DEFAULT 0 CHECK(used BETWEEN 0 AND 3),pending_battle_id TEXT REFERENCES battles(id)) STRICT;
 CREATE TABLE IF NOT EXISTS run_trainer_equipment(run_id TEXT NOT NULL REFERENCES runs(id),item TEXT NOT NULL CHECK(item IN ('Dynamax Band','Tera Orb')),PRIMARY KEY(run_id,item)) STRICT;
-  PRAGMA user_version = 31;
+CREATE TABLE IF NOT EXISTS run_event_rules(run_id TEXT PRIMARY KEY REFERENCES runs(id),version INTEGER NOT NULL CHECK(version=1)) STRICT;
+CREATE TABLE IF NOT EXISTS run_events(
+ id TEXT PRIMARY KEY,run_id TEXT NOT NULL REFERENCES runs(id),after_floor INTEGER NOT NULL CHECK(after_floor>0),
+ kind TEXT NOT NULL DEFAULT 'mystery-chest' CHECK(kind IN ('mystery-chest','breeder-gift','traveling-merchant')),
+ status TEXT NOT NULL CHECK(status IN ('choice','reward','complete')),reward_kind TEXT CHECK(reward_kind IN ('coins','egg-ticket')),
+ amount INTEGER NOT NULL DEFAULT 0 CHECK(amount>=0),UNIQUE(run_id,after_floor),
+ CHECK((reward_kind IS NULL AND amount=0 AND status!='reward') OR (reward_kind IS NOT NULL AND amount>0 AND status!='choice'))
+) STRICT;
+CREATE UNIQUE INDEX IF NOT EXISTS one_pending_run_event ON run_events(run_id) WHERE status!='complete';
+  PRAGMA user_version = 33;
 `;

@@ -15,7 +15,7 @@ export function pokemonImageSources(id:number,back=false,animated=false,spriteKe
   const view=shiny?(back?'shinyBack':'shinyFront'):(back?'back':'front');
   const extra=(additionalAnimations as Record<string,Partial<Record<string,{gif:string;png:string}>>>)[spriteKey]?.[view];
   if(animated && extra)return [extra.gif,extra.png];
-  const local=(paths:string[])=>localPokemonSources(paths,id,spriteKey,back,shiny);
+  const local=(paths:string[])=>{const sources=localPokemonSources(paths,id,spriteKey,back,shiny);return sources.length?sources:extra?[extra.png]:[];};
   if(shiny){const pixel=pixelSpriteSources(spriteKey,back,animated,true);if(pixel.length)return pixel;const side=back?'back/':'';return local(id<650 ? [`versions/generation-v/black-white/animated/${side}shiny/${spriteKey}.gif`,`${side}shiny/${spriteKey}.png`] : [`${side}shiny/${spriteKey}.png`]);}
   const mega=(megaSprites as Record<string,{key:string;animatedFront:boolean;animatedBack:boolean}>)[spriteKey];
   if(mega){const base='/sprites/gimmicks/'+(back?'back/':'front/')+mega.key;return animated && (back?mega.animatedBack:mega.animatedFront) ? [base+'.gif',base+'.png'] : [base+'.png'];}

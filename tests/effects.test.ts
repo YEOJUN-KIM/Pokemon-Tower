@@ -61,7 +61,7 @@ test('Intimidate animates its target and absorption blocks damage before healing
   assert.equal(intimidated[1].motion?.label,'공격 하락');
   const absorbed=presentationFrames(before,{...before,messages:[...before.messages,'|-heal|p2a: Lapras|75/100|[from] ability: Water Absorb|[of] p1a: Charizard']});
   assert.equal(absorbed[0].notice?.label,'저수');
-  assert.match(absorbed[0].announcement!,/효과가 없다/);
+  assert.equal(absorbed[0].announcement,'상대 라프라스의 저수!');
   assert.equal(absorbed[0].view.opponent?.condition,'50/100');
   assert.equal(absorbed[1].motion?.kind,'heal');
   assert.equal(absorbed[1].view.opponent?.condition,'75/100');

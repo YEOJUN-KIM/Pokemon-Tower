@@ -26,6 +26,7 @@ artifacts/**
 !artifacts/qa/previews/egg-results/background-colors.png
 !artifacts/qa/previews/egg-results/background-effects.gif
 !artifacts/qa/previews/egg-results/legendary-effects.gif
+!artifacts/qa/previews/events/chest-event.gif
 !artifacts/qa/screenshots/flamethrower-prototype/frame-09.png
 # Raw logs and transient QA output stay local.
 artifacts/temporary/

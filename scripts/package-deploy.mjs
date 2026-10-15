@@ -1,4 +1,4 @@
-import {cp, mkdir, access, writeFile, lstat, readdir, readlink} from 'node:fs/promises';
+import {cp, mkdir, access, readFile, writeFile, lstat, readdir, readlink} from 'node:fs/promises';
 import {resolve, basename, relative, dirname} from 'node:path';
 
 await access('.next/standalone/server.js');
@@ -29,7 +29,9 @@ await cp('scripts/backup-db.mjs', `${target}/scripts/backup-db.mjs`);
 await cp('scripts/import-save.mjs', `${target}/scripts/import-save.mjs`);
 await cp('scripts/start-deploy.mjs', `${target}/scripts/start-deploy.mjs`);
 await writeFile(`${target}/scripts/dependency-links.json`,JSON.stringify(links));
-await cp('docs/operations/DEPLOYMENT.md', `${target}/DEPLOYMENT.md`);
+const deploymentGuide=await readFile('docs/operations/DEPLOYMENT.md','utf8');
+await writeFile(`${target}/DEPLOYMENT.md`,deploymentGuide.replace('../../artifacts/reports/changes/NONCOMBAT_EVENTS_RELEASE.md','RELEASE_NOTES.md'));
+await cp('artifacts/reports/changes/NONCOMBAT_EVENTS_RELEASE.md', `${target}/RELEASE_NOTES.md`);
 await cp('docs/operations/ACCOUNTS.md',`${target}/ACCOUNTS.md`);
 await mkdir(`${target}/licenses`,{recursive:true});
 await cp('docs/references/THIRD_PARTY.md',`${target}/licenses/THIRD_PARTY.md`);

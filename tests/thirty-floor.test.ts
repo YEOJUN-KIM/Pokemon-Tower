@@ -38,7 +38,12 @@ test('one hundred real battle results progress through every checkpoint and only
       const row=store.battle(id),original=Showdown.Teams.unpack(row.opponent_team)!;
       assert.equal(original.length,3);assert.equal(new Set(original.map(set=>set.species)).size,3);
       const boss=floor%5===0 ? towerTrainerEncounter(floor,run,store.view('climb').run!.theme!,true)!.boss : null;
-      assert.deepEqual(row.boss ? JSON.parse(row.boss) : null,boss);
+      const savedBoss=row.boss?JSON.parse(row.boss):null;
+      if(savedBoss?.gimmick){
+        assert.ok(original.some(set=>set.species===savedBoss.gimmick.species));
+        if(savedBoss.gimmick.item)assert.ok(original.some(set=>set.species===savedBoss.gimmick.species && set.item===savedBoss.gimmick.item));
+        const {gimmick,...identity}=savedBoss;assert.deepEqual(identity,boss);
+      }else assert.deepEqual(savedBoss,boss);
       assert.equal(original.reduce((sum,set)=>sum+Object.values((set.evs ?? {}) as Record<string,number>).reduce((s,n)=>s+n,0),0),3*towerDifficulty(floor).points);
       // Weak deterministic opponents isolate progression from win-rate tuning. No winner is injected.
       const enemy=packTeam(['Unown','Luvdisc','Delibird']);

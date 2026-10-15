@@ -1,3 +1,4 @@
+import {RunEvents} from './run-events';
 import {pokemonRarity,eggRarity} from '../data/pokemon-rarity';
 import {eggGradeWeights,superRareSpeciesCategory} from '../data/egg-grades';
 import {isEggKind,rareEggCategory,machinePokemonKind,machineShiny} from '../data/egg-kinds';
@@ -61,11 +62,12 @@ export class TowerStore {
     this.db = new DatabaseSync(path);
     this.db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
     const version = this.db.prepare('PRAGMA user_version').get() as {user_version: number};
-    if (version.user_version > 31) throw new Error('Unsupported database schema');
+    if (version.user_version > 33) throw new Error('Unsupported database schema');
     // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
     if(version.user_version<28)this.db.exec('PRAGMA foreign_keys=OFF');
     try {this.tx(() => {
       this.db.exec(schema);
+      if(!(this.db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(column=>column.name==='kind'))this.db.exec("ALTER TABLE run_events ADD COLUMN kind TEXT NOT NULL DEFAULT 'mystery-chest' CHECK(kind IN ('mystery-chest','breeder-gift','traveling-merchant'))");
       const playerColumns=this.db.prepare('PRAGMA table_info(players)').all() as {name:string}[];
       if(!playerColumns.some(column=>column.name==='growth_points')) {
         this.db.exec('ALTER TABLE players ADD COLUMN growth_points INTEGER NOT NULL DEFAULT 0 CHECK(growth_points>=0)');
@@ -191,6 +193,9 @@ export class TowerStore {
     try { const result = fn(); this.db.exec('COMMIT'); return result; }
     catch (error) { this.db.exec('ROLLBACK'); throw error; }
   }
+  private get events(){return new RunEvents(this.db,this.roll);}
+  chooseEvent(owner:string,runId:string,eventId:string,choice:unknown){this.tx(()=>this.events.choose(owner,runId,eventId,choice));}
+  continueEvent(owner:string,runId:string,eventId:string){this.tx(()=>this.events.continue(owner,runId,eventId));}
   permanentView(owner:string):PermanentView {
     const row=this.db.prepare('SELECT reroll_level,shiny_tickets,egg_tickets FROM permanent_upgrades WHERE player_id=?').get(owner) as {reroll_level:number;shiny_tickets:number;egg_tickets:number}|undefined;
     return {retryLimit:(this.db.prepare('SELECT level FROM permanent_retry_upgrades WHERE player_id=?').get(owner) as {level:number}|undefined)?.level??0,rerollLevel:row?.reroll_level??0,rerollLimit:1+(row?.reroll_level??0),shinyTickets:row?.shiny_tickets??0,eggTickets:row?.egg_tickets??0};
@@ -313,7 +318,8 @@ export class TowerStore {
       id: row.id, rule:this.runRule(row.id),theme:this.runTheme(row.id), hiddenBossPending:this.route(row.id)?.pending_boss===row.floor, hiddenBossNext:!!this.route(row.id) && row.floor%50===0 && ['johto','kanto'].includes(this.runTheme(row.id) ?? '') && this.route(row.id)?.pending_boss!==row.floor, floor: row.floor, totalFloors: row.total_floors, floorName: row.floor===row.total_floors ? row.total_floors===3 ? '작은 타워의 정상' : '타워의 정상' : floors[row.floor - 1]?.name ?? '타워', state: row.state,
       retries:{limit:retry!.retry_limit,used:retry!.used,remaining:Math.max(0,retry!.retry_limit-retry!.used),canRetry:row.state==='lost'&&retry!.used<retry!.retry_limit&&!this.db.prepare('SELECT 1 FROM growth_rewards WHERE run_id=?').get(row.id),preparing:row.state==='select'&&!!retryBattle,opponents:retryBattle?(Showdown.Teams.unpack(retryBattle.opponent_team)??[]).map(p=>({species:p.species,moves:p.moves,item:p.item})):[]},
       roster: this.roster(row.id), partnerForms:Object.fromEntries(Object.entries(this.runProfiles(row.id)).filter(([,profile])=>profile.forme).map(([name,profile])=>[name,profile.forme!])), battleId: battle?.id ?? null,
-      earnedCoins: earned?.coins ?? 0, victories: earned?.wins ?? 0,
+      event:row.state==='select'?this.events.view(row.id):null,
+      earnedCoins: (earned?.coins ?? 0)+this.events.earnedCoins(row.id), victories: earned?.wins ?? 0,
       growthReward: (this.db.prepare('SELECT amount FROM growth_rewards WHERE run_id=?').get(row.id) as {amount:number}|undefined)?.amount ?? 0,
       restartReward:this.growthBase(row.id),
       upgrades: this.activeUpgrades(row.id,row.floor).map(upgrade=>({kind:upgrade.kind,remainingFloors:['recruit','cleared'].includes(row.state) ? Math.max(0,upgrade.end_floor-row.floor) : upgrade.end_floor-row.floor+1})),
@@ -364,7 +370,7 @@ export class TowerStore {
     }
   }
   runRule(id:string):BattleRule{return (this.db.prepare('SELECT rule FROM run_rules WHERE run_id=?').get(id) as {rule:BattleRule}|undefined)?.rule ?? 'chaos';}
-  start(owner: string, selected: unknown,rule:unknown='chaos'): string {
+  start(owner: string, selected: unknown,rule:unknown='chaos',options:{events?:boolean}={}): string {
     if(!isBattleRule(rule))throw new BattleRequestError('배틀 룰을 선택하세요.',400);
     return this.tx(() => {
       const current = this.latest(owner);
@@ -383,6 +389,7 @@ export class TowerStore {
       this.db.prepare('INSERT INTO run_themes VALUES (?,?)').run(id,theme);
       this.db.prepare('INSERT INTO run_routes(run_id,second_theme) VALUES (?,?)').run(id,secondTowerTheme(id,theme));
       this.db.prepare('INSERT INTO run_progression VALUES (?,?)').run(id,CURRENT_PROGRESSION);
+      if(options.events)this.events.enable(id);
       this.db.prepare('INSERT INTO run_tera_tickets VALUES (?,0)').run(id);
       selected.forEach((name, slot) => this.db.prepare('INSERT INTO members VALUES (?, ?, ?)').run(id, slot, name));
       const profiles=Object.fromEntries(this.trainingCollection(owner).map(entry=>[entry.species,entry.profile]));
@@ -394,6 +401,7 @@ export class TowerStore {
     return this.tx(() => {
       const run = this.ownedRun(owner, runId);
       if (run.state !== 'select' || run.floor !== expectedFloor || run.floor > run.total_floors) throw new BattleRequestError('이미 진행되었거나 잘못된 층입니다.', 409);
+      if(this.events.view(runId))throw new BattleRequestError('상자 이벤트를 먼저 마쳐 주세요.',409);
       this.validateSelection(selected, this.roster(runId));
       return this.createBattle(runId, run.floor, selected);
     });
@@ -779,7 +787,10 @@ export class TowerStore {
         this.db.prepare("UPDATE runs SET state = 'cleared' WHERE id = ?").run(run.id);
         this.settleGrowth(run.id,'cleared');
       }
-      else this.db.prepare("UPDATE runs SET state = 'select', floor = floor + 1 WHERE id = ?").run(run.id);
+      else {
+        this.db.prepare("UPDATE runs SET state = 'select', floor = floor + 1 WHERE id = ?").run(run.id);
+        this.events.encounter(run.id,run.floor);
+      }
     });
   }
   abandon(owner: string, runId: string) {

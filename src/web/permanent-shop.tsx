@@ -19,19 +19,19 @@ export default function PermanentShop({entries}:{entries:PokedexEntry[]}){
  const [dispensedKind,setDispensedKind]=useState<EggKind|null>(null);
  const [shinyTarget,setShinyTarget]=useState<string|null>(null);
  const [tower,setTower]=useState<TowerView|null>(null),[training,setTraining]=useState<TrainingView[]>([]),[error,setError]=useState(''),[busy,setBusy]=useState(false),[result,setResult]=useState<PermanentResult|null>(null),[spinning,setSpinning]=useState(false),[exchange,setExchange]=useState(false),[query,setQuery]=useState('');
- const lock=useRef(false),timer=useRef<ReturnType<typeof setTimeout>|null>(null),pending=useRef<{requestId:string;action:string;product:PermanentProduct;count:number;species?:string}|null>(null);
+ const lock=useRef(false),timer=useRef<ReturnType<typeof setTimeout>|null>(null),pending=useRef<{requestId:string;action:string;product:PermanentProduct;count:number;species?:string;eggKind?:string}|null>(null);
  useGameKeyboard('.permanent-shop button',1,true,(event,cursor,select)=>{if(event.key.toLowerCase()==='x'){window.location.href='/';return true;}if(event.key.startsWith('Arrow')&&cursor){event.preventDefault();const rect=cursor.getBoundingClientRect(),x=rect.x+rect.width/2,y=rect.y+rect.height/2,horizontal=['ArrowLeft','ArrowRight'].includes(event.key),positive=['ArrowRight','ArrowDown'].includes(event.key);const next=Array.from(document.querySelectorAll<HTMLButtonElement>('.permanent-shop button:not(:disabled)')).filter(b=>b!==cursor&&b.getClientRects().length).map(button=>{const r=button.getBoundingClientRect(),dx=r.x+r.width/2-x,dy=r.y+r.height/2-y;return {button,along:horizontal?dx:dy,cost:Math.abs(horizontal?dx:dy)+3*Math.abs(horizontal?dy:dx)};}).filter(b=>positive?b.along>2:b.along< -2).sort((a,b)=>a.cost-b.cost)[0];if(next){select(next.button);next.button.scrollIntoView({block:'nearest'});}return true;}return false;});
  useEffect(()=>{let alive=true;fetch('/api/battle?view=collection',{cache:'no-store'}).then(async r=>{const data:BattleResponse=await r.json();if(!r.ok)throw Error(data.error);if(alive){setTower(data.tower);setTraining(data.training??[]);}}).catch(e=>{if(alive)setError(e.message);});return()=>{alive=false;if(timer.current)clearTimeout(timer.current);};},[]);
  const permanent=tower?.permanent??{retryLimit:0,rerollLevel:0,rerollLimit:1,shinyTickets:0,eggTickets:0};
- async function send(action:string,product:PermanentProduct,count=1,species?:string,retry=false){
+ async function send(action:string,product:PermanentProduct,count=1,species?:string,retry=false,eggKind?:string){
   if(lock.current)return;lock.current=true;setBusy(true);setError('');setResult(null);
-  const body=retry&&pending.current?pending.current:{requestId:crypto.randomUUID(),action,product,count,...(species?{species}:{})};pending.current=body;
-  if(body.action==='hatch'){setDispensedKind(null);setSpinning(true);}
+  const body=retry&&pending.current?pending.current:{requestId:crypto.randomUUID(),action,product,count,...(eggKind?{eggKind}:{}),...(species?{species}:{})};pending.current=body;
+  if((body.action==='hatch'||body.action==='hatch-reward')){setDispensedKind(null);setSpinning(true);}
   try{
    const response=await fetch('/api/battle',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'permanent',...body})});
    const data:BattleResponse=await response.json();if(!response.ok){if(response.status<500)pending.current=null;throw Error(data.error??'구매하지 못했습니다.');}
    setTower(data.tower);setTraining(data.training??[]);setExchange(false);pending.current=null;
-   if(body.action==='hatch'){
+   if((body.action==='hatch'||body.action==='hatch-reward')){
     const kinds=(data.permanentResult?.eggs??[]).map(egg=>egg.eggKind??(egg.shiny?'shiny':'normal'));
     setDispensedKind(highestEggKind(kinds));
     const duration=window.matchMedia('(prefers-reduced-motion: reduce)').matches?100:1600;
@@ -65,6 +65,7 @@ export default function PermanentShop({entries}:{entries:PokedexEntry[]}){
  </div>
  </div>
  <div id="permanent-panel-eggs" role="tabpanel" aria-labelledby="permanent-tab-eggs" hidden={tab!=='eggs'}>
+ <section aria-label="보상 알 티켓">{(['superRare','shiny'] as const).filter(kind=>(permanent.rewardEggTickets?.[kind]??0)>0).map(kind=><button key={kind} disabled={blocked} onClick={()=>void send('hatch-reward','egg',1,undefined,false,kind)}>{eggKindInfo[kind].name} 티켓 · {permanent.rewardEggTickets?.[kind]}장 · 1개 부화</button>)}</section>
  <div className="egg-odds-toolbar"><button data-egg-odds-button disabled={busy} onClick={()=>setEggOdds(true)}>알 확률</button></div>
  <section className={`egg-station ${spinning?'is-spinning':''}`} aria-label="알 뽑기 기계" aria-busy={spinning}>
  <div className="egg-machine" aria-hidden="true"><img className="egg-machine-art" src="/sprites/eggs/machine.png" alt="" width={1122} height={1402}/>{dispensedKind&&<span className="egg-machine-output" data-testid="dispensed-egg" data-egg-kind={dispensedKind}><img src={eggKindInfo[dispensedKind].image} alt=""/></span>}</div>

@@ -1,3 +1,4 @@
+import {useVitaminReward,vitaminCount} from './reward-inventory-fixture';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
@@ -35,14 +36,14 @@ test('normal teams exclude rare species at all depths and elite specialists add 
 test('three vitamins total across types and checkpoints persist after reopen and reject a fourth without spending',()=>{
  const path=`.data/tests/${randomUUID()}.sqlite`;let {store,run}=setup(path);
  try{
-  const offers=store.view('feedback').run!.vitaminShop!.offers;
-  for(const offer of offers.slice(0,3))store.purchaseVitamin('feedback',run,11,offer.stat,'Charizard');
-  assert.equal(store.view('feedback').run!.vitaminShop!.counts!.Charizard,3);
-  const before=store.view('feedback');assert.throws(()=>store.purchaseVitamin('feedback',run,11,offers[3].stat,'Charizard'),/총 3개/);assert.deepEqual(store.view('feedback'),before);
+  const offers=([{stat:'atk'},{stat:'def'},{stat:'spa'},{stat:'spd'}] as const);
+  for(const offer of offers.slice(0,3))useVitaminReward(store,'feedback',run,11,offer.stat,'Charizard');
+  assert.equal(vitaminCount(store,run,'Charizard'),3);
+  assert.throws(()=>useVitaminReward(store,'feedback',run,11,offers[3].stat,'Charizard'),/대상/);const before=store.view('feedback');assert.throws(()=>store.useReward('feedback',run,randomUUID(),before.run!.rewardInventory![0].id,'Charizard'),/대상/);assert.deepEqual(store.view('feedback'),before);
   store.close();store=new TowerStore(path);store.db.prepare("UPDATE runs SET floor=21,state='select' WHERE id=?").run(run);
-  const stat=store.view('feedback').run!.vitaminShop!.offers[0].stat;
-  assert.throws(()=>store.purchaseVitamin('feedback',run,21,stat,'Charizard'),/총 3개/);
-  store.purchaseVitamin('feedback',run,21,stat,'Blastoise');assert.equal(store.view('feedback').run!.vitaminShop!.counts!.Blastoise,1);
+  const stat='spd' as const;
+  assert.throws(()=>store.useReward('feedback',run,randomUUID(),store.view('feedback').run!.rewardInventory![0].id,'Charizard'),/대상/);
+  store.useReward('feedback',run,randomUUID(),store.view('feedback').run!.rewardInventory![0].id,'Blastoise');assert.equal(vitaminCount(store,run,'Blastoise'),1);
  }finally{store.close();}
 });
 

@@ -1,4 +1,5 @@
 'use client';
+import {RewardInventory} from './reward-inventory';
 import {RulePicker} from './rule-picker';
 import {type BattleRule} from '../data/run-rules';
 import {VillainOutcome} from './villain-outcome';
@@ -71,6 +72,7 @@ export function TowerControls({tower, selected, setSelected, busy, submit,error}
         {newMoves.length>0 && <span className="recruit-new-moves">기술 수집 · 새 기술 {newMoves.length}개</span>}
       </button>;
     })}</div>
+    {choosingNext && <RewardInventory run={run} busy={busy} submit={submit}/>}
     {choosingNext && <div className="selection-equipment"><p>출전 전에 지닌 도구를 장착하거나 동료에게 이동·교환할 수 있어요.</p><HeldItemManager run={run} busy={busy} submit={submit} error={error}/></div>}
     {recruiting && <button className="secondary-button" data-recruit-details disabled={busy||!chosen} onClick={()=>setInspecting(true)}>선택한 포켓몬 정보 · 기술·특성·종족값</button>}
     {!recruiting && !choosingNext && <RulePicker value={rule} onChange={setRule} disabled={busy}/>}

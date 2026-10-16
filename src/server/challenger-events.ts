@@ -1,3 +1,4 @@
+import {snapshotRankReward} from './challenger-rewards';
 import type {DatabaseSync} from 'node:sqlite';
 import {drawChallengers,challengerCandidate,type SavedChallengerDefinition} from '../data/challengers';
 import {createHash} from 'node:crypto';
@@ -22,6 +23,13 @@ export class ChallengerEvents{
    const teamSeed=[0,1,2,3].map(()=>Math.floor(random()*65536)) as Seed;
    return {...candidate,encounter:generateNpcEncounter(floor,teamSeed,candidate.sample,candidate.rank,rule,progression)};
   }):drawLegacyChallengers(floor,random);
+  const runId=(this.db.prepare('SELECT run_id FROM run_events WHERE id=?').get(eventId) as {run_id:string}).run_id;
+  for(const candidate of candidates){
+   const rank='rank' in candidate?candidate.rank:candidate.rewardProfile==='high'?'master':candidate.rewardProfile==='medium'?'elite':'normal';
+   const digest=createHash('sha256').update(`${eventId}:reward:${candidate.id}`).digest();
+   const rewardRandom=encounterRandom([0,4,8,12].map(i=>digest.readUInt32LE(i)) as Seed);
+   Object.assign(candidate,snapshotRankReward(this.db,runId,rank,rewardRandom));
+  }
   this.db.prepare('INSERT INTO challenger_encounters(event_id,candidates_json) VALUES (?,?)').run(eventId,JSON.stringify(candidates));
  }
  row(eventId:string){return this.db.prepare('SELECT * FROM challenger_encounters WHERE event_id=?').get(eventId) as Encounter|undefined;}
@@ -32,10 +40,10 @@ export class ChallengerEvents{
  retry(previous:string,next:string){this.db.prepare('UPDATE challenger_encounters SET battle_id=? WHERE battle_id=?').run(next,previous);}
  win(eventId:string,owner:string){
   const row=this.row(eventId)!;const definition=this.definition(eventId,row.selected_id);
-  const result=applyRewardOption(this.db,owner,definition.rewardDefinition);
+  const result=applyRewardOption(this.db,owner,definition.rewardDefinition,(this.db.prepare('SELECT run_id FROM run_events WHERE id=?').get(eventId) as {run_id:string}).run_id);
   if(definition.selections){result.selections=definition.selections.map(selection=>{
    this.db.prepare('INSERT INTO event_reward_selections VALUES (?,?,?)').run(eventId,selection.id,JSON.stringify(selection));
-   return {id:selection.id,title:selection.title,state:'pending',candidates:selection.candidates.map(({effects,...display})=>display)};
+   return {id:selection.id,title:selection.title,...(selection.expanded?{expanded:true}:{}),state:'pending',candidates:selection.candidates.map(({effects,...display})=>display)};
   });}
   this.db.prepare("UPDATE run_events SET status='reward',result_json=? WHERE id=?").run(JSON.stringify(result),eventId);
   this.db.prepare("UPDATE challenger_encounters SET phase='reward' WHERE event_id=?").run(eventId);

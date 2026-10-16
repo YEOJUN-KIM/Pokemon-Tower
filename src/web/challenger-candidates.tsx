@@ -13,7 +13,7 @@ export function ChallengerCandidates({candidates,busy,onSelect}:{candidates:read
    <img src={`/sprites/trainers/${candidate.portrait}.png`} width="80" height="80" alt=""/>
    <strong><span className={styles.pointer} aria-hidden="true">&gt; </span>{candidate.title}</strong>
    <span>{candidate.difficulty} · 위험도 {'★'.repeat(candidate.danger)}</span>
-   <span>{candidate.battleStyle}</span><small>예상 보상</small><span>{candidate.rewardPreview}</span>
+   <span>{candidate.battleStyle}</span><small>보상</small><span>{candidate.rewardPreview}</span>
   </button>)}</div>
   <button className={styles.back} disabled={busy} onClick={()=>onSelect('back')}><span className={styles.pointer} aria-hidden="true">&gt; </span>돌아간다</button>
  </div>;

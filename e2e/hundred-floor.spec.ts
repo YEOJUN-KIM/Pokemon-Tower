@@ -29,7 +29,7 @@ for(const width of [1280,390])test(`fifty is a saved midpoint, fifty-one keeps r
     await expect(page.getByTestId('tower-shop')).toContainText('50층 클리어');await expect(page.getByTestId('tower-clear')).toHaveCount(0);
     await page.reload();await expect(page.getByTestId('tower-shop')).toBeVisible();
     expect(store.view(owner).run!.floor).toBe(51);expect(store.view(owner).coins).toBe(5000+row.reward);
-    expect(store.view(owner).run!.heldItems!.Charizard).toBe('Charcoal');expect(store.view(owner).run!.vitaminShop!.bonuses.Charizard.spa).toBe(5);
+    expect(store.view(owner).run!.heldItems!.Charizard).toBe('Charcoal');expect(store.db.prepare('SELECT points FROM run_stat_boosts WHERE run_id=? AND species=? AND stat=?').get(run,'Charizard','spa')!.points).toBe(5);
     await page.getByRole('button',{name:'출전 팀 선택'}).click();await expect(page.getByRole('button',{name:'51층 배틀 시작'})).toBeVisible();
    }else{
     await expect(page.getByRole('heading',{name:'100층 타워를 정복했어요!'})).toBeVisible();await page.reload();await expect(page.getByTestId('tower-clear')).toBeVisible();

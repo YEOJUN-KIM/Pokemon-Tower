@@ -1,4 +1,7 @@
 'use client';
+import {vitamins} from '../data/shop';
+import {moveInfo} from '../data/move-info';
+import {itemName} from '../data/held-items';
 import {useLayoutEffect,useRef,useState} from 'react';
 import type {RewardEntry,RewardResult,RewardSelection} from '../data/rewards';
 import {selectGameCursor} from './game-keyboard';
@@ -6,6 +9,12 @@ import styles from './styles/reward-panel.module.css';
 
 export function rewardEntryText(entry:RewardEntry):string {
  switch(entry.kind){
+  case 'growth-points':return `+ 성장 포인트 ${entry.amount.toLocaleString()}P`;
+  case 'vitamin':return `+ ${vitamins[entry.stat].name} ${entry.amount}개 · 출전 준비에서 사용`;
+  case 'machine':return `+ 기술머신 ${moveInfo[entry.move]?.name??entry.move} · 출전 준비에서 사용`;
+  case 'item-exchange':return '+ 에픽 지닌 도구 교환권 1장 · 출전 준비에서 사용';
+  case 'trainer-equipment':return `+ ${itemName(entry.item)}`;
+  case 'typed-egg-ticket':return `+ ${entry.eggKind==='superRare'?'슈퍼레어':'이로치'} 알 티켓 ${entry.amount}장 · 알 뽑기에서 사용`;
   case 'coins':return `+ 타워 코인 ${entry.amount.toLocaleString()}`;
   case 'egg-ticket':return `+ 알 뽑기권 ${entry.amount.toLocaleString()}장`;
   case 'coin-loss':return `타워 코인 -${entry.percent}% · 실제 ${entry.amount.toLocaleString()}코인 손실`;
@@ -20,7 +29,7 @@ export function RewardEntryList({entries}:{entries:readonly RewardEntry[]}){
 }
 
 export function RewardChoiceList({selections,busy,onSelect}:{selections:readonly RewardSelection[];busy:boolean;onSelect?:RewardPanelProps['onSelect']}){
- const [expanded,setExpanded]=useState<string|null>(null);
+ const [expanded,setExpanded]=useState<string|null>(()=>selections.find(selection=>selection.expanded)?.id??null);
  return <div className={styles.selections}>{selections.map(selection=><section key={selection.id} className={styles.selection} aria-label={selection.title} data-selection-state={selection.state}>
   <h3>{selection.title}</h3>
   {selection.state==='selected'?<p>{selection.candidates.find(candidate=>candidate.id===selection.selectedId)?.label??selection.selectedId} · 선택 완료</p>:<>

@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
     const player = account?.player_id??playerKey(owner!);
     service.store.ensurePlayer(player);
     if(body.type==='permanent'){
-      const permanentResult=service.store.permanentAction(player,body.requestId,body.action,body.product,body.count,body.species,body.action==='hatch'?'machine':undefined,body.tuning);
+      const permanentResult=service.store.permanentAction(player,body.requestId,body.action==='hatch-reward'?'hatch':body.action,body.product,body.count,body.species,body.action==='hatch-reward'?body.eggKind:body.action==='hatch'?'machine':undefined,body.tuning,body.action==='hatch-reward');
       return NextResponse.json({battle:null,tower:service.store.view(player),training:service.store.trainingCollection(player),permanentResult},{headers});
     }
     if((body.type==='event-choice'||body.type==='event-continue'||body.type==='event-reward-select') && typeof body.runId==='string' && typeof body.eventId==='string'){
@@ -65,6 +65,7 @@ export async function POST(request: NextRequest) {
       else service.store.continueEvent(player,body.runId,body.eventId);
       return NextResponse.json(await service.state(player),{headers});
     }
+    if(body.type==='reward-use' && typeof body.runId==='string'){service.store.useReward(player,body.runId,body.requestId,body.entryId,body.choiceId);return NextResponse.json(await service.state(player),{headers});}
     if(body.type==='favorite') {
       service.store.setFavorite(player,body.species,body.enabled);
       return NextResponse.json({tower:service.store.view(player)},{headers});

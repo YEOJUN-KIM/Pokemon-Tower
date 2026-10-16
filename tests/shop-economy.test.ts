@@ -16,9 +16,9 @@ test('one reroll per category is free and resets at the next checkpoint',()=>{
 
 test('vitamin and strong equipment prices are charged by the server and unaffordable purchases preserve inventory',()=>{
  const store=new TowerStore(':memory:');try{store.ensurePlayer('p');const id=store.battle(store.start('p',starters)).run_id;store.db.prepare("UPDATE runs SET total_floors=50,floor=6,state='select' WHERE id=?").run(id);store.db.prepare('UPDATE players SET coins=10000 WHERE id=?').run('p');
- const vitamin=store.view('p').run!.vitaminShop!.offers[0];assert.equal(vitamin.price,1900);store.purchaseVitamin('p',id,6,vitamin.stat,'Charizard');assert.equal(store.view('p').coins,8100);
- store.db.prepare('INSERT OR REPLACE INTO item_shops VALUES (?,?,?)').run(id,6,JSON.stringify(['Charizardite X','Leftovers','Life Orb','Charcoal']));store.purchaseItem('p',id,6,'Charizardite X','Charizard');assert.equal(heldItems['Charizardite X'].price,5000);assert.equal(store.view('p').coins,3100);
+ assert.equal(store.view('p').run!.vitaminShop,null);assert.throws(()=>store.purchaseVitamin('p',id,6,'atk','Charizard'),/판매는 종료/);assert.equal(store.view('p').coins,10000);
+ store.db.prepare('INSERT OR REPLACE INTO item_shops VALUES (?,?,?)').run(id,6,JSON.stringify(['Charizardite X','Leftovers','Life Orb','Charcoal']));store.purchaseItem('p',id,6,'Charizardite X','Charizard');assert.equal(heldItems['Charizardite X'].price,5000);assert.equal(store.view('p').coins,5000);
  store.db.prepare('UPDATE players SET coins=899 WHERE id=?').run('p');assert.throws(()=>store.purchaseItem('p',id,6,'Life Orb','Blastoise'),/부족/);assert.equal(store.view('p').coins,899);assert.equal(store.view('p').run!.heldItems!.Blastoise,undefined);
- store.db.prepare('UPDATE runs SET floor=46 WHERE id=?').run(id);assert.equal(store.view('p').run!.vitaminShop!.offers[0].price,5900);assert.equal(vitaminPrice(11),2400);
+ store.db.prepare('UPDATE runs SET floor=46 WHERE id=?').run(id);assert.equal(store.view('p').run!.vitaminShop,null);assert.equal(vitaminPrice(11),2400);
  }finally{store.close();}
 });

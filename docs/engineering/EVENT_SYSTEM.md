@@ -86,7 +86,7 @@ v35는 v1·v2를 허용하도록 `run_event_rules`를 이전하고, 기존 결�
 - `RewardChoiceList`: 콜백이 있으면 선택하기→후보 버튼을 열고 `(selectionId, candidateId)`만 전달합니다. 선택 완료는 전달받은 결과 상태로 표시하며 클릭만으로 완료·지급했다고 가정하지 않습니다.
 - 선택 대기가 하나라도 있으면 최종 확인은 비활성화합니다. 콜백이 없는 대기 항목은 '선택 기능 준비 중'으로 표시합니다. 현재 미스터리 상자는 selections가 없으므로 기존 확인 동작과 같습니다.
 
-`server/rewards.ts`의 `selectEventReward`는 서버 후보 정의를 조회하고 공통 `applyRewardOption`으로 지급합니다. `event-reward-select`는 이벤트·선택·후보 ID만 사용합니다. HTTP에 효과를 추가해도 사용하지 않습니다. `TowerStore` 트랜잭션 안에서 효과 지급과 결과 entries 추가 및 selectedId 저장이 함께 커밋됩니다. 동일 후보 중복은 무효 처리, 다른 후보 재선택은 409입니다. 실제 에픽 도구·영양제 후보는 미구현입니다.
+`server/rewards.ts`의 `selectEventReward`는 서버 후보 정의를 조회하고 공통 `applyRewardOption`으로 지급합니다. `event-reward-select`는 이벤트·선택·후보 ID만 사용합니다. HTTP에 효과를 추가해도 사용하지 않습니다. `TowerStore` 트랜잭션 안에서 효과 지급과 결과 entries 추가 및 selectedId 저장이 함께 커밋됩니다. 동일 후보 중복은 무효 처리, 다른 후보 재선택은 409입니다. 에픽 교환권·영양제·기술머신은 아래 공통 보관함 경로를 사용합니다.
 
 ## 도전자 배틀과 DB v36
 
@@ -119,3 +119,17 @@ v35는 v1·v2를 허용하도록 `run_event_rules`를 이전하고, 기존 결�
 - `e2e/challenger-events.spec.ts`: 실제 Chrome PC/모바일 후보·키보드·돌아가기, 배틀 표시, 내부 완료 fixture 후 팝업, 서버 선택 API·동시 중복 및 화면 저장. 전체 전투 승리는 테스트 전용 내부 callback fixture이며 클라이언트 승패 입력 API는 추가하지 않습니다.
 
 새 일반층과 도전자의 공통 구조·v38 런별 규칙·스냅샷 호환·도구/기믹 정책은 [NPC Sample·Rank](NPC_TRAINING.md)를 따릅니다. 신규 보상은 `data/challenger-rewards.ts`, Sample은 `data/npc-samples.ts`, 과거 후보 해석은 `data/legacy-challengers.ts`로 분리합니다.
+
+## Rank Reward v2 / DB v39
+
+- `data/challenger-rewards.ts`: normal/elite/master의 preview·풀·가중치·금액·범위·Master 카테고리/후보 수. NPC Sample 숫자와 분리합니다.
+- `server/challenger-rewards.ts`: 서버 컨텍스트에서 실제 보상 snapshot을 생성합니다. Elite TM 적격성·Master 장비 미보유/룰 적격성을 검사합니다. `eventId:reward:sampleId` 해시 난수로 분리해 기존 Sample·Rank·팀 생성 결과와 난수 호출 순서를 유지합니다.
+- ChallengerEvents.create는 팀 생성 뒤 각 후보의 rewardDefinition/selections와 rewardSnapshotVersion=2를 candidates_json에 저장합니다. win에서는 저장 효과만 사용하고 새 추첨을 하지 않습니다. 과거 후보 JSON은 수정하지 않고 legacy 보상도 계속 처리합니다. 공개 projection은 exact reward를 제거하고 Rank preview만 제공합니다.
+- `RewardEffect`는 growth-points, vitamin, item-exchange, machine, trainer-equipment, typed-egg-ticket을 추가했습니다. `server/rewards.ts`는 run context가 필요한 효과를 명시적으로 검사하며 장비 중복 시 실제 대체 결과를 entries에 기록합니다.
+- `server/inventory-grants.ts`는 기존 가방/장비/기술 해금과 신규 보관함의 작은 공통 지급 함수를 제공합니다. 상점의 도구/장비/기술머신 지급도 같은 함수를 사용합니다. 영양제 구매 경로는 종료했지만 기존 섭취 ledger·run_stat_boosts를 보상 사용에서 재사용합니다.
+- `run_reward_inventory`의 각 지급은 안정적인 entry ID와 서버 effect JSON·quantity를 저장합니다. `reward-use`는 requestId/entryId/choiceId만 받습니다. RewardInventory가 보유·대상·유효 기술·미보유 도구·섭취 한도를 확인하고 효과 적용/소모/사용 영수증을 같은 TowerStore 트랜잭션에 저장합니다. 같은 요청은 재사용, 소진된 entry는 새 요청으로 사용할 수 없습니다. 영양제/TM/교환권은 이번 런에 보관하고 TM 해금은 영구 수집에 반영합니다.
+- Master selection은 기존 event_reward_selections/result_json/exact-once 경로를 사용합니다. 후보가 3개 펼쳐진 상태로 표시하도록 optional expanded 플래그만 추가했습니다. 미선택 확인/진행 차단과 dialog 포커스·모바일 스크롤을 유지합니다.
+- typed-egg-ticket은 플레이어별 reward_egg_tickets에 영구 보관합니다. 기존 PermanentShop.hatch에 보상 티켓 모드를 추가해 해당 티켓 1장을 원자적으로 사용하고 기존 superRare/shiny 부화를 호출합니다. 일반 뽑기/가격/이로치 계산은 수정하지 않습니다. 전용 부화는 기존 permanent_receipts에 별도 payload로 기록해 무료 부화를 반복할 수 없습니다.
+- UI는 기존 RewardModal/RewardPanel을 재사용하고, 출전 준비에 작은 RewardInventory를 연결합니다. 기존 영구 상점 알 탭에 전용 보상 티켓 사용 버튼을 표시합니다. 10층 정비의 영양제 탭은 삭제하고 purchase-vitamin은 409로 명확히 종료합니다.
+
+검증: `tests/rank-rewards.test.ts`, `tests/reward-inventory-fixture.ts`, `e2e/rank-rewards.spec.ts`. 기존 NPC·이벤트·알·지닌 도구·TM·장비·상점 회귀도 실행합니다. 값과 풀은 [이벤트 규칙](../gameplay/EVENTS.md)을 따릅니다.

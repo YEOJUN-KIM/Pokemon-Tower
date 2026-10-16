@@ -94,17 +94,11 @@ Rank별 시도 확률을 통과한 뒤 현재 룰이 허용하는 메가/테라/
 
 보상 데이터는 `src/data/challenger-rewards.ts`에 있습니다. Sample과 분리한 Challenger Encounter가 Rank에 따라 결정합니다.
 
-| Rank | rewardProfile | 보상 |
-|---|---|---|
-| Normal | low | 300코인 |
-| Elite | medium | 700코인 + 알 티켓 1장 |
-| Master | high | 1,000코인 + 선택형 추가 보상 |
-
-Master 추가 선택은 1,000코인 / 알 티켓 3장 / 500코인+티켓 1장입니다. 일반층의 층별 보상은 기존 정책을 사용합니다.
+Normal/Elite/Master의 보상 프로필은 [이벤트 규칙](../gameplay/EVENTS.md)을 따릅니다. Normal은 간단한 1개 자동 지급, Elite는 6종 풀 중 1개 자동 지급, Master는 서로 다른 가치 축의 실제 후보 3개 중 1개 선택입니다. 구체 보상은 후보 생성 때 별도 reward 난수로 확정하고 카드에는 등급별 기대 문구만 표시합니다. NPC Sample/Rank/팀 생성 난수는 변경하지 않습니다. 기존 low/medium/high snapshot은 호환 경로로만 유지합니다.
 
 이벤트 UUID의 SHA-256을 기존 encounterRandom 시드로 사용합니다. 추첨한 세 명의 팀을 이벤트 발생 때 생성해 **세 정의만 candidates_json**에 저장합니다. 각 정의는 sample 전체 표시/컨셉 정보, Rank, 실제 training 목표, 팀별 IV/EV/moves/item/ability/nature 등 실제 프로필, 기믹 계획, 팀 시드, 보상/선택 효과를 포함합니다. 선택 때 현재 최신 데이터를 다시 조회하거나 팀을 재추첨하지 않습니다. Rank 프로필을 변경해도 대기 후보의 상대는 변하지 않는 테스트가 있습니다.
 
-조회/API projection은 표시명·portrait·일반/엘리트/마스터·위험도·자연어 힌트·예상 보상만 반환합니다. 내부 tactic·IV/EV·미공개 팀은 카드에 노출하지 않습니다. 전투 상단은 `클래스명 · Rank`를 표시합니다.
+조회/API projection은 표시명·portrait·일반/엘리트/마스터·위험도·자연어 힌트·보상 기대 문구만 반환합니다. 내부 tactic·IV/EV·미공개 팀은 카드에 노출하지 않습니다. 전투 상단은 `클래스명 · Rank`를 표시합니다.
 
 기존 BattleSession/RewardOption/RewardSelection/Reward Popup·트랜잭션을 재사용합니다. 영입 없음, 층 소모 없음, 중복 지급 차단과 선택 완료 전 진입 차단을 유지합니다. 재접속·재도전은 저장된 패킹 팀·시드·트레이너 정보를 그대로 복원합니다.
 
@@ -139,4 +133,4 @@ DB v38은 `run_npc_rules(run_id,version=1)`만 추가합니다. 새 런에만 �
 - Chrome PC/모바일 E2E 8개 통과. 후보 복구, 기존 도전자, Rank 표시, 실제 배틀 연결, Reward Popup·선택 보상 회귀를 확인했습니다.
 - 타입 검사·프로덕션 빌드·CSS 검사·워크스페이스 검사·`git diff --check` 통과.
 - 기존 네임드 회귀 검사가 원래 후보 목록만 비교해 지역형/등록 서명 파트너를 간헐적으로 거부하던 부분은 현행 템플릿/지역 변환 기준으로 정정했습니다. 네임드 팀 데이터는 수정하지 않았습니다.
-- 보상 정의와 정책은 그대로 유지했습니다. Rank별 300 / 700+티켓 / 1,000+선택 보상, 신규 AI/레이드/미러/빌런 캠페인 확장은 이번 변경에 포함하지 않습니다.
+- 위 검증은 NPC 구현 시점의 기록입니다. 이후 Reward Profile은 별도 확장했으며 최신 보상·저장 규칙은 EVENTS.md와 EVENT_SYSTEM.md를 따릅니다. NPC 난이도·Sample·Rank·AI는 이번 보상 확장에서 변경하지 않습니다.

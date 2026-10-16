@@ -44,6 +44,6 @@
 
 상대마다 표집 층·상성·기믹 단계가 달라 최종 강함 순위로 해석하지 않는다. 게임 가격·확률·AI·NPC 팀은 변경하지 않았다.
 
-상대 팀·시드·소스 해시: [manifest](normal-mode-balance-20261014-equipment-outliers/manifest.json). 원본 결과와 전체 요약은 같은 폴더의 battles.jsonl과 report.json에 있다.
+당시 상대 팀·시드·소스 해시 경로는 `normal-mode-balance-20261014-equipment-outliers/manifest.json`이며 원본 결과·전체 요약은 같은 폴더의 `battles.jsonl`·`report.json`이다. 현재 PC에는 이 원자료가 이전되지 않아 보고서만으로 재실행·해시 일치를 다시 확인할 수 없다.
 
 재현: NORMAL_BALANCE_OUTPUT과 NORMAL_BALANCE_DOCUMENT를 새 경로로 지정하고 NORMAL_BALANCE_SEEDS=16, NORMAL_BALANCE_NPCS=named-crasherwake,named-leon,magma-boss-maxie,aqua-boss-archie,flare-boss-lysandre,skull-boss-guzma로 설정한 뒤 `node --import tsx scripts/simulate-normal-npc-balance.ts --trainer-equipment` 실행.

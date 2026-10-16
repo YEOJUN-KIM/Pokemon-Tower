@@ -1,4 +1,4 @@
-import type {BossView} from '../web/contracts';
+import type {BossView} from '../shared/contracts';
 import {namedTrainerSamples,legacyNamedTrainerSamples,trainerView,type TrainerTactic} from './trainer-catalog';
 import {towerThemes,type TowerTheme} from './tower-themes';
 export {towerThemes,type TowerTheme} from './tower-themes';

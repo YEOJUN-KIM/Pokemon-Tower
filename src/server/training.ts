@@ -3,10 +3,9 @@ import {isTeraType,teraTypesForSpecies} from '../data/tera';
 import {pokemonSets,trainedSet} from '../data/teams';
 import {statKeys,natures,type StatBlock,type TrainingProfile} from '../data/training';
 import {moveLearnsets,startingMoves} from './move-learnsets';
-import {profileLearnset} from './move-learnsets';
 import {selectedForm} from '../data/selectable-forms';
 import {FORMAT} from '../battle/run';
-import {BattleRequestError} from './battle-session';
+import {BattleRequestError} from './request-error';
 import {genderOptions} from './pokemon-gender';
 
 export function defaultProfile(name:string,forme?:string):TrainingProfile {

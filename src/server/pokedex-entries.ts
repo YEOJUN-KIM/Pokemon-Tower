@@ -1,7 +1,7 @@
 import Showdown from 'pokemon-showdown';
 import {pokemonSets} from '../data/teams';
-import {species} from '../web/catalog';
-import type {PokedexEntry,PokemonFormPreview} from '../web/pokedex-data';
+import {species} from '../data/pokemon-catalog';
+import type {PokedexEntry,PokemonFormPreview} from '../shared/pokedex';
 import nationalDex from '../data/pokedex.json' with {type:'json'};
 import {isCollectibleSpecies} from '../data/pokedex-roster';
 import megaForms from '../data/mega-preview-forms.json' with {type:'json'};

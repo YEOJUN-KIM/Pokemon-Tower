@@ -7,8 +7,12 @@
 | 타입·CSS·문서 경계 확인 | pnpm typecheck / pnpm check:css / pnpm check:workspace |
 | 프로덕션 빌드 | pnpm build |
 | 알려진 테스트·임시 출력 정리 | pnpm clean:temp |
-| 실제 DB 수동 백업 | pnpm db:backup (TOWER_DB_PATH 명시) |
-| 개인용 통합 실행기 | 루트 포켓몬타워 실행.cmd → launcher-window.ps1 → launch-preview.mjs / preview.mjs |
+| 실제 DB 수동 백업 | node --env-file=.env.local scripts/backup-db.mjs ([저장·백업 안내](../docs/operations/BACKUPS.md)) |
+| 개인용 통합 실행기 | 루트 포켓몬타워 실행.exe → launcher-window.ps1 → launch-preview.mjs / preview.mjs |
+| 외부 터널 없이 로컬 실행 | 개인용 포켓몬타워 로컬 실행.cmd 또는 node scripts/launch-local.mjs |
+| Windows 실행 파일 다시 만들기 | powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build-windows-launcher.ps1 |
+| 실행기 화면만 렌더링 (서버 연결 없음) | powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File scripts/launcher-window.ps1 -NodePath (Get-Command node).Source -Preview |
+| 터널 주소 선택 회귀 검사 | node --test tests/preview-origin.test.mjs |
 | 배포 묶음 생성·검증 | pnpm deploy:package / pnpm deploy:verify |
 | NPC 입력·런타임 생성 | build-npc-review.ts → build-normal-npc-samples.ts → export-normal-npc-runtime.mjs |
 | NPC 리뷰 CSV 내보내기 | node scripts/export-npc-review-csv.mjs 또는 normal-npc-samples.json normal-npc 인자 |

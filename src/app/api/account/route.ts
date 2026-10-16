@@ -2,7 +2,7 @@ import {NextRequest,NextResponse} from 'next/server';
 import {randomBytes} from 'node:crypto';
 import {Accounts,authCookie,guestCookie,sessionSeconds} from '../../../server/accounts';
 import {getTowerService,playerKey} from '../../../server/tower-service';
-import {BattleRequestError} from '../../../server/battle-session';
+import {BattleRequestError} from '../../../server/request-error';
 
 export const runtime='nodejs';
 export const dynamic='force-dynamic';

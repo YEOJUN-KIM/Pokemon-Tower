@@ -1,6 +1,6 @@
 import {johtoReferences} from './johto-builds';
 import {regionalTrainerSamples} from './regional-trainers';
-import type {BossView} from '../web/contracts';
+import type {BossView} from '../shared/contracts';
 export type TrainerTactic='balanced'|'physical'|'special'|'speed'|'status'|'setup'|'bulk';
 export type TrainerSample={id:string;name:string;title:string;kind:'normal'|'elite'|'named';generation:number|null;specialty:string|null;tactic:TrainerTactic;portrait:string;role?:BossView['role'];minFloor:number;entries?:readonly string[];ace?:string;concept:string};
 

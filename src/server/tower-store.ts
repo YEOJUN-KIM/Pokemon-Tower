@@ -1,12 +1,9 @@
+import {spendCoins,grantCoins} from './player-wallet';
 import {RunEvents} from './run-events';
-import {pokemonRarity,eggRarity} from '../data/pokemon-rarity';
-import {eggGradeWeights,superRareSpeciesCategory} from '../data/egg-grades';
-import {isEggKind,rareEggCategory,machinePokemonKind,machineShiny} from '../data/egg-kinds';
-import {rareEggSpeciesCategory,eggSpeciesGrade} from './egg-pool';
 import {isTrainerEquipment,type TrainerEquipment} from '../data/trainer-equipment';
-import {permanentPrices,EGG_SHINY_ODDS,type PermanentView,type PermanentResult,type EggResult} from '../data/permanent-upgrades';
+import type {PermanentView,PermanentResult} from '../data/permanent-upgrades';
+import {PermanentShop} from './permanent-shop';
 import {isBattleRule,allowsGimmick,allowsRuleItem,type BattleRule} from '../data/run-rules';
-import {TERA_TICKET_PRICE} from '../data/tera';
 import {canEquipGimmick} from '../data/gimmicks';
 import {retainsHeldItemAfterActivation} from '../data/additional-held-items';
 import { DatabaseSync } from 'node:sqlite';
@@ -20,13 +17,14 @@ import {CURRENT_PROGRESSION,opponentTeraTickets,type TowerProgression} from '../
 import { packTeam, packPlayerTeam, pokemonSets, initialPartners } from '../data/teams';
 import {isCollectibleSpecies} from '../data/pokedex-roster';
 import { engineVersion, FORMAT, type BattleLog, type Seed } from '../battle/run';
-import type { BattleView, MachineOffer, RunView, TowerView } from '../web/contracts';
-import { BattleRequestError } from './battle-session';
-import { schema } from './schema';
+import type { BattleView, MachineOffer, RunView, TowerView } from '../shared/contracts';
+import { BattleRequestError } from './request-error';
+import {initializeTowerDatabase} from './storage/migrations';
+import {transaction} from './storage/transaction';
 import {moveLearnsets} from './move-learnsets';
 import {profileLearnset} from './move-learnsets';
 import {familyForms,selectedForm,collectionSpecies,separateForms,baseFormName} from '../data/selectable-forms';
-import {pokemonName as importedPokemonName} from '../web/catalog';
+import {pokemonName as importedPokemonName} from '../data/pokemon-catalog';
 import {generateOpponentTeam,selectTrainerSample,encounterPool} from './opponent-team';
 import {runOrganization,villainGrunt,villainEncounter,villainLeaders,type VillainEvent} from '../data/villain-organizations';
 import {opponentProfile} from './opponent-training';
@@ -38,7 +36,7 @@ import {machinePrice,machineRarity,rollMachineOffers} from '../data/machine-rari
 import {trainerCatalog,trainerView,type TrainerSample} from '../data/trainer-catalog';
 import {pokedexEntries} from './pokedex-entries';
 import Showdown from 'pokemon-showdown';
-import {upgrades,UPGRADE_FLOORS,SHOP_REROLL_LIMIT,machineMoves,isShopFloor,rerollPrice,vitamins,vitaminPrice,VITAMIN_BOOST,VITAMIN_LIMIT,type UpgradeKind} from '../data/shop';
+import {upgrades,machineMoves,isShopFloor,rerollPrice,vitaminPrice,VITAMIN_BOOST,VITAMIN_LIMIT,type UpgradeKind} from '../data/shop';
 import {collectionGender,speciesGender,genderOptions} from './pokemon-gender';
 import {npcGimmick,npcSpecies,type NpcGimmick} from '../data/npc-gimmicks';
 import {normalNpcCategory,normalNpcGimmicksEnabled} from '../data/normal-mode-stages';
@@ -60,108 +58,7 @@ export class TowerStore {
   constructor(path: string,private readonly roll=(max:number)=>randomInt(max)) {
     if (path !== ':memory:') mkdirSync(dirname(path), {recursive: true});
     this.db = new DatabaseSync(path);
-    this.db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
-    const version = this.db.prepare('PRAGMA user_version').get() as {user_version: number};
-    if (version.user_version > 33) throw new Error('Unsupported database schema');
-    // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
-    if(version.user_version<28)this.db.exec('PRAGMA foreign_keys=OFF');
-    try {this.tx(() => {
-      this.db.exec(schema);
-      if(!(this.db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(column=>column.name==='kind'))this.db.exec("ALTER TABLE run_events ADD COLUMN kind TEXT NOT NULL DEFAULT 'mystery-chest' CHECK(kind IN ('mystery-chest','breeder-gift','traveling-merchant'))");
-      const playerColumns=this.db.prepare('PRAGMA table_info(players)').all() as {name:string}[];
-      if(!playerColumns.some(column=>column.name==='growth_points')) {
-        this.db.exec('ALTER TABLE players ADD COLUMN growth_points INTEGER NOT NULL DEFAULT 0 CHECK(growth_points>=0)');
-        // Preserve the previous permanent wallet once. Existing climbs retain only their own earnings.
-        this.db.exec('UPDATE players SET growth_points=coins, coins=0');
-        this.db.exec(`UPDATE players SET coins=MAX(0,
-          COALESCE((SELECT SUM(rewards.amount) FROM rewards JOIN battles ON battles.id=rewards.battle_id JOIN runs ON runs.id=battles.run_id WHERE runs.player_id=players.id AND runs.state IN ('select','battle','recruit')),0)
-          -COALESCE((SELECT COUNT(*)*200 FROM run_upgrades JOIN runs ON runs.id=run_upgrades.run_id WHERE runs.player_id=players.id AND runs.state IN ('select','battle','recruit')),0))`);
-        this.db.exec("INSERT OR IGNORE INTO growth_rewards SELECT id,0 FROM runs WHERE state IN ('lost','cleared','abandoned')");
-      }
-      const battleColumns = this.db.prepare('PRAGMA table_info(battles)').all() as {name: string}[];
-      if(!battleColumns.some(column=>column.name==='trainer_equipment'))this.db.exec('ALTER TABLE battles ADD COLUMN trainer_equipment TEXT');
-      if (!battleColumns.some(column => column.name === 'boss')) this.db.exec('ALTER TABLE battles ADD COLUMN boss TEXT');
-      if (!battleColumns.some(column => column.name === 'trainer')) this.db.exec('ALTER TABLE battles ADD COLUMN trainer TEXT');
-      if (!battleColumns.some(column => column.name === 'upgrades')) this.db.exec("ALTER TABLE battles ADD COLUMN upgrades TEXT NOT NULL DEFAULT '[]'");
-      if(!battleColumns.some(column=>column.name==='battle_items'))this.db.exec("ALTER TABLE battles ADD COLUMN battle_items TEXT NOT NULL DEFAULT '{}'");
-      if(!battleColumns.some(column=>column.name==='tera_tickets'))this.db.exec(`ALTER TABLE battles ADD COLUMN tera_tickets TEXT NOT NULL DEFAULT '{"p1":0,"p2":0}'`);
-      if(!battleColumns.some(column=>column.name==='villain_event'))this.db.exec('ALTER TABLE battles ADD COLUMN villain_event TEXT');
-      if(!battleColumns.some(column=>column.name==='rule'))this.db.exec("ALTER TABLE battles ADD COLUMN rule TEXT NOT NULL DEFAULT 'chaos'");
-      if(!battleColumns.some(column=>column.name==='stage')){
-        const sql=(this.db.prepare("SELECT sql FROM sqlite_master WHERE type='table' AND name='battles'").get() as {sql:string}).sql;
-        const definition=sql.replace(/^CREATE TABLE(?: IF NOT EXISTS)?\s+["`]?battles["`]?/i,'CREATE TABLE battles_route_migration').replace(/UNIQUE\s*\(\s*run_id\s*,\s*floor\s*\)/i,'stage INTEGER NOT NULL DEFAULT 0 CHECK(stage IN (0,1)), UNIQUE(run_id, floor, stage)');
-        if(!definition.includes('stage INTEGER'))throw Error('Unsupported battle table migration');
-        this.db.exec(definition);
-        const names=(this.db.prepare('PRAGMA table_info(battles)').all() as {name:string}[]).map(column=>'"'+column.name.replaceAll('"','""')+'"').join(',');
-        this.db.exec(`INSERT INTO battles_route_migration(${names}) SELECT ${names} FROM battles; DROP TABLE battles; ALTER TABLE battles_route_migration RENAME TO battles;`);
-      }
-      const columns = this.db.prepare('PRAGMA table_info(runs)').all() as {name: string}[];
-      if(!columns.some(column=>column.name==='profiles'))this.db.exec("ALTER TABLE runs ADD COLUMN profiles TEXT NOT NULL DEFAULT '{}'");
-      const recruitmentColumns=this.db.prepare('PRAGMA table_info(recruitments)').all() as {name:string}[];
-      if(!recruitmentColumns.some(column=>column.name==='move_gain'))this.db.exec('ALTER TABLE recruitments ADD COLUMN move_gain TEXT');
-      if(!recruitmentColumns.some(column=>column.name==='iv_gain'))this.db.exec('ALTER TABLE recruitments ADD COLUMN iv_gain TEXT');
-      if (!columns.some(column => column.name === 'total_floors')) {
-        // Old runs keep their three-floor finish, even when resumed after this update.
-        this.db.exec('ALTER TABLE runs ADD COLUMN total_floors INTEGER NOT NULL DEFAULT 3 CHECK(total_floors BETWEEN 1 AND 30)');
-      }
-      if(version.user_version<7) {
-        // Convert the collection once; existing run snapshots and packed battles keep their original rules.
-        const saved=this.db.prepare('SELECT player_id,species,profile FROM pokemon_training').all() as {player_id:string;species:string;profile:string}[];
-        for(const row of saved) {
-          const profile=JSON.parse(row.profile) as TrainingProfile;
-          if(profile.statSystem==='points')continue;
-          profile.evs=Object.fromEntries(statKeys.map(key=>[key,Math.floor((profile.evs[key]+4)/8)])) as StatBlock;
-          profile.nature=profile.nature ?? 'Serious';profile.statSystem='points';
-          this.db.prepare('UPDATE pokemon_training SET profile=?,revision=revision+1 WHERE player_id=? AND species=?').run(JSON.stringify(profile),row.player_id,row.species);
-        }
-      }
-      if(version.user_version<8) {
-        // Preserve old players' configured moves, including unsaved defaults.
-        const owned=this.db.prepare('SELECT player_id,species FROM unlocks').all() as {player_id:string;species:string}[];
-        for(const row of owned) {
-          const saved=this.db.prepare('SELECT profile FROM pokemon_training WHERE player_id=? AND species=?').get(row.player_id,row.species) as {profile:string}|undefined;
-          const profile=saved ? JSON.parse(saved.profile) as TrainingProfile : {...defaultProfile(row.species),moves:[...pokemonSets[row.species as keyof typeof pokemonSets].moves]};
-          if(!saved)this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,1)').run(row.player_id,row.species,JSON.stringify(profile));
-          for(const move of profile.moves)this.db.prepare('INSERT OR IGNORE INTO move_unlocks VALUES (?,?,?)').run(row.player_id,row.species,move);
-        }
-      }
-      const runSQL=(this.db.prepare("SELECT sql FROM sqlite_master WHERE name='runs'").get() as {sql:string}).sql;
-      if(version.user_version<15 || !runSQL.includes('BETWEEN 1 AND 100')){
-        const definition=schema.match(/CREATE TABLE IF NOT EXISTS runs \([\s\S]*?\) STRICT;/)![0];
-        this.db.exec(definition.replace('IF NOT EXISTS runs','runs_v12'));
-        this.db.exec('INSERT INTO runs_v12(id,player_id,floor,state,created_at,total_floors,profiles) SELECT id,player_id,floor,state,created_at,total_floors,profiles FROM runs');
-        this.db.exec('DROP TABLE runs; ALTER TABLE runs_v12 RENAME TO runs;');
-        this.db.exec("CREATE UNIQUE INDEX one_active_run ON runs(player_id) WHERE state IN ('select','battle','recruit')");
-        if(this.db.prepare('PRAGMA foreign_key_check').all().length)throw Error('Tower migration failed foreign key validation');
-      }
-      const upgradeSQL=(this.db.prepare("SELECT sql FROM sqlite_master WHERE name='run_upgrades'").get() as {sql:string}).sql;
-      if(!upgradeSQL.includes("'critical'")){this.db.exec("ALTER TABLE run_upgrades RENAME TO run_upgrades_old; CREATE TABLE run_upgrades(run_id TEXT NOT NULL REFERENCES runs(id),kind TEXT NOT NULL CHECK(kind IN ('attack','speed','guard','defense','specialAttack','specialDefense','accuracy','critical')),start_floor INTEGER NOT NULL,end_floor INTEGER NOT NULL,PRIMARY KEY(run_id,kind)) STRICT; INSERT INTO run_upgrades SELECT * FROM run_upgrades_old; DROP TABLE run_upgrades_old;");}
-      const ruleSQL=(this.db.prepare("SELECT sql FROM sqlite_master WHERE name='run_rules'").get() as {sql:string}).sql;
-      if(!ruleSQL.includes("'z'")){
-        this.db.exec("CREATE TABLE run_rules_z(run_id TEXT PRIMARY KEY REFERENCES runs(id),rule TEXT NOT NULL CHECK(rule IN ('basic','mega','dynamax','tera','z','chaos'))) STRICT; INSERT INTO run_rules_z SELECT * FROM run_rules; DROP TABLE run_rules; ALTER TABLE run_rules_z RENAME TO run_rules;");
-      }
-      if(!(this.db.prepare('PRAGMA table_info(battles)').all() as {name:string}[]).some(c=>c.name==='attempt')){
-        const sql=(this.db.prepare("SELECT sql FROM sqlite_master WHERE name='battles'").get() as {sql:string}).sql;
-        const definition=sql.replace(/^CREATE TABLE(?: IF NOT EXISTS)?\s+["`]?battles["`]?/i,'CREATE TABLE battles_retry_migration').replace(/UNIQUE\s*\(\s*run_id\s*,\s*floor\s*,\s*stage\s*\)/i,'attempt INTEGER NOT NULL DEFAULT 0 CHECK(attempt>=0), UNIQUE(run_id, floor, stage, attempt)');
-        if(!definition.includes('attempt INTEGER'))throw Error('Unsupported retry migration');
-        this.db.exec(definition);
-        const names=(this.db.prepare('PRAGMA table_info(battles)').all() as {name:string}[]).map(c=>'"'+c.name+'"').join(',');
-        this.db.exec(`INSERT INTO battles_retry_migration(${names}) SELECT ${names} FROM battles; DROP TABLE battles; ALTER TABLE battles_retry_migration RENAME TO battles;`);
-        if(this.db.prepare('PRAGMA foreign_key_check').all().length)throw Error('Retry migration failed foreign key validation');
-      }
-      this.repairArchivedOwnership();
-      this.repairFormHeldItems();
-      if(version.user_version<31){
-        // Inventory and starter tickets do not prove a trainer-equipment purchase.
-        this.db.exec(`DELETE FROM run_held_items WHERE item='Dynamax Band';
-          DELETE FROM run_item_bag WHERE item IN ('Dynamax Band','Tera Orb');
-          DELETE FROM run_trainer_equipment WHERE NOT EXISTS (
-            SELECT 1 FROM shop_receipts p WHERE p.run_id=run_trainer_equipment.run_id AND p.kind='items' AND p.buyer IS NULL AND p.product=run_trainer_equipment.item
-          );
-          INSERT OR IGNORE INTO run_trainer_equipment
-            SELECT run_id,product FROM shop_receipts WHERE kind='items' AND buyer IS NULL AND product IN ('Dynamax Band','Tera Orb');`);
-      }
-    });} finally {this.db.exec('PRAGMA foreign_keys=ON');}
+    initializeTowerDatabase(this.db,()=>this.repairArchivedOwnership(),()=>this.repairFormHeldItems());
   }
   private repairFormHeldItems(){
     const rows=this.db.prepare('SELECT run_id,species,item FROM run_held_items').all() as {run_id:string;species:string;item:string}[];
@@ -189,78 +86,17 @@ export class TowerStore {
     }
   }
   private tx<T>(fn: () => T): T {
-    this.db.exec('BEGIN IMMEDIATE');
-    try { const result = fn(); this.db.exec('COMMIT'); return result; }
-    catch (error) { this.db.exec('ROLLBACK'); throw error; }
+    return transaction(this.db,fn);
   }
   private get events(){return new RunEvents(this.db,this.roll);}
   chooseEvent(owner:string,runId:string,eventId:string,choice:unknown){this.tx(()=>this.events.choose(owner,runId,eventId,choice));}
   continueEvent(owner:string,runId:string,eventId:string){this.tx(()=>this.events.continue(owner,runId,eventId));}
-  permanentView(owner:string):PermanentView {
-    const row=this.db.prepare('SELECT reroll_level,shiny_tickets,egg_tickets FROM permanent_upgrades WHERE player_id=?').get(owner) as {reroll_level:number;shiny_tickets:number;egg_tickets:number}|undefined;
-    return {retryLimit:(this.db.prepare('SELECT level FROM permanent_retry_upgrades WHERE player_id=?').get(owner) as {level:number}|undefined)?.level??0,rerollLevel:row?.reroll_level??0,rerollLimit:1+(row?.reroll_level??0),shinyTickets:row?.shiny_tickets??0,eggTickets:row?.egg_tickets??0};
+  private get permanentShop(){
+    return new PermanentShop(this.db,this.roll,(owner,species)=>this.savedTraining(owner,species),(owner,species)=>this.unlockedMoves(owner,species));
   }
+  permanentView(owner:string):PermanentView {return this.permanentShop.view(owner);}
   permanentAction(owner:string,requestId:unknown,action:unknown,product:unknown,count:unknown,species:unknown,eggKind:unknown='normal'):PermanentResult {
-    if(typeof requestId!=='string'||!/^[a-zA-Z0-9-]{16,80}$/.test(requestId))throw new BattleRequestError('구매 요청 번호가 올바르지 않습니다.',400);
-    if(!['buy','hatch','shiny'].includes(String(action)) || !['reroll','retry','shiny','egg'].includes(String(product)) || (count!==1&&count!==10) || (action!=='hatch' && product!=='egg' && count!==1))throw new BattleRequestError('상품 요청이 올바르지 않습니다.',400);
-    if((eggKind!=='machine'&&!isEggKind(eggKind))||(action!=='hatch'&&eggKind!=='normal'))throw new BattleRequestError('알 종류가 올바르지 않습니다.',400);
-    // Keep ordinary legacy receipt payloads identical so old retries remain idempotent.
-    const payload=JSON.stringify({action,product,count,species:species??null,...(eggKind!=='normal'?{eggKind}:{})});
-    return this.tx(()=>{
-      const old=this.db.prepare('SELECT payload,result FROM permanent_receipts WHERE player_id=? AND request_id=?').get(owner,requestId) as {payload:string;result:string}|undefined;
-      if(old){
-        const previous=JSON.parse(old.payload);
-        const legacyHatch=eggKind==='machine'&&action==='hatch'&&previous.eggKind!=='machine'&&previous.action===action&&previous.product===product&&previous.count===count&&previous.species===(species??null);
-        if(old.payload!==payload&&!legacyHatch)throw new BattleRequestError('같은 요청 번호에 다른 구매를 보낼 수 없습니다.',409);
-        return JSON.parse(old.result) as PermanentResult;
-      }
-      this.db.prepare('INSERT OR IGNORE INTO permanent_upgrades(player_id) VALUES (?)').run(owner);
-      const before=this.permanentView(owner);let result:PermanentResult;
-      if(action==='buy'){
-        if(product==='retry'&&before.retryLimit>=3)throw new BattleRequestError('다시하기는 최대 3회까지 확장할 수 있습니다.',409);
-        if(product==='reroll'&&before.rerollLevel>=2)throw new BattleRequestError('리롤은 최대 3회까지 확장할 수 있습니다.',409);
-        const price=product==='retry'?permanentPrices.retry[before.retryLimit]:product==='reroll'?permanentPrices.reroll[before.rerollLevel]:product==='shiny'?permanentPrices.shiny:permanentPrices.egg;
-        const cost=price*count;
-        if(!this.db.prepare('UPDATE players SET growth_points=growth_points-? WHERE id=? AND growth_points>=?').run(cost,owner,cost).changes)throw new BattleRequestError('성장 포인트가 부족합니다.',400);
-        const column=product==='reroll'?'reroll_level':product==='shiny'?'shiny_tickets':'egg_tickets';
-        if(product==='retry')this.db.prepare('INSERT INTO permanent_retry_upgrades VALUES (?,1) ON CONFLICT(player_id) DO UPDATE SET level=level+1').run(owner);
-        else this.db.prepare(`UPDATE permanent_upgrades SET ${column}=${column}+? WHERE player_id=?`).run(count,owner);
-        result={message:product==='retry'?`다음 도전부터 다시하기를 ${before.retryLimit+1}회 사용할 수 있어요!`:product==='reroll'?`무료 리롤이 종류별 ${before.rerollLimit+1}회로 확장됐어요!`:`${product==='shiny'?'이로치 교환권':'알 뽑기권'} ${count}장을 받았어요!`};
-      }else if(action==='shiny'&&product==='shiny'){
-        if(typeof species!=='string'||!this.db.prepare('SELECT 1 FROM unlocks WHERE player_id=? AND species=?').get(owner,species))throw new BattleRequestError('보유한 포켓몬을 선택하세요.',400);
-        const saved=this.savedTraining(owner,species);
-        if(saved.profile.shiny)throw new BattleRequestError('이미 이로치 외형을 해금한 포켓몬입니다.',409);
-        if(!this.db.prepare('UPDATE permanent_upgrades SET shiny_tickets=shiny_tickets-1 WHERE player_id=? AND shiny_tickets>0').run(owner).changes)throw new BattleRequestError('이로치 교환권이 없습니다.',400);
-        this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,species,JSON.stringify({...saved.profile,shiny:true}),saved.revision+1);
-        result={message:'이로치 외형을 해금했어요! 다음 도전부터 적용됩니다.'};
-      }else if(action==='hatch'&&product==='egg'){
-        const tickets=Math.min(count,before.eggTickets),cost=(count-tickets)*permanentPrices.egg;
-        if(!this.db.prepare('UPDATE players SET growth_points=growth_points-? WHERE id=? AND growth_points>=?').run(cost,owner,cost).changes)throw new BattleRequestError('티켓을 사용하고 남은 뽑기에 필요한 성장 포인트가 부족합니다.',400);
-        this.db.prepare('UPDATE permanent_upgrades SET egg_tickets=egg_tickets-? WHERE player_id=?').run(tickets,owner);
-        const pool=pokedexEntries().filter(entry=>entry.battleReady!==false).map(entry=>entry.species),eggs:EggResult[]=[];
-        for(let i=0;i<count;i++){
-          const kind=eggKind==='machine'?machinePokemonKind(this.roll(10000)):eggKind;
-          const normalMachine=eggKind==='machine'&&kind==='normal';
-          const rarity=kind==='superRare'?superRareSpeciesCategory(this.roll(eggGradeWeights.superRare)):kind==='rare'?rareEggCategory(this.roll(eggKind==='machine'?8500:10000)):normalMachine?'normal':eggRarity(this.roll(10000));
-          const candidates=pool.filter(name=>kind==='rare'||kind==='superRare'?rareEggSpeciesCategory(name)===rarity:normalMachine?eggSpeciesGrade(name)==='normal':pokemonRarity(name)===rarity);
-          if(!candidates.length)throw new BattleRequestError('뽑기 대상 데이터를 확인해야 합니다.',500);
-          const name=candidates[this.roll(candidates.length)],saved=this.savedTraining(owner,name),isNew=!this.db.prepare('SELECT 1 FROM unlocks WHERE player_id=? AND species=?').get(owner,name);
-          const ivs=Object.fromEntries(statKeys.map(stat=>[stat,this.roll(32)])) as StatBlock;
-          const improved=Object.fromEntries(statKeys.map(stat=>[stat,Math.max(saved.profile.ivs[stat],ivs[stat])])) as StatBlock;
-          const ivGain:IVGain={species:name,changes:statKeys.filter(stat=>improved[stat]>saved.profile.ivs[stat]).map(stat=>({stat,from:saved.profile.ivs[stat],to:improved[stat]}))};
-          const legal=trainingOptions(name).learnableMoves,known=this.unlockedMoves(owner,name),move=legal.length?legal[this.roll(legal.length)]:null,newMoves=move&&!known.includes(move)?[move]:[];
-          const shiny=eggKind==='machine'?machineShiny(this.roll(10000)):kind==='shiny'||this.roll(EGG_SHINY_ODDS)===0,newShiny=shiny&&!saved.profile.shiny;
-          this.db.prepare('INSERT OR IGNORE INTO unlocks VALUES (?,?)').run(owner,name);
-          if(isNew||ivGain.changes.length||newShiny)this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,name,JSON.stringify({...saved.profile,ivs:improved,shiny:!!saved.profile.shiny||shiny}),saved.revision+1);
-          for(const move of newMoves)this.db.prepare('INSERT OR IGNORE INTO move_unlocks VALUES (?,?,?)').run(owner,name,move);
-          const rareCategory=rareEggSpeciesCategory(name);
-          eggs.push({eggKind:shiny?'shiny':eggSpeciesGrade(name),...(rareCategory?{rareCategory}:{}),species:name,ivs,isNew,ivGain,newMoves,shiny,newShiny});
-        }
-        result={message:`${count}개의 알이 부화했어요!`,eggs,...(eggKind!=='machine'?{eggKind}:{})};
-      }else throw new BattleRequestError('교환 요청이 올바르지 않습니다.',400);
-      this.db.prepare('INSERT INTO permanent_receipts VALUES (?,?,?,?)').run(owner,requestId,payload,JSON.stringify(result));
-      return result;
-    });
+    return this.permanentShop.action(owner,requestId,action,product,count,species,eggKind);
   }
   ensurePlayer(owner: string) {
     this.tx(() => {
@@ -538,7 +374,7 @@ export class TowerStore {
   rerollShop(owner:string,id:string,floor:number,kind:unknown,revision:unknown){this.tx(()=>{
    const run=this.ownedRun(owner,id);if(run.state!=='select'||run.floor!==floor||!isShopFloor(floor,run.total_floors))throw new BattleRequestError('상점에서만 리롤할 수 있습니다.',409);
    if(kind!=='items'&&kind!=='machines')throw new BattleRequestError('도구 또는 기술머신 상점을 선택하세요.',400);this.checkShopRevision(run,kind,revision);
-   const count=this.shopRevision(run,kind);if(count>=this.permanentView(owner).rerollLimit)throw new BattleRequestError('이번 상점의 리롤을 모두 사용했습니다.',409);const price=rerollPrice(count);if(!this.db.prepare('UPDATE players SET coins=coins-? WHERE id=? AND coins>=?').run(price,owner,price).changes)throw new BattleRequestError('보유 자금이 부족합니다.',400);
+   const count=this.shopRevision(run,kind);if(count>=this.permanentView(owner).rerollLimit)throw new BattleRequestError('이번 상점의 리롤을 모두 사용했습니다.',409);const price=rerollPrice(count);if(!spendCoins(this.db,owner,price))throw new BattleRequestError('보유 자금이 부족합니다.',400);
    this.db.prepare('INSERT INTO shop_rerolls VALUES (?,?,?,?) ON CONFLICT(run_id,floor,kind) DO UPDATE SET count=excluded.count').run(id,floor,kind,count+1);
    if(kind==='items')this.itemOffers(run,true);else this.machineOffers(owner,run,true);
   });}
@@ -555,7 +391,7 @@ export class TowerStore {
    const offer=this.vitaminOffers(run).find(x=>x.stat===stat);if(!offer||typeof name!=='string'||!this.roster(id).includes(name))throw new BattleRequestError('판매 중인 영양제와 파티 포켓몬을 선택하세요.',400);
    if(offer.purchased)throw new BattleRequestError('이미 구매한 영양제입니다.',409);
    if((this.vitaminCounts(id)[name]??0)>=VITAMIN_LIMIT)throw new BattleRequestError('한 포켓몬은 이번 도전에서 종류와 관계없이 영양제를 총 3개까지만 사용할 수 있습니다.',409);
-   if(!this.db.prepare('UPDATE players SET coins=coins-? WHERE id=? AND coins>=?').run(offer.price,owner,offer.price).changes)throw new BattleRequestError('보유 자금이 부족합니다.',400);
+   if(!spendCoins(this.db,owner,offer.price))throw new BattleRequestError('보유 자금이 부족합니다.',400);
    this.db.prepare('INSERT INTO vitamin_purchases VALUES (?,?,?,?,?)').run(id,floor,stat as string,name,offer.price);
    this.db.prepare('INSERT INTO run_stat_boosts VALUES (?,?,?,?) ON CONFLICT(run_id,species,stat) DO UPDATE SET points=points+excluded.points').run(id,name,stat as string,VITAMIN_BOOST);
   });}
@@ -587,7 +423,7 @@ export class TowerStore {
       if(!this.roster(runId).some(name=>this.canHoldItem(runId,name,item)))throw new BattleRequestError('파티에 맞는 포켓몬이 없는 도구입니다.',400);
       if(this.itemPurchases(run).includes(item))throw new BattleRequestError('이번 상점에서 이미 구매한 도구입니다.',409);
       const price=heldItems[item].price;
-      if(!this.db.prepare('UPDATE players SET coins=coins-? WHERE id=? AND coins>=?').run(price,owner,price).changes)throw new BattleRequestError('보유 자금이 부족합니다.',400);
+      if(!spendCoins(this.db,owner,price))throw new BattleRequestError('보유 자금이 부족합니다.',400);
       this.db.prepare('INSERT OR IGNORE INTO item_purchases VALUES (?,?,?)').run(runId,run.floor,item);
       this.db.prepare('INSERT INTO shop_receipts VALUES (?,?,?,?,?,?)').run(runId,run.floor,'items',this.shopRevision(run,'items'),item,species);
       if(isTrainerEquipment(item))this.db.prepare('INSERT INTO run_trainer_equipment VALUES (?,?)').run(runId,item);
@@ -648,7 +484,7 @@ export class TowerStore {
         const edited=structuredClone(current);edited.moves[slot as number]=offer.move;
         snapshots[name]=validateProfile(name,edited);
       }
-      if(!this.db.prepare('UPDATE players SET coins=coins-? WHERE id=? AND coins>=?').run(offer.price,owner,offer.price).changes)throw new BattleRequestError('보유 자금이 부족합니다.',400);
+      if(!spendCoins(this.db,owner,offer.price))throw new BattleRequestError('보유 자금이 부족합니다.',400);
       this.db.prepare('INSERT OR IGNORE INTO machine_purchases VALUES (?,?,?,?,?,?)').run(run.id,run.floor,offer.move,name,slot as number|null,offer.price);
       this.db.prepare('INSERT INTO shop_receipts VALUES (?,?,?,?,?,?)').run(run.id,run.floor,'machines',this.shopRevision(run,'machines'),offer.move,name);
       this.db.prepare('INSERT INTO move_unlocks VALUES (?,?,?)').run(owner,name,offer.move);
@@ -663,8 +499,8 @@ export class TowerStore {
       if(typeof kind!=='string' || !Object.hasOwn(upgrades,kind)) throw new BattleRequestError('구매할 강화를 선택하세요.',400);
       if(!this.consumableOffers(run).includes(kind as UpgradeKind))throw new BattleRequestError('현재 상점에서 판매 중인 소모품을 선택하세요.',400);
       const item=upgrades[kind as UpgradeKind];
-      const paid=this.db.prepare('UPDATE players SET coins=coins-? WHERE id=? AND coins>=?').run(item.price,owner,item.price);
-      if(!paid.changes) throw new BattleRequestError('보유 자금이 부족합니다.',400);
+      const paid=spendCoins(this.db,owner,item.price);
+      if(!paid) throw new BattleRequestError('보유 자금이 부족합니다.',400);
       this.db.prepare('INSERT INTO run_battle_items VALUES (?,?,1) ON CONFLICT(run_id,kind) DO UPDATE SET quantity=quantity+1').run(runId,kind);
     });
   }
@@ -719,7 +555,7 @@ export class TowerStore {
         const event=battle.villain_event ? JSON.parse(battle.villain_event) as VillainEvent : null;
         if(event?.rank==='boss')this.db.prepare('UPDATE run_villain_campaigns SET defeated_battle_id=? WHERE run_id=? AND defeated_battle_id IS NULL').run(id,run.id);
         this.db.prepare('INSERT INTO rewards VALUES (?, ?, ?)').run(id, run.player_id, battle.reward);
-        this.db.prepare('UPDATE players SET coins = coins + ? WHERE id = ?').run(battle.reward, run.player_id);
+        grantCoins(this.db,run.player_id,battle.reward);
         this.db.prepare("UPDATE runs SET state = 'recruit' WHERE id = ?").run(run.id);
       } else {
         this.db.prepare("UPDATE runs SET state = 'lost' WHERE id = ?").run(run.id);

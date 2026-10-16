@@ -1,10 +1,11 @@
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
-import { BattleRequestError, BattleSession } from './battle-session';
+import { BattleSession } from './battle-session';
+import { BattleRequestError } from './request-error';
 import { AI_VERSION, TowerStore, type BattleRow } from './tower-store';
 import {supportedFormats} from '../data/battle-rules';
 import { engineVersion, type Seed } from '../battle/run';
-import type { BattleResponse, BattleView } from '../web/contracts';
+import type { BattleResponse, BattleView } from '../shared/contracts';
 
 export class TowerService {
   private sessions = new Map<string, {session: BattleSession; accessed: number}>();
@@ -22,7 +23,7 @@ export class TowerService {
       }
     }
     if (this.sessions.size >= 128) throw new BattleRequestError('동시 배틀 한도에 도달했습니다. 잠시 후 다시 시도해 주세요.', 503);
-    const savedNpc=JSON.parse(row.boss ?? row.trainer ?? 'null') as import('../web/contracts').BossView|null;
+    const savedNpc=JSON.parse(row.boss ?? row.trainer ?? 'null') as import('../shared/contracts').BossView|null;
     const session = new BattleSession(async (log, id, view) => {
       this.store.complete(id, log, view);
     }, JSON.parse(row.seed) as Seed, {

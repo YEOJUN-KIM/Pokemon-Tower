@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {isQuickTunnelOrigin} from './lib/preview-origin.mjs';
 
 const env=await readFile('.data/preview.env','utf8');
 const origin=env.match(/^TOWER_ORIGIN=(.*)$/m)?.[1].trim();
-assert.ok(/^https:\/\/[a-z0-9-]+\.trycloudflare\.com$/.test(origin),'Expected a preview tunnel address');
+assert.ok(isQuickTunnelOrigin(origin),'Expected a game tunnel address, not a Cloudflare service endpoint');
 const request=(path,options={})=>fetch(`${origin}${path}`,{...options,signal:AbortSignal.timeout(20000)});
 async function json(response) {
   assert.equal(response.status,200,await response.clone().text());

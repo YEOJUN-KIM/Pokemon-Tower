@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 import { NextRequest, NextResponse } from 'next/server';
-import { BattleRequestError } from '../../../server/battle-session';
+import { BattleRequestError } from '../../../server/request-error';
 import { getTowerService, playerKey } from '../../../server/tower-service';
 import {Accounts,authCookie} from '../../../server/accounts';
 

@@ -5,6 +5,7 @@ import {dirname,resolve,join,delimiter} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {once} from 'node:events';
 import {homedir} from 'node:os';
+import {isQuickTunnelOrigin, describeQuickTunnelFailure} from './lib/preview-origin.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 process.chdir(root);
@@ -30,7 +31,7 @@ async function main(){
  }
  console.log('\n포켓몬 타워 · 개인 플레이 실행기\n');
  if(!await engineReady()){
-  if(action!=='start'){console.log('Docker가 꺼져 있습니다. 게임 서버도 실행 중이 아닙니다.');return;}
+  if(action!=='start'){console.log('SERVER_STATE=stopped');console.log('Docker가 꺼져 있습니다. 게임 서버도 실행 중이 아닙니다.');return;}
   const desktop=await findFile([
    resolve(dirname(docker),'..','..','Docker Desktop.exe'),
    process.env.LOCALAPPDATA&&join(process.env.LOCALAPPDATA,'Programs','DockerDesktop','Docker Desktop.exe'),
@@ -47,18 +48,24 @@ async function main(){
  }
  const compose=['compose','-p','tower-preview','--env-file','.data/preview.env','-f','compose.yaml','-f','compose.preview.yaml'];
  if(action==='status'){
-  let services='';try{services=await read(docker,[...compose,'ps','--status','running','--services']);}catch{}
-  if(!services.split(/\r?\n/).includes('game')||!services.split(/\r?\n/).includes('tunnel')){console.log('게임 또는 터널이 꺼져 있습니다. 「포켓몬타워 실행.cmd」로 켜 주세요.');return;}
+  const services=await read(docker,[...compose,'ps','--status','running','--services']);
+  console.log(`SERVER_STATE=${services.split(/\r?\n/).includes('game')?'running':'stopped'}`);
+  if(!services.split(/\r?\n/).includes('game')){console.log('게임 서버가 꺼져 있습니다. 「서버 켜기」로 켜 주세요.');return;}
+  if(!services.split(/\r?\n/).includes('tunnel')){
+   const logs=await read(docker,[...compose,'logs','--tail=100','tunnel']);
+   throw Error(`${describeQuickTunnelFailure(logs)}\n\n[Cloudflare tunnel logs]\n${logs}`);
+  }
  }else{
   console.log(action==='start'?'2/3 게임 서버·저장 DB·임시 터널을 준비합니다. 최초 실행이나 업데이트에는 몇 분 걸릴 수 있어요.':'게임 서버와 터널을 종료합니다. 저장 데이터는 유지됩니다.');
   const child=spawn(process.execPath,[join(root,'scripts','preview.mjs'),action,...(process.argv.includes('--no-build')?['--no-build']:[])],{cwd:root,env,stdio:'inherit',windowsHide:true});
   const progress=setInterval(()=>console.log('준비 중입니다… 이 창을 그대로 두세요.'),15000);
   try{const [code]=await once(child,'exit');if(code!==0)throw Error('서버 실행 단계가 실패했습니다. 위 오류 내용을 확인해 주세요.');}finally{clearInterval(progress);}
-  if(action==='stop'){console.log('\n종료했습니다. 다음 실행에도 기존 저장을 이어 씁니다.');return;}
+  if(action==='stop'){console.log('SERVER_STATE=stopped');console.log('\n종료했습니다. 다음 실행에도 기존 저장을 이어 씁니다.');return;}
+  console.log('SERVER_STATE=running');
  }
  const settings=await readFile('.data/preview.env','utf8'),origin=settings.match(/^TOWER_ORIGIN=(https:\/\/[a-z0-9-]+\.trycloudflare\.com)\s*$/m)?.[1];
  const port=settings.match(/^TOWER_PORT=(\d+)\s*$/m)?.[1]??'3004';
- if(!origin)throw Error('게임 주소를 찾지 못했습니다. 실행 파일을 다시 실행해 주세요.');
+ if(!isQuickTunnelOrigin(origin))throw Error('유효한 게임 주소가 없습니다. 실행기에서 「서버 켜기」 또는 「업데이트」를 눌러 터널 주소를 다시 발급받아 주세요.');
  if(action==='start'){
   const deadline=Date.now()+60000;let ready=false;
   while(Date.now()<deadline){try{if((await fetch(`http://127.0.0.1:${port}/api/health`,{signal:AbortSignal.timeout(2000)})).ok){ready=true;break;}}catch{}await sleep(1000);}

@@ -1,6 +1,7 @@
 import {spawn} from 'node:child_process';
 import {once} from 'node:events';
 import {mkdir, readFile, writeFile} from 'node:fs/promises';
+import {findQuickTunnelOrigin, describeQuickTunnelFailure} from './lib/preview-origin.mjs';
 
 const args=['compose','-p','tower-preview','--env-file','.data/preview.env','-f','compose.yaml','-f','compose.preview.yaml'];
 async function compose(...command) {
@@ -36,18 +37,22 @@ if(action==='stop') {
   console.log(await compose('run','--rm','--no-deps','--entrypoint','node','game','-e',
     `const {existsSync}=require('node:fs');const {spawnSync}=require('node:child_process');if(existsSync('/data/tower.sqlite'))process.exit(spawnSync(process.execPath,['scripts/backup-db.mjs',${JSON.stringify(backup)}],{stdio:'inherit'}).status??1);else console.log('New save volume: no existing database to back up.');`));
   await compose('up','-d','--no-build');
+  console.log('SERVER_STATE=running');
   const tunnelId=(await compose('ps','-q','tunnel')).trim();
   if(!tunnelId)throw new Error('Tunnel container did not start.');
   const startedAt=(await docker('inspect','--format','{{.State.StartedAt}}',tunnelId)).trim();
   const deadline=Date.now()+45000;
   let origin;
+  let lastTunnelLogs='';
   while(Date.now()<deadline) {
-    const logs=await compose('logs','--since',startedAt,'--tail=100','tunnel');
-    origin=logs.match(/https:\/\/[a-z0-9-]+\.trycloudflare\.com/g)?.at(-1);
+    lastTunnelLogs=await compose('logs','--since',startedAt,'--tail=100','tunnel');
+    const state=(await docker('inspect','--format','{{.State.Status}}',tunnelId)).trim();
+    if(state==='exited'||state==='dead')break;
+    origin=findQuickTunnelOrigin(lastTunnelLogs);
     if(origin)break;
     await new Promise(resolve=>setTimeout(resolve,1000));
   }
-  if(!origin)throw new Error('Tunnel address not available. Check Docker tunnel logs, then retry.');
+  if(!origin)throw new Error(`${describeQuickTunnelFailure(lastTunnelLogs)}\n\n[Cloudflare tunnel logs]\n${lastTunnelLogs}`);
   const settings=await readFile('.data/preview.env','utf8');
   await writeFile('.data/preview.env',settings.replace(/^TOWER_ORIGIN=.*$/m,`TOWER_ORIGIN=${origin}`));
   // Keep the tunnel running so its hostname does not change while configuring the game.

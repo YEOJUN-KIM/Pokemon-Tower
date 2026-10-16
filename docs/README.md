@@ -6,6 +6,8 @@
 |---|---|
 | 지금 구현된 기능 | [현재 상태](STATUS.md) |
 | 다음에 할 일 | [개발 계획](current/ROADMAP.md) |
+| 다른 PC에서 작업 이어받기 | [작업 인계](SESSION_HANDOFF.md) · [컴퓨터 이전](operations/COMPUTER_MOVE.md) |
+| 개인 저장·백업 확인 | [저장과 백업](operations/BACKUPS.md) |
 | 조작 방법·게임 규칙 | [게임 안내](gameplay/README.md) |
 | 설치·실행·계정·배포 | [실행과 운영](operations/README.md) |
 | 코드·CSS·폴더를 수정하는 방법 | [개발 문서](engineering/README.md) |

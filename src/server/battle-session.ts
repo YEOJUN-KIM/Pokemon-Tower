@@ -1,4 +1,4 @@
-import {applyPublicTypes} from '../web/battle-types';
+import {applyPublicTypes} from '../battle/public-types';
 import {packedNpcRule} from '../data/npc-gimmicks';
 import {ZMovePolicy} from '../battle/z-move-policy';
 import {moveInfo} from '../data/move-info';
@@ -12,24 +12,19 @@ import { setImmediate as settle } from 'node:timers/promises';
 import { DamagePolicy, type Observation } from '../battle/policy';
 import {TowerPolicy} from '../battle/tower-policy';
 import { runBattle, type BattleLog, type Seed } from '../battle/run';
-import type { BattleView,PokemonView } from '../web/contracts';
+import type { BattleView,PokemonView } from '../shared/contracts';
 import type {UpgradeKind} from '../data/shop';
 import Showdown from 'pokemon-showdown';
 import {playerTeam} from '../data/teams';
 import {dynamaxDisplaySpecies} from '../data/selectable-forms';
 import {genderFromDetails} from '../data/gender';
-import {advanceField,emptyField} from '../web/battle-field';
+import {advanceField,emptyField} from '../battle/public-field';
 
 const zStatNames:Record<string,string>={atk:'공격',def:'방어',spa:'특수공격',spd:'특수방어',spe:'스피드',accuracy:'명중률',evasion:'회피율'};
 const zStatusEffects:Record<string,string>={heal:'자신의 HP를 전부 회복',healreplacement:'다음에 등장하는 포켓몬의 HP를 전부 회복',clearnegativeboost:'낮아진 능력치 랭크를 복구',redirect:'상대 공격을 자신에게 유도',crit2:'급소 확률 상승',curse:'고스트 타입은 HP 전부 회복, 그 외 타입은 공격 1단계 상승'};
 
-const requestErrorBrand=Symbol.for('pokemon-tower.request-error');
-export class BattleRequestError extends Error {
-  readonly [requestErrorBrand]=true;
-  // Page and API bundles can share a service singleton without sharing class identity.
-  static [Symbol.hasInstance](value:unknown){return value instanceof Error && (value as Error & {[requestErrorBrand]?:boolean})[requestErrorBrand]===true;}
-  constructor(message: string, public status: number) { super(message); }
-}
+import {BattleRequestError} from './request-error';
+export {BattleRequestError} from './request-error';
 
 export class BattleSession {
   readonly id: string;

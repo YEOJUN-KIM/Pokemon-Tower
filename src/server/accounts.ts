@@ -1,6 +1,6 @@
 import {createHash,randomBytes,randomUUID,scrypt,timingSafeEqual} from 'node:crypto';
 import type {DatabaseSync} from 'node:sqlite';
-import {BattleRequestError} from './battle-session';
+import {BattleRequestError} from './request-error';
 
 export const authCookie='tower_auth';
 export const guestCookie='tower_session';

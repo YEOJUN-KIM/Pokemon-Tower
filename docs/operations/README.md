@@ -2,6 +2,7 @@
 
 - [더블클릭 실행·설치·테스트](SETUP.md)
 - [계정과 저장 가져오기](ACCOUNTS.md)
+- [저장 위치·백업 검사·수동 백업](BACKUPS.md)
 - [배포와 복구](DEPLOYMENT.md)
 - [컴퓨터 이전](COMPUTER_MOVE.md)
 

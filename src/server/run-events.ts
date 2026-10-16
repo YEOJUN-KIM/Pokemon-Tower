@@ -1,7 +1,9 @@
+import {selectRunEvent,rollEventReward} from '../game/run-events';
+import {spendCoins,applyReward} from './player-wallet';
 import {randomUUID} from 'node:crypto';
 import type {DatabaseSync} from 'node:sqlite';
-import {mysteryChest,eventKinds,eventDefinitions,merchantTicketPrice,type RunEventView,type EventReward,type RunEventKind} from '../data/run-events';
-import {BattleRequestError} from './battle-session';
+import {eventDefinitions,type RunEventView,type EventReward,type RunEventKind} from '../data/run-events';
+import {BattleRequestError} from './request-error';
 
 type EventRow={id:string;kind:RunEventKind;run_id:string;after_floor:number;status:'choice'|'reward'|'complete';reward_kind:EventReward['kind']|null;amount:number};
 
@@ -12,9 +14,8 @@ export class RunEvents {
  encounter(runId:string,afterFloor:number){
   if(afterFloor%5===0 || !this.db.prepare('SELECT 1 FROM run_event_rules WHERE run_id=?').get(runId))return;
   const previous=this.db.prepare('SELECT MAX(after_floor) AS floor FROM run_events WHERE run_id=?').get(runId) as {floor:number|null};
-  if(previous.floor!==null && afterFloor-previous.floor<=mysteryChest.cooldownFloors)return;
-  if(this.roll(100)>=mysteryChest.encounterPercent)return;
-  let draw=this.roll(100);const kind=eventKinds.find(kind=>{draw-=eventDefinitions[kind].weight;return draw<0;})!;
+  const kind=selectRunEvent(afterFloor,previous.floor,this.roll);
+  if(!kind)return;
   this.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status) VALUES (?,?,?,?,'choice')").run(randomUUID(),runId,afterFloor,kind);
  }
  view(runId:string):RunEventView|null{
@@ -38,13 +39,10 @@ export class RunEvents {
    throw new BattleRequestError('이미 다른 선택으로 처리한 이벤트입니다.',409);
   }
   if(choice==='skip'){this.db.prepare("UPDATE run_events SET status='complete' WHERE id=?").run(eventId);return;}
-  if(row.kind==='traveling-merchant'){
-   const paid=this.db.prepare('UPDATE players SET coins=coins-? WHERE id=? AND coins>=?').run(merchantTicketPrice,owner,merchantTicketPrice);
-   if(!paid.changes)throw new BattleRequestError(`${merchantTicketPrice}코인이 필요합니다.`,409);
-  }
-  const reward:EventReward=row.kind!=='mystery-chest'?{kind:'egg-ticket',amount:1}:this.roll(100)<mysteryChest.coinsPercent?{kind:'coins',amount:mysteryChest.coins}:{kind:'egg-ticket',amount:mysteryChest.eggTickets};
-  if(reward.kind==='coins')this.db.prepare('UPDATE players SET coins=coins+? WHERE id=?').run(reward.amount,owner);
-  else this.db.prepare('INSERT INTO permanent_upgrades(player_id,egg_tickets) VALUES (?,?) ON CONFLICT(player_id) DO UPDATE SET egg_tickets=egg_tickets+excluded.egg_tickets').run(owner,reward.amount);
+  const cost=eventDefinitions[row.kind].cost;
+  if(cost && !spendCoins(this.db,owner,cost))throw new BattleRequestError(`${cost}코인이 필요합니다.`,409);
+  const reward=rollEventReward(row.kind,this.roll);
+  applyReward(this.db,owner,reward);
   this.db.prepare("UPDATE run_events SET status='reward',reward_kind=?,amount=? WHERE id=?").run(reward.kind,reward.amount,eventId);
  }
  continue(owner:string,runId:string,eventId:string){

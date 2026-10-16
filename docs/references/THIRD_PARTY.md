@@ -45,6 +45,8 @@ Next.js·React·React DOM(MIT), Playwright(Apache-2.0)를 추가했다.
 화면은 직접 구현했으며 Showdown 클라이언트 코드는 가져오지 않았다.
 현재 레트로 글꼴은 [Neo둥근모 공식 웹폰트](https://github.com/neodgm/neodgm-webfont)이며 파일과 SIL OFL 1.1 고지를 `public/fonts/`에 포함한다. [로컬 라이선스](../../public/fonts/NEODGM-LICENSE.txt)를 배포 때 유지한다. 초기 Noto Sans KR 외부 CSS 요청 방식은 현재 화면의 글꼴 기준이 아니다.
 
+Windows 실행기의 안내에는 [Neo둥근모 공식 v1.601](https://github.com/neodgm/neodgm/releases/tag/v1.601)의 `neodgm.ttf`를 앱 내부에서 읽어 사용한다. 시스템에 글꼴을 설치하지 않는다. SHA-256: `77305267996073aae07bad9313dad2e306a4128e55bfafbed4c41558fee57b4d`. 같은 OFL 고지를 함께 보관한다.
+
 ## 데이터·이미지
 
 - PokéAPI: https://pokeapi.co/docs/v2

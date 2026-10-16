@@ -13,6 +13,11 @@ playwright-report/
 .env*
 !.env.example
 
+# Personal Windows entry points stay on this PC.
+/포켓몬타워 실행.exe
+/포켓몬타워 실행.cmd
+/포켓몬타워 로컬 실행.cmd
+
 # Local conversation attachments and large reproducible experiment logs.
 .codex-remote-attachments/
 # Experiment outputs stay local; tracked history is preserved.
@@ -28,6 +33,7 @@ artifacts/**
 !artifacts/qa/previews/egg-results/legendary-effects.gif
 !artifacts/qa/previews/events/chest-event.gif
 !artifacts/qa/screenshots/flamethrower-prototype/frame-09.png
+!artifacts/qa/screenshots/launcher/pocket-launcher.png
 # Raw logs and transient QA output stay local.
 artifacts/temporary/
 artifacts/**/*.jsonl

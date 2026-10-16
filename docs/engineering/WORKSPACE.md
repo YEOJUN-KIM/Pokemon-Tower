@@ -13,6 +13,8 @@
 | `artifacts/qa/` | 문서나 재검증에서 실제 사용하는 화면·자산 검사 자료 |
 | `artifacts/temporary/` | 일회성 검증 결과. 해결 후 삭제 |
 | `.data/` | 실제 로컬 저장·운영 설정·수동 DB 백업 |
+| `.data/backups/` | 과거 실제 DB 스냅샷과 개인 검사 기록. 테스트 출력과 구분하여 보존 |
+| `.data/transfers/` | 받은 개인 저장 묶음·manifest·검사 결과. 실행 중인 DB와 분리 |
 | `.data/cache/` | 재생성 가능한 가져오기 캐시 |
 | `.next/`, `.pnpm-store/`, `node_modules/` | 실행·빌드 캐시와 의존성. 사용자 문서를 넣지 않음 |
 | `dist/` | 배포 명령이 생성하는 배포 묶음. 오래된 묶음은 제거 가능 |

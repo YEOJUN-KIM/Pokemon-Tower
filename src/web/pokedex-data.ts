@@ -1,11 +1,11 @@
+import type {PokedexEntry} from '../shared/pokedex';
+export type {PokedexEntry,PokemonFormPreview} from '../shared/pokedex';
 import localizedAbilities from '../data/ability-names.json' with {type:'json'};
-export type PokemonFormPreview={species:string;name:string;kind:'mega'|'gigantamax'|'primal'|'selectable'|'battle';condition?:string;spriteKey:string;types:string[];baseStats:import('../data/training').StatBlock;ability:string};
 // Collection names stay stable; selected forms supply the displayed stats/types/sprite identity.
 export function selectedPokedexEntry(entry:PokedexEntry,forme?:string):PokedexEntry{
  const form=entry.forms?.find(form=>form.species===forme);
  return form?{...entry,...form,name:entry.name}:entry;
 }
-export type PokedexEntry = {nationalId?:number;region?:string;canPrimal?:boolean;forms?:PokemonFormPreview[];baseStats:import('../data/training').StatBlock;species: string; id: number; name: string; types: string[]; ability: string; moves: string[]; level: number;generation:number;canMega:boolean;canGigantamax:boolean;battleReady?:boolean;aliases?:string[]};
 export const typeColors:Record<string,string>={노말:'#8b92a4',불꽃:'#e5714a',물:'#5392da',전기:'#c4a432',풀:'#57995f',얼음:'#55a5ac',격투:'#b96053',독:'#9860b6',땅:'#b48c59',비행:'#8a89cf',에스퍼:'#d26291',벌레:'#899e43',바위:'#9d9058',고스트:'#78649d',드래곤:'#6863c7',악:'#776d72',강철:'#738e9e',페어리:'#c780b3'};
 export const abilityNames: Record<string,string> = {
   ...localizedAbilities,

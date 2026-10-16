@@ -11,7 +11,7 @@
 - 혼합룰 기믹별 사용권 분리, 포켓몬당 하나의 기믹, Z 사용·교체·다이맥스 종료 후 중복 기믹 차단, 장비와 배틀 재생 보존.
 - 현재 관장급 IV 배분과 100층 상대 생성의 합법성.
 
-대표 화면: [PC 다이맥스 장비](../../qa/screenshots/trainer-equipment-20261014/trainer-equipment-dynamax-1280.png), [모바일 테라 사용 후](../../qa/screenshots/trainer-equipment-20261014/trainer-equipment-terastallize-390.png). 실제 브라우저 테스트 계정에서 촬영했고 두 화면의 배치를 확인했다.
+당시 대표 화면은 `artifacts/qa/screenshots/trainer-equipment-20261014/`의 `trainer-equipment-dynamax-1280.png`(PC), `trainer-equipment-terastallize-390.png`(모바일)이다. 당시 실제 브라우저 테스트 계정으로 촬영·확인했으며 현재 PC에는 두 캡처가 이전되지 않았다. 아래 검증 결과는 당시 기록이다.
 
 ## 검사와 수정
 

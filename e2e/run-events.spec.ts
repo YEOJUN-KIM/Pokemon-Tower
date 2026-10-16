@@ -10,6 +10,7 @@ for(const width of [1280,390])for(const choice of ['open','skip','resume-ticket'
  try{
   const auth=await new Accounts(store.db).register('chest_'+suffix,'chest-test-password',owner,undefined);store.ensurePlayer(owner);
   const id=store.start(owner,starters,'basic',{events:true}),runId=store.battle(id).run_id;
+  store.db.prepare('UPDATE run_event_rules SET version=1 WHERE run_id=?').run(runId);
   store.db.prepare("UPDATE battles SET status='complete',view=? WHERE id=?").run(JSON.stringify({id,status:'complete',requestId:1,turn:2,team:[],opponent:null,actions:[],messages:['|win|Player'],winner:'Player',error:null}),id);
   store.db.prepare("UPDATE runs SET state='recruit' WHERE id=?").run(runId);store.recruit(owner,runId,id,null,null);
   const event=store.view(owner).run!.event!;expect(event).toBeTruthy();
@@ -95,7 +96,7 @@ test('new game API enables events without changing already saved runs',async({pa
   await context.addCookies([{name:'tower_auth',value:account.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
   const response=await page.request.post('/api/battle',{headers:{origin:'http://127.0.0.1:3001'},data:{type:'start',selected:starters,rule:'basic'}});expect(response.ok()).toBe(true);
   const runId=(await response.json()).tower.run.id;
-  expect(store.db.prepare('SELECT version FROM run_event_rules WHERE run_id=?').get(runId)).toMatchObject({version:1});
+  expect(store.db.prepare('SELECT version FROM run_event_rules WHERE run_id=?').get(runId)).toMatchObject({version:2});
  }finally{store.close();}
 });
 

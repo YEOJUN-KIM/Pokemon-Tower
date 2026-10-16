@@ -1,6 +1,6 @@
 # 이벤트 확장 방법
 
-기준: 2026-10-16. 기존 3종의 콘텐츠·확률·비용·보상·난수 소비 순서를 유지하면서 선택지와 연출을 데이터로 분리했습니다.
+기준: 2026-10-16. 선택지·연출 분리 위에 v2 미스터리 상자와 목록형 공통 Reward 기반을 추가했습니다. 전체 등장·종류 가중치·쿨다운과 브리더·상인의 비용·보상·무추첨 동작을 유지하고, 기존 v1 런의 상자 규칙도 보존합니다.
 
 ## 책임과 흐름
 
@@ -10,7 +10,7 @@
 | `src/game/run-events.ts` | DB·React 없이 이벤트 추첨, 선택지 조회, 보상 추첨 |
 | `src/server/run-events.ts` | 활성화 여부·소유권·진행·등록된 종류와 선택지 검증, 선택 ID 저장, 재요청 처리 |
 | `src/server/player-wallet.ts` | 기존 코인 차감과 코인·알 티켓 지급. 이번 변경에서는 기존 구현 유지 |
-| `src/server/schema.ts`, `storage/migrations.ts` | 저장 제약과 v34 이전 |
+| `src/server/schema.ts`, `storage/migrations.ts` | 저장 제약과 v35 이전, 런별 규칙 버전 보존 |
 | `src/web/event-presentation.ts` | 이벤트 ID별 상자 또는 트레이너 스프라이트 설정 |
 | `src/web/run-event.tsx` | 공통 화면, 선택지 목록 렌더링, 선택 ID 전송과 보상 문구 표시 |
 
@@ -61,6 +61,19 @@
 - 상태·보상·수량 제약, 도전/층 유일성, 도전당 대기 이벤트 하나의 인덱스와 외래키를 유지합니다.
 - 기존 도전에 이벤트를 소급 활성화하지 않습니다. 새 콘텐츠 ID 추가에는 다음 마이그레이션이 필요하지 않습니다.
 
+## v2 상자와 공통 Reward 기반
+
+- `data/rewards.ts`: 적용 전 `RewardOption`·`RewardEffect`, 적용 후 `RewardResult`·`RewardEntry`. 옵션 ID·제목·표시 성격과 여러 항목을 지원합니다. 코인/티켓, 비율 손실, 메시지만 현재 구현합니다.
+- `data/run-events.ts`: v1 상자 정의와 v2 결과표를 분리합니다. 새 활성 런은 규칙 v2이며, 동일한 100 범위의 보상 난수를 한 번 사용해 6개 결과 중 하나를 고릅니다. 고정 보상인 브리더·상인은 난수를 추가 소비하지 않습니다.
+- `game/rewards.ts`: 서버가 제공한 잔액으로 손실을 계산하고 실제 적용 항목으로 변환하는 순수 함수. 설정을 검증하고 소수점 버림·잔액 상한을 적용합니다.
+- `server/rewards.ts`: 기존 지갑 함수로 결과의 모든 항목을 적용합니다. 호출자가 소유권·트랜잭션·영수증을 담당합니다. 다른 이벤트도 이 경로를 재사용할 수 있습니다.
+- `server/run-events.ts`: 선택·난수 결과·지갑 변경·`result_json`을 기존 TowerStore 트랜잭션 안에서 함께 처리합니다. 동일 선택은 즉시 재사용하며 확인은 완료 상태만 기록합니다.
+- `web/reward-panel.tsx`와 전용 CSS: 서버에 저장된 제목·목록을 표시하고 확인을 요청합니다. 자체 추첨·지급은 없으며 GameDialogue와 기존 키보드 선택 경로를 사용합니다.
+
+v35는 v1·v2를 허용하도록 `run_event_rules`를 이전하고, 기존 결과 열을 유지하면서 `run_events.result_json`을 추가합니다. 테이블 복사·인덱스 복원·외래키 검사는 기존 초기화 트랜잭션 안에서 실행합니다. 기존 활성화 규칙·선택 ID·결제·완료 기록은 보존하고 이미 지급한 보상을 재적용하지 않습니다.
+
+새 이벤트는 `outcome: 'reward-result'` 선택지에 가중치가 있는 `results`와 공통 `RewardOption`을 정의하면 같은 추첨·적용·저장·표시 경로를 쓸 수 있습니다. 단 현재 정의된 동작은 가중치 결과 추첨이며, 플레이어가 보상 후보 중 하나를 고르는 API/UI는 아직 구현하지 않았습니다. 향후에는 옵션 ID를 서버에서 검증하고 기존 `applyRewardOption`을 한 번 호출한 결과를 해당 이벤트의 영수증과 저장하는 방식으로 확장합니다. 클라이언트가 임의 항목·수량을 제출해 지급하게 만들지 않습니다.
+
 ## 검증 위치
 
 - `tests/run-event-rules.test.ts`: 기존 가중치 경계·전체 난수 호출 순서·고정 보상 무추첨.
@@ -70,3 +83,7 @@
 - `e2e/run-events.spec.ts`, `e2e/run-event-preview.spec.ts`: 실제 API·브라우저의 진행·복구·레이아웃.
 
 [이벤트와 보상 기획](../gameplay/EVENTS.md) · [저장 데이터](DATABASE.md)
+
+추가 검증: `tests/mystery-chest.test.ts`는 v2 전체 확률 구간·손실 경계·중복·복구·롤백·v34 호환을, `e2e/mystery-chest.spec.ts`는 결과 6종의 PC·모바일 UI와 API 재요청·확인 흐름을 검증합니다.
+
+[이번 확장의 검증 결과·변경 파일·남은 문제](../../artifacts/reports/changes/MYSTERY_CHEST_REWARDS.md)

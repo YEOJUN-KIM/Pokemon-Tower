@@ -12,6 +12,7 @@ import {eventDefinitions,isRunEventKind,type RunEventRegistry} from '../src/data
 function setup(path=':memory:'){
  let rolled=0;const store=new TowerStore(path,max=>Math.min(rolled,max-1));store.ensurePlayer('owner');
  const battle=store.start('owner',starters,'basic',{events:true}),run=store.battle(battle).run_id;
+ store.db.prepare('UPDATE run_event_rules SET version=1 WHERE run_id=?').run(run);
  return {store,run,battle,roll:(value:number)=>{rolled=value;}};
 }
 function finishFloor(store:TowerStore,run:string,battle:string,floor=1){
@@ -86,7 +87,7 @@ test('legacy runs are left unchanged by event schema migration',()=>{
  const path=`.data/tests/event-migration-${randomUUID()}.sqlite`;let store=new TowerStore(path,()=>0);
  try{store.ensurePlayer('owner');const id=store.start('owner',starters),run=store.battle(id).run_id;
   store.db.exec('DROP TABLE run_events;DROP TABLE run_event_rules;PRAGMA user_version=31');store.close();store=new TowerStore(path,()=>0);
-  assert.equal(finishFloor(store,run,id),null);assert.equal(store.view('owner').run!.floor,2);assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,34);
+  assert.equal(finishFloor(store,run,id),null);assert.equal(store.view('owner').run!.floor,2);assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,35);
  }finally{store.close();}
 });
 
@@ -203,13 +204,14 @@ test('v33 migration preserves choices, paid rewards, completed history and walle
    const columns='id,run_id,after_floor,kind,status,reward_kind,amount';
    const old=schema.match(/CREATE TABLE IF NOT EXISTS run_events\s*\([\s\S]*?\) STRICT;/)![0]
     .replace('IF NOT EXISTS run_events','run_events_v33')
-    .replace("kind TEXT NOT NULL DEFAULT 'mystery-chest',choice_id TEXT,","kind TEXT NOT NULL DEFAULT 'mystery-chest' CHECK(kind IN ('mystery-chest','breeder-gift','traveling-merchant')),");
+    .replace(/CHECK\(\(result_json[\s\S]*?(?=\n\) STRICT)/,"CHECK((reward_kind IS NULL AND amount=0 AND status!='reward') OR (reward_kind IS NOT NULL AND amount>0 AND status!='choice'))")
+    .replace("kind TEXT NOT NULL DEFAULT 'mystery-chest',choice_id TEXT,result_json TEXT,","kind TEXT NOT NULL DEFAULT 'mystery-chest' CHECK(kind IN ('mystery-chest','breeder-gift','traveling-merchant')),");
    store.db.exec(`${old} INSERT INTO run_events_v33(${columns}) SELECT ${columns} FROM run_events; DROP TABLE run_events; ALTER TABLE run_events_v33 RENAME TO run_events; CREATE UNIQUE INDEX one_pending_run_event ON run_events(run_id) WHERE status!='complete'; PRAGMA user_version=33;`);
    const before=store.db.prepare(`SELECT ${columns} FROM run_events ORDER BY id`).all();
    const coins=store.db.prepare('SELECT coins FROM players WHERE id=?').get('owner')!.coins;
    store.close();store=new TowerStore(path,()=>{throw Error('Migration/retry must not draw');});
    assert.deepEqual(store.db.prepare(`SELECT ${columns} FROM run_events ORDER BY id`).all(),before);
-   assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,34);
+   assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,35);
    assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
    assert.equal(store.view('owner').run!.event?.phase,status==='choice'?'choice':status==='reward'?'reward':undefined);
    if(status!=='choice')store.chooseEvent('owner',fixture.run,event.id,status==='complete-skipped'?'skip':'open');

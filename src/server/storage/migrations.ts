@@ -9,7 +9,7 @@ import {transaction} from './transaction';
 export function initializeTowerDatabase(db:DatabaseSync,repairArchivedOwnership:()=>void,repairFormHeldItems:()=>void):void {
     db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
     const version = db.prepare('PRAGMA user_version').get() as {user_version: number};
-    if (version.user_version > 34) throw new Error('Unsupported database schema');
+    if (version.user_version > 35) throw new Error('Unsupported database schema');
     // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
     if(version.user_version<28)db.exec('PRAGMA foreign_keys=OFF');
     try {transaction(db,() => {
@@ -27,6 +27,20 @@ export function initializeTowerDatabase(db:DatabaseSync,repairArchivedOwnership:
           DROP TABLE run_events; ALTER TABLE run_events_v34 RENAME TO run_events;
           CREATE UNIQUE INDEX one_pending_run_event ON run_events(run_id) WHERE status!='complete';`);
         if(db.prepare('PRAGMA foreign_key_check').all().length)throw Error('Event migration failed foreign key validation');
+      }
+      if(version.user_version<35){
+        // Existing runs stay on v1. Only explicitly enabled new runs use v2.
+        db.exec(`CREATE TABLE run_event_rules_v35(run_id TEXT PRIMARY KEY REFERENCES runs(id),version INTEGER NOT NULL CHECK(version IN (1,2))) STRICT;
+          INSERT INTO run_event_rules_v35 SELECT * FROM run_event_rules;
+          DROP TABLE run_event_rules; ALTER TABLE run_event_rules_v35 RENAME TO run_event_rules;`);
+        const definition=schema.match(/CREATE TABLE IF NOT EXISTS run_events\s*\([\s\S]*?\) STRICT;/)![0];
+        db.exec(definition.replace('IF NOT EXISTS run_events','run_events_v35'));
+        const hasResult=(db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(c=>c.name==='result_json');
+        db.exec(`INSERT INTO run_events_v35(id,run_id,after_floor,kind,status,reward_kind,amount,choice_id,result_json)
+          SELECT id,run_id,after_floor,kind,status,reward_kind,amount,choice_id,${hasResult?'result_json':'NULL'} FROM run_events;
+          DROP TABLE run_events; ALTER TABLE run_events_v35 RENAME TO run_events;
+          CREATE UNIQUE INDEX one_pending_run_event ON run_events(run_id) WHERE status!='complete';`);
+        if(db.prepare('PRAGMA foreign_key_check').all().length)throw Error('Reward migration failed foreign key validation');
       }
       const playerColumns=db.prepare('PRAGMA table_info(players)').all() as {name:string}[];
       if(!playerColumns.some(column=>column.name==='growth_points')) {

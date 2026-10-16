@@ -9,7 +9,7 @@ import {transaction} from './transaction';
 export function initializeTowerDatabase(db:DatabaseSync,repairArchivedOwnership:()=>void,repairFormHeldItems:()=>void):void {
     db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
     const version = db.prepare('PRAGMA user_version').get() as {user_version: number};
-    if (version.user_version > 35) throw new Error('Unsupported database schema');
+    if (version.user_version > 36) throw new Error('Unsupported database schema');
     // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
     if(version.user_version<28)db.exec('PRAGMA foreign_keys=OFF');
     try {transaction(db,() => {

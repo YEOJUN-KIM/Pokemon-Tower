@@ -9,9 +9,11 @@ export type RewardEntry=
  | {kind:'message';text:string};
 export type RewardTone='neutral'|'loss'|'good'|'great';
 export type RewardOption={id:string;title:string;tone:RewardTone;entries:readonly RewardEffect[]};
-// Candidate metadata is for display. Future requests send stable IDs; the
-// server must look up effects and persist the selected ID before granting.
+// Candidate metadata is for display. Requests send stable IDs; the server
+// looks up persisted effects and commits payment with the selected ID.
 export type RewardCandidate={id:string;label:string;description?:string};
+// Trusted server snapshots only; never accepted from a client request.
+export type RewardSelectionDefinition={id:string;title:string;candidates:readonly (RewardCandidate & {effects:readonly RewardEffect[]})[]};
 export type RewardSelection={id:string;title:string;candidates:readonly RewardCandidate[]} & (
  | {state:'pending';selectedId?:never}
  | {state:'selected';selectedId:string}

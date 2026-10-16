@@ -35,7 +35,7 @@ export function RewardChoiceList({selections,busy,onSelect}:{selections:readonly
 export function RewardPanel({result,busy,onConfirm,heading,onSelect}:RewardPanelProps){
  const ref=useRef<HTMLButtonElement>(null);
  const pending=result.selections?.some(selection=>selection.state==='pending')??false;
- useLayoutEffect(()=>{selectGameCursor(ref.current);},[result,busy]);
+ useLayoutEffect(()=>{selectGameCursor(pending?ref.current?.closest('[data-testid="reward-panel"]')?.querySelector<HTMLButtonElement>('button:not(:disabled)'):ref.current);},[result,busy]);
  return <div className={`${styles.scope} ${styles.panel} reward-panel`} data-reward-tone={result.tone} data-testid="reward-panel">
   <header className={styles.heading}>{heading??(result.tone==='good'||result.tone==='great'?'보상':'결과')}</header>
   <div className={styles.contents}>

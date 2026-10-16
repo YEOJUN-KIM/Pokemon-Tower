@@ -3,11 +3,11 @@ import {eventDefinitions,eventDefinition,mysteryChest,type EventReward,type Even
 
 export type Roll=(max:number)=>number;
 
-export function selectRunEvent(afterFloor:number,previousFloor:number|null,roll:Roll,registry:RunEventRegistry=eventDefinitions):string|null {
+export function selectRunEvent(afterFloor:number,previousFloor:number|null,roll:Roll,registry:RunEventRegistry=eventDefinitions,rulesVersion=1):string|null {
   if(afterFloor%5===0)return null;
   if(previousFloor!==null && afterFloor-previousFloor<=mysteryChest.cooldownFloors)return null;
   if(roll(100)>=mysteryChest.encounterPercent)return null;
-  const eventKinds=Object.keys(registry);
+  const eventKinds=Object.keys(registry).filter(kind=>(registry[kind].minFloor??1)<=afterFloor && (registry[kind].minRulesVersion??1)<=rulesVersion);
   const total=eventKinds.reduce((sum,kind)=>sum+registry[kind].weight,0);
   let draw=roll(total);
   return eventKinds.find(kind=>{draw-=registry[kind].weight;return draw<0;})!;

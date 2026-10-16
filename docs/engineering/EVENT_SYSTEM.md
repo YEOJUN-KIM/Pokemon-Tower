@@ -1,6 +1,6 @@
 # 이벤트 확장 방법
 
-기준: 2026-10-16. 선택지·연출 분리 위에 v2 미스터리 상자와 공통 Reward Popup 기반을 추가했습니다. 전체 등장·종류 가중치·쿨다운과 브리더·상인의 비용·보상·무추첨 동작을 유지하고, 기존 v1 런의 상자 규칙도 보존합니다.
+기준: 2026-10-16. 선택지·연출 분리 위에 v2 미스터리 상자, 도전자 선택전 1차 및 공통 Reward Popup·서버 선택 보상을 구현했습니다. 전체 등장 10%·쿨다운과 브리더·상인의 비용·보상·무추첨 동작을 유지합니다. v2는 도전자 가중치 20을 기존 50/30/20에 추가하며, 기존 v1 런의 규칙은 보존합니다.
 
 ## 책임과 흐름
 
@@ -10,7 +10,7 @@
 | `src/game/run-events.ts` | DB·React 없이 이벤트 추첨, 선택지 조회, 보상 추첨 |
 | `src/server/run-events.ts` | 활성화 여부·소유권·진행·등록된 종류와 선택지 검증, 선택 ID 저장, 재요청 처리 |
 | `src/server/player-wallet.ts` | 기존 코인 차감과 코인·알 티켓 지급. 이번 변경에서는 기존 구현 유지 |
-| `src/server/schema.ts`, `storage/migrations.ts` | 저장 제약과 v35 이전, 런별 규칙 버전 보존 |
+| `src/server/schema.ts`, `storage/migrations.ts` | 저장 제약과 v36 이전, 런별 규칙 버전 보존 |
 | `src/web/event-presentation.ts` | 이벤트 ID별 상자 또는 트레이너 스프라이트 설정 |
 | `src/web/run-event.tsx` | 공통 화면, 선택지 목록 렌더링, 선택 ID 전송과 보상 문구 표시 |
 
@@ -75,18 +75,31 @@
 
 v35는 v1·v2를 허용하도록 `run_event_rules`를 이전하고, 기존 결과 열을 유지하면서 `run_events.result_json`을 추가합니다. 테이블 복사·인덱스 복원·외래키 검사는 기존 초기화 트랜잭션 안에서 실행합니다. 기존 활성화 규칙·선택 ID·결제·완료 기록은 보존하고 이미 지급한 보상을 재적용하지 않습니다.
 
-새 이벤트는 `outcome: 'reward-result'` 선택지에 가중치가 있는 `results`와 공통 `RewardOption`을 정의하면 같은 추첨·적용·저장·표시 경로를 쓸 수 있습니다. 단 현재 실제 이벤트는 가중치 결과 추첨만 사용합니다. 후보 선택의 타입·화면 기반은 있지만, 선택을 서버에 저장·지급하는 API는 아직 구현하지 않았습니다. 향후에는 옵션 ID를 서버에서 검증하고 기존 `applyRewardOption`을 한 번 호출한 결과를 해당 이벤트의 영수증과 저장하는 방식으로 확장합니다. 클라이언트가 임의 항목·수량을 제출해 지급하게 만들지 않습니다.
+새 이벤트는 `outcome: 'reward-result'` 선택지에 가중치가 있는 `results`와 공통 `RewardOption`을 정의하면 같은 추첨·적용·저장·표시 경로를 쓸 수 있습니다. 도전자 선택전에서는 아래 선택형 서버 저장 경로도 사용합니다.
 
 ## 선택형 Reward 확장 기반
 
-`RewardResult.entries`는 기존에 이미 적용된 즉시 결과 목록 그대로입니다. 선택형은 선택적인 `selections` 필드로 구분하므로 기존 저장 JSON과 호환되며 DB 마이그레이션은 없습니다.
+`RewardResult.entries`는 기존에 이미 적용된 즉시 결과 목록 그대로입니다. 선택형은 선택적인 `selections` 필드로 구분하므로 기존 저장 JSON과 호환됩니다. 실제 서버 선택 정의는 DB v36의 별도 테이블에 보관합니다.
 
 - `RewardCandidate`: 안정적인 후보 ID·표시 이름·선택적인 설명. 클라이언트에 지급할 효과 자체를 맡기지 않습니다.
 - `RewardSelection`: 선택 ID·제목·후보 목록과 `state: 'pending'` 또는 `state: 'selected'`를 표현합니다. 완료 상태에는 `selectedId`가 있습니다.
 - `RewardChoiceList`: 콜백이 있으면 선택하기→후보 버튼을 열고 `(selectionId, candidateId)`만 전달합니다. 선택 완료는 전달받은 결과 상태로 표시하며 클릭만으로 완료·지급했다고 가정하지 않습니다.
 - 선택 대기가 하나라도 있으면 최종 확인은 비활성화합니다. 콜백이 없는 대기 항목은 '선택 기능 준비 중'으로 표시합니다. 현재 미스터리 상자는 selections가 없으므로 기존 확인 동작과 같습니다.
 
-후속 구현에서는 서버가 선택 ID와 후보 ID를 검증하고 선택 영수증을 원자적으로 저장해야 합니다. 실제 에픽 도구 풀·영양제 후보·지급·선택 저장 API와 도전자 선택전 자체는 미구현입니다. 이번 작업은 서버 보상 처리·DB v35·결과표를 수정하지 않습니다.
+`server/rewards.ts`의 `selectEventReward`는 서버 후보 정의를 조회하고 공통 `applyRewardOption`으로 지급합니다. `event-reward-select`는 이벤트·선택·후보 ID만 사용합니다. HTTP에 효과를 추가해도 사용하지 않습니다. `TowerStore` 트랜잭션 안에서 효과 지급과 결과 entries 추가 및 selectedId 저장이 함께 커밋됩니다. 동일 후보 중복은 무효 처리, 다른 후보 재선택은 409입니다. 실제 에픽 도구·영양제 후보는 미구현입니다.
+
+## 도전자 배틀과 DB v36
+
+- `data/challengers.ts`: ChallengerDefinition 배열·공개 후보 projection·등장 가중치/최소 통과 층. 추가 컨셉은 여기에 정의하고 현재 고정 3명 정책은 별도 확장합니다. 기존 trainer catalog의 TrainerSample 형태와 보유 스프라이트를 사용합니다.
+- `game/run-events.ts`: 전체 10%와 쿨다운 유지. 층·규칙 버전별로 후보 이벤트를 필터링하고 가중치 추첨합니다. 기본 규칙 인자는 legacy v1이며 서버는 저장 버전을 명시합니다.
+- `challenger_encounters`: event_id 고유, 모든 후보 정의 JSON, selected_id, 현재 battle_id, phase(choice/battle/reward). 후보와 효과 정의는 발생 시 저장해 재접속·데이터 변경으로 바뀌지 않습니다. API view는 공개 표시 필드만 전달합니다.
+- `event_reward_selections`: (event_id,selection_id) 고유, 지급 효과가 있는 서버 정의 JSON. 승리 기본 보상과 pending 선택을 같은 트랜잭션에 저장합니다. 기존 result_json에 최종 선택·실제 지급 결과를 저장합니다.
+- run_events는 choice/reward/complete를 유지하고 중간 배틀은 sidecar phase로 표현합니다. 선택 저장+배틀 생성, 배틀 완료+즉시 보상+pending 후보, 추가 선택 지급+selected 상태 각각 원자적으로 처리합니다. 신규 테이블만 추가하므로 기존 이벤트·배틀을 재작성하거나 재지급하지 않습니다.
+- TowerStore.createBattle의 선택적 도전자 정의로 기존 팀 생성·패킹·규칙·아이템·BattleSession을 재사용합니다. 같은 floor/stage의 다음 attempt를 배정해 이후 일반층 배틀도 보존합니다. attempt는 배틀 슬롯 식별이며 실제 재도전 소모량은 run_retries.used만 사용합니다. 숨은 보스 stage와 충돌하지 않습니다.
+- currentBattle은 진행 중 이벤트 battle_id를 우선 조회합니다. 승리 콜백은 공통 아이템 정산 후 이벤트 보상을 적용하고 runs.state=select로 바꿉니다. 일반 rewards/recruitments를 만들지 않으므로 영입·일반층 승리 수·층 증가가 없습니다. 확인 뒤 기존 enter로 같은 층 일반전을 생성합니다.
+- 패배는 기존 lost/재도전/성장 정산 정책을 유지합니다. 재도전 준비에서는 이벤트 화면을 숨기고 기존 정비 창을 표시합니다. 새 시도에 연결 battle_id를 갱신하며 상대 팀·시드·엔진 버전을 그대로 복사합니다.
+- 기본 팀은 직전 출전 팀의 suggestedTeam입니다. 새 AI 엔진이나 별도 출전 선택 UI는 추가하지 않았습니다. 통과 층 최소값 1, v2 가중치 20이며 기존 50/30/20의 상대 비중은 유지합니다. 규칙 v1에서는 제외됩니다.
+- `web/challenger-candidates.tsx`: PC 3열·모바일 스크롤·현재 게임 커서. RewardModal/RewardPanel/RewardChoiceList를 재사용하며 미선택 항목이 남으면 확인과 서버 continue/enter를 차단합니다. 후보를 추가하는 것 외에 새로운 효과 종류는 공통 reward 처리에서 확장해야 합니다.
 
 ## 검증 위치
 
@@ -101,3 +114,6 @@ v35는 v1·v2를 허용하도록 `run_event_rules`를 이전하고, 기존 결�
 추가 검증: `tests/mystery-chest.test.ts`는 v2 전체 확률 구간·손실 경계·중복·복구·롤백·v34 호환을, `e2e/mystery-chest.spec.ts`는 결과 6종의 PC·모바일 UI와 API 재요청·확인 흐름을 검증합니다.
 
 [이번 확장의 검증 결과·변경 파일·남은 문제](../../artifacts/reports/changes/MYSTERY_CHEST_REWARDS.md)
+
+- `tests/challenger-events.test.ts`·`tests/challenger-fixture.ts`: 결정론적 만남, 복구, 세 배틀의 엔진 진입, 영입 제외, 보상/선택 롤백·재지급 방지, 재도전, 능력 한도.
+- `e2e/challenger-events.spec.ts`: 실제 Chrome PC/모바일 후보·키보드·돌아가기, 배틀 표시, 내부 완료 fixture 후 팝업, 서버 선택 API·동시 중복 및 화면 저장. 전체 전투 승리는 테스트 전용 내부 callback fixture이며 클라이언트 승패 입력 API는 추가하지 않습니다.

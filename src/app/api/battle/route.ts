@@ -59,8 +59,9 @@ export async function POST(request: NextRequest) {
       const permanentResult=service.store.permanentAction(player,body.requestId,body.action,body.product,body.count,body.species,body.action==='hatch'?'machine':undefined);
       return NextResponse.json({battle:null,tower:service.store.view(player),training:service.store.trainingCollection(player),permanentResult},{headers});
     }
-    if((body.type==='event-choice'||body.type==='event-continue') && typeof body.runId==='string' && typeof body.eventId==='string'){
+    if((body.type==='event-choice'||body.type==='event-continue'||body.type==='event-reward-select') && typeof body.runId==='string' && typeof body.eventId==='string'){
       if(body.type==='event-choice')service.store.chooseEvent(player,body.runId,body.eventId,body.choice);
+      else if(body.type==='event-reward-select')service.store.selectEventReward(player,body.runId,body.eventId,body.selectionId,body.candidateId);
       else service.store.continueEvent(player,body.runId,body.eventId);
       return NextResponse.json(await service.state(player),{headers});
     }

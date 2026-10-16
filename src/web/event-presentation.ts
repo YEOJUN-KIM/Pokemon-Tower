@@ -4,6 +4,7 @@ type EventPresentation={artwork:'chest'}|{artwork:'trainer';sprite:string;alt:st
 
 // React components stay in web; content and game rules never import this registry.
 export const eventPresentation={
+ 'challenger-selection':{artwork:'trainer',sprite:'acetrainer-gen4',alt:'도전자'},
  'mystery-chest':{artwork:'chest'},
  'breeder-gift':{artwork:'trainer',sprite:'aromalady-gen4',alt:'브리더'},
  'traveling-merchant':{artwork:'trainer',sprite:'hiker-gen4',alt:'여행 상인'},

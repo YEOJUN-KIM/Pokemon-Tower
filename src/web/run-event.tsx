@@ -1,4 +1,5 @@
 'use client';
+import {ChallengerCandidates} from './challenger-candidates';
 import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {eventDefinition,type EventChoice,type RunEventView} from '../data/run-events';
 import {getEventPresentation} from './event-presentation';
@@ -28,7 +29,8 @@ export function eventDialogue(event:RunEventView){
  return choice?.outcome==='reward'?choice.message.replaceAll('{reward}',name).replaceAll('{detail}',reward?.kind==='coins'?'타워 코인에 더해졌다.':'알 뽑기에서 사용할 수 있다.'):name;
 }
 
-export function RunEventScene({event}:{event:RunEventView}){
+export function RunEventScene({event,busy=false,onSelect=()=>{}}:{event:RunEventView;busy?:boolean;onSelect?:(id:string)=>void}){
+ if(event.challengers && event.phase==='choice')return <ChallengerCandidates candidates={event.challengers} busy={busy} onSelect={onSelect}/>;
  const opened=event.phase==='reward',reward=event.reward,definition=eventDefinition(event.kind,undefined,event.rulesVersion),presentation=getEventPresentation(event.kind);
  if(!definition || !presentation)return null;
  const rewardName=reward?.kind==='coins'?`${reward.amount.toLocaleString()}코인`:`알 뽑기권 ${reward?.amount??1}장`;
@@ -54,11 +56,11 @@ export function RunEventPanel({event,runId,busy,selecting,onChoose,submit}:{even
  },[event.id,mode,!!event.result]);
  return <><section className={`${styles.scope} ${styles.bottom} battle-messages`} data-event-step={mode} aria-label="이벤트 상황">
   <div className="message-heading"><span><i className="record-dot"/>이벤트</span><span>{mode==='choices'?'어떻게 할까요?':`${event.afterFloor}층을 지나던 길`}</span></div>
-  {mode==='reward'&&event.result?<GameDialogue text="상자를 열었다. 결과를 확인해 보자." label="이벤트 안내"/>:<>
+  {event.challengers && mode!=='reward'?<GameDialogue text="도전할 트레이너를 고르거나 돌아갈 수 있다. 선택하면 현재 출전 팀으로 승부한다." label="이벤트 안내"/>:mode==='reward'&&event.result?<GameDialogue text={event.challengers?"승리했다! 전투 보상을 확인하자.":"상자를 열었다. 결과를 확인해 보자."} label="이벤트 안내"/>:<>
    {mode!=='choices'&&<GameDialogue text={eventDialogue(event)} label="이벤트 안내"/>}
    <RunEventChoices event={event} runId={runId} busy={busy} submit={submit} mode={mode} onChoose={onChoose}/>
   </>}
- </section>{mode==='reward'&&event.result&&revealed===event.id&&<RewardModal result={event.result} heading={event.result.tone==='good'||event.result.tone==='great'?'이벤트 보상':'이벤트 결과'} busy={busy} onConfirm={()=>void submit({type:'event-continue',runId,eventId:event.id})}/>}</>;
+ </section>{mode==='reward'&&event.result&&revealed===event.id&&<RewardModal result={event.result} heading={event.result.tone==='good'||event.result.tone==='great'?'이벤트 보상':'이벤트 결과'} busy={busy} onSelect={(selectionId,candidateId)=>void submit({type:'event-reward-select',runId,eventId:event.id,selectionId,candidateId})} onConfirm={()=>void submit({type:'event-continue',runId,eventId:event.id})}/>}</>;
 }
 
 function RunEventChoices({event,runId,busy,submit,mode,onChoose}:{event:RunEventView;runId:string;busy:boolean;submit:(body:Record<string,unknown>)=>Promise<void>;mode:'intro'|'choices'|'reward';onChoose:()=>void}){

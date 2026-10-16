@@ -154,5 +154,13 @@ CREATE TABLE IF NOT EXISTS run_events(
  (result_json IS NULL AND ((reward_kind IS NULL AND amount=0 AND status!='reward') OR (reward_kind IS NOT NULL AND amount>0 AND status!='choice'))))
 ) STRICT;
 CREATE UNIQUE INDEX IF NOT EXISTS one_pending_run_event ON run_events(run_id) WHERE status!='complete';
-  PRAGMA user_version = 35;
+CREATE TABLE IF NOT EXISTS challenger_encounters(
+ event_id TEXT PRIMARY KEY REFERENCES run_events(id),candidates_json TEXT NOT NULL CHECK(json_valid(candidates_json)),
+ selected_id TEXT,battle_id TEXT REFERENCES battles(id),phase TEXT NOT NULL DEFAULT 'choice' CHECK(phase IN ('choice','battle','reward'))
+) STRICT;
+CREATE TABLE IF NOT EXISTS event_reward_selections(
+ event_id TEXT NOT NULL REFERENCES run_events(id),selection_id TEXT NOT NULL,definition_json TEXT NOT NULL CHECK(json_valid(definition_json)),
+ PRIMARY KEY(event_id,selection_id)
+) STRICT;
+  PRAGMA user_version = 36;
 `;

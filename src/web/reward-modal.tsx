@@ -15,7 +15,7 @@ export function RewardModal({result,...props}:RewardPanelProps & {result:RewardR
   const dialog=ref.current;if(!dialog)return;
   const previous=document.activeElement instanceof HTMLElement?document.activeElement:null;
   dialog.showModal();
-  const button=dialog.querySelector<HTMLButtonElement>('[data-initial-focus]:not(:disabled)');
+  const button=dialog.querySelector<HTMLButtonElement>('[data-initial-focus]:not(:disabled)')??dialog.querySelector<HTMLButtonElement>('button:not(:disabled)');
   button?.focus({preventScroll:true});selectGameCursor(button);
   return()=>{dialog.close();if(previous?.isConnected)previous.focus({preventScroll:true});};
  },[]);

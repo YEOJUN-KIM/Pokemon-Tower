@@ -147,11 +147,11 @@ CREATE TABLE IF NOT EXISTS run_trainer_equipment(run_id TEXT NOT NULL REFERENCES
 CREATE TABLE IF NOT EXISTS run_event_rules(run_id TEXT PRIMARY KEY REFERENCES runs(id),version INTEGER NOT NULL CHECK(version=1)) STRICT;
 CREATE TABLE IF NOT EXISTS run_events(
  id TEXT PRIMARY KEY,run_id TEXT NOT NULL REFERENCES runs(id),after_floor INTEGER NOT NULL CHECK(after_floor>0),
- kind TEXT NOT NULL DEFAULT 'mystery-chest' CHECK(kind IN ('mystery-chest','breeder-gift','traveling-merchant')),
+ kind TEXT NOT NULL DEFAULT 'mystery-chest',choice_id TEXT,
  status TEXT NOT NULL CHECK(status IN ('choice','reward','complete')),reward_kind TEXT CHECK(reward_kind IN ('coins','egg-ticket')),
  amount INTEGER NOT NULL DEFAULT 0 CHECK(amount>=0),UNIQUE(run_id,after_floor),
  CHECK((reward_kind IS NULL AND amount=0 AND status!='reward') OR (reward_kind IS NOT NULL AND amount>0 AND status!='choice'))
 ) STRICT;
 CREATE UNIQUE INDEX IF NOT EXISTS one_pending_run_event ON run_events(run_id) WHERE status!='complete';
-  PRAGMA user_version = 33;
+  PRAGMA user_version = 34;
 `;

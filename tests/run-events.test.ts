@@ -4,6 +4,10 @@ import {randomUUID} from 'node:crypto';
 import {TowerStore} from '../src/server/tower-store';
 import {starters} from '../src/data/teams';
 import {mysteryChest,merchantTicketPrice} from '../src/data/run-events';
+import {RunEvents} from '../src/server/run-events';
+import {schema} from '../src/server/schema';
+import {transaction} from '../src/server/storage/transaction';
+import {eventDefinitions,isRunEventKind,type RunEventRegistry} from '../src/data/run-events';
 
 function setup(path=':memory:'){
  let rolled=0;const store=new TowerStore(path,max=>Math.min(rolled,max-1));store.ensurePlayer('owner');
@@ -82,7 +86,7 @@ test('legacy runs are left unchanged by event schema migration',()=>{
  const path=`.data/tests/event-migration-${randomUUID()}.sqlite`;let store=new TowerStore(path,()=>0);
  try{store.ensurePlayer('owner');const id=store.start('owner',starters),run=store.battle(id).run_id;
   store.db.exec('DROP TABLE run_events;DROP TABLE run_event_rules;PRAGMA user_version=31');store.close();store=new TowerStore(path,()=>0);
-  assert.equal(finishFloor(store,run,id),null);assert.equal(store.view('owner').run!.floor,2);assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,33);
+  assert.equal(finishFloor(store,run,id),null);assert.equal(store.view('owner').run!.floor,2);assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,34);
  }finally{store.close();}
 });
 
@@ -131,5 +135,89 @@ test('event kind weights partition the encounter without increasing its frequenc
  const {RunEvents}=await import('../src/server/run-events');
  for(const [draw,expected] of [[0,'mystery-chest'],[49,'mystery-chest'],[50,'breeder-gift'],[79,'breeder-gift'],[80,'traveling-merchant'],[99,'traveling-merchant']] as const){
   const {store,run}=setup();try{let call=0;new RunEvents(store.db,()=>call++===0?0:draw).encounter(run,1);assert.equal(new RunEvents(store.db,()=>0).view(run)!.kind,expected);}finally{store.close();}
+ }
+});
+
+test('new content with three choices stores without schema changes and commits the selected ID once',()=>{
+ const registry:RunEventRegistry={...eventDefinitions,'test-scientist':{
+  title:'fixture',summary:'fixture',intro:'fixture',weight:1,choices:[
+   {id:'help',label:'돕는다',outcome:'reward',cost:0,rewards:[{weight:1,reward:{kind:'coins',amount:7}}],message:'보상'},
+   {id:'trade',label:'거래한다',outcome:'reward',cost:30,rewards:[{weight:1,reward:{kind:'egg-ticket',amount:2}}],message:'보상'},
+   {id:'leave',label:'떠난다',outcome:'leave'},
+  ],
+ }};
+ for(const id of ['help','trade','leave']){
+  const {store,run,battle}=setup();try{
+   finishFloor(store,run,battle);
+   const version=store.db.prepare('PRAGMA user_version').get()!.user_version;
+   store.db.prepare('DELETE FROM run_events WHERE run_id=?').run(run);
+   const encounterCalls:number[]=[];
+   const content=new RunEvents(store.db,max=>{encounterCalls.push(max);return 0;},{'test-scientist':registry['test-scientist']});
+   content.encounter(run,1);
+   const event=content.view(run)!;
+   assert.equal(event.kind,'test-scientist');assert.deepEqual(encounterCalls,[100,1]);
+   store.db.prepare('UPDATE players SET coins=30 WHERE id=?').run('owner');
+   const events=new RunEvents(store.db,()=>{throw Error('Fixed choices must not draw');},registry);
+   assert.equal(isRunEventKind('test-scientist',registry),true);
+   assert.equal(isRunEventKind('__proto__',registry),false);
+   assert.throws(()=>events.choose('owner',run,event.id,'open'),/유효하지 않은/);
+   transaction(store.db,()=>events.choose('owner',run,event.id,id));
+   transaction(store.db,()=>events.choose('owner',run,event.id,id));
+   assert.throws(()=>events.choose('owner',run,event.id,id==='help'?'trade':'help'),/이미 다른/);
+   assert.equal(store.db.prepare('SELECT choice_id FROM run_events WHERE id=?').get(event.id)!.choice_id,id);
+   assert.equal(store.db.prepare('SELECT coins FROM players WHERE id=?').get('owner')!.coins,id==='help'?37:id==='trade'?0:30);
+   assert.equal(store.permanentView('owner').eggTickets,id==='trade'?2:0);
+   if(id!=='leave')assert.equal(events.view(run)!.choiceId,id);
+   events.continue('owner',run,event.id);
+   transaction(store.db,()=>events.choose('owner',run,event.id,id));
+   assert.equal(store.permanentView('owner').eggTickets,id==='trade'?2:0);
+   assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,version);
+   assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
+  }finally{store.close();}
+ }
+});
+
+test('unknown stored event IDs fail safely before rendering, charging or granting',()=>{
+ const {store,run,battle}=setup();try{
+  const event=finishFloor(store,run,battle)!;
+  for(const kind of ['missing-event','__proto__','constructor']){
+   store.db.prepare('UPDATE run_events SET kind=? WHERE id=?').run(kind,event.id);
+   assert.throws(()=>store.view('owner'),/알 수 없는 이벤트/);
+   assert.throws(()=>store.chooseEvent('owner',run,event.id,'open'),/알 수 없는 이벤트/);
+   assert.throws(()=>store.continueEvent('owner',run,event.id),/알 수 없는 이벤트/);
+   assert.equal(store.db.prepare('SELECT coins FROM players WHERE id=?').get('owner')!.coins,0);
+   assert.equal(store.permanentView('owner').eggTickets,0);
+  }
+ }finally{store.close();}
+});
+
+test('v33 migration preserves choices, paid rewards, completed history and wallet without granting again',()=>{
+ for(const status of ['choice','reward','complete-paid','complete-skipped']){
+  const path=`.data/tests/event-v33-${randomUUID()}.sqlite`,fixture=setup(path);let store=fixture.store;
+  try{
+   const event=finishFloor(store,fixture.run,fixture.battle)!;
+   if(status==='reward'||status==='complete-paid')store.chooseEvent('owner',fixture.run,event.id,'open');
+   if(status==='complete-paid')store.continueEvent('owner',fixture.run,event.id);
+   if(status==='complete-skipped')store.chooseEvent('owner',fixture.run,event.id,'skip');
+   store.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status,reward_kind,amount) VALUES (?,?,10,'breeder-gift','complete','egg-ticket',1),(?,?,11,'traveling-merchant','complete',NULL,0)").run(randomUUID(),fixture.run,randomUUID(),fixture.run);
+   const columns='id,run_id,after_floor,kind,status,reward_kind,amount';
+   const old=schema.match(/CREATE TABLE IF NOT EXISTS run_events\s*\([\s\S]*?\) STRICT;/)![0]
+    .replace('IF NOT EXISTS run_events','run_events_v33')
+    .replace("kind TEXT NOT NULL DEFAULT 'mystery-chest',choice_id TEXT,","kind TEXT NOT NULL DEFAULT 'mystery-chest' CHECK(kind IN ('mystery-chest','breeder-gift','traveling-merchant')),");
+   store.db.exec(`${old} INSERT INTO run_events_v33(${columns}) SELECT ${columns} FROM run_events; DROP TABLE run_events; ALTER TABLE run_events_v33 RENAME TO run_events; CREATE UNIQUE INDEX one_pending_run_event ON run_events(run_id) WHERE status!='complete'; PRAGMA user_version=33;`);
+   const before=store.db.prepare(`SELECT ${columns} FROM run_events ORDER BY id`).all();
+   const coins=store.db.prepare('SELECT coins FROM players WHERE id=?').get('owner')!.coins;
+   store.close();store=new TowerStore(path,()=>{throw Error('Migration/retry must not draw');});
+   assert.deepEqual(store.db.prepare(`SELECT ${columns} FROM run_events ORDER BY id`).all(),before);
+   assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,34);
+   assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
+   assert.equal(store.view('owner').run!.event?.phase,status==='choice'?'choice':status==='reward'?'reward':undefined);
+   if(status!=='choice')store.chooseEvent('owner',fixture.run,event.id,status==='complete-skipped'?'skip':'open');
+   assert.equal(store.db.prepare('SELECT coins FROM players WHERE id=?').get('owner')!.coins,coins);
+   // Content CHECK is gone; state, reward and uniqueness checks remain.
+   assert.throws(()=>store.db.prepare("UPDATE run_events SET status='invalid' WHERE id=?").run(event.id),/CHECK/);
+   assert.throws(()=>store.db.prepare('UPDATE run_events SET amount=-1 WHERE id=?').run(event.id),/CHECK/);
+   if(status==='choice'||status==='reward')assert.throws(()=>store.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status) VALUES (?,?,12,'new-content','choice')").run(randomUUID(),fixture.run),/UNIQUE/);
+  }finally{store.close();}
  }
 });

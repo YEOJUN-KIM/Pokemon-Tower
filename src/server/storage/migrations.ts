@@ -9,12 +9,25 @@ import {transaction} from './transaction';
 export function initializeTowerDatabase(db:DatabaseSync,repairArchivedOwnership:()=>void,repairFormHeldItems:()=>void):void {
     db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
     const version = db.prepare('PRAGMA user_version').get() as {user_version: number};
-    if (version.user_version > 33) throw new Error('Unsupported database schema');
+    if (version.user_version > 34) throw new Error('Unsupported database schema');
     // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
     if(version.user_version<28)db.exec('PRAGMA foreign_keys=OFF');
     try {transaction(db,() => {
       db.exec(schema);
       if(!(db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(column=>column.name==='kind'))db.exec("ALTER TABLE run_events ADD COLUMN kind TEXT NOT NULL DEFAULT 'mystery-chest' CHECK(kind IN ('mystery-chest','breeder-gift','traveling-merchant'))");
+      // Event IDs are content, not schema. Rebuild only this leaf table; keep
+      // receipts, pending rewards, completed rows and the one-pending index.
+      if(version.user_version<34){
+        const definition=schema.match(/CREATE TABLE IF NOT EXISTS run_events\s*\([\s\S]*?\) STRICT;/)![0];
+        db.exec(definition.replace('IF NOT EXISTS run_events','run_events_v34'));
+        const hasChoice=(db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(c=>c.name==='choice_id');
+        const choice=hasChoice?'choice_id':"CASE WHEN status='choice' THEN NULL WHEN reward_kind IS NULL THEN 'skip' ELSE 'open' END";
+        db.exec(`INSERT INTO run_events_v34(id,run_id,after_floor,kind,status,reward_kind,amount,choice_id)
+          SELECT id,run_id,after_floor,kind,status,reward_kind,amount,${choice} FROM run_events;
+          DROP TABLE run_events; ALTER TABLE run_events_v34 RENAME TO run_events;
+          CREATE UNIQUE INDEX one_pending_run_event ON run_events(run_id) WHERE status!='complete';`);
+        if(db.prepare('PRAGMA foreign_key_check').all().length)throw Error('Event migration failed foreign key validation');
+      }
       const playerColumns=db.prepare('PRAGMA table_info(players)').all() as {name:string}[];
       if(!playerColumns.some(column=>column.name==='growth_points')) {
         db.exec('ALTER TABLE players ADD COLUMN growth_points INTEGER NOT NULL DEFAULT 0 CHECK(growth_points>=0)');

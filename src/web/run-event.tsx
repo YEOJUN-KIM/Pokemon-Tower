@@ -1,6 +1,7 @@
 'use client';
 import {useLayoutEffect,useRef} from 'react';
-import {eventDefinitions,type RunEventView} from '../data/run-events';
+import {eventDefinition,type EventChoice,type RunEventView} from '../data/run-events';
+import {getEventPresentation} from './event-presentation';
 import {GameDialogue} from './game-dialogue';
 import {selectGameCursor} from './game-keyboard';
 import styles from './styles/run-event.module.css';
@@ -19,14 +20,18 @@ function Chest(){return <svg className={styles.chest} viewBox="0 0 160 140" role
 export function eventDialogue(event:RunEventView){
  const reward=event.reward;
  const name=reward?.kind==='coins'?`${reward.amount.toLocaleString()}코인`:`알 뽑기권 ${reward?.amount??1}장`;
- return event.phase==='reward'?(event.kind==='mystery-chest'?`${name}을 발견했다! ${reward?.kind==='coins'?'타워 코인에 더해졌다.':'알 뽑기에서 사용할 수 있다.'}`:`${eventDefinitions[event.kind].reward} 알 뽑기에서 사용할 수 있다.`):eventDefinitions[event.kind].intro;
+ const definition=eventDefinition(event.kind);
+ if(event.phase!=='reward')return definition?.intro??'';
+ const choice=definition?.choices.find(choice=>choice.id===(event.choiceId??'open'));
+ return choice?.outcome==='reward'?choice.message.replaceAll('{reward}',name).replaceAll('{detail}',reward?.kind==='coins'?'타워 코인에 더해졌다.':'알 뽑기에서 사용할 수 있다.'):name;
 }
 
 export function RunEventScene({event}:{event:RunEventView}){
- const opened=event.phase==='reward',reward=event.reward,definition=eventDefinitions[event.kind];
+ const opened=event.phase==='reward',reward=event.reward,definition=eventDefinition(event.kind),presentation=getEventPresentation(event.kind);
+ if(!definition || !presentation)return null;
  const rewardName=reward?.kind==='coins'?`${reward.amount.toLocaleString()}코인`:`알 뽑기권 ${reward?.amount??1}장`;
  return <><div className={`${styles.scope} ${styles.artwork}`} data-opened={opened} data-testid="event-artwork">
-  <div className={styles.object}><span className={styles.glow} aria-hidden="true"/>{event.kind==='mystery-chest'?<Chest/>:<img className={styles.npc} src={`/sprites/trainers/${event.kind==='breeder-gift'?'aromalady-gen4':'hiker-gen4'}.png`} alt={event.kind==='breeder-gift'?'브리더':'여행 상인'} width="180" height="200"/>}
+  <div className={styles.object}><span className={styles.glow} aria-hidden="true"/>{presentation.artwork==='chest'?<Chest/>:<img className={styles.npc} src={`/sprites/trainers/${presentation.sprite}.png`} alt={presentation.alt} width="180" height="200"/>}
    {opened&&<div className={styles.stars} aria-hidden="true"><i>✦</i><i>✧</i><i>✦</i><i>✧</i></div>}
    {opened&&<strong className={styles.reward} data-testid="event-reward">{rewardName}</strong>}
   </div>
@@ -50,6 +55,10 @@ function RunEventChoices({event,runId,busy,submit,mode,onChoose}:{event:RunEvent
  const ref=useRef<HTMLDivElement>(null);
  useLayoutEffect(()=>{selectGameCursor(ref.current?.querySelector<HTMLButtonElement>('[data-initial-focus]'));},[event.id,event.phase,busy,mode]);
  return <div ref={ref} className={`${styles.scope} ${styles.actions} event-choices`} role="group" aria-label="이벤트 선택" aria-busy={busy} data-keyboard-list>
-  {mode==='intro'?<button className={styles.choice} data-initial-focus disabled={busy} onClick={onChoose}><span className={styles.pointer} aria-hidden="true">{'>'}</span><span className={styles.label}>선택지 보기</span></button>:event.phase==='reward'?<button className={styles.choice} data-initial-focus disabled={busy} onClick={()=>void submit({type:'event-continue',runId,eventId:event.id})}><span className={styles.pointer} aria-hidden="true">{'>'}</span><span className={styles.label}>{busy?'잠시만요…':'계속하기'}</span></button>:<><button className={styles.choice} data-initial-focus disabled={busy} onClick={()=>void submit({type:'event-choice',runId,eventId:event.id,choice:'open'})}><span className={styles.pointer} aria-hidden="true">{'>'}</span><span className={styles.label}>{busy?'잠시만요…':eventDefinitions[event.kind].accept}</span></button><button className={styles.choice} disabled={busy} onClick={()=>void submit({type:'event-choice',runId,eventId:event.id,choice:'skip'})}><span className={styles.pointer} aria-hidden="true">{'>'}</span><span className={styles.label}>지나간다</span></button></>}
+  {mode==='intro'?<button className={styles.choice} data-initial-focus disabled={busy} onClick={onChoose}><span className={styles.pointer} aria-hidden="true">{'>'}</span><span className={styles.label}>선택지 보기</span></button>:event.phase==='reward'?<button className={styles.choice} data-initial-focus disabled={busy} onClick={()=>void submit({type:'event-continue',runId,eventId:event.id})}><span className={styles.pointer} aria-hidden="true">{'>'}</span><span className={styles.label}>{busy?'잠시만요…':'계속하기'}</span></button>:<EventChoiceButtons choices={eventDefinition(event.kind)?.choices??[]} busy={busy} onSelect={choice=>void submit({type:'event-choice',runId,eventId:event.id,choice})}/>}
  </div>;
+}
+
+export function EventChoiceButtons({choices,busy,onSelect}:{choices:readonly EventChoice[];busy:boolean;onSelect:(id:string)=>void}){
+ return <>{choices.map((choice,index)=><button key={choice.id} className={styles.choice} data-initial-focus={index===0?true:undefined} data-event-choice={choice.id} disabled={busy} onClick={()=>onSelect(choice.id)}><span className={styles.pointer} aria-hidden="true">{'>'}</span><span className={styles.label}>{busy?'잠시만요…':choice.label}</span></button>)}</>;
 }

@@ -32,7 +32,7 @@ test('reward tables preserve the chest threshold and fixed gifts never advance r
     const reward=rollEventReward(kind,()=>{throw Error('Fixed gifts must not draw');});
     assert.deepEqual(reward,{kind:'egg-ticket',amount:1});
     reward.amount=999;
-    assert.equal(eventDefinitions[kind].rewards[0].reward.amount,1);
+    assert.equal(eventDefinitions[kind].choices[0].rewards[0].reward.amount,1);
   }
-  assert.equal(eventDefinitions['traveling-merchant'].cost,merchantTicketPrice);
+  assert.equal(eventDefinitions['traveling-merchant'].choices[0].cost,merchantTicketPrice);
 });

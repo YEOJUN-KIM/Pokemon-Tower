@@ -1,6 +1,6 @@
 # 저장 데이터
 
-Node.js의 `node:sqlite`를 사용합니다. `src/server/schema.ts`와 `tower-store.ts`가 테이블·SQL·마이그레이션을 관리하고 코드가 지원하는 현재 스키마는 **33**입니다. 개별 DB·백업의 버전은 `PRAGMA user_version`으로 따로 확인합니다.
+Node.js의 `node:sqlite`를 사용합니다. `src/server/schema.ts`와 `storage/migrations.ts`가 테이블·마이그레이션을 관리하고 코드가 지원하는 현재 스키마는 **34**입니다. 개별 DB·백업의 버전은 `PRAGMA user_version`으로 따로 확인합니다. v34는 이벤트 ID 제약을 애플리케이션으로 옮기고 선택 ID를 저장하며, 기존 이벤트 기록을 보존합니다. [이벤트 확장 방법](EVENT_SYSTEM.md)을 참고하세요.
 
 계정·세션, 플레이어 재화, 도감·육성, 도전·팀·도구, 상대·배틀·행동, 보상·정산 상태를 저장합니다. 서버가 소유권을 확인하고 자원 소비와 보상을 트랜잭션으로 처리합니다.
 

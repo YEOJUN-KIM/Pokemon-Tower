@@ -1,5 +1,8 @@
 import {ChallengerEvents} from './challenger-events';
-import type {ChallengerDefinition} from '../data/challengers';
+import type {SavedChallengerDefinition} from '../data/challengers';
+import {trainNpcTeam} from './npc-training';
+import {generateNpcEncounter} from './npc-encounters';
+import {npcSamples,npcTrainerSample} from '../data/npc-samples';
 import {spendCoins,grantCoins} from './player-wallet';
 import {RunEvents} from './run-events';
 import {isTrainerEquipment,type TrainerEquipment} from '../data/trainer-equipment';
@@ -23,6 +26,7 @@ import type { BattleView, MachineOffer, RunView, TowerView } from '../shared/con
 import { BattleRequestError } from './request-error';
 import {initializeTowerDatabase} from './storage/migrations';
 import {transaction} from './storage/transaction';
+import {formTrainingSettings,trainingFormProfile,saveTrainingForm} from './storage/form-training';
 import {moveLearnsets} from './move-learnsets';
 import {profileLearnset} from './move-learnsets';
 import {familyForms,selectedForm,collectionSpecies,separateForms,baseFormName} from '../data/selectable-forms';
@@ -239,6 +243,7 @@ export class TowerStore {
       this.db.prepare('INSERT INTO run_themes VALUES (?,?)').run(id,theme);
       this.db.prepare('INSERT INTO run_routes(run_id,second_theme) VALUES (?,?)').run(id,secondTowerTheme(id,theme));
       this.db.prepare('INSERT INTO run_progression VALUES (?,?)').run(id,CURRENT_PROGRESSION);
+      this.db.prepare('INSERT INTO run_npc_rules VALUES (?,1)').run(id);
       if(options.events)this.events.enable(id);
       this.db.prepare('INSERT INTO run_tera_tickets VALUES (?,0)').run(id);
       selected.forEach((name, slot) => this.db.prepare('INSERT INTO members VALUES (?, ?, ?)').run(id, slot, name));
@@ -286,15 +291,18 @@ export class TowerStore {
     this.db.prepare("UPDATE runs SET state='battle' WHERE id=?").run(runId);
     return id;
   }
-  private createBattle(runId: string, floor: number, selected: string[],challenger?:ChallengerDefinition): string {
+  private createBattle(runId: string, floor: number, selected: string[],challenger?:SavedChallengerDefinition): string {
     const pending=this.retryState(runId).pending_battle_id;
     if(pending)return this.createRetryBattle(runId,selected,pending);
     const rule=this.runRule(runId);
+    const rankedChallenger=challenger&&'rank' in challenger?challenger:undefined;
+    const oldChallenger=challenger&&!('rank' in challenger)?challenger:undefined;
+    if(rankedChallenger&&!rankedChallenger.encounter)throw new BattleRequestError('저장된 도전자 팀을 찾을 수 없습니다.',409);
     const config = floors[floor - 1];
     if (!config) throw new BattleRequestError('지원하지 않는 층입니다.', 400);
     const id = randomUUID();
     const bytes = randomBytes(8);
-    const seed: Seed = [0, 2, 4, 6].map(i => bytes.readUInt16BE(i)) as Seed;
+    const seed: Seed = rankedChallenger?.encounter?.seed??[0, 2, 4, 6].map(i => bytes.readUInt16BE(i)) as Seed;
     const profiles=JSON.parse((this.db.prepare('SELECT profiles FROM runs WHERE id=?').get(runId) as {profiles:string}).profiles) as Record<string,TrainingProfile>;
     const progression:TowerProgression=(this.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(runId) as {version:typeof CURRENT_PROGRESSION}|undefined)?.version ?? 'legacy';
     const previous=this.db.prepare('SELECT opponent_team,trainer FROM battles WHERE run_id=? ORDER BY floor DESC, stage DESC LIMIT 3').all(runId) as {opponent_team:string;trainer:string|null}[];
@@ -319,33 +327,38 @@ export class TowerStore {
     const fixedVillain=progression!=='legacy'&&villain?normalNpcTemplate(villain.id,floor,villain.role):null;
     const filteredVillain=villain ? {...villain,...(fixedVillain?{entries:fixedVillain.team.map(p=>p.species),ace:fixedVillain.ace}:{entries:villain.entries!.filter(name=>pool.includes(name))})} : null;
     const eligible=filteredVillain && (!filteredVillain.ace || filteredVillain.entries.includes(filteredVillain.ace)) ? filteredVillain : null;
-    const sample:TrainerSample|undefined=challenger?{id:challenger.trainerId,name:challenger.title,title:'도전자',kind:challenger.kind,generation:null,specialty:null,tactic:challenger.tactic,portrait:challenger.portrait,minFloor:1,concept:challenger.battleStyle}:trainer ? undefined : eligible && eligible.entries.length>=3 ? eligible : selectTrainerSample(floor,seed,previous.flatMap(row=>{const saved=row.trainer ? JSON.parse(row.trainer) : null;const entry=trainerCatalog.find(s=>s.id===saved?.id);return entry ? [{id:entry.id,specialty:entry.specialty}] : [];}),progression);
-    const encounterFloor=challenger?Math.max(floor<=50?1:51,Math.min(floor<=50?50:100,floor+challenger.floorOffset)):floor;
-    const encounter=generateOpponentTeam(encounterFloor,seed,previous.flatMap(row=>(Showdown.Teams.unpack(row.opponent_team) ?? []).map(set=>set.species)),trainer,sample,progression);
+    const common=!!this.db.prepare('SELECT 1 FROM run_npc_rules WHERE run_id=?').get(runId);
+    const sample:TrainerSample|undefined=rankedChallenger?npcTrainerSample(rankedChallenger.encounter!.sample,rankedChallenger.encounter!.rank):oldChallenger?{id:oldChallenger.trainerId,name:oldChallenger.title,title:'도전자',kind:oldChallenger.kind,generation:null,specialty:null,tactic:oldChallenger.tactic,portrait:oldChallenger.portrait,minFloor:1,concept:oldChallenger.battleStyle}:trainer ? undefined : eligible && eligible.entries.length>=3 ? eligible : selectTrainerSample(floor,seed,previous.flatMap(row=>{const saved=row.trainer ? JSON.parse(row.trainer) : null;const entry=[...trainerCatalog,...npcSamples.map(s=>npcTrainerSample(s,s.defaultRank))].find(s=>s.id===saved?.id);return entry ? [{id:entry.id,specialty:entry.specialty}] : [];}),progression,{common});
+    const legacyChallenger=oldChallenger&&!oldChallenger.trainingTier?oldChallenger:undefined;
+    const encounterFloor=legacyChallenger?Math.max(floor<=50?1:51,Math.min(floor<=50?50:100,floor+legacyChallenger.floorOffset)):floor;
+    const concept=sample?.npcRank?npcSamples.find(s=>s.id===sample.id):undefined;
+    const rankedEncounter=rankedChallenger?structuredClone(rankedChallenger.encounter!):concept?generateNpcEncounter(floor,seed,concept,sample!.npcRank!,rule,progression):null;
+    const generated=rankedEncounter?.team??generateOpponentTeam(encounterFloor,seed,previous.flatMap(row=>(Showdown.Teams.unpack(row.opponent_team) ?? []).map(set=>set.species)),trainer,sample,progression);
+    const encounter=oldChallenger?.trainingTier?trainNpcTeam(generated,floor,oldChallenger.trainingTier,oldChallenger.tactic,seed,rule):generated;
     const npcId=sample?.id ?? trainer?.boss.id ?? '';
     const npcGeneration=sample?.generation ?? trainer?.boss.generation ?? null;
     const npcAce=sample?.ace ?? trainer?.ace;
     const template=progression!=='legacy'&&(trainer || sample?.kind==='named')?normalNpcTemplate(npcId,floor,sample?.role ?? trainer?.boss.role):null;
-    let signature:NpcGimmick|null=null;
-    const npcGimmicksAllowed=normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'));
+    let signature:NpcGimmick|null=rankedEncounter?.gimmick??null;
+    const npcGimmicksAllowed=rankedEncounter?!!signature:normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'));
     if(progression!=='legacy' && npcGimmicksAllowed && (trainer || sample?.kind==='named')){
       const plan=template?.signature ?? npcGimmick(npcId,npcGeneration,encounter.map(p=>p.name),npcAce?npcSpecies(npcAce,npcId,npcGeneration):undefined);
       const carrier=encounter.find(p=>p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
       signature=carrier?{rule:primalOrbs[carrier.item!]? 'primal':megaStones[carrier.item!]? 'mega':carrier.item===DYNAMAX_ITEM?'dynamax':'z',species:carrier.name,item:carrier.item}:plan?.rule==='tera'?plan:null;
       if(trainer && signature)trainer.boss.gimmick=signature;
     }
-    if(challenger)for(const entry of encounter){
-      if(challenger.attacksOnly)entry.moves=entry.moves.filter(move=>Showdown.Dex.moves.get(move).category!=='Status');
+    if(legacyChallenger)for(const entry of encounter){
+      if(legacyChallenger.attacksOnly)entry.moves=entry.moves.filter(move=>Showdown.Dex.moves.get(move).category!=='Status');
       if(!entry.moves.length)entry.moves=[...pokemonSets[entry.name].moves];
-      if(challenger.fallbackItem && !entry.item && allowsRuleItem(rule,challenger.fallbackItem))entry.item=challenger.fallbackItem;
+      if(legacyChallenger.fallbackItem && !entry.item && allowsRuleItem(rule,legacyChallenger.fallbackItem))entry.item=legacyChallenger.fallbackItem;
     }
     const opponents=encounter.map(entry=>entry.name);
     const opponentProfiles=Object.fromEntries(encounter.map(({name,moves,ability,profile})=>{
       return [name,{shiny:this.roll(8192)===0,...(profile ?? opponentProfile(name,moves,encounterFloor,Object.fromEntries(statKeys.map(stat=>[stat,randomBytes(1)[0]%32])) as StatBlock,progression)),gender:speciesGender(name,this.roll(1000000)/1000000),...(ability ? {ability} : {})}];
     }));
-    if(challenger)for(const profile of Object.values(opponentProfiles)){
-      for(const stat of statKeys){profile.evs[stat]=Math.min(32,Math.floor(profile.evs[stat]*challenger.trainingScale));profile.ivs[stat]=Math.min(31,Math.floor(profile.ivs[stat]*challenger.trainingScale));}
-      profile.evs.hp=Math.min(32,profile.evs.hp+(challenger.hpPoints??0));
+    if(legacyChallenger)for(const profile of Object.values(opponentProfiles)){
+      for(const stat of statKeys){profile.evs[stat]=Math.min(32,Math.floor(profile.evs[stat]*legacyChallenger.trainingScale));profile.ivs[stat]=Math.min(31,Math.floor(profile.ivs[stat]*legacyChallenger.trainingScale));}
+      profile.evs.hp=Math.min(32,profile.evs.hp+(legacyChallenger.hpPoints??0));
       const total=statKeys.reduce((sum,stat)=>sum+profile.evs[stat],0);
       if(total>66)for(const stat of statKeys)profile.evs[stat]=Math.floor(profile.evs[stat]*66/total);
     }
@@ -356,7 +369,7 @@ export class TowerStore {
     if(sample===eligible && event)this.db.prepare('UPDATE battles SET villain_event=? WHERE id=?').run(JSON.stringify(event.event),id);
     this.db.prepare('UPDATE battles SET battle_items=? WHERE id=?').run(JSON.stringify(this.battleItemBag(runId)),id);
     const hasNpcItem=encounter.some(p=>p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
-    const npcTeraTickets=npcGimmicksAllowed?(signature?.rule==='tera'?1:!hasNpcItem && sample?.kind==='elite'?opponentTeraTickets(floor,'elite'):0):0;
+    const npcTeraTickets=rankedEncounter?(signature?.rule==='tera'?1:0):npcGimmicksAllowed?(signature?.rule==='tera'?1:!hasNpcItem && sample?.kind==='elite'?opponentTeraTickets(floor,'elite'):0):0;
     this.db.prepare('UPDATE battles SET tera_tickets=?,trainer_equipment=? WHERE id=?').run(JSON.stringify({p1:0,p2:progression==='legacy'?(allowsGimmick(rule,'terastallize')?1:0):npcTeraTickets}),JSON.stringify(this.trainerEquipment(runId)),id);
     this.db.prepare("UPDATE runs SET state = 'battle' WHERE id = ?").run(runId);
     if(sample){const theme=this.runTheme(runId);this.db.prepare('UPDATE battles SET trainer=? WHERE id=?').run(JSON.stringify({...trainerView({...sample,...(theme?{generation:towerThemes[theme].generation}: {})}),...(signature?{gimmick:signature}:{})}),id);}
@@ -677,13 +690,14 @@ export class TowerStore {
     const unlocked=this.db.prepare('SELECT species FROM unlocks WHERE player_id=? ORDER BY rowid').all(owner) as {species:string}[];
     return unlocked.filter(({species})=>isCollectibleSpecies(species)).map(({species})=>{
       const saved=this.savedTraining(owner,species),forms=familyForms(species),base=defaultProfile(species);
-      const formOptions=forms.length?[{species,name:baseFormName(species,importedPokemonName(species)),spriteKey:String(separateForms[species]?.id??Showdown.Dex.species.get(species).num),moves:base.moves,ability:base.ability,abilities:trainingOptions(species).abilities,baseStats:trainingOptions(species).baseStats,teraType:base.teraType!},...forms.map(([name,form])=>({species:name,name:form.name,spriteKey:String(form.id),moves:form.moves,ability:form.ability,abilities:form.abilities,baseStats:form.baseStats,teraType:defaultProfile(species,name).teraType!,requiredItem:form.requiredItem}))]:undefined;
+      const formOptions=forms.length?[{species,name:baseFormName(species,importedPokemonName(species)),spriteKey:String(separateForms[species]?.id??Showdown.Dex.species.get(species).num),moves:base.moves,settings:formTrainingSettings(trainingFormProfile(this.db,owner,species,saved.profile,species)),ability:base.ability,abilities:trainingOptions(species).abilities,baseStats:trainingOptions(species).baseStats,teraType:base.teraType!},...forms.map(([name,form])=>({species:name,name:form.name,spriteKey:String(form.id),moves:form.moves,settings:formTrainingSettings(trainingFormProfile(this.db,owner,species,saved.profile,name)),ability:form.ability,abilities:form.abilities,baseStats:form.baseStats,teraType:defaultProfile(species,name).teraType!,requiredItem:form.requiredItem}))]:undefined;
       return {species,genders:genderOptions(species),...saved,...trainingOptions(species,saved.profile.forme),selfMoves:profileLearnset(species,saved.profile.forme).selfMoves,unlockedMoves:this.unlockedMoves(owner,species),...(formOptions?{formOptions}:{})};
     });
   }
   private unlockedMoves(owner:string,species:string):string[] {
     const saved=this.savedTraining(owner,species);
-    return [...new Set([...moveLearnsets[species].selfMoves,...profileLearnset(species,saved.profile.forme).selfMoves,...saved.profile.moves,...(this.db.prepare('SELECT move FROM move_unlocks WHERE player_id=? AND species=?').all(owner,species) as {move:string}[]).map(row=>row.move)])];
+    const formMoves=(this.db.prepare('SELECT settings FROM pokemon_form_training WHERE player_id=? AND base_species=?').all(owner,species) as {settings:string}[]).flatMap(row=>(JSON.parse(row.settings) as import('../data/training').FormTrainingSettings).moves);
+    return [...new Set([...formMoves,...moveLearnsets[species].selfMoves,...profileLearnset(species,saved.profile.forme).selfMoves,...saved.profile.moves,...(this.db.prepare('SELECT move FROM move_unlocks WHERE player_id=? AND species=?').all(owner,species) as {move:string}[]).map(row=>row.move)])];
   }
   private machinePartners(owner:string,runId:string) {
     const profiles=this.boostedProfiles(runId,this.runProfiles(runId));
@@ -702,7 +716,7 @@ export class TowerStore {
     const saved=this.db.prepare('SELECT profile,revision FROM pokemon_training WHERE player_id=? AND species=?').get(owner,species) as {profile:string;revision:number}|undefined;
     const profile:TrainingProfile=saved ? {...defaultProfile(species),...JSON.parse(saved.profile)} : defaultProfile(species);
     profile.gender ??= saved ? pokemonSets[species].gender as import('../data/gender').PokemonGender : collectionGender(species,owner);
-    return {profile,revision:saved?.revision ?? 0};
+    return {profile:trainingFormProfile(this.db,owner,species,profile),revision:saved?.revision ?? 0};
   }
   train(owner:string,name:string,revision:number,value:unknown,adjustment?:{id:string;floor:number;snapshot:string}) {
     this.tx(()=>{
@@ -716,11 +730,14 @@ export class TowerStore {
       const profile={...validateProfile(name,value),gender:(value as TrainingProfile).gender ?? before.profile.gender,shiny:before.profile.shiny ?? false};
       const formChanged=profile.forme!==(run?this.runProfiles(run.id)[name]?.forme:before.profile.forme);
       if(run&&formChanged)throw new BattleRequestError('모습은 출발 전에 설정하세요.',400);
-      const cost=trainingCost(formChanged?{...before.profile,ability:defaultProfile(name,profile.forme).ability}:before.profile,profile);
+      const target=trainingFormProfile(this.db,owner,name,before.profile,profile.forme??name);
+      const cost=trainingCost(formChanged?{...before.profile,ability:target.ability}:before.profile,profile);
       const known=new Set([...before.unlockedMoves,...profileLearnset(name,profile.forme).selfMoves]);
       if(profile.moves.some(move=>!known.has(move)))throw new BattleRequestError('아직 해금하지 않은 기술입니다. 상대 포켓몬을 영입해 기술을 모으세요.',400);
       if(statKeys.some(stat=>profile.ivs[stat]!==before.profile.ivs[stat]))throw new BattleRequestError('개체값은 상대 포켓몬 영입으로만 높일 수 있습니다.',400);
       if(!this.db.prepare('UPDATE players SET growth_points=growth_points-? WHERE id=? AND growth_points>=?').run(cost,owner,cost).changes)throw new BattleRequestError('성장 포인트가 부족합니다.',400);
+      saveTrainingForm(this.db,owner,name,before.profile,false);
+      saveTrainingForm(this.db,owner,name,profile);
       this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,name,JSON.stringify(profile),revision+1);
       if(run){const snapshots=this.runProfiles(run.id);snapshots[name]=profile;this.db.prepare('UPDATE runs SET profiles=? WHERE id=?').run(JSON.stringify(snapshots),run.id);}
     });

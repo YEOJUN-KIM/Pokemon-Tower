@@ -1,0 +1,170 @@
+{
+  "checkedOn": "2026-10-16",
+  "index": "https://play.pokemonshowdown.com/sprites/trainers/",
+  "credits": "https://play.pokemonshowdown.com/sprites/trainers/?filter=credited",
+  "policy": "Import only listed game classes without individual artist credits. Custom/unreviewed assets remain TODO; existing credited assets keep their attribution.",
+  "reviewed": [
+    {
+      "portrait": "youngster-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/youngster-gen4.png",
+      "status": "existing",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "8f64b7e6e1becf6e5d796e4849690a3cfce3ffc8dd8f77c3e0ce29e24a7ad5b7"
+    },
+    {
+      "portrait": "lass-gen3",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/lass-gen3.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "0cfe9c12e4a7473f5c2436d4d1e36927252a831b50eef3839143c18d93456202"
+    },
+    {
+      "portrait": "hiker-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/hiker-gen4.png",
+      "status": "existing",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "1f1178e233d3347feebf7fa846872529a1939c171c4c32496e8fe3e932117d37"
+    },
+    {
+      "portrait": "pokemonbreeder-gen3",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/pokemonbreeder-gen3.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "99c2779494fe22c0d968206cc3d937e947065a3856922b836c10108bbbf7b047"
+    },
+    {
+      "portrait": "gentleman-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/gentleman-gen4.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "1f0b0ab6008dc100b9835ae104fd0d973872958711a083a8a11a17718f02afa3"
+    },
+    {
+      "portrait": "blackbelt-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/blackbelt-gen4.png",
+      "status": "existing",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "5af41d44ced104979edacd334831d87b91a913e5d5b53e33ac0fd37605b01dfb"
+    },
+    {
+      "portrait": "scientist-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/scientist-gen4.png",
+      "status": "existing",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "3cf61883d687a520a7bfe16d684b063519dddf24c7f84bd14699d966034bc18b"
+    },
+    {
+      "portrait": "pokemonranger-gen3",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/pokemonranger-gen3.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "1f4c49d136c3f38b2ee081d05e7ac432777691a4816815c0c99a7ab339eaeae7"
+    },
+    {
+      "portrait": "acetrainer-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/acetrainer-gen4.png",
+      "status": "existing",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "f52a8cda9a6ba0e5702e85f5bde26f8d60ff0443b8868b3a86702e72a94c95d4"
+    },
+    {
+      "portrait": "veteran-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/veteran-gen4.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "b6bd6f281ad06a0d2abbac40d859590e254f3674b6f80427739dadf04ebe9e79"
+    },
+    {
+      "portrait": "backpacker",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/backpacker.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "0a5119b65205f9f693c11767825f6eb97a72f9b49ab8b9180321e9f2f90f1ad7"
+    },
+    {
+      "portrait": "schoolkid-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/schoolkid-gen4.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "ac0f2b529aaee4aab0735a078cca2926979e2c2df00c8eede2867334e1881a82"
+    },
+    {
+      "portrait": "psychic-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/psychic-gen4.png",
+      "status": "existing",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "8137a2a0881ae0a59f12255c501774371d51e966e343094ea874514c405f892b"
+    },
+    {
+      "portrait": "aromalady-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/aromalady.png",
+      "status": "existing",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "e5c3568a36f70bc1ab13b5df849e58370f700b51efb618a6b56273e8377b354e"
+    },
+    {
+      "portrait": "fisherman-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/fisherman-gen4.png",
+      "status": "existing",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "a85621f6ea811da2018344ecbb479be917e85220819b41eccb143cae6d89416b"
+    },
+    {
+      "portrait": "worker-gen4",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/worker-gen4.png",
+      "status": "existing",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "27590bd40d262ecfb23ab1b0723d255514921dc166e3482d9a0c97ec3368c081"
+    },
+    {
+      "portrait": "collector",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/collector.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-16",
+      "review": "game-class-no-individual-credit-listed",
+      "sha256": "46489113f0669d6fe966fdf54dce22db2b89cde0695104573455753d08efaa0b"
+    }
+  ],
+  "reviewRequiredCandidates": [
+    {
+      "portrait": "pokemonbreeder-gen7",
+      "artist": "Beliot419",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/pokemonbreeder-gen7.png",
+      "status": "review-required-not-imported"
+    },
+    {
+      "portrait": "pokemonranger-gen6",
+      "artist": "kyledove",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/pokemonranger-gen6.png",
+      "status": "review-required-not-imported"
+    },
+    {
+      "portrait": "veteran-gen7",
+      "artist": "kyledove",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/veteran-gen7.png",
+      "status": "review-required-not-imported"
+    },
+    {
+      "portrait": "acetrainer-gen6",
+      "artist": "kyledove",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/acetrainer-gen6.png",
+      "status": "review-required-not-imported"
+    }
+  ]
+}

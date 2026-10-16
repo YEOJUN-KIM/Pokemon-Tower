@@ -90,9 +90,9 @@ v35는 v1·v2를 허용하도록 `run_event_rules`를 이전하고, 기존 결�
 
 ## 도전자 배틀과 DB v36
 
-- `data/challengers.ts`: ChallengerDefinition 배열·공개 후보 projection·등장 가중치/최소 통과 층. 추가 컨셉은 여기에 정의하고 현재 고정 3명 정책은 별도 확장합니다. 기존 trainer catalog의 TrainerSample 형태와 보유 스프라이트를 사용합니다.
+- `data/challengers.ts`: ChallengerDefinition 배열·공개 후보 projection·등장 가중치/최소 통과 층. 공통 NPC 20개 Sample에서 minFloor·pool·weight로 ID/표시명 중복 없이 3명을 추첨하고 각 후보 Rank를 독립 결정합니다. 실제 육성 팀·기믹·시드까지 발생 시 snapshot합니다. [공통 육성 구조](NPC_TRAINING.md)를 사용합니다. 기존 trainer catalog의 TrainerSample 형태와 보유 스프라이트를 사용합니다.
 - `game/run-events.ts`: 전체 10%와 쿨다운 유지. 층·규칙 버전별로 후보 이벤트를 필터링하고 가중치 추첨합니다. 기본 규칙 인자는 legacy v1이며 서버는 저장 버전을 명시합니다.
-- `challenger_encounters`: event_id 고유, 모든 후보 정의 JSON, selected_id, 현재 battle_id, phase(choice/battle/reward). 후보와 효과 정의는 발생 시 저장해 재접속·데이터 변경으로 바뀌지 않습니다. API view는 공개 표시 필드만 전달합니다.
+- `challenger_encounters`: event_id 고유, 실제 추첨한 후보 3개의 정의 JSON, selected_id, 현재 battle_id, phase(choice/battle/reward). 후보와 효과 정의는 발생 시 저장해 재접속·데이터 변경으로 바뀌지 않습니다. API view는 공개 표시 필드만 전달합니다.
 - `event_reward_selections`: (event_id,selection_id) 고유, 지급 효과가 있는 서버 정의 JSON. 승리 기본 보상과 pending 선택을 같은 트랜잭션에 저장합니다. 기존 result_json에 최종 선택·실제 지급 결과를 저장합니다.
 - run_events는 choice/reward/complete를 유지하고 중간 배틀은 sidecar phase로 표현합니다. 선택 저장+배틀 생성, 배틀 완료+즉시 보상+pending 후보, 추가 선택 지급+selected 상태 각각 원자적으로 처리합니다. 신규 테이블만 추가하므로 기존 이벤트·배틀을 재작성하거나 재지급하지 않습니다.
 - TowerStore.createBattle의 선택적 도전자 정의로 기존 팀 생성·패킹·규칙·아이템·BattleSession을 재사용합니다. 같은 floor/stage의 다음 attempt를 배정해 이후 일반층 배틀도 보존합니다. attempt는 배틀 슬롯 식별이며 실제 재도전 소모량은 run_retries.used만 사용합니다. 숨은 보스 stage와 충돌하지 않습니다.
@@ -117,3 +117,5 @@ v35는 v1·v2를 허용하도록 `run_event_rules`를 이전하고, 기존 결�
 
 - `tests/challenger-events.test.ts`·`tests/challenger-fixture.ts`: 결정론적 만남, 복구, 세 배틀의 엔진 진입, 영입 제외, 보상/선택 롤백·재지급 방지, 재도전, 능력 한도.
 - `e2e/challenger-events.spec.ts`: 실제 Chrome PC/모바일 후보·키보드·돌아가기, 배틀 표시, 내부 완료 fixture 후 팝업, 서버 선택 API·동시 중복 및 화면 저장. 전체 전투 승리는 테스트 전용 내부 callback fixture이며 클라이언트 승패 입력 API는 추가하지 않습니다.
+
+새 일반층과 도전자의 공통 구조·v38 런별 규칙·스냅샷 호환·도구/기믹 정책은 [NPC Sample·Rank](NPC_TRAINING.md)를 따릅니다. 신규 보상은 `data/challenger-rewards.ts`, Sample은 `data/npc-samples.ts`, 과거 후보 해석은 `data/legacy-challengers.ts`로 분리합니다.

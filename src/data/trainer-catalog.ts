@@ -2,7 +2,7 @@ import {johtoReferences} from './johto-builds';
 import {regionalTrainerSamples} from './regional-trainers';
 import type {BossView} from '../shared/contracts';
 export type TrainerTactic='balanced'|'physical'|'special'|'speed'|'status'|'setup'|'bulk';
-export type TrainerSample={id:string;name:string;title:string;kind:'normal'|'elite'|'named';generation:number|null;specialty:string|null;tactic:TrainerTactic;portrait:string;role?:BossView['role'];minFloor:number;entries?:readonly string[];ace?:string;concept:string};
+export type TrainerSample={id:string;name:string;title:string;kind:'normal'|'elite'|'named';npcRank?:import('./npc-ranks').NpcRank;generation:number|null;specialty:string|null;tactic:TrainerTactic;portrait:string;role?:BossView['role'];minFloor:number;entries?:readonly string[];ace?:string;concept:string};
 
 const types=[
   ['Normal','반바지 소년','youngster-gen4','balanced','다양한 공격과 무난한 내구'],
@@ -91,5 +91,5 @@ for(const sample of namedTrainerSamples){
 namedTrainerSamples.push(...regionalTrainerSamples);
 export const trainerCatalog=[...normalTrainerSamples,...eliteTrainerSamples,...mixedTrainerSamples,...namedTrainerSamples];
 export function trainerView(sample:TrainerSample):BossView {
-  return {id:sample.id,name:sample.name,title:sample.title,introduction:'',victory:'',defeat:'',...(sample.role ? {role:sample.role} : {}),portrait:sample.portrait,kind:sample.kind,generation:sample.generation,specialty:sample.specialty};
+  return {id:sample.id,name:sample.name,title:sample.title,introduction:'',victory:'',defeat:'',...(sample.role ? {role:sample.role} : {}),...(sample.npcRank?{npcRank:sample.npcRank}:{}),portrait:sample.portrait,kind:sample.kind,generation:sample.generation,specialty:sample.specialty};
 }

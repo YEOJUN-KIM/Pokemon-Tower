@@ -1,6 +1,8 @@
 import type {BossView} from './contracts';
 import {moveTypeNames} from '../data/move-info';
+import {npcRankNames} from '../data/npc-ranks';
 export function trainerLabel(boss:BossView){
+  if(boss.npcRank)return `${boss.name} · ${npcRankNames[boss.npcRank]}`;
   if(boss.id.startsWith('challenger-'))return boss.name;
   const named=boss.kind==='named'||/^(named-|gym-leader-|elite-four-|champion-)/.test(boss.id);
   if(!named)return boss.kind==='elite'||boss.title==='엘리트 트레이너'?'엘리트 트레이너':boss.title||boss.name;

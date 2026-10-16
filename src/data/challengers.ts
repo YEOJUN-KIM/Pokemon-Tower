@@ -1,19 +1,31 @@
+import type {SavedChallengerDefinition as LegacySavedChallenger,ChallengerCandidate} from './legacy-challengers';
+import {challengerRewardProfiles as rewards} from './challenger-rewards';
+import {npcSamples,npcTacticHints,type NpcSample} from './npc-samples';
+import {npcRankNames,challengerRankWeights,drawNpcRank,npcRankTraining,type NpcRank,type NpcRankTraining} from './npc-ranks';
+import type {NpcEncounterSnapshot} from '../server/npc-encounters';
 import type {RewardOption,RewardSelectionDefinition} from './rewards';
-import type {TrainerSample} from './trainer-catalog';
 
-export type ChallengerDefinition={id:string;trainerId:string;title:string;difficulty:string;danger:number;battleStyle:string;rewardPreview:string;portrait:string;kind:TrainerSample['kind'];tactic:TrainerSample['tactic'];floorOffset:number;trainingScale:number;hpPoints:number;attacksOnly?:boolean;fallbackItem?:string;rewardDefinition:RewardOption;selections?:readonly RewardSelectionDefinition[]};
+export type ChallengerDefinition=ChallengerCandidate&{rank:NpcRank;sample:NpcSample;training:NpcRankTraining;tactic:NpcSample['tactic'];specialty:string|null;kind:'normal';minFloor:number;weight:number;rewardProfile:'low'|'medium'|'high';rewardDefinition:RewardOption;selections?:readonly RewardSelectionDefinition[];encounter?:NpcEncounterSnapshot};
+export type SavedChallengerDefinition=ChallengerDefinition|LegacySavedChallenger;
+export type {ChallengerCandidate};
 export const challengerSettings={weight:20,minFloor:1} as const;
-export const challengers:readonly ChallengerDefinition[]=[
- {id:'easy',trainerId:'challenger-breeder',title:'신중한 브리더',difficulty:'쉬움',danger:1,battleStyle:'기본 공격 위주 · 낮은 육성',rewardPreview:'타워 코인 300',portrait:'aromalady-gen4',kind:'normal',tactic:'physical',floorOffset:-3,trainingScale:.6,hpPoints:0,attacksOnly:true,rewardDefinition:{id:'challenger-easy',title:'전투 보상',tone:'good',entries:[{kind:'coins',amount:300}]}},
- {id:'medium',trainerId:'challenger-gentleman',title:'부유한 신사',difficulty:'보통',danger:2,battleStyle:'균형 잡힌 팀 · 높은 육성',rewardPreview:'타워 코인 700 · 알 뽑기권 1장',portrait:'faba',kind:'normal',tactic:'balanced',floorOffset:3,trainingScale:1.1,hpPoints:3,rewardDefinition:{id:'challenger-medium',title:'전투 보상',tone:'good',entries:[{kind:'coins',amount:700},{kind:'egg-ticket',amount:1}]}},
- {id:'hard',trainerId:'challenger-tactician',title:'숙련 전술가',difficulty:'어려움',danger:3,battleStyle:'상위급 팀 · 강화 기술과 도구',rewardPreview:'타워 코인 1,000 · 추가 보상 3개 중 1개',portrait:'acetrainer-gen4',kind:'elite',tactic:'setup',floorOffset:8,trainingScale:1.4,hpPoints:7,fallbackItem:'Leftovers',rewardDefinition:{id:'challenger-hard',title:'전투 보상',tone:'great',entries:[{kind:'coins',amount:1000}]},selections:[{id:'bonus',title:'고급 추가 보상',candidates:[
-  {id:'coins',label:'타워 코인 1,000',effects:[{kind:'coins',amount:1000}]},
-  {id:'tickets',label:'알 뽑기권 3장',effects:[{kind:'egg-ticket',amount:3}]},
-  {id:'mixed',label:'타워 코인 500 + 알 뽑기권 1장',effects:[{kind:'coins',amount:500},{kind:'egg-ticket',amount:1}]},
- ]}]},
-];
-export type ChallengerCandidate=Pick<ChallengerDefinition,'id'|'trainerId'|'title'|'difficulty'|'danger'|'battleStyle'|'rewardPreview'|'portrait'>;
-export function challengerCandidate(definition:ChallengerDefinition):ChallengerCandidate{
+export function challengerDefinition(sample:NpcSample,rank:NpcRank,floor:number):ChallengerDefinition{
+ const rewardProfile=rank==='normal'?'low':rank==='elite'?'medium':'high';
+ return {id:sample.id,trainerId:sample.id,title:sample.displayName,portrait:sample.portrait,difficulty:npcRankNames[rank],danger:rank==='normal'?1:rank==='elite'?2:3,battleStyle:npcTacticHints[sample.tactic],rewardPreview:rewardProfile==='low'?'타워 코인 300':rewardProfile==='medium'?'타워 코인 700 · 알 뽑기권 1장':'타워 코인 1,000 · 추가 보상 3개 중 1개',rank,sample:structuredClone(sample),training:npcRankTraining(floor,rank),tactic:sample.tactic,specialty:sample.specialty,kind:'normal',minFloor:sample.minFloor,weight:sample.weight,rewardProfile,...structuredClone(rewards[rewardProfile])};
+}
+export function drawChallengers(floor:number,random:()=>number,pool:readonly NpcSample[]=npcSamples):ChallengerDefinition[]{
+ let eligible=pool.filter(s=>s.pools.includes('challenger')&&s.minFloor<=floor&&s.weight>0);
+ const result:ChallengerDefinition[]=[];
+ while(result.length<3){
+  if(!eligible.length)throw Error('At least three distinct eligible challenger classes are required');
+  let ticket=random()*eligible.reduce((sum,s)=>sum+s.weight,0);
+  const sample=eligible.find(s=>(ticket-=s.weight)<0)??eligible.at(-1)!;
+  result.push(challengerDefinition(sample,drawNpcRank(challengerRankWeights,random),floor));
+  eligible=eligible.filter(s=>s.id!==sample.id&&s.displayName!==sample.displayName);
+ }
+ return result;
+}
+export function challengerCandidate(definition:SavedChallengerDefinition):ChallengerCandidate{
  const {id,trainerId,title,difficulty,danger,battleStyle,rewardPreview,portrait}=definition;
  return {id,trainerId,title,difficulty,danger,battleStyle,rewardPreview,portrait};
 }

@@ -5,6 +5,7 @@ import {DatabaseSync} from 'node:sqlite';
 import Showdown from 'pokemon-showdown';
 import {TowerStore} from '../src/server/tower-store';
 import {towerDifficulty} from '../src/data/tower-progression';
+import {npcRankTraining} from '../src/data/npc-ranks';
 import {floors} from '../src/data/floors';
 import {starters,packTeam,pokemonSets} from '../src/data/teams';
 import {isShopFloor} from '../src/data/shop';
@@ -44,7 +45,9 @@ test('one hundred real battle results progress through every checkpoint and only
         if(savedBoss.gimmick.item)assert.ok(original.some(set=>set.species===savedBoss.gimmick.species && set.item===savedBoss.gimmick.item));
         const {gimmick,...identity}=savedBoss;assert.deepEqual(identity,boss);
       }else assert.deepEqual(savedBoss,boss);
-      assert.equal(original.reduce((sum,set)=>sum+Object.values((set.evs ?? {}) as Record<string,number>).reduce((s,n)=>s+n,0),0),3*towerDifficulty(floor).points);
+      const rank=row.trainer?JSON.parse(row.trainer).npcRank:undefined;
+      const points=rank?npcRankTraining(floor,rank).evBudget:towerDifficulty(floor).points;
+      assert.equal(original.reduce((sum,set)=>sum+Object.values((set.evs ?? {}) as Record<string,number>).reduce((s,n)=>s+n,0),0),3*points);
       // Weak deterministic opponents isolate progression from win-rate tuning. No winner is injected.
       const enemy=packTeam(['Unown','Luvdisc','Delibird']);
       store.db.prepare('UPDATE battles SET opponent_team=?,seed=? WHERE id=?').run(enemy,'[1,2,3,4]',id);

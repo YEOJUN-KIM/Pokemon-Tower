@@ -1,5 +1,7 @@
 # 출처와 재사용
 
+2026-10-16 공통 NPC 클래스 확장: Showdown 원본 목록과 개별 아티스트 표기를 확인한 뒤 게임 기반 클래스 PNG 8종(lass-gen3, pokemonbreeder-gen3, gentleman-gen4, pokemonranger-gen3, veteran-gen4, backpacker, schoolkid-gen4, collector)을 수정 없이 추가했다. 이번 선택 자산에는 개별 아티스트 표기가 없었다. 제공원의 식별자·URL·SHA-256·확인일은 [초상화 출처 목록](../../public/sprites/trainers/sources.json), 반입/보류 구분은 [검토 결과](../../artifacts/reports/npc/npc-sprite-review.json)에 기록한다. 개별 크레딧이 있는 pokemonbreeder-gen7(Beliot419), pokemonranger-gen6/veteran-gen7/acetrainer-gen6(kyledove)은 검토 후보로만 남기고 다운로드하지 않았다. 기존 원작 이미지 권리와 Showdown 엔진 라이선스의 구분을 유지한다.
+
 2026-10-14 테라스탈 선택 아이콘: [Pokémon Showdown 타입 이미지](https://play.pokemonshowdown.com/sprites/types/)의 `Tera{Type}.png` 19종을 수정 없이 `public/sprites/gimmicks/tera/`에 저장했다. 테라스탈 버튼에서 현재 타입의 보석 아이콘을 표시한다. [개별 URL·해시](../../public/sprites/gimmicks/tera/sources.json)를 보존하며 재현은 `scripts/import-tera-type-icons.mjs`다. 기존 Pokémon 이미지의 원작 권리 구분을 따른다.
 
 2026-10-14 기믹 도구 개별 아이콘: [PokeAPI/sprites 도구 자료](https://github.com/PokeAPI/sprites/tree/0dc105d5b12416932f29b594078282ab4be045f5/sprites/items)에서 메가스톤 48개와 Z크리스탈 34개의 PNG를 수정 없이 저장했다. 메가스톤은 개별 이름의 PNG를 사용하고 망나뇽나이트는 gen9 자료를 사용한다. Z크리스탈은 타입별 18개·전용 16개의 가방 아이콘을 각 도구 이름에 연결했다. 출처 URL·고정 커밋·크기·SHA256은 [아이콘 출처 목록](../../public/sprites/items/gimmick-icon-sources.json)에 기록한다. 재현 도구는 `scripts/import-gimmick-item-icons.mjs`다. 기존 포켓몬 이미지의 권리 구분을 동일하게 따른다.

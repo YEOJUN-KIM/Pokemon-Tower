@@ -96,6 +96,10 @@ CREATE TABLE IF NOT EXISTS pokemon_training (
   profile TEXT NOT NULL, revision INTEGER NOT NULL CHECK(revision>0),
   PRIMARY KEY(player_id,species)
 ) STRICT;
+CREATE TABLE IF NOT EXISTS pokemon_form_training (
+  player_id TEXT NOT NULL REFERENCES players(id), form_species TEXT NOT NULL, base_species TEXT NOT NULL,
+  settings TEXT NOT NULL CHECK(json_valid(settings)), PRIMARY KEY(player_id,form_species)
+) STRICT;
 CREATE TABLE IF NOT EXISTS move_unlocks (
   player_id TEXT NOT NULL REFERENCES players(id), species TEXT NOT NULL, move TEXT NOT NULL,
   PRIMARY KEY(player_id,species,move)
@@ -127,6 +131,7 @@ CREATE TABLE IF NOT EXISTS run_progression (
   run_id TEXT PRIMARY KEY REFERENCES runs(id),
   version TEXT NOT NULL CHECK(version IN ('hundred-floor-v1'))
 ) STRICT;
+CREATE TABLE IF NOT EXISTS run_npc_rules(run_id TEXT PRIMARY KEY REFERENCES runs(id),version INTEGER NOT NULL CHECK(version=1)) STRICT;
 CREATE TABLE IF NOT EXISTS shop_rerolls(run_id TEXT NOT NULL REFERENCES runs(id),floor INTEGER NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('items','machines')),count INTEGER NOT NULL CHECK(count>=0),PRIMARY KEY(run_id,floor,kind)) STRICT;
 CREATE TABLE IF NOT EXISTS shop_receipts(run_id TEXT NOT NULL REFERENCES runs(id),floor INTEGER NOT NULL,kind TEXT NOT NULL,revision INTEGER NOT NULL,product TEXT NOT NULL,buyer TEXT,PRIMARY KEY(run_id,floor,kind,revision,product)) STRICT;
 CREATE TABLE IF NOT EXISTS vitamin_shops(run_id TEXT NOT NULL REFERENCES runs(id),floor INTEGER NOT NULL,offers TEXT NOT NULL,PRIMARY KEY(run_id,floor)) STRICT;
@@ -162,5 +167,5 @@ CREATE TABLE IF NOT EXISTS event_reward_selections(
  event_id TEXT NOT NULL REFERENCES run_events(id),selection_id TEXT NOT NULL,definition_json TEXT NOT NULL CHECK(json_valid(definition_json)),
  PRIMARY KEY(event_id,selection_id)
 ) STRICT;
-  PRAGMA user_version = 36;
+  PRAGMA user_version = 38;
 `;

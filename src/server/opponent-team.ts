@@ -19,6 +19,8 @@ import type {TrainingProfile} from '../data/training';
 import {separateForms} from '../data/selectable-forms';
 import {namedOpponentIVs} from './named-opponent-ivs';
 import {opponentProfile} from './opponent-training';
+import {npcSamples,npcTrainerSample} from '../data/npc-samples';
+import {rankWeights,drawNpcRank} from '../data/npc-ranks';
 
 export function encounterRandom(seed:Seed) {
   let state=seed.reduce((value,part)=>(Math.imul(value,31)+part)>>>0,2166136261);
@@ -67,8 +69,18 @@ export function encounterPool(floor:number,progression:TowerProgression='legacy'
     && (!data[name].legendary || (difficulty?difficulty.legendary:floor>=20)) && (!data[name].mythical || (difficulty?difficulty.mythical:floor>=30))
     && (!data[name].specialist || floor>=(name==='Ditto' ? 4 : 8)));
 }
-export function selectTrainerSample(floor:number,seed:Seed,previous:{id:string;specialty:string|null}[]=[],progression:TowerProgression='legacy'):TrainerSample {
+export function selectTrainerSample(floor:number,seed:Seed,previous:{id:string;specialty:string|null}[]=[],progression:TowerProgression='legacy',options:{common?:boolean}={}):TrainerSample {
   const random=encounterRandom(seed),pool=encounterPool(floor,progression);
+  if(options.common){
+    const ordinary=pool.filter(normalOpponentSpecies);
+    let candidates=npcSamples.filter(s=>s.pools.includes('normal')&&s.minFloor<=floor&&s.weight>0&&(!s.specialty||ordinary.filter(name=>Showdown.Dex.species.get(name).types.includes(s.specialty!)).length>=3));
+    const fresh=candidates.filter(s=>!previous.slice(0,3).some(p=>p.id===s.id)&&(!s.specialty||!previous.slice(0,2).some(p=>p.specialty===s.specialty)));
+    if(fresh.length)candidates=fresh;
+    if(!candidates.length)throw Error('No eligible common NPC sample');
+    let ticket=random()*candidates.reduce((sum,s)=>sum+s.weight,0);
+    const chosen=candidates.find(s=>(ticket-=s.weight)<0)??candidates.at(-1)!;
+    return npcTrainerSample(chosen,drawNpcRank(rankWeights(floor),random));
+  }
   const eligible=(sample:TrainerSample)=>sample.minFloor<=floor && (!sample.specialty || pool.filter(name=>(progression==='legacy'||sample.kind==='elite'||normalOpponentSpecies(name)) && Showdown.Dex.species.get(name).types.includes(sample.specialty!)).length>=3);
   const elite=floor>=(progression==='legacy'?4:11) && random()<(progression==='legacy'?.25:eliteChance(floor)),mixed=random()<.2;
   let candidates=(mixed ? mixedTrainerSamples.filter(s=>(s.kind==='elite')===elite) : elite ? eliteTrainerSamples : normalTrainerSamples).filter(eligible);

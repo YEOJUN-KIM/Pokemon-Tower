@@ -22,7 +22,7 @@ export function TrainingEditor({entry,points,onSave,showMoves=true,inRun=false}:
   useEffect(()=>{setDraft(structuredClone(entry.profile));},[entry.revision]);
   const formOption=entry.formOptions?.find(form=>form.species===(draft.forme??entry.species));
   const shownEntry={...entry,baseStats:formOption?.baseStats??entry.baseStats,abilities:formOption?.abilities??entry.abilities};
-  const total=statKeys.reduce((sum,key)=>sum+draft.evs[key],0),cost=trainingCost(draft.forme!==entry.profile.forme&&formOption?{...entry.profile,ability:formOption.ability}:entry.profile,draft);
+  const total=statKeys.reduce((sum,key)=>sum+draft.evs[key],0),cost=trainingCost(draft.forme!==entry.profile.forme&&formOption?{...entry.profile,ability:formOption.settings?.ability??formOption.ability}:entry.profile,draft);
   const valid=total<=66 && natures.some(nature=>nature.id===draft.nature) && new Set(draft.moves).size===4 && statKeys.every(key=>Number.isInteger(draft.evs[key]) && draft.evs[key]>=0 && draft.evs[key]<=32);
   const changed=JSON.stringify(draft)!==JSON.stringify(entry.profile),nature=natures.find(value=>value.id===draft.nature);
   function updatePoints(key:StatKey,value:number) {

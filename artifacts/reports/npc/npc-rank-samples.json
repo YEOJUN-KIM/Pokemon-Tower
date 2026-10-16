@@ -1,0 +1,1390 @@
+{
+  "seed": [
+    17,
+    29,
+    43,
+    71
+  ],
+  "rule": "basic",
+  "challengerRankWeights": {
+    "normal": 0.5,
+    "elite": 0.42,
+    "master": 0.08
+  },
+  "encounters": [
+    {
+      "version": 1,
+      "sample": {
+        "id": "youngster-balanced",
+        "displayName": "반바지 소년",
+        "portrait": "youngster-gen4",
+        "tactic": "balanced",
+        "specialty": null,
+        "defaultRank": "normal",
+        "minFloor": 1,
+        "weight": 22,
+        "pools": [
+          "normal",
+          "challenger"
+        ]
+      },
+      "rank": "normal",
+      "floor": 5,
+      "seed": [
+        17,
+        29,
+        43,
+        71
+      ],
+      "training": {
+        "rank": "normal",
+        "ivRange": [
+          0,
+          8
+        ],
+        "evBudget": 2,
+        "itemTier": "none",
+        "buildQuality": "balanced",
+        "gimmickChance": 0
+      },
+      "team": [
+        {
+          "name": "Quagsire",
+          "moves": [
+            "Liquidation",
+            "Stomping Tantrum",
+            "Waterfall",
+            "Toxic"
+          ],
+          "profile": {
+            "ivs": {
+              "hp": 2,
+              "atk": 7,
+              "def": 6,
+              "spa": 5,
+              "spd": 6,
+              "spe": 8
+            },
+            "evs": {
+              "hp": 1,
+              "atk": 1,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "moves": [
+              "Liquidation",
+              "Stomping Tantrum",
+              "Waterfall",
+              "Toxic"
+            ],
+            "ability": "Damp",
+            "nature": "Serious",
+            "teraType": "Water",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Clodsire",
+          "moves": [
+            "Poison Jab",
+            "Stomping Tantrum",
+            "Toxic",
+            "Slam"
+          ],
+          "profile": {
+            "ivs": {
+              "hp": 3,
+              "atk": 5,
+              "def": 6,
+              "spa": 3,
+              "spd": 8,
+              "spe": 2
+            },
+            "evs": {
+              "hp": 1,
+              "atk": 1,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "moves": [
+              "Poison Jab",
+              "Stomping Tantrum",
+              "Toxic",
+              "Slam"
+            ],
+            "ability": "Poison Point",
+            "nature": "Serious",
+            "teraType": "Poison",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Watchog",
+          "moves": [
+            "Revenge",
+            "Gunk Shot",
+            "Covet",
+            "Thunder Wave"
+          ],
+          "profile": {
+            "ivs": {
+              "hp": 7,
+              "atk": 3,
+              "def": 4,
+              "spa": 8,
+              "spd": 4,
+              "spe": 4
+            },
+            "evs": {
+              "hp": 1,
+              "atk": 1,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "moves": [
+              "Revenge",
+              "Gunk Shot",
+              "Covet",
+              "Thunder Wave"
+            ],
+            "ability": "Illuminate",
+            "nature": "Serious",
+            "teraType": "Normal",
+            "statSystem": "points"
+          }
+        }
+      ],
+      "gimmick": null
+    },
+    {
+      "version": 1,
+      "sample": {
+        "id": "ace-setup",
+        "displayName": "에이스 트레이너",
+        "portrait": "acetrainer-gen4",
+        "tactic": "setup",
+        "specialty": null,
+        "defaultRank": "elite",
+        "minFloor": 1,
+        "weight": 12,
+        "pools": [
+          "normal",
+          "challenger"
+        ]
+      },
+      "rank": "elite",
+      "floor": 5,
+      "seed": [
+        17,
+        29,
+        43,
+        71
+      ],
+      "training": {
+        "rank": "elite",
+        "ivRange": [
+          10,
+          18
+        ],
+        "evBudget": 22,
+        "itemTier": "competitive",
+        "buildQuality": "optimized",
+        "gimmickChance": 0.4
+      },
+      "team": [
+        {
+          "name": "Clodsire",
+          "moves": [
+            "Gunk Shot",
+            "Earthquake",
+            "Double-Edge",
+            "Toxic"
+          ],
+          "item": "Lum Berry",
+          "profile": {
+            "ivs": {
+              "hp": 12,
+              "atk": 17,
+              "def": 16,
+              "spa": 15,
+              "spd": 16,
+              "spe": 18
+            },
+            "evs": {
+              "hp": 4,
+              "atk": 11,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 7
+            },
+            "moves": [
+              "Gunk Shot",
+              "Earthquake",
+              "Double-Edge",
+              "Toxic"
+            ],
+            "ability": "Poison Point",
+            "nature": "Serious",
+            "teraType": "Poison",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Lilligant-Hisui",
+          "moves": [
+            "Close Combat",
+            "Axe Kick",
+            "Swords Dance",
+            "Low Sweep"
+          ],
+          "item": "Muscle Band",
+          "profile": {
+            "ivs": {
+              "hp": 15,
+              "atk": 16,
+              "def": 13,
+              "spa": 18,
+              "spd": 12,
+              "spe": 11
+            },
+            "evs": {
+              "hp": 4,
+              "atk": 11,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 7
+            },
+            "moves": [
+              "Close Combat",
+              "Axe Kick",
+              "Swords Dance",
+              "Low Sweep"
+            ],
+            "ability": "Chlorophyll",
+            "nature": "Serious",
+            "teraType": "Grass",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Quagsire",
+          "moves": [
+            "Liquidation",
+            "Earthquake",
+            "Hydro Pump",
+            "Toxic"
+          ],
+          "item": "Expert Belt",
+          "profile": {
+            "ivs": {
+              "hp": 17,
+              "atk": 13,
+              "def": 14,
+              "spa": 18,
+              "spd": 14,
+              "spe": 14
+            },
+            "evs": {
+              "hp": 4,
+              "atk": 11,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 7
+            },
+            "moves": [
+              "Liquidation",
+              "Earthquake",
+              "Hydro Pump",
+              "Toxic"
+            ],
+            "ability": "Damp",
+            "nature": "Serious",
+            "teraType": "Water",
+            "statSystem": "points"
+          }
+        }
+      ],
+      "gimmick": null
+    },
+    {
+      "version": 1,
+      "sample": {
+        "id": "veteran-balanced",
+        "displayName": "베테랑",
+        "portrait": "veteran-gen4",
+        "tactic": "balanced",
+        "specialty": null,
+        "defaultRank": "master",
+        "minFloor": 5,
+        "weight": 10,
+        "pools": [
+          "normal",
+          "challenger"
+        ]
+      },
+      "rank": "master",
+      "floor": 5,
+      "seed": [
+        17,
+        29,
+        43,
+        71
+      ],
+      "training": {
+        "rank": "master",
+        "ivRange": [
+          16,
+          24
+        ],
+        "evBudget": 45,
+        "itemTier": "premium",
+        "buildQuality": "optimized",
+        "gimmickChance": 1
+      },
+      "team": [
+        {
+          "name": "Quagsire",
+          "moves": [
+            "Liquidation",
+            "Earthquake",
+            "Waterfall",
+            "Toxic"
+          ],
+          "item": "Life Orb",
+          "profile": {
+            "ivs": {
+              "hp": 18,
+              "atk": 23,
+              "def": 22,
+              "spa": 21,
+              "spd": 22,
+              "spe": 24
+            },
+            "evs": {
+              "hp": 12,
+              "atk": 17,
+              "def": 4,
+              "spa": 0,
+              "spd": 4,
+              "spe": 8
+            },
+            "moves": [
+              "Liquidation",
+              "Earthquake",
+              "Waterfall",
+              "Toxic"
+            ],
+            "ability": "Damp",
+            "nature": "Serious",
+            "teraType": "Water",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Parasect",
+          "moves": [
+            "Leech Life",
+            "Seed Bomb",
+            "Throat Chop",
+            "X-Scissor"
+          ],
+          "item": "Muscle Band",
+          "profile": {
+            "ivs": {
+              "hp": 21,
+              "atk": 22,
+              "def": 19,
+              "spa": 24,
+              "spd": 18,
+              "spe": 17
+            },
+            "evs": {
+              "hp": 12,
+              "atk": 17,
+              "def": 4,
+              "spa": 0,
+              "spd": 4,
+              "spe": 8
+            },
+            "moves": [
+              "Leech Life",
+              "Seed Bomb",
+              "Throat Chop",
+              "X-Scissor"
+            ],
+            "ability": "Effect Spore",
+            "nature": "Serious",
+            "teraType": "Bug",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Watchog",
+          "moves": [
+            "Focus Punch",
+            "Gunk Shot",
+            "Swords Dance",
+            "Hyper Fang"
+          ],
+          "item": "Focus Sash",
+          "profile": {
+            "ivs": {
+              "hp": 19,
+              "atk": 20,
+              "def": 24,
+              "spa": 20,
+              "spd": 20,
+              "spe": 22
+            },
+            "evs": {
+              "hp": 12,
+              "atk": 17,
+              "def": 4,
+              "spa": 0,
+              "spd": 4,
+              "spe": 8
+            },
+            "moves": [
+              "Focus Punch",
+              "Gunk Shot",
+              "Swords Dance",
+              "Hyper Fang"
+            ],
+            "ability": "Illuminate",
+            "nature": "Serious",
+            "teraType": "Normal",
+            "statSystem": "points"
+          }
+        }
+      ],
+      "gimmick": null
+    },
+    {
+      "version": 1,
+      "sample": {
+        "id": "youngster-balanced",
+        "displayName": "반바지 소년",
+        "portrait": "youngster-gen4",
+        "tactic": "balanced",
+        "specialty": null,
+        "defaultRank": "normal",
+        "minFloor": 1,
+        "weight": 22,
+        "pools": [
+          "normal",
+          "challenger"
+        ]
+      },
+      "rank": "normal",
+      "floor": 20,
+      "seed": [
+        17,
+        29,
+        43,
+        71
+      ],
+      "training": {
+        "rank": "normal",
+        "ivRange": [
+          4,
+          11
+        ],
+        "evBudget": 4,
+        "itemTier": "basic",
+        "buildQuality": "balanced",
+        "gimmickChance": 0
+      },
+      "team": [
+        {
+          "name": "Heracross",
+          "moves": [
+            "Lunge",
+            "Brick Break",
+            "Low Kick",
+            "Strength"
+          ],
+          "item": "Sitrus Berry",
+          "profile": {
+            "ivs": {
+              "hp": 10,
+              "atk": 9,
+              "def": 9,
+              "spa": 9,
+              "spd": 11,
+              "spe": 10
+            },
+            "evs": {
+              "hp": 1,
+              "atk": 2,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 1
+            },
+            "moves": [
+              "Lunge",
+              "Brick Break",
+              "Low Kick",
+              "Strength"
+            ],
+            "ability": "Swarm",
+            "nature": "Serious",
+            "teraType": "Bug",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Persian-Alola",
+          "moves": [
+            "Dark Pulse",
+            "Lash Out",
+            "Throat Chop",
+            "Nasty Plot"
+          ],
+          "item": "Lum Berry",
+          "profile": {
+            "ivs": {
+              "hp": 9,
+              "atk": 6,
+              "def": 11,
+              "spa": 6,
+              "spd": 5,
+              "spe": 6
+            },
+            "evs": {
+              "hp": 1,
+              "atk": 0,
+              "def": 0,
+              "spa": 2,
+              "spd": 0,
+              "spe": 1
+            },
+            "moves": [
+              "Dark Pulse",
+              "Lash Out",
+              "Throat Chop",
+              "Nasty Plot"
+            ],
+            "ability": "Fur Coat",
+            "nature": "Serious",
+            "teraType": "Dark",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Beartic",
+          "moves": [
+            "Icicle Crash",
+            "Body Press",
+            "Mega Punch",
+            "Toxic"
+          ],
+          "item": "Wide Lens",
+          "profile": {
+            "ivs": {
+              "hp": 8,
+              "atk": 11,
+              "def": 7,
+              "spa": 7,
+              "spd": 9,
+              "spe": 5
+            },
+            "evs": {
+              "hp": 1,
+              "atk": 2,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 1
+            },
+            "moves": [
+              "Icicle Crash",
+              "Body Press",
+              "Mega Punch",
+              "Toxic"
+            ],
+            "ability": "Snow Cloak",
+            "nature": "Serious",
+            "teraType": "Ice",
+            "statSystem": "points"
+          }
+        }
+      ],
+      "gimmick": null
+    },
+    {
+      "version": 1,
+      "sample": {
+        "id": "ace-setup",
+        "displayName": "에이스 트레이너",
+        "portrait": "acetrainer-gen4",
+        "tactic": "setup",
+        "specialty": null,
+        "defaultRank": "elite",
+        "minFloor": 1,
+        "weight": 12,
+        "pools": [
+          "normal",
+          "challenger"
+        ]
+      },
+      "rank": "elite",
+      "floor": 20,
+      "seed": [
+        17,
+        29,
+        43,
+        71
+      ],
+      "training": {
+        "rank": "elite",
+        "ivRange": [
+          13,
+          20
+        ],
+        "evBudget": 25,
+        "itemTier": "competitive",
+        "buildQuality": "optimized",
+        "gimmickChance": 0.4
+      },
+      "team": [
+        {
+          "name": "Galvantula",
+          "moves": [
+            "Bug Buzz",
+            "Thunderbolt",
+            "Electro Ball",
+            "Toxic"
+          ],
+          "item": "Lum Berry",
+          "profile": {
+            "ivs": {
+              "hp": 15,
+              "atk": 19,
+              "def": 18,
+              "spa": 18,
+              "spd": 18,
+              "spe": 20
+            },
+            "evs": {
+              "hp": 5,
+              "atk": 0,
+              "def": 0,
+              "spa": 13,
+              "spd": 0,
+              "spe": 7
+            },
+            "moves": [
+              "Bug Buzz",
+              "Thunderbolt",
+              "Electro Ball",
+              "Toxic"
+            ],
+            "ability": "Compound Eyes",
+            "nature": "Serious",
+            "teraType": "Bug",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Dugtrio-Alola",
+          "moves": [
+            "Earthquake",
+            "High Horsepower",
+            "Swords Dance",
+            "Double-Edge"
+          ],
+          "item": "Muscle Band",
+          "profile": {
+            "ivs": {
+              "hp": 15,
+              "atk": 18,
+              "def": 18,
+              "spa": 15,
+              "spd": 20,
+              "spe": 15
+            },
+            "evs": {
+              "hp": 5,
+              "atk": 13,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 7
+            },
+            "moves": [
+              "Earthquake",
+              "High Horsepower",
+              "Swords Dance",
+              "Double-Edge"
+            ],
+            "ability": "Sand Veil",
+            "nature": "Serious",
+            "teraType": "Ground",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Scizor",
+          "moves": [
+            "Bullet Punch",
+            "X-Scissor",
+            "Swords Dance",
+            "Steel Wing"
+          ],
+          "item": "Expert Belt",
+          "profile": {
+            "ivs": {
+              "hp": 19,
+              "atk": 15,
+              "def": 17,
+              "spa": 20,
+              "spd": 16,
+              "spe": 16
+            },
+            "evs": {
+              "hp": 5,
+              "atk": 13,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 7
+            },
+            "moves": [
+              "Bullet Punch",
+              "X-Scissor",
+              "Swords Dance",
+              "Steel Wing"
+            ],
+            "ability": "Technician",
+            "nature": "Serious",
+            "teraType": "Bug",
+            "statSystem": "points"
+          }
+        }
+      ],
+      "gimmick": null
+    },
+    {
+      "version": 1,
+      "sample": {
+        "id": "veteran-balanced",
+        "displayName": "베테랑",
+        "portrait": "veteran-gen4",
+        "tactic": "balanced",
+        "specialty": null,
+        "defaultRank": "master",
+        "minFloor": 5,
+        "weight": 10,
+        "pools": [
+          "normal",
+          "challenger"
+        ]
+      },
+      "rank": "master",
+      "floor": 20,
+      "seed": [
+        17,
+        29,
+        43,
+        71
+      ],
+      "training": {
+        "rank": "master",
+        "ivRange": [
+          18,
+          25
+        ],
+        "evBudget": 48,
+        "itemTier": "premium",
+        "buildQuality": "optimized",
+        "gimmickChance": 1
+      },
+      "team": [
+        {
+          "name": "Slowking-Galar",
+          "moves": [
+            "Future Sight",
+            "Sludge Wave",
+            "Psychic Noise",
+            "Psyshock"
+          ],
+          "item": "Life Orb",
+          "profile": {
+            "ivs": {
+              "hp": 24,
+              "atk": 23,
+              "def": 23,
+              "spa": 23,
+              "spd": 25,
+              "spe": 24
+            },
+            "evs": {
+              "hp": 13,
+              "atk": 0,
+              "def": 4,
+              "spa": 18,
+              "spd": 4,
+              "spe": 9
+            },
+            "moves": [
+              "Future Sight",
+              "Sludge Wave",
+              "Psychic Noise",
+              "Psyshock"
+            ],
+            "ability": "Curious Medicine",
+            "nature": "Serious",
+            "teraType": "Poison",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Beedrill",
+          "moves": [
+            "X-Scissor",
+            "Poison Jab",
+            "Outrage",
+            "Facade"
+          ],
+          "item": "Muscle Band",
+          "profile": {
+            "ivs": {
+              "hp": 23,
+              "atk": 20,
+              "def": 25,
+              "spa": 20,
+              "spd": 19,
+              "spe": 20
+            },
+            "evs": {
+              "hp": 13,
+              "atk": 18,
+              "def": 4,
+              "spa": 0,
+              "spd": 4,
+              "spe": 9
+            },
+            "moves": [
+              "X-Scissor",
+              "Poison Jab",
+              "Outrage",
+              "Facade"
+            ],
+            "ability": "Swarm",
+            "nature": "Serious",
+            "teraType": "Bug",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Galvantula",
+          "moves": [
+            "Bug Buzz",
+            "Thunderbolt",
+            "Thunder Wave",
+            "Thunder"
+          ],
+          "item": "Wise Glasses",
+          "profile": {
+            "ivs": {
+              "hp": 20,
+              "atk": 22,
+              "def": 25,
+              "spa": 21,
+              "spd": 21,
+              "spe": 23
+            },
+            "evs": {
+              "hp": 13,
+              "atk": 0,
+              "def": 4,
+              "spa": 18,
+              "spd": 4,
+              "spe": 9
+            },
+            "moves": [
+              "Bug Buzz",
+              "Thunderbolt",
+              "Thunder Wave",
+              "Thunder"
+            ],
+            "ability": "Compound Eyes",
+            "nature": "Serious",
+            "teraType": "Bug",
+            "statSystem": "points"
+          }
+        }
+      ],
+      "gimmick": null
+    },
+    {
+      "version": 1,
+      "sample": {
+        "id": "youngster-balanced",
+        "displayName": "반바지 소년",
+        "portrait": "youngster-gen4",
+        "tactic": "balanced",
+        "specialty": null,
+        "defaultRank": "normal",
+        "minFloor": 1,
+        "weight": 22,
+        "pools": [
+          "normal",
+          "challenger"
+        ]
+      },
+      "rank": "normal",
+      "floor": 40,
+      "seed": [
+        17,
+        29,
+        43,
+        71
+      ],
+      "training": {
+        "rank": "normal",
+        "ivRange": [
+          11,
+          16
+        ],
+        "evBudget": 6,
+        "itemTier": "basic",
+        "buildQuality": "balanced",
+        "gimmickChance": 0
+      },
+      "team": [
+        {
+          "name": "Shuckle",
+          "moves": [
+            "Skitter Smack",
+            "Rock Slide",
+            "Bulldoze",
+            "Toxic"
+          ],
+          "item": "Sitrus Berry",
+          "profile": {
+            "ivs": {
+              "hp": 12,
+              "atk": 16,
+              "def": 15,
+              "spa": 14,
+              "spd": 15,
+              "spe": 16
+            },
+            "evs": {
+              "hp": 2,
+              "atk": 3,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 1
+            },
+            "moves": [
+              "Skitter Smack",
+              "Rock Slide",
+              "Bulldoze",
+              "Toxic"
+            ],
+            "ability": "Sturdy",
+            "nature": "Serious",
+            "teraType": "Bug",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Rapidash-Galar",
+          "moves": [
+            "Expanding Force",
+            "Play Rough",
+            "Psychic",
+            "Swords Dance"
+          ],
+          "item": "Lum Berry",
+          "profile": {
+            "ivs": {
+              "hp": 14,
+              "atk": 13,
+              "def": 14,
+              "spa": 15,
+              "spd": 13,
+              "spe": 16
+            },
+            "evs": {
+              "hp": 2,
+              "atk": 3,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 1
+            },
+            "moves": [
+              "Expanding Force",
+              "Play Rough",
+              "Psychic",
+              "Swords Dance"
+            ],
+            "ability": "Run Away",
+            "nature": "Serious",
+            "teraType": "Psychic",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Klinklang",
+          "moves": [
+            "Gear Grind",
+            "Wild Charge",
+            "Thunder Wave",
+            "Uproar"
+          ],
+          "item": "Wide Lens",
+          "profile": {
+            "ivs": {
+              "hp": 12,
+              "atk": 11,
+              "def": 16,
+              "spa": 13,
+              "spd": 14,
+              "spe": 16
+            },
+            "evs": {
+              "hp": 2,
+              "atk": 3,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 1
+            },
+            "moves": [
+              "Gear Grind",
+              "Wild Charge",
+              "Thunder Wave",
+              "Uproar"
+            ],
+            "ability": "Plus",
+            "nature": "Serious",
+            "teraType": "Steel",
+            "statSystem": "points"
+          }
+        }
+      ],
+      "gimmick": null
+    },
+    {
+      "version": 1,
+      "sample": {
+        "id": "ace-setup",
+        "displayName": "에이스 트레이너",
+        "portrait": "acetrainer-gen4",
+        "tactic": "setup",
+        "specialty": null,
+        "defaultRank": "elite",
+        "minFloor": 1,
+        "weight": 12,
+        "pools": [
+          "normal",
+          "challenger"
+        ]
+      },
+      "rank": "elite",
+      "floor": 40,
+      "seed": [
+        17,
+        29,
+        43,
+        71
+      ],
+      "training": {
+        "rank": "elite",
+        "ivRange": [
+          17,
+          22
+        ],
+        "evBudget": 30,
+        "itemTier": "competitive",
+        "buildQuality": "optimized",
+        "gimmickChance": 0.4
+      },
+      "team": [
+        {
+          "name": "Galvantula",
+          "moves": [
+            "Bug Buzz",
+            "Thunderbolt",
+            "Electro Ball",
+            "Toxic"
+          ],
+          "item": "Lum Berry",
+          "profile": {
+            "ivs": {
+              "hp": 18,
+              "atk": 22,
+              "def": 21,
+              "spa": 20,
+              "spd": 21,
+              "spe": 22
+            },
+            "evs": {
+              "hp": 6,
+              "atk": 0,
+              "def": 0,
+              "spa": 15,
+              "spd": 0,
+              "spe": 9
+            },
+            "moves": [
+              "Bug Buzz",
+              "Thunderbolt",
+              "Electro Ball",
+              "Toxic"
+            ],
+            "ability": "Compound Eyes",
+            "nature": "Serious",
+            "teraType": "Bug",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Arcanine-Hisui",
+          "moves": [
+            "Flare Blitz",
+            "Head Smash",
+            "Close Combat",
+            "Will-O-Wisp"
+          ],
+          "item": "Muscle Band",
+          "profile": {
+            "ivs": {
+              "hp": 20,
+              "atk": 19,
+              "def": 20,
+              "spa": 21,
+              "spd": 19,
+              "spe": 22
+            },
+            "evs": {
+              "hp": 6,
+              "atk": 15,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 9
+            },
+            "moves": [
+              "Flare Blitz",
+              "Head Smash",
+              "Close Combat",
+              "Will-O-Wisp"
+            ],
+            "ability": "Intimidate",
+            "nature": "Serious",
+            "teraType": "Fire",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Qwilfish",
+          "moves": [
+            "Liquidation",
+            "Gunk Shot",
+            "Swords Dance",
+            "Barb Barrage"
+          ],
+          "item": "Expert Belt",
+          "profile": {
+            "ivs": {
+              "hp": 17,
+              "atk": 22,
+              "def": 19,
+              "spa": 20,
+              "spd": 22,
+              "spe": 19
+            },
+            "evs": {
+              "hp": 6,
+              "atk": 15,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 9
+            },
+            "moves": [
+              "Liquidation",
+              "Gunk Shot",
+              "Swords Dance",
+              "Barb Barrage"
+            ],
+            "ability": "Poison Point",
+            "nature": "Serious",
+            "teraType": "Water",
+            "statSystem": "points"
+          }
+        }
+      ],
+      "gimmick": null
+    },
+    {
+      "version": 1,
+      "sample": {
+        "id": "veteran-balanced",
+        "displayName": "베테랑",
+        "portrait": "veteran-gen4",
+        "tactic": "balanced",
+        "specialty": null,
+        "defaultRank": "master",
+        "minFloor": 5,
+        "weight": 10,
+        "pools": [
+          "normal",
+          "challenger"
+        ]
+      },
+      "rank": "master",
+      "floor": 40,
+      "seed": [
+        17,
+        29,
+        43,
+        71
+      ],
+      "training": {
+        "rank": "master",
+        "ivRange": [
+          21,
+          26
+        ],
+        "evBudget": 52,
+        "itemTier": "premium",
+        "buildQuality": "optimized",
+        "gimmickChance": 1
+      },
+      "team": [
+        {
+          "name": "Lilligant-Hisui",
+          "moves": [
+            "Close Combat",
+            "Axe Kick",
+            "Low Sweep",
+            "Low Kick"
+          ],
+          "item": "Life Orb",
+          "profile": {
+            "ivs": {
+              "hp": 26,
+              "atk": 25,
+              "def": 24,
+              "spa": 25,
+              "spd": 26,
+              "spe": 26
+            },
+            "evs": {
+              "hp": 15,
+              "atk": 20,
+              "def": 4,
+              "spa": 0,
+              "spd": 4,
+              "spe": 9
+            },
+            "moves": [
+              "Close Combat",
+              "Axe Kick",
+              "Low Sweep",
+              "Low Kick"
+            ],
+            "ability": "Chlorophyll",
+            "nature": "Serious",
+            "teraType": "Grass",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Blastoise",
+          "moves": [
+            "Surf",
+            "Ice Beam",
+            "Scald",
+            "Water Spout"
+          ],
+          "item": "Wise Glasses",
+          "profile": {
+            "ivs": {
+              "hp": 24,
+              "atk": 25,
+              "def": 23,
+              "spa": 26,
+              "spd": 22,
+              "spe": 22
+            },
+            "evs": {
+              "hp": 15,
+              "atk": 0,
+              "def": 5,
+              "spa": 19,
+              "spd": 4,
+              "spe": 9
+            },
+            "moves": [
+              "Surf",
+              "Ice Beam",
+              "Scald",
+              "Water Spout"
+            ],
+            "ability": "Torrent",
+            "nature": "Serious",
+            "teraType": "Water",
+            "statSystem": "points"
+          }
+        },
+        {
+          "name": "Galvantula",
+          "moves": [
+            "Bug Buzz",
+            "Thunderbolt",
+            "Lunge",
+            "Toxic"
+          ],
+          "item": "Focus Sash",
+          "profile": {
+            "ivs": {
+              "hp": 26,
+              "atk": 23,
+              "def": 24,
+              "spa": 26,
+              "spd": 23,
+              "spe": 23
+            },
+            "evs": {
+              "hp": 15,
+              "atk": 0,
+              "def": 5,
+              "spa": 19,
+              "spd": 4,
+              "spe": 9
+            },
+            "moves": [
+              "Bug Buzz",
+              "Thunderbolt",
+              "Lunge",
+              "Toxic"
+            ],
+            "ability": "Compound Eyes",
+            "nature": "Serious",
+            "teraType": "Bug",
+            "statSystem": "points"
+          }
+        }
+      ],
+      "gimmick": null
+    }
+  ]
+}

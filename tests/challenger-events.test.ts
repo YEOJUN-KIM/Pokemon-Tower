@@ -4,7 +4,7 @@ import {randomUUID} from 'node:crypto';
 import {TowerStore} from '../src/server/tower-store';
 import {TowerService} from '../src/server/tower-service';
 import {starters} from '../src/data/teams';
-import {challengers} from '../src/data/challengers';
+import {challengers} from '../src/data/legacy-challengers';
 import {selectRunEvent} from '../src/game/run-events';
 import Showdown from 'pokemon-showdown';
 import {challengerFixture,finishChallengerBattle} from './challenger-fixture';
@@ -32,7 +32,7 @@ test('three persisted candidates, ownership, invalid choice and penalty-free bac
  }finally{store.close();}
 });
 for(const definition of challengers)test(`${definition.id}: selected 3v3, restore, win bypasses recruitment, atomic reward and next normal floor`,async()=>{
- const path=`.data/tests/challenger-${randomUUID()}.sqlite`,fixture=challengerFixture(path);let store=fixture.store;
+ const path=`.data/tests/challenger-${randomUUID()}.sqlite`,fixture=challengerFixture(path,'owner',2,definition.id);let store=fixture.store;
  const {owner,run,event}=fixture;let battleId:string;
  try{
   const candidates=store.view(owner).run!.event!.challengers;store.close();store=new TowerStore(path);
@@ -78,9 +78,8 @@ test('challenger loss uses the existing retry and restores the exact opponent',(
  }finally{store.close();}
 });
 test('challenger training scales with floors and stays within the normal point and IV caps',()=>{
- for(const floor of [5,40,99])for(const definition of challengers){const {store,owner,run,event}=challengerFixture(':memory:','owner',floor);try{
+ for(const floor of [5,40,99])for(const definition of challengers){const {store,owner,run,event}=challengerFixture(':memory:','owner',floor,definition.id);try{
   store.chooseEvent(owner,run,event.id,definition.id);const team=Showdown.Teams.unpack(store.currentBattle(owner)!.opponent_team)!;
-  if(floor===5)assert.ok(team.every(set=>(set.evs?.hp??0)>=definition.hpPoints));
   for(const set of team){assert.ok((Object.values(set.ivs!) as number[]).every(value=>value>=0&&value<=31));assert.ok((Object.values(set.evs??{}) as number[]).every(value=>value>=0&&value<=32));assert.ok((Object.values(set.evs??{}) as number[]).reduce((a,b)=>a+b,0)<=66);}
  }finally{store.close();}}
 });
@@ -109,8 +108,8 @@ test('event on the 50th floor leaves the normal battle slot and hidden boss stag
   assert.equal(store.db.prepare('SELECT COUNT(*) AS n FROM battles WHERE run_id=? AND floor=50').get(run)!.n,2);
  }finally{store.close();}
 });
-for(const floor of [5,40])for(const role of ['easy','medium','hard'])test(`real engine battle at floor ${floor} with ${role} is legal and settles through the existing callback`,async()=>{
- const {store,owner,run,event}=challengerFixture(':memory:','owner',floor);try{
+for(const floor of [5,40])for(const {id:role} of challengers)test(`real engine battle at floor ${floor} with ${role} is legal and settles through the existing callback`,async()=>{
+ const {store,owner,run,event}=challengerFixture(':memory:','owner',floor,role);try{
   store.chooseEvent(owner,run,event.id,role);const battle=store.currentBattle(owner)!;
   const log=await runBattle({teams:{p1:battle.player_team,p2:battle.opponent_team},seed:JSON.parse(battle.seed),format:battle.format,rule:battle.rule,upgrades:JSON.parse(battle.upgrades),teraTickets:JSON.parse(battle.tera_tickets),trainerEquipment:JSON.parse(battle.trainer_equipment!),player:new DamagePolicy(),opponent:new DamagePolicy()});
   assert.ok(log.turns>0);assert.ok(['Player','Tower AI'].includes(log.winner!));

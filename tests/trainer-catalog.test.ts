@@ -14,6 +14,7 @@ import {randomUUID} from 'node:crypto';
 import {existsSync} from 'node:fs';
 import {towerTrainerEncounter} from '../src/data/tower-trainers';
 import {towerThemes} from '../src/data/tower-themes';
+import {npcSamples,npcTrainerSample} from '../src/data/npc-samples';
 
 const seed:[number,number,number,number]=[1,2,3,4];
 function teamFor(sample:typeof trainerCatalog[number]){
@@ -74,13 +75,13 @@ test('boss identities vary by run, preview agrees with battle, and saved identit
   }
 });
 test('saved normal trainer survives reload and never grants a boss reward',()=>{
-  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);try{store.ensurePlayer('trainer');let id='',row;do{id=store.start('trainer',starters);row=store.battle(id);if(JSON.parse(row.trainer!).role==='villain')store.abandon('trainer',row.run_id);}while(JSON.parse(row.trainer!).role==='villain');assert.equal(row.boss,null);assert.ok(row.trainer);const sample=trainerCatalog.find(s=>s.id===JSON.parse(row.trainer!).id)!;assert.deepEqual(store.view('trainer').run!.trainer,{...trainerView(sample),generation:towerThemes[store.view('trainer').run!.theme!].generation});assert.equal(store.view('trainer').run!.boss,null);
+  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);try{store.ensurePlayer('trainer');let id='',row;do{id=store.start('trainer',starters);row=store.battle(id);if(JSON.parse(row.trainer!).role==='villain')store.abandon('trainer',row.run_id);}while(JSON.parse(row.trainer!).role==='villain');assert.equal(row.boss,null);assert.ok(row.trainer);const savedTrainer=JSON.parse(row.trainer!);const common=npcSamples.find(s=>s.id===savedTrainer.id);const sample=common?npcTrainerSample(common,savedTrainer.npcRank):trainerCatalog.find(s=>s.id===savedTrainer.id)!;assert.deepEqual(store.view('trainer').run!.trainer,{...trainerView(sample),generation:towerThemes[store.view('trainer').run!.theme!].generation});assert.equal(store.view('trainer').run!.boss,null);
     store.db.prepare('INSERT INTO rewards VALUES (?,?,?)').run(id,'trainer',100);assert.equal(store.view('trainer').run!.restartReward,20);
     const before=store.view('trainer');store.close();store=new TowerStore(path);assert.deepEqual(store.view('trainer'),before);assert.equal(store.battle(id).opponent_team,row.opponent_team);
   }finally{store.close();}
 });
 test('version ten migration preserves existing parties and creates nullable trainer metadata',()=>{
-  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);try{store.ensurePlayer('legacy');const id=store.start('legacy',starters),before=store.battle(id).opponent_team;store.db.exec('ALTER TABLE battles DROP COLUMN trainer; PRAGMA user_version=10;');store.close();store=new TowerStore(path);assert.equal(store.battle(id).opponent_team,before);assert.equal(store.view('legacy').run!.trainer,null);assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,36);}finally{store.close();}
+  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);try{store.ensurePlayer('legacy');const id=store.start('legacy',starters),before=store.battle(id).opponent_team;store.db.exec('ALTER TABLE battles DROP COLUMN trainer; PRAGMA user_version=10;');store.close();store=new TowerStore(path);assert.equal(store.battle(id).opponent_team,before);assert.equal(store.view('legacy').run!.trainer,null);assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,38);}finally{store.close();}
 });
 test('every sample completes a battle using the existing public-information AI',async()=>{
   for(const sample of trainerCatalog){const {packed}=teamFor(sample);const log=await runBattle({teams:{p1:packTeam(starters),p2:packed},seed,player:new DamagePolicy(),opponent:new TowerPolicy()});assert.ok(log.winner,`${sample.id}: unfinished battle`);}

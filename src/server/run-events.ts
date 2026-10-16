@@ -7,6 +7,8 @@ import {randomUUID} from 'node:crypto';
 import type {DatabaseSync} from 'node:sqlite';
 import {eventDefinitions,currentEventRulesVersion,isRunEventKind,type RunEventRegistry,type RunEventView,type EventReward} from '../data/run-events';
 import {BattleRequestError} from './request-error';
+import type {TowerProgression} from '../data/tower-progression';
+import type {BattleRule} from '../data/run-rules';
 
 type EventRow={id:string;kind:string;choice_id:string|null;result_json:string|null;run_id:string;after_floor:number;status:'choice'|'reward'|'complete';reward_kind:EventReward['kind']|null;amount:number};
 
@@ -21,7 +23,12 @@ export class RunEvents {
   if(!kind)return;
   const eventId=randomUUID();
   this.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status) VALUES (?,?,?,?,'choice')").run(eventId,runId,afterFloor,kind);
-  if(kind==='challenger-selection')new ChallengerEvents(this.db).create(eventId);
+  if(kind==='challenger-selection'){
+   const rule=(this.db.prepare('SELECT rule FROM run_rules WHERE run_id=?').get(runId) as {rule:BattleRule}).rule;
+   const progression=(this.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(runId) as {version:TowerProgression}|undefined)?.version??'legacy';
+   const common=!!this.db.prepare('SELECT 1 FROM run_npc_rules WHERE run_id=?').get(runId);
+   new ChallengerEvents(this.db).create(eventId,afterFloor+1,rule,progression,common);
+  }
  }
  private rulesVersion(runId:string){return (this.db.prepare('SELECT version FROM run_event_rules WHERE run_id=?').get(runId) as {version:number}|undefined)?.version??1;}
  view(runId:string):RunEventView|null{

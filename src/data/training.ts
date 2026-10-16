@@ -23,7 +23,8 @@ export function natureLabel(id:string) {
 }
 // evs stores stat points for new profiles; unmarked snapshots retain legacy EV rules.
 export type TrainingProfile={forme?:string;gender?:import('./gender').PokemonGender;shiny?:boolean;ivs:StatBlock;evs:StatBlock;moves:string[];ability:string;nature:string;teraType?:import('./tera').TeraType;statSystem?:'points';runBonuses?:Partial<StatBlock>};
-export type FormOption={species:string;name:string;spriteKey:string;moves:string[];ability:string;abilities:string[];baseStats:StatBlock;teraType:string;requiredItem?:string};
+export type FormTrainingSettings={moves:string[];ability:string;teraType:import('./tera').TeraType};
+export type FormOption={species:string;name:string;spriteKey:string;moves:string[];ability:string;abilities:string[];baseStats:StatBlock;teraType:string;requiredItem?:string;settings?:FormTrainingSettings};
 export type TrainingView={formOptions?:FormOption[];genders?:import('./gender').PokemonGender[];species:string;profile:TrainingProfile;revision:number;abilities:string[];learnableMoves:string[];selfMoves:string[];unlockedMoves:string[];baseStats:StatBlock};
 export function trainedStat(base:number,iv:number,points:number,key:StatKey,natureId:string) {
   if(key==='hp' && base===1)return 1;

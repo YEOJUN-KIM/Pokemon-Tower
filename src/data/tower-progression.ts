@@ -33,6 +33,7 @@ export function opponentTeraTickets(floor:number,kind:'normal'|'elite'|'named'){
 }
 
 export function eliteChance(floor:number){
+  // Compatibility curve for old runs. New random NPCs use npc-ranks.rankWeights.
   if(floor<11)return 0;
   if(floor<=50)return .08+(floor-11)*.17/39;
   if(floor<=60)return .08+(floor-51)*.04/9;

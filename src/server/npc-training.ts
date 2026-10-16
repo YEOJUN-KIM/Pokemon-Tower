@@ -7,9 +7,9 @@ import {allowsRuleItem,type BattleRule} from '../data/run-rules';
 import {defaultProfile} from './training';
 import {encounterRandom,opponentMoves,gentleMoves,type OpponentEntry} from './opponent-team';
 import type {Seed} from '../battle/run';
-import {improveNpcMoves} from './npc-builds';
+import {improveNpcMoves,npcBuildAttackStat} from './npc-builds';
 
-export function npcTrainingProfile(name:string,moves:string[],floor:number,tier:NpcTrainingTier,tactic:TrainerTactic,random:()=>number,frozenTarget?:NpcTrainingDefinition){
+export function npcTrainingProfile(name:string,moves:string[],floor:number,tier:NpcTrainingTier,tactic:TrainerTactic,random:()=>number,frozenTarget?:NpcTrainingDefinition,buildAttack?:'atk'|'spa'){
  const target=frozenTarget??npcTrainingTargets(floor,tier),profile=defaultProfile(name);
  profile.moves=[...moves];
  profile.ivs=Object.fromEntries(statKeys.map(stat=>[stat,target.ivRange[0]+Math.floor(random()*(target.ivRange[1]-target.ivRange[0]+1))])) as StatBlock;
@@ -22,6 +22,8 @@ export function npcTrainingProfile(name:string,moves:string[],floor:number,tier:
   if(!stat)throw Error('NPC EV budget cannot be allocated');
   profile.evs[stat]++;
  }
+ // Redirect the attack bucket after allocation to preserve rounding and every non-attack EV exactly.
+ if(buildAttack&&buildAttack!==attack)[profile.evs.atk,profile.evs.spa]=[profile.evs.spa,profile.evs.atk];
  return profile;
 }
 
@@ -56,6 +58,6 @@ export function trainNpcTeam(team:OpponentEntry[],floor:number,tier:NpcTrainingT
   if(options.buildRank)moves=improveNpcMoves(entry.name,moves,options.buildRank,tactic);
   const item=index<(options.itemSlots??team.length)?npcItemCandidates(target.itemTier,tactic,moves,!!frozenTarget).find(item=>!used.has(item)&&isHeldItem(item)&&Showdown.Dex.items.get(item).exists&&allowsRuleItem(rule,item)):undefined;
   if(item)used.add(item);
-  return {name:entry.name,moves,item,profile:npcTrainingProfile(entry.name,moves,floor,tier,tactic,random,target)};
+  return {name:entry.name,moves,item,profile:npcTrainingProfile(entry.name,moves,floor,tier,tactic,random,target,options.buildRank?npcBuildAttackStat(entry.name,moves):undefined)};
  });
 }

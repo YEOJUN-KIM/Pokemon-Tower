@@ -70,6 +70,19 @@ function poolFor(name:string):Pool{
 
 export function npcAttackStyle(name:string):AttackStyle{return poolFor(name).style;}
 
+/** Select one EV attack stat from the final build without changing its tactic's weight ratios. */
+export function npcBuildAttackStat(name:string,moves:string[]):'atk'|'spa'|undefined{
+ const attacks=moves.map(m=>dex.moves.get(m)).filter(m=>practical(m)&&m.overrideOffensivePokemon!=='target'&&(!m.overrideOffensiveStat||m.overrideOffensiveStat==='atk'||m.overrideOffensiveStat==='spa'));
+ const physical=attacks.filter(m=>(m.overrideOffensiveStat??(m.category==='Physical'?'atk':'spa'))==='atk');
+ const special=attacks.filter(m=>!physical.includes(m));
+ if(!attacks.length)return undefined; // Transform/Counter and defensive-stat specialists keep their fallback.
+ if(physical.length!==special.length)return physical.length>special.length?'atk':'spa';
+ const value=(selected:Move[])=>selected.reduce((sum,m)=>sum+attackValue(name,m),0);
+ const physicalValue=value(physical),specialValue=value(special);
+ if(physicalValue!==specialValue)return physicalValue>specialValue?'atk':'spa';
+ const stats=offensiveStats(name);return stats.atk>=stats.spa?'atk':'spa';
+}
+
 /** Hard coherence rules, shared with report diagnostics. Showdown legality is checked separately. */
 export function npcBuildIssues(name:string,moves:string[]):string[]{
  if(specialists.has(name))return [];

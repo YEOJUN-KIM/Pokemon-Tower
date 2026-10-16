@@ -81,7 +81,8 @@ test('new build correction is opt-in: Normal and legacy training retain exact mo
   const elite=generateNpcEncounter(floor,seed,sample,'elite'),old=trainNpcTeam(elite.team,floor,'standard',sample.tactic,seed,'basic',npcRankTraining(floor,'elite'),{itemSlots:elite.composition.itemSlots});
   for(let i=0;i<3;i++){
    assert.deepEqual(elite.team[i].profile!.ivs,old[i].profile!.ivs);
-   assert.deepEqual(elite.team[i].profile!.evs,old[i].profile!.evs);
+   assert.equal(Object.values(elite.team[i].profile!.evs).reduce((a,b)=>a+b,0),Object.values(old[i].profile!.evs).reduce((a,b)=>a+b,0));
+   for(const stat of ['hp','def','spd','spe'] as const)assert.equal(elite.team[i].profile!.evs[stat],old[i].profile!.evs[stat]);
   }
  }
  for(const name of ['Ditto','Unown','Wobbuffet','Pyukumuku']){
@@ -104,7 +105,7 @@ test('a pre-change v2 Master snapshot keeps even its old incoherent moves after 
   store.close();store=new TowerStore(path);
   store.chooseEvent(owner,run,event.id,offer.id);
   const original=store.currentBattle(owner)!,sets=Showdown.Teams.unpack(original.opponent_team)!;
-  for(const set of sets){const saved=snapshot.team.find(p=>p.name===set.species)!;assert.deepEqual(set.moves.map(m=>dex.moves.get(m).name),saved.moves);}
+  for(const set of sets){const saved=snapshot.team.find(p=>p.name===set.species)!;assert.deepEqual(set.moves.map(m=>dex.moves.get(m).name),saved.moves);assert.deepEqual(set.ivs,saved.profile!.ivs);assert.deepEqual(set.evs,saved.profile!.evs);assert.equal(set.item,saved.item??'');}
   store.db.prepare('UPDATE run_retries SET retry_limit=1 WHERE run_id=?').run(run);
   finishChallengerBattle(store,original.id,'Tower AI');store.retry(owner,run,original.id);
   const retry=store.enter(owner,run,40,starters);assert.equal(store.battle(retry).opponent_team,original.opponent_team);

@@ -364,7 +364,7 @@
 ### 40층 에이스 트레이너 / elite
 
 - Sample: ace-setup, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 2
-- Octillery (Water): IV 18/22/21/20/21/22 · EV 6/15/0/0/0/9 · Lum Berry · Water Spout, Sludge Wave, Fire Blast, Ice Beam
+- Octillery (Water): IV 18/22/21/20/21/22 · EV 6/0/0/15/0/9 · Lum Berry · Water Spout, Sludge Wave, Fire Blast, Ice Beam
 - Ursaluna-Bloodmoon (Ground/Normal): IV 20/19/20/21/19/22 · EV 6/0/0/15/0/9 · Wise Glasses · Blood Moon, Earth Power, Moonblast, Calm Mind
 - Charizard (Fire/Flying): IV 17/22/19/20/22/19 · EV 6/0/0/15/0/9 · 없음 · Hurricane, Dragon Pulse, Focus Blast, Flamethrower
 
@@ -378,7 +378,7 @@
 ### 40층 베테랑 / elite
 
 - Sample: veteran-balanced, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 2
-- Octillery (Water): IV 18/22/21/20/21/22 · EV 9/12/2/0/2/5 · Wise Glasses · Water Spout, Sludge Wave, Fire Blast, Ice Beam
+- Octillery (Water): IV 18/22/21/20/21/22 · EV 9/0/2/12/2/5 · Wise Glasses · Water Spout, Sludge Wave, Fire Blast, Ice Beam
 - Ursaluna-Bloodmoon (Ground/Normal): IV 20/19/20/21/19/22 · EV 9/0/3/11/2/5 · Expert Belt · Blood Moon, Earth Power, Moonblast, Focus Blast
 - Charizard (Fire/Flying): IV 17/22/19/20/22/19 · EV 9/0/3/11/2/5 · 없음 · Hurricane, Dragon Pulse, Focus Blast, Flamethrower
 

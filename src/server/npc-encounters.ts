@@ -78,7 +78,7 @@ export function generateNpcEncounter(floor:number,seed:Seed,sample:NpcSample,ran
  const ordinary=encounterPool(floor,progression).filter(normalOpponentSpecies);
  const selected=selectNpcMembers(ordinary,sample,rank,random,rule);
  const [minItems,maxItems]=training.itemSlots,itemSlots=minItems+Math.floor(random()*(maxItems-minItems+1));
- const team=trainNpcTeam(selected.members.map(name=>({name,moves:[]})),floor,'standard',sample.tactic,seed,rule,training,{itemSlots});
+ const team=trainNpcTeam(selected.members.map(name=>({name,moves:[]})),floor,'standard',sample.tactic,seed,rule,training,{itemSlots,buildRank:rank==='normal'?undefined:rank});
  // A gimmick replaces an equipped item's slot; Elite cannot gain a fourth budgeted slot.
  const equipped=team.filter(entry=>entry.item);
  const gimmick=equipRankGimmick(equipped,rank,random,rule,training.gimmickChance);

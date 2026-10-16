@@ -111,8 +111,8 @@ export class TowerStore {
     return new PermanentShop(this.db,this.roll,(owner,species)=>this.savedTraining(owner,species),(owner,species)=>this.unlockedMoves(owner,species));
   }
   permanentView(owner:string):PermanentView {return this.permanentShop.view(owner);}
-  permanentAction(owner:string,requestId:unknown,action:unknown,product:unknown,count:unknown,species:unknown,eggKind:unknown='normal'):PermanentResult {
-    return this.permanentShop.action(owner,requestId,action,product,count,species,eggKind);
+  permanentAction(owner:string,requestId:unknown,action:unknown,product:unknown,count:unknown,species:unknown,eggKind:unknown='normal',tuning:unknown=undefined):PermanentResult {
+    return this.permanentShop.action(owner,requestId,action,product,count,species,eggKind,tuning);
   }
   ensurePlayer(owner: string) {
     this.tx(() => {

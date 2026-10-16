@@ -1165,10 +1165,10 @@
         {
           "name": "Forretress",
           "moves": [
+            "Iron Head",
             "Lunge",
-            "Steel Beam",
-            "Hard Press",
-            "Toxic"
+            "Body Press",
+            "Earthquake"
           ],
           "item": "Muscle Band",
           "profile": {
@@ -1189,10 +1189,10 @@
               "spe": 4
             },
             "moves": [
+              "Iron Head",
               "Lunge",
-              "Steel Beam",
-              "Hard Press",
-              "Toxic"
+              "Body Press",
+              "Earthquake"
             ],
             "ability": "Sturdy",
             "nature": "Serious",
@@ -1205,8 +1205,8 @@
           "moves": [
             "Bug Buzz",
             "Hurricane",
-            "Silver Wind",
-            "Pollen Puff"
+            "Energy Ball",
+            "Psychic"
           ],
           "item": "Wise Glasses",
           "profile": {
@@ -1229,8 +1229,8 @@
             "moves": [
               "Bug Buzz",
               "Hurricane",
-              "Silver Wind",
-              "Pollen Puff"
+              "Energy Ball",
+              "Psychic"
             ],
             "ability": "Compound Eyes",
             "nature": "Serious",
@@ -1242,9 +1242,9 @@
           "name": "Rabsca",
           "moves": [
             "Bug Buzz",
-            "Future Sight",
-            "Sludge Bomb",
-            "Recover"
+            "Psychic",
+            "Earth Power",
+            "Sludge Bomb"
           ],
           "profile": {
             "ivs": {
@@ -1265,9 +1265,9 @@
             },
             "moves": [
               "Bug Buzz",
-              "Future Sight",
-              "Sludge Bomb",
-              "Recover"
+              "Psychic",
+              "Earth Power",
+              "Sludge Bomb"
             ],
             "ability": "Synchronize",
             "nature": "Serious",
@@ -1513,10 +1513,10 @@
         {
           "name": "Quagsire",
           "moves": [
-            "Liquidation",
             "Earthquake",
+            "Liquidation",
             "Recover",
-            "Waterfall"
+            "Toxic"
           ],
           "item": "Leftovers",
           "profile": {
@@ -1537,10 +1537,10 @@
               "spe": 0
             },
             "moves": [
-              "Liquidation",
               "Earthquake",
+              "Liquidation",
               "Recover",
-              "Waterfall"
+              "Toxic"
             ],
             "ability": "Damp",
             "nature": "Serious",
@@ -1551,9 +1551,9 @@
         {
           "name": "Dewgong",
           "moves": [
-            "Surf",
             "Ice Beam",
-            "Aqua Tail",
+            "Surf",
+            "Alluring Voice",
             "Toxic"
           ],
           "item": "Sitrus Berry",
@@ -1575,9 +1575,9 @@
               "spe": 0
             },
             "moves": [
-              "Surf",
               "Ice Beam",
-              "Aqua Tail",
+              "Surf",
+              "Alluring Voice",
               "Toxic"
             ],
             "ability": "Thick Fat",
@@ -1589,10 +1589,10 @@
         {
           "name": "Tatsugiri",
           "moves": [
-            "Draco Meteor",
             "Surf",
-            "Take Down",
-            "Hydro Pump"
+            "Draco Meteor",
+            "Hydro Pump",
+            "Nasty Plot"
           ],
           "profile": {
             "ivs": {
@@ -1612,10 +1612,10 @@
               "spe": 0
             },
             "moves": [
-              "Draco Meteor",
               "Surf",
-              "Take Down",
-              "Hydro Pump"
+              "Draco Meteor",
+              "Hydro Pump",
+              "Nasty Plot"
             ],
             "ability": "Commander",
             "nature": "Serious",
@@ -1862,9 +1862,9 @@
           "name": "Hitmontop",
           "moves": [
             "Close Combat",
-            "Double-Edge",
-            "Reversal",
-            "Seismic Toss"
+            "Earthquake",
+            "Ice Spinner",
+            "Double-Edge"
           ],
           "item": "Muscle Band",
           "profile": {
@@ -1886,9 +1886,9 @@
             },
             "moves": [
               "Close Combat",
-              "Double-Edge",
-              "Reversal",
-              "Seismic Toss"
+              "Earthquake",
+              "Ice Spinner",
+              "Double-Edge"
             ],
             "ability": "Intimidate",
             "nature": "Serious",
@@ -1899,10 +1899,10 @@
         {
           "name": "Hitmonchan",
           "moves": [
-            "Focus Punch",
-            "Double-Edge",
-            "Low Kick",
-            "Close Combat"
+            "Close Combat",
+            "Earthquake",
+            "Poison Jab",
+            "Double-Edge"
           ],
           "item": "Expert Belt",
           "profile": {
@@ -1923,10 +1923,10 @@
               "spe": 7
             },
             "moves": [
-              "Focus Punch",
-              "Double-Edge",
-              "Low Kick",
-              "Close Combat"
+              "Close Combat",
+              "Earthquake",
+              "Poison Jab",
+              "Double-Edge"
             ],
             "ability": "Keen Eye",
             "nature": "Serious",
@@ -1938,9 +1938,9 @@
           "name": "Lilligant-Hisui",
           "moves": [
             "Close Combat",
+            "Ice Spinner",
             "Axe Kick",
-            "Petal Blizzard",
-            "Low Sweep"
+            "Petal Blizzard"
           ],
           "profile": {
             "ivs": {
@@ -1961,9 +1961,9 @@
             },
             "moves": [
               "Close Combat",
+              "Ice Spinner",
               "Axe Kick",
-              "Petal Blizzard",
-              "Low Sweep"
+              "Petal Blizzard"
             ],
             "ability": "Chlorophyll",
             "nature": "Serious",
@@ -2209,10 +2209,10 @@
         {
           "name": "Xatu",
           "moves": [
-            "Future Sight",
+            "Psychic",
             "Air Slash",
-            "Calm Mind",
-            "Air Cutter"
+            "Heat Wave",
+            "Calm Mind"
           ],
           "item": "Lum Berry",
           "profile": {
@@ -2233,10 +2233,10 @@
               "spe": 7
             },
             "moves": [
-              "Future Sight",
+              "Psychic",
               "Air Slash",
-              "Calm Mind",
-              "Air Cutter"
+              "Heat Wave",
+              "Calm Mind"
             ],
             "ability": "Synchronize",
             "nature": "Serious",
@@ -2247,10 +2247,10 @@
         {
           "name": "Mr. Mime",
           "moves": [
-            "Future Sight",
+            "Psychic",
             "Dazzling Gleam",
-            "Nasty Plot",
-            "Psychic"
+            "Energy Ball",
+            "Nasty Plot"
           ],
           "item": "Wise Glasses",
           "profile": {
@@ -2271,10 +2271,10 @@
               "spe": 7
             },
             "moves": [
-              "Future Sight",
+              "Psychic",
               "Dazzling Gleam",
-              "Nasty Plot",
-              "Psychic"
+              "Energy Ball",
+              "Nasty Plot"
             ],
             "ability": "Soundproof",
             "nature": "Serious",
@@ -2287,8 +2287,8 @@
           "moves": [
             "Liquidation",
             "Psychic Fangs",
-            "Hydro Pump",
-            "Zen Headbutt"
+            "Crunch",
+            "Drill Run"
           ],
           "profile": {
             "ivs": {
@@ -2310,8 +2310,8 @@
             "moves": [
               "Liquidation",
               "Psychic Fangs",
-              "Hydro Pump",
-              "Zen Headbutt"
+              "Crunch",
+              "Drill Run"
             ],
             "ability": "Mold Breaker",
             "nature": "Serious",
@@ -2559,10 +2559,10 @@
         {
           "name": "Magcargo",
           "moves": [
-            "Overheat",
             "Power Gem",
+            "Overheat",
             "Recover",
-            "Flame Burst"
+            "Toxic"
           ],
           "item": "Leftovers",
           "profile": {
@@ -2583,10 +2583,10 @@
               "spe": 0
             },
             "moves": [
-              "Overheat",
               "Power Gem",
+              "Overheat",
               "Recover",
-              "Flame Burst"
+              "Toxic"
             ],
             "ability": "Magma Armor",
             "nature": "Serious",
@@ -2598,9 +2598,9 @@
           "name": "Dugtrio-Alola",
           "moves": [
             "Earthquake",
-            "High Horsepower",
+            "Iron Head",
             "Foul Play",
-            "Iron Head"
+            "Toxic"
           ],
           "item": "Sitrus Berry",
           "profile": {
@@ -2622,9 +2622,9 @@
             },
             "moves": [
               "Earthquake",
-              "High Horsepower",
+              "Iron Head",
               "Foul Play",
-              "Iron Head"
+              "Toxic"
             ],
             "ability": "Sand Veil",
             "nature": "Serious",
@@ -2637,7 +2637,7 @@
           "moves": [
             "Earth Power",
             "Thunderbolt",
-            "Uproar",
+            "Sludge Wave",
             "Toxic"
           ],
           "profile": {
@@ -2660,7 +2660,7 @@
             "moves": [
               "Earth Power",
               "Thunderbolt",
-              "Uproar",
+              "Sludge Wave",
               "Toxic"
             ],
             "ability": "Static",
@@ -2730,10 +2730,10 @@
         {
           "name": "Magcargo",
           "moves": [
-            "Overheat",
             "Power Gem",
-            "Shell Smash",
-            "Flame Burst"
+            "Earth Power",
+            "Overheat",
+            "Shell Smash"
           ],
           "item": "Lum Berry",
           "profile": {
@@ -2754,10 +2754,10 @@
               "spe": 7
             },
             "moves": [
-              "Overheat",
               "Power Gem",
-              "Shell Smash",
-              "Flame Burst"
+              "Earth Power",
+              "Overheat",
+              "Shell Smash"
             ],
             "ability": "Magma Armor",
             "nature": "Serious",
@@ -2768,10 +2768,10 @@
         {
           "name": "Beedrill",
           "moves": [
-            "X-Scissor",
             "Poison Jab",
-            "Swords Dance",
-            "Facade"
+            "X-Scissor",
+            "Drill Run",
+            "Swords Dance"
           ],
           "item": "Muscle Band",
           "profile": {
@@ -2792,10 +2792,10 @@
               "spe": 7
             },
             "moves": [
-              "X-Scissor",
               "Poison Jab",
-              "Swords Dance",
-              "Facade"
+              "X-Scissor",
+              "Drill Run",
+              "Swords Dance"
             ],
             "ability": "Swarm",
             "nature": "Serious",
@@ -2807,9 +2807,9 @@
           "name": "Basculin",
           "moves": [
             "Wave Crash",
-            "Double-Edge",
-            "Scald",
-            "Thrash"
+            "Superpower",
+            "Head Smash",
+            "Double-Edge"
           ],
           "profile": {
             "ivs": {
@@ -2830,9 +2830,9 @@
             },
             "moves": [
               "Wave Crash",
-              "Double-Edge",
-              "Scald",
-              "Thrash"
+              "Superpower",
+              "Head Smash",
+              "Double-Edge"
             ],
             "ability": "Reckless",
             "nature": "Serious",
@@ -2901,10 +2901,10 @@
         {
           "name": "Dodrio",
           "moves": [
-            "Double-Edge",
             "Brave Bird",
-            "Swords Dance",
-            "Frustration"
+            "Double-Edge",
+            "Jump Kick",
+            "Swords Dance"
           ],
           "item": "Focus Sash",
           "profile": {
@@ -2925,10 +2925,10 @@
               "spe": 13
             },
             "moves": [
-              "Double-Edge",
               "Brave Bird",
-              "Swords Dance",
-              "Frustration"
+              "Double-Edge",
+              "Jump Kick",
+              "Swords Dance"
             ],
             "ability": "Run Away",
             "nature": "Serious",
@@ -2939,10 +2939,10 @@
         {
           "name": "Ludicolo",
           "moves": [
+            "Energy Ball",
             "Surf",
-            "Leaf Storm",
-            "Swords Dance",
-            "Giga Drain"
+            "Ice Beam",
+            "Focus Blast"
           ],
           "item": "Lum Berry",
           "profile": {
@@ -2963,10 +2963,10 @@
               "spe": 13
             },
             "moves": [
+              "Energy Ball",
               "Surf",
-              "Leaf Storm",
-              "Swords Dance",
-              "Giga Drain"
+              "Ice Beam",
+              "Focus Blast"
             ],
             "ability": "Swift Swim",
             "nature": "Serious",
@@ -2978,9 +2978,9 @@
           "name": "Camerupt",
           "moves": [
             "Eruption",
-            "Earthquake",
-            "Stomping Tantrum",
-            "Toxic"
+            "Earth Power",
+            "Flash Cannon",
+            "Ancient Power"
           ],
           "item": "Life Orb",
           "profile": {
@@ -3002,9 +3002,9 @@
             },
             "moves": [
               "Eruption",
-              "Earthquake",
-              "Stomping Tantrum",
-              "Toxic"
+              "Earth Power",
+              "Flash Cannon",
+              "Ancient Power"
             ],
             "ability": "Magma Armor",
             "nature": "Serious",
@@ -3073,10 +3073,10 @@
         {
           "name": "Magcargo",
           "moves": [
-            "Overheat",
             "Power Gem",
-            "Flame Burst",
-            "Burning Jealousy"
+            "Earth Power",
+            "Overheat",
+            "Shell Smash"
           ],
           "item": "Wise Glasses",
           "profile": {
@@ -3097,10 +3097,10 @@
               "spe": 4
             },
             "moves": [
-              "Overheat",
               "Power Gem",
-              "Flame Burst",
-              "Burning Jealousy"
+              "Earth Power",
+              "Overheat",
+              "Shell Smash"
             ],
             "ability": "Magma Armor",
             "nature": "Serious",
@@ -3111,10 +3111,10 @@
         {
           "name": "Beedrill",
           "moves": [
-            "X-Scissor",
             "Poison Jab",
+            "X-Scissor",
             "Outrage",
-            "Facade"
+            "Drill Run"
           ],
           "item": "Muscle Band",
           "profile": {
@@ -3135,10 +3135,10 @@
               "spe": 4
             },
             "moves": [
-              "X-Scissor",
               "Poison Jab",
+              "X-Scissor",
               "Outrage",
-              "Facade"
+              "Drill Run"
             ],
             "ability": "Swarm",
             "nature": "Serious",
@@ -3150,9 +3150,9 @@
           "name": "Basculin",
           "moves": [
             "Wave Crash",
-            "Double-Edge",
-            "Scald",
-            "Thrash"
+            "Superpower",
+            "Head Smash",
+            "Double-Edge"
           ],
           "profile": {
             "ivs": {
@@ -3173,9 +3173,9 @@
             },
             "moves": [
               "Wave Crash",
-              "Double-Edge",
-              "Scald",
-              "Thrash"
+              "Superpower",
+              "Head Smash",
+              "Double-Edge"
             ],
             "ability": "Reckless",
             "nature": "Serious",
@@ -3244,10 +3244,10 @@
         {
           "name": "Dodrio",
           "moves": [
-            "Double-Edge",
             "Brave Bird",
-            "Frustration",
-            "Flail"
+            "Double-Edge",
+            "Jump Kick",
+            "Drill Run"
           ],
           "item": "Life Orb",
           "profile": {
@@ -3268,10 +3268,10 @@
               "spe": 8
             },
             "moves": [
-              "Double-Edge",
               "Brave Bird",
-              "Frustration",
-              "Flail"
+              "Double-Edge",
+              "Jump Kick",
+              "Drill Run"
             ],
             "ability": "Run Away",
             "nature": "Serious",
@@ -3282,10 +3282,10 @@
         {
           "name": "Ludicolo",
           "moves": [
+            "Energy Ball",
             "Surf",
-            "Leaf Storm",
-            "Giga Drain",
-            "Energy Ball"
+            "Ice Beam",
+            "Focus Blast"
           ],
           "item": "Wise Glasses",
           "profile": {
@@ -3306,10 +3306,10 @@
               "spe": 8
             },
             "moves": [
+              "Energy Ball",
               "Surf",
-              "Leaf Storm",
-              "Giga Drain",
-              "Energy Ball"
+              "Ice Beam",
+              "Focus Blast"
             ],
             "ability": "Swift Swim",
             "nature": "Serious",
@@ -3320,10 +3320,10 @@
         {
           "name": "Mimikyu",
           "moves": [
-            "Shadow Claw",
             "Play Rough",
-            "Swords Dance",
-            "Leech Life"
+            "Shadow Claw",
+            "Wood Hammer",
+            "Drain Punch"
           ],
           "item": "Muscle Band",
           "profile": {
@@ -3344,10 +3344,10 @@
               "spe": 8
             },
             "moves": [
-              "Shadow Claw",
               "Play Rough",
-              "Swords Dance",
-              "Leech Life"
+              "Shadow Claw",
+              "Wood Hammer",
+              "Drain Punch"
             ],
             "ability": "Disguise",
             "nature": "Serious",
@@ -3593,10 +3593,10 @@
         {
           "name": "Scizor",
           "moves": [
-            "Bullet Punch",
-            "X-Scissor",
-            "Hard Press",
-            "Double-Edge"
+            "Iron Head",
+            "Close Combat",
+            "Double-Edge",
+            "X-Scissor"
           ],
           "item": "Muscle Band",
           "profile": {
@@ -3617,10 +3617,10 @@
               "spe": 4
             },
             "moves": [
-              "Bullet Punch",
-              "X-Scissor",
-              "Hard Press",
-              "Double-Edge"
+              "Iron Head",
+              "Close Combat",
+              "Double-Edge",
+              "X-Scissor"
             ],
             "ability": "Technician",
             "nature": "Serious",
@@ -3632,9 +3632,9 @@
           "name": "Rabsca",
           "moves": [
             "Bug Buzz",
-            "Future Sight",
-            "Psybeam",
-            "Psychic"
+            "Psychic",
+            "Earth Power",
+            "Energy Ball"
           ],
           "item": "Wise Glasses",
           "profile": {
@@ -3656,9 +3656,9 @@
             },
             "moves": [
               "Bug Buzz",
-              "Future Sight",
-              "Psybeam",
-              "Psychic"
+              "Psychic",
+              "Earth Power",
+              "Energy Ball"
             ],
             "ability": "Synchronize",
             "nature": "Serious",
@@ -3669,10 +3669,10 @@
         {
           "name": "Leavanny",
           "moves": [
-            "Lunge",
             "Leaf Blade",
+            "Lunge",
             "Poison Jab",
-            "Toxic"
+            "Throat Chop"
           ],
           "profile": {
             "ivs": {
@@ -3692,10 +3692,10 @@
               "spe": 4
             },
             "moves": [
-              "Lunge",
               "Leaf Blade",
+              "Lunge",
               "Poison Jab",
-              "Toxic"
+              "Throat Chop"
             ],
             "ability": "Swarm",
             "nature": "Serious",
@@ -3941,9 +3941,9 @@
         {
           "name": "Kabutops",
           "moves": [
-            "Stone Edge",
             "Liquidation",
-            "Double-Edge",
+            "Stone Edge",
+            "Superpower",
             "Toxic"
           ],
           "item": "Leftovers",
@@ -3965,9 +3965,9 @@
               "spe": 0
             },
             "moves": [
-              "Stone Edge",
               "Liquidation",
-              "Double-Edge",
+              "Stone Edge",
+              "Superpower",
               "Toxic"
             ],
             "ability": "Swift Swim",
@@ -3979,9 +3979,9 @@
         {
           "name": "Tentacruel",
           "moves": [
-            "Surf",
             "Sludge Wave",
-            "Gunk Shot",
+            "Surf",
+            "Ice Beam",
             "Toxic"
           ],
           "item": "Sitrus Berry",
@@ -4003,9 +4003,9 @@
               "spe": 0
             },
             "moves": [
-              "Surf",
               "Sludge Wave",
-              "Gunk Shot",
+              "Surf",
+              "Ice Beam",
               "Toxic"
             ],
             "ability": "Clear Body",
@@ -4017,10 +4017,10 @@
         {
           "name": "Tatsugiri",
           "moves": [
-            "Draco Meteor",
             "Surf",
-            "Take Down",
-            "Hydro Pump"
+            "Draco Meteor",
+            "Hydro Pump",
+            "Nasty Plot"
           ],
           "profile": {
             "ivs": {
@@ -4040,10 +4040,10 @@
               "spe": 0
             },
             "moves": [
-              "Draco Meteor",
               "Surf",
-              "Take Down",
-              "Hydro Pump"
+              "Draco Meteor",
+              "Hydro Pump",
+              "Nasty Plot"
             ],
             "ability": "Commander",
             "nature": "Serious",
@@ -4290,9 +4290,9 @@
           "name": "Hitmontop",
           "moves": [
             "Close Combat",
-            "Double-Edge",
-            "Reversal",
-            "Seismic Toss"
+            "Earthquake",
+            "Ice Spinner",
+            "Double-Edge"
           ],
           "item": "Muscle Band",
           "profile": {
@@ -4314,9 +4314,9 @@
             },
             "moves": [
               "Close Combat",
-              "Double-Edge",
-              "Reversal",
-              "Seismic Toss"
+              "Earthquake",
+              "Ice Spinner",
+              "Double-Edge"
             ],
             "ability": "Intimidate",
             "nature": "Serious",
@@ -4327,10 +4327,10 @@
         {
           "name": "Flamigo",
           "moves": [
-            "Brave Bird",
             "Close Combat",
-            "Mega Kick",
-            "Low Kick"
+            "Brave Bird",
+            "Liquidation",
+            "Throat Chop"
           ],
           "item": "Expert Belt",
           "profile": {
@@ -4351,10 +4351,10 @@
               "spe": 7
             },
             "moves": [
-              "Brave Bird",
               "Close Combat",
-              "Mega Kick",
-              "Low Kick"
+              "Brave Bird",
+              "Liquidation",
+              "Throat Chop"
             ],
             "ability": "Scrappy",
             "nature": "Serious",
@@ -4366,9 +4366,9 @@
           "name": "Lilligant-Hisui",
           "moves": [
             "Close Combat",
+            "Ice Spinner",
             "Axe Kick",
-            "Petal Blizzard",
-            "Low Sweep"
+            "Petal Blizzard"
           ],
           "profile": {
             "ivs": {
@@ -4389,9 +4389,9 @@
             },
             "moves": [
               "Close Combat",
+              "Ice Spinner",
               "Axe Kick",
-              "Petal Blizzard",
-              "Low Sweep"
+              "Petal Blizzard"
             ],
             "ability": "Chlorophyll",
             "nature": "Serious",
@@ -4637,10 +4637,10 @@
         {
           "name": "Slowking",
           "moves": [
+            "Psychic",
             "Surf",
-            "Future Sight",
-            "Nasty Plot",
-            "Muddy Water"
+            "Fire Blast",
+            "Nasty Plot"
           ],
           "item": "Lum Berry",
           "profile": {
@@ -4661,10 +4661,10 @@
               "spe": 7
             },
             "moves": [
+              "Psychic",
               "Surf",
-              "Future Sight",
-              "Nasty Plot",
-              "Muddy Water"
+              "Fire Blast",
+              "Nasty Plot"
             ],
             "ability": "Oblivious",
             "nature": "Serious",
@@ -4675,10 +4675,10 @@
         {
           "name": "Gardevoir",
           "moves": [
-            "Future Sight",
             "Moonblast",
-            "Calm Mind",
-            "Synchronoise"
+            "Psychic",
+            "Energy Ball",
+            "Calm Mind"
           ],
           "item": "Wise Glasses",
           "profile": {
@@ -4699,10 +4699,10 @@
               "spe": 7
             },
             "moves": [
-              "Future Sight",
               "Moonblast",
-              "Calm Mind",
-              "Synchronoise"
+              "Psychic",
+              "Energy Ball",
+              "Calm Mind"
             ],
             "ability": "Synchronize",
             "nature": "Serious",
@@ -4713,10 +4713,10 @@
         {
           "name": "Beheeyem",
           "moves": [
-            "Future Sight",
+            "Psychic",
             "Energy Ball",
-            "Nasty Plot",
-            "Psybeam"
+            "Thunderbolt",
+            "Nasty Plot"
           ],
           "profile": {
             "ivs": {
@@ -4736,10 +4736,10 @@
               "spe": 7
             },
             "moves": [
-              "Future Sight",
+              "Psychic",
               "Energy Ball",
-              "Nasty Plot",
-              "Psybeam"
+              "Thunderbolt",
+              "Nasty Plot"
             ],
             "ability": "Telepathy",
             "nature": "Serious",
@@ -4987,8 +4987,8 @@
         {
           "name": "Shuckle",
           "moves": [
-            "Skitter Smack",
             "Stone Edge",
+            "Skitter Smack",
             "Earthquake",
             "Toxic"
           ],
@@ -5011,8 +5011,8 @@
               "spe": 0
             },
             "moves": [
-              "Skitter Smack",
               "Stone Edge",
+              "Skitter Smack",
               "Earthquake",
               "Toxic"
             ],
@@ -5026,9 +5026,9 @@
           "name": "Avalugg-Hisui",
           "moves": [
             "Mountain Gale",
-            "Double-Edge",
-            "Recover",
-            "Earthquake"
+            "Stone Edge",
+            "Body Press",
+            "Recover"
           ],
           "item": "Sitrus Berry",
           "profile": {
@@ -5050,9 +5050,9 @@
             },
             "moves": [
               "Mountain Gale",
-              "Double-Edge",
-              "Recover",
-              "Earthquake"
+              "Stone Edge",
+              "Body Press",
+              "Recover"
             ],
             "ability": "Strong Jaw",
             "nature": "Serious",
@@ -5065,8 +5065,8 @@
           "moves": [
             "Liquidation",
             "Stone Edge",
-            "Toxic",
-            "Hydro Pump"
+            "Earthquake",
+            "Toxic"
           ],
           "profile": {
             "ivs": {
@@ -5088,8 +5088,8 @@
             "moves": [
               "Liquidation",
               "Stone Edge",
-              "Toxic",
-              "Hydro Pump"
+              "Earthquake",
+              "Toxic"
             ],
             "ability": "Solid Rock",
             "nature": "Serious",
@@ -5158,10 +5158,10 @@
         {
           "name": "Skarmory",
           "moves": [
-            "Iron Head",
             "Brave Bird",
-            "Swords Dance",
-            "Pluck"
+            "Iron Head",
+            "Body Press",
+            "Swords Dance"
           ],
           "item": "Lum Berry",
           "profile": {
@@ -5182,10 +5182,10 @@
               "spe": 7
             },
             "moves": [
-              "Iron Head",
               "Brave Bird",
-              "Swords Dance",
-              "Pluck"
+              "Iron Head",
+              "Body Press",
+              "Swords Dance"
             ],
             "ability": "Keen Eye",
             "nature": "Serious",
@@ -5196,10 +5196,10 @@
         {
           "name": "Pidgeot",
           "moves": [
-            "Double-Edge",
-            "Heat Wave",
-            "Return",
-            "Frustration"
+            "Brave Bird",
+            "U-turn",
+            "Steel Wing",
+            "Return"
           ],
           "item": "Muscle Band",
           "profile": {
@@ -5220,10 +5220,10 @@
               "spe": 7
             },
             "moves": [
-              "Double-Edge",
-              "Heat Wave",
-              "Return",
-              "Frustration"
+              "Brave Bird",
+              "U-turn",
+              "Steel Wing",
+              "Return"
             ],
             "ability": "Keen Eye",
             "nature": "Serious",
@@ -5235,9 +5235,9 @@
           "name": "Golurk",
           "moves": [
             "Earthquake",
-            "Poltergeist",
+            "Shadow Punch",
             "Close Combat",
-            "Toxic"
+            "Darkest Lariat"
           ],
           "profile": {
             "ivs": {
@@ -5258,9 +5258,9 @@
             },
             "moves": [
               "Earthquake",
-              "Poltergeist",
+              "Shadow Punch",
               "Close Combat",
-              "Toxic"
+              "Darkest Lariat"
             ],
             "ability": "Iron Fist",
             "nature": "Serious",
@@ -5330,9 +5330,9 @@
           "name": "Avalugg-Hisui",
           "moves": [
             "Mountain Gale",
-            "Double-Edge",
-            "Earthquake",
-            "Toxic"
+            "Stone Edge",
+            "Body Press",
+            "Earthquake"
           ],
           "item": "Focus Sash",
           "profile": {
@@ -5354,9 +5354,9 @@
             },
             "moves": [
               "Mountain Gale",
-              "Double-Edge",
-              "Earthquake",
-              "Toxic"
+              "Stone Edge",
+              "Body Press",
+              "Earthquake"
             ],
             "ability": "Strong Jaw",
             "nature": "Serious",
@@ -5367,10 +5367,10 @@
         {
           "name": "Tentacruel",
           "moves": [
-            "Surf",
             "Sludge Wave",
-            "Swords Dance",
-            "Gunk Shot"
+            "Surf",
+            "Ice Beam",
+            "Dazzling Gleam"
           ],
           "item": "Lum Berry",
           "profile": {
@@ -5391,10 +5391,10 @@
               "spe": 14
             },
             "moves": [
-              "Surf",
               "Sludge Wave",
-              "Swords Dance",
-              "Gunk Shot"
+              "Surf",
+              "Ice Beam",
+              "Dazzling Gleam"
             ],
             "ability": "Clear Body",
             "nature": "Serious",
@@ -5405,10 +5405,10 @@
         {
           "name": "Gardevoir",
           "moves": [
-            "Future Sight",
             "Moonblast",
-            "Calm Mind",
-            "Psyshock"
+            "Psychic",
+            "Energy Ball",
+            "Calm Mind"
           ],
           "item": "Life Orb",
           "profile": {
@@ -5429,10 +5429,10 @@
               "spe": 14
             },
             "moves": [
-              "Future Sight",
               "Moonblast",
-              "Calm Mind",
-              "Psyshock"
+              "Psychic",
+              "Energy Ball",
+              "Calm Mind"
             ],
             "ability": "Synchronize",
             "nature": "Serious",
@@ -5501,10 +5501,10 @@
         {
           "name": "Skarmory",
           "moves": [
-            "Iron Head",
             "Brave Bird",
-            "Pluck",
-            "Aerial Ace"
+            "Iron Head",
+            "Body Press",
+            "X-Scissor"
           ],
           "item": "Muscle Band",
           "profile": {
@@ -5525,10 +5525,10 @@
               "spe": 4
             },
             "moves": [
-              "Iron Head",
               "Brave Bird",
-              "Pluck",
-              "Aerial Ace"
+              "Iron Head",
+              "Body Press",
+              "X-Scissor"
             ],
             "ability": "Keen Eye",
             "nature": "Serious",
@@ -5540,9 +5540,9 @@
           "name": "Avalugg-Hisui",
           "moves": [
             "Mountain Gale",
-            "Double-Edge",
-            "High Horsepower",
-            "Ice Spinner"
+            "Stone Edge",
+            "Body Press",
+            "Earthquake"
           ],
           "item": "Expert Belt",
           "profile": {
@@ -5564,9 +5564,9 @@
             },
             "moves": [
               "Mountain Gale",
-              "Double-Edge",
-              "High Horsepower",
-              "Ice Spinner"
+              "Stone Edge",
+              "Body Press",
+              "Earthquake"
             ],
             "ability": "Strong Jaw",
             "nature": "Serious",
@@ -5578,9 +5578,9 @@
           "name": "Golurk",
           "moves": [
             "Earthquake",
-            "Poltergeist",
+            "Shadow Punch",
             "Close Combat",
-            "Toxic"
+            "Darkest Lariat"
           ],
           "profile": {
             "ivs": {
@@ -5601,9 +5601,9 @@
             },
             "moves": [
               "Earthquake",
-              "Poltergeist",
+              "Shadow Punch",
               "Close Combat",
-              "Toxic"
+              "Darkest Lariat"
             ],
             "ability": "Iron Fist",
             "nature": "Serious",
@@ -5673,9 +5673,9 @@
           "name": "Avalugg-Hisui",
           "moves": [
             "Mountain Gale",
-            "Double-Edge",
-            "Earthquake",
-            "Toxic"
+            "Stone Edge",
+            "Body Press",
+            "Earthquake"
           ],
           "item": "Life Orb",
           "profile": {
@@ -5697,9 +5697,9 @@
             },
             "moves": [
               "Mountain Gale",
-              "Double-Edge",
-              "Earthquake",
-              "Toxic"
+              "Stone Edge",
+              "Body Press",
+              "Earthquake"
             ],
             "ability": "Strong Jaw",
             "nature": "Serious",
@@ -5710,10 +5710,10 @@
         {
           "name": "Tentacruel",
           "moves": [
-            "Surf",
             "Sludge Wave",
-            "Gunk Shot",
-            "Toxic"
+            "Surf",
+            "Ice Beam",
+            "Dazzling Gleam"
           ],
           "item": "Wise Glasses",
           "profile": {
@@ -5734,10 +5734,10 @@
               "spe": 9
             },
             "moves": [
-              "Surf",
               "Sludge Wave",
-              "Gunk Shot",
-              "Toxic"
+              "Surf",
+              "Ice Beam",
+              "Dazzling Gleam"
             ],
             "ability": "Clear Body",
             "nature": "Serious",
@@ -5748,10 +5748,10 @@
         {
           "name": "Gardevoir",
           "moves": [
-            "Future Sight",
             "Moonblast",
-            "Will-O-Wisp",
-            "Psyshock"
+            "Psychic",
+            "Energy Ball",
+            "Focus Blast"
           ],
           "item": "Focus Sash",
           "profile": {
@@ -5772,10 +5772,10 @@
               "spe": 9
             },
             "moves": [
-              "Future Sight",
               "Moonblast",
-              "Will-O-Wisp",
-              "Psyshock"
+              "Psychic",
+              "Energy Ball",
+              "Focus Blast"
             ],
             "ability": "Synchronize",
             "nature": "Serious",
@@ -6022,10 +6022,10 @@
         {
           "name": "Scizor",
           "moves": [
-            "Bullet Punch",
-            "X-Scissor",
-            "Hard Press",
-            "Double-Edge"
+            "Iron Head",
+            "Close Combat",
+            "Double-Edge",
+            "X-Scissor"
           ],
           "item": "Muscle Band",
           "profile": {
@@ -6046,10 +6046,10 @@
               "spe": 5
             },
             "moves": [
-              "Bullet Punch",
-              "X-Scissor",
-              "Hard Press",
-              "Double-Edge"
+              "Iron Head",
+              "Close Combat",
+              "Double-Edge",
+              "X-Scissor"
             ],
             "ability": "Technician",
             "nature": "Serious",
@@ -6062,7 +6062,7 @@
           "moves": [
             "Bug Buzz",
             "Hurricane",
-            "Pollen Puff",
+            "Energy Ball",
             "Quiver Dance"
           ],
           "item": "Wise Glasses",
@@ -6086,7 +6086,7 @@
             "moves": [
               "Bug Buzz",
               "Hurricane",
-              "Pollen Puff",
+              "Energy Ball",
               "Quiver Dance"
             ],
             "ability": "Compound Eyes",
@@ -6100,8 +6100,8 @@
           "moves": [
             "Megahorn",
             "Iron Head",
-            "Swords Dance",
-            "X-Scissor"
+            "Close Combat",
+            "Swords Dance"
           ],
           "profile": {
             "ivs": {
@@ -6123,8 +6123,8 @@
             "moves": [
               "Megahorn",
               "Iron Head",
-              "Swords Dance",
-              "X-Scissor"
+              "Close Combat",
+              "Swords Dance"
             ],
             "ability": "Swarm",
             "nature": "Serious",
@@ -6372,8 +6372,8 @@
           "name": "Vaporeon",
           "moves": [
             "Surf",
-            "Synchronoise",
-            "Brine",
+            "Ice Beam",
+            "Alluring Voice",
             "Toxic"
           ],
           "item": "Leftovers",
@@ -6396,8 +6396,8 @@
             },
             "moves": [
               "Surf",
-              "Synchronoise",
-              "Brine",
+              "Ice Beam",
+              "Alluring Voice",
               "Toxic"
             ],
             "ability": "Water Absorb",
@@ -6409,10 +6409,10 @@
         {
           "name": "Rotom-Wash",
           "moves": [
-            "Hydro Pump",
             "Thunderbolt",
-            "Hyper Voice",
-            "Discharge"
+            "Hydro Pump",
+            "Dark Pulse",
+            "Thunder Wave"
           ],
           "item": "Sitrus Berry",
           "profile": {
@@ -6433,10 +6433,10 @@
               "spe": 0
             },
             "moves": [
-              "Hydro Pump",
               "Thunderbolt",
-              "Hyper Voice",
-              "Discharge"
+              "Hydro Pump",
+              "Dark Pulse",
+              "Thunder Wave"
             ],
             "ability": "Levitate",
             "nature": "Serious",
@@ -6448,8 +6448,8 @@
           "name": "Samurott-Hisui",
           "moves": [
             "Liquidation",
-            "Surf",
-            "Razor Shell",
+            "Throat Chop",
+            "Megahorn",
             "Toxic"
           ],
           "profile": {
@@ -6471,8 +6471,8 @@
             },
             "moves": [
               "Liquidation",
-              "Surf",
-              "Razor Shell",
+              "Throat Chop",
+              "Megahorn",
               "Toxic"
             ],
             "ability": "Torrent",
@@ -6720,10 +6720,10 @@
         {
           "name": "Breloom",
           "moves": [
+            "Close Combat",
             "Seed Bomb",
-            "Focus Punch",
-            "Double-Edge",
-            "Drain Punch"
+            "Gunk Shot",
+            "Double-Edge"
           ],
           "item": "Muscle Band",
           "profile": {
@@ -6744,10 +6744,10 @@
               "spe": 9
             },
             "moves": [
+              "Close Combat",
               "Seed Bomb",
-              "Focus Punch",
-              "Double-Edge",
-              "Drain Punch"
+              "Gunk Shot",
+              "Double-Edge"
             ],
             "ability": "Effect Spore",
             "nature": "Serious",
@@ -6759,9 +6759,9 @@
           "name": "Tauros-Paldea-Combat",
           "moves": [
             "Close Combat",
-            "Body Press",
-            "Reversal",
-            "Raging Bull"
+            "Earthquake",
+            "Outrage",
+            "Stone Edge"
           ],
           "item": "Expert Belt",
           "profile": {
@@ -6783,9 +6783,9 @@
             },
             "moves": [
               "Close Combat",
-              "Body Press",
-              "Reversal",
-              "Raging Bull"
+              "Earthquake",
+              "Outrage",
+              "Stone Edge"
             ],
             "ability": "Intimidate",
             "nature": "Serious",
@@ -6796,10 +6796,10 @@
         {
           "name": "Poliwrath",
           "moves": [
+            "Close Combat",
             "Liquidation",
-            "Focus Punch",
-            "Double-Edge",
-            "Close Combat"
+            "Earthquake",
+            "Darkest Lariat"
           ],
           "profile": {
             "ivs": {
@@ -6819,10 +6819,10 @@
               "spe": 9
             },
             "moves": [
+              "Close Combat",
               "Liquidation",
-              "Focus Punch",
-              "Double-Edge",
-              "Close Combat"
+              "Earthquake",
+              "Darkest Lariat"
             ],
             "ability": "Water Absorb",
             "nature": "Serious",
@@ -7070,9 +7070,9 @@
           "name": "Espeon",
           "moves": [
             "Psychic",
+            "Power Gem",
             "Shadow Ball",
-            "Calm Mind",
-            "Psybeam"
+            "Calm Mind"
           ],
           "item": "Lum Berry",
           "profile": {
@@ -7094,9 +7094,9 @@
             },
             "moves": [
               "Psychic",
+              "Power Gem",
               "Shadow Ball",
-              "Calm Mind",
-              "Psybeam"
+              "Calm Mind"
             ],
             "ability": "Synchronize",
             "nature": "Serious",
@@ -7107,10 +7107,10 @@
         {
           "name": "Gardevoir",
           "moves": [
-            "Future Sight",
             "Moonblast",
-            "Calm Mind",
-            "Synchronoise"
+            "Psychic",
+            "Energy Ball",
+            "Calm Mind"
           ],
           "item": "Wise Glasses",
           "profile": {
@@ -7131,10 +7131,10 @@
               "spe": 9
             },
             "moves": [
-              "Future Sight",
               "Moonblast",
-              "Calm Mind",
-              "Synchronoise"
+              "Psychic",
+              "Energy Ball",
+              "Calm Mind"
             ],
             "ability": "Synchronize",
             "nature": "Serious",
@@ -7145,10 +7145,10 @@
         {
           "name": "Braviary-Hisui",
           "moves": [
-            "Future Sight",
             "Psychic",
-            "Calm Mind",
-            "Hurricane"
+            "Hurricane",
+            "Heat Wave",
+            "Calm Mind"
           ],
           "profile": {
             "ivs": {
@@ -7168,10 +7168,10 @@
               "spe": 9
             },
             "moves": [
-              "Future Sight",
               "Psychic",
-              "Calm Mind",
-              "Hurricane"
+              "Hurricane",
+              "Heat Wave",
+              "Calm Mind"
             ],
             "ability": "Keen Eye",
             "nature": "Serious",
@@ -7420,8 +7420,8 @@
         {
           "name": "Swampert",
           "moves": [
-            "Liquidation",
             "Earthquake",
+            "Liquidation",
             "Outrage",
             "Toxic"
           ],
@@ -7444,8 +7444,8 @@
               "spe": 0
             },
             "moves": [
-              "Liquidation",
               "Earthquake",
+              "Liquidation",
               "Outrage",
               "Toxic"
             ],
@@ -7459,9 +7459,9 @@
           "name": "Camerupt",
           "moves": [
             "Eruption",
-            "Earthquake",
-            "Toxic",
-            "Earth Power"
+            "Earth Power",
+            "Flash Cannon",
+            "Toxic"
           ],
           "item": "Sitrus Berry",
           "profile": {
@@ -7483,9 +7483,9 @@
             },
             "moves": [
               "Eruption",
-              "Earthquake",
-              "Toxic",
-              "Earth Power"
+              "Earth Power",
+              "Flash Cannon",
+              "Toxic"
             ],
             "ability": "Magma Armor",
             "nature": "Serious",
@@ -7496,10 +7496,10 @@
         {
           "name": "Stunfisk-Galar",
           "moves": [
-            "Steel Beam",
             "Earthquake",
-            "Thunder Wave",
-            "Lash Out"
+            "Foul Play",
+            "Stone Edge",
+            "Thunder Wave"
           ],
           "profile": {
             "ivs": {
@@ -7519,10 +7519,10 @@
               "spe": 0
             },
             "moves": [
-              "Steel Beam",
               "Earthquake",
-              "Thunder Wave",
-              "Lash Out"
+              "Foul Play",
+              "Stone Edge",
+              "Thunder Wave"
             ],
             "ability": "Mimicry",
             "nature": "Serious",
@@ -7592,9 +7592,9 @@
           "name": "Octillery",
           "moves": [
             "Water Spout",
-            "Double-Edge",
-            "Scald",
-            "Toxic"
+            "Sludge Wave",
+            "Fire Blast",
+            "Ice Beam"
           ],
           "item": "Lum Berry",
           "profile": {
@@ -7616,9 +7616,9 @@
             },
             "moves": [
               "Water Spout",
-              "Double-Edge",
-              "Scald",
-              "Toxic"
+              "Sludge Wave",
+              "Fire Blast",
+              "Ice Beam"
             ],
             "ability": "Suction Cups",
             "nature": "Serious",
@@ -7631,8 +7631,8 @@
           "moves": [
             "Blood Moon",
             "Earth Power",
-            "Swords Dance",
-            "Tera Blast"
+            "Moonblast",
+            "Calm Mind"
           ],
           "item": "Wise Glasses",
           "profile": {
@@ -7655,8 +7655,8 @@
             "moves": [
               "Blood Moon",
               "Earth Power",
-              "Swords Dance",
-              "Tera Blast"
+              "Moonblast",
+              "Calm Mind"
             ],
             "ability": "Mind's Eye",
             "nature": "Serious",
@@ -7667,10 +7667,10 @@
         {
           "name": "Charizard",
           "moves": [
-            "Flamethrower",
-            "Air Slash",
-            "Dragon Dance",
-            "Focus Punch"
+            "Hurricane",
+            "Dragon Pulse",
+            "Focus Blast",
+            "Flamethrower"
           ],
           "profile": {
             "ivs": {
@@ -7690,10 +7690,10 @@
               "spe": 9
             },
             "moves": [
-              "Flamethrower",
-              "Air Slash",
-              "Dragon Dance",
-              "Focus Punch"
+              "Hurricane",
+              "Dragon Pulse",
+              "Focus Blast",
+              "Flamethrower"
             ],
             "ability": "Blaze",
             "nature": "Serious",
@@ -7762,10 +7762,10 @@
         {
           "name": "Charizard",
           "moves": [
-            "Flamethrower",
-            "Air Slash",
-            "Dragon Dance",
-            "Focus Punch"
+            "Fire Blast",
+            "Hurricane",
+            "Dragon Pulse",
+            "Focus Blast"
           ],
           "item": "Focus Sash",
           "profile": {
@@ -7786,10 +7786,10 @@
               "spe": 16
             },
             "moves": [
-              "Flamethrower",
-              "Air Slash",
-              "Dragon Dance",
-              "Focus Punch"
+              "Fire Blast",
+              "Hurricane",
+              "Dragon Pulse",
+              "Focus Blast"
             ],
             "ability": "Blaze",
             "nature": "Serious",
@@ -7802,8 +7802,8 @@
           "moves": [
             "Blood Moon",
             "Earth Power",
-            "Swords Dance",
-            "Moonblast"
+            "Moonblast",
+            "Calm Mind"
           ],
           "item": "Lum Berry",
           "profile": {
@@ -7826,8 +7826,8 @@
             "moves": [
               "Blood Moon",
               "Earth Power",
-              "Swords Dance",
-              "Moonblast"
+              "Moonblast",
+              "Calm Mind"
             ],
             "ability": "Mind's Eye",
             "nature": "Serious",
@@ -7840,8 +7840,8 @@
           "moves": [
             "Ice Beam",
             "Surf",
-            "Swords Dance",
-            "Double-Edge"
+            "Signal Beam",
+            "Toxic"
           ],
           "item": "Life Orb",
           "profile": {
@@ -7864,8 +7864,8 @@
             "moves": [
               "Ice Beam",
               "Surf",
-              "Swords Dance",
-              "Double-Edge"
+              "Signal Beam",
+              "Toxic"
             ],
             "ability": "Thick Fat",
             "nature": "Serious",
@@ -7935,9 +7935,9 @@
           "name": "Octillery",
           "moves": [
             "Water Spout",
-            "Double-Edge",
-            "Scald",
-            "Toxic"
+            "Sludge Wave",
+            "Fire Blast",
+            "Ice Beam"
           ],
           "item": "Wise Glasses",
           "profile": {
@@ -7959,9 +7959,9 @@
             },
             "moves": [
               "Water Spout",
-              "Double-Edge",
-              "Scald",
-              "Toxic"
+              "Sludge Wave",
+              "Fire Blast",
+              "Ice Beam"
             ],
             "ability": "Suction Cups",
             "nature": "Serious",
@@ -7974,8 +7974,8 @@
           "moves": [
             "Blood Moon",
             "Earth Power",
-            "Tera Blast",
-            "Calm Mind"
+            "Moonblast",
+            "Focus Blast"
           ],
           "item": "Expert Belt",
           "profile": {
@@ -7998,8 +7998,8 @@
             "moves": [
               "Blood Moon",
               "Earth Power",
-              "Tera Blast",
-              "Calm Mind"
+              "Moonblast",
+              "Focus Blast"
             ],
             "ability": "Mind's Eye",
             "nature": "Serious",
@@ -8010,10 +8010,10 @@
         {
           "name": "Charizard",
           "moves": [
-            "Flamethrower",
-            "Air Slash",
-            "Roost",
-            "Focus Punch"
+            "Hurricane",
+            "Dragon Pulse",
+            "Focus Blast",
+            "Flamethrower"
           ],
           "profile": {
             "ivs": {
@@ -8033,10 +8033,10 @@
               "spe": 5
             },
             "moves": [
-              "Flamethrower",
-              "Air Slash",
-              "Roost",
-              "Focus Punch"
+              "Hurricane",
+              "Dragon Pulse",
+              "Focus Blast",
+              "Flamethrower"
             ],
             "ability": "Blaze",
             "nature": "Serious",
@@ -8105,10 +8105,10 @@
         {
           "name": "Charizard",
           "moves": [
-            "Flamethrower",
-            "Air Slash",
-            "Focus Punch",
-            "Fire Pledge"
+            "Fire Blast",
+            "Hurricane",
+            "Dragon Pulse",
+            "Focus Blast"
           ],
           "item": "Life Orb",
           "profile": {
@@ -8129,10 +8129,10 @@
               "spe": 9
             },
             "moves": [
-              "Flamethrower",
-              "Air Slash",
-              "Focus Punch",
-              "Fire Pledge"
+              "Fire Blast",
+              "Hurricane",
+              "Dragon Pulse",
+              "Focus Blast"
             ],
             "ability": "Blaze",
             "nature": "Serious",
@@ -8145,8 +8145,8 @@
           "moves": [
             "Blood Moon",
             "Earth Power",
-            "Calm Mind",
-            "Moonblast"
+            "Moonblast",
+            "Focus Blast"
           ],
           "item": "Wise Glasses",
           "profile": {
@@ -8169,8 +8169,8 @@
             "moves": [
               "Blood Moon",
               "Earth Power",
-              "Calm Mind",
-              "Moonblast"
+              "Moonblast",
+              "Focus Blast"
             ],
             "ability": "Mind's Eye",
             "nature": "Serious",
@@ -8183,8 +8183,8 @@
           "moves": [
             "Ice Beam",
             "Surf",
-            "Toxic",
-            "Double-Edge"
+            "Signal Beam",
+            "Toxic"
           ],
           "item": "Focus Sash",
           "profile": {
@@ -8207,8 +8207,8 @@
             "moves": [
               "Ice Beam",
               "Surf",
-              "Toxic",
-              "Double-Edge"
+              "Signal Beam",
+              "Toxic"
             ],
             "ability": "Thick Fat",
             "nature": "Serious",
@@ -8226,6 +8226,746 @@
         "candidateCount": 12,
         "itemSlots": 3
       }
+    }
+  ],
+  "buildExamples": [
+    {
+      "name": "Ludicolo",
+      "before": [
+        "Surf",
+        "Leaf Storm",
+        "Swords Dance",
+        "Giga Drain"
+      ],
+      "style": "special",
+      "elite": [
+        "Surf",
+        "Ice Beam",
+        "Focus Blast",
+        "Leaf Storm"
+      ],
+      "master": [
+        "Energy Ball",
+        "Surf",
+        "Ice Beam",
+        "Focus Blast"
+      ]
+    },
+    {
+      "name": "Charizard",
+      "before": [
+        "Flamethrower",
+        "Air Slash",
+        "Dragon Dance",
+        "Focus Punch"
+      ],
+      "style": "special",
+      "elite": [
+        "Hurricane",
+        "Dragon Pulse",
+        "Focus Blast",
+        "Flamethrower"
+      ],
+      "master": [
+        "Fire Blast",
+        "Hurricane",
+        "Dragon Pulse",
+        "Focus Blast"
+      ]
+    },
+    {
+      "name": "Ursaluna-Bloodmoon",
+      "before": [
+        "Blood Moon",
+        "Earth Power",
+        "Swords Dance",
+        "Moonblast"
+      ],
+      "style": "special",
+      "elite": [
+        "Blood Moon",
+        "Earth Power",
+        "Moonblast",
+        "Calm Mind"
+      ],
+      "master": [
+        "Blood Moon",
+        "Earth Power",
+        "Moonblast",
+        "Calm Mind"
+      ]
+    },
+    {
+      "name": "Walrein",
+      "before": [
+        "Ice Beam",
+        "Surf",
+        "Swords Dance",
+        "Double-Edge"
+      ],
+      "style": "special",
+      "elite": [
+        "Ice Beam",
+        "Surf",
+        "Signal Beam",
+        "Hydro Pump"
+      ],
+      "master": [
+        "Ice Beam",
+        "Surf",
+        "Signal Beam",
+        "Toxic"
+      ]
+    }
+  ],
+  "buildChecks": [
+    {
+      "floor": 5,
+      "sample": "youngster-balanced",
+      "rank": "elite",
+      "name": "Forretress",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "youngster-balanced",
+      "rank": "elite",
+      "name": "Butterfree",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "youngster-balanced",
+      "rank": "elite",
+      "name": "Rabsca",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "fisherman-bulk",
+      "rank": "elite",
+      "name": "Quagsire",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "fisherman-bulk",
+      "rank": "elite",
+      "name": "Dewgong",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "fisherman-bulk",
+      "rank": "elite",
+      "name": "Tatsugiri",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "blackbelt-physical",
+      "rank": "elite",
+      "name": "Hitmontop",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "blackbelt-physical",
+      "rank": "elite",
+      "name": "Hitmonchan",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "blackbelt-physical",
+      "rank": "elite",
+      "name": "Lilligant-Hisui",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "psychic-setup",
+      "rank": "elite",
+      "name": "Xatu",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "psychic-setup",
+      "rank": "elite",
+      "name": "Mr. Mime",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "psychic-setup",
+      "rank": "elite",
+      "name": "Veluza",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "hiker-bulk",
+      "rank": "elite",
+      "name": "Magcargo",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "hiker-bulk",
+      "rank": "elite",
+      "name": "Dugtrio-Alola",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "hiker-bulk",
+      "rank": "elite",
+      "name": "Stunfisk",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "ace-setup",
+      "rank": "elite",
+      "name": "Magcargo",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "ace-setup",
+      "rank": "elite",
+      "name": "Beedrill",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "ace-setup",
+      "rank": "elite",
+      "name": "Basculin",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "ace-setup",
+      "rank": "master",
+      "name": "Dodrio",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "ace-setup",
+      "rank": "master",
+      "name": "Ludicolo",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "ace-setup",
+      "rank": "master",
+      "name": "Camerupt",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "veteran-balanced",
+      "rank": "elite",
+      "name": "Magcargo",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "veteran-balanced",
+      "rank": "elite",
+      "name": "Beedrill",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "veteran-balanced",
+      "rank": "elite",
+      "name": "Basculin",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "veteran-balanced",
+      "rank": "master",
+      "name": "Dodrio",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "veteran-balanced",
+      "rank": "master",
+      "name": "Ludicolo",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 5,
+      "sample": "veteran-balanced",
+      "rank": "master",
+      "name": "Mimikyu",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "youngster-balanced",
+      "rank": "elite",
+      "name": "Scizor",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "youngster-balanced",
+      "rank": "elite",
+      "name": "Rabsca",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "youngster-balanced",
+      "rank": "elite",
+      "name": "Leavanny",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "fisherman-bulk",
+      "rank": "elite",
+      "name": "Kabutops",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "fisherman-bulk",
+      "rank": "elite",
+      "name": "Tentacruel",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "fisherman-bulk",
+      "rank": "elite",
+      "name": "Tatsugiri",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "blackbelt-physical",
+      "rank": "elite",
+      "name": "Hitmontop",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "blackbelt-physical",
+      "rank": "elite",
+      "name": "Flamigo",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "blackbelt-physical",
+      "rank": "elite",
+      "name": "Lilligant-Hisui",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "psychic-setup",
+      "rank": "elite",
+      "name": "Slowking",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "psychic-setup",
+      "rank": "elite",
+      "name": "Gardevoir",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "psychic-setup",
+      "rank": "elite",
+      "name": "Beheeyem",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "hiker-bulk",
+      "rank": "elite",
+      "name": "Shuckle",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "hiker-bulk",
+      "rank": "elite",
+      "name": "Avalugg-Hisui",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "hiker-bulk",
+      "rank": "elite",
+      "name": "Carracosta",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "ace-setup",
+      "rank": "elite",
+      "name": "Skarmory",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "ace-setup",
+      "rank": "elite",
+      "name": "Pidgeot",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "ace-setup",
+      "rank": "elite",
+      "name": "Golurk",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "ace-setup",
+      "rank": "master",
+      "name": "Avalugg-Hisui",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "ace-setup",
+      "rank": "master",
+      "name": "Tentacruel",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "ace-setup",
+      "rank": "master",
+      "name": "Gardevoir",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "veteran-balanced",
+      "rank": "elite",
+      "name": "Skarmory",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "veteran-balanced",
+      "rank": "elite",
+      "name": "Avalugg-Hisui",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "veteran-balanced",
+      "rank": "elite",
+      "name": "Golurk",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "veteran-balanced",
+      "rank": "master",
+      "name": "Avalugg-Hisui",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "veteran-balanced",
+      "rank": "master",
+      "name": "Tentacruel",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 20,
+      "sample": "veteran-balanced",
+      "rank": "master",
+      "name": "Gardevoir",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "youngster-balanced",
+      "rank": "elite",
+      "name": "Scizor",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "youngster-balanced",
+      "rank": "elite",
+      "name": "Butterfree",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "youngster-balanced",
+      "rank": "elite",
+      "name": "Escavalier",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "fisherman-bulk",
+      "rank": "elite",
+      "name": "Vaporeon",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "fisherman-bulk",
+      "rank": "elite",
+      "name": "Rotom-Wash",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "fisherman-bulk",
+      "rank": "elite",
+      "name": "Samurott-Hisui",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "blackbelt-physical",
+      "rank": "elite",
+      "name": "Breloom",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "blackbelt-physical",
+      "rank": "elite",
+      "name": "Tauros-Paldea-Combat",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "blackbelt-physical",
+      "rank": "elite",
+      "name": "Poliwrath",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "psychic-setup",
+      "rank": "elite",
+      "name": "Espeon",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "psychic-setup",
+      "rank": "elite",
+      "name": "Gardevoir",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "psychic-setup",
+      "rank": "elite",
+      "name": "Braviary-Hisui",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "hiker-bulk",
+      "rank": "elite",
+      "name": "Swampert",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "hiker-bulk",
+      "rank": "elite",
+      "name": "Camerupt",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "hiker-bulk",
+      "rank": "elite",
+      "name": "Stunfisk-Galar",
+      "style": "physical",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "ace-setup",
+      "rank": "elite",
+      "name": "Octillery",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "ace-setup",
+      "rank": "elite",
+      "name": "Ursaluna-Bloodmoon",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "ace-setup",
+      "rank": "elite",
+      "name": "Charizard",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "ace-setup",
+      "rank": "master",
+      "name": "Charizard",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "ace-setup",
+      "rank": "master",
+      "name": "Ursaluna-Bloodmoon",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "ace-setup",
+      "rank": "master",
+      "name": "Walrein",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "veteran-balanced",
+      "rank": "elite",
+      "name": "Octillery",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "veteran-balanced",
+      "rank": "elite",
+      "name": "Ursaluna-Bloodmoon",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "veteran-balanced",
+      "rank": "elite",
+      "name": "Charizard",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "veteran-balanced",
+      "rank": "master",
+      "name": "Charizard",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "veteran-balanced",
+      "rank": "master",
+      "name": "Ursaluna-Bloodmoon",
+      "style": "special",
+      "issues": []
+    },
+    {
+      "floor": 40,
+      "sample": "veteran-balanced",
+      "rank": "master",
+      "name": "Walrein",
+      "style": "special",
+      "issues": []
     }
   ],
   "fallback": {

@@ -47,6 +47,52 @@
 | 40 | 베테랑 / elite | 0.00 / 40.00 / 60.00 | competitive | Water · Ground/Normal · Fire/Flying | 523.00 | 20.22 | 30/30/30 | 2 | 없음 |
 | 40 | 베테랑 / master | 0.00 / 40.00 / 60.00 | competitive | Fire/Flying · Ground/Normal · Ice/Water | 539.67 | 24.28 | 52/52/52 | 3 | 없음 |
 
+## Elite / Master 기술배치 평가
+
+새 공통 Elite/Master 생성 시 기존 opponentMoves 결과에 보정 단계를 적용합니다. Normal과 기존 생성 경로는 그대로이며, 저장된 v1/v2 snapshot과 packed team을 다시 생성하지 않습니다. 종 구성·확률·보상·IV/EV 예산은 변경하지 않았습니다.
+
+- Physical/Special: 기본 Atk/SpA에 기본 특성 Huge Power/Pure Power의 공격 배율을 반영합니다. 비율이 1.2 이상이면 높은 쪽을 우선합니다. 근접한 경우 실제 실용 기술의 위력·명중·자속·능력치 점수로 선택하며, 해당 분류에 실용 공격기가 없으면 반대쪽을 사용합니다.
+- Mixed: 능력치 비율 1.1 이하이고, 서로 다른 두 자속 타입의 최상위 기술이 각각 물리/특수에 20% 넘는 이점이 있을 때만 허용합니다.
+- 강화기는 성향과 일치하고 강화받는 공격기가 최소 2개여야 합니다. Foul Play의 상대 공격 사용과 Body Press의 방어 사용을 구분합니다. 중복 강화·회복·상태 역할을 제한하고, 실용 공격 수단과 가능한 자속 공격기를 유지합니다. Ditto/Unown/Wobbuffet/Pyukumuku의 기존 특수 전술은 유지합니다.
+- Elite는 기존 기술 선호 점수 10을 유지하고 역할 중복을 감점합니다. Master는 기존 선호 점수를 2로 낮추고, 중복 공격 감점을 강화하며 세트 전체의 효과적인 타입 커버리지·복수 자속·강화 후 공격 수를 추가 평가합니다. 강화기를 강제하지 않으며 4공격도 선택합니다.
+- 위력뿐 아니라 명중·반동·공격 능력치 하락·지연/연속 고정·조건부 공격을 감안합니다. Focus Punch 등 지원 조건을 마련하지 않은 기술은 제외합니다. 지원기는 현재 TowerPolicy가 사용하는 기술로 한정합니다. 최종 4기술 조합은 Showdown으로 합법성을 확인합니다.
+
+검사 결과: 새 Elite/Master 81개체 중 일관성 문제 0개체. 반바지 소년의 기존 teamConcept은 이번 작업에서 변경하지 않았습니다.
+
+### 사용자 제시 문제 사례 비교
+
+아래 이전 기술은 사용자 제시 사례이며, 이후는 동일 입력을 setup 전술로 보정한 결과입니다. 실제 층별 팀은 다음 상세 목록에 별도로 기록합니다.
+
+| 종 / 성향 | 이전 | Elite 이후 | Master 이후 |
+|---|---|---|---|
+| Ludicolo / special | Surf, Leaf Storm, Swords Dance, Giga Drain | Surf, Ice Beam, Focus Blast, Leaf Storm | Energy Ball, Surf, Ice Beam, Focus Blast |
+| Charizard / special | Flamethrower, Air Slash, Dragon Dance, Focus Punch | Hurricane, Dragon Pulse, Focus Blast, Flamethrower | Fire Blast, Hurricane, Dragon Pulse, Focus Blast |
+| Ursaluna-Bloodmoon / special | Blood Moon, Earth Power, Swords Dance, Moonblast | Blood Moon, Earth Power, Moonblast, Calm Mind | Blood Moon, Earth Power, Moonblast, Calm Mind |
+| Walrein / special | Ice Beam, Surf, Swords Dance, Double-Edge | Ice Beam, Surf, Signal Beam, Hydro Pump | Ice Beam, Surf, Signal Beam, Toxic |
+
+### 지정 검토 대상: 5 / 20 / 40층
+
+| 층 | Sample / Rank | 종 / 성향 / 결과 |
+|---|---|---|
+| 5 | 태권왕 / elite | Hitmontop (physical; 정상) · Hitmonchan (physical; 정상) · Lilligant-Hisui (physical; 정상) |
+| 5 | 초능력자 / elite | Xatu (special; 정상) · Mr. Mime (special; 정상) · Veluza (physical; 정상) |
+| 5 | 에이스 트레이너 / elite | Magcargo (special; 정상) · Beedrill (physical; 정상) · Basculin (physical; 정상) |
+| 5 | 에이스 트레이너 / master | Dodrio (physical; 정상) · Ludicolo (special; 정상) · Camerupt (special; 정상) |
+| 5 | 베테랑 / elite | Magcargo (special; 정상) · Beedrill (physical; 정상) · Basculin (physical; 정상) |
+| 5 | 베테랑 / master | Dodrio (physical; 정상) · Ludicolo (special; 정상) · Mimikyu (physical; 정상) |
+| 20 | 태권왕 / elite | Hitmontop (physical; 정상) · Flamigo (physical; 정상) · Lilligant-Hisui (physical; 정상) |
+| 20 | 초능력자 / elite | Slowking (special; 정상) · Gardevoir (special; 정상) · Beheeyem (special; 정상) |
+| 20 | 에이스 트레이너 / elite | Skarmory (physical; 정상) · Pidgeot (physical; 정상) · Golurk (physical; 정상) |
+| 20 | 에이스 트레이너 / master | Avalugg-Hisui (physical; 정상) · Tentacruel (special; 정상) · Gardevoir (special; 정상) |
+| 20 | 베테랑 / elite | Skarmory (physical; 정상) · Avalugg-Hisui (physical; 정상) · Golurk (physical; 정상) |
+| 20 | 베테랑 / master | Avalugg-Hisui (physical; 정상) · Tentacruel (special; 정상) · Gardevoir (special; 정상) |
+| 40 | 태권왕 / elite | Breloom (physical; 정상) · Tauros-Paldea-Combat (physical; 정상) · Poliwrath (physical; 정상) |
+| 40 | 초능력자 / elite | Espeon (special; 정상) · Gardevoir (special; 정상) · Braviary-Hisui (special; 정상) |
+| 40 | 에이스 트레이너 / elite | Octillery (special; 정상) · Ursaluna-Bloodmoon (special; 정상) · Charizard (special; 정상) |
+| 40 | 에이스 트레이너 / master | Charizard (special; 정상) · Ursaluna-Bloodmoon (special; 정상) · Walrein (special; 정상) |
+| 40 | 베테랑 / elite | Octillery (special; 정상) · Ursaluna-Bloodmoon (special; 정상) · Charizard (special; 정상) |
+| 40 | 베테랑 / master | Charizard (special; 정상) · Ursaluna-Bloodmoon (special; 정상) · Walrein (special; 정상) |
+
 ## 실제 팀 상세
 
 ### 5층 반바지 소년 / normal
@@ -59,9 +105,9 @@
 ### 5층 반바지 소년 / elite
 
 - Sample: youngster-balanced, concept: Bug 3마리, 테마 3/3, 후보 26종, fallback false, itemSlots 2
-- Forretress (Bug/Steel): IV 12/17/16/15/16/18 · EV 6/8/2/0/2/4 · Muscle Band · Lunge, Steel Beam, Hard Press, Toxic
-- Butterfree (Bug/Flying): IV 15/16/13/18/12/11 · EV 6/0/2/8/2/4 · Wise Glasses · Bug Buzz, Hurricane, Silver Wind, Pollen Puff
-- Rabsca (Bug/Psychic): IV 17/13/14/18/14/14 · EV 6/0/2/8/2/4 · 없음 · Bug Buzz, Future Sight, Sludge Bomb, Recover
+- Forretress (Bug/Steel): IV 12/17/16/15/16/18 · EV 6/8/2/0/2/4 · Muscle Band · Iron Head, Lunge, Body Press, Earthquake
+- Butterfree (Bug/Flying): IV 15/16/13/18/12/11 · EV 6/0/2/8/2/4 · Wise Glasses · Bug Buzz, Hurricane, Energy Ball, Psychic
+- Rabsca (Bug/Psychic): IV 17/13/14/18/14/14 · EV 6/0/2/8/2/4 · 없음 · Bug Buzz, Psychic, Earth Power, Sludge Bomb
 
 ### 5층 낚시꾼 / normal
 
@@ -73,9 +119,9 @@
 ### 5층 낚시꾼 / elite
 
 - Sample: fisherman-bulk, concept: Water 3마리, 테마 3/3, 후보 30종, fallback false, itemSlots 2
-- Quagsire (Water/Ground): IV 12/17/16/15/16/18 · EV 9/0/7/0/6/0 · Leftovers · Liquidation, Earthquake, Recover, Waterfall
-- Dewgong (Water/Ice): IV 14/13/15/16/13/18 · EV 9/0/7/0/6/0 · Sitrus Berry · Surf, Ice Beam, Aqua Tail, Toxic
-- Tatsugiri (Dragon/Water): IV 15/12/10/17/13/14 · EV 9/0/7/0/6/0 · 없음 · Draco Meteor, Surf, Take Down, Hydro Pump
+- Quagsire (Water/Ground): IV 12/17/16/15/16/18 · EV 9/0/7/0/6/0 · Leftovers · Earthquake, Liquidation, Recover, Toxic
+- Dewgong (Water/Ice): IV 14/13/15/16/13/18 · EV 9/0/7/0/6/0 · Sitrus Berry · Ice Beam, Surf, Alluring Voice, Toxic
+- Tatsugiri (Dragon/Water): IV 15/12/10/17/13/14 · EV 9/0/7/0/6/0 · 없음 · Surf, Draco Meteor, Hydro Pump, Nasty Plot
 
 ### 5층 태권왕 / normal
 
@@ -87,9 +133,9 @@
 ### 5층 태권왕 / elite
 
 - Sample: blackbelt-physical, concept: Fighting 3마리, 테마 3/3, 후보 12종, fallback false, itemSlots 2
-- Hitmontop (Fighting): IV 12/17/16/15/16/18 · EV 4/11/0/0/0/7 · Muscle Band · Close Combat, Double-Edge, Reversal, Seismic Toss
-- Hitmonchan (Fighting): IV 15/16/13/18/12/11 · EV 4/11/0/0/0/7 · Expert Belt · Focus Punch, Double-Edge, Low Kick, Close Combat
-- Lilligant-Hisui (Grass/Fighting): IV 13/14/18/14/14/16 · EV 4/11/0/0/0/7 · 없음 · Close Combat, Axe Kick, Petal Blizzard, Low Sweep
+- Hitmontop (Fighting): IV 12/17/16/15/16/18 · EV 4/11/0/0/0/7 · Muscle Band · Close Combat, Earthquake, Ice Spinner, Double-Edge
+- Hitmonchan (Fighting): IV 15/16/13/18/12/11 · EV 4/11/0/0/0/7 · Expert Belt · Close Combat, Earthquake, Poison Jab, Double-Edge
+- Lilligant-Hisui (Grass/Fighting): IV 13/14/18/14/14/16 · EV 4/11/0/0/0/7 · 없음 · Close Combat, Ice Spinner, Axe Kick, Petal Blizzard
 
 ### 5층 초능력자 / normal
 
@@ -101,9 +147,9 @@
 ### 5층 초능력자 / elite
 
 - Sample: psychic-setup, concept: Psychic 3마리, 테마 3/3, 후보 17종, fallback false, itemSlots 2
-- Xatu (Psychic/Flying): IV 17/16/15/16/18/17 · EV 4/0/0/11/0/7 · Lum Berry · Future Sight, Air Slash, Calm Mind, Air Cutter
-- Mr. Mime (Psychic/Fairy): IV 16/13/18/12/11/12 · EV 4/0/0/11/0/7 · Wise Glasses · Future Sight, Dazzling Gleam, Nasty Plot, Psychic
-- Veluza (Water/Psychic): IV 17/13/14/18/14/14 · EV 4/11/0/0/0/7 · 없음 · Liquidation, Psychic Fangs, Hydro Pump, Zen Headbutt
+- Xatu (Psychic/Flying): IV 17/16/15/16/18/17 · EV 4/0/0/11/0/7 · Lum Berry · Psychic, Air Slash, Heat Wave, Calm Mind
+- Mr. Mime (Psychic/Fairy): IV 16/13/18/12/11/12 · EV 4/0/0/11/0/7 · Wise Glasses · Psychic, Dazzling Gleam, Energy Ball, Nasty Plot
+- Veluza (Water/Psychic): IV 17/13/14/18/14/14 · EV 4/11/0/0/0/7 · 없음 · Liquidation, Psychic Fangs, Crunch, Drill Run
 
 ### 5층 등산가 / normal
 
@@ -115,37 +161,37 @@
 ### 5층 등산가 / elite
 
 - Sample: hiker-bulk, concept: Rock/Ground 3마리, 테마 3/3, 후보 22종, fallback false, itemSlots 2
-- Magcargo (Fire/Rock): IV 17/16/15/16/18/17 · EV 9/0/7/0/6/0 · Leftovers · Overheat, Power Gem, Recover, Flame Burst
-- Dugtrio-Alola (Ground/Steel): IV 15/16/13/18/12/11 · EV 9/0/7/0/6/0 · Sitrus Berry · Earthquake, High Horsepower, Foul Play, Iron Head
-- Stunfisk (Ground/Electric): IV 17/13/14/18/14/14 · EV 9/0/7/0/6/0 · 없음 · Earth Power, Thunderbolt, Uproar, Toxic
+- Magcargo (Fire/Rock): IV 17/16/15/16/18/17 · EV 9/0/7/0/6/0 · Leftovers · Power Gem, Overheat, Recover, Toxic
+- Dugtrio-Alola (Ground/Steel): IV 15/16/13/18/12/11 · EV 9/0/7/0/6/0 · Sitrus Berry · Earthquake, Iron Head, Foul Play, Toxic
+- Stunfisk (Ground/Electric): IV 17/13/14/18/14/14 · EV 9/0/7/0/6/0 · 없음 · Earth Power, Thunderbolt, Sludge Wave, Toxic
 
 ### 5층 에이스 트레이너 / elite
 
 - Sample: ace-setup, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 2
-- Magcargo (Fire/Rock): IV 17/16/15/16/18/17 · EV 4/0/0/11/0/7 · Lum Berry · Overheat, Power Gem, Shell Smash, Flame Burst
-- Beedrill (Bug/Poison): IV 16/13/18/12/11/12 · EV 4/11/0/0/0/7 · Muscle Band · X-Scissor, Poison Jab, Swords Dance, Facade
-- Basculin (Water): IV 17/13/14/18/14/14 · EV 4/11/0/0/0/7 · 없음 · Wave Crash, Double-Edge, Scald, Thrash
+- Magcargo (Fire/Rock): IV 17/16/15/16/18/17 · EV 4/0/0/11/0/7 · Lum Berry · Power Gem, Earth Power, Overheat, Shell Smash
+- Beedrill (Bug/Poison): IV 16/13/18/12/11/12 · EV 4/11/0/0/0/7 · Muscle Band · Poison Jab, X-Scissor, Drill Run, Swords Dance
+- Basculin (Water): IV 17/13/14/18/14/14 · EV 4/11/0/0/0/7 · 없음 · Wave Crash, Superpower, Head Smash, Double-Edge
 
 ### 5층 에이스 트레이너 / master
 
 - Sample: ace-setup, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 3
-- Dodrio (Normal/Flying): IV 23/22/21/22/24/23 · EV 9/23/0/0/0/13 · Focus Sash · Double-Edge, Brave Bird, Swords Dance, Frustration
-- Ludicolo (Water/Grass): IV 21/22/19/24/18/17 · EV 9/0/0/23/0/13 · Lum Berry · Surf, Leaf Storm, Swords Dance, Giga Drain
-- Camerupt (Fire/Ground): IV 23/19/20/24/20/20 · EV 9/0/0/23/0/13 · Life Orb · Eruption, Earthquake, Stomping Tantrum, Toxic
+- Dodrio (Normal/Flying): IV 23/22/21/22/24/23 · EV 9/23/0/0/0/13 · Focus Sash · Brave Bird, Double-Edge, Jump Kick, Swords Dance
+- Ludicolo (Water/Grass): IV 21/22/19/24/18/17 · EV 9/0/0/23/0/13 · Lum Berry · Energy Ball, Surf, Ice Beam, Focus Blast
+- Camerupt (Fire/Ground): IV 23/19/20/24/20/20 · EV 9/0/0/23/0/13 · Life Orb · Eruption, Earth Power, Flash Cannon, Ancient Power
 
 ### 5층 베테랑 / elite
 
 - Sample: veteran-balanced, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 2
-- Magcargo (Fire/Rock): IV 17/16/15/16/18/17 · EV 6/0/2/8/2/4 · Wise Glasses · Overheat, Power Gem, Flame Burst, Burning Jealousy
-- Beedrill (Bug/Poison): IV 16/13/18/12/11/12 · EV 6/8/2/0/2/4 · Muscle Band · X-Scissor, Poison Jab, Outrage, Facade
-- Basculin (Water): IV 17/13/14/18/14/14 · EV 6/8/2/0/2/4 · 없음 · Wave Crash, Double-Edge, Scald, Thrash
+- Magcargo (Fire/Rock): IV 17/16/15/16/18/17 · EV 6/0/2/8/2/4 · Wise Glasses · Power Gem, Earth Power, Overheat, Shell Smash
+- Beedrill (Bug/Poison): IV 16/13/18/12/11/12 · EV 6/8/2/0/2/4 · Muscle Band · Poison Jab, X-Scissor, Outrage, Drill Run
+- Basculin (Water): IV 17/13/14/18/14/14 · EV 6/8/2/0/2/4 · 없음 · Wave Crash, Superpower, Head Smash, Double-Edge
 
 ### 5층 베테랑 / master
 
 - Sample: veteran-balanced, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 3
-- Dodrio (Normal/Flying): IV 23/22/21/22/24/23 · EV 12/17/4/0/4/8 · Life Orb · Double-Edge, Brave Bird, Frustration, Flail
-- Ludicolo (Water/Grass): IV 21/22/19/24/18/17 · EV 12/0/4/17/4/8 · Wise Glasses · Surf, Leaf Storm, Giga Drain, Energy Ball
-- Mimikyu (Ghost/Fairy): IV 19/20/24/20/20/22 · EV 12/17/4/0/4/8 · Muscle Band · Shadow Claw, Play Rough, Swords Dance, Leech Life
+- Dodrio (Normal/Flying): IV 23/22/21/22/24/23 · EV 12/17/4/0/4/8 · Life Orb · Brave Bird, Double-Edge, Jump Kick, Drill Run
+- Ludicolo (Water/Grass): IV 21/22/19/24/18/17 · EV 12/0/4/17/4/8 · Wise Glasses · Energy Ball, Surf, Ice Beam, Focus Blast
+- Mimikyu (Ghost/Fairy): IV 19/20/24/20/20/22 · EV 12/17/4/0/4/8 · Muscle Band · Play Rough, Shadow Claw, Wood Hammer, Drain Punch
 
 ### 20층 반바지 소년 / normal
 
@@ -157,9 +203,9 @@
 ### 20층 반바지 소년 / elite
 
 - Sample: youngster-balanced, concept: Bug 3마리, 테마 3/3, 후보 42종, fallback false, itemSlots 2
-- Scizor (Bug/Steel): IV 19/18/18/18/20/19 · EV 7/10/2/0/2/4 · Muscle Band · Bullet Punch, X-Scissor, Hard Press, Double-Edge
-- Rabsca (Bug/Psychic): IV 18/18/15/20/15/14 · EV 7/0/2/10/2/4 · Wise Glasses · Bug Buzz, Future Sight, Psybeam, Psychic
-- Leavanny (Bug/Grass): IV 19/15/17/20/16/16 · EV 7/10/2/0/2/4 · 없음 · Lunge, Leaf Blade, Poison Jab, Toxic
+- Scizor (Bug/Steel): IV 19/18/18/18/20/19 · EV 7/10/2/0/2/4 · Muscle Band · Iron Head, Close Combat, Double-Edge, X-Scissor
+- Rabsca (Bug/Psychic): IV 18/18/15/20/15/14 · EV 7/0/2/10/2/4 · Wise Glasses · Bug Buzz, Psychic, Earth Power, Energy Ball
+- Leavanny (Bug/Grass): IV 19/15/17/20/16/16 · EV 7/10/2/0/2/4 · 없음 · Leaf Blade, Lunge, Poison Jab, Throat Chop
 
 ### 20층 낚시꾼 / normal
 
@@ -171,9 +217,9 @@
 ### 20층 낚시꾼 / elite
 
 - Sample: fisherman-bulk, concept: Water 3마리, 테마 3/3, 후보 57종, fallback false, itemSlots 2
-- Kabutops (Rock/Water): IV 15/19/18/18/18/20 · EV 10/0/8/0/7/0 · Leftovers · Stone Edge, Liquidation, Double-Edge, Toxic
-- Tentacruel (Water/Poison): IV 17/15/18/18/15/20 · EV 10/0/8/0/7/0 · Sitrus Berry · Surf, Sludge Wave, Gunk Shot, Toxic
-- Tatsugiri (Dragon/Water): IV 18/14/13/19/15/17 · EV 10/0/8/0/7/0 · 없음 · Draco Meteor, Surf, Take Down, Hydro Pump
+- Kabutops (Rock/Water): IV 15/19/18/18/18/20 · EV 10/0/8/0/7/0 · Leftovers · Liquidation, Stone Edge, Superpower, Toxic
+- Tentacruel (Water/Poison): IV 17/15/18/18/15/20 · EV 10/0/8/0/7/0 · Sitrus Berry · Sludge Wave, Surf, Ice Beam, Toxic
+- Tatsugiri (Dragon/Water): IV 18/14/13/19/15/17 · EV 10/0/8/0/7/0 · 없음 · Surf, Draco Meteor, Hydro Pump, Nasty Plot
 
 ### 20층 태권왕 / normal
 
@@ -185,9 +231,9 @@
 ### 20층 태권왕 / elite
 
 - Sample: blackbelt-physical, concept: Fighting 3마리, 테마 3/3, 후보 29종, fallback false, itemSlots 2
-- Hitmontop (Fighting): IV 15/19/18/18/18/20 · EV 5/13/0/0/0/7 · Muscle Band · Close Combat, Double-Edge, Reversal, Seismic Toss
-- Flamigo (Flying/Fighting): IV 18/18/15/20/15/14 · EV 5/13/0/0/0/7 · Expert Belt · Brave Bird, Close Combat, Mega Kick, Low Kick
-- Lilligant-Hisui (Grass/Fighting): IV 15/17/20/16/16/18 · EV 5/13/0/0/0/7 · 없음 · Close Combat, Axe Kick, Petal Blizzard, Low Sweep
+- Hitmontop (Fighting): IV 15/19/18/18/18/20 · EV 5/13/0/0/0/7 · Muscle Band · Close Combat, Earthquake, Ice Spinner, Double-Edge
+- Flamigo (Flying/Fighting): IV 18/18/15/20/15/14 · EV 5/13/0/0/0/7 · Expert Belt · Close Combat, Brave Bird, Liquidation, Throat Chop
+- Lilligant-Hisui (Grass/Fighting): IV 15/17/20/16/16/18 · EV 5/13/0/0/0/7 · 없음 · Close Combat, Ice Spinner, Axe Kick, Petal Blizzard
 
 ### 20층 초능력자 / normal
 
@@ -199,9 +245,9 @@
 ### 20층 초능력자 / elite
 
 - Sample: psychic-setup, concept: Psychic 3마리, 테마 3/3, 후보 42종, fallback false, itemSlots 2
-- Slowking (Water/Psychic): IV 19/18/18/18/20/19 · EV 5/0/0/13/0/7 · Lum Berry · Surf, Future Sight, Nasty Plot, Muddy Water
-- Gardevoir (Psychic/Fairy): IV 18/15/20/15/14/15 · EV 5/0/0/13/0/7 · Wise Glasses · Future Sight, Moonblast, Calm Mind, Synchronoise
-- Beheeyem (Psychic): IV 17/20/16/16/18/14 · EV 5/0/0/13/0/7 · 없음 · Future Sight, Energy Ball, Nasty Plot, Psybeam
+- Slowking (Water/Psychic): IV 19/18/18/18/20/19 · EV 5/0/0/13/0/7 · Lum Berry · Psychic, Surf, Fire Blast, Nasty Plot
+- Gardevoir (Psychic/Fairy): IV 18/15/20/15/14/15 · EV 5/0/0/13/0/7 · Wise Glasses · Moonblast, Psychic, Energy Ball, Calm Mind
+- Beheeyem (Psychic): IV 17/20/16/16/18/14 · EV 5/0/0/13/0/7 · 없음 · Psychic, Energy Ball, Thunderbolt, Nasty Plot
 
 ### 20층 등산가 / normal
 
@@ -213,37 +259,37 @@
 ### 20층 등산가 / elite
 
 - Sample: hiker-bulk, concept: Rock/Ground 3마리, 테마 3/3, 후보 60종, fallback false, itemSlots 2
-- Shuckle (Bug/Rock): IV 15/19/18/18/18/20 · EV 10/0/8/0/7/0 · Leftovers · Skitter Smack, Stone Edge, Earthquake, Toxic
-- Avalugg-Hisui (Ice/Rock): IV 15/18/18/15/20/15 · EV 10/0/8/0/7/0 · Sitrus Berry · Mountain Gale, Double-Edge, Recover, Earthquake
-- Carracosta (Water/Rock): IV 13/19/15/17/20/16 · EV 10/0/8/0/7/0 · 없음 · Liquidation, Stone Edge, Toxic, Hydro Pump
+- Shuckle (Bug/Rock): IV 15/19/18/18/18/20 · EV 10/0/8/0/7/0 · Leftovers · Stone Edge, Skitter Smack, Earthquake, Toxic
+- Avalugg-Hisui (Ice/Rock): IV 15/18/18/15/20/15 · EV 10/0/8/0/7/0 · Sitrus Berry · Mountain Gale, Stone Edge, Body Press, Recover
+- Carracosta (Water/Rock): IV 13/19/15/17/20/16 · EV 10/0/8/0/7/0 · 없음 · Liquidation, Stone Edge, Earthquake, Toxic
 
 ### 20층 에이스 트레이너 / elite
 
 - Sample: ace-setup, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 2
-- Skarmory (Steel/Flying): IV 19/18/18/18/20/19 · EV 5/13/0/0/0/7 · Lum Berry · Iron Head, Brave Bird, Swords Dance, Pluck
-- Pidgeot (Normal/Flying): IV 18/18/15/20/15/14 · EV 5/13/0/0/0/7 · Muscle Band · Double-Edge, Heat Wave, Return, Frustration
-- Golurk (Ground/Ghost): IV 13/19/15/17/20/16 · EV 5/13/0/0/0/7 · 없음 · Earthquake, Poltergeist, Close Combat, Toxic
+- Skarmory (Steel/Flying): IV 19/18/18/18/20/19 · EV 5/13/0/0/0/7 · Lum Berry · Brave Bird, Iron Head, Body Press, Swords Dance
+- Pidgeot (Normal/Flying): IV 18/18/15/20/15/14 · EV 5/13/0/0/0/7 · Muscle Band · Brave Bird, U-turn, Steel Wing, Return
+- Golurk (Ground/Ghost): IV 13/19/15/17/20/16 · EV 5/13/0/0/0/7 · 없음 · Earthquake, Shadow Punch, Close Combat, Darkest Lariat
 
 ### 20층 에이스 트레이너 / master
 
 - Sample: ace-setup, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 3
-- Avalugg-Hisui (Ice/Rock): IV 20/24/23/23/23/25 · EV 10/24/0/0/0/14 · Focus Sash · Mountain Gale, Double-Edge, Earthquake, Toxic
-- Tentacruel (Water/Poison): IV 22/20/23/23/20/25 · EV 10/0/0/24/0/14 · Lum Berry · Surf, Sludge Wave, Swords Dance, Gunk Shot
-- Gardevoir (Psychic/Fairy): IV 18/24/20/22/25/21 · EV 10/0/0/24/0/14 · Life Orb · Future Sight, Moonblast, Calm Mind, Psyshock
+- Avalugg-Hisui (Ice/Rock): IV 20/24/23/23/23/25 · EV 10/24/0/0/0/14 · Focus Sash · Mountain Gale, Stone Edge, Body Press, Earthquake
+- Tentacruel (Water/Poison): IV 22/20/23/23/20/25 · EV 10/0/0/24/0/14 · Lum Berry · Sludge Wave, Surf, Ice Beam, Dazzling Gleam
+- Gardevoir (Psychic/Fairy): IV 18/24/20/22/25/21 · EV 10/0/0/24/0/14 · Life Orb · Moonblast, Psychic, Energy Ball, Calm Mind
 
 ### 20층 베테랑 / elite
 
 - Sample: veteran-balanced, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 2
-- Skarmory (Steel/Flying): IV 19/18/18/18/20/19 · EV 7/10/2/0/2/4 · Muscle Band · Iron Head, Brave Bird, Pluck, Aerial Ace
-- Avalugg-Hisui (Ice/Rock): IV 18/18/15/20/15/14 · EV 7/10/2/0/2/4 · Expert Belt · Mountain Gale, Double-Edge, High Horsepower, Ice Spinner
-- Golurk (Ground/Ghost): IV 13/19/15/17/20/16 · EV 7/10/2/0/2/4 · 없음 · Earthquake, Poltergeist, Close Combat, Toxic
+- Skarmory (Steel/Flying): IV 19/18/18/18/20/19 · EV 7/10/2/0/2/4 · Muscle Band · Brave Bird, Iron Head, Body Press, X-Scissor
+- Avalugg-Hisui (Ice/Rock): IV 18/18/15/20/15/14 · EV 7/10/2/0/2/4 · Expert Belt · Mountain Gale, Stone Edge, Body Press, Earthquake
+- Golurk (Ground/Ghost): IV 13/19/15/17/20/16 · EV 7/10/2/0/2/4 · 없음 · Earthquake, Shadow Punch, Close Combat, Darkest Lariat
 
 ### 20층 베테랑 / master
 
 - Sample: veteran-balanced, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 3
-- Avalugg-Hisui (Ice/Rock): IV 20/24/23/23/23/25 · EV 13/18/4/0/4/9 · Life Orb · Mountain Gale, Double-Edge, Earthquake, Toxic
-- Tentacruel (Water/Poison): IV 22/20/23/23/20/25 · EV 13/0/4/18/4/9 · Wise Glasses · Surf, Sludge Wave, Gunk Shot, Toxic
-- Gardevoir (Psychic/Fairy): IV 18/24/20/22/25/21 · EV 13/0/4/18/4/9 · Focus Sash · Future Sight, Moonblast, Will-O-Wisp, Psyshock
+- Avalugg-Hisui (Ice/Rock): IV 20/24/23/23/23/25 · EV 13/18/4/0/4/9 · Life Orb · Mountain Gale, Stone Edge, Body Press, Earthquake
+- Tentacruel (Water/Poison): IV 22/20/23/23/20/25 · EV 13/0/4/18/4/9 · Wise Glasses · Sludge Wave, Surf, Ice Beam, Dazzling Gleam
+- Gardevoir (Psychic/Fairy): IV 18/24/20/22/25/21 · EV 13/0/4/18/4/9 · Focus Sash · Moonblast, Psychic, Energy Ball, Focus Blast
 
 ### 40층 반바지 소년 / normal
 
@@ -255,9 +301,9 @@
 ### 40층 반바지 소년 / elite
 
 - Sample: youngster-balanced, concept: Bug 3마리, 테마 3/3, 후보 45종, fallback false, itemSlots 2
-- Scizor (Bug/Steel): IV 22/21/20/21/22/22 · EV 9/12/2/0/2/5 · Muscle Band · Bullet Punch, X-Scissor, Hard Press, Double-Edge
-- Butterfree (Bug/Flying): IV 21/19/22/18/18/18 · EV 9/0/3/11/2/5 · Wise Glasses · Bug Buzz, Hurricane, Pollen Puff, Quiver Dance
-- Escavalier (Bug/Steel): IV 19/20/22/19/19/21 · EV 9/12/2/0/2/5 · 없음 · Megahorn, Iron Head, Swords Dance, X-Scissor
+- Scizor (Bug/Steel): IV 22/21/20/21/22/22 · EV 9/12/2/0/2/5 · Muscle Band · Iron Head, Close Combat, Double-Edge, X-Scissor
+- Butterfree (Bug/Flying): IV 21/19/22/18/18/18 · EV 9/0/3/11/2/5 · Wise Glasses · Bug Buzz, Hurricane, Energy Ball, Quiver Dance
+- Escavalier (Bug/Steel): IV 19/20/22/19/19/21 · EV 9/12/2/0/2/5 · 없음 · Megahorn, Iron Head, Close Combat, Swords Dance
 
 ### 40층 낚시꾼 / normal
 
@@ -269,9 +315,9 @@
 ### 40층 낚시꾼 / elite
 
 - Sample: fisherman-bulk, concept: Water 3마리, 테마 3/3, 후보 77종, fallback false, itemSlots 2
-- Vaporeon (Water): IV 18/22/21/20/21/22 · EV 12/0/9/0/9/0 · Leftovers · Surf, Synchronoise, Brine, Toxic
-- Rotom-Wash (Electric/Water): IV 20/21/19/22/18/18 · EV 12/0/9/0/9/0 · Sitrus Berry · Hydro Pump, Thunderbolt, Hyper Voice, Discharge
-- Samurott-Hisui (Water/Dark): IV 22/19/20/22/19/19 · EV 12/0/9/0/9/0 · 없음 · Liquidation, Surf, Razor Shell, Toxic
+- Vaporeon (Water): IV 18/22/21/20/21/22 · EV 12/0/9/0/9/0 · Leftovers · Surf, Ice Beam, Alluring Voice, Toxic
+- Rotom-Wash (Electric/Water): IV 20/21/19/22/18/18 · EV 12/0/9/0/9/0 · Sitrus Berry · Thunderbolt, Hydro Pump, Dark Pulse, Thunder Wave
+- Samurott-Hisui (Water/Dark): IV 22/19/20/22/19/19 · EV 12/0/9/0/9/0 · 없음 · Liquidation, Throat Chop, Megahorn, Toxic
 
 ### 40층 태권왕 / normal
 
@@ -283,9 +329,9 @@
 ### 40층 태권왕 / elite
 
 - Sample: blackbelt-physical, concept: Fighting 3마리, 테마 3/3, 후보 37종, fallback false, itemSlots 2
-- Breloom (Grass/Fighting): IV 22/21/20/21/22/22 · EV 6/15/0/0/0/9 · Muscle Band · Seed Bomb, Focus Punch, Double-Edge, Drain Punch
-- Tauros-Paldea-Combat (Fighting): IV 19/20/21/19/22/18 · EV 6/15/0/0/0/9 · Expert Belt · Close Combat, Body Press, Reversal, Raging Bull
-- Poliwrath (Water/Fighting): IV 17/22/19/20/22/19 · EV 6/15/0/0/0/9 · 없음 · Liquidation, Focus Punch, Double-Edge, Close Combat
+- Breloom (Grass/Fighting): IV 22/21/20/21/22/22 · EV 6/15/0/0/0/9 · Muscle Band · Close Combat, Seed Bomb, Gunk Shot, Double-Edge
+- Tauros-Paldea-Combat (Fighting): IV 19/20/21/19/22/18 · EV 6/15/0/0/0/9 · Expert Belt · Close Combat, Earthquake, Outrage, Stone Edge
+- Poliwrath (Water/Fighting): IV 17/22/19/20/22/19 · EV 6/15/0/0/0/9 · 없음 · Close Combat, Liquidation, Earthquake, Darkest Lariat
 
 ### 40층 초능력자 / normal
 
@@ -297,9 +343,9 @@
 ### 40층 초능력자 / elite
 
 - Sample: psychic-setup, concept: Psychic 3마리, 테마 3/3, 후보 47종, fallback false, itemSlots 2
-- Espeon (Psychic): IV 22/21/20/21/22/22 · EV 6/0/0/15/0/9 · Lum Berry · Psychic, Shadow Ball, Calm Mind, Psybeam
-- Gardevoir (Psychic/Fairy): IV 21/19/22/18/18/18 · EV 6/0/0/15/0/9 · Wise Glasses · Future Sight, Moonblast, Calm Mind, Synchronoise
-- Braviary-Hisui (Psychic/Flying): IV 20/22/19/19/21/18 · EV 6/0/0/15/0/9 · 없음 · Future Sight, Psychic, Calm Mind, Hurricane
+- Espeon (Psychic): IV 22/21/20/21/22/22 · EV 6/0/0/15/0/9 · Lum Berry · Psychic, Power Gem, Shadow Ball, Calm Mind
+- Gardevoir (Psychic/Fairy): IV 21/19/22/18/18/18 · EV 6/0/0/15/0/9 · Wise Glasses · Moonblast, Psychic, Energy Ball, Calm Mind
+- Braviary-Hisui (Psychic/Flying): IV 20/22/19/19/21/18 · EV 6/0/0/15/0/9 · 없음 · Psychic, Hurricane, Heat Wave, Calm Mind
 
 ### 40층 등산가 / normal
 
@@ -311,37 +357,37 @@
 ### 40층 등산가 / elite
 
 - Sample: hiker-bulk, concept: Rock/Ground 3마리, 테마 3/3, 후보 72종, fallback false, itemSlots 2
-- Swampert (Water/Ground): IV 18/22/21/20/21/22 · EV 12/0/9/0/9/0 · Leftovers · Liquidation, Earthquake, Outrage, Toxic
-- Camerupt (Fire/Ground): IV 19/20/21/19/22/18 · EV 12/0/9/0/9/0 · Sitrus Berry · Eruption, Earthquake, Toxic, Earth Power
-- Stunfisk-Galar (Ground/Steel): IV 18/17/22/19/20/22 · EV 12/0/9/0/9/0 · 없음 · Steel Beam, Earthquake, Thunder Wave, Lash Out
+- Swampert (Water/Ground): IV 18/22/21/20/21/22 · EV 12/0/9/0/9/0 · Leftovers · Earthquake, Liquidation, Outrage, Toxic
+- Camerupt (Fire/Ground): IV 19/20/21/19/22/18 · EV 12/0/9/0/9/0 · Sitrus Berry · Eruption, Earth Power, Flash Cannon, Toxic
+- Stunfisk-Galar (Ground/Steel): IV 18/17/22/19/20/22 · EV 12/0/9/0/9/0 · 없음 · Earthquake, Foul Play, Stone Edge, Thunder Wave
 
 ### 40층 에이스 트레이너 / elite
 
 - Sample: ace-setup, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 2
-- Octillery (Water): IV 18/22/21/20/21/22 · EV 6/15/0/0/0/9 · Lum Berry · Water Spout, Double-Edge, Scald, Toxic
-- Ursaluna-Bloodmoon (Ground/Normal): IV 20/19/20/21/19/22 · EV 6/0/0/15/0/9 · Wise Glasses · Blood Moon, Earth Power, Swords Dance, Tera Blast
-- Charizard (Fire/Flying): IV 17/22/19/20/22/19 · EV 6/0/0/15/0/9 · 없음 · Flamethrower, Air Slash, Dragon Dance, Focus Punch
+- Octillery (Water): IV 18/22/21/20/21/22 · EV 6/15/0/0/0/9 · Lum Berry · Water Spout, Sludge Wave, Fire Blast, Ice Beam
+- Ursaluna-Bloodmoon (Ground/Normal): IV 20/19/20/21/19/22 · EV 6/0/0/15/0/9 · Wise Glasses · Blood Moon, Earth Power, Moonblast, Calm Mind
+- Charizard (Fire/Flying): IV 17/22/19/20/22/19 · EV 6/0/0/15/0/9 · 없음 · Hurricane, Dragon Pulse, Focus Blast, Flamethrower
 
 ### 40층 에이스 트레이너 / master
 
 - Sample: ace-setup, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 3
-- Charizard (Fire/Flying): IV 26/25/24/25/26/26 · EV 10/0/0/26/0/16 · Focus Sash · Flamethrower, Air Slash, Dragon Dance, Focus Punch
-- Ursaluna-Bloodmoon (Ground/Normal): IV 23/24/25/23/26/22 · EV 10/0/0/26/0/16 · Lum Berry · Blood Moon, Earth Power, Swords Dance, Moonblast
-- Walrein (Ice/Water): IV 22/21/26/23/24/26 · EV 10/0/0/26/0/16 · Life Orb · Ice Beam, Surf, Swords Dance, Double-Edge
+- Charizard (Fire/Flying): IV 26/25/24/25/26/26 · EV 10/0/0/26/0/16 · Focus Sash · Fire Blast, Hurricane, Dragon Pulse, Focus Blast
+- Ursaluna-Bloodmoon (Ground/Normal): IV 23/24/25/23/26/22 · EV 10/0/0/26/0/16 · Lum Berry · Blood Moon, Earth Power, Moonblast, Calm Mind
+- Walrein (Ice/Water): IV 22/21/26/23/24/26 · EV 10/0/0/26/0/16 · Life Orb · Ice Beam, Surf, Signal Beam, Toxic
 
 ### 40층 베테랑 / elite
 
 - Sample: veteran-balanced, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 2
-- Octillery (Water): IV 18/22/21/20/21/22 · EV 9/12/2/0/2/5 · Wise Glasses · Water Spout, Double-Edge, Scald, Toxic
-- Ursaluna-Bloodmoon (Ground/Normal): IV 20/19/20/21/19/22 · EV 9/0/3/11/2/5 · Expert Belt · Blood Moon, Earth Power, Tera Blast, Calm Mind
-- Charizard (Fire/Flying): IV 17/22/19/20/22/19 · EV 9/0/3/11/2/5 · 없음 · Flamethrower, Air Slash, Roost, Focus Punch
+- Octillery (Water): IV 18/22/21/20/21/22 · EV 9/12/2/0/2/5 · Wise Glasses · Water Spout, Sludge Wave, Fire Blast, Ice Beam
+- Ursaluna-Bloodmoon (Ground/Normal): IV 20/19/20/21/19/22 · EV 9/0/3/11/2/5 · Expert Belt · Blood Moon, Earth Power, Moonblast, Focus Blast
+- Charizard (Fire/Flying): IV 17/22/19/20/22/19 · EV 9/0/3/11/2/5 · 없음 · Hurricane, Dragon Pulse, Focus Blast, Flamethrower
 
 ### 40층 베테랑 / master
 
 - Sample: veteran-balanced, concept: competitive, 테마 0/0, 후보 0종, fallback false, itemSlots 3
-- Charizard (Fire/Flying): IV 26/25/24/25/26/26 · EV 15/0/5/19/4/9 · Life Orb · Flamethrower, Air Slash, Focus Punch, Fire Pledge
-- Ursaluna-Bloodmoon (Ground/Normal): IV 23/24/25/23/26/22 · EV 15/0/5/19/4/9 · Wise Glasses · Blood Moon, Earth Power, Calm Mind, Moonblast
-- Walrein (Ice/Water): IV 22/21/26/23/24/26 · EV 15/0/5/19/4/9 · Focus Sash · Ice Beam, Surf, Toxic, Double-Edge
+- Charizard (Fire/Flying): IV 26/25/24/25/26/26 · EV 15/0/5/19/4/9 · Life Orb · Fire Blast, Hurricane, Dragon Pulse, Focus Blast
+- Ursaluna-Bloodmoon (Ground/Normal): IV 23/24/25/23/26/22 · EV 15/0/5/19/4/9 · Wise Glasses · Blood Moon, Earth Power, Moonblast, Focus Blast
+- Walrein (Ice/Water): IV 22/21/26/23/24/26 · EV 15/0/5/19/4/9 · Focus Sash · Ice Beam, Surf, Signal Beam, Toxic
 
 ## 공통 Sample 전체 목록
 

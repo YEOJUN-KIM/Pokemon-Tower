@@ -1,0 +1,172 @@
+{
+  "version": 2,
+  "sample": {
+    "id": "ace-setup",
+    "displayName": "에이스 트레이너",
+    "portrait": "acetrainer-gen4",
+    "tactic": "setup",
+    "specialty": null,
+    "rankWeights": {
+      "normal": 0,
+      "elite": 0.7,
+      "master": 0.3
+    },
+    "teamConcept": {
+      "mode": "competitive"
+    },
+    "minFloor": 1,
+    "weight": 12,
+    "pools": [
+      "normal",
+      "challenger"
+    ]
+  },
+  "rank": "master",
+  "floor": 40,
+  "seed": [
+    17,
+    29,
+    43,
+    71
+  ],
+  "training": {
+    "rank": "master",
+    "ivRange": [
+      21,
+      26
+    ],
+    "evBudget": 52,
+    "itemTier": "premium",
+    "buildQuality": "optimized",
+    "gimmickChance": 1,
+    "itemSlots": [
+      3,
+      3
+    ]
+  },
+  "team": [
+    {
+      "name": "Charizard",
+      "moves": [
+        "Flamethrower",
+        "Air Slash",
+        "Dragon Dance",
+        "Focus Punch"
+      ],
+      "item": "Focus Sash",
+      "profile": {
+        "ivs": {
+          "hp": 26,
+          "atk": 25,
+          "def": 24,
+          "spa": 25,
+          "spd": 26,
+          "spe": 26
+        },
+        "evs": {
+          "hp": 10,
+          "atk": 0,
+          "def": 0,
+          "spa": 26,
+          "spd": 0,
+          "spe": 16
+        },
+        "moves": [
+          "Flamethrower",
+          "Air Slash",
+          "Dragon Dance",
+          "Focus Punch"
+        ],
+        "ability": "Blaze",
+        "nature": "Serious",
+        "teraType": "Fire",
+        "statSystem": "points"
+      }
+    },
+    {
+      "name": "Ursaluna-Bloodmoon",
+      "moves": [
+        "Blood Moon",
+        "Earth Power",
+        "Swords Dance",
+        "Moonblast"
+      ],
+      "item": "Lum Berry",
+      "profile": {
+        "ivs": {
+          "hp": 23,
+          "atk": 24,
+          "def": 25,
+          "spa": 23,
+          "spd": 26,
+          "spe": 22
+        },
+        "evs": {
+          "hp": 10,
+          "atk": 0,
+          "def": 0,
+          "spa": 26,
+          "spd": 0,
+          "spe": 16
+        },
+        "moves": [
+          "Blood Moon",
+          "Earth Power",
+          "Swords Dance",
+          "Moonblast"
+        ],
+        "ability": "Mind's Eye",
+        "nature": "Serious",
+        "teraType": "Ground",
+        "statSystem": "points"
+      }
+    },
+    {
+      "name": "Walrein",
+      "moves": [
+        "Ice Beam",
+        "Surf",
+        "Swords Dance",
+        "Double-Edge"
+      ],
+      "item": "Life Orb",
+      "profile": {
+        "ivs": {
+          "hp": 22,
+          "atk": 21,
+          "def": 26,
+          "spa": 23,
+          "spd": 24,
+          "spe": 26
+        },
+        "evs": {
+          "hp": 10,
+          "atk": 0,
+          "def": 0,
+          "spa": 26,
+          "spd": 0,
+          "spe": 16
+        },
+        "moves": [
+          "Ice Beam",
+          "Surf",
+          "Swords Dance",
+          "Double-Edge"
+        ],
+        "ability": "Thick Fat",
+        "nature": "Serious",
+        "teraType": "Ice",
+        "statSystem": "points"
+      }
+    }
+  ],
+  "gimmick": null,
+  "composition": {
+    "themeAvailable": 0,
+    "themeRequired": 0,
+    "themeUsed": 0,
+    "fallback": false,
+    "candidateCount": 12,
+    "itemSlots": 3
+  }
+}

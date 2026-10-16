@@ -2,8 +2,14 @@
 import {useEffect,useState} from 'react';
 export const PLAYBACK_KEY='tower-playback-speed-v1';
 export type PlaybackSpeed=1|2|4;
-export function playbackDuration(duration:number,speed:PlaybackSpeed,notice=false,dialogue=''){
+export type PlaybackTiming={important?:boolean;idle?:boolean};
+export function playbackDuration(duration:number,speed:PlaybackSpeed,notice=false,dialogue='',timing:PlaybackTiming={}){
   const readingTime=speed>1 && dialogue ? Math.min(duration,Math.max(800,Math.min(1600,Array.from(dialogue).length*28+450))) : 0;
+  if(speed===4){
+    const readable=timing.important!==false ? readingTime : dialogue?Math.min(duration,Math.max(450,Math.min(850,Array.from(dialogue).length*18+250))):0;
+    const pause=timing.idle&&!notice&&!dialogue?Math.min(duration/speed,60):duration/speed;
+    return Math.max(pause,notice?700:0,readable);
+  }
   return Math.max(duration/speed,notice?1200:0,readingTime);
 }
 export function readPlaybackSpeed():PlaybackSpeed{

@@ -1,9 +1,9 @@
 'use client';
-import {useLayoutEffect,useRef} from 'react';
+import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {eventDefinition,type EventChoice,type RunEventView} from '../data/run-events';
 import {getEventPresentation} from './event-presentation';
 import {GameDialogue} from './game-dialogue';
-import {RewardPanel} from './reward-panel';
+import {RewardModal,rewardRevealDelay} from './reward-modal';
 import {selectGameCursor} from './game-keyboard';
 import styles from './styles/run-event.module.css';
 
@@ -46,13 +46,19 @@ export function RunEventScene({event}:{event:RunEventView}){
 
 export function RunEventPanel({event,runId,busy,selecting,onChoose,submit}:{event:RunEventView;runId:string;busy:boolean;selecting:boolean;onChoose:()=>void;submit:(body:Record<string,unknown>)=>Promise<void>}){
  const mode=event.phase==='reward'?'reward':selecting?'choices':'intro';
- return <section className={`${styles.scope} ${styles.bottom} battle-messages`} data-event-step={mode} aria-label="이벤트 상황">
+ const [revealed,setRevealed]=useState<string|null>(null);
+ useEffect(()=>{
+  if(mode!=='reward'||!event.result)return;
+  const timer=setTimeout(()=>setRevealed(event.id),window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:rewardRevealDelay);
+  return()=>clearTimeout(timer);
+ },[event.id,mode,!!event.result]);
+ return <><section className={`${styles.scope} ${styles.bottom} battle-messages`} data-event-step={mode} aria-label="이벤트 상황">
   <div className="message-heading"><span><i className="record-dot"/>이벤트</span><span>{mode==='choices'?'어떻게 할까요?':`${event.afterFloor}층을 지나던 길`}</span></div>
-  {mode==='reward'&&event.result?<RewardPanel result={event.result} busy={busy} dialogueLabel="이벤트 안내" onConfirm={()=>void submit({type:'event-continue',runId,eventId:event.id})}/>:<>
+  {mode==='reward'&&event.result?<GameDialogue text="상자를 열었다. 결과를 확인해 보자." label="이벤트 안내"/>:<>
    {mode!=='choices'&&<GameDialogue text={eventDialogue(event)} label="이벤트 안내"/>}
    <RunEventChoices event={event} runId={runId} busy={busy} submit={submit} mode={mode} onChoose={onChoose}/>
   </>}
- </section>;
+ </section>{mode==='reward'&&event.result&&revealed===event.id&&<RewardModal result={event.result} heading={event.result.tone==='good'||event.result.tone==='great'?'이벤트 보상':'이벤트 결과'} busy={busy} onConfirm={()=>void submit({type:'event-continue',runId,eventId:event.id})}/>}</>;
 }
 
 function RunEventChoices({event,runId,busy,submit,mode,onChoose}:{event:RunEventView;runId:string;busy:boolean;submit:(body:Record<string,unknown>)=>Promise<void>;mode:'intro'|'choices'|'reward';onChoose:()=>void}){

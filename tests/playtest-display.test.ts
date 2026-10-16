@@ -13,9 +13,9 @@ test('ordinary trainers show only their class; named gym leaders show specialty 
   assert.equal(trainerLabel(boss({kind:'normal'})),'등산가');
   assert.equal(trainerLabel(boss({id:'named-falkner',kind:'named',role:'gym',specialty:'Flying',title:'체육관 관장',name:'비상'})),'비행타입 관장 비상');
 });
-test('2x and 4x retain 1.2 seconds for notices while normal frames remain accelerated',()=>{
+test('1x/2x retain existing popup pacing; 4x uses a readable shorter popup hold',()=>{
   assert.equal(playbackDuration(1000,2),500);assert.equal(playbackDuration(1000,4),250);
-  assert.equal(playbackDuration(1000,2,true),1200);assert.equal(playbackDuration(1000,4,true),1200);
+  assert.equal(playbackDuration(1000,2,true),1200);assert.equal(playbackDuration(1000,4,true),700);
   assert.equal(playbackDuration(1600,1,true),1600);
 });
 test('every species/form has local normal and shiny backs, and copied fronts are excluded',()=>{
@@ -35,4 +35,16 @@ test('fast playback preserves readable new dialogue without slowing hidden damag
  }
  assert.equal(playbackDuration(750,1,false,'긴 문장'.repeat(30)),750);
  assert.equal(playbackDuration(0,4),0);
+});
+
+
+test('4x removes idle overhead but leaves important results readable and 1x/2x timing unchanged',()=>{
+ const legacy=(duration:number,speed:number,notice:boolean,text:string)=>Math.max(duration/speed,notice?1200:0,speed>1&&text?Math.min(duration,Math.max(800,Math.min(1600,Array.from(text).length*28+450))):0);
+ for(const speed of [1,2] as const)for(const duration of [0,220,360,750,1200,1600])for(const notice of [false,true])for(const text of ['', '효과가 굉장했다!', '긴 일반 메시지입니다.']){
+  assert.equal(playbackDuration(duration,speed,notice,text,{important:false,idle:true}),legacy(duration,speed,notice,text));
+ }
+ assert.equal(playbackDuration(750,4,false,'',{idle:true}),60);
+ assert.equal(playbackDuration(750,4,false,'피카츄 등장!',{important:false}),450);
+ for(const text of ['효과가 굉장했다!','효과가 별로인 듯하다…','급소에 맞았다!','공격이 빗나갔다.','기술은 실패했다.','효과가 없다.','마비되었다!'])assert.equal(playbackDuration(750,4,false,text,{important:true}),750);
+ assert.equal(playbackDuration(1000,4,false,'',{idle:false}),250);
 });

@@ -1,6 +1,6 @@
 # 이벤트 확장 방법
 
-기준: 2026-10-16. 선택지·연출 분리 위에 v2 미스터리 상자와 목록형 공통 Reward 기반을 추가했습니다. 전체 등장·종류 가중치·쿨다운과 브리더·상인의 비용·보상·무추첨 동작을 유지하고, 기존 v1 런의 상자 규칙도 보존합니다.
+기준: 2026-10-16. 선택지·연출 분리 위에 v2 미스터리 상자와 공통 Reward Popup 기반을 추가했습니다. 전체 등장·종류 가중치·쿨다운과 브리더·상인의 비용·보상·무추첨 동작을 유지하고, 기존 v1 런의 상자 규칙도 보존합니다.
 
 ## 책임과 흐름
 
@@ -68,17 +68,31 @@
 - `game/rewards.ts`: 서버가 제공한 잔액으로 손실을 계산하고 실제 적용 항목으로 변환하는 순수 함수. 설정을 검증하고 소수점 버림·잔액 상한을 적용합니다.
 - `server/rewards.ts`: 기존 지갑 함수로 결과의 모든 항목을 적용합니다. 호출자가 소유권·트랜잭션·영수증을 담당합니다. 다른 이벤트도 이 경로를 재사용할 수 있습니다.
 - `server/run-events.ts`: 선택·난수 결과·지갑 변경·`result_json`을 기존 TowerStore 트랜잭션 안에서 함께 처리합니다. 동일 선택은 즉시 재사용하며 확인은 완료 상태만 기록합니다.
-- `web/reward-panel.tsx`와 전용 CSS: 서버에 저장된 제목·목록을 표시하고 확인을 요청합니다. 자체 추첨·지급은 없으며 GameDialogue와 기존 키보드 선택 경로를 사용합니다.
+- `web/reward-modal.tsx`: 실제 `dialog.showModal()`로 중앙 top layer·배경 비활성화·포커스 복원·ESC 차단·Tab 순환·Space 입력을 담당합니다. 기존 game keyboard는 열린 dialog로 입력 범위를 제한합니다.
+- `web/reward-panel.tsx`: 팝업 콘텐츠를 담당하고 `RewardEntryList`와 `RewardChoiceList`를 분리했습니다. 자체 지급·추첨은 하지 않습니다. `heading`으로 사용하는 콘텐츠의 제목을 지정할 수 있습니다.
+- `web/styles/reward-panel.module.css`: 픽셀풍 테두리·tone·중앙 배치·최대 높이·내용 스크롤·확인 영역을 담당합니다. 기존 화면 footer 스타일이 간섭하지 않도록 확인 영역은 별도 group입니다.
+- `web/run-event.tsx`: 하단에는 짧은 상황 안내만 유지하고 열림 연출 약 650ms 후 RewardModal을 연결합니다. 동작 감소 시 지연을 생략합니다. 기존 저장 결과를 표시하며 확인은 기존 `event-continue` API를 그대로 호출합니다.
 
 v35는 v1·v2를 허용하도록 `run_event_rules`를 이전하고, 기존 결과 열을 유지하면서 `run_events.result_json`을 추가합니다. 테이블 복사·인덱스 복원·외래키 검사는 기존 초기화 트랜잭션 안에서 실행합니다. 기존 활성화 규칙·선택 ID·결제·완료 기록은 보존하고 이미 지급한 보상을 재적용하지 않습니다.
 
-새 이벤트는 `outcome: 'reward-result'` 선택지에 가중치가 있는 `results`와 공통 `RewardOption`을 정의하면 같은 추첨·적용·저장·표시 경로를 쓸 수 있습니다. 단 현재 정의된 동작은 가중치 결과 추첨이며, 플레이어가 보상 후보 중 하나를 고르는 API/UI는 아직 구현하지 않았습니다. 향후에는 옵션 ID를 서버에서 검증하고 기존 `applyRewardOption`을 한 번 호출한 결과를 해당 이벤트의 영수증과 저장하는 방식으로 확장합니다. 클라이언트가 임의 항목·수량을 제출해 지급하게 만들지 않습니다.
+새 이벤트는 `outcome: 'reward-result'` 선택지에 가중치가 있는 `results`와 공통 `RewardOption`을 정의하면 같은 추첨·적용·저장·표시 경로를 쓸 수 있습니다. 단 현재 실제 이벤트는 가중치 결과 추첨만 사용합니다. 후보 선택의 타입·화면 기반은 있지만, 선택을 서버에 저장·지급하는 API는 아직 구현하지 않았습니다. 향후에는 옵션 ID를 서버에서 검증하고 기존 `applyRewardOption`을 한 번 호출한 결과를 해당 이벤트의 영수증과 저장하는 방식으로 확장합니다. 클라이언트가 임의 항목·수량을 제출해 지급하게 만들지 않습니다.
+
+## 선택형 Reward 확장 기반
+
+`RewardResult.entries`는 기존에 이미 적용된 즉시 결과 목록 그대로입니다. 선택형은 선택적인 `selections` 필드로 구분하므로 기존 저장 JSON과 호환되며 DB 마이그레이션은 없습니다.
+
+- `RewardCandidate`: 안정적인 후보 ID·표시 이름·선택적인 설명. 클라이언트에 지급할 효과 자체를 맡기지 않습니다.
+- `RewardSelection`: 선택 ID·제목·후보 목록과 `state: 'pending'` 또는 `state: 'selected'`를 표현합니다. 완료 상태에는 `selectedId`가 있습니다.
+- `RewardChoiceList`: 콜백이 있으면 선택하기→후보 버튼을 열고 `(selectionId, candidateId)`만 전달합니다. 선택 완료는 전달받은 결과 상태로 표시하며 클릭만으로 완료·지급했다고 가정하지 않습니다.
+- 선택 대기가 하나라도 있으면 최종 확인은 비활성화합니다. 콜백이 없는 대기 항목은 '선택 기능 준비 중'으로 표시합니다. 현재 미스터리 상자는 selections가 없으므로 기존 확인 동작과 같습니다.
+
+후속 구현에서는 서버가 선택 ID와 후보 ID를 검증하고 선택 영수증을 원자적으로 저장해야 합니다. 실제 에픽 도구 풀·영양제 후보·지급·선택 저장 API와 도전자 선택전 자체는 미구현입니다. 이번 작업은 서버 보상 처리·DB v35·결과표를 수정하지 않습니다.
 
 ## 검증 위치
 
 - `tests/run-event-rules.test.ts`: 기존 가중치 경계·전체 난수 호출 순서·고정 보상 무추첨.
 - `tests/run-events.test.ts`: 기존 동작·복구·결제 롤백, 3개 선택지 fixture·새 ID 저장·중복 요청·알 수 없는 ID·v33 전체 상태 보존.
-- `tests/run-event-ui.test.ts`: 실제 선택 버튼의 개수·표시·ID 전달과 기존 보상 문구·연출 등록.
+- `tests/run-event-ui.test.ts`: 실제 이벤트 선택 버튼·ID 전달과 기존 보상 문구·연출 등록. `tests/reward-ui.test.ts`는 즉시 결과 호환과 선택 대기·완료 타입/화면을 검증합니다.
 - `tests/architecture-boundaries.test.ts`: data/game/server와 web 의존 경계.
 - `e2e/run-events.spec.ts`, `e2e/run-event-preview.spec.ts`: 실제 API·브라우저의 진행·복구·레이아웃.
 

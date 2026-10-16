@@ -48,3 +48,5 @@
 @keyframes chest-glow {from {opacity:0;transform:scale(.5);} to {opacity:1;transform:scale(1);}}
 @keyframes chest-star {0%,100% {opacity:0;transform:translateY(8px) scale(.3);} 35% {opacity:1;transform:translateY(-8px) scale(1);}}
 @media(prefers-reduced-motion:reduce) {.pointer,.label,.lid {transition:none;}.stars {display:none;}.artwork[data-opened=true] .glow {animation:none;}}
+
+.artwork[data-reward-tone=neutral] .glow,.artwork[data-reward-tone=loss] .glow {background:none;animation:none;}

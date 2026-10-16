@@ -8,10 +8,10 @@ import {effectNotice, type EffectNotice} from './battle-effects';
 import {advanceField,emptyField} from './battle-field';
 import {itemName} from '../data/held-items';
 import {moveAnimationPlan} from './move-animation-plan';
-import {effectActivationMessage,dialogueTextForLine} from './battle-message-data';
+import {importantBattleLine,dialogueTextForLine} from './battle-message-data';
 
 export type Motion = {kind: 'z-charge' | 'z-release' | 'move' | 'hit' | 'heal' | 'switch' | 'faint' | 'stat-up' | 'stat-down' | 'mega-charge' | 'mega-shell' | 'mega-burst' | 'mega-flash' | 'mega-reveal' | 'dynamax-recall' | 'dynamax-ball' | 'dynamax-release' | 'dynamax-grow' | 'dynamax-end' | 'tera-charge' | 'tera-shell' | 'tera-burst' | 'tera-reveal'; category?:string;targetSide?:'player'|'enemy';missed?:boolean;blocked?:boolean;sendOut?:boolean;side: 'player' | 'enemy'; color: string; move?: string; label?:string;impact?:'weak'|'strong'|'critical'};
-export type Frame = {view: BattleView; motion: Motion | null; duration: number; notice?:EffectNotice; announcement?:string};
+export type Frame = {view: BattleView; motion: Motion | null; duration: number; notice?:EffectNotice; announcement?:string; important?:boolean};
 
 // Protocol windows can be truncated at 300 lines. Match the largest overlap,
 // including repeated events, instead of assuming that message counts increase.
@@ -72,9 +72,9 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
     const absorbs = event === '-heal' && candidate && ['Water Absorb','Volt Absorb'].includes(candidate.name);
     const changesState=['-damage','-heal','-boost','-unboost','-setboost','-status','-curestatus','-cureteam','-start','-end','-weather','-fieldstart','-fieldend'].includes(event);
     const activationFirst=!!notice && (changesState||['-immune','-fail','-block'].includes(event)) && !absorbs;
-    if(activationFirst)frames.push({view:structuredClone(view),motion:null,notice,announcement:effectActivationMessage(notice),duration:1200});
-    if(absorbs) {
-      frames.push({view:structuredClone(view),motion:null,notice,announcement:effectActivationMessage(candidate),duration:1200});
+    if(activationFirst)frames.push({view:structuredClone(view),motion:null,notice,duration:1200});
+    if(absorbs && notice) {
+      frames.push({view:structuredClone(view),motion:null,notice,duration:1200});
     }
     view.messages = [...view.messages, line].slice(-300);
     view.field=advanceField(view.field ?? emptyField(),line);
@@ -163,7 +163,9 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
       ? `${side==='enemy'?'상대 ':''}${pokemonName(pokemon.displaySpecies ?? pokemon.species)}의 타입이 ${condition.split('/').map(type=>teraNames[type] ?? type).join('·')}(으)로 바뀌었다!` : undefined;
     if (event === 'turn') view.turn = Number(actor);
     const motionDuration = motion?.kind === 'dynamax-grow' ? 1150 : motion?.kind === 'dynamax-end' ? 600 : motion?.kind === 'switch' ? (motion.sendOut && (view.opponent?.shiny || view.team.find(p=>p.active)?.shiny) ? 1400 : 800) : motion?.kind === 'move' ? moveAnimationPlan(motion.move ?? '',motion.color).duration : motion?.kind === 'hit' ? 360 : motion ? 220 : 0;
-    frames.push({view, motion, notice:absorbs || activationFirst ? undefined : notice, announcement:typeAnnouncement, duration:Math.max(motionDuration, typeAnnouncement ? 750 : notice && !absorbs && !activationFirst ? 1200 : describeLine(line)||dialogueTextForLine(line,'') ? 750 : 0)});
+    const dialogue=dialogueTextForLine(line,describeLine(line)??'');
+    const messageDuration=candidate ? dialogue?750:0 : describeLine(line)||dialogue?750:0;
+    frames.push({view, motion, notice:absorbs || activationFirst ? undefined : notice, announcement:typeAnnouncement,important:importantBattleLine(line), duration:Math.max(motionDuration, typeAnnouncement ? 750 : notice && !absorbs && !activationFirst ? 1200 : messageDuration)});
   }
   return frames;
 }

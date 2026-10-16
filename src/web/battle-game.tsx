@@ -67,7 +67,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
   useEffect(()=>{if(trainerIntro?.phase!=='enter')return;const confirm=(event:KeyboardEvent)=>{if(!['enter','z'].includes(event.key.toLowerCase()) || event.ctrlKey || event.altKey || event.metaKey)return;event.preventDefault();event.stopImmediatePropagation();if(!event.repeat)introContinue.current?.();};document.addEventListener('keydown',confirm,true);return ()=>document.removeEventListener('keydown',confirm,true);},[trainerIntro?.phase]);
   const playbackSpeed=useRef<PlaybackSpeed>(1);
   useEffect(()=>{if(!playing)return;const frame=requestAnimationFrame(()=>{document.querySelector('.arena')?.getAnimations({subtree:true}).forEach(animation=>{const target=(animation.effect as KeyframeEffect|null)?.target;animation.updatePlaybackRate(target instanceof Element && (target.closest('.effect-notice')||target.matches('.health-card'))?1:playbackSpeed.current);});});return ()=>cancelAnimationFrame(frame);},[playing,frameNumber]);
-  const waitPlayback=(duration:number,notice=false,dialogue='')=>new Promise<void>(resolve=>{const done=()=>{clearTimeout(timer);playbackWait.current=null;resolve();};const timer=setTimeout(done,playbackDuration(duration,playbackSpeed.current,notice,dialogue));playbackWait.current=done;});
+  const waitPlayback=(duration:number,notice=false,dialogue='',timing:import('./playback-settings').PlaybackTiming={})=>new Promise<void>(resolve=>{const done=()=>{clearTimeout(timer);playbackWait.current=null;resolve();};const timer=setTimeout(done,playbackDuration(duration,playbackSpeed.current,notice,dialogue,timing));playbackWait.current=done;});
   const mounted = useRef(true);
   const [error, setError] = useState('');
   const [acknowledgedResult, setAcknowledgedResult] = useState<string | null>(null);
@@ -190,7 +190,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
         }
       }
       const dialogue=currentBattleDialogue(battleMessageEntries(frame.view.messages),frame.announcement).text;
-      if(frame.duration || frame.notice)await waitPlayback(frame.duration,!!frame.notice,dialogue!==previousDialogue?dialogue:'');
+      if(frame.duration || frame.notice)await waitPlayback(frame.duration,!!frame.notice,dialogue!==previousDialogue?dialogue:'',{important:frame.important??false,idle:!frame.motion&&dialogue===previousDialogue});
       previousDialogue=dialogue;
     }
     if(skip.current)stopCry();

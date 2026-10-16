@@ -1,7 +1,6 @@
 'use client';
-import {useLayoutEffect,useRef} from 'react';
-import type {RewardEntry,RewardResult} from '../data/rewards';
-import {GameDialogue} from './game-dialogue';
+import {useLayoutEffect,useRef,useState} from 'react';
+import type {RewardEntry,RewardResult,RewardSelection} from '../data/rewards';
 import {selectGameCursor} from './game-keyboard';
 import styles from './styles/reward-panel.module.css';
 
@@ -14,15 +13,40 @@ export function rewardEntryText(entry:RewardEntry):string {
  }
 }
 
-// Displays an already committed result; confirmation never grants its entries.
-export function RewardPanel({result,busy,onConfirm,dialogueLabel='보상 안내'}:{result:RewardResult;busy:boolean;onConfirm:()=>void;dialogueLabel?:string}){
+export type RewardPanelProps={result:RewardResult;busy:boolean;onConfirm:()=>void;heading?:string;onSelect?:(selectionId:string,candidateId:string)=>void};
+
+export function RewardEntryList({entries}:{entries:readonly RewardEntry[]}){
+ return <ul className={styles.entries} aria-label="결과 항목">{entries.map((entry,index)=><li key={index} data-reward-kind={entry.kind}><span className={styles.entryMark} aria-hidden="true">{entry.kind==='coin-loss'?'!':entry.kind==='message'?'·':'◆'}</span><span>{rewardEntryText(entry)}</span></li>)}</ul>;
+}
+
+export function RewardChoiceList({selections,busy,onSelect}:{selections:readonly RewardSelection[];busy:boolean;onSelect?:RewardPanelProps['onSelect']}){
+ const [expanded,setExpanded]=useState<string|null>(null);
+ return <div className={styles.selections}>{selections.map(selection=><section key={selection.id} className={styles.selection} aria-label={selection.title} data-selection-state={selection.state}>
+  <h3>{selection.title}</h3>
+  {selection.state==='selected'?<p>{selection.candidates.find(candidate=>candidate.id===selection.selectedId)?.label??selection.selectedId} · 선택 완료</p>:<>
+   <button className={styles.choice} disabled={busy||!onSelect} aria-expanded={expanded===selection.id} onClick={()=>setExpanded(expanded===selection.id?null:selection.id)}>{onSelect?'선택하기 >':'선택 기능 준비 중'}</button>
+   {expanded===selection.id&&<div className={styles.candidates} data-keyboard-list>{selection.candidates.map(candidate=><button key={candidate.id} className={styles.choice} disabled={busy} onClick={()=>onSelect?.(selection.id,candidate.id)}>{candidate.label}{candidate.description&&<small>{candidate.description}</small>}</button>)}</div>}
+  </>}
+ </section>)}</div>;
+}
+
+// Presentation only: selections are controlled by the caller/server. No wallet
+// changes or local "claimed" state happen when these buttons are clicked.
+export function RewardPanel({result,busy,onConfirm,heading,onSelect}:RewardPanelProps){
  const ref=useRef<HTMLButtonElement>(null);
+ const pending=result.selections?.some(selection=>selection.state==='pending')??false;
  useLayoutEffect(()=>{selectGameCursor(ref.current);},[result,busy]);
  return <div className={`${styles.scope} ${styles.panel} reward-panel`} data-reward-tone={result.tone} data-testid="reward-panel">
-  <GameDialogue text={result.title} label={dialogueLabel}/>
-  <ul className={styles.entries} aria-label="결과 항목">{result.entries.map((entry,index)=><li key={index} data-reward-kind={entry.kind}>{rewardEntryText(entry)}</li>)}</ul>
-  <div className={`${styles.actions} event-choices`} data-keyboard-list>
-   <button ref={ref} className={styles.confirm} disabled={busy} onClick={onConfirm}><span className={styles.pointer} aria-hidden="true">{'>'}</span>{busy?'잠시만요…':'확인'}</button>
+  <header className={styles.heading}>{heading??(result.tone==='good'||result.tone==='great'?'보상':'결과')}</header>
+  <div className={styles.contents}>
+   <div className={styles.emblem} aria-hidden="true">{result.tone==='great'?'✦':result.tone==='loss'?'!':result.tone==='good'?'◆':'◇'}</div>
+   <h2 className={styles.title}>{result.title}</h2>
+   <RewardEntryList entries={result.entries}/>
+   {result.selections&&<RewardChoiceList selections={result.selections} busy={busy} onSelect={onSelect}/>}
+  </div>
+  <div className={styles.actions} role="group" aria-label="보상 확인">
+   {pending&&<p className={styles.pending}>보상을 선택한 뒤 확인할 수 있습니다.</p>}
+   <button ref={ref} data-initial-focus className={styles.confirm} disabled={busy||pending} onClick={onConfirm}><span className={styles.pointer} aria-hidden="true">{'>'}</span>{busy?'잠시만요…':'확인'}</button>
   </div>
  </div>;
 }

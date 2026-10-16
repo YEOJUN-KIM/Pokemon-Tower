@@ -1,8 +1,8 @@
 /* src/web/battle-layout.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
 /* Battle HUD uses a single palette; the arena stays clear of controls. */
-:where(.scope) :global(.message-turn-group) {margin:12px 0;padding:12px 16px;border:1px solid #76938955;border-radius:7px;background:#ebf0e7;}
-:where(.scope) :global(.message-turn-group h3) {margin:0 0 7px;padding-bottom:7px;border-bottom:1px solid #b8c9bb;font-size:13px;color:#476b58;}
-:global(body) :where(.scope) :global(.message-history .message-turn-group p) {display:block;margin:0;padding:5px 0;color:#2a4439;font-size:14px;line-height:1.7;}
+:where(.scope) :global(.message-turn-group) {margin:12px 0;padding:12px 16px;border:1px solid #76938955;border-radius:7px;background:#243b4a;}
+:where(.scope) :global(.message-turn-group h3) {margin:0 0 7px;padding-bottom:7px;border-bottom:1px solid #b8c9bb;font-size:13px;color:#c4dfd5;}
+:global(body) :where(.scope) :global(.message-history .message-turn-group p) {display:block;margin:0;padding:5px 0;color:#e8f0ef;font-size:14px;line-height:1.7;}
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live) {
   padding: 10px 14px;
   background: #101d27;

@@ -168,6 +168,37 @@
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice) {
   animation: notice-enter .16s ease-out both;
+  padding: 15px 21px;
+  gap: 15px;
+  max-width: 48%;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice p) {
+  min-width: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice strong) {
+  font-size: 24px;
+  overflow-wrap: anywhere;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice>span) {
+  font-size: 11px;
+}
+@media(max-width:760px) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice) {
+    padding: 11px 14px;
+    gap: 9px;
+    max-width: calc(50% - 18px);
+  }
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice p) {
+    font-size: 11px;
+  }
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice strong) {
+    font-size: 20px;
+  }
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice>span) {
+    font-size: 10px;
+  }
 }
 @keyframes notice-enter {
   from {

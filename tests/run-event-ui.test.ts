@@ -37,3 +37,19 @@ test('choice buttons render arbitrary IDs and counts, keeping the selected ID in
   assert.equal(getEventPresentation('__proto__'),undefined);
  }finally{hooks.deregister();}
 });
+
+test('challenger detail only exposes optional special hint, rank and reward category',async()=>{
+ const hooks=registerHooks({load(url,context,next){return url.endsWith('.css')?{format:'module',source:'export default {}',shortCircuit:true}:next(url,context);}});
+ try{
+  const {ChallengerDetail}=await import('../src/web/challenger-candidates');
+  const {challengerCandidate,challengerDefinition}=await import('../src/data/challengers');
+  const {npcSamples}=await import('../src/data/npc-samples');
+  const definition=challengerDefinition(npcSamples[0],'elite',20),candidate=challengerCandidate(definition);
+  const normal=renderToStaticMarkup(createElement(ChallengerDetail,{candidate}));
+  assert.ok(normal.includes(candidate.title));assert.ok(normal.includes('엘리트 ★★'));assert.ok(normal.includes(candidate.rewardPreview));
+  assert.ok(!normal.includes(candidate.battleStyle));assert.ok(!normal.includes('challenger-special-hint'));assert.ok(!normal.includes('위험도'));
+  const future=challengerCandidate({...definition,specialHint:'특별한 만남이다.'});assert.equal(future.specialHint,'특별한 만남이다.');
+  const special=renderToStaticMarkup(createElement(ChallengerDetail,{candidate:future}));assert.ok(special.includes('특별한 만남이다.'));assert.ok(special.includes('challenger-special-hint'));
+  assert.equal(renderToStaticMarkup(createElement(ChallengerDetail,{candidate:undefined})),'');
+ }finally{hooks.deregister();}
+});

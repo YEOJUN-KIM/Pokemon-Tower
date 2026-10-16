@@ -22,6 +22,8 @@
 
 2026-10-12 플레이어 등장·투구 스프라이트는 이미지 생성 도구로 제작한 오리지널 트레이너로 교체했다: `public/sprites/trainers/player-back-sheet.png`. 청록색 모자·노란 재킷의 뒷모습 4프레임이며, 기존 트레이너와 도트 크기를 맞추기 위해 96×128 프레임과 제한된 색상으로 변환했다. 생성 원본은 `artifacts/qa/previews/player-trainer/original-sheet.png`에 보존한다. 이전 지우 시트도 보존하지만 현재 화면에서는 사용하지 않는다.
 
+2026-10-16 Mirror 외형은 사용자 요청으로 위 플레이어와 같은 캐릭터의 정면으로 변경했다. built-in imagegen에서 기존 뒷모습 시트를 정체성/복장 참조로 사용해 생성하고 `public/sprites/trainers/player-front.png`(96×144, 64색, 투명 배경)에 보관한다. 생성 원본은 `artifacts/qa/previews/player-trainer/front-generated.png`, 최종 프롬프트·SHA-256은 `public/sprites/trainers/player-front-source.json`에 있다. 얼굴의 좁은 그늘은 SVG overlay이며 PNG에 굽지 않는다.
+
 임시 NPC 비상·목호 이미지는 Showdown에서 받아 `public/sprites/trainers/`에 포함했다: [비상 원본](https://play.pokemonshowdown.com/sprites/trainers/falkner.png), [목호 원본](https://play.pokemonshowdown.com/sprites/trainers/lance.png). 로딩 실패 시 임시 트레이너 이미지로 대체한다. 포켓몬/NPC 원작 권리는 해당 권리자에게 있으며 Showdown 엔진 라이선스와 이미지 권리는 별개다.
 
 2026-10-06 일반 NPC 샘플도 수정 없이 같은 폴더에 저장했다: [반바지 소년](https://play.pokemonshowdown.com/sprites/trainers/youngster-gen4.png), [등산가](https://play.pokemonshowdown.com/sprites/trainers/hiker-gen4.png), [낚시꾼](https://play.pokemonshowdown.com/sprites/trainers/fisherman-gen4.png), [엘리트 트레이너](https://play.pokemonshowdown.com/sprites/trainers/acetrainer-gen4.png). 파일 이름은 제공원의 식별자이며 세대별 콘텐츠 배치가 완료됐다는 뜻은 아니다.

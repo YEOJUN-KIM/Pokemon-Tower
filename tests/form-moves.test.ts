@@ -30,7 +30,8 @@ test('Urshifu shares growth while each style restores its own saved moves and te
   change(store,'forms','Urshifu');saved=entry(store,'forms');assert.deepEqual(saved.profile.moves,single);assert.equal(saved.profile.nature,'Adamant');assert.deepEqual(saved.profile.evs,updated.evs);
   assert.throws(()=>store.train('forms','Urshifu',before.revision,preview),/변경/);
   store.db.prepare('UPDATE players SET growth_points=20000 WHERE id=?').run('forms');
-  store.permanentAction('forms',randomUUID(),'buy','shiny',1,null);store.permanentAction('forms',randomUUID(),'shiny','shiny',1,'Urshifu');
+  // Seed an existing shiny record; permanent conversion has been retired.
+  const prior=entry(store,'forms');store.db.prepare('UPDATE pokemon_training SET profile=?,revision=revision+1 WHERE player_id=? AND species=?').run(JSON.stringify({...prior.profile,shiny:true}),'forms','Urshifu');
   const shiny=entry(store,'forms');assert.ok(shiny.profile.shiny);const other=profileForForm(shiny,'Urshifu-Rapid-Strike');assert.ok(other.shiny);assert.deepEqual(other.moves,rapid);assert.deepEqual(other.ivs,shiny.profile.ivs);assert.equal(other.gender,shiny.profile.gender);
   const rows=store.db.prepare('SELECT form_species,settings FROM pokemon_form_training WHERE player_id=? ORDER BY form_species').all('forms');assert.equal(rows.length,2);
   assert.ok(rows.every(row=>!('ivs' in JSON.parse(row.settings as string))&&!('evs' in JSON.parse(row.settings as string))&&!('nature' in JSON.parse(row.settings as string))));

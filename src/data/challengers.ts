@@ -4,8 +4,9 @@ import {npcSamples,npcTacticHints,type NpcSample,type LegacyNpcSample} from './n
 import {npcRankNames,sampleRankWeights,drawNpcRank,npcRankTraining,type NpcRank,type NpcRankTraining} from './npc-ranks';
 import type {NpcEncounterSnapshot} from '../server/npc-encounters';
 import type {RewardOption,RewardSelectionDefinition} from './rewards';
+import type {MirrorTeamSnapshot} from './mirror-challenger';
 
-export type ChallengerDefinition=ChallengerCandidate&{rank:NpcRank;sample:NpcSample;training:NpcRankTraining;tactic:NpcSample['tactic'];specialty:string|null;kind:'normal';minFloor:number;weight:number;rewardProfile:NpcRank;rewardDefinition:RewardOption;selections?:readonly RewardSelectionDefinition[];rewardSnapshotVersion?:2;encounter?:NpcEncounterSnapshot};
+export type ChallengerDefinition=Omit<ChallengerCandidate,'mirror'>&{mirror?:MirrorTeamSnapshot;rank:NpcRank;sample:NpcSample;training:NpcRankTraining;tactic:NpcSample['tactic'];specialty:string|null;kind:'normal';minFloor:number;weight:number;rewardProfile:NpcRank;rewardDefinition:RewardOption;selections?:readonly RewardSelectionDefinition[];rewardSnapshotVersion?:2;encounter?:NpcEncounterSnapshot};
 export type SavedRankedChallengerDefinition=Omit<ChallengerDefinition,'sample'|'training'|'rewardProfile'>&{rewardProfile:NpcRank|'low'|'medium'|'high';sample:NpcSample|LegacyNpcSample;training:NpcRankTraining|Omit<NpcRankTraining,'itemSlots'>};
 export type SavedChallengerDefinition=SavedRankedChallengerDefinition|LegacySavedChallenger;
 export type {ChallengerCandidate};
@@ -29,5 +30,5 @@ export function drawChallengers(floor:number,random:()=>number,pool:readonly Npc
 export function challengerCandidate(definition:SavedChallengerDefinition):ChallengerCandidate{
  const {id,trainerId,title,difficulty,danger,battleStyle,rewardPreview,portrait}=definition;
  const rank='rank' in definition?definition.rank:danger===3?'master':danger===2?'elite':'normal';
- return {id,trainerId,title,difficulty,danger,battleStyle,rewardPreview:rankRewardProfiles[rank].preview,portrait};
+ return {id,trainerId,title:'mirror' in definition&&definition.mirror?'???':title,difficulty,danger,battleStyle,rewardPreview:'mirror' in definition&&definition.mirror?'특별한 보상':rankRewardProfiles[rank].preview,portrait,...('mirror' in definition&&definition.mirror?{mirror:true,specialHint:'어딘가 익숙한 기분이 든다.'}:'specialHint' in definition&&definition.specialHint?{specialHint:definition.specialHint}:{})};
 }

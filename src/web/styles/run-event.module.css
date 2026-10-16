@@ -50,3 +50,5 @@
 @media(prefers-reduced-motion:reduce) {.pointer,.label,.lid {transition:none;}.stars {display:none;}.artwork[data-opened=true] .glow {animation:none;}}
 
 .artwork[data-reward-tone=neutral] .glow,.artwork[data-reward-tone=loss] .glow {background:none;animation:none;}
+:global(body) :where(.scope).bottom[data-challenger-selection=true] :global(.message-heading) {display:none;}
+:global(body) :where(.scope).bottom[data-challenger-selection=true] :global(.game-dialogue.current-messages) {min-height:0;flex:0 0 auto;margin:0;padding:0 4px;}

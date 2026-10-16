@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-16",
+  "tool": "built-in image_gen",
+  "use": "Mirror candidate and battle appearance; front view of the existing player character",
+  "reference": "public/sprites/trainers/player-back-sheet.png",
+  "output": "public/sprites/trainers/player-front.png",
+  "processing": "Nearest-neighbor resize to 96x144; 64-color PNG with original transparency preserved. Face-only shadow is rendered as an SVG overlay.",
+  "prompt": "Edit intent: identity-preserve, front-view companion sprite for an existing pixel-art game character. The provided reference is a four-frame BACK VIEW sprite sheet of the player's character. Make ONE single FRONT VIEW full-body sprite of EXACTLY this same character, not a new NPC: same dark teal baseball cap with brim, dark short hair, mustard yellow/golden jacket with a light inner shirt, dark charcoal/slate pants, off-white sneakers, same body proportions and classic handheld monster-battle trainer pixel style. Facing the viewer in a relaxed slightly three-quarter standing pose, hands naturally at the sides, not throwing, no extra equipment. Small face visible beneath the cap with just a natural modest brim shadow, no black cloud, no silhouette, no glowing eyes, no facial exaggeration. Preserve the reference's limited palette, crisp dark pixel outlines and low-resolution pixel clusters; aim at an effective 64x96 sprite, enlarged with nearest-neighbor pixel edges, not smooth painted art. ONE centered standing figure on a truly transparent background, whole cap and shoes inside frame, no floor shadow, no text, no panels, no duplicates. Keep clear transparent margins around the figure. This is the front-facing appearance used by the mirror version of the player; a subtle face-only shadow is added later in CSS.",
+  "sha256": "0fd37f0601b36e49654eae35e08636c22bfacd7981f403f725c8098f99675986"
+}

@@ -78,6 +78,9 @@ export async function runBattle(options: {
       // Gender is freely selectable in the collection, just like earned IVs.
       // Check event origins with a gender proxy; use the saved sex in battles/replays.
       set.gender='';
+      // Tower collection rewards can unlock shiny species independently of
+      // cartridge event locks. Keep the actual shiny flag in the battle team.
+      set.shiny=false;
     }
     const errors = new TeamValidator(format).validateTeam(legality);
     if (errors?.length) throw new Error(errors.join('\n'));

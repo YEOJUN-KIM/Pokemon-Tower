@@ -56,13 +56,13 @@ export class BattleSession {
   private saveInput?: (requestId: number, action: string) => void;
 
   constructor(save: (log: BattleLog, id: string, view: BattleView) => Promise<void>, seed?: Seed,
-    options: {trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];rule?:import('../data/run-rules').BattleRule;opponentTeraSpecies?:string;id?: string; format?:string; aiVersion?:string; teams?: {p1: string; p2: string}; history?: string[]; battleItems?:import('../data/battle-items').BattleItemBag; upgrades?:UpgradeKind[];teraTickets?:import('../data/tera').TeraTickets; saveInput?: (requestId: number, action: string) => void} = {}) {
+    options: {opponentRule?:import('../data/run-rules').BattleRule;trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];rule?:import('../data/run-rules').BattleRule;opponentTeraSpecies?:string;id?: string; format?:string; aiVersion?:string; teams?: {p1: string; p2: string}; history?: string[]; battleItems?:import('../data/battle-items').BattleItemBag; upgrades?:UpgradeKind[];teraTickets?:import('../data/tera').TeraTickets; saveInput?: (requestId: number, action: string) => void} = {}) {
     this.id = options.id ?? randomUUID();
     this.trainerEquipment=options.trainerEquipment;
     this.initialTeraTickets=options.teraTickets?.p1 ?? 0;
     if(options.aiVersion==='tower-policy-v10'){
       const team=Showdown.Teams.unpack(options.teams?.p2 ?? '') ?? [];
-      this.opponentRule=packedNpcRule(team,options.teraTickets?.p2 ?? 0);
+      this.opponentRule=options.opponentRule??packedNpcRule(team,options.teraTickets?.p2 ?? 0);
       this.opponentPrimal=team.some(p=>p.species==='Groudon' && p.item==='Red Orb' || p.species==='Kyogre' && p.item==='Blue Orb');
     }
     for(const set of Showdown.Teams.unpack(options.teams?.p1 ?? playerTeam) ?? []){

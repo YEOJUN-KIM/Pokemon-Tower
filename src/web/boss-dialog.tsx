@@ -2,9 +2,11 @@
 import {useState} from 'react';
 import type {BossView} from './contracts';
 import {trainerSamples,trainerLabel} from './trainer-samples';
+import {PlayerMirrorPortrait} from './player-mirror-portrait';
 
 export function BossPortrait({boss}: {boss?: BossView}) {
   const [failed,setFailed]=useState<string|null>(null);
+  if(boss?.mirror)return <PlayerMirrorPortrait className="boss-portrait npc-portrait"/>;
   const sprite=boss?.portrait ?? boss?.id.replace(/^(gym-leader-|elite-four-|champion-)/,'');
   const supported=!!sprite && /^[a-z0-9-]+$/.test(sprite) && (!!boss?.portrait || ['falkner','lance',...trainerSamples.map(sample=>sample.id)].includes(sprite));
   const champion=boss?.role==='champion' || boss?.id.startsWith('champion-');

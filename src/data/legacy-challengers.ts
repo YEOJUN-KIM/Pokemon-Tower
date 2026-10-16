@@ -43,7 +43,7 @@ export function drawChallengers(floor:number,random:()=>number,pool:readonly Cha
  }
  return result;
 }
-export type ChallengerCandidate=Pick<ChallengerDefinition,'id'|'trainerId'|'title'|'difficulty'|'danger'|'battleStyle'|'rewardPreview'|'portrait'>;
+export type ChallengerCandidate=Pick<ChallengerDefinition,'id'|'trainerId'|'title'|'difficulty'|'danger'|'battleStyle'|'rewardPreview'|'portrait'>&{mirror?:boolean;specialHint?:string};
 export function challengerCandidate(definition:SavedChallengerDefinition):ChallengerCandidate{
  const {id,trainerId,title,difficulty,danger,battleStyle,rewardPreview,portrait}=definition;
  return {id,trainerId,title,difficulty,danger,battleStyle,rewardPreview,portrait};

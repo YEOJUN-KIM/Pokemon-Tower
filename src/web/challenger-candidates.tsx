@@ -2,19 +2,29 @@
 import {useLayoutEffect,useRef} from 'react';
 import type {ChallengerCandidate} from '../data/challengers';
 import {selectGameCursor} from './game-keyboard';
+import {PlayerMirrorPortrait} from './player-mirror-portrait';
 import styles from './styles/challenger-candidates.module.css';
 
-export function ChallengerCandidates({candidates,busy,onSelect}:{candidates:readonly ChallengerCandidate[];busy:boolean;onSelect:(id:string)=>void}){
+export function ChallengerDetail({candidate}:{candidate:ChallengerCandidate|undefined}){
+ if(!candidate)return null;
+ return <aside id="challenger-preview" className={`${styles.scope} ${styles.detail}`} aria-label="도전자 상세" data-testid="challenger-detail" data-candidate={candidate.id}>
+  <span className={styles.portrait} data-mirror={candidate.mirror||undefined}>{candidate.mirror?<PlayerMirrorPortrait/>:<img src={`/sprites/trainers/${candidate.portrait}.png`} width="120" height="144" alt=""/>}</span>
+  <h2>{candidate.title}</h2><p>{candidate.difficulty} {'★'.repeat(candidate.danger)}</p>
+  {candidate.specialHint&&<p className={styles.hint} data-testid="challenger-special-hint">{candidate.specialHint}</p>}
+  <strong className={styles.reward}>{candidate.rewardPreview}</strong>
+ </aside>;
+}
+
+export function ChallengerCandidates({candidates,selectedId,busy,onFocus,onConfirm}:{candidates:readonly ChallengerCandidate[];selectedId:string;busy:boolean;onFocus:(id:string)=>void;onConfirm:(id:string)=>void}){
  const ref=useRef<HTMLDivElement>(null);
- useLayoutEffect(()=>{selectGameCursor(ref.current?.querySelector<HTMLButtonElement>('[data-initial-focus]'));},[busy]);
- return <div ref={ref} className={`${styles.scope} event-choices`} data-testid="challenger-candidates" data-keyboard-list>
-  <h2>도전자 선택전</h2><p>상대와 보상을 확인하고 승부할 도전자를 고르자.</p>
-  <div className={styles.candidates}>{candidates.map((candidate,index)=><button key={candidate.id} className={styles.candidate} disabled={busy} data-initial-focus={index===0?true:undefined} data-challenger={candidate.id} onClick={()=>onSelect(candidate.id)}>
-   <img src={`/sprites/trainers/${candidate.portrait}.png`} width="80" height="80" alt=""/>
-   <strong><span className={styles.pointer} aria-hidden="true">&gt; </span>{candidate.title}</strong>
-   <span>{candidate.difficulty} · 위험도 {'★'.repeat(candidate.danger)}</span>
-   <span>{candidate.battleStyle}</span><small>보상</small><span>{candidate.rewardPreview}</span>
-  </button>)}</div>
-  <button className={styles.back} disabled={busy} onClick={()=>onSelect('back')}><span className={styles.pointer} aria-hidden="true">&gt; </span>돌아간다</button>
+ useLayoutEffect(()=>{selectGameCursor(ref.current?.querySelector<HTMLButtonElement>('[data-initial-focus]'));},[]);
+ return <div ref={ref} className={`${styles.scope} ${styles.menu} event-choices`} data-testid="challenger-candidates" aria-busy={busy}>
+  <div className={styles.list} data-keyboard-list role="group" aria-label="도전할 트레이너">
+   {candidates.map((candidate,index)=><button key={candidate.id} disabled={busy} data-initial-focus={index===0?true:undefined} data-challenger={candidate.id} aria-pressed={selectedId===candidate.id} aria-controls="challenger-preview" onFocus={event=>{onFocus(candidate.id);selectGameCursor(event.currentTarget);}} onClick={()=>onFocus(candidate.id)}>
+    <span className={styles.pointer} aria-hidden="true">&gt;</span>{index+1}. {candidate.title}
+   </button>)}
+   <button disabled={busy} data-challenger="back" aria-pressed={selectedId==='back'} onFocus={event=>{onFocus('back');selectGameCursor(event.currentTarget);}} onClick={()=>onConfirm('back')}><span className={styles.pointer} aria-hidden="true">&gt;</span>4. 돌아간다</button>
+  </div>
+  <div className={styles.confirm}><button disabled={busy||selectedId==='back'} onClick={()=>onConfirm(selectedId)}>도전한다</button><small>1–3 확인 · Z / Enter 도전 · X 돌아가기</small></div>
  </div>;
 }

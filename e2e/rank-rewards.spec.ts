@@ -17,10 +17,10 @@ for(const width of [1280,390])test(`rank previews hide rewards and Master expose
   const defs=(['normal','elite','master'] as const).map((rank,index)=>({...challengerDefinition(npcSamples[index],rank,20),...snapshotRankReward(store.db,run,rank,()=>0)}));
   defs[2]={...f.candidate,id:defs[2].id};store.db.prepare('UPDATE challenger_encounters SET candidates_json=? WHERE event_id=?').run(JSON.stringify(defs),event.id);
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);await page.setViewportSize({width,height:900});await page.goto('/battle');
-  const cards=page.getByTestId('challenger-candidates');await expect(cards).toContainText('소소한 보상');await expect(cards).toContainText('희귀한 보상');await expect(cards).toContainText('특별한 보상');
+  const cards=page.getByTestId('challenger-candidates');for(const [index,preview] of ['소소한 보상','희귀한 보상','특별한 보상'].entries()){await page.keyboard.press(String(index+1));await expect(page.getByTestId('challenger-detail')).toContainText(preview);}await expect(page.getByTestId('challenger-detail')).not.toContainText('티켓');
   await expect(cards).not.toContainText('코인');await expect(cards).not.toContainText('티켓');await expect(cards).not.toContainText('1,500');
   mkdirSync('artifacts/qa/screenshots/rank-rewards',{recursive:true});await page.screenshot({path:`artifacts/qa/screenshots/rank-rewards/previews-${width}.png`});
-  await cards.locator(`[data-challenger=${defs[2].id}]`).click();await expect.poll(()=>store.view(owner).run!.state).toBe('battle');
+  await cards.locator(`[data-challenger=${defs[2].id}]`).click();await page.getByRole('button',{name:'도전한다',exact:true}).click();await expect.poll(()=>store.view(owner).run!.state).toBe('battle');
   finishChallengerBattle(store,store.currentBattle(owner)!.id);await page.reload();const modal=page.getByTestId('reward-modal');await expect(modal).toBeVisible();
   await expect(modal.getByRole('button',{name:'슈퍼레어 알 티켓 1장',exact:true})).toBeVisible();await expect(modal.getByRole('button',{name:'확인',exact:true})).toBeDisabled();
   await expect(modal).toContainText('성장 포인트 1,500P');await expect(modal).toContainText('다이맥스밴드');

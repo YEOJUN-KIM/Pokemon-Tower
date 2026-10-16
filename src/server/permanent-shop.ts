@@ -45,26 +45,20 @@ export class PermanentShop {
       }
       // Already-paid event receipts remain replayable even when that event is
       // no longer registered. New purchases must resolve a current definition.
+      if(action==='shiny'||product==='shiny')throw new BattleRequestError('이로치 교환권 판매와 상시 변환은 종료되었습니다.',409);
       const {matches}=resolveEggMachineTuning(tuning);
       this.db.prepare('INSERT OR IGNORE INTO permanent_upgrades(player_id) VALUES (?)').run(owner);
       const before=this.view(owner);let result:PermanentResult;
       if(action==='buy'){
         if(product==='retry'&&before.retryLimit>=3)throw new BattleRequestError('다시하기는 최대 3회까지 확장할 수 있습니다.',409);
         if(product==='reroll'&&before.rerollLevel>=2)throw new BattleRequestError('리롤은 최대 3회까지 확장할 수 있습니다.',409);
-        const price=product==='retry'?permanentPrices.retry[before.retryLimit]:product==='reroll'?permanentPrices.reroll[before.rerollLevel]:product==='shiny'?permanentPrices.shiny:permanentPrices.egg;
+        const price=product==='retry'?permanentPrices.retry[before.retryLimit]:product==='reroll'?permanentPrices.reroll[before.rerollLevel]:permanentPrices.egg;
         const cost=price*count;
         if(!this.db.prepare('UPDATE players SET growth_points=growth_points-? WHERE id=? AND growth_points>=?').run(cost,owner,cost).changes)throw new BattleRequestError('성장 포인트가 부족합니다.',400);
-        const column=product==='reroll'?'reroll_level':product==='shiny'?'shiny_tickets':'egg_tickets';
+        const column=product==='reroll'?'reroll_level':'egg_tickets';
         if(product==='retry')this.db.prepare('INSERT INTO permanent_retry_upgrades VALUES (?,1) ON CONFLICT(player_id) DO UPDATE SET level=level+1').run(owner);
         else this.db.prepare(`UPDATE permanent_upgrades SET ${column}=${column}+? WHERE player_id=?`).run(count,owner);
-        result={message:product==='retry'?`다음 도전부터 다시하기를 ${before.retryLimit+1}회 사용할 수 있어요!`:product==='reroll'?`무료 리롤이 종류별 ${before.rerollLimit+1}회로 확장됐어요!`:`${product==='shiny'?'이로치 교환권':'알 뽑기권'} ${count}장을 받았어요!`};
-      }else if(action==='shiny'&&product==='shiny'){
-        if(typeof species!=='string'||!this.db.prepare('SELECT 1 FROM unlocks WHERE player_id=? AND species=?').get(owner,species))throw new BattleRequestError('보유한 포켓몬을 선택하세요.',400);
-        const saved=this.savedTraining(owner,species);
-        if(saved.profile.shiny)throw new BattleRequestError('이미 이로치 외형을 해금한 포켓몬입니다.',409);
-        if(!this.db.prepare('UPDATE permanent_upgrades SET shiny_tickets=shiny_tickets-1 WHERE player_id=? AND shiny_tickets>0').run(owner).changes)throw new BattleRequestError('이로치 교환권이 없습니다.',400);
-        this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,species,JSON.stringify({...saved.profile,shiny:true}),saved.revision+1);
-        result={message:'이로치 외형을 해금했어요! 다음 도전부터 적용됩니다.'};
+        result={message:product==='retry'?`다음 도전부터 다시하기를 ${before.retryLimit+1}회 사용할 수 있어요!`:product==='reroll'?`무료 리롤이 종류별 ${before.rerollLimit+1}회로 확장됐어요!`:`알 뽑기권 ${count}장을 받았어요!`};
       }else if(action==='hatch'&&product==='egg'){
         const unitPrice=tuning.kind==='none'?permanentPrices.egg:eggMachineTuningRules.focusedPrice;
         const tickets=rewardTicket?0:Math.min(count,before.eggTickets),cost=rewardTicket?0:(count-tickets)*unitPrice;

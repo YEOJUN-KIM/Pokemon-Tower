@@ -25,3 +25,5 @@
 [게임 규칙](gameplay/README.md) · [설치·실행](operations/README.md) · [실험·변경 근거](../artifacts/README.md)
 
 새 일반층과 도전자 선택전은 공통 [NPC Sample·Rank 시스템](engineering/NPC_TRAINING.md)을 사용합니다. v38은 새 런만 적용하며 기존 네임드/빌런과 저장 상대는 유지합니다.
+
+공통 NPC는 클래스별 rankWeights와 teamConcept으로 Rank를 결정하고 테마 수를 유지합니다. Normal 도구 슬롯을 제한하며 신규 encounter snapshot v2와 기존 v1 읽기를 함께 지원합니다.

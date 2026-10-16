@@ -15,6 +15,8 @@ import {existsSync} from 'node:fs';
 import {towerTrainerEncounter} from '../src/data/tower-trainers';
 import {towerThemes} from '../src/data/tower-themes';
 import {npcSamples,npcTrainerSample} from '../src/data/npc-samples';
+import {normalNpcTemplate} from '../src/server/npc-templates';
+import {npcSpecies,npcExtraCandidates} from '../src/data/npc-gimmicks';
 
 const seed:[number,number,number,number]=[1,2,3,4];
 function teamFor(sample:typeof trainerCatalog[number]){
@@ -69,7 +71,11 @@ test('boss identities vary by run, preview agrees with battle, and saved identit
       const preview=store.view('boss').run!.boss!;store.close();store=new TowerStore(path);
       assert.deepEqual(store.view('boss').run!.boss,preview);
       const id=store.enter('boss',runId,floor,starters),row=store.battle(id);assert.deepEqual(JSON.parse(row.boss!),preview);
-      const sample=namedTrainerSamples.find(s=>s.id===preview.id)!;for(const p of Showdown.Teams.unpack(row.opponent_team)!)assert.ok(sample.entries!.map(name=>evolvedOpponentSpecies(name,sample.id==='named-red')).includes(p.species));
+      const sample=namedTrainerSamples.find(s=>s.id===preview.id)!;
+      // Current named templates include registered regional adaptations and signature partners.
+      const template=normalNpcTemplate(sample.id,floor,sample.role);
+      const allowed=template?template.team.map(p=>p.species):[...sample.entries!,...(npcExtraCandidates[sample.id]??[])].map(name=>npcSpecies(name,sample.id,sample.generation));
+      for(const p of Showdown.Teams.unpack(row.opponent_team)!)assert.ok(allowed.includes(p.species),`${sample.id}: ${p.species}`);
       store.close();store=new TowerStore(path);assert.equal(store.battle(id).opponent_team,row.opponent_team);assert.deepEqual(store.view('boss').run!.boss,preview);
     }finally{store.close();}
   }

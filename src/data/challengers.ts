@@ -1,12 +1,13 @@
 import type {SavedChallengerDefinition as LegacySavedChallenger,ChallengerCandidate} from './legacy-challengers';
 import {challengerRewardProfiles as rewards} from './challenger-rewards';
-import {npcSamples,npcTacticHints,type NpcSample} from './npc-samples';
-import {npcRankNames,challengerRankWeights,drawNpcRank,npcRankTraining,type NpcRank,type NpcRankTraining} from './npc-ranks';
+import {npcSamples,npcTacticHints,type NpcSample,type LegacyNpcSample} from './npc-samples';
+import {npcRankNames,sampleRankWeights,drawNpcRank,npcRankTraining,type NpcRank,type NpcRankTraining} from './npc-ranks';
 import type {NpcEncounterSnapshot} from '../server/npc-encounters';
 import type {RewardOption,RewardSelectionDefinition} from './rewards';
 
 export type ChallengerDefinition=ChallengerCandidate&{rank:NpcRank;sample:NpcSample;training:NpcRankTraining;tactic:NpcSample['tactic'];specialty:string|null;kind:'normal';minFloor:number;weight:number;rewardProfile:'low'|'medium'|'high';rewardDefinition:RewardOption;selections?:readonly RewardSelectionDefinition[];encounter?:NpcEncounterSnapshot};
-export type SavedChallengerDefinition=ChallengerDefinition|LegacySavedChallenger;
+export type SavedRankedChallengerDefinition=Omit<ChallengerDefinition,'sample'|'training'>&{sample:NpcSample|LegacyNpcSample;training:NpcRankTraining|Omit<NpcRankTraining,'itemSlots'>};
+export type SavedChallengerDefinition=SavedRankedChallengerDefinition|LegacySavedChallenger;
 export type {ChallengerCandidate};
 export const challengerSettings={weight:20,minFloor:1} as const;
 export function challengerDefinition(sample:NpcSample,rank:NpcRank,floor:number):ChallengerDefinition{
@@ -20,7 +21,7 @@ export function drawChallengers(floor:number,random:()=>number,pool:readonly Npc
   if(!eligible.length)throw Error('At least three distinct eligible challenger classes are required');
   let ticket=random()*eligible.reduce((sum,s)=>sum+s.weight,0);
   const sample=eligible.find(s=>(ticket-=s.weight)<0)??eligible.at(-1)!;
-  result.push(challengerDefinition(sample,drawNpcRank(challengerRankWeights,random),floor));
+  result.push(challengerDefinition(sample,drawNpcRank(sampleRankWeights(sample,floor,'challenger'),random),floor));
   eligible=eligible.filter(s=>s.id!==sample.id&&s.displayName!==sample.displayName);
  }
  return result;

@@ -15,12 +15,12 @@ import {towerDifficulty,eliteChance,type TowerProgression} from '../data/tower-p
 import {megaStones,DYNAMAX_ITEM,canEquipGimmick} from '../data/gimmicks';
 import {allowedOpponentSpecies,evolvedOpponentSpecies} from '../data/opponent-species';
 import {normalNpcTemplate,templateProfile} from './npc-templates';
-import type {TrainingProfile} from '../data/training';
+import {statKeys,type TrainingProfile} from '../data/training';
 import {separateForms} from '../data/selectable-forms';
 import {namedOpponentIVs} from './named-opponent-ivs';
 import {opponentProfile} from './opponent-training';
 import {npcSamples,npcTrainerSample} from '../data/npc-samples';
-import {rankWeights,drawNpcRank} from '../data/npc-ranks';
+import {sampleRankWeights,drawNpcRank} from '../data/npc-ranks';
 
 export function encounterRandom(seed:Seed) {
   let state=seed.reduce((value,part)=>(Math.imul(value,31)+part)>>>0,2166136261);
@@ -72,14 +72,13 @@ export function encounterPool(floor:number,progression:TowerProgression='legacy'
 export function selectTrainerSample(floor:number,seed:Seed,previous:{id:string;specialty:string|null}[]=[],progression:TowerProgression='legacy',options:{common?:boolean}={}):TrainerSample {
   const random=encounterRandom(seed),pool=encounterPool(floor,progression);
   if(options.common){
-    const ordinary=pool.filter(normalOpponentSpecies);
-    let candidates=npcSamples.filter(s=>s.pools.includes('normal')&&s.minFloor<=floor&&s.weight>0&&(!s.specialty||ordinary.filter(name=>Showdown.Dex.species.get(name).types.includes(s.specialty!)).length>=3));
+    let candidates=npcSamples.filter(s=>s.pools.includes('normal')&&s.minFloor<=floor&&s.weight>0);
     const fresh=candidates.filter(s=>!previous.slice(0,3).some(p=>p.id===s.id)&&(!s.specialty||!previous.slice(0,2).some(p=>p.specialty===s.specialty)));
     if(fresh.length)candidates=fresh;
     if(!candidates.length)throw Error('No eligible common NPC sample');
     let ticket=random()*candidates.reduce((sum,s)=>sum+s.weight,0);
     const chosen=candidates.find(s=>(ticket-=s.weight)<0)??candidates.at(-1)!;
-    return npcTrainerSample(chosen,drawNpcRank(rankWeights(floor),random));
+    return npcTrainerSample(chosen,drawNpcRank(sampleRankWeights(chosen,floor),random));
   }
   const eligible=(sample:TrainerSample)=>sample.minFloor<=floor && (!sample.specialty || pool.filter(name=>(progression==='legacy'||sample.kind==='elite'||normalOpponentSpecies(name)) && Showdown.Dex.species.get(name).types.includes(sample.specialty!)).length>=3);
   const elite=floor>=(progression==='legacy'?4:11) && random()<(progression==='legacy'?.25:eliteChance(floor)),mixed=random()<.2;
@@ -92,21 +91,34 @@ export function selectTrainerSample(floor:number,seed:Seed,previous:{id:string;s
   return candidates[Math.floor(random()*candidates.length)];
 }
 // Enumerate the small candidate pool, keeping the ace and favouring complementary partners.
-export function selectNamedEntries(entries:readonly string[],random:()=>number,ace?:string,carrier?:string):string[] {
+export function selectNamedEntries(entries:readonly string[],random:()=>number,ace?:string,carrier?:string,options:{accept?:(names:string[])=>boolean;quality?:'elite'|'master';tactic?:TrainerTactic}={}):string[] {
   if(entries.length<3 || new Set(entries).size!==entries.length || entries.some(name=>!pokemonSets[name]))throw Error('Invalid named trainer entries');
   if(ace && !entries.includes(ace))throw Error('Trainer ace is missing from entries');
-  const combinations:{names:string[];weight:number}[]=[];
+  const combinations:{names:string[];weight:number;sharedWeaknesses:number}[]=[];
   for(let a=0;a<entries.length-2;a++)for(let b=a+1;b<entries.length-1;b++)for(let c=b+1;c<entries.length;c++){
     const names=[entries[a],entries[b],entries[c]],species=names.map(name=>Showdown.Dex.species.get(name));
     if(ace && !names.includes(ace) || carrier && !names.includes(carrier))continue;
+    if(options.accept&&!options.accept(names))continue;
     const coverage=new Set(species.flatMap(s=>s.types)).size;
     const physical=species.some(s=>s.baseStats.atk>s.baseStats.spa),special=species.some(s=>s.baseStats.spa>s.baseStats.atk);
     const speed=species.some(s=>s.baseStats.spe>=90),bulk=species.some(s=>s.baseStats.hp+s.baseStats.def+s.baseStats.spd>=270);
     const sharedWeaknesses=Showdown.Dex.types.all().filter(type=>species.every(s=>Showdown.Dex.getImmunity(type.name,s) && Showdown.Dex.getEffectiveness(type.name,s)>0)).length;
-    combinations.push({names,weight:(1+coverage*.2)*(physical && special ? 1.5 : 1)*(speed && bulk ? 1.3 : 1)*Math.pow(.45,sharedWeaknesses)});
+    let weight=(1+coverage*.2)*(physical && special ? 1.5 : 1)*(speed && bulk ? 1.3 : 1)*Math.pow(.45,sharedWeaknesses);
+    if(options.quality){
+      const bst=species.reduce((sum,s)=>sum+statKeys.reduce((total,key)=>total+s.baseStats[key],0),0)/3;
+      weight*=Math.pow(bst/500,options.quality==='master'?8:4);
+      weight*=Math.pow(coverage/4,options.quality==='master'?4:2);
+      const setup=names.some(name=>poolFor(name).subs.some(move=>['Dragon Dance','Swords Dance','Nasty Plot','Calm Mind','Quiver Dance','Bulk Up','Shell Smash'].includes(move)));
+      if(options.tactic==='setup'&&setup)weight*=1.5;
+      if(options.quality==='master')weight*=weight;
+    }
+    combinations.push({names,weight,sharedWeaknesses});
   }
-  let ticket=random()*combinations.reduce((sum,c)=>sum+c.weight,0);
-  const selected=[...(combinations.find(c=>(ticket-=c.weight)<0) ?? combinations.at(-1)!).names];
+  if(!combinations.length)throw Error('No team satisfies NPC composition constraints');
+  const minimumWeakness=Math.min(...combinations.map(c=>c.sharedWeaknesses));
+  const eligible=options.quality==='master'?combinations.filter(c=>c.sharedWeaknesses===minimumWeakness):combinations;
+  let ticket=random()*eligible.reduce((sum,c)=>sum+c.weight,0);
+  const selected=[...(eligible.find(c=>(ticket-=c.weight)<0) ?? eligible.at(-1)!).names];
   // The first entry should not always become the lead, either.
   for(let i=selected.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[selected[i],selected[j]]=[selected[j],selected[i]];}
   return selected;

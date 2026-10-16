@@ -42,9 +42,9 @@ export function npcItemCandidates(tier:NpcItemTier,tactic:TrainerTactic,moves:st
 }
 
 // Reusable by other NPC generators; each caller owns membership and saves the packed result.
-export function trainNpcTeam(team:OpponentEntry[],floor:number,tier:NpcTrainingTier,tactic:TrainerTactic,seed:Seed,rule:BattleRule,frozenTarget?:NpcTrainingDefinition):OpponentEntry[]{
+export function trainNpcTeam(team:OpponentEntry[],floor:number,tier:NpcTrainingTier,tactic:TrainerTactic,seed:Seed,rule:BattleRule,frozenTarget?:NpcTrainingDefinition,options:{itemSlots?:number}={}):OpponentEntry[]{
  const random=encounterRandom(seed),target=frozenTarget??npcTrainingTargets(floor,tier),used=new Set<string>();
- return team.map(entry=>{
+ return team.map((entry,index)=>{
   let moves=opponentMoves(entry.name,random,target.buildQuality==='simple'?undefined:tactic);
   if(target.buildQuality==='simple'){
    const attacks=moves.filter(move=>Showdown.Dex.moves.get(move).category!=='Status');
@@ -52,7 +52,7 @@ export function trainNpcTeam(team:OpponentEntry[],floor:number,tier:NpcTrainingT
    if(attacks.length)moves=attacks;
   }
   if(target.buildQuality!=='optimized')moves=gentleMoves([{name:entry.name,moves}])[0].moves;
-  const item=npcItemCandidates(target.itemTier,tactic,moves,!!frozenTarget).find(item=>!used.has(item)&&isHeldItem(item)&&Showdown.Dex.items.get(item).exists&&allowsRuleItem(rule,item));
+  const item=index<(options.itemSlots??team.length)?npcItemCandidates(target.itemTier,tactic,moves,!!frozenTarget).find(item=>!used.has(item)&&isHeldItem(item)&&Showdown.Dex.items.get(item).exists&&allowsRuleItem(rule,item)):undefined;
   if(item)used.add(item);
   return {name:entry.name,moves,item,profile:npcTrainingProfile(entry.name,moves,floor,tier,tactic,random,target)};
  });

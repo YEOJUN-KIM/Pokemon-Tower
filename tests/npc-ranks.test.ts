@@ -4,7 +4,7 @@ import Showdown from 'pokemon-showdown';
 import {randomUUID} from 'node:crypto';
 import {existsSync,readFileSync} from 'node:fs';
 import {npcSamples,npcTrainerSample} from '../src/data/npc-samples';
-import {npcRankProfiles,npcRankTraining,rankWeights,challengerRankWeights,drawNpcRank,type NpcRank} from '../src/data/npc-ranks';
+import {npcRankProfiles,npcRankTraining,rankWeights,sampleRankWeights,challengerRankWeights,drawNpcRank,type NpcRank} from '../src/data/npc-ranks';
 import {drawChallengers,challengerDefinition} from '../src/data/challengers';
 import {generateNpcEncounter} from '../src/server/npc-encounters';
 import {encounterRandom,encounterPool,normalOpponentSpecies,selectTrainerSample,type OpponentEntry} from '../src/server/opponent-team';
@@ -46,7 +46,7 @@ test('rank targets differ at 5/20/40 and retain monotonic IVs and legal EV total
   const means=teams.map(s=>s.team.flatMap(p=>Object.values(p.profile!.ivs)).reduce((a,b)=>a+b,0)/18);
   assert.ok(means[0]<means[1]&&means[1]<means[2]);
   const totals=teams.map(s=>Object.values(s.team[0].profile!.evs).reduce((a,b)=>a+b,0));assert.ok(totals[0]<totals[1]&&totals[1]<totals[2]);
-  assert.equal(teams[0].team.filter(p=>p.item).length,floor<15?0:3);
+  assert.ok(teams[0].team.filter(p=>p.item).length<=(floor<=20?0:1));
   assert.notDeepEqual(teams[1].team.map(p=>p.item),teams[2].team.map(p=>p.item));
  }
 });
@@ -95,8 +95,12 @@ test('challenger draws are weighted, respect minimums and sample/class uniquenes
   assert.ok(offers.every(c=>c.minFloor<=floor));combinations.add(offers.map(c=>c.rank).sort().join(','));
   for(const c of offers){counts[c.rank]++;samples.set(c.id,(samples.get(c.id)??0)+1);}
  }
- for(const rank of ranks)assert.ok(Math.abs(counts[rank]/9000-challengerRankWeights[rank])<.025);
- for(const combo of ['elite,normal,normal','elite,elite,master','master,master,normal','elite,master,normal'])assert.ok(combinations.has(combo));
+ assert.ok(counts.normal>counts.master);assert.ok(counts.elite>counts.master);
+ for(const c of drawChallengers(20,random))assert.ok(c.sample.rankWeights[c.rank]>0);
+ for(const combo of ['elite,normal,normal','elite,elite,master','elite,master,normal'])assert.ok(combinations.has(combo));
+ const twoMasters=[npcSamples.find(s=>s.id==='veteran-balanced')!,npcSamples.find(s=>s.id==='ace-setup')!,npcSamples[0]];
+ const tickets=[0,.99,0,.99,0,0];
+ assert.deepEqual(drawChallengers(20,()=>tickets.shift()!,twoMasters).map(c=>c.rank),['master','master','normal']);
  const custom=npcSamples.slice(0,4).map((s,i)=>({...s,weight:i===0?1000:1}));
  let heavy=0;for(let i=0;i<500;i++)if(drawChallengers(5,random,custom).some(s=>s.id===custom[0].id))heavy++;
  assert.ok(heavy>490);

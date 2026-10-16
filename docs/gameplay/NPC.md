@@ -24,3 +24,5 @@
 | 난이도 측정 | [밸런스 보고서](../../artifacts/experiments/balance/README.md) |
 
 새 일반층과 도전자 선택전은 현재 층의 일반 종족 풀에 같은 [NPC Sample·Rank·Training 프로필](../engineering/NPC_TRAINING.md)을 적용합니다. IV·EV·도구·기술·기믹 성향을 층과 분리하며, Sample은 전투 컨셉만 정의합니다. 도전자는 Sample/표시 클래스 중복 없이 3명을 추첨하고 실제 팀까지 저장합니다. [전체 Sample 및 5/20/40층 생성 예시](../../artifacts/reports/npc/NPC_RANK_SAMPLES.md)를 확인할 수 있습니다.
+
+클래스별 Rank 성향과 teamConcept을 적용합니다. 반바지 소년은 Bug 3마리, 낚시꾼은 Water 3마리, 등산가는 Rock/Ground 3마리를 유지하고 에이스·베테랑은 competitive 팀을 사용합니다. Normal 도구는 초반 0개, 중반 0~1개, 후반 1~2개입니다. 저장된 v1 팀은 재해석하지 않으며 새 생성부터 v2를 저장합니다.

@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "sample": {
+    "id": "youngster-balanced",
+    "displayName": "반바지 소년",
+    "portrait": "youngster-gen4",
+    "tactic": "balanced",
+    "specialty": null,
+    "defaultRank": "normal",
+    "minFloor": 1,
+    "weight": 22,
+    "pools": [
+      "normal",
+      "challenger"
+    ]
+  },
+  "rank": "normal",
+  "floor": 20,
+  "seed": [
+    17,
+    29,
+    43,
+    71
+  ],
+  "training": {
+    "rank": "normal",
+    "ivRange": [
+      4,
+      11
+    ],
+    "evBudget": 4,
+    "itemTier": "basic",
+    "buildQuality": "balanced",
+    "gimmickChance": 0
+  },
+  "team": [
+    {
+      "name": "Heracross",
+      "moves": [
+        "Lunge",
+        "Brick Break",
+        "Low Kick",
+        "Strength"
+      ],
+      "item": "Sitrus Berry",
+      "profile": {
+        "ivs": {
+          "hp": 10,
+          "atk": 9,
+          "def": 9,
+          "spa": 9,
+          "spd": 11,
+          "spe": 10
+        },
+        "evs": {
+          "hp": 1,
+          "atk": 2,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 1
+        },
+        "moves": [
+          "Lunge",
+          "Brick Break",
+          "Low Kick",
+          "Strength"
+        ],
+        "ability": "Swarm",
+        "nature": "Serious",
+        "teraType": "Bug",
+        "statSystem": "points"
+      }
+    },
+    {
+      "name": "Persian-Alola",
+      "moves": [
+        "Dark Pulse",
+        "Lash Out",
+        "Throat Chop",
+        "Nasty Plot"
+      ],
+      "item": "Lum Berry",
+      "profile": {
+        "ivs": {
+          "hp": 9,
+          "atk": 6,
+          "def": 11,
+          "spa": 6,
+          "spd": 5,
+          "spe": 6
+        },
+        "evs": {
+          "hp": 1,
+          "atk": 0,
+          "def": 0,
+          "spa": 2,
+          "spd": 0,
+          "spe": 1
+        },
+        "moves": [
+          "Dark Pulse",
+          "Lash Out",
+          "Throat Chop",
+          "Nasty Plot"
+        ],
+        "ability": "Fur Coat",
+        "nature": "Serious",
+        "teraType": "Dark",
+        "statSystem": "points"
+      }
+    },
+    {
+      "name": "Beartic",
+      "moves": [
+        "Icicle Crash",
+        "Body Press",
+        "Mega Punch",
+        "Toxic"
+      ],
+      "item": "Wide Lens",
+      "profile": {
+        "ivs": {
+          "hp": 8,
+          "atk": 11,
+          "def": 7,
+          "spa": 7,
+          "spd": 9,
+          "spe": 5
+        },
+        "evs": {
+          "hp": 1,
+          "atk": 2,
+          "def": 0,
+          "spa": 0,
+          "spd": 0,
+          "spe": 1
+        },
+        "moves": [
+          "Icicle Crash",
+          "Body Press",
+          "Mega Punch",
+          "Toxic"
+        ],
+        "ability": "Snow Cloak",
+        "nature": "Serious",
+        "teraType": "Ice",
+        "statSystem": "points"
+      }
+    }
+  ],
+  "gimmick": null
+}

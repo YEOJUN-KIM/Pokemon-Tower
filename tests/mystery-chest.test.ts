@@ -119,7 +119,7 @@ test('v34 saves preserve pending v1 choices, paid rewards and completed events a
     INSERT INTO run_event_rules_v34 SELECT * FROM run_event_rules; DROP TABLE run_event_rules; ALTER TABLE run_event_rules_v34 RENAME TO run_event_rules; PRAGMA user_version=34;`);
    store.close();store=new TowerStore(path,()=>{if(status==='choice')return 80;throw Error('Migration cannot draw');});
    assert.deepEqual(store.view('owner'),before);
-   assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,39);
+   assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,40);
    if(status==='choice'){store.chooseEvent('owner',f.run,f.event.id,'open');assert.deepEqual(store.view('owner').run!.event!.reward,{kind:'egg-ticket',amount:1});}
    else store.chooseEvent('owner',f.run,f.event.id,status==='skip'?'skip':'open');
    assert.equal(store.permanentView('owner').eggTickets,status==='skip'?0:1);

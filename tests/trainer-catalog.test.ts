@@ -87,7 +87,7 @@ test('saved normal trainer survives reload and never grants a boss reward',()=>{
   }finally{store.close();}
 });
 test('version ten migration preserves existing parties and creates nullable trainer metadata',()=>{
-  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);try{store.ensurePlayer('legacy');const id=store.start('legacy',starters),before=store.battle(id).opponent_team;store.db.exec('ALTER TABLE battles DROP COLUMN trainer; PRAGMA user_version=10;');store.close();store=new TowerStore(path);assert.equal(store.battle(id).opponent_team,before);assert.equal(store.view('legacy').run!.trainer,null);assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,39);}finally{store.close();}
+  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);try{store.ensurePlayer('legacy');const id=store.start('legacy',starters),before=store.battle(id).opponent_team;store.db.exec('ALTER TABLE battles DROP COLUMN trainer; PRAGMA user_version=10;');store.close();store=new TowerStore(path);assert.equal(store.battle(id).opponent_team,before);assert.equal(store.view('legacy').run!.trainer,null);assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,40);}finally{store.close();}
 });
 test('every sample completes a battle using the existing public-information AI',async()=>{
   for(const sample of trainerCatalog){const {packed}=teamFor(sample);const log=await runBattle({teams:{p1:packTeam(starters),p2:packed},seed,player:new DamagePolicy(),opponent:new TowerPolicy()});assert.ok(log.winner,`${sample.id}: unfinished battle`);}

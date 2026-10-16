@@ -37,6 +37,6 @@ test('boss preview becomes a persisted encounter and v2 migration preserves old 
     store.close();store=new TowerStore(path);
     assert.equal(store.battle(id).reward,300);
     assert.equal(store.view('boss-test').run!.boss,null);
-    assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,39);
+    assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,40);
   } finally {store.close();}
 });

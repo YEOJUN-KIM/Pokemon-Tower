@@ -111,6 +111,7 @@ export class TowerStore {
   });}
   selectEventReward(owner:string,runId:string,eventId:string,selectionId:unknown,candidateId:unknown){this.tx(()=>this.events.selectReward(owner,runId,eventId,selectionId,candidateId));}
   continueEvent(owner:string,runId:string,eventId:string){this.tx(()=>this.events.continue(owner,runId,eventId));}
+  purchaseHiddenShop(owner:string,runId:string,eventId:string,productId:unknown){this.tx(()=>this.events.purchase(owner,runId,eventId,productId));}
   private get permanentShop(){
     return new PermanentShop(this.db,this.roll,(owner,species)=>this.savedTraining(owner,species),(owner,species)=>this.unlockedMoves(owner,species));
   }

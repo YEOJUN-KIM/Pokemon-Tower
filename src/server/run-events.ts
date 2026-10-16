@@ -1,4 +1,5 @@
 import {ChallengerEvents} from './challenger-events';
+import {HiddenShop} from './hidden-shop';
 import {selectRunEvent,findEventChoice,rollChoiceReward,rollRewardOption} from '../game/run-events';
 import {applyRewardOption,selectEventReward} from './rewards';
 import type {RewardResult} from '../data/rewards';
@@ -23,6 +24,7 @@ export class RunEvents {
   if(!kind)return;
   const eventId=randomUUID();
   this.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status) VALUES (?,?,?,?,'choice')").run(eventId,runId,afterFloor,kind);
+  if(kind==='hidden-shop')new HiddenShop(this.db).create(eventId,runId);
   if(kind==='challenger-selection'){
    const rule=(this.db.prepare('SELECT rule FROM run_rules WHERE run_id=?').get(runId) as {rule:BattleRule}).rule;
    const progression=(this.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(runId) as {version:TowerProgression}|undefined)?.version??'legacy';
@@ -34,7 +36,7 @@ export class RunEvents {
  view(runId:string):RunEventView|null{
   const row=this.db.prepare("SELECT * FROM run_events WHERE run_id=? AND status!='complete' ORDER BY after_floor DESC LIMIT 1").get(runId) as EventRow|undefined;
   if(row)this.validateKind(row.kind);
-  return row?{id:row.id,kind:row.kind,choiceId:row.choice_id,rulesVersion:this.rulesVersion(runId),...(row.result_json?{result:JSON.parse(row.result_json) as RewardResult}:{}),afterFloor:row.after_floor,phase:row.status as RunEventView['phase'],...new ChallengerEvents(this.db).view(row.id),reward:row.reward_kind?{kind:row.reward_kind,amount:row.amount}:null}:null;
+  return row?{id:row.id,kind:row.kind,choiceId:row.choice_id,rulesVersion:this.rulesVersion(runId),...(row.result_json?{result:JSON.parse(row.result_json) as RewardResult}:{}),...(row.kind==='hidden-shop'?{hiddenShop:new HiddenShop(this.db).view(row.id)}:{}),afterFloor:row.after_floor,phase:row.status as RunEventView['phase'],...new ChallengerEvents(this.db).view(row.id),reward:row.reward_kind?{kind:row.reward_kind,amount:row.amount}:null}:null;
  }
  earnedCoins(runId:string){
   const rows=this.db.prepare('SELECT reward_kind,amount,result_json FROM run_events WHERE run_id=?').all(runId) as EventRow[];
@@ -78,6 +80,11 @@ export class RunEvents {
   this.db.prepare("UPDATE run_events SET status='reward',choice_id=?,reward_kind=?,amount=? WHERE id=?").run(choice.id,reward.kind,reward.amount,eventId);
  }
  selectReward(owner:string,runId:string,eventId:string,selectionId:unknown,candidateId:unknown){this.owned(owner,runId,eventId);selectEventReward(this.db,owner,eventId,selectionId,candidateId);}
+ purchase(owner:string,runId:string,eventId:string,productId:unknown){
+  const row=this.owned(owner,runId,eventId);
+  if(row.kind!=='hidden-shop'||row.status!=='choice')throw new BattleRequestError('열려 있는 히든상점이 아닙니다.',409);
+  new HiddenShop(this.db).purchase(owner,runId,eventId,productId);
+ }
  continue(owner:string,runId:string,eventId:string){
   const row=this.owned(owner,runId,eventId);
   if(row.result_json && (JSON.parse(row.result_json) as RewardResult).selections?.some(s=>s.state==='pending'))throw new BattleRequestError('추가 보상을 먼저 선택하세요.',409);

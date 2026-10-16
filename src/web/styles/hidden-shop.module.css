@@ -1,0 +1,26 @@
+.scope {box-sizing:border-box;}
+.shop {position:absolute;inset:12px;z-index:21;display:flex;flex-direction:column;min-height:0;padding:16px;overflow:hidden;background:#263341f5;color:#eef5fa;border:2px solid #9e6273;}
+.heading {display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.heading h2 {margin:0;font-size:20px;}
+.heading p {margin:8px 0;font-size:13px;}
+.wallets {display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:13px;}
+.wallets strong {white-space:nowrap;}
+.limit {margin:8px 0 12px;color:#ffe5a3;font-weight:700;}
+.limit small {font-weight:400;}
+.products {display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px;min-height:0;overflow:auto;overscroll-behavior:contain;padding:2px 4px 8px;}
+.product {display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:12px;text-align:center;}
+.product p {margin:0 0 8px;font-size:12px;line-height:1.5;overflow-wrap:anywhere;}
+.product button {display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;width:100%;margin-top:auto;min-height:52px;font-size:12px;white-space:normal;}
+.growth {color:#b4e2ff;}
+.coins {color:#ffe5a3;}
+@media(max-width:760px) {
+ .shop {inset:6px;padding:10px;}
+ .heading h2 {font-size:16px;}
+ .heading p {margin:4px 0;font-size:11px;}
+ .wallets {font-size:11px;gap:6px 10px;}
+ .limit {font-size:12px;margin:8px 0;}
+ .products {grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px;}
+ .product {padding:8px;font-size:12px;}
+ .product p {font-size:10px;}
+ .product button {font-size:11px;}
+}

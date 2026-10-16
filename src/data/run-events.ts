@@ -1,4 +1,5 @@
 import {challengerSettings,type ChallengerCandidate} from './challengers';
+import {hiddenShopEventSettings,type HiddenShopView} from './hidden-shop';
 import type {RewardResult,WeightedRewardOption} from './rewards';
 // Initial tuning for the first non-combat encounter; amounts and odds live together.
 export const mysteryChest = {encounterPercent:10,cooldownFloors:2,coinsPercent:80,coins:150,eggTickets:1} as const;
@@ -21,6 +22,7 @@ export const eventDefinitions={
  'breeder-gift':{title:'브리더의 응원',summary:'브리더가 알 뽑기권 1장을 선물하려 한다.',intro:'길에서 만난 브리더가 손을 흔든다. “타워에 도전 중이군요! 새로운 친구를 만나는 데 이 뽑기권이 도움이 될 거예요.”',weight:30,choices:[{id:'open',label:'선물을 받는다',outcome:'reward',cost:0,rewards:[{weight:1,reward:{kind:'egg-ticket',amount:1}}],message:'브리더에게 알 뽑기권 1장을 받았다! 알 뽑기에서 사용할 수 있다.'},leave]},
  'traveling-merchant':{title:'여행 상인의 제안',summary:`${merchantTicketPrice}코인으로 알 뽑기권 1장 구매.`,intro:`커다란 가방을 멘 상인이 말을 건넨다. “알 뽑기권 한 장을 ${merchantTicketPrice}코인에 드리지요. 필요하신가요?”`,weight:20,choices:[{id:'open',label:`${merchantTicketPrice}코인으로 산다`,outcome:'reward',cost:merchantTicketPrice,rewards:[{weight:1,reward:{kind:'egg-ticket',amount:1}}],message:`${merchantTicketPrice}코인을 내고 알 뽑기권 1장을 샀다! 알 뽑기에서 사용할 수 있다.`},leave]},
  'challenger-selection':{title:'도전자 선택전',summary:'상대와 보상을 살펴보고 도전할 트레이너를 고르자.',intro:'세 명의 도전자가 승부를 기다리고 있다. 돌아가도 괜찮다.',weight:challengerSettings.weight,minFloor:challengerSettings.minFloor,minRulesVersion:2,choices:[{id:'back',label:'돌아간다',outcome:'leave'}]},
+ 'hidden-shop':{title:'수상한 상인',summary:'희귀한 상품 중 무엇을 가져갈까? 구매 한도와 결제 재화를 확인하자.',intro:'“흔히 볼 수 없는 물건들이야.” 상인이 조용히 진열대를 펼쳤다.',weight:hiddenShopEventSettings.weight,minFloor:hiddenShopEventSettings.minFloor,minRulesVersion:hiddenShopEventSettings.minRulesVersion,choices:[{id:'leave',label:'나가기',outcome:'leave'}]},
 } as const satisfies RunEventRegistry;
 // Initial v2 tuning only. The original table above remains frozen for v1 runs.
 export const mysteryChestResults=[
@@ -48,5 +50,5 @@ export function eventDefinition(kind:string,registry:RunEventRegistry=eventDefin
  return isRunEventKind(kind,registry)?registry[kind]:undefined;
 }
 // Event IDs and choice IDs are content strings, validated against the registry on the server.
-export type RunEventView={id:string;kind:string;choiceId?:string|null;rulesVersion?:number;result?:RewardResult;afterFloor:number;challengers?:readonly ChallengerCandidate[];phase:'choice'|'battle'|'reward';reward:EventReward|null};
+export type RunEventView={id:string;kind:string;choiceId?:string|null;rulesVersion?:number;result?:RewardResult;afterFloor:number;challengers?:readonly ChallengerCandidate[];hiddenShop?:HiddenShopView;phase:'choice'|'battle'|'reward';reward:EventReward|null};
 

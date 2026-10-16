@@ -8,6 +8,7 @@ export const eventPresentation={
  'mystery-chest':{artwork:'chest'},
  'breeder-gift':{artwork:'trainer',sprite:'aromalady-gen4',alt:'브리더'},
  'traveling-merchant':{artwork:'trainer',sprite:'hiker-gen4',alt:'여행 상인'},
+ 'hidden-shop':{artwork:'trainer',sprite:'hiker-gen4',alt:'수상한 상인'},
 } as const satisfies Record<RunEventKind,EventPresentation>;
 
 export function getEventPresentation(kind:string):EventPresentation|undefined {

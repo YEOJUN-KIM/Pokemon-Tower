@@ -1,3 +1,4 @@
+import {recentEncounters} from './encounter-history';
 import {RewardInventory} from './reward-inventory';
 import {RaidEvents} from './raid-events';
 import {rollEncounterShiny} from './shiny';
@@ -11,6 +12,7 @@ import {generateNpcEncounter} from './npc-encounters';
 import {npcSamples,npcTrainerSample} from '../data/npc-samples';
 import {spendCoins,grantCoins} from './player-wallet';
 import {RunEvents} from './run-events';
+import {eventDefinitions,type RunEventRegistry} from '../data/run-events';
 import {isTrainerEquipment,type TrainerEquipment} from '../data/trainer-equipment';
 import type {PermanentView,PermanentResult} from '../data/permanent-upgrades';
 import {PermanentShop} from './permanent-shop';
@@ -61,13 +63,13 @@ export const AI_VERSION = 'tower-policy-v10';
 const favoriteSpecies=new Set(pokedexEntries().map(entry=>entry.species));
 type RunRow = {id: string; player_id: string; floor: number; state: RunView['state']; total_floors: number};
 export type BattleRow = {
-  rule:BattleRule;id: string; run_id: string; floor: number; player_team: string; opponent_team: string; seed: string;
+  encounter_order:number;rule:BattleRule;id: string; run_id: string; floor: number; player_team: string; opponent_team: string; seed: string;
   engine_version: string; format: string; ai_version: string; status: 'active' | 'complete';
   reward: number; candidates: string; log: string | null; view: string | null; boss: string | null; trainer:string|null;upgrades:string;battle_items:string;tera_tickets:string;trainer_equipment:string|null;villain_event:string|null;
 };
 export class TowerStore {
   readonly db: DatabaseSync;
-  constructor(path: string,private readonly roll=(max:number)=>randomInt(max)) {
+  constructor(path: string,private readonly roll=(max:number)=>randomInt(max),private readonly eventRegistry:RunEventRegistry=eventDefinitions) {
     if (path !== ':memory:') mkdirSync(dirname(path), {recursive: true});
     this.db = new DatabaseSync(path);
     initializeTowerDatabase(this.db,()=>this.repairArchivedOwnership(),()=>this.repairFormHeldItems());
@@ -104,7 +106,7 @@ export class TowerStore {
   private runBag(owner:string,runId:string){return new RunBag(this.db,{runId,roster:this.roster(runId),profiles:this.runProfiles(runId),held:this.heldItems(runId),rule:this.runRule(runId),partners:this.machinePartners(owner,runId)});}
   useBag(owner:string,runId:string,requestId:unknown,entryId:unknown,target:unknown,slot:unknown=null){this.tx(()=>{const run=this.ownedRun(owner,runId);if(run.state!=='select')throw new BattleRequestError('배낭은 비전투 준비 중 사용할 수 있습니다.',409);this.runBag(owner,runId).use(requestId,entryId,target,slot,(species,item)=>this.setHeldItem(runId,species,item));});}
   useReward(owner:string,runId:string,requestId:unknown,entryId:unknown,choiceId:unknown){this.tx(()=>{const run=this.ownedRun(owner,runId);if(run.state!=='select'||this.events.view(runId)&&!this.retryState(runId).pending_battle_id)throw new BattleRequestError('이벤트를 마친 뒤 출전 준비에서 사용하세요.',409);this.rewardInventory(owner,runId,run.floor).use(requestId,entryId,choiceId);});}
-  private get events(){return new RunEvents(this.db,this.roll);}
+  private get events(){return new RunEvents(this.db,this.roll,this.eventRegistry);}
   chooseEvent(owner:string,runId:string,eventId:string,choice:unknown){this.tx(()=>{
     const row=this.events.owned(owner,runId,eventId);
     if(row.kind==='raid-encounter'&&choice==='challenge'){
@@ -180,10 +182,10 @@ export class TowerStore {
     if (!run || ['select', 'abandoned'].includes(run.state)) return null;
     const event=new ChallengerEvents(this.db).pending(run.id);
     if(event?.phase==='battle' && event.battle_id)return this.battle(event.battle_id);
-    return this.db.prepare('SELECT * FROM battles WHERE run_id = ? AND floor = ? AND stage = ? ORDER BY attempt DESC LIMIT 1').get(run.id, run.floor,this.route(run.id)?.pending_boss===run.floor?1:0) as BattleRow ?? null;
+    return this.db.prepare('SELECT * FROM battles WHERE run_id = ? AND floor = ? AND stage = ? ORDER BY encounter_order DESC, attempt DESC LIMIT 1').get(run.id, run.floor,this.route(run.id)?.pending_boss===run.floor?1:0) as BattleRow ?? null;
   }
   private suggestedTeam(runId: string): string[] {
-    const previous = this.db.prepare('SELECT id, player_team FROM battles WHERE run_id = ? ORDER BY floor DESC, stage DESC, attempt DESC LIMIT 1').get(runId) as {id: string; player_team: string} | undefined;
+    const previous = this.db.prepare('SELECT id, player_team FROM battles WHERE run_id = ? ORDER BY encounter_order DESC, attempt DESC LIMIT 1').get(runId) as {id: string; player_team: string} | undefined;
     const recruitment = previous ? this.db.prepare('SELECT species, replaced FROM recruitments WHERE battle_id = ?').get(previous.id) as {species: string | null; replaced: string | null} | undefined : undefined;
     const roster = this.roster(runId);
     const lastTeam = previous ? (Showdown.Teams.unpack(previous.player_team) ?? []).map(pokemon => collectionSpecies(pokemon.species)) : [];
@@ -240,8 +242,8 @@ export class TowerStore {
       candidateDetails:row.state==='recruit' && battle?Object.fromEntries(this.recruitmentTeam(battle).filter(set=>isCollectibleSpecies(set.species)).map(set=>[set.species,{ability:set.ability,nature:set.nature,moves:set.moves.map(m=>Showdown.Dex.moves.get(m).name),baseStats:{...Showdown.Dex.species.get(set.species).baseStats},types:[...Showdown.Dex.species.get(set.species).types],teraType:set.teraType as import('../data/tera').TeraType|undefined,shiny:!!set.shiny}])):{},
       collectionMoves: row.state==='recruit' && battle ? Object.fromEntries(this.recruitmentTeam(battle).map(set=>[set.species,this.unlockedMoves(owner,set.species)])) : {},
       currentMoves: row.state==='recruit' && battle ? Object.fromEntries(this.recruitmentTeam(battle).map(set=>[set.species,(JSON.parse((this.db.prepare('SELECT profiles FROM runs WHERE id=?').get(row.id) as {profiles:string}).profiles)[set.species] ?? this.savedTraining(owner,set.species).profile).moves])) : Object.fromEntries(this.roster(row.id).map(name=>[name,this.runProfiles(row.id)[name]?.moves ?? this.savedTraining(owner,name).profile.moves])),
-      lastMoveGain: (()=>{const saved=this.db.prepare('SELECT move_gain FROM recruitments JOIN battles ON battles.id=recruitments.battle_id WHERE battles.run_id=? ORDER BY battles.floor DESC, battles.stage DESC LIMIT 1').get(row.id) as {move_gain:string|null}|undefined;return saved?.move_gain ? JSON.parse(saved.move_gain) : null;})(),
-      lastIVGain: (()=>{const saved=this.db.prepare('SELECT iv_gain FROM recruitments JOIN battles ON battles.id=recruitments.battle_id WHERE battles.run_id=? ORDER BY battles.floor DESC, battles.stage DESC LIMIT 1').get(row.id) as {iv_gain:string|null}|undefined;return saved?.iv_gain ? JSON.parse(saved.iv_gain) : null;})(),
+      lastMoveGain: (()=>{const saved=this.db.prepare('SELECT move_gain FROM recruitments JOIN battles ON battles.id=recruitments.battle_id WHERE battles.run_id=? ORDER BY battles.encounter_order DESC, battles.attempt DESC LIMIT 1').get(row.id) as {move_gain:string|null}|undefined;return saved?.move_gain ? JSON.parse(saved.move_gain) : null;})(),
+      lastIVGain: (()=>{const saved=this.db.prepare('SELECT iv_gain FROM recruitments JOIN battles ON battles.id=recruitments.battle_id WHERE battles.run_id=? ORDER BY battles.encounter_order DESC, battles.attempt DESC LIMIT 1').get(row.id) as {iv_gain:string|null}|undefined;return saved?.iv_gain ? JSON.parse(saved.iv_gain) : null;})(),
     } : null};
   }
   private route(runId:string){return this.db.prepare('SELECT second_theme,pending_boss FROM run_routes WHERE run_id=?').get(runId) as {second_theme:TowerTheme;pending_boss:number}|undefined;}
@@ -317,9 +319,9 @@ export class TowerStore {
     const previous=this.battle(previousId),id=randomUUID(),rule=this.runRule(runId);
     const profiles=this.runProfiles(runId);
     const player=packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band'));
-    const attempt=(this.db.prepare('SELECT MAX(attempt) AS n FROM battles WHERE run_id=? AND floor=? AND stage=(SELECT stage FROM battles WHERE id=?)').get(runId,previous.floor,previousId) as {n:number}).n+1;
-    this.db.prepare(`INSERT INTO battles(id,run_id,floor,player_team,opponent_team,seed,engine_version,format,ai_version,status,reward,candidates,boss,trainer,upgrades,battle_items,tera_tickets,villain_event,rule,stage,attempt)
-      SELECT ?,run_id,floor,?,opponent_team,seed,engine_version,format,ai_version,'active',reward,candidates,boss,trainer,?,?,?,?,rule,stage,? FROM battles WHERE id=?`).run(id,player,JSON.stringify(this.activeUpgrades(runId,previous.floor).map(u=>u.kind).sort()),JSON.stringify(this.battleItemBag(runId)),JSON.stringify({...JSON.parse(previous.tera_tickets),p1:this.teraQuantity(runId)}),previous.villain_event,attempt,previousId);
+    const attempt=(this.db.prepare('SELECT MAX(attempt) AS n FROM battles WHERE run_id=? AND encounter_order=? AND stage=(SELECT stage FROM battles WHERE id=?)').get(runId,previous.encounter_order,previousId) as {n:number}).n+1;
+    this.db.prepare(`INSERT INTO battles(id,run_id,floor,player_team,opponent_team,seed,engine_version,format,ai_version,status,reward,candidates,boss,trainer,upgrades,battle_items,tera_tickets,villain_event,rule,stage,attempt,encounter_order)
+      SELECT ?,run_id,floor,?,opponent_team,seed,engine_version,format,ai_version,'active',reward,candidates,boss,trainer,?,?,?,?,rule,stage,?,encounter_order FROM battles WHERE id=?`).run(id,player,JSON.stringify(this.activeUpgrades(runId,previous.floor).map(u=>u.kind).sort()),JSON.stringify(this.battleItemBag(runId)),JSON.stringify({...JSON.parse(previous.tera_tickets),p1:this.teraQuantity(runId)}),previous.villain_event,attempt,previousId);
     this.db.prepare('UPDATE battles SET trainer_equipment=?,tera_tickets=? WHERE id=?').run(JSON.stringify(this.trainerEquipment(runId)),JSON.stringify({...JSON.parse(previous.tera_tickets),p1:0}),id);
     new ChallengerEvents(this.db).retry(previousId,id);
     new RaidEvents(this.db).retry(previousId,id);
@@ -330,9 +332,9 @@ export class TowerStore {
   private createRaidBattle(runId:string,floor:number,selected:string[],raid:import('../data/raids').RaidSnapshot){
     const id=randomUUID(),seed=[0,1,2,3].map(()=>randomInt(65536)) as Seed,rule=this.runRule(runId);
     const player=packPlayerTeam(selected,this.boostedProfiles(runId,this.runProfiles(runId)),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band'));
-    const attempt=(this.db.prepare('SELECT COALESCE(MAX(attempt),-1)+1 AS n FROM battles WHERE run_id=? AND floor=? AND stage=0').get(runId,floor) as {n:number}).n;
-    this.db.prepare(`INSERT INTO battles(id,run_id,floor,player_team,opponent_team,seed,engine_version,format,ai_version,status,reward,candidates,rule,stage,attempt,battle_items,upgrades,tera_tickets,trainer_equipment)
-      VALUES (?,?,?,?,?,?,?,?,?,'active',0,?,?,0,?,?,?,?,?)`).run(id,runId,floor,player,raid.opponentTeam,JSON.stringify(seed),engineVersion,FORMAT,AI_VERSION,JSON.stringify([raid.species]),rule,attempt,JSON.stringify(this.battleItemBag(runId)),JSON.stringify(this.activeUpgrades(runId,floor).map(u=>u.kind).sort()),JSON.stringify({p1:0,p2:0}),JSON.stringify(this.trainerEquipment(runId)));
+    const attempt=0;
+    this.db.prepare(`INSERT INTO battles(id,run_id,floor,player_team,opponent_team,seed,engine_version,format,ai_version,status,reward,candidates,rule,stage,attempt,battle_items,upgrades,tera_tickets,trainer_equipment,encounter_order)
+      VALUES (?,?,?,?,?,?,?,?,?,'active',0,?,?,0,?,?,?,?,?,(SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id,runId,floor,player,raid.opponentTeam,JSON.stringify(seed),engineVersion,FORMAT,AI_VERSION,JSON.stringify([raid.species]),rule,attempt,JSON.stringify(this.battleItemBag(runId)),JSON.stringify(this.activeUpgrades(runId,floor).map(u=>u.kind).sort()),JSON.stringify({p1:0,p2:0}),JSON.stringify(this.trainerEquipment(runId)),runId);
     this.db.prepare("UPDATE runs SET state='battle' WHERE id=?").run(runId);return id;
   }
   private recruitmentTeam(battle:BattleRow){const raids=new RaidEvents(this.db),row=raids.forBattle(battle.id);return Showdown.Teams.unpack(row?raids.snapshot(row).recruitTeam:battle.opponent_team)??[];}
@@ -350,7 +352,7 @@ export class TowerStore {
     const seed: Seed = rankedChallenger?.encounter?.seed??[0, 2, 4, 6].map(i => bytes.readUInt16BE(i)) as Seed;
     const profiles=JSON.parse((this.db.prepare('SELECT profiles FROM runs WHERE id=?').get(runId) as {profiles:string}).profiles) as Record<string,TrainingProfile>;
     const progression:TowerProgression=(this.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(runId) as {version:typeof CURRENT_PROGRESSION}|undefined)?.version ?? 'legacy';
-    const previous=this.db.prepare('SELECT opponent_team,trainer FROM battles WHERE run_id=? ORDER BY floor DESC, stage DESC LIMIT 3').all(runId) as {opponent_team:string;trainer:string|null}[];
+    const previous=recentEncounters(this.db,runId);
     const trainer=challenger?null:this.encounter(runId,floor);
     const organization=this.db.prepare('SELECT organization FROM run_villains WHERE run_id=?').get(runId) as {organization:string}|undefined;
     const campaign=this.db.prepare('SELECT defeated_battle_id FROM run_villain_campaigns WHERE run_id=?').get(runId) as {defeated_battle_id:string|null}|undefined;
@@ -408,8 +410,9 @@ export class TowerStore {
       if(total>66)for(const stat of statKeys)profile.evs[stat]=Math.floor(profile.evs[stat]*66/total);
     }
     if(signature?.rule==='tera' && !template)opponentProfiles[signature.species].teraType=(sample?.specialty ?? trainer?.boss.specialty ?? Showdown.Dex.species.get(signature.species).types[0]) as import('../data/tera').TeraType;
-    this.db.prepare(`INSERT INTO battles(id, run_id, floor, player_team, opponent_team, seed, engine_version, format, ai_version, status, reward, candidates, boss, stage,attempt)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, ?)`).run(id, runId, floor, packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band')), packTeam(opponents,opponentProfiles,Object.fromEntries(encounter.map(entry=>[entry.name,entry.item && (progression!=='legacy' || allowsRuleItem(rule,entry.item))?entry.item:''])),encounter.filter(p=>p.gigantamax).map(p=>p.name)), JSON.stringify(seed), engineVersion, FORMAT, progression==='legacy'?'tower-policy-v9':AI_VERSION, config.reward+(sample===eligible && event ? event.event.bonus : 0), JSON.stringify(opponents), trainer ? JSON.stringify(trainer.boss) : null,this.route(runId)?.pending_boss===floor?1:0,(this.db.prepare('SELECT COALESCE(MAX(attempt),-1)+1 AS n FROM battles WHERE run_id=? AND floor=? AND stage=?').get(runId,floor,this.route(runId)?.pending_boss===floor?1:0) as {n:number}).n);
+    this.db.prepare(`INSERT INTO battles(id, run_id, floor, player_team, opponent_team, seed, engine_version, format, ai_version, status, reward, candidates, boss, stage,attempt,encounter_order)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, (SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id, runId, floor, packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band')), packTeam(opponents,opponentProfiles,Object.fromEntries(encounter.map(entry=>[entry.name,entry.item && (progression!=='legacy' || allowsRuleItem(rule,entry.item))?entry.item:''])),encounter.filter(p=>p.gigantamax).map(p=>p.name)), JSON.stringify(seed), engineVersion, FORMAT, progression==='legacy'?'tower-policy-v9':AI_VERSION, config.reward+(sample===eligible && event ? event.event.bonus : 0), JSON.stringify(opponents), trainer ? JSON.stringify(trainer.boss) : null,this.route(runId)?.pending_boss===floor?1:0,0,runId);
+
     this.db.prepare('UPDATE battles SET rule=? WHERE id=?').run(rule,id);
     if(rankedChallenger?.mirror)this.db.prepare('UPDATE battles SET opponent_team=? WHERE id=?').run(rankedChallenger.mirror.opponentTeam,id);
     if(sample===eligible && event)this.db.prepare('UPDATE battles SET villain_event=? WHERE id=?').run(JSON.stringify(event.event),id);
@@ -683,6 +686,7 @@ export class TowerStore {
       } else if (replaced !== null || (swap!==undefined && swap!==null)) throw new BattleRequestError('영입하지 않으면 교체할 수 없습니다.', 400);
       this.db.prepare('INSERT INTO recruitments(battle_id,species,replaced,iv_gain,move_gain) VALUES (?, ?, ?, ?, ?)').run(battle.id, chosen, replaced,ivGain ? JSON.stringify(ivGain) : null,moveGain ? JSON.stringify(moveGain) : null);
       if(new RaidEvents(this.db).forBattle(battleId)){this.db.prepare("UPDATE runs SET state='select' WHERE id=?").run(run.id);return;}
+      this.db.prepare('INSERT INTO run_encounter_progress(run_id,cleared_count) VALUES (?,1) ON CONFLICT(run_id) DO UPDATE SET cleared_count=cleared_count+1').run(run.id);
       const route=this.route(run.id),theme=this.runTheme(run.id);
       if(route && run.floor%50===0 && (theme==='johto'||theme==='kanto') && route.pending_boss!==run.floor){
         this.db.prepare('UPDATE run_routes SET pending_boss=? WHERE run_id=?').run(run.floor,run.id);

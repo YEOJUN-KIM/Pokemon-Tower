@@ -13,7 +13,7 @@ export function finishChallengerBattle(store:TowerStore,id:string,winner='Player
  store.complete(id,log,view);return {log,view};
 }
 export function challengerFixture(path=':memory:',owner='owner',floor=2,candidateId?:string){
- const store=new TowerStore(path,max=>max===Object.values(eventDefinitions).reduce((n,e)=>n+e.weight,0)?100:0);store.ensurePlayer(owner);
+ const store=new TowerStore(path,()=>0,{'challenger-selection':eventDefinitions['challenger-selection']});store.ensurePlayer(owner);
  const first=store.start(owner,starters,'basic',{events:true}),run=store.battle(first).run_id;
  if(floor!==2){store.db.prepare('UPDATE runs SET floor=? WHERE id=?').run(floor-1,run);store.db.prepare('UPDATE battles SET floor=? WHERE id=?').run(floor-1,first);}
  finishChallengerBattle(store,first);store.recruit(owner,run,first,null,null);

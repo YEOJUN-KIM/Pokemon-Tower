@@ -50,7 +50,7 @@ export function addMirrorCandidate(db:DatabaseSync,eventId:string,runId:string,f
  const roll=random??encounterRandom(seed);
  if(roll()>=settings.mirrorCandidateChance)return candidates;
  // Recruitment receipts exist only for completed floor battles, never challengers.
- const source=db.prepare("SELECT b.id,b.player_team,b.rule,b.trainer_equipment FROM battles b JOIN recruitments r ON r.battle_id=b.id WHERE b.run_id=? AND b.floor=? AND b.stage=0 AND b.status='complete' ORDER BY b.attempt DESC LIMIT 1").get(runId,floor-1) as {id:string;player_team:string;rule:BattleRule;trainer_equipment:string|null}|undefined;
+ const source=db.prepare("SELECT b.id,b.player_team,b.rule,b.trainer_equipment FROM battles b JOIN recruitments r ON r.battle_id=b.id WHERE b.run_id=? AND b.floor=? AND b.stage=0 AND b.status='complete' ORDER BY b.encounter_order DESC,b.attempt DESC LIMIT 1").get(runId,floor-1) as {id:string;player_team:string;rule:BattleRule;trainer_equipment:string|null}|undefined;
  if(!source||source.rule!==rule)return candidates;
  const original=Showdown.Teams.unpack(source.player_team);
  if(!original||original.length!==3||new Set(original.map(p=>collectionSpecies(p.species))).size!==3)return candidates;

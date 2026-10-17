@@ -4,9 +4,10 @@ import {finishChallengerBattle} from './challenger-fixture';
 import {createRaidSnapshot,RaidEvents} from '../src/server/raid-events';
 import type {BattleView} from '../src/shared/contracts';
 import type {BattleLog} from '../src/battle/run';
+import {eventDefinitions} from '../src/data/run-events';
 
 export function raidFixture(path=':memory:',owner='raid-owner',bossId='garchomp',routeId?:string){
- const store=new TowerStore(path,max=>max===100?0:max-1);store.ensurePlayer(owner);
+ const store=new TowerStore(path,max=>max===100?0:max-1,{'raid-encounter':eventDefinitions['raid-encounter']});store.ensurePlayer(owner);
  const first=store.start(owner,starters,'basic',{events:true}),run=store.battle(first).run_id;
  finishChallengerBattle(store,first);store.recruit(owner,run,first,null,null);
  const event=store.view(owner).run!.event!;

@@ -56,7 +56,8 @@ CREATE TABLE IF NOT EXISTS battles (
   log TEXT, view TEXT, boss TEXT, trainer TEXT, upgrades TEXT NOT NULL DEFAULT '[]',
   stage INTEGER NOT NULL DEFAULT 0 CHECK(stage IN (0,1)),
   attempt INTEGER NOT NULL DEFAULT 0 CHECK(attempt>=0),
-  UNIQUE(run_id, floor, stage, attempt)
+  encounter_order INTEGER NOT NULL DEFAULT 0 CHECK(encounter_order>=0),
+  UNIQUE(run_id, encounter_order, stage, attempt)
 ) STRICT;
 CREATE TABLE IF NOT EXISTS actions (
   battle_id TEXT NOT NULL REFERENCES battles(id),
@@ -154,7 +155,8 @@ CREATE TABLE IF NOT EXISTS run_events(
  id TEXT PRIMARY KEY,run_id TEXT NOT NULL REFERENCES runs(id),after_floor INTEGER NOT NULL CHECK(after_floor>0),
  kind TEXT NOT NULL DEFAULT 'mystery-chest',choice_id TEXT,result_json TEXT,
  status TEXT NOT NULL CHECK(status IN ('choice','reward','complete')),reward_kind TEXT CHECK(reward_kind IN ('coins','egg-ticket')),
- amount INTEGER NOT NULL DEFAULT 0 CHECK(amount>=0),UNIQUE(run_id,after_floor),
+ amount INTEGER NOT NULL DEFAULT 0 CHECK(amount>=0),
+ encounter_order INTEGER NOT NULL DEFAULT 0 CHECK(encounter_order>=0),
  CHECK((result_json IS NOT NULL AND json_valid(result_json) AND reward_kind IS NULL AND amount=0 AND status!='choice') OR
  (result_json IS NULL AND ((reward_kind IS NULL AND amount=0 AND status!='reward') OR (reward_kind IS NOT NULL AND amount>0 AND status!='choice'))))
 ) STRICT;
@@ -172,5 +174,7 @@ CREATE TABLE IF NOT EXISTS reward_use_receipts(run_id TEXT NOT NULL REFERENCES r
 CREATE TABLE IF NOT EXISTS reward_egg_tickets(player_id TEXT NOT NULL REFERENCES players(id),kind TEXT NOT NULL CHECK(kind IN ('superRare','shiny')),quantity INTEGER NOT NULL CHECK(quantity>=0),PRIMARY KEY(player_id,kind)) STRICT;
 CREATE TABLE IF NOT EXISTS hidden_shop_events(event_id TEXT PRIMARY KEY REFERENCES run_events(id),snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json))) STRICT;
 CREATE TABLE IF NOT EXISTS raid_encounters(event_id TEXT PRIMARY KEY REFERENCES run_events(id),snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json)),battle_id TEXT REFERENCES battles(id)) STRICT;
-  PRAGMA user_version = 42;
+CREATE TABLE IF NOT EXISTS run_encounter_progress(run_id TEXT PRIMARY KEY REFERENCES runs(id),cleared_count INTEGER NOT NULL DEFAULT 0 CHECK(cleared_count>=0)) STRICT;
+CREATE TABLE IF NOT EXISTS teleport_events(event_id TEXT PRIMARY KEY REFERENCES run_events(id),segment INTEGER NOT NULL CHECK(segment IN (1,2)),origin_floor INTEGER NOT NULL,destination_floor INTEGER NOT NULL CHECK((segment=1 AND destination_floor BETWEEN 1 AND 50) OR (segment=2 AND destination_floor BETWEEN 51 AND 100))) STRICT;
+  PRAGMA user_version = 43;
 `;

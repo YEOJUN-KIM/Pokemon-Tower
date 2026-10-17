@@ -44,8 +44,8 @@ test('v25 battle migration preserves saved battle and action references',()=>{
     store.ensurePlayer('legacy');const id=store.start('legacy',starters),before=store.battle(id);
     store.db.prepare("INSERT INTO actions VALUES (?,1,'move 1')").run(id);
     const sql=(store.db.prepare("SELECT sql FROM sqlite_master WHERE name='battles'").get() as {sql:string}).sql;
-    const old=sql.replace('CREATE TABLE battles','CREATE TABLE old_battles').replace(/stage INTEGER NOT NULL DEFAULT 0 CHECK\(stage IN \(0,1\)\),\s*/,'').replace(/attempt INTEGER NOT NULL DEFAULT 0 CHECK\(attempt>=0\),\s*/,'').replace(/UNIQUE\(run_id, floor, stage(?:, attempt)?\)/,'UNIQUE(run_id, floor)');
-    const columns=(store.db.prepare('PRAGMA table_info(battles)').all() as {name:string}[]).filter(c=>!['stage','attempt'].includes(c.name)).map(c=>c.name).join(',');
+    const old=sql.replace(/encounter_order INTEGER NOT NULL DEFAULT 0 CHECK\(encounter_order>=0\),\s*/,'').replace('UNIQUE(run_id, encounter_order, stage, attempt)','UNIQUE(run_id, floor, stage, attempt)').replace('CREATE TABLE battles','CREATE TABLE old_battles').replace(/stage INTEGER NOT NULL DEFAULT 0 CHECK\(stage IN \(0,1\)\),\s*/,'').replace(/attempt INTEGER NOT NULL DEFAULT 0 CHECK\(attempt>=0\),\s*/,'').replace(/UNIQUE\(run_id, floor, stage(?:, attempt)?\)/,'UNIQUE(run_id, floor)');
+    const columns=(store.db.prepare('PRAGMA table_info(battles)').all() as {name:string}[]).filter(c=>!['stage','attempt','encounter_order'].includes(c.name)).map(c=>c.name).join(',');
     store.db.exec(`PRAGMA foreign_keys=OFF;${old};INSERT INTO old_battles(${columns}) SELECT ${columns} FROM battles;DROP TABLE battles;ALTER TABLE old_battles RENAME TO battles;PRAGMA user_version=25;`);
     store.db.prepare('DELETE FROM run_routes WHERE run_id=?').run(before.run_id);
     store.close();store=new TowerStore(path);

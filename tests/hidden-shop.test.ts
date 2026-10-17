@@ -55,7 +55,7 @@ test('purchased vitamin and TM use existing reward inventory and keep vitamin ca
 });
 
 test('event selection uses the shared encounter roll, cooldown and checkpoint exclusion; v1 remains unchanged',()=>{
- const total=Object.values(eventDefinitions).reduce((n,d)=>n+d.weight,0),hiddenEnd=total-eventDefinitions['raid-encounter'].weight,roll=(max:number)=>max===100?0:hiddenEnd-1;
+ const total=Object.values(eventDefinitions).reduce((n,d)=>n+d.weight,0),hiddenEnd=total-eventDefinitions['raid-encounter'].weight-eventDefinitions['random-teleport'].weight,roll=(max:number)=>max===100?0:hiddenEnd-1;
  assert.equal(hiddenEnd,132);assert.equal(selectRunEvent(1,null,roll,undefined,2),'hidden-shop');
  assert.equal(selectRunEvent(5,null,roll,undefined,2),null);assert.equal(selectRunEvent(3,1,roll,undefined,2),null);
  assert.equal(selectRunEvent(1,null,()=>99,undefined,2),null);
@@ -63,7 +63,8 @@ test('event selection uses the shared encounter roll, cooldown and checkpoint ex
  const f=hiddenShopFixture();try{
   f.store.chooseEvent(f.owner,f.run,f.eventId,'leave');
   f.store.db.prepare('INSERT INTO run_event_rules VALUES (?,2)').run(f.run);
-  transaction(f.store.db,()=>new RunEvents(f.store.db,roll).encounter(f.run,4));
+  f.store.db.prepare('INSERT INTO run_encounter_progress VALUES (?,4) ON CONFLICT(run_id) DO UPDATE SET cleared_count=4').run(f.run);
+  transaction(f.store.db,()=>new RunEvents(f.store.db,roll,{...eventDefinitions}).encounter(f.run,4));
   const event=f.store.view(f.owner).run!.event!;assert.equal(event.kind,'hidden-shop');assert.ok(event.hiddenShop!.offers.length>=4);assert.equal(f.store.view(f.owner).run!.floor,2);
  }finally{f.store.close();}
 });
@@ -181,6 +182,6 @@ test('schema 39 migration adds storage while preserving old event snapshots',()=
  try{
   store.chooseEvent(f.owner,f.run,f.eventId,'leave');const old=store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId);
   store.db.exec('DROP TABLE hidden_shop_events; PRAGMA user_version=39');store.close();store=new TowerStore(path);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,42);assert.deepEqual(store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId),old);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,43);assert.deepEqual(store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId),old);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
  }finally{store.close();}
 });

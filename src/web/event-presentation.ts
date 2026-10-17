@@ -1,9 +1,10 @@
 import type {RunEventKind} from '../data/run-events';
 
-type EventPresentation={artwork:'chest'}|{artwork:'raid'}|{artwork:'trainer';sprite:string;alt:string};
+type EventPresentation={artwork:'chest'}|{artwork:'teleport'}|{artwork:'raid'}|{artwork:'trainer';sprite:string;alt:string};
 
 // React components stay in web; content and game rules never import this registry.
 export const eventPresentation={
+ 'random-teleport':{artwork:'teleport'},
  'raid-encounter':{artwork:'raid'},
  'challenger-selection':{artwork:'trainer',sprite:'acetrainer-gen4',alt:'도전자'},
  'mystery-chest':{artwork:'chest'},

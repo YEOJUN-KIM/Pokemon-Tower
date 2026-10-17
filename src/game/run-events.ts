@@ -1,14 +1,16 @@
+import {teleportSegment} from '../data/teleport';
 import type {RewardOption,WeightedRewardOption} from '../data/rewards';
 import {eventDefinitions,eventDefinition,mysteryChest,type EventReward,type EventChoice,type RunEventRegistry} from '../data/run-events';
 
 export type Roll=(max:number)=>number;
 
-export function selectRunEvent(afterFloor:number,previousFloor:number|null,roll:Roll,registry:RunEventRegistry=eventDefinitions,rulesVersion=1):string|null {
+export function selectRunEvent(afterFloor:number,previousOrder:number|null,roll:Roll,registry:RunEventRegistry=eventDefinitions,rulesVersion=1,order=afterFloor,eligible:(kind:string)=>boolean=()=>true):string|null {
   if(afterFloor%5===0)return null;
-  if(previousFloor!==null && afterFloor-previousFloor<=mysteryChest.cooldownFloors)return null;
+  if(previousOrder!==null && order-previousOrder<=mysteryChest.cooldownFloors)return null;
   if(roll(100)>=mysteryChest.encounterPercent)return null;
-  const eventKinds=Object.keys(registry).filter(kind=>(registry[kind].minFloor??1)<=afterFloor && (registry[kind].minRulesVersion??1)<=rulesVersion);
+  const eventKinds=Object.keys(registry).filter(kind=>eligible(kind)&&(kind!=='random-teleport'||teleportSegment(afterFloor)!==null)&&(registry[kind].minFloor??1)<=afterFloor && (registry[kind].minRulesVersion??1)<=rulesVersion);
   const total=eventKinds.reduce((sum,kind)=>sum+registry[kind].weight,0);
+  if(total<=0)return null;
   let draw=roll(total);
   return eventKinds.find(kind=>{draw-=registry[kind].weight;return draw<0;})!;
 }

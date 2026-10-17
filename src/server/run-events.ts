@@ -1,3 +1,4 @@
+import {createTeleportSnapshot,teleportSegment} from '../data/teleport';
 import {ChallengerEvents} from './challenger-events';
 import {RaidEvents} from './raid-events';
 import {raidEventTestSettings} from '../data/raids';
@@ -13,7 +14,7 @@ import {BattleRequestError} from './request-error';
 import type {TowerProgression} from '../data/tower-progression';
 import type {BattleRule} from '../data/run-rules';
 
-type EventRow={id:string;kind:string;choice_id:string|null;result_json:string|null;run_id:string;after_floor:number;status:'choice'|'reward'|'complete';reward_kind:EventReward['kind']|null;amount:number};
+type EventRow={id:string;kind:string;choice_id:string|null;result_json:string|null;run_id:string;after_floor:number;encounter_order:number;status:'choice'|'reward'|'complete';reward_kind:EventReward['kind']|null;amount:number};
 
 // Mutations run inside TowerStore's transaction, including reward payment and receipt.
 export class RunEvents {
@@ -23,11 +24,16 @@ export class RunEvents {
   if(!this.db.prepare('SELECT 1 FROM run_event_rules WHERE run_id=?').get(runId))return;
   const forceRaid=this.registry===eventDefinitions&&raidEventTestSettings.enabled&&afterFloor+1>=raidEventTestSettings.startFloor;
   if(!forceRaid&&afterFloor%5===0)return;
-  const previous=this.db.prepare('SELECT MAX(after_floor) AS floor FROM run_events WHERE run_id=?').get(runId) as {floor:number|null};
-  const kind=forceRaid?'raid-encounter':selectRunEvent(afterFloor,previous.floor,this.roll,this.registry,this.rulesVersion(runId));
+  if(this.view(runId))return;
+  const order=(this.db.prepare('SELECT cleared_count FROM run_encounter_progress WHERE run_id=?').get(runId) as {cleared_count:number}|undefined)?.cleared_count??0;
+  const previous=this.db.prepare('SELECT MAX(encounter_order) AS position FROM run_events WHERE run_id=?').get(runId) as {position:number|null};
+  const segment=teleportSegment(afterFloor);
+  const eligible=(kind:string)=>kind!=='random-teleport'||(segment!==null&&!this.db.prepare('SELECT 1 FROM teleport_events t JOIN run_events e ON e.id=t.event_id WHERE e.run_id=? AND t.segment=?').get(runId,segment));
+  const kind=forceRaid?'raid-encounter':selectRunEvent(afterFloor,previous.position,this.roll,this.registry,this.rulesVersion(runId),order,eligible);
   if(!kind)return;
   const eventId=randomUUID();
-  this.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status) VALUES (?,?,?,?,'choice')").run(eventId,runId,afterFloor,kind);
+  this.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status,encounter_order) VALUES (?,?,?,?,'choice',?)").run(eventId,runId,afterFloor,kind,order);
+  if(kind==='random-teleport'){const snapshot=createTeleportSnapshot(afterFloor,this.roll);this.db.prepare('INSERT INTO teleport_events VALUES (?,?,?,?)').run(eventId,snapshot.segment,snapshot.originFloor,snapshot.destinationFloor);}
   if(kind==='hidden-shop')new HiddenShop(this.db).create(eventId,runId);
   if(kind==='raid-encounter')new RaidEvents(this.db).create(eventId,runId,afterFloor+1);
   if(kind==='challenger-selection'){
@@ -39,9 +45,9 @@ export class RunEvents {
  }
  private rulesVersion(runId:string){return (this.db.prepare('SELECT version FROM run_event_rules WHERE run_id=?').get(runId) as {version:number}|undefined)?.version??1;}
  view(runId:string):RunEventView|null{
-  const row=this.db.prepare("SELECT * FROM run_events WHERE run_id=? AND status!='complete' ORDER BY after_floor DESC LIMIT 1").get(runId) as EventRow|undefined;
+  const row=this.db.prepare("SELECT * FROM run_events WHERE run_id=? AND status!='complete' ORDER BY encounter_order DESC LIMIT 1").get(runId) as EventRow|undefined;
   if(row)this.validateKind(row.kind);
-  return row?{id:row.id,kind:row.kind,choiceId:row.choice_id,rulesVersion:this.rulesVersion(runId),...(row.result_json?{result:JSON.parse(row.result_json) as RewardResult}:{}),...(row.kind==='hidden-shop'?{hiddenShop:new HiddenShop(this.db).view(row.id)}:{}),afterFloor:row.after_floor,phase:row.status as RunEventView['phase'],...new ChallengerEvents(this.db).view(row.id),...(row.kind==='raid-encounter'?new RaidEvents(this.db).view(row.id):{}),reward:row.reward_kind?{kind:row.reward_kind,amount:row.amount}:null}:null;
+  return row?{id:row.id,kind:row.kind,choiceId:row.choice_id,rulesVersion:this.rulesVersion(runId),...(row.kind==='random-teleport'&&row.status!=='choice'&&row.choice_id==='teleport'?{teleport:{destinationFloor:this.teleport(row.id).destination_floor}}:{}),...(row.result_json?{result:JSON.parse(row.result_json) as RewardResult}:{}),...(row.kind==='hidden-shop'?{hiddenShop:new HiddenShop(this.db).view(row.id)}:{}),afterFloor:row.after_floor,phase:row.status as RunEventView['phase'],...new ChallengerEvents(this.db).view(row.id),...(row.kind==='raid-encounter'?new RaidEvents(this.db).view(row.id):{}),reward:row.reward_kind?{kind:row.reward_kind,amount:row.amount}:null}:null;
  }
  earnedCoins(runId:string){
   const rows=this.db.prepare('SELECT reward_kind,amount,result_json FROM run_events WHERE run_id=?').all(runId) as EventRow[];
@@ -54,10 +60,13 @@ export class RunEvents {
   const event=this.db.prepare('SELECT * FROM run_events WHERE id=? AND run_id=?').get(eventId,runId) as EventRow|undefined;
   if(!event)throw new BattleRequestError('이벤트를 찾을 수 없습니다.',404);
   const specialState=event.kind==='raid-encounter'?['battle','lost','recruit'].includes(run.state):event.kind==='challenger-selection'&&['battle','lost'].includes(run.state);
-  if((run.state!=='select'&&!specialState) || run.floor!==event.after_floor+1)throw new BattleRequestError('이미 지나간 이벤트입니다.',409);
+  const expectedFloor=event.kind==='random-teleport'&&event.choice_id==='teleport'?this.teleport(event.id).destination_floor:event.after_floor+1;
+  const order=(this.db.prepare('SELECT cleared_count FROM run_encounter_progress WHERE run_id=?').get(runId) as {cleared_count:number}|undefined)?.cleared_count??0;
+  if((run.state!=='select'&&!specialState) || run.floor!==expectedFloor || event.kind==='random-teleport'&&event.encounter_order!==order)throw new BattleRequestError('이미 지나간 이벤트입니다.',409);
   this.validateKind(event.kind);
   return event;
  }
+ private teleport(eventId:string){return this.db.prepare('SELECT destination_floor FROM teleport_events WHERE event_id=?').get(eventId) as {destination_floor:number};}
  private validateKind(kind:string){
   if(!isRunEventKind(kind,this.registry))throw new BattleRequestError('알 수 없는 이벤트입니다. 이벤트 정의를 확인해 주세요.',409);
  }
@@ -72,6 +81,12 @@ export class RunEvents {
   if(row.choice_id)throw new BattleRequestError('이미 도전자를 선택했습니다.',409);
   if(choice.outcome==='leave'){
    this.db.prepare("UPDATE run_events SET status='complete',choice_id=? WHERE id=?").run(choice.id,eventId);return;
+  }
+  if(choice.outcome==='teleport'){
+   const destination=this.teleport(eventId).destination_floor;
+   this.db.prepare("UPDATE runs SET floor=? WHERE id=?").run(destination,runId);
+   this.db.prepare("UPDATE run_events SET status='reward',choice_id=?,result_json=? WHERE id=?").run(choice.id,JSON.stringify({id:'teleport',title:destination+'층에 도착했다!',tone:'neutral',entries:[]}),eventId);
+   return;
   }
   if(choice.outcome==='challenger'||choice.outcome==='raid')throw new BattleRequestError('이벤트 배틀을 시작해야 합니다.',409);
   if(choice.cost && !spendCoins(this.db,owner,choice.cost))throw new BattleRequestError(`${choice.cost}코인이 필요합니다.`,409);

@@ -52,3 +52,8 @@
 .artwork[data-reward-tone=neutral] .glow,.artwork[data-reward-tone=loss] .glow {background:none;animation:none;}
 :global(body) :where(.scope).bottom[data-challenger-selection=true] :global(.message-heading) {display:none;}
 :global(body) :where(.scope).bottom[data-challenger-selection=true] :global(.game-dialogue.current-messages) {min-height:0;flex:0 0 auto;margin:0;padding:0 4px;}
+
+.portal {font-size:140px;line-height:1;color:#b4a2ff;text-shadow:0 0 24px #8c61ff;}
+.artwork[data-teleport=true][data-opened=true] .object {animation:teleport-arrival 1s ease-out both;}
+@keyframes teleport-arrival {0% {opacity:0;transform:scale(.4) rotate(-45deg);filter:brightness(4);} 55% {opacity:1;filter:brightness(2);} 100% {transform:scale(1);filter:brightness(1);}}
+@media(prefers-reduced-motion:reduce) {.artwork[data-teleport=true][data-opened=true] .object {animation:none;}}

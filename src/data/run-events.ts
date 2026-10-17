@@ -1,3 +1,4 @@
+import {teleportEventSettings} from './teleport';
 import {challengerSettings,type ChallengerCandidate} from './challengers';
 import {raidEventSettings,type RaidEventView} from './raids';
 import {hiddenShopEventSettings,type HiddenShopView} from './hidden-shop';
@@ -9,6 +10,7 @@ export const merchantTicketPrice=300;
 export type WeightedEventReward={weight:number;reward:EventReward};
 export type EventChoice={id:string;label:string} & (
  | {outcome:'leave'}
+ | {outcome:'teleport'}
  | {outcome:'raid'}
  | {outcome:'challenger';challengerId:string}
  | {outcome:'reward-result';cost:number;results:readonly WeightedRewardOption[]}
@@ -26,6 +28,7 @@ export const eventDefinitions={
  'challenger-selection':{title:'도전자 선택전',summary:'상대와 보상을 살펴보고 도전할 트레이너를 고르자.',intro:'세 명의 도전자가 승부를 기다리고 있다. 돌아가도 괜찮다.',weight:challengerSettings.weight,minFloor:challengerSettings.minFloor,minRulesVersion:2,choices:[{id:'back',label:'돌아간다',outcome:'leave'}]},
  'hidden-shop':{title:'수상한 상인',summary:'희귀한 상품 중 무엇을 가져갈까? 구매 한도와 결제 재화를 확인하자.',intro:'“흔히 볼 수 없는 물건들이야.” 상인이 조용히 진열대를 펼쳤다.',weight:hiddenShopEventSettings.weight,minFloor:hiddenShopEventSettings.minFloor,minRulesVersion:hiddenShopEventSettings.minRulesVersion,choices:[{id:'leave',label:'나가기',outcome:'leave'}]},
  'raid-encounter':{title:'정체불명의 강적',summary:'강한 기척이 느껴진다.',intro:'강한 기척이 느껴진다.',...raidEventSettings,choices:[{id:'challenge',label:'도전한다',outcome:'raid'},leave]},
+ 'random-teleport':{title:'수상한 순간이동 장치',summary:'공간이 일그러지고 있다.',intro:'공간이 일그러지고 있다. 어디로 연결되어 있는지는 알 수 없다.',...teleportEventSettings,choices:[{id:'teleport',label:'순간이동한다',outcome:'teleport'},{id:'skip',label:'이용하지 않는다',outcome:'leave'}]},
 } as const satisfies RunEventRegistry;
 // Initial v2 tuning only. The original table above remains frozen for v1 runs.
 export const mysteryChestResults=[
@@ -53,5 +56,4 @@ export function eventDefinition(kind:string,registry:RunEventRegistry=eventDefin
  return isRunEventKind(kind,registry)?registry[kind]:undefined;
 }
 // Event IDs and choice IDs are content strings, validated against the registry on the server.
-export type RunEventView={id:string;kind:string;choiceId?:string|null;rulesVersion?:number;result?:RewardResult;afterFloor:number;raid?:RaidEventView;challengers?:readonly ChallengerCandidate[];hiddenShop?:HiddenShopView;phase:'choice'|'battle'|'reward';reward:EventReward|null};
-
+export type RunEventView={id:string;kind:string;choiceId?:string|null;rulesVersion?:number;teleport?:{destinationFloor:number};result?:RewardResult;afterFloor:number;raid?:RaidEventView;challengers?:readonly ChallengerCandidate[];hiddenShop?:HiddenShopView;phase:'choice'|'battle'|'reward';reward:EventReward|null};

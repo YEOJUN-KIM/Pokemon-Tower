@@ -12,9 +12,10 @@ import {migrateRunBag} from './run-bag-migration';
 export function initializeTowerDatabase(db:DatabaseSync,repairArchivedOwnership:()=>void,repairFormHeldItems:()=>void):void {
     db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
     const version = db.prepare('PRAGMA user_version').get() as {user_version: number};
-    if (version.user_version > 42) throw new Error('Unsupported database schema');
+    const eventHadOrder=(db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(c=>c.name==='encounter_order');
+    if (version.user_version > 43) throw new Error('Unsupported database schema');
     // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
-    if(version.user_version<28)db.exec('PRAGMA foreign_keys=OFF');
+    if(version.user_version<43)db.exec('PRAGMA foreign_keys=OFF');
     try {transaction(db,() => {
       db.exec(schema);
       if(!(db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(column=>column.name==='kind'))db.exec("ALTER TABLE run_events ADD COLUMN kind TEXT NOT NULL DEFAULT 'mystery-chest' CHECK(kind IN ('mystery-chest','breeder-gift','traveling-merchant'))");
@@ -126,6 +127,32 @@ export function initializeTowerDatabase(db:DatabaseSync,repairArchivedOwnership:
         db.exec(`INSERT INTO battles_retry_migration(${names}) SELECT ${names} FROM battles; DROP TABLE battles; ALTER TABLE battles_retry_migration RENAME TO battles;`);
         if(db.prepare('PRAGMA foreign_key_check').all().length)throw Error('Retry migration failed foreign key validation');
       }
+      // Rebuild parents with foreign keys disabled; preserve every dependent receipt by ID.
+      if(!(db.prepare('PRAGMA table_info(battles)').all() as {name:string}[]).some(c=>c.name==='encounter_order')){
+        const sql=(db.prepare("SELECT sql FROM sqlite_master WHERE name='battles'").get() as {sql:string}).sql;
+        db.exec(sql.replace(/^CREATE TABLE(?: IF NOT EXISTS)?\s+["`]?battles["`]?/i,'CREATE TABLE battles_visit_migration').replace(/UNIQUE\s*\(\s*run_id\s*,\s*floor\s*,\s*stage\s*,\s*attempt\s*\)/i,'encounter_order INTEGER NOT NULL DEFAULT 0 CHECK(encounter_order>=0), UNIQUE(run_id, encounter_order, stage, attempt)'));
+        const names=(db.prepare('PRAGMA table_info(battles)').all() as {name:string}[]).map(c=>'"'+c.name+'"').join(',');
+        // Legacy climbs were monotonic. Seed/team identify exact retries while
+        // distinguishing a challenger/raid and the normal battle on that floor.
+        db.exec(`INSERT INTO battles_visit_migration(${names},encounter_order)
+          SELECT ${names},dense_rank() OVER(PARTITION BY run_id ORDER BY floor,stage,first_encounter)
+          FROM (SELECT *,MIN(rowid) OVER(PARTITION BY run_id,floor,stage,seed,opponent_team) AS first_encounter FROM battles);
+          DROP TABLE battles; ALTER TABLE battles_visit_migration RENAME TO battles;`);
+      }
+      const eventSQL=(db.prepare("SELECT sql FROM sqlite_master WHERE name='run_events'").get() as {sql:string}).sql;
+      if(/UNIQUE\s*\(\s*run_id\s*,\s*after_floor\s*\)/i.test(eventSQL)){
+        const definition=schema.match(/CREATE TABLE IF NOT EXISTS run_events\s*\([\s\S]*?\) STRICT;/)![0];
+        db.exec(definition.replace('IF NOT EXISTS run_events','run_events_visit_migration'));
+        db.exec(`INSERT INTO run_events_visit_migration(id,run_id,after_floor,kind,choice_id,result_json,status,reward_kind,amount,encounter_order)
+          SELECT id,run_id,after_floor,kind,choice_id,result_json,status,reward_kind,amount,after_floor FROM run_events;
+          DROP TABLE run_events; ALTER TABLE run_events_visit_migration RENAME TO run_events;
+          CREATE UNIQUE INDEX one_pending_run_event ON run_events(run_id) WHERE status!='complete';`);
+      }
+      if(version.user_version<43){
+        db.exec('INSERT OR IGNORE INTO run_encounter_progress(run_id,cleared_count) SELECT id,MAX(0,floor-1) FROM runs');
+        if(!eventHadOrder)db.exec('UPDATE run_events SET encounter_order=after_floor WHERE encounter_order=0');
+      }
+      if(db.prepare('PRAGMA foreign_key_check').all().length)throw Error('Encounter migration failed foreign key validation');
       repairArchivedOwnership();
       repairFormHeldItems();
       if(version.user_version<41)migrateRunBag(db);

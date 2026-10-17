@@ -71,6 +71,6 @@ test('v36 migration preserves selected form loadout, shared stats and active bat
   store.db.exec('DROP TABLE pokemon_form_training; PRAGMA user_version=36');store.close();store=new TowerStore(path);
   assert.deepEqual(entry(store,'migration').profile,before);assert.deepEqual(store.battle(row.id),packed);assert.equal(store.db.prepare('SELECT profiles FROM runs WHERE id=?').get(row.run_id)!.profiles,runProfiles);
   assert.deepEqual(store.history(row.id),[]);assert.equal(store.db.prepare('SELECT COUNT(*) AS n FROM pokemon_form_training WHERE player_id=?').get('migration')!.n,1);
-  store.close();store=new TowerStore(path);assert.deepEqual(entry(store,'migration').profile,before);assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,40);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
+  store.close();store=new TowerStore(path);assert.deepEqual(entry(store,'migration').profile,before);assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,41);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
  }finally{store.close();}
 });

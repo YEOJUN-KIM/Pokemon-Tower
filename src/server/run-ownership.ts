@@ -1,0 +1,6 @@
+import type {DatabaseSync} from 'node:sqlite';
+export function ownsRunItem(db:DatabaseSync,runId:string,item:string,ignoreRewardId=''){
+ return !!db.prepare('SELECT 1 FROM run_item_bag WHERE run_id=? AND item=? AND quantity>0 UNION ALL SELECT 1 FROM run_held_items WHERE run_id=? AND item=? UNION ALL SELECT 1 FROM run_trainer_equipment WHERE run_id=? AND item=?').get(runId,item,runId,item,runId,item)||!!db.prepare("SELECT 1 FROM run_reward_inventory WHERE run_id=? AND id<>? AND quantity>0 AND json_extract(effect_json,'$.kind')='item-exchange' AND json_array_length(json_extract(effect_json,'$.items'))=1 AND json_extract(effect_json,'$.items[0]')=?").get(runId,ignoreRewardId,item);
+}
+export function ownsMachine(db:DatabaseSync,runId:string,move:string){return !!db.prepare("SELECT 1 FROM run_reward_inventory WHERE run_id=? AND quantity>0 AND json_extract(effect_json,'$.kind')='machine' AND json_extract(effect_json,'$.move')=?").get(runId,move);}
+export function runMachines(db:DatabaseSync,runId:string){return (db.prepare("SELECT DISTINCT json_extract(effect_json,'$.move') AS move FROM run_reward_inventory WHERE run_id=? AND quantity>0 AND json_extract(effect_json,'$.kind')='machine'").all(runId) as {move:string}[]).map(row=>row.move);}

@@ -1,3 +1,4 @@
+import {ownsMachine} from '../src/server/run-ownership';
 import {useVitaminReward,vitaminBonus} from './reward-inventory-fixture';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
@@ -9,7 +10,7 @@ import {DamagePolicy} from '../src/battle/policy';
 function setup(){const store=new TowerStore(':memory:');store.ensurePlayer('p');const id=store.battle(store.start('p',starters)).run_id;store.db.prepare("UPDATE runs SET total_floors=50,floor=6,state='select' WHERE id=?").run(id);store.db.prepare('UPDATE players SET coins=20000 WHERE id=?').run('p');return {store,id};}
 test('rerolls replace entire offers, isolate costs, preserve purchases and reject stale or duplicate payment',()=>{const {store,id}=setup();try{
  const before=store.view('p').run!,offer=before.machineShop!.offers[0];store.purchaseMachine('p',id,6,offer.move,offer.targets[0]);const coins=store.view('p').coins;
- store.rerollShop('p',id,6,'machines',0);const after=store.view('p');assert.equal(after.coins,coins);assert.equal(after.run!.shopRerolls!.machines.count,1);assert.equal(after.run!.shopRerolls!.machines.price,0);assert.equal(after.run!.shopRerolls!.items.price,0);assert.ok(after.run!.machineShop!.offers.every(x=>!x.purchased));assert.ok(store.trainingCollection('p').find(x=>x.species===offer.targets[0])!.unlockedMoves.includes(offer.move));assert.deepEqual(after.run!.vitaminShop,before.vitaminShop);
+ store.rerollShop('p',id,6,'machines',0);const after=store.view('p');assert.equal(after.coins,coins);assert.equal(after.run!.shopRerolls!.machines.count,1);assert.equal(after.run!.shopRerolls!.machines.price,0);assert.equal(after.run!.shopRerolls!.items.price,0);assert.ok(after.run!.machineShop!.offers.every(x=>!x.purchased));assert.ok(ownsMachine(store.db,id,offer.move));assert.ok(after.run!.machineShop!.offers.every(o=>o.move!==offer.move));assert.deepEqual(after.run!.vitaminShop,before.vitaminShop);
  assert.throws(()=>store.rerollShop('p',id,6,'machines',0),/변경/);assert.equal(store.view('p').coins,after.coins);assert.throws(()=>store.purchaseMachine('p',id,6,after.run!.machineShop!.offers[0].move,after.run!.machineShop!.offers[0].targets[0],null,0),/변경/);
  store.rerollShop('p',id,6,'items',0);assert.equal(store.view('p').coins,after.coins);assert.throws(()=>store.rerollShop('p',id,6,'vitamins',0),/도구/);store.db.prepare('UPDATE players SET coins=0 WHERE id=?').run('p');const saved=store.view('p').run!.itemOffers;assert.throws(()=>store.rerollShop('p',id,6,'items',1),/리롤/);assert.deepEqual(store.view('p').run!.itemOffers,saved);
 }finally{store.close();}});

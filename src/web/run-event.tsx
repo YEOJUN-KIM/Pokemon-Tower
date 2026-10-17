@@ -1,6 +1,6 @@
 'use client';
 import {ChallengerCandidates,ChallengerDetail} from './challenger-candidates';
-import {HiddenShop} from './hidden-shop';
+import {HiddenShop,HiddenShopDetail} from './hidden-shop';
 import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {eventDefinition,type EventChoice,type RunEventView} from '../data/run-events';
 import {getEventPresentation} from './event-presentation';
@@ -30,8 +30,8 @@ export function eventDialogue(event:RunEventView){
  return choice?.outcome==='reward'?choice.message.replaceAll('{reward}',name).replaceAll('{detail}',reward?.kind==='coins'?'타워 코인에 더해졌다.':'알 뽑기에서 사용할 수 있다.'):name;
 }
 
-export function RunEventScene({event,busy=false,challengerId,coins=0,growthPoints=0,onPurchase=()=>{}}:{event:RunEventView;busy?:boolean;challengerId?:string;coins?:number;growthPoints?:number;onPurchase?:(id:string)=>void}){
- if(event.hiddenShop)return <HiddenShop shop={event.hiddenShop} coins={coins} growthPoints={growthPoints} busy={busy} onPurchase={onPurchase}/>;
+export function RunEventScene({event,busy=false,challengerId,coins=0,growthPoints=0,shopOfferId,onShopFocus=()=>{}}:{event:RunEventView;busy?:boolean;challengerId?:string;coins?:number;growthPoints?:number;shopOfferId?:string;onShopFocus?:(id:string)=>void}){
+ if(event.hiddenShop)return <HiddenShop shop={event.hiddenShop} coins={coins} growthPoints={growthPoints} busy={busy} selectedId={shopOfferId} onFocus={onShopFocus}/>;
  if(event.challengers && event.phase==='choice')return <ChallengerDetail candidate={event.challengers.find(candidate=>candidate.id===(challengerId??event.challengers?.[0]?.id))}/>;
  const opened=event.phase==='reward',reward=event.reward,definition=eventDefinition(event.kind,undefined,event.rulesVersion),presentation=getEventPresentation(event.kind);
  if(!definition || !presentation)return null;
@@ -48,7 +48,7 @@ export function RunEventScene({event,busy=false,challengerId,coins=0,growthPoint
  </aside>}</>;
 }
 
-export function RunEventPanel({event,runId,busy,selecting,onChoose,submit,challengerId,onChallengerFocus=()=>{}}:{event:RunEventView;runId:string;busy:boolean;selecting:boolean;onChoose:()=>void;submit:(body:Record<string,unknown>)=>Promise<void>;challengerId?:string;onChallengerFocus?:(id:string)=>void}){
+export function RunEventPanel({event,runId,busy,selecting,onChoose,submit,challengerId,onChallengerFocus=()=>{},shopOfferId,coins=0,growthPoints=0,onHiddenPurchase,bagButton}:{event:RunEventView;runId:string;busy:boolean;selecting:boolean;onChoose:()=>void;submit:(body:Record<string,unknown>)=>Promise<void>;challengerId?:string;onChallengerFocus?:(id:string)=>void;shopOfferId?:string;coins?:number;growthPoints?:number;onHiddenPurchase?:(id:string)=>void;bagButton?:import('react').ReactNode}){
  const mode=event.phase==='reward'?'reward':selecting?'choices':'intro';
  const [revealed,setRevealed]=useState<string|null>(null);
  useEffect(()=>{
@@ -56,7 +56,7 @@ export function RunEventPanel({event,runId,busy,selecting,onChoose,submit,challe
   const timer=setTimeout(()=>setRevealed(event.id),window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:rewardRevealDelay);
   return()=>clearTimeout(timer);
  },[event.id,mode,!!event.result]);
- if(event.hiddenShop)return <section className={`${styles.scope} ${styles.bottom} battle-messages`} aria-label="히든상점 안내"><GameDialogue text="타워 코인은 이번 도전의 재화, 성장 포인트는 도전 후에도 남는 재화입니다. 원하는 상품만 구매하고 나갈 수 있습니다." label="이벤트 안내"/><div className={`${styles.scope} ${styles.actions} event-choices`}><button className={styles.choice} data-initial-focus disabled={busy} onClick={()=>void submit({type:'event-choice',runId,eventId:event.id,choice:'leave'})}>나가기</button></div></section>;
+ if(event.hiddenShop)return <HiddenShopDetail shop={event.hiddenShop} selectedId={shopOfferId} coins={coins} growthPoints={growthPoints} busy={busy} bagButton={bagButton} onPurchase={productId=>onHiddenPurchase?onHiddenPurchase(productId):void submit({type:'hidden-shop-purchase',runId,eventId:event.id,productId})} onLeave={()=>void submit({type:'event-choice',runId,eventId:event.id,choice:'leave'})}/>;
  return <><section className={`${styles.scope} ${styles.bottom} battle-messages`} data-event-step={mode} data-challenger-selection={!!event.challengers&&mode!=='reward'} aria-label="이벤트 상황">
   <div className="message-heading"><span><i className="record-dot"/>이벤트</span><span>{mode==='choices'?'어떻게 할까요?':`${event.afterFloor}층을 지나던 길`}</span></div>
   {event.challengers && mode!=='reward'?<><GameDialogue text="도전할 트레이너를 선택하세요." label="이벤트 안내"/><ChallengerCandidates candidates={event.challengers} selectedId={challengerId??event.challengers[0]?.id} busy={busy} onFocus={onChallengerFocus} onConfirm={choice=>void submit({type:'event-choice',runId,eventId:event.id,choice})}/></>:mode==='reward'&&event.result?<GameDialogue text={event.challengers?"승리했다! 전투 보상을 확인하자.":"상자를 열었다. 결과를 확인해 보자."} label="이벤트 안내"/>:<>

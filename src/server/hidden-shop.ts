@@ -10,6 +10,7 @@ import {trainerEquipmentKeys} from '../data/trainer-equipment';
 import {allowsRuleItem,type BattleRule} from '../data/run-rules';
 import {spendCoins} from './player-wallet';
 import {grantRunItem} from './inventory-grants';
+import {ownsRunItem,ownsMachine} from './run-ownership';
 import {applyRewardOption} from './rewards';
 import {BattleRequestError} from './request-error';
 
@@ -23,11 +24,9 @@ export function hiddenShopProducts(db:DatabaseSync,runId:string):HiddenShopProdu
    products.push({id:productId,name,category,quantity,icon:image,description,allowedCurrencies:override?.allowedCurrencies??pool[category].allowedCurrencies,prices:override?.prices??pool[category].prices,effect:{...effect,...('amount' in effect?{amount:quantity}:{})}});
   }
  };
- for(const stat of statKeys)add('vitamin',`vitamin-${stat}`,vitamins[stat].name,vitamins[stat].icon,'보상 보관함에 보관 · 포켓몬당 영양제 총 3개 제한',{kind:'vitamin',stat,amount:1});
- const reserved=(db.prepare('SELECT effect_json FROM run_reward_inventory WHERE run_id=? AND quantity>0').all(runId) as {effect_json:string}[]).flatMap(row=>{const effect=JSON.parse(row.effect_json);return effect.kind==='item-exchange'&&effect.items.length===1?effect.items:[];});
- for(const item of epicRewardItems.filter(item=>allowsRuleItem(rule,item)&&!reserved.includes(item)&&!db.prepare('SELECT 1 FROM run_item_bag WHERE run_id=? AND item=? AND quantity>0').get(runId,item)&&!db.prepare('SELECT 1 FROM run_held_items WHERE run_id=? AND item=?').get(runId,item)))add('held-item',`item-${item}`,itemName(item),itemIcon(item),heldItems[item].description,{kind:'item-exchange',items:[item],amount:1,fallbackCoins:0});
- const storedMoves=(db.prepare('SELECT effect_json FROM run_reward_inventory WHERE run_id=? AND quantity>0').all(runId) as {effect_json:string}[]).flatMap(row=>{const effect=JSON.parse(row.effect_json);return effect.kind==='machine'?[effect.move]:[];});
- for(const move of eligibleRewardMachines(db,runId).filter(move=>!storedMoves.includes(move)))add('machine',`machine-${move}`,`기술머신 ${moveInfo[move]?.name??move}`,'tm-normal','보상 보관함에서 배울 포켓몬을 선택 · 영구 기술 해금',{kind:'machine',move,amount:1});
+ for(const stat of statKeys)add('vitamin',`vitamin-${stat}`,vitamins[stat].name,vitamins[stat].icon,'배낭에 보관 · 포켓몬당 영양제 총 3개 제한',{kind:'vitamin',stat,amount:1});
+ for(const item of epicRewardItems.filter(item=>allowsRuleItem(rule,item)&&!ownsRunItem(db,runId,item)))add('held-item',`item-${item}`,itemName(item),itemIcon(item),heldItems[item].description,{kind:'item-exchange',items:[item],amount:1,fallbackCoins:0});
+ for(const move of eligibleRewardMachines(db,runId))add('machine',`machine-${move}`,`기술머신 ${moveInfo[move]?.name??move}`,'tm-normal','배낭에 등록 · 이번 Run 동안 반복 사용 가능',{kind:'machine',move,amount:1});
  add('egg-tickets','egg-ticket','알 티켓','lucky-egg','영구 상점의 일반 알 뽑기에서 사용',{kind:'egg-ticket',amount:1});
  add('super-rare-ticket','super-rare-ticket','슈퍼레어 알 티켓','lucky-egg','영구 상점의 보상 알 티켓으로 부화',{kind:'typed-egg-ticket',eggKind:'superRare',amount:1});
  for(const item of trainerEquipmentKeys.filter(item=>allowsRuleItem(rule,item)&&!db.prepare('SELECT 1 FROM run_trainer_equipment WHERE run_id=? AND item=?').get(runId,item)))add('equipment',`equipment-${item}`,itemName(item),itemIcon(item),'이번 도전의 트레이너 장비 · 지닌 도구와 별개',{kind:'trainer-equipment',item,amount:1,fallbackPoints:0});
@@ -77,8 +76,9 @@ export class HiddenShop{
   if(offer.purchased)return;
   if(snapshot.offers.filter(p=>p.purchased).length>=snapshot.purchaseLimit)throw new BattleRequestError('구매 한도를 모두 사용했습니다.',409);
   const effect=offer.effect;
+  if(effect.kind==='machine'&&ownsMachine(this.db,runId,effect.move))throw new BattleRequestError('이미 배낭에 보유한 기술머신입니다.',409);
   if(effect.kind==='trainer-equipment'&&this.db.prepare('SELECT 1 FROM run_trainer_equipment WHERE run_id=? AND item=?').get(runId,effect.item))throw new BattleRequestError('이미 보유한 트레이너 장비입니다.',409);
-  if(effect.kind==='item-exchange'&&(this.db.prepare('SELECT 1 FROM run_item_bag WHERE run_id=? AND item=? AND quantity>0').get(runId,effect.items[0])||this.db.prepare('SELECT 1 FROM run_held_items WHERE run_id=? AND item=?').get(runId,effect.items[0])))throw new BattleRequestError('이미 보유한 지닌 도구입니다.',409);
+  if(effect.kind==='item-exchange'&&ownsRunItem(this.db,runId,effect.items[0]))throw new BattleRequestError('이미 보유한 지닌 도구입니다.',409);
   const paid=offer.currency==='coins'?spendCoins(this.db,owner,offer.price):!!this.db.prepare('UPDATE players SET growth_points=growth_points-? WHERE id=? AND growth_points>=?').run(offer.price,owner,offer.price).changes;
   if(!paid)throw new BattleRequestError(`${offer.currency==='coins'?'타워 코인':'성장 포인트'}가 부족합니다.`,409);
   if(effect.kind==='item-exchange')grantRunItem(this.db,runId,effect.items[0],effect.amount);

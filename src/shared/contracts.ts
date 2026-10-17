@@ -30,6 +30,7 @@ export type BattleView = {
   teraTickets?:number;
 };
 export type RunView = {
+  bag?:import('../data/bag').BagView;
   rewardInventory?:import('../data/reward-inventory').RewardInventoryView[];
   event?:import('../data/run-events').RunEventView|null;
   trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];

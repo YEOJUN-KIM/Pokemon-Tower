@@ -1,6 +1,9 @@
 'use client';
 import {Ball,SendOut,PokemonFeedback,ShinySparkles,Sprite,HealthCard} from './battle-pokemon';
 import {RunEventScene,RunEventPanel} from './run-event';
+import {hiddenShopAvailability} from './hidden-shop';
+import {BagButton} from './bag';
+import {ItemAcquisitionDialog} from './item-acquisition-dialog';
 import {TrainerEquipment} from './trainer-equipment';
 import {collectionSpecies} from '../data/selectable-forms';
 import {battleRules} from '../data/run-rules';
@@ -48,6 +51,8 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
   const [selected, setSelected] = useState<string[]>([]);
   const [eventSelection,setEventSelection]=useState<string|null>(null);
   const [challengerFocus,setChallengerFocus]=useState<{eventId:string;id:string}|null>(null);
+  const [shopFocus,setShopFocus]=useState<{eventId:string;id:string}|null>(null);
+  const [acquireOfferId,setAcquireOfferId]=useState<string|null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [motion, setMotion] = useState<Motion | null>(null);
@@ -113,6 +118,8 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
   const currentEvent = !recruitment ? run?.event : null;
   const challengerId=challengerFocus?.eventId===currentEvent?.id?challengerFocus?.id:currentEvent?.challengers?.[0]?.id;
   const focusChallenger=(id:string)=>{if(currentEvent)setChallengerFocus(previous=>previous?.eventId===currentEvent.id&&previous.id===id?previous:{eventId:currentEvent.id,id});};
+  const shopOfferId=shopFocus?.eventId===currentEvent?.id?shopFocus?.id:currentEvent?.hiddenShop?.offers[0]?.id;
+  const focusShopOffer=(id:string)=>{if(currentEvent)setShopFocus(previous=>previous?.eventId===currentEvent.id&&previous.id===id?previous:{eventId:currentEvent.id,id});};
   const hasResult = done && tower && run && ['recruit', 'lost', 'cleared'].includes(run.state);
   const celebratingClear = run?.state==='cleared' && !!recruitment;
   const preparing = !battle || !run || (!['battle', 'recruit'].includes(run.state) && !celebratingClear);
@@ -226,16 +233,28 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
       }
       if(body.type === 'action' && data.battle?.status === 'complete') effect(data.battle.winner === 'Player' ? 'victory' : 'defeat');
       if (body.type === 'start' && prepareNewRun) router.replace('/battle', {scroll:false});
-    } catch (e) { setError(e instanceof Error ? e.message : '서버에 연결할 수 없습니다. 새로고침해 주세요.');if(body.type==='adjust-run')throw e; }
+    } catch (e) { setError(e instanceof Error ? e.message : '서버에 연결할 수 없습니다. 새로고침해 주세요.');if(body.type==='adjust-run'||body.type==='bag-use')throw e; }
     finally { if(mounted.current){setBusy(false);setPlaying(false);setTrainerIntro(null);setMotion(null);setNotice(null);setAnnouncement(null);} requestLock.current = false; }
   }
   const send = (action: string) => {if(action.startsWith('move ') && gimmick && battle?.actions.some(a=>a.command===action+' '+gimmick))action+=' '+gimmick;setGimmick(null);setTab('root');if(action.startsWith('move '))lastMove.current=action.replace(/ (mega|dynamax|terastallize|zmove)$/,'');return submit({type: 'action', battleId: battle?.id, requestId: battle?.requestId, action});};
   const selectAction=()=>{if(document.querySelector('dialog[open]'))return;const buttons=Array.from(document.querySelectorAll<HTMLButtonElement>('.action-grid button:not(:disabled)'));selectGameCursor(buttons.find(button=>button.dataset.command===lastMove.current) ?? buttons[0] ?? document.querySelector<HTMLButtonElement>('.battle-panel .command-area>.primary-button'));};
   const focusAction=()=>requestAnimationFrame(selectAction);
+  const acquireOffer=currentEvent?.hiddenShop?.offers.find(offer=>offer.id===acquireOfferId);
+  useEffect(()=>{if(acquireOffer?.purchased)setAcquireOfferId(null);},[acquireOffer?.purchased]);
+  const requestHiddenPurchase=(id:string)=>{const offer=currentEvent?.hiddenShop?.offers.find(o=>o.id===id);if(!offer||busy||!currentEvent||hiddenShopAvailability(currentEvent.hiddenShop!,offer,tower!.coins,tower!.growthPoints)!=='구매 가능')return;if(offer.category==='held-item'||offer.category==='vitamin')setAcquireOfferId(id);else void submit({type:'hidden-shop-purchase',runId:run!.id,eventId:currentEvent.id,productId:id});};
   useEffect(()=>{if(run?.state==='battle' && !busy && !playing && battle?.status==='waiting')selectAction();},[battle?.requestId,busy,playing,tab,run?.state]);
   useEffect(()=>{if(run && ['recruit','select'].includes(run.state) && !run.event && !recruitment && (!hasResult || acknowledgedResult===battle?.id))setStageOpen(true);else setStageOpen(false);},[run?.state,run?.floor,run?.event?.id,recruitment,acknowledgedResult,battle?.id]);
   useGameKeyboard('.battle-room .event-choices button,.battle-room .action-grid button,.battle-room .battle-command-back,.battle-room .gimmick-toggle,.battle-room .tera-toggle,.battle-room .command-area>.primary-button',2,!!tower && !!run && (['battle','select','recruit'].includes(run.state) || (!!hasResult && acknowledgedResult!==battle?.id && run.state!=='cleared')),(event,cursor)=>{
     const key=event.key.toLowerCase();
+    if(currentEvent?.hiddenShop && ['1','2','3','4','5','x','z','enter','b'].includes(key)){
+      event.preventDefault();if(busy)return true;
+      if(key==='b'||['z','enter'].includes(key)&&cursor?.hasAttribute('data-open-bag')){document.querySelector<HTMLButtonElement>('.battle-room [data-open-bag]')?.click();return true;}
+      if(/^[1-5]$/.test(key)){const id=currentEvent.hiddenShop.offers[Number(key)-1]?.id;if(id){const button=document.querySelector<HTMLButtonElement>(`.battle-room [data-shop-offer="${id}"]`);selectGameCursor(button);button?.scrollIntoView({block:'nearest',inline:'nearest'});}return true;}
+      if(key==='x'||cursor?.hasAttribute('data-hidden-shop-leave')){void submit({type:'event-choice',runId:run!.id,eventId:currentEvent.id,choice:'leave'});return true;}
+      const offer=currentEvent.hiddenShop.offers.find(offer=>offer.id===(cursor?.dataset.shopOffer??shopOfferId));
+      if(offer)requestHiddenPurchase(offer.id);
+      return true;
+    }
     if(currentEvent?.challengers && currentEvent.phase==='choice' && ['1','2','3','4','x','z','enter'].includes(key)){
       event.preventDefault();if(busy)return true;
       if(['1','2','3'].includes(key)){const button=document.querySelector<HTMLButtonElement>(`.battle-room [data-challenger="${currentEvent.challengers[Number(key)-1]?.id}"]`);selectGameCursor(button);return true;}
@@ -254,7 +273,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     }
     if(key==='x'){effect('cancel');if(showField){fieldHeld.current=false;setShowField(null);}else if(tab!=='root' && !forceSwitch){setGimmick(null);setTab('root');}else setBattleMenu(true);}
     return true;
-  },cursor=>{if(cursor.dataset.command)setFocusedCommand(cursor.dataset.command);if(currentEvent?.challengers&&currentEvent.phase==='choice'&&cursor.dataset.challenger)focusChallenger(cursor.dataset.challenger);});
+  },cursor=>{if(cursor.dataset.command)setFocusedCommand(cursor.dataset.command);if(currentEvent?.challengers&&currentEvent.phase==='choice'&&cursor.dataset.challenger)focusChallenger(cursor.dataset.challenger);if(currentEvent?.hiddenShop&&cursor.dataset.shopOffer)focusShopOffer(cursor.dataset.shopOffer);});
 
   if(!tower) return <main className="settings-screen" aria-busy={loading}>
     {error ? <div className="error-banner" role="alert">{error}<button onClick={()=>{setLoading(true);refresh().then(()=>setError('')).catch(e=>setError(e.message)).finally(()=>setLoading(false));}}>다시 연결</button></div> : <p role="status">저장된 도전을 불러오는 중…</p>}
@@ -268,6 +287,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     <div className="workspace">
       <nav className="battle-nav" aria-label="메인 메뉴"><a href="/" aria-label="포켓몬 타워 홈"><Ball /><strong>POKÉMON TOWER</strong></a><div><a href="/pokedex">포켓몬 도감</a><a href="/settings">설정</a><a href="/">타이틀</a></div></nav>
       <main>
+        {acquireOffer&&currentEvent&&run&&<ItemAcquisitionDialog run={run} name={acquireOffer.name} item={acquireOffer.category==='held-item'?acquireOffer.id.replace(/^item-/,''):undefined} vitamin={acquireOffer.category==='vitamin'} busy={busy} error={error} onClose={()=>setAcquireOfferId(null)} onAcquire={(destination,species)=>void submit({type:'hidden-shop-purchase',runId:run.id,eventId:currentEvent.id,productId:acquireOffer.id,destination,species})}/>}
         {tower && <section className="tower-summary" aria-label="타워 진행"><div><span>{themeLabel(run?.theme)}</span><strong>{run ? `${run.floor} / ${run.totalFloors}층` : '출발 준비'}</strong><small>{run?.boss ? `${run.boss.title} ${run.boss.name}` : run ? (progressionLabel(run.floor,run.totalFloors) ?? '다음 층을 향해 도전하세요.') : '팀을 선택하고 타워에 도전하세요.'}</small></div><div><span>타워 코인</span><strong data-testid="wallet">{tower.coins.toLocaleString()}코인</strong></div><div><span>성장 포인트</span><strong data-testid="growth-wallet">{tower.growthPoints.toLocaleString()}P</strong></div><div><span>영구 도감</span><strong>{tower.unlocked.length}종 해금</strong></div>{run && ['battle','recruit','select'].includes(run.state) && <button className="text-button" disabled={busy} onClick={() => { if (window.confirm(restartNotice(tower))) void submit({type: 'abandon', runId: run.id}); }}>도전 종료</button>}</section>}
         {error && <div className="error-banner" role="alert">{error}<button onClick={() => { setLoading(true); refresh().then(() => setError('')).catch(e => setError(e.message)).finally(() => setLoading(false)); }}>다시 연결</button></div>}
         {run && ['select','battle','recruit'].includes(run.state) && run.upgrades.length>0 && <div className="upgrade-status" aria-label="구매한 강화">{run.upgrades.map(upgrade=><span key={upgrade.kind}>{upgrades[upgrade.kind].name} · {upgrade.remainingFloors>0 ? `${upgrade.remainingFloors}개 층 남음${run.state==='battle' ? ' (현재 층 포함)' : ''}` : '사용 완료'}</span>)}</div>}
@@ -297,7 +317,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
               {battle && !currentEvent && <FieldInspection battle={battle} open={!!showField} held={showField==='hold'} touchHeld={showField==='touch'} onClose={()=>{fieldHeld.current=false;setShowField(null);}}/>}
               <div className="stadium-backdrop" aria-hidden="true"><div className="stadium-lights"/><div className="field-horizon"/><div className="stadium-field"/><div className="stadium-details"><i/><i/><i/></div></div><span className="arena-label">{String(run?.floor ?? 1).padStart(2,'0')}F / {arenaNames[scenery]}</span>
               {!currentEvent&&<><div className="arena-orbit orbit-one" aria-hidden="true" /><div className="arena-orbit orbit-two" aria-hidden="true" /></>}
-              {currentEvent ? <RunEventScene event={currentEvent} busy={busy} coins={tower.coins} growthPoints={tower.growthPoints} onPurchase={productId=>void submit({type:'hidden-shop-purchase',runId:run!.id,eventId:currentEvent.id,productId})} challengerId={challengerId}/> : !trainerIntro && !preparing && battle && active && battle.opponent ? <>
+              {currentEvent ? <RunEventScene event={currentEvent} busy={busy} coins={tower.coins} growthPoints={tower.growthPoints} shopOfferId={shopOfferId} onShopFocus={focusShopOffer} challengerId={challengerId}/> : !trainerIntro && !preparing && battle && active && battle.opponent ? <>
                 <HealthCard pokemon={battle.opponent} enemy field={battle.field} faintPending={battle.pendingFaints?.includes('enemy')} />
                 {motion && ['dynamax-recall','dynamax-ball','dynamax-release','dynamax-grow'].includes(motion.kind) && <div className={`dynamax-atmosphere atmosphere-${motion.kind}`} aria-hidden="true"><i/><b/></div>}
                 <div className="enemy-position"><span key={`enemy-${frameNumber}`} style={{['--tera-color' as string]:motion ? teraColors[motion.color[0].toUpperCase()+motion.color.slice(1)] : undefined}} className={`motion-wrap ${motion?.side === 'enemy' ? `motion-${motion.kind}` : ''}`}>{motion?.kind === 'switch' && motion.sendOut!==false && motion.side === 'enemy' && <SendOut />}<Sprite shiny={battle.opponent.shiny} name={battle.opponent.displaySpecies ?? battle.opponent.species} animated dynamax={battle.opponent.dynamax} terastallized={battle.opponent.terastallized} condition={battle.opponent.condition} className={health(battle.opponent.condition).percent === 0 && !battle.pendingFaints?.includes('enemy') ? 'fainted' : ''} /><PokemonFeedback motion={motion?.side === 'enemy' ? motion : null} /></span>{battle.opponent.shiny&&motion?.kind==='switch'&&motion.sendOut!==false&&(motion.side==='enemy'||battle.turn===0)&&<ShinySparkles key={'enemy-shiny-'+frameNumber}/>}</div>
@@ -317,7 +337,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
               {trainerIntro?.phase==='enter' && <button className="trainer-intro-confirm" onClick={()=>introContinue.current?.()}>포켓몬 내보내기</button>}
 
             </div>
-            {currentEvent && run ? <RunEventPanel key={currentEvent.id} event={currentEvent} runId={run.id} busy={busy} challengerId={challengerId} onChallengerFocus={focusChallenger} selecting={eventSelection===currentEvent.id} onChoose={()=>setEventSelection(currentEvent.id)} submit={submit}/> : <BattleMessages onSkip={skipPlayback} key={battle?.id ?? 'preparing'} messages={battle?.messages ?? []} playing={playing} turn={battle?.turn ?? 0} announcement={announcement ?? (!busy && !done && tab==='root' && active ? `${pokemonName(active.species)}, 무엇을 할까요?` : null)} />}
+            {currentEvent && run ? <RunEventPanel key={currentEvent.id} event={currentEvent} runId={run.id} busy={busy} challengerId={challengerId} onHiddenPurchase={requestHiddenPurchase} bagButton={<BagButton run={run} busy={busy} submit={submit} error={error}/>} onChallengerFocus={focusChallenger} shopOfferId={shopOfferId} coins={tower.coins} growthPoints={tower.growthPoints} selecting={eventSelection===currentEvent.id} onChoose={()=>setEventSelection(currentEvent.id)} submit={submit}/> : <BattleMessages onSkip={skipPlayback} key={battle?.id ?? 'preparing'} messages={battle?.messages ?? []} playing={playing} turn={battle?.turn ?? 0} announcement={announcement ?? (!busy && !done && tab==='root' && active ? `${pokemonName(active.species)}, 무엇을 할까요?` : null)} />}
             {!currentEvent && !(busy || playing) && <div className="command-area">
               {!battle || done || broken ? loading || !tower ? <p>저장된 도전을 불러오는 중…</p> : broken ? <div><p role="alert">{battle?.error}</p><button className="secondary-button" onClick={() => refresh().catch(e => setError(e.message))}>배틀 다시 불러오기</button></div> : <button className="primary-button" onClick={()=>setStageOpen(true)}>{run?.state==='recruit' ? '영입 선택' : '다음 층 준비'}</button>
               : <BattleCommands equipment={run?.trainerEquipment??[]} rule={run?.rule} itemBag={run?.battleItems} battle={battle} mode={tab} busy={busy} forceSwitch={forceSwitch} focused={focusedCommand} gimmick={gimmick} onGimmick={setGimmick} onMode={mode=>{setGimmick(null);setTab(mode);}} onFocus={setFocusedCommand} onSend={send}/>}

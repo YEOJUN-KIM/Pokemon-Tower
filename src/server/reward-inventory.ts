@@ -6,7 +6,7 @@ import {vitamins,VITAMIN_LIMIT} from '../data/shop';
 import {moveInfo} from '../data/move-info';
 import {itemName} from '../data/held-items';
 import {trainingOptions} from './training';
-import {applyVitamin,learnMachine,grantRunItem} from './inventory-grants';
+import {applyVitamin,grantRunItem} from './inventory-grants';
 import {grantCoins} from './player-wallet';
 import {BattleRequestError} from './request-error';
 
@@ -41,7 +41,7 @@ export class RewardInventory{
   const effect:InventoryReward=JSON.parse(row.effect_json);
   if(!this.choices(effect).some(c=>c.id===choice))throw new BattleRequestError('사용할 수 있는 대상을 선택하세요.',409);
   if(effect.kind==='vitamin')applyVitamin(this.db,runId,floor,choice,effect.stat);
-  else if(effect.kind==='machine')learnMachine(this.db,owner,choice,effect.move);
+  else if(effect.kind==='machine')throw new BattleRequestError('기술머신은 배낭에서 사용할 포켓몬과 기술 칸을 선택하세요.',409);
   else if(effect.kind==='item-exchange'){if(choice==='owned-fallback')grantCoins(this.db,owner,effect.fallbackCoins);else grantRunItem(this.db,runId,choice,1);}
   else throw new BattleRequestError('사용할 수 없는 보상입니다.',400);
   this.db.prepare('UPDATE run_reward_inventory SET quantity=quantity-1 WHERE id=? AND quantity>0').run(id);

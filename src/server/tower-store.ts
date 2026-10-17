@@ -1,5 +1,7 @@
 import {RewardInventory} from './reward-inventory';
-import {grantRunItem,grantEquipment,learnMachine} from './inventory-grants';
+import {RunBag} from './run-bag';
+import {ownsRunItem,ownsMachine,runMachines} from './run-ownership';
+import {grantRunItem,grantEquipment,grantStoredReward,applyVitamin} from './inventory-grants';
 import {ChallengerEvents} from './challenger-events';
 import type {SavedChallengerDefinition} from '../data/challengers';
 import {trainNpcTeam} from './npc-training';
@@ -44,7 +46,7 @@ import {machinePrice,machineRarity,rollMachineOffers} from '../data/machine-rari
 import {trainerCatalog,trainerView,type TrainerSample} from '../data/trainer-catalog';
 import {pokedexEntries} from './pokedex-entries';
 import Showdown from 'pokemon-showdown';
-import {upgrades,machineMoves,isShopFloor,rerollPrice,vitaminPrice,VITAMIN_BOOST,VITAMIN_LIMIT,type UpgradeKind} from '../data/shop';
+import {upgrades,machineMoves,MACHINE_COUNT,isShopFloor,rerollPrice,vitaminPrice,VITAMIN_BOOST,VITAMIN_LIMIT,type UpgradeKind} from '../data/shop';
 import {collectionGender,speciesGender,genderOptions} from './pokemon-gender';
 import {npcGimmick,npcSpecies,type NpcGimmick} from '../data/npc-gimmicks';
 import {normalNpcCategory,normalNpcGimmicksEnabled} from '../data/normal-mode-stages';
@@ -97,6 +99,8 @@ export class TowerStore {
     return transaction(this.db,fn);
   }
   private rewardInventory(owner:string,runId:string,floor:number){return new RewardInventory(this.db,{owner,runId,floor,roster:this.roster(runId),profiles:this.runProfiles(runId),known:species=>this.unlockedMoves(owner,species)});}
+  private runBag(owner:string,runId:string){return new RunBag(this.db,{runId,roster:this.roster(runId),profiles:this.runProfiles(runId),held:this.heldItems(runId),rule:this.runRule(runId),partners:this.machinePartners(owner,runId)});}
+  useBag(owner:string,runId:string,requestId:unknown,entryId:unknown,target:unknown,slot:unknown=null){this.tx(()=>{const run=this.ownedRun(owner,runId);if(run.state!=='select')throw new BattleRequestError('배낭은 비전투 준비 중 사용할 수 있습니다.',409);this.runBag(owner,runId).use(requestId,entryId,target,slot,(species,item)=>this.setHeldItem(runId,species,item));});}
   useReward(owner:string,runId:string,requestId:unknown,entryId:unknown,choiceId:unknown){this.tx(()=>{const run=this.ownedRun(owner,runId);if(run.state!=='select'||this.events.view(runId)&&!this.retryState(runId).pending_battle_id)throw new BattleRequestError('이벤트를 마친 뒤 출전 준비에서 사용하세요.',409);this.rewardInventory(owner,runId,run.floor).use(requestId,entryId,choiceId);});}
   private get events(){return new RunEvents(this.db,this.roll);}
   chooseEvent(owner:string,runId:string,eventId:string,choice:unknown){this.tx(()=>{
@@ -111,7 +115,21 @@ export class TowerStore {
   });}
   selectEventReward(owner:string,runId:string,eventId:string,selectionId:unknown,candidateId:unknown){this.tx(()=>this.events.selectReward(owner,runId,eventId,selectionId,candidateId));}
   continueEvent(owner:string,runId:string,eventId:string){this.tx(()=>this.events.continue(owner,runId,eventId));}
-  purchaseHiddenShop(owner:string,runId:string,eventId:string,productId:unknown){this.tx(()=>this.events.purchase(owner,runId,eventId,productId));}
+  purchaseHiddenShop(owner:string,runId:string,eventId:string,productId:unknown,destination:unknown='bag',species:unknown=null){this.tx(()=>{
+    const row=this.events.owned(owner,runId,eventId);if(row.kind!=='hidden-shop'||row.status!=='choice')throw new BattleRequestError('열려 있는 히든상점이 아닙니다.',409);
+    const snapshot=JSON.parse((this.db.prepare('SELECT snapshot_json FROM hidden_shop_events WHERE event_id=?').get(eventId) as {snapshot_json:string}).snapshot_json),offer=snapshot.offers.find((o:{id:string})=>o.id===productId);
+    if(offer?.purchased)return;
+    if(destination!=='bag'&&destination!=='use')throw new BattleRequestError('구매 후 처리 방식을 선택하세요.',400);
+    this.events.purchase(owner,runId,eventId,productId);
+    if(destination==='use'){
+      if(typeof species!=='string'||!this.roster(runId).includes(species))throw new BattleRequestError('사용할 포켓몬을 선택하세요.',400);
+      if(offer.effect.kind==='item-exchange'){this.setHeldItem(runId,species,offer.effect.items[0]);}
+      else if(offer.effect.kind==='vitamin'){
+        const entry=this.db.prepare("SELECT id FROM run_reward_inventory WHERE run_id=? AND quantity>0 AND json_extract(effect_json,'$.kind')='vitamin' AND json_extract(effect_json,'$.stat')=? ORDER BY rowid DESC LIMIT 1").get(runId,offer.effect.stat) as {id:string};
+        this.runBag(owner,runId).use(createHash('sha256').update(eventId+':'+productId).digest('hex'),entry.id,species,null,(name,item)=>this.setHeldItem(runId,name,item));
+      }else throw new BattleRequestError('이 상품은 배낭에 자동 등록합니다.',400);
+    }
+  });}
   private get permanentShop(){
     return new PermanentShop(this.db,this.roll,(owner,species)=>this.savedTraining(owner,species),(owner,species)=>this.unlockedMoves(owner,species));
   }
@@ -177,7 +195,7 @@ export class TowerStore {
       id: row.id, rule:this.runRule(row.id),theme:this.runTheme(row.id), hiddenBossPending:this.route(row.id)?.pending_boss===row.floor, hiddenBossNext:!!this.route(row.id) && row.floor%50===0 && ['johto','kanto'].includes(this.runTheme(row.id) ?? '') && this.route(row.id)?.pending_boss!==row.floor, floor: row.floor, totalFloors: row.total_floors, floorName: row.floor===row.total_floors ? row.total_floors===3 ? '작은 타워의 정상' : '타워의 정상' : floors[row.floor - 1]?.name ?? '타워', state: row.state,
       retries:{limit:retry!.retry_limit,used:retry!.used,remaining:Math.max(0,retry!.retry_limit-retry!.used),canRetry:row.state==='lost'&&retry!.used<retry!.retry_limit&&!this.db.prepare('SELECT 1 FROM growth_rewards WHERE run_id=?').get(row.id),preparing:row.state==='select'&&!!retryBattle,opponents:retryBattle?(Showdown.Teams.unpack(retryBattle.opponent_team)??[]).map(p=>({species:p.species,moves:p.moves,item:p.item})):[]},
       roster: this.roster(row.id), partnerForms:Object.fromEntries(Object.entries(this.runProfiles(row.id)).filter(([,profile])=>profile.forme).map(([name,profile])=>[name,profile.forme!])), battleId: battle?.id ?? null,
-      rewardInventory:this.rewardInventory(owner,row.id,row.floor).view(),
+      rewardInventory:this.rewardInventory(owner,row.id,row.floor).view(),bag:row.state==='select'?this.runBag(owner,row.id).view():undefined,
       event:row.state==='select'&&!retryBattle?this.events.view(row.id):null,
       earnedCoins: (earned?.coins ?? 0)+this.events.earnedCoins(row.id), victories: earned?.wins ?? 0,
       growthReward: (this.db.prepare('SELECT amount FROM growth_rewards WHERE run_id=?').get(row.id) as {amount:number}|undefined)?.amount ?? 0,
@@ -403,7 +421,7 @@ export class TowerStore {
     let counter=0;const random=()=>createHash('sha256').update(`${run.id}:item-shop:${run.floor}:${this.shopRevision(run,"items") ? "roll"+this.shopRevision(run,"items")+":" : ""}${counter++}`).digest().readUInt32LE(0)/4294967296;
     const held=Object.values(this.heldItems(run.id));
     const owned=[...this.trainerEquipment(run.id),...(this.db.prepare('SELECT item FROM run_item_bag WHERE run_id=? AND quantity>0').all(run.id) as {item:string}[]).map(x=>x.item)];
-    const offers=rollItemOffers(run.floor-1,random,item=>allowsRuleItem(this.runRule(run.id),item) && !owned.includes(item) && !held.includes(item) && roster.some(name=>this.canHoldItem(run.id,name,item)),existing);
+    const offers=rollItemOffers(run.floor-1,random,item=>allowsRuleItem(this.runRule(run.id),item) && !ownsRunItem(this.db,run.id,item) && !held.includes(item) && roster.some(name=>this.canHoldItem(run.id,name,item)),existing);
     this.db.prepare('INSERT INTO item_shops VALUES (?,?,?) ON CONFLICT(run_id,floor) DO UPDATE SET offers=excluded.offers').run(run.id,run.floor,JSON.stringify(offers));
     return offers;
   }
@@ -442,8 +460,8 @@ export class TowerStore {
     const old=(this.db.prepare('SELECT item FROM run_held_items WHERE run_id=? AND species=?').get(runId,species) as {item:string}|undefined)?.item;if(old===item)return;
     if(item && this.db.prepare('SELECT 1 FROM run_held_items WHERE run_id=? AND item=? AND species<>?').get(runId,item,species))throw new BattleRequestError('같은 종류의 도구는 한 마리만 장착할 수 있습니다. 먼저 다른 포켓몬의 도구를 해제하세요.',409);
     if(item && !this.db.prepare('UPDATE run_item_bag SET quantity=quantity-1 WHERE run_id=? AND item=? AND quantity>0').run(runId,item).changes)throw new BattleRequestError('가방에 없는 도구입니다.',409);
-    if(old)this.bagItem(runId,old,1);
     this.db.prepare('DELETE FROM run_held_items WHERE run_id=? AND species=?').run(runId,species);
+    if(old)this.bagItem(runId,old,1);
     if(item)this.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(runId,species,item);
   }
   purchaseItem(owner:string,runId:string,expectedFloor:number,item:unknown,species:unknown,revision:unknown=0) {
@@ -451,10 +469,11 @@ export class TowerStore {
       const run=this.ownedRun(owner,runId);
       if(run.state!=='select' || run.floor!==expectedFloor || !isShopFloor(run.floor,run.total_floors))throw new BattleRequestError('도구는 체크포인트 클리어 후 상점에서 구매할 수 있습니다.',409);
       this.checkShopRevision(run,'items',revision);
+      if(typeof item==='string'&&this.db.prepare('SELECT 1 FROM shop_receipts WHERE run_id=? AND floor=? AND kind=? AND revision=? AND product=?').get(runId,expectedFloor,'items',revision as number,item))return;
       if(!isHeldItem(item) || (species!==null && (typeof species!=='string' || !this.roster(runId).includes(species))))throw new BattleRequestError('도구와 파티 포켓몬을 선택하세요.',400);
       if(isTrainerEquipment(item)&&species!==null)throw new BattleRequestError('트레이너 장비는 포켓몬을 선택하지 않고 구매합니다.',400);
       if(itemShopRule(item).minClearedFloor>run.floor-1 || !this.itemOffers(run).includes(item))throw new BattleRequestError('이번 상점에서 판매하지 않는 도구입니다.',409);
-      if(this.trainerEquipment(runId).includes(item as TrainerEquipment)||(this.db.prepare('SELECT 1 FROM run_item_bag WHERE run_id=? AND item=? AND quantity>0').get(runId,item)) || Object.values(this.heldItems(runId)).includes(item))throw new BattleRequestError('이미 보유한 도구입니다.',409);
+      if(ownsRunItem(this.db,runId,item) || Object.values(this.heldItems(runId)).includes(item))throw new BattleRequestError('이미 보유한 도구입니다.',409);
       if(!this.roster(runId).some(name=>this.canHoldItem(runId,name,item)))throw new BattleRequestError('파티에 맞는 포켓몬이 없는 도구입니다.',400);
       if(this.itemPurchases(run).includes(item))throw new BattleRequestError('이번 상점에서 이미 구매한 도구입니다.',409);
       const price=heldItems[item].price;
@@ -473,14 +492,8 @@ export class TowerStore {
       if(isTrainerEquipment(item))throw new BattleRequestError('트레이너 장비는 포켓몬에게 장착하지 않습니다.',400);
       const holder=item?(this.db.prepare('SELECT species FROM run_held_items WHERE run_id=? AND item=? AND species<>?').get(runId,item,species) as {species:string}|undefined)?.species:undefined;
       if(holder){
-        if(swapFrom!==holder)throw new BattleRequestError('같은 도구는 한 마리만 장착합니다. 현재 소지자를 확인하고 도구 이동·교환을 승인하세요.',409);
-        const old=this.heldItems(runId)[species];
-        if(!allowsRuleItem(this.runRule(runId),item as string) || !canEquipGimmick(species,item as string) || old && !canEquipGimmick(holder,old))throw new BattleRequestError('두 포켓몬에게 맞는 도구만 교환할 수 있습니다.',400);
-        if(selectedForm(species,this.runProfiles(runId)[species]?.forme)?.requiredItem || selectedForm(holder,this.runProfiles(runId)[holder]?.forme)?.requiredItem)throw new BattleRequestError('전용 도구가 고정된 모습은 도구를 교환할 수 없습니다.',400);
-        this.db.prepare('DELETE FROM run_held_items WHERE run_id=? AND species IN (?,?)').run(runId,species,holder);
-        this.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(runId,species,item);
-        if(old)this.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(runId,holder,old);
-        return;
+        if(swapFrom!==undefined&&swapFrom!==holder)throw new BattleRequestError('도구 소지자가 바뀌었습니다.',409);
+        this.setHeldItem(runId,holder,null);this.setHeldItem(runId,species,item as string);return;
       }
       if(swapFrom!==undefined)throw new BattleRequestError('도구 소지자가 바뀌었습니다. 다시 선택해 주세요.',409);
       this.setHeldItem(runId,species,item as string|null);
@@ -490,40 +503,27 @@ export class TowerStore {
     return JSON.parse((this.db.prepare('SELECT profiles FROM runs WHERE id=?').get(runId) as {profiles:string}).profiles);
   }
   private machineOffers(owner:string,run:RunRow,regenerate=false):MachineOffer[] {
-    let saved=this.db.prepare('SELECT offers FROM machine_shops WHERE run_id=? AND floor=?').get(run.id,run.floor) as {offers:string}|undefined;
-    if(!saved||regenerate) {
-      const roster=this.roster(run.id),profiles=this.runProfiles(run.id);
-      const options=Object.fromEntries(roster.map(name=>[name,{known:this.unlockedMoves(owner,name),legal:trainingOptions(name,profiles[name]?.forme).learnableMoves,current:profiles[name]?.moves ?? this.savedTraining(owner,name).profile.moves}]));
-      const candidates=machineMoves.map(move=>({move,rarity:machineRarity(move),price:machinePrice(move),targets:roster.filter(name=>options[name].legal.includes(move) && !options[name].known.includes(move) && !options[name].current.includes(move)),purchased:false})).filter(offer=>offer.targets.length);
-      let counter=0;const random=()=>createHash('sha256').update(`${run.id}:machine-shop:${run.floor}:${this.shopRevision(run,"machines") ? "roll"+this.shopRevision(run,"machines")+":" : ""}${counter++}`).digest().readUInt32BE(0)/0x100000000;
-      // A single saved row freezes the complete selection, including for existing checkpoints.
-      this.db.prepare('INSERT INTO machine_shops VALUES (?,?,?) ON CONFLICT(run_id,floor) DO UPDATE SET offers=excluded.offers').run(run.id,run.floor,JSON.stringify(rollMachineOffers(candidates,run.floor-1,random)));
-      saved=this.db.prepare('SELECT offers FROM machine_shops WHERE run_id=? AND floor=?').get(run.id,run.floor) as {offers:string};
-    }
-    const purchases=(this.shopRevision(run,'machines')===0 ? this.db.prepare('SELECT move,species FROM machine_purchases WHERE run_id=? AND floor=?').all(run.id,run.floor) : this.db.prepare('SELECT product AS move,buyer AS species FROM shop_receipts WHERE run_id=? AND floor=? AND kind=? AND revision=?').all(run.id,run.floor,'machines',this.shopRevision(run,'machines'))) as {move:string;species:string}[];
-    return (JSON.parse(saved.offers) as MachineOffer[]).map(offer=>{const purchase=purchases.find(entry=>entry.move===offer.move);return {...offer,purchased:!!purchase,...(purchase ? {buyer:purchase.species} : {})};});
+    const saved=this.db.prepare('SELECT offers FROM machine_shops WHERE run_id=? AND floor=?').get(run.id,run.floor) as {offers:string}|undefined;
+    const purchases=(this.db.prepare('SELECT product AS move,buyer AS species FROM shop_receipts WHERE run_id=? AND floor=? AND kind=? AND revision=?').all(run.id,run.floor,'machines',this.shopRevision(run,'machines'))) as {move:string;species:string}[];
+    const candidates=machineMoves.filter(move=>!ownsMachine(this.db,run.id,move)).map(move=>({move,rarity:machineRarity(move),price:machinePrice(move),targets:[],purchased:false}));
+    const existing:MachineOffer[]=saved&&!regenerate?JSON.parse(saved.offers).filter((offer:MachineOffer)=>!ownsMachine(this.db,run.id,offer.move)||purchases.some(p=>p.move===offer.move)):[];
+    let counter=0;const random=()=>createHash('sha256').update(run.id+':machine-shop:'+run.floor+':'+this.shopRevision(run,'machines')+':'+counter++).digest().readUInt32BE(0)/0x100000000;
+    const offers=[...existing,...rollMachineOffers(candidates.filter(c=>!existing.some(o=>o.move===c.move)),run.floor-1,random).slice(0,Math.max(0,MACHINE_COUNT-existing.length))];
+    this.db.prepare('INSERT INTO machine_shops VALUES (?,?,?) ON CONFLICT(run_id,floor) DO UPDATE SET offers=excluded.offers').run(run.id,run.floor,JSON.stringify(offers));
+    return offers.map(offer=>({...offer,purchased:purchases.some(p=>p.move===offer.move)}));
   }
-  purchaseMachine(owner:string,runId:string,expectedFloor:number,move:unknown,name:unknown,slot:unknown=null,revision:unknown=0) {
+  purchaseMachine(owner:string,runId:string,expectedFloor:number,move:unknown,_name:unknown=null,_slot:unknown=null,revision:unknown=0) {
     this.tx(()=>{
       const run=this.ownedRun(owner,runId);
-      if(run.state!=='select' || !isShopFloor(run.floor,run.total_floors) || run.floor!==expectedFloor)throw new BattleRequestError('기술머신은 체크포인트 클리어 후 상점에서 구매할 수 있습니다.',409);
+      if(run.state!=='select'||run.floor!==expectedFloor||!isShopFloor(run.floor,run.total_floors))throw new BattleRequestError('기술머신은 정비 상점에서 구매하세요.',409);
       this.checkShopRevision(run,'machines',revision);
-      const offer=this.machineOffers(owner,run).find(offer=>offer.move===move);
-      if(!offer)throw new BattleRequestError('상점에 제시된 기술머신을 선택하세요.',400);
-      if(offer.purchased)throw new BattleRequestError('이미 구매한 기술머신입니다.',409);
-      if(typeof name!=='string' || !this.roster(run.id).includes(name) || !offer.targets.includes(name) || !trainingOptions(name,this.runProfiles(run.id)[name]?.forme).learnableMoves.includes(offer.move))throw new BattleRequestError('이 기술을 배울 수 있는 파티 포켓몬을 선택하세요.',400);
-      const snapshots=this.runProfiles(run.id),current=snapshots[name] ?? this.savedTraining(owner,name).profile;
-      if(this.unlockedMoves(owner,name).includes(offer.move) || current.moves.includes(offer.move))throw new BattleRequestError('이미 수집한 기술입니다.',409);
-      if(slot!==null) {
-        if(!Number.isInteger(slot) || (slot as number)<0 || (slot as number)>Math.min(current.moves.length,3))throw new BattleRequestError('교체할 기술 칸을 선택하세요.',400);
-        const edited=structuredClone(current);edited.moves[slot as number]=offer.move;
-        snapshots[name]=validateProfile(name,edited);
-      }
+      if(this.db.prepare('SELECT 1 FROM shop_receipts WHERE run_id=? AND floor=? AND kind=? AND revision=? AND product=?').get(runId,expectedFloor,'machines',revision as number,typeof move==='string'?move:''))return;
+      const offer=this.machineOffers(owner,run).find(o=>o.move===move);if(!offer)throw new BattleRequestError('진열된 기술머신을 선택하세요.',400);
+      if(ownsMachine(this.db,runId,offer.move))throw new BattleRequestError('이미 배낭에 보유한 기술머신입니다.',409);
       if(!spendCoins(this.db,owner,offer.price))throw new BattleRequestError('보유 자금이 부족합니다.',400);
-      this.db.prepare('INSERT OR IGNORE INTO machine_purchases VALUES (?,?,?,?,?,?)').run(run.id,run.floor,offer.move,name,slot as number|null,offer.price);
-      this.db.prepare('INSERT INTO shop_receipts VALUES (?,?,?,?,?,?)').run(run.id,run.floor,'machines',this.shopRevision(run,'machines'),offer.move,name);
-      learnMachine(this.db,owner,name,offer.move);
-      if(slot!==null)this.db.prepare('UPDATE runs SET profiles=? WHERE id=?').run(JSON.stringify(snapshots),run.id);
+      grantStoredReward(this.db,runId,{kind:'machine',move:offer.move,amount:1});
+      this.db.prepare('INSERT OR IGNORE INTO machine_purchases VALUES (?,?,?,?,?,?)').run(runId,expectedFloor,offer.move,'bag',null,offer.price);
+      this.db.prepare('INSERT INTO shop_receipts VALUES (?,?,?,?,?,?)').run(runId,expectedFloor,'machines',revision as number,offer.move,'bag');
     });
   }
   private battleItemBag(id:string){return Object.fromEntries((this.db.prepare('SELECT kind,quantity FROM run_battle_items WHERE run_id=? AND quantity>0').all(id) as {kind:UpgradeKind;quantity:number}[]).map(x=>[x.kind,x.quantity]));}
@@ -621,7 +621,7 @@ export class TowerStore {
           if(replaced!==null)throw new BattleRequestError('보유 포켓몬의 개체값 갱신에는 교체가 필요하지 않습니다.',400);
         } else if (roster.length >= 6) {
           if (!replaced || !roster.includes(replaced)) throw new BattleRequestError('보유 한도 6마리입니다. 교체할 멤버를 선택하세요.', 400);
-          this.setHeldItem(run.id,replaced,null);
+          const fixed=selectedForm(replaced,this.runProfiles(run.id)[replaced]?.forme)?.requiredItem;if(fixed){this.bagItem(run.id,fixed,1);this.db.prepare('DELETE FROM run_held_items WHERE run_id=? AND species=?').run(run.id,replaced);}else this.setHeldItem(run.id,replaced,null);
           this.db.prepare('UPDATE members SET species = ? WHERE run_id = ? AND species = ?').run(chosen, run.id, replaced);
         } else {
           if (replaced !== null) throw new BattleRequestError('빈자리가 있으므로 교체 없이 영입하세요.', 400);
@@ -727,13 +727,14 @@ export class TowerStore {
       if(run&&formChanged)throw new BattleRequestError('모습은 출발 전에 설정하세요.',400);
       const target=trainingFormProfile(this.db,owner,name,before.profile,profile.forme??name);
       const cost=trainingCost(formChanged?{...before.profile,ability:target.ability}:before.profile,profile);
-      const known=new Set([...before.unlockedMoves,...profileLearnset(name,profile.forme).selfMoves]);
+      const known=new Set([...before.unlockedMoves,...profileLearnset(name,profile.forme).selfMoves,...(run?runMachines(this.db,run.id):[])]);
       if(profile.moves.some(move=>!known.has(move)))throw new BattleRequestError('아직 해금하지 않은 기술입니다. 상대 포켓몬을 영입해 기술을 모으세요.',400);
       if(statKeys.some(stat=>profile.ivs[stat]!==before.profile.ivs[stat]))throw new BattleRequestError('개체값은 상대 포켓몬 영입으로만 높일 수 있습니다.',400);
       if(!this.db.prepare('UPDATE players SET growth_points=growth_points-? WHERE id=? AND growth_points>=?').run(cost,owner,cost).changes)throw new BattleRequestError('성장 포인트가 부족합니다.',400);
       saveTrainingForm(this.db,owner,name,before.profile,false);
-      saveTrainingForm(this.db,owner,name,profile);
-      this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,name,JSON.stringify(profile),revision+1);
+      const permanentProfile=run?{...profile,moves:profile.moves.every(move=>before.unlockedMoves.includes(move))?profile.moves:before.profile.moves}:profile;
+      saveTrainingForm(this.db,owner,name,permanentProfile);
+      this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,name,JSON.stringify(permanentProfile),revision+1);
       if(run){const snapshots=this.runProfiles(run.id);snapshots[name]=profile;this.db.prepare('UPDATE runs SET profiles=? WHERE id=?').run(JSON.stringify(snapshots),run.id);}
     });
   }

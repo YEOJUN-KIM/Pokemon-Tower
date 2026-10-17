@@ -47,12 +47,11 @@ for(const [name,draw] of [['coins',0],['eggs',.3],['vitamins',.55],['growth',.7]
   store.continueEvent(owner,run,f.event.id);
   const entries=store.view(owner).run!.rewardInventory!;
   if(name==='vitamins'||name==='epic'||name==='machine'){
-   assert.equal(entries.length,name==='vitamins'?2:1);const entry=entries[0];assert.ok(entry.choices.length);
+   assert.equal(entries.length,name==='vitamins'?2:1);if(name==='machine'){const effect=result.entries[0];assert.equal(effect.kind,'machine');assert.ok(store.view(owner).run!.bag!.entries.some(e=>e.action==='machine'));return;}const entry=entries[0];assert.ok(entry.choices.length);
    const request=randomUUID();store.useReward(owner,run,request,entry.id,entry.choices[0].id);store.useReward(owner,run,request,entry.id,entry.choices[0].id);
    assert.throws(()=>store.useReward(owner,run,randomUUID(),entry.id,entry.choices[0].id));
    if(name==='epic'){assert.ok(epicRewardItems.every(item=>itemShopRule(item).rarity==='epic'));assert.equal(store.view(owner).run!.itemBag![entry.choices[0].id],1);}
    if(name==='vitamins')assert.equal(store.db.prepare('SELECT COUNT(*) AS n FROM vitamin_purchases WHERE run_id=?').get(run)!.n,1);
-   if(name==='machine'){const effect=result.entries[0];assert.equal(effect.kind,'machine');if(effect.kind==='machine')assert.ok(store.trainingCollection(owner).find(e=>e.species===entry.choices[0].id)!.unlockedMoves.includes(effect.move));}
   }
  }finally{store.close();}
 });
@@ -128,7 +127,7 @@ test('v38 old challenger reward JSON remains byte-for-byte intact and pays its o
  try{
   const original=store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(f.event.id)!.candidates_json;
   store.db.exec('PRAGMA user_version=38');store.close();store=new TowerStore(path);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,40);assert.equal(store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(f.event.id)!.candidates_json,original);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,41);assert.equal(store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(f.event.id)!.candidates_json,original);
   const before=store.view(f.owner).coins;store.chooseEvent(f.owner,f.run,f.event.id,'medium');finishChallengerBattle(store,store.currentBattle(f.owner)!.id);assert.equal(store.view(f.owner).coins,before+700);assert.equal(store.permanentView(f.owner).eggTickets,1);
  }finally{store.close();}
 });

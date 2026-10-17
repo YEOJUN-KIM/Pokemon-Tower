@@ -47,18 +47,11 @@ test('three vitamins total across types and checkpoints persist after reopen and
  }finally{store.close();}
 });
 
-test('confirmed item transfers and swaps conserve inventory and reject stale or incompatible exchanges atomically',()=>{
+test('automatic item transfers return the previous target tool and reject stale holders atomically',()=>{
  const {store,run}=setup();try{
-  store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(run,'Charizard','Leftovers');
-  store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(run,'Blastoise','Sitrus Berry');
-  assert.throws(()=>store.equipItem('feedback',run,11,'Blastoise','Leftovers'),/승인/);
-  store.equipItem('feedback',run,11,'Blastoise','Leftovers','Charizard');
-  assert.deepEqual(store.view('feedback').run!.heldItems,{Charizard:'Sitrus Berry',Blastoise:'Leftovers'});assert.deepEqual(store.view('feedback').run!.itemBag,{});
-  store.equipItem('feedback',run,11,'Venusaur','Leftovers','Blastoise');
-  assert.deepEqual(store.view('feedback').run!.heldItems,{Charizard:'Sitrus Berry',Venusaur:'Leftovers'});
-  const before=store.view('feedback');assert.throws(()=>store.equipItem('feedback',run,11,'Blastoise','Leftovers','Charizard'),/확인/);assert.deepEqual(store.view('feedback'),before);
-  store.db.prepare("UPDATE run_held_items SET item='Charizardite X' WHERE run_id=? AND species='Charizard'").run(run);
-  const incompatible=store.view('feedback');assert.throws(()=>store.equipItem('feedback',run,11,'Charizard','Leftovers','Venusaur'),/맞는 도구/);assert.deepEqual(store.view('feedback'),incompatible);
+  store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(run,'Charizard','Leftovers');store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(run,'Blastoise','Sitrus Berry');
+  store.equipItem('feedback',run,11,'Blastoise','Leftovers');assert.deepEqual(store.view('feedback').run!.heldItems,{Blastoise:'Leftovers'});assert.equal(store.view('feedback').run!.itemBag!['Sitrus Berry'],1);
+  store.equipItem('feedback',run,11,'Venusaur','Leftovers');assert.deepEqual(store.view('feedback').run!.heldItems,{Venusaur:'Leftovers'});const before=store.view('feedback');assert.throws(()=>store.equipItem('feedback',run,11,'Blastoise','Leftovers','Charizard'),/바뀌었/);assert.deepEqual(store.view('feedback'),before);
  }finally{store.close();}
 });
 

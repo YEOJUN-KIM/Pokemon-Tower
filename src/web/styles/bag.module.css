@@ -1,0 +1,15 @@
+.scope {color:#edf5ed;display:grid;gap:12px;}
+.dialog {max-width:1000px;}
+.pockets {display:flex;flex-wrap:wrap;gap:6px;}
+.scope button {font:inherit;color:inherit;background:#293d49;border:1px solid #597784;border-radius:0;min-height:38px;padding:8px 12px;text-align:left;}
+.scope button[aria-pressed=true],.scope button[data-game-cursor=true],.scope button:focus-visible {background:#354b55;border-color:#ffeba3;}
+.scope button:disabled {opacity:.45;}
+.layout {display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.8fr);gap:18px;min-height:260px;}
+.list {display:flex;flex-direction:column;gap:3px;max-height:50vh;overflow:auto;}
+.list button {display:flex;justify-content:space-between;align-items:center;gap:8px;}
+.list small {color:#b4d4db;font-size:11px;}
+.detail {padding:14px;border:1px solid #597784;line-height:1.6;}
+.detail img {object-fit:contain;image-rendering:pixelated;}
+.detail p {font-size:13px;}.detail h3 {font-size:18px;}
+.targets {display:flex;flex-direction:column;gap:4px;}
+@media(max-width:760px){.layout {grid-template-columns:minmax(0,1fr);gap:10px;}.list {max-height:28vh;}.detail {padding:10px;}.pockets button {font-size:12px;padding:6px;}}

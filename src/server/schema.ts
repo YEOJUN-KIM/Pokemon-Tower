@@ -171,5 +171,5 @@ CREATE TABLE IF NOT EXISTS run_reward_inventory(id TEXT PRIMARY KEY,run_id TEXT 
 CREATE TABLE IF NOT EXISTS reward_use_receipts(run_id TEXT NOT NULL REFERENCES runs(id),request_id TEXT NOT NULL,payload TEXT NOT NULL,PRIMARY KEY(run_id,request_id)) STRICT;
 CREATE TABLE IF NOT EXISTS reward_egg_tickets(player_id TEXT NOT NULL REFERENCES players(id),kind TEXT NOT NULL CHECK(kind IN ('superRare','shiny')),quantity INTEGER NOT NULL CHECK(quantity>=0),PRIMARY KEY(player_id,kind)) STRICT;
 CREATE TABLE IF NOT EXISTS hidden_shop_events(event_id TEXT PRIMARY KEY REFERENCES run_events(id),snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json))) STRICT;
-  PRAGMA user_version = 40;
+  PRAGMA user_version = 41;
 `;

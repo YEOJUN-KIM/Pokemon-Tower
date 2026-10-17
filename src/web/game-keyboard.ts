@@ -43,6 +43,11 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
       if(event.key==='Tab'){document.body.dataset.gameInput='native';return;}
       if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','PageUp','PageDown','Enter'].includes(event.key) || ['z','x','c','a','s','q','e','v','f','r'].includes(event.key.toLowerCase()))document.body.dataset.gameInput='cursor';
       const key=event.key.toLowerCase(),scope=context(),cursor=draw();
+      const pocketScope=cursor?.closest('[data-keyboard-pocket-scope]')??(scope instanceof HTMLDialogElement?scope.querySelector('[data-keyboard-pocket-scope]'):null);
+      if(pocketScope&&['arrowleft','arrowright'].includes(key)){
+        event.preventDefault();const tabs=Array.from(pocketScope.querySelectorAll<HTMLButtonElement>('[data-game-tabs] button:not(:disabled)'));
+        const index=tabs.findIndex(tab=>tab.getAttribute('aria-pressed')==='true');tabs[(Math.max(0,index)+(key==='arrowright'?1:tabs.length-1))%tabs.length]?.click();return;
+      }
       if(event.repeat && (['enter','z','x','c','q','e'].includes(key)||/^[1-5]$/.test(key))){event.preventDefault();return;}
       if(/^[1-9]$/.test(key)&&scope instanceof HTMLDialogElement){const button=scope.querySelector<HTMLButtonElement>(`button[data-number-shortcut="${key}"]`);if(button){event.preventDefault();if(!button.disabled&&button.getClientRects().length){document.body.dataset.gameInput='cursor';select(button);button.click();}return;}}
       if(key==='x' && cursor?.closest('[data-keyboard-zone=library]')){
@@ -139,6 +144,12 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
         const previous=items.filter(item=>item.closest('[data-keyboard-list]')).at(-1);select(previous);previous?.scrollIntoView({block:'nearest'});return;
       }
       const list=cursor.closest<HTMLElement>('[data-keyboard-list]');
+      const directionalGrid=cursor.closest<HTMLElement>('[data-keyboard-grid=directional]');
+      if(typeof scope==='string' && directionalGrid){
+        const entries=items.filter(item=>item.closest('[data-keyboard-grid=directional]')===directionalGrid);
+        const next=directionalButton(cursor,entries,key)??cursor;
+        select(next);next.scrollIntoView({block:'nearest',inline:'nearest'});return;
+      }
       if(list) {
         const entries=items.filter(item=>item.closest('[data-keyboard-list]')===list),position=entries.indexOf(cursor);
         const delta=event.key==='ArrowDown' ? 1 : event.key==='ArrowUp' ? -1 : 0;

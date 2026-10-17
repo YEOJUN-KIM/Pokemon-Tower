@@ -35,5 +35,5 @@ for(const gender of ['F','M','N'] as const)test(`Attract uses the packed sex (${
   const teams={p1:Showdown.Teams.pack([own,trainedSet('Gengar'),trainedSet('Charizard')]),p2:Showdown.Teams.pack([target,trainedSet('Blastoise'),trainedSet('Venusaur')])};
   const log=await runBattle({teams,seed:[1,2,3,4],player:{choose:o=>o.legalActions.find(a=>a.command.startsWith('team '))?.command ?? (o.turn===1?'move 1':o.legalActions.find(a=>a.command==='move 2')?.command ?? o.legalActions[0].command)},opponent:{choose:o=>o.legalActions.find(a=>a.command.startsWith('team '))?.command ?? o.legalActions.find(a=>a.command==='move 1')?.command ?? o.legalActions[0].command}});
   assert.equal(log.publicProtocol.some(line=>line.startsWith('|-start|p2a:')&&line.includes('|Attract')),gender==='F');
-  const replay=await replayBattle(log);assert.deepEqual(replay.publicProtocol,log.publicProtocol);
+  const replay=await replayBattle(log);assert.deepEqual(replay.publicProtocol.filter(line=>!line.startsWith('|t:|')),log.publicProtocol.filter(line=>!line.startsWith('|t:|')));
 });

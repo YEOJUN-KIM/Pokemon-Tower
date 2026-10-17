@@ -62,11 +62,12 @@ export async function POST(request: NextRequest) {
     if((body.type==='event-choice'||body.type==='event-continue'||body.type==='event-reward-select'||body.type==='hidden-shop-purchase') && typeof body.runId==='string' && typeof body.eventId==='string'){
       if(body.type==='event-choice')service.store.chooseEvent(player,body.runId,body.eventId,body.choice);
       else if(body.type==='event-reward-select')service.store.selectEventReward(player,body.runId,body.eventId,body.selectionId,body.candidateId);
-      else if(body.type==='hidden-shop-purchase')service.store.purchaseHiddenShop(player,body.runId,body.eventId,body.productId);
+      else if(body.type==='hidden-shop-purchase')service.store.purchaseHiddenShop(player,body.runId,body.eventId,body.productId,body.destination??'bag',body.species??null);
       else service.store.continueEvent(player,body.runId,body.eventId);
       return NextResponse.json(await service.state(player),{headers});
     }
     if(body.type==='reward-use' && typeof body.runId==='string'){service.store.useReward(player,body.runId,body.requestId,body.entryId,body.choiceId);return NextResponse.json(await service.state(player),{headers});}
+    if(body.type==='bag-use' && typeof body.runId==='string'){service.store.useBag(player,body.runId,body.requestId,body.entryId,body.target??null,body.slot??null);return NextResponse.json(await service.state(player),{headers});}
     if(body.type==='favorite') {
       service.store.setFavorite(player,body.species,body.enabled);
       return NextResponse.json({tower:service.store.view(player)},{headers});

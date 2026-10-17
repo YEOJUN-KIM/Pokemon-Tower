@@ -4,38 +4,22 @@ import {mkdirSync} from 'node:fs';
 import {Accounts} from '../src/server/accounts';
 import {hiddenShopFixture} from '../tests/hidden-shop-fixture';
 
-for(const width of [1280,390])test(`hidden shop at ${width}: snapshot, mixed payment, duplicate API, limit and leave`,async({page,context})=>{
- const suffix=randomBytes(8).toString('hex'),owner=`hidden-${suffix}`,f=hiddenShopFixture('.data/e2e.sqlite',owner);
+for(const width of [1280,390])test(`hidden shop at ${width}: immediate/cancel, mixed payment, duplicate receipt, two purchases and restore`,async({page,context})=>{
+ const suffix=randomBytes(8).toString('hex'),owner='hidden-'+suffix,f=hiddenShopFixture('.data/e2e.sqlite',owner);
  try{
-  f.store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();
-  const auth=await new Accounts(f.store.db).register(`hs_${suffix}`,'hidden-shop-test-password',owner,undefined);
+  f.store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();const auth=await new Accounts(f.store.db).register('hs_'+suffix,'hidden-shop-test-password',owner,undefined);
   f.pin(['vitamin-atk','item-Life Orb','machine-Earthquake','egg-ticket-5','equipment-Dynamax Band'],['coins','growth-points','coins','growth-points','growth-points']);
-  await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
-  await page.setViewportSize({width,height:width===390?844:900});await page.goto('/battle');
-  const shop=page.getByTestId('hidden-shop'),cards=shop.locator('[data-product-id]');
-  await expect(shop).toBeVisible();await expect(cards).toHaveCount(5);await expect(shop).toContainText('남은 구매 횟수 2');
-  for(const img of await shop.locator('img').all())expect(await img.evaluate(el=>(el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
-  await expect(shop.getByLabel('보유 재화')).toContainText('타워 코인');await expect(shop.getByLabel('보유 재화')).toContainText('성장 포인트');
-  const before=await cards.allTextContents();await page.reload();await expect(shop).toBeVisible();expect(await cards.allTextContents()).toEqual(before);
-  const vitaminButton=shop.locator('[data-product-id="vitamin-atk"] button');
-  if(width===1280){await vitaminButton.evaluate(element=>document.dispatchEvent(new CustomEvent('game-cursor-select',{detail:element})));await expect(vitaminButton).toHaveAttribute('data-game-cursor','true');await page.keyboard.press('Enter');}else await vitaminButton.click();
-  await expect(shop).toContainText('남은 구매 횟수 1');
-  await expect(shop.locator('[data-product-id="vitamin-atk"] button')).toBeDisabled();
-  const saved=f.store.view(owner);
-  const payload={type:'hidden-shop-purchase',runId:f.run,eventId:f.eventId,productId:'vitamin-atk',price:0,currency:'growth-points',quantity:100,item:'Life Orb'};
-  const repeated=await Promise.all([1,2].map(()=>page.request.post('/api/battle',{headers:{origin:'http://127.0.0.1:3001'},data:payload})));
-  expect(repeated.every(r=>r.ok())).toBe(true);expect(f.store.view(owner)).toEqual(saved);
-  await shop.locator('[data-product-id="item-Life Orb"] button').click();await expect(shop).toContainText('구매 한도를 모두 사용했습니다.');
-  await page.reload();await expect(shop).toContainText('총 2 / 2개 구매');
-  for(const button of await shop.locator('button').all())await expect(button).toBeDisabled();
-  const after=f.store.view(owner);expect(after.coins).toBe(49600);expect(after.growthPoints).toBe(9750);
-  const third=await page.request.post('/api/battle',{headers:{origin:'http://127.0.0.1:3001'},data:{...payload,productId:'egg-ticket-5'}});expect(third.status()).toBe(409);expect(f.store.view(owner)).toEqual(after);
-  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-  expect(await shop.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
-  await expect(page.getByRole('button',{name:'나가기',exact:true})).toBeInViewport();
-  mkdirSync('artifacts/qa/screenshots/hidden-shop',{recursive:true});await page.screenshot({path:`artifacts/qa/screenshots/hidden-shop/purchased-${width}.png`});
-  await page.getByRole('button',{name:'나가기',exact:true}).click();await expect(shop).toHaveCount(0);
-  expect(f.store.view(owner).run!.event).toBeNull();expect(f.store.view(owner).run!.floor).toBe(2);
+  await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);await page.setViewportSize({width,height:width===390?844:900});await page.goto('/battle');
+  const shop=page.getByTestId('hidden-shop'),detail=page.getByTestId('hidden-shop-detail'),buy=page.locator('[data-hidden-shop-buy]');await expect(shop).toBeVisible();await expect(detail).toHaveAttribute('data-offer-id','vitamin-atk');await expect(shop).toContainText('구매 0 / 2');
+  for(const [index,id] of ['vitamin-atk','item-Life Orb','machine-Earthquake','egg-ticket-5','equipment-Dynamax Band'].entries()){await page.keyboard.press(String(index+1));await expect(detail).toHaveAttribute('data-offer-id',id);}expect(f.store.view(owner).run!.event!.hiddenShop!.purchasedCount).toBe(0);
+  await page.keyboard.press('1');await page.keyboard.press('ArrowDown');await expect(detail).toHaveAttribute('data-offer-id','item-Life Orb');await page.keyboard.press('ArrowUp');await expect(detail).toHaveAttribute('data-offer-id','vitamin-atk');
+  mkdirSync('artifacts/qa/screenshots/hidden-shop',{recursive:true});await page.screenshot({path:`artifacts/qa/screenshots/hidden-shop/entry-${width}.png`});
+  await buy.click();let acquisition=page.getByTestId('item-acquisition');await expect(acquisition).toBeVisible();await acquisition.getByRole('button',{name:'취소',exact:true}).click();expect(f.store.view(owner).run!.event!.hiddenShop!.purchasedCount).toBe(0);
+  await buy.click();await acquisition.getByRole('button',{name:'바로 사용',exact:true}).click();await acquisition.locator('[data-partner=Charizard]').click();await expect(shop).toContainText('구매 1 / 2');await expect(page.getByRole('region',{name:'수상한 상인 대화'})).toContainText('하나 더 고를 수 있어');
+  const before=f.store.view(owner),payload={type:'hidden-shop-purchase',runId:f.run,eventId:f.eventId,productId:'vitamin-atk',price:0,quantity:100};const repeated=await Promise.all([1,2].map(()=>page.request.post('/api/battle',{headers:{origin:'http://127.0.0.1:3001'},data:payload})));expect(repeated.every(r=>r.ok())).toBe(true);expect(f.store.view(owner)).toEqual(before);
+  await shop.locator('[data-shop-offer="item-Life Orb"]').click();await buy.click();await acquisition.getByRole('button',{name:'배낭에 넣기',exact:true}).click();await expect(shop).toContainText('구매 2 / 2');await page.reload();await expect(shop).toContainText('구매 2 / 2');await page.keyboard.press('3');await expect(detail).toContainText('더 이상 구매할 수 없습니다.');await expect(buy).toBeDisabled();await expect(page.getByRole('button',{name:'배낭',exact:true})).toBeEnabled();
+  const after=f.store.view(owner);expect(after.coins).toBe(49600);expect(after.growthPoints).toBe(9750);const third=await page.request.post('/api/battle',{headers:{origin:'http://127.0.0.1:3001'},data:{...payload,productId:'egg-ticket-5'}});expect(third.status()).toBe(409);expect(f.store.view(owner)).toEqual(after);
+  await page.screenshot({path:`artifacts/qa/screenshots/hidden-shop/purchased-${width}.png`});await page.getByRole('button',{name:'나가기',exact:true}).click();await expect(shop).toHaveCount(0);
  }finally{f.store.close();}
 });
 
@@ -77,8 +61,17 @@ test('checkpoint regression: normal consumable, trainer equipment and TM still p
   await page.locator('[data-held-item="Dynamax Band"]').click();await expect.poll(()=>f.store.trainerEquipment(f.run)).toContain('Dynamax Band');
   await page.getByRole('button',{name:'배틀 아이템',exact:true}).click();await page.locator('.shop-product').filter({hasText:'플러스파워'}).getByRole('button').click();await expect.poll(()=>f.store.view(owner).run!.battleItems?.attack).toBe(1);
   await page.getByRole('button',{name:'기술머신',exact:true}).click();await page.locator(`[data-machine="${machine.move}"]`).click();
-  const dialog=page.getByTestId('machine-confirmation');await dialog.locator(`[data-target="${machine.targets[0]}"]`).click();await dialog.getByRole('button',{name:'도감에만 저장',exact:true}).click();await dialog.locator('.machine-buy').click();await expect(dialog).toContainText('기술머신 구매 완료');
-  expect(f.store.db.prepare('SELECT 1 FROM move_unlocks WHERE player_id=? AND species=? AND move=?').get(owner,machine.targets[0],machine.move)).toBeTruthy();
+  await expect.poll(()=>f.store.view(owner).run!.bag!.entries.some(e=>e.move===machine.move)).toBe(true);await expect(page.getByTestId('machine-confirmation')).toHaveCount(0);
   expect(f.store.view(owner).growthPoints).toBe(10000);await expect(page.getByText('영양제',{exact:true})).toHaveCount(0);
+ }finally{f.store.close();}
+});
+
+for(const width of [1280,900,390])for(const count of [4,5])test(`hidden list/detail ${count} products at ${width}: Z TM purchase, restore, X`,async({page,context})=>{
+ const suffix=randomBytes(8).toString('hex'),owner='hl-'+suffix,f=hiddenShopFixture('.data/e2e.sqlite',owner);
+ try{
+  f.store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();const auth=await new Accounts(f.store.db).register('hy_'+suffix,'hidden-shop-test-password',owner,undefined);f.pin(['vitamin-atk','item-Life Orb','machine-Earthquake','egg-ticket-5','equipment-Dynamax Band'].slice(0,count));
+  await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);await page.setViewportSize({width,height:900});await page.goto('/battle');const shop=page.getByTestId('hidden-shop'),detail=page.getByTestId('hidden-shop-detail');await expect(shop.locator('[data-product-id]')).toHaveCount(count);
+  const list=await shop.locator('[data-keyboard-list]').boundingBox(),info=await detail.boundingBox();if(width>760)expect(list!.x+list!.width).toBeLessThan(info!.x);else expect(list!.y+list!.height).toBeLessThanOrEqual(info!.y);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.keyboard.press('3');await expect(detail).toHaveAttribute('data-offer-id','machine-Earthquake');await page.keyboard.press('z');await expect(shop).toContainText('구매 1 / 2');await expect(page.getByTestId('item-acquisition')).toHaveCount(0);expect(f.store.view(owner).run!.bag!.entries.some(e=>e.move==='Earthquake')).toBe(true);await page.reload();await expect(shop).toContainText('구매 1 / 2');await page.keyboard.press('x');await expect(shop).toHaveCount(0);
  }finally{f.store.close();}
 });

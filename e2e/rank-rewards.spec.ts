@@ -40,9 +40,12 @@ for(const [category,draw] of [['vitamin',.55],['epic',.8],['machine',.9]] as con
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);await page.setViewportSize({width:390,height:844});await page.goto('/battle');
   const modal=page.getByTestId('reward-modal');await expect(modal).toBeVisible();await expect(modal).toContainText('희귀한 보상');await expect(modal.getByRole('button',{name:'선택하기 >'})).toHaveCount(0);
   await page.screenshot({path:`artifacts/qa/screenshots/rank-rewards/elite-${category}.png`});await modal.getByRole('button',{name:'확인',exact:true}).click();
-  const entry=store.view(owner).run!.rewardInventory![0],inventory=page.getByRole('region',{name:'보상 보관함'}); // section's accessible name
-  await expect(inventory).toBeVisible();await inventory.getByRole('button',{name:new RegExp(entry.label)}).click();const choice=entry.choices[0],label=store.view(owner).run!.roster.includes(choice.id)?({'Charizard':'리자몽','Blastoise':'거북왕','Venusaur':'이상해꽃'} as Record<string,string>)[choice.id]:choice.label;
-  await inventory.getByRole('button',{name:label,exact:true}).click();await expect(inventory).toHaveCount(0);expect(store.view(owner).run!.rewardInventory!.length).toBe(0);
+  await page.getByRole('button',{name:'배낭',exact:true}).click();const bag=page.getByTestId('bag');await expect(bag).toBeVisible();
+  await bag.getByRole('button',{name:category==='vitamin'?'소모품':category==='machine'?'기술머신':'도구',exact:true}).click();
+  const entry=store.view(owner).run!.bag!.entries.find(e=>e.action===(category==='vitamin'?'vitamin':category==='machine'?'machine':'exchange'))!;await bag.locator('[data-bag-entry="'+entry.id+'"]').click();
+  if(entry.targets.length){await bag.getByRole('button',{name:'사용',exact:true}).click();await bag.locator('[data-bag-target="'+entry.targets[0]+'"]').click();if(category==='machine')await bag.locator('[data-learning-slot="0"]').click();}
+  if(category==='machine')expect(store.view(owner).run!.bag!.entries.some(e=>e.move===entry.move)).toBe(true);else expect(store.view(owner).run!.rewardInventory!.length).toBe(0);
+  await bag.getByRole('button',{name:'닫기',exact:true}).click();
   store.db.prepare("UPDATE runs SET floor=21,state='select' WHERE id=?").run(run);await page.reload();await page.getByTestId('maintenance-shop').click();await expect(page.getByRole('button',{name:'육성',exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'지닌 도구',exact:true})).toBeVisible();await expect(page.getByRole('button',{name:'기술머신',exact:true})).toBeVisible();
  }finally{store.close();}
 });

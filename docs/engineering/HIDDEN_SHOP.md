@@ -55,7 +55,7 @@ DB v40의 `hidden_shop_events(event_id PRIMARY KEY REFERENCES run_events(id),sna
 |---|---|
 | 영양제 | Reward → `grantStoredReward` → `run_reward_inventory`. 출전 준비에서 기존 `RewardInventory.use` → `applyVitamin`. 포켓몬당 총 3개/같은 층 사용 제한 유지 |
 | 에픽 도구 | 단일 item-exchange effect snapshot → `grantRunItem`으로 `run_item_bag` 직접 지급 → 기존 장착 UI. 신규 도구 DB 없음 |
-| TM | Elite와 공유한 `eligibleRewardMachines`로 파티/폼 learnset·selfMoves·현재 기술·영구 해금 확인. 아무도 새로 배울 수 없거나 같은 TM이 보관함에 있으면 제외. 구매 후 보관함 → `learnMachine` → `move_unlocks` 영구 해금 |
+| TM | Elite와 공유한 `eligibleRewardMachines`에서 현재 Run 소유권만 확인. compatibility는 Bag 사용 시 검사하며 한 번 등록한 TM은 Run 동안 반복 사용. 계정 해금 없음 |
 | 일반 티켓 | egg-ticket effect → `permanent_upgrades.egg_tickets` ×3/×5 → 기존 Permanent Shop 부화 |
 | 슈퍼레어 | typed-egg-ticket(superRare) → `grantEggTicket` → `reward_egg_tickets` → 기존 Permanent Shop 보상 티켓 부화 |
 | 장비 | `allowsRuleItem`·`run_trainer_equipment` 미보유 검사 → 기존 Reward의 `grantEquipment`. Held Item과 구분하고 두 장비 동시 보유 유지 |
@@ -66,7 +66,7 @@ DB v40의 `hidden_shop_events(event_id PRIMARY KEY REFERENCES run_events(id),sna
 
 기존 일반 상점 카드 표면을 `web/shop-product.tsx`로 추출해 소모품·TM·히든상점에서 공유합니다. 기존 `tower-shop/shop-products/shop-product/secondary-button` 스타일, 이벤트 화면과 키보드 조작을 재사용합니다. 전용 CSS는 배치·내부 스크롤·재화 구분을 담당합니다.
 
-제목/설명, 두 지갑, 재화 이름·아이콘·가격, 남은 횟수/총 구매 수, 품절·재화 부족·한도 상태를 표시합니다. 코인은 🪙·금색, 성장 포인트는 ◆·파란색·P로 구분하고 재화 이름도 항상 표시합니다. 모바일 2열/PC 3열 내부 스크롤이며 기존 알 이미지/TM 디스크 SVG를 사용합니다. 2개 구매 후 나머지 버튼을 비활성화합니다.
+현재 UI는 좌측 세로 상품 목록·우측 상세·하단 상인 대화로 구성합니다. 공통 Bag에서 사용/장착하고, Held/Vitamin은 즉시 사용 또는 배낭 등록을 선택합니다. TM은 자동 등록합니다. 기존 4–5개 상품/두 재화/가격/최대 2개 구매/snapshot/exact-once를 유지합니다. [공통 배낭과 상점 통합](BAG.md)이 최신 규칙이며, 이전 카드 UI 보고서는 [HIDDEN_SHOP_UI](HIDDEN_SHOP_UI.md)에 남깁니다.
 
 나가기는 기존 leave choice로 완료 처리합니다. 0개 구매도 가능하고 재입장하지 않습니다. 열린 이벤트만 복구합니다. 마지막 구매 후 자동 퇴장하지 않고 추가 확인 모달도 없습니다. 기존 10층 상점/관리와 영양제 고정 판매 제거 상태를 유지합니다.
 

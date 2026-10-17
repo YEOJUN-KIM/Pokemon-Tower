@@ -29,3 +29,5 @@
 새 일반층과 도전자 선택전은 공통 [NPC Sample·Rank 시스템](engineering/NPC_TRAINING.md)을 사용합니다. v38은 새 런만 적용하며 기존 네임드/빌런과 저장 상대는 유지합니다.
 
 공통 NPC는 클래스별 rankWeights와 teamConcept으로 Rank를 결정하고 테마 수를 유지합니다. Normal 도구 슬롯을 제한하며 신규 encounter snapshot v2와 기존 v1 읽기를 함께 지원합니다.
+
+2026-10-17: 공통 Run Bag과 상점/TM 통합을 구현했습니다. DB v41은 기존 저장소를 재사용하는 의미 변환입니다. Held 자동 이동/반환, Run TM 반복 사용·미보유 후보 생성, 일반/히든상점 full-use Bag, 세로 Hidden Shop 및 원자적 즉시 구매를 지원합니다. 최신 명세·호환 정책·검증은 [BAG](engineering/BAG.md)을 따릅니다.

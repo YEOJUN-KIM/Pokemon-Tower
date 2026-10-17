@@ -1,3 +1,4 @@
+import {grantStoredReward} from '../src/server/inventory-grants';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {randomUUID} from 'node:crypto';
@@ -40,7 +41,7 @@ test('category weights are per group and repeat-category soft penalty preserves 
 
 test('purchased vitamin and TM use existing reward inventory and keep vitamin cap/forever move unlock',()=>{
  const f=hiddenShopFixture();try{
-  const machine=f.products.find(p=>p.category==='machine')!;f.pin(['vitamin-atk',machine.id]);
+  const machine=f.products.find(p=>p.id==='machine-Earthquake')!;f.pin(['vitamin-atk',machine.id]);
   f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,'vitamin-atk');f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,machine.id);
   f.store.chooseEvent(f.owner,f.run,f.eventId,'leave');
   const inventory=f.store.view(f.owner).run!.rewardInventory!;
@@ -48,8 +49,8 @@ test('purchased vitamin and TM use existing reward inventory and keep vitamin ca
   assert.ok(vitamin.choices.length);assert.ok(tm.choices.length);
   f.store.useReward(f.owner,f.run,randomUUID(),vitamin.id,vitamin.choices[0].id);
   assert.equal(f.store.db.prepare('SELECT COUNT(*) AS n FROM vitamin_purchases WHERE run_id=? AND species=?').get(f.run,vitamin.choices[0].id)!.n,1);
-  const request=randomUUID();f.store.useReward(f.owner,f.run,request,tm.id,tm.choices[0].id);f.store.useReward(f.owner,f.run,request,tm.id,tm.choices[0].id);
-  if(machine.effect.kind!=='machine')throw Error();assert.ok(f.store.db.prepare('SELECT 1 FROM move_unlocks WHERE player_id=? AND species=? AND move=?').get(f.owner,tm.choices[0].id,machine.effect.move));
+  const bag=f.store.view(f.owner).run!.bag!.entries.find(e=>e.id===tm.id)!;const request=randomUUID();f.store.useBag(f.owner,f.run,request,tm.id,bag.targets[0],0);f.store.useBag(f.owner,f.run,request,tm.id,bag.targets[0],0);
+  if(machine.effect.kind!=='machine')throw Error();assert.ok(f.store.view(f.owner).run!.bag!.entries.some(e=>e.move===(machine.effect.kind==='machine'?machine.effect.move:'')));assert.equal(f.store.db.prepare('SELECT 1 FROM move_unlocks WHERE player_id=? AND species=? AND move=?').get(f.owner,bag.targets[0],machine.effect.move),undefined);
  }finally{f.store.close();}
 });
 
@@ -122,7 +123,7 @@ test('rule/ownership eligibility excludes unique held items, both owned trainer 
   f.store.db.prepare("INSERT INTO run_held_items VALUES (?,?,'Choice Band')").run(f.run,starters[0]);
   const machine=f.products.find(p=>p.effect.kind==='machine')!;
   if(machine.effect.kind!=='machine')throw Error();
-  for(const species of f.store.roster(f.run))f.store.db.prepare('INSERT OR IGNORE INTO move_unlocks VALUES (?,?,?)').run(f.owner,species,machine.effect.move);
+  grantStoredReward(f.store.db,f.run,{kind:'machine',move:machine.effect.move,amount:1});
   const products=hiddenShopProducts(f.store.db,f.run);
   assert.ok(!products.some(p=>p.category==='equipment'||['item-Life Orb','item-Choice Band',machine.id].includes(p.id)));
  }finally{f.store.close();}
@@ -180,6 +181,6 @@ test('schema 39 migration adds storage while preserving old event snapshots',()=
  try{
   store.chooseEvent(f.owner,f.run,f.eventId,'leave');const old=store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId);
   store.db.exec('DROP TABLE hidden_shop_events; PRAGMA user_version=39');store.close();store=new TowerStore(path);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,40);assert.deepEqual(store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId),old);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,41);assert.deepEqual(store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId),old);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
  }finally{store.close();}
 });

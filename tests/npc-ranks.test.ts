@@ -130,7 +130,7 @@ test('v37 migration leaves old runs unmarked, preserves packed battles/candidate
   store.db.prepare('DELETE FROM run_npc_rules WHERE run_id=?').run(run);
   const saved=store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(event.id)!.candidates_json;
   store.db.exec('PRAGMA user_version=37');store.close();store=new TowerStore(path,max=>max-1);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,40);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,41);
   assert.equal(store.db.prepare('SELECT COUNT(*) AS n FROM run_npc_rules WHERE run_id=?').get(run)!.n,0);
   assert.equal(store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(event.id)!.candidates_json,saved);
   store.chooseEvent(owner,run,event.id,'back');store.db.prepare('DELETE FROM run_villains WHERE run_id=?').run(run);

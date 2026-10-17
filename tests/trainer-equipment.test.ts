@@ -31,7 +31,7 @@ test('equipment purchases occupy no Pokemon slot, coexist, persist, and reject d
    assert.equal(itemShopRule(item).rarity,'legendary');
    assert.throws(()=>store.purchaseItem('equipment',id,11,item,'Charizard'),/트레이너/);
    store.purchaseItem('equipment',id,11,item,null);
-   assert.throws(()=>store.purchaseItem('equipment',id,11,item,null),/보유/);
+   const paid=store.view('equipment').coins;store.purchaseItem('equipment',id,11,item,null);assert.equal(store.view('equipment').coins,paid);
    assert.throws(()=>store.equipItem('equipment',id,11,'Charizard',item),/트레이너/);
   }
   assert.deepEqual(store.trainerEquipment(id),['Dynamax Band','Tera Orb']);

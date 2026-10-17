@@ -41,7 +41,7 @@ test('v12 migration adds empty inventories without changing saved battle teams',
     store.close();store=new TowerStore(path);
     assert.deepEqual(store.battle(id),before);
     assert.deepEqual(store.view('migration').run!.heldItems,{});
-    assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,40);
+    assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,41);
     assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
   }finally{store.close();}
 });
@@ -68,11 +68,11 @@ test('item purchases, transfers, rollback, snapshots and fresh runs preserve inv
     assert.throws(()=>store.purchaseItem('items',run,6,'Leftovers','Pikachu'),/선택/);
     store.purchaseItem('items',run,6,'Leftovers','Charizard');
     assert.equal(store.view('items').coins,1400);
-    assert.throws(()=>store.purchaseItem('items',run,6,'Leftovers','Blastoise'),/보유/);
+    store.purchaseItem('items',run,6,'Leftovers','Blastoise');assert.equal(store.view('items').coins,1400);
     store.purchaseItem('items',run,6,'Sitrus Berry','Charizard');
     assert.deepEqual(store.view('items').run!.itemBag, {Leftovers:1});
     store.equipItem('items',run,6,'Blastoise','Leftovers');
-    assert.throws(()=>store.equipItem('items',run,6,'Venusaur','Leftovers'),/한 마리/);
+    store.equipItem('items',run,6,'Venusaur','Leftovers');store.equipItem('items',run,6,'Blastoise','Leftovers');
     store.equipItem('items',run,6,'Charizard',null);
     assert.deepEqual(store.view('items').run!.itemBag,{'Sitrus Berry':1});
     store.close();store=new TowerStore(path);
@@ -83,7 +83,7 @@ test('item purchases, transfers, rollback, snapshots and fresh runs preserve inv
     assert.throws(()=>store.purchaseItem('items',run,11,'Leftovers','Venusaur'),/보유/);
     assert.deepEqual(store.view('items'),beforeDuplicate);
     store.db.prepare('UPDATE run_item_bag SET quantity=1 WHERE run_id=? AND item=?').run(run,'Leftovers');
-    assert.throws(()=>store.equipItem('items',run,11,'Venusaur','Leftovers'),/한 마리/);
+    store.equipItem('items',run,11,'Venusaur','Leftovers');store.equipItem('items',run,11,'Blastoise','Leftovers');
     assert.deepEqual(store.view('items').run!.heldItems,{Blastoise:'Leftovers'});
     store.db.prepare('DELETE FROM run_item_bag WHERE run_id=? AND item=?').run(run,'Leftovers');
     assert.throws(()=>store.purchaseItem('items',run,11,'Leftovers','Blastoise'),/보유/);

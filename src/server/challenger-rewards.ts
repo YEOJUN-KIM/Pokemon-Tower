@@ -1,4 +1,5 @@
 import type {DatabaseSync} from 'node:sqlite';
+import {ownsMachine,ownsRunItem} from './run-ownership';
 import {rankRewardProfiles as profiles,type RankRewardSnapshot} from '../data/challenger-rewards';
 import type {NpcRank} from '../data/npc-ranks';
 import type {RewardEffect,RewardOption,RewardSelectionDefinition} from '../data/rewards';
@@ -8,9 +9,6 @@ import {machineMoves} from '../data/shop';
 import {machineRarity} from '../data/machine-rarities';
 import {trainerEquipmentKeys} from '../data/trainer-equipment';
 import {statKeys} from '../data/training';
-import {trainingOptions} from './training';
-import {moveLearnsets,profileLearnset} from './move-learnsets';
-import type {TrainingProfile} from '../data/training';
 import {allowsRuleItem,type BattleRule} from '../data/run-rules';
 
 export function weightedRewardId<T extends string>(pool:readonly {id:T;weight:number}[],random:()=>number):T{
@@ -20,13 +18,9 @@ export function weightedRewardId<T extends string>(pool:readonly {id:T;weight:nu
 const pick=<T>(values:readonly T[],random:()=>number)=>values[Math.floor(random()*values.length)];
 export const epicRewardItems=heldItemKeys.filter(item=>itemShopRule(item).rarity==='epic');
 export const eliteRewardMachines=machineMoves.filter(move=>['unique','epic'].includes(machineRarity(move)));
-// Shared with hidden shops: current roster learnsets, permanent unlocks and
-// already configured moves use the same eligibility as Elite rewards.
+// Shared ownership filter; compatibility is checked only when a TM is used.
 export function eligibleRewardMachines(db:DatabaseSync,runId:string){
- const run=db.prepare('SELECT player_id,profiles FROM runs WHERE id=?').get(runId) as {player_id:string;profiles:string};
- const roster=(db.prepare('SELECT species FROM members WHERE run_id=?').all(runId) as {species:string}[]).map(r=>r.species);
- const training:Record<string,TrainingProfile>=JSON.parse(run.profiles);
- return eliteRewardMachines.filter(move=>roster.some(species=>!moveLearnsets[species].selfMoves.includes(move)&&!profileLearnset(species,training[species]?.forme).selfMoves.includes(move)&&trainingOptions(species,training[species]?.forme).learnableMoves.includes(move)&&!db.prepare('SELECT 1 FROM move_unlocks WHERE player_id=? AND species=? AND move=?').get(run.player_id,species,move)&&!training[species]?.moves.includes(move)));
+ return eliteRewardMachines.filter(move=>!ownsMachine(db,runId,move));
 }
 // Only reward randomness uses this source. Team/rank generation uses a different seed.
 export function snapshotRankReward(db:DatabaseSync,runId:string,rank:NpcRank,random:()=>number):RankRewardSnapshot{
@@ -44,7 +38,7 @@ export function snapshotRankReward(db:DatabaseSync,runId:string,rank:NpcRank,ran
     for(let i=0;i<count;i++){const index=Math.floor(random()*pool.length),stat=pool.splice(index,1)[0];entries.push({kind:'vitamin',stat,amount:1});}
     return result('vitamins',entries);
    }
-   case 'epic':return result('epic',[{kind:'item-exchange',items:epicRewardItems.filter(item=>allowsRuleItem(rule,item)),amount:1,fallbackCoins:profile.coins}]);
+   case 'epic':{const items=epicRewardItems.filter(item=>allowsRuleItem(rule,item)&&!ownsRunItem(db,runId,item));return items.length?result('epic',[{kind:'item-exchange',items,amount:1,fallbackCoins:profile.coins}]):result('epic-fallback',[{kind:'coins',amount:profile.coins}]);}
    case 'machine':{
     const moves=eligibleRewardMachines(db,runId);
     return moves.length?result('machine',[{kind:'machine',move:pick(moves,random),amount:1}]):result('machine-fallback',[{kind:'coins',amount:profile.coins}]);

@@ -10,10 +10,10 @@ import Showdown from 'pokemon-showdown';
 import {challengerFixture,finishChallengerBattle} from './challenger-fixture';
 import {runBattle} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
-import {mysteryChest} from '../src/data/run-events';
+import {eventEncounterSettings} from '../src/data/run-events';
 
 test('challenger encounter preserves shared encounter chance, legacy weights and floor eligibility',()=>{
- for(const version of [1,2])for(let draw=mysteryChest.encounterPercent;draw<100;draw++)assert.equal(selectRunEvent(4,null,()=>draw,undefined,version),null);
+ for(const version of [1,2])for(let draw=eventEncounterSettings.encounterPercent;draw<100;draw++)assert.equal(selectRunEvent(4,null,()=>draw,undefined,version),null);
  assert.equal(selectRunEvent(4,null,max=>max===100?0:100,undefined,2),'challenger-selection');
  let call=0;assert.equal(selectRunEvent(1,null,()=>call++===0?0:99,undefined,1),'traveling-merchant');
  assert.equal(selectRunEvent(5,null,()=>0,undefined,2),null);

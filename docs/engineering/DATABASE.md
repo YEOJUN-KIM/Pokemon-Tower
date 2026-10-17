@@ -1,19 +1,43 @@
 # 저장 데이터
 
-Node.js의 `node:sqlite`를 사용합니다. `src/server/schema.ts`와 `storage/migrations.ts`가 테이블·마이그레이션을 관리하고 코드가 지원하는 현재 스키마는 **39**입니다. 개별 DB·백업의 버전은 `PRAGMA user_version`으로 따로 확인합니다. v34는 이벤트 ID 제약을 애플리케이션으로 옮겼고, v35는 `result_json`과 이벤트 규칙 v2를 추가합니다. 기존 런의 v1과 대기·지급·완료 이벤트를 보존하며 새 활성 런만 v2를 사용합니다. [이벤트 확장 방법](EVENT_SYSTEM.md)을 참고하세요.
+기준: 2026-10-18. Node.js `node:sqlite`를 사용하며 현재 코드가 지원하는 DB 스키마는 **45**다. `src/server/schema.ts`의 `PRAGMA user_version`과 `src/server/storage/migrations.ts`가 기준이다. 개별 저장·백업 버전은 `PRAGMA user_version`으로 별도 확인한다. 코드보다 새로운 DB는 열지 않는다.
 
-계정·세션, 플레이어 재화, 도감·육성, 도전·팀·도구, 상대·배틀·행동, 보상·정산 상태를 저장합니다. 서버가 소유권을 확인하고 자원 소비와 보상을 트랜잭션으로 처리합니다.
+## 서로 다른 버전
 
-DB 경로는 `TOWER_DB_PATH`로 지정하며 기본값은 `.data/tower.sqlite`입니다. 로컬 개발의 실제 경로는 `.env.local`, 통합 실행기는 Docker 볼륨의 `/data/tower.sqlite`를 확인합니다. WAL 모드에서 `-wal`·`-shm` 파일도 사용하므로 실행 중 DB 파일만 따로 이동하거나 부속 파일을 삭제하지 않습니다.
+| 버전 | 의미·기준 |
+|---|---|
+| DB schema 45 | 테이블·제약·migration; 이벤트 종류 수나 AI 버전이 아님 |
+| run_event_rules 1/2 | 런의 이벤트 규칙. 새 런은 `currentEventRulesVersion=2`, 과거 v1은 유지 |
+| run_npc_rules 1 | 새 공통 Sample/Rank 생성 경로 표식. 기존 런에 소급 부여하지 않음 |
+| NPC encounter snapshot 1/2 | 저장한 팀 구성/Rank의 직렬화 구조 |
+| tower-policy-v11 및 이전 버전 | 배틀 행동 정책. 배틀 행의 버전을 그대로 복구 |
 
-수동 백업 스크립트는 실행 환경의 `TOWER_DB_PATH`를 사용하고 기본 보관 위치는 DB 옆의 `backups/`입니다. SQLite backup API와 무결성 검사를 사용합니다. 환경 파일을 읽는 명령과 Docker 백업은 [저장과 백업](../operations/BACKUPS.md)을 따릅니다.
+규칙 버전을 올리거나 현재 상수 값을 바꿨다는 이유로 기존 결과 JSON/팀/시드/영수증을 재작성하지 않는다. 이번 중간점검에는 새 DB migration이나 저장 버전 변경이 없다.
 
-1차 완성 이후 정기 백업 주기·보관 개수를 정합니다. 지금은 자동 주기 백업을 추가하지 않습니다. 기존 실제 저장 백업과 테스트용 DB를 구분합니다.
+## 저장 책임과 트랜잭션
 
-[계정·가져오기](../operations/ACCOUNTS.md) · [배포·복구](../operations/DEPLOYMENT.md)
+계정·세션, 재화, 수집·성장·선택 폼, 런·파티·장비·배낭, 배틀·행동·진행 순서, 이벤트 상태·보상·구매 영수증을 저장한다. `storage/transaction.ts`의 `BEGIN IMMEDIATE`/COMMIT/ROLLBACK에서 소유권·결제·지급·영수증·완료 상태를 함께 처리한다. 잔액이 충분한 경우에만 갱신하는 SQL과 요청 ID를 함께 유지한다.
 
-선택 폼의 공통 성장·선택 상태는 `pokemon_training`을 사용합니다. `pokemon_form_training`은 `(player_id, form_species)`를 키로 기술 배치·선택 특성·테라 타입만 저장하며, IV·능력 포인트·성격·성별·이로치는 포함하지 않습니다. 읽을 때 공통 성장 데이터와 선택 폼의 설정을 조합합니다. 공통 revision으로 동시 저장을 검증하고 폼 변경·공통 육성·폼 설정 저장을 하나의 트랜잭션으로 처리합니다. v37은 현재 선택 폼의 기존 설정을 이전하며 생성된 배틀·행동·도전 스냅샷은 바꾸지 않습니다.
+`storage/migrations.ts`는 테이블 보강·부모 테이블 재작성·데이터 복사·인덱스 복원·폼/수집 복구를 기존 순서로 실행한다. 필요한 구간에서만 트랜잭션 밖에서 외래키를 잠시 끄고, 복사 후 `foreign_key_check`와 재활성화를 수행한다. 초기화 콜백과 이전 순서를 임의로 바꾸지 않는다.
 
-v38은 `run_npc_rules(run_id, version=1)`를 추가합니다. 새 런만 공통 NPC Sample·Normal/Elite/Master 생성 경로를 사용하며, 기존 런에는 표식을 부여하지 않습니다. 기존 배틀·도전자 후보·보상 snapshot을 재작성하지 않습니다. [NPC 저장 호환](NPC_TRAINING.md)을 참고하세요.
+## 주요 현재 저장 구조
 
-DB v39는 run_reward_inventory(이번 도전 보상 보관), reward_use_receipts(사용 요청별 영수증), reward_egg_tickets(플레이어별 슈퍼레어/이로치 알 티켓)를 추가합니다. 기존 snapshot JSON은 그대로 보존합니다. vitamin_purchases는 판매 종료 후에도 기존 섭취 한도·효과 복구와 보상 영양제 섭취 기록에 사용합니다.
+- `run_events`: `kind`는 콘텐츠 문자열이며 특정 이벤트 목록을 DB CHECK로 고정하지 않는다. 서버 registry가 종류와 선택 ID를 검증한다. 이벤트당 `choice_id`, `result_json`, 지급 상태와 실제 보상을 보존하고 런당 진행 중 이벤트 하나를 고유 인덱스로 보장한다.
+- `challenger_encounters`, `raid_encounters`, `villain_event_encounters`, `hidden_boss_events`: 발생 시 팀·시드·보상 snapshot과 현재 시도 battle_id. 도전/승리/재도전 처리는 기존 snapshot을 사용한다.
+- `event_reward_selections`, `run_reward_inventory`, `reward_use_receipts`, `reward_egg_tickets`: 서버 보상 후보·소모·반복 요청·전용 알 티켓. 클라이언트가 보상 효과를 정하지 않는다.
+- `hidden_shop_events`: 상품·재화·가격·effect·구매 여부/한도를 하나의 JSON으로 보존한다.
+- `run_encounter_progress`와 battles/run_events의 `encounter_order`: 순간이동으로 층을 재방문해도 통과 순서·쿨다운·전투 시도를 구분한다. 재도전 횟수는 `run_retries.used`이며 배틀 attempt와 혼동하지 않는다.
+- `teleport_events`: 구간별 목적지와 원래 층을 고정 저장한다.
+- `run_organization_campaigns`: 런별 조직 단서·간부·보스 진행. 일반층의 옛 빌런 독립 추첨 대신 이벤트 캠페인이 사용한다.
+- `pokemon_training`은 공통 성장/폼 선택, `pokemon_form_training`은 폼별 기술·특성·테라 타입을 보존한다. 공통 revision으로 동시 저장을 검증한다.
+- 공통 배낭은 기존 인벤토리/영수증을 재사용한다. 영양제 판매가 종료돼도 섭취 ledger·효과·소모 기록을 삭제하지 않는다.
+
+## 실제 저장·이전
+
+DB 경로는 `TOWER_DB_PATH`, 기본값은 `.data/tower.sqlite`다. 개발은 `.env.local`, 개인 실행기는 Docker 볼륨 `/data/tower.sqlite`를 확인한다. 둘은 별개 저장이다. WAL에서 실행 중 DB만 복사하거나 `-wal`/`-shm`을 삭제하지 않는다.
+
+백업은 SQLite backup API와 무결성 검사 경로를 사용한다. 실제 저장은 감사/테스트에 사용하지 않는다. [저장·백업](../operations/BACKUPS.md), [이전](../operations/COMPUTER_MOVE.md), [계정](../operations/ACCOUNTS.md)을 따른다.
+
+## 자동 검증
+
+`tests/run-events.test.ts`, `mystery-chest.test.ts`, `raid-events.test.ts`, `teleport.test.ts`, `rocket-campaign.test.ts`, `hidden-boss-events.test.ts`에서 과거 스키마 이전·재접속·같은 보상 중복 방지·오류 롤백을 검사한다. 일반 배틀·재도전·도전자·배낭·상점 검사도 각 저장 snapshot을 검증한다. [이벤트 개발](EVENT_SYSTEM.md)에서 수정 범위별 검사를 확인한다.

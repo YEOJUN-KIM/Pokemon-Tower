@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {selectRunEvent,rollEventReward} from '../src/game/run-events';
-import {mysteryChest,merchantTicketPrice,eventDefinitions} from '../src/data/run-events';
+import {eventEncounterSettings,legacyChestRewards,merchantTicketPrice,eventDefinitions} from '../src/data/run-events';
 
 test('event selection preserves every existing weighted draw and random call order',()=>{
   for(let draw=0;draw<100;draw++){
@@ -17,7 +17,7 @@ test('checkpoint, cooldown and missed encounters consume only their original dra
   assert.equal(selectRunEvent(5,null,noDraw),null);
   assert.equal(selectRunEvent(3,1,noDraw),null);
   const calls:number[]=[];
-  assert.equal(selectRunEvent(4,1,max=>{calls.push(max);return mysteryChest.encounterPercent;}),null);
+  assert.equal(selectRunEvent(4,1,max=>{calls.push(max);return eventEncounterSettings.encounterPercent;}),null);
   assert.deepEqual(calls,[100]);
   assert.equal(selectRunEvent(4,1,()=>0),'mystery-chest');
 });
@@ -25,7 +25,7 @@ test('checkpoint, cooldown and missed encounters consume only their original dra
 test('reward tables preserve the chest threshold and fixed gifts never advance randomness',()=>{
   for(let draw=0;draw<100;draw++){
     const calls:number[]=[];
-    assert.deepEqual(rollEventReward('mystery-chest',max=>{calls.push(max);return draw;}),draw<80?{kind:'coins',amount:mysteryChest.coins}:{kind:'egg-ticket',amount:mysteryChest.eggTickets});
+    assert.deepEqual(rollEventReward('mystery-chest',max=>{calls.push(max);return draw;}),draw<80?{kind:'coins',amount:legacyChestRewards.coins}:{kind:'egg-ticket',amount:legacyChestRewards.eggTickets});
     assert.deepEqual(calls,[100]);
   }
   for(const kind of ['breeder-gift','traveling-merchant'] as const){

@@ -6,7 +6,7 @@
 
 1. **Run Event 연결** — `src/data/run-events.ts`의 `eventDefinitions`에 `raid-encounter`를 등록했다. 기존 `selectRunEvent`의 전체 encounterPercent, cooldownFloors, 5층 배수 제외, rulesVersion 조건을 그대로 따른다. 도전은 같은 층의 추가 전투이며, 영입·보상 확인 후 원래 층의 일반 전투를 진행한다.
 
-2. **중앙 설정** — `src/data/raids.ts`의 `raidEventSettings`는 초기 `weight:20`, `minFloor:1`, `minRulesVersion:2`다. 보스 가중치는 한카리아스 80, 뮤츠 20이며 각 보스 minFloor는 1이다. 전체 이벤트 확률은 수정하지 않았다. 현재 공통 `mysteryChest.encounterPercent`는 90, cooldownFloors는 2다. Raid weight는 이벤트 발생 후의 상대 가중치다.
+2. **중앙 설정** — `src/data/raids.ts`의 `raidEventSettings`는 초기 `weight:20`, `minFloor:1`, `minRulesVersion:2`다. 보스 가중치는 한카리아스 80, 뮤츠 20이며 각 보스 minFloor는 1이다. 전체 이벤트 확률은 수정하지 않았다. 현재 공통 `eventEncounterSettings.encounterPercent`는 10, cooldownFloors는 2다. 수동 Raid 강제 등장 설정은 제거했으며 정상 추첨을 따른다. Raid weight는 이벤트 발생 후의 상대 가중치다.
 
 3. **Definition 구조** — `RaidBossDefinition`은 id/species/category/weight/minFloor/ivRule/shinyRule/battleTraining/rewardProfile/routes를 가진다. Route에는 weight, 공격 방향, recruit nature/ability/moves, phases가 있다. `RaidPhaseDefinition`은 species/ability/moves/transformation/messages/buffs를 가진다. 게임 루프에 보스 종별 분기는 없다.
 

@@ -8,7 +8,7 @@ import {campaignEligible,emptyCampaign,rocketCampaignSettings} from '../src/data
 import {organizationGrunt,villainLeaders} from '../src/data/villain-organizations';
 import {selectTrainerSample} from '../src/server/opponent-team';
 import {starters} from '../src/data/teams';
-import {eventDefinitions,mysteryChest} from '../src/data/run-events';
+import {eventDefinitions,eventEncounterSettings} from '../src/data/run-events';
 import {selectRunEvent} from '../src/game/run-events';
 import {rocketFixture,nextRocketEvent,rocketRegistry} from './rocket-fixture';
 import {finishChallengerBattle} from './challenger-fixture';
@@ -46,25 +46,27 @@ test('intro decline preserves eligibility, cooldown, global chance and single we
   const events=new RunEvents(f.store.db,()=>0,rocketRegistry);events.encounter(f.run,2);assert.equal(events.view(f.run),null);
   assert.equal(nextRocketEvent(f.store,f.run).kind,'rocket-intro');
   assert.equal(f.store.db.prepare("SELECT COUNT(*) AS n FROM run_events WHERE run_id=? AND status!='complete'").get(f.run)!.n,1);
-  assert.equal(selectRunEvent(1,null,()=>mysteryChest.encounterPercent,rocketRegistry,2),null);
+  assert.equal(selectRunEvent(1,null,()=>eventEncounterSettings.encounterPercent,rocketRegistry,2),null);
   assert.equal(selectRunEvent(4,3,()=>0,rocketRegistry,2,4),null);
  }finally{f.store.close();}
 });
 
-test('temporary live villain-only mode overrides forced Raid, preserves cooldown and leaves injected registries usable',()=>{
+test('live registry keeps ordinary candidates before and after a campaign, with cooldown and injected registries',()=>{
  const f=rocketFixture(),s=f.store;try{
   s.chooseEvent(f.owner,f.run,f.event.id,'skip');
   const live=new RunEvents(s.db,()=>0);
   s.db.prepare('UPDATE run_encounter_progress SET cleared_count=2 WHERE run_id=?').run(f.run);
   live.encounter(f.run,2);assert.equal(live.view(f.run),null);
   s.db.prepare('UPDATE run_encounter_progress SET cleared_count=4 WHERE run_id=?').run(f.run);
-  live.encounter(f.run,4);const intro=live.view(f.run)!;assert.equal(intro.kind,'rocket-intro');
+  live.encounter(f.run,4);const intro=live.view(f.run)!;assert.equal(intro.kind,'mystery-chest');
   s.db.prepare("UPDATE runs SET floor=5 WHERE id=?").run(f.run);live.choose(f.owner,f.run,intro.id,'skip');
   s.db.prepare('INSERT INTO run_organization_campaigns VALUES (?,?,?,?,?,?,?,?)').run(f.run,'rocket',1,2,1,1,1,1);
   s.db.prepare('UPDATE run_encounter_progress SET cleared_count=7 WHERE run_id=?').run(f.run);
-  live.encounter(f.run,7);assert.equal(live.view(f.run),null);
+  live.encounter(f.run,7);assert.equal(live.view(f.run)!.kind,'mystery-chest');
+  s.db.prepare("UPDATE runs SET floor=8 WHERE id=?").run(f.run);live.choose(f.owner,f.run,live.view(f.run)!.id,'skip');
+  s.db.prepare('UPDATE run_encounter_progress SET cleared_count=10 WHERE run_id=?').run(f.run);
   const chest=new RunEvents(s.db,()=>0,{'mystery-chest':eventDefinitions['mystery-chest']});
-  chest.encounter(f.run,7);assert.equal(chest.view(f.run)!.kind,'mystery-chest');
+  chest.encounter(f.run,8);assert.equal(chest.view(f.run)!.kind,'mystery-chest');
  }finally{s.close();}
 });
 

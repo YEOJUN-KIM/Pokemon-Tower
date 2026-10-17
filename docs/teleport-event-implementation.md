@@ -68,7 +68,7 @@ type TeleportEventSnapshot = {
 - 다른 이벤트 weight, 전체 encounterPercent, cooldown 설정값, Raid minFloor/weight, Shiny 확률, 보상 수치를 변경하지 않았다.
 - 텔레포트 임시 weight 10은 `src/data/teleport.ts`에 분리했다. 기존 v1 이벤트 런은 그대로 유지하고 v2에서 추가한다.
 - 기존 공통 규칙인 **5층 단위 클리어 직후 이벤트 생략**도 유지했다. 따라서 해당 층에서 snapshot을 계산할 수 있더라도 실제 이벤트 생성은 기존 공통 gate를 따른다.
-- 현재 `raidEventTestSettings={enabled:true,startFloor:3}`가 남아 있어 기본 경로에서는 3층부터 Raid 수동 QA override가 우선한다. 이 설정은 변경하지 않았다. 텔레포트 및 일반 이벤트 테스트는 registry 주입으로 override와 분리했다.
+- 현재는 강제 Raid/로켓단 전용 QA 설정 없이 공통 eventEncounterSettings의 10%·쿨다운 2를 따른다. 포탈 snapshot과 구간별 한 번 제한은 유지한다.
 - 기존 per-floor 상점/구매 이력과 층 구간형 강화 의미는 유지했다. 재방문 시 구매 이력을 초기화하지 않는다. 후속 경제 설계 시 별도로 검토할 부분이다.
 
 ## 검증

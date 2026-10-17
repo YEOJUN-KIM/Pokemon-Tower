@@ -1,53 +1,102 @@
-# 확장을 위한 구조 정리
+# 2026-10-18 중간점검
 
-## 수정 전 분석과 범위
+감사 기준 커밋: `296cbbb1`. 수정 전 작업 트리는 깨끗했다. 먼저 src 전체 244개 TS/TSX의 import 방향과 파일 책임, 최근 Git 이력, 이벤트/NPC 생성·저장 경로, 상점·재화·전투 버전·마이그레이션·테스트·기준 문서를 확인했다. 과거 리팩터링 보고는 Git history를 참고한다.
 
-루트의 Next.js·TypeScript·Playwright 설정과 `package.json`이 앱·CLI·검사를 실행한다. `public`은 로컬 스프라이트·폰트·음원을 보관하고, `scripts`는 데이터 가져오기·NPC 생성·시뮬레이션·배포·실행기를 담당한다. `docs`는 현재 규칙·운영·개발 문서, `artifacts`는 실험·보고서·QA 결과다. `.data`의 SQLite 저장은 소스 데이터와 분리된다. `compose*.yaml`과 Dockerfile은 실행·배포용이며 이번 책임 분리 때문에 수정할 필요가 없다.
+## Phase 1 분류 (구현 전)
 
-실행 흐름은 `app` 페이지 → `web` 화면 → `/api/battle` → `TowerService` → `TowerStore` / `BattleSession` → Showdown이다. CLI와 시뮬레이션도 `battle/run.ts`를 사용한다. 데미지·기술·특성·상태이상의 실제 계산은 Showdown과 기존 `battle` 확장에 있으며 UI에서 다시 구현하지 않는다. NPC 정책은 `battle/*policy.ts`, 팀 구성은 `server/opponent-team.ts`와 `data`의 템플릿이 담당한다.
+| 분류 | 발견 사항 | 처리 기준 |
+|---|---|---|
+| A 지금 수정 | 전체 이벤트 확률 90% | `af9780ea`가 확인용 10→90 임시 변경을 명시. 10% 복구 |
+| A 지금 수정 | 로켓단만 후보, 3층부터 강제 Raid | `c223d25a`, `c909a9b7`의 수동 QA 우회. 정상 선택 경로로 복구 |
+| A 지금 수정 | `mysteryChest`가 전체 만남과 v1 상자 보상 설정을 함께 소유 | 전체 만남 설정과 상자 내부 설정 분리 |
+| A 지금 수정 | NPC 단계/기믹 50·55·75·100 경계가 런타임·리뷰 도구에 반복 | 단계 담당 모듈에서 재사용, 경계 동작 보존 |
+| A 지금 수정 | 6개 allFloors 후보 빌드 추가 후 옛 재생성/CSV가 고정 3마리·2단계 가정 | 후보 원본 보존과 runtime 일치 검증, 리뷰 출력 호환 보완 |
+| A 지금 수정 | 기준 문서의 스키마 33/39/40·AI v10·옛 이벤트 제약 설명 | 현재 코드의 v45/v11·동적 이벤트 ID·snapshot 설명으로 갱신 |
+| B 보류 | TowerStore 829줄, BattleGame 367줄, Pokedex 212줄 | 책임별 모듈이 이미 존재. 실제 추가 책임 없이 재분할하지 않음 |
+| B 보류 | data→server type import 3개와 기존 합법 기술 조회 1개 | UI 역참조는 아님. 광범위 카탈로그 이동은 이번 작업에서 하지 않음 |
+| B 보류 | 로켓단 weight=100, Raid 보스 minFloor=1 등 최초 임시 튜닝 | 이전 안정값·설계 근거가 없어 임의 복원 금지 |
+| C 유지 | v1/v2 이벤트·NPC snapshot, AI v1~v11 복구 분기 | 저장된 팀·seed·보상·영수증과 버전 호환을 보존 |
+| C 유지 | 공통 지갑/보상/인벤토리 지급 및 호출자 트랜잭션 | 원자성·소유권·중복 지급 방지를 바꾸지 않음 |
+| C 유지 | 무료 리롤·종료된 영양제 가격 함수·분석 AI 정책 | 무료 리롤은 의도됨. 가격·정책은 과거 실험 도구가 참조하므로 dead code 아님 |
+| C 유지 | 알 85/12/3%, 이로치 0.24%, Rank·층 육성 곡선 | 최근 이력에서 확인용 변경 근거 없음. 별도 밸런스 재설계 금지 |
 
-정적 데이터는 대부분 `data`의 JSON·TypeScript로 분리되어 있다. 예외는 `web/catalog.ts`의 포켓몬 이름·폼·타입 카탈로그다. 이를 서버의 도감·저장소와 전투 타입 해석기까지 참조하여 화면 연출 코드에 역방향 의존한다. DTO도 `web/contracts.ts`에 있어 서버와 트레이너 데이터가 화면 폴더를 참조한다. 공통 요청 오류는 배틀 세션에 있어 이벤트·계정·저장소가 전투 실행 모듈까지 불러온다.
+전역 발생률 → 적격 이벤트 상대 weight → 내부 결과 weight를 구분한다. 0 weight 히든보스는 별도 강제 진행용이며 잘못된 극단값으로 취급하지 않는다. 이벤트 체크포인트 제외와 보상 지급은 각각 game 선택기와 서버 트랜잭션의 책임이다.
 
-플레이어·파티·수집·재화는 SQLite가 기준이고 화면은 서버 응답을 로컬 React 상태로 표시한다. `TowerStore`의 트랜잭션, 구매 영수증, 입력 이력과 소유권 검증이 중복 지급과 잘못된 진행을 막는다. 전역 `TowerService`는 세션 캐시이며 별도 클라이언트 저장소로 교체할 필요가 없다. 브라우저 저장소는 음량·재생 속도 등의 설정에 사용한다.
+## 적용 결과와 근거
 
-주요 과밀 파일은 `server/tower-store.ts`(약 94KB), `web/battle-game.tsx`(약 42KB), `web/pokedex.tsx`(약 30KB)다. 저장소에는 마이그레이션, 상점, 파티, 부화, 정산이 함께 있다. 전투 화면에는 표시 컴포넌트와 비동기 연출·입력·요청 제어가 함께 있다. 상점과 이벤트의 조건부 코인 차감 SQL이 반복된다. 이벤트는 세 종류이며 텍스트·가중치는 데이터에 있으나 구매 비용과 보상 분기는 저장 모듈에 있다.
+전체 구조는 게임/UI 경계·순수 규칙·호출자 트랜잭션·snapshot 호환이 이미 분리되어 있었다. 이번에는 새 엔진/대형 서비스 계층/전면 파일 재배치 없이 확인된 설정·생성 도구·문서 문제만 수정했다.
 
-기존 분리를 유지하면서 다음 순서로 정리한다.
+| 밸런스 항목 | 이전 상태 | 최종 상태 | Git 근거 |
+|---|---|---|---|
+| 전체 랜덤 이벤트 확률 | 90% | 10% | af9780eaad102f59fc12280993f87bee5be45324: “확인을 위해 이벤트발생확률을 10% -> 90%로 임의 수정함”; 이전 f7b5e35f의 10%와 기존 문서/경계 테스트 일치 |
+| 로켓단 전용 후보 제한 | onlyVillainEvents=true | QA 설정·우회 코드 제거 | c223d25a59ca74a5f37e8fbc9354882bb345cae8에서 Temporary manual QA로 추가 |
+| 3층부터 Raid 강제 출현 | enabled=true,startFloor=3 | QA 설정·우회 코드 제거 | c909a9b7ab6bb4514f05ddd1a8d00b9dc035e668에서 Temporary manual playtest override로 추가 |
 
-1. 브라우저에서도 안전한 공통 DTO와 포켓몬 카탈로그를 화면 밖으로 옮긴다. 기존 경로는 재수출하여 호출자 호환성을 유지한다.
-2. 공통 요청 오류와 재화 변경 함수를 분리한다. 기존 트랜잭션·영수증의 경계는 유지한다.
-3. 이벤트 비용·보상 데이터를 정의하고 선택·보상 추첨을 순수 함수로 추출한다. 기존 확률, 경계값, 난수 호출 순서를 보존한다.
-4. 저장소의 스키마 초기화를 별도 모듈로 추출하고 공개 전투 상태 해석을 UI 밖으로 옮긴다.
-5. 전투 화면의 독립적인 표시 컴포넌트를 분리한다. 연출 타이밍과 요청 잠금은 변경하지 않는다.
-6. 기존 전체 테스트, 타입 검사, 빌드와 주요 브라우저 회귀 검사로 검증한다.
+쿨다운 2, 종류 weight, 내부 결과/보상, 알 85/12/3%·이로치 0.24%, Rank·육성·가격은 변경하지 않았다. 로켓단 단계 weight 100·Raid 보스 minFloor 1은 초기 튜닝이며 복구할 이전 정상값이 없으므로 후속 실측 대상으로 유지했다. 숨은 보스 weight 0은 챕터 완료용 확정 생성이므로 유지한다.
 
-새 콘텐츠·라이브러리·저장 형식·AI 버전 변경은 범위에 포함하지 않는다. 실험용 AI 정책은 CLI와 분석 도구에서 사용될 수 있으므로 유사하다는 이유로 삭제하지 않는다. 기존 실행기·운영 문서의 미커밋 변경은 유지한다.
+## 이벤트 변경
 
-## 적용한 변경
+- `data/run-events.ts`: 전체 만남은 eventEncounterSettings, 기존 v1 상자 보상은 legacyChestRewards, v2 결과는 mysteryChestResults로 구분했다.
+- `game/run-events.ts`: 전체 gate/쿨다운과 종류 선택의 기준이다. 5배수 제외는 이 경로에서 관리하고 서버의 중복 조건을 제거했다. 기존 난수 호출 순서·v1/v2 선택을 유지했다.
+- `server/run-events.ts`, `data/raids.ts`, `data/villain-campaigns.ts`: 수동 QA 코드만 삭제했다. 서버는 정상 선택기와 조직/포탈 적격 조건을 사용하며 이미 발생한 이벤트·배틀·보상은 그대로 처리한다.
+- 테스트는 라이브 registry의 일반 만남 복귀와 완료 캠페인 뒤 다른 이벤트의 정상 등장, 미발생 경계, 과거 보상과 저장 호환을 검증한다.
 
-| 새 담당 파일 | 추출한 책임·호환 경로 |
+## NPC 변경
+
+- `data/normal-mode-stages.ts`: normalNpcFloorRules와 normalNpcStageRange를 제공한다. 기존 50/55/75/100 의미·실제 경계값은 유지했다.
+- `server/npc-templates.ts`, `data/villain-organizations.ts`: 빌런 보스 기준을 같은 설정에서 읽는다. runtime 팀/기술/IV/EV는 바꾸지 않았다.
+- `scripts/lib/npc-runtime.mjs`, `export-normal-npc-runtime.mjs`: 검토 입력 projection과 무결성 검사, --check 비쓰기 검증을 추가했다. 현재 320개 runtime 행은 수정 전과 동일하다. 두 번 export한 SHA-256도 동일하다.
+- `build-normal-npc-samples.ts`: 6종 allFloors 검토 입력을 재구성하지 못하는 옛 부트스트랩이 덮어쓰지 못하도록 쓰기 전 거부한다. 현재 입력을 옛 참조 데이터로 다시 만드는 시스템 재설계는 보류한다.
+- `export-npc-review-csv.mjs`: 단일 5~6마리 후보·빈 에이스/기믹·참고 EV 예산을 지원한다. summary에 candidate_count/species_4~6을 추가한 schema v2(28열), details v2(31열)를 생성한다. 단계별 범위와 기믹 개방은 공통 설정을 참조한다.
+- 기존 normal/reference CSV 4개만 재생성했다. normal 320행/977행, reference 164행/492행이며 모든 셀이 CSV 왕복 일치했다. 원본·runtime JSON은 새 팀으로 재작성하지 않았다.
+
+## 기타 정리와 유지
+
+실제 재화/보상/아이템 지급은 기존 player-wallet/rewards/inventory-grants와 호출자 트랜잭션을 유지했다. DB schema 45, 이벤트 v1/v2, NPC snapshot v1/v2, 이전 AI 버전을 변경하지 않았다. 실제 사용자 DB에는 접근하거나 마이그레이션을 실행하지 않았다.
+
+`tests/npc-ai.test.ts`의 replay 비교만 기존 battleEvents 방식으로 바꿨다. 전체 기본 검사에서 게임 내용과 무관한 엔진 벽시계 |t:| 차이로 실패한 것이 근거다. 팀·행동·전투 내용·정책 동등성 검사는 그대로 유지했다.
+
+TowerStore/BattleGame/Pokedex는 파일 크기로 나누지 않았다. data→server 타입/기술 조회, 공통 카탈로그·폼 처리, 과거 API 재수출, 무료 리롤·판매 종료 영양제 가격·AI 분석/시뮬레이션은 실제 참조가 있어 유지했다. 삭제한 dead code는 수동 QA 상수·분기뿐이다.
+
+## 최종 검증
+
+| 실제 실행 | 결과 |
 |---|---|
-| `shared/contracts.ts`, `shared/pokedex.ts` | 공개 응답과 도감 타입. 기존 `web/contracts.ts`, `web/pokedex-data.ts`가 재수출한다. |
-| `data/pokemon-catalog.ts` | 기존 `web/catalog.ts`의 포켓몬·폼 카탈로그와 이름 조회를 그대로 추출했다. 기존 이름·타입·폼 적용 순서는 같다. |
-| `battle/public-field.ts`, `battle/public-types.ts` | 공개 전투 프로토콜의 필드·능력치·타입 해석. 기존 `web` 경로는 같은 구현을 재수출한다. |
-| `server/request-error.ts` | 기존 `BattleRequestError`와 번들 간 오류 인식을 위한 Symbol 브랜드. 기존 배틀 세션 경로도 재수출한다. |
-| `server/player-wallet.ts` | 상점·이벤트의 조건부 코인 차감과 전투·이벤트 코인 지급, 이벤트 보상 적용을 공통화했다. |
-| `game/run-events.ts` | 이벤트 선택과 보상 추첨. `data/run-events.ts`에 비용과 보상 표를 모으고 `server/run-events.ts`는 저장·소유권·재처리를 담당한다. |
-| `server/storage/migrations.ts`, `transaction.ts` | DB 초기화와 기존 마이그레이션 순서, BEGIN IMMEDIATE/COMMIT/ROLLBACK. 기존 수집·폼 복구 콜백도 동일한 트랜잭션에서 실행한다. |
-| `server/permanent-shop.ts` | 영구 상품·알 부화·교환·영수증 처리. 컬렉션 조회는 기존 저장소에 맡기며 공개 `TowerStore` 메서드는 유지한다. |
-| `web/battle-pokemon.tsx` | 볼·등장·이로치·스프라이트·HP 카드 표시. 전투 화면의 입력·재생·요청 조율과 분리했다. |
+| 수정 전 pnpm test | 757개 중 756 통과; npc-ai의 벽시계 비교 1개 실패 |
+| 최종 pnpm test | 761/761 통과 (약 172초) |
+| pnpm typecheck | 통과 |
+| pnpm build | 통과; Windows junction 권한으로 승인된 프로세스 사용 |
+| pnpm check:css | 통과; 3578개 bounded rule, 14개 token |
+| pnpm check:workspace | 통과; 문서 링크·출력 위치 검사 |
+| node scripts/export-normal-npc-runtime.mjs --check | 320개 검토 원본/runtime 일치 |
+| runtime export 두 번 + SHA-256 비교 | 두 번 모두 수정 전 runtime과 동일 |
+| 옛 단계 bootstrap 실행 | 의도된 allFloors 보호 오류로 종료, 입력 해시 보존 |
+| node scripts/export-npc-review-csv.mjs normal-npc-samples.json normal-npc | 320/977행, 전체 셀 왕복 검증 통과 |
+| node scripts/export-npc-review-csv.mjs | 164/492행, 전체 셀 왕복 검증 통과 |
 
-서버와 트레이너 데이터의 import를 새 담당 경로로 변경했다. 새 외부 의존성은 없다. `tower-store.ts`는 약 94KB에서 75KB, `battle-game.tsx`는 약 42KB에서 36KB로 줄었다. 수정한 파일에서 확인된 미사용 import만 정리했다.
+관련 E2E 실제 명령:
 
-## 검증
+```sh
+node --import tsx node_modules/@playwright/test/cli.js test e2e/run-events.spec.ts e2e/villain-campaign.spec.ts e2e/teleport.spec.ts e2e/named-pilot.spec.ts --grep 'Rocket chain|teleport portal|canonical named entry and reload 1280|mystery chest open|breeder-gift decline at 390|traveling-merchant .*390'
+```
 
-- 수정 전 테스트: 479개 중 478개 통과. `gender.test.ts`의 재현 비교가 실제 벽시계 `|t:|` 차이로 한 번 실패했다. 게임 엔진과 해당 비교 테스트는 변경하지 않았다.
-- 최종 전체 검사: `node --import tsx --test --test-concurrency=2 tests/*.test.ts` — 483개 모두 통과. 기본 병렬 실행 중 상세 오류 없이 종료됐던 트레이너 테스트 7개도 단독 실행과 전체 재실행에서 통과했다.
-- 새 검사 4개: 게임→UI 역방향 의존성, 이벤트 100개 가중치 구간, 체크포인트·쿨다운·미발생 시 난수 소비, 보상 100개 구간과 고정 선물의 난수 소비·데이터 불변성.
-- 전체 기존 검사에는 실제 전투·기술·특성·기믹·아이템 효과·파티·영입·도감·부화·이벤트·상점·재화·소유권·중복 요청·트랜잭션 롤백·디스크 복구·과거 스키마 마이그레이션이 포함된다.
-- `pnpm typecheck`, `pnpm build`, `pnpm check:css`, `pnpm check:workspace` 통과. Windows junction 생성 권한 때문에 빌드는 승인된 일반 프로세스로 실행했다.
-- Chrome E2E는 현재 로그인 흐름에 맞는 24개 시나리오가 통과했다. `battle-request-fixes.spec.ts`의 기술배치 교환·자동 저장·실패 복원·현재 타입·PC/모바일 정비 3개, `egg-kinds.spec.ts`의 PC/모바일 부화 2개, `run-events.spec.ts`의 선택·거절·보상·재접속·중복 지급 방지 15개, `trainer-equipment.spec.ts`의 PC/모바일 구매·장비 HUD·다이맥스·테라스탈·교체·재접속 4개를 확인했다.
-- 브라우저 검사 실행에는 기존 JSON import의 Node ESM 호환을 위해 프로세스에 `NODE_OPTIONS=--import tsx`를 지정했다. 한 번에 계정을 20개 넘게 만들면 기존 회원가입 제한에 걸리므로 장비 4개는 제한 창이 지난 뒤 별도 실행했다. 게임의 인증 제한은 변경하지 않았다.
-- 최초 선택한 구형 `battle.spec.ts`는 비로그인 진입 후 도감이 나타난다고 가정하지만 실제로는 로그인 화면으로 이동해 실패했다. 같은 전제의 구형 시나리오 전체를 통과했다고 간주하지 않는다. 이들 테스트의 로그인 준비 정비는 후속 과제다.
+17/17 통과. PC/모바일 상자·브리더/상인·포탈 1/4배속·동작 감소·거절, 로켓단 진행/복구/레이아웃, 대표 네임드 3종/새로고침을 확인했다. 전체 E2E 모음을 실행했다고 주장하지 않는다. 자동 완료 fixture는 실제 전투를 통한 사람의 난이도 검증과 구분한다.
 
-콘텐츠 추가 위치와 의도적으로 남긴 구조적 문제는 [현재 구조 문서](ARCHITECTURE.md)에 정리했다.
+현재 문서의 명시된 src/scripts/tests/e2e 경로를 확인했고, DB 45·AI v11을 코드와 대조했다. 문서·생성 도구의 새 이름에서 제거한 mysteryChest.encounterPercent/QA 상수를 현재 설정으로 안내하는 참조도 정리했다.
+
+## 수정 문서와 이후 변경 기준
+
+| 문서 | 갱신 내용 |
+|---|---|
+| STATUS / current/ROADMAP | 현재 이벤트/NPC/배낭·DB/AI 상태, 구현된 후속 콘텐츠와 남은 튜닝 |
+| engineering/ARCHITECTURE | data/game/battle/server/shared/web·scripts/artifacts 책임, 주요 설정 source of truth |
+| engineering/DATABASE | schema 45·migration·각 규칙 버전 구분·snapshot/영수증 보존 |
+| engineering/EVENT_SYSTEM | 전체 발생/종류/내부 결과 분리, 새 ID/outcome/보상 추가 절차와 검사 |
+| engineering/NPC_DATA | 현재 검토 입력→export→runtime 경로, stage/기믹/전설/Rank/AI 기준, CSV v2와 안전한 생성 명령 |
+| SESSION_HANDOFF | 실제 지원 버전·실행 저장 경계·기준 문서 연결 |
+| gameplay/EVENTS / NPC / named-trainer-sample-pilot | 정상 등장 규칙·캠페인·현재 320행 후보 구조·수정/검증 경로 |
+| engineering/RAID_EVENTS, rocket-campaign-implementation, teleport-event-implementation, hidden-boss-events | 폐기된 QA 안내 제거·정상/확정 이벤트 구분 |
+| operations/DEPLOYMENT | 옛 v33 패키지 설명을 현재 schema 45·최신 빌드/백업 기준으로 교체 |
+| scripts/README, artifacts/reports/npc/README | 현재 export/check·CSV 명령과 옛 비교 표의 범위 명시 |
+
+전체 확률/쿨다운은 eventEncounterSettings, 종류 weight는 registry/각 data 모듈, 상자 결과는 legacyChestRewards/mysteryChestResults에서 수정한다. NPC 팀은 검토 원본 normal-npc-samples.json, 단계/기믹 층은 normal-mode-stages.ts, 일반 전설/환상 풀은 tower-progression.ts, Rank/AI는 npc-ranks.ts/npc-ai.ts를 따른다. 명령과 자동 검증 범위는 NPC_DATA/EVENT_SYSTEM에서 유지한다. 작은 변경마다 새 기준 문서를 만들지 않는다.

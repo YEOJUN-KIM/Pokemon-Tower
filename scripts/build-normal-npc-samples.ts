@@ -1,6 +1,6 @@
-import {readFileSync,writeFileSync} from 'node:fs';
+import {existsSync,readFileSync,writeFileSync} from 'node:fs';
 import Showdown from 'pokemon-showdown';
-import {normalModeStages,normalNpcCategory,type NormalModeStage} from '../src/data/normal-mode-stages';
+import {normalModeStages,normalNpcCategory,normalNpcFloorRules,type NormalModeStage} from '../src/data/normal-mode-stages';
 import {towerDifficulty} from '../src/data/tower-progression';
 import {megaStones,DYNAMAX_ITEM} from '../src/data/gimmicks';
 import {primalOrbs} from '../src/data/primal-forms';
@@ -19,6 +19,10 @@ import {npcEarlyReplacements,canonicalNpcId} from '../src/data/npc-review-preset
 
 type Member={species:string;name:string;item:string;itemName:string;gigantamax:boolean;profile:TrainingProfile;battleForm?:{species:string;name:string;ability:string;types:string[]}};
 type Source={id:string;name:string;generation:number|null;role:string;title:string;ace:string;signature:NpcGimmick;team:Member[];legendaryMinFloor?:number};
+// This legacy bootstrap cannot reconstruct the reviewed single-build candidates.
+// Fail before writing anything instead of silently discarding them.
+const reviewedPath='scripts/data/npc/normal-npc-samples.json';
+if(existsSync(reviewedPath)&&JSON.parse(readFileSync(reviewedPath,'utf8')).samples.some((s:{allFloors?:boolean})=>s.allFloors))throw Error('Reviewed allFloors candidates exist. Edit normal-npc-samples.json and run export-normal-npc-runtime.mjs; the legacy staged bootstrap must not overwrite reviewed input.');
 const full=JSON.parse(readFileSync('scripts/data/npc/npc-team-samples.json','utf8')) as {samples:Source[]};
 const validator=new Showdown.TeamValidator(FORMAT);
 const special=(item:string)=>!!megaStones[item] || !!zCrystals[item] || !!primalOrbs[item] || item===DYNAMAX_ITEM;
@@ -68,7 +72,7 @@ const samples=full.samples.flatMap(source=>{
   return {...source,ace,signature,team,packed,stage,stageName:policy.name,sampleTier:policy.sampleTier,gimmickEnabled:policy.gimmicks,referenceFloor:floor,iv:difficulty.ivCap,statPoints:difficulty.points,floorRange:category==='boss'?(policy.sampleTier===1?'50층 첫 관문·중간 보스':'100층 최종전'):(policy.sampleTier===1?'5~45층':'55~95층'),...(source.legendaryMinFloor && policy.sampleTier===1?{legendaryMinFloor:undefined}:{})};
  });
 });
-writeFileSync('scripts/data/npc/normal-npc-samples.json',JSON.stringify({status:'normal-mode-template',training:'scaled-to-floor-curve',villainBossMinFloor:75,level:50,maxPointsPerStat:32,stages:normalModeStages,samples},null,2)+'\n');
+writeFileSync('scripts/data/npc/normal-npc-samples.json',JSON.stringify({status:'normal-mode-template',training:'scaled-to-floor-curve',villainBossMinFloor:normalNpcFloorRules.villainBoss,level:50,maxPointsPerStat:32,stages:normalModeStages,samples},null,2)+'\n');
 const labels={mega:'메가진화',dynamax:'거다이맥스',tera:'테라스탈',z:'Z기술',primal:'원시회귀'};
 const sections=['# 일반 모드 NPC 두 단계 샘플','',
  '2026-10-13. 사용자 검토용 문서. 164종의 NPC마다 두 단계, 총328개다. 고정 3마리·기술·도구·특성·성격·역할별 육성을 새 일반 모드 배틀에 적용했다. CSV는 코드 활용·검증용이며 이 문서에서 팀을 확인하면 된다.',

@@ -1,10 +1,9 @@
 import {HiddenBossEvents} from './hidden-boss-events';
 import {VillainCampaigns} from './villain-campaigns';
-import {isRocketStage,villainEventTestSettings} from '../data/villain-campaigns';
+import {isRocketStage} from '../data/villain-campaigns';
 import {createTeleportSnapshot,teleportSegment} from '../data/teleport';
 import {ChallengerEvents} from './challenger-events';
 import {RaidEvents} from './raid-events';
-import {raidEventTestSettings} from '../data/raids';
 import {HiddenShop} from './hidden-shop';
 import {selectRunEvent,findEventChoice,rollChoiceReward,rollRewardOption} from '../game/run-events';
 import {applyRewardOption,selectEventReward} from './rewards';
@@ -25,18 +24,14 @@ export class RunEvents {
  enable(runId:string){this.db.prepare('INSERT INTO run_event_rules(run_id,version) VALUES (?,?)').run(runId,currentEventRulesVersion);}
  encounter(runId:string,afterFloor:number){
   if(!this.db.prepare('SELECT 1 FROM run_event_rules WHERE run_id=?').get(runId))return;
-  const villainOnly=this.registry===eventDefinitions&&villainEventTestSettings.onlyVillainEvents;
-  const forceRaid=!villainOnly&&this.registry===eventDefinitions&&raidEventTestSettings.enabled&&afterFloor+1>=raidEventTestSettings.startFloor;
-  if(!forceRaid&&afterFloor%5===0)return;
   if(this.view(runId))return;
   const order=(this.db.prepare('SELECT cleared_count FROM run_encounter_progress WHERE run_id=?').get(runId) as {cleared_count:number}|undefined)?.cleared_count??0;
   const previous=this.db.prepare('SELECT MAX(encounter_order) AS position FROM run_events WHERE run_id=?').get(runId) as {position:number|null};
   const segment=teleportSegment(afterFloor);
   const eligible=(kind:string)=>{
-   if(villainOnly&&!isRocketStage(kind))return false;
    return isRocketStage(kind)?new VillainCampaigns(this.db).eligible(runId,kind,afterFloor):kind!=='random-teleport'||(segment!==null&&!this.db.prepare('SELECT 1 FROM teleport_events t JOIN run_events e ON e.id=t.event_id WHERE e.run_id=? AND t.segment=?').get(runId,segment));
   };
-  const kind=forceRaid?'raid-encounter':selectRunEvent(afterFloor,previous.position,this.roll,this.registry,this.rulesVersion(runId),order,eligible);
+  const kind=selectRunEvent(afterFloor,previous.position,this.roll,this.registry,this.rulesVersion(runId),order,eligible);
   if(!kind)return;
   const eventId=randomUUID();
   this.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status,encounter_order) VALUES (?,?,?,?,'choice',?)").run(eventId,runId,afterFloor,kind,order);

@@ -1,38 +1,59 @@
-# NPC CSV 데이터 규약
+# NPC 데이터와 생성 규약
 
-CSV는 코드 활용·검증용이다. 사용자 검토는 `NORMAL_MODE_SAMPLES.md`와 `NPC_TEAM_SAMPLES.md`에서 한다. 일반 모드 JSON에서 추출한 `src/data/normal-npc-templates.json`은 새 배틀 생성에 연결됐다. 최고 단계 참고 데이터는 별도로 유지한다.
+기준: 2026-10-18. runtime JSON을 직접 편집하지 않는다. 현재 네임드/조직원 입력은 일반 단계별 314행과 단일 후보 빌드 6행, 합계 **320행·977마리 후보**다. 164종×2단계 고정 3마리라는 가정은 더 이상 전체 입력에 적용하지 않는다.
 
-## 파일과 생성
+## 실제 source of truth
 
-입력 JSON은 `scripts/data/npc/`, 리뷰 Markdown과 CSV 출력은 `artifacts/reports/npc/`에 있습니다. 실제 게임은 `src/data/normal-npc-templates.json`을 읽습니다.
+```text
+scripts/data/npc/normal-npc-samples.json (사람이 검토·수정하는 현재 입력)
+    → node scripts/export-normal-npc-runtime.mjs
+    → src/data/normal-npc-templates.json (생성물, 직접 수정 금지)
+    → src/server/npc-templates.ts
+    → src/server/opponent-team.ts (실제 층·합법성·3마리 선택·기믹·육성)
+    → 배틀 팀 snapshot 저장
+```
 
-- `normal-npc-summary.csv`: 일반 모드 328팀, 24열.
-- `normal-npc-details.csv`: 일반 모드 984마리, 31열.
-- `npc-team-summary.csv`: 최고 단계 참고 164팀, 24열.
-- `npc-team-details.csv`: 최고 단계 참고 492마리, 31열.
+`allFloors/select/required`가 있는 6종(비상·꼭두·이향·아폴로·비주기·로켓단 조직원)은 5~6마리 후보에서 기존 선택기로 실제 3마리를 구성한다. 캐노니컬 ID/캠페인 별칭은 `data/npc-review-presets.ts`에서 연결하며 에이스·필수 멤버·팀 컨셉을 보존한다. 일반 샘플과 상세 빌드는 [파일럿](../gameplay/named-trainer-sample-pilot.md)을 참고한다.
 
-원본은 각각 `normal-npc-samples.json`, `npc-team-samples.json`이다. `scripts/export-npc-review-csv.mjs`로 내보낸다. CSV만 직접 수정하지 않는다. UTF-8 BOM, CRLF, RFC 4180 인용 규칙을 사용한다. 가져올 때 BOM을 제거하고 CSV 파서를 사용한다.
+`npc-team-samples.json`은 별도의 최고 단계 참고 입력이다. `build-npc-review.ts → build-normal-npc-samples.ts`는 초기 단계별 자료를 만들던 부트스트랩이다. 현재 리뷰 완료 입력에 allFloors 빌드가 있으면 **build-normal-npc-samples.ts는 쓰기 전에 중단**한다. 이 옛 생성기를 일상적인 재생성 경로로 사용하면 최신 빌드가 사라지므로, 현재는 normal-npc-samples.json을 수정하고 runtime export만 실행한다. 전체 생성기를 다시 설계하는 작업은 이번 감사 범위에 포함하지 않았다.
 
-일반 샘플을 다시 생성한 뒤에는 `node scripts/export-normal-npc-runtime.mjs`로 게임용 JSON도 갱신한다. 게임은 CSV나 검토 문서를 직접 읽지 않는다. 두 단계의 멤버·기술·도구·특성·성격을 고정하고, 실제 층의 육성 곡선을 상한으로 포인트를 역할별 배분한다.
+## 그 외 NPC·AI 설정
 
-## 키와 값
+| 대상 | 수정 위치 |
+|---|---|
+| 일반/도전자 클래스·컨셉·Sample | `src/data/npc-samples.ts` |
+| Normal/Elite/Master 확률·육성·도구 슬롯 | `src/data/npc-ranks.ts` |
+| 공통 NPC 역할별 팀 생성 | `src/server/npc-encounters.ts`, `npc-training.ts`, `npc-builds.ts` |
+| 네임드 표시명·역할·초상화 | `src/data/trainer-catalog.ts`·지역별 trainer 데이터 |
+| stage 경계·기믹 시작 | `src/data/normal-mode-stages.ts`의 normalNpcFloorRules / normalNpcStage / normalNpcGimmicksEnabled |
+| stage 리뷰 범위 | 같은 모듈의 normalNpcStageRange; CSV도 재사용 |
+| 개별 전설 최소 층 | 입력 행의 legendaryMinFloor; 일반 풀은 `data/tower-progression.ts`의 legendary/mythical 허용 조건도 검사 |
+| 빌런 보스 일반 단계 기준 | normalNpcFloorRules.villainBoss; `VILLAIN_BOSS_MIN_FLOOR`는 같은 값을 참조 |
+| AI tier/전술/상한 | `src/data/npc-ai.ts`, `src/battle/npc-policy.ts` |
 
-`schema_version=1`. 요약 기본키는 `sample_id`, 상세 기본키는 `(sample_id, slot)`이다. `sample_id`는 `npc_id:stage_id`이며 상세 행은 이 키로 요약과 연결한다. `slot`은 1~3이다. `npc_id`만으로 연결하면 두 단계가 섞인다.
+50층 첫 챔피언 기믹, 55층 후반 관장/간부 기믹, 75층 단계별 빌런 보스, 100층 최종 stage를 유지한다. 단일 빌드는 allFloors로 단계별 행 선택을 생략하지만, 실제 기믹 개방과 층별 육성 제한은 유지한다. 이벤트 캠페인의 등장 조건과 일반 NPC stage 기준은 서로 다른 규칙이다.
 
-`mode=normal`은 일반 모드 초안, `mode=reference`는 최고 단계 참고다. 참고 행은 `stage_id=reference-max`, `sample_tier=0`이다. 일반 모드는 `leaders-early`, `first-gate`, `leaders-late`, `final-gate`와 단계 1/2를 사용한다. 이름·기술·도구·특성·성격·타입은 저장 데이터와 Showdown에서 사용하는 영문 내부 이름이다. 한글 표시 문자열과 자유 메모는 넣지 않는다.
+새 팀은 발생 시 팀·폼·기믹·IV/EV·시드·AI tier/전술을 저장한다. 입력 변경은 기존 배틀·도전자·캠페인의 snapshot을 재작성하지 않는다. AI 정책 버전과 NPC encounter snapshot 버전도 구분한다.
 
-불리언은 정수 0/1, 수치는 정수, 없는 선택 문자열은 빈 값이다. `generation=0`은 세대 미지정, `legendary_min_floor=0`은 별도 전설 제한 없음이다. 포인트는 게임의 능력 포인트이며 Showdown의 일반 EV 수치로 해석하지 않는다.
+## 갱신·검증 명령
 
-## 적용 조건
+프로젝트 루트에서 실행한다.
 
-`min_floor`/`max_floor`는 샘플 단계 선택 범위다. 관장 계열은 1~54/55~100, 보스 계열은 1~99/100이다. 실제 출현 층과는 별개다. `reference_floor`는 육성 기준을 추출한 대표 층이며 각 층의 고정 육성 수치를 뜻하지 않는다.
+```sh
+node scripts/export-normal-npc-runtime.mjs
+node scripts/export-normal-npc-runtime.mjs --check
+node scripts/export-npc-review-csv.mjs normal-npc-samples.json normal-npc
+node scripts/export-npc-review-csv.mjs
+pnpm test
+pnpm typecheck
+```
 
-빌런 보스는75~100층에서 후반·최종 샘플을 사용한다. 빌런 보스의 첫 관문 행은 비교용이며 `min_floor=max_floor=0`으로 실제 선택 대상에서 제외한다. 간부의50/55층 구분은 기존 관장 계열을 따른다.
+export는 중복 ID/단계, 후보 수·중복 멤버, 에이스/기믹 담당/필수 멤버, 기술 수·IV·능력 포인트를 검사한다. `--check`는 쓰지 않고 원본 projection과 runtime을 비교한다. 같은 입력을 다시 export하면 동일한 JSON을 생성한다.
 
-기믹은 `gimmick_enabled=1`과 `gimmick_min_floor` 조건을 모두 확인한다. 보스 첫 관문 템플릿을 50층 이전에 사용할 경우 기믹을 제거해야 한다. 전설은 `legendary_min_floor`를 별도로 확인한다. 참고 모드의 `gimmick_min_floor=0`은 일반 모드 해금 기준으로 사용하지 않는다.
+샘플을 추가할 때 기존 형식의 staged 3마리 또는 allFloors/select 후보 행을 원본에 정의하고, 트레이너 ID/별칭·합법 기술·폼·기믹 담당·에이스를 맞춘다. export 후 `tests/npc-templates.test.ts`, `named-pilot.test.ts`, `normal-mode-stages.test.ts`, `maintenance-settings.test.ts` 및 관련 실제 전투 검사를 실행한다. 단순 입력 누락/참조 검사와 실제 Showdown 합법성·변신·복구 검사는 서로 대체하지 않는다.
 
-`gimmick_type`은 `none`, `mega`, `z`, `dynamax`, `tera`, `primal`이다. `dynamax` 행의 후보는 거다이맥스를 사용하는 설정이다. 비활성 행의 `carrier_species`는 빈 값, `is_carrier=0`이다. `ace_species`와 기믹 담당은 다를 수 있다. `form_species`, `form_ability`, `form_types`는 변신이 있는 경우만 채우며 타입 구분자는 `/`이다.
+## 리뷰 CSV (게임 입력 아님)
 
-## 자동 검증
+출력은 `artifacts/reports/npc/`다. summary는 **schema_version=2, 28열**, details는 **schema_version=2, 31열**이다. summary에 candidate_count와 species_4~6을 추가해 단일 후보 빌드 전체를 표현한다. sample_id는 단계형 `npc_id:stage`, 단일형 `npc_id:all`, 최고 단계 참고 `npc_id:reference-max`다. details 기본키는 (sample_id,slot)이며 후보 slot은 최대 6이다.
 
-내보내기는 키 중복, 팀당 서로 다른 3마리, 에이스·담당의 소속, 기술 4개, IV 범위, 스탯별 포인트 상한·총합, 비활성 거다이맥스, 열 수를 검사한다. 저장된 CSV를 다시 읽어 전체 셀을 원본과 비교한다. JSON의 기술 합법성 검증은 샘플 생성기가 수행한다.
+현재 normal CSV는 320행/977행, reference CSV는 164행/492행이다. UTF-8 BOM·CRLF·RFC 4180 인용을 사용하며 저장된 CSV를 다시 읽어 전체 셀을 원본과 대조한다. 포인트는 게임의 능력 포인트이며 Showdown 일반 EV와 혼동하지 않는다. CSV만 고치거나 리뷰 artifacts를 게임 입력으로 사용하지 않는다.

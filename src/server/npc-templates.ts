@@ -1,6 +1,6 @@
 import rows from '../data/normal-npc-templates.json' with {type:'json'};
 import roster from '../data/battle-roster.json' with {type:'json'};
-import {normalNpcCategory,normalNpcStage,type NormalModeStage} from '../data/normal-mode-stages';
+import {normalNpcCategory,normalNpcStage,normalNpcFloorRules,type NormalModeStage} from '../data/normal-mode-stages';
 import {towerDifficulty} from '../data/tower-progression';
 import type {NpcGimmick} from '../data/npc-gimmicks';
 import {statKeys,type TrainingProfile,type StatBlock} from '../data/training';
@@ -15,7 +15,7 @@ export function normalNpcTemplate(id:string,floor:number,role?:string):Template|
  // Campaign bosses enter late and use their reviewed final roster, including
  // legendary aces. Champions keep the distinct 50/100-floor samples.
  const villainBoss=role==='villain' && !id.includes('-executive-');
- const stage=villainBoss&&floor>=75?'final-gate':normalNpcStage(floor,category);
+ const stage=villainBoss&&floor>=normalNpcFloorRules.villainBoss?'final-gate':normalNpcStage(floor,category);
  const row=templates.get(`${canonicalNpcId(id)}:all`)??templates.get(`${id}:all`)??templates.get(`${id}:${stage}`);
  if(!row)return null;
  if(row.team.some(p=>!isCollectibleSpecies(p.species)))return null;

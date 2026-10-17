@@ -2,9 +2,6 @@ import type {RewardOption} from './rewards';
 
 export type CampaignState={started:number;clues:number;officer_defeated:number;boss_location_known:number;boss_defeated:number;completed:number};
 export const emptyCampaign:CampaignState={started:0,clues:0,officer_defeated:0,boss_location_known:0,boss_defeated:0,completed:0};
-// Temporary manual QA: false restores all event candidates and the saved Raid override.
-// Only affects the live registry; explicit test registries keep their own candidates.
-export const villainEventTestSettings={onlyVillainEvents:true} as const;
 // 임시값: 전체 이벤트 구현 완료 후 확률과 보상 재조정 예정.
 export const rocketCampaignSettings={organization:'rocket',requiredClues:2,introMaxFloor:30,stages:{
  'rocket-intro':{weight:100,minFloor:1,coins:300,title:'열려 있는 관리 구역',summary:'잠겨 있어야 할 관리 구역의 문이 열려 있다.',intro:'관리 구역의 문이 열려 있다. 들어가 볼까?'},

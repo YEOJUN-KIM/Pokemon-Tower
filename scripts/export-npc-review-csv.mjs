@@ -1,3 +1,4 @@
+import {normalNpcFloorRules,normalNpcStageRange,normalNpcCategory} from '../src/data/normal-mode-stages.ts';
 import fs from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
@@ -13,26 +14,31 @@ await fs.mkdir(outputDir,{recursive:true});
 const data=JSON.parse(await fs.readFile(inputDir+(process.argv[2] ?? 'npc-team-samples.json'),'utf8'));
 const prefix=process.argv[3] ?? 'npc-team';
 const stats=['hp','atk','def','spa','spd','spe'];
-const summary=[['schema_version','mode','sample_id','npc_id','stage_id','sample_tier','npc_category','generation','reference_floor','min_floor','max_floor','gimmick_min_floor','gimmick_enabled','gimmick_type','carrier_species','ace_species','legendary_min_floor','level','iv_cap','total_stat_points','max_stat_points','species_1','species_2','species_3']];
+const summary=[['schema_version','mode','sample_id','npc_id','stage_id','sample_tier','npc_category','generation','reference_floor','min_floor','max_floor','gimmick_min_floor','gimmick_enabled','gimmick_type','carrier_species','ace_species','legendary_min_floor','level','iv_cap','total_stat_points','max_stat_points','species_1','species_2','species_3','candidate_count','species_4','species_5','species_6']];
 const detail=[['schema_version','sample_id','npc_id','slot','species','item','ability','nature','tera_type','gigantamax','is_ace','is_carrier','move_1','move_2','move_3','move_4',...stats.map(k=>'iv_'+k),...stats.map(k=>'points_'+k),'form_species','form_ability','form_types']];
 const ids=new Set();
 for(const s of [...data.samples].sort((a,b)=>a.id.localeCompare(b.id)||(a.sampleTier??0)-(b.sampleTier??0))){
- const staged=!!s.stage,active=s.gimmickEnabled!==false,id=s.id+':'+(s.stage??'reference-max');
+ const staged=!!s.stage,active=s.gimmickEnabled!==false,id=s.id+':'+(s.allFloors?'all':s.stage??'reference-max');
  assert.ok(!ids.has(id),'Duplicate sample: '+id);ids.add(id);
- assert.equal(new Set(s.team.map(p=>p.species)).size,3);
- assert.ok(s.team.some(p=>p.species===s.ace));
- assert.ok(s.team.some(p=>p.species===s.signature.species));
- const category=s.id.includes('-executive-')?'leader':['champion','villain'].includes(s.role)?'boss':'leader';
+ assert.equal(new Set(s.team.map(p=>p.species)).size,s.team.length);
+ assert.ok(s.allFloors?s.team.length>=3&&s.team.length<=6:s.team.length===3);
+ assert.ok(!s.ace||s.team.some(p=>p.species===s.ace));
+ assert.ok(!s.signature||s.team.some(p=>p.species===s.signature.species));
+ const category=normalNpcCategory(s.role,s.id,'named');
  const villainBoss=s.role==='villain'&&!s.id.includes('-executive-');
- const range=!staged?[1,100]:villainBoss?(s.sampleTier===1?[0,0]:[75,100]):category==='boss'?(s.sampleTier===1?[1,99]:[100,100]):s.sampleTier===1?[1,54]:[55,100];
- summary.push([1,staged?'normal':'reference',id,s.id,s.stage??'reference-max',s.sampleTier??0,category,s.generation??0,s.referenceFloor??data.floor,...range,staged&&active?(villainBoss?75:category==='boss'?50:55):0,Number(active),active?s.signature.rule:'none',active?s.signature.species:'',s.ace,s.legendaryMinFloor??0,data.level,s.iv??data.iv,s.statPoints??data.statPoints,data.maxPointsPerStat,...s.team.map(p=>p.species)]);
+ const range=!staged||s.allFloors?[1,normalNpcFloorRules.finalGate]:villainBoss?(s.sampleTier===1?[0,0]:[normalNpcFloorRules.villainBoss,normalNpcFloorRules.finalGate]):normalNpcStageRange(s.stage);
+ const gimmickFloor=!staged||!active?0:!s.allFloors&&villainBoss?normalNpcFloorRules.villainBoss:category==='boss'?normalNpcFloorRules.firstGate:normalNpcFloorRules.lateLeaders;
+ const points=s.statPoints??data.statPoints??Math.max(...s.team.map(p=>stats.reduce((n,k)=>n+p.profile.evs[k],0)));
+ const iv=s.iv??data.iv??Math.max(...s.team.flatMap(p=>stats.map(k=>p.profile.ivs[k])));
+ summary.push([2,staged?'normal':'reference',id,s.id,s.allFloors?'all':s.stage??'reference-max',s.sampleTier??0,category,s.generation??0,s.referenceFloor??data.floor??0,...range,gimmickFloor,Number(active),active?s.signature.rule:'none',active?s.signature.species:'',s.ace,s.legendaryMinFloor??0,data.level,iv,points,data.maxPointsPerStat,...Array.from({length:3},(_,i)=>s.team[i]?.species??''),s.team.length,...Array.from({length:3},(_,i)=>s.team[i+3]?.species??'')]);
  for(const [i,p] of s.team.entries()){
   const f=p.profile;
   assert.equal(f.moves.length,4);
-  assert.equal(stats.reduce((n,k)=>n+f.evs[k],0),s.statPoints??data.statPoints);
+  const total=stats.reduce((n,k)=>n+f.evs[k],0);
+  if(s.allFloors)assert.ok(total<=66);else assert.equal(total,s.statPoints??data.statPoints);
   for(const k of stats){assert.ok(Number.isInteger(f.ivs[k])&&f.ivs[k]>=0&&f.ivs[k]<=31);assert.ok(Number.isInteger(f.evs[k])&&f.evs[k]>=0&&f.evs[k]<=data.maxPointsPerStat);}
   assert.ok(active||!p.gigantamax);
-  detail.push([1,id,s.id,i+1,p.species,p.item,f.ability,f.nature,f.teraType??'',Number(!!p.gigantamax),Number(p.species===s.ace),Number(active&&p.species===s.signature.species),...f.moves,...stats.map(k=>f.ivs[k]),...stats.map(k=>f.evs[k]),p.battleForm?.species??'',p.battleForm?.ability??'',p.battleForm?.types.join('/')??'']);
+  detail.push([2,id,s.id,i+1,p.species,p.item,f.ability,f.nature,f.teraType??'',Number(!!p.gigantamax),Number(p.species===s.ace),Number(active&&p.species===s.signature.species),...f.moves,...stats.map(k=>f.ivs[k]),...stats.map(k=>f.evs[k]),p.battleForm?.species??'',p.battleForm?.ability??'',p.battleForm?.types.join('/')??'']);
  }
 }
 for(const [file,sheetName,matrix] of [[prefix+'-summary.csv','Summary',summary],[prefix+'-details.csv','Details',detail]]){

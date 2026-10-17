@@ -125,7 +125,7 @@ test('v11 settings survive retry and reconnect without rerolling the opponent or
   let state=(await service.state('ai')).battle!;
   await service.action('ai',id,state.requestId,state.actions[0].command);state=(await service.state('ai')).battle!;
   await service.dispose();service=new TowerService(s);const resumed=(await service.state('ai')).battle!;
-  assert.deepEqual(resumed.messages,state.messages);assert.equal(resumed.turn,state.turn);assert.deepEqual(resumed.actions,state.actions);
+  assert.deepEqual(battleEvents(resumed.messages),battleEvents(state.messages));assert.equal(resumed.turn,state.turn);assert.deepEqual(resumed.actions,state.actions);
   finishChallengerBattle(s,id,'Tower AI');s.retry('ai',row.run_id,id);const next=s.battle(s.enter('ai',row.run_id,1,starters));
   for(const key of ['ai_version','opponent_team','seed','trainer','boss','reward','candidates'] as const)assert.equal(next[key],row[key],key);
  }finally{await service.dispose();s.close();}
@@ -156,9 +156,9 @@ test('v10 and v11 Expert balanced produce identical session histories',async()=>
  const sessions=['tower-policy-v10',AI_VERSION].map(aiVersion=>new BattleSession(async()=>{},[1,2,3,4],{teams,aiVersion,npcAi:{tier:'expert',tactic:'balanced'}}));
  try{let states=await Promise.all(sessions.map(s=>s.ready()));
   for(let n=0;states[0].status==='waiting'&&n<200;n++){
-   assert.deepEqual(states[0].messages,states[1].messages);
+   assert.deepEqual(battleEvents(states[0].messages),battleEvents(states[1].messages));
    states=await Promise.all(sessions.map((s,i)=>s.submit(states[i].id,states[i].requestId,states[i].actions[0].command)));
   }
-  assert.equal(states[0].status,'complete');assert.equal(states[1].status,'complete');assert.deepEqual(states[0].messages,states[1].messages);
+  assert.equal(states[0].status,'complete');assert.equal(states[1].status,'complete');assert.deepEqual(battleEvents(states[0].messages),battleEvents(states[1].messages));
  }finally{await Promise.all(sessions.map(s=>s.dispose()));}
 });

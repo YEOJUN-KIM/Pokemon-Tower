@@ -1,3 +1,4 @@
+import {normalNpcFloorRules} from './normal-mode-stages';
 import {namedTrainerSamples,type TrainerSample} from './trainer-catalog';
 import {towerThemes,type TowerTheme} from './tower-themes';
 
@@ -15,7 +16,7 @@ export const villainOrganizations=[
   {id:'star',name:'스타단',portrait:'teamstargrunt',entries:['Murkrow','Houndoom','Torkoal','Skuntank','Revavroom','Primeape']},
 ] as const;
 export const VILLAIN_CHANCE=.08;
-export const VILLAIN_BOSS_MIN_FLOOR=75;
+export const VILLAIN_BOSS_MIN_FLOOR=normalNpcFloorRules.villainBoss;
 // Shared sample source for scripted campaigns; no encounter roll or floor gate.
 export function organizationGrunt(organization:string):TrainerSample {
  const group=villainOrganizations.find(group=>group.id===organization);

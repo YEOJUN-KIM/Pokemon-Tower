@@ -1,14 +1,14 @@
 import {isRocketStage,campaignEligible,emptyCampaign} from '../data/villain-campaigns';
 import {teleportSegment} from '../data/teleport';
 import type {RewardOption,WeightedRewardOption} from '../data/rewards';
-import {eventDefinitions,eventDefinition,mysteryChest,type EventReward,type EventChoice,type RunEventRegistry} from '../data/run-events';
+import {eventDefinitions,eventDefinition,eventEncounterSettings,type EventReward,type EventChoice,type RunEventRegistry} from '../data/run-events';
 
 export type Roll=(max:number)=>number;
 
 export function selectRunEvent(afterFloor:number,previousOrder:number|null,roll:Roll,registry:RunEventRegistry=eventDefinitions,rulesVersion=1,order=afterFloor,eligible:(kind:string)=>boolean=kind=>!isRocketStage(kind)||campaignEligible(kind,emptyCampaign,afterFloor)):string|null {
   if(afterFloor%5===0)return null;
-  if(previousOrder!==null && order-previousOrder<=mysteryChest.cooldownFloors)return null;
-  if(roll(100)>=mysteryChest.encounterPercent)return null;
+  if(previousOrder!==null && order-previousOrder<=eventEncounterSettings.cooldownFloors)return null;
+  if(roll(100)>=eventEncounterSettings.encounterPercent)return null;
   const eventKinds=Object.keys(registry).filter(kind=>eligible(kind)&&(kind!=='random-teleport'||teleportSegment(afterFloor)!==null)&&(registry[kind].minFloor??1)<=afterFloor && (registry[kind].minRulesVersion??1)<=rulesVersion);
   const total=eventKinds.reduce((sum,kind)=>sum+registry[kind].weight,0);
   if(total<=0)return null;

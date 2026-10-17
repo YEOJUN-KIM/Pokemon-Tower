@@ -224,3 +224,5 @@ Teleport가 포함된다. 관장 E2E는 데스크톱/모바일에서 실제 조�
 | Weezing | Levitate | None | Sludge Bomb, Flamethrower, Will-O-Wisp, Thunderbolt |
 | Muk | Sticky Hold | None | Poison Jab, Brick Break, Toxic, Body Slam |
 | Persian | Technician | None | Fake Out, Bite, U-turn, Thunder Wave |
+
+현재 후보 원본 수정 후 node scripts/export-normal-npc-runtime.mjs로 갱신하고 --check로 일치 여부를 검사합니다. 옛 build-normal-npc-samples.ts는 이 단일 빌드를 재구성하지 못하므로 덮어쓰기를 거부합니다. CSV는 후보 최대 6마리를 포함하는 schema v2를 사용합니다. [현재 데이터 규약](../engineering/NPC_DATA.md).

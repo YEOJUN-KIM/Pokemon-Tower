@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {TowerStore} from '../src/server/tower-store';
 import {starters} from '../src/data/teams';
-import {mysteryChest,merchantTicketPrice} from '../src/data/run-events';
+import {eventEncounterSettings,legacyChestRewards,merchantTicketPrice} from '../src/data/run-events';
 import {RunEvents} from '../src/server/run-events';
 import {schema} from '../src/server/schema';
 import {transaction} from '../src/server/storage/transaction';
@@ -30,13 +30,13 @@ test('chest is an extra encounter, coins pay once, and next battle waits for con
   assert.throws(()=>store.chooseEvent('stranger',run,event.id,'open'),/이 도전/);
   assert.throws(()=>store.chooseEvent('owner',run,event.id,'other'),/진행하거나/);
   store.chooseEvent('owner',run,event.id,'open');store.chooseEvent('owner',run,event.id,'open');
-  assert.equal(store.view('owner').coins,mysteryChest.coins);assert.equal(store.view('owner').run!.earnedCoins,mysteryChest.coins);assert.equal(store.view('owner').run!.victories,0);
-  assert.deepEqual(store.view('owner').run!.event?.reward,{kind:'coins',amount:mysteryChest.coins});
+  assert.equal(store.view('owner').coins,legacyChestRewards.coins);assert.equal(store.view('owner').run!.earnedCoins,legacyChestRewards.coins);assert.equal(store.view('owner').run!.victories,0);
+  assert.deepEqual(store.view('owner').run!.event?.reward,{kind:'coins',amount:legacyChestRewards.coins});
   assert.throws(()=>store.chooseEvent('owner',run,event.id,'skip'),/이미 다른/);
   assert.throws(()=>store.enter('owner',run,2,starters),/이벤트를 먼저/);
   store.continueEvent('owner',run,event.id);store.continueEvent('owner',run,event.id);
   assert.equal(store.view('owner').run!.event,null);assert.equal(store.view('owner').run!.floor,2);
-  store.chooseEvent('owner',run,event.id,'open');assert.equal(store.view('owner').coins,mysteryChest.coins);
+  store.chooseEvent('owner',run,event.id,'open');assert.equal(store.view('owner').coins,legacyChestRewards.coins);
   store.enter('owner',run,2,starters);assert.throws(()=>store.chooseEvent('owner',run,event.id,'open'),/이미 지나간/);
  }finally{store.close();}
 });
@@ -63,7 +63,7 @@ test('skipping grants nothing and choice survives reload without another encount
 });
 test('encounter threshold, cooldown, named gates and final clear keep their original floors',()=>{
  const {store,run,battle,roll}=setup();try{
-  roll(mysteryChest.encounterPercent);assert.equal(finishFloor(store,run,battle),null);roll(mysteryChest.encounterPercent-1);
+  roll(eventEncounterSettings.encounterPercent);assert.equal(finishFloor(store,run,battle),null);roll(eventEncounterSettings.encounterPercent-1);
   const b2=store.enter('owner',run,2,starters),event=finishFloor(store,run,b2,2)!;assert.ok(event);store.chooseEvent('owner',run,event.id,'skip');
   for(const floor of [3,4]){const id=store.enter('owner',run,floor,starters);assert.equal(finishFloor(store,run,id,floor),null);}
   const b5=store.enter('owner',run,5,starters);assert.equal(finishFloor(store,run,b5,5),null);
@@ -80,7 +80,7 @@ test('coin payment failure rolls back the receipt, allowing a safe retry',()=>{
   const event=finishFloor(store,run,battle)!;
   store.db.exec("CREATE TRIGGER fail_chest BEFORE UPDATE OF coins ON players BEGIN SELECT RAISE(ABORT,'payment failed'); END");
   assert.throws(()=>store.chooseEvent('owner',run,event.id,'open'),/payment failed/);assert.equal(store.view('owner').run!.event?.phase,'choice');assert.equal(store.view('owner').coins,0);
-  store.db.exec('DROP TRIGGER fail_chest');store.chooseEvent('owner',run,event.id,'open');assert.equal(store.view('owner').coins,mysteryChest.coins);
+  store.db.exec('DROP TRIGGER fail_chest');store.chooseEvent('owner',run,event.id,'open');assert.equal(store.view('owner').coins,legacyChestRewards.coins);
  }finally{store.close();}
 });
 test('legacy runs are left unchanged by event schema migration',()=>{
@@ -127,7 +127,7 @@ test('v32 migration preserves a pending chest and its paid reward',()=>{
   const event=finishFloor(store,fixture.run,fixture.battle)!;store.chooseEvent('owner',fixture.run,event.id,'open');
   const before=store.view('owner');store.db.exec('ALTER TABLE run_events DROP COLUMN kind;PRAGMA user_version=32');store.close();store=new TowerStore(path,()=>0);
   assert.deepEqual(store.view('owner'),before);assert.equal(store.view('owner').run!.event!.kind,'mystery-chest');
-  store.chooseEvent('owner',fixture.run,event.id,'open');assert.equal(store.view('owner').coins,mysteryChest.coins);
+  store.chooseEvent('owner',fixture.run,event.id,'open');assert.equal(store.view('owner').coins,legacyChestRewards.coins);
   assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
  }finally{store.close();}
 });

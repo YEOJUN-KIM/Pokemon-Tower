@@ -1,4 +1,17 @@
 /* Battle health HUD owner: base, theme, responsive layout and HP states. Keep changes here instead of other theme files. */
+:where(.scope[data-ui-screen="battle"]) :global(.health-card[data-raid-reset]) {
+  animation: raid-health-reset .65s ease-out both;
+}
+:where(.scope[data-ui-screen="battle"]) :global(.health-card[data-raid-reset] .hp-track i) {
+  transform-origin:left;
+  transition:none;
+  animation:raid-health-fill .6s ease-out both;
+}
+@keyframes raid-health-fill {from{transform:scaleX(0);}to{transform:scaleX(1);}}
+@keyframes raid-health-reset {0%{opacity:.35;filter:brightness(1.7);}100%{opacity:1;filter:brightness(1);}}
+@media(prefers-reduced-motion:reduce){
+  :where(.scope[data-ui-screen="battle"]) :global(.health-card[data-raid-reset]),:where(.scope[data-ui-screen="battle"]) :global(.health-card[data-raid-reset] .hp-track i){animation:none;}
+}
 :where(.scope[data-ui-screen="battle"]) :global(.health-card) {
   position: absolute;
   background: #ffffffeb;

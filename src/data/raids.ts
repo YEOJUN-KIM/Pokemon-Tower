@@ -3,6 +3,9 @@ import type {RewardOption} from './rewards';
 
 // Temporary v1 tuning. Encounter chance/cooldown still belong to the shared event rules.
 export const raidEventSettings={weight:20,minFloor:1,minRulesVersion:2} as const;
+// Temporary manual playtest override. Set enabled=false to restore normal event selection.
+// startFloor is the destination floor (3 means after clearing floor 2).
+export const raidEventTestSettings={enabled:true,startFloor:3} as const;
 export type RaidCategory='normal'|'paradox'|'ultra-beast'|'sub-legendary'|'legendary'|'mythical';
 export const raidCategoryPresentation:Record<RaidCategory,{aura:string;entry:string}>={
  normal:{aura:'#91b2cd',entry:'강력한 포켓몬이 모습을 드러냈다!'},

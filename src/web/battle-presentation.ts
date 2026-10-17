@@ -10,8 +10,29 @@ import {itemName} from '../data/held-items';
 import {moveAnimationPlan} from './move-animation-plan';
 import {importantBattleLine,dialogueTextForLine} from './battle-message-data';
 
-export type Motion = {kind: 'z-charge' | 'z-release' | 'move' | 'hit' | 'heal' | 'switch' | 'faint' | 'stat-up' | 'stat-down' | 'mega-charge' | 'mega-shell' | 'mega-burst' | 'mega-flash' | 'mega-reveal' | 'dynamax-recall' | 'dynamax-ball' | 'dynamax-release' | 'dynamax-grow' | 'dynamax-end' | 'tera-charge' | 'tera-shell' | 'tera-burst' | 'tera-reveal'; category?:string;targetSide?:'player'|'enemy';missed?:boolean;blocked?:boolean;sendOut?:boolean;side: 'player' | 'enemy'; color: string; move?: string; label?:string;impact?:'weak'|'strong'|'critical'};
-export type Frame = {view: BattleView; motion: Motion | null; duration: number; notice?:EffectNotice; announcement?:string; important?:boolean};
+export type Motion = {kind: 'z-charge' | 'z-release' | 'move' | 'hit' | 'heal' | 'switch' | 'faint' | 'stat-up' | 'stat-down' | 'mega-charge' | 'mega-shell' | 'mega-burst' | 'mega-flash' | 'mega-reveal' | 'raid-aura-charge' | 'raid-aura-burst' | 'raid-aura-reveal' | 'dynamax-recall' | 'dynamax-ball' | 'dynamax-release' | 'dynamax-grow' | 'dynamax-end' | 'tera-charge' | 'tera-shell' | 'tera-burst' | 'tera-reveal'; raidPhase?:'mega'|'aura';hpReset?:boolean;category?:string;targetSide?:'player'|'enemy';missed?:boolean;blocked?:boolean;sendOut?:boolean;side: 'player' | 'enemy'; color: string; move?: string; label?:string;impact?:'weak'|'strong'|'critical'};
+export type Frame = {view: BattleView; motion: Motion | null; duration: number; minimumDuration?:number; notice?:EffectNotice; announcement?:string; important?:boolean};
+
+// Presentation only: the saved protocol already owns the two transition messages.
+// A different public form is a Mega transition; the same form is the final aura.
+function raidTransitionFrames(before:BattleView,line:string,first:string,resultLine?:string):Frame[]{
+ const [, , ,details,condition]=line.split('|'),name=details.split(',')[0];
+ const raidPhase=before.opponent?.displaySpecies??before.opponent?.species;
+ const kind=raidPhase===name?'aura':'mega';
+ const sequence:readonly [Motion['kind'],number][] = kind==='mega'
+  ? [['mega-charge',950],['mega-shell',650],['mega-burst',400],['mega-flash',250]]
+  : [['raid-aura-charge',700],['raid-aura-burst',450]];
+ const frames:Frame[]=sequence.map(([motion,duration])=>({view:structuredClone(before),motion:{kind:motion,side:'enemy',color:'psychic',raidPhase:kind},announcement:first,duration,minimumDuration:duration/2}));
+ const view=structuredClone(before);
+ view.field=advanceField(view.field??emptyField(),line);
+ view.opponent={species:name,shiny:details.split(', ').includes('shiny'),gender:genderFromDetails(details),condition};
+ view.pendingFaints=view.pendingFaints?.filter(side=>side!=='enemy');
+ view.messages=[...view.messages,line,...(resultLine?[resultLine]:[])].slice(-300);
+ const result=resultLine?.split('|')[2]??first;
+ frames.push({view,motion:{kind:kind==='mega'?'mega-reveal':'raid-aura-reveal',side:'enemy',color:'psychic',raidPhase:kind,hpReset:true},announcement:result,duration:850,minimumDuration:700});
+ frames.push({view:structuredClone(view),motion:null,announcement:result,duration:550,minimumDuration:350});
+ return frames;
+}
 
 // Protocol windows can be truncated at 300 lines. Match the largest overlap,
 // including repeated events, instead of assuming that message counts increase.
@@ -28,6 +49,7 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
   const frames: Frame[] = [];
   let lastNotice = '';
   let impact:Motion['impact'];
+  const consumed=new Set<number>();
   const lines=[...newLines(before.messages,after.messages)];
   // Presentation only: critical feedback precedes effectiveness; stored logs stay intact.
   for(let index=0;index<lines.length-1;index++){
@@ -46,21 +68,25 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
     }
   }
   for (const [index,line] of lines.entries()) {
+    if(consumed.has(index))continue;
     view = structuredClone(view);
     const [, event, actor, value, condition] = line.split('|');
     if(event==='faint'&&line.split('|').includes('[raid]')){view.messages=[...view.messages,line].slice(-300);continue;}
     if(event==='message'){
+      if(lines[index+1]?.startsWith('|switch|p2')&&lines[index+1].split('|').includes('[raid]')){
+        frames.push({view:structuredClone(view),motion:null,duration:300,minimumDuration:200});
+      }
       view.messages=[...view.messages,line].slice(-300);
-      frames.push({view:structuredClone(view),motion:null,announcement:actor,duration:1300});continue;
+      const raidMessage=lines[index+1]?.includes('[raid]');
+      frames.push({view:structuredClone(view),motion:null,announcement:actor,duration:raidMessage?1000:1300,minimumDuration:raidMessage?700:undefined});continue;
     }
     if(event==='switch'&&line.split('|').includes('[raid]')){
-      view.field=advanceField(view.field??emptyField(),line);
       const premonition=lines[index-1]?.split('|')[2];
-      frames.push({view:structuredClone(view),motion:{kind:'mega-charge',side:'enemy',color:'psychic'},announcement:premonition,duration:650});
-      view.opponent={species:value.split(',')[0],shiny:value.split(', ').includes('shiny'),gender:genderFromDetails(value),condition};
-      view.pendingFaints=view.pendingFaints?.filter(side=>side!=='enemy');
-      view.messages=[...view.messages,line].slice(-300);
-      frames.push({view:structuredClone(view),motion:{kind:'mega-reveal',side:'enemy',color:'psychic'},announcement:lines[index+1]?.split('|')[2],duration:650});continue;
+      const resultLine=lines[index+1]?.startsWith('|message|')?lines[index+1]:undefined;
+      const transition=raidTransitionFrames(view,line,premonition??'',resultLine);
+      frames.push(...transition);view=structuredClone(transition.at(-1)!.view);
+      if(resultLine)consumed.add(index+1);
+      continue;
     }
     if(['move','switch','drag','turn'].includes(event))lastNotice='';
     const candidate=effectNotice(line);

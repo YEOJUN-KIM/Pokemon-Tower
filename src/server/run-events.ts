@@ -1,5 +1,6 @@
 import {ChallengerEvents} from './challenger-events';
 import {RaidEvents} from './raid-events';
+import {raidEventTestSettings} from '../data/raids';
 import {HiddenShop} from './hidden-shop';
 import {selectRunEvent,findEventChoice,rollChoiceReward,rollRewardOption} from '../game/run-events';
 import {applyRewardOption,selectEventReward} from './rewards';
@@ -19,9 +20,11 @@ export class RunEvents {
  constructor(private readonly db:DatabaseSync,private readonly roll:(max:number)=>number,private readonly registry:RunEventRegistry=eventDefinitions){}
  enable(runId:string){this.db.prepare('INSERT INTO run_event_rules(run_id,version) VALUES (?,?)').run(runId,currentEventRulesVersion);}
  encounter(runId:string,afterFloor:number){
-  if(afterFloor%5===0 || !this.db.prepare('SELECT 1 FROM run_event_rules WHERE run_id=?').get(runId))return;
+  if(!this.db.prepare('SELECT 1 FROM run_event_rules WHERE run_id=?').get(runId))return;
+  const forceRaid=this.registry===eventDefinitions&&raidEventTestSettings.enabled&&afterFloor+1>=raidEventTestSettings.startFloor;
+  if(!forceRaid&&afterFloor%5===0)return;
   const previous=this.db.prepare('SELECT MAX(after_floor) AS floor FROM run_events WHERE run_id=?').get(runId) as {floor:number|null};
-  const kind=selectRunEvent(afterFloor,previous.floor,this.roll,this.registry,this.rulesVersion(runId));
+  const kind=forceRaid?'raid-encounter':selectRunEvent(afterFloor,previous.floor,this.roll,this.registry,this.rulesVersion(runId));
   if(!kind)return;
   const eventId=randomUUID();
   this.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status) VALUES (?,?,?,?,'choice')").run(eventId,runId,afterFloor,kind);

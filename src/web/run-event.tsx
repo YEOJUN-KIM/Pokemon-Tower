@@ -1,6 +1,6 @@
 'use client';
 import {ChallengerCandidates,ChallengerDetail} from './challenger-candidates';
-import {RaidScene} from './raid-scene';
+import {RaidScene,RaidVictoryScene} from './raid-scene';
 import {HiddenShop,HiddenShopDetail} from './hidden-shop';
 import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import {eventDefinition,type EventChoice,type RunEventView} from '../data/run-events';
@@ -32,7 +32,10 @@ export function eventDialogue(event:RunEventView){
 }
 
 export function RunEventScene({event,busy=false,challengerId,coins=0,growthPoints=0,shopOfferId,onShopFocus=()=>{}}:{event:RunEventView;busy?:boolean;challengerId?:string;coins?:number;growthPoints?:number;shopOfferId?:string;onShopFocus?:(id:string)=>void}){
- if(event.raid)return <RaidScene raid={event.raid}/>;
+ if(event.kind==='raid-encounter'&&event.raid){
+  if(event.phase==='choice'&&!event.choiceId)return <RaidScene raid={event.raid}/>;
+  return event.phase==='reward'?<RaidVictoryScene/>:null;
+ }
  if(event.hiddenShop)return <HiddenShop shop={event.hiddenShop} coins={coins} growthPoints={growthPoints} busy={busy} selectedId={shopOfferId} onFocus={onShopFocus}/>;
  if(event.challengers && event.phase==='choice')return <ChallengerDetail candidate={event.challengers.find(candidate=>candidate.id===(challengerId??event.challengers?.[0]?.id))}/>;
  const opened=event.phase==='reward',reward=event.reward,definition=eventDefinition(event.kind,undefined,event.rulesVersion),presentation=getEventPresentation(event.kind);
@@ -60,12 +63,12 @@ export function RunEventPanel({event,runId,busy,selecting,onChoose,submit,challe
  },[event.id,mode,!!event.result]);
  if(event.hiddenShop)return <HiddenShopDetail shop={event.hiddenShop} selectedId={shopOfferId} coins={coins} growthPoints={growthPoints} busy={busy} bagButton={bagButton} onPurchase={productId=>onHiddenPurchase?onHiddenPurchase(productId):void submit({type:'hidden-shop-purchase',runId,eventId:event.id,productId})} onLeave={()=>void submit({type:'event-choice',runId,eventId:event.id,choice:'leave'})}/>;
  return <><section className={`${styles.scope} ${styles.bottom} battle-messages`} data-event-step={mode} data-challenger-selection={!!event.challengers&&mode!=='reward'} aria-label="이벤트 상황">
-  <div className="message-heading"><span><i className="record-dot"/>이벤트</span><span>{mode==='choices'?'어떻게 할까요?':`${event.afterFloor}층을 지나던 길`}</span></div>
+  <div className="message-heading"><span><i className="record-dot"/>{event.raid&&mode==='reward'?'레이드 승리':'이벤트'}</span><span>{event.raid&&mode==='reward'?'특별한 보상':mode==='choices'?'어떻게 할까요?':`${event.afterFloor}층을 지나던 길`}</span></div>
   {event.challengers && mode!=='reward'?<><GameDialogue text="도전할 트레이너를 선택하세요." label="이벤트 안내"/><ChallengerCandidates candidates={event.challengers} selectedId={challengerId??event.challengers[0]?.id} busy={busy} onFocus={onChallengerFocus} onConfirm={choice=>void submit({type:'event-choice',runId,eventId:event.id,choice})}/></>:mode==='reward'&&event.result?<GameDialogue text={event.raid?"승리했다! 특별한 보상을 확인하자.":event.challengers?"승리했다! 전투 보상을 확인하자.":"상자를 열었다. 결과를 확인해 보자."} label="이벤트 안내"/>:<>
    {mode!=='choices'&&<GameDialogue text={eventDialogue(event)} label="이벤트 안내"/>}
    <RunEventChoices event={event} runId={runId} busy={busy} submit={submit} mode={mode} onChoose={onChoose}/>
   </>}
- </section>{mode==='reward'&&event.result&&revealed===event.id&&<RewardModal result={event.result} heading={event.result.tone==='good'||event.result.tone==='great'?'이벤트 보상':'이벤트 결과'} busy={busy} onSelect={(selectionId,candidateId)=>void submit({type:'event-reward-select',runId,eventId:event.id,selectionId,candidateId})} onConfirm={()=>void submit({type:'event-continue',runId,eventId:event.id})}/>}</>;
+ </section>{mode==='reward'&&event.result&&revealed===event.id&&<RewardModal result={event.result} heading={event.raid?event.result.title:event.result.tone==='good'||event.result.tone==='great'?'이벤트 보상':'이벤트 결과'} busy={busy} onSelect={(selectionId,candidateId)=>void submit({type:'event-reward-select',runId,eventId:event.id,selectionId,candidateId})} onConfirm={()=>void submit({type:'event-continue',runId,eventId:event.id})}/>}</>;
 }
 
 function RunEventChoices({event,runId,busy,submit,mode,onChoose}:{event:RunEventView;runId:string;busy:boolean;submit:(body:Record<string,unknown>)=>Promise<void>;mode:'intro'|'choices'|'reward';onChoose:()=>void}){

@@ -32,16 +32,39 @@ for(const width of [1280,390])for(const bossId of ['garchomp','mewtwo'])test(`ra
   await expect(page.locator('.enemy-health')).toContainText(bossId==='mewtwo'?'뮤츠':'한카리아스');
   await page.reload();await expect(page.locator('.enemy-health')).toBeVisible();
   const battle=f.store.currentBattle(owner)!;finishRaidBattle(f.store,battle.id);await page.reload();
+  await expect(scene).toHaveCount(0);
   await page.getByRole('button',{name:'영입으로 계속'}).click();
   const recruitment=page.getByRole('dialog',{name:'승리 · 동료 영입',exact:true});await expect(recruitment).toBeVisible();
+  await expect(scene).toHaveCount(0);
   const name=bossId==='mewtwo'?'뮤츠':'한카리아스';await recruitment.getByRole('button',{name:`${name} 영입 선택`,exact:true}).click();
   await recruitment.getByRole('button',{name:/동료로 데려가기/}).click();await page.getByTestId('recruit-confirmation').getByRole('button',{name:'동료로 데려가기',exact:true}).click();
   await expect(page.getByTestId('recruit-celebration')).toBeVisible();
+  await expect(scene).toHaveCount(0);
   expect(f.store.view(owner).run!.roster).toContain(f.snapshot.species);expect(f.store.view(owner).run!.floor).toBe(2);
   await page.getByTestId('recruit-celebration').getByRole('button').last().click();
   const reward=page.getByTestId('reward-modal');await expect(reward).toBeVisible();await expect(reward).toContainText('특별한 보상');await expect(reward).not.toContainText('Elite');
+  await expect(reward).toHaveAttribute('aria-label','특별한 보상');await expect(scene).toHaveCount(0);await expect(page.getByTestId('raid-victory')).toBeVisible();
+  await page.reload();await expect(reward).toBeVisible();await expect(scene).toHaveCount(0);await expect(page.getByTestId('raid-victory')).toBeVisible();
   await page.screenshot({path:`artifacts/qa/screenshots/raids/reward-${bossId}-${width}.png`});
   await reward.getByRole('button',{name:'확인',exact:true}).click();await expect(reward).toHaveCount(0);expect(f.store.view(owner).run!.event).toBeNull();expect(f.store.view(owner).run!.floor).toBe(2);
+ }finally{f.store.close();}
+});
+for(const width of [1280,390])test(`declining Raid recruitment still opens special reward without discovery at ${width}`,async({page,context})=>{
+ const owner='raid_no_'+randomBytes(6).toString('hex'),f=raidFixture('.data/e2e.sqlite',owner);
+ try{
+  const auth=await new Accounts(f.store.db).register(owner,'raid-password',owner,undefined);
+  f.store.chooseEvent(owner,f.run,f.event.id,'challenge');finishRaidBattle(f.store,f.store.currentBattle(owner)!.id);
+  const result=f.store.db.prepare('SELECT result_json FROM run_events WHERE id=?').get(f.event.id)!.result_json;
+  const coins=f.store.view(owner).coins;
+  await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
+  await page.setViewportSize({width,height:width===390?844:900});await page.goto('/battle');
+  await expect(page.getByTestId('raid-encounter')).toHaveCount(0);await expect(page.getByTestId('result-dialog')).toContainText('포켓몬 영입 + 특별한 보상');
+  await page.getByRole('button',{name:'영입으로 계속'}).click();await page.getByRole('button',{name:'영입 없이 계속',exact:true}).click();
+  const reward=page.getByTestId('reward-modal');await expect(reward).toBeVisible();await expect(reward).toHaveAttribute('aria-label','특별한 보상');
+  await expect(page.getByTestId('raid-encounter')).toHaveCount(0);await expect(page.getByTestId('raid-victory')).toBeVisible();
+  expect(f.store.view(owner).coins).toBe(coins);expect(f.store.db.prepare('SELECT result_json FROM run_events WHERE id=?').get(f.event.id)!.result_json).toBe(result);
+  expect(f.store.view(owner).run!.roster).not.toContain('Garchomp');
+  await reward.getByRole('button',{name:'확인',exact:true}).click();await expect(reward).toHaveCount(0);expect(f.store.view(owner).run!.event).toBeNull();
  }finally{f.store.close();}
 });
 test('raid skip completes event with no battle or reward',async({page,context})=>{

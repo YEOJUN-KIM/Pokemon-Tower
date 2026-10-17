@@ -1,4 +1,30 @@
 /* src/web/gimmick-theme.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
+:where(.scope) :global(.raid-aura-atmosphere) {
+  position:absolute;inset:0;z-index:4;pointer-events:none;
+  background:radial-gradient(ellipse at 75% 35%,#c493ff77,transparent 65%);
+  animation:raid-aura-light .7s ease-in-out both;
+}
+:where(.scope) :global(.aura-raid-aura-burst) {
+  background:radial-gradient(ellipse at 75% 35%,#fff9dfc0,#ac7ce34d 40%,transparent 75%);
+  animation:raid-aura-light .45s ease-out both;
+}
+:where(.scope) :global(.aura-raid-aura-reveal) {animation:raid-aura-settle .85s ease-out both;}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-raid-aura-charge>.sprite) {animation:raid-aura-glow .7s ease-in both;}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-raid-aura-burst) {animation:raid-aura-shake .45s ease-out both;}
+:where(.scope[data-ui-screen="battle"]) :global(.motion-raid-aura-reveal>.sprite) {animation:raid-aura-settle .85s ease-out both;filter:drop-shadow(0 0 14px #cf9fff);}
+:where(.scope) :global(:is(.motion-raid-aura-charge,.motion-raid-aura-burst,.motion-raid-aura-reveal):after) {
+  content:"";position:absolute;inset:5%;border:3px solid #edcaff;border-radius:50%;
+  box-shadow:0 0 22px #c291ff,inset 0 0 18px #c291ff;pointer-events:none;
+  animation:raid-aura-ring .7s ease-out both;
+}
+@keyframes raid-aura-ring {from{opacity:.9;transform:scale(.55);}to{opacity:0;transform:scale(1.6);}}
+@keyframes raid-aura-glow {from{filter:brightness(1);}to{filter:brightness(1.6) drop-shadow(0 0 22px #cf9fff);}}
+@keyframes raid-aura-light {0%,100%{opacity:.15;}45%{opacity:.8;}}
+@keyframes raid-aura-settle {from{opacity:.65;filter:brightness(1.5);}to{opacity:1;filter:brightness(1);}}
+@keyframes raid-aura-shake {0%,100%{translate:0;}25%{translate:-3px 1px;}65%{translate:3px -1px;}}
+@media(prefers-reduced-motion:reduce){
+  :where(.scope) :global(.raid-aura-atmosphere),:where(.scope) :global(:is(.motion-raid-aura-charge,.motion-raid-aura-burst,.motion-raid-aura-reveal):after),:where(.scope) :global(:is(.motion-raid-aura-charge,.motion-raid-aura-reveal)>.sprite),:where(.scope) :global(.motion-raid-aura-burst){animation:none;}
+}
 :where(.scope[data-ui-screen="battle"]) :global(.has-gimmick .battle-move-grid) {
   grid-area: moves;
 }

@@ -48,6 +48,20 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
   for (const [index,line] of lines.entries()) {
     view = structuredClone(view);
     const [, event, actor, value, condition] = line.split('|');
+    if(event==='faint'&&line.split('|').includes('[raid]')){view.messages=[...view.messages,line].slice(-300);continue;}
+    if(event==='message'){
+      view.messages=[...view.messages,line].slice(-300);
+      frames.push({view:structuredClone(view),motion:null,announcement:actor,duration:1300});continue;
+    }
+    if(event==='switch'&&line.split('|').includes('[raid]')){
+      view.field=advanceField(view.field??emptyField(),line);
+      const premonition=lines[index-1]?.split('|')[2];
+      frames.push({view:structuredClone(view),motion:{kind:'mega-charge',side:'enemy',color:'psychic'},announcement:premonition,duration:650});
+      view.opponent={species:value.split(',')[0],shiny:value.split(', ').includes('shiny'),gender:genderFromDetails(value),condition};
+      view.pendingFaints=view.pendingFaints?.filter(side=>side!=='enemy');
+      view.messages=[...view.messages,line].slice(-300);
+      frames.push({view:structuredClone(view),motion:{kind:'mega-reveal',side:'enemy',color:'psychic'},announcement:lines[index+1]?.split('|')[2],duration:650});continue;
+    }
     if(['move','switch','drag','turn'].includes(event))lastNotice='';
     const candidate=effectNotice(line);
     const noticeKey=candidate ? `${candidate.actor}:${candidate.kind}:${candidate.name}` : '';

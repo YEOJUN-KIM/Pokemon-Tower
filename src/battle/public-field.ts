@@ -6,6 +6,7 @@ export function emptyField():PublicField{return {turn:0,effects:[],opponentSize:
 export function advanceField(previous:PublicField,line:string):PublicField {
   const state:PublicField={...previous,effects:previous.effects.map(effect=>({...effect})),faintedOpponents:[...previous.faintedOpponents],boosts:{p1:{...previous.boosts?.p1},p2:{...previous.boosts?.p2}}};
   const [,event,actor,value,...tags]=line.split('|');
+  if(event==='raid'){state.raid=true;state.opponentSize=1;}
   const side=actor?.startsWith('p1') ? 'p1' : actor?.startsWith('p2') ? 'p2' : null,boosts=state.boosts!;
   const keys=['atk','def','spa','spd','spe','accuracy','evasion'];
   if(side){
@@ -23,7 +24,7 @@ export function advanceField(previous:PublicField,line:string):PublicField {
   if(event==='-clearallboost')state.boosts={p1:{},p2:{}};
   if(event==='turn')state.turn=Number(actor);
   if(event==='teamsize' && actor==='p2')state.opponentSize=Number(value);
-  if(event==='faint' && actor.startsWith('p2') && !state.faintedOpponents.includes(actor))state.faintedOpponents.push(actor);
+  if(event==='faint' && actor.startsWith('p2') && !tags.includes('[raid]') && value!=='[raid]' && !state.faintedOpponents.includes(actor))state.faintedOpponents.push(actor);
   if(event==='-heal' && actor.startsWith('p2') && !value.includes('fnt'))state.faintedOpponents=state.faintedOpponents.filter(name=>name!==actor);
   const remove=(scope:FieldEffect['scope'],id?:string)=>{state.effects=state.effects.filter(effect=>effect.scope!==scope || (id!==undefined && effect.id!==id));};
   const add=(scope:FieldEffect['scope'],raw:string)=>{

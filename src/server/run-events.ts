@@ -1,4 +1,5 @@
 import {ChallengerEvents} from './challenger-events';
+import {RaidEvents} from './raid-events';
 import {HiddenShop} from './hidden-shop';
 import {selectRunEvent,findEventChoice,rollChoiceReward,rollRewardOption} from '../game/run-events';
 import {applyRewardOption,selectEventReward} from './rewards';
@@ -25,6 +26,7 @@ export class RunEvents {
   const eventId=randomUUID();
   this.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status) VALUES (?,?,?,?,'choice')").run(eventId,runId,afterFloor,kind);
   if(kind==='hidden-shop')new HiddenShop(this.db).create(eventId,runId);
+  if(kind==='raid-encounter')new RaidEvents(this.db).create(eventId,runId,afterFloor+1);
   if(kind==='challenger-selection'){
    const rule=(this.db.prepare('SELECT rule FROM run_rules WHERE run_id=?').get(runId) as {rule:BattleRule}).rule;
    const progression=(this.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(runId) as {version:TowerProgression}|undefined)?.version??'legacy';
@@ -36,7 +38,7 @@ export class RunEvents {
  view(runId:string):RunEventView|null{
   const row=this.db.prepare("SELECT * FROM run_events WHERE run_id=? AND status!='complete' ORDER BY after_floor DESC LIMIT 1").get(runId) as EventRow|undefined;
   if(row)this.validateKind(row.kind);
-  return row?{id:row.id,kind:row.kind,choiceId:row.choice_id,rulesVersion:this.rulesVersion(runId),...(row.result_json?{result:JSON.parse(row.result_json) as RewardResult}:{}),...(row.kind==='hidden-shop'?{hiddenShop:new HiddenShop(this.db).view(row.id)}:{}),afterFloor:row.after_floor,phase:row.status as RunEventView['phase'],...new ChallengerEvents(this.db).view(row.id),reward:row.reward_kind?{kind:row.reward_kind,amount:row.amount}:null}:null;
+  return row?{id:row.id,kind:row.kind,choiceId:row.choice_id,rulesVersion:this.rulesVersion(runId),...(row.result_json?{result:JSON.parse(row.result_json) as RewardResult}:{}),...(row.kind==='hidden-shop'?{hiddenShop:new HiddenShop(this.db).view(row.id)}:{}),afterFloor:row.after_floor,phase:row.status as RunEventView['phase'],...new ChallengerEvents(this.db).view(row.id),...(row.kind==='raid-encounter'?new RaidEvents(this.db).view(row.id):{}),reward:row.reward_kind?{kind:row.reward_kind,amount:row.amount}:null}:null;
  }
  earnedCoins(runId:string){
   const rows=this.db.prepare('SELECT reward_kind,amount,result_json FROM run_events WHERE run_id=?').all(runId) as EventRow[];
@@ -48,7 +50,8 @@ export class RunEvents {
   if(!run || run.player_id!==owner)throw new BattleRequestError('이 도전의 이벤트가 아닙니다.',404);
   const event=this.db.prepare('SELECT * FROM run_events WHERE id=? AND run_id=?').get(eventId,runId) as EventRow|undefined;
   if(!event)throw new BattleRequestError('이벤트를 찾을 수 없습니다.',404);
-  if((run.state!=='select' && !(event.kind==='challenger-selection' && ['battle','lost'].includes(run.state))) || run.floor!==event.after_floor+1)throw new BattleRequestError('이미 지나간 이벤트입니다.',409);
+  const specialState=event.kind==='raid-encounter'?['battle','lost','recruit'].includes(run.state):event.kind==='challenger-selection'&&['battle','lost'].includes(run.state);
+  if((run.state!=='select'&&!specialState) || run.floor!==event.after_floor+1)throw new BattleRequestError('이미 지나간 이벤트입니다.',409);
   this.validateKind(event.kind);
   return event;
  }
@@ -67,7 +70,7 @@ export class RunEvents {
   if(choice.outcome==='leave'){
    this.db.prepare("UPDATE run_events SET status='complete',choice_id=? WHERE id=?").run(choice.id,eventId);return;
   }
-  if(choice.outcome==='challenger')throw new BattleRequestError('도전자 배틀을 시작해야 합니다.',409);
+  if(choice.outcome==='challenger'||choice.outcome==='raid')throw new BattleRequestError('이벤트 배틀을 시작해야 합니다.',409);
   if(choice.cost && !spendCoins(this.db,owner,choice.cost))throw new BattleRequestError(`${choice.cost}코인이 필요합니다.`,409);
   if(choice.outcome==='reward-result'){
    const option=rollRewardOption(choice.results,this.roll);
@@ -88,6 +91,7 @@ export class RunEvents {
  continue(owner:string,runId:string,eventId:string){
   const row=this.owned(owner,runId,eventId);
   if(row.result_json && (JSON.parse(row.result_json) as RewardResult).selections?.some(s=>s.state==='pending'))throw new BattleRequestError('추가 보상을 먼저 선택하세요.',409);
+  if(row.kind==='raid-encounter'&&(this.db.prepare('SELECT state FROM runs WHERE id=?').get(runId) as {state:string}).state!=='select')throw new BattleRequestError('포켓몬 영입을 먼저 마쳐 주세요.',409);
   if(row.status==='choice')throw new BattleRequestError('이벤트에서 할 행동을 먼저 선택하세요.',409);
   if(row.status==='reward')this.db.prepare("UPDATE run_events SET status='complete' WHERE id=?").run(eventId);
  }

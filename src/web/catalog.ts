@@ -78,7 +78,9 @@ export function health(condition: string) {
 }
 import {teraNames} from '../data/tera';
 export function describeLine(line: string): string | null {
+  if(line.split('|').includes('[raid]'))return null;
   const [, event, actor, value,condition] = line.split('|');
+  if(event==='message')return actor;
   const subject = actor?.includes(': ') ? `${actor.startsWith('p2') ? '상대 ' : ''}${pokemonName(actor.split(': ')[1])}` : '';
   const trigger = effectNotice(line);
   const owner = trigger ? `${trigger.side === 'enemy' ? '상대 ' : ''}${pokemonName(trigger.actor.split(': ')[1])}` : '';

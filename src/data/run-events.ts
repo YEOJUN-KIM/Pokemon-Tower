@@ -1,4 +1,5 @@
 import {challengerSettings,type ChallengerCandidate} from './challengers';
+import {raidEventSettings,type RaidEventView} from './raids';
 import {hiddenShopEventSettings,type HiddenShopView} from './hidden-shop';
 import type {RewardResult,WeightedRewardOption} from './rewards';
 // Initial tuning for the first non-combat encounter; amounts and odds live together.
@@ -8,6 +9,7 @@ export const merchantTicketPrice=300;
 export type WeightedEventReward={weight:number;reward:EventReward};
 export type EventChoice={id:string;label:string} & (
  | {outcome:'leave'}
+ | {outcome:'raid'}
  | {outcome:'challenger';challengerId:string}
  | {outcome:'reward-result';cost:number;results:readonly WeightedRewardOption[]}
  | {outcome:'reward';cost:number;rewards:readonly WeightedEventReward[];message:string}
@@ -23,6 +25,7 @@ export const eventDefinitions={
  'traveling-merchant':{title:'여행 상인의 제안',summary:`${merchantTicketPrice}코인으로 알 뽑기권 1장 구매.`,intro:`커다란 가방을 멘 상인이 말을 건넨다. “알 뽑기권 한 장을 ${merchantTicketPrice}코인에 드리지요. 필요하신가요?”`,weight:20,choices:[{id:'open',label:`${merchantTicketPrice}코인으로 산다`,outcome:'reward',cost:merchantTicketPrice,rewards:[{weight:1,reward:{kind:'egg-ticket',amount:1}}],message:`${merchantTicketPrice}코인을 내고 알 뽑기권 1장을 샀다! 알 뽑기에서 사용할 수 있다.`},leave]},
  'challenger-selection':{title:'도전자 선택전',summary:'상대와 보상을 살펴보고 도전할 트레이너를 고르자.',intro:'세 명의 도전자가 승부를 기다리고 있다. 돌아가도 괜찮다.',weight:challengerSettings.weight,minFloor:challengerSettings.minFloor,minRulesVersion:2,choices:[{id:'back',label:'돌아간다',outcome:'leave'}]},
  'hidden-shop':{title:'수상한 상인',summary:'희귀한 상품 중 무엇을 가져갈까? 구매 한도와 결제 재화를 확인하자.',intro:'“흔히 볼 수 없는 물건들이야.” 상인이 조용히 진열대를 펼쳤다.',weight:hiddenShopEventSettings.weight,minFloor:hiddenShopEventSettings.minFloor,minRulesVersion:hiddenShopEventSettings.minRulesVersion,choices:[{id:'leave',label:'나가기',outcome:'leave'}]},
+ 'raid-encounter':{title:'정체불명의 강적',summary:'강한 기척이 느껴진다.',intro:'강한 기척이 느껴진다.',...raidEventSettings,choices:[{id:'challenge',label:'도전한다',outcome:'raid'},leave]},
 } as const satisfies RunEventRegistry;
 // Initial v2 tuning only. The original table above remains frozen for v1 runs.
 export const mysteryChestResults=[
@@ -50,5 +53,5 @@ export function eventDefinition(kind:string,registry:RunEventRegistry=eventDefin
  return isRunEventKind(kind,registry)?registry[kind]:undefined;
 }
 // Event IDs and choice IDs are content strings, validated against the registry on the server.
-export type RunEventView={id:string;kind:string;choiceId?:string|null;rulesVersion?:number;result?:RewardResult;afterFloor:number;challengers?:readonly ChallengerCandidate[];hiddenShop?:HiddenShopView;phase:'choice'|'battle'|'reward';reward:EventReward|null};
+export type RunEventView={id:string;kind:string;choiceId?:string|null;rulesVersion?:number;result?:RewardResult;afterFloor:number;raid?:RaidEventView;challengers?:readonly ChallengerCandidate[];hiddenShop?:HiddenShopView;phase:'choice'|'battle'|'reward';reward:EventReward|null};
 

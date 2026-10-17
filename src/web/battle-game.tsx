@@ -180,7 +180,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     const initialView={...data.battle,field:emptyField(),messages:[],opponent:null,team:data.battle.team.map(p=>({...p,active:false})),turn:0};
     const frames=presentationFrames(isAction && battle ? battle : initialView,data.battle);
     playbackSpeed.current=readPlaybackSpeed();skip.current=false;setPlaying(true);
-    if(!isAction) {
+    if(!isAction && !data.tower.run?.raid) {
       const boss=battleTrainer(data.battle.id,data.tower.run?.boss ?? data.tower.run?.trainer);
       setStageOpen(false);setBattle(initialView);setTrainerIntro({boss,phase:'enter'});setAnnouncement(trainerAppearance(boss));
       await new Promise<void>(resolve=>{introContinue.current=()=>{introContinue.current=null;resolve();};});
@@ -221,7 +221,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
         await refresh();
         throw new Error(data.error ?? '행동을 처리하지 못했습니다.');
       }
-      if(data.battle && (body.type === 'action' || body.type === 'start' || body.type === 'enter')) {
+      if(data.battle && (body.type === 'action' || body.type === 'start' || body.type === 'enter' || body.type==='event-choice'&&body.choice==='challenge')) {
         await playBattle(data,body.type==='action');
       }
       if(!mounted.current)return;
@@ -311,7 +311,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
               const state=!entered?'미출전':fainted?'기절':pokemon.active?'출전 중':'출전';
               return <div className={`team-member ${!entered || fainted ? "is-muted" : ""} ${pokemon.active && !fainted ? "is-active" : ""}`} key={pokemon.species} title={`${battlePokemonName(pokemon.displaySpecies??pokemon.species)} · ${state}`} aria-label={`${battlePokemonName(pokemon.displaySpecies??pokemon.species)} · ${state}`} data-team-state={state}><Sprite shiny={pokemon.shiny} name={pokemon.displaySpecies??pokemon.species}/><span className="team-status">{state}</span></div>;
             })}</div><TrainerEquipment items={run?.trainerEquipment??[]}/></section>
-            {battle && !currentEvent && <div className="opponent-heading"><div className="enemy-trainer" data-opponent-kind={run?.boss ? "boss" : run?.trainer?.kind ?? "normal"}><span className="opponent-marker" aria-hidden="true">VS</span><strong>{trainerLabel(run?.boss ?? run?.trainer ?? battleTrainer(battle.id))}</strong></div></div>}
+            {battle && !currentEvent && <div className="opponent-heading"><div className="enemy-trainer" data-opponent-kind={run?.boss ? "boss" : run?.trainer?.kind ?? "normal"}><span className="opponent-marker" aria-hidden="true">VS</span><strong>{run?.raid?'레이드 포켓몬':trainerLabel(run?.boss ?? run?.trainer ?? battleTrainer(battle.id))}</strong></div></div>}
             <div className="tip"><span>TRAINER TIP</span><p>상대의 약점을 노려보세요.<br />타입 상성에 따라 공격의 효과가 달라집니다.</p></div>
           </aside>
               {battle && !currentEvent && <FieldInspection battle={battle} open={!!showField} held={showField==='hold'} touchHeld={showField==='touch'} onClose={()=>{fieldHeld.current=false;setShowField(null);}}/>}

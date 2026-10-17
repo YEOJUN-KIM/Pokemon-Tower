@@ -17,7 +17,7 @@ test('checkpoint, cooldown and missed encounters consume only their original dra
   assert.equal(selectRunEvent(5,null,noDraw),null);
   assert.equal(selectRunEvent(3,1,noDraw),null);
   const calls:number[]=[];
-  assert.equal(selectRunEvent(4,1,max=>{calls.push(max);return 10;}),null);
+  assert.equal(selectRunEvent(4,1,max=>{calls.push(max);return mysteryChest.encounterPercent;}),null);
   assert.deepEqual(calls,[100]);
   assert.equal(selectRunEvent(4,1,()=>0),'mystery-chest');
 });

@@ -1,4 +1,6 @@
 import {isBattleRule,type BattleRule} from '../data/run-rules';
+import {installRaid} from './raid';
+import type {RaidSnapshot} from '../data/raids';
 import {isTrainerEquipment} from '../data/trainer-equipment';
 import {installBattleItems} from './battle-items';
 import type {BattleItemBag} from '../data/battle-items';
@@ -20,6 +22,7 @@ import {FORMAT,PRE_TERA_FORMAT,PRE_NPC_FORMAT,supportedFormats} from '../data/ba
 export {FORMAT} from '../data/battle-rules';
 export type Seed = [number, number, number, number];
 export type BattleLog = {
+  raid?:RaidSnapshot;
   opponentRule?:BattleRule;
   opponentTeraSpecies?:string;
   rule?:BattleRule;
@@ -34,6 +37,7 @@ export type BattleLog = {
 };
 
 export async function runBattle(options: {
+  raid?:RaidSnapshot;
   opponentRule?:BattleRule;
   opponentTeraSpecies?:string;
   rule?:BattleRule;
@@ -55,14 +59,21 @@ export async function runBattle(options: {
   const towerFormat=[FORMAT,PRE_NPC_FORMAT,PRE_TERA_FORMAT].includes(format);
   if(options.teraTickets && ['p1','p2'].some(side=>!Number.isSafeInteger(options.teraTickets![side as 'p1'|'p2']) || options.teraTickets![side as 'p1'|'p2']<0))throw Error('Invalid tera tickets');
   const teams = options.teams ?? {p1: playerTeam, p2: opponentTeam};
+  if(options.raid){
+    if(options.raid.opponentTeam!==teams.p2||options.raid.phases.length<2||options.raid.phases.length>3)throw Error('Invalid raid team snapshot');
+    for(const phase of options.raid.phases){
+      const form=Showdown.Dex.species.get(phase.species);
+      if(!form.exists||![form.name,form.baseSpecies].includes(options.raid.species)||!Object.values(form.abilities).includes(phase.ability))throw Error('Invalid raid phase form/ability');
+    }
+  }
   const packed=Object.fromEntries(Object.entries(teams).map(([side,team])=>[side,Teams.unpack(team)!])) as Record<'p1'|'p2',NonNullable<ReturnType<typeof Teams.unpack>>>;
   if(towerFormat)for(const set of Object.values(packed).flat())if(!canEquipGimmick(set.species,set.item))throw Error('Incompatible gimmick item');
   const engineTeams=teams;
   const active=[...new Set(options.upgrades ?? [])].sort() as UpgradeKind[];
   if(active.some(kind=>!Object.hasOwn(upgrades,kind))) throw new Error('Invalid upgrade');
-  for (const team of Object.values(teams)) {
+  for (const [side,team] of Object.entries(teams)) {
     const unpacked = Teams.unpack(team);
-    if (!unpacked || unpacked.length !== 3) throw new Error('Expected fixed 3-Pokemon team');
+    if (!unpacked || unpacked.length !== (side==='p2'&&options.raid?options.raid.phases.length:3)) throw new Error('Expected fixed 3-Pokemon team');
     const legality=structuredClone(unpacked);
     for(const set of legality) {
       if(towerFormat && Showdown.toID(set.item)==='dynamaxband')set.item='';
@@ -88,6 +99,7 @@ export async function runBattle(options: {
   const log: BattleLog = {schemaVersion: 1, engineVersion, format, seed: [...seed], teams,
     decisions: [], publicProtocol: [], winner: null, turns: 0};
   if(options.rule)log.rule=options.rule;
+  if(options.raid)log.raid=structuredClone(options.raid);
   if(options.opponentRule)log.opponentRule=options.opponentRule;
   if(options.opponentTeraSpecies)log.opponentTeraSpecies=options.opponentTeraSpecies;
   if(active.length) log.upgrades=active;
@@ -101,6 +113,7 @@ export async function runBattle(options: {
       if(type!=='start' || !this.battle) return;
       if(options.battleItems)itemController=installBattleItems(this.battle,options.battleItems);
       if(towerFormat)installTowerGimmicks(this.battle,packed,format!==PRE_TERA_FORMAT ? options.teraTickets : undefined,options.rule,options.opponentRule,options.opponentTeraSpecies,options.trainerEquipment);
+      if(options.raid)installRaid(this.battle,options.raid);
       const original=this.battle.statModify.bind(this.battle);
       this.battle.statModify=(base,set,key)=>Showdown.toID(set.pokeball).startsWith(POINT_TEAM_MARKER)
         ? key==='hp' && base.hp===1 ? 1 : trainedStat(base[key],set.ivs[key],set.evs[key]+(pointBonuses(Showdown.toID(set.pokeball))[key as keyof import("../data/training").StatBlock]??0),key,set.nature)
@@ -167,6 +180,10 @@ export async function runBattle(options: {
         };
         while(true){
           observation.legalActions=legalActions(request,opponent?.species);
+          if(side==='p2'&&options.raid&&!observation.legalActions[0]?.command.startsWith('team ')){
+            const forced=observation.legalActions.every(a=>a.command.startsWith('switch '));
+            observation.legalActions=forced?observation.legalActions.slice(0,1):observation.legalActions.filter(a=>a.command.startsWith('move ')&&!/ (mega|dynamax|terastallize|zmove)/.test(a.command));
+          }
           if(switching && observation.switching)observation.switching={...observation.switching,...switching.view()};
           if(side==='p1' && itemController)observation.legalActions.push(...itemController.legal().map(kind=>({command:'item '+kind,label:upgrades[kind].name,estimatedDamage:0})));
           const action = await policy.choose(structuredClone(observation));
@@ -221,7 +238,7 @@ export async function replayBattle(record: BattleLog): Promise<BattleLog> {
       return next.action;
     }};
   };
-  const result = await runBattle({seed: record.seed, rule:record.rule,opponentRule:record.opponentRule,opponentTeraSpecies:record.opponentTeraSpecies,format:record.format, teams: record.teams, battleItems:record.battleItems,upgrades:record.upgrades,teraTickets:record.teraTickets,trainerEquipment:record.trainerEquipment, player: makePolicy('p1'), opponent: makePolicy('p2')});
+  const result = await runBattle({raid:record.raid,seed: record.seed, rule:record.rule,opponentRule:record.opponentRule,opponentTeraSpecies:record.opponentTeraSpecies,format:record.format, teams: record.teams, battleItems:record.battleItems,upgrades:record.upgrades,teraTickets:record.teraTickets,trainerEquipment:record.trainerEquipment, player: makePolicy('p1'), opponent: makePolicy('p2')});
   if (JSON.stringify(battleEvents(result.publicProtocol)) !== JSON.stringify(battleEvents(record.publicProtocol))) throw new Error('Replay diverged');
   if (result.winner !== record.winner || result.turns !== record.turns) throw new Error('Replay result mismatch');
   if (result.decisions.length !== record.decisions.length) throw new Error('Unused replay actions');

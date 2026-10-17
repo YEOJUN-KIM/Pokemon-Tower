@@ -5,7 +5,7 @@ import type {TrainingView} from '../data/training';
 import type {StatBlock,IVGain,MoveGain} from '../data/training';
 export type PokemonView = {types?:string[];gender?:import('../data/gender').PokemonGender;shiny?:boolean;species: string; displaySpecies?:string; condition: string; active: boolean; stats?:StatBlock; ability?:string; nature?:string; moves?:string[];item?:string;dynamax?:boolean;teraType?:string;terastallized?:string;berryUsed?:boolean};
 export type FieldEffect={id:string;name:string;scope:'weather'|'field'|'p1'|'p2';started:number;duration:number|null;maxDuration:number|null;layers?:number};
-export type PublicField={turn:number;effects:FieldEffect[];opponentSize:number;faintedOpponents:string[];boosts?:Record<'p1'|'p2',Record<string,number>>};
+export type PublicField={raid?:boolean;turn:number;effects:FieldEffect[];opponentSize:number;faintedOpponents:string[];boosts?:Record<'p1'|'p2',Record<string,number>>};
 export type BossView = {mirror?:boolean;mirrorRule?:import('../data/run-rules').BattleRule;npcRank?:import('../data/npc-ranks').NpcRank;gimmick?:import('../data/npc-gimmicks').NpcGimmick;id: string; name: string; title: string; introduction: string; victory: string; defeat: string;role?:'gym'|'villain'|'champion'|'elite';portrait?:string;kind?:'normal'|'elite'|'named';generation?:number|null;specialty?:string|null};
 export type BattleView = {
   trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];
@@ -30,6 +30,7 @@ export type BattleView = {
   teraTickets?:number;
 };
 export type RunView = {
+  raid?:boolean;
   bag?:import('../data/bag').BagView;
   rewardInventory?:import('../data/reward-inventory').RewardInventoryView[];
   event?:import('../data/run-events').RunEventView|null;

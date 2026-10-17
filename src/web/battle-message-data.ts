@@ -5,6 +5,7 @@ function subjectName(actor:string){return `${actor.startsWith('p2')?'상대 ':''
 function topic(name:string){const code=name.charCodeAt(name.length-1);return name+(code>=0xac00&&code<=0xd7a3&&(code-0xac00)%28!==0?'은':'는');}
 
 export function dialogueTextForLine(line:string,fallback:string):string|null{
+ if(line.split('|').includes('[raid]'))return null;
  const [,event,actor='',value='']=line.split('|'),name=subjectName(actor),who=topic(name),trigger=effectNotice(line);
  const metadata=line.split('|');
  // Popup ownership comes from the same public event parser as presentation.

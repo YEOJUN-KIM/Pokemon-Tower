@@ -54,7 +54,7 @@ export function TowerControls({tower, selected, setSelected, busy, submit,error}
     {recruiting && inspecting && chosen && <RecruitCandidateDetails name={chosen} run={run} onClose={()=>setInspecting(false)}/>}
     <div className="selection-title"><div><div className="eyebrow">{recruiting ? 'A NEW PARTNER' : choosingNext ? (run.theme ? themeLabel(run.theme) : 'NEXT FLOOR') : 'BUILD YOUR TEAM'}</div>
       <h2>{recruiting ? '새로운 동료를 선택하세요.' : choosingNext ? `${run.floor}층에 출전할 3마리를 선택하세요.` : run?.state === 'cleared' ? `${run.totalFloors}층 타워를 정복했어요!` : '함께 출발할 3마리를 선택하세요.'}</h2>
-      <p>{recruiting ? `승리 보상 ${run.reward}코인을 받았습니다. 영입한 포켓몬은 도감에도 해금됩니다.` : choosingNext ? `${run.boss ? `${run.boss.title} ${run.boss.name} · ` : ""}이번 도전의 보유 멤버 ${run.roster.length} / 6마리 중 출전할 3마리를 고르세요. 첫 번째가 선봉입니다.` : `영구 도감 ${tower.unlocked.length}종 중 새 도전에 데려갈 3마리를 고르세요. 첫 번째가 선봉입니다. 새 도전의 세대 테마는 출발할 때 무작위로 정해집니다.`}</p></div>
+      <p>{recruiting ? run.raid?'특별한 보상을 받았습니다. 영입 선택 후 보상을 확인하세요.':`승리 보상 ${run.reward}코인을 받았습니다. 영입한 포켓몬은 도감에도 해금됩니다.` : choosingNext ? `${run.boss ? `${run.boss.title} ${run.boss.name} · ` : ""}이번 도전의 보유 멤버 ${run.roster.length} / 6마리 중 출전할 3마리를 고르세요. 첫 번째가 선봉입니다.` : `영구 도감 ${tower.unlocked.length}종 중 새 도전에 데려갈 3마리를 고르세요. 첫 번째가 선봉입니다. 새 도전의 세대 테마는 출발할 때 무작위로 정해집니다.`}</p></div>
       <span className="selection-count">{recruiting ? `${run.roster.length} / 6` : `${selected.length} / 3`}</span></div>
     <div className="pokemon-selection" data-keyboard-grid>{available.map(name => {
       const incoming=recruiting ? run.candidateIVs[name] : undefined,previous=recruiting ? run.collectionIVs[name] : undefined;

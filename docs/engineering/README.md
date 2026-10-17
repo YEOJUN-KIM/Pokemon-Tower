@@ -9,6 +9,7 @@
 | CSS 담당 위치와 규칙 | [CSS 관리](CSS_STRUCTURE.md) |
 | NPC 생성기·JSON·CSV | [NPC 데이터](NPC_DATA.md) |
 | 이벤트 정의·선택지·연출·저장 | [이벤트 확장 방법](EVENT_SYSTEM.md) |
+| Raid 설정·보스 데이터·페이즈·검증 | [Raid Event v1](RAID_EVENTS.md) |
 | 문서 작성·정리 규칙 | [문서 관리](MAINTENANCE.md) |
 
 [게임 안내](../gameplay/README.md) · [보고서](../../artifacts/README.md)

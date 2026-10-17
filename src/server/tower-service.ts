@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import {RaidEvents} from './raid-events';
 import { resolve } from 'node:path';
 import { BattleSession } from './battle-session';
 import { BattleRequestError } from './request-error';
@@ -28,6 +29,7 @@ export class TowerService {
       this.store.complete(id, log, view);
     }, JSON.parse(row.seed) as Seed, {
       id: row.id, format:row.format,aiVersion:row.ai_version,teams: {p1: row.player_team, p2: row.opponent_team},
+      raid:(()=>{const events=new RaidEvents(this.store.db),raid=events.forBattle(row.id);return raid?events.snapshot(raid):undefined;})(),
       trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),rule:row.rule,battleItems:JSON.parse(row.battle_items),upgrades:JSON.parse(row.upgrades),teraTickets:JSON.parse(row.tera_tickets),
       opponentRule:savedNpc?.mirror?savedNpc.mirrorRule:undefined,
       opponentTeraSpecies:row.ai_version===AI_VERSION && savedNpc?.gimmick?.rule==='tera' ? savedNpc.gimmick.species : undefined,
@@ -80,9 +82,9 @@ const globalStore = globalThis as typeof globalThis & {towerPersistentService?: 
 export function getTowerService() {
   // Refresh the development singleton once when this schema/behavior version changes.
   // Its recorded inputs recover the battle in the new service without spending tickets twice.
-  if(globalStore.towerPersistentServiceVersion!==74){
+  if(globalStore.towerPersistentServiceVersion!==75){
     const previous=globalStore.towerPersistentService;
-    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=74;
+    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=75;
     if(previous)void previous.dispose().then(()=>previous.store.close()).catch(error=>console.error('Previous tower service shutdown failed',error));
   }
   // Runtime save data must not be traced into the deployment bundle.

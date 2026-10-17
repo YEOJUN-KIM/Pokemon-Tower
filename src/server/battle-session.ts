@@ -56,7 +56,7 @@ export class BattleSession {
   private saveInput?: (requestId: number, action: string) => void;
 
   constructor(save: (log: BattleLog, id: string, view: BattleView) => Promise<void>, seed?: Seed,
-    options: {opponentRule?:import('../data/run-rules').BattleRule;trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];rule?:import('../data/run-rules').BattleRule;opponentTeraSpecies?:string;id?: string; format?:string; aiVersion?:string; teams?: {p1: string; p2: string}; history?: string[]; battleItems?:import('../data/battle-items').BattleItemBag; upgrades?:UpgradeKind[];teraTickets?:import('../data/tera').TeraTickets; saveInput?: (requestId: number, action: string) => void} = {}) {
+    options: {raid?:import('../data/raids').RaidSnapshot;opponentRule?:import('../data/run-rules').BattleRule;trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];rule?:import('../data/run-rules').BattleRule;opponentTeraSpecies?:string;id?: string; format?:string; aiVersion?:string; teams?: {p1: string; p2: string}; history?: string[]; battleItems?:import('../data/battle-items').BattleItemBag; upgrades?:UpgradeKind[];teraTickets?:import('../data/tera').TeraTickets; saveInput?: (requestId: number, action: string) => void} = {}) {
     this.id = options.id ?? randomUUID();
     this.trainerEquipment=options.trainerEquipment;
     this.initialTeraTickets=options.teraTickets?.p1 ?? 0;
@@ -73,6 +73,7 @@ export class BattleSession {
     const random = randomBytes(8);
     const battleSeed: Seed = seed ?? [0, 2, 4, 6].map(i => random.readUInt16BE(i)) as Seed;
     this.finished = runBattle({
+      raid:options.raid,
       seed: battleSeed,
       format:options.format,
       teams: options.teams,

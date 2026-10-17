@@ -1,0 +1,5 @@
+.scope {display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;flex:0 0 auto;vertical-align:middle;}
+.scope[data-size=detail] {width:64px;height:64px;}
+.scope img {width:100%;height:100%;object-fit:contain;image-rendering:pixelated;}
+.scope[data-missing=true] {color:#bdd1e8;background:#293d49;outline:1px solid #597784;outline-offset:-1px;}
+.scope[data-size=detail] svg {width:32px;height:32px;}

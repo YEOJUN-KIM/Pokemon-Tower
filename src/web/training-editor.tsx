@@ -12,6 +12,7 @@ import {StatRadar} from './stat-radar';
 import {PokedexDialog} from './pokedex-dialog';
 import {TypeBadge} from './type-badge';
 import abilityDescriptions from '../data/ability-descriptions.json' with {type:'json'};
+import styles from './styles/training-wallet.module.css';
 
 export function TrainingEditor({entry,points,onSave,showMoves=true,inRun=false}:{inRun?:boolean;entry:TrainingView;points:number;onSave:(entry:TrainingView,profile:TrainingProfile)=>Promise<void>;showMoves?:boolean}) {
   const [draft,setDraft]=useState(()=>structuredClone(entry.profile));
@@ -34,10 +35,11 @@ export function TrainingEditor({entry,points,onSave,showMoves=true,inRun=false}:
   }
   async function save(){setBusy(true);setMessage('');try{await onSave(entry,draft);}catch(error){setMessage(error instanceof Error ? error.message : '저장하지 못했습니다.');}finally{setBusy(false);}}
   return <section className="training-editor" data-tab-scope data-testid="training-editor" aria-label="포켓몬 영구 설정">
+    {inRun&&<div className={styles.wallet} role="status" aria-label="보유 성장 포인트"><span>보유 성장 포인트 <small>영구 재화</small></span><strong data-testid="training-growth-wallet">{points.toLocaleString()}P</strong></div>}
     <div className="training-tabs" role="tablist" aria-label="육성 설정 종류" data-game-tabs>{tabs.map(([id,label])=><button key={id} id={`training-tab-${id}`} role="tab" aria-selected={tab===id} aria-controls={`training-panel-${id}`} onClick={()=>setTab(id)}>{label}</button>)}</div>
     <small className="training-tab-hint">Z 세부 선택 · ↑↓ 능력치 이동 · ←→ 노력치 조정 · X 뒤로</small>
     <div role="tabpanel" id="training-panel-stats" aria-labelledby="training-tab-stats" hidden={tab!=='stats'}><div className="training-top-layout"><StatRadar entry={shownEntry} profile={draft}/><div className="training-point-panel">
-    <div className="training-section-title"><h3>능력치 육성</h3><span>Lv.50</span></div>
+    <div className="training-section-title"><h3>능력치 육성</h3>{!inRun&&<span>Lv.50</span>}</div>
     <div className="training-budget"><div><span>능력 포인트</span><strong data-testid="stat-point-total" aria-live="polite">{total}<small> / 66</small></strong></div><div className="training-budget-track"><i style={{width:`${total/66*100}%`}}/></div></div>
     <div className="training-stat-labels"><span>능력치</span><span>종족값</span><span>개체값</span><span>노력치</span><span>최종값</span></div>
     <div className="training-stat-list" aria-label="레벨 50 실제 능력치">{statKeys.map(key=>{

@@ -40,7 +40,7 @@
 | 항목 | 구현 |
 |---|---|
 | 20. 출전 준비 | 기존 별도 RewardInventory/도구 관리 진입을 공통 BagButton으로 통합. 최대 6마리에서 사용, 닫으면 선택한 출전 3마리 유지 |
-| 21. 일반상점 | 같은 full-use Bag. 상점 카테고리·상품·리롤 revision은 Bag을 열고 닫아도 유지. 포켓몬 조정의 기존 도구 관리 진입도 같은 Bag을 엶 |
+| 21. 정비 배낭 | 정비 첫 메뉴에서 상점 / 포켓몬 조정 / 배낭 / 출전 팀 선택으로 진입. 일반 상점 팝업과 포켓몬 개별 조정 메뉴의 배낭 버튼은 제거. Bag을 사용해도 상품·리롤 revision은 유지 |
 | 22. 히든상점 | 같은 BagButton과 B 단축키. 상품 Snapshot·가격·재화·구매 상태·한도를 유지하며 사용/장착 가능 |
 | 23. 새 화면 | 좌측 세로 상품 목록, 우측 아이콘/이름/설명/가격/상태, 모바일은 세로 재배치. 상단 지갑/구매 N / 2 유지 |
 | 24. 상인 대화 | 하단 GameDialogue는 상인 말 전용. 입장/첫 구매/한도/재화 부족 대화. 상품 설명은 우측 상세로 이동 |
@@ -81,3 +81,13 @@
 - UI: [bag.tsx](../../src/web/bag.tsx), [bag.module.css](../../src/web/styles/bag.module.css), [item-acquisition-dialog.tsx](../../src/web/item-acquisition-dialog.tsx), [held-item-controls.tsx](../../src/web/held-item-controls.tsx), [reward-inventory.tsx](../../src/web/reward-inventory.tsx), [tower-controls.tsx](../../src/web/tower-controls.tsx), [tower-shop.tsx](../../src/web/tower-shop.tsx), [battle-game.tsx](../../src/web/battle-game.tsx), [run-event.tsx](../../src/web/run-event.tsx), [game-keyboard.ts](../../src/web/game-keyboard.ts), [hidden-shop.tsx](../../src/web/hidden-shop.tsx), [hidden-shop.module.css](../../src/web/styles/hidden-shop.module.css).
 - 주요 테스트: [bag.test.ts](../../tests/bag.test.ts), [machine-shop.test.ts](../../tests/machine-shop.test.ts), [hidden-shop.test.ts](../../tests/hidden-shop.test.ts), [bag.spec.ts](../../e2e/bag.spec.ts), [hidden-shop.spec.ts](../../e2e/hidden-shop.spec.ts), [rank-rewards.spec.ts](../../e2e/rank-rewards.spec.ts). 기존 도구 이동/폼·장비/리롤 기대값 및 schema version 검증을 새 계약에 맞게 갱신했습니다. 성별 replay 테스트는 실시간 타임스탬프를 비교에서 제외해 실제 전투 로그만 비교하도록 수정했습니다.
 - 문서: 이 문서, ITEMS/CONTROLS/EVENTS, HIDDEN_SHOP/HIDDEN_SHOP_UI 및 상태·인수인계 문서.
+
+## 대상 선택 카드 개선 (2026-10-17)
+
+도구 장착·TM 사용 시 공통 파티 카드를 사용합니다. 포켓몬 스프라이트·이름·레벨을 표시하고, HP 영역 대신 TM은 `배울 수 있음 / 배울 수 없음 / 이미 배우고 있음`을 구분합니다. 이미 아는 기술을 먼저 판별하며, 사용할 수 없는 대상은 선택을 막습니다. 도구는 현재 지닌 도구의 아이콘과 이름을 표시하고 미장착 영역은 비웁니다. 구매 직후 바로 장착도 같은 카드를 사용합니다. 모바일에서는 상태를 이름 아래로 배치합니다.
+
+일반 상점의 반복 사용 안내 문구를 삭제하고 리롤 버튼은 `리롤`로 줄였습니다. 히든상점과 출전 팀 선택의 배낭 진입은 유지합니다.
+
+검증: 관련 단위·통합 14/14, Bag·일반/히든상점·Rank 보상 Chrome 회귀 22/22 통과. PC/모바일에서 세 가지 TM 상태, 장착 도구 아이콘, 미장착 빈 영역, 정비 메뉴 진입과 기존 버튼 제거를 확인했습니다. TypeScript·프로덕션 빌드·CSS 구조·문서 링크 검사도 통과했습니다.
+
+[TM 대상 PC](../../artifacts/qa/screenshots/bag/targets-machine-1280.png) · [TM 대상 모바일](../../artifacts/qa/screenshots/bag/targets-machine-390.png) · [도구 대상 PC](../../artifacts/qa/screenshots/bag/targets-held-1280.png) · [도구 대상 모바일](../../artifacts/qa/screenshots/bag/targets-held-390.png)

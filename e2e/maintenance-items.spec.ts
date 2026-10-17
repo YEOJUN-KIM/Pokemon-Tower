@@ -38,7 +38,7 @@ for(const width of [1280,390])test('maintenance, free reroll and zero-turn battl
   await product.getByRole('button').click();await expect(product).toContainText('보유 1개');
   await page.keyboard.press('x');await expect(shop.getByRole('button',{name:'배틀 아이템',exact:true})).toHaveAttribute('data-game-cursor','true');
   await page.keyboard.press('ArrowLeft');
-  await page.getByTestId('shop-reroll').click();await expect(page.getByTestId('shop-reroll')).toHaveText('리롤 사용 완료');expect(store.view(owner).coins).toBe(19700);
+  await page.getByTestId('shop-reroll').click();await expect(page.getByTestId('shop-reroll')).toHaveText('리롤 완료');expect(store.view(owner).coins).toBe(19700);
   await shop.locator('[data-held-item]:not(:disabled)').first().click();
   const itemDialog=page.locator('dialog[open]').last();
   await expectMaintenanceSize(itemDialog);

@@ -2,6 +2,7 @@ import Showdown from 'pokemon-showdown';
 import {CautiousSwitchingPolicy} from './switch-policy';
 import {PublicImmunityV2} from './public-immunity-v2';
 import {estimateDamage,type Observation,type OwnPokemon} from './policy';
+import type {MoveScoreBias} from './tactic-score';
 
 const hp=(p:OwnPokemon)=>{const [n,d]=p.condition.split(' ')[0].split('/').map(Number);return d>0?n/d:0;};
 
@@ -11,7 +12,7 @@ export class LearningOpponentPolicy extends CautiousSwitchingPolicy {
  private memory=new PublicImmunityV2();
  private learnedSwitches=0;
  private lastSwitch=-10;
- constructor(private side:'p1'|'p2'='p2'){super();}
+ constructor(private side:'p1'|'p2'='p2',scoreBias?:MoveScoreBias){super(scoreBias);}
  observePublicLine(line:string){
   if(!line.startsWith('|')||line.startsWith('|request|'))return;
   const normalized=this.side==='p1'?line:line.replace(/\bp([12])(?=[a-z]?:)/g,(_,n)=>'p'+(n==='1'?'2':'1'));

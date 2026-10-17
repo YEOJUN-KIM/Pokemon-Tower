@@ -12,7 +12,7 @@ export class TowerService {
   private sessions = new Map<string, {session: BattleSession; accessed: number}>();
   constructor(readonly store: TowerStore) {}
   private session(owner: string, row: BattleRow): BattleSession {
-    if (row.engine_version !== engineVersion || !supportedFormats.includes(row.format) || ![AI_VERSION,'tower-policy-v9','tower-policy-v8','tower-policy-v7','tower-policy-v6','tower-policy-v5','tower-policy-v4','tower-policy-v3','tower-policy-v2','damage-policy-v1'].includes(row.ai_version)) {
+    if (row.engine_version !== engineVersion || !supportedFormats.includes(row.format) || ![AI_VERSION,'tower-policy-v10','tower-policy-v9','tower-policy-v8','tower-policy-v7','tower-policy-v6','tower-policy-v5','tower-policy-v4','tower-policy-v3','tower-policy-v2','damage-policy-v1'].includes(row.ai_version)) {
       throw new BattleRequestError('이 배틀을 만든 엔진·규칙 버전과 현재 버전이 다릅니다. 기존 버전에서 복구하거나 도전을 종료해 주세요.', 409);
     }
     const cached = this.sessions.get(row.id);
@@ -28,11 +28,11 @@ export class TowerService {
     const session = new BattleSession(async (log, id, view) => {
       this.store.complete(id, log, view);
     }, JSON.parse(row.seed) as Seed, {
-      id: row.id, format:row.format,aiVersion:row.ai_version,teams: {p1: row.player_team, p2: row.opponent_team},
+      id: row.id, format:row.format,aiVersion:row.ai_version,npcAi:savedNpc?.npcAi,teams: {p1: row.player_team, p2: row.opponent_team},
       raid:(()=>{const events=new RaidEvents(this.store.db),raid=events.forBattle(row.id);return raid?events.snapshot(raid):undefined;})(),
       trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),rule:row.rule,battleItems:JSON.parse(row.battle_items),upgrades:JSON.parse(row.upgrades),teraTickets:JSON.parse(row.tera_tickets),
       opponentRule:savedNpc?.mirror?savedNpc.mirrorRule:undefined,
-      opponentTeraSpecies:row.ai_version===AI_VERSION && savedNpc?.gimmick?.rule==='tera' ? savedNpc.gimmick.species : undefined,
+      opponentTeraSpecies:['tower-policy-v10',AI_VERSION].includes(row.ai_version) && savedNpc?.gimmick?.rule==='tera' ? savedNpc.gimmick.species : undefined,
       history: this.store.history(row.id),
       saveInput: (requestId, command) => this.store.input(owner, row.id, requestId, command),
     });
@@ -90,9 +90,9 @@ const globalStore = globalThis as typeof globalThis & {towerPersistentService?: 
 export function getTowerService() {
   // Refresh the development singleton once when this schema/behavior version changes.
   // Its recorded inputs recover the battle in the new service without spending tickets twice.
-  if(globalStore.towerPersistentServiceVersion!==76){
+  if(globalStore.towerPersistentServiceVersion!==77){
     const previous=globalStore.towerPersistentService;
-    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=76;
+    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=77;
     if(previous)void previous.dispose().then(()=>previous.store.close()).catch(error=>console.error('Previous tower service shutdown failed',error));
   }
   // Runtime save data must not be traced into the deployment bundle.

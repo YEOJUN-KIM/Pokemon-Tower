@@ -70,18 +70,18 @@ test('boss identities vary by run, preview agrees with battle, and saved identit
       store.db.prepare("UPDATE runs SET floor=?,state='select' WHERE id=?").run(floor,runId);
       const preview=store.view('boss').run!.boss!;store.close();store=new TowerStore(path);
       assert.deepEqual(store.view('boss').run!.boss,preview);
-      const id=store.enter('boss',runId,floor,starters),row=store.battle(id);assert.deepEqual(JSON.parse(row.boss!),preview);
+      const id=store.enter('boss',runId,floor,starters),row=store.battle(id);const savedBoss=JSON.parse(row.boss!);const {npcAi,...identity}=savedBoss;assert.deepEqual(identity,preview);assert.ok(npcAi);
       const sample=namedTrainerSamples.find(s=>s.id===preview.id)!;
       // Current named templates include registered regional adaptations and signature partners.
       const template=normalNpcTemplate(sample.id,floor,sample.role);
       const allowed=template?template.team.map(p=>p.species):[...sample.entries!,...(npcExtraCandidates[sample.id]??[])].map(name=>npcSpecies(name,sample.id,sample.generation));
       for(const p of Showdown.Teams.unpack(row.opponent_team)!)assert.ok(allowed.includes(p.species),`${sample.id}: ${p.species}`);
-      store.close();store=new TowerStore(path);assert.equal(store.battle(id).opponent_team,row.opponent_team);assert.deepEqual(store.view('boss').run!.boss,preview);
+      store.close();store=new TowerStore(path);assert.equal(store.battle(id).opponent_team,row.opponent_team);assert.deepEqual(store.view('boss').run!.boss,savedBoss);
     }finally{store.close();}
   }
 });
 test('saved normal trainer survives reload and never grants a boss reward',()=>{
-  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);try{store.ensurePlayer('trainer');let id='',row;do{id=store.start('trainer',starters);row=store.battle(id);if(JSON.parse(row.trainer!).role==='villain')store.abandon('trainer',row.run_id);}while(JSON.parse(row.trainer!).role==='villain');assert.equal(row.boss,null);assert.ok(row.trainer);const savedTrainer=JSON.parse(row.trainer!);const common=npcSamples.find(s=>s.id===savedTrainer.id);const sample=common?npcTrainerSample(common,savedTrainer.npcRank):trainerCatalog.find(s=>s.id===savedTrainer.id)!;assert.deepEqual(store.view('trainer').run!.trainer,{...trainerView(sample),generation:towerThemes[store.view('trainer').run!.theme!].generation});assert.equal(store.view('trainer').run!.boss,null);
+  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);try{store.ensurePlayer('trainer');let id='',row;do{id=store.start('trainer',starters);row=store.battle(id);if(JSON.parse(row.trainer!).role==='villain')store.abandon('trainer',row.run_id);}while(JSON.parse(row.trainer!).role==='villain');assert.equal(row.boss,null);assert.ok(row.trainer);const savedTrainer=JSON.parse(row.trainer!);const common=npcSamples.find(s=>s.id===savedTrainer.id);const sample=common?npcTrainerSample(common,savedTrainer.npcRank):trainerCatalog.find(s=>s.id===savedTrainer.id)!;assert.deepEqual(store.view('trainer').run!.trainer,{...trainerView(sample),npcAi:savedTrainer.npcAi,...(savedTrainer.gimmick?{gimmick:savedTrainer.gimmick}:{}),generation:towerThemes[store.view('trainer').run!.theme!].generation});assert.equal(store.view('trainer').run!.boss,null);
     store.db.prepare('INSERT INTO rewards VALUES (?,?,?)').run(id,'trainer',100);assert.equal(store.view('trainer').run!.restartReward,20);
     const before=store.view('trainer');store.close();store=new TowerStore(path);assert.deepEqual(store.view('trainer'),before);assert.equal(store.battle(id).opponent_team,row.opponent_team);
   }finally{store.close();}

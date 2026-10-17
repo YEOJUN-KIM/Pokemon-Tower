@@ -1,5 +1,6 @@
 import Showdown from 'pokemon-showdown';
 import {DamagePolicy,estimateDamage,type Observation,type OwnPokemon} from './policy';
+import type {MoveScoreBias} from './tactic-score';
 
 function fraction(condition:string) {const [current,max]=condition.split(' ')[0].split('/').map(Number);return max>0 ? current/max : 0;}
 const heals=new Set(['recover','roost','softboiled','slackoff','strengthsap']);
@@ -7,6 +8,7 @@ const setup=new Set(['dragondance','swordsdance','nastyplot','calmmind','bulkup'
 // Decisions use our own visible condition and public opponent information only.
 // This is a deterministic heuristic, not usage statistics or a trained model.
 export class TowerPolicy extends DamagePolicy {
+  constructor(private readonly scoreBias?:MoveScoreBias){super();}
   private setupUsed=new Set<string>();
   private statusUsed=new Set<string>();
   private soaked=new Set<string>();
@@ -32,6 +34,7 @@ export class TowerPolicy extends DamagePolicy {
       }
       if(move.id==='soak')score=target.types.some(type=>['Steel','Poison'].includes(type)) && !this.soaked.has(enemy.species) ? 65 : 0;
       if(!Number.isFinite(score))score=0;
+      if(this.scoreBias)score+=this.scoreBias(score,action,observation);
       return {action,score};
     }).sort((a,b)=>b.score-a.score);
     const best=scores[0];if(!best)throw Error('No legal actions');

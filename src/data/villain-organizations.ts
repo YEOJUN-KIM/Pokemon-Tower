@@ -37,19 +37,19 @@ export type VillainRank='grunt'|'executive'|'boss';
 export type VillainEvent={organization:string;name:string;rank:VillainRank;bonus:number};
 export const villainRankNames:Record<VillainRank,string>={grunt:'조직원',executive:'간부',boss:'보스'};
 export const villainBonuses:Record<VillainRank,number>={grunt:0,executive:250,boss:1000};
-const leader=(id:string)=>namedTrainerSamples.find(s=>s.id===`named-${id}`)!;
-const executive=(id:string,name:string,portrait:string,entries:string[],ace=entries[0]):TrainerSample=>({id,name,portrait,entries,ace,title:'',role:'villain',kind:'named',generation:null,specialty:null,tactic:'status',minFloor:16,concept:'조직 간부의 테마 파티'});
+const leader=(id:string,aiCeiling:NonNullable<TrainerSample['aiCeiling']>='expert'):TrainerSample=>({...namedTrainerSamples.find(s=>s.id===`named-${id}`)!,aiCeiling});
+const executive=(id:string,name:string,portrait:string,entries:string[],ace=entries[0]):TrainerSample=>({aiCeiling:'tactical',id,name,portrait,entries,ace,title:'',role:'villain',kind:'named',generation:null,specialty:null,tactic:'status',minFloor:16,concept:'조직 간부의 테마 파티'});
 export const villainLeaders:Record<string,{executive:TrainerSample;boss:TrainerSample}>={
- rocket:{executive:leader('archer'),boss:leader('giovanni')},
+ rocket:{executive:leader('archer','tactical'),boss:leader('giovanni')},
  magma:{executive:executive('tabitha','호걸','tabitha',['Camerupt','Mightyena','Golbat','Weezing','Magcargo']),boss:leader('maxie')},
  galactic:{executive:executive('mars','마스','mars',['Purugly','Golbat','Bronzong','Skuntank','Toxicroak']),boss:leader('cyrus')},
  plasma:{executive:executive('zinzolin','칠현인 비오','zinzolin',['Cryogonal','Weavile','Garbodor','Scrafty','Bisharp']),boss:leader('ghetsis')},
  flare:{executive:executive('xerosic','크세로시키','xerosic',['Malamar','Crobat','Houndoom','Scrafty','Swalot']),boss:leader('lysandre')},
- skull:{executive:executive('plumeria','플루메리','plumeria',['Salazzle','Golbat','Gengar','Muk','Crobat']),boss:{...executive('guzma','구즈마','guzma',['Golisopod','Scizor','Pinsir','Masquerain','Ariados']),tactic:'physical',minFloor:31}},
+ skull:{executive:executive('plumeria','플루메리','plumeria',['Salazzle','Golbat','Gengar','Muk','Crobat']),boss:{...executive('guzma','구즈마','guzma',['Golisopod','Scizor','Pinsir','Masquerain','Ariados']),aiCeiling:'expert',tactic:'physical',minFloor:31}},
  aqua:{executive:executive('matt','해조','matt',['Sharpedo','Mightyena','Crobat','Walrein','Muk']),boss:leader('archie')},
  aether:{executive:executive('faba','자우보','faba',['Hypno','Slowbro','Bruxish','Alakazam','Espeon']),boss:leader('lusamine')},
- macrocosmos:{executive:leader('oleana'),boss:leader('rose')},
- star:{executive:leader('giacomo'),boss:leader('penny')},
+ macrocosmos:{executive:leader('oleana','tactical'),boss:leader('rose')},
+ star:{executive:leader('giacomo','tactical'),boss:leader('penny')},
 };
 export type VillainProgress={gruntWins:number;executiveWins:number};
 // Victories shift the next draw upwards; a small chance for lower ranks remains.

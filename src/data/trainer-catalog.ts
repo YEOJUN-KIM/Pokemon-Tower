@@ -2,7 +2,7 @@ import {johtoReferences} from './johto-builds';
 import {regionalTrainerSamples} from './regional-trainers';
 import type {BossView} from '../shared/contracts';
 export type TrainerTactic='balanced'|'physical'|'special'|'speed'|'status'|'setup'|'bulk';
-export type TrainerSample={id:string;name:string;title:string;kind:'normal'|'elite'|'named';npcRank?:import('./npc-ranks').NpcRank;generation:number|null;specialty:string|null;tactic:TrainerTactic;portrait:string;role?:BossView['role'];minFloor:number;entries?:readonly string[];ace?:string;concept:string};
+export type TrainerSample={aiCeiling?:import('./npc-ai').NpcAiTier;id:string;name:string;title:string;kind:'normal'|'elite'|'named';npcRank?:import('./npc-ranks').NpcRank;generation:number|null;specialty:string|null;tactic:TrainerTactic;portrait:string;role?:BossView['role'];minFloor:number;entries?:readonly string[];ace?:string;concept:string};
 
 const types=[
   ['Normal','반바지 소년','youngster-gen4','balanced','다양한 공격과 무난한 내구'],
@@ -31,8 +31,8 @@ export const mixedTrainerSamples:TrainerSample[]=[
   {id:'elite-rush',name:'속공 전문가',title:'엘리트 트레이너',kind:'elite',generation:null,specialty:null,tactic:'speed',portrait:'acetrainer-gen4',role:'elite',minFloor:4,concept:'빠른 포켓몬과 선공 기술을 선호'},
   {id:'elite-endurance',name:'내구 전문가',title:'엘리트 트레이너',kind:'elite',generation:null,specialty:null,tactic:'bulk',portrait:'acetrainer-gen4',role:'elite',minFloor:4,concept:'내구가 높은 포켓몬과 회복 기술을 선호'},
 ];
-function named(generation:number,id:string,name:string,role:NonNullable<BossView['role']>,specialty:string|null,tactic:TrainerTactic,entries:readonly string[],concept:string,portrait=id):TrainerSample {
-  return {id:`named-${id}`,name,title:role==='gym' ? (id==='kiawe' ? '캡틴' : '체육관 관장') : role==='champion' ? (id==='kukui' ? '리그 최종 상대' : '챔피언') : '악당조직',kind:'named',generation,specialty,tactic,portrait,role,minFloor:role==='gym' ? 5 : role==='champion' ? 10 : 8,entries,concept};
+function named(generation:number,id:string,name:string,role:NonNullable<BossView['role']>,specialty:string|null,tactic:TrainerTactic,entries:readonly string[],concept:string,portrait=id,aiCeiling:TrainerSample['aiCeiling']=role==='villain'?'expert':undefined):TrainerSample {
+  return {...(aiCeiling?{aiCeiling}:{}),id:`named-${id}`,name,title:role==='gym' ? (id==='kiawe' ? '캡틴' : '체육관 관장') : role==='champion' ? (id==='kukui' ? '리그 최종 상대' : '챔피언') : '악당조직',kind:'named',generation,specialty,tactic,portrait,role,minFloor:role==='gym' ? 5 : role==='champion' ? 10 : 8,entries,concept};
 }
 // Candidate entries inspired by each trainer's theme, not exact original-game parties.
 // Keep the ace and choose two partners; Pokémon generations are unrestricted.
@@ -41,7 +41,7 @@ export const namedTrainerSamples:TrainerSample[]=[
   named(1,'giovanni','비주기','villain','Ground','physical',['Persian','Nidoking','Rhyperior','Nidoqueen','Dugtrio','Kangaskhan'],'대표 페르시온과 땅 공격'),
   named(1,'blue','그린','champion',null,'balanced',['Pidgeot','Alakazam','Arcanine','Blastoise','Exeggutor','Machamp'],'다양한 타입과 공격 방식'),
   named(2,'falkner','비상','gym','Flying','speed',['Pidgeot','Noctowl','Skarmory','Swellow','Xatu','Honchkrow'],'비행 파티의 속도와 방어'),
-  named(2,'archer','아폴로','villain',null,'status',['Houndoom','Golbat','Weezing','Muk','Crobat','Raticate'],'로켓단의 악·독 조합'),
+  named(2,'archer','아폴로','villain',null,'status',['Houndoom','Golbat','Weezing','Muk','Crobat','Raticate'],'로켓단의 악·독 조합','archer','tactical'),
   named(2,'lance','목호','champion',null,'physical',['Dragonite','Gyarados','Charizard','Aerodactyl','Kingdra','Salamence'],'강한 드래곤과 비행 파트너'),
   named(3,'flannery','민지','gym','Fire','special',['Torkoal','Camerupt','Blaziken','Magcargo','Ninetales','Rapidash'],'느린 불꽃과 빠른 공격수'),
   named(3,'maxie','마적','villain',null,'physical',['Camerupt','Mightyena','Crobat','Weezing','Solrock','Claydol'],'마그마단의 땅·악·비행'),
@@ -62,7 +62,7 @@ export const namedTrainerSamples:TrainerSample[]=[
   named(8,'rose','로즈','villain','Steel','bulk',['Copperajah','Ferrothorn','Perrserker','Escavalier','Klinklang','Magnezone'],'강철 파티와 높은 내구'),
   named(8,'leon','단델','champion',null,'balanced',['Charizard','Dragapult','Aegislash','Haxorus','Rillaboom','Seismitoad'],'리자몽을 중심으로 한 혼합 파티'),
   named(9,'iono','모야모','gym','Electric','special',['Bellibolt','Kilowattrel','Mismagius','Luxray','Electrode','Eelektross'],'전기 파티와 대표 무우마직'),
-  named(9,'giacomo','피냐','villain','Dark','physical',['Kingambit','Honchkrow','Krookodile','Mabosstiff','Weavile','Umbreon'],'스타단 악 타입 파티'),
+  named(9,'giacomo','피냐','villain','Dark','physical',['Kingambit','Honchkrow','Krookodile','Mabosstiff','Weavile','Umbreon'],'스타단 악 타입 파티','giacomo','tactical'),
   named(9,'geeta','테사','champion',null,'balanced',['Glimmora','Kingambit','Espathra','Avalugg','Veluza','Gogoat'],'팔데아 대표 포켓몬의 혼합 파티'),
 ];
 export const legacyNamedTrainerSamples=[...namedTrainerSamples];
@@ -91,5 +91,5 @@ for(const sample of namedTrainerSamples){
 namedTrainerSamples.push(...regionalTrainerSamples);
 export const trainerCatalog=[...normalTrainerSamples,...eliteTrainerSamples,...mixedTrainerSamples,...namedTrainerSamples];
 export function trainerView(sample:TrainerSample):BossView {
-  return {id:sample.id,name:sample.name,title:sample.title,introduction:'',victory:'',defeat:'',...(sample.role ? {role:sample.role} : {}),...(sample.npcRank?{npcRank:sample.npcRank}:{}),portrait:sample.portrait,kind:sample.kind,generation:sample.generation,specialty:sample.specialty};
+  return {...(sample.aiCeiling?{aiCeiling:sample.aiCeiling}:{}),id:sample.id,name:sample.name,title:sample.title,introduction:'',victory:'',defeat:'',...(sample.role ? {role:sample.role} : {}),...(sample.npcRank?{npcRank:sample.npcRank}:{}),portrait:sample.portrait,kind:sample.kind,generation:sample.generation,specialty:sample.specialty};
 }

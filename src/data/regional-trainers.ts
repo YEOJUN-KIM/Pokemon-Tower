@@ -2,7 +2,7 @@ import type {TrainerSample,TrainerTactic} from './trainer-catalog';
 
 // Tower samples: signature Pokémon first, followed by original-inspired partners.
 // These pools and generated moves are adaptations, not verbatim game teams.
-type Row=[number,string,string,'gym'|'elite'|'champion'|'villain',string|null,TrainerTactic,string,string?];
+type Row=[number,string,string,'gym'|'elite'|'champion'|'villain',string|null,TrainerTactic,string,string?,TrainerSample['aiCeiling']?];
 const rows:Row[]=[
  [1,'misty','이슬','gym','Water','special','Starmie,Golduck,Lapras,Politoed,Lanturn,Milotic'],
  [1,'ltsurge','마티스','gym','Electric','physical','Raichu,Electrode,Magneton,Electivire,Jolteon,Ampharos'],
@@ -95,7 +95,7 @@ const rows:Row[]=[
  [8,'hop','호브','elite',null,'balanced','Dubwool,Corviknight,Snorlax,Rillaboom,Pincurchin,Cramorant'],
  [8,'bede','비트','elite','Fairy','special','Hatterene,Mawile,Gardevoir,Rapidash,Alcremie,Togekiss'],
  [8,'raihan-cup','금랑','elite','Dragon','balanced','Duraludon,Flygon,Goodra,Turtonator,Torkoal,Arcanine','raihan'],
- [8,'oleana','올리브','villain',null,'special','Garbodor,Froslass,Tsareena,Salazzle,Milotic,Vileplume'],
+ [8,'oleana','올리브','villain',null,'special','Garbodor,Froslass,Tsareena,Salazzle,Milotic,Vileplume','oleana','tactical'],
  [9,'katy','단풍','gym','Bug','physical','Ursaring,Spidops,Heracross,Forretress,Lokix,Vespiquen'],
  [9,'brassius','콜사','gym','Grass','status','Sudowoodo,Arboliva,Breloom,Tsareena,Lilligant,Cacturne'],
  [9,'kofu','곤포','gym','Water','physical','Crabominable,Veluza,Wugtrio,Pelipper,Clawitzer,Dondozo'],
@@ -110,9 +110,9 @@ const rows:Row[]=[
  [9,'nemona','네모','champion',null,'balanced','Pawmot,Lycanroc,Goodra,Dudunsparce,Orthworm,Meowscarada'],
  [9,'penny','모란','villain',null,'balanced','Sylveon,Umbreon,Vaporeon,Jolteon,Flareon,Leafeon'],
 ];
-export const regionalTrainerSamples:TrainerSample[]=rows.map(([generation,id,name,role,specialty,tactic,pool,portrait])=>({
+export const regionalTrainerSamples:TrainerSample[]=rows.map(([generation,id,name,role,specialty,tactic,pool,portrait,aiCeiling])=>({
  id:`named-${id}`,name,role,generation,specialty,tactic,entries:pool.split(','),ace:pool.split(',')[0],portrait:portrait??id,
- kind:'named',minFloor:role==='gym'?5:role==='elite'?10:role==='champion'?40:8,
+ kind:'named',...(aiCeiling?{aiCeiling}:role==='villain'?{aiCeiling:'expert' as const}:{}),minFloor:role==='gym'?5:role==='elite'?10:role==='champion'?40:8,
  title:generation===7&&role==='gym'?'캡틴':generation===8&&role==='elite'?'챔피언컵 참가자':role==='elite'?'사천왕':role==='gym'?'체육관 관장':role==='villain'?'조직 관계자':['barry','serena','hau','nemona','red-kanto'].includes(id)?'최종 도전자':'챔피언',
  concept:`${generation}세대 지역 테마의 ${specialty??'혼합'} 파티; 원작을 참고한 타워용 후보`,
 }));

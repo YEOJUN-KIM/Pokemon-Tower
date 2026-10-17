@@ -3,7 +3,7 @@ import {npcRankNames,type NpcRank,type NpcRankWeights} from './npc-ranks';
 
 export type NpcPool='normal'|'challenger';
 export type NpcTeamConcept={mode:'specialty';types:readonly string[];requiredCount:1|2|3}|{mode:'competitive'}|{mode:'mixed-theme'};
-export type NpcSample={id:string;displayName:string;portrait:string;tactic:TrainerTactic;specialty:string|null;rankWeights:NpcRankWeights;teamConcept:NpcTeamConcept;minFloor:number;weight:number;pools:readonly NpcPool[]};
+export type NpcSample={aiCeiling?:import('./npc-ai').NpcAiTier;id:string;displayName:string;portrait:string;tactic:TrainerTactic;specialty:string|null;rankWeights:NpcRankWeights;teamConcept:NpcTeamConcept;minFloor:number;weight:number;pools:readonly NpcPool[]};
 // Concept only: no reward, IV multiplier, floor offset, or battle-specific rank.
 export const npcSamples:readonly NpcSample[]=[
  {id:'youngster-balanced',displayName:'반바지 소년',portrait:'youngster-gen4',tactic:'balanced',specialty:'Bug',rankWeights:{normal:.9,elite:.1,master:0},teamConcept:{mode:'specialty',types:['Bug'],requiredCount:3},minFloor:1,weight:22,pools:['normal','challenger']},
@@ -29,6 +29,6 @@ export const npcSamples:readonly NpcSample[]=[
 ];
 export const npcTacticHints:Record<TrainerTactic,string>={balanced:'균형 잡힌 팀이다.',physical:'공격적인 팀 구성이다.',special:'특수한 공격 기술을 선호한다.',setup:'변화기를 자주 활용하는 듯하다.',status:'변화기를 자주 활용하는 듯하다.',bulk:'오래 버티는 전투에 능해 보인다.',speed:'빠른 포켓몬이 눈에 띈다.'};
 export type LegacyNpcSample=Omit<NpcSample,'rankWeights'|'teamConcept'>&{defaultRank:NpcRank};
-export function npcTrainerSample(sample:Pick<NpcSample,'id'|'displayName'|'portrait'|'tactic'|'specialty'|'minFloor'>,rank:NpcRank):TrainerSample{
- return {id:sample.id,name:sample.displayName,title:`${npcRankNames[rank]} 트레이너`,kind:rank==='normal'?'normal':'elite',npcRank:rank,generation:null,specialty:sample.specialty,tactic:sample.tactic,portrait:sample.portrait,minFloor:sample.minFloor,concept:npcTacticHints[sample.tactic]};
+export function npcTrainerSample(sample:Pick<NpcSample,'id'|'displayName'|'portrait'|'tactic'|'specialty'|'minFloor'|'aiCeiling'>,rank:NpcRank):TrainerSample{
+ return {...(sample.aiCeiling?{aiCeiling:sample.aiCeiling}:{}),id:sample.id,name:sample.displayName,title:`${npcRankNames[rank]} 트레이너`,kind:rank==='normal'?'normal':'elite',npcRank:rank,generation:null,specialty:sample.specialty,tactic:sample.tactic,portrait:sample.portrait,minFloor:sample.minFloor,concept:npcTacticHints[sample.tactic]};
 }

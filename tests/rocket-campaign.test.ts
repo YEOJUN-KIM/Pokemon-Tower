@@ -19,6 +19,18 @@ import {DamagePolicy} from '../src/battle/policy';
 import {TowerService} from '../src/server/tower-service';
 import {presentationFrames} from '../src/web/battle-presentation';
 
+test('pre-tier pending Rocket snapshots retain v10 and their original frozen team',()=>{
+ const f=rocketFixture(),s=f.store;try{
+  const campaigns=new VillainCampaigns(s.db),snapshot=campaigns.snapshot(campaigns.row(f.event.id)!);
+  delete snapshot.aiVersion;delete snapshot.trainer.npcAi;
+  const json=JSON.stringify(snapshot);
+  s.db.prepare('UPDATE villain_event_encounters SET snapshot_json=? WHERE event_id=?').run(json,f.event.id);
+  s.chooseEvent(f.owner,f.run,f.event.id,'challenge');const b=s.currentBattle(f.owner)!;
+  assert.equal(b.ai_version,'tower-policy-v10');assert.equal(b.opponent_team,snapshot.opponentTeam);
+  assert.equal(JSON.parse(b.trainer!).npcAi,undefined);assert.equal(campaigns.row(f.event.id)!.snapshot_json,json);
+ }finally{s.close();}
+});
+
 test('normal random draws exclude villains in legacy and common pools; ordinary floor creation never rolls villains',()=>{
  for(const progression of ['legacy','hundred-floor-v1'] as const)for(const common of [false,true])for(let floor=1;floor<=100;floor++)for(let n=0;n<8;n++)assert.notEqual(selectTrainerSample(floor,[n,2,3,4],[],progression,{common}).role,'villain');
  const s=new TowerStore(':memory:');try{
@@ -67,7 +79,7 @@ test('full Rocket chain reuses source samples, freezes snapshots, pays/progresse
    s.close();s=new TowerStore(path,()=>0,rocketRegistry);
    assert.equal(new VillainCampaigns(s.db).row(event.id)!.snapshot_json,saved.snapshot_json);
    s.chooseEvent(f.owner,f.run,event.id,'challenge');const b=s.currentBattle(f.owner)!;
-   assert.equal(b.opponent_team,snapshot.opponentTeam);assert.equal(JSON.parse(b.trainer!).id,source.id);
+   assert.equal(b.ai_version,snapshot.aiVersion);assert.deepEqual(JSON.parse(b.trainer!).npcAi,snapshot.trainer.npcAi);assert.equal(b.opponent_team,snapshot.opponentTeam);assert.equal(JSON.parse(b.trainer!).id,source.id);
    s.chooseEvent(f.owner,f.run,event.id,'challenge');assert.equal(s.currentBattle(f.owner)!.id,b.id);
    s.close();s=new TowerStore(path,()=>0,rocketRegistry);assert.equal(s.currentBattle(f.owner)!.opponent_team,b.opponent_team);
    const receipt=finishChallengerBattle(s,b.id);s.complete(b.id,receipt.log,receipt.view);
@@ -92,7 +104,7 @@ for(const ambush of [false,true])test(`${ambush?'ambush':'intro'} loss and dupli
   s.chooseEvent(f.owner,f.run,event.id,'challenge');const lost=s.currentBattle(f.owner)!;finishChallengerBattle(s,lost.id,'Tower AI');
   assert.deepEqual(campaigns.state(f.run),before);assert.equal(s.db.prepare('SELECT coins FROM players WHERE id=?').get(f.owner)!.coins,coins);
   s.retry(f.owner,f.run,lost.id);s.retry(f.owner,f.run,lost.id);const id=s.enter(f.owner,f.run,lost.floor,starters),retry=s.battle(id);
-  assert.equal(retry.opponent_team,lost.opponent_team);assert.equal(retry.seed,lost.seed);assert.equal(retry.tera_tickets,lost.tera_tickets);assert.equal(campaigns.row(event.id)!.snapshot_json,snapshot);
+  assert.equal(retry.ai_version,lost.ai_version);assert.equal(retry.trainer,lost.trainer);assert.equal(retry.opponent_team,lost.opponent_team);assert.equal(retry.seed,lost.seed);assert.equal(retry.tera_tickets,lost.tera_tickets);assert.equal(campaigns.row(event.id)!.snapshot_json,snapshot);
   const receipt=finishChallengerBattle(s,id);s.complete(id,receipt.log,receipt.view);assert.equal(campaigns.state(f.run).clues,ambush?1:0);assert.equal(campaigns.state(f.run).started,1);
   assert.equal(s.db.prepare('SELECT used FROM run_retries WHERE run_id=?').get(f.run)!.used,1);
  }finally{s.close();}

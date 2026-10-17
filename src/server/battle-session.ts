@@ -1,3 +1,4 @@
+import {createNpcPolicy} from '../battle/npc-policy';
 import {applyPublicTypes} from '../battle/public-types';
 import {packedNpcRule} from '../data/npc-gimmicks';
 import {ZMovePolicy} from '../battle/z-move-policy';
@@ -56,11 +57,11 @@ export class BattleSession {
   private saveInput?: (requestId: number, action: string) => void;
 
   constructor(save: (log: BattleLog, id: string, view: BattleView) => Promise<void>, seed?: Seed,
-    options: {raid?:import('../data/raids').RaidSnapshot;opponentRule?:import('../data/run-rules').BattleRule;trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];rule?:import('../data/run-rules').BattleRule;opponentTeraSpecies?:string;id?: string; format?:string; aiVersion?:string; teams?: {p1: string; p2: string}; history?: string[]; battleItems?:import('../data/battle-items').BattleItemBag; upgrades?:UpgradeKind[];teraTickets?:import('../data/tera').TeraTickets; saveInput?: (requestId: number, action: string) => void} = {}) {
+    options: {npcAi?:import('../data/npc-ai').NpcAi;raid?:import('../data/raids').RaidSnapshot;opponentRule?:import('../data/run-rules').BattleRule;trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];rule?:import('../data/run-rules').BattleRule;opponentTeraSpecies?:string;id?: string; format?:string; aiVersion?:string; teams?: {p1: string; p2: string}; history?: string[]; battleItems?:import('../data/battle-items').BattleItemBag; upgrades?:UpgradeKind[];teraTickets?:import('../data/tera').TeraTickets; saveInput?: (requestId: number, action: string) => void} = {}) {
     this.id = options.id ?? randomUUID();
     this.trainerEquipment=options.trainerEquipment;
     this.initialTeraTickets=options.teraTickets?.p1 ?? 0;
-    if(options.aiVersion==='tower-policy-v10'){
+    if(['tower-policy-v10','tower-policy-v11'].includes(options.aiVersion??'')){
       const team=Showdown.Teams.unpack(options.teams?.p2 ?? '') ?? [];
       this.opponentRule=options.opponentRule??packedNpcRule(team,options.teraTickets?.p2 ?? 0);
       this.opponentPrimal=team.some(p=>p.species==='Groudon' && p.item==='Red Orb' || p.species==='Kyogre' && p.item==='Blue Orb');
@@ -78,7 +79,7 @@ export class BattleSession {
       format:options.format,
       teams: options.teams,
       rule:options.rule,opponentRule:this.opponentRule,opponentTeraSpecies:options.opponentTeraSpecies,battleItems:options.battleItems,upgrades:options.upgrades,teraTickets:options.teraTickets,trainerEquipment:options.trainerEquipment,
-      opponent: ['tower-policy-v10','tower-policy-v9'].includes(options.aiVersion ?? '') ? new ZMovePolicy() : options.aiVersion==='tower-policy-v8' ? new LearningOpponentPolicy() : options.aiVersion==='damage-policy-v1' ? new DamagePolicy() : options.aiVersion==='tower-policy-v7' ? new CautiousSwitchingPolicy() : options.aiVersion==='tower-policy-v6' ? new SwitchingPolicy() : options.aiVersion==='tower-policy-v5' ? new TeraPolicy() : options.aiVersion==='tower-policy-v4' ? new GimmickPolicy() : options.aiVersion==='tower-policy-v3' ? new LegacyGimmickPolicy() : new TowerPolicy(),
+      opponent: options.aiVersion==='tower-policy-v11' ? createNpcPolicy(options.npcAi) : ['tower-policy-v10','tower-policy-v9'].includes(options.aiVersion ?? '') ? new ZMovePolicy() : options.aiVersion==='tower-policy-v8' ? new LearningOpponentPolicy() : options.aiVersion==='damage-policy-v1' ? new DamagePolicy() : options.aiVersion==='tower-policy-v7' ? new CautiousSwitchingPolicy() : options.aiVersion==='tower-policy-v6' ? new SwitchingPolicy() : options.aiVersion==='tower-policy-v5' ? new TeraPolicy() : options.aiVersion==='tower-policy-v4' ? new GimmickPolicy() : options.aiVersion==='tower-policy-v3' ? new LegacyGimmickPolicy() : new TowerPolicy(),
       player: {choose: observation => {
         if (observation.legalActions[0]?.command.startsWith('team ')) return 'team 123';
         this.observation = observation;

@@ -1,3 +1,4 @@
+import {npcAi} from '../data/npc-ai';
 import {HiddenBossEvents,hiddenBossEligible,hasHiddenBoss} from './hidden-boss-events';
 import {VillainCampaigns} from './villain-campaigns';
 import {isRocketStage} from '../data/villain-campaigns';
@@ -62,7 +63,7 @@ import {zCrystals} from '../data/z-crystals';
 import {defaultProfile,trainingOptions,validateProfile} from './training';
 import {trainingCost,statKeys,trainedStat,natures,type StatBlock,type IVGain,type MoveGain,type MoveSwap,type TrainingProfile,type TrainingView} from '../data/training';
 
-export const AI_VERSION = 'tower-policy-v10';
+export const AI_VERSION = 'tower-policy-v11';
 const favoriteSpecies=new Set(pokedexEntries().map(entry=>entry.species));
 type RunRow = {id: string; player_id: string; floor: number; state: RunView['state']; total_floors: number};
 export type BattleRow = {
@@ -365,7 +366,7 @@ export class TowerStore {
     const player=packPlayerTeam(selected,this.boostedProfiles(runId,this.runProfiles(runId)),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band'));
     const attempt=0;
     this.db.prepare(`INSERT INTO battles(id,run_id,floor,player_team,opponent_team,seed,engine_version,format,ai_version,status,reward,candidates,rule,stage,attempt,battle_items,upgrades,tera_tickets,trainer_equipment,encounter_order)
-      VALUES (?,?,?,?,?,?,?,?,?,'active',0,?,?,0,?,?,?,?,?,(SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id,runId,floor,player,raid.opponentTeam,JSON.stringify(seed),engineVersion,FORMAT,AI_VERSION,JSON.stringify([raid.species]),rule,attempt,JSON.stringify(this.battleItemBag(runId)),JSON.stringify(this.activeUpgrades(runId,floor).map(u=>u.kind).sort()),JSON.stringify({p1:0,p2:0}),JSON.stringify(this.trainerEquipment(runId)),runId);
+      VALUES (?,?,?,?,?,?,?,?,?,'active',0,?,?,0,?,?,?,?,?,(SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id,runId,floor,player,raid.opponentTeam,JSON.stringify(seed),engineVersion,FORMAT,'tower-policy-v10',JSON.stringify([raid.species]),rule,attempt,JSON.stringify(this.battleItemBag(runId)),JSON.stringify(this.activeUpgrades(runId,floor).map(u=>u.kind).sort()),JSON.stringify({p1:0,p2:0}),JSON.stringify(this.trainerEquipment(runId)),runId);
     this.db.prepare("UPDATE runs SET state='battle' WHERE id=?").run(runId);return id;
   }
   private recruitmentTeam(battle:BattleRow){const raids=new RaidEvents(this.db),row=raids.forBattle(battle.id);return Showdown.Teams.unpack(row?raids.snapshot(row).recruitTeam:battle.opponent_team)??[];}
@@ -421,8 +422,10 @@ export class TowerStore {
       if(total>66)for(const stat of statKeys)profile.evs[stat]=Math.floor(profile.evs[stat]*66/total);
     }
     if(signature?.rule==='tera' && !template)opponentProfiles[signature.species].teraType=(sample?.specialty ?? trainer?.boss.specialty ?? Showdown.Dex.species.get(signature.species).types[0]) as import('../data/tera').TeraType;
+    // Pending snapshots without an AI version predate tiers and retain their old policy.
+    const aiVersion=special?.aiVersion??(progression==='legacy'?'tower-policy-v9':special?'tower-policy-v10':rankedChallenger?(rankedChallenger.aiVersion??'tower-policy-v10'):AI_VERSION);
     this.db.prepare(`INSERT INTO battles(id, run_id, floor, player_team, opponent_team, seed, engine_version, format, ai_version, status, reward, candidates, boss, stage,attempt,encounter_order)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, (SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id, runId, floor, packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band')), packTeam(opponents,opponentProfiles,Object.fromEntries(encounter.map(entry=>[entry.name,entry.item && (progression!=='legacy' || allowsRuleItem(rule,entry.item))?entry.item:''])),encounter.filter(p=>p.gigantamax).map(p=>p.name)), JSON.stringify(seed), engineVersion, FORMAT, progression==='legacy'?'tower-policy-v9':AI_VERSION, config.reward, JSON.stringify(opponents), trainer ? JSON.stringify(trainer.boss) : null,this.route(runId)?.pending_boss===floor?1:0,0,runId);
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, (SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id, runId, floor, packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band')), packTeam(opponents,opponentProfiles,Object.fromEntries(encounter.map(entry=>[entry.name,entry.item && (progression!=='legacy' || allowsRuleItem(rule,entry.item))?entry.item:''])),encounter.filter(p=>p.gigantamax).map(p=>p.name)), JSON.stringify(seed), engineVersion, FORMAT, aiVersion, config.reward, JSON.stringify(opponents), trainer ? JSON.stringify(trainer.boss) : null,this.route(runId)?.pending_boss===floor?1:0,0,runId);
 
     this.db.prepare('UPDATE battles SET rule=? WHERE id=?').run(rule,id);
     if(rankedChallenger?.mirror)this.db.prepare('UPDATE battles SET opponent_team=? WHERE id=?').run(rankedChallenger.mirror.opponentTeam,id);
@@ -432,6 +435,15 @@ export class TowerStore {
     this.db.prepare('UPDATE battles SET tera_tickets=?,trainer_equipment=? WHERE id=?').run(JSON.stringify({p1:0,p2:progression==='legacy'?(allowsGimmick(rule,'terastallize')?1:0):npcTeraTickets}),JSON.stringify(this.trainerEquipment(runId)),id);
     this.db.prepare("UPDATE runs SET state = 'battle' WHERE id = ?").run(runId);
     if(sample){const theme=this.runTheme(runId);this.db.prepare('UPDATE battles SET trainer=? WHERE id=?').run(JSON.stringify({...trainerView({...sample,...(theme?{generation:towerThemes[theme].generation}: {})}),...(signature?{gimmick:signature}:{}),...(rankedChallenger?.mirror?{name:'???',title:'',mirror:true,mirrorRule:rankedChallenger.mirror.opponentRule}:{})}),id);}
+    if(!special && aiVersion===AI_VERSION){
+      const row=this.battle(id),column=row.boss?'boss':'trainer';
+      const saved=JSON.parse(row.boss??row.trainer??'null');
+      if(saved){
+        const descriptor=sample??{...trainer!.boss,kind:'named' as const,tactic:trainer!.tactic};
+        saved.npcAi=rankedChallenger?.npcAi??npcAi(floor,descriptor,{challenger:!!challenger,boss:floor%50===0});
+        this.db.prepare(`UPDATE battles SET ${column}=? WHERE id=?`).run(JSON.stringify(saved),id);
+      }
+    }
     this.db.prepare('UPDATE battles SET upgrades=? WHERE id=?').run(JSON.stringify(this.activeUpgrades(runId,floor).map(upgrade=>upgrade.kind).sort()),id);
     if(special)this.db.prepare('UPDATE battles SET opponent_team=?,reward=0,candidates=?,trainer=?,tera_tickets=? WHERE id=?').run(special.opponentTeam,'[]',JSON.stringify({...special.trainer,introduction:''}),JSON.stringify({p1:0,p2:special.opponentTeraTickets}),id);
     return id;

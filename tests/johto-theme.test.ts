@@ -39,7 +39,7 @@ test('new Johto preview and fixed template persist, while a v15 legacy run remai
       if(floor===50)assert.equal(team.find(p=>p.species==='Dragonite')!.item,'Dragoninite');
       
       for(const p of team){const original=template.team.find(entry=>entry.species===p.species)!;assert.ok(original);assert.equal(p.ability,original.profile.ability);assert.deepEqual(p.moves.map(m=>Showdown.Dex.moves.get(m).name),original.profile.moves);}
-      const savedBoss={...preview,...(floor===50?{gimmick:template.signature}:{})};
+      const savedBoss={...preview,npcAi:JSON.parse(row.boss!).npcAi,...(floor===50?{gimmick:template.signature}:{})};
       store.close();store=new TowerStore(path);assert.deepEqual(store.battle(id),row);assert.deepEqual(store.view('johto').run!.boss,savedBoss);
     }
     store.db.prepare("UPDATE runs SET floor=5,state='select' WHERE id=?").run(run);

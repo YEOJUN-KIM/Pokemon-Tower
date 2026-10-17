@@ -14,6 +14,7 @@ import {battleEvents} from '../src/battle/run';
 
 test('every themed legendary boss and organization alias switches at 75 with one gimmick',()=>{
  for(const [id,early] of Object.entries(npcEarlyReplacements)){
+  if(normalNpcTemplate(id,75,'villain')?.allFloors){assert.deepEqual(normalNpcTemplate(id,74,'villain'),normalNpcTemplate(id,75,'villain'));continue;}
   const aliases=[...new Set(templates.filter(t=>canonicalNpcId(t.id)===id).map(t=>t.id))];
   assert.equal(aliases.length,2,id);
   for(const alias of aliases){
@@ -34,7 +35,7 @@ test('regional NPC partners and Iris retain their intended species in both stage
   assert.ok(rows.every(t=>t.team.some(p=>p.species===partner)),id);
  }
  for(const row of templates.filter(t=>t.id==='named-iris')){
-  assert.equal(row.ace,'Haxorus');assert.equal(row.signature.species,'Haxorus');
+  assert.equal(row.ace,'Haxorus');assert.equal(row.signature?.species,'Haxorus');
   assert.ok(row.team.every(p=>p.species!=='Kommo-o'));
  }
 });

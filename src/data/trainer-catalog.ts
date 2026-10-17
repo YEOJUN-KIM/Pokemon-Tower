@@ -81,7 +81,7 @@ namedTrainerSamples.push(
   {...named(2,'karen','카렌','elite','Dark','balanced',['Umbreon','Houndoom','Honchkrow','Weavile','Absol','Spiritomb'],'악 타입의 공격과 내구'),title:'사천왕'},
   named(2,'red','레드','champion',null,'balanced',['Pikachu','Espeon','Snorlax','Venusaur','Charizard','Blastoise'],'2세대 테마의 최종 혼합 파티'),
 );
-const signatureSpecies:Record<string,string>={lance:'Dragonite',volkner:'Electivire',kiawe:'Marowak',giovanni:'Persian',bugsy:'Scizor',pryce:'Mamoswine',clair:'Kingdra',chuck:'Poliwrath',jasmine:'Steelix',whitney:'Miltank',morty:'Gengar',falkner:'Pidgeot',koga:'Crobat',bruno:'Machamp',karen:'Umbreon',will:'Xatu'};
+const signatureSpecies:Record<string,string>={lance:'Dragonite',volkner:'Electivire',kiawe:'Marowak',giovanni:'Nidoking',bugsy:'Scizor',pryce:'Mamoswine',clair:'Kingdra',chuck:'Poliwrath',jasmine:'Steelix',whitney:'Miltank',morty:'Gengar',falkner:'Pidgeot',koga:'Crobat',bruno:'Machamp',karen:'Umbreon',will:'Xatu'};
 for(const sample of namedTrainerSamples){
   const reference=johtoReferences[sample.id.slice(6)];
   if(reference)sample.entries=[...new Set(reference.sets.map(set=>set.species))];

@@ -61,7 +61,7 @@ test('each theme persists its real preview and legal champion/final team without
     const expected=towerTrainerEncounter(floor,run,theme,true)!,preview=store.view('preview').run!.boss;assert.deepEqual(preview,expected.boss);
     const row=store.battle(store.enter('preview',run,floor,starters)),team=Showdown.Teams.unpack(row.opponent_team)!;
     assert.equal(team.length,3);const template=normalNpcTemplate(expected.boss.id,floor,expected.boss.role)!;
-    assert.ok(team.some(p=>p.species===template.ace));assert.deepEqual(team.map(p=>p.species).sort(),template.team.map(p=>p.species).sort());
+    assert.ok(team.some(p=>p.species===template.ace));if(!template.select)assert.deepEqual(team.map(p=>p.species).sort(),template.team.map(p=>p.species).sort());else assert.ok(team.every(p=>template.team.some(s=>s.species===p.species)));
     assert.equal(new Set(team.map(p=>p.species)).size,3);
     const saved=store.view('preview');store.close();store=new TowerStore(path);assert.deepEqual(store.view('preview'),saved);assert.deepEqual(store.battle(row.id),row);
    }

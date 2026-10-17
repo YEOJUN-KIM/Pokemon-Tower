@@ -5,9 +5,10 @@ import {towerDifficulty} from '../data/tower-progression';
 import type {NpcGimmick} from '../data/npc-gimmicks';
 import {statKeys,type TrainingProfile,type StatBlock} from '../data/training';
 import {isCollectibleSpecies} from '../data/pokedex-roster';
+import {canonicalNpcId} from '../data/npc-review-presets';
 
-type Template={id:string;stage:NormalModeStage;role:string;ace:string;signature:NpcGimmick;gimmickEnabled:boolean;legendaryMinFloor?:number;team:{species:string;item:string;gigantamax:boolean;profile:TrainingProfile}[]};
-const templates=new Map((rows as unknown as Template[]).map(row=>[`${row.id}:${row.stage}`,row]));
+type Template={id:string;stage:NormalModeStage;allFloors?:boolean;select?:boolean;required?:string[];role:string;ace:string;signature:NpcGimmick|null;gimmickEnabled:boolean;legendaryMinFloor?:number;team:{species:string;item:string;gigantamax:boolean;profile:TrainingProfile}[]};
+const templates=new Map((rows as unknown as Template[]).map(row=>[`${row.id}:${row.allFloors?'all':row.stage}`,row]));
 const species=roster as Record<string,{legendary?:boolean;mythical?:boolean}>;
 export function normalNpcTemplate(id:string,floor:number,role?:string):Template|null{
  const category=normalNpcCategory(role,id,'named');
@@ -15,7 +16,7 @@ export function normalNpcTemplate(id:string,floor:number,role?:string):Template|
  // legendary aces. Champions keep the distinct 50/100-floor samples.
  const villainBoss=role==='villain' && !id.includes('-executive-');
  const stage=villainBoss&&floor>=75?'final-gate':normalNpcStage(floor,category);
- const row=templates.get(`${id}:${stage}`);
+ const row=templates.get(`${canonicalNpcId(id)}:all`)??templates.get(`${id}:all`)??templates.get(`${id}:${stage}`);
  if(!row)return null;
  if(row.team.some(p=>!isCollectibleSpecies(p.species)))return null;
  const difficulty=towerDifficulty(floor);

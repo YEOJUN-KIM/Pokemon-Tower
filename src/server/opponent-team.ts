@@ -152,13 +152,17 @@ function equipNamedTeam(team:OpponentEntry[],ace:string|undefined,champion:boole
 export function generateOpponentTeam(floor:number,seed:Seed,previous:string[]=[],trainer=towerTrainerEncounter(floor,seed.join(':')) as TrainerEncounter|null,sample?:TrainerSample,progression:TowerProgression='legacy',options:{templates?:boolean}={}):OpponentEntry[] {
   if(!Number.isSafeInteger(floor) || floor<1)throw Error('Invalid encounter floor');
   const random=encounterRandom(seed);
-  if(options.templates!==false && progression!=='legacy' && (trainer || sample?.kind==='named')){
+  if(options.templates!==false && progression!=='legacy' && (trainer || sample)){
     const template=normalNpcTemplate(sample?.id ?? trainer!.boss.id,floor,sample?.role ?? trainer?.boss.role);
     if(template){
-      const team=template.team.map(p=>{const profile=templateProfile(p.profile,floor);return {name:p.species,moves:profile.moves,item:p.item,ability:profile.ability,gigantamax:p.gigantamax,profile};});
-      // Fixed membership/builds; only the lead order varies with the saved seed.
+      const named=!!trainer||sample?.kind==='named';
+      const selected=template.select?selectNamedEntries(template.team.map(p=>p.species),random,template.ace||undefined,template.signature?.species,{accept:names=>(template.required??[]).every(name=>names.includes(name))}):template.team.map(p=>p.species);
+      const enabled=normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'));
+      let team=selected.map(name=>template.team.find(p=>p.species===name)!).map(p=>{const profile=templateProfile(p.profile,floor);return {name:p.species,moves:profile.moves,item:p.item,ability:profile.ability,gigantamax:p.gigantamax,profile};});
+      if(template.allFloors&&enabled)team=equipNpcGimmick(team,template.signature) as typeof team;
+      // Builds stay fixed; candidate membership and lead order use the saved seed.
       for(let i=team.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[team[i],team[j]]=[team[j],team[i]];}
-      return withNamedIVs(normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'))?team:stripNpcGimmicks(team),floor,seed,progression,true);
+      return withNamedIVs(enabled?team:stripNpcGimmicks(team),floor,seed,progression,named);
     }
   }
   let entries=sample?.entries ?? trainer?.entries;

@@ -19,7 +19,7 @@ test('live named teams use the reviewed three members and profiles, scaled to ac
  for(const sample of namedTrainerSamples)for(const floor of [5,45,50,55,75,95,100]){
   const source=normalNpcTemplate(sample.id,floor,sample.role);assert.ok(source,sample.id);
   const team=generateOpponentTeam(floor,[1,2,3,4],[],null,sample,CURRENT_PROGRESSION);
-  assert.deepEqual(team.map(p=>p.name).sort(),source.team.map(p=>p.species).sort());
+  assert.equal(team.length,3);if(!source.select)assert.deepEqual(team.map(p=>p.name).sort(),source.team.map(p=>p.species).sort());else assert.ok(team.every(p=>source.team.some(s=>s.species===p.name)));
   for(const entry of team){const original:{species:string;profile:TrainingProfile}=source.team.find(p=>p.species===entry.name)!;
    const expected=templateProfile(original.profile,floor);
    expected.ivs=namedOpponentIVs(entry.name,entry.moves,floor,[1,2,3,4],expected);
@@ -31,9 +31,9 @@ test('live named teams use the reviewed three members and profiles, scaled to ac
   }
  }
  const iris=normalNpcTemplate('named-iris',50,'champion')!;
- assert.equal(iris.ace,'Haxorus');assert.equal(iris.signature.species,'Haxorus');
+ assert.equal(iris.ace,'Haxorus');assert.equal(iris.signature?.species,'Haxorus');
  assert.equal(iris.team.find(p=>p.species==='Haxorus')!.item,'Dragonium Z');
- assert.equal(templates.length,328);
+ assert.equal(templates.length,320);
 });
 
 test('stored champion teams retain template nature, ability, tools and stats across reopening',()=>{

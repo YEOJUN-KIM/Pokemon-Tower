@@ -11,12 +11,12 @@ export type NpcGimmick={rule:Exclude<BattleRule,'basic'|'chaos'>|'primal';specie
 // Explicit tower adaptations for generations 1–5, not original-game claims.
 // Keep an ace without a Mega forme rather than silently choosing another ace.
 const earlyRows:[string,NpcGimmick['rule'],string][]=[
- ['brock','mega','Aerodactyl'],['giovanni','mega','Kangaskhan'],['blue','mega','Pidgeot'],
+ ['brock','mega','Aerodactyl'],['giovanni','z','Nidoking'],['blue','mega','Pidgeot'],
  ['misty','z','Starmie'],['ltsurge','z','Raichu'],['erika','tera','Vileplume'],
  ['koga-kanto','z','Weezing'],['sabrina','mega','Alakazam'],['blaine','z','Arcanine'],
  ['giovanni-gym','tera','Nidoking'],['lorelei','dynamax','Lapras'],['bruno-kanto','dynamax','Machamp'],
  ['agatha','mega','Gengar'],['lance-kanto','mega','Dragonite'],['red-kanto','dynamax','Pikachu'],
- ['falkner','mega','Pidgeot'],['bugsy','mega','Scizor'],['whitney','z','Miltank'],
+ ['falkner','z','Pidgeot'],['bugsy','mega','Scizor'],['whitney','z','Miltank'],
  ['morty','mega','Gengar'],['chuck','z','Poliwrath'],['jasmine','mega','Steelix'],
  ['pryce','tera','Mamoswine'],['clair','z','Kingdra'],['will','tera','Xatu'],
  ['koga','tera','Crobat'],['bruno','dynamax','Machamp'],['karen','z','Umbreon'],
@@ -46,6 +46,8 @@ const earlyRows:[string,NpcGimmick['rule'],string][]=[
 ];
 export const earlyNpcAssignments=Object.fromEntries(earlyRows.map(([id,rule,species])=>['named-'+id,{rule,species}])) as Record<string,NpcGimmick>;
 const overrides:Record<string,NpcGimmick>={...earlyNpcAssignments,
+ 'named-falkner':{rule:'z',species:'Pidgeot',item:'Flyinium Z'},
+ 'named-giovanni':{rule:'z',species:'Nidoking',item:'Groundium Z'},
  'named-diantha':{rule:'mega',species:'Gardevoir'},
  'named-lysandre':{rule:'mega',species:'Gyarados'},
  'named-ramos':{rule:'mega',species:'Venusaur'},

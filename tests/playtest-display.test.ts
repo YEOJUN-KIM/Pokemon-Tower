@@ -11,9 +11,9 @@ const boss=(data:Partial<BossView>):BossView=>({id:'normal',name:'등산가',tit
 test('ordinary trainers show only their class; named gym leaders show specialty and name',()=>{
   assert.equal(trainerLabel(boss({id:'elite-rush',kind:'elite',title:'엘리트 트레이너',name:'속공 전문가'})),'엘리트 트레이너');
   assert.equal(trainerLabel(boss({kind:'normal'})),'등산가');
-  assert.equal(trainerLabel(boss({kind:'normal',npcRank:'normal',title:'일반 트레이너'})),'등산가 · 일반');
-  assert.equal(trainerLabel(boss({kind:'elite',npcRank:'elite',name:'에이스 트레이너'})),'에이스 트레이너 · 엘리트');
-  assert.equal(trainerLabel(boss({kind:'elite',npcRank:'master',name:'베테랑'})),'베테랑 · 마스터');
+  assert.equal(trainerLabel(boss({kind:'normal',npcRank:'normal',title:'일반 트레이너'})),'등산가');
+  assert.equal(trainerLabel(boss({kind:'elite',npcRank:'elite',name:'에이스 트레이너'})),'에이스 트레이너');
+  assert.equal(trainerLabel(boss({kind:'elite',npcRank:'master',name:'베테랑'})),'베테랑');
   assert.equal(trainerLabel(boss({id:'named-falkner',kind:'named',role:'gym',specialty:'Flying',title:'체육관 관장',name:'비상'})),'비행타입 관장 비상');
 });
 test('1x/2x retain existing popup pacing; 4x uses a readable shorter popup hold',()=>{

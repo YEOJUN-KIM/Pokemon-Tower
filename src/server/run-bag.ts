@@ -11,7 +11,8 @@ import {selectedForm} from '../data/selectable-forms';
 import {vitamins,upgrades,VITAMIN_LIMIT} from '../data/shop';
 import {moveInfo} from '../data/move-info';
 import {trainingOptions,validateProfile,defaultProfile} from './training';
-import {applyVitamin,grantRunItem} from './inventory-grants';
+import {vitaminDisabledReason} from '../shared/vitamin-eligibility';
+import {readVitaminUsage,applyVitamin,grantRunItem} from './inventory-grants';
 import {ownsRunItem} from './run-ownership';
 import {BattleRequestError} from './request-error';
 import type {InventoryReward} from '../data/rewards';
@@ -22,13 +23,14 @@ export class RunBag{
  constructor(private db:DatabaseSync,private context:Context){}
  view():BagView{
   const {runId,roster,profiles,held,rule,partners}=this.context,entries:BagEntry[]=[];
+  const floor=(this.db.prepare('SELECT floor FROM runs WHERE id=?').get(runId) as {floor:number}).floor,vitaminUsage=readVitaminUsage(this.db,runId,floor);
   const canHold=(species:string,item:string)=>!selectedForm(species,profiles[species]?.forme)?.requiredItem&&canEquipGimmick(species,item);
   const owned=new Set([...(this.db.prepare('SELECT item FROM run_item_bag WHERE run_id=? AND quantity>0').all(runId) as {item:string}[]).map(r=>r.item),...Object.values(held)]);
   for(const item of owned){if(!isHeldItem(item)){entries.push({id:`held:${item}`,item,pocket:'tools',name:itemName(item),description:'이 모습에 고정된 전용 도구입니다.',icon:'',holder:Object.entries(held).find(([,value])=>value===item)?.[0],action:'view',targets:[]});continue;}entries.push({id:`held:${item}`,item,pocket:zCrystals[item]?'z':'tools',name:itemName(item),description:heldItems[item].description,icon:`/sprites/items/${itemIcon(item)}.${itemIconExtension(item)}`,holder:Object.entries(held).find(([,value])=>value===item)?.[0],action:'equip',targets:roster.filter(s=>canHold(s,item))});}
   for(const row of this.db.prepare('SELECT id,effect_json,quantity FROM run_reward_inventory WHERE run_id=? AND quantity>0 ORDER BY rowid').all(runId) as {id:string;effect_json:string;quantity:number}[]){
    const effect:InventoryReward=JSON.parse(row.effect_json);
    if(effect.kind==='vitamin'&&entries.some(e=>e.pocket==='consumables'&&e.name===vitamins[effect.stat].name)){entries.find(e=>e.pocket==='consumables'&&e.name===vitamins[effect.stat].name)!.quantity!+=row.quantity;continue;}
-   if(effect.kind==='vitamin')entries.push({id:row.id,pocket:'consumables',name:vitamins[effect.stat].name,description:`${vitamins[effect.stat].name} · 포켓몬당 영양제 총 ${VITAMIN_LIMIT}개 제한`,icon:`/sprites/items/${vitamins[effect.stat].icon}.png`,quantity:row.quantity,action:'vitamin',targets:roster.filter(s=>(this.db.prepare('SELECT COUNT(*) AS n FROM vitamin_purchases WHERE run_id=? AND species=?').get(runId,s) as {n:number}).n<VITAMIN_LIMIT)});
+   if(effect.kind==='vitamin')entries.push({id:row.id,pocket:'consumables',name:vitamins[effect.stat].name,description:`${vitamins[effect.stat].name} · 포켓몬당 영양제 총 ${VITAMIN_LIMIT}개 제한`,icon:`/sprites/items/${vitamins[effect.stat].icon}.png`,quantity:row.quantity,action:'vitamin',targets:roster.filter(s=>!vitaminDisabledReason(vitaminUsage,s,vitamins[effect.stat].name))});
    else if(effect.kind==='machine')entries.push({id:row.id,pocket:'machines',move:effect.move,name:moveInfo[effect.move]?.name??effect.move,description:moveInfo[effect.move]?.description??'현재 Run 동안 반복해서 가르칠 수 있는 기술머신입니다.',icon:'/sprites/items/tm-normal.png',action:'machine',targets:roster.filter(s=>trainingOptions(s,profiles[s]?.forme).learnableMoves.includes(effect.move)&&!profiles[s]?.moves.includes(effect.move))});
    else if(effect.kind==='item-exchange')entries.push({id:row.id,pocket:'tools',name:effect.items.length===1?itemName(effect.items[0]):'에픽 지닌 도구 교환권',description:'미보유 도구를 선택해 배낭에 등록합니다.',icon:'/sprites/items/life-orb.png',action:'exchange',targets:effect.items.filter(item=>!ownsRunItem(this.db,runId,item,row.id))});
   }

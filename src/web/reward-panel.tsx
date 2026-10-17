@@ -13,8 +13,8 @@ export function rewardEntryText(entry:RewardEntry):string {
   case 'pokemon-enhancement':return `${pokemonName(entry.species)} · ${entry.mode==='shiny'?'이로치 획득':entry.mode==='six-iv'?'6V 완성':'선택한 능력치 V 강화'}`;
   case 'growth-points':return `+ 성장 포인트 ${entry.amount.toLocaleString()}P`;
   case 'vitamin':return `+ ${vitamins[entry.stat].name} ${entry.amount}개 · 출전 준비에서 사용`;
-  case 'machine':return `+ 기술머신 ${moveInfo[entry.move]?.name??entry.move} · 출전 준비에서 사용`;
-  case 'item-exchange':return '+ 에픽 지닌 도구 교환권 1장 · 출전 준비에서 사용';
+  case 'machine':return `기술머신 ${moveInfo[entry.move]?.name??entry.move} 획득 · 배낭 등록`;
+  case 'item-exchange':return entry.direct?`${itemName(entry.items[0])} 획득 · 배낭 등록`:'+ 에픽 지닌 도구 교환권 1장 · 출전 준비에서 사용';
   case 'trainer-equipment':return `+ ${itemName(entry.item)}`;
   case 'typed-egg-ticket':return `+ ${entry.eggKind==='superRare'?'슈퍼레어':'이로치'} 알 티켓 ${entry.amount}장 · 알 뽑기에서 사용`;
   case 'coins':return `+ 타워 코인 ${entry.amount.toLocaleString()}`;

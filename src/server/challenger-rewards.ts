@@ -38,16 +38,16 @@ export function snapshotRankReward(db:DatabaseSync,runId:string,rank:NpcRank,ran
     for(let i=0;i<count;i++){const index=Math.floor(random()*pool.length),stat=pool.splice(index,1)[0];entries.push({kind:'vitamin',stat,amount:1});}
     return result('vitamins',entries);
    }
-   case 'epic':{const items=epicRewardItems.filter(item=>allowsRuleItem(rule,item)&&!ownsRunItem(db,runId,item));return items.length?result('epic',[{kind:'item-exchange',items,amount:1,fallbackCoins:profile.coins}]):result('epic-fallback',[{kind:'coins',amount:profile.coins}]);}
+   case 'epic':{const items=epicRewardItems.filter(item=>allowsRuleItem(rule,item)&&!ownsRunItem(db,runId,item));return items.length?result('epic',[{kind:'item-exchange',items:[pick(items,random)],amount:1,fallbackCoins:profile.coins,direct:true}]):result('epic-fallback',[{kind:'coins',amount:profile.coins}]);}
    case 'machine':{
     const moves=eligibleRewardMachines(db,runId);
-    return moves.length?result('machine',[{kind:'machine',move:pick(moves,random),amount:1}]):result('machine-fallback',[{kind:'coins',amount:profile.coins}]);
+    return moves.length?result('machine',[{kind:'machine',move:pick(moves,random),amount:1,fallbackCoins:profile.coins}]):result('machine-fallback',[{kind:'coins',amount:profile.coins}]);
    }
   }
  }
  const profile=profiles.master,eggKind=weightedRewardId(profile.eggs,random);
  const egg:RewardEffect=eggKind==='normal'?{kind:'egg-ticket',amount:profile.tickets}:{kind:'typed-egg-ticket',eggKind,amount:1};
- const equipment=trainerEquipmentKeys.filter(item=>allowsRuleItem(rule,item)&&!db.prepare('SELECT 1 FROM run_trainer_equipment WHERE run_id=? AND item=?').get(runId,item));
+ const equipment=trainerEquipmentKeys.filter(item=>allowsRuleItem(rule,item)&&!ownsRunItem(db,runId,item));
  const equipmentItem=equipment.length?pick(equipment,random):null;
  // All unique trainer equipment owned: a snapshotted, clearly named fallback.
  const equipmentEffect:RewardEffect=equipmentItem?{kind:'trainer-equipment',item:equipmentItem,amount:1,fallbackPoints:profile.equipmentFallback}:{kind:'coins',amount:profile.equipmentFallbackCoins};

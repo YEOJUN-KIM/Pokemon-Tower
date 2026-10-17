@@ -3,8 +3,8 @@ import type {TrainerEquipment} from './trainer-equipment';
 export type InventoryReward=
  | {kind:'growth-points';amount:number}
  | {kind:'vitamin';stat:StatKey;amount:number}
- | {kind:'item-exchange';items:readonly string[];amount:number;fallbackCoins:number}
- | {kind:'machine';move:string;amount:number}
+ | {kind:'item-exchange';items:readonly string[];amount:number;fallbackCoins:number;direct?:true}
+ | {kind:'machine';move:string;amount:number;fallbackCoins?:number}
  | {kind:'trainer-equipment';item:TrainerEquipment;amount:number;fallbackPoints:number}
  | {kind:'typed-egg-ticket';eggKind:'superRare'|'shiny';amount:number};
 // Options describe effects; results record the exact effects already applied.

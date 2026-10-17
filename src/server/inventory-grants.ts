@@ -4,6 +4,11 @@ import type {InventoryReward} from '../data/rewards';
 import {VITAMIN_BOOST,VITAMIN_LIMIT} from '../data/shop';
 import {BattleRequestError} from './request-error';
 
+export function readVitaminUsage(db:DatabaseSync,runId:string,floor:number){
+ const counts=Object.fromEntries((db.prepare('SELECT species,COUNT(*) AS n FROM vitamin_purchases WHERE run_id=? GROUP BY species').all(runId) as {species:string;n:number}[]).map(row=>[row.species,row.n]));
+ const usedStats=(db.prepare('SELECT stat FROM vitamin_purchases WHERE run_id=? AND floor=?').all(runId,floor) as {stat:string}[]).map(row=>row.stat);
+ return {counts,limit:VITAMIN_LIMIT,usedStats};
+}
 // Shared inventory mutations; callers own their transaction and receipt.
 export function grantGrowth(db:DatabaseSync,owner:string,amount:number){db.prepare('UPDATE players SET growth_points=growth_points+? WHERE id=?').run(amount,owner);}
 export function grantRunItem(db:DatabaseSync,runId:string,item:string,quantity:number){if(quantity>0&&!db.prepare('SELECT 1 FROM run_held_items WHERE run_id=? AND item=?').get(runId,item))db.prepare('INSERT INTO run_item_bag VALUES (?,?,1) ON CONFLICT(run_id,item) DO UPDATE SET quantity=1').run(runId,item);}

@@ -1,4 +1,5 @@
-import {grantGrowth,grantStoredReward,grantEggTicket,grantEquipment} from './inventory-grants';
+import {grantRunItem,grantGrowth,grantStoredReward,grantEggTicket,grantEquipment} from './inventory-grants';
+import {ownsRunItem,ownsMachine} from './run-ownership';
 import {applyPokemonEnhancement} from './pokemon-enhancements';
 import {isHeldItem} from '../data/held-items';
 import {vitamins,machineMoves} from '../data/shop';
@@ -27,7 +28,13 @@ export function applyRewardOption(db:DatabaseSync,owner:string,option:RewardOpti
     if(!grantEquipment(db,runId,entry.item)){grantGrowth(db,owner,entry.fallbackPoints);actual.push({kind:'growth-points' as const,amount:entry.fallbackPoints});continue;}
    }else if(entry.kind==='vitamin'||entry.kind==='machine'||entry.kind==='item-exchange'){
     if(entry.kind==='vitamin'&&!Object.hasOwn(vitamins,entry.stat)||entry.kind==='machine'&&!(machineMoves as readonly string[]).includes(entry.move)||entry.kind==='item-exchange'&&(!entry.items.length||!entry.items.every(isHeldItem)))throw Error('Invalid inventory reward');
-    grantStoredReward(db,runId,entry);
+    if(entry.kind==='item-exchange'&&entry.direct){
+     if(entry.items.length!==1)throw Error('Direct held reward must contain one item');
+     if(ownsRunItem(db,runId,entry.items[0])){const fallback={kind:'coins' as const,amount:entry.fallbackCoins};applyReward(db,owner,fallback);actual.push(fallback);continue;}
+     grantRunItem(db,runId,entry.items[0],1);
+    }else if(entry.kind==='machine'&&entry.fallbackCoins!==undefined&&ownsMachine(db,runId,entry.move)){
+     const fallback={kind:'coins' as const,amount:entry.fallbackCoins};applyReward(db,owner,fallback);actual.push(fallback);continue;
+    }else grantStoredReward(db,runId,entry);
    }
    actual.push(entry);continue;
   }

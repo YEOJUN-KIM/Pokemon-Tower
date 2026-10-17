@@ -1,7 +1,7 @@
 import {RewardInventory} from './reward-inventory';
 import {RunBag} from './run-bag';
 import {ownsRunItem,ownsMachine,runMachines} from './run-ownership';
-import {grantRunItem,grantEquipment,grantStoredReward,applyVitamin} from './inventory-grants';
+import {readVitaminUsage,grantRunItem,grantEquipment,grantStoredReward,applyVitamin} from './inventory-grants';
 import {ChallengerEvents} from './challenger-events';
 import type {SavedChallengerDefinition} from '../data/challengers';
 import {trainNpcTeam} from './npc-training';
@@ -125,7 +125,7 @@ export class TowerStore {
       if(typeof species!=='string'||!this.roster(runId).includes(species))throw new BattleRequestError('사용할 포켓몬을 선택하세요.',400);
       if(offer.effect.kind==='item-exchange'){this.setHeldItem(runId,species,offer.effect.items[0]);}
       else if(offer.effect.kind==='vitamin'){
-        const entry=this.db.prepare("SELECT id FROM run_reward_inventory WHERE run_id=? AND quantity>0 AND json_extract(effect_json,'$.kind')='vitamin' AND json_extract(effect_json,'$.stat')=? ORDER BY rowid DESC LIMIT 1").get(runId,offer.effect.stat) as {id:string};
+        const entry=this.db.prepare("SELECT id FROM run_reward_inventory WHERE run_id=? AND quantity>0 AND json_extract(effect_json,'$.kind')='vitamin' AND json_extract(effect_json,'$.stat')=? ORDER BY rowid ASC LIMIT 1").get(runId,offer.effect.stat) as {id:string};
         this.runBag(owner,runId).use(createHash('sha256').update(eventId+':'+productId).digest('hex'),entry.id,species,null,(name,item)=>this.setHeldItem(runId,name,item));
       }else throw new BattleRequestError('이 상품은 배낭에 자동 등록합니다.',400);
     }
@@ -210,7 +210,7 @@ export class TowerStore {
       adjustment:row.state==='select' && (isShopFloor(row.floor,row.total_floors)||!!retryBattle)?{entries:this.trainingCollection(owner).filter(entry=>this.roster(row.id).includes(entry.species)).map(entry=>{const profile=this.runProfiles(row.id)[entry.species]??entry.profile;return {...entry,profile,...trainingOptions(entry.species,profile.forme),selfMoves:profileLearnset(entry.species,profile.forme).selfMoves,unlockedMoves:[...new Set([...entry.unlockedMoves,...profileLearnset(entry.species,profile.forme).selfMoves])]} ;}),snapshot:createHash('sha256').update(JSON.stringify(this.runProfiles(row.id))).digest('hex')}:null,
       consumableOffers:row.state==='select' && isShopFloor(row.floor,row.total_floors)?this.consumableOffers(row):[],
       shopRerolls:Object.fromEntries(['items','machines'].map(kind=>{const count=this.shopRevision(row,kind);return [kind,{count,limit:this.permanentView(owner).rerollLimit,price:rerollPrice(count)}];})) as RunView['shopRerolls'],
-      vitaminShop:null,
+      vitaminShop:null,vitaminUsage:readVitaminUsage(this.db,row.id,row.floor),
       itemOffers:row.state==='select' && isShopFloor(row.floor,row.total_floors) ? this.itemOffers(row) : [],
       machineShop: row.state==='select' && isShopFloor(row.floor,row.total_floors) ? {
         offers:this.machineOffers(owner,row),

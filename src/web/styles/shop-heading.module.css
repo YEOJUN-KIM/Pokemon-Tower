@@ -1,0 +1,4 @@
+.heading {flex-wrap:wrap;}
+.actions {display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:10px;min-width:0;max-width:100%;}
+.actions>button {flex:0 0 auto;min-height:38px;padding:8px 14px;}
+@media(max-width:600px){.actions {width:100%;justify-content:space-between;gap:8px;}}

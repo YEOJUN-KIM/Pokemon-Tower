@@ -12,7 +12,6 @@ import type {Seed} from '../src/battle/run';
 import {npcSamples} from '../src/data/npc-samples';
 import {generateNpcEncounter} from '../src/server/npc-encounters';
 import type {NpcRank} from '../src/data/npc-ranks';
-import {itemShopRule} from '../src/data/held-item-shop';
 import {transaction} from '../src/server/storage/transaction';
 import {applyRewardOption} from '../src/server/rewards';
 
@@ -46,11 +45,11 @@ for(const [name,draw] of [['coins',0],['eggs',.3],['vitamins',.55],['growth',.7]
   if(name==='vitamins'){assert.equal(result.entries.length,2);assert.equal(new Set(result.entries.map(e=>e.kind==='vitamin'?e.stat:'')).size,2);assert.ok(result.entries.every(e=>e.kind==='vitamin'&&e.amount===1));}
   store.continueEvent(owner,run,f.event.id);
   const entries=store.view(owner).run!.rewardInventory!;
-  if(name==='vitamins'||name==='epic'||name==='machine'){
+  if(name==='epic'){const reward=result.entries[0];assert.equal(reward.kind,'item-exchange');if(reward.kind==='item-exchange'){assert.equal(reward.direct,true);assert.equal(reward.items.length,1);assert.equal(store.view(owner).run!.itemBag![reward.items[0]],1);}assert.equal(entries.length,0);}
+  if(name==='vitamins'||name==='machine'){
    assert.equal(entries.length,name==='vitamins'?2:1);if(name==='machine'){const effect=result.entries[0];assert.equal(effect.kind,'machine');assert.ok(store.view(owner).run!.bag!.entries.some(e=>e.action==='machine'));return;}const entry=entries[0];assert.ok(entry.choices.length);
    const request=randomUUID();store.useReward(owner,run,request,entry.id,entry.choices[0].id);store.useReward(owner,run,request,entry.id,entry.choices[0].id);
    assert.throws(()=>store.useReward(owner,run,randomUUID(),entry.id,entry.choices[0].id));
-   if(name==='epic'){assert.ok(epicRewardItems.every(item=>itemShopRule(item).rarity==='epic'));assert.equal(store.view(owner).run!.itemBag![entry.choices[0].id],1);}
    if(name==='vitamins')assert.equal(store.db.prepare('SELECT COUNT(*) AS n FROM vitamin_purchases WHERE run_id=?').get(run)!.n,1);
   }
  }finally{store.close();}
@@ -133,6 +132,7 @@ test('v38 old challenger reward JSON remains byte-for-byte intact and pays its o
 });
 test('all-owned epic exchange uses its stored fallback once',()=>{
  const f=rankRewardFixture('elite',[.8]);try{
+  f.candidate.rewardDefinition={...f.candidate.rewardDefinition,entries:[{kind:'item-exchange',items:epicRewardItems,amount:1,fallbackCoins:1500}]};f.store.db.prepare('UPDATE challenger_encounters SET candidates_json=? WHERE event_id=?').run(JSON.stringify([f.candidate]),f.event.id);
   win(f);f.store.continueEvent(f.owner,f.run,f.event.id);
   for(const item of epicRewardItems)f.store.db.prepare('INSERT INTO run_item_bag VALUES (?,?,1)').run(f.run,item);
   const entry=f.store.view(f.owner).run!.rewardInventory![0];assert.deepEqual(entry.choices.map(c=>c.id),['owned-fallback']);const before=f.store.view(f.owner).coins,request=randomUUID();

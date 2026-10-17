@@ -2894,3 +2894,55 @@
   color: #c6b9d6;
   font-size: 12px;
 }
+
+/* Compact shop prices sit beside metadata; descriptions keep the full row. */
+:where(.scope) :global(.tower-shop .compact-shop-products .shop-product) {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-content: start;
+  align-items: center;
+}
+:where(.scope) :global(.tower-shop .compact-shop-products .shop-product-title) {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+:where(.scope) :global(.tower-shop .compact-shop-products .shop-product-meta) {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
+  min-width: 0;
+  font-size: 11px;
+  line-height: 1.8;
+}
+:where(.scope) :global(.tower-shop .compact-shop-products .shop-product-description) {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin: 2px 0 0;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+:where(.scope) :global(.tower-shop .compact-shop-products .shop-product-status) {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  color: #ffdc88;
+}
+:where(.scope) :global(.tower-shop .compact-shop-products .shop-product-status:empty) {
+  display: none;
+}
+:where(.scope) :global(.tower-shop .compact-shop-products .shop-product>button) {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: center;
+  width: auto;
+  margin: 0;
+  padding: 8px 12px;
+  white-space: nowrap;
+}
+
+@media(max-width:600px) {
+  :where(.scope) :global(.tower-shop .compact-shop-products.shop-products) {grid-template-columns:minmax(0,1fr);}
+}

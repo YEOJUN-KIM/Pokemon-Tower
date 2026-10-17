@@ -7,9 +7,22 @@ import {rankRewardFixture} from '../tests/rank-reward-fixture';
 import {finishChallengerBattle} from '../tests/challenger-fixture';
 import {challengerDefinition} from '../src/data/challengers';
 import {npcSamples} from '../src/data/npc-samples';
+import {itemName} from '../src/data/held-items';
+import {grantRunItem,grantStoredReward} from '../src/server/inventory-grants';
 import {snapshotRankReward} from '../src/server/challenger-rewards';
 
 test.beforeEach(()=>{const s=new TowerStore('.data/e2e.sqlite');try{s.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();}finally{s.close();}});
+for(const width of [1280,390])for(const [kind,roll] of [['epic',.8],['machine',.9]] as const)test(`Elite stale ${kind} at ${width}: actual coin fallback, hidden preview and immutable snapshot`,async({page,context})=>{
+ const owner='stale_'+randomBytes(8).toString('hex'),f=rankRewardFixture('elite',[roll,0],'.data/e2e.sqlite',owner),{store,run,event,candidate}=f;
+ try{
+  const auth=await new Accounts(store.db).register(owner,'rank-rewards-password',owner,undefined),effect=candidate.rewardDefinition.entries[0];
+  if(effect.kind==='item-exchange')grantRunItem(store.db,run,effect.items[0],1);else if(effect.kind==='machine')grantStoredReward(store.db,run,effect);else throw Error('Expected unique');
+  const raw=store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(event.id)!.candidates_json,before=store.view(owner).coins;
+  await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001'}]);await page.setViewportSize({width,height:900});await page.goto('/battle');await expect(page.getByTestId('challenger-detail')).toContainText('희귀한 보상');if(effect.kind==='item-exchange')await expect(page.getByTestId('challenger-detail')).not.toContainText(itemName(effect.items[0]));
+  store.chooseEvent(owner,run,event.id,candidate.id);const id=store.currentBattle(owner)!.id;finishChallengerBattle(store,id);finishChallengerBattle(store,id);await page.reload();const modal=page.getByTestId('reward-modal');await expect(modal).toContainText('타워 코인 1,500');await expect(modal).not.toContainText('교환권');await expect(modal.locator('[data-reward-kind=coins]')).toHaveCount(1);await expect(modal.getByRole('button',{name:'선택하기 >'})).toHaveCount(0);expect(store.view(owner).coins).toBe(before+1500);expect(store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(event.id)!.candidates_json).toBe(raw);
+  mkdirSync('artifacts/qa/screenshots/rank-rewards',{recursive:true});await page.screenshot({path:`artifacts/qa/screenshots/rank-rewards/stale-${kind}-${width}.png`});await page.reload();await expect(modal).toContainText('타워 코인 1,500');expect(store.view(owner).coins).toBe(before+1500);
+ }finally{store.close();}
+});
 for(const width of [1280,390])test(`rank previews hide rewards and Master exposes three actual choices only after victory at ${width}`,async({page,context})=>{
  const owner='rr_'+randomBytes(8).toString('hex'),f=rankRewardFixture('master',[.7,0],'.data/e2e.sqlite',owner),{store,run,event}=f;
  try{
@@ -39,11 +52,12 @@ for(const [category,draw] of [['vitamin',.55],['epic',.8],['machine',.9]] as con
   store.chooseEvent(owner,run,event.id,candidate.id);finishChallengerBattle(store,store.currentBattle(owner)!.id);
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);await page.setViewportSize({width:390,height:844});await page.goto('/battle');
   const modal=page.getByTestId('reward-modal');await expect(modal).toBeVisible();await expect(modal).toContainText('희귀한 보상');await expect(modal.getByRole('button',{name:'선택하기 >'})).toHaveCount(0);
+  if(category==='epic'){await expect(modal).not.toContainText('교환권');const reward=candidate.rewardDefinition.entries[0];if(reward.kind==='item-exchange'){await expect(modal).toContainText(itemName(reward.items[0]));expect(store.view(owner).run!.itemBag![reward.items[0]]).toBe(1);}}
   await page.screenshot({path:`artifacts/qa/screenshots/rank-rewards/elite-${category}.png`});await modal.getByRole('button',{name:'확인',exact:true}).click();
   await page.getByRole('button',{name:'배낭',exact:true}).click();const bag=page.getByTestId('bag');await expect(bag).toBeVisible();
   await bag.getByRole('button',{name:category==='vitamin'?'소모품':category==='machine'?'기술머신':'도구',exact:true}).click();
-  const entry=store.view(owner).run!.bag!.entries.find(e=>e.action===(category==='vitamin'?'vitamin':category==='machine'?'machine':'exchange'))!;await bag.locator('[data-bag-entry="'+entry.id+'"]').click();
-  if(entry.targets.length){await bag.getByRole('button',{name:'사용',exact:true}).click();await bag.locator('[data-bag-target="'+entry.targets[0]+'"]').click();if(category==='machine')await bag.locator('[data-learning-slot="0"]').click();}
+  const entry=store.view(owner).run!.bag!.entries.find(e=>e.action===(category==='vitamin'?'vitamin':category==='machine'?'machine':'equip'))!;await bag.locator('[data-bag-entry="'+entry.id+'"]').click();
+  if(entry.targets.length){await bag.getByRole('button',{name:category==='epic'?'지니게 하기':'사용',exact:true}).click();await bag.locator('[data-bag-target="'+entry.targets[0]+'"]').click();if(category==='machine'){await bag.locator('[data-learning-slot="0"]').click();await expect(bag.locator('[data-learning-slot]')).toHaveCount(0);}await expect(bag.locator('[data-bag-target]')).toHaveCount(0);}
   if(category==='machine')expect(store.view(owner).run!.bag!.entries.some(e=>e.move===entry.move)).toBe(true);else expect(store.view(owner).run!.rewardInventory!.length).toBe(0);
   await bag.getByRole('button',{name:'닫기',exact:true}).click();
   store.db.prepare("UPDATE runs SET floor=21,state='select' WHERE id=?").run(run);await page.reload();await page.getByTestId('maintenance-shop').click();await expect(page.getByRole('button',{name:'육성',exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'지닌 도구',exact:true})).toBeVisible();await expect(page.getByRole('button',{name:'기술머신',exact:true})).toBeVisible();

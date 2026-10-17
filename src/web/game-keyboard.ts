@@ -43,6 +43,7 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
       if(event.key==='Tab'){document.body.dataset.gameInput='native';return;}
       if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','PageUp','PageDown','Enter'].includes(event.key) || ['z','x','c','a','s','q','e','v','f','r'].includes(event.key.toLowerCase()))document.body.dataset.gameInput='cursor';
       const key=event.key.toLowerCase(),scope=context(),cursor=draw();
+      if(key==='b'&&scope instanceof HTMLDialogElement){const bag=scope.querySelector<HTMLButtonElement>('[data-testid=tower-shop] [data-open-bag]');if(bag){event.preventDefault();if(!event.repeat&&!bag.disabled)bag.click();return;}}
       const pocketScope=cursor?.closest('[data-keyboard-pocket-scope]')??(scope instanceof HTMLDialogElement?scope.querySelector('[data-keyboard-pocket-scope]'):null);
       if(pocketScope&&['arrowleft','arrowright'].includes(key)){
         event.preventDefault();const tabs=Array.from(pocketScope.querySelectorAll<HTMLButtonElement>('[data-game-tabs] button:not(:disabled)'));

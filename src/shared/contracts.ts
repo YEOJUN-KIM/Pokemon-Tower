@@ -57,6 +57,7 @@ export type RunView = {
   itemPurchases?:string[];
   itemOffers?:string[];
   shopRerolls?:Record<'items'|'machines',{count:number;price:number;limit?:number}>;
+  vitaminUsage?:import('./vitamin-eligibility').VitaminUsage;
   vitaminShop?:{offers:{stat:import('../data/training').StatKey;price:number;purchased:boolean}[];bonuses:Record<string,Partial<StatBlock>>;partners:Record<string,MachinePartner>;counts?:Record<string,number>;limit?:number}|null;
   candidateDetails?:Record<string,{ability:string;nature:string;moves:string[];baseStats:StatBlock;types?:string[];teraType?:import('../data/tera').TeraType;shiny?:boolean}>;
   machineShop?: {offers:MachineOffer[];currentMoves:Record<string,string[]>;partners:Record<string,MachinePartner>} | null;

@@ -8,6 +8,7 @@ import {challengerDefinition,type ChallengerDefinition} from '../data/challenger
 import {npcTrainingProfile} from './npc-training';
 import {npcBuildAttackStat} from './npc-builds';
 import {encounterRandom} from './opponent-team';
+import {ownsRunItem} from './run-ownership';
 import {weightedRewardId} from './challenger-rewards';
 import {enhancementCandidates} from './pokemon-enhancements';
 import type {RewardSelectionDefinition,RewardEffect} from '../data/rewards';
@@ -32,7 +33,7 @@ export function snapshotMirrorReward(db:DatabaseSync,runId:string,random:()=>num
  else if(kind==='growth')entries=growth();
  else if(kind==='superRare'||kind==='shiny-ticket')entries=[{kind:'typed-egg-ticket',eggKind:kind==='superRare'?'superRare':'shiny',amount:1}];
  else if(kind==='equipment'){
-  const eligible=trainerEquipmentKeys.filter(item=>allowsRuleItem(rule,item)&&!db.prepare('SELECT 1 FROM run_trainer_equipment WHERE run_id=? AND item=?').get(runId,item));
+  const eligible=trainerEquipmentKeys.filter(item=>allowsRuleItem(rule,item)&&!ownsRunItem(db,runId,item));
   entries=eligible.length?[{kind:'trainer-equipment',item:eligible[Math.floor(random()*eligible.length)],amount:1,fallbackPoints:profile.equipmentFallback}]:growth();
  }else{
   const candidates=enhancementCandidates(db,owner,runId,kind);

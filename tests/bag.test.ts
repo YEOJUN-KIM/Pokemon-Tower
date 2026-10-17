@@ -11,6 +11,15 @@ import {starters} from '../src/data/teams';
 import {machineMoves,MACHINE_COUNT} from '../src/data/shop';
 const view=(f:ReturnType<typeof hiddenShopFixture>)=>f.store.view(f.owner).run!.bag!;
 
+test('immediate vitamin purchase uses the canonical Bag row when the same vitamin is already stored',()=>{
+ const f=hiddenShopFixture();try{
+  grantStoredReward(f.store.db,f.run,{kind:'vitamin',stat:'atk',amount:2});f.pin(['vitamin-atk','item-Life Orb','machine-Earthquake','egg-ticket-5']);const before=f.store.view(f.owner);
+  f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,'vitamin-atk','use','Charizard');f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,'vitamin-atk','use','Charizard');
+  assert.equal(f.store.view(f.owner).coins,before.coins-400);assert.equal(view(f).entries.find(e=>e.action==='vitamin')!.quantity,2);assert.equal(f.store.db.prepare('SELECT points FROM run_stat_boosts WHERE run_id=? AND species=? AND stat=?').get(f.run,'Charizard','atk')!.points,5);
+  assert.ok(!view(f).entries.find(e=>e.action==='vitamin')!.targets.length);assert.equal(f.store.view(f.owner).run!.vitaminUsage!.usedStats[0],'atk');
+ }finally{f.store.close();}
+});
+
 test('Bag unifies pockets without duplicating stores; equipped tool stays visible, moves automatically, returns replaced tool',()=>{
  const f=hiddenShopFixture();try{
   grantRunItem(f.store.db,f.run,'Focus Sash',3);grantRunItem(f.store.db,f.run,'Life Orb',1);grantRunItem(f.store.db,f.run,'Charizardite X',1);grantRunItem(f.store.db,f.run,'Firium Z',1);grantEquipment(f.store.db,f.run,'Dynamax Band');

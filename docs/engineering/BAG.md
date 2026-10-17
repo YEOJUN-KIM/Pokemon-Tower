@@ -40,7 +40,7 @@
 | 항목 | 구현 |
 |---|---|
 | 20. 출전 준비 | 기존 별도 RewardInventory/도구 관리 진입을 공통 BagButton으로 통합. 최대 6마리에서 사용, 닫으면 선택한 출전 3마리 유지 |
-| 21. 정비 배낭 | 정비 첫 메뉴에서 상점 / 포켓몬 조정 / 배낭 / 출전 팀 선택으로 진입. 일반 상점 팝업과 포켓몬 개별 조정 메뉴의 배낭 버튼은 제거. Bag을 사용해도 상품·리롤 revision은 유지 |
+| 21. 정비 배낭 | 정비 첫 메뉴에서 상점 / 포켓몬 조정 / 배낭 / 출전 팀 선택으로 진입. 일반 상점 상단 utility에도 배낭 진입 제공. 포켓몬 개별 조정 메뉴의 배낭 버튼은 제거. Bag을 사용해도 상품·리롤 revision은 유지 |
 | 22. 히든상점 | 같은 BagButton과 B 단축키. 상품 Snapshot·가격·재화·구매 상태·한도를 유지하며 사용/장착 가능 |
 | 23. 새 화면 | 좌측 세로 상품 목록, 우측 아이콘/이름/설명/가격/상태, 모바일은 세로 재배치. 상단 지갑/구매 N / 2 유지 |
 | 24. 상인 대화 | 하단 GameDialogue는 상인 말 전용. 입장/첫 구매/한도/재화 부족 대화. 상품 설명은 우측 상세로 이동 |
@@ -91,3 +91,11 @@
 검증: 관련 단위·통합 14/14, Bag·일반/히든상점·Rank 보상 Chrome 회귀 22/22 통과. PC/모바일에서 세 가지 TM 상태, 장착 도구 아이콘, 미장착 빈 영역, 정비 메뉴 진입과 기존 버튼 제거를 확인했습니다. TypeScript·프로덕션 빌드·CSS 구조·문서 링크 검사도 통과했습니다.
 
 [TM 대상 PC](../../artifacts/qa/screenshots/bag/targets-machine-1280.png) · [TM 대상 모바일](../../artifacts/qa/screenshots/bag/targets-machine-390.png) · [도구 대상 PC](../../artifacts/qa/screenshots/bag/targets-held-1280.png) · [도구 대상 모바일](../../artifacts/qa/screenshots/bag/targets-held-390.png)
+
+## 일반상점 접근성 보완
+
+일반상점 상단 배낭 버튼과 B 단축키를 추가했습니다. 첫 사용 가능 대상 커서와 영양제 제한 표시도 공통 적용합니다. 상세 변경·검증·제약은 [SHOP_BAG_UX](SHOP_BAG_UX.md)를 참조하세요.
+
+## 도전자 unique 보상
+
+신규 Elite 에픽 도구는 랜덤 단일 snapshot 후 교환권 없이 직접 Bag에 등록합니다. 신규 도구/TM은 지급 직전 중복이면 1,500코인으로 대체합니다. [상세 보고와 저장 호환](CHALLENGER_UNIQUE_REWARDS.md).

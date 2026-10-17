@@ -1,3 +1,4 @@
+import {finishChallengerBattle} from './challenger-fixture';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
@@ -27,11 +28,10 @@ test('hidden battle stays on floor 50, survives reload, advances once, and switc
     assert.equal(store.currentBattle('route'),null);
     store.close();store=new TowerStore(path);
     assert.equal(store.view('route').run!.hiddenBossPending,true);
-    const red=store.enter('route',run,50,starters);assert.equal(JSON.parse(store.battle(red).boss!).name,'레드');
+    const event=store.view('route').run!.event!;assert.equal(event.kind,'hidden-boss');store.chooseEvent('route',run,event.id,'challenge');const red=store.currentBattle('route')!.id;assert.equal(JSON.parse(store.battle(red).trainer!).name,'레드');
     assert.equal(store.currentBattle('route')?.id,red);
     assert.equal((store.db.prepare('SELECT COUNT(*) n FROM battles WHERE run_id=? AND floor=50').get(run) as {n:number}).n,2);
-    store.db.prepare("UPDATE runs SET state='recruit' WHERE id=?").run(run);store.db.prepare("UPDATE battles SET status='complete' WHERE id=?").run(red);
-    store.recruit('route',run,red,null,null);
+    finishChallengerBattle(store,red);store.continueEvent('route',run,event.id);
     assert.equal(store.view('route').run!.floor,51);assert.equal(store.view('route').run!.theme,'hoenn');assert.equal(store.view('route').run!.hiddenBossPending,false);
     assert.throws(()=>store.recruit('route',run,red,null,null));
     assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
@@ -63,9 +63,8 @@ test('a second-chapter Johto champion does not clear until Red is beaten',()=>{
     store.db.prepare("UPDATE runs SET floor=100,state='recruit' WHERE id=?").run(run);
     store.db.prepare("UPDATE battles SET floor=100,status='complete' WHERE id=?").run(id);
     store.recruit('final',run,id,null,null);assert.equal(store.view('final').run!.state,'select');assert.equal(store.view('final').run!.boss?.name,'레드');
-    const red=store.enter('final',run,100,starters);
-    store.db.prepare("UPDATE runs SET state='recruit' WHERE id=?").run(run);store.db.prepare("UPDATE battles SET status='complete' WHERE id=?").run(red);
-    store.recruit('final',run,red,null,null);assert.equal(store.view('final').run!.state,'cleared');
+    const event=store.view('final').run!.event!;store.chooseEvent('final',run,event.id,'challenge');const red=store.currentBattle('final')!.id;
+    finishChallengerBattle(store,red);store.continueEvent('final',run,event.id);assert.equal(store.view('final').run!.state,'cleared');
     assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
   }finally{store.close();}
 });

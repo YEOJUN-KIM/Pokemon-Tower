@@ -30,6 +30,7 @@ export type BattleView = {
   teraTickets?:number;
 };
 export type RunView = {
+  villainEncounter?:{stage:import('../data/villain-campaigns').RocketStage;afterFloor:number}|null;
   raid?:boolean;
   bag?:import('../data/bag').BagView;
   rewardInventory?:import('../data/reward-inventory').RewardInventoryView[];

@@ -3,19 +3,17 @@ import assert from 'node:assert/strict';
 import {raidFixture} from './raid-fixture';
 import {RunEvents} from '../src/server/run-events';
 import {raidEventTestSettings} from '../src/data/raids';
+import {villainEventTestSettings} from '../src/data/villain-campaigns';
 
-test('manual raid playtest forces every destination floor from 3, ignoring chance, cooldown and checkpoints',()=>{
- const {store,owner,run,event}=raidFixture();
- try{
-  assert.deepEqual(raidEventTestSettings,{enabled:true,startFloor:3});
+test('manual Raid settings remain preserved while the temporary villain-only override takes priority',()=>{
+ const {store,owner,run,event}=raidFixture();try{
+  assert.deepEqual(raidEventTestSettings,{enabled:true,startFloor:3});assert.equal(villainEventTestSettings.onlyVillainEvents,true);
   store.chooseEvent(owner,run,event.id,'skip');
-  const events=new RunEvents(store.db,()=>{throw Error('Forced raids must not roll the normal event table');});
-  for(const floor of [3,4,5,6,7]){
-   store.db.prepare("UPDATE runs SET floor=?,state='select' WHERE id=?").run(floor,run);
-   events.encounter(run,floor-1);
-   const pending=store.view(owner).run!.event!;
-   assert.equal(pending.kind,'raid-encounter');assert.equal(pending.afterFloor,floor-1);assert.ok(pending.raid);
-   store.chooseEvent(owner,run,pending.id,'skip');
-  }
+  const events=new RunEvents(store.db,()=>0);
+  store.db.prepare('UPDATE run_encounter_progress SET cleared_count=2 WHERE run_id=?').run(run);
+  events.encounter(run,2);assert.equal(events.view(run),null);
+  store.db.prepare('UPDATE run_encounter_progress SET cleared_count=4 WHERE run_id=?').run(run);
+  store.db.prepare("UPDATE runs SET floor=5,state='select' WHERE id=?").run(run);
+  events.encounter(run,4);assert.equal(events.view(run)!.kind,'rocket-intro');
  }finally{store.close();}
 });

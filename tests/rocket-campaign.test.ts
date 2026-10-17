@@ -16,6 +16,8 @@ import {transaction} from '../src/server/storage/transaction';
 import Showdown from 'pokemon-showdown';
 import {FORMAT,runBattle} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
+import {TowerService} from '../src/server/tower-service';
+import {presentationFrames} from '../src/web/battle-presentation';
 
 test('normal random draws exclude villains in legacy and common pools; ordinary floor creation never rolls villains',()=>{
  for(const progression of ['legacy','hundred-floor-v1'] as const)for(const common of [false,true])for(let floor=1;floor<=100;floor++)for(let n=0;n<8;n++)assert.notEqual(selectTrainerSample(floor,[n,2,3,4],[],progression,{common}).role,'villain');
@@ -35,6 +37,23 @@ test('intro decline preserves eligibility, cooldown, global chance and single we
   assert.equal(selectRunEvent(1,null,()=>mysteryChest.encounterPercent,rocketRegistry,2),null);
   assert.equal(selectRunEvent(4,3,()=>0,rocketRegistry,2,4),null);
  }finally{f.store.close();}
+});
+
+test('temporary live villain-only mode overrides forced Raid, preserves cooldown and leaves injected registries usable',()=>{
+ const f=rocketFixture(),s=f.store;try{
+  s.chooseEvent(f.owner,f.run,f.event.id,'skip');
+  const live=new RunEvents(s.db,()=>0);
+  s.db.prepare('UPDATE run_encounter_progress SET cleared_count=2 WHERE run_id=?').run(f.run);
+  live.encounter(f.run,2);assert.equal(live.view(f.run),null);
+  s.db.prepare('UPDATE run_encounter_progress SET cleared_count=4 WHERE run_id=?').run(f.run);
+  live.encounter(f.run,4);const intro=live.view(f.run)!;assert.equal(intro.kind,'rocket-intro');
+  s.db.prepare("UPDATE runs SET floor=5 WHERE id=?").run(f.run);live.choose(f.owner,f.run,intro.id,'skip');
+  s.db.prepare('INSERT INTO run_organization_campaigns VALUES (?,?,?,?,?,?,?,?)').run(f.run,'rocket',1,2,1,1,1,1);
+  s.db.prepare('UPDATE run_encounter_progress SET cleared_count=7 WHERE run_id=?').run(f.run);
+  live.encounter(f.run,7);assert.equal(live.view(f.run),null);
+  const chest=new RunEvents(s.db,()=>0,{'mystery-chest':eventDefinitions['mystery-chest']});
+  chest.encounter(f.run,7);assert.equal(chest.view(f.run)!.kind,'mystery-chest');
+ }finally{s.close();}
 });
 
 test('full Rocket chain reuses source samples, freezes snapshots, pays/progresses once and bypasses normal floor/recruitment',()=>{
@@ -99,7 +118,7 @@ test('backward Teleport preserves persisted clues and organization stage across 
   assert.equal(s.view(f.owner).run!.floor,1);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),before);
   s.close();s=new TowerStore(path,()=>0,rocketRegistry);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),before);
   const snapshot=s.db.prepare('SELECT * FROM villain_event_encounters').all();s.db.exec('PRAGMA user_version=43');s.close();s=new TowerStore(path);
-  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,44);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),before);assert.deepEqual(s.db.prepare('SELECT * FROM villain_event_encounters').all(),snapshot);assert.deepEqual(s.db.prepare('PRAGMA foreign_key_check').all(),[]);
+  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,45);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),before);assert.deepEqual(s.db.prepare('SELECT * FROM villain_event_encounters').all(),snapshot);assert.deepEqual(s.db.prepare('PRAGMA foreign_key_check').all(),[]);
  }finally{s.close();}
 });
 
@@ -107,7 +126,7 @@ test('actual v43 database without either new table upgrades while preserving an 
  const path=`.data/tests/rocket-v43-${randomUUID()}.sqlite`;let s=new TowerStore(path);try{
   s.ensurePlayer('old');const id=s.start('old',starters),before=s.battle(id),view=s.view('old');
   s.db.exec('DROP TABLE villain_event_encounters; DROP TABLE run_organization_campaigns; PRAGMA user_version=43');s.close();s=new TowerStore(path);
-  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,44);assert.deepEqual(s.battle(id),before);assert.deepEqual(s.view('old'),view);
+  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,45);assert.deepEqual(s.battle(id),before);assert.deepEqual(s.view('old'),view);
   assert.equal(s.db.prepare('SELECT COUNT(*) AS n FROM run_organization_campaigns').get()!.n,0);assert.deepEqual(s.db.prepare('PRAGMA foreign_key_check').all(),[]);
  }finally{s.close();}
 });
@@ -125,4 +144,27 @@ test('grunt, officer and Giovanni snapshots are legal and run through the existi
    finishChallengerBattle(s,b.id);
   }
  }finally{s.close();}
+});
+
+test('special final action returns the last hit/faint/win for playback before showing the event reward',async()=>{
+ const f=rocketFixture(),s=f.store,service=new TowerService(s);try{
+  for(let index=0;index<5;index++){
+   const event=index?nextRocketEvent(s,f.run):f.event;s.chooseEvent(f.owner,f.run,event.id,'challenge');const b=s.currentBattle(f.owner)!;
+   if(index<3){finishChallengerBattle(s,b.id);continue;}
+   const player=Showdown.Teams.pack(Showdown.Teams.import('Charizard\nAbility: Blaze\nLevel: 50\nEVs: 1 HP\n- Flamethrower\n\nBlastoise\nAbility: Torrent\nLevel: 50\nEVs: 1 HP\n- Surf\n\nVenusaur\nAbility: Overgrow\nLevel: 50\nEVs: 1 HP\n- Vine Whip')!);
+   const opponent=Showdown.Teams.pack(Showdown.Teams.import('Magikarp\nAbility: Swift Swim\nLevel: 1\nEVs: 1 HP\n- Splash\n\nCaterpie\nAbility: Shield Dust\nLevel: 1\nEVs: 1 HP\n- Tackle\n\nWeedle\nAbility: Shield Dust\nLevel: 1\nEVs: 1 HP\n- Poison Sting')!);
+   s.db.prepare('UPDATE battles SET player_team=?,opponent_team=? WHERE id=?').run(player,opponent,b.id);
+   let before=await service.state(f.owner);assert.equal(before.battle!.status,'waiting',before.battle!.error??'');
+   for(let turn=0;turn<2;turn++)before=await service.action(f.owner,b.id,before.battle!.requestId,'move 1');
+   const result=await service.action(f.owner,b.id,before.battle!.requestId,'move 1');
+   assert.equal(result.tower.run!.state,'select');assert.equal(result.tower.run!.event!.phase,'reward');
+   assert.equal(result.battle!.status,'complete');assert.equal(result.battle!.winner,'Player');
+   const frames=presentationFrames(before.battle!,result.battle!);
+   assert.ok(frames.some(frame=>frame.motion?.kind==='hit'));
+   assert.ok(frames.some(frame=>frame.motion?.kind==='faint'));
+   assert.ok(result.battle!.messages.includes('|win|Player'));
+   assert.ok(frames.every(frame=>frame.view.status==='waiting'&&frame.view.winner===null));
+   assert.equal((await service.state(f.owner)).battle,null);
+  }
+ }finally{await service.dispose();s.close();}
 });

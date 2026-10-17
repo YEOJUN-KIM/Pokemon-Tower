@@ -10,9 +10,9 @@ import {applyRewardOption} from '../src/server/rewards';
 import {transaction} from '../src/server/storage/transaction';
 import {schema} from '../src/server/schema';
 
-function setup(path=':memory:',coins=1000){
+function setup(path=':memory:',coins=1000,version=2){
  let draw=0,calls=0;
- const store=new TowerStore(path,()=>{calls++;return draw;});store.ensurePlayer('owner');
+ const store=new TowerStore(path,()=>{calls++;return draw;},{'mystery-chest':eventDefinition('mystery-chest',undefined,version)!});store.ensurePlayer('owner');
  const battle=store.start('owner',starters,'basic',{events:true}),run=store.battle(battle).run_id;
  store.db.prepare("UPDATE battles SET status='complete' WHERE id=?").run(battle);
  store.db.prepare("UPDATE runs SET state='recruit' WHERE id=?").run(run);
@@ -102,7 +102,7 @@ test('multi-entry grant and result receipt failures roll back the whole transact
 
 test('v34 saves preserve pending v1 choices, paid rewards and completed events across v35 migration',()=>{
  for(const status of ['choice','reward','complete','skip']){
-  const path=`.data/tests/mystery-migration-${randomUUID()}.sqlite`,f=setup(path);let store=f.store;
+  const path=`.data/tests/mystery-migration-${randomUUID()}.sqlite`,f=setup(path,1000,1);let store=f.store;
   try{
    store.db.prepare('UPDATE run_event_rules SET version=1 WHERE run_id=?').run(f.run);
    if(status==='reward'||status==='complete'){f.setDraw(80);store.chooseEvent('owner',f.run,f.event.id,'open');}
@@ -119,7 +119,7 @@ test('v34 saves preserve pending v1 choices, paid rewards and completed events a
     INSERT INTO run_event_rules_v34 SELECT * FROM run_event_rules; DROP TABLE run_event_rules; ALTER TABLE run_event_rules_v34 RENAME TO run_event_rules; PRAGMA user_version=34;`);
    store.close();store=new TowerStore(path,()=>{if(status==='choice')return 80;throw Error('Migration cannot draw');});
    assert.deepEqual(store.view('owner'),before);
-   assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,44);
+   assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,45);
    if(status==='choice'){store.chooseEvent('owner',f.run,f.event.id,'open');assert.deepEqual(store.view('owner').run!.event!.reward,{kind:'egg-ticket',amount:1});}
    else store.chooseEvent('owner',f.run,f.event.id,status==='skip'?'skip':'open');
    assert.equal(store.permanentView('owner').eggTickets,status==='skip'?0:1);

@@ -1,7 +1,7 @@
 const named=(ids:string)=>ids.split(',').map(id=>`named-${id}`);
 export const towerThemes={
- kanto:{name:'관동',generation:1,gyms:named('brock,misty,ltsurge,erika,koga-kanto,sabrina,blaine,giovanni-gym'),elites:named('lorelei,bruno-kanto,agatha,lance-kanto'),champion:'named-blue',final:'named-red-kanto',organizations:['rocket']},
- johto:{name:'성도',generation:2,gyms:named('falkner,bugsy,whitney,morty,chuck,jasmine,pryce,clair'),elites:named('will,koga,bruno,karen'),champion:'named-lance',final:'named-red',organizations:['rocket']},
+ kanto:{hiddenBoss:true,name:'관동',generation:1,gyms:named('brock,misty,ltsurge,erika,koga-kanto,sabrina,blaine,giovanni-gym'),elites:named('lorelei,bruno-kanto,agatha,lance-kanto'),champion:'named-blue',final:'named-red-kanto',organizations:['rocket']},
+ johto:{hiddenBoss:true,name:'성도',generation:2,gyms:named('falkner,bugsy,whitney,morty,chuck,jasmine,pryce,clair'),elites:named('will,koga,bruno,karen'),champion:'named-lance',final:'named-red',organizations:['rocket']},
  hoenn:{name:'호연',generation:3,gyms:named('roxanne,brawly,wattson,flannery,norman,winona,tateandliza,wallace-gym,juan'),elites:named('sidney,phoebe,glacia,drake'),champion:'named-steven',final:'named-wallace',organizations:['magma','aqua']},
  sinnoh:{name:'신오',generation:4,gyms:named('roark,gardenia,maylene,crasherwake,fantina,byron,candice,volkner'),elites:named('aaron,bertha,flint,lucian'),champion:'named-cynthia',final:'named-barry',organizations:['galactic']},
  unova:{name:'하나',generation:5,gyms:named('cilan,chili,cress,lenora,burgh,elesa,clay,skyla,brycen,drayden,cheren,roxie,marlon'),elites:named('shauntal,marshal,grimsley,caitlin'),champion:'named-alder',final:'named-iris',organizations:['plasma']},

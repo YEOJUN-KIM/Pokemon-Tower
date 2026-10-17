@@ -40,6 +40,7 @@ export class TowerService {
     return session;
   }
   async state(owner: string): Promise<BattleResponse> {
+    this.store.prepareHiddenBossEvent(owner);
     const row = this.store.currentBattle(owner);
     let battle: BattleView | null = null;
     if (row?.status === 'complete') battle = JSON.parse(row.view!) as BattleView;
@@ -57,7 +58,14 @@ export class TowerService {
     const session = this.session(owner, current);
     await session.ready();
     await session.submit(id, requestId, action);
-    return this.state(owner);
+    const response=await this.state(owner);
+    // Special wins return the run to selection immediately. The action still
+    // needs its completed turn so the client can play the final hit and faint.
+    if(!response.battle){
+      const finished=this.store.battle(id);
+      if(finished.status==='complete'&&finished.view)response.battle=JSON.parse(finished.view) as BattleView;
+    }
+    return response;
   }
   async abandon(owner: string, id: string) {
     const current = this.store.currentBattle(owner);
@@ -82,9 +90,9 @@ const globalStore = globalThis as typeof globalThis & {towerPersistentService?: 
 export function getTowerService() {
   // Refresh the development singleton once when this schema/behavior version changes.
   // Its recorded inputs recover the battle in the new service without spending tickets twice.
-  if(globalStore.towerPersistentServiceVersion!==75){
+  if(globalStore.towerPersistentServiceVersion!==76){
     const previous=globalStore.towerPersistentService;
-    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=75;
+    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=76;
     if(previous)void previous.dispose().then(()=>previous.store.close()).catch(error=>console.error('Previous tower service shutdown failed',error));
   }
   // Runtime save data must not be traced into the deployment bundle.

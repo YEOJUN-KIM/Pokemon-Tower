@@ -186,5 +186,6 @@ CREATE TABLE IF NOT EXISTS villain_event_encounters(
  event_id TEXT PRIMARY KEY REFERENCES run_events(id),snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json)),
  battle_id TEXT UNIQUE REFERENCES battles(id),claimed INTEGER NOT NULL DEFAULT 0 CHECK(claimed IN (0,1))
 ) STRICT;
-  PRAGMA user_version = 44;
+CREATE TABLE IF NOT EXISTS hidden_boss_events(event_id TEXT PRIMARY KEY REFERENCES run_events(id),snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json)),battle_id TEXT UNIQUE REFERENCES battles(id),claimed INTEGER NOT NULL DEFAULT 0 CHECK(claimed IN (0,1))) STRICT;
+  PRAGMA user_version = 45;
 `;

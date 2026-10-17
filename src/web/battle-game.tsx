@@ -119,19 +119,21 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
   const done = battle?.status === 'complete';
   const broken = battle?.status === 'error';
   const run = tower?.run;
-  const currentEvent = !recruitment ? run?.event : null;
+  const currentEvent = !playing && !recruitment ? run?.event : null;
   const challengerId=challengerFocus?.eventId===currentEvent?.id?challengerFocus?.id:currentEvent?.challengers?.[0]?.id;
   const focusChallenger=(id:string)=>{if(currentEvent)setChallengerFocus(previous=>previous?.eventId===currentEvent.id&&previous.id===id?previous:{eventId:currentEvent.id,id});};
   const shopOfferId=shopFocus?.eventId===currentEvent?.id?shopFocus?.id:currentEvent?.hiddenShop?.offers[0]?.id;
   const focusShopOffer=(id:string)=>{if(currentEvent)setShopFocus(previous=>previous?.eventId===currentEvent.id&&previous.id===id?previous:{eventId:currentEvent.id,id});};
-  const hasResult = done && tower && run && ['recruit', 'lost', 'cleared'].includes(run.state);
+  const hasResult = !playing && done && tower && run && ['recruit', 'lost', 'cleared'].includes(run.state);
   const celebratingClear = run?.state==='cleared' && !!recruitment;
   const preparing = !battle || !run || (!['battle', 'recruit'].includes(run.state) && !celebratingClear);
   const team:PokemonView[] = (run?.roster ?? selected).map(name => (!preparing ? battle?.team.find(p=>collectionSpecies(p.species)===name) : undefined) ?? {species:name,displaySpecies:run?.partnerForms?.[name],condition:'1/1',active:false});
   const gimmickHint=({mega:'메가진화',dynamax:'다이맥스',tera:'테라스탈',z:'Z기술',chaos:'변신 선택',basic:''} as const)[run?.rule ?? 'chaos'];
   const active = battle?.team.find(p => p.active);
   const encounterMusic=trainerMusic(run?.boss ?? run?.trainer);
-  const scenery=arenaTheme(run?.floor ?? 1,run?.totalFloors ?? 10,encounterMusic);
+  const scenery=run?.villainEncounter?.stage==='rocket-ambush'
+    ?arenaTheme(run.villainEncounter.afterFloor,run.totalFloors,'trainer')
+    :arenaTheme(run?.floor ?? 1,run?.totalFloors ?? 10,encounterMusic);
   const rareEncounter=useRef<{id:string;track:MusicTrack|null}>({id:'',track:null});
 
   async function refresh() {
@@ -178,7 +180,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     }
   }, [run?.id, run?.floor, run?.state, run?.suggestedTeam.join(','), tower?.unlocked.join(',')]);
 
-  async function playBattle(data:BattleResponse,isAction:boolean) {
+  async function playBattle(data:BattleResponse,isAction:boolean,automaticIntro=false) {
     if(!data.battle)return;
     if(!isAction)setTower(data.tower);
     const initialView={...data.battle,field:emptyField(),messages:[],opponent:null,team:data.battle.team.map(p=>({...p,active:false})),turn:0};
@@ -186,8 +188,9 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     playbackSpeed.current=readPlaybackSpeed();skip.current=false;setPlaying(true);
     if(!isAction && !data.tower.run?.raid) {
       const boss=battleTrainer(data.battle.id,data.tower.run?.boss ?? data.tower.run?.trainer);
-      setStageOpen(false);setBattle(initialView);setTrainerIntro({boss,phase:'enter'});setAnnouncement(boss.introduction||trainerAppearance(boss));
-      await new Promise<void>(resolve=>{introContinue.current=()=>{introContinue.current=null;resolve();};});
+      setStageOpen(false);setBattle(initialView);setTrainerIntro({boss,phase:'enter'});setAnnouncement(boss.role==='villain'?trainerAppearance(boss):boss.introduction||trainerAppearance(boss));
+      if(automaticIntro)await waitPlayback(1000,false,'',{minimumDuration:500});
+      else await new Promise<void>(resolve=>{introContinue.current=()=>{introContinue.current=null;resolve();};});
       if(!skip.current && mounted.current){setTrainerIntro({boss,phase:'throw'});await waitPlayback(550);}
       setTrainerIntro(null);
     }
@@ -232,7 +235,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
         throw new Error(data.error ?? '행동을 처리하지 못했습니다.');
       }
       if(data.battle && (body.type === 'action' || body.type === 'start' || body.type === 'enter' || body.type==='event-choice'&&body.choice==='challenge')) {
-        await playBattle(data,body.type==='action');
+        await playBattle(data,body.type==='action',body.type==='event-choice'&&currentEvent?.kind==='hidden-boss');
       }
       if(!mounted.current)return;
       setMotion(null);setNotice(null);setAnnouncement(null);setPlaying(false);setBattle(data.battle);

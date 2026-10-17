@@ -65,3 +65,10 @@
 .managementDoor i {position:absolute;inset:42px 22px 0 0;background:linear-gradient(100deg,#687a81,#293d49);transform:skewY(-7deg);transform-origin:left;}
 
 .scope.facility {position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 119px,#92a8ae1a 120px 122px),linear-gradient(#263c49 0 68%,#789096 68% 69%,#33464d 69%);box-shadow:inset 0 0 70px #07141b99;}
+
+/* Rocket choices share one compact row, without a second nested scroll area. */
+.scope.bottom[data-villain=true] {gap:4px;}
+.bottom[data-villain=true][data-event-step=choices] .actions {flex:0 0 auto;flex-direction:row;flex-wrap:wrap;gap:4px;overflow:visible;}
+.bottom[data-villain=true] .actions .choice {min-height:44px;padding:4px 14px 4px 8px;font-size:18px;}
+:global(body) :where(.scope).bottom[data-villain=true] :global(.game-dialogue.current-messages) {min-height:0;flex:0 0 auto;margin:0;padding:4px 12px 12px;}
+:global(body) :where(.scope).bottom[data-villain=true] :global(.game-dialogue.current-messages p.latest) {font-size:20px;line-height:1.5;}

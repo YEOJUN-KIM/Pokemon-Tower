@@ -4,6 +4,7 @@ type EventPresentation={artwork:'chest'}|{artwork:'teleport'}|{artwork:'raid'}|{
 
 // React components stay in web; content and game rules never import this registry.
 export const eventPresentation={
+ 'hidden-boss':{artwork:'trainer',sprite:'red',alt:'히든보스'},
  'rocket-intro':{artwork:'trainer',sprite:'rocketgrunt',alt:'로켓단 조직원'},
  'rocket-ambush':{artwork:'trainer',sprite:'rocketgrunt',alt:'로켓단 조직원'},
  'rocket-officer':{artwork:'trainer',sprite:'archer',alt:'로켓단 간부'},

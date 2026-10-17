@@ -87,7 +87,7 @@ test('legacy runs are left unchanged by event schema migration',()=>{
  const path=`.data/tests/event-migration-${randomUUID()}.sqlite`;let store=new TowerStore(path,()=>0);
  try{store.ensurePlayer('owner');const id=store.start('owner',starters),run=store.battle(id).run_id;
   store.db.exec('DROP TABLE run_events;DROP TABLE run_event_rules;PRAGMA user_version=31');store.close();store=new TowerStore(path,()=>0);
-  assert.equal(finishFloor(store,run,id),null);assert.equal(store.view('owner').run!.floor,2);assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,44);
+  assert.equal(finishFloor(store,run,id),null);assert.equal(store.view('owner').run!.floor,2);assert.equal((store.db.prepare('PRAGMA user_version').get() as {user_version:number}).user_version,45);
  }finally{store.close();}
 });
 
@@ -135,7 +135,7 @@ test('v32 migration preserves a pending chest and its paid reward',()=>{
 test('event kind weights partition the encounter without increasing its frequency',async()=>{
  const {RunEvents}=await import('../src/server/run-events');
  for(const [draw,expected] of [[0,'mystery-chest'],[49,'mystery-chest'],[50,'breeder-gift'],[79,'breeder-gift'],[80,'traveling-merchant'],[99,'traveling-merchant']] as const){
-  const {store,run}=setup();try{let call=0;new RunEvents(store.db,()=>call++===0?0:draw).encounter(run,1);assert.equal(new RunEvents(store.db,()=>0).view(run)!.kind,expected);}finally{store.close();}
+  const {store,run}=setup();try{let call=0;new RunEvents(store.db,()=>call++===0?0:draw,{...eventDefinitions}).encounter(run,1);assert.equal(new RunEvents(store.db,()=>0).view(run)!.kind,expected);}finally{store.close();}
  }
 });
 
@@ -211,7 +211,7 @@ test('v33 migration preserves choices, paid rewards, completed history and walle
    const coins=store.db.prepare('SELECT coins FROM players WHERE id=?').get('owner')!.coins;
    store.close();store=new TowerStore(path,()=>{throw Error('Migration/retry must not draw');});
    assert.deepEqual(store.db.prepare(`SELECT ${columns} FROM run_events ORDER BY id`).all(),before);
-   assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,44);
+   assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,45);
    assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
    assert.equal(store.view('owner').run!.event?.phase,status==='choice'?'choice':status==='reward'?'reward':undefined);
    if(status!=='choice')store.chooseEvent('owner',fixture.run,event.id,status==='complete-skipped'?'skip':'open');

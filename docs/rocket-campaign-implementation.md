@@ -1,5 +1,13 @@
 # 로켓단 Run Event 캠페인
 
+현재 임시 수동 QA 설정: `src/data/villain-campaigns.ts`의
+`villainEventTestSettings.onlyVillainEvents = true`로 라이브 이벤트 후보를 로켓단으로 제한한다.
+이 모드가 기존 Raid 강제 출현보다 우선하지만 Raid 설정 자체는 보존한다.
+전역 확률/cooldown/단계 조건은 유지하며, 완료 후 다른 이벤트로 대체하지 않는다.
+이미 생성된 이벤트는 그대로 마친 뒤 다음 추첨부터 적용된다.
+`false`로 되돌리면 원래 이벤트 후보와 기존 Raid QA 설정이 복원된다.
+explicit registry를 주입하는 자동 테스트는 이 임시 모드의 영향을 받지 않는다.
+
 ## 동작 및 기존 샘플
 
 `rocket-intro → rocket-ambush × 2 → rocket-officer → rocket-boss → 완료`.

@@ -1,0 +1,31 @@
+.portal {position:relative;isolation:isolate;width:min(224px,100%);aspect-ratio:1;pointer-events:none;}
+.sprite {position:relative;z-index:1;display:block;width:100%;height:auto;image-rendering:pixelated;}
+.aura {position:absolute;inset:12%;border-radius:50%;background:radial-gradient(ellipse,#a95dff88,transparent 70%);opacity:var(--portal-pulse-opacity);animation:portal-breathe var(--portal-pulse) ease-in-out infinite;}
+.energy {position:absolute;z-index:2;inset:29%;border-radius:50%;background:conic-gradient(from 0deg,transparent 0deg 60deg,#b594ff55 85deg,transparent 120deg 225deg,#5e82ff55 255deg,transparent 300deg);mask-image:radial-gradient(circle,transparent 8%,#000 35% 60%,transparent 72%);opacity:.38;animation:portal-turn var(--portal-rotation) linear infinite;}
+.fragments {position:absolute;z-index:2;inset:0;}
+.fragments i {position:absolute;width:3px;height:3px;background:#d9afff;box-shadow:0 0 4px #b96bff88;opacity:.55;animation:portal-drift var(--portal-fragment) ease-in-out infinite alternate;}
+.fragments i:nth-child(1) {left:15%;top:42%;}
+.fragments i:nth-child(2) {right:17%;top:25%;animation-delay:-1.6s;}
+.fragments i:nth-child(3) {right:12%;top:64%;animation-delay:-2.7s;}
+.fragments i:nth-child(4) {left:40%;bottom:11%;animation-delay:-.8s;}
+.flash {position:absolute;z-index:3;inset:19%;border-radius:50%;background:radial-gradient(circle,#eee2ffb3,transparent 68%);opacity:0;}
+.portal[data-phase=activate] .sprite {animation:portal-charge var(--portal-activate) ease-in-out both;}
+.portal[data-phase=activate] .aura {animation:portal-surge var(--portal-activate) ease-out both;}
+.portal[data-phase=activate] .energy {opacity:.65;}
+.portal[data-phase=activate] .fragments i {--portal-drift:2px;animation-duration:.4s;}
+.portal[data-phase=activate] .flash {animation:portal-flash var(--portal-activate) ease-out both;}
+.portal[data-phase=arrived] .energy,.portal[data-phase=arrived] .fragments i,.portal[data-phase=arrived] .aura {animation-play-state:paused;opacity:.2;}
+@keyframes portal-turn {to {transform:rotate(360deg);}}
+@keyframes portal-breathe {0%,100% {opacity:var(--portal-pulse-opacity);transform:scale(1);} 50% {opacity:calc(var(--portal-pulse-opacity) + .12);transform:scale(1.015);}}
+@keyframes portal-drift {from {transform:translate(0,0);} to {transform:translate(var(--portal-drift),calc(-1 * var(--portal-drift)));}}
+@keyframes portal-charge {0% {filter:brightness(1);} 65% {filter:brightness(1.22);} 100% {filter:brightness(1.08);}}
+@keyframes portal-surge {0% {opacity:var(--portal-pulse-opacity);transform:scale(1);} 70% {opacity:var(--portal-charge-opacity);transform:scale(1.05);} 100% {opacity:.3;transform:scale(1.02);}}
+@keyframes portal-flash {0%,55% {opacity:0;} 75% {opacity:.6;} 100% {opacity:0;}}
+@keyframes portal-quiet {0%,100% {opacity:0;} 50% {opacity:.12;}}
+@media(prefers-reduced-motion:reduce) {
+ .portal .energy,.portal .aura,.portal .fragments i,.portal[data-phase=activate] .aura,.portal[data-phase=activate] .fragments i {animation:none;}
+ .portal .energy,.portal[data-phase=activate] .energy {opacity:.15;}
+ .portal .aura {opacity:.18;}
+ .portal[data-phase=activate] .sprite {animation:none;}
+ .portal[data-phase=activate] .flash {animation:portal-quiet var(--portal-activate) linear both;}
+}

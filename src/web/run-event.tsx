@@ -1,4 +1,5 @@
 'use client';
+import {TeleportPortal} from './teleport-portal';
 import {ChallengerCandidates,ChallengerDetail} from './challenger-candidates';
 import {RaidScene,RaidVictoryScene} from './raid-scene';
 import {HiddenShop,HiddenShopDetail} from './hidden-shop';
@@ -31,7 +32,7 @@ export function eventDialogue(event:RunEventView){
  return choice?.outcome==='reward'?choice.message.replaceAll('{reward}',name).replaceAll('{detail}',reward?.kind==='coins'?'타워 코인에 더해졌다.':'알 뽑기에서 사용할 수 있다.'):name;
 }
 
-export function RunEventScene({event,busy=false,challengerId,coins=0,growthPoints=0,shopOfferId,onShopFocus=()=>{}}:{event:RunEventView;busy?:boolean;challengerId?:string;coins?:number;growthPoints?:number;shopOfferId?:string;onShopFocus?:(id:string)=>void}){
+export function RunEventScene({event,portalActivationMs,busy=false,challengerId,coins=0,growthPoints=0,shopOfferId,onShopFocus=()=>{}}:{event:RunEventView;portalActivationMs?:number;busy?:boolean;challengerId?:string;coins?:number;growthPoints?:number;shopOfferId?:string;onShopFocus?:(id:string)=>void}){
  if(event.kind==='raid-encounter'&&event.raid){
   if(event.phase==='choice'&&!event.choiceId)return <RaidScene raid={event.raid}/>;
   return event.phase==='reward'?<RaidVictoryScene/>:null;
@@ -42,7 +43,7 @@ export function RunEventScene({event,busy=false,challengerId,coins=0,growthPoint
  if(!definition || !presentation || presentation.artwork==='raid')return null;
  const rewardName=reward?.kind==='coins'?`${reward.amount.toLocaleString()}코인`:`알 뽑기권 ${reward?.amount??1}장`;
  return <><div className={`${styles.scope} ${styles.artwork}`} data-opened={opened} data-teleport={event.kind==='random-teleport'} data-reward-tone={event.result?.tone} data-testid="event-artwork">
-  <div className={styles.object}><span className={styles.glow} aria-hidden="true"/>{presentation.artwork==='teleport'?<div className={styles.portal} role="img" aria-label="순간이동 장치">◉</div>:presentation.artwork==='chest'?<Chest/>:<img className={styles.npc} src={`/sprites/trainers/${presentation.sprite}.png`} alt={presentation.alt} width="180" height="200"/>}
+  <div className={styles.object}><span className={styles.glow} aria-hidden="true"/>{presentation.artwork==='teleport'?<TeleportPortal activationMs={portalActivationMs} arrived={opened}/>:presentation.artwork==='chest'?<Chest/>:<img className={styles.npc} src={`/sprites/trainers/${presentation.sprite}.png`} alt={presentation.alt} width="180" height="200"/>}
    {opened&&(!event.result||['good','great'].includes(event.result.tone))&&<div className={styles.stars} aria-hidden="true"><i>✦</i><i>✧</i><i>✦</i><i>✧</i></div>}
    {opened&&!event.result&&<strong className={styles.reward} data-testid="event-reward">{rewardName}</strong>}
   </div>
@@ -58,11 +59,11 @@ export function RunEventPanel({event,runId,busy,selecting,onChoose,submit,challe
  const [revealed,setRevealed]=useState<string|null>(null);
  useEffect(()=>{
   if(mode!=='reward'||!event.result)return;
-  const timer=setTimeout(()=>setRevealed(event.id),window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:event.teleport?1000:rewardRevealDelay);
+  const timer=setTimeout(()=>setRevealed(event.id),window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:event.teleport?0:rewardRevealDelay);
   return()=>clearTimeout(timer);
  },[event.id,mode,!!event.result]);
  if(event.hiddenShop)return <HiddenShopDetail shop={event.hiddenShop} selectedId={shopOfferId} coins={coins} growthPoints={growthPoints} busy={busy} bagButton={bagButton} onPurchase={productId=>onHiddenPurchase?onHiddenPurchase(productId):void submit({type:'hidden-shop-purchase',runId,eventId:event.id,productId})} onLeave={()=>void submit({type:'event-choice',runId,eventId:event.id,choice:'leave'})}/>;
- return <><section className={`${styles.scope} ${styles.bottom} battle-messages`} data-event-step={mode} data-challenger-selection={!!event.challengers&&mode!=='reward'} aria-label="이벤트 상황">
+ return <><section className={`${styles.scope} ${styles.bottom} battle-messages`} data-event-step={mode} data-teleport={event.kind==='random-teleport'} data-challenger-selection={!!event.challengers&&mode!=='reward'} aria-label="이벤트 상황">
   <div className="message-heading"><span><i className="record-dot"/>{event.raid&&mode==='reward'?'레이드 승리':'이벤트'}</span><span>{event.raid&&mode==='reward'?'특별한 보상':mode==='choices'?'어떻게 할까요?':`${event.afterFloor}층을 지나던 길`}</span></div>
   {event.challengers && mode!=='reward'?<><GameDialogue text="도전할 트레이너를 선택하세요." label="이벤트 안내"/><ChallengerCandidates candidates={event.challengers} selectedId={challengerId??event.challengers[0]?.id} busy={busy} onFocus={onChallengerFocus} onConfirm={choice=>void submit({type:'event-choice',runId,eventId:event.id,choice})}/></>:mode==='reward'&&event.teleport?<GameDialogue text={revealed===event.id?eventDialogue(event):'공간이 일그러지고 있다…'} label="이벤트 안내"/>:mode==='reward'&&event.result?<GameDialogue text={event.raid?"승리했다! 특별한 보상을 확인하자.":event.challengers?"승리했다! 전투 보상을 확인하자.":"상자를 열었다. 결과를 확인해 보자."} label="이벤트 안내"/>:<>
    {(mode!=='choices'||event.kind==='random-teleport')&&<GameDialogue text={eventDialogue(event)} label="이벤트 안내"/>}

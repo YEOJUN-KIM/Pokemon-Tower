@@ -43,6 +43,7 @@ import {arenaTheme,arenaNames,trainerMusic,revealedRare,strongerRare} from './en
 import type {MusicTrack} from './music-score';
 import {BattleCommands,type CommandMode} from './battle-commands';
 import {readPlaybackSpeed,playbackDuration,type PlaybackSpeed} from './playback-settings';
+import {portalActivationDuration} from './portal-effects';
 import {useTouchHold} from './use-touch-hold';
 
 export default function BattleGame({prepareNewRun = false,entries}: {prepareNewRun?: boolean;entries:PokedexEntry[]}) {
@@ -50,6 +51,9 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
   const [tower, setTower] = useState<TowerView | null>(null);
   const [selected, setSelected] = useState<string[]>([]);
   const [eventSelection,setEventSelection]=useState<string|null>(null);
+  const [portalActivation,setPortalActivation]=useState<{eventId:string;duration:number}|null>(null);
+  const portalWait=useRef<(()=>void)|null>(null);
+  useEffect(()=>()=>{portalWait.current?.();},[]);
   const [challengerFocus,setChallengerFocus]=useState<{eventId:string;id:string}|null>(null);
   const [shopFocus,setShopFocus]=useState<{eventId:string;id:string}|null>(null);
   const [acquireOfferId,setAcquireOfferId]=useState<string|null>(null);
@@ -212,6 +216,12 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     requestLock.current = true;
     setBusy(true); setError('');
     try {
+      if(body.type==='event-choice'&&body.choice==='teleport'&&currentEvent?.kind==='random-teleport'&&body.eventId===currentEvent.id&&currentEvent.phase==='choice'){
+        const duration=portalActivationDuration(readPlaybackSpeed(),window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        setPortalActivation({eventId:currentEvent.id,duration});
+        await new Promise<void>(resolve=>{const done=()=>{clearTimeout(timer);portalWait.current=null;resolve();};const timer=setTimeout(done,duration);portalWait.current=done;});
+        if(!mounted.current)return;
+      }
       const response = await fetch('/api/battle', {
         method: 'POST', headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body),
@@ -234,7 +244,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
       if(body.type === 'action' && data.battle?.status === 'complete') effect(data.battle.winner === 'Player' ? 'victory' : 'defeat');
       if (body.type === 'start' && prepareNewRun) router.replace('/battle', {scroll:false});
     } catch (e) { setError(e instanceof Error ? e.message : '서버에 연결할 수 없습니다. 새로고침해 주세요.');if(body.type==='adjust-run'||body.type==='bag-use')throw e; }
-    finally { if(mounted.current){setBusy(false);setPlaying(false);setTrainerIntro(null);setMotion(null);setNotice(null);setAnnouncement(null);} requestLock.current = false; }
+    finally { if(mounted.current){setPortalActivation(null);setBusy(false);setPlaying(false);setTrainerIntro(null);setMotion(null);setNotice(null);setAnnouncement(null);} requestLock.current = false; }
   }
   const send = (action: string) => {if(action.startsWith('move ') && gimmick && battle?.actions.some(a=>a.command===action+' '+gimmick))action+=' '+gimmick;setGimmick(null);setTab('root');if(action.startsWith('move '))lastMove.current=action.replace(/ (mega|dynamax|terastallize|zmove)$/,'');return submit({type: 'action', battleId: battle?.id, requestId: battle?.requestId, action});};
   const selectAction=()=>{if(document.querySelector('dialog[open]'))return;const buttons=Array.from(document.querySelectorAll<HTMLButtonElement>('.action-grid button:not(:disabled)'));selectGameCursor(buttons.find(button=>button.dataset.command===lastMove.current) ?? buttons[0] ?? document.querySelector<HTMLButtonElement>('.battle-panel .command-area>.primary-button'));};
@@ -317,7 +327,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
               {battle && !currentEvent && <FieldInspection battle={battle} open={!!showField} held={showField==='hold'} touchHeld={showField==='touch'} onClose={()=>{fieldHeld.current=false;setShowField(null);}}/>}
               <div className="stadium-backdrop" aria-hidden="true"><div className="stadium-lights"/><div className="field-horizon"/><div className="stadium-field"/><div className="stadium-details"><i/><i/><i/></div></div><span className="arena-label">{String(run?.floor ?? 1).padStart(2,'0')}F / {arenaNames[scenery]}</span>
               {!currentEvent&&<><div className="arena-orbit orbit-one" aria-hidden="true" /><div className="arena-orbit orbit-two" aria-hidden="true" /></>}
-              {currentEvent ? <RunEventScene event={currentEvent} busy={busy} coins={tower.coins} growthPoints={tower.growthPoints} shopOfferId={shopOfferId} onShopFocus={focusShopOffer} challengerId={challengerId}/> : !trainerIntro && !preparing && battle && active && battle.opponent ? <>
+              {currentEvent ? <RunEventScene event={currentEvent} portalActivationMs={portalActivation?.eventId===currentEvent.id?portalActivation.duration:undefined} busy={busy} coins={tower.coins} growthPoints={tower.growthPoints} shopOfferId={shopOfferId} onShopFocus={focusShopOffer} challengerId={challengerId}/> : !trainerIntro && !preparing && battle && active && battle.opponent ? <>
                 <HealthCard pokemon={battle.opponent} enemy raidReset={motion?.side==='enemy'&&!!motion.hpReset} field={battle.field} faintPending={battle.pendingFaints?.includes('enemy')} />
                 {motion && ['dynamax-recall','dynamax-ball','dynamax-release','dynamax-grow'].includes(motion.kind) && <div className={`dynamax-atmosphere atmosphere-${motion.kind}`} aria-hidden="true"><i/><b/></div>}
                 <div className="enemy-position"><span key={`enemy-${frameNumber}`} style={{['--tera-color' as string]:motion ? teraColors[motion.color[0].toUpperCase()+motion.color.slice(1)] : undefined}} className={`motion-wrap ${motion?.side === 'enemy' ? `motion-${motion.kind}` : ''}`}>{motion?.kind === 'switch' && motion.sendOut!==false && motion.side === 'enemy' && <SendOut />}<Sprite shiny={battle.opponent.shiny} name={battle.opponent.displaySpecies ?? battle.opponent.species} animated dynamax={battle.opponent.dynamax} terastallized={battle.opponent.terastallized} condition={battle.opponent.condition} className={health(battle.opponent.condition).percent === 0 && !battle.pendingFaints?.includes('enemy') ? 'fainted' : ''} /><PokemonFeedback motion={motion?.side === 'enemy' ? motion : null} /></span>{battle.opponent.shiny&&motion?.kind==='switch'&&motion.sendOut!==false&&(motion.side==='enemy'||battle.turn===0)&&<ShinySparkles key={'enemy-shiny-'+frameNumber}/>}</div>

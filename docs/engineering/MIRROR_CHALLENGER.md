@@ -90,7 +90,7 @@ IV/EV는 복사하지 않습니다. 기존 `npcRankTraining(floor,'elite')`와 `
 
 선택 완료 전 이벤트 계속하기/다음 일반전 진입을 막습니다. Pending 대상 선택은 JSON/선택 정의에서 복구됩니다. 재도전은 기존 `createRetryBattle`이 상대 packed team·seed·trainer/gimmick을 복사하므로 이후 플레이어 기술·도구 변경과 무관합니다. 승리 후 영입이 없습니다.
 
-기존 Challenger JSON은 마이그레이션하거나 재추첨하지 않습니다. Mirror는 새 후보 생성에만 들어갑니다. 기존 DB v40의 JSON 저장 구조를 사용하므로 DB 스키마/테이블을 추가하지 않았습니다. 개발 singleton 동작 버전만 73으로 갱신합니다.
+기존 Challenger JSON은 마이그레이션하거나 재추첨하지 않습니다. Mirror는 새 후보 생성에만 들어갑니다. Mirror는 기존 JSON 저장 구조를 재사용하며 별도 테이블/스키마를 추가하지 않습니다. 현재 지원 DB 버전은 [DATABASE](DATABASE.md)를 따릅니다. 개발 singleton의 내부 갱신 번호는 저장 호환 버전이 아닙니다.
 
 기믹은 복사된 적격 Mega/원시회귀/Z 도구를 우선 사용하고, 없으면 원본 장비의 Tera Orb 또는 Dynamax Band에 맞는 기존 NPC 규칙을 사용합니다. 지닌 도구를 Band로 덮어쓰지 않습니다. 저장된 trainer metadata의 `mirrorRule`을 기존 BattleSession의 opponentRule에 전달해 기존 AI/엔진이 처리하며 현재 Run Rule을 넘어서는 조합은 만들지 않습니다.
 

@@ -1,40 +1,36 @@
 # 개발 이어받기
 
-기준: 2026-10-18. 다음 작업을 시작할 때 필요한 정보만 관리합니다.
+기준: 2026-10-18. 현재 구현은 [STATUS](STATUS.md), 남은 작업은 [ROADMAP](current/ROADMAP.md), 수정 위치는 담당 gameplay/engineering 문서를 기준으로 한다. 과거 완료 내역은 Git·reports/artifacts에 맡긴다.
 
-## 읽는 순서
+## 다음 작업의 방향
 
-1. [현재 상태](STATUS.md)와 [다음 작업](current/ROADMAP.md).
-2. [폴더 관리](engineering/WORKSPACE.md)와 수정할 영역의 개발 문서.
-3. 게임 규칙은 [게임 안내](gameplay/README.md), 변경 근거는 [보고서 목록](../artifacts/README.md).
-4. PC를 옮겼다면 [컴퓨터 이전](operations/COMPUTER_MOVE.md)과 [저장·백업](operations/BACKUPS.md).
+대규모 기반 구축과 중간점검 리팩터링은 완료했다. **콘텐츠 → 밸런스 → UI/UX → 비주얼/연출 → 사운드 → 실제 장기 플레이 → 최종 QA**를 진행한다. 전체 구조 리팩터링을 다시 주요 목표로 잡지 않으며 실제 문제가 드러난 영역만 최소 수정한다.
 
-## 저장과 실행
+- 네임드 6종 파일럿을 기준으로 필요한 NPC부터 팀/기술/도구/특성/성격/포인트/기믹/에이스/AI tier·ceiling을 검토한다. 일괄 후보형 전환은 계획하지 않는다.
+- 구현된 이벤트 구조를 재작성하지 않는다. Raid 보스/패턴/보상, 조직별 NPC/보스, 도전자 Sample 등 콘텐츠와 빈도·가치를 보강한다.
+- 이벤트 10%·쿨다운 2는 측정의 출발점이다. 전체 발생·종류 weight·내부 결과와 코인/성장 포인트/티켓의 획득·소비를 함께 검토한다. 알 확률/가격 등은 근거 없이 변경하지 않는다.
+- 기본·혼합·대표 기믹 룰부터 사람이 실제 100층을 플레이한다. 자동 검사/시뮬레이션 통과와 사람의 난이도·UX 검증을 구분한다.
+- 1차 완성 이후 적극적인 후보는 Hard Mode·ML AI다. 150/200층·온라인 대전·PWA는 현재 계획이 없다. 위험 선택 배틀/연승/라이벌/교환은 후순위 아이디어다.
 
-- 코드가 지원하는 저장 스키마는 **45**입니다. 기존 DB의 버전은 별도로 검사하며 서버 실행 시 지원되는 마이그레이션이 적용됩니다.
-- 로컬 개발은 `.env.local`의 `TOWER_DB_PATH`, 통합 실행기는 Docker 볼륨의 `/data/tower.sqlite`를 사용합니다. 두 저장은 별개입니다.
-- 받은 개인 저장은 `.data/transfers/`에서 검증·보관합니다. 이 PC의 비교 결과는 해당 폴더의 README와 verification JSON에 있습니다. 보관만으로 실행 중인 저장이 교체되지는 않습니다.
-- 루트의 `포켓몬타워 실행.exe`로 서버 켜기·끄기, 주소 확인·복사, 게임 열기를 합니다. 업데이트 전 Docker DB를 백업하며 터널 시작 이후 로그에서 새 주소를 읽습니다.
-- EXE·로컬 실행 CMD는 Git에서 제외합니다. Node.js·Docker가 준비된 다른 Windows PC에서는 최신 프로젝트 루트에 같은 EXE를 가져와 실행합니다. PC별 재생성은 필요 없으며 개인 저장은 별도 복원합니다. [EXE 역할·이전 순서](operations/COMPUTER_MOVE.md#실행-환경이-준비된-다른-pc에서-exe-사용)를 참고합니다.
+## 현재 유지할 기술 기준
 
-## 이어서 수정할 때 유지할 기준
+- 지원 DB schema **45**, 기본 새 전투 AI **tower-policy-v11**, 이벤트 rules v1/v2와 NPC snapshot v1/v2 호환을 유지한다. 정책·스키마·이벤트 규칙 버전은 같은 개념이 아니다.
+- 이미 생성된 팀·시드·기믹·보상·선택/구매 영수증은 재접속이나 데이터 수정으로 다시 추첨하지 않는다. 트랜잭션·소유권·중복 지급 방지를 약화하지 않는다.
+- 이벤트 전체 발생/쿨다운은 `data/run-events.ts`의 eventEncounterSettings, 종류/결과는 각각 registry와 보상 표다. 수동 QA 강제 등장은 없다. [이벤트 추가/검증](engineering/EVENT_SYSTEM.md).
+- 네임드 입력은 `scripts/data/npc/normal-npc-samples.json`, runtime은 export 생성물이다. 옛 단계 bootstrap은 allFloors 입력 덮어쓰기를 거부한다. Sample/Rank/AI·층 기준·검증은 [NPC 데이터](engineering/NPC_DATA.md)를 따른다.
+- 공통 포켓몬/폼·타입·기술 데이터, game-keyboard/dialog, 기존 VFX/음향 경로를 재사용한다. 같은 규칙을 UI에 다시 구현하지 않는다. [구조](engineering/ARCHITECTURE.md).
 
-- Mirror는 별도 이벤트가 아닌 새 공통 도전자의 3% 특수 후보입니다. 일반전 실제 출전 팀/Elite 수치/랜덤 보상 snapshot을 복구하고, 영입 없이 기존 보상 선택 영수증으로 강화 대상을 처리합니다. 이로치 상시 교환은 종료했으며 기존 기록은 보존합니다. [구조·확률·풀](engineering/MIRROR_CHALLENGER.md)을 따릅니다.
+## 저장·개인 실행 실사용
 
-- 상자·브리더 선물·여행 상인 이벤트는 층을 소모하지 않고 종류·선택·보상을 복구합니다. 현재 확률과 보상은 [이벤트](gameplay/EVENTS.md)를 따릅니다.
-- 히든상점은 상품 4–5개와 재화/가격/effect/구매 한도를 발생 시 snapshot합니다. 두 재화 합계 2회 구매와 상품별 멱등 영수증을 유지합니다. [풀·가격·구조·조정 위치](engineering/HIDDEN_SHOP.md)를 따릅니다.
-- 다이맥스밴드·테라스탈오브는 트레이너 장비로 동시 보유합니다. 배틀 생성 시 장비 배열을 고정하며 기존 NULL 스냅샷은 종전 규칙을 유지합니다. 저장된 배틀의 장비 snapshot은 재사용합니다.
-- 기술배치 무료 자동 저장, 현재 대화와 지난 기록의 분리, 모바일 길게 누르기·두 번 터치 스킵 등 현재 동작은 [화면과 조작](gameplay/CONTROLS.md)에서 확인합니다.
-- 네임드 NPC 생성 입력은 `scripts/data/npc/`, 공통 랜덤 Sample은 `src/data/npc-samples.ts`, Rank는 `src/data/npc-ranks.ts`, 리뷰 표는 `artifacts/reports/npc/`입니다. 새 런의 일반층·도전자는 공통 Sample/Rank를 사용하고 구 런과 저장 상대는 유지합니다. 과거 실험의 해시는 당시 버전의 기록입니다.
+로컬 개발은 `.env.local`의 TOWER_DB_PATH, 통합 실행기는 Docker 볼륨 `/data/tower.sqlite`를 사용하며 별개 저장이다. 받은 개인 저장은 보관만으로 실행 DB를 교체하지 않는다. [백업](operations/BACKUPS.md)·[컴퓨터 이전](operations/COMPUTER_MOVE.md)을 따른다.
+
+루트 `포켓몬타워 실행.exe`는 서버 켜기/끄기·주소 복사·게임 열기를 제공한다. 업데이트 전 Docker DB를 백업한다. EXE·로컬 CMD·개인 저장/환경변수의 Git 제외 정책은 [설치](operations/SETUP.md)와 이전 안내를 따른다. 실제 실행기/재접속의 장기 사용 검증은 아직 남은 작업이다.
 
 ## 작업 전후 확인
 
-작업 전 `git status`로 변경사항을 확인합니다. Next.js 코드 수정 전 설치된 `node_modules/next/dist/docs/`의 관련 가이드를 읽습니다.
+1. `git status`와 STATUS/ROADMAP, 해당 기능의 문서를 읽는다. Next.js 코드를 수정할 때는 설치된 `node_modules/next/dist/docs/`의 관련 안내를 읽는다.
+2. 필요한 영역만 수정하고 관련 회귀·타입·빌드·브라우저 검사를 선택한다. 문서만 수정한 경우에는 경로/링크·현재 코드와의 일치·`pnpm check:workspace`·diff를 확인한다.
+3. 실제로 실행한 검증과 사람의 플레이 여부를 구분해 기록한다. 근거 없이 기능/플레이 검증 완료로 표시하지 않는다.
+4. 현재 기능은 STATUS/담당 문서에 반영하고 완료된 작업을 ROADMAP에서 정리한다. 상세 로그·숫자는 Git/reports에 둔다.
 
-빠른 검사: `pnpm typecheck`, `pnpm check:css`, `pnpm check:workspace`. 브라우저 검증 전에는 빌드합니다. 테스트용 로그인과 tsx 실행 방법은 [설치·실행](operations/SETUP.md)을 따릅니다. 실험 원자료가 없는 경우 재현을 완료했다고 기록하지 않습니다.
-
-선택 폼은 공통 개체·성장 데이터를 공유하고, `pokemon_form_training`에 폼별 기술·선택 특성·테라 타입을 저장합니다. 폼을 변경하면 해당 폼의 저장 설정을 불러오며, 현재 선택 폼의 기존 저장만 v37 이전 시 보존합니다. 기존 배틀·도전 스냅샷은 유지합니다.
-
-2026-10-17 공통 배낭: 최신 동작/DB v41 의미 변환/호환성/30개 항목 보고는 [BAG](engineering/BAG.md). 새 Bag 재고 테이블 없이 기존 Run 저장을 통합했습니다. TM은 Run 동안 반복 사용하고 새 계정 기술 해금은 하지 않습니다. 기존 계정 기술 지식은 출처를 구별할 수 없어 보존합니다. 자동 도구 이동은 대상의 기존 도구를 Bag으로 반환하며 원 소지자와 자동 교환하지 않습니다. 전체 664개 단위·통합 및 Chrome 39개 회귀가 통과했습니다.
-
-전체 구조·주요 설정 위치는 [구조](engineering/ARCHITECTURE.md), 이벤트 10%·쿨다운과 종류/결과 weight 분리는 [이벤트 개발](engineering/EVENT_SYSTEM.md), NPC 검토 입력→export·검증은 [NPC 데이터](engineering/NPC_DATA.md)를 따릅니다. 수동 QA 강제 이벤트 설정은 제거했으며 기본 새 전투 정책은 tower-policy-v11입니다.
+[폴더 책임](engineering/WORKSPACE.md) · [현재 DB](engineering/DATABASE.md) · [기술/VFX 계획](gameplay/MOVE_EFFECTS_PLAN.md) · [조작](gameplay/CONTROLS.md)

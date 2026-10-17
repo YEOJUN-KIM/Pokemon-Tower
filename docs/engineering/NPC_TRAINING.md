@@ -1,6 +1,6 @@
 # NPC Sample · Rank · Training
 
-기준: 2026-10-16. 새 일반층 랜덤 NPC와 도전자 선택전이 공통 Sample/Rank 생성 경로를 사용합니다. 기존 네임드·빌런의 정체성·템플릿·캠페인은 유지합니다.
+기준: 2026-10-18. 새 일반층 랜덤 NPC와 도전자 선택전이 공통 Sample/Rank 생성 경로를 사용합니다. 기존 네임드·빌런의 정체성·템플릿·캠페인은 유지합니다.
 
 ## 책임 분리
 
@@ -34,7 +34,7 @@ Normal은 같은 컨셉 후보에서 단순 랜덤 선택합니다. Elite는 BST
 
 requiredCount 3이면 후보 풀 자체를 테마 안으로 제한합니다. 1~2 조건도 조합 검사에서 하한을 강제합니다. 부족하면 가능한 테마 종을 전부 사용하고 현재 층 일반 풀로 부족분만 채웁니다. 상위 층 풀을 열지 않습니다. `composition`에 themeAvailable/themeRequired/themeUsed/fallback/candidateCount를 저장합니다. Master의 메가 파트너도 컨셉 제약 안에서 고르며 호환 종이 없으면 컨셉을 우선합니다.
 
-현재 AI_VERSION과 공개 정보 기반 TowerPolicy를 그대로 사용합니다. Master 전용 새 AI, 새 날씨 엔진, 레이드, 미러, 빌런 신규 단계, 네임드 전면 재작성은 구현하지 않았습니다.
+현재 기본 새 전투는 tower-policy-v11과 data/npc-ai.ts의 tier/ceiling을 사용하고 공개 정보 기반 정책을 적용합니다. Rank는 팀 품질이며 전투 판단 tier와 구분합니다. Raid·Mirror·로켓단 캠페인은 각 기존 이벤트 경로로 구현되어 있습니다. Master 전용 새 AI나 새 날씨 엔진을 의미하지 않습니다.
 
 ## IV와 EV
 
@@ -98,13 +98,13 @@ Normal/Elite/Master의 보상 프로필은 [이벤트 규칙](../gameplay/EVENTS
 
 이벤트 UUID의 SHA-256을 기존 encounterRandom 시드로 사용합니다. 추첨한 세 명의 팀을 이벤트 발생 때 생성해 **세 정의만 candidates_json**에 저장합니다. 각 정의는 sample 전체 표시/컨셉 정보, Rank, 실제 training 목표, 팀별 IV/EV/moves/item/ability/nature 등 실제 프로필, 기믹 계획, 팀 시드, 보상/선택 효과를 포함합니다. 선택 때 현재 최신 데이터를 다시 조회하거나 팀을 재추첨하지 않습니다. Rank 프로필을 변경해도 대기 후보의 상대는 변하지 않는 테스트가 있습니다.
 
-조회/API projection은 표시명·portrait·일반/엘리트/마스터·위험도·자연어 힌트·보상 기대 문구만 반환합니다. 내부 tactic·IV/EV·미공개 팀은 카드에 노출하지 않습니다. 전투 상단은 `클래스명 · Rank`를 표시합니다.
+조회/API projection은 표시명·portrait·일반/엘리트/마스터·위험도·자연어 힌트·보상 기대 문구만 반환합니다. 내부 tactic·IV/EV·미공개 팀은 카드에 노출하지 않습니다. 전투 상단의 표시명에는 일반/엘리트/마스터 Rank 접미사를 붙이지 않습니다. 직업명 자체인 ‘엘리트 트레이너’와 후보 위험도/보상 안내는 별개입니다. 표시 기준은 src/web/trainer-samples.ts입니다.
 
 기존 BattleSession/RewardOption/RewardSelection/Reward Popup·트랜잭션을 재사용합니다. 영입 없음, 층 소모 없음, 중복 지급 차단과 선택 완료 전 진입 차단을 유지합니다. 재접속·재도전은 저장된 패킹 팀·시드·트레이너 정보를 그대로 복원합니다.
 
 ## 저장 호환
 
-새 `NpcEncounterSnapshot`은 v2이며 sample의 rankWeights/teamConcept, 슬롯 범위와 실제 슬롯 수, composition/fallback을 저장합니다. v1은 legacy sample의 defaultRank와 기존 training/team을 읽는 별도 타입으로 유지합니다. 저장된 상대는 현행 클래스 데이터나 슬롯 규칙으로 다시 해석하지 않습니다. `f35b612`의 실제 20층 v1 반바지 소년 snapshot을 fixture로 보존해, 현재는 Bug 3마리·Normal 무도구여도 당시의 혼합 팀·도구 3개·육성값을 재접속/전투/재도전에서 유지하는지 검증합니다. DB 스키마는 v38을 그대로 사용합니다.
+새 `NpcEncounterSnapshot`은 v2이며 sample의 rankWeights/teamConcept, 슬롯 범위와 실제 슬롯 수, composition/fallback을 저장합니다. v1은 legacy sample의 defaultRank와 기존 training/team을 읽는 별도 타입으로 유지합니다. 저장된 상대는 현행 클래스 데이터나 슬롯 규칙으로 다시 해석하지 않습니다. `f35b612`의 실제 20층 v1 반바지 소년 snapshot을 fixture로 보존해, 현재는 Bug 3마리·Normal 무도구여도 당시의 혼합 팀·도구 3개·육성값을 재접속/전투/재도전에서 유지하는지 검증합니다. 공통 NPC 표식은 v38에서 도입했으며 현재 지원 DB 스키마는 45입니다. NPC snapshot 버전과 DB 버전은 별개입니다.
 
 DB v38은 `run_npc_rules(run_id,version=1)`만 추가합니다. 새 런에만 표식을 저장하고 이전 런에는 소급 부여하지 않습니다. 구 런의 미래 일반 NPC와 미래 도전자 이벤트도 구 경로를 유지합니다. 이미 생성된 모든 배틀은 기존 패킹 결과로 복구합니다.
 

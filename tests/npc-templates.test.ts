@@ -7,7 +7,7 @@ import {generateOpponentTeam} from '../src/server/opponent-team';
 import {namedTrainerSamples} from '../src/data/trainer-catalog';
 import {towerDifficulty,CURRENT_PROGRESSION} from '../src/data/tower-progression';
 import {TowerStore} from '../src/server/tower-store';
-import {villainEncounter,villainRankWeights} from '../src/data/villain-organizations';
+import {villainEncounter,villainRankWeights,villainLeaders} from '../src/data/villain-organizations';
 import {packTeam,starters} from '../src/data/teams';
 import {runBattle} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
@@ -58,26 +58,13 @@ test('stored champion teams retain template nature, ability, tools and stats acr
 
 test('boss rank is impossible before 75 even after many wins; late Maxie stores and uses Primal Groudon',async()=>{
  for(let floor=1;floor<75;floor++)assert.equal(villainRankWeights(floor,{gruntWins:100,executiveWins:100}).boss,0);
- const store=new TowerStore(':memory:');try{
-  store.ensurePlayer('maxie');let row:ReturnType<TowerStore['battle']>|undefined;
-  for(let attempt=0;attempt<50&&!row;attempt++){
-   const first=store.battle(store.start('maxie',starters,'basic'));
-   store.db.prepare("UPDATE run_villains SET organization='magma' WHERE run_id=?").run(first.run_id);
-   for(let floor=76;floor<100;floor++){
-    const event=villainEncounter(first.run_id,floor,'magma');if(event?.event.rank!=='boss')continue;
-    store.db.prepare("UPDATE runs SET floor=?,state='select' WHERE id=?").run(floor,first.run_id);
-    const next=store.battle(store.enter('maxie',first.run_id,floor,starters));
-    if(next.villain_event&&JSON.parse(next.villain_event).rank==='boss'){row=next;break;}
-   }
-   if(!row)store.abandon('maxie',first.run_id);
-  }
-  assert.ok(row);assert.ok(row.floor>=75);
-  const sets=Showdown.Teams.unpack(row.opponent_team)!;
-  assert.deepEqual(sets.map(p=>p.species).sort(),['Groudon','Camerupt','Crobat'].sort());
-  assert.equal(sets.find(p=>p.species==='Groudon')!.item,'Red Orb');
-  assert.equal(JSON.parse(row.trainer!).gimmick.rule,'primal');
-  assert.equal(JSON.parse(row.tera_tickets).p2,0);
-  const log=await runBattle({rule:'basic',teams:{p1:packTeam(starters),p2:row.opponent_team},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),teraTickets:{p1:0,p2:0}});
-  assert.ok(log.publicProtocol.some(line=>line.includes('Groudon-Primal')));assert.ok(log.winner);
- }finally{store.close();}
+ // Villain teams remain available for scripts after removal from ordinary floors.
+ const sample={...villainLeaders.magma.boss,id:'magma-boss-maxie'};
+ const team=generateOpponentTeam(80,[1,2,3,4],[],null,sample,CURRENT_PROGRESSION);
+ assert.deepEqual(team.map(p=>p.name).sort(),['Groudon','Camerupt','Crobat'].sort());
+ assert.equal(team.find(p=>p.name==='Groudon')!.item,'Red Orb');
+ const profiles=Object.fromEntries(team.map(p=>[p.name,p.profile!]));
+ const opponent=packTeam(team.map(p=>p.name),profiles,Object.fromEntries(team.map(p=>[p.name,p.item??''])));
+ const log=await runBattle({rule:'basic',teams:{p1:packTeam(starters),p2:opponent},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),teraTickets:{p1:0,p2:0}});
+ assert.ok(log.publicProtocol.some(line=>line.includes('Groudon-Primal')));assert.ok(log.winner);
 });

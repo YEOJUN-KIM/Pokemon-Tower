@@ -16,6 +16,12 @@ export const villainOrganizations=[
 ] as const;
 export const VILLAIN_CHANCE=.08;
 export const VILLAIN_BOSS_MIN_FLOOR=75;
+// Shared sample source for scripted campaigns; no encounter roll or floor gate.
+export function organizationGrunt(organization:string):TrainerSample {
+ const group=villainOrganizations.find(group=>group.id===organization);
+ if(!group)throw Error('Unknown villain organization');
+ return {id:`${group.id}-grunt`,name:'조직원',title:group.name,kind:'normal',role:'villain',generation:null,specialty:null,tactic:'status',portrait:group.portrait,minFloor:1,entries:group.entries,concept:`${group.name}의 조직원`};
+}
 function ticket(key:string){let hash=2166136261;for(const char of key)hash=Math.imul(hash^char.charCodeAt(0),16777619);hash=Math.imul(hash^(hash>>>16),0x85ebca6b);hash=Math.imul(hash^(hash>>>13),0xc2b2ae35);return ((hash^(hash>>>16))>>>0)/4294967296;}
 export function runOrganization(runId:string,theme?:TowerTheme|null) {
  const candidates=theme?towerThemes[theme].organizations:villainOrganizations.map(group=>group.id);
@@ -24,7 +30,7 @@ export function runOrganization(runId:string,theme?:TowerTheme|null) {
 export function villainGrunt(runId:string,floor:number,organization:string,previousVillain=false):TrainerSample|null {
   if(floor%5===0 || previousVillain || ticket(`villain:${runId}:${floor}`)>=VILLAIN_CHANCE)return null;
   const group=villainOrganizations.find(group=>group.id===organization);if(!group)return null;
-  return {id:`${group.id}-grunt`,name:'조직원',title:group.name,kind:'normal',role:'villain',generation:null,specialty:null,tactic:'status',portrait:group.portrait,minFloor:1,entries:group.entries,concept:`${group.name}의 무작위 조직원 이벤트`};
+  return organizationGrunt(organization);
 }
 
 export type VillainRank='grunt'|'executive'|'boss';

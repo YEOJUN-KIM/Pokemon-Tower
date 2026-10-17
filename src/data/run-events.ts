@@ -1,3 +1,4 @@
+import {rocketCampaignSettings,type RocketStage} from './villain-campaigns';
 import {teleportEventSettings} from './teleport';
 import {challengerSettings,type ChallengerCandidate} from './challengers';
 import {raidEventSettings,type RaidEventView} from './raids';
@@ -12,6 +13,7 @@ export type EventChoice={id:string;label:string} & (
  | {outcome:'leave'}
  | {outcome:'teleport'}
  | {outcome:'raid'}
+ | {outcome:'villain'}
  | {outcome:'challenger';challengerId:string}
  | {outcome:'reward-result';cost:number;results:readonly WeightedRewardOption[]}
  | {outcome:'reward';cost:number;rewards:readonly WeightedEventReward[];message:string}
@@ -21,6 +23,11 @@ export type EventDefinition={
 };
 export type RunEventRegistry=Readonly<Record<string,EventDefinition>>;
 const leave={id:'skip',label:'지나간다',outcome:'leave'} as const;
+function rocketDefinition(kind:RocketStage):EventDefinition{
+ const stage=rocketCampaignSettings.stages[kind];
+ return {title:stage.title,summary:stage.summary,intro:stage.intro,weight:stage.weight,minFloor:stage.minFloor,minRulesVersion:2,
+ choices:kind==='rocket-intro'?[{id:'challenge',label:'들어가 본다',outcome:'villain'},leave]:[{id:'challenge',label:'승부한다',outcome:'villain'}]};
+}
 export const eventDefinitions={
  'mystery-chest':{title:'길에서 발견한 상자',summary:'코인이나 알 뽑기권이 들어 있을지도 모른다.',intro:'길에서 작은 상자를 발견했다. 안쪽에서 달그락거리는 소리가 들린다. 열어볼까?',weight:50,choices:[{id:'open',label:'상자를 연다',outcome:'reward',cost:0,rewards:[{weight:mysteryChest.coinsPercent,reward:{kind:'coins',amount:mysteryChest.coins}},{weight:100-mysteryChest.coinsPercent,reward:{kind:'egg-ticket',amount:mysteryChest.eggTickets}}],message:'{reward}을 발견했다! {detail}'},leave]},
  'breeder-gift':{title:'브리더의 응원',summary:'브리더가 알 뽑기권 1장을 선물하려 한다.',intro:'길에서 만난 브리더가 손을 흔든다. “타워에 도전 중이군요! 새로운 친구를 만나는 데 이 뽑기권이 도움이 될 거예요.”',weight:30,choices:[{id:'open',label:'선물을 받는다',outcome:'reward',cost:0,rewards:[{weight:1,reward:{kind:'egg-ticket',amount:1}}],message:'브리더에게 알 뽑기권 1장을 받았다!'},leave]},
@@ -29,6 +36,10 @@ export const eventDefinitions={
  'hidden-shop':{title:'수상한 상인',summary:'희귀한 상품 중 무엇을 가져갈까? 구매 한도와 결제 재화를 확인하자.',intro:'“흔히 볼 수 없는 물건들이야.” 상인이 조용히 진열대를 펼쳤다.',weight:hiddenShopEventSettings.weight,minFloor:hiddenShopEventSettings.minFloor,minRulesVersion:hiddenShopEventSettings.minRulesVersion,choices:[{id:'leave',label:'나가기',outcome:'leave'}]},
  'raid-encounter':{title:'정체불명의 강적',summary:'강한 기척이 느껴진다.',intro:'강한 기척이 느껴진다.',...raidEventSettings,choices:[{id:'challenge',label:'도전한다',outcome:'raid'},leave]},
  'random-teleport':{title:'수상한 순간이동 장치',summary:'공간이 일그러지고 있다.',intro:'공간이 일그러지고 있다. 어디로 연결되어 있는지는 알 수 없다.',...teleportEventSettings,choices:[{id:'teleport',label:'순간이동한다',outcome:'teleport'},{id:'skip',label:'이용하지 않는다',outcome:'leave'}]},
+ 'rocket-intro':rocketDefinition('rocket-intro'),
+ 'rocket-ambush':rocketDefinition('rocket-ambush'),
+ 'rocket-officer':rocketDefinition('rocket-officer'),
+ 'rocket-boss':rocketDefinition('rocket-boss'),
 } as const satisfies RunEventRegistry;
 // Initial v2 tuning only. The original table above remains frozen for v1 runs.
 export const mysteryChestResults=[
@@ -56,4 +67,4 @@ export function eventDefinition(kind:string,registry:RunEventRegistry=eventDefin
  return isRunEventKind(kind,registry)?registry[kind]:undefined;
 }
 // Event IDs and choice IDs are content strings, validated against the registry on the server.
-export type RunEventView={id:string;kind:string;choiceId?:string|null;rulesVersion?:number;teleport?:{destinationFloor:number};result?:RewardResult;afterFloor:number;raid?:RaidEventView;challengers?:readonly ChallengerCandidate[];hiddenShop?:HiddenShopView;phase:'choice'|'battle'|'reward';reward:EventReward|null};
+export type RunEventView={villain?:{organization:string;stage:RocketStage;portrait:string;name:string};id:string;kind:string;choiceId?:string|null;rulesVersion?:number;teleport?:{destinationFloor:number};result?:RewardResult;afterFloor:number;raid?:RaidEventView;challengers?:readonly ChallengerCandidate[];hiddenShop?:HiddenShopView;phase:'choice'|'battle'|'reward';reward:EventReward|null};

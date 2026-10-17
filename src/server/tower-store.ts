@@ -1,3 +1,5 @@
+import {VillainCampaigns,type VillainSnapshot} from './villain-campaigns';
+import {isRocketStage} from '../data/villain-campaigns';
 import {recentEncounters} from './encounter-history';
 import {RewardInventory} from './reward-inventory';
 import {RaidEvents} from './raid-events';
@@ -40,7 +42,7 @@ import {profileLearnset} from './move-learnsets';
 import {familyForms,selectedForm,collectionSpecies,separateForms,baseFormName} from '../data/selectable-forms';
 import {pokemonName as importedPokemonName} from '../data/pokemon-catalog';
 import {generateOpponentTeam,selectTrainerSample,encounterPool} from './opponent-team';
-import {runOrganization,villainGrunt,villainEncounter,villainLeaders,type VillainEvent} from '../data/villain-organizations';
+import {runOrganization,type VillainEvent} from '../data/villain-organizations';
 import {opponentProfile} from './opponent-training';
 import {normalNpcTemplate} from './npc-templates';
 import {primalOrbs} from '../data/primal-forms';
@@ -109,6 +111,13 @@ export class TowerStore {
   private get events(){return new RunEvents(this.db,this.roll,this.eventRegistry);}
   chooseEvent(owner:string,runId:string,eventId:string,choice:unknown){this.tx(()=>{
     const row=this.events.owned(owner,runId,eventId);
+    if(isRocketStage(row.kind)&&choice==='challenge'){
+      const campaigns=new VillainCampaigns(this.db),saved=campaigns.row(eventId)!;
+      if(saved.battle_id)return;
+      if(row.status!=='choice'||row.choice_id)throw new BattleRequestError('이미 마친 이벤트입니다.',409);
+      const battle=this.createBattle(runId,row.after_floor+1,this.suggestedTeam(runId),undefined,campaigns.snapshot(saved));
+      campaigns.start(eventId,battle);return;
+    }
     if(row.kind==='raid-encounter'&&choice==='challenge'){
       const raids=new RaidEvents(this.db),saved=raids.row(eventId)!;
       if(saved.battle_id)return;
@@ -325,6 +334,7 @@ export class TowerStore {
     this.db.prepare('UPDATE battles SET trainer_equipment=?,tera_tickets=? WHERE id=?').run(JSON.stringify(this.trainerEquipment(runId)),JSON.stringify({...JSON.parse(previous.tera_tickets),p1:0}),id);
     new ChallengerEvents(this.db).retry(previousId,id);
     new RaidEvents(this.db).retry(previousId,id);
+    new VillainCampaigns(this.db).retry(previousId,id);
     this.db.prepare('UPDATE run_retries SET pending_battle_id=NULL WHERE run_id=?').run(runId);
     this.db.prepare("UPDATE runs SET state='battle' WHERE id=?").run(runId);
     return id;
@@ -338,10 +348,10 @@ export class TowerStore {
     this.db.prepare("UPDATE runs SET state='battle' WHERE id=?").run(runId);return id;
   }
   private recruitmentTeam(battle:BattleRow){const raids=new RaidEvents(this.db),row=raids.forBattle(battle.id);return Showdown.Teams.unpack(row?raids.snapshot(row).recruitTeam:battle.opponent_team)??[];}
-  private createBattle(runId: string, floor: number, selected: string[],challenger?:SavedChallengerDefinition): string {
+  private createBattle(runId: string, floor: number, selected: string[],challenger?:SavedChallengerDefinition,special?:VillainSnapshot): string {
     const pending=this.retryState(runId).pending_battle_id;
     if(pending)return this.createRetryBattle(runId,selected,pending);
-    const rule=this.runRule(runId);
+    const rule=special?.rule??this.runRule(runId);
     const rankedChallenger=challenger&&'rank' in challenger?challenger:undefined;
     const oldChallenger=challenger&&!('rank' in challenger)?challenger:undefined;
     if(rankedChallenger&&!rankedChallenger.encounter)throw new BattleRequestError('저장된 도전자 팀을 찾을 수 없습니다.',409);
@@ -349,38 +359,18 @@ export class TowerStore {
     if (!config) throw new BattleRequestError('지원하지 않는 층입니다.', 400);
     const id = randomUUID();
     const bytes = randomBytes(8);
-    const seed: Seed = rankedChallenger?.encounter?.seed??[0, 2, 4, 6].map(i => bytes.readUInt16BE(i)) as Seed;
+    const seed: Seed = special?.seed??rankedChallenger?.encounter?.seed??[0, 2, 4, 6].map(i => bytes.readUInt16BE(i)) as Seed;
     const profiles=JSON.parse((this.db.prepare('SELECT profiles FROM runs WHERE id=?').get(runId) as {profiles:string}).profiles) as Record<string,TrainingProfile>;
     const progression:TowerProgression=(this.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(runId) as {version:typeof CURRENT_PROGRESSION}|undefined)?.version ?? 'legacy';
     const previous=recentEncounters(this.db,runId);
-    const trainer=challenger?null:this.encounter(runId,floor);
-    const organization=this.db.prepare('SELECT organization FROM run_villains WHERE run_id=?').get(runId) as {organization:string}|undefined;
-    const campaign=this.db.prepare('SELECT defeated_battle_id FROM run_villain_campaigns WHERE run_id=?').get(runId) as {defeated_battle_id:string|null}|undefined;
-    const previousVillain=!!previous[0]?.trainer && JSON.parse(previous[0].trainer).role==='villain';
-    // Reward rows record committed wins exactly once, including across app restarts.
-    const victories=this.db.prepare('SELECT b.villain_event FROM battles b JOIN rewards r ON r.battle_id=b.id WHERE b.run_id=? AND b.villain_event IS NOT NULL').all(runId) as {villain_event:string}[];
-    const progress={gruntWins:0,executiveWins:0};
-    for(const victory of victories){const saved=JSON.parse(victory.villain_event) as VillainEvent;if(saved.organization!==organization?.organization)continue;if(saved.rank==='grunt')progress.gruntWins++;else if(saved.rank==='executive')progress.executiveWins++;}
-    const pool=encounterPool(floor,progression);
-    const eligibleRank=(sample:TrainerSample)=>{
-      if(progression!=='legacy' && sample.kind==='named'){
-        const group=organization?.organization,rank=sample===villainLeaders[group ?? '']?.boss?'boss':'executive';
-        if(group && normalNpcTemplate(`${group}-${rank}-${sample.portrait}`,floor,sample.role))return true;
-      }
-      return sample.entries!.filter(name=>pool.includes(name)).length>=3 && (!sample.ace || pool.includes(sample.ace));
-    };
-    const event=!challenger && organization && campaign ? villainEncounter(runId,floor,organization.organization,previousVillain,!!campaign.defeated_battle_id,progress,eligibleRank) : null;
-    const villain=event?.sample ?? (!challenger && organization && !campaign ? villainGrunt(runId,floor,organization.organization,previousVillain) : null);
-    const fixedVillain=progression!=='legacy'&&villain?normalNpcTemplate(villain.id,floor,villain.role):null;
-    const filteredVillain=villain ? {...villain,...(fixedVillain?{entries:fixedVillain.team.map(p=>p.species),ace:fixedVillain.ace}:{entries:villain.entries!.filter(name=>pool.includes(name))})} : null;
-    const eligible=filteredVillain && (!filteredVillain.ace || filteredVillain.entries.includes(filteredVillain.ace)) ? filteredVillain : null;
+    const trainer=challenger||special?null:this.encounter(runId,floor);
     const common=!!this.db.prepare('SELECT 1 FROM run_npc_rules WHERE run_id=?').get(runId);
-    const sample:TrainerSample|undefined=rankedChallenger?npcTrainerSample(rankedChallenger.encounter!.sample,rankedChallenger.encounter!.rank):oldChallenger?{id:oldChallenger.trainerId,name:oldChallenger.title,title:'도전자',kind:oldChallenger.kind,generation:null,specialty:null,tactic:oldChallenger.tactic,portrait:oldChallenger.portrait,minFloor:1,concept:oldChallenger.battleStyle}:trainer ? undefined : eligible && eligible.entries.length>=3 ? eligible : selectTrainerSample(floor,seed,previous.flatMap(row=>{const saved=row.trainer ? JSON.parse(row.trainer) : null;const entry=[...trainerCatalog,...npcSamples].find(s=>s.id===saved?.id);return entry ? [{id:entry.id,specialty:entry.specialty}] : [];}),progression,{common});
+    const sample:TrainerSample|undefined=special?special.sample:rankedChallenger?npcTrainerSample(rankedChallenger.encounter!.sample,rankedChallenger.encounter!.rank):oldChallenger?{id:oldChallenger.trainerId,name:oldChallenger.title,title:'도전자',kind:oldChallenger.kind,generation:null,specialty:null,tactic:oldChallenger.tactic,portrait:oldChallenger.portrait,minFloor:1,concept:oldChallenger.battleStyle}:trainer ? undefined : selectTrainerSample(floor,seed,previous.flatMap(row=>{const saved=row.trainer ? JSON.parse(row.trainer) : null;const entry=[...trainerCatalog,...npcSamples].find(s=>s.id===saved?.id);return entry ? [{id:entry.id,specialty:entry.specialty}] : [];}),progression,{common});
     const legacyChallenger=oldChallenger&&!oldChallenger.trainingTier?oldChallenger:undefined;
     const encounterFloor=legacyChallenger?Math.max(floor<=50?1:51,Math.min(floor<=50?50:100,floor+legacyChallenger.floorOffset)):floor;
     const concept=sample?.npcRank?npcSamples.find(s=>s.id===sample.id):undefined;
     const rankedEncounter=rankedChallenger?structuredClone(rankedChallenger.encounter!):concept?generateNpcEncounter(floor,seed,concept,sample!.npcRank!,rule,progression):null;
-    const generated=rankedEncounter?.team??generateOpponentTeam(encounterFloor,seed,previous.flatMap(row=>(Showdown.Teams.unpack(row.opponent_team) ?? []).map(set=>set.species)),trainer,sample,progression);
+    const generated=special?.team??rankedEncounter?.team??generateOpponentTeam(encounterFloor,seed,previous.flatMap(row=>(Showdown.Teams.unpack(row.opponent_team) ?? []).map(set=>set.species)),trainer,sample,progression);
     const encounter=oldChallenger?.trainingTier?trainNpcTeam(generated,floor,oldChallenger.trainingTier,oldChallenger.tactic,seed,rule):generated;
     const npcId=sample?.id ?? trainer?.boss.id ?? '';
     const npcGeneration=sample?.generation ?? trainer?.boss.generation ?? null;
@@ -411,11 +401,10 @@ export class TowerStore {
     }
     if(signature?.rule==='tera' && !template)opponentProfiles[signature.species].teraType=(sample?.specialty ?? trainer?.boss.specialty ?? Showdown.Dex.species.get(signature.species).types[0]) as import('../data/tera').TeraType;
     this.db.prepare(`INSERT INTO battles(id, run_id, floor, player_team, opponent_team, seed, engine_version, format, ai_version, status, reward, candidates, boss, stage,attempt,encounter_order)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, (SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id, runId, floor, packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band')), packTeam(opponents,opponentProfiles,Object.fromEntries(encounter.map(entry=>[entry.name,entry.item && (progression!=='legacy' || allowsRuleItem(rule,entry.item))?entry.item:''])),encounter.filter(p=>p.gigantamax).map(p=>p.name)), JSON.stringify(seed), engineVersion, FORMAT, progression==='legacy'?'tower-policy-v9':AI_VERSION, config.reward+(sample===eligible && event ? event.event.bonus : 0), JSON.stringify(opponents), trainer ? JSON.stringify(trainer.boss) : null,this.route(runId)?.pending_boss===floor?1:0,0,runId);
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, (SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id, runId, floor, packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band')), packTeam(opponents,opponentProfiles,Object.fromEntries(encounter.map(entry=>[entry.name,entry.item && (progression!=='legacy' || allowsRuleItem(rule,entry.item))?entry.item:''])),encounter.filter(p=>p.gigantamax).map(p=>p.name)), JSON.stringify(seed), engineVersion, FORMAT, progression==='legacy'?'tower-policy-v9':AI_VERSION, config.reward, JSON.stringify(opponents), trainer ? JSON.stringify(trainer.boss) : null,this.route(runId)?.pending_boss===floor?1:0,0,runId);
 
     this.db.prepare('UPDATE battles SET rule=? WHERE id=?').run(rule,id);
     if(rankedChallenger?.mirror)this.db.prepare('UPDATE battles SET opponent_team=? WHERE id=?').run(rankedChallenger.mirror.opponentTeam,id);
-    if(sample===eligible && event)this.db.prepare('UPDATE battles SET villain_event=? WHERE id=?').run(JSON.stringify(event.event),id);
     this.db.prepare('UPDATE battles SET battle_items=? WHERE id=?').run(JSON.stringify(this.battleItemBag(runId)),id);
     const hasNpcItem=encounter.some(p=>p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
     const npcTeraTickets=rankedEncounter?(signature?.rule==='tera'?1:0):npcGimmicksAllowed?(signature?.rule==='tera'?1:!hasNpcItem && sample?.kind==='elite'?opponentTeraTickets(floor,'elite'):0):0;
@@ -423,6 +412,7 @@ export class TowerStore {
     this.db.prepare("UPDATE runs SET state = 'battle' WHERE id = ?").run(runId);
     if(sample){const theme=this.runTheme(runId);this.db.prepare('UPDATE battles SET trainer=? WHERE id=?').run(JSON.stringify({...trainerView({...sample,...(theme?{generation:towerThemes[theme].generation}: {})}),...(signature?{gimmick:signature}:{}),...(rankedChallenger?.mirror?{name:'???',title:'',mirror:true,mirrorRule:rankedChallenger.mirror.opponentRule}:{})}),id);}
     this.db.prepare('UPDATE battles SET upgrades=? WHERE id=?').run(JSON.stringify(this.activeUpgrades(runId,floor).map(upgrade=>upgrade.kind).sort()),id);
+    if(special)this.db.prepare('UPDATE battles SET opponent_team=?,reward=0,candidates=?,trainer=?,tera_tickets=? WHERE id=?').run(special.opponentTeam,'[]',JSON.stringify(special.trainer),JSON.stringify({p1:0,p2:special.opponentTeraTickets}),id);
     return id;
   }
   trainerEquipment(runId:string):TrainerEquipment[]{return (this.db.prepare('SELECT item FROM run_trainer_equipment WHERE run_id=? ORDER BY item').all(runId) as {item:TrainerEquipment}[]).map(row=>row.item);}
@@ -609,6 +599,11 @@ export class TowerStore {
       for(const member of remaining.values()){
         this.db.prepare('DELETE FROM run_held_items WHERE run_id=? AND species=?').run(run.id,member.species);
         if(member.item)this.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(run.id,member.species,member.item);
+      }
+      const campaigns=new VillainCampaigns(this.db),villain=campaigns.forBattle(id);
+      if(log.winner==='Player'&&villain){
+        campaigns.win(villain,run.id,run.player_id);
+        this.db.prepare("UPDATE runs SET state='select' WHERE id=?").run(run.id);return;
       }
       const challengerEvent=new ChallengerEvents(this.db).pending(run.id);
       const raids=new RaidEvents(this.db),raid=raids.forBattle(id);

@@ -80,7 +80,7 @@ export function selectTrainerSample(floor:number,seed:Seed,previous:{id:string;s
     const chosen=candidates.find(s=>(ticket-=s.weight)<0)??candidates.at(-1)!;
     return npcTrainerSample(chosen,drawNpcRank(sampleRankWeights(chosen,floor),random));
   }
-  const eligible=(sample:TrainerSample)=>sample.minFloor<=floor && (!sample.specialty || pool.filter(name=>(progression==='legacy'||sample.kind==='elite'||normalOpponentSpecies(name)) && Showdown.Dex.species.get(name).types.includes(sample.specialty!)).length>=3);
+  const eligible=(sample:TrainerSample)=>sample.role!=='villain' && sample.minFloor<=floor && (!sample.specialty || pool.filter(name=>(progression==='legacy'||sample.kind==='elite'||normalOpponentSpecies(name)) && Showdown.Dex.species.get(name).types.includes(sample.specialty!)).length>=3);
   const elite=floor>=(progression==='legacy'?4:11) && random()<(progression==='legacy'?.25:eliteChance(floor)),mixed=random()<.2;
   let candidates=(mixed ? mixedTrainerSamples.filter(s=>(s.kind==='elite')===elite) : elite ? eliteTrainerSamples : normalTrainerSamples).filter(eligible);
   if(!candidates.length)candidates=normalTrainerSamples.filter(eligible);

@@ -21,7 +21,7 @@ import {defaultProfile} from '../src/server/training';
 import {eventDefinitions} from '../src/data/run-events';
 
 test('raid eligibility shares event gating and exposes only silhouette/category',()=>{
- assert.equal(selectRunEvent(1,null,max=>max===100?0:max-1-eventDefinitions['random-teleport'].weight,undefined,2),'raid-encounter');
+ assert.equal(selectRunEvent(1,null,()=>0,{'raid-encounter':eventDefinitions['raid-encounter']},2),'raid-encounter');
  assert.equal(selectRunEvent(5,null,()=>0,undefined,2),null);
  assert.equal(selectRunEvent(4,3,()=>0,undefined,2),null);
  const f=raidFixture();try{assert.deepEqual(f.event.raid,{spriteId:445,category:'normal'});assert.equal(JSON.stringify(f.event).includes('Garchomp'),false);assert.ok(raidEventSettings.weight>0);assert.equal(Object.keys(raidCategoryPresentation).length,6);}finally{f.store.close();}

@@ -176,5 +176,15 @@ CREATE TABLE IF NOT EXISTS hidden_shop_events(event_id TEXT PRIMARY KEY REFERENC
 CREATE TABLE IF NOT EXISTS raid_encounters(event_id TEXT PRIMARY KEY REFERENCES run_events(id),snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json)),battle_id TEXT REFERENCES battles(id)) STRICT;
 CREATE TABLE IF NOT EXISTS run_encounter_progress(run_id TEXT PRIMARY KEY REFERENCES runs(id),cleared_count INTEGER NOT NULL DEFAULT 0 CHECK(cleared_count>=0)) STRICT;
 CREATE TABLE IF NOT EXISTS teleport_events(event_id TEXT PRIMARY KEY REFERENCES run_events(id),segment INTEGER NOT NULL CHECK(segment IN (1,2)),origin_floor INTEGER NOT NULL,destination_floor INTEGER NOT NULL CHECK((segment=1 AND destination_floor BETWEEN 1 AND 50) OR (segment=2 AND destination_floor BETWEEN 51 AND 100))) STRICT;
-  PRAGMA user_version = 43;
+CREATE TABLE IF NOT EXISTS run_organization_campaigns(
+ run_id TEXT NOT NULL REFERENCES runs(id),organization TEXT NOT NULL,
+ started INTEGER NOT NULL DEFAULT 0 CHECK(started IN (0,1)),clues INTEGER NOT NULL DEFAULT 0 CHECK(clues>=0),
+ officer_defeated INTEGER NOT NULL DEFAULT 0 CHECK(officer_defeated IN (0,1)),boss_location_known INTEGER NOT NULL DEFAULT 0 CHECK(boss_location_known IN (0,1)),
+ boss_defeated INTEGER NOT NULL DEFAULT 0 CHECK(boss_defeated IN (0,1)),completed INTEGER NOT NULL DEFAULT 0 CHECK(completed IN (0,1)),PRIMARY KEY(run_id,organization)
+) STRICT;
+CREATE TABLE IF NOT EXISTS villain_event_encounters(
+ event_id TEXT PRIMARY KEY REFERENCES run_events(id),snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json)),
+ battle_id TEXT UNIQUE REFERENCES battles(id),claimed INTEGER NOT NULL DEFAULT 0 CHECK(claimed IN (0,1))
+) STRICT;
+  PRAGMA user_version = 44;
 `;

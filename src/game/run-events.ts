@@ -1,10 +1,11 @@
+import {isRocketStage,campaignEligible,emptyCampaign} from '../data/villain-campaigns';
 import {teleportSegment} from '../data/teleport';
 import type {RewardOption,WeightedRewardOption} from '../data/rewards';
 import {eventDefinitions,eventDefinition,mysteryChest,type EventReward,type EventChoice,type RunEventRegistry} from '../data/run-events';
 
 export type Roll=(max:number)=>number;
 
-export function selectRunEvent(afterFloor:number,previousOrder:number|null,roll:Roll,registry:RunEventRegistry=eventDefinitions,rulesVersion=1,order=afterFloor,eligible:(kind:string)=>boolean=()=>true):string|null {
+export function selectRunEvent(afterFloor:number,previousOrder:number|null,roll:Roll,registry:RunEventRegistry=eventDefinitions,rulesVersion=1,order=afterFloor,eligible:(kind:string)=>boolean=kind=>!isRocketStage(kind)||campaignEligible(kind,emptyCampaign,afterFloor)):string|null {
   if(afterFloor%5===0)return null;
   if(previousOrder!==null && order-previousOrder<=mysteryChest.cooldownFloors)return null;
   if(roll(100)>=mysteryChest.encounterPercent)return null;

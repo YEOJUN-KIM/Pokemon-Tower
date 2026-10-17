@@ -186,7 +186,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     playbackSpeed.current=readPlaybackSpeed();skip.current=false;setPlaying(true);
     if(!isAction && !data.tower.run?.raid) {
       const boss=battleTrainer(data.battle.id,data.tower.run?.boss ?? data.tower.run?.trainer);
-      setStageOpen(false);setBattle(initialView);setTrainerIntro({boss,phase:'enter'});setAnnouncement(trainerAppearance(boss));
+      setStageOpen(false);setBattle(initialView);setTrainerIntro({boss,phase:'enter'});setAnnouncement(boss.introduction||trainerAppearance(boss));
       await new Promise<void>(resolve=>{introContinue.current=()=>{introContinue.current=null;resolve();};});
       if(!skip.current && mounted.current){setTrainerIntro({boss,phase:'throw'});await waitPlayback(550);}
       setTrainerIntro(null);

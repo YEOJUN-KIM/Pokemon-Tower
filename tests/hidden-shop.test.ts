@@ -55,7 +55,7 @@ test('purchased vitamin and TM use existing reward inventory and keep vitamin ca
 });
 
 test('event selection uses the shared encounter roll, cooldown and checkpoint exclusion; v1 remains unchanged',()=>{
- const total=Object.values(eventDefinitions).reduce((n,d)=>n+d.weight,0),hiddenEnd=total-eventDefinitions['raid-encounter'].weight-eventDefinitions['random-teleport'].weight,roll=(max:number)=>max===100?0:hiddenEnd-1;
+ const total=Object.entries(eventDefinitions).filter(([kind])=>!kind.startsWith('rocket-')).reduce((n,[,d])=>n+d.weight,0),hiddenEnd=total-eventDefinitions['raid-encounter'].weight-eventDefinitions['random-teleport'].weight,roll=(max:number)=>max===100?0:hiddenEnd-1;
  assert.equal(hiddenEnd,132);assert.equal(selectRunEvent(1,null,roll,undefined,2),'hidden-shop');
  assert.equal(selectRunEvent(5,null,roll,undefined,2),null);assert.equal(selectRunEvent(3,1,roll,undefined,2),null);
  assert.equal(selectRunEvent(1,null,()=>99,undefined,2),null);
@@ -182,6 +182,6 @@ test('schema 39 migration adds storage while preserving old event snapshots',()=
  try{
   store.chooseEvent(f.owner,f.run,f.eventId,'leave');const old=store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId);
   store.db.exec('DROP TABLE hidden_shop_events; PRAGMA user_version=39');store.close();store=new TowerStore(path);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,43);assert.deepEqual(store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId),old);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,44);assert.deepEqual(store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId),old);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
  }finally{store.close();}
 });

@@ -4,6 +4,10 @@ type EventPresentation={artwork:'chest'}|{artwork:'teleport'}|{artwork:'raid'}|{
 
 // React components stay in web; content and game rules never import this registry.
 export const eventPresentation={
+ 'rocket-intro':{artwork:'trainer',sprite:'rocketgrunt',alt:'로켓단 조직원'},
+ 'rocket-ambush':{artwork:'trainer',sprite:'rocketgrunt',alt:'로켓단 조직원'},
+ 'rocket-officer':{artwork:'trainer',sprite:'archer',alt:'로켓단 간부'},
+ 'rocket-boss':{artwork:'trainer',sprite:'giovanni',alt:'비주기'},
  'random-teleport':{artwork:'teleport'},
  'raid-encounter':{artwork:'raid'},
  'challenger-selection':{artwork:'trainer',sprite:'acetrainer-gen4',alt:'도전자'},

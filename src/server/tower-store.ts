@@ -403,7 +403,7 @@ export class TowerStore {
     if(progression!=='legacy' && npcGimmicksAllowed && (trainer || sample?.kind==='named')){
       const plan=template?.signature ?? npcGimmick(npcId,npcGeneration,encounter.map(p=>p.name),npcAce?npcSpecies(npcAce,npcId,npcGeneration):undefined);
       const carrier=encounter.find(p=>p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
-      signature=carrier?{rule:primalOrbs[carrier.item!]? 'primal':megaStones[carrier.item!]? 'mega':carrier.item===DYNAMAX_ITEM?'dynamax':'z',species:carrier.name,item:carrier.item}:plan?.rule==='tera'?plan:null;
+      signature=carrier?{rule:primalOrbs[carrier.item!]? 'primal':megaStones[carrier.item!]? 'mega':carrier.item===DYNAMAX_ITEM?'dynamax':'z',species:carrier.name,item:carrier.item}:plan?.rule==='tera'||plan?.rule==='dynamax'&&encounter.some(p=>p.name===plan.species&&p.gigantamax)?plan:null;
       if(trainer && signature)trainer.boss.gimmick=signature;
     }
     if(legacyChallenger)for(const entry of encounter){

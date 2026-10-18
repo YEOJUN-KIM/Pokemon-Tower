@@ -21,6 +21,7 @@ export type Observation = {
   switching?:{hazards:{spikes:number;toxicSpikes:number;stealthRock:boolean;stickyWeb:boolean};boosts:Record<string,number>;dynamax:boolean;opponentTypes:string[];maybeTrapped?:boolean};
 };
 export interface Policy {
+  readonly fixedOrder?:boolean;
   observePublicLine?(line:string):void;
   readonly switchingInformation?:boolean;
   readonly uncertainSwitchingInformation?:boolean;

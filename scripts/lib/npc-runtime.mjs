@@ -19,6 +19,6 @@ export function projectNpcRuntime(source){
    const points=Object.values(p.profile.evs);
    assert.ok(points.every(n=>Number.isInteger(n)&&n>=0&&n<=32)&&points.reduce((a,b)=>a+b,0)<=66,`Invalid training points: ${key}`);
   }
-  return {id:s.id,stage:s.stage,...(s.allFloors?{allFloors:true,select:s.select,required:s.required}:s.select?{select:true,required:s.required}:{}),...(s.selectionRules?{selectionRules:s.selectionRules}:{}),role:s.role,ace:s.ace,signature:s.signature,gimmickEnabled:s.gimmickEnabled,legendaryMinFloor:s.legendaryMinFloor,team:s.team.map(p=>({species:p.species,item:p.item,gigantamax:p.gigantamax,profile:p.profile}))};
+  return {id:s.id,stage:s.stage,...(s.allFloors?{allFloors:true,select:s.select,required:s.required}:s.select?{select:true,required:s.required}:{}),...(s.selectionRules?{selectionRules:s.selectionRules}:{}),role:s.role,ace:s.ace,signature:s.signature,gimmickEnabled:s.gimmickEnabled,legendaryMinFloor:s.legendaryMinFloor,team:s.team.map(p=>({species:p.species,item:p.item,gigantamax:p.gigantamax,...(p.role==='hidden'?{special:'hidden'}:{}),profile:p.profile}))};
  });
 }

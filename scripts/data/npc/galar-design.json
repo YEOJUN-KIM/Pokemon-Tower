@@ -1,0 +1,794 @@
+{
+  "trainers": [
+    {
+      "id": "named-nessa",
+      "name": "야청",
+      "category": "gym",
+      "specialty": "Water",
+      "tactic": "physical",
+      "concept": "비 + 우선도 압박 + 쓱쓱 거다이갈가부기",
+      "team": [
+        {
+          "species": "Pelipper",
+          "ability": "Drizzle",
+          "item": "Focus Sash",
+          "nature": "Timid",
+          "moves": [
+            "Scald",
+            "Hurricane",
+            "U-turn",
+            "Tailwind"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Golisopod",
+          "ability": "Emergency Exit",
+          "item": "Sitrus Berry",
+          "nature": "Adamant",
+          "moves": [
+            "First Impression",
+            "Liquidation",
+            "Leech Life",
+            "Sucker Punch"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Drednaw",
+          "ability": "Swift Swim",
+          "item": "",
+          "nature": "Adamant",
+          "moves": [
+            "Liquidation",
+            "Stone Edge",
+            "Crunch",
+            "Superpower"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Pelipper",
+        "Golisopod",
+        "Drednaw"
+      ],
+      "ace": "Drednaw",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Drednaw"
+      }
+    },
+    {
+      "id": "named-kabu",
+      "name": "순무",
+      "category": "gym",
+      "specialty": "Fire",
+      "tactic": "physical",
+      "concept": "가뭄 + 위협 + 거다이다태우지네",
+      "team": [
+        {
+          "species": "Torkoal",
+          "ability": "Drought",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "moves": [
+            "Lava Plume",
+            "Stealth Rock",
+            "Yawn",
+            "Body Press"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Arcanine",
+          "ability": "Intimidate",
+          "item": "Sitrus Berry",
+          "nature": "Adamant",
+          "moves": [
+            "Flare Blitz",
+            "Extreme Speed",
+            "Wild Charge",
+            "Play Rough"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Centiskorch",
+          "ability": "Flash Fire",
+          "item": "",
+          "nature": "Adamant",
+          "moves": [
+            "Fire Lash",
+            "Leech Life",
+            "Power Whip",
+            "Knock Off"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Torkoal",
+        "Arcanine",
+        "Centiskorch"
+      ],
+      "ace": "Centiskorch",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Centiskorch"
+      }
+    },
+    {
+      "id": "named-bea",
+      "name": "채두",
+      "category": "gym",
+      "specialty": "Fighting",
+      "tactic": "setup",
+      "concept": "배수의진과 낮은 교체 빈도의 정면 돌파",
+      "team": [
+        {
+          "species": "Hawlucha",
+          "ability": "Unburden",
+          "item": "Focus Sash",
+          "nature": "Jolly",
+          "moves": [
+            "Close Combat",
+            "Acrobatics",
+            "Poison Jab",
+            "Swords Dance"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Falinks",
+          "ability": "Battle Armor",
+          "item": "Sitrus Berry",
+          "nature": "Adamant",
+          "moves": [
+            "No Retreat",
+            "Close Combat",
+            "Iron Head",
+            "Throat Chop"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Machamp",
+          "ability": "No Guard",
+          "item": "",
+          "nature": "Adamant",
+          "moves": [
+            "Dynamic Punch",
+            "Knock Off",
+            "Ice Punch",
+            "Stone Edge"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Hawlucha",
+        "Falinks",
+        "Machamp"
+      ],
+      "ace": "Machamp",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Machamp"
+      }
+    },
+    {
+      "id": "named-allister",
+      "name": "어니언",
+      "category": "gym",
+      "specialty": "Ghost",
+      "tactic": "status",
+      "concept": "도깨비불 + 병상첨병 + 탈 랭크업",
+      "team": [
+        {
+          "species": "Cursola",
+          "ability": "Weak Armor",
+          "item": "Focus Sash",
+          "nature": "Modest",
+          "moves": [
+            "Strength Sap",
+            "Will-O-Wisp",
+            "Hex",
+            "Ancient Power"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Mimikyu",
+          "ability": "Disguise",
+          "item": "Sitrus Berry",
+          "nature": "Jolly",
+          "moves": [
+            "Play Rough",
+            "Shadow Sneak",
+            "Swords Dance",
+            "Will-O-Wisp"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Gengar",
+          "ability": "Cursed Body",
+          "item": "",
+          "nature": "Timid",
+          "moves": [
+            "Shadow Ball",
+            "Sludge Bomb",
+            "Focus Blast",
+            "Hypnosis"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Cursola",
+        "Mimikyu",
+        "Gengar"
+      ],
+      "ace": "Gengar",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Gengar"
+      }
+    },
+    {
+      "id": "named-gordie",
+      "name": "마쿠와",
+      "category": "gym",
+      "specialty": "Rock",
+      "tactic": "bulk",
+      "concept": "모래 + 단단지 설치 + 거다이분석 지속 피해",
+      "team": [
+        {
+          "species": "Tyranitar",
+          "ability": "Sand Stream",
+          "item": "Assault Vest",
+          "nature": "Adamant",
+          "moves": [
+            "Stone Edge",
+            "Crunch",
+            "Earthquake",
+            "Ice Punch"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Shuckle",
+          "ability": "Sturdy",
+          "item": "Mental Herb",
+          "nature": "Careful",
+          "moves": [
+            "Sticky Web",
+            "Stealth Rock",
+            "Rock Tomb",
+            "Encore"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Coalossal",
+          "ability": "Steam Engine",
+          "item": "",
+          "nature": "Modest",
+          "moves": [
+            "Heat Wave",
+            "Ancient Power",
+            "Earth Power",
+            "Solar Beam"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Tyranitar",
+        "Shuckle",
+        "Coalossal"
+      ],
+      "ace": "Coalossal",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Coalossal"
+      }
+    },
+    {
+      "id": "named-melony",
+      "name": "멜론",
+      "category": "gym",
+      "specialty": "Ice",
+      "tactic": "setup",
+      "concept": "나비춤 + 스카프 물리 돌파 + 거다이선율",
+      "team": [
+        {
+          "species": "Frosmoth",
+          "ability": "Ice Scales",
+          "item": "Focus Sash",
+          "nature": "Timid",
+          "moves": [
+            "Ice Beam",
+            "Bug Buzz",
+            "Quiver Dance",
+            "Giga Drain"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Darmanitan-Galar",
+          "ability": "Gorilla Tactics",
+          "item": "Choice Scarf",
+          "nature": "Jolly",
+          "moves": [
+            "Icicle Crash",
+            "Flare Blitz",
+            "Earthquake",
+            "U-turn"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Lapras",
+          "ability": "Water Absorb",
+          "item": "",
+          "nature": "Modest",
+          "moves": [
+            "Freeze-Dry",
+            "Hydro Pump",
+            "Thunderbolt",
+            "Ice Beam"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Frosmoth",
+        "Darmanitan-Galar",
+        "Lapras"
+      ],
+      "ace": "Lapras",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Lapras"
+      }
+    },
+    {
+      "id": "named-marnie",
+      "name": "마리",
+      "category": "gym",
+      "specialty": "Dark",
+      "tactic": "physical",
+      "concept": "빠른 방해 + 위협 중견 + 벌크업 난전",
+      "team": [
+        {
+          "species": "Morpeko",
+          "ability": "Hunger Switch",
+          "item": "Focus Sash",
+          "nature": "Jolly",
+          "moves": [
+            "Aura Wheel",
+            "Seed Bomb",
+            "Fake Out",
+            "Taunt"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Scrafty",
+          "ability": "Intimidate",
+          "item": "Assault Vest",
+          "nature": "Adamant",
+          "moves": [
+            "Drain Punch",
+            "Crunch",
+            "Ice Punch",
+            "Poison Jab"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Grimmsnarl",
+          "ability": "Prankster",
+          "item": "",
+          "nature": "Adamant",
+          "moves": [
+            "Spirit Break",
+            "Darkest Lariat",
+            "Bulk Up",
+            "Sucker Punch"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Morpeko",
+        "Scrafty",
+        "Grimmsnarl"
+      ],
+      "ace": "Grimmsnarl",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Grimmsnarl"
+      }
+    },
+    {
+      "id": "named-bede",
+      "name": "비트",
+      "category": "gym",
+      "specialty": "Fairy",
+      "tactic": "special",
+      "concept": "특수 → 물리 → 매직미러 거다이 에이스",
+      "team": [
+        {
+          "species": "Gardevoir",
+          "ability": "Trace",
+          "item": "Choice Scarf",
+          "nature": "Timid",
+          "moves": [
+            "Psychic",
+            "Moonblast",
+            "Shadow Ball",
+            "Energy Ball"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Rapidash-Galar",
+          "ability": "Pastel Veil",
+          "item": "Life Orb",
+          "nature": "Jolly",
+          "moves": [
+            "Psycho Cut",
+            "Play Rough",
+            "Drill Run",
+            "Smart Strike"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Hatterene",
+          "ability": "Magic Bounce",
+          "item": "",
+          "nature": "Modest",
+          "moves": [
+            "Psychic",
+            "Dazzling Gleam",
+            "Mystical Fire",
+            "Calm Mind"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Gardevoir",
+        "Rapidash-Galar",
+        "Hatterene"
+      ],
+      "ace": "Hatterene",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Hatterene"
+      }
+    },
+    {
+      "id": "named-raihan",
+      "name": "금랑",
+      "category": "gym",
+      "specialty": "Dragon",
+      "tactic": "balanced",
+      "concept": "모래 + 설치 + 유턴 + 적극적인 상성 운영",
+      "team": [
+        {
+          "species": "Gigalith",
+          "ability": "Sand Stream",
+          "item": "Leftovers",
+          "nature": "Impish",
+          "moves": [
+            "Stealth Rock",
+            "Rock Blast",
+            "Body Press",
+            "Earthquake"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Flygon",
+          "ability": "Levitate",
+          "item": "Life Orb",
+          "nature": "Jolly",
+          "moves": [
+            "Earthquake",
+            "Dragon Claw",
+            "Fire Punch",
+            "U-turn"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Duraludon",
+          "ability": "Stalwart",
+          "item": "",
+          "nature": "Modest",
+          "moves": [
+            "Draco Meteor",
+            "Flash Cannon",
+            "Thunderbolt",
+            "Body Press"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Gigalith",
+        "Flygon",
+        "Duraludon"
+      ],
+      "ace": "Duraludon",
+      "aiCeiling": "expert",
+      "minFloor": 5,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Duraludon"
+      }
+    },
+    {
+      "id": "macrocosmos-grunt",
+      "name": "매크로코스모스 직원",
+      "category": "grunt",
+      "specialty": "Steel",
+      "tactic": "physical",
+      "concept": "강철 기본 공격; 다이맥스 없음",
+      "team": [
+        {
+          "species": "Perrserker",
+          "ability": "Tough Claws",
+          "item": "",
+          "nature": "Serious",
+          "moves": [
+            "Iron Head",
+            "Fake Out",
+            "Crunch",
+            "U-turn"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Klinklang",
+          "ability": "Clear Body",
+          "item": "",
+          "nature": "Serious",
+          "moves": [
+            "Gear Grind",
+            "Wild Charge",
+            "Shift Gear",
+            "Volt Switch"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Copperajah",
+          "ability": "Sheer Force",
+          "item": "",
+          "nature": "Serious",
+          "moves": [
+            "Iron Head",
+            "Earthquake",
+            "Stone Edge",
+            "Play Rough"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Perrserker",
+        "Klinklang",
+        "Copperajah"
+      ],
+      "ace": "Copperajah",
+      "aiCeiling": "basic",
+      "minFloor": 1,
+      "signature": null
+    },
+    {
+      "id": "named-oleana",
+      "name": "올리브",
+      "category": "executive",
+      "specialty": null,
+      "tactic": "bulk",
+      "concept": "빠른 교란 → 밀로틱 내구전 → 거다이 피니셔",
+      "team": [
+        {
+          "species": "Froslass",
+          "ability": "Cursed Body",
+          "item": "Focus Sash",
+          "nature": "Timid",
+          "moves": [
+            "Ice Beam",
+            "Shadow Ball",
+            "Will-O-Wisp",
+            "Destiny Bond"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Milotic",
+          "ability": "Competitive",
+          "item": "Leftovers",
+          "nature": "Bold",
+          "moves": [
+            "Scald",
+            "Ice Beam",
+            "Recover",
+            "Mirror Coat"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Garbodor",
+          "ability": "Weak Armor",
+          "item": "",
+          "nature": "Mild",
+          "moves": [
+            "Sludge Bomb",
+            "Psychic",
+            "Thunderbolt",
+            "Drain Punch"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Froslass",
+        "Milotic",
+        "Garbodor"
+      ],
+      "ace": "Garbodor",
+      "aiCeiling": "expert",
+      "minFloor": 5,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Garbodor"
+      }
+    },
+    {
+      "id": "named-rose",
+      "name": "로즈",
+      "category": "boss",
+      "specialty": "Steel",
+      "tactic": "bulk",
+      "concept": "설치 → 거다이대왕끼리동 → 히든 일반 무한다이노",
+      "team": [
+        {
+          "species": "Ferrothorn",
+          "ability": "Iron Barbs",
+          "item": "Leftovers",
+          "nature": "Relaxed",
+          "moves": [
+            "Stealth Rock",
+            "Power Whip",
+            "Gyro Ball",
+            "Leech Seed"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Copperajah",
+          "ability": "Sheer Force",
+          "item": "",
+          "nature": "Adamant",
+          "moves": [
+            "Heavy Slam",
+            "Earthquake",
+            "Stone Edge",
+            "Power Whip"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Eternatus",
+          "ability": "Pressure",
+          "item": "",
+          "nature": "Timid",
+          "moves": [
+            "Dynamax Cannon",
+            "Sludge Bomb",
+            "Flamethrower",
+            "Dragon Pulse"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Ferrothorn",
+        "Copperajah",
+        "Eternatus"
+      ],
+      "ace": "Copperajah",
+      "aiCeiling": "expert",
+      "minFloor": 75,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Copperajah"
+      }
+    },
+    {
+      "id": "named-leon",
+      "name": "단델",
+      "category": "champion",
+      "specialty": null,
+      "tactic": "balanced",
+      "concept": "배틀스위치 + 유턴 + 거다이옥염 최종 에이스",
+      "team": [
+        {
+          "species": "Aegislash",
+          "ability": "Stance Change",
+          "item": "Weakness Policy",
+          "nature": "Quiet",
+          "moves": [
+            "King's Shield",
+            "Shadow Ball",
+            "Sacred Sword",
+            "Flash Cannon"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Dragapult",
+          "ability": "Infiltrator",
+          "item": "Life Orb",
+          "nature": "Naive",
+          "moves": [
+            "Dragon Darts",
+            "Phantom Force",
+            "Fire Blast",
+            "U-turn"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Charizard",
+          "ability": "Blaze",
+          "item": "",
+          "nature": "Timid",
+          "moves": [
+            "Fire Blast",
+            "Air Slash",
+            "Solar Beam",
+            "Ancient Power"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Aegislash",
+        "Dragapult",
+        "Charizard"
+      ],
+      "ace": "Charizard",
+      "aiCeiling": "expert",
+      "minFloor": 5,
+      "signature": {
+        "rule": "dynamax",
+        "species": "Charizard"
+      }
+    }
+  ]
+}

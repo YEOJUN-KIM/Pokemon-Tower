@@ -12,7 +12,7 @@ export const npcReviewPresets:Record<string,{entries:string[];ace:string;signatu
  'named-ghetsis':{entries:['Kyurem','Hydreigon','Cofagrigus'],ace:'Kyurem',signature:{rule:'z',species:'Hydreigon',item:'Dragonium Z'},legendaryMinFloor:75},
  'named-lysandre':{entries:['Yveltal','Gyarados','Pyroar'],ace:'Yveltal',signature:{rule:'mega',species:'Gyarados',item:'Gyaradosite'},legendaryMinFloor:75},
  'named-lusamine':{entries:['Clefable','Lilligant','Necrozma'],ace:'Necrozma',legendaryMinFloor:75},
- 'named-rose':{entries:['Eternatus','Copperajah','Magnezone'],ace:'Eternatus',signature:{rule:'dynamax',species:'Copperajah',item:'Dynamax Band'},legendaryMinFloor:75},
+ 'named-rose':{entries:['Ferrothorn','Copperajah','Eternatus'],ace:'Copperajah',signature:{rule:'dynamax',species:'Copperajah'},legendaryMinFloor:75},
  'named-iris':{entries:['Haxorus','Hydreigon','Lapras'],ace:'Haxorus',signature:{rule:'z',species:'Haxorus',item:'Dragonium Z'}},
  'named-kiawe':{entries:['Marowak-Alola','Turtonator','Salazzle'],ace:'Marowak-Alola'},
  'named-kukui':{entries:['Incineroar','Lycanroc','Snorlax','Magnezone','Braviary','Slowbro'],ace:'Incineroar'},
@@ -29,6 +29,5 @@ export const npcEarlyReplacements:Record<string,{species:string;replacement:stri
  'named-cyrus':{species:'Dialga',replacement:'Honchkrow',ace:'Weavile',signature:{rule:'z',species:'Weavile',item:'Darkinium Z'}},
  'named-ghetsis':{species:'Kyurem',replacement:'Eelektross',ace:'Hydreigon',signature:{rule:'z',species:'Hydreigon',item:'Dragonium Z'}},
  'named-lysandre':{species:'Yveltal',replacement:'Mienshao',ace:'Gyarados',signature:{rule:'mega',species:'Gyarados',item:'Gyaradosite'}},
- 'named-rose':{species:'Eternatus',replacement:'Escavalier',ace:'Copperajah',signature:{rule:'dynamax',species:'Copperajah',item:'Dynamax Band'}},
 };
 export function canonicalNpcId(id:string){return id.startsWith('named-')?id:'named-'+id.replace(/^[^-]+-(?:executive|boss)-/,'');}

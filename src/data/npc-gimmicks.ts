@@ -6,6 +6,7 @@ import type {BattleRule} from './run-rules';
 import type {OpponentEntry} from '../server/opponent-team';
 import {evolvedOpponentSpecies} from './opponent-species';
 import {primalOrbs} from './primal-forms';
+import {galarTrainer} from './galar-trainers';
 
 export type NpcGimmick={rule:Exclude<BattleRule,'basic'|'chaos'>|'primal';species:string;item?:string};
 // Explicit tower adaptations for generations 1–5, not original-game claims.
@@ -60,6 +61,8 @@ const organizationGenerations:Record<string,number>={rocket:1,magma:3,aqua:3,gal
 // A first roster assignment, independent of the player's rule. Floor presets can
 // refine these assignments later without multiplying them by player rule.
 export function npcGimmick(id:string,generation:number|null,entries:readonly string[],ace?:string):NpcGimmick|null{
+ const galar=galarTrainer(id);
+ if(galar)return galar.signature&&entries.includes(galar.signature.species)?{rule:'dynamax',species:galar.signature.species}:null;
  const canonical=id.startsWith('named-')?id:'named-'+id.replace(/^[^-]+-(?:executive|boss)-/,'');
  const configured=overrides[canonical];
  const preferred=configured?{...configured,species:entries.includes(configured.species)?configured.species:npcSpecies(configured.species,canonical,generation)}:undefined;
@@ -113,9 +116,9 @@ export function equipNpcGimmick(team:OpponentEntry[],gimmick:NpcGimmick|null){
  });
 }
 export function stripNpcGimmicks(team:OpponentEntry[]){return team.map(entry=>({...entry,gigantamax:false,item:entry.item && (megaStones[entry.item] || zCrystals[entry.item] || entry.item===DYNAMAX_ITEM || entry.item==='Red Orb' || entry.item==='Blue Orb')?undefined:entry.item}));}
-export function packedNpcRule(team:{item:string}[],teraTickets:number):BattleRule{
+export function packedNpcRule(team:{item:string;gigantamax?:boolean}[],teraTickets:number):BattleRule{
  if(team.some(p=>megaStones[p.item]))return 'mega';
- if(team.some(p=>p.item===DYNAMAX_ITEM))return 'dynamax';
+ if(team.some(p=>p.item===DYNAMAX_ITEM||p.gigantamax&&!p.item))return 'dynamax';
  if(team.some(p=>zCrystals[p.item]))return 'z';
  return teraTickets>0?'tera':'basic';
 }

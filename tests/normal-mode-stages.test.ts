@@ -13,6 +13,7 @@ import {TowerStore} from '../src/server/tower-store';
 import {starters} from '../src/data/teams';
 import normalSamples from '../scripts/data/npc/normal-npc-samples.json' with {type:'json'};
 import {alolaTrainer} from '../src/data/alola-trainers';
+import {galarTrainer} from '../src/data/galar-trainers';
 
 const special=(item:string)=>!!megaStones[item] || !!zCrystals[item] || !!primalOrbs[item] || item===DYNAMAX_ITEM;
 test('normal mode has two leader and two boss samples and exact 50/55/100 boundaries',()=>{
@@ -25,10 +26,10 @@ test('normal mode has two leader and two boss samples and exact 50/55/100 bounda
 test('new encounters suppress every early gimmick and retain late signatures',()=>{
  for(const sample of namedTrainerSamples){
   const isBoss=sample.role==='champion'||sample.role==='villain',start=isBoss?50:55;
-  for(const floor of [start-1,start]){
+  for(const floor of [start-1,start].filter(f=>f>=sample.minFloor)){
    const team=generateOpponentTeam(floor,[1,2,3,4],[],null,sample,'hundred-floor-v1');
    if(floor<start){assert.ok(team.every(p=>!special(p.item ?? '')),sample.id);assert.ok(team.every(p=>!p.gigantamax));}
-   else {const reviewed=normalNpcTemplate(sample.id,floor,sample.role);const plan=reviewed?reviewed.signature:npcGimmick(sample.id,sample.generation,[...sample.entries!,...(npcExtraCandidates[sample.id] ?? [])],sample.ace);if(plan&&plan.rule!=='tera')assert.ok(team.some(p=>special(p.item ?? '')),sample.id);}
+   else {const reviewed=normalNpcTemplate(sample.id,floor,sample.role);const plan=reviewed?reviewed.signature:npcGimmick(sample.id,sample.generation,[...sample.entries!,...(npcExtraCandidates[sample.id] ?? [])],sample.ace);if(plan&&plan.rule!=='tera')assert.ok(team.some(p=>special(p.item ?? '')||p.gigantamax&&!p.item),sample.id);}
   }
  }
 });
@@ -47,12 +48,12 @@ test('general-mode review keeps fifty candidate pools and paired stages for othe
  for(const row of normalSamples.samples){
   counts.set(row.id,(counts.get(row.id) ?? 0)+1);
   if('select' in row&&row.select){
-   const alola=alolaTrainer(row.id);assert.ok(row.team.length>=3&&row.team.length<=6);for(const p of row.team){assert.equal(p.profile.moves.length,4);assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),alola?.points??66);assert.ok(Object.values(p.profile.ivs).every(v=>v===(alola?.category==='grunt'?12:31)));}continue;
+   const alola=alolaTrainer(row.id),galar=galarTrainer(row.id);const points=galar?(galar.category==='grunt'?18:galar.aiCeiling==='expert'?66:48):alola?.points??66;assert.ok(row.team.length>=3&&row.team.length<=6);for(const p of row.team){assert.equal(p.profile.moves.length,4);assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),points);assert.ok(Object.values(p.profile.ivs).every(v=>v===((galar??alola)?.category==='grunt'?12:31)));}continue;
   }
   assert.equal(row.team.length,3);
   for(const p of row.team){assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),row.statPoints);assert.ok(Object.values(p.profile.evs).every(v=>v<=32));assert.ok(Object.values(p.profile.ivs).every(v=>v===row.iv));}
   if(!row.gimmickEnabled)assert.ok(row.team.every(p=>!special(p.item)&&!p.gigantamax&&(!('battleForm' in p)||!p.battleForm)));
  }
- assert.equal(counts.size,177);assert.equal([...counts.values()].filter(n=>n===1).length,128);assert.ok([...counts.values()].every(n=>n===1||n===2));
+ assert.equal(counts.size,171);assert.equal([...counts.values()].filter(n=>n===1).length,141);assert.ok([...counts.values()].every(n=>n===1||n===2));
  for(const id of ['named-maxie','magma-boss-maxie']){const rows=normalSamples.samples.filter(s=>s.id===id);assert.ok(rows.find(s=>s.stage==='first-gate')!.team.every(p=>p.species!=='Groudon'));const final=rows.find(s=>s.stage==='final-gate')!;assert.ok(final.team.some(p=>p.species==='Groudon'));assert.ok(final.team.some(p=>p.species==='Camerupt' && p.item==='Cameruptite'));}
 });

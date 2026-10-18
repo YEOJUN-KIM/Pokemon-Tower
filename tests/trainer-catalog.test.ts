@@ -18,18 +18,19 @@ import {npcSamples,npcTrainerSample} from '../src/data/npc-samples';
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {npcSpecies,npcExtraCandidates} from '../src/data/npc-gimmicks';
 import {alolaTrainer} from '../src/data/alola-trainers';
+import {galarTrainer} from '../src/data/galar-trainers';
 import {CURRENT_PROGRESSION} from '../src/data/tower-progression';
 
 const seed:[number,number,number,number]=[1,2,3,4];
 function teamFor(sample:typeof trainerCatalog[number]){
-  const encounter=generateOpponentTeam(Math.max(10,sample.minFloor),seed,[],null,sample,alolaTrainer(sample.id)?CURRENT_PROGRESSION:'legacy');
+  const encounter=generateOpponentTeam(Math.max(10,sample.minFloor),seed,[],null,sample,alolaTrainer(sample.id)||galarTrainer(sample.id)?CURRENT_PROGRESSION:'legacy');
   const profiles=Object.fromEntries(encounter.map(({name,moves,profile})=>[name,{...(profile??defaultProfile(name)),moves,...(encounter.find(p=>p.name===name)?.ability?{ability:encounter.find(p=>p.name===name)!.ability!}:{})}]));
   return {encounter,packed:packTeam(encounter.map(p=>p.name),profiles,Object.fromEntries(encounter.map(p=>[p.name,p.item ?? ''])))};
 }
 test('catalog covers all types and generations with supported, legal distinct parties',()=>{
-  assert.equal(trainerCatalog.length,188);assert.equal(new Set(trainerCatalog.map(s=>s.id)).size,188);
+  assert.equal(trainerCatalog.length,184);assert.equal(new Set(trainerCatalog.map(s=>s.id)).size,184);
   assert.equal(new Set(normalTrainerSamples.map(s=>s.specialty)).size,18);assert.equal(new Set(eliteTrainerSamples.map(s=>s.specialty)).size,18);
-  for(let gen=1;gen<=9;gen++){const group=namedTrainerSamples.filter(s=>s.generation===gen);assert.ok(group.length>=13);assert.deepEqual(new Set(group.map(s=>s.role)),new Set(['gym','villain','champion','elite']));}
+  for(let gen=1;gen<=9;gen++){const group=namedTrainerSamples.filter(s=>s.generation===gen);assert.ok(group.length>=(gen===8?12:13));assert.deepEqual(new Set(group.map(s=>s.role)),new Set(gen===8?['gym','villain','champion']:['gym','villain','champion','elite']));}
   const validator=new Showdown.TeamValidator(FORMAT);
   for(const sample of trainerCatalog){
     for(const name of sample.entries ?? [])assert.ok(pokemonSets[name],`${sample.id}: unsupported ${name}`);
@@ -49,8 +50,8 @@ test('selection respects floors and recent identities/types without restricting 
 test('named trainers draw varied legal triples from original candidate entries, with a mandatory ace and varied partners',()=>{
   const validator=new Showdown.TeamValidator(FORMAT);
   for(const sample of namedTrainerSamples){
-    const alola=alolaTrainer(sample.id),floor=Math.max(10,sample.minFloor),progression=alola?CURRENT_PROGRESSION:'legacy';
-    assert.ok(sample.entries!.length>=(alola?3:5));assert.equal(new Set(sample.entries).size,sample.entries!.length);
+    const alola=alolaTrainer(sample.id),galar=galarTrainer(sample.id),floor=Math.max(10,sample.minFloor),progression=alola||galar?CURRENT_PROGRESSION:'legacy';
+    assert.ok(sample.entries!.length>=(alola||galar?3:5));assert.equal(new Set(sample.entries).size,sample.entries!.length);
     const combinations=new Set<string>(),seen=new Set<string>();
     for(let i=0;i<300;i++){
       const seed:[number,number,number,number]=[i,2,3,4],team=generateOpponentTeam(floor,seed,[],null,sample,progression);
@@ -60,7 +61,7 @@ test('named trainers draw varied legal triples from original candidate entries, 
         assert.equal(validator.validateSet({...structuredClone(pokemonSets[p.name]),species:p.profile?.forme??p.name,moves:p.moves,ability:p.ability ?? pokemonSets[p.name].ability,item:p.item ?? ''},{}),null,`${sample.id}: ${p.name}`);}
       combinations.add(team.map(p=>p.name).sort().join(','));assert.ok(team.some(p=>p.name===sample.ace),sample.id);const equipped=team.map(p=>p.item).filter(Boolean);if(!alola)assert.equal(new Set(equipped).size,equipped.length);
     }
-    assert.equal(seen.size,sample.entries!.length,sample.id);assert.ok(combinations.size>=(alola?(alola.entries.length===3?1:3):sample.entries!.length===5 ? 6 : 8),sample.id);
+    assert.equal(seen.size,sample.entries!.length,sample.id);assert.ok(combinations.size>=(galar?1:alola?(alola.entries.length===3?1:3):sample.entries!.length===5 ? 6 : 8),sample.id);
   }
 });
 test('boss identities vary by run, preview agrees with battle, and saved identity and party survive reload',()=>{

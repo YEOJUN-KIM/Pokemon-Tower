@@ -4,9 +4,9 @@
     "named-hau",
     "named-guzma"
   ],
-  "count": 224,
-  "runtime": "57ff351be24863f5da5b9c3534aa3338787001cfcc4d737bcd8b3eed9a3aacfa",
-  "source": "f4a22864dd705f04a630fe3869ac571442ac6de6567190dd6de94840c4cc4264",
+  "count": 199,
+  "runtime": "0a635e2e9bd30847cd01963ea8c444eb9669fcf37c8b6fc17825be1d77ce4580",
+  "source": "67ab79f139099fca63d7a620561c8c0c58db038ea551c259672b7c6b11228b59",
   "otherTrainers": "b8f633414110ee08f88432493c1ed5a664786e0537b2d86db693b444fad36968",
   "sharedBuilds": "83dde6d7929da3c544ce9dabe6876bfff0e29569d45c3a617e9e0ffdeb6b36c9",
   "oldRuntime": [
@@ -1020,5 +1020,6 @@
         "bulk": false
       }
     }
-  }
+  },
+  "galarRebase": "Authorized Galar update; non-Galar rows remain pinned by galar-preservation.json."
 }

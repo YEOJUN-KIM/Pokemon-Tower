@@ -4,6 +4,7 @@ import {sinnohTrainers} from './sinnoh-trainers';
 import {unovaTrainers} from './unova-trainers';
 import {kalosTrainers} from './kalos-trainers';
 import {alolaTrainers,alolaSample} from './alola-trainers';
+import {galarTrainers,galarSample} from './galar-trainers';
 import {regionalTrainerSamples} from './regional-trainers';
 import type {BossView} from '../shared/contracts';
 import {namedTrainerIntro} from './named-trainer-intros';
@@ -122,7 +123,10 @@ for(const reviewed of alolaTrainers.filter(t=>t.category!=='grunt')){
  const replacement=alolaSample(reviewed),index=namedTrainerSamples.findIndex(s=>s.id===reviewed.id);
  if(index>=0)Object.assign(namedTrainerSamples[index],replacement);else namedTrainerSamples.push(replacement);
 }
-export const trainerCatalog=[...normalTrainerSamples,...eliteTrainerSamples,...mixedTrainerSamples,...namedTrainerSamples];
+// Replace the old Galar candidate pools, including deferred identities.
+for(let i=namedTrainerSamples.length-1;i>=0;i--)if(namedTrainerSamples[i].generation===8)namedTrainerSamples.splice(i,1);
+namedTrainerSamples.push(...galarTrainers.filter(t=>t.category!=='grunt').map(galarSample));
+export const trainerCatalog=[...normalTrainerSamples,...eliteTrainerSamples,...mixedTrainerSamples,...namedTrainerSamples,galarSample(galarTrainers.find(t=>t.category==='grunt')!)];
 export function trainerView(sample:TrainerSample):BossView {
   return {...(sample.aiCeiling?{aiCeiling:sample.aiCeiling}:{}),id:sample.id,name:sample.name,title:sample.title,introduction:sample.kind==='named'?namedTrainerIntro(sample.id):'',victory:'',defeat:'',...(sample.role ? {role:sample.role} : {}),...(sample.npcRank?{npcRank:sample.npcRank}:{}),portrait:sample.portrait,kind:sample.kind,generation:sample.generation,specialty:sample.specialty};
 }

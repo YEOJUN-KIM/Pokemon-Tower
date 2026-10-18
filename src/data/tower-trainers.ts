@@ -31,8 +31,8 @@ export function towerTrainerEncounter(floor:number,runId='prototype',theme:Tower
     const config=towerThemes[theme];
     if(hidden)id=config.final;
     else if(localFloor===50)id=splitRoute?config.champion:config.final;
-    else if(localFloor===40)id=splitRoute?shuffled([...config.elites],`${chapterRun}:${theme}:elite`)[3]:config.champion;
-    else if(localFloor%10===0)id=shuffled([...config.elites],`${chapterRun}:${theme}:elite`)[localFloor/10-1];
+    else if(localFloor===40)id=splitRoute?shuffled([...config.elites],`${chapterRun}:${theme}:elite`)[3%config.elites.length]:config.champion;
+    else if(localFloor%10===0)id=shuffled([...config.elites],`${chapterRun}:${theme}:elite`)[(localFloor/10-1)%config.elites.length];
     else id=shuffled([...config.gyms],`${chapterRun}:${theme}:gym`)[Math.floor(localFloor/10)];
     const sample=namedTrainerSamples.find(s=>s.id===id)!;
     const boss=trainerView(sample);

@@ -2,7 +2,7 @@ import {allowsGimmick,type BattleRule} from '../data/run-rules';
 import type {Battle} from 'pokemon-showdown';
 import {DYNAMAX_ITEM,megaStones} from '../data/gimmicks';
 // Installed on one battle only. Old saved formats never enter this path.
-export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:string;species:string;item:string}[]>,tickets?:import('../data/tera').TeraTickets,rule:BattleRule='chaos',opponentRule:BattleRule=rule,opponentTeraSpecies?:string,equipment?:readonly import('../data/trainer-equipment').TrainerEquipment[]){
+export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:string;species:string;item:string;gigantamax?:boolean}[]>,tickets?:import('../data/tera').TeraTickets,rule:BattleRule='chaos',opponentRule:BattleRule=rule,opponentTeraSpecies?:string,equipment?:readonly import('../data/trainer-equipment').TrainerEquipment[]){
  const ruleFor=(side:string)=>side==='p2'?opponentRule:rule;
  const baseDex=battle.dex,localDex=Object.create(baseDex) as typeof baseDex,localItems=Object.create(baseDex.items) as typeof baseDex.items;
  const ball=baseDex.items.get('Poke Ball');
@@ -49,7 +49,9 @@ export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:
      const original=pokemon.getDynamaxRequest.bind(pokemon);
      pokemon.getDynamaxRequest=(skipChecks?:boolean)=>{
       if(!allowsGimmick(ruleFor(side.id),'dynamax'))return;
-      const hasBand=side.id==='p1'&&equipment!==undefined?equipment.includes('Dynamax Band'):pokemon.getItem().id==='dynamaxband';
+      // Packed G-Max eligibility doubles as an itemless NPC carrier marker.
+      // Historical held-band teams retain their existing behavior.
+      const hasBand=side.id==='p1'&&equipment!==undefined?equipment.includes('Dynamax Band'):pokemon.getItem().id==='dynamaxband'||side.id==='p2'&&!!entry?.gigantamax&&!entry.item;
       if(!skipChecks && (!hasBand || !trainerEquipment&&used.has(side.id) || pokemon.terastallized || transformed.has(pokemon)))return;
       if(trainerEquipment){
        if(!skipChecks&&(!side.canDynamaxNow()||pokemon.species.cannotDynamax||pokemon.illusion?.species.cannotDynamax||pokemon.species.isMega||pokemon.species.isPrimal||pokemon.species.forme==='Ultra'))return;

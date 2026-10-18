@@ -29,7 +29,7 @@ test('all named NPCs and villain leaders have one legal representative carrier a
  const samples=[...namedTrainerSamples,...Object.values(villainLeaders).flatMap(p=>[p.executive,...p.executives??[],p.boss])];
  for(const sample of samples)for(const floor of [5,35,75].filter(f=>f>=sample.minFloor)){
   const team=generateOpponentTeam(floor,[1,2,3,4],[],null,sample,CURRENT_PROGRESSION);
-  const carriers=team.filter(p=>p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
+  const carriers=team.filter(p=>p.gigantamax&&!p.item||p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
   assert.ok(carriers.length<=1,sample.id);
   const reviewed=normalNpcTemplate(sample.id,floor,sample.role);
   const planned=reviewed?reviewed.signature:npcGimmick(sample.id,sample.generation,[...sample.entries!,...(npcExtraCandidates[sample.id] ?? [])],sample.ace);
@@ -68,7 +68,7 @@ test('all player rules save the same Leon gimmick; reopening restores NPC powers
   store.db.prepare("UPDATE runs SET floor=50,state='select' WHERE id=?").run(first.run_id);
   const boss=store.battle(store.enter(rule,first.run_id,50,starters));
   assert.equal(boss.ai_version,'tower-policy-v13');assert.equal(boss.rule,rule);
-  assert.equal(Showdown.Teams.unpack(boss.opponent_team)!.find(p=>p.species==='Charizard')!.item,DYNAMAX_ITEM);
+  assert.equal(Showdown.Teams.unpack(boss.opponent_team)!.find(p=>p.species==='Charizard')!.item,'');
   assert.equal(Showdown.Teams.unpack(boss.opponent_team)!.find(p=>p.species==='Charizard')!.gigantamax,true);
   assert.equal(JSON.parse(boss.boss!).gimmick.rule,'dynamax');assert.equal(JSON.parse(boss.tera_tickets).p2,0);
   const service=new TowerService(store);try{assert.equal((await service.state(rule)).battle!.opponentRule,'dynamax');}finally{await service.dispose();}

@@ -8,7 +8,7 @@ import {isCollectibleSpecies} from '../data/pokedex-roster';
 import {canonicalNpcId} from '../data/npc-review-presets';
 import {validateSelectionRules,type SelectionRules} from '../data/npc-selection-rules';
 
-type Template={id:string;stage:NormalModeStage;allFloors?:boolean;select?:boolean;required?:string[];selectionRules?:SelectionRules;role:string;ace:string;signature:NpcGimmick|null;gimmickEnabled:boolean;legendaryMinFloor?:number;team:{species:string;item:string;gigantamax:boolean;profile:TrainingProfile}[]};
+type Template={id:string;stage:NormalModeStage;allFloors?:boolean;select?:boolean;required?:string[];selectionRules?:SelectionRules;role:string;ace:string;signature:NpcGimmick|null;gimmickEnabled:boolean;legendaryMinFloor?:number;team:{species:string;item:string;gigantamax:boolean;special?:'hidden';profile:TrainingProfile}[]};
 for(const row of rows as unknown as Template[])validateSelectionRules(row.team.map(p=>p.species),row.selectionRules,[...row.required??[],...row.ace?[row.ace]:[],...row.signature?[row.signature.species]:[]]);
 const templates=new Map((rows as unknown as Template[]).map(row=>[`${row.id}:${row.allFloors?'all':row.stage}`,row]));
 const species=roster as Record<string,{legendary?:boolean;mythical?:boolean}>;

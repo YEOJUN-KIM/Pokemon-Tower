@@ -1,0 +1,28 @@
+{
+  "excluded": [
+    "named-nessa",
+    "named-rose",
+    "named-leon",
+    "named-milo",
+    "named-kabu",
+    "named-bea",
+    "named-allister",
+    "named-opal",
+    "named-gordie",
+    "named-melony",
+    "named-piers",
+    "named-raihan",
+    "named-marnie",
+    "named-hop",
+    "named-bede",
+    "named-raihan-cup",
+    "named-oleana",
+    "macrocosmos-executive-oleana",
+    "macrocosmos-boss-rose",
+    "macrocosmos-grunt"
+  ],
+  "hashes": {
+    "scripts/data/npc/normal-npc-samples.json": "b114f02c9d7a68b6aa734f5866294b41b8a8830b92c43dede4095107caa7fc3e",
+    "src/data/normal-npc-templates.json": "ee825c842b92d53251e1e3a877e5b4af83b339e5eb46f5a010d0e287001d0817"
+  }
+}

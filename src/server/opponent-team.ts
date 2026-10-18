@@ -124,7 +124,7 @@ export function selectNamedEntries(entries:readonly string[],random:()=>number,a
   for(let i=selected.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[selected[i],selected[j]]=[selected[j],selected[i]];}
   return selected;
 }
-export type OpponentEntry={name:string;moves:string[];item?:string;ability?:string;gigantamax?:boolean;profile?:TrainingProfile};
+export type OpponentEntry={name:string;moves:string[];item?:string;ability?:string;gigantamax?:boolean;special?:'hidden';profile?:TrainingProfile};
 function withNamedIVs(team:OpponentEntry[],floor:number,seed:Seed,progression:TowerProgression,named:boolean){
  if(!named||progression==='legacy')return team;
  return team.map(entry=>{
@@ -160,7 +160,7 @@ export function generateOpponentTeam(floor:number,seed:Seed,previous:string[]=[]
       const selected=template.select?selectNamedEntries(template.team.map(p=>p.species),random,template.ace||undefined,template.signature?.species,{accept:names=>(template.required??[]).every(name=>names.includes(name))&&satisfiesSelectionRules(names,template.selectionRules)}):template.team.map(p=>p.species);
       if(!satisfiesSelectionRules(selected,template.selectionRules))throw Error('NPC team does not satisfy selection rules');
       const enabled=normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'));
-      let team=selected.map(name=>template.team.find(p=>p.species===name)!).map(p=>{const profile=templateProfile(p.profile,floor);return {name:p.species,moves:profile.moves,item:p.item,ability:profile.ability,gigantamax:p.gigantamax,profile};});
+      let team=selected.map(name=>template.team.find(p=>p.species===name)!).map(p=>{const profile=templateProfile(p.profile,floor);return {name:p.species,moves:profile.moves,item:p.item,ability:profile.ability,gigantamax:p.gigantamax,...(p.special?{special:p.special}:{}),profile};});
       if(template.allFloors&&enabled)team=equipNpcGimmick(team,template.signature) as typeof team;
       // Builds stay fixed; candidate membership and lead order use the saved seed.
       for(let i=team.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[team[i],team[j]]=[team[j],team[i]];}

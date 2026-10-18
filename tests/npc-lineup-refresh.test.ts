@@ -33,8 +33,8 @@ test('every themed legendary boss and organization alias switches at 75 with one
 });
 
 test('regional NPC partners and Iris retain their intended species in both stages',()=>{
- for(const [id,partner] of [['kiawe','Marowak-Alola'],['kukui','Incineroar'],['hau','Raichu-Alola'],['opal','Weezing-Galar'],['melony','Darmanitan-Galar'],['bede','Rapidash-Galar']]){
-  const rows=templates.filter(t=>t.id==='named-'+id);assert.equal(rows.length,['kiawe','kukui','hau'].includes(id)?1:2);
+ for(const [id,partner] of [['kiawe','Marowak-Alola'],['kukui','Incineroar'],['hau','Raichu-Alola'],['melony','Darmanitan-Galar'],['bede','Rapidash-Galar']]){
+  const rows=templates.filter(t=>t.id==='named-'+id);assert.equal(rows.length,1);
   assert.ok(rows.every(t=>t.team.some(p=>p.species===partner)),id);
  }
  for(const row of templates.filter(t=>t.id==='named-iris')){

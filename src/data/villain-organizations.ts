@@ -4,6 +4,7 @@ import {sinnohTrainer} from './sinnoh-trainers';
 import {unovaTrainer} from './unova-trainers';
 import {kalosTrainer} from './kalos-trainers';
 import {alolaTrainer,alolaSample} from './alola-trainers';
+import {galarTrainer,galarSample} from './galar-trainers';
 import {namedTrainerSamples,type TrainerSample} from './trainer-catalog';
 import {towerThemes,type TowerTheme} from './tower-themes';
 
@@ -24,6 +25,7 @@ export const VILLAIN_CHANCE=.08;
 export const VILLAIN_BOSS_MIN_FLOOR=normalNpcFloorRules.villainBoss;
 // Shared sample source for scripted campaigns; no encounter roll or floor gate.
 export function organizationGrunt(organization:string):TrainerSample {
+ const galar=galarTrainer(`${organization}-grunt`);if(galar)return galarSample(galar);
  const reviewed=alolaTrainer(`${organization}-grunt`);if(reviewed)return alolaSample(reviewed);
  const group=villainOrganizations.find(group=>group.id===organization);
  if(!group)throw Error('Unknown villain organization');
@@ -55,7 +57,7 @@ export const villainLeaders:Record<string,{executive:TrainerSample;executives?:T
  skull:{executive:leader('guzma','expert'),boss:leader('guzma','expert')},
  aqua:{executive:executive('matt','해조','matt',hoennTrainer('aqua-executive-matt')!.entries),executives:[executive('shelly','이연','shelly',hoennTrainer('aqua-executive-shelly')!.entries)],boss:leader('archie')},
  aether:{executive:leader('faba','tactical'),boss:leader('lusamine')},
- macrocosmos:{executive:leader('oleana','tactical'),boss:leader('rose')},
+ macrocosmos:{executive:leader('oleana','expert'),boss:leader('rose')},
  star:{executive:leader('giacomo','tactical'),boss:leader('penny')},
 };
 export type VillainProgress={gruntWins:number;executiveWins:number};

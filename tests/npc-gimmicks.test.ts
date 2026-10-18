@@ -22,6 +22,7 @@ import {PRE_NPC_FORMAT} from '../src/data/battle-rules';
 import {normalNpcCategory,normalNpcGimmicksEnabled} from '../src/data/normal-mode-stages';
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {primalOrbs} from '../src/data/primal-forms';
+import {hoennTrainer} from '../src/data/hoenn-trainers';
 
 test('all named NPCs and villain leaders have one legal representative carrier at early and late floors',()=>{
  const validator=new Showdown.TeamValidator(FORMAT);
@@ -31,7 +32,7 @@ test('all named NPCs and villain leaders have one legal representative carrier a
   const carriers=team.filter(p=>p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
   assert.ok(carriers.length<=1,sample.id);
   const planned=normalNpcTemplate(sample.id,floor,sample.role)?.signature ?? npcGimmick(sample.id,sample.generation,[...sample.entries!,...(npcExtraCandidates[sample.id] ?? [])],sample.ace);
-  assert.ok(planned,sample.id);
+  if(!planned){assert.ok(['named-roxanne','named-tateandliza','tabitha'].includes(sample.id));assert.equal(carriers.length,0);continue;}
   const enabled=normalNpcGimmicksEnabled(floor,normalNpcCategory(sample.role,sample.id,sample.kind));
   assert.equal(carriers.length,!enabled || planned.rule==='tera'?0:1,sample.id);
   for(const p of carriers){if(zCrystals[p.item!]){const crystal=zCrystals[p.item!];assert.ok(p.moves.some(m=>crystal.from?Showdown.Dex.moves.get(m).name===crystal.from:Showdown.Dex.moves.get(m).type===crystal.type && !!Showdown.Dex.moves.get(m).zMove),sample.id);}
@@ -105,7 +106,7 @@ test('every generation 1–5 NPC has an explicit individual assignment; later ge
  for(const sample of namedTrainerSamples){
   const entries=[...sample.entries!,...(npcExtraCandidates[sample.id] ?? [])];
   const plan=npcGimmick(sample.id,sample.generation,entries,sample.ace)!;
-  if(sample.generation!<=5){assert.ok(earlyNpcAssignments[sample.id],sample.id);assert.equal(plan.rule,earlyNpcAssignments[sample.id].rule);}
+  if(sample.generation!<=5){if(hoennTrainer(sample.id)?.signature===null){assert.equal(plan,null);continue;}assert.ok(earlyNpcAssignments[sample.id],sample.id);assert.equal(plan.rule,earlyNpcAssignments[sample.id].rule);}
   else assert.equal(plan.rule,({6:'mega',7:'z',8:'dynamax',9:'tera'} as const)[sample.generation as 6|7|8|9],sample.id);
  }
 });

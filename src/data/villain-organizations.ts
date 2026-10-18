@@ -1,4 +1,5 @@
 import {normalNpcFloorRules} from './normal-mode-stages';
+import {hoennTrainer} from './hoenn-trainers';
 import {namedTrainerSamples,type TrainerSample} from './trainer-catalog';
 import {towerThemes,type TowerTheme} from './tower-themes';
 
@@ -21,7 +22,7 @@ export const VILLAIN_BOSS_MIN_FLOOR=normalNpcFloorRules.villainBoss;
 export function organizationGrunt(organization:string):TrainerSample {
  const group=villainOrganizations.find(group=>group.id===organization);
  if(!group)throw Error('Unknown villain organization');
- return {id:`${group.id}-grunt`,name:'조직원',title:group.name,kind:'normal',role:'villain',generation:null,specialty:null,tactic:'status',portrait:group.portrait,minFloor:1,entries:group.entries,concept:`${group.name}의 조직원`};
+ return {id:`${group.id}-grunt`,name:'조직원',title:group.name,kind:'normal',role:'villain',generation:null,specialty:null,tactic:'status',portrait:group.portrait,minFloor:1,entries:hoennTrainer(`${group.id}-grunt`)?.entries??group.entries,concept:`${group.name}의 조직원`};
 }
 function ticket(key:string){let hash=2166136261;for(const char of key)hash=Math.imul(hash^char.charCodeAt(0),16777619);hash=Math.imul(hash^(hash>>>16),0x85ebca6b);hash=Math.imul(hash^(hash>>>13),0xc2b2ae35);return ((hash^(hash>>>16))>>>0)/4294967296;}
 export function runOrganization(runId:string,theme?:TowerTheme|null) {
@@ -40,14 +41,14 @@ export const villainRankNames:Record<VillainRank,string>={grunt:'조직원',exec
 export const villainBonuses:Record<VillainRank,number>={grunt:0,executive:250,boss:1000};
 const leader=(id:string,aiCeiling:NonNullable<TrainerSample['aiCeiling']>='expert'):TrainerSample=>({...namedTrainerSamples.find(s=>s.id===`named-${id}`)!,aiCeiling});
 const executive=(id:string,name:string,portrait:string,entries:string[],ace=entries[0]):TrainerSample=>({aiCeiling:'tactical',id,name,portrait,entries,ace,title:'',role:'villain',kind:'named',generation:null,specialty:null,tactic:'status',minFloor:16,concept:'조직 간부의 테마 파티'});
-export const villainLeaders:Record<string,{executive:TrainerSample;boss:TrainerSample}>={
+export const villainLeaders:Record<string,{executive:TrainerSample;executives?:TrainerSample[];boss:TrainerSample}>={
  rocket:{executive:leader('archer','tactical'),boss:leader('giovanni')},
- magma:{executive:executive('tabitha','호걸','tabitha',['Camerupt','Mightyena','Golbat','Weezing','Magcargo']),boss:leader('maxie')},
+ magma:{executive:executive('tabitha','호걸','tabitha',hoennTrainer('magma-executive-tabitha')!.entries),executives:[executive('courtney','구열','courtney',hoennTrainer('magma-executive-courtney')!.entries)],boss:leader('maxie')},
  galactic:{executive:executive('mars','마스','mars',['Purugly','Golbat','Bronzong','Skuntank','Toxicroak']),boss:leader('cyrus')},
  plasma:{executive:executive('zinzolin','칠현인 비오','zinzolin',['Cryogonal','Weavile','Garbodor','Scrafty','Bisharp']),boss:leader('ghetsis')},
  flare:{executive:executive('xerosic','크세로시키','xerosic',['Malamar','Crobat','Houndoom','Scrafty','Swalot']),boss:leader('lysandre')},
  skull:{executive:executive('plumeria','플루메리','plumeria',['Salazzle','Golbat','Gengar','Muk','Crobat']),boss:{...executive('guzma','구즈마','guzma',['Golisopod','Scizor','Pinsir','Masquerain','Ariados']),aiCeiling:'expert',tactic:'physical',minFloor:31}},
- aqua:{executive:executive('matt','해조','matt',['Sharpedo','Mightyena','Crobat','Walrein','Muk']),boss:leader('archie')},
+ aqua:{executive:executive('matt','해조','matt',hoennTrainer('aqua-executive-matt')!.entries),executives:[executive('shelly','이연','shelly',hoennTrainer('aqua-executive-shelly')!.entries)],boss:leader('archie')},
  aether:{executive:executive('faba','자우보','faba',['Hypno','Slowbro','Bruxish','Alakazam','Espeon']),boss:leader('lusamine')},
  macrocosmos:{executive:leader('oleana','tactical'),boss:leader('rose')},
  star:{executive:leader('giacomo','tactical'),boss:leader('penny')},
@@ -65,10 +66,12 @@ export function villainEncounter(runId:string,floor:number,organization:string,p
  if(ended)return null;
  const grunt=villainGrunt(runId,floor,organization,previousVillain);if(!grunt)return null;
  const weights=villainRankWeights(floor,progress);
- const candidates=(['grunt','executive','boss'] as const).filter(rank=>weights[rank]>0 && eligible(rank==='grunt'?grunt:villainLeaders[organization][rank]));
+ const leaders=villainLeaders[organization];
+ const officers=[leaders.executive,...leaders.executives??[]].filter(eligible);
+ const candidates=(['grunt','executive','boss'] as const).filter(rank=>weights[rank]>0 && (rank==='executive'?officers.length>0:eligible(rank==='grunt'?grunt:leaders.boss)));
  if(!candidates.length)return null;
  let roll=ticket(`villain-rank:${runId}:${floor}`)*candidates.reduce((sum,rank)=>sum+weights[rank],0);
  const rank=candidates.find(rank=>(roll-=weights[rank])<0) ?? candidates.at(-1)!;
- const group=villainOrganizations.find(g=>g.id===organization)!,base=rank==='grunt'?grunt:villainLeaders[organization][rank];
+ const group=villainOrganizations.find(g=>g.id===organization)!,base=rank==='grunt'?grunt:rank==='executive'?officers[Math.floor(ticket(`villain-officer:${runId}:${floor}`)*officers.length)]:leaders.boss;
  return {sample:{...base,id:rank==='grunt'?grunt.id:`${organization}-${rank}-${base.portrait}`,title:`${group.name} ${rank==='grunt'?'':villainRankNames[rank]}`.trim(),role:'villain',minFloor:rank==='boss'?VILLAIN_BOSS_MIN_FLOOR:rank==='executive'?16:1},event:{organization,name:group.name,rank,bonus:villainBonuses[rank]}};
 }

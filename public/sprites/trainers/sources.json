@@ -1099,6 +1099,20 @@
       "reviewedOn": "2026-10-16",
       "review": "game-class-no-individual-credit-listed",
       "sha256": "46489113f0669d6fe966fdf54dce22db2b89cde0695104573455753d08efaa0b"
+    },
+    {
+      "portrait": "courtney",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/courtney.png",
+      "status": "downloaded",
+      "artist": "ZacWeavile",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "shelly",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/shelly.png",
+      "status": "downloaded",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
     }
   ]
 }

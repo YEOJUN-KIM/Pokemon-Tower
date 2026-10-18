@@ -21,10 +21,10 @@ const earlyRows:[string,NpcGimmick['rule'],string][]=[
  ['pryce','tera','Mamoswine'],['clair','z','Kingdra'],['will','tera','Xatu'],
  ['koga','tera','Crobat'],['bruno','dynamax','Machamp'],['karen','z','Umbreon'],
  ['archer','mega','Houndoom'],['lance','mega','Dragonite'],['red','dynamax','Pikachu'],
- ['roxanne','tera','Probopass'],['brawly','z','Hariyama'],['wattson','mega','Manectric'],
+ ['brawly','z','Hariyama'],['wattson','mega','Manectric'],
  ['flannery','z','Torkoal'],['norman','z','Slaking'],['winona','mega','Altaria'],
- ['tateandliza','tera','Solrock'],['wallace-gym','z','Milotic'],['juan','z','Kingdra'],
- ['sidney','mega','Absol'],['phoebe','mega','Banette'],['glacia','tera','Walrein'],
+ ['wallace-gym','z','Milotic'],['juan','z','Kingdra'],
+ ['sidney','mega','Absol'],['phoebe','mega','Sableye'],['glacia','mega','Glalie'],
  ['drake','mega','Salamence'],['maxie','mega','Camerupt'],['archie','mega','Sharpedo'],
  ['steven','mega','Metagross'],['wallace','z','Milotic'],
  ['roark','tera','Rampardos'],['gardenia','z','Roserade'],['maylene','mega','Lucario'],
@@ -40,7 +40,7 @@ const earlyRows:[string,NpcGimmick['rule'],string][]=[
  ['grimsley','tera','Bisharp'],['caitlin','z','Gothitelle'],['ghetsis','z','Hydreigon'],
  ['alder','z','Volcarona'],['iris','z','Haxorus'],
  // Organization executives have no generation field in the source catalog.
- ['tabitha','mega','Camerupt'],['mars','tera','Purugly'],['zinzolin','z','Cryogonal'],
+ ['courtney','mega','Camerupt'],['mars','tera','Purugly'],['zinzolin','z','Cryogonal'],
  ['xerosic','mega','Houndoom'],['plumeria','z','Salazzle'],['guzma','z','Golisopod'],
  ['matt','mega','Sharpedo'],['faba','z','Hypno'],
 ];

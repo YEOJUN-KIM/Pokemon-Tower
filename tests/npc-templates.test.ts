@@ -33,7 +33,7 @@ test('live named teams use the reviewed three members and profiles, scaled to ac
  const iris=normalNpcTemplate('named-iris',50,'champion')!;
  assert.equal(iris.ace,'Haxorus');assert.equal(iris.signature?.species,'Haxorus');
  assert.equal(iris.team.find(p=>p.species==='Haxorus')!.item,'Dragonium Z');
- assert.equal(templates.length,297);
+ assert.equal(templates.length,284);
 });
 
 test('stored champion teams retain template nature, ability, tools and stats across reopening',()=>{
@@ -56,15 +56,16 @@ test('stored champion teams retain template nature, ability, tools and stats acr
  }finally{store.close();}
 });
 
-test('boss rank is impossible before 75 even after many wins; late Maxie stores and uses Primal Groudon',async()=>{
+test('boss rank is impossible before 75 even after many wins; late Maxie keeps Groudon and Mega Camerupt',async()=>{
  for(let floor=1;floor<75;floor++)assert.equal(villainRankWeights(floor,{gruntWins:100,executiveWins:100}).boss,0);
  // Villain teams remain available for scripts after removal from ordinary floors.
  const sample={...villainLeaders.magma.boss,id:'magma-boss-maxie'};
  const team=generateOpponentTeam(80,[1,2,3,4],[],null,sample,CURRENT_PROGRESSION);
- assert.deepEqual(team.map(p=>p.name).sort(),['Groudon','Camerupt','Crobat'].sort());
- assert.equal(team.find(p=>p.name==='Groudon')!.item,'Red Orb');
+ assert.ok(team.some(p=>p.name==='Groudon'));assert.ok(team.some(p=>p.name==='Camerupt'));
+ assert.equal(team.find(p=>p.name==='Camerupt')!.item,'Cameruptite');
+ assert.equal(team.find(p=>p.name==='Groudon')!.item,'Assault Vest');
  const profiles=Object.fromEntries(team.map(p=>[p.name,p.profile!]));
  const opponent=packTeam(team.map(p=>p.name),profiles,Object.fromEntries(team.map(p=>[p.name,p.item??''])));
  const log=await runBattle({rule:'basic',teams:{p1:packTeam(starters),p2:opponent},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),teraTickets:{p1:0,p2:0}});
- assert.ok(log.publicProtocol.some(line=>line.includes('Groudon-Primal')));assert.ok(log.winner);
+ assert.ok(log.winner);
 });

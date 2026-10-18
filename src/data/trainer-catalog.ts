@@ -1,4 +1,5 @@
 import {johtoReferences} from './johto-builds';
+import {hoennTrainers} from './hoenn-trainers';
 import {regionalTrainerSamples} from './regional-trainers';
 import type {BossView} from '../shared/contracts';
 import {namedTrainerIntro} from './named-trainer-intros';
@@ -90,6 +91,10 @@ for(const sample of namedTrainerSamples){
   if(!sample.entries!.includes(sample.ace))sample.entries=[sample.ace,...sample.entries!.slice(1)];
 }
 namedTrainerSamples.push(...regionalTrainerSamples);
+for(const reviewed of hoennTrainers){
+ const sample=namedTrainerSamples.find(s=>s.id===reviewed.id);
+ if(sample){sample.entries=reviewed.entries;sample.ace=reviewed.ace;sample.concept=reviewed.concept;if(reviewed.aiCeiling)sample.aiCeiling=reviewed.aiCeiling;}
+}
 export const trainerCatalog=[...normalTrainerSamples,...eliteTrainerSamples,...mixedTrainerSamples,...namedTrainerSamples];
 export function trainerView(sample:TrainerSample):BossView {
   return {...(sample.aiCeiling?{aiCeiling:sample.aiCeiling}:{}),id:sample.id,name:sample.name,title:sample.title,introduction:sample.kind==='named'?namedTrainerIntro(sample.id):'',victory:'',defeat:'',...(sample.role ? {role:sample.role} : {}),...(sample.npcRank?{npcRank:sample.npcRank}:{}),portrait:sample.portrait,kind:sample.kind,generation:sample.generation,specialty:sample.specialty};

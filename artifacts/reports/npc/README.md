@@ -1,5 +1,7 @@
 # NPC 팀 검토 자료
 
+- [호연 필수 NPC 설계](../../../docs/gameplay/hoenn-named-trainers.md) · [밸런스 검증](../../../docs/gameplay/hoenn-named-trainer-balance-report.md) · [선출·승률·기믹 집계](hoenn-audit.json): 마그마 간부 둘은 추가 조정 대상으로 남아 있습니다.
+
 - [일반 모드 두 단계 팀 표](NORMAL_MODE_SAMPLES.md): 단일 빌드 파일럿 이전의 단계별 비교 자료입니다. 현재 6종 후보 변경은 [파일럿 명세](../../../docs/gameplay/named-trainer-sample-pilot.md)를 함께 확인합니다.
 - [최고 단계 참고 팀 표](NPC_TEAM_SAMPLES.md): 생성 기준을 검토하는 참고 자료입니다.
 

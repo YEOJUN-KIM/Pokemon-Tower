@@ -7,7 +7,7 @@ export function projectNpcRuntime(source){
  return source.samples.map(s=>{
   const key=`${s.id}:${s.allFloors?'all':s.stage}`;
   assert.ok(!keys.has(key),`Duplicate NPC template: ${key}`);keys.add(key);
-  assert.ok(s.allFloors?s.select&&s.team.length>=3&&s.team.length<=6:s.team.length===3,`Invalid NPC candidate count: ${key}`);
+  assert.ok(s.select?s.team.length>=3&&s.team.length<=6:!s.allFloors&&s.team.length===3,`Invalid NPC candidate count: ${key}`);
   assert.equal(new Set(s.team.map(p=>p.species)).size,s.team.length,`Duplicate NPC member: ${key}`);
   assert.ok(!s.ace||s.team.some(p=>p.species===s.ace),`Missing ace: ${key}`);
   assert.ok(!s.signature||s.team.some(p=>p.species===s.signature.species),`Missing gimmick carrier: ${key}`);
@@ -19,6 +19,6 @@ export function projectNpcRuntime(source){
    const points=Object.values(p.profile.evs);
    assert.ok(points.every(n=>Number.isInteger(n)&&n>=0&&n<=32)&&points.reduce((a,b)=>a+b,0)<=66,`Invalid training points: ${key}`);
   }
-  return {id:s.id,stage:s.stage,...(s.allFloors?{allFloors:true,select:s.select,required:s.required}:{}),...(s.selectionRules?{selectionRules:s.selectionRules}:{}),role:s.role,ace:s.ace,signature:s.signature,gimmickEnabled:s.gimmickEnabled,legendaryMinFloor:s.legendaryMinFloor,team:s.team.map(p=>({species:p.species,item:p.item,gigantamax:p.gigantamax,profile:p.profile}))};
+  return {id:s.id,stage:s.stage,...(s.allFloors?{allFloors:true,select:s.select,required:s.required}:s.select?{select:true,required:s.required}:{}),...(s.selectionRules?{selectionRules:s.selectionRules}:{}),role:s.role,ace:s.ace,signature:s.signature,gimmickEnabled:s.gimmickEnabled,legendaryMinFloor:s.legendaryMinFloor,team:s.team.map(p=>({species:p.species,item:p.item,gigantamax:p.gigantamax,profile:p.profile}))};
  });
 }

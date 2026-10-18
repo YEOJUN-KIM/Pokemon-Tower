@@ -5,8 +5,8 @@ export const npcReviewPresets:Record<string,{entries:string[];ace:string;signatu
  'named-giovanni':{entries:['Mewtwo','Rhyperior','Kangaskhan'],ace:'Mewtwo',signature:{rule:'mega',species:'Kangaskhan',item:'Kangaskhanite'},legendaryMinFloor:75},
  'named-lance':{entries:['Dragonite','Charizard','Gyarados'],ace:'Dragonite'},
  'named-cynthia':{entries:['Garchomp','Spiritomb','Lucario'],ace:'Garchomp'},
- 'named-maxie':{entries:['Groudon','Camerupt','Crobat'],ace:'Groudon',signature:{rule:'primal',species:'Groudon',item:'Red Orb'},legendaryMinFloor:75},
- 'named-archie':{entries:['Kyogre','Sharpedo','Crobat'],ace:'Kyogre',signature:{rule:'primal',species:'Kyogre',item:'Blue Orb'},legendaryMinFloor:75},
+ 'named-maxie':{entries:['Groudon','Camerupt','Crobat','Weezing','Mightyena'],ace:'Groudon',signature:{rule:'mega',species:'Camerupt',item:'Cameruptite'},legendaryMinFloor:75},
+ 'named-archie':{entries:['Kyogre','Sharpedo','Crobat','Muk','Mightyena'],ace:'Kyogre',signature:{rule:'mega',species:'Sharpedo',item:'Sharpedonite'},legendaryMinFloor:75},
  // Organization-themed tower adaptations, rather than original-game teams.
  'named-cyrus':{entries:['Dialga','Weavile','Crobat'],ace:'Dialga',signature:{rule:'z',species:'Weavile',item:'Darkinium Z'},legendaryMinFloor:75},
  'named-ghetsis':{entries:['Kyurem','Hydreigon','Cofagrigus'],ace:'Kyurem',signature:{rule:'z',species:'Hydreigon',item:'Dragonium Z'},legendaryMinFloor:75},
@@ -24,8 +24,8 @@ export const npcReviewPresets:Record<string,{entries:string[];ace:string;signatu
 // Comparison samples below the legendary threshold keep ordinary partners.
 export const npcEarlyReplacements:Record<string,{species:string;replacement:string;ace:string;signature:NpcGimmick}>={
  'named-giovanni':{species:'Mewtwo',replacement:'Nidoqueen',ace:'Rhyperior',signature:{rule:'mega',species:'Kangaskhan',item:'Kangaskhanite'}},
- 'named-maxie':{species:'Groudon',replacement:'Claydol',ace:'Camerupt',signature:{rule:'mega',species:'Camerupt',item:'Cameruptite'}},
- 'named-archie':{species:'Kyogre',replacement:'Walrein',ace:'Sharpedo',signature:{rule:'mega',species:'Sharpedo',item:'Sharpedonite'}},
+ 'named-maxie':{species:'Groudon',replacement:'Mightyena',ace:'Camerupt',signature:{rule:'mega',species:'Camerupt',item:'Cameruptite'}},
+ 'named-archie':{species:'Kyogre',replacement:'Mightyena',ace:'Sharpedo',signature:{rule:'mega',species:'Sharpedo',item:'Sharpedonite'}},
  'named-cyrus':{species:'Dialga',replacement:'Honchkrow',ace:'Weavile',signature:{rule:'z',species:'Weavile',item:'Darkinium Z'}},
  'named-ghetsis':{species:'Kyurem',replacement:'Eelektross',ace:'Hydreigon',signature:{rule:'z',species:'Hydreigon',item:'Dragonium Z'}},
  'named-lysandre':{species:'Yveltal',replacement:'Mienshao',ace:'Gyarados',signature:{rule:'mega',species:'Gyarados',item:'Gyaradosite'}},

@@ -26,7 +26,7 @@ test('new encounters suppress every early gimmick and retain late signatures',()
   for(const floor of [start-1,start]){
    const team=generateOpponentTeam(floor,[1,2,3,4],[],null,sample,'hundred-floor-v1');
    if(floor<start){assert.ok(team.every(p=>!special(p.item ?? '')),sample.id);assert.ok(team.every(p=>!p.gigantamax));}
-   else if(npcGimmick(sample.id,sample.generation,[...sample.entries!,...(npcExtraCandidates[sample.id] ?? [])],sample.ace)?.rule!=='tera')assert.ok(team.some(p=>special(p.item ?? '')),sample.id);
+   else {const plan=npcGimmick(sample.id,sample.generation,[...sample.entries!,...(npcExtraCandidates[sample.id] ?? [])],sample.ace);if(plan&&plan.rule!=='tera')assert.ok(team.some(p=>special(p.item ?? '')),sample.id);}
   }
  }
 });
@@ -40,17 +40,17 @@ test('saved early Paldea fights have no NPC Tera ticket, while the first champio
   }
  }finally{store.close();}
 });
-test('general-mode review keeps twenty-nine single named pools and two staged templates for other NPCs',()=>{
+test('general-mode review keeps fifty candidate pools and paired stages for other NPCs',()=>{
  const counts=new Map<string,number>();
  for(const row of normalSamples.samples){
   counts.set(row.id,(counts.get(row.id) ?? 0)+1);
-  if('allFloors' in row&&row.allFloors){
-   assert.ok(row.team.length>=5);for(const p of row.team){assert.equal(p.profile.moves.length,4);assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),66);assert.ok(Object.values(p.profile.ivs).every(v=>v===31));}continue;
+  if('select' in row&&row.select){
+   assert.ok(row.team.length>=3&&row.team.length<=6);for(const p of row.team){assert.equal(p.profile.moves.length,4);assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),66);assert.ok(Object.values(p.profile.ivs).every(v=>v===31));}continue;
   }
   assert.equal(row.team.length,3);
   for(const p of row.team){assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),row.statPoints);assert.ok(Object.values(p.profile.evs).every(v=>v<=32));assert.ok(Object.values(p.profile.ivs).every(v=>v===row.iv));}
   if(!row.gimmickEnabled)assert.ok(row.team.every(p=>!special(p.item)&&!p.gigantamax&&(!('battleForm' in p)||!p.battleForm)));
  }
- assert.equal(counts.size,163);assert.equal([...counts.values()].filter(n=>n===1).length,29);assert.ok([...counts.values()].every(n=>n===1||n===2));
- for(const id of ['named-maxie','magma-boss-maxie']){const rows=normalSamples.samples.filter(s=>s.id===id);assert.ok(rows.find(s=>s.sampleTier===1)!.team.every(p=>p.species!=='Groudon'));assert.ok(rows.find(s=>s.sampleTier===2)!.team.some(p=>p.species==='Groudon' && p.item==='Red Orb'));}
+ assert.equal(counts.size,167);assert.equal([...counts.values()].filter(n=>n===1).length,50);assert.ok([...counts.values()].every(n=>n===1||n===2));
+ for(const id of ['named-maxie','magma-boss-maxie']){const rows=normalSamples.samples.filter(s=>s.id===id);assert.ok(rows.find(s=>s.stage==='first-gate')!.team.every(p=>p.species!=='Groudon'));const final=rows.find(s=>s.stage==='final-gate')!;assert.ok(final.team.some(p=>p.species==='Groudon'));assert.ok(final.team.some(p=>p.species==='Camerupt' && p.item==='Cameruptite'));}
 });

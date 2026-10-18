@@ -18,7 +18,7 @@ import {FORMAT,runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {pokemonSets,packTeam,starters} from '../src/data/teams';
 import {snapshotTrainerEventBattle} from '../src/server/trainer-event-battle';
 import {kalosBattleTelemetry} from '../scripts/lib/kalos-battle-telemetry';
-import preservation from './fixtures/kalos-preservation.json' with {type:'json'};
+import preservation from './fixtures/alola-preservation.json' with {type:'json'};
 
 function sampleFor(id:string){
  const named=trainerCatalog.find(s=>s.id===id);if(named)return named;
@@ -30,8 +30,8 @@ test('Kalos preserves all other reviewed/runtime rows and common policy engines'
  const ids=new Set([...kalosTrainers.map(t=>t.id),'named-lysandre']);
  const sort=(a:{id:string;stage:string},b:{id:string;stage:string})=>(a.id+a.stage).localeCompare(b.id+b.stage);
  const digest=(v:unknown)=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
- const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((r:{id:string})=>!ids.has(r.id)).sort(sort);
- const source=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((r:{id:string})=>!ids.has(r.id)).sort(sort);
+ const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((r:{id:string})=>!preservation.excludedAlola.includes(r.id)&&!ids.has(r.id)).sort(sort);
+ const source=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((r:{id:string})=>!preservation.excludedAlola.includes(r.id)&&!ids.has(r.id)).sort(sort);
  assert.equal(runtime.length,preservation.kalos.count);assert.equal(digest(runtime),preservation.kalos.runtime);assert.equal(digest(source),preservation.kalos.source);
  for(const [path,hash] of Object.entries(preservation.common))assert.equal(createHash('sha256').update(readFileSync(path,'utf8').replace(/\r\n/g,'\n')).digest('hex'),hash,path);
 });

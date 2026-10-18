@@ -1,0 +1,1305 @@
+{
+  "trainers": [
+    {
+      "id": "named-ilima",
+      "name": "일리마",
+      "category": "captain",
+      "specialty": "Normal",
+      "ace": "Gumshoos",
+      "entries": [
+        "Gumshoos",
+        "Komala",
+        "Smeargle",
+        "Tauros"
+      ],
+      "tactic": "status",
+      "aiCeiling": "tactical",
+      "points": 48,
+      "signature": null,
+      "minFloor": 5,
+      "concept": "알로라 captain: Normal 타입과 역할별 육성"
+    },
+    {
+      "id": "named-lana",
+      "name": "수련",
+      "category": "captain",
+      "specialty": "Water",
+      "ace": "Araquanid",
+      "entries": [
+        "Araquanid",
+        "Lanturn",
+        "Cloyster",
+        "Wishiwashi"
+      ],
+      "tactic": "bulk",
+      "aiCeiling": "tactical",
+      "points": 48,
+      "signature": null,
+      "minFloor": 5,
+      "concept": "알로라 captain: Water 타입과 역할별 육성"
+    },
+    {
+      "id": "named-kiawe",
+      "name": "키아웨",
+      "category": "captain",
+      "specialty": "Fire",
+      "ace": "Marowak-Alola",
+      "entries": [
+        "Marowak-Alola",
+        "Salazzle",
+        "Arcanine",
+        "Turtonator"
+      ],
+      "tactic": "physical",
+      "aiCeiling": "tactical",
+      "points": 48,
+      "signature": null,
+      "minFloor": 5,
+      "concept": "알로라 captain: Fire 타입과 역할별 육성"
+    },
+    {
+      "id": "named-mallow",
+      "name": "마오",
+      "category": "captain",
+      "specialty": "Grass",
+      "ace": "Tsareena",
+      "entries": [
+        "Tsareena",
+        "Lurantis",
+        "Shiinotic",
+        "Trevenant"
+      ],
+      "tactic": "status",
+      "aiCeiling": "tactical",
+      "points": 48,
+      "signature": null,
+      "minFloor": 5,
+      "concept": "알로라 captain: Grass 타입과 역할별 육성"
+    },
+    {
+      "id": "named-sophocles",
+      "name": "마마네",
+      "category": "captain",
+      "specialty": "Electric",
+      "ace": "Togedemaru",
+      "entries": [
+        "Togedemaru",
+        "Vikavolt",
+        "Magnezone",
+        "Electivire"
+      ],
+      "tactic": "status",
+      "aiCeiling": "tactical",
+      "points": 48,
+      "signature": null,
+      "minFloor": 5,
+      "concept": "알로라 captain: Electric 타입과 역할별 육성"
+    },
+    {
+      "id": "named-mina",
+      "name": "말리화",
+      "category": "captain",
+      "specialty": "Fairy",
+      "ace": "Ribombee",
+      "entries": [
+        "Ribombee",
+        "Granbull",
+        "Comfey",
+        "Shiinotic"
+      ],
+      "tactic": "setup",
+      "aiCeiling": "tactical",
+      "points": 48,
+      "signature": null,
+      "minFloor": 5,
+      "concept": "알로라 captain: Fairy 타입과 역할별 육성"
+    },
+    {
+      "id": "named-nanu",
+      "name": "나누",
+      "category": "kahuna",
+      "specialty": "Dark",
+      "ace": "Persian-Alola",
+      "entries": [
+        "Persian-Alola",
+        "Krookodile",
+        "Sableye",
+        "Honchkrow"
+      ],
+      "tactic": "status",
+      "aiCeiling": "tactical",
+      "points": 54,
+      "signature": null,
+      "minFloor": 5,
+      "concept": "알로라 kahuna: Dark 타입과 역할별 육성"
+    },
+    {
+      "id": "named-hapu",
+      "name": "하푸우",
+      "category": "kahuna",
+      "specialty": "Ground",
+      "ace": "Mudsdale",
+      "entries": [
+        "Mudsdale",
+        "Gastrodon",
+        "Flygon",
+        "Golurk"
+      ],
+      "tactic": "bulk",
+      "aiCeiling": "tactical",
+      "points": 54,
+      "signature": {
+        "rule": "z",
+        "species": "Mudsdale",
+        "item": "Groundium Z"
+      },
+      "minFloor": 5,
+      "concept": "알로라 kahuna: Ground 타입과 역할별 육성"
+    },
+    {
+      "id": "named-hala",
+      "name": "할라",
+      "category": "elite",
+      "specialty": "Fighting",
+      "ace": "Crabominable",
+      "entries": [
+        "Crabominable",
+        "Hariyama",
+        "Bewear",
+        "Poliwrath"
+      ],
+      "tactic": "physical",
+      "aiCeiling": "expert",
+      "points": 66,
+      "signature": {
+        "rule": "z",
+        "species": "Crabominable",
+        "item": "Fightinium Z"
+      },
+      "minFloor": 5,
+      "concept": "알로라 elite: Fighting 타입과 역할별 육성"
+    },
+    {
+      "id": "named-olivia",
+      "name": "라이치",
+      "category": "elite",
+      "specialty": "Rock",
+      "ace": "Lycanroc",
+      "entries": [
+        "Lycanroc",
+        "Relicanth",
+        "Carbink",
+        "Probopass",
+        "Golem-Alola"
+      ],
+      "tactic": "bulk",
+      "aiCeiling": "expert",
+      "points": 66,
+      "signature": {
+        "rule": "z",
+        "species": "Lycanroc",
+        "item": "Rockium Z"
+      },
+      "minFloor": 5,
+      "concept": "알로라 elite: Rock 타입과 역할별 육성"
+    },
+    {
+      "id": "named-acerola",
+      "name": "아세로라",
+      "category": "elite",
+      "specialty": "Ghost",
+      "ace": "Palossand",
+      "entries": [
+        "Palossand",
+        "Mimikyu",
+        "Dhelmise",
+        "Drifblim",
+        "Froslass"
+      ],
+      "tactic": "setup",
+      "aiCeiling": "expert",
+      "points": 66,
+      "signature": {
+        "rule": "z",
+        "species": "Mimikyu",
+        "item": "Mimikium Z"
+      },
+      "minFloor": 5,
+      "concept": "알로라 elite: Ghost 타입과 역할별 육성"
+    },
+    {
+      "id": "named-kahili",
+      "name": "카일리",
+      "category": "elite",
+      "specialty": "Flying",
+      "ace": "Toucannon",
+      "entries": [
+        "Toucannon",
+        "Skarmory",
+        "Mandibuzz",
+        "Oricorio"
+      ],
+      "tactic": "bulk",
+      "aiCeiling": "expert",
+      "points": 66,
+      "signature": {
+        "rule": "z",
+        "species": "Toucannon",
+        "item": "Flyinium Z"
+      },
+      "minFloor": 5,
+      "concept": "알로라 elite: Flying 타입과 역할별 육성"
+    },
+    {
+      "id": "named-molayne",
+      "name": "몰레인",
+      "category": "elite",
+      "specialty": "Steel",
+      "ace": "Dugtrio-Alola",
+      "entries": [
+        "Dugtrio-Alola",
+        "Magnezone",
+        "Metagross",
+        "Skarmory"
+      ],
+      "tactic": "physical",
+      "aiCeiling": "expert",
+      "points": 66,
+      "signature": {
+        "rule": "z",
+        "species": "Dugtrio-Alola",
+        "item": "Steelium Z"
+      },
+      "minFloor": 5,
+      "concept": "알로라 elite: Steel 타입과 역할별 육성"
+    },
+    {
+      "id": "named-kukui",
+      "name": "쿠쿠이",
+      "category": "champion",
+      "specialty": null,
+      "ace": "Incineroar",
+      "entries": [
+        "Incineroar",
+        "Lycanroc",
+        "Snorlax",
+        "Magnezone",
+        "Braviary",
+        "Slowbro"
+      ],
+      "tactic": "balanced",
+      "aiCeiling": "expert",
+      "points": 66,
+      "signature": {
+        "rule": "z",
+        "species": "Incineroar",
+        "item": "Incinium Z"
+      },
+      "minFloor": 5,
+      "concept": "알로라 champion: 혼합 타입과 역할별 육성"
+    },
+    {
+      "id": "skull-grunt",
+      "name": "스컬단 조직원",
+      "category": "grunt",
+      "specialty": null,
+      "ace": "Raticate-Alola",
+      "entries": [
+        "Raticate-Alola",
+        "Crobat",
+        "Salazzle",
+        "Garbodor",
+        "Scrafty",
+        "Toxapex"
+      ],
+      "tactic": "balanced",
+      "aiCeiling": "basic",
+      "points": 18,
+      "signature": null,
+      "minFloor": 1,
+      "concept": "알로라 grunt: 혼합 타입과 역할별 육성"
+    },
+    {
+      "id": "named-guzma",
+      "name": "구즈마",
+      "category": "executive",
+      "specialty": "Bug",
+      "ace": "Golisopod",
+      "entries": [
+        "Golisopod",
+        "Masquerain",
+        "Scizor",
+        "Ariados",
+        "Pinsir"
+      ],
+      "tactic": "physical",
+      "aiCeiling": "tactical",
+      "points": 54,
+      "signature": null,
+      "minFloor": 5,
+      "concept": "알로라 executive: Bug 타입과 역할별 육성"
+    },
+    {
+      "id": "aether-grunt",
+      "name": "에테르재단 직원",
+      "category": "grunt",
+      "specialty": null,
+      "ace": "Ledian",
+      "entries": [
+        "Ledian",
+        "Mudsdale",
+        "Pelipper",
+        "Parasect",
+        "Dugtrio",
+        "Manectric"
+      ],
+      "tactic": "balanced",
+      "aiCeiling": "basic",
+      "points": 18,
+      "signature": null,
+      "minFloor": 1,
+      "concept": "알로라 grunt: 혼합 타입과 역할별 육성"
+    },
+    {
+      "id": "named-faba",
+      "name": "자오보",
+      "category": "executive",
+      "specialty": "Psychic",
+      "ace": "Hypno",
+      "entries": [
+        "Hypno",
+        "Slowbro",
+        "Bruxish",
+        "Raichu-Alola",
+        "Alakazam"
+      ],
+      "tactic": "status",
+      "aiCeiling": "tactical",
+      "points": 54,
+      "signature": null,
+      "minFloor": 5,
+      "concept": "알로라 executive: Psychic 타입과 역할별 육성"
+    },
+    {
+      "id": "named-lusamine",
+      "name": "루자미네",
+      "category": "boss",
+      "specialty": null,
+      "ace": "Necrozma",
+      "entries": [
+        "Necrozma",
+        "Clefable",
+        "Lilligant"
+      ],
+      "tactic": "setup",
+      "aiCeiling": "expert",
+      "points": 66,
+      "signature": null,
+      "minFloor": 75,
+      "concept": "알로라 boss: 혼합 타입과 역할별 육성"
+    }
+  ],
+  "builds": {
+    "Gumshoos": {
+      "ability": "Adaptability",
+      "item": "Silk Scarf",
+      "moves": [
+        "Return",
+        "Crunch",
+        "Earthquake",
+        "Fire Punch"
+      ],
+      "bulk": false
+    },
+    "Komala": {
+      "ability": "Comatose",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Return",
+        "Knock Off",
+        "Earthquake",
+        "Sucker Punch"
+      ],
+      "bulk": false
+    },
+    "Smeargle": {
+      "ability": "Own Tempo",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Super Fang",
+        "Night Shade",
+        "Thunder Wave",
+        "Leech Seed"
+      ],
+      "nature": "Calm",
+      "bulk": true
+    },
+    "Tauros": {
+      "ability": "Intimidate",
+      "item": "Silk Scarf",
+      "moves": [
+        "Return",
+        "Earthquake",
+        "Rock Slide",
+        "Zen Headbutt"
+      ],
+      "bulk": false
+    },
+    "Araquanid": {
+      "ability": "Water Bubble",
+      "item": "Mystic Water",
+      "moves": [
+        "Liquidation",
+        "Leech Life",
+        "Crunch",
+        "Mirror Coat"
+      ],
+      "bulk": false
+    },
+    "Lanturn": {
+      "ability": "Volt Absorb",
+      "item": "Leftovers",
+      "moves": [
+        "Scald",
+        "Thunderbolt",
+        "Ice Beam",
+        "Thunder Wave"
+      ],
+      "nature": "Calm",
+      "bulk": true
+    },
+    "Cloyster": {
+      "ability": "Skill Link",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Icicle Spear",
+        "Rock Blast",
+        "Shell Smash",
+        "Liquidation"
+      ],
+      "bulk": false
+    },
+    "Wishiwashi": {
+      "ability": "Schooling",
+      "item": "Mystic Water",
+      "moves": [
+        "Liquidation",
+        "Earthquake",
+        "U-turn",
+        "Ice Beam"
+      ],
+      "nature": "Brave",
+      "bulk": true
+    },
+    "Marowak-Alola": {
+      "ability": "Lightning Rod",
+      "item": "Thick Club",
+      "moves": [
+        "Flare Blitz",
+        "Shadow Bone",
+        "Bonemerang",
+        "Rock Slide"
+      ],
+      "bulk": false
+    },
+    "Salazzle": {
+      "ability": "Corrosion",
+      "item": "Charcoal",
+      "moves": [
+        "Flamethrower",
+        "Sludge Bomb",
+        "Dragon Pulse",
+        "Toxic"
+      ],
+      "bulk": false
+    },
+    "Arcanine": {
+      "ability": "Intimidate",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Flare Blitz",
+        "Extreme Speed",
+        "Crunch",
+        "Will-O-Wisp"
+      ],
+      "bulk": false
+    },
+    "Turtonator": {
+      "ability": "Shell Armor",
+      "item": "Charcoal",
+      "moves": [
+        "Flamethrower",
+        "Dragon Pulse",
+        "Flash Cannon",
+        "Shell Smash"
+      ],
+      "bulk": false
+    },
+    "Tsareena": {
+      "ability": "Queenly Majesty",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Trop Kick",
+        "High Jump Kick",
+        "Knock Off",
+        "U-turn"
+      ],
+      "bulk": false
+    },
+    "Lurantis": {
+      "ability": "Leaf Guard",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Leaf Blade",
+        "Knock Off",
+        "Leech Life",
+        "Swords Dance"
+      ],
+      "bulk": false
+    },
+    "Shiinotic": {
+      "ability": "Effect Spore",
+      "item": "Leftovers",
+      "moves": [
+        "Moonblast",
+        "Giga Drain",
+        "Strength Sap",
+        "Leech Seed"
+      ],
+      "nature": "Bold",
+      "bulk": true
+    },
+    "Trevenant": {
+      "ability": "Natural Cure",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Horn Leech",
+        "Shadow Claw",
+        "Drain Punch",
+        "Will-O-Wisp"
+      ],
+      "bulk": false
+    },
+    "Togedemaru": {
+      "ability": "Iron Barbs",
+      "item": "Magnet",
+      "moves": [
+        "Zing Zap",
+        "Iron Head",
+        "U-turn",
+        "Nuzzle"
+      ],
+      "nature": "Jolly",
+      "bulk": false
+    },
+    "Vikavolt": {
+      "ability": "Levitate",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Thunderbolt",
+        "Bug Buzz",
+        "Energy Ball",
+        "Roost"
+      ],
+      "bulk": false
+    },
+    "Magnezone": {
+      "ability": "Sturdy",
+      "item": "Magnet",
+      "moves": [
+        "Thunderbolt",
+        "Flash Cannon",
+        "Volt Switch",
+        "Thunder Wave"
+      ],
+      "bulk": false
+    },
+    "Electivire": {
+      "ability": "Motor Drive",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Wild Charge",
+        "Ice Punch",
+        "Earthquake",
+        "Cross Chop"
+      ],
+      "bulk": false
+    },
+    "Ribombee": {
+      "ability": "Shield Dust",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Moonblast",
+        "Bug Buzz",
+        "Quiver Dance",
+        "Psychic"
+      ],
+      "nature": "Timid",
+      "bulk": false
+    },
+    "Granbull": {
+      "ability": "Intimidate",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Play Rough",
+        "Earthquake",
+        "Crunch",
+        "Thunder Wave"
+      ],
+      "bulk": false
+    },
+    "Comfey": {
+      "ability": "Triage",
+      "item": "Leftovers",
+      "moves": [
+        "Draining Kiss",
+        "Giga Drain",
+        "Calm Mind",
+        "Stored Power"
+      ],
+      "nature": "Bold",
+      "bulk": true
+    },
+    "Persian-Alola": {
+      "ability": "Fur Coat",
+      "item": "Leftovers",
+      "moves": [
+        "Dark Pulse",
+        "Power Gem",
+        "Thunder Wave",
+        "Nasty Plot"
+      ],
+      "nature": "Timid",
+      "bulk": false
+    },
+    "Krookodile": {
+      "ability": "Intimidate",
+      "item": "Soft Sand",
+      "moves": [
+        "Earthquake",
+        "Knock Off",
+        "Rock Slide",
+        "Dragon Claw"
+      ],
+      "bulk": false
+    },
+    "Sableye": {
+      "ability": "Prankster",
+      "item": "Leftovers",
+      "moves": [
+        "Knock Off",
+        "Will-O-Wisp",
+        "Recover",
+        "Night Shade"
+      ],
+      "nature": "Careful",
+      "bulk": true
+    },
+    "Honchkrow": {
+      "ability": "Super Luck",
+      "item": "Black Glasses",
+      "moves": [
+        "Brave Bird",
+        "Sucker Punch",
+        "Night Slash",
+        "Roost"
+      ],
+      "bulk": false
+    },
+    "Mudsdale": {
+      "ability": "Stamina",
+      "item": "Groundium Z",
+      "moves": [
+        "Earthquake",
+        "Heavy Slam",
+        "Rock Slide",
+        "Body Press"
+      ],
+      "nature": "Impish",
+      "bulk": true
+    },
+    "Gastrodon": {
+      "ability": "Storm Drain",
+      "item": "Leftovers",
+      "moves": [
+        "Scald",
+        "Earth Power",
+        "Ice Beam",
+        "Recover"
+      ],
+      "nature": "Calm",
+      "bulk": true
+    },
+    "Flygon": {
+      "ability": "Levitate",
+      "item": "Soft Sand",
+      "moves": [
+        "Earthquake",
+        "Dragon Claw",
+        "U-turn",
+        "Rock Slide"
+      ],
+      "nature": "Jolly",
+      "bulk": false
+    },
+    "Golurk": {
+      "ability": "Iron Fist",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Earthquake",
+        "Shadow Punch",
+        "Drain Punch",
+        "Ice Punch"
+      ],
+      "bulk": false
+    },
+    "Crabominable": {
+      "ability": "Iron Fist",
+      "item": "Fightinium Z",
+      "moves": [
+        "Drain Punch",
+        "Ice Hammer",
+        "Thunder Punch",
+        "Earthquake"
+      ],
+      "bulk": false
+    },
+    "Hariyama": {
+      "ability": "Thick Fat",
+      "item": "Assault Vest",
+      "moves": [
+        "Drain Punch",
+        "Knock Off",
+        "Bullet Punch",
+        "Heavy Slam"
+      ],
+      "bulk": false
+    },
+    "Bewear": {
+      "ability": "Fluffy",
+      "item": "Leftovers",
+      "moves": [
+        "Drain Punch",
+        "Return",
+        "Darkest Lariat",
+        "Bulk Up"
+      ],
+      "bulk": false
+    },
+    "Primeape": {
+      "ability": "Vital Spirit",
+      "item": "Choice Scarf",
+      "moves": [
+        "Close Combat",
+        "U-turn",
+        "Ice Punch",
+        "Stone Edge"
+      ],
+      "nature": "Jolly",
+      "bulk": false
+    },
+    "Poliwrath": {
+      "ability": "Water Absorb",
+      "item": "Leftovers",
+      "moves": [
+        "Drain Punch",
+        "Liquidation",
+        "Ice Punch",
+        "Bulk Up"
+      ],
+      "bulk": false
+    },
+    "Lycanroc": {
+      "ability": "Sand Rush",
+      "item": "Rockium Z",
+      "moves": [
+        "Rock Slide",
+        "Accelerock",
+        "Crunch",
+        "Swords Dance"
+      ],
+      "nature": "Jolly",
+      "bulk": false
+    },
+    "Relicanth": {
+      "ability": "Rock Head",
+      "item": "Assault Vest",
+      "moves": [
+        "Head Smash",
+        "Waterfall",
+        "Earthquake",
+        "Body Slam"
+      ],
+      "bulk": false
+    },
+    "Carbink": {
+      "ability": "Sturdy",
+      "item": "Leftovers",
+      "moves": [
+        "Moonblast",
+        "Power Gem",
+        "Earth Power",
+        "Calm Mind"
+      ],
+      "nature": "Bold",
+      "bulk": true
+    },
+    "Probopass": {
+      "ability": "Sturdy",
+      "item": "Leftovers",
+      "moves": [
+        "Power Gem",
+        "Flash Cannon",
+        "Earth Power",
+        "Thunder Wave"
+      ],
+      "nature": "Calm",
+      "bulk": true
+    },
+    "Golem-Alola": {
+      "ability": "Galvanize",
+      "item": "Assault Vest",
+      "moves": [
+        "Return",
+        "Rock Slide",
+        "Earthquake",
+        "Fire Punch"
+      ],
+      "bulk": false
+    },
+    "Palossand": {
+      "ability": "Water Compaction",
+      "item": "Leftovers",
+      "moves": [
+        "Shadow Ball",
+        "Earth Power",
+        "Giga Drain",
+        "Toxic"
+      ],
+      "nature": "Bold",
+      "bulk": true
+    },
+    "Mimikyu": {
+      "ability": "Disguise",
+      "item": "Mimikium Z",
+      "moves": [
+        "Play Rough",
+        "Shadow Claw",
+        "Shadow Sneak",
+        "Swords Dance"
+      ],
+      "nature": "Jolly",
+      "bulk": false
+    },
+    "Dhelmise": {
+      "ability": "Steelworker",
+      "item": "Assault Vest",
+      "moves": [
+        "Power Whip",
+        "Shadow Claw",
+        "Anchor Shot",
+        "Earthquake"
+      ],
+      "bulk": false
+    },
+    "Drifblim": {
+      "ability": "Aftermath",
+      "item": "Leftovers",
+      "moves": [
+        "Shadow Ball",
+        "Air Slash",
+        "Thunderbolt",
+        "Will-O-Wisp"
+      ],
+      "bulk": false
+    },
+    "Froslass": {
+      "ability": "Cursed Body",
+      "item": "Focus Sash",
+      "moves": [
+        "Ice Beam",
+        "Shadow Ball",
+        "Thunderbolt",
+        "Thunder Wave"
+      ],
+      "nature": "Timid",
+      "bulk": false
+    },
+    "Toucannon": {
+      "ability": "Skill Link",
+      "item": "Flyinium Z",
+      "moves": [
+        "Brave Bird",
+        "Bullet Seed",
+        "Rock Blast",
+        "Roost"
+      ],
+      "bulk": false
+    },
+    "Skarmory": {
+      "ability": "Sturdy",
+      "item": "Leftovers",
+      "moves": [
+        "Brave Bird",
+        "Body Press",
+        "Roost",
+        "Steel Wing"
+      ],
+      "nature": "Impish",
+      "bulk": true
+    },
+    "Mandibuzz": {
+      "ability": "Overcoat",
+      "item": "Leftovers",
+      "moves": [
+        "Foul Play",
+        "Brave Bird",
+        "Roost",
+        "Toxic"
+      ],
+      "nature": "Impish",
+      "bulk": true
+    },
+    "Oricorio": {
+      "ability": "Dancer",
+      "item": "Life Orb",
+      "moves": [
+        "Revelation Dance",
+        "Air Slash",
+        "Roost",
+        "Quiver Dance"
+      ],
+      "bulk": false
+    },
+    "Dugtrio-Alola": {
+      "ability": "Tangling Hair",
+      "item": "Steelium Z",
+      "moves": [
+        "Earthquake",
+        "Iron Head",
+        "Sucker Punch",
+        "Stone Edge"
+      ],
+      "nature": "Jolly",
+      "bulk": false
+    },
+    "Metagross": {
+      "ability": "Clear Body",
+      "item": "Assault Vest",
+      "moves": [
+        "Meteor Mash",
+        "Zen Headbutt",
+        "Bullet Punch",
+        "Earthquake"
+      ],
+      "bulk": false
+    },
+    "Snorlax": {
+      "ability": "Thick Fat",
+      "item": "Leftovers",
+      "moves": [
+        "Body Slam",
+        "Crunch",
+        "Earthquake",
+        "Fire Punch"
+      ],
+      "bulk": false
+    },
+    "Braviary": {
+      "ability": "Defiant",
+      "item": "Choice Scarf",
+      "moves": [
+        "Brave Bird",
+        "Return",
+        "Close Combat",
+        "U-turn"
+      ],
+      "nature": "Jolly",
+      "bulk": false
+    },
+    "Slowbro": {
+      "ability": "Regenerator",
+      "item": "Leftovers",
+      "moves": [
+        "Scald",
+        "Psychic",
+        "Ice Beam",
+        "Slack Off"
+      ],
+      "nature": "Bold",
+      "bulk": true
+    },
+    "Incineroar": {
+      "ability": "Intimidate",
+      "item": "Incinium Z",
+      "moves": [
+        "Flare Blitz",
+        "Darkest Lariat",
+        "Drain Punch",
+        "Swords Dance"
+      ],
+      "bulk": false
+    },
+    "Golisopod": {
+      "ability": "Emergency Exit",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Swords Dance",
+        "Liquidation",
+        "Leech Life",
+        "Aqua Jet"
+      ],
+      "bulk": false
+    },
+    "Masquerain": {
+      "ability": "Intimidate",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Quiver Dance",
+        "Bug Buzz",
+        "Air Slash",
+        "Hydro Pump"
+      ],
+      "bulk": false
+    },
+    "Scizor": {
+      "ability": "Technician",
+      "item": "Metal Coat",
+      "moves": [
+        "Bullet Punch",
+        "Bug Bite",
+        "Swords Dance",
+        "Roost"
+      ],
+      "bulk": false
+    },
+    "Ariados": {
+      "ability": "Sniper",
+      "item": "Poison Barb",
+      "moves": [
+        "Poison Jab",
+        "Megahorn",
+        "Sucker Punch",
+        "Knock Off"
+      ],
+      "bulk": false
+    },
+    "Pinsir": {
+      "ability": "Mold Breaker",
+      "item": "Silver Powder",
+      "moves": [
+        "X-Scissor",
+        "Close Combat",
+        "Rock Slide",
+        "Swords Dance"
+      ],
+      "bulk": false
+    },
+    "Hypno": {
+      "ability": "Insomnia",
+      "item": "Leftovers",
+      "moves": [
+        "Psychic",
+        "Shadow Ball",
+        "Thunder Wave",
+        "Focus Blast"
+      ],
+      "nature": "Calm",
+      "bulk": true
+    },
+    "Bruxish": {
+      "ability": "Strong Jaw",
+      "item": "Mystic Water",
+      "moves": [
+        "Psychic Fangs",
+        "Crunch",
+        "Liquidation",
+        "Aqua Jet"
+      ],
+      "nature": "Jolly",
+      "bulk": false
+    },
+    "Raichu-Alola": {
+      "ability": "Surge Surfer",
+      "item": "Magnet",
+      "moves": [
+        "Thunderbolt",
+        "Psychic",
+        "Surf",
+        "Nasty Plot"
+      ],
+      "nature": "Timid",
+      "bulk": false
+    },
+    "Alakazam": {
+      "ability": "Magic Guard",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Psychic",
+        "Shadow Ball",
+        "Focus Blast",
+        "Recover"
+      ],
+      "nature": "Timid",
+      "bulk": false
+    },
+    "Clefable": {
+      "ability": "Magic Guard",
+      "item": "Leftovers",
+      "moves": [
+        "Moonblast",
+        "Flamethrower",
+        "Calm Mind",
+        "Soft-Boiled"
+      ],
+      "nature": "Bold",
+      "bulk": true
+    },
+    "Lilligant": {
+      "ability": "Own Tempo",
+      "item": "Life Orb",
+      "moves": [
+        "Petal Dance",
+        "Quiver Dance",
+        "Giga Drain",
+        "Pollen Puff"
+      ],
+      "nature": "Timid",
+      "bulk": false
+    },
+    "Necrozma": {
+      "ability": "Prism Armor",
+      "item": "Weakness Policy",
+      "moves": [
+        "Sunsteel Strike",
+        "Psychic Fangs",
+        "Earthquake",
+        "Dragon Dance"
+      ],
+      "nature": "Adamant",
+      "bulk": false,
+      "forme": "Necrozma-Dusk-Mane"
+    },
+    "Raticate-Alola": {
+      "ability": "Thick Fat",
+      "item": "",
+      "moves": [
+        "Crunch",
+        "Hyper Fang",
+        "Quick Attack",
+        "Stomping Tantrum"
+      ],
+      "bulk": false
+    },
+    "Crobat": {
+      "ability": "Inner Focus",
+      "item": "",
+      "moves": [
+        "Wing Attack",
+        "Poison Fang",
+        "Bite",
+        "Quick Attack"
+      ],
+      "bulk": false
+    },
+    "Garbodor": {
+      "ability": "Aftermath",
+      "item": "",
+      "moves": [
+        "Gunk Shot",
+        "Body Slam",
+        "Stomping Tantrum",
+        "Rock Blast"
+      ],
+      "bulk": false
+    },
+    "Scrafty": {
+      "ability": "Shed Skin",
+      "item": "",
+      "moves": [
+        "Brick Break",
+        "Crunch",
+        "Headbutt",
+        "Rock Tomb"
+      ],
+      "bulk": false
+    },
+    "Toxapex": {
+      "ability": "Limber",
+      "item": "",
+      "moves": [
+        "Liquidation",
+        "Poison Jab",
+        "Pin Missile",
+        "Bite"
+      ],
+      "bulk": false
+    },
+    "Ledian": {
+      "ability": "Early Bird",
+      "item": "",
+      "moves": [
+        "Bug Buzz",
+        "Air Slash",
+        "Swift",
+        "Giga Drain"
+      ],
+      "bulk": false
+    },
+    "Mudsdale-employee": {
+      "ability": "Stamina",
+      "item": "",
+      "moves": [
+        "High Horsepower",
+        "Double Kick",
+        "Heavy Slam",
+        "Rock Tomb"
+      ],
+      "bulk": false
+    },
+    "Pelipper": {
+      "ability": "Keen Eye",
+      "item": "",
+      "moves": [
+        "Water Pulse",
+        "Air Slash",
+        "Ice Beam",
+        "Swift"
+      ],
+      "bulk": false
+    },
+    "Parasect": {
+      "ability": "Effect Spore",
+      "item": "",
+      "moves": [
+        "Seed Bomb",
+        "X-Scissor",
+        "Slash",
+        "Brick Break"
+      ],
+      "bulk": false
+    },
+    "Dugtrio": {
+      "ability": "Sand Veil",
+      "item": "",
+      "moves": [
+        "Dig",
+        "Rock Tomb",
+        "Slash",
+        "Sucker Punch"
+      ],
+      "bulk": false
+    },
+    "Manectric": {
+      "ability": "Static",
+      "item": "",
+      "moves": [
+        "Discharge",
+        "Flamethrower",
+        "Snarl",
+        "Swift"
+      ],
+      "bulk": false
+    }
+  }
+}

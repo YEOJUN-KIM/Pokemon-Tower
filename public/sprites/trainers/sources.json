@@ -1154,6 +1154,36 @@
       "review": "original-game-character-artwork",
       "creditSource": "https://archives.bulbagarden.net/wiki/File:XY_Aliana.png",
       "sha256": "89cc188beff8a50ce19d8b82687f024c0e8a48cd8dd50d9e1b410f5f992d7ee2"
+    },
+    {
+      "portrait": "hala",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/hala.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-18",
+      "review": "credited-asset",
+      "artist": "Gnomowladny",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/",
+      "sha256": "68c18ddce289db0ee19e10342089685df396477882d9482db1164151a917b283"
+    },
+    {
+      "portrait": "nanu",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/nanu.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-18",
+      "review": "credited-asset",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/",
+      "sha256": "00f103ddb119030f17fde45f6497103b8cb07adf96b986e767644d7245be8f2e"
+    },
+    {
+      "portrait": "hapu",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/hapu.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-18",
+      "review": "credited-asset",
+      "artist": "Beliot419",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/",
+      "sha256": "607aabc0f3fc6e49f58b1be4c2a85466e3dc00c5298906a3c21bca7a96f83f54"
     }
   ]
 }

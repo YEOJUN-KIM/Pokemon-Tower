@@ -16,7 +16,7 @@ import type {TrainingProfile} from '../src/data/training';
 import {namedOpponentIVs} from '../src/server/named-opponent-ivs';
 
 test('live named teams use the reviewed three members and profiles, scaled to actual floors',()=>{
- for(const sample of namedTrainerSamples)for(const floor of [5,45,50,55,75,95,100]){
+ for(const sample of namedTrainerSamples)for(const floor of [5,45,50,55,75,95,100].filter(f=>f>=sample.minFloor)){
   const source=normalNpcTemplate(sample.id,floor,sample.role);assert.ok(source,sample.id);
   const team=generateOpponentTeam(floor,[1,2,3,4],[],null,sample,CURRENT_PROGRESSION);
   assert.equal(team.length,3);if(!source.select)assert.deepEqual(team.map(p=>p.name).sort(),source.team.map(p=>p.species).sort());else assert.ok(team.every(p=>source.team.some(s=>s.species===p.name)));
@@ -33,7 +33,7 @@ test('live named teams use the reviewed three members and profiles, scaled to ac
  const iris=normalNpcTemplate('named-iris',50,'champion')!;
  assert.equal(iris.ace,'Haxorus');assert.equal(iris.signature,null);
  assert.equal(iris.team.find(p=>p.species==='Haxorus')!.item,'Focus Sash');
- assert.equal(templates.length,241);
+ assert.equal(templates.length,227);
 });
 
 test('stored champion teams retain template nature, ability, tools and stats across reopening',()=>{

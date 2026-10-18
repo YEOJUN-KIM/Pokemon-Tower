@@ -27,7 +27,7 @@ import {hoennTrainer} from '../src/data/hoenn-trainers';
 test('all named NPCs and villain leaders have one legal representative carrier at early and late floors',()=>{
  const validator=new Showdown.TeamValidator(FORMAT);
  const samples=[...namedTrainerSamples,...Object.values(villainLeaders).flatMap(p=>[p.executive,...p.executives??[],p.boss])];
- for(const sample of samples)for(const floor of [5,35,75]){
+ for(const sample of samples)for(const floor of [5,35,75].filter(f=>f>=sample.minFloor)){
   const team=generateOpponentTeam(floor,[1,2,3,4],[],null,sample,CURRENT_PROGRESSION);
   const carriers=team.filter(p=>p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
   assert.ok(carriers.length<=1,sample.id);
@@ -38,7 +38,7 @@ test('all named NPCs and villain leaders have one legal representative carrier a
   assert.equal(carriers.length,!enabled || planned.rule==='tera'?0:1,sample.id);
   for(const p of carriers){if(zCrystals[p.item!]){const crystal=zCrystals[p.item!];assert.ok(p.moves.some(m=>crystal.from?Showdown.Dex.moves.get(m).name===crystal.from:Showdown.Dex.moves.get(m).type===crystal.type && !!Showdown.Dex.moves.get(m).zMove),sample.id);}
    if(p.item===DYNAMAX_ITEM){assert.ok(Showdown.Dex.species.get(p.name).canGigantamax,sample.id);assert.equal(p.gigantamax,true);}}
-  const profiles=Object.fromEntries(team.map(p=>[p.name,{...defaultProfile(p.name),moves:p.moves,...(p.ability?{ability:p.ability}:{})}]));
+  const profiles=Object.fromEntries(team.map(p=>[p.name,{...(p.profile??defaultProfile(p.name)),moves:p.moves,...(p.ability?{ability:p.ability}:{})}]));
   const sets=Showdown.Teams.unpack(packTeam(team.map(p=>p.name),profiles,Object.fromEntries(team.map(p=>[p.name,p.item ?? ''])),team.filter(p=>p.gigantamax).map(p=>p.name)))!;
   for(const set of sets){if(set.item===DYNAMAX_ITEM)set.item='';set.pokeball='';set.ivs={hp:31,atk:31,def:31,spa:31,spd:31,spe:31};set.evs={hp:1,atk:0,def:0,spa:0,spd:0,spe:0};set.gender='';}
   assert.equal(validator.validateTeam(sets),null,sample.id+' '+floor);

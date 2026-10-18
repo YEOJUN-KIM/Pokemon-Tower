@@ -39,7 +39,8 @@ assert.ok(!requestedNpcs||requestedNpcs.length>0&&new Set(requestedNpcs).size===
 const targets=kalosTrainers.filter(t=>!requestedNpcs||requestedNpcs.includes(t.id));
 // Same four independent-battle benchmarks and equipment as the existing regional
 // comparison. No shopping, recruitment, consumables, or claims of human win rate.
-const cases=[{id:'starters',species:['Charizard','Blastoise','Venusaur']},{id:'offense',species:['Garchomp','Metagross','Lapras']},{id:'bulk',species:['Slowbro','Corviknight','Gastrodon']},{id:'signature',species:['Mimikyu','Kommo-o','Gyarados']}];
+const cases:{id:string;species:string[]}[]=process.env.KALOS_CASES?JSON.parse(readFileSync(process.env.KALOS_CASES,'utf8')):[{id:'starters',species:['Charizard','Blastoise','Venusaur']},{id:'offense',species:['Garchomp','Metagross','Lapras']},{id:'bulk',species:['Slowbro','Corviknight','Gastrodon']},{id:'signature',species:['Mimikyu','Kommo-o','Gyarados']}];
+assert.ok(cases.length>0&&new Set(cases.map(c=>c.id)).size===cases.length&&cases.every(c=>c.id&&c.species.length===3&&new Set(c.species).size===3&&c.species.every(s=>!!pokemonSets[s])),'Invalid KALOS_CASES');
 const highest=JSON.parse(readFileSync('scripts/data/npc/npc-team-samples.json','utf8')).samples as {team:{species:string;profile:TrainingProfile}[]}[];
 const roles=new Map<string,TrainingProfile>();for(const r of highest)for(const p of r.team)if(!roles.has(p.species))roles.set(p.species,p.profile);
 const gear=(floor:number,rule:BattleRule):TrainerEquipment[]=>floor<11?[]:[...(allowsGimmick(rule,'dynamax')?['Dynamax Band' as const]:[]),...(allowsGimmick(rule,'terastallize')?['Tera Orb' as const]:[])];

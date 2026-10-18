@@ -13,12 +13,15 @@ const path='scripts/data/npc/normal-npc-samples.json';
 const source=JSON.parse(readFileSync(path,'utf8'));
 const validator=new Showdown.TeamValidator(FORMAT);
 const builds:Record<string,{ability:string;item:string;moves:string[]}>=design.builds;
+// Scoped set adjustments must not change partners shared with other trainers.
+const overrides:Record<string,Record<string,Partial<(typeof builds)[string]>>>=design.overrides;
 const utility=new Set(['toxic','willowisp','thunderwave','leechseed','dragondance','swordsdance','nastyplot','calmmind','bulkup','quiverdance','shellsmash','recover','roost','slackoff']);
 const rows=[];
 for(const t of kalosTrainers){
  const signature=t.mega?{rule:'mega',species:t.mega,item:Object.keys(megaStones).find(item=>megaStones[item].species===t.mega)!}:null;
  const team=t.entries.map(species=>{
   const b=structuredClone(builds[species]);assert.ok(b,species);
+  Object.assign(b,structuredClone(overrides[t.id]?.[species]??{}));
   // The installed National Dex validator rejects Power Gem for both species.
   if(species==='Aurorus'||species==='Cradily')b.moves=b.moves.map(m=>m==='Power Gem'?'Ancient Power':m);
   // The requested optional Megas are ordinary partners unless explicitly assigned.

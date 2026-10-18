@@ -69,7 +69,7 @@
         "Victreebel",
         "Trevenant",
         "Tangrowth",
-        "Leafeon"
+        "Ludicolo"
       ],
       "mega": null,
       "concept": "풀 회복과 지속 압박",
@@ -1114,6 +1114,91 @@
         "Energy Ball",
         "Shadow Ball"
       ]
+    },
+    "Ludicolo": {
+      "ability": "Own Tempo",
+      "item": "Assault Vest",
+      "moves": [
+        "Scald",
+        "Giga Drain",
+        "Ice Beam",
+        "Focus Blast"
+      ]
+    }
+  },
+  "overrides": {
+    "named-wikstrom": {
+      "Aegislash": {
+        "moves": [
+          "Shadow Claw",
+          "Iron Head",
+          "Sacred Sword",
+          "Shadow Sneak"
+        ],
+        "item": "Weakness Policy"
+      },
+      "Aggron": {
+        "ability": "Sturdy",
+        "item": "Assault Vest"
+      },
+      "Escavalier": {
+        "moves": [
+          "Megahorn",
+          "Iron Head",
+          "Close Combat",
+          "Drill Run"
+        ]
+      },
+      "Scizor": {
+        "moves": [
+          "Bullet Punch",
+          "Iron Head",
+          "Knock Off",
+          "Swords Dance"
+        ]
+      }
+    },
+    "named-ramos": {
+      "Victreebel": {
+        "moves": [
+          "Giga Drain",
+          "Sludge Bomb",
+          "Toxic",
+          "Sucker Punch"
+        ]
+      },
+      "Tangrowth": {
+        "moves": [
+          "Giga Drain",
+          "Focus Blast",
+          "Ancient Power",
+          "Leech Seed"
+        ]
+      },
+      "Ludicolo": {
+        "ability": "Own Tempo",
+        "item": "Assault Vest",
+        "moves": [
+          "Scald",
+          "Giga Drain",
+          "Ice Beam",
+          "Focus Blast"
+        ]
+      }
+    },
+    "named-siebold": {
+      "Starmie": {
+        "item": "Mystic Water",
+        "moves": [
+          "Surf",
+          "Psychic",
+          "Ice Beam",
+          "Recover"
+        ]
+      },
+      "Greninja": {
+        "ability": "Torrent"
+      }
     }
   }
 }

@@ -16520,5 +16520,15 @@
         "src/server/opponent-team.ts": "4c83da14652813d310341e611e22d0a545ab3ca05367d06b644421d12b6cd48c"
       }
     }
+  },
+  "followup": {
+    "report": "artifacts/reports/npc/kalos-tuning.json",
+    "documentation": "docs/gameplay/kalos-npc-tuning.md",
+    "supersededNpcIds": [
+      "named-wikstrom",
+      "named-ramos",
+      "named-siebold"
+    ],
+    "note": "이 파일의 수치는 f4018e89 최초 샘플의 역사적 측정값이다. 세 NPC의 현재 세트·승률·검증은 followup report를 사용한다."
   }
 }

@@ -15,6 +15,7 @@ import {sinnohTrainer} from '../src/data/sinnoh-trainers';
 
 test('every themed legendary boss and organization alias switches at 75 with one gimmick',()=>{
  for(const [id,early] of Object.entries(npcEarlyReplacements)){
+  if(id==='named-lusamine'){assert.equal(normalNpcTemplate(id,74,'villain'),null);assert.equal(normalNpcTemplate(id,75,'villain')?.team.length,3);continue;}
   if(normalNpcTemplate(id,75,'villain')?.allFloors){assert.deepEqual(normalNpcTemplate(id,74,'villain'),normalNpcTemplate(id,75,'villain'));continue;}
   const aliases=[...new Set(templates.filter(t=>canonicalNpcId(t.id)===id).map(t=>t.id))];
   assert.equal(aliases.length,2,id);
@@ -32,8 +33,8 @@ test('every themed legendary boss and organization alias switches at 75 with one
 });
 
 test('regional NPC partners and Iris retain their intended species in both stages',()=>{
- for(const [id,partner] of [['kiawe','Marowak-Alola'],['kukui','Ninetales-Alola'],['hau','Raichu-Alola'],['opal','Weezing-Galar'],['melony','Darmanitan-Galar'],['bede','Rapidash-Galar']]){
-  const rows=templates.filter(t=>t.id==='named-'+id);assert.equal(rows.length,2);
+ for(const [id,partner] of [['kiawe','Marowak-Alola'],['kukui','Incineroar'],['hau','Raichu-Alola'],['opal','Weezing-Galar'],['melony','Darmanitan-Galar'],['bede','Rapidash-Galar']]){
+  const rows=templates.filter(t=>t.id==='named-'+id);assert.equal(rows.length,['kiawe','kukui'].includes(id)?1:2);
   assert.ok(rows.every(t=>t.team.some(p=>p.species===partner)),id);
  }
  for(const row of templates.filter(t=>t.id==='named-iris')){

@@ -6,7 +6,7 @@ export const towerThemes={
  sinnoh:{name:'신오',generation:4,gyms:named('roark,gardenia,maylene,crasherwake,fantina,byron,candice,volkner'),elites:named('aaron,bertha,flint,lucian'),champion:'named-cynthia',final:'named-barry',organizations:['galactic']},
  unova:{hiddenBoss:true,name:'하나',generation:5,gyms:named('cilan,chili,cress,lenora,burgh,elesa,clay,skyla,brycen,drayden,cheren,roxie,marlon'),elites:named('shauntal,marshal,grimsley,caitlin,alder'),champion:'named-iris',final:'named-n',organizations:['plasma']},
  kalos:{name:'칼로스',generation:6,gyms:named('viola,grant,korrina,ramos,clemont,valerie,olympia,wulfric'),elites:named('malva,siebold,wikstrom,drasna'),champion:'named-diantha',final:'named-serena',organizations:['flare']},
- alola:{name:'알로라',generation:7,gyms:named('ilima,lana,kiawe,mallow,sophocles,acerola-captain,mina'),elites:named('molayne,olivia,acerola,kahili'),champion:'named-kukui',final:'named-hau',organizations:['skull','aether']},
+ alola:{name:'알로라',generation:7,gyms:named('ilima,lana,kiawe,mallow,sophocles,mina,nanu,hapu'),elites:named('hala,molayne,olivia,acerola,kahili'),champion:'named-kukui',final:'named-hau',organizations:['skull','aether']},
  galar:{name:'가라르',generation:8,gyms:named('milo,nessa,kabu,bea,allister,opal,gordie,melony,piers,raihan'),elites:named('marnie,hop,bede,raihan-cup'),champion:'named-leon',final:'named-leon',organizations:['macrocosmos']},
  paldea:{name:'팔데아',generation:9,gyms:named('katy,brassius,iono,kofu,larry,ryme,tulip,grusha'),elites:named('rika,poppy,larry-elite,hassel'),champion:'named-geeta',final:'named-nemona',organizations:['star']},
 } as const;

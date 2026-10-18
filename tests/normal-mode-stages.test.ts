@@ -12,6 +12,7 @@ import {npcGimmick,npcExtraCandidates} from '../src/data/npc-gimmicks';
 import {TowerStore} from '../src/server/tower-store';
 import {starters} from '../src/data/teams';
 import normalSamples from '../scripts/data/npc/normal-npc-samples.json' with {type:'json'};
+import {alolaTrainer} from '../src/data/alola-trainers';
 
 const special=(item:string)=>!!megaStones[item] || !!zCrystals[item] || !!primalOrbs[item] || item===DYNAMAX_ITEM;
 test('normal mode has two leader and two boss samples and exact 50/55/100 boundaries',()=>{
@@ -46,12 +47,12 @@ test('general-mode review keeps fifty candidate pools and paired stages for othe
  for(const row of normalSamples.samples){
   counts.set(row.id,(counts.get(row.id) ?? 0)+1);
   if('select' in row&&row.select){
-   assert.ok(row.team.length>=3&&row.team.length<=6);for(const p of row.team){assert.equal(p.profile.moves.length,4);assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),66);assert.ok(Object.values(p.profile.ivs).every(v=>v===31));}continue;
+   const alola=alolaTrainer(row.id);assert.ok(row.team.length>=3&&row.team.length<=6);for(const p of row.team){assert.equal(p.profile.moves.length,4);assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),alola?.points??66);assert.ok(Object.values(p.profile.ivs).every(v=>v===(alola?.category==='grunt'?12:31)));}continue;
   }
   assert.equal(row.team.length,3);
   for(const p of row.team){assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),row.statPoints);assert.ok(Object.values(p.profile.evs).every(v=>v<=32));assert.ok(Object.values(p.profile.ivs).every(v=>v===row.iv));}
   if(!row.gimmickEnabled)assert.ok(row.team.every(p=>!special(p.item)&&!p.gigantamax&&(!('battleForm' in p)||!p.battleForm)));
  }
- assert.equal(counts.size,175);assert.equal([...counts.values()].filter(n=>n===1).length,109);assert.ok([...counts.values()].every(n=>n===1||n===2));
+ assert.equal(counts.size,177);assert.equal([...counts.values()].filter(n=>n===1).length,127);assert.ok([...counts.values()].every(n=>n===1||n===2));
  for(const id of ['named-maxie','magma-boss-maxie']){const rows=normalSamples.samples.filter(s=>s.id===id);assert.ok(rows.find(s=>s.stage==='first-gate')!.team.every(p=>p.species!=='Groudon'));const final=rows.find(s=>s.stage==='final-gate')!;assert.ok(final.team.some(p=>p.species==='Groudon'));assert.ok(final.team.some(p=>p.species==='Camerupt' && p.item==='Cameruptite'));}
 });

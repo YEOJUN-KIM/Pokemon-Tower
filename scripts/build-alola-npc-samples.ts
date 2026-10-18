@@ -1,0 +1,148 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import assert from 'node:assert/strict';
+import Showdown from 'pokemon-showdown';
+import {pokemonSets} from '../src/data/teams';
+import {isCollectibleSpecies} from '../src/data/pokedex-roster';
+import {isHeldItem} from '../src/data/held-items';
+import {FORMAT} from '../src/battle/run';
+
+// Explicit reviewed builds, rather than borrowing mutable player default sets.
+const builds:Record<string,{ability:string;item:string;moves:string[];nature?:string;bulk?:boolean;forme?:string}>={};
+function b(species:string,ability:string,item:string,moves:string,nature?:string,bulk=false,forme?:string){builds[species]={ability,item,moves:moves.split('|'),nature,bulk,forme};}
+b('Gumshoos','Adaptability','Silk Scarf','Return|Crunch|Earthquake|Fire Punch');
+b('Komala','Comatose','Sitrus Berry','Return|Knock Off|Earthquake|Sucker Punch');
+b('Smeargle','Own Tempo','Sitrus Berry','Super Fang|Night Shade|Thunder Wave|Leech Seed','Calm',true);
+b('Tauros','Intimidate','Silk Scarf','Return|Earthquake|Rock Slide|Zen Headbutt');
+b('Araquanid','Water Bubble','Mystic Water','Liquidation|Leech Life|Crunch|Mirror Coat');
+b('Lanturn','Volt Absorb','Leftovers','Scald|Thunderbolt|Ice Beam|Thunder Wave','Calm',true);
+b('Cloyster','Skill Link','Sitrus Berry','Icicle Spear|Rock Blast|Shell Smash|Liquidation');
+b('Wishiwashi','Schooling','Mystic Water','Liquidation|Earthquake|U-turn|Ice Beam','Brave',true);
+b('Marowak-Alola','Lightning Rod','Thick Club','Flare Blitz|Shadow Bone|Bonemerang|Rock Slide');
+b('Salazzle','Corrosion','Charcoal','Flamethrower|Sludge Bomb|Dragon Pulse|Toxic');
+b('Arcanine','Intimidate','Sitrus Berry','Flare Blitz|Extreme Speed|Crunch|Will-O-Wisp');
+b('Turtonator','Shell Armor','Charcoal','Flamethrower|Dragon Pulse|Flash Cannon|Shell Smash');
+b('Tsareena','Queenly Majesty','Sitrus Berry','Trop Kick|High Jump Kick|Knock Off|U-turn');
+b('Lurantis','Leaf Guard','Sitrus Berry','Leaf Blade|Knock Off|Leech Life|Swords Dance');
+b('Shiinotic','Effect Spore','Leftovers','Moonblast|Giga Drain|Strength Sap|Leech Seed','Bold',true);
+b('Trevenant','Natural Cure','Sitrus Berry','Horn Leech|Shadow Claw|Drain Punch|Will-O-Wisp');
+b('Togedemaru','Iron Barbs','Magnet','Zing Zap|Iron Head|U-turn|Nuzzle','Jolly');
+b('Vikavolt','Levitate','Sitrus Berry','Thunderbolt|Bug Buzz|Energy Ball|Roost');
+b('Magnezone','Sturdy','Magnet','Thunderbolt|Flash Cannon|Volt Switch|Thunder Wave');
+b('Electivire','Motor Drive','Sitrus Berry','Wild Charge|Ice Punch|Earthquake|Cross Chop');
+b('Ribombee','Shield Dust','Sitrus Berry','Moonblast|Bug Buzz|Quiver Dance|Psychic','Timid');
+b('Granbull','Intimidate','Sitrus Berry','Play Rough|Earthquake|Crunch|Thunder Wave');
+b('Comfey','Triage','Leftovers','Draining Kiss|Giga Drain|Calm Mind|Stored Power','Bold',true);
+b('Persian-Alola','Fur Coat','Leftovers','Dark Pulse|Power Gem|Thunder Wave|Nasty Plot','Timid');
+b('Krookodile','Intimidate','Soft Sand','Earthquake|Knock Off|Rock Slide|Dragon Claw');
+b('Sableye','Prankster','Leftovers','Knock Off|Will-O-Wisp|Recover|Night Shade','Careful',true);
+b('Honchkrow','Super Luck','Black Glasses','Brave Bird|Sucker Punch|Night Slash|Roost');
+b('Mudsdale','Stamina','Groundium Z','Earthquake|Heavy Slam|Rock Slide|Body Press','Impish',true);
+b('Gastrodon','Storm Drain','Leftovers','Scald|Earth Power|Ice Beam|Recover','Calm',true);
+b('Flygon','Levitate','Soft Sand','Earthquake|Dragon Claw|U-turn|Rock Slide','Jolly');
+b('Golurk','Iron Fist','Sitrus Berry','Earthquake|Shadow Punch|Drain Punch|Ice Punch');
+b('Crabominable','Iron Fist','Fightinium Z','Drain Punch|Ice Hammer|Thunder Punch|Earthquake');
+b('Hariyama','Thick Fat','Assault Vest','Drain Punch|Knock Off|Bullet Punch|Heavy Slam');
+b('Bewear','Fluffy','Leftovers','Drain Punch|Return|Darkest Lariat|Bulk Up');
+b('Primeape','Vital Spirit','Choice Scarf','Close Combat|U-turn|Ice Punch|Stone Edge','Jolly');
+b('Poliwrath','Water Absorb','Leftovers','Drain Punch|Liquidation|Ice Punch|Bulk Up');
+b('Lycanroc','Sand Rush','Rockium Z','Rock Slide|Accelerock|Crunch|Swords Dance','Jolly');
+b('Relicanth','Rock Head','Assault Vest','Head Smash|Waterfall|Earthquake|Body Slam');
+b('Carbink','Sturdy','Leftovers','Moonblast|Power Gem|Earth Power|Calm Mind','Bold',true);
+b('Probopass','Sturdy','Leftovers','Power Gem|Flash Cannon|Earth Power|Thunder Wave','Calm',true);
+b('Golem-Alola','Galvanize','Assault Vest','Return|Rock Slide|Earthquake|Fire Punch');
+b('Palossand','Water Compaction','Leftovers','Shadow Ball|Earth Power|Giga Drain|Toxic','Bold',true);
+b('Mimikyu','Disguise','Mimikium Z','Play Rough|Shadow Claw|Shadow Sneak|Swords Dance','Jolly');
+b('Dhelmise','Steelworker','Assault Vest','Power Whip|Shadow Claw|Anchor Shot|Earthquake');
+b('Drifblim','Aftermath','Leftovers','Shadow Ball|Air Slash|Thunderbolt|Will-O-Wisp');
+b('Froslass','Cursed Body','Focus Sash','Ice Beam|Shadow Ball|Thunderbolt|Thunder Wave','Timid');
+b('Toucannon','Skill Link','Flyinium Z','Brave Bird|Bullet Seed|Rock Blast|Roost');
+b('Skarmory','Sturdy','Leftovers','Brave Bird|Body Press|Roost|Steel Wing','Impish',true);
+b('Mandibuzz','Overcoat','Leftovers','Foul Play|Brave Bird|Roost|Toxic','Impish',true);
+b('Oricorio','Dancer','Life Orb','Revelation Dance|Air Slash|Roost|Quiver Dance');
+b('Dugtrio-Alola','Tangling Hair','Steelium Z','Earthquake|Iron Head|Sucker Punch|Stone Edge','Jolly');
+b('Metagross','Clear Body','Assault Vest','Meteor Mash|Zen Headbutt|Bullet Punch|Earthquake');
+b('Snorlax','Thick Fat','Leftovers','Body Slam|Crunch|Earthquake|Fire Punch');
+b('Braviary','Defiant','Choice Scarf','Brave Bird|Return|Close Combat|U-turn','Jolly');
+b('Slowbro','Regenerator','Leftovers','Scald|Psychic|Ice Beam|Slack Off','Bold',true);
+b('Incineroar','Intimidate','Incinium Z','Flare Blitz|Darkest Lariat|Drain Punch|Swords Dance');
+b('Golisopod','Emergency Exit','Sitrus Berry','Swords Dance|Liquidation|Leech Life|Aqua Jet');
+b('Masquerain','Intimidate','Sitrus Berry','Quiver Dance|Bug Buzz|Air Slash|Hydro Pump');
+b('Scizor','Technician','Metal Coat','Bullet Punch|Bug Bite|Swords Dance|Roost');
+b('Ariados','Sniper','Poison Barb','Poison Jab|Megahorn|Sucker Punch|Knock Off');
+b('Pinsir','Mold Breaker','Silver Powder','X-Scissor|Close Combat|Rock Slide|Swords Dance');
+b('Hypno','Insomnia','Leftovers','Psychic|Shadow Ball|Thunder Wave|Focus Blast','Calm',true);
+b('Bruxish','Strong Jaw','Mystic Water','Psychic Fangs|Crunch|Liquidation|Aqua Jet','Jolly');
+b('Raichu-Alola','Surge Surfer','Magnet','Thunderbolt|Psychic|Surf|Nasty Plot','Timid');
+b('Alakazam','Magic Guard','Sitrus Berry','Psychic|Shadow Ball|Focus Blast|Recover','Timid');
+b('Clefable','Magic Guard','Leftovers','Moonblast|Flamethrower|Calm Mind|Soft-Boiled','Bold',true);
+b('Lilligant','Own Tempo','Life Orb','Petal Dance|Quiver Dance|Giga Drain|Pollen Puff','Timid');
+b('Necrozma','Prism Armor','Weakness Policy','Sunsteel Strike|Psychic Fangs|Earthquake|Dragon Dance','Adamant',false,'Necrozma-Dusk-Mane');
+b('Raticate-Alola','Thick Fat','','Crunch|Hyper Fang|Quick Attack|Stomping Tantrum');
+b('Crobat','Inner Focus','','Wing Attack|Poison Fang|Bite|Quick Attack');
+b('Garbodor','Aftermath','','Gunk Shot|Body Slam|Stomping Tantrum|Rock Blast');
+b('Scrafty','Shed Skin','','Brick Break|Crunch|Headbutt|Rock Tomb');
+b('Toxapex','Limber','','Liquidation|Poison Jab|Pin Missile|Bite');
+b('Ledian','Early Bird','','Bug Buzz|Air Slash|Swift|Giga Drain');
+b('Mudsdale-employee','Stamina','','High Horsepower|Double Kick|Heavy Slam|Rock Tomb');
+b('Pelipper','Keen Eye','','Water Pulse|Air Slash|Ice Beam|Swift');
+b('Parasect','Effect Spore','','Seed Bomb|X-Scissor|Slash|Brick Break');
+b('Dugtrio','Sand Veil','','Dig|Rock Tomb|Slash|Sucker Punch');
+b('Manectric','Static','','Discharge|Flamethrower|Snarl|Swift');
+
+type Category='captain'|'kahuna'|'elite'|'champion'|'grunt'|'executive'|'boss';
+const trainers:{id:string;name:string;category:Category;specialty:string|null;ace:string;entries:string[];tactic:string;aiCeiling:string;points:number;signature:{rule:string;species:string;item:string}|null;minFloor:number;concept:string}[]=[];
+function t(id:string,name:string,category:Category,specialty:string|null,pool:string,tactic='balanced',z?:[string,string]){
+ const entries=pool.split(',');trainers.push({id:id.endsWith('-grunt')?id:`named-${id}`,name,category,specialty,ace:entries[0],entries,tactic,aiCeiling:category==='grunt'?'basic':['captain','kahuna','executive'].includes(category)?'tactical':'expert',points:category==='grunt'?18:category==='captain'?48:['kahuna','executive'].includes(category)?54:66,signature:z?{rule:'z',species:z[0],item:z[1]}:null,minFloor:category==='boss'?75:category==='grunt'?1:5,concept:`알로라 ${category}: ${specialty??'혼합'} 타입과 역할별 육성`});
+}
+t('ilima','일리마','captain','Normal','Gumshoos,Komala,Smeargle,Tauros','status');
+t('lana','수련','captain','Water','Araquanid,Lanturn,Cloyster,Wishiwashi','bulk');
+t('kiawe','키아웨','captain','Fire','Marowak-Alola,Salazzle,Arcanine,Turtonator','physical');
+t('mallow','마오','captain','Grass','Tsareena,Lurantis,Shiinotic,Trevenant','status');
+t('sophocles','마마네','captain','Electric','Togedemaru,Vikavolt,Magnezone,Electivire','status');
+t('mina','말리화','captain','Fairy','Ribombee,Granbull,Comfey,Shiinotic','setup');
+t('nanu','나누','kahuna','Dark','Persian-Alola,Krookodile,Sableye,Honchkrow','status');
+t('hapu','하푸우','kahuna','Ground','Mudsdale,Gastrodon,Flygon,Golurk','bulk',['Mudsdale','Groundium Z']);
+t('hala','할라','elite','Fighting','Crabominable,Hariyama,Bewear,Poliwrath','physical',['Crabominable','Fightinium Z']);
+t('olivia','라이치','elite','Rock','Lycanroc,Relicanth,Carbink,Probopass,Golem-Alola','bulk',['Lycanroc','Rockium Z']);
+t('acerola','아세로라','elite','Ghost','Palossand,Mimikyu,Dhelmise,Drifblim,Froslass','setup',['Mimikyu','Mimikium Z']);
+t('kahili','카일리','elite','Flying','Toucannon,Skarmory,Mandibuzz,Oricorio','bulk',['Toucannon','Flyinium Z']);
+t('molayne','몰레인','elite','Steel','Dugtrio-Alola,Magnezone,Metagross,Skarmory','physical',['Dugtrio-Alola','Steelium Z']);
+t('kukui','쿠쿠이','champion',null,'Incineroar,Lycanroc,Snorlax,Magnezone,Braviary,Slowbro','balanced',['Incineroar','Incinium Z']);
+t('skull-grunt','스컬단 조직원','grunt',null,'Raticate-Alola,Crobat,Salazzle,Garbodor,Scrafty,Toxapex');
+t('guzma','구즈마','executive','Bug','Golisopod,Masquerain,Scizor,Ariados,Pinsir','physical');
+t('aether-grunt','에테르재단 직원','grunt',null,'Ledian,Mudsdale,Pelipper,Parasect,Dugtrio,Manectric');
+t('faba','자오보','executive','Psychic','Hypno,Slowbro,Bruxish,Raichu-Alola,Alakazam','status');
+t('lusamine','루자미네','boss',null,'Necrozma,Clefable,Lilligant','setup');
+const validator=new Showdown.TeamValidator(FORMAT),keys=['hp','atk','def','spa','spd','spe'] as const;
+const rows=trainers.flatMap(trainer=>{
+ const team=trainer.entries.map(species=>{
+  const set=structuredClone(builds[trainer.id==='aether-grunt'&&species==='Mudsdale'?'Mudsdale-employee':species]);assert.ok(set, species);
+  const grunt=trainer.category==='grunt',actual=set.forme??species,stats=Showdown.Dex.species.get(actual).baseStats;
+  // Skull grunts deliberately use ordinary attacks and no competitive tools.
+  if(grunt){set.item='';set.nature='Serious';if(species==='Salazzle')set.moves=['Flamethrower','Sludge Bomb','Dragon Pulse','Dragon Rage'];}
+  if(trainer.id==='named-kukui'&&species==='Lycanroc')set.item='Focus Sash';
+  if(trainer.id==='named-molayne'&&species==='Magnezone')set.item='Assault Vest',set.moves=['Thunderbolt','Flash Cannon','Volt Switch','Body Press'];
+  const attacks=set.moves.map(m=>Showdown.Dex.moves.get(m)).filter(m=>m.category!=='Status'&&!m.damage&&!m.damageCallback&&m.id!=='mirrorcoat');
+  const physical=attacks.filter(m=>m.category==='Physical').length>attacks.filter(m=>m.category==='Special').length;
+  const fast=stats.spe>=80,evs={hp:0,atk:0,def:0,spa:0,spd:0,spe:0};
+  if(grunt)for(const k of keys)evs[k]=3;
+  else if(set.bulk){evs.hp=Math.min(32,Math.round(trainer.points/2));const defense=['Bold','Impish'].includes(set.nature??'')?'def':'spd';evs[defense]=Math.min(32,trainer.points-evs.hp);evs[defense==='def'?'spd':'def']=trainer.points-evs.hp-evs[defense];}
+  else {evs[physical?'atk':'spa']=Math.min(32,Math.round(trainer.points/2));evs[fast?'spe':'hp']=Math.min(32,trainer.points-evs[physical?'atk':'spa']);evs.spd=trainer.points-Object.values(evs).reduce((a,b)=>a+b,0);}
+  const nature=set.nature??(physical?'Adamant':'Modest');
+  assert.ok(isCollectibleSpecies(species),`Uncollectible ${species}`);assert.ok(!set.item||isHeldItem(set.item)||set.item==='Thick Club'&&Showdown.Dex.items.get(set.item).exists,`Item ${set.item}`);
+  const legal=validator.validateSet({...structuredClone(pokemonSets[species]),species:actual,ability:set.ability,item:set.item,moves:set.moves,nature},{});
+  assert.equal(legal,null,`${trainer.id}/${actual}: ${legal}`);
+  return {species,item:set.item,gigantamax:false,role:species==='Smeargle'?'Fixed-damage utility':`${physical?'Physical':'Special'}${set.bulk?' bulky':''}`,profile:{statSystem:'points',ivs:Object.fromEntries(keys.map(k=>[k,grunt?12:31])),evs,nature,ability:set.ability,moves:set.moves,...(set.forme?{forme:set.forme}:{})}};
+ });
+ const boss=trainer.category==='boss';if(boss)team.sort((a,b)=>['Clefable','Lilligant','Necrozma'].indexOf(a.species)-['Clefable','Lilligant','Necrozma'].indexOf(b.species));
+ const common={id:trainer.id,name:trainer.name,generation:7,title:trainer.category,role:['captain','kahuna'].includes(trainer.category)?'gym':['grunt','executive','boss'].includes(trainer.category)?'villain':trainer.category,ace:trainer.category==='grunt'?'':trainer.ace,signature:trainer.signature,stage:'leaders-early',allFloors:true,select:true,required:boss?team.map(p=>p.species):trainer.category==='grunt'?[]:[trainer.ace],...(boss?{legendaryMinFloor:75,selectionRules:{preferredLead:['Clefable'],preferredLast:['Necrozma']}}:{}),gimmickEnabled:!!trainer.signature,concept:trainer.concept,powerTier:trainer.category,team};
+ // Only the late Mallow build gets Contrary + Superpower; early retains Leaf Guard.
+ if(trainer.id==='named-mallow')return ['leaders-early','leaders-late'].map(stage=>{const row=structuredClone(common);row.stage=stage;row.allFloors=false;if(stage==='leaders-late'){const p=row.team.find(p=>p.species==='Lurantis')!;p.profile.ability='Contrary';p.profile.moves=['Leaf Blade','Superpower','Knock Off','Leech Life'];assert.equal(validator.validateSet({...structuredClone(pokemonSets.Lurantis),ability:p.profile.ability,moves:p.profile.moves},{}),null);}return row;});
+ return [common];
+});
+const path='scripts/data/npc/normal-npc-samples.json',source=JSON.parse(readFileSync(path,'utf8'));
+const removed=new Set([...trainers.map(t=>t.id),'named-acerola-captain','skull-executive-plumeria','skull-boss-guzma','aether-executive-faba','aether-boss-lusamine']);
+source.samples=source.samples.filter((r:{id:string})=>!removed.has(r.id));source.samples.push(...rows);
+writeFileSync(path,JSON.stringify(source,null,2)+'\n');
+writeFileSync('scripts/data/npc/alola-design.json',JSON.stringify({trainers,builds},null,2)+'\n');
+console.log(`Reviewed ${trainers.length} Alola identities / ${rows.length} rows`);

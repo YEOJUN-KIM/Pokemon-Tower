@@ -48,7 +48,7 @@ const heldItemsById=new Map(heldItemKeys.map(item=>[item.toLowerCase().replace(/
 export function normalizeHeldItem(value:string){return heldItemsById.get(value.toLowerCase().replace(/[^a-z0-9]/g,''))??null;}
 export function itemIcon(item:HeldItem){return item.toLowerCase().replaceAll(' ','-');}
 export function isHeldItem(value:unknown):value is HeldItem{return typeof value==='string' && Object.hasOwn(heldItems,value);}
-export const npcItemNames:Record<string,string>={'Red Orb':'주홍구슬','Light Ball':'전기구슬','Flame Orb':'화염구슬','Toxic Orb':'맹독구슬','Black Sludge':'검은진흙','Lum Berry':'리샘열매','Wacan Berry':'초나열매'};
+export const npcItemNames:Record<string,string>={'Thick Club':'굵은뼈','Red Orb':'주홍구슬','Light Ball':'전기구슬','Flame Orb':'화염구슬','Toxic Orb':'맹독구슬','Black Sludge':'검은진흙','Lum Berry':'리샘열매','Wacan Berry':'초나열매'};
 export function itemName(value?:string|null){const item=value?normalizeHeldItem(value):null;return item ? heldItems[item].name : value ? npcItemNames[value] ?? value : '없음';}
 
 export function itemIconExtension(item:string){return ['Fairy Feather','Heavy-Duty Boots'].includes(item) ? 'svg' : 'png';}

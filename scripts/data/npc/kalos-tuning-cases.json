@@ -1,0 +1,34 @@
+[
+  {
+    "id": "grass-electric",
+    "species": [
+      "Venusaur",
+      "Jolteon",
+      "Rotom"
+    ]
+  },
+  {
+    "id": "fire-ground",
+    "species": [
+      "Arcanine",
+      "Flygon",
+      "Lucario"
+    ]
+  },
+  {
+    "id": "physical",
+    "species": [
+      "Dragonite",
+      "Weavile",
+      "Conkeldurr"
+    ]
+  },
+  {
+    "id": "mixed",
+    "species": [
+      "Snorlax",
+      "Crobat",
+      "Milotic"
+    ]
+  }
+]

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {createHash,randomUUID} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
-import preservation from './fixtures/kalos-preservation.json' with {type:'json'};
+import preservation from './fixtures/alola-preservation.json' with {type:'json'};
 import {unovaTrainers} from '../src/data/unova-trainers';
 import {sinnohTrainers} from '../src/data/sinnoh-trainers';
 import {trainerCatalog,namedTrainerSamples,legacyNamedTrainerSamples} from '../src/data/trainer-catalog';
@@ -36,8 +36,8 @@ function sampleFor(id:string){
 test('Unova preserves every other region runtime and reviewed definition and every common policy',()=>{
  const ids=new Set([...kalosTrainers.map(t=>t.id),'named-lysandre',...unovaTrainers.map(t=>t.id),'named-ghetsis']);
  const sort=(a:{id:string;stage:string},b:{id:string;stage:string})=>(a.id+a.stage).localeCompare(b.id+b.stage);
- const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((r:{id:string})=>!ids.has(r.id)).sort(sort);
- const reviewed=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((r:{id:string})=>!ids.has(r.id)).sort(sort);
+ const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((r:{id:string})=>!preservation.excludedAlola.includes(r.id)&&!ids.has(r.id)).sort(sort);
+ const reviewed=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((r:{id:string})=>!preservation.excludedAlola.includes(r.id)&&!ids.has(r.id)).sort(sort);
  assert.equal(runtime.length,preservation.unova.count);assert.equal(digest(runtime),preservation.unova.runtime);assert.equal(digest(reviewed),preservation.unova.source);
  for(const [path,hash]of Object.entries(preservation.common))assert.equal(createHash('sha256').update(readFileSync(path,'utf8').replace(/\r\n/g,'\n')).digest('hex'),hash,path);
  for(const t of sinnohTrainers)assert.ok(normalNpcTemplate(t.id,95,t.category==='boss'||t.category==='executive'?'villain':t.category)?.team.every(p=>!p.profile.moves.includes('Trick Room')));

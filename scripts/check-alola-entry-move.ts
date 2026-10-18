@@ -1,0 +1,10 @@
+import {writeFileSync} from 'node:fs';
+import {runBattle} from '../src/battle/run';
+import {packTeam} from '../src/data/teams';
+import {createNpcPolicy} from '../src/battle/npc-policy';
+import {defaultProfile} from '../src/server/training';
+const wall={...defaultProfile('Umbreon'),moves:['Tackle'],nature:'Bold',evs:{hp:32,atk:0,def:32,spa:0,spd:2,spe:0}};
+const goli={...defaultProfile('Golisopod'),ability:'Emergency Exit',moves:['First Impression','Liquidation','Leech Life','Aqua Jet'],nature:'Adamant',evs:{hp:32,atk:32,def:0,spa:0,spd:2,spe:0}};
+const log=await runBattle({teams:{p1:packTeam(['Umbreon','Snorlax','Blissey'],{Umbreon:wall}),p2:packTeam(['Golisopod','Scizor','Pinsir'],{Golisopod:goli})},seed:[1,2,3,4],rule:'basic',player:{choose:o=>o.legalActions[0].command},opponent:createNpcPolicy({tier:'tactical',tactic:'physical'})});
+const result={turns:log.turns,firstImpression:log.publicProtocol.filter(l=>l.startsWith('|move|p2')&&l.includes('|First Impression|')).length,failures:log.publicProtocol.filter(l=>l.startsWith('|-fail|p2')).length,protocol:log.publicProtocol};
+writeFileSync('artifacts/experiments/balance/alola-20261018/first-impression-reproduction.json',JSON.stringify(result,null,2)+'\n');console.log({turns:result.turns,firstImpression:result.firstImpression,failures:result.failures});

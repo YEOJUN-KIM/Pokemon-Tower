@@ -75,7 +75,6 @@ const rows:Row[]=[
  [7,'lana','수련','gym','Water','bulk','Araquanid,Lanturn,Cloyster,Wishiwashi,Primarina,Toxapex'],
  [7,'mallow','마오','gym','Grass','physical','Tsareena,Lurantis,Trevenant,Shiinotic,Roserade,Leafeon'],
  [7,'sophocles','마마네','gym','Electric','special','Vikavolt,Togedemaru,Magnezone,Electivire,Ampharos,Electrode'],
- [7,'acerola-captain','아세로라','gym','Ghost','status','Palossand,Mimikyu,Drifblim,Dhelmise,Froslass,Banette','acerola'],
  [7,'mina','말리화','gym','Fairy','special','Ribombee,Granbull,Mawile,Wigglytuff,Clefable,Shiinotic'],
  [7,'molayne','멀레인','elite','Steel','bulk','Metagross,Magnezone,Skarmory,Klefki,Bisharp,Forretress'],
  [7,'olivia','라이치','elite','Rock','physical','Lycanroc,Relicanth,Carbink,Probopass,Gigalith,Armaldo'],

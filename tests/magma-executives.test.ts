@@ -7,7 +7,7 @@ import Showdown from 'pokemon-showdown';
 import {hoennTrainers} from '../src/data/hoenn-trainers';
 import {sinnohTrainers} from '../src/data/sinnoh-trainers';
 import {unovaTrainers} from '../src/data/unova-trainers';
-import preservation from './fixtures/kalos-preservation.json' with {type:'json'};
+import preservation from './fixtures/alola-preservation.json' with {type:'json'};
 import {villainLeaders} from '../src/data/villain-organizations';
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
@@ -26,8 +26,8 @@ const digest=(v:unknown)=>createHash('sha256').update(JSON.stringify(v)).digest(
 test('Magma and subsequent Sinnoh reviews preserve all other reviewed/runtime NPCs',()=>{
  const excluded=new Set([...kalosTrainers.map(t=>t.id),'named-lysandre',...ids,...sinnohTrainers.map(t=>t.id),...unovaTrainers.map(t=>t.id),'named-cyrus','named-ghetsis']);
  const sort=(a:{id:string;stage:string},b:{id:string;stage:string})=>(a.id+a.stage).localeCompare(b.id+b.stage);
- const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((s:{id:string})=>!excluded.has(s.id)).sort(sort);
- const source=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((s:{id:string})=>!excluded.has(s.id)).sort(sort);
+ const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((s:{id:string})=>!preservation.excludedAlola.includes(s.id)&&!excluded.has(s.id)).sort(sort);
+ const source=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((s:{id:string})=>!preservation.excludedAlola.includes(s.id)&&!excluded.has(s.id)).sort(sort);
  assert.equal(runtime.length,preservation.magma.count);assert.equal(source.length,preservation.magma.count);
  assert.equal(digest(runtime),preservation.magma.runtime);
  assert.equal(digest(source),preservation.magma.source);

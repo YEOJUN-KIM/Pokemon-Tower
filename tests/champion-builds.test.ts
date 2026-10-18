@@ -7,6 +7,7 @@ import {championMoves} from '../src/data/champion-builds';
 import {packTeam,pokemonSets} from '../src/data/teams';
 import {FORMAT,runBattle} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
+import {normalNpcTemplate} from '../src/server/npc-templates';
 
 test('every champion candidate has a complete legal battle build',()=>{
   const validator=new Showdown.TeamValidator(FORMAT);
@@ -15,7 +16,7 @@ test('every champion candidate has a complete legal battle build',()=>{
   for(const name of candidates){
     const sample=namedTrainerSamples.find(s=>s.role==='champion'&&s.entries!.includes(name))!;
     const original=johtoOriginalBuild(sample.id,name);
-    const moves=original?.moves ?? championMoves[name];assert.equal(moves?.length,4,name);
+    const moves=normalNpcTemplate(sample.id,95,sample.role)?.team.find(p=>p.species===name)?.profile.moves??original?.moves ?? championMoves[name];assert.equal(moves?.length,4,name);
     assert.equal(validator.validateSet({...structuredClone(pokemonSets[name]),moves:[...moves],...(original?{ability:original.ability}: {})},{}),null,name);
   }
 });

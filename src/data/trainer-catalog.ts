@@ -3,6 +3,7 @@ import {hoennTrainers} from './hoenn-trainers';
 import {sinnohTrainers} from './sinnoh-trainers';
 import {unovaTrainers} from './unova-trainers';
 import {kalosTrainers} from './kalos-trainers';
+import {alolaTrainers,alolaSample} from './alola-trainers';
 import {regionalTrainerSamples} from './regional-trainers';
 import type {BossView} from '../shared/contracts';
 import {namedTrainerIntro} from './named-trainer-intros';
@@ -117,6 +118,10 @@ const hiddenN=unovaTrainers.find(t=>t.category==='hidden')!;
 // Hidden-only registration: absent from legacy random identities and the normal
 // trainer pools. The existing chapter-completion event looks this ID up directly.
 namedTrainerSamples.push({id:hiddenN.id,name:hiddenN.name,title:'히든 보스',kind:'named',role:'champion',generation:5,specialty:null,tactic:hiddenN.tactic,portrait:'n',minFloor:50,entries:hiddenN.entries,ace:hiddenN.ace,concept:hiddenN.concept,aiCeiling:hiddenN.aiCeiling});
+for(const reviewed of alolaTrainers.filter(t=>t.category!=='grunt')){
+ const replacement=alolaSample(reviewed),index=namedTrainerSamples.findIndex(s=>s.id===reviewed.id);
+ if(index>=0)Object.assign(namedTrainerSamples[index],replacement);else namedTrainerSamples.push(replacement);
+}
 export const trainerCatalog=[...normalTrainerSamples,...eliteTrainerSamples,...mixedTrainerSamples,...namedTrainerSamples];
 export function trainerView(sample:TrainerSample):BossView {
   return {...(sample.aiCeiling?{aiCeiling:sample.aiCeiling}:{}),id:sample.id,name:sample.name,title:sample.title,introduction:sample.kind==='named'?namedTrainerIntro(sample.id):'',victory:'',defeat:'',...(sample.role ? {role:sample.role} : {}),...(sample.npcRank?{npcRank:sample.npcRank}:{}),portrait:sample.portrait,kind:sample.kind,generation:sample.generation,specialty:sample.specialty};

@@ -1,0 +1,75 @@
+{
+  "common": {
+    "src/battle/npc-policy.ts": "22206328062533e0b44312f7cdfbc5df5ba39a88788abc45f5921c728dd6cb2e",
+    "src/battle/tower-policy.ts": "4fd3c29dea61cf0bf2c3a046d1929da306bfa8b798d093a0ec79d029960e8998",
+    "src/battle/z-decision.ts": "851fa606cdc87cc0f9d81ded577ec24d80f1bf0492f057c0511202b7419f24e2",
+    "src/battle/gimmicks.ts": "fd934ababa605f06d4f1cfb4a1a9c6b14d76960c909e14edf3cae4b306c2f0ee",
+    "src/data/npc-ai.ts": "375414f8f70094a3b473c27515754905edcb8bc6850075ce3f91a34dd0b29a49",
+    "src/data/npc-selection-rules.ts": "cbd1fe1da13113468d0065384fead4c3423c246ca576687fe3bf7ef226de8dcd",
+    "src/server/opponent-team.ts": "d45f947f53ba580305ead8556e3195928e2a4029a2e35fb5b5b3e5a123e5cc40",
+    "src/data/tower-progression.ts": "3d7851211f1c2905ab49ced03d1a3924b851ae2cde6ee6af0c1a0d1da70d18e5",
+    "src/server/npc-templates.ts": "e74503645ff2391cf6997e70ac7965a900ae55266f00761e20dbe8cf2b00e07f",
+    "src/server/hidden-boss-events.ts": "e5789f432ce6325bd892ac4383e8ae37457b308a268b21836db07a30e1b53e21"
+  },
+  "excludedAlola": [
+    "named-ilima",
+    "named-lana",
+    "named-kiawe",
+    "named-mallow",
+    "named-sophocles",
+    "named-mina",
+    "named-nanu",
+    "named-hapu",
+    "named-hala",
+    "named-olivia",
+    "named-acerola",
+    "named-kahili",
+    "named-molayne",
+    "named-kukui",
+    "skull-grunt",
+    "named-guzma",
+    "aether-grunt",
+    "named-faba",
+    "named-lusamine",
+    "named-acerola-captain",
+    "skull-executive-plumeria",
+    "skull-boss-guzma",
+    "aether-executive-faba",
+    "aether-boss-lusamine"
+  ],
+  "alola": {
+    "count": 207,
+    "runtime": "c5e1293cc78fa1e2322972685a3174e58851b7c2fa72e1d80dee8178716ec90f",
+    "source": "e8eeb0d739b3a2543a637a749546fa599f9f854dcf90c6db0db1f9d033ec1771"
+  },
+  "kalos": {
+    "count": 189,
+    "runtime": "dd667e3a835335822c749c16bf1c7ae9be9f3921bc211ba2b45af5cef048878d",
+    "source": "2db0da94573e6aed4c7c336d2516e709886cf282e532f7540b5c7ac37120198f"
+  },
+  "unova": {
+    "count": 163,
+    "runtime": "7efad096494861e650eeb067b6a0761b96872e393ad64152859da14bce9e3189",
+    "source": "f48e83339993a94f36158bb973908c177e9fd3cfc8a45ebdb572aef0e5f7a858"
+  },
+  "sinnoh": {
+    "count": 142,
+    "runtime": "b19df535cf6307c8842fdd3380dca59d2de3f949870147385b68b2bcb9998952",
+    "source": "5129c8c1baed34aff74fdf264e219b152063b92ab6189284bc203dd76d1b8e0e"
+  },
+  "hoenn": {
+    "count": 113,
+    "runtime": "669bed6daf45dcfa50242862f65245010b307bf029b0a8ddaf32f49e51ddbca3",
+    "source": "832d04fffc64d80a024cd6bd6d09019bbf0b3d7dee9e640fb4cc058b3131512e"
+  },
+  "magma": {
+    "count": 140,
+    "runtime": "1357f7adbf340603cd98d492868e5bc5b74a62452ef24f28492cdbaac4db3716",
+    "source": "5c0ccd0dbf6dd1f7c38282af53c55b2d4942a66a86def2f8557a012ef8ba1e7c"
+  },
+  "tuning": {
+    "count": 204,
+    "runtime": "83f06db6f19a71dd61f38b14a314e45db1a6517622e1455c3331ab6ca94bb9b0",
+    "source": "8899afc97a255fade02d8932e4e43841b4b8fff3e56d1d0669800ddb599890d1"
+  }
+}

@@ -1,0 +1,1119 @@
+{
+  "trainers": [
+    {
+      "id": "named-viola",
+      "name": "비올라",
+      "category": "gym",
+      "power": "Gym",
+      "ace": "Vivillon",
+      "entries": [
+        "Vivillon",
+        "Masquerain",
+        "Heracross",
+        "Scizor",
+        "Galvantula",
+        "Yanmega"
+      ],
+      "mega": null,
+      "concept": "빠른 벌레와 다양한 복합 타입",
+      "tactic": "speed",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-grant",
+      "name": "자크로",
+      "category": "gym",
+      "power": "Upper Gym",
+      "ace": "Tyrantrum",
+      "entries": [
+        "Tyrantrum",
+        "Aurorus",
+        "Aerodactyl",
+        "Barbaracle",
+        "Rhyperior",
+        "Cradily"
+      ],
+      "mega": "Aerodactyl",
+      "concept": "바위 내구와 강한 물리 화력",
+      "tactic": "physical",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-korrina",
+      "name": "코르니",
+      "category": "gym",
+      "power": "Upper Gym",
+      "ace": "Lucario",
+      "entries": [
+        "Lucario",
+        "Mienshao",
+        "Hawlucha",
+        "Machamp",
+        "Gallade",
+        "Toxicroak"
+      ],
+      "mega": "Lucario",
+      "concept": "격투 정면전과 메가루카리오",
+      "tactic": "physical",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-ramos",
+      "name": "후쿠지",
+      "category": "gym",
+      "power": "Gym",
+      "ace": "Gogoat",
+      "entries": [
+        "Gogoat",
+        "Jumpluff",
+        "Victreebel",
+        "Trevenant",
+        "Tangrowth",
+        "Leafeon"
+      ],
+      "mega": null,
+      "concept": "풀 회복과 지속 압박",
+      "tactic": "bulk",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-clemont",
+      "name": "시트론",
+      "category": "gym",
+      "power": "Upper Gym",
+      "ace": "Heliolisk",
+      "entries": [
+        "Heliolisk",
+        "Magnezone",
+        "Luxray",
+        "Rotom",
+        "Ampharos",
+        "Eelektross"
+      ],
+      "mega": "Ampharos",
+      "concept": "전기 특수 견제와 마비·피벗",
+      "tactic": "special",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-valerie",
+      "name": "마슈",
+      "category": "gym",
+      "power": "Upper Gym",
+      "ace": "Sylveon",
+      "entries": [
+        "Sylveon",
+        "Mawile",
+        "Mr. Mime",
+        "Florges",
+        "Azumarill",
+        "Klefki"
+      ],
+      "mega": "Mawile",
+      "concept": "페어리 특수전과 강철 물리 보완",
+      "tactic": "special",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-olympia",
+      "name": "고지카",
+      "category": "gym",
+      "power": "Upper Gym",
+      "ace": "Meowstic",
+      "entries": [
+        "Meowstic",
+        "Sigilyph",
+        "Slowking",
+        "Gothitelle",
+        "Alakazam",
+        "Espeon"
+      ],
+      "mega": null,
+      "concept": "에스퍼 특수전과 회복·마비",
+      "tactic": "special",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-wulfric",
+      "name": "우르프",
+      "category": "gym",
+      "power": "Upper Gym",
+      "ace": "Avalugg",
+      "entries": [
+        "Avalugg",
+        "Abomasnow",
+        "Cryogonal",
+        "Mamoswine",
+        "Weavile",
+        "Walrein"
+      ],
+      "mega": "Abomasnow",
+      "concept": "느린 얼음 내구와 눈보라·선공기",
+      "tactic": "bulk",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-malva",
+      "name": "파키라",
+      "category": "elite",
+      "power": "Elite Four",
+      "ace": "Talonflame",
+      "entries": [
+        "Talonflame",
+        "Pyroar",
+        "Chandelure",
+        "Houndoom",
+        "Torkoal",
+        "Volcarona"
+      ],
+      "mega": null,
+      "concept": "불꽃 직선 화력과 특수 강화",
+      "tactic": "special",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-siebold",
+      "name": "즈미",
+      "category": "elite",
+      "power": "Elite Four",
+      "ace": "Clawitzer",
+      "entries": [
+        "Clawitzer",
+        "Barbaracle",
+        "Starmie",
+        "Gyarados",
+        "Milotic",
+        "Greninja"
+      ],
+      "mega": null,
+      "concept": "물 파동과 회복·다양한 공격",
+      "tactic": "special",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-wikstrom",
+      "name": "간피",
+      "category": "elite",
+      "power": "Elite Four",
+      "ace": "Aegislash",
+      "entries": [
+        "Aegislash",
+        "Scizor",
+        "Probopass",
+        "Klefki",
+        "Aggron",
+        "Escavalier"
+      ],
+      "mega": "Scizor",
+      "concept": "강철 저항과 선공기·혼합 화력",
+      "tactic": "bulk",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-drasna",
+      "name": "드라세나",
+      "category": "elite",
+      "power": "Elite Four",
+      "ace": "Noivern",
+      "entries": [
+        "Noivern",
+        "Dragalge",
+        "Druddigon",
+        "Altaria",
+        "Goodra",
+        "Salamence"
+      ],
+      "mega": "Altaria",
+      "concept": "드래곤 특수전과 메가파비코리 회복",
+      "tactic": "special",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "named-diantha",
+      "name": "카르네",
+      "category": "champion",
+      "power": "Champion",
+      "ace": "Gardevoir",
+      "entries": [
+        "Gardevoir",
+        "Hawlucha",
+        "Tyrantrum",
+        "Aurorus",
+        "Gourgeist",
+        "Goodra"
+      ],
+      "mega": "Gardevoir",
+      "concept": "공식 여섯 동료와 메가가디안",
+      "tactic": "balanced",
+      "aiCeiling": "expert"
+    },
+    {
+      "id": "flare-grunt",
+      "name": "플레어단 조무래기",
+      "category": "grunt",
+      "power": "Normal / Lower Gym",
+      "ace": "",
+      "entries": [
+        "Mightyena",
+        "Houndoom",
+        "Manectric",
+        "Crobat",
+        "Scrafty",
+        "Liepard"
+      ],
+      "mega": null,
+      "concept": "악·독과 빠른 조직 공용 압박",
+      "tactic": "status",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "flare-executive-aliana",
+      "name": "아케비",
+      "category": "executive",
+      "power": "Upper Gym",
+      "ace": "Manectric",
+      "entries": [
+        "Manectric",
+        "Mightyena",
+        "Houndoom",
+        "Crobat",
+        "Pyroar",
+        "Toxicroak"
+      ],
+      "mega": null,
+      "concept": "전기·불꽃 속공형 일반 간부",
+      "tactic": "speed",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "flare-executive-xerosic",
+      "name": "크세로시키",
+      "category": "executive",
+      "power": "Upper Gym / Lower Elite Four",
+      "ace": "Malamar",
+      "entries": [
+        "Malamar",
+        "Crobat",
+        "Houndoom",
+        "Magnezone",
+        "Beheeyem",
+        "Rotom"
+      ],
+      "mega": null,
+      "concept": "과학자 혼합 특수전과 교란·Contrary",
+      "tactic": "status",
+      "aiCeiling": "tactical"
+    },
+    {
+      "id": "flare-boss-lysandre",
+      "name": "플라드리",
+      "category": "boss",
+      "power": "Champion+",
+      "ace": "Gyarados",
+      "entries": [
+        "Gyarados",
+        "Mienshao",
+        "Pyroar",
+        "Honchkrow",
+        "Houndoom",
+        "Crobat"
+      ],
+      "mega": "Gyarados",
+      "concept": "메가갸라도스 물리 강화와 혼합 동료",
+      "tactic": "physical",
+      "aiCeiling": "expert"
+    }
+  ],
+  "builds": {
+    "Vivillon": {
+      "ability": "Compound Eyes",
+      "item": "Focus Sash",
+      "moves": [
+        "Bug Buzz",
+        "Hurricane",
+        "Energy Ball",
+        "Quiver Dance"
+      ]
+    },
+    "Masquerain": {
+      "ability": "Intimidate",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Bug Buzz",
+        "Air Slash",
+        "Ice Beam",
+        "Giga Drain"
+      ]
+    },
+    "Heracross": {
+      "ability": "Guts",
+      "item": "Flame Orb",
+      "moves": [
+        "Close Combat",
+        "Megahorn",
+        "Facade",
+        "Stone Edge"
+      ]
+    },
+    "Scizor": {
+      "ability": "Technician",
+      "item": "Scizorite",
+      "moves": [
+        "Bullet Punch",
+        "X-Scissor",
+        "Knock Off",
+        "Swords Dance"
+      ]
+    },
+    "Galvantula": {
+      "ability": "Compound Eyes",
+      "item": "Focus Sash",
+      "moves": [
+        "Thunder",
+        "Bug Buzz",
+        "Energy Ball",
+        "Thunder Wave"
+      ]
+    },
+    "Yanmega": {
+      "ability": "Speed Boost",
+      "item": "Life Orb",
+      "moves": [
+        "Bug Buzz",
+        "Air Slash",
+        "Giga Drain",
+        "Ancient Power"
+      ]
+    },
+    "Tyrantrum": {
+      "ability": "Strong Jaw",
+      "item": "Lum Berry",
+      "moves": [
+        "Head Smash",
+        "Dragon Claw",
+        "Earthquake",
+        "Crunch"
+      ]
+    },
+    "Aurorus": {
+      "ability": "Refrigerate",
+      "item": "Assault Vest",
+      "moves": [
+        "Ice Beam",
+        "Power Gem",
+        "Earth Power",
+        "Thunderbolt"
+      ]
+    },
+    "Aerodactyl": {
+      "ability": "Rock Head",
+      "item": "Aerodactylite",
+      "moves": [
+        "Stone Edge",
+        "Dual Wingbeat",
+        "Earthquake",
+        "Ice Fang"
+      ]
+    },
+    "Barbaracle": {
+      "ability": "Tough Claws",
+      "item": "White Herb",
+      "moves": [
+        "Liquidation",
+        "Stone Edge",
+        "Cross Chop",
+        "Shell Smash"
+      ]
+    },
+    "Rhyperior": {
+      "ability": "Solid Rock",
+      "item": "Assault Vest",
+      "moves": [
+        "Stone Edge",
+        "Earthquake",
+        "Megahorn",
+        "Ice Punch"
+      ]
+    },
+    "Cradily": {
+      "ability": "Storm Drain",
+      "item": "Leftovers",
+      "moves": [
+        "Giga Drain",
+        "Power Gem",
+        "Earth Power",
+        "Recover"
+      ]
+    },
+    "Lucario": {
+      "ability": "Inner Focus",
+      "item": "Lucarionite",
+      "moves": [
+        "Close Combat",
+        "Meteor Mash",
+        "Extreme Speed",
+        "Ice Punch"
+      ]
+    },
+    "Mienshao": {
+      "ability": "Regenerator",
+      "item": "Life Orb",
+      "moves": [
+        "Close Combat",
+        "Knock Off",
+        "Stone Edge",
+        "U-turn"
+      ]
+    },
+    "Hawlucha": {
+      "ability": "Unburden",
+      "item": "Sitrus Berry",
+      "moves": [
+        "High Jump Kick",
+        "Acrobatics",
+        "Poison Jab",
+        "Swords Dance"
+      ]
+    },
+    "Machamp": {
+      "ability": "No Guard",
+      "item": "Assault Vest",
+      "moves": [
+        "Dynamic Punch",
+        "Knock Off",
+        "Stone Edge",
+        "Bullet Punch"
+      ]
+    },
+    "Gallade": {
+      "ability": "Sharpness",
+      "item": "Scope Lens",
+      "moves": [
+        "Sacred Sword",
+        "Psycho Cut",
+        "Night Slash",
+        "Leaf Blade"
+      ]
+    },
+    "Toxicroak": {
+      "ability": "Dry Skin",
+      "item": "Black Sludge",
+      "moves": [
+        "Drain Punch",
+        "Poison Jab",
+        "Sucker Punch",
+        "Ice Punch"
+      ]
+    },
+    "Gogoat": {
+      "ability": "Sap Sipper",
+      "item": "Leftovers",
+      "moves": [
+        "Horn Leech",
+        "Earthquake",
+        "Rock Slide",
+        "Bulk Up"
+      ]
+    },
+    "Jumpluff": {
+      "ability": "Infiltrator",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Giga Drain",
+        "Acrobatics",
+        "Leech Seed",
+        "Toxic"
+      ]
+    },
+    "Victreebel": {
+      "ability": "Chlorophyll",
+      "item": "Black Sludge",
+      "moves": [
+        "Giga Drain",
+        "Sludge Bomb",
+        "Knock Off",
+        "Sucker Punch"
+      ]
+    },
+    "Trevenant": {
+      "ability": "Harvest",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Horn Leech",
+        "Shadow Claw",
+        "Earthquake",
+        "Will-O-Wisp"
+      ]
+    },
+    "Tangrowth": {
+      "ability": "Regenerator",
+      "item": "Rocky Helmet",
+      "moves": [
+        "Giga Drain",
+        "Knock Off",
+        "Sludge Bomb",
+        "Leech Seed"
+      ]
+    },
+    "Leafeon": {
+      "ability": "Leaf Guard",
+      "item": "Lum Berry",
+      "moves": [
+        "Leaf Blade",
+        "Knock Off",
+        "X-Scissor",
+        "Swords Dance"
+      ]
+    },
+    "Heliolisk": {
+      "ability": "Dry Skin",
+      "item": "Expert Belt",
+      "moves": [
+        "Thunderbolt",
+        "Surf",
+        "Grass Knot",
+        "Dark Pulse"
+      ]
+    },
+    "Magnezone": {
+      "ability": "Sturdy",
+      "item": "Air Balloon",
+      "moves": [
+        "Thunderbolt",
+        "Flash Cannon",
+        "Thunder Wave",
+        "Body Press"
+      ]
+    },
+    "Luxray": {
+      "ability": "Intimidate",
+      "item": "Flame Orb",
+      "moves": [
+        "Wild Charge",
+        "Crunch",
+        "Ice Fang",
+        "Facade"
+      ]
+    },
+    "Rotom": {
+      "ability": "Levitate",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Volt Switch",
+        "Shadow Ball",
+        "Will-O-Wisp",
+        "Thunder Wave"
+      ]
+    },
+    "Ampharos": {
+      "ability": "Static",
+      "item": "Ampharosite",
+      "moves": [
+        "Thunderbolt",
+        "Dragon Pulse",
+        "Focus Blast",
+        "Thunder Wave"
+      ]
+    },
+    "Eelektross": {
+      "ability": "Levitate",
+      "item": "Assault Vest",
+      "moves": [
+        "Thunderbolt",
+        "Flamethrower",
+        "Giga Drain",
+        "Knock Off"
+      ]
+    },
+    "Sylveon": {
+      "ability": "Pixilate",
+      "item": "Leftovers",
+      "moves": [
+        "Hyper Voice",
+        "Psyshock",
+        "Shadow Ball",
+        "Calm Mind"
+      ]
+    },
+    "Mawile": {
+      "ability": "Intimidate",
+      "item": "Mawilite",
+      "moves": [
+        "Play Rough",
+        "Iron Head",
+        "Sucker Punch",
+        "Fire Fang"
+      ]
+    },
+    "Mr. Mime": {
+      "ability": "Filter",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Psychic",
+        "Dazzling Gleam",
+        "Energy Ball",
+        "Thunder Wave"
+      ]
+    },
+    "Florges": {
+      "ability": "Flower Veil",
+      "item": "Leftovers",
+      "moves": [
+        "Moonblast",
+        "Psychic",
+        "Energy Ball",
+        "Calm Mind"
+      ]
+    },
+    "Azumarill": {
+      "ability": "Huge Power",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Play Rough",
+        "Waterfall",
+        "Aqua Jet",
+        "Knock Off"
+      ]
+    },
+    "Klefki": {
+      "ability": "Prankster",
+      "item": "Leftovers",
+      "moves": [
+        "Dazzling Gleam",
+        "Flash Cannon",
+        "Thunder Wave",
+        "Foul Play"
+      ]
+    },
+    "Meowstic": {
+      "ability": "Infiltrator",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Psychic",
+        "Shadow Ball",
+        "Energy Ball",
+        "Thunder Wave"
+      ]
+    },
+    "Sigilyph": {
+      "ability": "Magic Guard",
+      "item": "Life Orb",
+      "moves": [
+        "Psychic",
+        "Air Slash",
+        "Heat Wave",
+        "Roost"
+      ]
+    },
+    "Slowking": {
+      "ability": "Regenerator",
+      "item": "Leftovers",
+      "moves": [
+        "Scald",
+        "Psychic",
+        "Ice Beam",
+        "Slack Off"
+      ]
+    },
+    "Gothitelle": {
+      "ability": "Competitive",
+      "item": "Leftovers",
+      "moves": [
+        "Psychic",
+        "Thunderbolt",
+        "Energy Ball",
+        "Calm Mind"
+      ]
+    },
+    "Alakazam": {
+      "ability": "Magic Guard",
+      "item": "Life Orb",
+      "moves": [
+        "Psychic",
+        "Shadow Ball",
+        "Focus Blast",
+        "Dazzling Gleam"
+      ]
+    },
+    "Espeon": {
+      "ability": "Magic Bounce",
+      "item": "Lum Berry",
+      "moves": [
+        "Psychic",
+        "Dazzling Gleam",
+        "Shadow Ball",
+        "Calm Mind"
+      ]
+    },
+    "Avalugg": {
+      "ability": "Sturdy",
+      "item": "Leftovers",
+      "moves": [
+        "Avalanche",
+        "Body Press",
+        "Earthquake",
+        "Recover"
+      ]
+    },
+    "Abomasnow": {
+      "ability": "Snow Warning",
+      "item": "Abomasite",
+      "moves": [
+        "Blizzard",
+        "Giga Drain",
+        "Earth Power",
+        "Ice Shard"
+      ]
+    },
+    "Cryogonal": {
+      "ability": "Levitate",
+      "item": "Leftovers",
+      "moves": [
+        "Freeze-Dry",
+        "Water Pulse",
+        "Flash Cannon",
+        "Recover"
+      ]
+    },
+    "Mamoswine": {
+      "ability": "Thick Fat",
+      "item": "Life Orb",
+      "moves": [
+        "Icicle Crash",
+        "Earthquake",
+        "Ice Shard",
+        "Stone Edge"
+      ]
+    },
+    "Weavile": {
+      "ability": "Pressure",
+      "item": "Focus Sash",
+      "moves": [
+        "Icicle Crash",
+        "Knock Off",
+        "Ice Shard",
+        "Low Kick"
+      ]
+    },
+    "Walrein": {
+      "ability": "Thick Fat",
+      "item": "Leftovers",
+      "moves": [
+        "Surf",
+        "Ice Beam",
+        "Earthquake",
+        "Toxic"
+      ]
+    },
+    "Talonflame": {
+      "ability": "Gale Wings",
+      "item": "Sharp Beak",
+      "moves": [
+        "Brave Bird",
+        "Flare Blitz",
+        "U-turn",
+        "Roost"
+      ]
+    },
+    "Pyroar": {
+      "ability": "Unnerve",
+      "item": "Wise Glasses",
+      "moves": [
+        "Flamethrower",
+        "Hyper Voice",
+        "Dark Pulse",
+        "Will-O-Wisp"
+      ]
+    },
+    "Chandelure": {
+      "ability": "Flash Fire",
+      "item": "Expert Belt",
+      "moves": [
+        "Shadow Ball",
+        "Flamethrower",
+        "Energy Ball",
+        "Psychic"
+      ]
+    },
+    "Houndoom": {
+      "ability": "Flash Fire",
+      "item": "Houndoominite",
+      "moves": [
+        "Fire Blast",
+        "Dark Pulse",
+        "Sludge Bomb",
+        "Nasty Plot"
+      ]
+    },
+    "Torkoal": {
+      "ability": "White Smoke",
+      "item": "Leftovers",
+      "moves": [
+        "Flamethrower",
+        "Earth Power",
+        "Body Press",
+        "Will-O-Wisp"
+      ]
+    },
+    "Volcarona": {
+      "ability": "Flame Body",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Fiery Dance",
+        "Bug Buzz",
+        "Giga Drain",
+        "Quiver Dance"
+      ]
+    },
+    "Clawitzer": {
+      "ability": "Mega Launcher",
+      "item": "Expert Belt",
+      "moves": [
+        "Water Pulse",
+        "Dark Pulse",
+        "Aura Sphere",
+        "Ice Beam"
+      ]
+    },
+    "Starmie": {
+      "ability": "Natural Cure",
+      "item": "Life Orb",
+      "moves": [
+        "Surf",
+        "Psychic",
+        "Ice Beam",
+        "Thunderbolt"
+      ]
+    },
+    "Gyarados": {
+      "ability": "Intimidate",
+      "item": "Gyaradosite",
+      "moves": [
+        "Waterfall",
+        "Crunch",
+        "Ice Fang",
+        "Dragon Dance"
+      ]
+    },
+    "Milotic": {
+      "ability": "Marvel Scale",
+      "item": "Leftovers",
+      "moves": [
+        "Scald",
+        "Ice Beam",
+        "Recover",
+        "Mirror Coat"
+      ]
+    },
+    "Greninja": {
+      "ability": "Protean",
+      "item": "Expert Belt",
+      "moves": [
+        "Surf",
+        "Dark Pulse",
+        "Ice Beam",
+        "Grass Knot"
+      ]
+    },
+    "Aegislash": {
+      "ability": "Stance Change",
+      "item": "Leftovers",
+      "moves": [
+        "Shadow Ball",
+        "Iron Head",
+        "Sacred Sword",
+        "Shadow Sneak"
+      ]
+    },
+    "Probopass": {
+      "ability": "Sturdy",
+      "item": "Air Balloon",
+      "moves": [
+        "Power Gem",
+        "Flash Cannon",
+        "Earth Power",
+        "Thunder Wave"
+      ]
+    },
+    "Aggron": {
+      "ability": "Rock Head",
+      "item": "Aggronite",
+      "moves": [
+        "Heavy Slam",
+        "Earthquake",
+        "Ice Punch",
+        "Body Press"
+      ]
+    },
+    "Escavalier": {
+      "ability": "Overcoat",
+      "item": "Assault Vest",
+      "moves": [
+        "Megahorn",
+        "Iron Head",
+        "Knock Off",
+        "Drill Run"
+      ]
+    },
+    "Noivern": {
+      "ability": "Infiltrator",
+      "item": "Life Orb",
+      "moves": [
+        "Dragon Pulse",
+        "Hurricane",
+        "Flamethrower",
+        "U-turn"
+      ]
+    },
+    "Dragalge": {
+      "ability": "Adaptability",
+      "item": "Assault Vest",
+      "moves": [
+        "Draco Meteor",
+        "Sludge Wave",
+        "Hydro Pump",
+        "Thunderbolt"
+      ]
+    },
+    "Druddigon": {
+      "ability": "Rough Skin",
+      "item": "Rocky Helmet",
+      "moves": [
+        "Dragon Claw",
+        "Earthquake",
+        "Fire Punch",
+        "Sucker Punch"
+      ]
+    },
+    "Altaria": {
+      "ability": "Natural Cure",
+      "item": "Altarianite",
+      "moves": [
+        "Dragon Pulse",
+        "Moonblast",
+        "Flamethrower",
+        "Roost"
+      ]
+    },
+    "Goodra": {
+      "ability": "Sap Sipper",
+      "item": "Assault Vest",
+      "moves": [
+        "Dragon Pulse",
+        "Flamethrower",
+        "Thunderbolt",
+        "Sludge Bomb"
+      ]
+    },
+    "Salamence": {
+      "ability": "Intimidate",
+      "item": "Lum Berry",
+      "moves": [
+        "Dragon Claw",
+        "Earthquake",
+        "Fire Blast",
+        "Roost"
+      ]
+    },
+    "Gardevoir": {
+      "ability": "Trace",
+      "item": "Gardevoirite",
+      "moves": [
+        "Moonblast",
+        "Psychic",
+        "Shadow Ball",
+        "Thunderbolt"
+      ]
+    },
+    "Gourgeist": {
+      "ability": "Frisk",
+      "item": "Leftovers",
+      "moves": [
+        "Seed Bomb",
+        "Shadow Sneak",
+        "Will-O-Wisp",
+        "Leech Seed"
+      ]
+    },
+    "Mightyena": {
+      "ability": "Intimidate",
+      "item": "Sitrus Berry",
+      "moves": [
+        "Crunch",
+        "Play Rough",
+        "Fire Fang",
+        "Sucker Punch"
+      ]
+    },
+    "Manectric": {
+      "ability": "Lightning Rod",
+      "item": "Expert Belt",
+      "moves": [
+        "Thunderbolt",
+        "Flamethrower",
+        "Volt Switch",
+        "Thunder Wave"
+      ]
+    },
+    "Scrafty": {
+      "ability": "Intimidate",
+      "item": "Leftovers",
+      "moves": [
+        "Drain Punch",
+        "Knock Off",
+        "Ice Punch",
+        "Dragon Dance"
+      ]
+    },
+    "Liepard": {
+      "ability": "Prankster",
+      "item": "Focus Sash",
+      "moves": [
+        "Knock Off",
+        "Play Rough",
+        "Sucker Punch",
+        "Thunder Wave"
+      ]
+    },
+    "Crobat": {
+      "ability": "Infiltrator",
+      "item": "Black Sludge",
+      "moves": [
+        "Brave Bird",
+        "Cross Poison",
+        "U-turn",
+        "Roost"
+      ]
+    },
+    "Honchkrow": {
+      "ability": "Super Luck",
+      "item": "Scope Lens",
+      "moves": [
+        "Brave Bird",
+        "Night Slash",
+        "Sucker Punch",
+        "Heat Wave"
+      ]
+    },
+    "Malamar": {
+      "ability": "Contrary",
+      "item": "Leftovers",
+      "moves": [
+        "Superpower",
+        "Knock Off",
+        "Psycho Cut",
+        "Rock Slide"
+      ]
+    },
+    "Beheeyem": {
+      "ability": "Analytic",
+      "item": "Assault Vest",
+      "moves": [
+        "Psychic",
+        "Thunderbolt",
+        "Energy Ball",
+        "Shadow Ball"
+      ]
+    }
+  }
+}

@@ -26,12 +26,13 @@ import {hoennTrainer} from '../src/data/hoenn-trainers';
 
 test('all named NPCs and villain leaders have one legal representative carrier at early and late floors',()=>{
  const validator=new Showdown.TeamValidator(FORMAT);
- const samples=[...namedTrainerSamples,...Object.values(villainLeaders).flatMap(p=>[p.executive,p.boss])];
+ const samples=[...namedTrainerSamples,...Object.values(villainLeaders).flatMap(p=>[p.executive,...p.executives??[],p.boss])];
  for(const sample of samples)for(const floor of [5,35,75]){
   const team=generateOpponentTeam(floor,[1,2,3,4],[],null,sample,CURRENT_PROGRESSION);
   const carriers=team.filter(p=>p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
   assert.ok(carriers.length<=1,sample.id);
-  const planned=normalNpcTemplate(sample.id,floor,sample.role)?.signature ?? npcGimmick(sample.id,sample.generation,[...sample.entries!,...(npcExtraCandidates[sample.id] ?? [])],sample.ace);
+  const reviewed=normalNpcTemplate(sample.id,floor,sample.role);
+  const planned=reviewed?reviewed.signature:npcGimmick(sample.id,sample.generation,[...sample.entries!,...(npcExtraCandidates[sample.id] ?? [])],sample.ace);
   if(!planned){assert.ok(normalNpcTemplate(sample.id,floor,sample.role)?.signature===null||['named-roxanne','named-tateandliza','tabitha'].includes(sample.id));assert.equal(carriers.length,0);continue;}
   const enabled=normalNpcGimmicksEnabled(floor,normalNpcCategory(sample.role,sample.id,sample.kind));
   assert.equal(carriers.length,!enabled || planned.rule==='tera'?0:1,sample.id);

@@ -2,6 +2,7 @@ import {johtoReferences} from './johto-builds';
 import {hoennTrainers} from './hoenn-trainers';
 import {sinnohTrainers} from './sinnoh-trainers';
 import {unovaTrainers} from './unova-trainers';
+import {kalosTrainers} from './kalos-trainers';
 import {regionalTrainerSamples} from './regional-trainers';
 import type {BossView} from '../shared/contracts';
 import {namedTrainerIntro} from './named-trainer-intros';
@@ -107,6 +108,10 @@ for(const reviewed of unovaTrainers){
   sample.entries=reviewed.entries;sample.ace=reviewed.ace;sample.concept=reviewed.concept;sample.tactic=reviewed.tactic;sample.aiCeiling=reviewed.aiCeiling;
   if(reviewed.category==='veteran'){sample.role='elite';sample.title='강자';}
  }
+}
+for(const reviewed of kalosTrainers){
+ const sample=namedTrainerSamples.find(s=>s.id===reviewed.id||(reviewed.category==='boss'&&s.id==='named-lysandre'));
+ if(sample){sample.entries=reviewed.entries;sample.ace=reviewed.ace;sample.concept=reviewed.concept;sample.tactic=reviewed.tactic;sample.aiCeiling=reviewed.aiCeiling;}
 }
 const hiddenN=unovaTrainers.find(t=>t.category==='hidden')!;
 // Hidden-only registration: absent from legacy random identities and the normal

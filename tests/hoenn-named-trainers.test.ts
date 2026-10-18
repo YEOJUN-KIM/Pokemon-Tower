@@ -1,3 +1,4 @@
+import {kalosTrainers} from '../src/data/kalos-trainers';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
@@ -6,7 +7,7 @@ import Showdown from 'pokemon-showdown';
 import {hoennTrainers} from '../src/data/hoenn-trainers';
 import {sinnohTrainers} from '../src/data/sinnoh-trainers';
 import {unovaTrainers} from '../src/data/unova-trainers';
-import preservation from './fixtures/unova-preservation.json' with {type:'json'};
+import preservation from './fixtures/kalos-preservation.json' with {type:'json'};
 import {trainerCatalog} from '../src/data/trainer-catalog';
 import {villainLeaders,villainEncounter,organizationGrunt} from '../src/data/villain-organizations';
 import {normalNpcTemplate} from '../src/server/npc-templates';
@@ -24,7 +25,7 @@ import {projectNpcRuntime} from '../scripts/lib/npc-runtime.mjs';
 const source=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8'));
 const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8'));
 test('all out-of-scope NPC runtime definitions retain their pre-Hoenn content',()=>{
- const changed=new Set([...hoennTrainers,...sinnohTrainers,...unovaTrainers].map(t=>t.id));changed.add('named-maxie');changed.add('named-archie');changed.add('named-cyrus');changed.add('named-ghetsis');
+ const changed=new Set([...kalosTrainers,...hoennTrainers,...sinnohTrainers,...unovaTrainers].map(t=>t.id));changed.add('named-lysandre');changed.add('named-maxie');changed.add('named-archie');changed.add('named-cyrus');changed.add('named-ghetsis');
  const others=runtime.filter((r:{id:string})=>!changed.has(r.id)).sort((a:{id:string;stage:string},b:{id:string;stage:string})=>(a.id+a.stage).localeCompare(b.id+b.stage));
  // Sinnoh has its own before/after preservation guard following its review.
  assert.equal(others.length,preservation.hoenn.count);

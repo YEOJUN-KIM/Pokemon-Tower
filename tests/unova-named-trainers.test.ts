@@ -1,9 +1,10 @@
+import {kalosTrainers} from '../src/data/kalos-trainers';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {createHash,randomUUID} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
-import preservation from './fixtures/unova-preservation.json' with {type:'json'};
+import preservation from './fixtures/kalos-preservation.json' with {type:'json'};
 import {unovaTrainers} from '../src/data/unova-trainers';
 import {sinnohTrainers} from '../src/data/sinnoh-trainers';
 import {trainerCatalog,namedTrainerSamples,legacyNamedTrainerSamples} from '../src/data/trainer-catalog';
@@ -33,7 +34,7 @@ function sampleFor(id:string){
  const g=villainLeaders.plasma;return {...(id.includes('-boss-')?g.boss:[g.executive,...g.executives??[]].find(s=>id.endsWith('-'+s.portrait))!),id,role:'villain' as const};
 }
 test('Unova preserves every other region runtime and reviewed definition and every common policy',()=>{
- const ids=new Set([...unovaTrainers.map(t=>t.id),'named-ghetsis']);
+ const ids=new Set([...kalosTrainers.map(t=>t.id),'named-lysandre',...unovaTrainers.map(t=>t.id),'named-ghetsis']);
  const sort=(a:{id:string;stage:string},b:{id:string;stage:string})=>(a.id+a.stage).localeCompare(b.id+b.stage);
  const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((r:{id:string})=>!ids.has(r.id)).sort(sort);
  const reviewed=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((r:{id:string})=>!ids.has(r.id)).sort(sort);
@@ -86,6 +87,14 @@ test('Elesa actually chooses Volt Switch and pivots in a real v12 battle',async(
  const index=log.publicProtocol.findIndex(l=>l.startsWith('|move|p2a: Zebstrika|Volt Switch|'));assert.ok(index>=0);
  assert.ok(log.publicProtocol.slice(index+1).some(l=>l.startsWith('|switch|p2a:')&&!l.startsWith('|switch|p2a: Zebstrika|')));
  assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
+});
+test('Skyla Unfezant uses legal Facade against Flying-resistant Electric opponents',async()=>{
+ const sample=sampleFor('named-skyla');let n=1,team=generateOpponentTeam(95,[n,95,29,43],[],null,sample,CURRENT_PROGRESSION);
+ while(team[0].name!=='Unfezant'&&n<1000){n++;team=generateOpponentTeam(95,[n,95,29,43],[],null,sample,CURRENT_PROGRESSION);}
+ assert.equal(team[0].name,'Unfezant');
+ assert.deepEqual(team[0].profile!.moves,['Brave Bird','Facade','Night Slash','U-turn']);
+ const log=await runBattle({teams:{p1:packTeam(['Ampharos','Luxray','Eelektross']),p2:packTeam(team.map(p=>p.name),Object.fromEntries(team.map(p=>[p.name,p.profile!])),Object.fromEntries(team.map(p=>[p.name,p.item??''])))},seed:[n,95,37,101],rule:'basic',player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(95,sample))});
+ assert.ok(log.publicProtocol.some(l=>l.startsWith('|move|p2a: Unfezant|Facade|')));
 });
 for(const floor of [50,100])test(`N F${floor}: champion victory → event snapshot → full recovery → retry/reconnect → reward and chapter advance once`,async()=>{
  const path=`.data/tests/n-unova-${randomUUID()}.sqlite`,f=hiddenBossFixture('unova',floor,path);let store=f.store;

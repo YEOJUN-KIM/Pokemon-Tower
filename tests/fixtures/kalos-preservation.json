@@ -1,0 +1,39 @@
+{
+  "common": {
+    "src/battle/npc-policy.ts": "22206328062533e0b44312f7cdfbc5df5ba39a88788abc45f5921c728dd6cb2e",
+    "src/battle/tower-policy.ts": "4fd3c29dea61cf0bf2c3a046d1929da306bfa8b798d093a0ec79d029960e8998",
+    "src/battle/z-decision.ts": "851fa606cdc87cc0f9d81ded577ec24d80f1bf0492f057c0511202b7419f24e2",
+    "src/battle/gimmicks.ts": "fd934ababa605f06d4f1cfb4a1a9c6b14d76960c909e14edf3cae4b306c2f0ee",
+    "src/data/npc-ai.ts": "375414f8f70094a3b473c27515754905edcb8bc6850075ce3f91a34dd0b29a49",
+    "src/data/npc-selection-rules.ts": "cbd1fe1da13113468d0065384fead4c3423c246ca576687fe3bf7ef226de8dcd",
+    "src/server/opponent-team.ts": "d45f947f53ba580305ead8556e3195928e2a4029a2e35fb5b5b3e5a123e5cc40",
+    "src/data/tower-progression.ts": "3d7851211f1c2905ab49ced03d1a3924b851ae2cde6ee6af0c1a0d1da70d18e5",
+    "src/server/npc-templates.ts": "e74503645ff2391cf6997e70ac7965a900ae55266f00761e20dbe8cf2b00e07f",
+    "src/server/hidden-boss-events.ts": "e5789f432ce6325bd892ac4383e8ae37457b308a268b21836db07a30e1b53e21"
+  },
+  "kalos": {
+    "count": 223,
+    "runtime": "707e511e17664267d4ca18759ad8ba5240230ce8f4fbce7deda9d320f1b79ee5",
+    "source": "dd81b44584bf035762144288075cb029a230e2ef75363f186aff8d236e6efddb"
+  },
+  "unova": {
+    "count": 197,
+    "runtime": "9354256fa464bfc05a1a64c81749c9950423b66a24209d9ee84cfdafbf703fbc",
+    "source": "27c7f4b6614d0845b5d527e3d051aa9b8cd715b142247142588f2a6c326bd526"
+  },
+  "sinnoh": {
+    "count": 176,
+    "runtime": "4e0f40ef2348c36019519950549abed242a56043a46f46f32a16c2a7691c4b86",
+    "source": "eed49c35a95eaa98f818e1b4c49a00406922e1581a4918bc235616af1b6bf1e9"
+  },
+  "hoenn": {
+    "count": 147,
+    "runtime": "dfffc15f24c786abb4df0aa1c57a68a389001bc27f13737a483daec23d444437",
+    "source": "d585a4fd962c7430fd05f24b16d1fdf1ab045bd05e46f2e694f09bc0528afb85"
+  },
+  "magma": {
+    "count": 174,
+    "runtime": "dd6b84c6008921bab1b358cbb70f9885383e05259b063044a36105845a9aea5a",
+    "source": "2f2f6da851641d4e62919fc3da47aaaeddbdfbb327c877f4815bfb688dcf1b31"
+  }
+}

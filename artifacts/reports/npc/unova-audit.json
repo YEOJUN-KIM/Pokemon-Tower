@@ -542,7 +542,7 @@
           "errors": 0
         }
       ],
-      "notes": "Flying variety: Swanna 특수·물, Unfezant/Archeops/Braviary 물리, Skarmory/Mandibuzz 내구·회복. Return은 Braviary에서 Body Slam으로 바꿨다."
+      "notes": "Flying variety: Swanna 특수·물, Unfezant/Archeops/Braviary 물리, Skarmory/Mandibuzz 내구·회복. Return은 Braviary에서 Body Slam, 누락됐던 Unfezant에서는 Facade로 교체했다. Unfezant의 Normal 자속은 비행 반감 상성을 보완한다."
     },
     {
       "id": "named-brycen",
@@ -5027,62 +5027,61 @@
       "members": [
         {
           "species": "Swanna",
-          "selectedBattles": 160,
+          "selectedBattles": 480,
           "moves": {
-            "Surf": 106,
-            "Hurricane": 244,
-            "Ice Beam": 13,
-            "Roost": 125
+            "Surf": 297,
+            "Hurricane": 610,
+            "Ice Beam": 63,
+            "Roost": 272
           },
           "zeroMoves": []
         },
         {
           "species": "Unfezant",
-          "selectedBattles": 20,
+          "selectedBattles": 120,
           "moves": {
-            "Brave Bird": 24,
-            "Return": 0,
-            "Night Slash": 4,
+            "Brave Bird": 138,
+            "Facade": 0,
+            "Night Slash": 5,
             "U-turn": 0
           },
           "zeroMoves": [
-            "Return",
+            "Facade",
             "U-turn"
           ]
         },
         {
           "species": "Skarmory",
-          "selectedBattles": 124,
+          "selectedBattles": 384,
           "moves": {
-            "Brave Bird": 152,
+            "Brave Bird": 456,
             "Body Press": 0,
-            "Roost": 51,
-            "Toxic": 0
+            "Roost": 162,
+            "Toxic": 2
           },
           "zeroMoves": [
-            "Body Press",
-            "Toxic"
+            "Body Press"
           ]
         },
         {
           "species": "Archeops",
-          "selectedBattles": 48,
+          "selectedBattles": 168,
           "moves": {
-            "Stone Edge": 59,
-            "Dual Wingbeat": 19,
-            "Earthquake": 6,
-            "U-turn": 4
+            "Stone Edge": 202,
+            "Dual Wingbeat": 84,
+            "Earthquake": 20,
+            "U-turn": 19
           },
           "zeroMoves": []
         },
         {
           "species": "Braviary",
-          "selectedBattles": 84,
+          "selectedBattles": 144,
           "moves": {
-            "Brave Bird": 106,
+            "Brave Bird": 160,
             "Body Slam": 0,
-            "Superpower": 16,
-            "Roost": 7
+            "Superpower": 42,
+            "Roost": 15
           },
           "zeroMoves": [
             "Body Slam"
@@ -5090,16 +5089,14 @@
         },
         {
           "species": "Mandibuzz",
-          "selectedBattles": 44,
+          "selectedBattles": 144,
           "moves": {
-            "Foul Play": 38,
-            "Brave Bird": 53,
-            "Roost": 31,
-            "Toxic": 0
+            "Foul Play": 120,
+            "Brave Bird": 184,
+            "Roost": 105,
+            "Toxic": 10
           },
-          "zeroMoves": [
-            "Toxic"
-          ]
+          "zeroMoves": []
         }
       ]
     },
@@ -6629,11 +6626,119 @@
     }
   },
   "sourceHashes": {
-    "src/data/normal-npc-templates.json": "135198d169d266ad30373dc34857c9d7cb7ad749ea277a6fb6fbc16e26ab7191",
+    "src/data/normal-npc-templates.json": "72082ca6d6779b2cda7ac68878170ee989aaae8a52b2c021c00f37373de5f4ee",
     "src/data/unova-trainers.ts": "31d4096825f240957ba614562aeac34eabf0cfbadde3f4e0c7c8923ec3ef6187",
     "src/data/trainer-catalog.ts": "3baff21b4b732618d6458507c2f3e1c5adad62ea435f4aab967712d0d0a4ed57",
     "src/data/tower-themes.ts": "4fc64b00f615853207e76a5390ee3e87e9ea9da6dbe777dae0e488b52e81a743",
     "src/data/villain-organizations.ts": "9dd3c411a86cb1bb35a51b120ba0c4a6d831ce3fc917ebbdad76c39be3bcb6f5",
     "src/data/npc-gimmicks.ts": "b8e84809429d26338508de945ca7726323b072ebdf42e5032e54886823b70ab4"
+  },
+  "skylaFollowup": {
+    "battles": 480,
+    "errors": 0,
+    "usageSource": "artifacts/experiments/balance/unova-20261018/skyla-facade/after-focused.jsonl",
+    "electricMatchup": {
+      "team": [
+        "Unfezant",
+        "Archeops",
+        "Swanna"
+      ],
+      "seed": [
+        21,
+        95,
+        37,
+        101
+      ],
+      "facadeUses": 1,
+      "publicProtocol": [
+        "|t:|1792320734",
+        "|gametype|singles",
+        "|player|p1|Player||",
+        "|player|p2|Tower AI||",
+        "|gen|9",
+        "|tier|[Gen 9] National Dex AG",
+        "|rule|HP Percentage Mod: HP is shown in percentages",
+        "|rule|Endless Battle Clause: Forcing endless battles is banned",
+        "|raw|<div class=\"infobox\"><details class=\"readmore\" open><summary><strong>4 custom rules:</strong></summary> Max Team Size = 3, Adjust Level = 50, +Dragonite-Mega, +Dragoninite</details></div>",
+        "|clearpoke",
+        "|poke|p1|Ampharos, L50, M|",
+        "|poke|p1|Luxray, L50, M|",
+        "|poke|p1|Eelektross, L50, M|",
+        "|poke|p2|Unfezant, L50, M|",
+        "|poke|p2|Archeops, L50, M|",
+        "|poke|p2|Swanna, L50, M|",
+        "|teampreview",
+        "|",
+        "|t:|1792320734",
+        "|teamsize|p1|3",
+        "|teamsize|p2|3",
+        "|start",
+        "|switch|p1a: Ampharos|Ampharos, L50, M|100/100",
+        "|switch|p2a: Unfezant|Unfezant, L50, M|100/100",
+        "|turn|1",
+        "|",
+        "|t:|1792320734",
+        "|move|p2a: Unfezant|Facade|p1a: Ampharos",
+        "|-damage|p1a: Ampharos|53/100",
+        "|move|p1a: Ampharos|Thunderbolt|p2a: Unfezant",
+        "|-supereffective|p2a: Unfezant",
+        "|-damage|p2a: Unfezant|0 fnt",
+        "|faint|p2a: Unfezant",
+        "|",
+        "|upkeep",
+        "|",
+        "|t:|1792320734",
+        "|switch|p2a: Archeops|Archeops, L50, M|100/100",
+        "|turn|2",
+        "|",
+        "|t:|1792320734",
+        "|move|p2a: Archeops|Earthquake|p1a: Ampharos",
+        "|-supereffective|p1a: Ampharos",
+        "|-damage|p1a: Ampharos|0 fnt",
+        "|faint|p1a: Ampharos",
+        "|",
+        "|upkeep",
+        "|",
+        "|t:|1792320734",
+        "|switch|p1a: Luxray|Luxray, L50, M|100/100",
+        "|turn|3",
+        "|",
+        "|t:|1792320734",
+        "|move|p2a: Archeops|Earthquake|p1a: Luxray",
+        "|-supereffective|p1a: Luxray",
+        "|-damage|p1a: Luxray|0 fnt",
+        "|faint|p1a: Luxray",
+        "|",
+        "|upkeep",
+        "|",
+        "|t:|1792320734",
+        "|switch|p1a: Eelektross|Eelektross, L50, M|100/100",
+        "|turn|4",
+        "|",
+        "|t:|1792320734",
+        "|move|p2a: Archeops|Earthquake|p1a: Eelektross",
+        "|-immune|p1a: Eelektross|[from] ability: Levitate",
+        "|move|p1a: Eelektross|Supercell Slam|p2a: Archeops",
+        "|-supereffective|p2a: Archeops",
+        "|-damage|p2a: Archeops|0 fnt",
+        "|faint|p2a: Archeops",
+        "|",
+        "|upkeep",
+        "|",
+        "|t:|1792320734",
+        "|switch|p2a: Swanna|Swanna, L50, M|100/100",
+        "|turn|5",
+        "|",
+        "|t:|1792320734",
+        "|move|p2a: Swanna|Surf|p1a: Eelektross",
+        "|-damage|p1a: Eelektross|40/100",
+        "|move|p1a: Eelektross|Supercell Slam|p2a: Swanna",
+        "|-supereffective|p2a: Swanna",
+        "|-damage|p2a: Swanna|0 fnt",
+        "|faint|p2a: Swanna",
+        "|",
+        "|win|Player"
+      ]
+    }
   }
 }

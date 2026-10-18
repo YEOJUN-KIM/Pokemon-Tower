@@ -52,7 +52,7 @@ set('Golurk','Iron Fist','Assault Vest','Earthquake,Shadow Punch,Drain Punch,Ice
 set('Mamoswine','Thick Fat','Life Orb','Earthquake,Icicle Crash,Ice Shard,Stone Edge','Ground / Ice breaker and priority');
 set('Hippowdon','Sand Stream','Leftovers','Earthquake,Stone Edge,Slack Off,Toxic','Bulky Ground sustain');
 set('Swanna','Keen Eye','Wise Glasses','Surf,Hurricane,Ice Beam,Roost','Fast special Flying / Water recovery');
-set('Unfezant','Super Luck','Scope Lens','Brave Bird,Return,Night Slash,U-turn','Fast physical Flying / critical pressure');
+set('Unfezant','Super Luck','Scope Lens','Brave Bird,Facade,Night Slash,U-turn','Fast physical Flying / critical pressure and Normal coverage');
 set('Skarmory','Sturdy','Rocky Helmet','Brave Bird,Body Press,Roost,Toxic','Physical Flying wall / recovery');
 set('Archeops','Defeatist','Sitrus Berry','Stone Edge,Dual Wingbeat,Earthquake,U-turn','Fast Flying / Rock pivot');
 set('Mandibuzz','Overcoat','Leftovers','Foul Play,Brave Bird,Roost,Toxic','Bulky Flying / Dark sustain');

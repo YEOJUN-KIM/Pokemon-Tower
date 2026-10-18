@@ -1,3 +1,4 @@
+import {kalosTrainers} from '../src/data/kalos-trainers';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
@@ -5,7 +6,7 @@ import {createHash} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import {sinnohTrainers} from '../src/data/sinnoh-trainers';
 import {unovaTrainers} from '../src/data/unova-trainers';
-import preservation from './fixtures/unova-preservation.json' with {type:'json'};
+import preservation from './fixtures/kalos-preservation.json' with {type:'json'};
 import {trainerCatalog} from '../src/data/trainer-catalog';
 import {organizationGrunt,villainLeaders,villainEncounter} from '../src/data/villain-organizations';
 import {normalNpcTemplate} from '../src/server/npc-templates';
@@ -25,7 +26,7 @@ export function sampleFor(id:string){
  return {...(id.includes('-boss-')?group.boss:[group.executive,...group.executives??[]].find(s=>id.endsWith('-'+s.portrait))!),id,role:'villain' as const};
 }
 test('Sinnoh review preserves every out-of-scope runtime row including Hoenn work',()=>{
- const ids=new Set([...sinnohTrainers.map(t=>t.id),...unovaTrainers.map(t=>t.id),'named-cyrus','named-ghetsis']);
+ const ids=new Set([...kalosTrainers.map(t=>t.id),'named-lysandre',...sinnohTrainers.map(t=>t.id),...unovaTrainers.map(t=>t.id),'named-cyrus','named-ghetsis']);
  const rows=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((r:{id:string})=>!ids.has(r.id)).sort((a:{id:string;stage:string},b:{id:string;stage:string})=>(a.id+a.stage).localeCompare(b.id+b.stage));
  assert.equal(rows.length,preservation.sinnoh.count);assert.equal(createHash('sha256').update(JSON.stringify(rows)).digest('hex'),preservation.sinnoh.runtime);
 });

@@ -1145,6 +1145,15 @@
       "reviewedOn": "2026-10-18",
       "review": "game-character-no-individual-credit-listed",
       "sha256": "ff80c0e3086614328c983629e3f39766dee225405c245ba0f1900bbbcfe9a57a"
+    },
+    {
+      "portrait": "aliana",
+      "url": "https://archives.bulbagarden.net/media/upload/b/b0/XY_Aliana.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-18",
+      "review": "original-game-character-artwork",
+      "creditSource": "https://archives.bulbagarden.net/wiki/File:XY_Aliana.png",
+      "sha256": "89cc188beff8a50ce19d8b82687f024c0e8a48cd8dd50d9e1b410f5f992d7ee2"
     }
   ]
 }

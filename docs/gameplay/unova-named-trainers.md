@@ -30,7 +30,7 @@ Pokémon Black의 N과 맞는 제크로무를 단일 대표 전설로 선택했�
 
 - Sleep Powder/Hypnosis/Reflect/Light Screen/Stealth Rock/Spikes/Pain Split/Morning Sun/Yawn/Healing Wish/Shift Gear/Curse/Protect 등 현재 scorer가 다루지 않는 변화기는 넣지 않았다. 사용되는 변화기는 Toxic/Thunder Wave/Will-O-Wisp/Leech Seed, 지원되는 setup/recovery와 조건부 Destiny Bond다.
 - 초기 Zebstrika의 Volt Switch 0회: 더 높은 Thunderbolt 점수가 피벗 선택을 가렸다. Thunderbolt→Thunder Wave로 교체했다. 중복 전기 공격에 묻히던 일부 Volt Switch는 별도 견제/상태기로, Rotom은 Volt Switch를 주 전기 기술로 정리했다.
-- 반복 0회였던 Return은 실제 요청 라벨이 Return 102가 되면서 현 AI가 낮게 평가함을 real battle observation에서 확인했다. Watchog→Retaliate, Stoutland→Facade, Braviary→Body Slam, Klinklang→Giga Impact로 교체했다. 공통 기술명/AI 처리는 수정하지 않았다.
+- 반복 0회였던 Return은 실제 요청 라벨이 Return 102가 되면서 현 AI가 낮게 평가함을 real battle observation에서 확인했다. Watchog→Retaliate, Stoutland→Facade, Braviary→Body Slam, Klinklang→Giga Impact로 교체했다. 후속 검토에서 누락됐던 Unfezant의 Return도 Facade로 교체했다. 공통 기술명/AI 처리는 수정하지 않았다.
 - Cryogonal의 Ice Beam/Freeze-Dry는 현 일반 타입 점수에서 중복된다. Freeze-Dry를 주 얼음 기술로 남기고 Water Pulse를 견제로 사용한다. Vanilluxe는 중복 Freeze-Dry를 Water Pulse로 교체했다. Lapras의 Freeze-Dry는 유일한 주 얼음 기술로 유지한다.
 - 0회 사용은 전부 실패로 판정하지 않았다. 실제 선출/행동 기회, 상성, 우선기·상태·회복의 조건, Choice lock을 구분했다. 코드상 지원되는 조건부 기술은 남겨 정체성을 보존한다. 후보/기술별 실행 횟수와 0회 목록은 audit JSON의 usage에 있다.
 - Trick Room 사용 NPC = **0명**. 최종 named gimmick available=0, used=0.
@@ -286,7 +286,7 @@ Concept: 빠른 비행과 내구형 비행의 타입 분담.
 | Pokémon | Ability | Item | Moves | Role |
 |---|---|---|---|---|
 | Swanna | Keen Eye | Wise Glasses | Surf / Hurricane / Ice Beam / Roost | Fast special Flying / Water recovery |
-| Unfezant | Super Luck | Scope Lens | Brave Bird / Return / Night Slash / U-turn | Fast physical Flying / critical pressure |
+| Unfezant | Super Luck | Scope Lens | Brave Bird / Facade / Night Slash / U-turn | Fast physical Flying / critical pressure and Normal coverage |
 | Skarmory | Sturdy | Rocky Helmet | Brave Bird / Body Press / Roost / Toxic | Physical Flying wall / recovery |
 | Archeops | Defeatist | Sitrus Berry | Stone Edge / Dual Wingbeat / Earthquake / U-turn | Fast Flying / Rock pivot |
 | Braviary | Defiant | Sharp Beak | Brave Bird / Body Slam / Superpower / Roost | Flying pressure / recovery |
@@ -294,7 +294,7 @@ Concept: 빠른 비행과 내구형 비행의 타입 분담.
 
 Representative lineups F95 (1000 draws): Archeops / Skarmory / Swanna: 18.4%; Skarmory / Swanna / Unfezant: 17.5%; Mandibuzz / Skarmory / Swanna: 14.1%.
 Lead frequency: Swanna: 34.5%; Skarmory: 20.4%; Archeops: 12.7%. Last frequency: Swanna: 33.9%; Skarmory: 21.2%; Unfezant: 12.4%. Ace inclusion: 100.0%. selectionRules success: 100.0%. Gimmick carrier: 없음.
-Design Notes: Flying variety: Swanna 특수·물, Unfezant/Archeops/Braviary 물리, Skarmory/Mandibuzz 내구·회복. Return은 Braviary에서 Body Slam으로 바꿨다.
+Design Notes: Flying variety: Swanna 특수·물, Unfezant/Archeops/Braviary 물리, Skarmory/Mandibuzz 내구·회복. Return은 Braviary에서 Body Slam, 누락됐던 Unfezant에서는 Facade로 교체했다. Unfezant의 Normal 자속은 비행 반감 상성을 보완한다.
 
 ### 담죽 — named-brycen
 
@@ -666,6 +666,12 @@ A candidate/B lineup/C lead-last/D moves/E item/F AI usage/G gimmick/H benchmark
 - Before는 `NPC_BALANCE_BASELINE=.../baseline-runtime.json`, `UNOVA_METADATA_BASELINE=.../baseline-metadata.json`을 설정하고 `node --import ./scripts/lib/unova-baseline.mjs --import tsx scripts/simulate-unova-npcs.ts --before` 실행. metadata와 runtime을 함께 복원하며 live 파일을 교체하지 않는다.
 - `UNOVA_NPCS`, `UNOVA_SEEDS`, `UNOVA_SEED_START`, `UNOVA_RULES`, `UNOVA_DRAWS`, `UNOVA_TRACES`, `UNOVA_OUTPUT`으로 표본과 저장 경로를 지정한다.
 - `node --import tsx scripts/report-unova-npcs.ts`는 before/after·커버리지·위계·route 표본 수와 오류를 확인한 뒤 이 문서와 `artifacts/reports/npc/unova-audit.json`을 생성한다.
+
+### 풍란 Return 누락 후속 수정
+
+Unfezant의 Return은 기존 20회 선출에서 0회 사용이었다. Quick Attack도 고정 벤치마크 480전에서 0회 선택되어 채택하지 않았다. 최종 세트는 Brave Bird / Facade / Night Slash / U-turn이다. Facade는 비행 반감 전기 타입에 Normal 자속으로 대응하고 상태이상 때도 기능한다. 고정 벤치마크 480전에서는 Facade도 0회였지만, 별도의 실제 전기 팀(Ampharos/Luxray/Eelektross) 대전에서는 Facade 1회 실행을 확인했다. 후자는 회귀 테스트로 고정했다. 공통 AI는 변경하지 않았다.
+
+후속 고정 벤치마크 480전, 오류 0회. 이 자료는 audit usage의 풍란 항목에 반영했다. 위 전체 Before/After·경로·70,000회 선출 표는 Return 교체 전 측정이며 재측정 결과로 표시하지 않는다. 기존 전체 테스트·build 결과도 교체 전 실행 기록이다. 후속 변경 후 하나지방 테스트 31개, TypeScript 검사와 export 일치 검사를 통과했다.
 
 ### 최종 실제 실행 결과
 

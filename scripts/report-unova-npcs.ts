@@ -51,7 +51,7 @@ const notes:Record<string,string>={
  'named-burgh':'Bug variety: Leavanny/Crustle 강화, Escavalier 느린 즉시 화력, Accelgor 빠른 특수, Galvantula 전기·마비, Heracross 격투를 분담한다. Dwebble은 사용 가능한 진화형 Crustle을 선택했다.',
  'named-elesa':'Electric pivot: Zebstrika Volt Switch는 실제 사용 후 교체까지 별도 v12 배틀로 확인했다. 더 높은 점수의 Thunderbolt가 피벗을 가리던 슬롯은 Thunder Wave로 교체했다. Emolga는 공중 피벗, Ampharos/Magnezone은 내구·마비, Eelektross는 땅 무효·혼합 견제다.',
  'named-clay':'Heavy Ground: Excadrill 대표 물리, Krookodile 악, Seismitoad Water Absorb, Golurk 고스트, Mamoswine 얼음, Hippowdon 내구. 느린 조합을 공격수 강제 규칙으로 지우지 않는다.',
- 'named-skyla':'Flying variety: Swanna 특수·물, Unfezant/Archeops/Braviary 물리, Skarmory/Mandibuzz 내구·회복. Return은 Braviary에서 Body Slam으로 바꿨다.',
+ 'named-skyla':'Flying variety: Swanna 특수·물, Unfezant/Archeops/Braviary 물리, Skarmory/Mandibuzz 내구·회복. Return은 Braviary에서 Body Slam, 누락됐던 Unfezant에서는 Facade로 교체했다. Unfezant의 Normal 자속은 비행 반감 상성을 보완한다.',
  'named-brycen':'Ice offense/bulk: Beartic 물리·선공기, Cryogonal 특수 회복, Vanilluxe 눈, Weavile/Mamoswine 빠른 압박과 우선기, Walrein 물/독 운영. Cryogonal은 Freeze-Dry를 주 얼음 기술로 삼아 Ice Beam과의 점수 중복을 제거했다.',
  'named-drayden':'Dragon direct battle: Haxorus 물리 강화, Druddigon 내구·우선기, Hydreigon 특수, Flygon 피벗, Altaria 회복·독, Salamence 혼합을 유지한다.',
  'named-cheren':'Stable Normal: Stoutland Intimidate/Sitrus Berry 에이스와 Snorlax 내구, Cinccino 연속기, Sawsbuck 흡수, Braviary 회복. 라이벌 버전은 추가하지 않았다.',
@@ -78,7 +78,10 @@ const provenanceSources=[
  '[Colress](https://bulbapedia.bulbagarden.net/wiki/Colress)',
  '[Ghetsis](https://bulbapedia.bulbagarden.net/wiki/Ghetsis)',
 ];
-const totalUsage=[...new Map([...after,...coverage,...hierarchy].map(r=>[[r.id,r.floor,r.n,r.caseId,r.rule].join(':'),r])).values()];
+const skylaFollowupPath=root+'/skyla-facade/after-focused.jsonl';
+const skylaFollowup=existsSync(skylaFollowupPath)?lines(skylaFollowupPath):[];
+if(skylaFollowup.length){assert.equal(skylaFollowup.length,480);assert.ok(skylaFollowup.every(r=>r.id==='named-skyla'&&!r.error));}
+const totalUsage=[...new Map([...after,...coverage,...hierarchy].map(r=>[[r.id,r.floor,r.n,r.caseId,r.rule].join(':'),r])).values()].filter(r=>!skylaFollowup.length||r.id!=='named-skyla').concat(skylaFollowup);
 const usage=unovaTrainers.map(t=>{
  const rows=totalUsage.filter(r=>r.id===t.id),template=source.find((s:any)=>s.id===t.id&&(t.category!=='hidden'||s.stage==='final-gate'));
  return {id:t.id,members:template.team.map((p:any)=>{const moves=Object.fromEntries(p.profile.moves.map((m:string)=>[m,rows.reduce((n,r)=>n+(r.moveUsage?.[p.species]?.[m]??0),0)]));return {species:p.species,selectedBattles:rows.filter(r=>r.team.includes(p.species)).length,moves,zeroMoves:Object.entries(moves).filter(([,n])=>n===0).map(([m])=>m)};})};
@@ -90,6 +93,7 @@ assert.ok(lineups.every((l:any)=>l.success===l.draws&&(!l.ace||l.ace===l.draws))
 const trickRoomUsers=unovaTrainers.filter(t=>source.filter((s:any)=>s.id===t.id).some((s:any)=>s.team.some((p:any)=>p.profile.moves.includes('Trick Room')))).length;assert.equal(trickRoomUsers,0);
 const byNpc=unovaTrainers.map(t=>({id:t.id,name:t.name,category:t.category,power:t.power,bands:(t.category==='hidden'?[50,100]:t.category==='boss'?[76,96]:[45,95]).map(floor=>({floor,before:stats(before.filter(r=>r.id===t.id&&r.floor===floor)),after:stats(after.filter(r=>r.id===t.id&&r.floor===floor))})),benchmarks:['starters','offense','bulk','signature'].map(caseId=>({caseId,...stats(after.filter(r=>r.id===t.id&&r.caseId===caseId))})),notes:notes[t.id]}));
 const audit={date:'2026-10-18',verdict:'하나지방 필수 NPC 샘플 완료',focused:{before:stats(before),after:stats(after)},coverage:stats(coverage),hierarchy:stats(hierarchy),route:{before:stats(routeBefore),after:stats(routeAfter.filter(r=>r.stage==='course')),hidden:stats(routeAfter.filter(r=>r.stage==='hidden'))},legend,gimmicks,trickRoomUsers,byNpc,lineups,usage,preservation,validation,manifest:{focused:json(root+'/after-focused-manifest.json'),before:json(root+'/before-focused-manifest.json'),route:json(root+'/route/after-route-manifest.json')},sourceHashes:Object.fromEntries(['src/data/normal-npc-templates.json','src/data/unova-trainers.ts','src/data/trainer-catalog.ts','src/data/tower-themes.ts','src/data/villain-organizations.ts','src/data/npc-gimmicks.ts'].map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')]))};
+Object.assign(audit,{skylaFollowup:{battles:skylaFollowup.length,errors:skylaFollowup.filter(r=>r.error).length,usageSource:skylaFollowupPath,electricMatchup:existsSync(root+'/skyla-facade/electric-matchup.json')?json(root+'/skyla-facade/electric-matchup.json'):null}});
 mkdirSync('artifacts/reports/npc',{recursive:true});writeFileSync('artifacts/reports/npc/unova-audit.json',JSON.stringify(audit,null,2)+'\n');
 const md=['# 하나지방 필수 NPC 샘플','', '2026-10-18. **하나지방 필수 NPC 샘플 완료**. 관장 13명, 사천왕 4명, 강자 노간주, 챔피언 아이리스, 플라스마 조직원·비오·아크로마·게치스, 히든보스 N: 총 24종.','',
  '## 구현 범위와 데이터','',
@@ -106,7 +110,7 @@ const md=['# 하나지방 필수 NPC 샘플','', '2026-10-18. **하나지방 필
  '## Dead-slot 검토와 소규모 수정','',
  '- Sleep Powder/Hypnosis/Reflect/Light Screen/Stealth Rock/Spikes/Pain Split/Morning Sun/Yawn/Healing Wish/Shift Gear/Curse/Protect 등 현재 scorer가 다루지 않는 변화기는 넣지 않았다. 사용되는 변화기는 Toxic/Thunder Wave/Will-O-Wisp/Leech Seed, 지원되는 setup/recovery와 조건부 Destiny Bond다.',
  '- 초기 Zebstrika의 Volt Switch 0회: 더 높은 Thunderbolt 점수가 피벗 선택을 가렸다. Thunderbolt→Thunder Wave로 교체했다. 중복 전기 공격에 묻히던 일부 Volt Switch는 별도 견제/상태기로, Rotom은 Volt Switch를 주 전기 기술로 정리했다.',
- '- 반복 0회였던 Return은 실제 요청 라벨이 Return 102가 되면서 현 AI가 낮게 평가함을 real battle observation에서 확인했다. Watchog→Retaliate, Stoutland→Facade, Braviary→Body Slam, Klinklang→Giga Impact로 교체했다. 공통 기술명/AI 처리는 수정하지 않았다.',
+ '- 반복 0회였던 Return은 실제 요청 라벨이 Return 102가 되면서 현 AI가 낮게 평가함을 real battle observation에서 확인했다. Watchog→Retaliate, Stoutland→Facade, Braviary→Body Slam, Klinklang→Giga Impact로 교체했다. 후속 검토에서 누락됐던 Unfezant의 Return도 Facade로 교체했다. 공통 기술명/AI 처리는 수정하지 않았다.',
  '- Cryogonal의 Ice Beam/Freeze-Dry는 현 일반 타입 점수에서 중복된다. Freeze-Dry를 주 얼음 기술로 남기고 Water Pulse를 견제로 사용한다. Vanilluxe는 중복 Freeze-Dry를 Water Pulse로 교체했다. Lapras의 Freeze-Dry는 유일한 주 얼음 기술로 유지한다.',
  '- 0회 사용은 전부 실패로 판정하지 않았다. 실제 선출/행동 기회, 상성, 우선기·상태·회복의 조건, Choice lock을 구분했다. 코드상 지원되는 조건부 기술은 남겨 정체성을 보존한다. 후보/기술별 실행 횟수와 0회 목록은 audit JSON의 usage에 있다.',
  `- Trick Room 사용 NPC = **${trickRoomUsers}명**. 최종 named gimmick available=${gimmicks.available}, used=${gimmicks.used}.`, '',
@@ -141,6 +145,7 @@ md.push('## 이상치 분류와 남은 제약','',
  `하나 범위 밖 runtime/검토 원본 ${preservation.unova.count}행 각각 baseline SHA-256 일치. 관동·성도·호연·신오를 포함한다. 공통 AI/선출/기믹 엔진/층별 성장/히든보스 이벤트 엔진 ${Object.keys(preservation.common).length}개 파일 해시도 동일하다. 신오 Trick Room 금지와 모든 기존 샘플을 유지했다. 테스트의 이전 전역 개수/기믹 가정만 새 하나 범위에 맞췄고, 새로운 보존 fixture는 변경 전 baseline에서 계산했다.`, '',
  '## 검증과 재현','',
  '- `node --import tsx scripts/review-unova-npc-samples.ts` → `node scripts/export-normal-npc-runtime.mjs` → `--check`.','- `node --import tsx scripts/simulate-unova-npcs.ts`: 기본 focused/lineup.','- `UNOVA_OUTPUT=.../route`와 `--route-only`: 현재 common ranks·100층 경로 및 히든 관문.','- Before는 `NPC_BALANCE_BASELINE=.../baseline-runtime.json`, `UNOVA_METADATA_BASELINE=.../baseline-metadata.json`을 설정하고 `node --import ./scripts/lib/unova-baseline.mjs --import tsx scripts/simulate-unova-npcs.ts --before` 실행. metadata와 runtime을 함께 복원하며 live 파일을 교체하지 않는다.','- `UNOVA_NPCS`, `UNOVA_SEEDS`, `UNOVA_SEED_START`, `UNOVA_RULES`, `UNOVA_DRAWS`, `UNOVA_TRACES`, `UNOVA_OUTPUT`으로 표본과 저장 경로를 지정한다.','- `node --import tsx scripts/report-unova-npcs.ts`는 before/after·커버리지·위계·route 표본 수와 오류를 확인한 뒤 이 문서와 `artifacts/reports/npc/unova-audit.json`을 생성한다.','');
+md.push('### 풍란 Return 누락 후속 수정','', 'Unfezant의 Return은 기존 20회 선출에서 0회 사용이었다. Quick Attack도 고정 벤치마크 480전에서 0회 선택되어 채택하지 않았다. 최종 세트는 Brave Bird / Facade / Night Slash / U-turn이다. Facade는 비행 반감 전기 타입에 Normal 자속으로 대응하고 상태이상 때도 기능한다. 고정 벤치마크 480전에서는 Facade도 0회였지만, 별도의 실제 전기 팀(Ampharos/Luxray/Eelektross) 대전에서는 Facade 1회 실행을 확인했다. 후자는 회귀 테스트로 고정했다. 공통 AI는 변경하지 않았다.','', `후속 고정 벤치마크 ${skylaFollowup.length}전, 오류 ${skylaFollowup.filter(r=>r.error).length}회. 이 자료는 audit usage의 풍란 항목에 반영했다. 위 전체 Before/After·경로·70,000회 선출 표는 Return 교체 전 측정이며 재측정 결과로 표시하지 않는다. 기존 전체 테스트·build 결과도 교체 전 실행 기록이다. 후속 변경 후 하나지방 테스트 31개, TypeScript 검사와 export 일치 검사를 통과했다.`, '');
 if(validation)md.push('### 최종 실제 실행 결과','',...validation.results.map((r:{check:string;result:string})=>`- ${r.check}: ${r.result}`),'');
 md.push('**하나지방 필수 NPC 샘플 완료**','');
 writeFileSync('docs/gameplay/unova-named-trainers.md',md.join('\n'));

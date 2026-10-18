@@ -33,7 +33,7 @@ test('live named teams use the reviewed three members and profiles, scaled to ac
  const iris=normalNpcTemplate('named-iris',50,'champion')!;
  assert.equal(iris.ace,'Haxorus');assert.equal(iris.signature,null);
  assert.equal(iris.team.find(p=>p.species==='Haxorus')!.item,'Focus Sash');
- assert.equal(templates.length,255);
+ assert.equal(templates.length,241);
 });
 
 test('stored champion teams retain template nature, ability, tools and stats across reopening',()=>{

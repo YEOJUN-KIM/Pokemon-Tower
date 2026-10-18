@@ -92,6 +92,8 @@ set('Weezing','Levitate','Rocky Helmet','Sludge Bomb,Flamethrower,Will-O-Wisp,Pa
 set('Muk','Sticky Hold','Black Sludge','Poison Jab,Knock Off,Shadow Sneak,Curse','Bulky poison / priority');
 set('Groudon','Drought','Assault Vest','Precipice Blades,Fire Punch,Stone Edge,Thunder Punch','Legendary sun lead / bulky coverage');
 set('Kyogre','Drizzle','Leftovers','Surf,Thunder,Ice Beam,Calm Mind','Legendary rain boss');
+// Advanced Magma tower adaptations, not claims of original admin ownership.
+set('Cacturne','Water Absorb','Focus Sash','Seed Bomb,Knock Off,Sucker Punch,Drain Punch','Water immunity / Grass-Dark pressure / priority');
 
 const sourcePath='scripts/data/npc/normal-npc-samples.json';
 const source=JSON.parse(readFileSync(sourcePath,'utf8'));
@@ -113,7 +115,10 @@ for(const t of hoennTrainers){
    if(species==='Sharpedo')b.moves=['Waterfall','Crunch','Ice Fang','Aqua Jet'];
   }
   if(t.category==='boss'&&species===t.signature?.species)b.item=t.signature.item!;
-  if(t.id.startsWith('magma-executive-')&&species==='Crobat')Object.assign(b,{item:'Life Orb',moves:['Brave Bird','U-turn','Giga Drain','Roost'],role:'Fast mixed coverage / Water-Ground check'});
+  if(t.id.startsWith('magma-executive-')&&species==='Crobat')Object.assign(b,{item:'Black Sludge',moves:['Brave Bird','Cross Poison','U-turn','Roost'],role:'Fast physical lead / Fairy-Grass pressure / pivot'});
+  if(t.id.startsWith('magma-executive-')&&species==='Camerupt')Object.assign(b,{item:t.id==='magma-executive-tabitha'?'Assault Vest':'Sitrus Berry',moves:['Fire Blast','Earth Power','Ancient Power','Flash Cannon'],role:'Immediate Fire/Ground special breaker'});
+  if(t.id.startsWith('magma-executive-')&&species==='Weezing')Object.assign(b,{moves:['Sludge Wave','Flamethrower','Will-O-Wisp','Pain Split'],role:'Ground immunity / burn / non-projectile Poison pressure'});
+  if(t.id.startsWith('magma-executive-')&&species==='Mightyena')Object.assign(b,{item:'Choice Band',moves:['Crunch','Play Rough','Sucker Punch','Fire Fang'],role:'Intimidate / immediate Dark pressure / priority'});
   if(species==='Ninetales')b.item='Charcoal';
   if(t.id==='named-steven'&&species==='Claydol')Object.assign(b,{moves:['Earth Power','Psychic','Ice Beam','Reflect'],role:'Bulky coverage / screen'});
   const profile={statSystem:'points' as const,ivs:{hp:31,atk:31,def:31,spa:31,spd:31,spe:31},evs:{hp:0,atk:0,def:0,spa:0,spd:0,spe:0},nature:'Serious',ability:b.ability,moves:b.moves};

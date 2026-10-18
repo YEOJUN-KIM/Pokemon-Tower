@@ -416,51 +416,53 @@ Design Notes: A/H: 물/땅에 약한 조직 풀과 Basic~Tactical 한계. 낮은
 
 ## 호걸 (magma-executive-tabitha)
 
-Category: executive; Power Tier: Upper Gym; Ace: Camerupt; AI: F45 tactical, F95 tactical.
+Category: executive; Power Tier: Upper Gym; Ace: Camerupt; AI: Tactical ceiling.
 
-Concept: 불꽃·땅 압박과 독 타입 보완.
+Concept: 불꽃·땅 브레이커와 독·악 압박, 저수·트릭룸 지원.
 
 Gimmick: None.
 
-selectionRules: `{"preferredLead":["Crobat"]}`.
+selectionRules: `{"preferredLead":["Crobat","Claydol"],"atLeastOneOf":["Crobat","Cacturne"]}`.
 
 | 후보 | 특성 | 기본 아이템 | 기술 ×4 | 역할 |
 |---|---|---|---|---|
-| Camerupt | Solid Rock | Sitrus Berry | Flamethrower / Earth Power / Ancient Power / Yawn | Fire / Ground wallbreaker |
-| Mightyena | Intimidate | Sitrus Berry | Crunch / Play Rough / Sucker Punch / Taunt | Attack reduction / priority |
-| Crobat | Infiltrator | Life Orb | Brave Bird / U-turn / Giga Drain / Roost | Fast mixed coverage / Water-Ground check |
-| Weezing | Levitate | Rocky Helmet | Sludge Bomb / Flamethrower / Will-O-Wisp / Pain Split | Ground immunity / physical check |
-| Magcargo | Flame Body | White Herb | Fire Blast / Earth Power / Power Gem / Shell Smash | Setup special breaker |
+| Camerupt | Solid Rock | Assault Vest | Fire Blast / Earth Power / Ancient Power / Flash Cannon | Immediate Fire/Ground special breaker |
+| Mightyena | Intimidate | Choice Band | Crunch / Play Rough / Sucker Punch / Fire Fang | Intimidate / immediate Dark pressure / priority |
+| Crobat | Infiltrator | Black Sludge | Brave Bird / Cross Poison / U-turn / Roost | Fast physical lead / Fairy-Grass pressure / pivot |
+| Weezing | Levitate | Rocky Helmet | Sludge Wave / Flamethrower / Will-O-Wisp / Pain Split | Ground immunity / burn / non-projectile Poison pressure |
+| Claydol | Levitate | Sitrus Berry | Earth Power / Psychic / Ice Beam / Trick Room | Bulky room setter / coverage |
+| Cacturne | Water Absorb | Focus Sash | Seed Bomb / Knock Off / Sucker Punch / Drain Punch | Water immunity / Grass-Dark pressure / priority |
 
-signature carrier는 허용 층부터 지정 기믹 도구로 바뀐다. 후보별 IV/포인트는 기존 floor scaling을 사용한다.
+signature carrier는 허용 층부터 지정 기믹 도구로 바뀐다. 기존 층별 성장·선출기를 사용한다.
 
-Representative Lineups (F95, 1000회): Camerupt / Crobat / Mightyena: 204회; Camerupt / Mightyena / Weezing: 190회; Camerupt / Crobat / Magcargo: 188회.
+Representative Lineups (F95, 1000회): Camerupt / Claydol / Crobat: 193회; Camerupt / Crobat / Mightyena: 164회; Camerupt / Crobat / Weezing: 154회.
 
-Design Notes: A/B/C/D/E/H: 물에 약한 폭타·마그카르고와 공격력이 낮은 조직 파트너가 반복 약점이다. 소규모 보정으로 크로뱃에 생명의구슬·기가드레인을 주고 선봉을 선호하도록 했다. Upper Gym 목표 충족 여부는 최종 표를 따른다.
+Design Notes: 마그카르고를 점토도리로 교체하고 저수 선인왕을 추가한 두 자리 조직 확장이다. 점토도리/선인왕을 원작 간부 소유로 주장하지 않는다. 크로뱃의 미사용 기가드레인에 물 대응을 의존하지 않는다. [추가 조정 검증](magma-executive-balance-report.md)에 기준 commit·세트·승률·holdout·선출·메가 비교를 기록했다.
 
 ## 구열 (magma-executive-courtney)
 
-Category: executive; Power Tier: Upper Gym / Lower Elite Four; Ace: Camerupt; AI: F45 tactical, F95 tactical.
+Category: executive; Power Tier: Upper Gym / Lower Elite Four; Ace: Camerupt; AI: Tactical ceiling.
 
-Concept: 메가폭타의 화력과 화상·회복 파트너.
+Concept: 메가폭타와 저수 파트너, 트릭룸·독·악 압박으로 역할 분담.
 
-Gimmick: mega / Camerupt / Cameruptite.
+Gimmick: Mega Camerupt / Cameruptite.
 
-selectionRules: `{"preferredLead":["Crobat"]}`.
+selectionRules: `{"preferredLead":["Crobat","Claydol"],"atLeastOneOf":["Crobat","Cacturne"]}`.
 
 | 후보 | 특성 | 기본 아이템 | 기술 ×4 | 역할 |
 |---|---|---|---|---|
-| Camerupt | Solid Rock | Sitrus Berry | Flamethrower / Earth Power / Ancient Power / Yawn | Fire / Ground wallbreaker |
-| Mightyena | Intimidate | Sitrus Berry | Crunch / Play Rough / Sucker Punch / Taunt | Attack reduction / priority |
-| Crobat | Infiltrator | Life Orb | Brave Bird / U-turn / Giga Drain / Roost | Fast mixed coverage / Water-Ground check |
-| Weezing | Levitate | Rocky Helmet | Sludge Bomb / Flamethrower / Will-O-Wisp / Pain Split | Ground immunity / physical check |
-| Magcargo | Flame Body | White Herb | Fire Blast / Earth Power / Power Gem / Shell Smash | Setup special breaker |
+| Camerupt | Solid Rock | Sitrus Berry | Fire Blast / Earth Power / Ancient Power / Flash Cannon | Immediate Fire/Ground special breaker |
+| Mightyena | Intimidate | Choice Band | Crunch / Play Rough / Sucker Punch / Fire Fang | Intimidate / immediate Dark pressure / priority |
+| Crobat | Infiltrator | Black Sludge | Brave Bird / Cross Poison / U-turn / Roost | Fast physical lead / Fairy-Grass pressure / pivot |
+| Weezing | Levitate | Rocky Helmet | Sludge Wave / Flamethrower / Will-O-Wisp / Pain Split | Ground immunity / burn / non-projectile Poison pressure |
+| Claydol | Levitate | Sitrus Berry | Earth Power / Psychic / Ice Beam / Trick Room | Bulky room setter / coverage |
+| Cacturne | Water Absorb | Focus Sash | Seed Bomb / Knock Off / Sucker Punch / Drain Punch | Water immunity / Grass-Dark pressure / priority |
 
-signature carrier는 허용 층부터 지정 기믹 도구로 바뀐다. 후보별 IV/포인트는 기존 floor scaling을 사용한다.
+signature carrier는 허용 층부터 지정 기믹 도구로 바뀐다. 기존 층별 성장·선출기를 사용한다.
 
-Representative Lineups (F95, 1000회): Camerupt / Crobat / Mightyena: 204회; Camerupt / Mightyena / Weezing: 190회; Camerupt / Crobat / Magcargo: 188회.
+Representative Lineups (F95, 1000회): Camerupt / Claydol / Crobat: 193회; Camerupt / Crobat / Mightyena: 164회; Camerupt / Crobat / Weezing: 154회.
 
-Design Notes: A/B/C/D/E/G/H: 메가폭타도 느리고 물 4배 약점이 남는다. 크로뱃의 물/땅 대응 보정 후에도 높은 승률이 반복되면 추가 조정 대상으로 남긴다.
+Design Notes: 마그카르고를 점토도리로 교체하고 저수 선인왕을 추가한 두 자리 조직 확장이다. 점토도리/선인왕을 원작 간부 소유로 주장하지 않는다. 크로뱃의 미사용 기가드레인에 물 대응을 의존하지 않는다. [추가 조정 검증](magma-executive-balance-report.md)에 기준 commit·세트·승률·holdout·선출·메가 비교를 기록했다.
 
 ## 마적 (magma-boss-maxie)
 

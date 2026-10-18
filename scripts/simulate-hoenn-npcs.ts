@@ -30,7 +30,11 @@ assert.equal(phase==='before',!!process.env.NPC_BALANCE_BASELINE);
 const root=process.env.HOENN_OUTPUT??'artifacts/experiments/balance/hoenn-20261018';mkdirSync(root,{recursive:true});
 const count=Number(process.env.HOENN_SEEDS??4),draws=Number(process.env.HOENN_DRAWS??1000);
 assert.ok(Number.isSafeInteger(count)&&count>0&&Number.isSafeInteger(draws)&&draws>0);
+const firstSeed=Number(process.env.HOENN_SEED_START??1);assert.ok(Number.isSafeInteger(firstSeed)&&firstSeed>0);
 const rules=Object.keys(battleRules) as BattleRule[];
+const requestedNpcs=process.env.HOENN_NPCS?.split(',').filter(Boolean);
+assert.ok(!requestedNpcs||requestedNpcs.length>0&&new Set(requestedNpcs).size===requestedNpcs.length&&requestedNpcs.every(id=>hoennTrainers.some(t=>t.id===id)),'Invalid HOENN_NPCS');
+const targets=hoennTrainers.filter(t=>!requestedNpcs||requestedNpcs.includes(t.id));
 // Same four independent-battle benchmarks and equipment as the existing regional
 // comparison. No shopping, recruitment, consumables, or claims of human win rate.
 const cases=[{id:'starters',species:['Charizard','Blastoise','Venusaur']},{id:'offense',species:['Garchomp','Metagross','Lapras']},{id:'bulk',species:['Slowbro','Corviknight','Gastrodon']},{id:'signature',species:['Mimikyu','Kommo-o','Gyarados']}];
@@ -62,30 +66,34 @@ function sampleFor(id:string):TrainerSample{
 }
 const inc=(map:Record<string,number>,key:string)=>{map[key]=(map[key]??0)+1;};
 const lineup:unknown[]=[];
-for(const t of hoennTrainers){
+for(const t of targets){
  const sample=sampleFor(t.id);
  for(const floor of t.category==='boss'?[76,96]:[45,55,95]){
   const template=normalNpcTemplate(t.id,floor,sample.role);if(phase==='before'&&!template)continue;assert.ok(template,t.id);
-  const teams:Record<string,number>={},leads:Record<string,number>={},lasts:Record<string,number>={};let ace=0,carrier=0,success=0,both=0,slow=0;
+  const teams:Record<string,number>={},leads:Record<string,number>={},lasts:Record<string,number>={};let ace=0,carrier=0,success=0,both=0,slow=0,slowTeam70=0,waterResponse=0,waterResistance=0,grassCoverage=0;
   for(let n=1;n<=draws;n++){
    const team=generateOpponentTeam(floor,[n,floor,29,43],[],null,sample,CURRENT_PROGRESSION),names=team.map(p=>p.name);
    inc(teams,[...names].sort().join(' / '));inc(leads,names[0]);inc(lasts,names[2]);
    ace+=Number(names.includes(template.ace));carrier+=Number(!!template.signature&&names.includes(template.signature.species));
    success+=Number(satisfiesSelectionRules(names,template.selectionRules));both+=Number(names.includes('Solrock')&&names.includes('Lunatone'));
    slow+=Number(names.every(n=>Showdown.Dex.species.get(n).baseStats.spe<70));
+   slowTeam70+=Number(names.every(n=>Showdown.Dex.species.get(n).baseStats.spe<=70));
+   const resists=team.some(p=>Showdown.Dex.getEffectiveness('Water',Showdown.Dex.species.get(p.name))<0||['Water Absorb','Storm Drain','Dry Skin'].includes(p.ability??''));
+   const grass=team.some(p=>p.moves.some(m=>{const move=Showdown.Dex.moves.get(m);return move.type==='Grass'&&move.category!=='Status';}));
+   waterResistance+=Number(resists);grassCoverage+=Number(grass);waterResponse+=Number(resists||grass);
   }
-  assert.equal(success,draws);lineup.push({id:t.id,floor,draws,teams,leads,lasts,ace,carrier,success,both,slow});
+  assert.equal(success,draws);lineup.push({id:t.id,floor,draws,teams,leads,lasts,ace,carrier,success,both,slow,slowTeam70,waterResponse,waterResistance,grassCoverage});
  }
 }
 writeFileSync(`${root}/${phase}-lineups.json`,JSON.stringify(lineup,null,2));
 const out=`${root}/${phase}-focused.jsonl`;writeFileSync(out,'');
 const sources=['src/data/normal-npc-templates.json','src/data/hoenn-trainers.ts','src/battle/npc-policy.ts','src/battle/z-decision.ts','src/server/opponent-team.ts'];
-writeFileSync(`${root}/${phase}-focused-manifest.json`,JSON.stringify({engineVersion,FORMAT,count,draws,cases,rules,baseline:process.env.NPC_BALANCE_BASELINE??null,sourceHashes:Object.fromEntries(sources.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')]))},null,2));
-for(const t of hoennTrainers){
+writeFileSync(`${root}/${phase}-focused-manifest.json`,JSON.stringify({engineVersion,FORMAT,count,firstSeed,draws,cases,rules,targets:targets.map(t=>t.id),baseline:process.env.NPC_BALANCE_BASELINE??null,loadedRuntimeHash:createHash('sha256').update(readFileSync(process.env.NPC_BALANCE_BASELINE??'src/data/normal-npc-templates.json')).digest('hex'),sourceHashes:Object.fromEntries(sources.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')]))},null,2));
+for(const t of targets){
  const sample=sampleFor(t.id);let battles=0,errors=0;
  for(const floor of t.category==='boss'?[76,96]:[45,95]){
   const template=normalNpcTemplate(t.id,floor,sample.role);if(phase==='before'&&!template)continue;assert.ok(template,t.id);
-  for(let n=1;n<=count;n++){
+  for(let n=firstSeed;n<firstSeed+count;n++){
    const entries=generateOpponentTeam(floor,[n,floor,29,43],[],null,sample,CURRENT_PROGRESSION);
    const signature=normalNpcGimmicksEnabled(floor,normalNpcCategory(sample.role,sample.id,sample.kind))?template.signature:null,tera=signature?.rule==='tera'?1:0;
    const p2=packTeam(entries.map(p=>p.name),Object.fromEntries(entries.map(p=>[p.name,p.profile!])),Object.fromEntries(entries.map(p=>[p.name,p.item??''])));
@@ -96,9 +104,14 @@ for(const t of hoennTrainers){
      const monitor=monitorZPolicy(createNpcPolicy(ai));
      const log=await runBattle({teams:{p1:player(i,floor,rule),p2},seed,rule,opponentRule:packedNpcRule(entries.map(p=>({item:p.item??''})),tera),opponentTeraSpecies:signature?.rule==='tera'?signature.species:undefined,teraTickets:{p1:0,p2:tera},trainerEquipment:gear(floor,rule),player:new ZMovePolicy('p1'),opponent:monitor.policy});
      const telemetry=namedBattleTelemetry(log),z=telemetry.available.some(a=>a.kind==='z')?zAiTelemetry(log,monitor.evaluations):null;
+     if(process.env.HOENN_TRACES==='1'&&n===1&&rule==='basic'){
+      mkdirSync(root+'/traces',{recursive:true});
+      writeFileSync(`${root}/traces/${phase}-${t.id}-${floor}-${cases[i].id}.json`,JSON.stringify({seed,ai,teams:log.teams,winner:log.winner,publicProtocol:log.publicProtocol,decisions:log.decisions.filter(d=>d.side==='p2').map(d=>({turn:d.observation.turn,action:d.action,own:d.observation.ownTeam.find(p=>p.active),opponent:d.observation.opponent}))},null,2));
+     }
      const truant=log.publicProtocol.filter(l=>l.includes('Truant')).length;
      const legendaryKOs=log.publicProtocol.reduce((state,l)=>{const p=l.split('|');if(p[1]==='move')state.actor=p[2]?.startsWith('p2')?p[2].split(': ')[1]:'';if(p[1]==='faint'&&p[2]?.startsWith('p1')&&['Groudon','Kyogre'].includes(state.actor))state.count++;return state;},{actor:'',count:0}).count;
-     appendFileSync(out,JSON.stringify({...base,winner:log.winner,turns:log.turns,telemetry,z,truant,legendaryKOs})+'\n');
+     const waterAbsorbActivations=log.publicProtocol.filter(l=>l.includes('Water Absorb')&&l.includes('|p2')).length;
+     appendFileSync(out,JSON.stringify({...base,winner:log.winner,turns:log.turns,telemetry,z,truant,legendaryKOs,waterAbsorbActivations})+'\n');
     }catch(error){errors++;appendFileSync(out,JSON.stringify({...base,error:String(error)})+'\n');}
     battles++;
    }

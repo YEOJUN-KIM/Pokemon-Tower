@@ -37369,15 +37369,20 @@
       "gimmickEnabled": false,
       "selectionRules": {
         "preferredLead": [
-          "Crobat"
+          "Crobat",
+          "Claydol"
+        ],
+        "atLeastOneOf": [
+          "Crobat",
+          "Cacturne"
         ]
       },
-      "concept": "불꽃·땅 압박과 독 타입 보완",
+      "concept": "불꽃·땅 브레이커와 독·악 압박, 저수·트릭룸 지원",
       "powerTier": "Upper Gym",
       "team": [
         {
           "species": "Camerupt",
-          "item": "Sitrus Berry",
+          "item": "Assault Vest",
           "gigantamax": false,
           "profile": {
             "statSystem": "points",
@@ -37400,17 +37405,17 @@
             "nature": "Modest",
             "ability": "Solid Rock",
             "moves": [
-              "Flamethrower",
+              "Fire Blast",
               "Earth Power",
               "Ancient Power",
-              "Yawn"
+              "Flash Cannon"
             ]
           },
-          "role": "Fire / Ground wallbreaker"
+          "role": "Immediate Fire/Ground special breaker"
         },
         {
           "species": "Mightyena",
-          "item": "Sitrus Berry",
+          "item": "Choice Band",
           "gigantamax": false,
           "profile": {
             "statSystem": "points",
@@ -37436,14 +37441,14 @@
               "Crunch",
               "Play Rough",
               "Sucker Punch",
-              "Taunt"
+              "Fire Fang"
             ]
           },
-          "role": "Attack reduction / priority"
+          "role": "Intimidate / immediate Dark pressure / priority"
         },
         {
           "species": "Crobat",
-          "item": "Life Orb",
+          "item": "Black Sludge",
           "gigantamax": false,
           "profile": {
             "statSystem": "points",
@@ -37467,12 +37472,12 @@
             "ability": "Infiltrator",
             "moves": [
               "Brave Bird",
+              "Cross Poison",
               "U-turn",
-              "Giga Drain",
               "Roost"
             ]
           },
-          "role": "Fast mixed coverage / Water-Ground check"
+          "role": "Fast physical lead / Fairy-Grass pressure / pivot"
         },
         {
           "species": "Weezing",
@@ -37499,17 +37504,17 @@
             "nature": "Modest",
             "ability": "Levitate",
             "moves": [
-              "Sludge Bomb",
+              "Sludge Wave",
               "Flamethrower",
               "Will-O-Wisp",
               "Pain Split"
             ]
           },
-          "role": "Ground immunity / physical check"
+          "role": "Ground immunity / burn / non-projectile Poison pressure"
         },
         {
-          "species": "Magcargo",
-          "item": "White Herb",
+          "species": "Claydol",
+          "item": "Sitrus Berry",
           "gigantamax": false,
           "profile": {
             "statSystem": "points",
@@ -37530,15 +37535,48 @@
               "spe": 0
             },
             "nature": "Modest",
-            "ability": "Flame Body",
+            "ability": "Levitate",
             "moves": [
-              "Fire Blast",
               "Earth Power",
-              "Power Gem",
-              "Shell Smash"
+              "Psychic",
+              "Ice Beam",
+              "Trick Room"
             ]
           },
-          "role": "Setup special breaker"
+          "role": "Bulky room setter / coverage"
+        },
+        {
+          "species": "Cacturne",
+          "item": "Focus Sash",
+          "gigantamax": false,
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 26,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 8,
+              "spe": 0
+            },
+            "nature": "Adamant",
+            "ability": "Water Absorb",
+            "moves": [
+              "Seed Bomb",
+              "Knock Off",
+              "Sucker Punch",
+              "Drain Punch"
+            ]
+          },
+          "role": "Water immunity / Grass-Dark pressure / priority"
         }
       ]
     },
@@ -42666,10 +42704,15 @@
       "gimmickEnabled": true,
       "selectionRules": {
         "preferredLead": [
-          "Crobat"
+          "Crobat",
+          "Claydol"
+        ],
+        "atLeastOneOf": [
+          "Crobat",
+          "Cacturne"
         ]
       },
-      "concept": "메가폭타의 화력과 화상·회복 파트너",
+      "concept": "메가폭타와 저수 파트너, 트릭룸·독·악 압박으로 역할 분담",
       "powerTier": "Upper Gym / Lower Elite Four",
       "team": [
         {
@@ -42697,17 +42740,17 @@
             "nature": "Modest",
             "ability": "Solid Rock",
             "moves": [
-              "Flamethrower",
+              "Fire Blast",
               "Earth Power",
               "Ancient Power",
-              "Yawn"
+              "Flash Cannon"
             ]
           },
-          "role": "Fire / Ground wallbreaker"
+          "role": "Immediate Fire/Ground special breaker"
         },
         {
           "species": "Mightyena",
-          "item": "Sitrus Berry",
+          "item": "Choice Band",
           "gigantamax": false,
           "profile": {
             "statSystem": "points",
@@ -42733,14 +42776,14 @@
               "Crunch",
               "Play Rough",
               "Sucker Punch",
-              "Taunt"
+              "Fire Fang"
             ]
           },
-          "role": "Attack reduction / priority"
+          "role": "Intimidate / immediate Dark pressure / priority"
         },
         {
           "species": "Crobat",
-          "item": "Life Orb",
+          "item": "Black Sludge",
           "gigantamax": false,
           "profile": {
             "statSystem": "points",
@@ -42764,12 +42807,12 @@
             "ability": "Infiltrator",
             "moves": [
               "Brave Bird",
+              "Cross Poison",
               "U-turn",
-              "Giga Drain",
               "Roost"
             ]
           },
-          "role": "Fast mixed coverage / Water-Ground check"
+          "role": "Fast physical lead / Fairy-Grass pressure / pivot"
         },
         {
           "species": "Weezing",
@@ -42796,17 +42839,17 @@
             "nature": "Modest",
             "ability": "Levitate",
             "moves": [
-              "Sludge Bomb",
+              "Sludge Wave",
               "Flamethrower",
               "Will-O-Wisp",
               "Pain Split"
             ]
           },
-          "role": "Ground immunity / physical check"
+          "role": "Ground immunity / burn / non-projectile Poison pressure"
         },
         {
-          "species": "Magcargo",
-          "item": "White Herb",
+          "species": "Claydol",
+          "item": "Sitrus Berry",
           "gigantamax": false,
           "profile": {
             "statSystem": "points",
@@ -42827,15 +42870,48 @@
               "spe": 0
             },
             "nature": "Modest",
-            "ability": "Flame Body",
+            "ability": "Levitate",
             "moves": [
-              "Fire Blast",
               "Earth Power",
-              "Power Gem",
-              "Shell Smash"
+              "Psychic",
+              "Ice Beam",
+              "Trick Room"
             ]
           },
-          "role": "Setup special breaker"
+          "role": "Bulky room setter / coverage"
+        },
+        {
+          "species": "Cacturne",
+          "item": "Focus Sash",
+          "gigantamax": false,
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 26,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 8,
+              "spe": 0
+            },
+            "nature": "Adamant",
+            "ability": "Water Absorb",
+            "moves": [
+              "Seed Bomb",
+              "Knock Off",
+              "Sucker Punch",
+              "Drain Punch"
+            ]
+          },
+          "role": "Water immunity / Grass-Dark pressure / priority"
         }
       ]
     },

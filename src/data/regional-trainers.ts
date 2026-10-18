@@ -5,12 +5,12 @@ import type {TrainerSample,TrainerTactic} from './trainer-catalog';
 type Row=[number,string,string,'gym'|'elite'|'champion'|'villain',string|null,TrainerTactic,string,string?,TrainerSample['aiCeiling']?];
 const rows:Row[]=[
  [1,'misty','이슬','gym','Water','special','Starmie,Golduck,Lapras,Politoed,Lanturn,Milotic'],
- [1,'ltsurge','마티스','gym','Electric','physical','Raichu,Electrode,Magneton,Electivire,Jolteon,Ampharos'],
+ [1,'ltsurge','마티스','gym','Electric','speed','Raichu,Electrode,Magneton,Electivire,Jolteon,Ampharos'],
  [1,'erika','민화','gym','Grass','status','Vileplume,Tangela,Victreebel,Bellossom,Shiftry,Roserade'],
  [1,'koga-kanto','독수','gym','Poison','status','Weezing,Muk,Venomoth,Golbat,Arbok,Ariados','koga'],
  [1,'sabrina','초련','gym','Psychic','special','Alakazam,Mr. Mime,Slowbro,Espeon,Jynx,Hypno'],
  [1,'blaine','강연','gym','Fire','special','Arcanine,Rapidash,Magmar,Ninetales,Magcargo,Houndoom'],
- [1,'giovanni-gym','비주기','gym','Ground','physical','Nidoking,Nidoqueen,Dugtrio,Rhydon,Persian,Kangaskhan','giovanni'],
+ [1,'giovanni-gym','비주기','gym','Ground','balanced','Nidoking,Nidoqueen,Dugtrio,Rhydon,Persian,Kangaskhan','giovanni'],
  [1,'lorelei','칸나','elite','Ice','bulk','Lapras,Jynx,Cloyster,Dewgong,Slowbro,Piloswine'],
  [1,'bruno-kanto','시바','elite','Fighting','physical','Machamp,Hitmonlee,Hitmonchan,Onix,Poliwrath,Primeape','bruno'],
  [1,'agatha','국화','elite','Ghost','status','Gengar,Haunter,Golbat,Arbok,Misdreavus,Weezing'],

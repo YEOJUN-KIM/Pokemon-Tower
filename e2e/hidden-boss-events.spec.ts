@@ -5,8 +5,8 @@ import {hiddenBossFixture} from '../tests/hidden-boss-fixture';
 import {TowerService} from '../src/server/tower-service';
 import {Accounts} from '../src/server/accounts';
 
-for(const [floor,width] of [[50,1280],[100,390]])test(`theme champion ${floor} → surprise event → automatic hidden battle at ${width}px`,async({page,context})=>{
- const owner='hidden_'+randomBytes(7).toString('hex'),f=hiddenBossFixture('johto',floor,'.data/e2e.sqlite',owner),s=f.store,service=new TowerService(s);
+for(const [theme,floor,width] of [['johto',50,1280],['johto',100,390],['kanto',50,1280],['kanto',100,390]] as const)test(`${theme} champion ${floor} → surprise event → automatic hidden battle at ${width}px`,async({page,context})=>{
+ const owner='hidden_'+randomBytes(7).toString('hex'),f=hiddenBossFixture(theme,floor,'.data/e2e.sqlite',owner),s=f.store,service=new TowerService(s);
  try{
   const player=Showdown.Teams.pack(Showdown.Teams.import('Charizard\nAbility: Blaze\nLevel: 50\nEVs: 1 HP\n- Flamethrower\n\nBlastoise\nAbility: Torrent\nLevel: 50\nEVs: 1 HP\n- Surf\n\nVenusaur\nAbility: Overgrow\nLevel: 50\nEVs: 1 HP\n- Vine Whip')!);
   const opponent=Showdown.Teams.pack(Showdown.Teams.import('Magikarp\nAbility: Swift Swim\nLevel: 1\nEVs: 1 HP\n- Splash\n\nCaterpie\nAbility: Shield Dust\nLevel: 1\nEVs: 1 HP\n- Tackle\n\nWeedle\nAbility: Shield Dust\nLevel: 1\nEVs: 1 HP\n- Poison Sting')!);

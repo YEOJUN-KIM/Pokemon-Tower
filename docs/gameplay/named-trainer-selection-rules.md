@@ -1,5 +1,7 @@
 # 네임드 선출·배치 규칙
 
+아래 데이터 집계는 selectionRules 도입 당시 기준이다. 이후 관동 후보·규칙 현황은 [관동 네임드 완성 문서](kanto-named-trainers.md)를 참고한다.
+
 `trainer-catalog → reviewed samples → runtime export → npc-templates → opponent-team → npc-ai/policy` 경로를 유지한다. 신규 필드는 검토 원본 `scripts/data/npc/normal-npc-samples.json`의 `selectionRules`이며, 기존 최상위 `required`는 저장된 정의 및 기존 파일럿과의 호환을 위해 그대로 지원한다.
 
 ```ts

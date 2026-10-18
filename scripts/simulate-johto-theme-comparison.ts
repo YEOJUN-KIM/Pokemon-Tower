@@ -31,6 +31,8 @@ assert.equal(phase==='before',!!process.env.NPC_BALANCE_BASELINE,'Before runs re
 const root=process.env.THEME_BALANCE_OUTPUT??'artifacts/experiments/balance/johto-expansion-20261018';
 const seeds=Number(process.env.THEME_BALANCE_SEEDS??4),limit=Number(process.env.THEME_BALANCE_LIMIT??Infinity);
 const telemetry=process.env.THEME_BALANCE_TELEMETRY==='1';
+const traceNpcs=(process.env.THEME_BALANCE_TRACE_NPCS??'named-bugsy,named-chuck,named-jasmine').split(',');
+const baselineCatalog=phase==='before'&&process.env.THEME_BALANCE_BASELINE_CATALOG?new Map(readFileSync(process.env.THEME_BALANCE_BASELINE_CATALOG,'utf8').trim().split('\n').map(line=>{const row=JSON.parse(line) as {id:string;tactic:TrainerSample['tactic']};return [row.id,row.tactic];})):null;
 assert.ok(Number.isSafeInteger(seeds)&&seeds>0);mkdirSync(root,{recursive:true});
 const digest=(s:string)=>createHash('sha256').update(s).digest('hex');
 const rules=Object.keys(battleRules) as BattleRule[];
@@ -73,7 +75,8 @@ function enemy(theme:TowerTheme,floor:number,n:number,rule:BattleRule,hidden=fal
  const named=floor%5===0||hidden,key=JSON.stringify([named?theme:'shared',floor,n,rule,hidden]);
  const cached=enemyCache.get(key);if(cached)return cached;
  const seed:Seed=[n,floor,29,43],trainer=named?towerTrainerEncounter(floor,`johto-comparison-v1:${n}`,theme,true,hidden):null;
- const sample:TrainerSample=trainer?{...trainerCatalog.find(s=>s.id===trainer.boss.id)!,role:trainer.boss.role}:selectTrainerSample(floor,seed,[],CURRENT_PROGRESSION,{common:true});
+ let sample:TrainerSample=trainer?{...trainerCatalog.find(s=>s.id===trainer.boss.id)!,role:trainer.boss.role}:selectTrainerSample(floor,seed,[],CURRENT_PROGRESSION,{common:true});
+ const oldTactic=baselineCatalog?.get(sample.id);if(oldTactic)sample={...sample,tactic:oldTactic};
  const concept=sample.npcRank?npcSamples.find(s=>s.id===sample.id):undefined;
  const ranked=concept?generateNpcEncounter(floor,seed,concept,sample.npcRank,rule,CURRENT_PROGRESSION):null;
  const team=ranked?.team??generateOpponentTeam(floor,seed,[],trainer,sample,CURRENT_PROGRESSION);
@@ -93,13 +96,15 @@ async function battle(theme:TowerTheme,floor:number,n:number,index:number,rule:B
  const foe=enemy(theme,floor,n,rule,hidden),p1=playerTeam(index,floor,rule),seed:Seed=[n,floor,37,101],equipment=gear(floor,rule);
  const key=digest(JSON.stringify({p1,p2:foe.packed,seed,rule,ai:foe.ai,enemyRule:foe.rule,tera:foe.tera,teraSpecies:foe.teraSpecies,equipment}));
  let outcome=cache.get(key);
- if(!outcome||(telemetry&&foe.kind!=='ordinary'&&!outcome.telemetry&&!outcome.error)){
+ const saveTrace=telemetry&&traceNpcs.includes(foe.npcId)&&n===1&&rule==='basic';
+ const tracePath=`${root}/traces/${phase}-${foe.npcId}-${floor}-${cases[index].id}.json`;
+ if(!outcome||(telemetry&&foe.kind!=='ordinary'&&!outcome.telemetry&&!outcome.error)||(saveTrace&&!existsSync(tracePath))){
   try{
    const log=await runBattle({teams:{p1,p2:foe.packed},seed,rule,opponentRule:foe.rule,opponentTeraSpecies:foe.teraSpecies,teraTickets:{p1:0,p2:foe.tera},trainerEquipment:equipment,player:new ZMovePolicy('p1'),opponent:createNpcPolicy(foe.ai)});
    outcome={key,winner:log.winner,turns:log.turns,hash:digest(log.publicProtocol.filter(l=>!l.startsWith('|t:|')).join('\n')),...(telemetry&&foe.kind!=='ordinary'?{telemetry:namedBattleTelemetry(log)}:{})};
-   if(telemetry&&['named-bugsy','named-chuck','named-jasmine'].includes(foe.npcId)&&n===1&&rule==='basic'){
+   if(saveTrace){
     mkdirSync(root+'/traces',{recursive:true});
-    writeFileSync(`${root}/traces/${phase}-${foe.npcId}-${floor}-${cases[index].id}.json`,JSON.stringify({foe,seed,teams:log.teams,winner:log.winner,publicProtocol:log.publicProtocol,decisions:log.decisions.filter(d=>d.side==='p2').map(d=>({turn:d.observation.turn,action:d.action,own:d.observation.ownTeam.find(p=>p.active),opponent:d.observation.opponent}))},null,2));
+    writeFileSync(tracePath,JSON.stringify({foe,seed,teams:log.teams,winner:log.winner,publicProtocol:log.publicProtocol,decisions:log.decisions.filter(d=>d.side==='p2').map(d=>({turn:d.observation.turn,action:d.action,own:d.observation.ownTeam.find(p=>p.active),opponent:d.observation.opponent}))},null,2));
    }
   }catch(error){outcome={key,winner:null,turns:0,hash:'',error:String(error)};}
   cache.set(key,outcome);appendFileSync(cachePath,JSON.stringify(outcome)+'\n');fresh++;
@@ -108,7 +113,9 @@ async function battle(theme:TowerTheme,floor:number,n:number,index:number,rule:B
  rows.push(row);appendFileSync(rowsPath,JSON.stringify(row)+'\n');
  if(index===0)manifest.push({theme,floor,n,rule,hidden,foe});
 }
-const themes=(phase==='before'&&process.env.THEME_BALANCE_ALL_THEMES!=='1'?['johto']:Object.keys(towerThemes)) as TowerTheme[];
+const requestedThemes=process.env.THEME_BALANCE_THEMES?.split(',');
+if(requestedThemes)assert.ok(requestedThemes.length>0&&new Set(requestedThemes).size===requestedThemes.length&&requestedThemes.every(theme=>Object.hasOwn(towerThemes,theme)),'Invalid comparison themes');
+const themes=(requestedThemes??(phase==='before'&&process.env.THEME_BALANCE_ALL_THEMES!=='1'?['johto']:Object.keys(towerThemes))) as TowerTheme[];
 outer:for(const theme of themes)for(let floor=1;floor<=100;floor++){
  for(let n=1;n<=seeds;n++)for(let i=0;i<cases.length;i++)for(const rule of rules){if(rows.length>=limit)break outer;await battle(theme,floor,n,i,rule);}
  if(floor%10===0)console.log(`${phase} ${theme} F${floor}: rows=${rows.length} actual=${fresh} cache=${reused} errors=${rows.filter(r=>r.error).length} seconds=${Math.round((Date.now()-started)/1000)}`);

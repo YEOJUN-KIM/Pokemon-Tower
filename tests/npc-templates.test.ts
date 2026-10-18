@@ -33,7 +33,7 @@ test('live named teams use the reviewed three members and profiles, scaled to ac
  const iris=normalNpcTemplate('named-iris',50,'champion')!;
  assert.equal(iris.ace,'Haxorus');assert.equal(iris.signature?.species,'Haxorus');
  assert.equal(iris.team.find(p=>p.species==='Haxorus')!.item,'Dragonium Z');
- assert.equal(templates.length,284);
+ assert.equal(templates.length,273);
 });
 
 test('stored champion teams retain template nature, ability, tools and stats across reopening',()=>{
@@ -45,7 +45,7 @@ test('stored champion teams retain template nature, ability, tools and stats acr
    store.db.prepare("UPDATE runs SET floor=?,state='select' WHERE id=?").run(floor,first.run_id);
    const row=store.battle(store.enter('templates',first.run_id,floor,starters));
    const template=normalNpcTemplate('named-cynthia',floor,'champion')!,sets=Showdown.Teams.unpack(row.opponent_team)!;
-   assert.deepEqual(sets.map(s=>s.species).sort(),['Garchomp','Spiritomb','Lucario'].sort());
+   assert.equal(sets.length,3);assert.ok(sets.some(s=>s.species==='Garchomp'));assert.ok(sets.every(s=>template.team.some(p=>p.species===s.species)));
    for(const set of sets){const source=template.team.find(p=>p.species===set.species)!,profile=templateProfile(source.profile,floor);
     profile.ivs=namedOpponentIVs(set.species,source.profile.moves,floor,JSON.parse(row.seed),profile);
     assert.equal(set.item,source.item);assert.equal(set.nature,profile.nature);assert.equal(set.ability,profile.ability);

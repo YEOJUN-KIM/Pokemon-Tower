@@ -1,5 +1,6 @@
 import {johtoReferences} from './johto-builds';
 import {hoennTrainers} from './hoenn-trainers';
+import {sinnohTrainers} from './sinnoh-trainers';
 import {regionalTrainerSamples} from './regional-trainers';
 import type {BossView} from '../shared/contracts';
 import {namedTrainerIntro} from './named-trainer-intros';
@@ -94,6 +95,10 @@ namedTrainerSamples.push(...regionalTrainerSamples);
 for(const reviewed of hoennTrainers){
  const sample=namedTrainerSamples.find(s=>s.id===reviewed.id);
  if(sample){sample.entries=reviewed.entries;sample.ace=reviewed.ace;sample.concept=reviewed.concept;if(reviewed.aiCeiling)sample.aiCeiling=reviewed.aiCeiling;}
+}
+for(const reviewed of sinnohTrainers){
+ const sample=namedTrainerSamples.find(s=>s.id===reviewed.id||(reviewed.category==='boss'&&s.id==='named-cyrus'));
+ if(sample){sample.entries=reviewed.entries;sample.ace=reviewed.ace;sample.concept=reviewed.concept;sample.aiCeiling=reviewed.aiCeiling;}
 }
 export const trainerCatalog=[...normalTrainerSamples,...eliteTrainerSamples,...mixedTrainerSamples,...namedTrainerSamples];
 export function trainerView(sample:TrainerSample):BossView {

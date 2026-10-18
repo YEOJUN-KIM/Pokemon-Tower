@@ -4,6 +4,7 @@ import {createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import Showdown from 'pokemon-showdown';
 import {hoennTrainers} from '../src/data/hoenn-trainers';
+import {sinnohTrainers} from '../src/data/sinnoh-trainers';
 import {villainLeaders} from '../src/data/villain-organizations';
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
@@ -19,15 +20,34 @@ import {packedNpcRule} from '../src/data/npc-gimmicks';
 
 const ids=['magma-executive-tabitha','magma-executive-courtney'];
 const digest=(v:unknown)=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
-test('only the two Magma executives change relative to 5325869: all other reviewed/runtime NPCs stay fixed',()=>{
- const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((s:{id:string})=>!ids.includes(s.id));
- const source=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((s:{id:string})=>!ids.includes(s.id));
- assert.equal(runtime.length,282);assert.equal(source.length,282);
- assert.equal(digest(runtime),'2eb532e4104000909689ae971f5c956f49615577e5b9309f80f3578ec83713a6');
- assert.equal(digest(source),'7f5b0d122eb581a84ecb4b0c88fe81b1f3a82fd9c0909b98948a22b2f5bd723b');
+test('Magma and subsequent Sinnoh reviews preserve all other reviewed/runtime NPCs',()=>{
+ const excluded=new Set([...ids,...sinnohTrainers.map(t=>t.id),'named-cyrus']);
+ const sort=(a:{id:string;stage:string},b:{id:string;stage:string})=>(a.id+a.stage).localeCompare(b.id+b.stage);
+ const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((s:{id:string})=>!excluded.has(s.id)).sort(sort);
+ const source=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((s:{id:string})=>!excluded.has(s.id)).sort(sort);
+ assert.equal(runtime.length,250);assert.equal(source.length,250);
+ assert.equal(digest(runtime),'9a875a5b35dd4b7705ea0953172bdacf8c6758ec454722ae57881b2fb55e520f');
+ assert.equal(digest(source),'d624f546f8e792974658b5d23b2522e5524866d25d155bcbe9d172faec504a40');
 });
 function sampleFor(id:string){const group=villainLeaders.magma;return {...[group.executive,...group.executives!].find(s=>id.endsWith('-'+s.portrait))!,id};}
 for(const id of ids){
+ test(`${id}: Tactical uses Shadow Ball coverage against Espeon where Trick Room stayed idle`,async()=>{
+  const sample=sampleFor(id);
+  const snap=Array.from({length:128},(_,n)=>snapshotTrainerEventBattle(`claydol-slot:${id}:${n}`,sample,95,'basic',CURRENT_PROGRESSION)).find(s=>s.team[0].name==='Claydol')!;
+  assert.ok(snap,'native selection must produce a Claydol lead');
+  const current=Showdown.Teams.unpack(snap.opponentTeam)!;
+  assert.deepEqual(current[0].moves.map(Showdown.toID),['earthpower','psychic','icebeam','shadowball']);
+  const previous=structuredClone(current);previous[0].moves[3]='Trick Room';
+  // Same teams, stats and seed isolate the fourth slot; no AI or selection changes.
+  for(const [label,p2] of [['old',Showdown.Teams.pack(previous)],['new',snap.opponentTeam]] as const){
+   const log=await runBattle({teams:{p1:packTeam(['Espeon','Corviknight','Gastrodon']),p2},seed:snap.seed,rule:'basic',opponentRule:packedNpcRule(snap.team.map(p=>({item:p.item??''})),0),player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(95,sample))});
+   const first=log.decisions.find(d=>d.side==='p2'&&d.observation.opponent?.species==='Espeon'&&d.observation.ownTeam.some(p=>p.active&&p.details.startsWith('Claydol'))&&d.action.startsWith('move '))!;
+   assert.ok(first);
+   assert.equal(first.action,label==='old'?'move 1':'move 4');
+   assert.ok(log.publicProtocol.some(line=>line.startsWith(`|move|p2a: Claydol|${label==='old'?'Earth Power':'Shadow Ball'}|`)),'chosen move must actually execute');
+   assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
+  }
+ });
  test(`${id}: supported candidate sets and varied legal triples retain ace, floor budgets and native AI`,()=>{
   const s=sampleFor(id),validator=new Showdown.TeamValidator(FORMAT);
   const template=normalNpcTemplate(id,95,'villain')!;
@@ -70,4 +90,3 @@ for(const id of ids){
   }
  });
 }
-

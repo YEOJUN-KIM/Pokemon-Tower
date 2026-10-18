@@ -418,7 +418,7 @@ Design Notes: A/H: 물/땅에 약한 조직 풀과 Basic~Tactical 한계. 낮은
 
 Category: executive; Power Tier: Upper Gym; Ace: Camerupt; AI: Tactical ceiling.
 
-Concept: 불꽃·땅 브레이커와 독·악 압박, 저수·트릭룸 지원.
+Concept: 불꽃·땅 브레이커와 독·악 압박, 저수와 점토도리 특수 견제.
 
 Gimmick: None.
 
@@ -430,7 +430,7 @@ selectionRules: `{"preferredLead":["Crobat","Claydol"],"atLeastOneOf":["Crobat",
 | Mightyena | Intimidate | Choice Band | Crunch / Play Rough / Sucker Punch / Fire Fang | Intimidate / immediate Dark pressure / priority |
 | Crobat | Infiltrator | Black Sludge | Brave Bird / Cross Poison / U-turn / Roost | Fast physical lead / Fairy-Grass pressure / pivot |
 | Weezing | Levitate | Rocky Helmet | Sludge Wave / Flamethrower / Will-O-Wisp / Pain Split | Ground immunity / burn / non-projectile Poison pressure |
-| Claydol | Levitate | Sitrus Berry | Earth Power / Psychic / Ice Beam / Trick Room | Bulky room setter / coverage |
+| Claydol | Levitate | Sitrus Berry | Earth Power / Psychic / Ice Beam / Shadow Ball | Bulky special coverage / Psychic-Ghost pressure |
 | Cacturne | Water Absorb | Focus Sash | Seed Bomb / Knock Off / Sucker Punch / Drain Punch | Water immunity / Grass-Dark pressure / priority |
 
 signature carrier는 허용 층부터 지정 기믹 도구로 바뀐다. 기존 층별 성장·선출기를 사용한다.
@@ -443,7 +443,7 @@ Design Notes: 마그카르고를 점토도리로 교체하고 저수 선인왕�
 
 Category: executive; Power Tier: Upper Gym / Lower Elite Four; Ace: Camerupt; AI: Tactical ceiling.
 
-Concept: 메가폭타와 저수 파트너, 트릭룸·독·악 압박으로 역할 분담.
+Concept: 메가폭타와 저수 파트너, 점토도리 특수 견제·독·악 압박으로 역할 분담.
 
 Gimmick: Mega Camerupt / Cameruptite.
 
@@ -455,7 +455,7 @@ selectionRules: `{"preferredLead":["Crobat","Claydol"],"atLeastOneOf":["Crobat",
 | Mightyena | Intimidate | Choice Band | Crunch / Play Rough / Sucker Punch / Fire Fang | Intimidate / immediate Dark pressure / priority |
 | Crobat | Infiltrator | Black Sludge | Brave Bird / Cross Poison / U-turn / Roost | Fast physical lead / Fairy-Grass pressure / pivot |
 | Weezing | Levitate | Rocky Helmet | Sludge Wave / Flamethrower / Will-O-Wisp / Pain Split | Ground immunity / burn / non-projectile Poison pressure |
-| Claydol | Levitate | Sitrus Berry | Earth Power / Psychic / Ice Beam / Trick Room | Bulky room setter / coverage |
+| Claydol | Levitate | Sitrus Berry | Earth Power / Psychic / Ice Beam / Shadow Ball | Bulky special coverage / Psychic-Ghost pressure |
 | Cacturne | Water Absorb | Focus Sash | Seed Bomb / Knock Off / Sucker Punch / Drain Punch | Water immunity / Grass-Dark pressure / priority |
 
 signature carrier는 허용 층부터 지정 기믹 도구로 바뀐다. 기존 층별 성장·선출기를 사용한다.

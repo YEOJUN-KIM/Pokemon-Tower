@@ -27,11 +27,8 @@ const earlyRows:[string,NpcGimmick['rule'],string][]=[
  ['sidney','mega','Absol'],['phoebe','mega','Sableye'],['glacia','mega','Glalie'],
  ['drake','mega','Salamence'],['maxie','mega','Camerupt'],['archie','mega','Sharpedo'],
  ['steven','mega','Metagross'],['wallace','z','Milotic'],
- ['roark','tera','Rampardos'],['gardenia','z','Roserade'],['maylene','mega','Lucario'],
- ['crasherwake','z','Floatzel'],['fantina','tera','Mismagius'],['byron','tera','Bastiodon'],
- ['candice','mega','Abomasnow'],['volkner','z','Electivire'],['aaron','mega','Scizor'],
- ['bertha','tera','Hippowdon'],['flint','z','Infernape'],['lucian','tera','Bronzong'],
- ['cyrus','z','Weavile'],['cynthia','mega','Garchomp'],['barry','z','Empoleon'],
+ // Reviewed Sinnoh leaders and Galactic officers use no transformation gimmick.
+ ['barry','z','Empoleon'],
  ['cilan','z','Simisage'],['chili','z','Simisear'],['cress','z','Simipour'],
  ['lenora','tera','Watchog'],['burgh','z','Leavanny'],['elesa','z','Zebstrika'],
  ['clay','z','Excadrill'],['skyla','tera','Swanna'],['brycen','tera','Beartic'],
@@ -40,7 +37,7 @@ const earlyRows:[string,NpcGimmick['rule'],string][]=[
  ['grimsley','tera','Bisharp'],['caitlin','z','Gothitelle'],['ghetsis','z','Hydreigon'],
  ['alder','z','Volcarona'],['iris','z','Haxorus'],
  // Organization executives have no generation field in the source catalog.
- ['courtney','mega','Camerupt'],['mars','tera','Purugly'],['zinzolin','z','Cryogonal'],
+ ['courtney','mega','Camerupt'],['zinzolin','z','Cryogonal'],
  ['xerosic','mega','Houndoom'],['plumeria','z','Salazzle'],['guzma','z','Golisopod'],
  ['matt','mega','Sharpedo'],['faba','z','Hypno'],
 ];

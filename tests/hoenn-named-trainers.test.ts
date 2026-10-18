@@ -4,6 +4,7 @@ import {readFileSync,existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import {hoennTrainers} from '../src/data/hoenn-trainers';
+import {sinnohTrainers} from '../src/data/sinnoh-trainers';
 import {trainerCatalog} from '../src/data/trainer-catalog';
 import {villainLeaders,villainEncounter,organizationGrunt} from '../src/data/villain-organizations';
 import {normalNpcTemplate} from '../src/server/npc-templates';
@@ -21,10 +22,11 @@ import {projectNpcRuntime} from '../scripts/lib/npc-runtime.mjs';
 const source=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8'));
 const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8'));
 test('all out-of-scope NPC runtime definitions retain their pre-Hoenn content',()=>{
- const changed=new Set(hoennTrainers.map(t=>t.id));changed.add('named-maxie');changed.add('named-archie');
+ const changed=new Set([...hoennTrainers,...sinnohTrainers].map(t=>t.id));changed.add('named-maxie');changed.add('named-archie');changed.add('named-cyrus');
  const others=runtime.filter((r:{id:string})=>!changed.has(r.id)).sort((a:{id:string;stage:string},b:{id:string;stage:string})=>(a.id+a.stage).localeCompare(b.id+b.stage));
- assert.equal(others.length,255);
- assert.equal(createHash('sha256').update(JSON.stringify(others)).digest('hex'),'495158cdfcdddc6b840e9ca7881e3509ab81fa6a40115183044116f2bafd9685');
+ // Sinnoh has its own before/after preservation guard following its review.
+ assert.equal(others.length,223);
+ assert.equal(createHash('sha256').update(JSON.stringify(others)).digest('hex'),'b24c2024edcb8a43c8030d1e560b86c628ed7d5ff3fc901e500618da4a8ff601');
 });
 function sampleFor(id:string){
  const named=trainerCatalog.find(s=>s.id===id);if(named)return named;

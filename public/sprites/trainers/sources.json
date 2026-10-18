@@ -1113,6 +1113,22 @@
       "status": "downloaded",
       "artist": "Gnomowladny",
       "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "jupiter",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/jupiter.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-18",
+      "review": "game-character-no-individual-credit-listed",
+      "sha256": "819cca37ec5880c5bf5de6bc59daa579768e028c665cab296500388b2658a47c"
+    },
+    {
+      "portrait": "saturn",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/saturn.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-18",
+      "review": "game-character-no-individual-credit-listed",
+      "sha256": "6156d48fa2181144a401fb9426299b2e40fb1914b1a2fa1966a24df199b13bec"
     }
   ]
 }

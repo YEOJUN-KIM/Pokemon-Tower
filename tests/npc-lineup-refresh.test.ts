@@ -11,6 +11,7 @@ import {BattleSession} from '../src/server/battle-session';
 import {packTeam} from '../src/data/teams';
 import {defaultProfile} from '../src/server/training';
 import {battleEvents} from '../src/battle/run';
+import {sinnohTrainer} from '../src/data/sinnoh-trainers';
 
 test('every themed legendary boss and organization alias switches at 75 with one gimmick',()=>{
  for(const [id,early] of Object.entries(npcEarlyReplacements)){
@@ -21,10 +22,11 @@ test('every themed legendary boss and organization alias switches at 75 with one
    const before=normalNpcTemplate(alias,74,'villain')!,after=normalNpcTemplate(alias,75,'villain')!;
    assert.ok(before.team.some(p=>p.species===early.replacement),alias);
    assert.ok(before.team.every(p=>p.species!==early.species),alias);
-   assert.deepEqual(after.team.map(p=>p.species).sort(),[...npcReviewPresets[id].entries].sort(),alias);
+   const reviewed=id==='named-cyrus'?sinnohTrainer('galactic-boss-cyrus'):undefined;
+   assert.deepEqual(after.team.map(p=>p.species).sort(),[...(reviewed?.entries??npcReviewPresets[id].entries)].sort(),alias);
    assert.equal(after.legendaryMinFloor,75);
    assert.equal(after.ace,npcReviewPresets[id].ace);
-   assert.equal(after.team.filter(p=>megaStones[p.item]||primalOrbs[p.item]||zCrystals[p.item]||p.item===DYNAMAX_ITEM).length,1,alias);
+   assert.equal(after.team.filter(p=>megaStones[p.item]||primalOrbs[p.item]||zCrystals[p.item]||p.item===DYNAMAX_ITEM).length,reviewed?0:1,alias);
   }
  }
 });

@@ -119,6 +119,7 @@ for(const t of hoennTrainers){
   if(t.id.startsWith('magma-executive-')&&species==='Camerupt')Object.assign(b,{item:t.id==='magma-executive-tabitha'?'Assault Vest':'Sitrus Berry',moves:['Fire Blast','Earth Power','Ancient Power','Flash Cannon'],role:'Immediate Fire/Ground special breaker'});
   if(t.id.startsWith('magma-executive-')&&species==='Weezing')Object.assign(b,{moves:['Sludge Wave','Flamethrower','Will-O-Wisp','Pain Split'],role:'Ground immunity / burn / non-projectile Poison pressure'});
   if(t.id.startsWith('magma-executive-')&&species==='Mightyena')Object.assign(b,{item:'Choice Band',moves:['Crunch','Play Rough','Sucker Punch','Fire Fang'],role:'Intimidate / immediate Dark pressure / priority'});
+  if(['magma-executive-tabitha','magma-executive-courtney'].includes(t.id)&&species==='Claydol')Object.assign(b,{moves:['Earth Power','Psychic','Ice Beam','Shadow Ball'],role:'Bulky special coverage / Psychic-Ghost pressure'});
   if(species==='Ninetales')b.item='Charcoal';
   if(t.id==='named-steven'&&species==='Claydol')Object.assign(b,{moves:['Earth Power','Psychic','Ice Beam','Reflect'],role:'Bulky coverage / screen'});
   const profile={statSystem:'points' as const,ivs:{hp:31,atk:31,def:31,spa:31,spd:31,spe:31},evs:{hp:0,atk:0,def:0,spa:0,spd:0,spe:0},nature:'Serious',ability:b.ability,moves:b.moves};

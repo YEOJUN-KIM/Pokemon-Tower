@@ -1,6 +1,7 @@
 // Tower battle sets: modern legal moves, independent of a trainer's original generation.
 // These are deliberate game builds, not exact copies of the original parties.
 export const championMoves:Record<string,readonly string[]>={
+  Gastrodon:['Earth Power','Scald','Ice Beam','Recover'],
   Altaria:["Dragon Dance", "Dragon Claw", "Earthquake", "Roost"],
   Lapras:["Surf", "Ice Beam", "Thunderbolt", "Sing"],
   Ludicolo:["Surf", "Giga Drain", "Ice Beam", "Rain Dance"],

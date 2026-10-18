@@ -13,6 +13,10 @@ export class SwitchingPolicy extends TeraPolicy {
  private voluntary=0;
  private lastSwitchTurn=-10;
  private departed=new Map<string,number>();
+ protected override checkpointDecisionState():()=>void {
+  const parent=super.checkpointDecisionState(),voluntary=this.voluntary,last=this.lastSwitchTurn,departed=new Map(this.departed);
+  return ()=>{parent();this.voluntary=voluntary;this.lastSwitchTurn=last;this.departed=departed;};
+ }
  override choose(o:Observation):string {
   const own=o.ownTeam.find(p=>p.active),enemy=o.opponent;
   const switches=o.legalActions.filter(a=>a.command.startsWith('switch '));

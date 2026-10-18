@@ -12,6 +12,12 @@ export class TowerPolicy extends DamagePolicy {
   private setupUsed=new Set<string>();
   private statusUsed=new Set<string>();
   private soaked=new Set<string>();
+  // v12 can replace a speculative ordinary choice with another Z move. Archived
+  // callers never invoke this hook and keep their original state transitions.
+  protected checkpointDecisionState():()=>void {
+    const setup=new Set(this.setupUsed),status=new Set(this.statusUsed),soaked=new Set(this.soaked);
+    return ()=>{this.setupUsed=setup;this.statusUsed=status;this.soaked=soaked;};
+  }
   override choose(observation:Observation):string {
     const own=observation.ownTeam.find(p=>p.active),enemy=observation.opponent;
     if(!own || !enemy)return super.choose(observation);

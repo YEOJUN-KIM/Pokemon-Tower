@@ -1,8 +1,11 @@
-import {readFileSync,writeFileSync,existsSync} from 'node:fs';
+import {readFileSync,writeFileSync,existsSync,mkdirSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import Showdown from 'pokemon-showdown';
 
 const root=process.env.THEME_BALANCE_OUTPUT??'artifacts/experiments/balance/named-selection-20261018';
+// Generate reviewable artifacts first. Updating tracked docs is an explicit opt-in.
+const documentOutput=process.env.NPC_REPORT_DOCS_OUTPUT??`${root}/documents`;
+mkdirSync(documentOutput,{recursive:true});
 const json=path=>JSON.parse(readFileSync(path,'utf8'));
 const jsonl=path=>readFileSync(path,'utf8').trim().split('\n').filter(Boolean).map(JSON.parse);
 const before=json(`${root}/before-report.json`),after=json(`${root}/after-report.json`);
@@ -132,7 +135,7 @@ const selectionDoc=[
  '',
  '</details>',
  ];
-writeFileSync('docs/gameplay/named-trainer-selection-rules.md',selectionDoc.join('\n')+'\n');
+writeFileSync(`${documentOutput}/named-trainer-selection-rules.md`,selectionDoc.join('\n')+'\n');
 const report=[
  '# 네임드 밸런스·기믹 점검 보고서',
  '',
@@ -211,7 +214,7 @@ const report=[
  'node scripts/report-named-selection.mjs',
  '```',
  ];
-writeFileSync('docs/gameplay/named-trainer-balance-report.md',report.join('\n')+'\n');
+writeFileSync(`${documentOutput}/named-trainer-balance-report.md`,report.join('\n')+'\n');
 writeFileSync(`${root}/comparison.json`,JSON.stringify({npcComparison,lineups,placements,gimmickByNpc,gimmickTotals,review},null,2));
 writeFileSync(`${root}/gimmick-events.jsonl`,gimmicks.map(r=>JSON.stringify(r)).join('\n')+'\n');
 console.log(JSON.stringify({reviewed:review.length,applied:review.filter(r=>r.rules.length).length,johto:after.byTheme.filter(r=>r.theme==='johto'),gimmickTotals,focus:npcComparison.filter(r=>['named-jasmine','named-bugsy','named-chuck'].includes(r.id))},null,2));

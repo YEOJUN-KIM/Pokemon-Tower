@@ -1,4 +1,4 @@
-import {readFileSync,writeFileSync,existsSync} from 'node:fs';
+import {readFileSync,writeFileSync,existsSync,mkdirSync} from 'node:fs';
 import assert from 'node:assert/strict';
 import Showdown from 'pokemon-showdown';
 import {towerThemes} from '../src/data/tower-themes.ts';
@@ -10,6 +10,9 @@ import {moveInfo} from '../src/data/move-info.ts';
 import {satisfiesSelectionRules} from '../src/data/npc-selection-rules.ts';
 
 const root=process.env.THEME_BALANCE_OUTPUT??'artifacts/experiments/balance/kanto-completion-20261018';
+// Generate reviewable artifacts first. Updating tracked docs is an explicit opt-in.
+const documentOutput=process.env.NPC_REPORT_DOCS_OUTPUT??`${root}/documents`;
+mkdirSync(documentOutput,{recursive:true});
 const json=p=>JSON.parse(readFileSync(p,'utf8')),jsonl=p=>readFileSync(p,'utf8').trim().split('\n').filter(Boolean).map(JSON.parse);
 const config=towerThemes.kanto,ids=[...config.gyms,...config.elites,config.champion,config.final];
 const source=json('scripts/data/npc/normal-npc-samples.json'),oldSource=json(`${root}/before-source.json`);
@@ -97,7 +100,7 @@ const design=[
  '이번에 새로 추가한 대사는 없다. 기존 관동 레드의 “… …!”만 유지했다([레츠고 전투 전 reference](https://bulbapedia.bulbagarden.net/wiki/Red_(game)/Quotes)). 다른 한국어 전투 직전 원문/맥락은 unverified로 남겼으며 창작하지 않았다.', '',
  '승률·선출·기믹·테스트: [관동 최종 밸런스 보고서](kanto-named-trainer-balance-report.md).',
 ];
-writeFileSync('docs/gameplay/kanto-named-trainers.md',design.join('\n')+'\n');
+writeFileSync(`${documentOutput}/kanto-named-trainers.md`,design.join('\n')+'\n');
 const allStats=(phase,band,filter=regular)=>stats(rows[phase].filter(r=>r.band===band&&filter(r)));
 const report=[
  '# 관동 네임드 최종 밸런스 보고서', '',
@@ -158,5 +161,5 @@ const report=[
  'node --import tsx scripts/report-kanto-npc-balance.mjs',
  '```',
 ];
-writeFileSync('docs/gameplay/kanto-named-trainer-balance-report.md',report.join('\n')+'\n');
+writeFileSync(`${documentOutput}/kanto-named-trainer-balance-report.md`,report.join('\n')+'\n');
 console.log(JSON.stringify({npc,gimmickTotals,successes:successes.length},null,2));

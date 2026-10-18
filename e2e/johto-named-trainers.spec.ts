@@ -38,7 +38,7 @@ for(const [id,name,ace,width] of [['bugsy','호일','Scizor',1280],['morty','유
   const restored=await (await page.request.get('/api/battle')).json();
   expect(restored.battle.id).toBe(state.battle.id);expect(restored.battle.messages).toEqual(state.battle.messages);
   const after=store.battle(before.id);
-  expect(after.opponent_team).toBe(before.opponent_team);expect(after.seed).toBe(before.seed);expect(after.boss).toBe(before.boss);expect(after.ai_version).toBe('tower-policy-v11');
+  expect(after.opponent_team).toBe(before.opponent_team);expect(after.seed).toBe(before.seed);expect(after.boss).toBe(before.boss);expect(after.ai_version).toBe('tower-policy-v12');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  }finally{store.close();}
 });

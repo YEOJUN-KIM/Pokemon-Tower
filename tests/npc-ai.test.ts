@@ -75,7 +75,7 @@ test('only Expert learns public immunity; alternative attacks and bounded safe s
 test('Tactical and Expert use all supported active gimmicks, while Basic excludes them',()=>{
  for(const gimmick of ['mega','dynamax','terastallize','zmove'])for(const tier of npcAiTiers){
   const o=observation();o.ownTeam=[pokemon('Charizard',true,['Flamethrower'])];o.opponent={species:'Snorlax',condition:'100/100'};
-  o.legalActions=[{command:'move 1',label:'Flamethrower',estimatedDamage:60},{command:`move 1 ${gimmick}`,label:gimmick==='dynamax'?'Max Flare':gimmick==='zmove'?'Inferno Overdrive':'Flamethrower',estimatedDamage:100}];
+  o.legalActions=[{command:'move 1',label:'Flamethrower',estimatedDamage:60},{command:`move 1 ${gimmick}`,label:gimmick==='dynamax'?'Max Flare':gimmick==='zmove'?'Inferno Overdrive':'Flamethrower',estimatedDamage:gimmick==='zmove'?180:100}];
   assert.equal(policy(tier).choose(o),tier==='basic'?'move 1':`move 1 ${gimmick}`,`${tier} ${gimmick}`);
  }
 });
@@ -110,13 +110,13 @@ test('samples have valid optional ceilings and explicit defaults across roles, r
  assert.equal(challengerDefinition(npcSamples[0],'master',1).npcAi!.tier,'expert');
 });
 
-test('event snapshots freeze v11 tier/tactic independently of later sample edits',()=>{
+test('current event snapshots freeze tier/tactic independently of later sample edits',()=>{
  const sample=structuredClone(villainLeaders.rocket.boss),snapshot=snapshotTrainerEventBattle('npc-ai-snapshot',sample,10,'basic','hundred-floor-v1');
  assert.equal(snapshot.aiVersion,AI_VERSION);assert.deepEqual(snapshot.trainer.npcAi,{tier:'expert',tactic:'physical'});
  sample.aiCeiling='basic';sample.tactic='status';assert.deepEqual(snapshot.trainer.npcAi,{tier:'expert',tactic:'physical'});
 });
 
-test('v11 settings survive retry and reconnect without rerolling the opponent or tier',async()=>{
+test('current AI settings survive retry and reconnect without rerolling the opponent or tier',async()=>{
  const s=new TowerStore(':memory:');s.ensurePlayer('ai');s.db.prepare('UPDATE players SET growth_points=10000 WHERE id=?').run('ai');
  s.permanentAction('ai',randomUUID(),'buy','retry',1,null);
  let service=new TowerService(s);
@@ -133,7 +133,7 @@ test('v11 settings survive retry and reconnect without rerolling the opponent or
 
 test('every archived AI version including v10 remains reconnectable',async()=>{
  const s=new TowerStore(':memory:'),service=new TowerService(s);
- try{for(const version of ['damage-policy-v1',...Array.from({length:9},(_,i)=>`tower-policy-v${i+2}`)]){
+ try{for(const version of ['damage-policy-v1',...Array.from({length:10},(_,i)=>`tower-policy-v${i+2}`)]){
   s.ensurePlayer(version);const id=s.start(version,starters);s.db.prepare('UPDATE battles SET ai_version=? WHERE id=?').run(version,id);
   assert.equal((await service.state(version)).battle!.status,'waiting',version);assert.equal(s.battle(id).ai_version,version);
  }}finally{await service.dispose();s.close();}
@@ -153,7 +153,7 @@ for(const tier of npcAiTiers)test(`${tier} real battles expose only public oppon
 
 test('v10 and v11 Expert balanced produce identical session histories',async()=>{
  const teams={p1:packTeam(starters),p2:packTeam(['Starmie','Espeon','Snorlax'])};
- const sessions=['tower-policy-v10',AI_VERSION].map(aiVersion=>new BattleSession(async()=>{},[1,2,3,4],{teams,aiVersion,npcAi:{tier:'expert',tactic:'balanced'}}));
+ const sessions=['tower-policy-v10','tower-policy-v11'].map(aiVersion=>new BattleSession(async()=>{},[1,2,3,4],{teams,aiVersion,npcAi:{tier:'expert',tactic:'balanced'}}));
  try{let states=await Promise.all(sessions.map(s=>s.ready()));
   for(let n=0;states[0].status==='waiting'&&n<200;n++){
    assert.deepEqual(battleEvents(states[0].messages),battleEvents(states[1].messages));

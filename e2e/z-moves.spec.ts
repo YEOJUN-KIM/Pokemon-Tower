@@ -35,7 +35,7 @@ for(const width of [1280,390])test(`Z selection, real power, activation, one use
   await page.reload();await page.getByRole('button',{name:'싸운다',exact:true}).click();await expect(page.getByTestId('zmove-toggle')).toHaveCount(0);
 });
 
-test('crystal shop charges 3000 and keeps equipment after reload',async({page,context})=>{
+test('crystal shop charges 3000, bag equips it and reload preserves the holder',async({page,context})=>{
   const suffix=randomBytes(7).toString('hex'),owner='zshop-'+suffix,store=new TowerStore('.data/e2e.sqlite');let token='';
   try{
     token=(await new Accounts(store.db).register('zshop_'+suffix,'test-password',owner,undefined)).token;store.ensurePlayer(owner);
@@ -45,7 +45,9 @@ test('crystal shop charges 3000 and keeps equipment after reload',async({page,co
   await page.goto('/battle');await page.getByTestId('maintenance-shop').click();
   await page.getByRole('button',{name:'지닌 도구',exact:true}).click();
   await page.locator('[data-held-item="Firium Z"]').click();
-  await page.locator('[data-partner="Charizard"]').click();
-  await expect.poll(async()=>{const d=await page.request.get('/api/battle').then(r=>r.json());return {coins:d.tower.coins,item:d.tower.run.heldItems.Charizard};}).toEqual({coins:1000,item:'Firium Z'});
+  await expect.poll(async()=>{const d=await page.request.get('/api/battle').then(r=>r.json());return d.tower.coins;}).toBe(1000);
+  await page.getByRole('dialog',{name:'정비 상점',exact:true}).getByRole('button',{name:'배낭',exact:true}).click();
+  const bag=page.getByTestId('bag');await bag.getByRole('button',{name:'Z크리스탈',exact:true}).click();await bag.locator('[data-bag-entry="held:Firium Z"]').click();await bag.locator('[data-bag-target=Charizard]').click();
+  await expect.poll(async()=>{const d=await page.request.get('/api/battle').then(r=>r.json());return d.tower.run.heldItems.Charizard;}).toBe('Firium Z');await bag.getByRole('button',{name:'닫기',exact:true}).click();
   await page.reload();await expect(page.getByTestId('run-maintenance')).toContainText('1,000코인');
 });

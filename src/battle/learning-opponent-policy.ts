@@ -12,6 +12,10 @@ export class LearningOpponentPolicy extends CautiousSwitchingPolicy {
  private memory=new PublicImmunityV2();
  private learnedSwitches=0;
  private lastSwitch=-10;
+ protected override checkpointDecisionState():()=>void {
+  const parent=super.checkpointDecisionState(),switches=this.learnedSwitches,last=this.lastSwitch;
+  return ()=>{parent();this.learnedSwitches=switches;this.lastSwitch=last;};
+ }
  constructor(private side:'p1'|'p2'='p2',scoreBias?:MoveScoreBias){super(scoreBias);}
  observePublicLine(line:string){
   if(!line.startsWith('|')||line.startsWith('|request|'))return;

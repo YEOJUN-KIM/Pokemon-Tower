@@ -63,7 +63,7 @@ import {zCrystals} from '../data/z-crystals';
 import {defaultProfile,trainingOptions,validateProfile} from './training';
 import {trainingCost,statKeys,trainedStat,natures,type StatBlock,type IVGain,type MoveGain,type MoveSwap,type TrainingProfile,type TrainingView} from '../data/training';
 
-export const AI_VERSION = 'tower-policy-v11';
+export const AI_VERSION = 'tower-policy-v12';
 const favoriteSpecies=new Set(pokedexEntries().map(entry=>entry.species));
 type RunRow = {id: string; player_id: string; floor: number; state: RunView['state']; total_floors: number};
 export type BattleRow = {

@@ -496,6 +496,14 @@
     "heightm": 2.5,
     "key": "tyranitar-mega"
   },
+  "Golisopod-Mega": {
+    "id": 768,
+    "baseSpecies": "Golisopod",
+    "spriteKey": "10316",
+    "types": ["Bug", "Steel"],
+    "heightm": 2.3,
+    "key": "golisopod-mega"
+  },
   "Dragonite-Mega": {
     "id": 149,
     "baseSpecies": "Dragonite",

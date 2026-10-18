@@ -295,6 +295,28 @@
       "concept": "알로라 champion: 혼합 타입과 역할별 육성"
     },
     {
+      "id": "named-hau",
+      "name": "하우",
+      "category": "champion",
+      "specialty": null,
+      "ace": "Raichu-Alola",
+      "entries": [
+        "Noivern",
+        "Primarina",
+        "Raichu-Alola"
+      ],
+      "tactic": "speed",
+      "aiCeiling": "expert",
+      "points": 66,
+      "signature": {
+        "rule": "z",
+        "species": "Raichu-Alola",
+        "item": "Aloraichium Z"
+      },
+      "minFloor": 5,
+      "concept": "알로라 champion: 혼합 타입과 역할별 육성"
+    },
+    {
       "id": "skull-grunt",
       "name": "스컬단 조직원",
       "category": "grunt",
@@ -329,9 +351,13 @@
         "Pinsir"
       ],
       "tactic": "physical",
-      "aiCeiling": "tactical",
+      "aiCeiling": "expert",
       "points": 54,
-      "signature": null,
+      "signature": {
+        "rule": "mega",
+        "species": "Golisopod",
+        "item": "Golisopite"
+      },
       "minFloor": 5,
       "concept": "알로라 executive: Bug 타입과 역할별 육성"
     },
@@ -1299,6 +1325,54 @@
     }
   },
   "overrides": {
+    "named-hau": {
+      "Noivern": {
+        "ability": "Infiltrator",
+        "item": "Life Orb",
+        "nature": "Timid",
+        "moves": [
+          "Draco Meteor",
+          "Air Slash",
+          "Flamethrower",
+          "U-turn"
+        ]
+      },
+      "Primarina": {
+        "ability": "Torrent",
+        "item": "Assault Vest",
+        "nature": "Modest",
+        "moves": [
+          "Sparkling Aria",
+          "Moonblast",
+          "Ice Beam",
+          "Energy Ball"
+        ]
+      },
+      "Raichu-Alola": {
+        "ability": "Surge Surfer",
+        "item": "Aloraichium Z",
+        "nature": "Timid",
+        "moves": [
+          "Thunderbolt",
+          "Psychic",
+          "Focus Blast",
+          "Nasty Plot"
+        ]
+      }
+    },
+    "named-guzma": {
+      "Golisopod": {
+        "ability": "Emergency Exit",
+        "item": "Golisopite",
+        "nature": "Adamant",
+        "moves": [
+          "First Impression",
+          "Liquidation",
+          "Leech Life",
+          "Aqua Jet"
+        ]
+      }
+    },
     "named-olivia": {
       "Cradily": {
         "ability": "Storm Drain",

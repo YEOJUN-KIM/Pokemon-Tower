@@ -15,7 +15,7 @@ for(const tier of ['v6','basic','tactical','expert'] as const)for(const width of
   const id=store.start(owner,['Garchomp','Charizard','Blastoise']);
   const own=Showdown.Teams.unpack(packTeam(['Garchomp','Charizard','Blastoise']))!,enemy=Showdown.Teams.unpack(packTeam(['Pikachu','Gyarados','Blastoise']))!;
   own[0].moves=['Swords Dance','Earthquake','Dragon Claw','Rock Slide'];enemy[0].moves=['Thunderbolt','Thunder Wave','Volt Switch','Nasty Plot'];enemy[1].moves=['Ice Fang','Waterfall','Dragon Dance','Earthquake'];
-  const version=tier==='v6'?'tower-policy-v6':'tower-policy-v12';
+  const version=tier==='v6'?'tower-policy-v6':'tower-policy-v13';
   const trainer=JSON.parse(store.battle(id).trainer!);
   if(tier!=='v6')trainer.npcAi={tier,tactic:'balanced'};
   store.db.prepare('UPDATE battles SET ai_version=?,trainer=?,player_team=?,opponent_team=?,seed=?,tera_tickets=? WHERE id=?').run(version,JSON.stringify(trainer),Showdown.Teams.pack(own),Showdown.Teams.pack(enemy),'[2,3,4,5]','{"p1":0,"p2":0}',id);

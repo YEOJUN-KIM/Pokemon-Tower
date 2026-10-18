@@ -23540,276 +23540,6 @@
       "floorRange": "100층 최종전"
     },
     {
-      "id": "named-hau",
-      "name": "하우",
-      "generation": 7,
-      "role": "champion",
-      "title": "최종 도전자",
-      "ace": "Primarina",
-      "signature": {
-        "rule": "z",
-        "species": "Primarina",
-        "item": "Primarium Z"
-      },
-      "seed": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "packed": "Primarina||PrimariumZ|Torrent|SparklingAria,AlluringVoice,IceBeam,Psychic|Serious|2,,1,5,,|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Water]Raichu-Alola||WiseGlasses|SurgeSurfer|Psyshock,ThunderPunch,Discharge,ExpandingForce|Serious|1,,,5,,2|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Electric]Crabominable||MuscleBand|HyperCutter|BodyPress,IceSpinner,StompingTantrum,BulkUp|Serious|2,5,,,1,|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Fighting",
-      "team": [
-        {
-          "species": "Primarina",
-          "name": "누리레느",
-          "item": "Primarium Z",
-          "itemName": "누리레느Z",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 1,
-              "spa": 5,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Sparkling Aria",
-              "Alluring Voice",
-              "Ice Beam",
-              "Psychic"
-            ],
-            "ability": "Torrent",
-            "nature": "Serious",
-            "teraType": "Water",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Raichu-Alola",
-          "name": "라이츄 (알로라)",
-          "item": "Wise Glasses",
-          "itemName": "박식안경",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 0,
-              "def": 0,
-              "spa": 5,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Psyshock",
-              "Thunder Punch",
-              "Discharge",
-              "Expanding Force"
-            ],
-            "ability": "Surge Surfer",
-            "nature": "Serious",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Crabominable",
-          "name": "모단단게",
-          "item": "Muscle Band",
-          "itemName": "힘의머리띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 5,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Body Press",
-              "Ice Spinner",
-              "Stomping Tantrum",
-              "Bulk Up"
-            ],
-            "ability": "Hyper Cutter",
-            "nature": "Serious",
-            "teraType": "Fighting",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "first-gate",
-      "stageName": "50층 첫 관문",
-      "sampleTier": 1,
-      "gimmickEnabled": true,
-      "referenceFloor": 50,
-      "iv": 12,
-      "statPoints": 8,
-      "floorRange": "50층 첫 관문·중간 보스"
-    },
-    {
-      "id": "named-hau",
-      "name": "하우",
-      "generation": 7,
-      "role": "champion",
-      "title": "최종 도전자",
-      "ace": "Primarina",
-      "signature": {
-        "rule": "z",
-        "species": "Primarina",
-        "item": "Primarium Z"
-      },
-      "seed": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "packed": "Primarina||PrimariumZ|Torrent|SparklingAria,Moonblast,IceBeam,Psychic|Modest|24,,10,32,,|M|||50|,,towerpointsv1,,,Water]Raichu-Alola||WiseGlasses|SurgeSurfer|FutureSight,VoltTackle,Discharge,ExpandingForce|Timid|10,,,32,,24|M|||50|,,towerpointsv1,,,Electric]Crabominable||MuscleBand|HyperCutter|CloseCombat,IceHammer,Earthquake,BulkUp|Adamant|24,32,,,10,|M|||50|,,towerpointsv1,,,Fighting",
-      "team": [
-        {
-          "species": "Primarina",
-          "name": "누리레느",
-          "item": "Primarium Z",
-          "itemName": "누리레느Z",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 24,
-              "atk": 0,
-              "def": 10,
-              "spa": 32,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Sparkling Aria",
-              "Moonblast",
-              "Ice Beam",
-              "Psychic"
-            ],
-            "ability": "Torrent",
-            "nature": "Modest",
-            "teraType": "Water",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Raichu-Alola",
-          "name": "라이츄 (알로라)",
-          "item": "Wise Glasses",
-          "itemName": "박식안경",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 10,
-              "atk": 0,
-              "def": 0,
-              "spa": 32,
-              "spd": 0,
-              "spe": 24
-            },
-            "moves": [
-              "Future Sight",
-              "Volt Tackle",
-              "Discharge",
-              "Expanding Force"
-            ],
-            "ability": "Surge Surfer",
-            "nature": "Timid",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Crabominable",
-          "name": "모단단게",
-          "item": "Muscle Band",
-          "itemName": "힘의머리띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 24,
-              "atk": 32,
-              "def": 0,
-              "spa": 0,
-              "spd": 10,
-              "spe": 0
-            },
-            "moves": [
-              "Close Combat",
-              "Ice Hammer",
-              "Earthquake",
-              "Bulk Up"
-            ],
-            "ability": "Hyper Cutter",
-            "nature": "Adamant",
-            "teraType": "Fighting",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "final-gate",
-      "stageName": "100층 최종 관문",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 100,
-      "iv": 31,
-      "statPoints": 66,
-      "floorRange": "100층 최종전"
-    },
-    {
       "id": "named-milo",
       "name": "아킬",
       "generation": 8,
@@ -40124,6 +39854,139 @@
       ]
     },
     {
+      "id": "named-hau",
+      "name": "하우",
+      "generation": 7,
+      "title": "champion",
+      "role": "champion",
+      "ace": "Raichu-Alola",
+      "signature": {
+        "rule": "z",
+        "species": "Raichu-Alola",
+        "item": "Aloraichium Z"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Noivern",
+        "Primarina",
+        "Raichu-Alola"
+      ],
+      "gimmickEnabled": true,
+      "concept": "알로라 champion: 혼합 타입과 역할별 육성",
+      "powerTier": "champion",
+      "team": [
+        {
+          "species": "Noivern",
+          "item": "Life Orb",
+          "gigantamax": false,
+          "role": "Special",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Timid",
+            "ability": "Infiltrator",
+            "moves": [
+              "Draco Meteor",
+              "Air Slash",
+              "Flamethrower",
+              "U-turn"
+            ]
+          }
+        },
+        {
+          "species": "Primarina",
+          "item": "Assault Vest",
+          "gigantamax": false,
+          "role": "Special",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 0
+            },
+            "nature": "Modest",
+            "ability": "Torrent",
+            "moves": [
+              "Sparkling Aria",
+              "Moonblast",
+              "Ice Beam",
+              "Energy Ball"
+            ]
+          }
+        },
+        {
+          "species": "Raichu-Alola",
+          "item": "Aloraichium Z",
+          "gigantamax": false,
+          "role": "Special",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Timid",
+            "ability": "Surge Surfer",
+            "moves": [
+              "Thunderbolt",
+              "Psychic",
+              "Focus Blast",
+              "Nasty Plot"
+            ]
+          }
+        }
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Noivern"
+        ],
+        "preferredLast": [
+          "Raichu-Alola"
+        ]
+      }
+    },
+    {
       "id": "skull-grunt",
       "name": "스컬단 조직원",
       "generation": 7,
@@ -40346,20 +40209,24 @@
       "title": "executive",
       "role": "villain",
       "ace": "Golisopod",
-      "signature": null,
+      "signature": {
+        "rule": "mega",
+        "species": "Golisopod",
+        "item": "Golisopite"
+      },
       "stage": "leaders-early",
       "allFloors": true,
       "select": true,
       "required": [
         "Golisopod"
       ],
-      "gimmickEnabled": false,
+      "gimmickEnabled": true,
       "concept": "알로라 executive: Bug 타입과 역할별 육성",
       "powerTier": "executive",
       "team": [
         {
           "species": "Golisopod",
-          "item": "Sitrus Berry",
+          "item": "Golisopite",
           "gigantamax": false,
           "role": "Physical",
           "profile": {
@@ -40383,7 +40250,7 @@
             "nature": "Adamant",
             "ability": "Emergency Exit",
             "moves": [
-              "Swords Dance",
+              "First Impression",
               "Liquidation",
               "Leech Life",
               "Aqua Jet"

@@ -67,7 +67,7 @@ test('all player rules save the same Leon gimmick; reopening restores NPC powers
   store.db.prepare("UPDATE run_themes SET theme='galar' WHERE run_id=?").run(first.run_id);
   store.db.prepare("UPDATE runs SET floor=50,state='select' WHERE id=?").run(first.run_id);
   const boss=store.battle(store.enter(rule,first.run_id,50,starters));
-  assert.equal(boss.ai_version,'tower-policy-v12');assert.equal(boss.rule,rule);
+  assert.equal(boss.ai_version,'tower-policy-v13');assert.equal(boss.rule,rule);
   assert.equal(Showdown.Teams.unpack(boss.opponent_team)!.find(p=>p.species==='Charizard')!.item,DYNAMAX_ITEM);
   assert.equal(Showdown.Teams.unpack(boss.opponent_team)!.find(p=>p.species==='Charizard')!.gigantamax,true);
   assert.equal(JSON.parse(boss.boss!).gimmick.rule,'dynamax');assert.equal(JSON.parse(boss.tera_tickets).p2,0);

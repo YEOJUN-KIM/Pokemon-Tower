@@ -1,7 +1,8 @@
+import {readPreHauGuzmaFile as readFileSync} from './hau-guzma-preservation';
 import {kalosTrainers} from '../src/data/kalos-trainers';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,existsSync} from 'node:fs';
+import {existsSync} from 'node:fs';
 import {createHash,randomUUID} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import preservation from './fixtures/alola-preservation.json' with {type:'json'};
@@ -115,7 +116,7 @@ for(const floor of [50,100])test(`N F${floor}: champion victory → event snapsh
   const coins=()=>Number(store.db.prepare('SELECT coins FROM players WHERE id=?').get(f.owner)!.coins);
   const beforeLoss=coins();finishChallengerBattle(store,battle.id,'Tower AI');assert.equal(coins(),beforeLoss);
   store.retry(f.owner,f.run,battle.id);const retry=store.battle(store.enter(f.owner,f.run,floor,starters));
-  assert.equal(retry.opponent_team,battle.opponent_team);assert.equal(retry.seed,battle.seed);assert.equal(retry.ai_version,'tower-policy-v12');
+  assert.equal(retry.opponent_team,battle.opponent_team);assert.equal(retry.seed,battle.seed);assert.equal(retry.ai_version,'tower-policy-v13');
   battle=retry;finishChallengerBattle(store,battle.id);const receipt=coins();
   assert.equal(store.view(f.owner).run!.event!.phase,'reward');assert.deepEqual(store.view(f.owner).run!.roster,roster);
   store.continueEvent(f.owner,f.run,event.id);assert.equal(coins(),receipt);

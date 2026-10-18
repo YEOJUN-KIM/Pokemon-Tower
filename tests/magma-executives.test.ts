@@ -1,8 +1,8 @@
+import {readPreHauGuzmaFile as readFileSync} from './hau-guzma-preservation';
 import {kalosTrainers} from '../src/data/kalos-trainers';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {readFileSync} from 'node:fs';
 import Showdown from 'pokemon-showdown';
 import {hoennTrainers} from '../src/data/hoenn-trainers';
 import {sinnohTrainers} from '../src/data/sinnoh-trainers';
@@ -85,7 +85,7 @@ for(const id of ids){
   for(const floor of [45,95]){
    const snap=snapshotTrainerEventBattle('magma-executive-snapshot:'+id+':'+floor,sample,floor,'basic',CURRENT_PROGRESSION);
    assert.deepEqual(JSON.parse(JSON.stringify(snap)),JSON.parse(JSON.stringify(snapshotTrainerEventBattle('magma-executive-snapshot:'+id+':'+floor,sample,floor,'basic',CURRENT_PROGRESSION))));
-   assert.equal(snap.aiVersion,'tower-policy-v12');assert.equal(snap.trainer.npcAi!.tier,'tactical');
+   assert.equal(snap.aiVersion,'tower-policy-v13');assert.equal(snap.trainer.npcAi!.tier,'tactical');
    const team=Showdown.Teams.unpack(snap.opponentTeam)!;assert.equal(team.length,3);assert.ok(team.some(p=>p.species==='Camerupt'));
    const log=await runBattle({teams:{p1:packTeam(starters),p2:snap.opponentTeam},seed:snap.seed,rule:'basic',opponentRule:packedNpcRule(snap.team.map(p=>({item:p.item??''})),0),player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(floor,sample))});
    assert.ok(log.winner);for(const d of log.decisions)assert.ok(d.observation.legalActions.some(a=>a.command===d.action));

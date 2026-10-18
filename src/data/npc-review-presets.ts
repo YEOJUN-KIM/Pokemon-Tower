@@ -16,7 +16,7 @@ export const npcReviewPresets:Record<string,{entries:string[];ace:string;signatu
  'named-iris':{entries:['Haxorus','Hydreigon','Lapras'],ace:'Haxorus',signature:{rule:'z',species:'Haxorus',item:'Dragonium Z'}},
  'named-kiawe':{entries:['Marowak-Alola','Turtonator','Salazzle'],ace:'Marowak-Alola'},
  'named-kukui':{entries:['Incineroar','Lycanroc','Snorlax','Magnezone','Braviary','Slowbro'],ace:'Incineroar'},
- 'named-hau':{entries:['Primarina','Raichu-Alola','Crabominable'],ace:'Primarina'},
+ 'named-hau':{entries:['Noivern','Primarina','Raichu-Alola'],ace:'Raichu-Alola',signature:{rule:'z',species:'Raichu-Alola',item:'Aloraichium Z'}},
  'named-opal':{entries:['Alcremie','Weezing-Galar','Togekiss'],ace:'Alcremie'},
  'named-melony':{entries:['Lapras','Darmanitan-Galar','Frosmoth'],ace:'Lapras'},
  'named-bede':{entries:['Hatterene','Rapidash-Galar','Gardevoir'],ace:'Hatterene'},

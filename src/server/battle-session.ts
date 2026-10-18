@@ -1,4 +1,5 @@
 import {createNpcPolicy} from '../battle/npc-policy';
+import {createNpcPolicy as v12NpcPolicy} from '../battle/npc-policy-v12';
 import {createNpcPolicy as archivedNpcPolicy} from '../battle/npc-policy-v11';
 import {applyPublicTypes} from '../battle/public-types';
 import {packedNpcRule} from '../data/npc-gimmicks';
@@ -62,7 +63,7 @@ export class BattleSession {
     this.id = options.id ?? randomUUID();
     this.trainerEquipment=options.trainerEquipment;
     this.initialTeraTickets=options.teraTickets?.p1 ?? 0;
-    if(['tower-policy-v10','tower-policy-v11','tower-policy-v12'].includes(options.aiVersion??'')){
+    if(['tower-policy-v10','tower-policy-v11','tower-policy-v12','tower-policy-v13'].includes(options.aiVersion??'')){
       const team=Showdown.Teams.unpack(options.teams?.p2 ?? '') ?? [];
       this.opponentRule=options.opponentRule??packedNpcRule(team,options.teraTickets?.p2 ?? 0);
       this.opponentPrimal=team.some(p=>p.species==='Groudon' && p.item==='Red Orb' || p.species==='Kyogre' && p.item==='Blue Orb');
@@ -80,7 +81,7 @@ export class BattleSession {
       format:options.format,
       teams: options.teams,
       rule:options.rule,opponentRule:this.opponentRule,opponentTeraSpecies:options.opponentTeraSpecies,battleItems:options.battleItems,upgrades:options.upgrades,teraTickets:options.teraTickets,trainerEquipment:options.trainerEquipment,
-      opponent: options.aiVersion==='tower-policy-v12' ? createNpcPolicy(options.npcAi) : options.aiVersion==='tower-policy-v11' ? archivedNpcPolicy(options.npcAi) : ['tower-policy-v10','tower-policy-v9'].includes(options.aiVersion ?? '') ? new ZMovePolicy() : options.aiVersion==='tower-policy-v8' ? new LearningOpponentPolicy() : options.aiVersion==='damage-policy-v1' ? new DamagePolicy() : options.aiVersion==='tower-policy-v7' ? new CautiousSwitchingPolicy() : options.aiVersion==='tower-policy-v6' ? new SwitchingPolicy() : options.aiVersion==='tower-policy-v5' ? new TeraPolicy() : options.aiVersion==='tower-policy-v4' ? new GimmickPolicy() : options.aiVersion==='tower-policy-v3' ? new LegacyGimmickPolicy() : new TowerPolicy(),
+      opponent: options.aiVersion==='tower-policy-v13' ? createNpcPolicy(options.npcAi) : options.aiVersion==='tower-policy-v12' ? v12NpcPolicy(options.npcAi) : options.aiVersion==='tower-policy-v11' ? archivedNpcPolicy(options.npcAi) : ['tower-policy-v10','tower-policy-v9'].includes(options.aiVersion ?? '') ? new ZMovePolicy() : options.aiVersion==='tower-policy-v8' ? new LearningOpponentPolicy() : options.aiVersion==='damage-policy-v1' ? new DamagePolicy() : options.aiVersion==='tower-policy-v7' ? new CautiousSwitchingPolicy() : options.aiVersion==='tower-policy-v6' ? new SwitchingPolicy() : options.aiVersion==='tower-policy-v5' ? new TeraPolicy() : options.aiVersion==='tower-policy-v4' ? new GimmickPolicy() : options.aiVersion==='tower-policy-v3' ? new LegacyGimmickPolicy() : new TowerPolicy(),
       player: {choose: observation => {
         if (observation.legalActions[0]?.command.startsWith('team ')) return 'team 123';
         this.observation = observation;

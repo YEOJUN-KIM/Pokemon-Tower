@@ -27,7 +27,7 @@ test('player rules persist and filter shops while new NPCs keep independent gimm
  // This probe specifically needs a gimmick-bearing champion; reviewed Sinnoh
  // champions intentionally have none, so do not depend on a random run theme.
  s.db.prepare("UPDATE run_themes SET theme='galar' WHERE run_id=?").run(row.run_id);
- s.db.prepare("UPDATE runs SET floor=50,state='select' WHERE id=?").run(row.run_id);const boss=s.battle(s.enter(rule,row.run_id,50,starters));assert.equal(boss.rule,rule);assert.equal(boss.ai_version,'tower-policy-v12');assert.ok(JSON.parse(boss.boss!).gimmick);
+ s.db.prepare("UPDATE runs SET floor=50,state='select' WHERE id=?").run(row.run_id);const boss=s.battle(s.enter(rule,row.run_id,50,starters));assert.equal(boss.rule,rule);assert.equal(boss.ai_version,'tower-policy-v13');assert.ok(JSON.parse(boss.boss!).gimmick);
  s.db.prepare('DELETE FROM run_rules WHERE run_id=?').run(row.run_id);assert.equal(s.view(rule).run!.rule,'chaos');}
  s.ensurePlayer('invalid');assert.throws(()=>s.start('invalid',starters,'invalid'),/룰/);assert.equal(s.view('invalid').run,null);
  }finally{s.close();}

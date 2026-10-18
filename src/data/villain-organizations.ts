@@ -52,7 +52,7 @@ export const villainLeaders:Record<string,{executive:TrainerSample;executives?:T
  galactic:{executive:{...executive('galactic-executive-mars','마스','mars',sinnohTrainer('galactic-executive-mars')!.entries),generation:4},executives:[{...executive('galactic-executive-jupiter','주피터','jupiter',sinnohTrainer('galactic-executive-jupiter')!.entries),generation:4},{...executive('galactic-executive-saturn','새턴','saturn',sinnohTrainer('galactic-executive-saturn')!.entries),generation:4}],boss:leader('cyrus')},
  plasma:{executive:{...executive('plasma-executive-zinzolin','비오','zinzolin',unovaTrainer('plasma-executive-zinzolin')!.entries),generation:5,tactic:'bulk'},executives:[{...executive('plasma-executive-colress','아크로마','colress',unovaTrainer('plasma-executive-colress')!.entries),generation:5,tactic:'special',aiCeiling:'expert'}],boss:leader('ghetsis')},
  flare:{executive:{...executive('flare-executive-aliana','아케비','aliana',kalosTrainer('flare-executive-aliana')!.entries),generation:6,tactic:'speed'},executives:[{...executive('flare-executive-xerosic','크세로시키','xerosic',kalosTrainer('flare-executive-xerosic')!.entries),generation:6}],boss:leader('lysandre')},
- skull:{executive:leader('guzma','tactical'),boss:leader('guzma','tactical')},
+ skull:{executive:leader('guzma','expert'),boss:leader('guzma','expert')},
  aqua:{executive:executive('matt','해조','matt',hoennTrainer('aqua-executive-matt')!.entries),executives:[executive('shelly','이연','shelly',hoennTrainer('aqua-executive-shelly')!.entries)],boss:leader('archie')},
  aether:{executive:leader('faba','tactical'),boss:leader('lusamine')},
  macrocosmos:{executive:leader('oleana','tactical'),boss:leader('rose')},

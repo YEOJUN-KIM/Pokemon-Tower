@@ -33,7 +33,7 @@ test('confirmed new Mega abilities replace outdated preview data',()=>{
  const forms=pokedexEntries().flatMap(p=>p.forms??[]);
  for(const [species,ability] of Object.entries(megaAbilityCorrections)){
   assert.equal(forms.find(p=>p.species===species)?.ability,ability);
-  assert.ok(!Object.values(megaStones).some(stone=>stone.forme===species),'Preview-only correction must not silently affect saved battles');
+  assert.equal(Object.values(megaStones).some(stone=>stone.forme===species),species==='Golisopod-Mega','Only the explicitly versioned Golisopod opt-in may become playable');
  }
 });
 

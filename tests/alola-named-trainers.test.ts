@@ -1,6 +1,7 @@
+import {readPreHauGuzmaFile as readFileSync} from './hau-guzma-preservation';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,existsSync} from 'node:fs';
+import {existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import {alolaTrainers,alolaSample,alolaScopeIds,alolaVillainSequence} from '../src/data/alola-trainers';
@@ -19,15 +20,15 @@ import {createNpcPolicy} from '../src/battle/npc-policy';
 import {packedNpcRule} from '../src/data/npc-gimmicks';
 import preservation from './fixtures/alola-preservation.json' with {type:'json'};
 
-test('Alola preserves every out-of-scope source/runtime entry, including tuned Kalos and excluded Hau',()=>{
- const digest=(rows:{id:string;stage:string}[])=>{const kept=rows.filter(r=>!alolaScopeIds.has(r.id)).sort((a,b)=>(a.id+a.stage).localeCompare(b.id+b.stage));assert.equal(kept.length,preservation.alola.count);return createHash('sha256').update(JSON.stringify(kept)).digest('hex');};
+test('Alola preserves every out-of-scope source/runtime entry, including tuned Kalos and legacy Hau baseline',()=>{
+ const digest=(rows:{id:string;stage:string}[])=>{const kept=rows.filter(r=>!preservation.excludedAlola.includes(r.id)).sort((a,b)=>(a.id+a.stage).localeCompare(b.id+b.stage));assert.equal(kept.length,preservation.alola.count);return createHash('sha256').update(JSON.stringify(kept)).digest('hex');};
  assert.equal(digest(JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8'))),preservation.alola.runtime);
  assert.equal(digest(JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples),preservation.alola.source);
  for(const [path,hash] of Object.entries(preservation.common))assert.equal(createHash('sha256').update(readFileSync(path,'utf8').replace(/\r\n/g,'\n')).digest('hex'),hash,path);
 });
 
-test('19 identities, unique higher roles, route candidates, deferred villain sequence and portraits',()=>{
- assert.equal(alolaTrainers.length,19);assert.equal(new Set(alolaTrainers.map(t=>t.id)).size,19);
+test('20 identities, unique higher roles, route candidates, deferred villain sequence and portraits',()=>{
+ assert.equal(alolaTrainers.length,20);assert.equal(new Set(alolaTrainers.map(t=>t.id)).size,20);
  assert.equal(trainerCatalog.some(t=>t.id==='named-acerola-captain'),false);
  assert.equal(towerThemes.alola.gyms.length,8);assert.equal(towerThemes.alola.elites.length,5);
  for(const id of ['hala','olivia','acerola','molayne']){assert.ok(towerThemes.alola.elites.includes(`named-${id}`));assert.ok(!towerThemes.alola.gyms.includes(`named-${id}`));}
@@ -60,7 +61,7 @@ for(const t of alolaTrainers)test(`${t.id}: legal role-oriented builds, determin
    assert.deepEqual(team,generateOpponentTeam(floor,[seed,floor,29,43],[],null,sample,CURRENT_PROGRESSION));
    if(t.category==='boss')assert.deepEqual(names,['Clefable','Lilligant','Necrozma']);
    if(t.category==='grunt'){assert.equal(npcAi(floor,sample).tier,'basic');for(const p of team){assert.ok(Object.values(p.profile!.ivs).every(v=>v<=12));assert.equal(p.item,'');}}
-   if(['captain','kahuna','executive'].includes(t.category))assert.equal(npcAi(floor,sample).tier,'tactical');
+   if(['captain','kahuna','executive'].includes(t.category))assert.equal(npcAi(floor,sample).tier,t.aiCeiling);
    for(const p of team){const source=template.team.find(s=>s.species===p.name)!;assert.deepEqual(p.profile!.evs,templateProfile(source.profile,floor).evs);}
    lineups.add([...names].sort().join(','));
   }

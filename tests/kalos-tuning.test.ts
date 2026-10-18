@@ -1,6 +1,6 @@
+import {readPreHauGuzmaFile as readFileSync} from './hau-guzma-preservation';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import baseline from './fixtures/alola-preservation.json' with {type:'json'};
 

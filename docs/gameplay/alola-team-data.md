@@ -1,5 +1,7 @@
 # 알로라 NPC 최종 팀 데이터
 
+하우·구즈마의 최신 변경과 실제 기믹/AI 검증은 [후속 보고](hau-guzma-npc-ai.md)를 참고한다. 하우 추가 후 20명이며 다른 NPC 데이터는 보존했다.
+
 각 표는 95층 검토 원본이다. 실제 IV/훈련 포인트·기믹은 기존 층별 규칙으로 조정된다. 원본 source의 포인트는 카트리지 EV가 아니다.
 
 ## 일리마 / captain
@@ -173,11 +175,11 @@
 
 ## 구즈마 / executive
 
-필수: Golisopod. AI 상한: tactical. 훈련 포인트 상한: 54.
+필수: Golisopod. AI 상한: expert. 훈련 포인트 상한: 54. 50층부터 Golisopite로 메가진화하며 벌레/강철·Tough Claws가 된다. 메가 후 비상탈출은 발동하지 않는다.
 
 |포켓몬|종족값 HP/공/방/특공/특방/속|성격|특성|도구|훈련 HP/공/방/특공/특방/속|기술|
 |---|---|---|---|---|---|---|
-|Golisopod|75/125/140/60/90/40|Adamant|Emergency Exit|Sitrus Berry|27/27/0/0/0/0|Swords Dance / Liquidation / Leech Life / Aqua Jet|
+|Golisopod|75/125/140/60/90/40|Adamant|Emergency Exit → Tough Claws (Mega)|Golisopite|27/27/0/0/0/0|First Impression / Liquidation / Leech Life / Aqua Jet|
 |Masquerain|70/60/62/100/82/80|Modest|Intimidate|Sitrus Berry|0/0/0/27/0/27|Quiver Dance / Bug Buzz / Air Slash / Hydro Pump|
 |Scizor|70/130/100/55/80/65|Adamant|Technician|Metal Coat|27/27/0/0/0/0|Bullet Punch / Bug Bite / Swords Dance / Roost|
 |Ariados|70/90/70/60/70/40|Adamant|Sniper|Poison Barb|27/27/0/0/0/0|Poison Jab / Megahorn / Sucker Punch / Knock Off|
@@ -218,3 +220,13 @@
 |Lilligant|70/60/75/110/75/90|Timid|Own Tempo|Life Orb|0/0/0/32/2/32|Petal Dance / Quiver Dance / Giga Drain / Pollen Puff|
 |Necrozma-Dusk-Mane|97/157/127/113/109/77|Adamant|Prism Armor|Weakness Policy|32/32/0/0/2/0|Sunsteel Strike / Psychic Fangs / Earthquake / Dragon Dance|
 
+
+## 하우 / champion
+
+고정 순서: Noivern → Primarina → Raichu-Alola. 3마리 모두 필수. AI 상한 expert, 훈련 총 66점. 알로라이Z는 기존 기믹 게이트인 50층부터 사용한다.
+
+|포켓몬|성격|특성|도구|훈련 HP/공/방/특공/특방/속|기술|
+|---|---|---|---|---|---|
+|Noivern|Timid|Infiltrator|Life Orb|0/0/0/32/2/32|Draco Meteor / Air Slash / Flamethrower / U-turn|
+|Primarina|Modest|Torrent|Assault Vest|32/0/0/32/2/0|Sparkling Aria / Moonblast / Ice Beam / Energy Ball|
+|Raichu-Alola|Timid|Surge Surfer|Aloraichium Z|0/0/0/32/2/32|Thunderbolt / Psychic / Focus Blast / Nasty Plot|

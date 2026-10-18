@@ -6,6 +6,7 @@ import {installBattleItems} from './battle-items';
 import type {BattleItemBag} from '../data/battle-items';
 import {setImmediate as settleItem} from 'node:timers/promises';
 import {installTowerGimmicks} from './gimmicks';
+import {installGolisopodMega} from './golisopod-mega';
 import {DYNAMAX_ITEM,canEquipGimmick} from '../data/gimmicks';
 import { createRequire } from 'node:module';
 import Showdown from 'pokemon-showdown';
@@ -18,7 +19,7 @@ import {upgrades,type UpgradeKind} from '../data/shop';
 
 const require = createRequire(import.meta.url);
 export const engineVersion: string = require('pokemon-showdown/package.json').version;
-import {FORMAT,PRE_TERA_FORMAT,PRE_NPC_FORMAT,supportedFormats} from '../data/battle-rules';
+import {FORMAT,PRE_GOLISOPOD_FORMAT,PRE_TERA_FORMAT,PRE_NPC_FORMAT,supportedFormats} from '../data/battle-rules';
 export {FORMAT} from '../data/battle-rules';
 export type Seed = [number, number, number, number];
 export type BattleLog = {
@@ -56,7 +57,7 @@ export async function runBattle(options: {
   const seed: Seed = options.seed ?? [1, 2, 3, 4];
   if (seed.length !== 4 || seed.some(n => !Number.isInteger(n) || n < 0 || n > 65535)) throw new Error('Invalid seed');
   const format=options.format ?? FORMAT;if(!supportedFormats.includes(format))throw Error('Unsupported battle format');
-  const towerFormat=[FORMAT,PRE_NPC_FORMAT,PRE_TERA_FORMAT].includes(format);
+  const towerFormat=[FORMAT,PRE_GOLISOPOD_FORMAT,PRE_NPC_FORMAT,PRE_TERA_FORMAT].includes(format);
   if(options.teraTickets && ['p1','p2'].some(side=>!Number.isSafeInteger(options.teraTickets![side as 'p1'|'p2']) || options.teraTickets![side as 'p1'|'p2']<0))throw Error('Invalid tera tickets');
   const teams = options.teams ?? {p1: playerTeam, p2: opponentTeam};
   if(options.raid){
@@ -113,6 +114,7 @@ export async function runBattle(options: {
       if(type!=='start' || !this.battle) return;
       if(options.battleItems)itemController=installBattleItems(this.battle,options.battleItems);
       if(towerFormat)installTowerGimmicks(this.battle,packed,format!==PRE_TERA_FORMAT ? options.teraTickets : undefined,options.rule,options.opponentRule,options.opponentTeraSpecies,options.trainerEquipment);
+      if(format===FORMAT)installGolisopodMega(this.battle);
       if(options.raid)installRaid(this.battle,options.raid);
       const original=this.battle.statModify.bind(this.battle);
       this.battle.statModify=(base,set,key)=>Showdown.toID(set.pokeball).startsWith(POINT_TEAM_MARKER)

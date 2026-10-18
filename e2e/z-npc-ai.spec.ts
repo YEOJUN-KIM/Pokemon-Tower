@@ -5,7 +5,7 @@ import {Accounts} from '../src/server/accounts';
 import {defaultProfile} from '../src/server/training';
 import {packTeam,starters} from '../src/data/teams';
 
-for(const version of ['tower-policy-v11','tower-policy-v12'])for(const width of [1280,390])test(`${version} NPC Z in basic rule activates and survives reload ${width}px`,async({page,context})=>{
+for(const version of ['tower-policy-v11','tower-policy-v12','tower-policy-v13'])for(const width of [1280,390])test(`${version} NPC Z in basic rule activates and survives reload ${width}px`,async({page,context})=>{
  const owner='znpc_'+randomBytes(7).toString('hex'),store=new TowerStore('.data/e2e.sqlite');let token='',id='';
  try{
   store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();store.ensurePlayer(owner);token=(await new Accounts(store.db).register(owner,'test-password',owner,undefined)).token;

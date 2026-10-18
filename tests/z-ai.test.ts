@@ -5,7 +5,7 @@ import {readFileSync} from 'node:fs';
 import Showdown from 'pokemon-showdown';
 import {chooseResourceZ,evaluateZOptions,hpFraction} from '../src/battle/z-decision';
 import {chooseZMove} from '../src/battle/z-move-policy';
-import {createNpcPolicy} from '../src/battle/npc-policy';
+import {createNpcPolicy} from '../src/battle/npc-policy-v12';
 import {createNpcPolicy as oldPolicy} from '../src/battle/npc-policy-v11';
 import type {Observation} from '../src/battle/policy';
 import {packTeam,starters} from '../src/data/teams';
@@ -102,7 +102,7 @@ test('v11 saved Z battle reconnects identically, and v12 reconnect/replay is det
  assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
  const telemetry=zAiTelemetry(log,monitored.evaluations);assert.ok(telemetry.carriers.length);assert.ok(telemetry.decisions.length);assert.ok(telemetry.decisions.every(d=>Number.isFinite(d.normal)));
 });
-test('non-Z battles preserve every command and public event for all tiers',async()=>{
+test('v12 non-Z battles preserve every command and public event for all tiers',async()=>{
  for(const tier of ['basic','tactical','expert'] as const)for(const rule of ['basic','mega','dynamax','tera','chaos'] as const){
   const item=rule==='mega'?'Charizardite X':rule==='dynamax'||rule==='chaos'?'Dynamax Band':'';
   const ai={tier,tactic:'balanced' as const},options={teams:{p1:packTeam(starters),p2:packTeam(starters,{},item?{Charizard:item}:{})},rule,opponentRule:rule,teraTickets:{p1:0,p2:rule==='tera'?1:0},opponentTeraSpecies:rule==='tera'?'Charizard':undefined,seed:[2,3,4,5] as [number,number,number,number]};

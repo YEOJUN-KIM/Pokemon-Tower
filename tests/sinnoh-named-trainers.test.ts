@@ -1,7 +1,8 @@
+import {readPreHauGuzmaFile as readFileSync} from './hau-guzma-preservation';
 import {kalosTrainers} from '../src/data/kalos-trainers';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,existsSync} from 'node:fs';
+import {existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import {sinnohTrainers} from '../src/data/sinnoh-trainers';

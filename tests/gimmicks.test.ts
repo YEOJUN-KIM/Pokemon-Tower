@@ -21,8 +21,8 @@ function teams(item:string,bench?:string){
  enemy.forEach(p=>p.moves=['Rest']);
  return {p1:Showdown.Teams.pack(own),p2:Showdown.Teams.pack(enemy)};
 }
-test('48 matching mega stones and a dynamax band have icons, legal forms and legendary shop grades',()=>{
- assert.equal(Object.keys(megaStones).length,48);
+test('49 matching mega stones and a dynamax band have icons, legal forms and legendary shop grades',()=>{
+ assert.equal(Object.keys(megaStones).length,49);
  const validator=new Showdown.TeamValidator(FORMAT);
  for(const [item,info]of Object.entries(megaStones)){
   assert.ok(pokemonSets[info.species]);assert.equal(validator.validateSet({...structuredClone(pokemonSets[info.species]),item},{}),null,item);

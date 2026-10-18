@@ -89,9 +89,16 @@ b('Parasect','Effect Spore','','Seed Bomb|X-Scissor|Slash|Brick Break');
 b('Dugtrio','Sand Veil','','Dig|Rock Tomb|Slash|Sucker Punch');
 b('Manectric','Static','','Discharge|Flamethrower|Snarl|Swift');
 
-// Scope these builds to the three reviewed trainers: shared Skarmory,
-// Lycanroc and Arcanine partners elsewhere must keep their previous profiles.
+// Trainer-scoped overrides: shared species partners elsewhere keep their builds.
 const overrides:Record<string,typeof builds>={
+ 'named-hau':{
+  Noivern:{ability:'Infiltrator',item:'Life Orb',nature:'Timid',moves:['Draco Meteor','Air Slash','Flamethrower','U-turn']},
+  Primarina:{ability:'Torrent',item:'Assault Vest',nature:'Modest',moves:['Sparkling Aria','Moonblast','Ice Beam','Energy Ball']},
+  'Raichu-Alola':{ability:'Surge Surfer',item:'Aloraichium Z',nature:'Timid',moves:['Thunderbolt','Psychic','Focus Blast','Nasty Plot']},
+ },
+ 'named-guzma':{
+  Golisopod:{ability:'Emergency Exit',item:'Golisopite',nature:'Adamant',moves:['First Impression','Liquidation','Leech Life','Aqua Jet']},
+ },
  'named-olivia':{
   Cradily:{ability:'Storm Drain',item:'Leftovers',nature:'Calm',bulk:true,moves:['Giga Drain','Ancient Power','Earth Power','Recover']},
   Relicanth:{ability:'Rock Head',item:'Choice Band',nature:'Adamant',moves:['Head Smash','Waterfall','Earthquake','Zen Headbutt']},
@@ -109,6 +116,7 @@ const overrides:Record<string,typeof builds>={
  },
 };
 const fixedLineups:Record<string,string[]>={
+ 'named-hau':['Noivern','Primarina','Raichu-Alola'],
  'named-olivia':['Cradily','Relicanth','Lycanroc'],
  'named-kahili':['Skarmory','Toucannon','Hawlucha'],
  'named-kiawe':['Arcanine','Talonflame','Marowak-Alola'],
@@ -116,8 +124,8 @@ const fixedLineups:Record<string,string[]>={
 
 type Category='captain'|'kahuna'|'elite'|'champion'|'grunt'|'executive'|'boss';
 const trainers:{id:string;name:string;category:Category;specialty:string|null;ace:string;entries:string[];tactic:string;aiCeiling:string;points:number;signature:{rule:string;species:string;item:string}|null;minFloor:number;concept:string}[]=[];
-function t(id:string,name:string,category:Category,specialty:string|null,pool:string,tactic='balanced',z?:[string,string]){
- const entries=pool.split(',');trainers.push({id:id.endsWith('-grunt')?id:`named-${id}`,name,category,specialty,ace:entries[0],entries,tactic,aiCeiling:category==='grunt'?'basic':['captain','kahuna','executive'].includes(category)?'tactical':'expert',points:category==='grunt'?18:category==='captain'?48:['kahuna','executive'].includes(category)?54:66,signature:z?{rule:'z',species:z[0],item:z[1]}:null,minFloor:category==='boss'?75:category==='grunt'?1:5,concept:`알로라 ${category}: ${specialty??'혼합'} 타입과 역할별 육성`});
+function t(id:string,name:string,category:Category,specialty:string|null,pool:string,tactic='balanced',z?:[string,string,('z'|'mega')?]){
+ const entries=pool.split(',');trainers.push({id:id.endsWith('-grunt')?id:`named-${id}`,name,category,specialty,ace:entries[0],entries,tactic,aiCeiling:category==='grunt'?'basic':['captain','kahuna','executive'].includes(category)?'tactical':'expert',points:category==='grunt'?18:category==='captain'?48:['kahuna','executive'].includes(category)?54:66,signature:z?{rule:z[2]??'z',species:z[0],item:z[1]}:null,minFloor:category==='boss'?75:category==='grunt'?1:5,concept:`알로라 ${category}: ${specialty??'혼합'} 타입과 역할별 육성`});
 }
 t('ilima','일리마','captain','Normal','Gumshoos,Komala,Smeargle,Tauros','status');
 t('lana','수련','captain','Water','Araquanid,Lanturn,Cloyster,Wishiwashi','bulk');
@@ -133,12 +141,13 @@ t('acerola','아세로라','elite','Ghost','Palossand,Mimikyu,Dhelmise,Drifblim,
 t('kahili','카일리','elite','Flying','Toucannon,Skarmory,Mandibuzz,Oricorio','bulk',['Toucannon','Flyinium Z']);
 t('molayne','몰레인','elite','Steel','Dugtrio-Alola,Magnezone,Metagross,Skarmory','physical',['Dugtrio-Alola','Steelium Z']);
 t('kukui','쿠쿠이','champion',null,'Incineroar,Lycanroc,Snorlax,Magnezone,Braviary,Slowbro','balanced',['Incineroar','Incinium Z']);
+t('hau','하우','champion',null,'Raichu-Alola,Noivern,Primarina','speed',['Raichu-Alola','Aloraichium Z']);
 t('skull-grunt','스컬단 조직원','grunt',null,'Raticate-Alola,Crobat,Salazzle,Garbodor,Scrafty,Toxapex');
-t('guzma','구즈마','executive','Bug','Golisopod,Masquerain,Scizor,Ariados,Pinsir','physical');
+t('guzma','구즈마','executive','Bug','Golisopod,Masquerain,Scizor,Ariados,Pinsir','physical',['Golisopod','Golisopite','mega']);
 t('aether-grunt','에테르재단 직원','grunt',null,'Ledian,Mudsdale,Pelipper,Parasect,Dugtrio,Manectric');
 t('faba','자오보','executive','Psychic','Hypno,Slowbro,Bruxish,Raichu-Alola,Alakazam','status');
 t('lusamine','루자미네','boss',null,'Necrozma,Clefable,Lilligant','setup');
-for(const trainer of trainers)if(fixedLineups[trainer.id])trainer.entries=[...fixedLineups[trainer.id]];
+for(const trainer of trainers){if(fixedLineups[trainer.id])trainer.entries=[...fixedLineups[trainer.id]];if(trainer.id==='named-guzma')trainer.aiCeiling='expert';}
 const validator=new Showdown.TeamValidator(FORMAT),keys=['hp','atk','def','spa','spd','spe'] as const;
 const rows=trainers.flatMap(trainer=>{
  const team=trainer.entries.map(species=>{

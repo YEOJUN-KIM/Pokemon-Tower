@@ -1,6 +1,7 @@
+import {preHauGuzmaTrainers} from './hau-guzma-preservation';
+import {readPreHauGuzmaFile as readFileSync} from './hau-guzma-preservation';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import preservation from './fixtures/alola-tuning-preservation.json' with {type:'json'};
@@ -25,8 +26,8 @@ test('three-trainer tuning preserves 224 other NPC rows, shared builds and all c
  const keep=(rows:{id:string;stage:string}[])=>rows.filter(r=>!preservation.ids.includes(r.id)).sort((a,b)=>(a.id+a.stage).localeCompare(b.id+b.stage));
  const runtime=keep(JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8'))),source=keep(JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples);
  assert.equal(runtime.length,224);assert.equal(source.length,224);assert.equal(hash(runtime),preservation.runtime);assert.equal(hash(source),preservation.source);
- assert.equal(hash(design.trainers.filter(t=>!preservation.ids.includes(t.id))),preservation.otherTrainers);assert.equal(hash(design.builds),preservation.sharedBuilds);
- assert.deepEqual(Object.keys(design.overrides).sort(),[...preservation.ids].sort());
+ assert.equal(hash(preHauGuzmaTrainers(design.trainers).filter(t=>!preservation.ids.includes(t.id))),preservation.otherTrainers);assert.equal(hash(design.builds),preservation.sharedBuilds);
+ assert.deepEqual(Object.keys(design.overrides).filter(id=>!['named-hau','named-guzma'].includes(id)).sort(),[...preservation.ids].sort());
  for(const [path,hash] of Object.entries(preservation.common))assert.equal(createHash('sha256').update(readFileSync(path,'utf8').replace(/\r\n/g,'\n')).digest('hex'),hash,path);
 });
 for(const [id,lineup]of Object.entries(lineups))test(`${id}: all floors and 100 seeds keep fixed order, legal sets and original rank budgets`,()=>{

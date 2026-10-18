@@ -49,9 +49,9 @@ export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:
      const original=pokemon.getDynamaxRequest.bind(pokemon);
      pokemon.getDynamaxRequest=(skipChecks?:boolean)=>{
       if(!allowsGimmick(ruleFor(side.id),'dynamax'))return;
-      // Packed G-Max eligibility doubles as an itemless NPC carrier marker.
+      // Packed G-Max eligibility identifies the NPC carrier independently of its held item.
       // Historical held-band teams retain their existing behavior.
-      const hasBand=side.id==='p1'&&equipment!==undefined?equipment.includes('Dynamax Band'):pokemon.getItem().id==='dynamaxband'||side.id==='p2'&&!!entry?.gigantamax&&!entry.item;
+      const hasBand=side.id==='p1'&&equipment!==undefined?equipment.includes('Dynamax Band'):pokemon.getItem().id==='dynamaxband'||side.id==='p2'&&!!entry?.gigantamax;
       if(!skipChecks && (!hasBand || !trainerEquipment&&used.has(side.id) || pokemon.terastallized || transformed.has(pokemon)))return;
       if(trainerEquipment){
        if(!skipChecks&&(!side.canDynamaxNow()||pokemon.species.cannotDynamax||pokemon.illusion?.species.cannotDynamax||pokemon.species.isMega||pokemon.species.isPrimal||pokemon.species.forme==='Ultra'))return;

@@ -3,7 +3,7 @@
     "src/battle/npc-policy.ts": "22206328062533e0b44312f7cdfbc5df5ba39a88788abc45f5921c728dd6cb2e",
     "src/battle/tower-policy.ts": "4fd3c29dea61cf0bf2c3a046d1929da306bfa8b798d093a0ec79d029960e8998",
     "src/battle/z-decision.ts": "851fa606cdc87cc0f9d81ded577ec24d80f1bf0492f057c0511202b7419f24e2",
-    "src/battle/gimmicks.ts": "8feaa212be044a8ff78c58bcc97f7f98210d8d79a43b9928ba6af6eb11792acd",
+    "src/battle/gimmicks.ts": "04fadd02268bd0d919853d93f7bb7193d6c86d3379d0f3588f70afce60014f5c",
     "src/data/npc-ai.ts": "8d473e24e0f6f11842cb3c6ff41d6958536d07d86474ae3d756c58f516309d71",
     "src/data/npc-selection-rules.ts": "cbd1fe1da13113468d0065384fead4c3423c246ca576687fe3bf7ef226de8dcd",
     "src/server/opponent-team.ts": "f10a249fe0683dd1e5652fa8557ec55592e89511b7864272fdb0abaca7a58ea6",
@@ -39,38 +39,38 @@
   ],
   "alola": {
     "count": 182,
-    "runtime": "3e88d16e17ea0754a773eecf1637e9168b19d889b9a1751d956c00eefe4b60a1",
-    "source": "8f483ec4a569acd0951afd5d8f034f617a1abb3bfa4eb42305b21fb221d00f2c"
+    "runtime": "1547a0fabbf91dbd5c8149110d909e59ce0b58e5f427893ee5ee31b8a5847677",
+    "source": "f495087ccb01d55389e704316eaea8a5a2d23e0a561f61fb244beb6d208fa374"
   },
   "kalos": {
     "count": 164,
-    "runtime": "199b67c51733ef6e808c5efaa6a9a719d4604881af3f7c9fa7112ac1f3c96670",
-    "source": "a3b0dcdca96bb44dddaa7181fcbbd6a7421a1dd82b625e5e36a6a0c27b32536d"
+    "runtime": "09e7d465af1566f90b7e2570f06aa48bc8928d0a3dd5eacb3b72017b70e2a516",
+    "source": "eceed4d7551629d74aa3d6c459bdc3bad65fe15332edb226651ec422756ea3f1"
   },
   "unova": {
     "count": 138,
-    "runtime": "765eacae49aa60256a8cb00bc85287ad91e43aab24f7fa901890c84b533ea9c7",
-    "source": "1815e84030c9c155b1a80dc7d640d8b2b7d2430797979189ae9e2a66d05ea04c"
+    "runtime": "9c753bbf61e75d390de40e81a7a903bc92bb4445e6a3b2b57839cf2c54ac90e9",
+    "source": "d9034c28ce9fc591ac7a19a59597e3eee85db8884b67ea482be89b83260ffd29"
   },
   "sinnoh": {
     "count": 117,
-    "runtime": "36027d5bc61bf1cfa3168db5ba4d48266749b12ca051fe5e50b1872ca5f3d608",
-    "source": "4add30434fe75c6e3c8d198605ff4a93992484ef6969c012877a66f0cfa83fae"
+    "runtime": "10855ce76287374870276997e934c550c9f7004c3ea35a0007167daffe5ee1b4",
+    "source": "fc47e16b6ca9c58a12d9a02b97855db1d428ccb6b4e11614a71da375021c3eb6"
   },
   "hoenn": {
     "count": 88,
-    "runtime": "093e9cd5d4f3d1d6f8807d7243c3eeef24ae1ce1728c1d4b98e4b9d89fd71ac7",
-    "source": "4e538f08b422a86ca89a4f9908649e2303eb8b0dfbbebb98981e600354b75c6d"
+    "runtime": "89869f7efccc491aa037411dba34f512ae56f4d9adaf26bae806baf3187a9553",
+    "source": "e3e3efe650f2fb1a2a205ef4b80f0ff2f19e53559342970bf4e631b0dd4eee12"
   },
   "magma": {
     "count": 115,
-    "runtime": "92d0477a719342ef5eadcae05512396b4c8a0c07ecafc10d906fc17f7ee20db8",
-    "source": "2609ae60e6086d65fd492756be5564192f0bafda0f16a763476705dbcbd2571a"
+    "runtime": "10832044b0a502842f698e1e0fbc99c8fd4b0dc88d1a245443673caa1b97c529",
+    "source": "a538271340f2fe8b46e5ad1748ec3a53886525335d16806d2eb4482ed51f55e5"
   },
   "tuning": {
     "count": 179,
-    "runtime": "2344e999c4d747a5fa0f7a12f20aac375187683f7abb5366b2af5a89d9492778",
-    "source": "65d32f3d619b0f74b0cfafad66397c4663b739454e58be0fca44a062f6dedb5e"
+    "runtime": "0c1e045cfb7f7f85778a338bc7b7524c5494d9a98e738461d23be87c7dc2ce54",
+    "source": "2a5f2da874899aeb0e4c827c59def9427aec9952c18a48803ea05b3f8c6f125b"
   },
   "galarRebase": "Galar content updated; every non-Galar row is independently pinned by galar-preservation.json."
 }

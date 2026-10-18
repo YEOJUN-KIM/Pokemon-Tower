@@ -31,7 +31,7 @@ test('exactly 13 Galar samples, deferred identities absent, campaign uses review
  assert.deepEqual(organizationGrunt('macrocosmos'),galarSample(galarTrainers.find(t=>t.category==='grunt')!));
  assert.equal(villainLeaders.macrocosmos.executive.aiCeiling,'expert');
 });
-for(const t of galarTrainers)test(`${t.id}: deterministic ordered triples, legal builds and itemless carrier`,()=>{
+for(const t of galarTrainers)test(`${t.id}: deterministic ordered triples, legal builds and designated carrier`,()=>{
  const sample=galarSample(t),validator=new Showdown.TeamValidator(FORMAT);
  assert.ok(existsSync(`public/sprites/trainers/${sample.portrait}.png`));
  for(const floor of [5,45,50,54,55,75,95,100].filter(f=>f>=t.minFloor)){
@@ -44,7 +44,7 @@ for(const t of galarTrainers)test(`${t.id}: deterministic ordered triples, legal
     assert.ok(pokemonSets[p.name]);assert.ok(Showdown.Dex.abilities.get(p.ability).exists);
     assert.ok(!p.item||Showdown.Dex.items.get(p.item).exists);
     assert.ok(p.moves.every(m=>Showdown.Dex.moves.get(m).exists));
-    if(p.gigantamax){assert.equal(p.name,t.ace);assert.equal(p.item,'');assert.ok(Showdown.Dex.species.get(p.name).canGigantamax);}
+    if(p.gigantamax){assert.equal(p.name,t.ace);assert.equal(p.item,t.id==='named-leon'?'Life Orb':'');assert.ok(Showdown.Dex.species.get(p.name).canGigantamax);}
     assert.equal(validator.validateSet({...structuredClone(pokemonSets[p.name]),ability:p.ability,item:p.item,moves:p.moves,nature:p.profile!.nature},{}),null);
    }
   }
@@ -102,13 +102,13 @@ test('Rose phases resist forced phazing and retain their rule during replay',asy
  const entries=log.publicProtocol.filter(l=>l.startsWith('|switch|p2')).map(l=>l.split('|')[3].split(',')[0]);
  assert.deepEqual(entries,t.entries.slice(0,entries.length));assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
 });
-for(const t of galarTrainers.filter(t=>t.signature))test(`${t.id}: actual designated itemless Gigantamax`,async()=>{
+for(const t of galarTrainers.filter(t=>t.signature))test(`${t.id}: actual designated Gigantamax including Leon's held-item exception`,async()=>{
  const team=focusedTeam(t.id,t.ace),sets=Showdown.Teams.unpack(team)!;
  const log=await runBattle({teams:{p1:packTeam(['Blissey','Snorlax','Lapras']),p2:team},rule:'basic',opponentRule:packedNpcRule(sets,0),player:new DamagePolicy(),opponent:{choose(o){return o.legalActions.find(a=>a.command.endsWith(' dynamax')&&a.label===Showdown.Dex.species.get(t.ace).canGigantamax)?.command??o.legalActions.find(a=>a.command.endsWith(' dynamax')&&a.label!=='Max Guard')?.command??new DamagePolicy().choose(o);}}});
  assert.ok(log.publicProtocol.some(l=>l.includes('|-start|p2a:')&&l.includes('|Dynamax')));
  assert.ok(log.publicProtocol.some(l=>l.includes('|-start|p2a:')&&l.includes('|Dynamax|Gmax')));
  if(t.id==='named-melony')assert.ok(log.publicProtocol.some(l=>l.includes('|-sidestart|p2: Tower AI|')&&l.includes('Aurora Veil')));
- if(t.id==='named-leon')assert.ok(log.publicProtocol.some(l=>l.includes('G-Max Wildfire')));
+ if(t.id==='named-leon'){assert.ok(log.publicProtocol.some(l=>l.includes('G-Max Wildfire')));assert.ok(log.publicProtocol.some(l=>l.startsWith('|-damage|p2a: Charizard|')&&l.includes('[from] item: Life Orb')));}
  if(t.id==='named-gordie')assert.ok(log.publicProtocol.some(l=>l.includes('G-Max Volcalith')));
 });
 

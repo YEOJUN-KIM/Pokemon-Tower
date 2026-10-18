@@ -29,7 +29,7 @@ test('new encounters suppress every early gimmick and retain late signatures',()
   for(const floor of [start-1,start].filter(f=>f>=sample.minFloor)){
    const team=generateOpponentTeam(floor,[1,2,3,4],[],null,sample,'hundred-floor-v1');
    if(floor<start){assert.ok(team.every(p=>!special(p.item ?? '')),sample.id);assert.ok(team.every(p=>!p.gigantamax));}
-   else {const reviewed=normalNpcTemplate(sample.id,floor,sample.role);const plan=reviewed?reviewed.signature:npcGimmick(sample.id,sample.generation,[...sample.entries!,...(npcExtraCandidates[sample.id] ?? [])],sample.ace);if(plan&&plan.rule!=='tera')assert.ok(team.some(p=>special(p.item ?? '')||p.gigantamax&&!p.item),sample.id);}
+   else {const reviewed=normalNpcTemplate(sample.id,floor,sample.role);const plan=reviewed?reviewed.signature:npcGimmick(sample.id,sample.generation,[...sample.entries!,...(npcExtraCandidates[sample.id] ?? [])],sample.ace);if(plan&&plan.rule!=='tera')assert.ok(team.some(p=>special(p.item ?? '')||p.gigantamax),sample.id);}
   }
  }
 });

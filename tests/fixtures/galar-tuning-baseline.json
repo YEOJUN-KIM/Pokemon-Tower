@@ -1,0 +1,977 @@
+{
+  "commit": "edc1d6eb0261e5db9ae17f59d3a6349d5c9f21ec",
+  "changed": [
+    "named-allister",
+    "named-raihan",
+    "named-leon"
+  ],
+  "paths": {
+    "scripts/data/npc/galar-design.json": {
+      "otherHash": "f26c8e0e5dfbd4b04517a3087929163ef841903a1ee92db36a30a4e5abd8537f",
+      "rows": [
+        {
+          "id": "named-allister",
+          "name": "어니언",
+          "category": "gym",
+          "specialty": "Ghost",
+          "tactic": "status",
+          "concept": "도깨비불 + 병상첨병 + 탈 랭크업",
+          "team": [
+            {
+              "species": "Cursola",
+              "ability": "Weak Armor",
+              "item": "Focus Sash",
+              "nature": "Modest",
+              "moves": [
+                "Strength Sap",
+                "Will-O-Wisp",
+                "Hex",
+                "Ancient Power"
+              ],
+              "role": "lead"
+            },
+            {
+              "species": "Mimikyu",
+              "ability": "Disguise",
+              "item": "Sitrus Berry",
+              "nature": "Jolly",
+              "moves": [
+                "Play Rough",
+                "Shadow Sneak",
+                "Swords Dance",
+                "Will-O-Wisp"
+              ],
+              "role": "middle"
+            },
+            {
+              "species": "Gengar",
+              "ability": "Cursed Body",
+              "item": "",
+              "nature": "Timid",
+              "moves": [
+                "Shadow Ball",
+                "Sludge Bomb",
+                "Focus Blast",
+                "Hypnosis"
+              ],
+              "role": "ace"
+            }
+          ],
+          "entries": [
+            "Cursola",
+            "Mimikyu",
+            "Gengar"
+          ],
+          "ace": "Gengar",
+          "aiCeiling": "tactical",
+          "minFloor": 5,
+          "signature": {
+            "rule": "dynamax",
+            "species": "Gengar"
+          }
+        },
+        {
+          "id": "named-raihan",
+          "name": "금랑",
+          "category": "gym",
+          "specialty": "Dragon",
+          "tactic": "balanced",
+          "concept": "모래 + 설치 + 유턴 + 적극적인 상성 운영",
+          "team": [
+            {
+              "species": "Gigalith",
+              "ability": "Sand Stream",
+              "item": "Leftovers",
+              "nature": "Impish",
+              "moves": [
+                "Stealth Rock",
+                "Rock Blast",
+                "Body Press",
+                "Earthquake"
+              ],
+              "role": "lead"
+            },
+            {
+              "species": "Flygon",
+              "ability": "Levitate",
+              "item": "Life Orb",
+              "nature": "Jolly",
+              "moves": [
+                "Earthquake",
+                "Dragon Claw",
+                "Fire Punch",
+                "U-turn"
+              ],
+              "role": "middle"
+            },
+            {
+              "species": "Duraludon",
+              "ability": "Stalwart",
+              "item": "",
+              "nature": "Modest",
+              "moves": [
+                "Draco Meteor",
+                "Flash Cannon",
+                "Thunderbolt",
+                "Body Press"
+              ],
+              "role": "ace"
+            }
+          ],
+          "entries": [
+            "Gigalith",
+            "Flygon",
+            "Duraludon"
+          ],
+          "ace": "Duraludon",
+          "aiCeiling": "expert",
+          "minFloor": 5,
+          "signature": {
+            "rule": "dynamax",
+            "species": "Duraludon"
+          }
+        },
+        {
+          "id": "named-leon",
+          "name": "단델",
+          "category": "champion",
+          "specialty": null,
+          "tactic": "balanced",
+          "concept": "배틀스위치 + 유턴 + 거다이옥염 최종 에이스",
+          "team": [
+            {
+              "species": "Aegislash",
+              "ability": "Stance Change",
+              "item": "Weakness Policy",
+              "nature": "Quiet",
+              "moves": [
+                "King's Shield",
+                "Shadow Ball",
+                "Sacred Sword",
+                "Flash Cannon"
+              ],
+              "role": "lead"
+            },
+            {
+              "species": "Dragapult",
+              "ability": "Infiltrator",
+              "item": "Life Orb",
+              "nature": "Naive",
+              "moves": [
+                "Dragon Darts",
+                "Phantom Force",
+                "Fire Blast",
+                "U-turn"
+              ],
+              "role": "middle"
+            },
+            {
+              "species": "Charizard",
+              "ability": "Blaze",
+              "item": "",
+              "nature": "Timid",
+              "moves": [
+                "Fire Blast",
+                "Air Slash",
+                "Solar Beam",
+                "Ancient Power"
+              ],
+              "role": "ace"
+            }
+          ],
+          "entries": [
+            "Aegislash",
+            "Dragapult",
+            "Charizard"
+          ],
+          "ace": "Charizard",
+          "aiCeiling": "expert",
+          "minFloor": 5,
+          "signature": {
+            "rule": "dynamax",
+            "species": "Charizard"
+          }
+        }
+      ]
+    },
+    "scripts/data/npc/normal-npc-samples.json": {
+      "otherHash": "3f69aed1cfc67c9a63eed77eece7b9861e9e5a4c747f91595d3d19a17a425926",
+      "rows": [
+        {
+          "id": "named-allister",
+          "name": "어니언",
+          "generation": 8,
+          "title": "gym",
+          "role": "gym",
+          "ace": "Gengar",
+          "signature": {
+            "rule": "dynamax",
+            "species": "Gengar"
+          },
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Cursola",
+            "Mimikyu",
+            "Gengar"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Cursola"
+            ],
+            "preferredLast": [
+              "Gengar"
+            ]
+          },
+          "gimmickEnabled": true,
+          "concept": "도깨비불 + 병상첨병 + 탈 랭크업",
+          "powerTier": "gym",
+          "team": [
+            {
+              "species": "Cursola",
+              "item": "Focus Sash",
+              "gigantamax": false,
+              "role": "lead",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 24,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 0
+                },
+                "nature": "Modest",
+                "ability": "Weak Armor",
+                "moves": [
+                  "Strength Sap",
+                  "Will-O-Wisp",
+                  "Hex",
+                  "Ancient Power"
+                ]
+              }
+            },
+            {
+              "species": "Mimikyu",
+              "item": "Sitrus Berry",
+              "gigantamax": false,
+              "role": "middle",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 24,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Jolly",
+                "ability": "Disguise",
+                "moves": [
+                  "Play Rough",
+                  "Shadow Sneak",
+                  "Swords Dance",
+                  "Will-O-Wisp"
+                ]
+              }
+            },
+            {
+              "species": "Gengar",
+              "item": "",
+              "gigantamax": true,
+              "role": "ace",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Timid",
+                "ability": "Cursed Body",
+                "moves": [
+                  "Shadow Ball",
+                  "Sludge Bomb",
+                  "Focus Blast",
+                  "Hypnosis"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-raihan",
+          "name": "금랑",
+          "generation": 8,
+          "title": "gym",
+          "role": "gym",
+          "ace": "Duraludon",
+          "signature": {
+            "rule": "dynamax",
+            "species": "Duraludon"
+          },
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Gigalith",
+            "Flygon",
+            "Duraludon"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Gigalith"
+            ],
+            "preferredLast": [
+              "Duraludon"
+            ]
+          },
+          "gimmickEnabled": true,
+          "concept": "모래 + 설치 + 유턴 + 적극적인 상성 운영",
+          "powerTier": "gym",
+          "team": [
+            {
+              "species": "Gigalith",
+              "item": "Leftovers",
+              "gigantamax": false,
+              "role": "lead",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Impish",
+                "ability": "Sand Stream",
+                "moves": [
+                  "Stealth Rock",
+                  "Rock Blast",
+                  "Body Press",
+                  "Earthquake"
+                ]
+              }
+            },
+            {
+              "species": "Flygon",
+              "item": "Life Orb",
+              "gigantamax": false,
+              "role": "middle",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Jolly",
+                "ability": "Levitate",
+                "moves": [
+                  "Earthquake",
+                  "Dragon Claw",
+                  "Fire Punch",
+                  "U-turn"
+                ]
+              }
+            },
+            {
+              "species": "Duraludon",
+              "item": "",
+              "gigantamax": true,
+              "role": "ace",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 32,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Modest",
+                "ability": "Stalwart",
+                "moves": [
+                  "Draco Meteor",
+                  "Flash Cannon",
+                  "Thunderbolt",
+                  "Body Press"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-leon",
+          "name": "단델",
+          "generation": 8,
+          "title": "champion",
+          "role": "champion",
+          "ace": "Charizard",
+          "signature": {
+            "rule": "dynamax",
+            "species": "Charizard"
+          },
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Aegislash",
+            "Dragapult",
+            "Charizard"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Aegislash"
+            ],
+            "preferredLast": [
+              "Charizard"
+            ]
+          },
+          "gimmickEnabled": true,
+          "concept": "배틀스위치 + 유턴 + 거다이옥염 최종 에이스",
+          "powerTier": "champion",
+          "team": [
+            {
+              "species": "Aegislash",
+              "item": "Weakness Policy",
+              "gigantamax": false,
+              "role": "lead",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 32,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Quiet",
+                "ability": "Stance Change",
+                "moves": [
+                  "King's Shield",
+                  "Shadow Ball",
+                  "Sacred Sword",
+                  "Flash Cannon"
+                ]
+              }
+            },
+            {
+              "species": "Dragapult",
+              "item": "Life Orb",
+              "gigantamax": false,
+              "role": "middle",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Naive",
+                "ability": "Infiltrator",
+                "moves": [
+                  "Dragon Darts",
+                  "Phantom Force",
+                  "Fire Blast",
+                  "U-turn"
+                ]
+              }
+            },
+            {
+              "species": "Charizard",
+              "item": "",
+              "gigantamax": true,
+              "role": "ace",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 32,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Timid",
+                "ability": "Blaze",
+                "moves": [
+                  "Fire Blast",
+                  "Air Slash",
+                  "Solar Beam",
+                  "Ancient Power"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "src/data/normal-npc-templates.json": {
+      "otherHash": "d00c0a59b5e18222bdb69f37c510870c03eb1f811c6a6c482f11a306f33d4279",
+      "rows": [
+        {
+          "id": "named-allister",
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Cursola",
+            "Mimikyu",
+            "Gengar"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Cursola"
+            ],
+            "preferredLast": [
+              "Gengar"
+            ]
+          },
+          "role": "gym",
+          "ace": "Gengar",
+          "signature": {
+            "rule": "dynamax",
+            "species": "Gengar"
+          },
+          "gimmickEnabled": true,
+          "team": [
+            {
+              "species": "Cursola",
+              "item": "Focus Sash",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 24,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 0
+                },
+                "nature": "Modest",
+                "ability": "Weak Armor",
+                "moves": [
+                  "Strength Sap",
+                  "Will-O-Wisp",
+                  "Hex",
+                  "Ancient Power"
+                ]
+              }
+            },
+            {
+              "species": "Mimikyu",
+              "item": "Sitrus Berry",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 24,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Jolly",
+                "ability": "Disguise",
+                "moves": [
+                  "Play Rough",
+                  "Shadow Sneak",
+                  "Swords Dance",
+                  "Will-O-Wisp"
+                ]
+              }
+            },
+            {
+              "species": "Gengar",
+              "item": "",
+              "gigantamax": true,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Timid",
+                "ability": "Cursed Body",
+                "moves": [
+                  "Shadow Ball",
+                  "Sludge Bomb",
+                  "Focus Blast",
+                  "Hypnosis"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-raihan",
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Gigalith",
+            "Flygon",
+            "Duraludon"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Gigalith"
+            ],
+            "preferredLast": [
+              "Duraludon"
+            ]
+          },
+          "role": "gym",
+          "ace": "Duraludon",
+          "signature": {
+            "rule": "dynamax",
+            "species": "Duraludon"
+          },
+          "gimmickEnabled": true,
+          "team": [
+            {
+              "species": "Gigalith",
+              "item": "Leftovers",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Impish",
+                "ability": "Sand Stream",
+                "moves": [
+                  "Stealth Rock",
+                  "Rock Blast",
+                  "Body Press",
+                  "Earthquake"
+                ]
+              }
+            },
+            {
+              "species": "Flygon",
+              "item": "Life Orb",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Jolly",
+                "ability": "Levitate",
+                "moves": [
+                  "Earthquake",
+                  "Dragon Claw",
+                  "Fire Punch",
+                  "U-turn"
+                ]
+              }
+            },
+            {
+              "species": "Duraludon",
+              "item": "",
+              "gigantamax": true,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 32,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Modest",
+                "ability": "Stalwart",
+                "moves": [
+                  "Draco Meteor",
+                  "Flash Cannon",
+                  "Thunderbolt",
+                  "Body Press"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-leon",
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Aegislash",
+            "Dragapult",
+            "Charizard"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Aegislash"
+            ],
+            "preferredLast": [
+              "Charizard"
+            ]
+          },
+          "role": "champion",
+          "ace": "Charizard",
+          "signature": {
+            "rule": "dynamax",
+            "species": "Charizard"
+          },
+          "gimmickEnabled": true,
+          "team": [
+            {
+              "species": "Aegislash",
+              "item": "Weakness Policy",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 32,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Quiet",
+                "ability": "Stance Change",
+                "moves": [
+                  "King's Shield",
+                  "Shadow Ball",
+                  "Sacred Sword",
+                  "Flash Cannon"
+                ]
+              }
+            },
+            {
+              "species": "Dragapult",
+              "item": "Life Orb",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Naive",
+                "ability": "Infiltrator",
+                "moves": [
+                  "Dragon Darts",
+                  "Phantom Force",
+                  "Fire Blast",
+                  "U-turn"
+                ]
+              }
+            },
+            {
+              "species": "Charizard",
+              "item": "",
+              "gigantamax": true,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 32,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Timid",
+                "ability": "Blaze",
+                "moves": [
+                  "Fire Blast",
+                  "Air Slash",
+                  "Solar Beam",
+                  "Ancient Power"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ai": "cc88f85ab7dffebe3ad7710823987b18647ab0075ccd6fe53fe38d819576808d"
+}

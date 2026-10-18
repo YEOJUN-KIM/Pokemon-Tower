@@ -118,7 +118,7 @@ export function equipNpcGimmick(team:OpponentEntry[],gimmick:NpcGimmick|null){
 export function stripNpcGimmicks(team:OpponentEntry[]){return team.map(entry=>({...entry,gigantamax:false,item:entry.item && (megaStones[entry.item] || zCrystals[entry.item] || entry.item===DYNAMAX_ITEM || entry.item==='Red Orb' || entry.item==='Blue Orb')?undefined:entry.item}));}
 export function packedNpcRule(team:{item:string;gigantamax?:boolean}[],teraTickets:number):BattleRule{
  if(team.some(p=>megaStones[p.item]))return 'mega';
- if(team.some(p=>p.item===DYNAMAX_ITEM||p.gigantamax&&!p.item))return 'dynamax';
+ if(team.some(p=>p.item===DYNAMAX_ITEM||p.gigantamax))return 'dynamax';
  if(team.some(p=>zCrystals[p.item]))return 'z';
  return teraTickets>0?'tera':'basic';
 }

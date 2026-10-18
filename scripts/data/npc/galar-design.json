@@ -194,7 +194,7 @@
         {
           "species": "Cursola",
           "ability": "Weak Armor",
-          "item": "Focus Sash",
+          "item": "",
           "nature": "Modest",
           "moves": [
             "Strength Sap",
@@ -531,7 +531,7 @@
             "Draco Meteor",
             "Flash Cannon",
             "Thunderbolt",
-            "Body Press"
+            "Dark Pulse"
           ],
           "role": "ace"
         }
@@ -753,7 +753,7 @@
         {
           "species": "Dragapult",
           "ability": "Infiltrator",
-          "item": "Life Orb",
+          "item": "Focus Sash",
           "nature": "Naive",
           "moves": [
             "Dragon Darts",
@@ -766,7 +766,7 @@
         {
           "species": "Charizard",
           "ability": "Blaze",
-          "item": "",
+          "item": "Life Orb",
           "nature": "Timid",
           "moves": [
             "Fire Blast",

@@ -23,7 +23,7 @@ t('bea','채두','gym','Fighting','setup','배수의진과 낮은 교체 빈도�
  'Falinks;Battle Armor;Sitrus Berry;Adamant;No Retreat|Close Combat|Iron Head|Throat Chop',
  'Machamp;No Guard;;Adamant;Dynamic Punch|Knock Off|Ice Punch|Stone Edge']);
 t('allister','어니언','gym','Ghost','status','도깨비불 + 병상첨병 + 탈 랭크업',[
- 'Cursola;Weak Armor;Focus Sash;Modest;Strength Sap|Will-O-Wisp|Hex|Ancient Power',
+ 'Cursola;Weak Armor;;Modest;Strength Sap|Will-O-Wisp|Hex|Ancient Power',
  'Mimikyu;Disguise;Sitrus Berry;Jolly;Play Rough|Shadow Sneak|Swords Dance|Will-O-Wisp',
  'Gengar;Cursed Body;;Timid;Shadow Ball|Sludge Bomb|Focus Blast|Hypnosis']);
 t('gordie','마쿠와','gym','Rock','bulk','모래 + 단단지 설치 + 거다이분석 지속 피해',[
@@ -45,7 +45,7 @@ t('bede','비트','gym','Fairy','special','특수 → 물리 → 매직미러 �
 t('raihan','금랑','gym','Dragon','balanced','모래 + 설치 + 유턴 + 적극적인 상성 운영',[
  'Gigalith;Sand Stream;Leftovers;Impish;Stealth Rock|Rock Blast|Body Press|Earthquake',
  'Flygon;Levitate;Life Orb;Jolly;Earthquake|Dragon Claw|Fire Punch|U-turn',
- 'Duraludon;Stalwart;;Modest;Draco Meteor|Flash Cannon|Thunderbolt|Body Press']);
+ 'Duraludon;Stalwart;;Modest;Draco Meteor|Flash Cannon|Thunderbolt|Dark Pulse']);
 t('macrocosmos-grunt','매크로코스모스 직원','grunt','Steel','physical','강철 기본 공격; 다이맥스 없음',[
  'Perrserker;Tough Claws;;Serious;Iron Head|Fake Out|Crunch|U-turn',
  'Klinklang;Clear Body;;Serious;Gear Grind|Wild Charge|Shift Gear|Volt Switch',
@@ -60,8 +60,8 @@ t('rose','로즈','boss','Steel','bulk','설치 → 거다이대왕끼리동 →
  'Eternatus;Pressure;;Timid;Dynamax Cannon|Sludge Bomb|Flamethrower|Dragon Pulse']);
 t('leon','단델','champion',null,'balanced','배틀스위치 + 유턴 + 거다이옥염 최종 에이스',[
  'Aegislash;Stance Change;Weakness Policy;Quiet;King\'s Shield|Shadow Ball|Sacred Sword|Flash Cannon',
- 'Dragapult;Infiltrator;Life Orb;Naive;Dragon Darts|Phantom Force|Fire Blast|U-turn',
- 'Charizard;Blaze;;Timid;Fire Blast|Air Slash|Solar Beam|Ancient Power']);
+ 'Dragapult;Infiltrator;Focus Sash;Naive;Dragon Darts|Phantom Force|Fire Blast|U-turn',
+ 'Charizard;Blaze;Life Orb;Timid;Fire Blast|Air Slash|Solar Beam|Ancient Power']);
 
 const validator=new Showdown.TeamValidator(FORMAT),keys=['hp','atk','def','spa','spd','spe'] as const;
 const rows=trainers.map(trainer=>{

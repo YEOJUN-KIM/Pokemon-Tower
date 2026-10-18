@@ -36012,7 +36012,7 @@
       "team": [
         {
           "species": "Cursola",
-          "item": "Focus Sash",
+          "item": "",
           "gigantamax": false,
           "role": "lead",
           "profile": {
@@ -36765,7 +36765,7 @@
               "Draco Meteor",
               "Flash Cannon",
               "Thunderbolt",
-              "Body Press"
+              "Dark Pulse"
             ]
           }
         }
@@ -37231,7 +37231,7 @@
         },
         {
           "species": "Dragapult",
-          "item": "Life Orb",
+          "item": "Focus Sash",
           "gigantamax": false,
           "role": "middle",
           "profile": {
@@ -37264,7 +37264,7 @@
         },
         {
           "species": "Charizard",
-          "item": "",
+          "item": "Life Orb",
           "gigantamax": true,
           "role": "ace",
           "profile": {

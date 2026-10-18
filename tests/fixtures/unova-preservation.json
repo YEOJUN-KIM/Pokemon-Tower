@@ -1,0 +1,34 @@
+{
+  "unova": {
+    "count": 229,
+    "runtime": "6ef04558163cd25d41832d8cbcc2d75c65cd4c9383c6c83223454a496fc208e3",
+    "source": "322a0a037f46da86f0bea1126cbb50c7731ae88228fcc287c19fe9f2f10a7736"
+  },
+  "sinnoh": {
+    "count": 208,
+    "runtime": "501e0175252aa4f8f7fd59f0720facc7d4a7d4c8a5b1f84e107bfda6d35fa2c5",
+    "source": "a236595d91a474e8de0ffb34bf459da83c1fa43e964f36693e3541dd6f46e909"
+  },
+  "hoenn": {
+    "count": 179,
+    "runtime": "2e3ca0ce48194f4f8f3660ae1d13eb23d79e56762c4d27651307b95bab664c23",
+    "source": "2662086cacebba8d009002a22c225b20ad858dbcca962b54b22fdf0025b30021"
+  },
+  "magma": {
+    "count": 206,
+    "runtime": "d7a426376ebe467b4d1fd6382add55c22e721de2b8d7aec3fd4f01b8c4ef5a7a",
+    "source": "53f53dbb8932a17896b2cd43fd2e6b75cab05b36295a34922cadb6de09e191e0"
+  },
+  "common": {
+    "src/battle/npc-policy.ts": "22206328062533e0b44312f7cdfbc5df5ba39a88788abc45f5921c728dd6cb2e",
+    "src/battle/tower-policy.ts": "4fd3c29dea61cf0bf2c3a046d1929da306bfa8b798d093a0ec79d029960e8998",
+    "src/battle/z-decision.ts": "851fa606cdc87cc0f9d81ded577ec24d80f1bf0492f057c0511202b7419f24e2",
+    "src/battle/gimmicks.ts": "fd934ababa605f06d4f1cfb4a1a9c6b14d76960c909e14edf3cae4b306c2f0ee",
+    "src/data/npc-ai.ts": "375414f8f70094a3b473c27515754905edcb8bc6850075ce3f91a34dd0b29a49",
+    "src/data/npc-selection-rules.ts": "cbd1fe1da13113468d0065384fead4c3423c246ca576687fe3bf7ef226de8dcd",
+    "src/server/opponent-team.ts": "d45f947f53ba580305ead8556e3195928e2a4029a2e35fb5b5b3e5a123e5cc40",
+    "src/data/tower-progression.ts": "3d7851211f1c2905ab49ced03d1a3924b851ae2cde6ee6af0c1a0d1da70d18e5",
+    "src/server/npc-templates.ts": "e74503645ff2391cf6997e70ac7965a900ae55266f00761e20dbe8cf2b00e07f",
+    "src/server/hidden-boss-events.ts": "e5789f432ce6325bd892ac4383e8ae37457b308a268b21836db07a30e1b53e21"
+  }
+}

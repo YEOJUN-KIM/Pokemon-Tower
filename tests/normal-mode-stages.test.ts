@@ -51,6 +51,6 @@ test('general-mode review keeps fifty candidate pools and paired stages for othe
   for(const p of row.team){assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),row.statPoints);assert.ok(Object.values(p.profile.evs).every(v=>v<=32));assert.ok(Object.values(p.profile.ivs).every(v=>v===row.iv));}
   if(!row.gimmickEnabled)assert.ok(row.team.every(p=>!special(p.item)&&!p.gigantamax&&(!('battleForm' in p)||!p.battleForm)));
  }
- assert.equal(counts.size,170);assert.equal([...counts.values()].filter(n=>n===1).length,67);assert.ok([...counts.values()].every(n=>n===1||n===2));
+ assert.equal(counts.size,173);assert.equal([...counts.values()].filter(n=>n===1).length,91);assert.ok([...counts.values()].every(n=>n===1||n===2));
  for(const id of ['named-maxie','magma-boss-maxie']){const rows=normalSamples.samples.filter(s=>s.id===id);assert.ok(rows.find(s=>s.stage==='first-gate')!.team.every(p=>p.species!=='Groudon'));const final=rows.find(s=>s.stage==='final-gate')!;assert.ok(final.team.some(p=>p.species==='Groudon'));assert.ok(final.team.some(p=>p.species==='Camerupt' && p.item==='Cameruptite'));}
 });

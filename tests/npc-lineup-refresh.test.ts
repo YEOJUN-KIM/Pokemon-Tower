@@ -37,7 +37,7 @@ test('regional NPC partners and Iris retain their intended species in both stage
   assert.ok(rows.every(t=>t.team.some(p=>p.species===partner)),id);
  }
  for(const row of templates.filter(t=>t.id==='named-iris')){
-  assert.equal(row.ace,'Haxorus');assert.equal(row.signature?.species,'Haxorus');
+  assert.equal(row.ace,'Haxorus');assert.equal(row.signature,null);
   assert.ok(row.team.every(p=>p.species!=='Kommo-o'));
  }
 });

@@ -29,15 +29,9 @@ const earlyRows:[string,NpcGimmick['rule'],string][]=[
  ['steven','mega','Metagross'],['wallace','z','Milotic'],
  // Reviewed Sinnoh leaders and Galactic officers use no transformation gimmick.
  ['barry','z','Empoleon'],
- ['cilan','z','Simisage'],['chili','z','Simisear'],['cress','z','Simipour'],
- ['lenora','tera','Watchog'],['burgh','z','Leavanny'],['elesa','z','Zebstrika'],
- ['clay','z','Excadrill'],['skyla','tera','Swanna'],['brycen','tera','Beartic'],
- ['drayden','z','Haxorus'],['cheren','tera','Stoutland'],['roxie','z','Scolipede'],
- ['marlon','z','Jellicent'],['shauntal','z','Chandelure'],['marshal','z','Conkeldurr'],
- ['grimsley','tera','Bisharp'],['caitlin','z','Gothitelle'],['ghetsis','z','Hydreigon'],
- ['alder','z','Volcarona'],['iris','z','Haxorus'],
+ // Reviewed Unova trainers use ordinary items and no transformation gimmick.
  // Organization executives have no generation field in the source catalog.
- ['courtney','mega','Camerupt'],['zinzolin','z','Cryogonal'],
+ ['courtney','mega','Camerupt'],
  ['xerosic','mega','Houndoom'],['plumeria','z','Salazzle'],['guzma','z','Golisopod'],
  ['matt','mega','Sharpedo'],['faba','z','Hypno'],
 ];
@@ -48,7 +42,6 @@ const overrides:Record<string,NpcGimmick>={...earlyNpcAssignments,
  'named-diantha':{rule:'mega',species:'Gardevoir'},
  'named-lysandre':{rule:'mega',species:'Gyarados'},
  'named-ramos':{rule:'mega',species:'Venusaur'},
- 'named-iris':{rule:'z',species:'Haxorus',item:'Dragonium Z'},
  'named-acerola':{rule:'z',species:'Mimikyu',item:'Mimikium Z'},
  'named-acerola-captain':{rule:'z',species:'Mimikyu',item:'Mimikium Z'},
 };

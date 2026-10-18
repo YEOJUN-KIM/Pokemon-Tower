@@ -25,7 +25,7 @@ function teamFor(sample:typeof trainerCatalog[number]){
   return {encounter,packed:packTeam(encounter.map(p=>p.name),profiles,Object.fromEntries(encounter.map(p=>[p.name,p.item ?? ''])))};
 }
 test('catalog covers all types and generations with supported, legal distinct parties',()=>{
-  assert.equal(trainerCatalog.length,183);assert.equal(new Set(trainerCatalog.map(s=>s.id)).size,183);
+  assert.equal(trainerCatalog.length,184);assert.equal(new Set(trainerCatalog.map(s=>s.id)).size,184);
   assert.equal(new Set(normalTrainerSamples.map(s=>s.specialty)).size,18);assert.equal(new Set(eliteTrainerSamples.map(s=>s.specialty)).size,18);
   for(let gen=1;gen<=9;gen++){const group=namedTrainerSamples.filter(s=>s.generation===gen);assert.ok(group.length>=13);assert.deepEqual(new Set(group.map(s=>s.role)),new Set(['gym','villain','champion','elite']));}
   const validator=new Showdown.TeamValidator(FORMAT);
@@ -64,7 +64,7 @@ test('boss identities vary by run, preview agrees with battle, and saved identit
   for(const floor of [5,10]){
     const seen=new Set<string>();
     for(let i=0;i<200;i++){const boss=towerTrainerEncounter(floor,`run-${i}`)!;seen.add(boss.boss.id);assert.equal(boss.boss.role,floor===5 ? 'gym' : 'champion');assert.deepEqual(towerTrainerEncounter(floor,`run-${i}`),boss);}
-    assert.equal(seen.size,9);
+    assert.equal(seen.size,floor%10===0?8:9); // Alder is now an Elite Four+ veteran.
     const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);
     try{store.ensurePlayer('boss');const first=store.start('boss',starters),runId=store.battle(first).run_id;
       store.db.prepare("UPDATE runs SET floor=?,state='select' WHERE id=?").run(floor,runId);

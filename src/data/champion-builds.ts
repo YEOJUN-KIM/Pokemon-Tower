@@ -1,6 +1,10 @@
 // Tower battle sets: modern legal moves, independent of a trainer's original generation.
 // These are deliberate game builds, not exact copies of the original parties.
 export const championMoves:Record<string,readonly string[]>={
+  Carracosta:['Waterfall','Stone Edge','Aqua Jet','Shell Smash'],
+  Klinklang:['Gear Grind','Wild Charge','Giga Impact','Thunder Wave'],
+  Zoroark:['Dark Pulse','Flamethrower','Focus Blast','Nasty Plot'],
+  Zekrom:['Bolt Strike','Dragon Claw','Zen Headbutt','Crunch'],
   Gastrodon:['Earth Power','Scald','Ice Beam','Recover'],
   Altaria:["Dragon Dance", "Dragon Claw", "Earthquake", "Roost"],
   Lapras:["Surf", "Ice Beam", "Thunderbolt", "Sing"],

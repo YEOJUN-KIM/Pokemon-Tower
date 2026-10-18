@@ -5,6 +5,8 @@ import {readFileSync} from 'node:fs';
 import Showdown from 'pokemon-showdown';
 import {hoennTrainers} from '../src/data/hoenn-trainers';
 import {sinnohTrainers} from '../src/data/sinnoh-trainers';
+import {unovaTrainers} from '../src/data/unova-trainers';
+import preservation from './fixtures/unova-preservation.json' with {type:'json'};
 import {villainLeaders} from '../src/data/villain-organizations';
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
@@ -21,13 +23,13 @@ import {packedNpcRule} from '../src/data/npc-gimmicks';
 const ids=['magma-executive-tabitha','magma-executive-courtney'];
 const digest=(v:unknown)=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 test('Magma and subsequent Sinnoh reviews preserve all other reviewed/runtime NPCs',()=>{
- const excluded=new Set([...ids,...sinnohTrainers.map(t=>t.id),'named-cyrus']);
+ const excluded=new Set([...ids,...sinnohTrainers.map(t=>t.id),...unovaTrainers.map(t=>t.id),'named-cyrus','named-ghetsis']);
  const sort=(a:{id:string;stage:string},b:{id:string;stage:string})=>(a.id+a.stage).localeCompare(b.id+b.stage);
  const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((s:{id:string})=>!excluded.has(s.id)).sort(sort);
  const source=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((s:{id:string})=>!excluded.has(s.id)).sort(sort);
- assert.equal(runtime.length,250);assert.equal(source.length,250);
- assert.equal(digest(runtime),'9a875a5b35dd4b7705ea0953172bdacf8c6758ec454722ae57881b2fb55e520f');
- assert.equal(digest(source),'d624f546f8e792974658b5d23b2522e5524866d25d155bcbe9d172faec504a40');
+ assert.equal(runtime.length,preservation.magma.count);assert.equal(source.length,preservation.magma.count);
+ assert.equal(digest(runtime),preservation.magma.runtime);
+ assert.equal(digest(source),preservation.magma.source);
 });
 function sampleFor(id:string){const group=villainLeaders.magma;return {...[group.executive,...group.executives!].find(s=>id.endsWith('-'+s.portrait))!,id};}
 for(const id of ids){

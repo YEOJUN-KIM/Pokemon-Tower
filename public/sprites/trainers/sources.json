@@ -1129,6 +1129,22 @@
       "reviewedOn": "2026-10-18",
       "review": "game-character-no-individual-credit-listed",
       "sha256": "6156d48fa2181144a401fb9426299b2e40fb1914b1a2fa1966a24df199b13bec"
+    },
+    {
+      "portrait": "colress",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/colress.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-18",
+      "review": "game-character-no-individual-credit-listed",
+      "sha256": "755658d81b3c7657f26646c8b045590ee210cc9e14a8254844c78347488a44ed"
+    },
+    {
+      "portrait": "n",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/n.png",
+      "status": "downloaded",
+      "reviewedOn": "2026-10-18",
+      "review": "game-character-no-individual-credit-listed",
+      "sha256": "ff80c0e3086614328c983629e3f39766dee225405c245ba0f1900bbbcfe9a57a"
     }
   ]
 }

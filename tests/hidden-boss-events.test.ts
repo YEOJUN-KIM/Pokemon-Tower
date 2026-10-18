@@ -12,7 +12,7 @@ import {hiddenBossFixture} from './hidden-boss-fixture';
 
 test('hidden-boss event requires a supported chapter theme and its actual final champion',()=>{
  for(const theme of Object.keys(towerThemes) as TowerTheme[])for(const floor of [49,50,51,99,100]){
-  assert.equal(hiddenBossEligible(theme,floor,towerThemes[theme].champion),['johto','kanto'].includes(theme)&&floor%50===0);
+  assert.equal(hiddenBossEligible(theme,floor,towerThemes[theme].champion),['johto','kanto','unova'].includes(theme)&&floor%50===0);
   assert.equal(hiddenBossEligible(theme,floor,'named-red'),false);
  }
 });

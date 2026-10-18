@@ -1,6 +1,7 @@
 import {normalNpcFloorRules} from './normal-mode-stages';
 import {hoennTrainer} from './hoenn-trainers';
 import {sinnohTrainer} from './sinnoh-trainers';
+import {unovaTrainer} from './unova-trainers';
 import {namedTrainerSamples,type TrainerSample} from './trainer-catalog';
 import {towerThemes,type TowerTheme} from './tower-themes';
 
@@ -23,7 +24,7 @@ export const VILLAIN_BOSS_MIN_FLOOR=normalNpcFloorRules.villainBoss;
 export function organizationGrunt(organization:string):TrainerSample {
  const group=villainOrganizations.find(group=>group.id===organization);
  if(!group)throw Error('Unknown villain organization');
- return {id:`${group.id}-grunt`,name:'조직원',title:group.name,kind:'normal',role:'villain',generation:null,specialty:null,tactic:'status',portrait:group.portrait,minFloor:1,entries:sinnohTrainer(`${group.id}-grunt`)?.entries??hoennTrainer(`${group.id}-grunt`)?.entries??group.entries,concept:`${group.name}의 조직원`};
+ return {id:`${group.id}-grunt`,name:'조직원',title:group.name,kind:'normal',role:'villain',generation:null,specialty:null,tactic:'status',portrait:group.portrait,minFloor:1,entries:unovaTrainer(`${group.id}-grunt`)?.entries??sinnohTrainer(`${group.id}-grunt`)?.entries??hoennTrainer(`${group.id}-grunt`)?.entries??group.entries,concept:`${group.name}의 조직원`};
 }
 function ticket(key:string){let hash=2166136261;for(const char of key)hash=Math.imul(hash^char.charCodeAt(0),16777619);hash=Math.imul(hash^(hash>>>16),0x85ebca6b);hash=Math.imul(hash^(hash>>>13),0xc2b2ae35);return ((hash^(hash>>>16))>>>0)/4294967296;}
 export function runOrganization(runId:string,theme?:TowerTheme|null) {
@@ -46,7 +47,7 @@ export const villainLeaders:Record<string,{executive:TrainerSample;executives?:T
  rocket:{executive:leader('archer','tactical'),boss:leader('giovanni')},
  magma:{executive:executive('tabitha','호걸','tabitha',hoennTrainer('magma-executive-tabitha')!.entries),executives:[executive('courtney','구열','courtney',hoennTrainer('magma-executive-courtney')!.entries)],boss:leader('maxie')},
  galactic:{executive:{...executive('galactic-executive-mars','마스','mars',sinnohTrainer('galactic-executive-mars')!.entries),generation:4},executives:[{...executive('galactic-executive-jupiter','주피터','jupiter',sinnohTrainer('galactic-executive-jupiter')!.entries),generation:4},{...executive('galactic-executive-saturn','새턴','saturn',sinnohTrainer('galactic-executive-saturn')!.entries),generation:4}],boss:leader('cyrus')},
- plasma:{executive:executive('zinzolin','칠현인 비오','zinzolin',['Cryogonal','Weavile','Garbodor','Scrafty','Bisharp']),boss:leader('ghetsis')},
+ plasma:{executive:{...executive('plasma-executive-zinzolin','비오','zinzolin',unovaTrainer('plasma-executive-zinzolin')!.entries),generation:5,tactic:'bulk'},executives:[{...executive('plasma-executive-colress','아크로마','colress',unovaTrainer('plasma-executive-colress')!.entries),generation:5,tactic:'special',aiCeiling:'expert'}],boss:leader('ghetsis')},
  flare:{executive:executive('xerosic','크세로시키','xerosic',['Malamar','Crobat','Houndoom','Scrafty','Swalot']),boss:leader('lysandre')},
  skull:{executive:executive('plumeria','플루메리','plumeria',['Salazzle','Golbat','Gengar','Muk','Crobat']),boss:{...executive('guzma','구즈마','guzma',['Golisopod','Scizor','Pinsir','Masquerain','Ariados']),aiCeiling:'expert',tactic:'physical',minFloor:31}},
  aqua:{executive:executive('matt','해조','matt',hoennTrainer('aqua-executive-matt')!.entries),executives:[executive('shelly','이연','shelly',hoennTrainer('aqua-executive-shelly')!.entries)],boss:leader('archie')},

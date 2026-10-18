@@ -64,7 +64,7 @@ for(const t of alolaTrainers)test(`${t.id}: legal role-oriented builds, determin
    for(const p of team){const source=template.team.find(s=>s.species===p.name)!;assert.deepEqual(p.profile!.evs,templateProfile(source.profile,floor).evs);}
    lineups.add([...names].sort().join(','));
   }
-  if(t.category==='boss')assert.equal(lineups.size,1);else assert.ok(lineups.size>=3,t.id);
+  if(template.required?.length===3)assert.equal(lineups.size,1);else assert.ok(lineups.size>=3,t.id);
   const snapshot=snapshotTrainerEventBattle(`alola:${t.id}`,sample,floor,'basic',CURRENT_PROGRESSION);
   assert.deepEqual(snapshot,snapshotTrainerEventBattle(`alola:${t.id}`,sample,floor,'basic',CURRENT_PROGRESSION));
   const sets=Showdown.Teams.unpack(snapshot.opponentTeam)!;assert.equal(sets.length,3);

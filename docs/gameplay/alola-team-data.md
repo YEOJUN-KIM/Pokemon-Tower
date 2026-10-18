@@ -26,14 +26,13 @@
 
 ## 키아웨 / captain
 
-필수: Marowak-Alola. AI 상한: tactical. 훈련 포인트 상한: 48.
+고정 순서: Arcanine → Talonflame → Marowak-Alola. 3마리 모두 필수. [후속 조정 보고](alola-npc-tuning.md).
 
 |포켓몬|종족값 HP/공/방/특공/특방/속|성격|특성|도구|훈련 HP/공/방/특공/특방/속|기술|
 |---|---|---|---|---|---|---|
+|Arcanine|90/110/80/100/80/95|Adamant|Intimidate|Sitrus Berry|0/24/0/0/0/24|Flare Blitz / Play Rough / Wild Charge / Close Combat|
+|Talonflame|78/81/71/74/69/126|Jolly|Gale Wings|Sharp Beak|0/24/0/0/0/24|Brave Bird / Flare Blitz / Roost / Swords Dance|
 |Marowak-Alola|60/80/110/50/80/45|Adamant|Lightning Rod|Thick Club|24/24/0/0/0/0|Flare Blitz / Shadow Bone / Bonemerang / Rock Slide|
-|Salazzle|68/64/60/111/60/117|Modest|Corrosion|Charcoal|0/0/0/24/0/24|Flamethrower / Sludge Bomb / Dragon Pulse / Toxic|
-|Arcanine|90/110/80/100/80/95|Adamant|Intimidate|Sitrus Berry|0/24/0/0/0/24|Flare Blitz / Extreme Speed / Crunch / Will-O-Wisp|
-|Turtonator|60/78/135/91/85/36|Modest|Shell Armor|Charcoal|24/0/0/24/0/0|Flamethrower / Dragon Pulse / Flash Cannon / Shell Smash|
 
 ## 마오 / captain
 
@@ -105,15 +104,13 @@
 
 ## 라이치 / elite
 
-필수: Lycanroc. AI 상한: expert. 훈련 포인트 상한: 66.
+고정 순서: Cradily → Relicanth → Lycanroc. 3마리 모두 필수. [후속 조정 보고](alola-npc-tuning.md).
 
 |포켓몬|종족값 HP/공/방/특공/특방/속|성격|특성|도구|훈련 HP/공/방/특공/특방/속|기술|
 |---|---|---|---|---|---|---|
-|Lycanroc|75/115/65/55/65/112|Jolly|Sand Rush|Rockium Z|0/32/0/0/2/32|Rock Slide / Accelerock / Crunch / Swords Dance|
-|Relicanth|100/90/130/45/65/55|Adamant|Rock Head|Assault Vest|32/32/0/0/2/0|Head Smash / Waterfall / Earthquake / Body Slam|
-|Carbink|50/50/150/50/150/50|Bold|Sturdy|Leftovers|32/0/32/0/2/0|Moonblast / Power Gem / Earth Power / Calm Mind|
-|Probopass|60/55/145/75/150/40|Calm|Sturdy|Leftovers|32/0/2/0/32/0|Power Gem / Flash Cannon / Earth Power / Thunder Wave|
-|Golem-Alola|80/120/130/55/65/45|Adamant|Galvanize|Assault Vest|32/32/0/0/2/0|Return / Rock Slide / Earthquake / Fire Punch|
+|Cradily|86/81/97/81/107/43|Calm|Storm Drain|Leftovers|32/0/2/0/32/0|Giga Drain / Ancient Power / Earth Power / Recover|
+|Relicanth|100/90/130/45/65/55|Adamant|Rock Head|Choice Band|32/32/0/0/2/0|Head Smash / Waterfall / Earthquake / Zen Headbutt|
+|Lycanroc|75/115/65/55/65/112|Jolly|Keen Eye|Rockium Z|0/32/0/0/2/32|Stone Edge / Play Rough / Crunch / Drill Run|
 
 ## 아세로라 / elite
 
@@ -129,14 +126,13 @@
 
 ## 카일리 / elite
 
-필수: Toucannon. AI 상한: expert. 훈련 포인트 상한: 66.
+고정 순서: Skarmory → Toucannon → Hawlucha. 3마리 모두 필수. [후속 조정 보고](alola-npc-tuning.md).
 
 |포켓몬|종족값 HP/공/방/특공/특방/속|성격|특성|도구|훈련 HP/공/방/특공/특방/속|기술|
 |---|---|---|---|---|---|---|
-|Toucannon|80/120/75/75/75/60|Adamant|Skill Link|Flyinium Z|32/32/0/0/2/0|Brave Bird / Bullet Seed / Rock Blast / Roost|
-|Skarmory|65/80/140/40/70/70|Impish|Sturdy|Leftovers|32/0/32/0/2/0|Brave Bird / Body Press / Roost / Steel Wing|
-|Mandibuzz|110/65/105/55/95/80|Impish|Overcoat|Leftovers|32/0/32/0/2/0|Foul Play / Brave Bird / Roost / Toxic|
-|Oricorio|75/70/70/98/70/93|Modest|Dancer|Life Orb|0/0/0/32/2/32|Revelation Dance / Air Slash / Roost / Quiver Dance|
+|Skarmory|65/80/140/40/70/70|Impish|Sturdy|Rocky Helmet|32/0/32/0/2/0|Brave Bird / Drill Run / Roost / Toxic|
+|Toucannon|80/120/75/75/75/60|Adamant|Skill Link|Flyinium Z|32/32/0/0/2/0|Beak Blast / Bullet Seed / Rock Blast / Brick Break|
+|Hawlucha|78/92/75/74/63/118|Jolly|Unburden|White Herb|0/32/0/0/2/32|Close Combat / Acrobatics / Stone Edge / Swords Dance|
 
 ## 몰레인 / elite
 

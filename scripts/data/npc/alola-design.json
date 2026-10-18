@@ -45,10 +45,9 @@
       "specialty": "Fire",
       "ace": "Marowak-Alola",
       "entries": [
-        "Marowak-Alola",
-        "Salazzle",
         "Arcanine",
-        "Turtonator"
+        "Talonflame",
+        "Marowak-Alola"
       ],
       "tactic": "physical",
       "aiCeiling": "tactical",
@@ -186,11 +185,9 @@
       "specialty": "Rock",
       "ace": "Lycanroc",
       "entries": [
-        "Lycanroc",
+        "Cradily",
         "Relicanth",
-        "Carbink",
-        "Probopass",
-        "Golem-Alola"
+        "Lycanroc"
       ],
       "tactic": "bulk",
       "aiCeiling": "expert",
@@ -234,10 +231,9 @@
       "specialty": "Flying",
       "ace": "Toucannon",
       "entries": [
-        "Toucannon",
         "Skarmory",
-        "Mandibuzz",
-        "Oricorio"
+        "Toucannon",
+        "Hawlucha"
       ],
       "tactic": "bulk",
       "aiCeiling": "expert",
@@ -1300,6 +1296,115 @@
         "Swift"
       ],
       "bulk": false
+    }
+  },
+  "overrides": {
+    "named-olivia": {
+      "Cradily": {
+        "ability": "Storm Drain",
+        "item": "Leftovers",
+        "nature": "Calm",
+        "bulk": true,
+        "moves": [
+          "Giga Drain",
+          "Ancient Power",
+          "Earth Power",
+          "Recover"
+        ]
+      },
+      "Relicanth": {
+        "ability": "Rock Head",
+        "item": "Choice Band",
+        "nature": "Adamant",
+        "moves": [
+          "Head Smash",
+          "Waterfall",
+          "Earthquake",
+          "Zen Headbutt"
+        ]
+      },
+      "Lycanroc": {
+        "ability": "Keen Eye",
+        "item": "Rockium Z",
+        "nature": "Jolly",
+        "moves": [
+          "Stone Edge",
+          "Play Rough",
+          "Crunch",
+          "Drill Run"
+        ]
+      }
+    },
+    "named-kahili": {
+      "Skarmory": {
+        "ability": "Sturdy",
+        "item": "Rocky Helmet",
+        "nature": "Impish",
+        "bulk": true,
+        "moves": [
+          "Brave Bird",
+          "Drill Run",
+          "Roost",
+          "Toxic"
+        ]
+      },
+      "Toucannon": {
+        "ability": "Skill Link",
+        "item": "Flyinium Z",
+        "nature": "Adamant",
+        "moves": [
+          "Beak Blast",
+          "Bullet Seed",
+          "Rock Blast",
+          "Brick Break"
+        ]
+      },
+      "Hawlucha": {
+        "ability": "Unburden",
+        "item": "White Herb",
+        "nature": "Jolly",
+        "moves": [
+          "Close Combat",
+          "Acrobatics",
+          "Stone Edge",
+          "Swords Dance"
+        ]
+      }
+    },
+    "named-kiawe": {
+      "Arcanine": {
+        "ability": "Intimidate",
+        "item": "Sitrus Berry",
+        "nature": "Adamant",
+        "moves": [
+          "Flare Blitz",
+          "Play Rough",
+          "Wild Charge",
+          "Close Combat"
+        ]
+      },
+      "Talonflame": {
+        "ability": "Gale Wings",
+        "item": "Sharp Beak",
+        "nature": "Jolly",
+        "moves": [
+          "Brave Bird",
+          "Flare Blitz",
+          "Roost",
+          "Swords Dance"
+        ]
+      },
+      "Marowak-Alola": {
+        "ability": "Lightning Rod",
+        "item": "Thick Club",
+        "moves": [
+          "Flare Blitz",
+          "Shadow Bone",
+          "Bonemerang",
+          "Rock Slide"
+        ],
+        "bulk": false
+      }
     }
   }
 }

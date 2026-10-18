@@ -38101,12 +38101,80 @@
       "allFloors": true,
       "select": true,
       "required": [
+        "Arcanine",
+        "Talonflame",
         "Marowak-Alola"
       ],
       "gimmickEnabled": false,
       "concept": "알로라 captain: Fire 타입과 역할별 육성",
       "powerTier": "captain",
       "team": [
+        {
+          "species": "Arcanine",
+          "item": "Sitrus Berry",
+          "gigantamax": false,
+          "role": "Physical",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 24,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 24
+            },
+            "nature": "Adamant",
+            "ability": "Intimidate",
+            "moves": [
+              "Flare Blitz",
+              "Play Rough",
+              "Wild Charge",
+              "Close Combat"
+            ]
+          }
+        },
+        {
+          "species": "Talonflame",
+          "item": "Sharp Beak",
+          "gigantamax": false,
+          "role": "Physical",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 24,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 24
+            },
+            "nature": "Jolly",
+            "ability": "Gale Wings",
+            "moves": [
+              "Brave Bird",
+              "Flare Blitz",
+              "Roost",
+              "Swords Dance"
+            ]
+          }
+        },
         {
           "species": "Marowak-Alola",
           "item": "Thick Club",
@@ -38139,107 +38207,16 @@
               "Rock Slide"
             ]
           }
-        },
-        {
-          "species": "Salazzle",
-          "item": "Charcoal",
-          "gigantamax": false,
-          "role": "Special",
-          "profile": {
-            "statSystem": "points",
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 0,
-              "atk": 0,
-              "def": 0,
-              "spa": 24,
-              "spd": 0,
-              "spe": 24
-            },
-            "nature": "Modest",
-            "ability": "Corrosion",
-            "moves": [
-              "Flamethrower",
-              "Sludge Bomb",
-              "Dragon Pulse",
-              "Toxic"
-            ]
-          }
-        },
-        {
-          "species": "Arcanine",
-          "item": "Sitrus Berry",
-          "gigantamax": false,
-          "role": "Physical",
-          "profile": {
-            "statSystem": "points",
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 0,
-              "atk": 24,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 24
-            },
-            "nature": "Adamant",
-            "ability": "Intimidate",
-            "moves": [
-              "Flare Blitz",
-              "Extreme Speed",
-              "Crunch",
-              "Will-O-Wisp"
-            ]
-          }
-        },
-        {
-          "species": "Turtonator",
-          "item": "Charcoal",
-          "gigantamax": false,
-          "role": "Special",
-          "profile": {
-            "statSystem": "points",
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 24,
-              "atk": 0,
-              "def": 0,
-              "spa": 24,
-              "spd": 0,
-              "spe": 0
-            },
-            "nature": "Modest",
-            "ability": "Shell Armor",
-            "moves": [
-              "Flamethrower",
-              "Dragon Pulse",
-              "Flash Cannon",
-              "Shell Smash"
-            ]
-          }
         }
-      ]
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Arcanine"
+        ],
+        "preferredLast": [
+          "Marowak-Alola"
+        ]
+      }
     },
     {
       "id": "named-mallow",
@@ -39329,6 +39306,8 @@
       "allFloors": true,
       "select": true,
       "required": [
+        "Cradily",
+        "Relicanth",
         "Lycanroc"
       ],
       "gimmickEnabled": true,
@@ -39336,10 +39315,10 @@
       "powerTier": "elite",
       "team": [
         {
-          "species": "Lycanroc",
-          "item": "Rockium Z",
+          "species": "Cradily",
+          "item": "Leftovers",
           "gigantamax": false,
-          "role": "Physical",
+          "role": "Special bulky",
           "profile": {
             "statSystem": "points",
             "ivs": {
@@ -39351,26 +39330,26 @@
               "spe": 31
             },
             "evs": {
-              "hp": 0,
-              "atk": 32,
-              "def": 0,
+              "hp": 32,
+              "atk": 0,
+              "def": 2,
               "spa": 0,
-              "spd": 2,
-              "spe": 32
+              "spd": 32,
+              "spe": 0
             },
-            "nature": "Jolly",
-            "ability": "Sand Rush",
+            "nature": "Calm",
+            "ability": "Storm Drain",
             "moves": [
-              "Rock Slide",
-              "Accelerock",
-              "Crunch",
-              "Swords Dance"
+              "Giga Drain",
+              "Ancient Power",
+              "Earth Power",
+              "Recover"
             ]
           }
         },
         {
           "species": "Relicanth",
-          "item": "Assault Vest",
+          "item": "Choice Band",
           "gigantamax": false,
           "role": "Physical",
           "profile": {
@@ -39397,79 +39376,13 @@
               "Head Smash",
               "Waterfall",
               "Earthquake",
-              "Body Slam"
+              "Zen Headbutt"
             ]
           }
         },
         {
-          "species": "Carbink",
-          "item": "Leftovers",
-          "gigantamax": false,
-          "role": "Special bulky",
-          "profile": {
-            "statSystem": "points",
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 32,
-              "atk": 0,
-              "def": 32,
-              "spa": 0,
-              "spd": 2,
-              "spe": 0
-            },
-            "nature": "Bold",
-            "ability": "Sturdy",
-            "moves": [
-              "Moonblast",
-              "Power Gem",
-              "Earth Power",
-              "Calm Mind"
-            ]
-          }
-        },
-        {
-          "species": "Probopass",
-          "item": "Leftovers",
-          "gigantamax": false,
-          "role": "Special bulky",
-          "profile": {
-            "statSystem": "points",
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 32,
-              "atk": 0,
-              "def": 2,
-              "spa": 0,
-              "spd": 32,
-              "spe": 0
-            },
-            "nature": "Calm",
-            "ability": "Sturdy",
-            "moves": [
-              "Power Gem",
-              "Flash Cannon",
-              "Earth Power",
-              "Thunder Wave"
-            ]
-          }
-        },
-        {
-          "species": "Golem-Alola",
-          "item": "Assault Vest",
+          "species": "Lycanroc",
+          "item": "Rockium Z",
           "gigantamax": false,
           "role": "Physical",
           "profile": {
@@ -39483,24 +39396,32 @@
               "spe": 31
             },
             "evs": {
-              "hp": 32,
+              "hp": 0,
               "atk": 32,
               "def": 0,
               "spa": 0,
               "spd": 2,
-              "spe": 0
+              "spe": 32
             },
-            "nature": "Adamant",
-            "ability": "Galvanize",
+            "nature": "Jolly",
+            "ability": "Keen Eye",
             "moves": [
-              "Return",
-              "Rock Slide",
-              "Earthquake",
-              "Fire Punch"
+              "Stone Edge",
+              "Play Rough",
+              "Crunch",
+              "Drill Run"
             ]
           }
         }
-      ]
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Cradily"
+        ],
+        "preferredLast": [
+          "Lycanroc"
+        ]
+      }
     },
     {
       "id": "named-acerola",
@@ -39707,12 +39628,47 @@
       "allFloors": true,
       "select": true,
       "required": [
-        "Toucannon"
+        "Skarmory",
+        "Toucannon",
+        "Hawlucha"
       ],
       "gimmickEnabled": true,
       "concept": "알로라 elite: Flying 타입과 역할별 육성",
       "powerTier": "elite",
       "team": [
+        {
+          "species": "Skarmory",
+          "item": "Rocky Helmet",
+          "gigantamax": false,
+          "role": "Physical bulky",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 32,
+              "atk": 0,
+              "def": 32,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "nature": "Impish",
+            "ability": "Sturdy",
+            "moves": [
+              "Brave Bird",
+              "Drill Run",
+              "Roost",
+              "Toxic"
+            ]
+          }
+        },
         {
           "species": "Toucannon",
           "item": "Flyinium Z",
@@ -39739,84 +39695,18 @@
             "nature": "Adamant",
             "ability": "Skill Link",
             "moves": [
-              "Brave Bird",
+              "Beak Blast",
               "Bullet Seed",
               "Rock Blast",
-              "Roost"
+              "Brick Break"
             ]
           }
         },
         {
-          "species": "Skarmory",
-          "item": "Leftovers",
+          "species": "Hawlucha",
+          "item": "White Herb",
           "gigantamax": false,
-          "role": "Physical bulky",
-          "profile": {
-            "statSystem": "points",
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 32,
-              "atk": 0,
-              "def": 32,
-              "spa": 0,
-              "spd": 2,
-              "spe": 0
-            },
-            "nature": "Impish",
-            "ability": "Sturdy",
-            "moves": [
-              "Brave Bird",
-              "Body Press",
-              "Roost",
-              "Steel Wing"
-            ]
-          }
-        },
-        {
-          "species": "Mandibuzz",
-          "item": "Leftovers",
-          "gigantamax": false,
-          "role": "Physical bulky",
-          "profile": {
-            "statSystem": "points",
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 32,
-              "atk": 0,
-              "def": 32,
-              "spa": 0,
-              "spd": 2,
-              "spe": 0
-            },
-            "nature": "Impish",
-            "ability": "Overcoat",
-            "moves": [
-              "Foul Play",
-              "Brave Bird",
-              "Roost",
-              "Toxic"
-            ]
-          }
-        },
-        {
-          "species": "Oricorio",
-          "item": "Life Orb",
-          "gigantamax": false,
-          "role": "Special",
+          "role": "Physical",
           "profile": {
             "statSystem": "points",
             "ivs": {
@@ -39829,23 +39719,31 @@
             },
             "evs": {
               "hp": 0,
-              "atk": 0,
+              "atk": 32,
               "def": 0,
-              "spa": 32,
+              "spa": 0,
               "spd": 2,
               "spe": 32
             },
-            "nature": "Modest",
-            "ability": "Dancer",
+            "nature": "Jolly",
+            "ability": "Unburden",
             "moves": [
-              "Revelation Dance",
-              "Air Slash",
-              "Roost",
-              "Quiver Dance"
+              "Close Combat",
+              "Acrobatics",
+              "Stone Edge",
+              "Swords Dance"
             ]
           }
         }
-      ]
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Skarmory"
+        ],
+        "preferredLast": [
+          "Hawlucha"
+        ]
+      }
     },
     {
       "id": "named-molayne",

@@ -1,0 +1,30 @@
+{
+  "ids": [
+    "named-olivia",
+    "named-kahili",
+    "named-kiawe"
+  ],
+  "count": 224,
+  "runtime": "ca474830bad4b431922b5a3106df355deb7bd76e6e8498857fc36bb3c77fc6ea",
+  "source": "7264a869dfd3f0aa9d5cce70d2558ea223cbf2c78cee846864f27830a70277b3",
+  "otherTrainers": "639a5ed5a55ba7f94639da12c18aa18c40efb08282aeea11e6eb503356287224",
+  "sharedBuilds": "83dde6d7929da3c544ce9dabe6876bfff0e29569d45c3a617e9e0ffdeb6b36c9",
+  "common": {
+    "src/battle/npc-policy.ts": "22206328062533e0b44312f7cdfbc5df5ba39a88788abc45f5921c728dd6cb2e",
+    "src/battle/tower-policy.ts": "4fd3c29dea61cf0bf2c3a046d1929da306bfa8b798d093a0ec79d029960e8998",
+    "src/battle/z-decision.ts": "851fa606cdc87cc0f9d81ded577ec24d80f1bf0492f057c0511202b7419f24e2",
+    "src/battle/gimmicks.ts": "fd934ababa605f06d4f1cfb4a1a9c6b14d76960c909e14edf3cae4b306c2f0ee",
+    "src/data/npc-ai.ts": "375414f8f70094a3b473c27515754905edcb8bc6850075ce3f91a34dd0b29a49",
+    "src/data/npc-selection-rules.ts": "cbd1fe1da13113468d0065384fead4c3423c246ca576687fe3bf7ef226de8dcd",
+    "src/server/opponent-team.ts": "d45f947f53ba580305ead8556e3195928e2a4029a2e35fb5b5b3e5a123e5cc40",
+    "src/data/tower-progression.ts": "3d7851211f1c2905ab49ced03d1a3924b851ae2cde6ee6af0c1a0d1da70d18e5",
+    "src/server/npc-templates.ts": "e74503645ff2391cf6997e70ac7965a900ae55266f00761e20dbe8cf2b00e07f",
+    "src/server/hidden-boss-events.ts": "e5789f432ce6325bd892ac4383e8ae37457b308a268b21836db07a30e1b53e21",
+    "src/battle/run.ts": "c967e036f1a437e2383ec7e016b4a46fa905866db2aa16a8e824ad7d391b3a21",
+    "src/data/teams.ts": "6d547192b2854bbf1e8c1f3055dc3dedb684b83c74e12c4bb2271a4ac6ea14d8",
+    "src/data/held-items.ts": "279028fe99418b3a2a9c0ccdaf314a92c4a8557a464d074af69416d96d9f9cfc",
+    "src/data/gimmicks.ts": "eee68978e1502d4adcb3d0f19187b55100bd012fbf56e6db0d90ff0d61f32bfd",
+    "src/data/z-crystals.json": "f1e371a50242bcadb6e5664426e6f93f1bdebc7f98c7933e1426fad778403671",
+    "src/data/villain-organizations.ts": "8deae80a50ae556a57e3611dc1620bed5c67eb43e479a523d61a35e5ab59f164"
+  }
+}

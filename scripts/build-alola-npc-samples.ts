@@ -89,6 +89,31 @@ b('Parasect','Effect Spore','','Seed Bomb|X-Scissor|Slash|Brick Break');
 b('Dugtrio','Sand Veil','','Dig|Rock Tomb|Slash|Sucker Punch');
 b('Manectric','Static','','Discharge|Flamethrower|Snarl|Swift');
 
+// Scope these builds to the three reviewed trainers: shared Skarmory,
+// Lycanroc and Arcanine partners elsewhere must keep their previous profiles.
+const overrides:Record<string,typeof builds>={
+ 'named-olivia':{
+  Cradily:{ability:'Storm Drain',item:'Leftovers',nature:'Calm',bulk:true,moves:['Giga Drain','Ancient Power','Earth Power','Recover']},
+  Relicanth:{ability:'Rock Head',item:'Choice Band',nature:'Adamant',moves:['Head Smash','Waterfall','Earthquake','Zen Headbutt']},
+  Lycanroc:{ability:'Keen Eye',item:'Rockium Z',nature:'Jolly',moves:['Stone Edge','Play Rough','Crunch','Drill Run']},
+ },
+ 'named-kahili':{
+  Skarmory:{ability:'Sturdy',item:'Rocky Helmet',nature:'Impish',bulk:true,moves:['Brave Bird','Drill Run','Roost','Toxic']},
+  Toucannon:{ability:'Skill Link',item:'Flyinium Z',nature:'Adamant',moves:['Beak Blast','Bullet Seed','Rock Blast','Brick Break']},
+  Hawlucha:{ability:'Unburden',item:'White Herb',nature:'Jolly',moves:['Close Combat','Acrobatics','Stone Edge','Swords Dance']},
+ },
+ 'named-kiawe':{
+  Arcanine:{ability:'Intimidate',item:'Sitrus Berry',nature:'Adamant',moves:['Flare Blitz','Play Rough','Wild Charge','Close Combat']},
+  Talonflame:{ability:'Gale Wings',item:'Sharp Beak',nature:'Jolly',moves:['Brave Bird','Flare Blitz','Roost','Swords Dance']},
+  'Marowak-Alola':structuredClone(builds['Marowak-Alola']),
+ },
+};
+const fixedLineups:Record<string,string[]>={
+ 'named-olivia':['Cradily','Relicanth','Lycanroc'],
+ 'named-kahili':['Skarmory','Toucannon','Hawlucha'],
+ 'named-kiawe':['Arcanine','Talonflame','Marowak-Alola'],
+};
+
 type Category='captain'|'kahuna'|'elite'|'champion'|'grunt'|'executive'|'boss';
 const trainers:{id:string;name:string;category:Category;specialty:string|null;ace:string;entries:string[];tactic:string;aiCeiling:string;points:number;signature:{rule:string;species:string;item:string}|null;minFloor:number;concept:string}[]=[];
 function t(id:string,name:string,category:Category,specialty:string|null,pool:string,tactic='balanced',z?:[string,string]){
@@ -113,10 +138,11 @@ t('guzma','구즈마','executive','Bug','Golisopod,Masquerain,Scizor,Ariados,Pin
 t('aether-grunt','에테르재단 직원','grunt',null,'Ledian,Mudsdale,Pelipper,Parasect,Dugtrio,Manectric');
 t('faba','자오보','executive','Psychic','Hypno,Slowbro,Bruxish,Raichu-Alola,Alakazam','status');
 t('lusamine','루자미네','boss',null,'Necrozma,Clefable,Lilligant','setup');
+for(const trainer of trainers)if(fixedLineups[trainer.id])trainer.entries=[...fixedLineups[trainer.id]];
 const validator=new Showdown.TeamValidator(FORMAT),keys=['hp','atk','def','spa','spd','spe'] as const;
 const rows=trainers.flatMap(trainer=>{
  const team=trainer.entries.map(species=>{
-  const set=structuredClone(builds[trainer.id==='aether-grunt'&&species==='Mudsdale'?'Mudsdale-employee':species]);assert.ok(set, species);
+  const set=structuredClone(overrides[trainer.id]?.[species]??builds[trainer.id==='aether-grunt'&&species==='Mudsdale'?'Mudsdale-employee':species]);assert.ok(set, species);
   const grunt=trainer.category==='grunt',actual=set.forme??species,stats=Showdown.Dex.species.get(actual).baseStats;
   // Skull grunts deliberately use ordinary attacks and no competitive tools.
   if(grunt){set.item='';set.nature='Serious';if(species==='Salazzle')set.moves=['Flamethrower','Sludge Bomb','Dragon Pulse','Dragon Rage'];}
@@ -136,6 +162,9 @@ const rows=trainers.flatMap(trainer=>{
  });
  const boss=trainer.category==='boss';if(boss)team.sort((a,b)=>['Clefable','Lilligant','Necrozma'].indexOf(a.species)-['Clefable','Lilligant','Necrozma'].indexOf(b.species));
  const common={id:trainer.id,name:trainer.name,generation:7,title:trainer.category,role:['captain','kahuna'].includes(trainer.category)?'gym':['grunt','executive','boss'].includes(trainer.category)?'villain':trainer.category,ace:trainer.category==='grunt'?'':trainer.ace,signature:trainer.signature,stage:'leaders-early',allFloors:true,select:true,required:boss?team.map(p=>p.species):trainer.category==='grunt'?[]:[trainer.ace],...(boss?{legendaryMinFloor:75,selectionRules:{preferredLead:['Clefable'],preferredLast:['Necrozma']}}:{}),gimmickEnabled:!!trainer.signature,concept:trainer.concept,powerTier:trainer.category,team};
+ if(fixedLineups[trainer.id]){
+  const lineup=fixedLineups[trainer.id];common.required=[...lineup];common.selectionRules={preferredLead:[lineup[0]],preferredLast:[lineup[2]]};
+ }
  // Only the late Mallow build gets Contrary + Superpower; early retains Leaf Guard.
  if(trainer.id==='named-mallow')return ['leaders-early','leaders-late'].map(stage=>{const row=structuredClone(common);row.stage=stage;row.allFloors=false;if(stage==='leaders-late'){const p=row.team.find(p=>p.species==='Lurantis')!;p.profile.ability='Contrary';p.profile.moves=['Leaf Blade','Superpower','Knock Off','Leech Life'];assert.equal(validator.validateSet({...structuredClone(pokemonSets.Lurantis),ability:p.profile.ability,moves:p.profile.moves},{}),null);}return row;});
  return [common];
@@ -144,5 +173,5 @@ const path='scripts/data/npc/normal-npc-samples.json',source=JSON.parse(readFile
 const removed=new Set([...trainers.map(t=>t.id),'named-acerola-captain','skull-executive-plumeria','skull-boss-guzma','aether-executive-faba','aether-boss-lusamine']);
 source.samples=source.samples.filter((r:{id:string})=>!removed.has(r.id));source.samples.push(...rows);
 writeFileSync(path,JSON.stringify(source,null,2)+'\n');
-writeFileSync('scripts/data/npc/alola-design.json',JSON.stringify({trainers,builds},null,2)+'\n');
+writeFileSync('scripts/data/npc/alola-design.json',JSON.stringify({trainers,builds,overrides},null,2)+'\n');
 console.log(`Reviewed ${trainers.length} Alola identities / ${rows.length} rows`);

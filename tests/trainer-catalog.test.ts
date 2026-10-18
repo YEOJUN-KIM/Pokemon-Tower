@@ -60,7 +60,7 @@ test('named trainers draw varied legal triples from original candidate entries, 
         assert.equal(validator.validateSet({...structuredClone(pokemonSets[p.name]),species:p.profile?.forme??p.name,moves:p.moves,ability:p.ability ?? pokemonSets[p.name].ability,item:p.item ?? ''},{}),null,`${sample.id}: ${p.name}`);}
       combinations.add(team.map(p=>p.name).sort().join(','));assert.ok(team.some(p=>p.name===sample.ace),sample.id);const equipped=team.map(p=>p.item).filter(Boolean);if(!alola)assert.equal(new Set(equipped).size,equipped.length);
     }
-    assert.equal(seen.size,sample.entries!.length,sample.id);assert.ok(combinations.size>=(alola?(alola.category==='boss'?1:3):sample.entries!.length===5 ? 6 : 8),sample.id);
+    assert.equal(seen.size,sample.entries!.length,sample.id);assert.ok(combinations.size>=(alola?(alola.entries.length===3?1:3):sample.entries!.length===5 ? 6 : 8),sample.id);
   }
 });
 test('boss identities vary by run, preview agrees with battle, and saved identity and party survive reload',()=>{

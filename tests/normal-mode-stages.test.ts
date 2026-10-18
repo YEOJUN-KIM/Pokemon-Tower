@@ -40,7 +40,7 @@ test('saved early Paldea fights have no NPC Tera ticket, while the first champio
   }
  }finally{store.close();}
 });
-test('general-mode review keeps six single pilot pools and two staged templates for other NPCs',()=>{
+test('general-mode review keeps fifteen single named pools and two staged templates for other NPCs',()=>{
  const counts=new Map<string,number>();
  for(const row of normalSamples.samples){
   counts.set(row.id,(counts.get(row.id) ?? 0)+1);
@@ -51,6 +51,6 @@ test('general-mode review keeps six single pilot pools and two staged templates 
   for(const p of row.team){assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),row.statPoints);assert.ok(Object.values(p.profile.evs).every(v=>v<=32));assert.ok(Object.values(p.profile.ivs).every(v=>v===row.iv));}
   if(!row.gimmickEnabled)assert.ok(row.team.every(p=>!special(p.item)&&!p.gigantamax&&(!('battleForm' in p)||!p.battleForm)));
  }
- assert.equal(counts.size,163);assert.equal([...counts.values()].filter(n=>n===1).length,6);assert.ok([...counts.values()].every(n=>n===1||n===2));
+ assert.equal(counts.size,163);assert.equal([...counts.values()].filter(n=>n===1).length,15);assert.ok([...counts.values()].every(n=>n===1||n===2));
  for(const id of ['named-maxie','magma-boss-maxie']){const rows=normalSamples.samples.filter(s=>s.id===id);assert.ok(rows.find(s=>s.sampleTier===1)!.team.every(p=>p.species!=='Groudon'));assert.ok(rows.find(s=>s.sampleTier===2)!.team.some(p=>p.species==='Groudon' && p.item==='Red Orb'));}
 });

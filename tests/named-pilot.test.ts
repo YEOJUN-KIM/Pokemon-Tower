@@ -38,7 +38,7 @@ test('six pilot candidate pools are canonical, legal and playable at low/high fl
   }
   assert.ok(variations.size>1,sample.id+' variation');
  }
- assert.equal(rows.filter(r=>'allFloors' in r&&r.allFloors).length,6);
+ assert.equal(rows.filter(r=>samples.some(s=>s.id===r.id)&&'allFloors' in r&&r.allFloors).length,6);
 });
 
 test('pilot AI ceilings and gym tiers keep v11 rules',()=>{

@@ -1,6 +1,7 @@
 import {johtoReferences} from './johto-builds';
 import {regionalTrainerSamples} from './regional-trainers';
 import type {BossView} from '../shared/contracts';
+import {namedTrainerIntro} from './named-trainer-intros';
 export type TrainerTactic='balanced'|'physical'|'special'|'speed'|'status'|'setup'|'bulk';
 export type TrainerSample={aiCeiling?:import('./npc-ai').NpcAiTier;id:string;name:string;title:string;kind:'normal'|'elite'|'named';npcRank?:import('./npc-ranks').NpcRank;generation:number|null;specialty:string|null;tactic:TrainerTactic;portrait:string;role?:BossView['role'];minFloor:number;entries?:readonly string[];ace?:string;concept:string};
 
@@ -91,5 +92,5 @@ for(const sample of namedTrainerSamples){
 namedTrainerSamples.push(...regionalTrainerSamples);
 export const trainerCatalog=[...normalTrainerSamples,...eliteTrainerSamples,...mixedTrainerSamples,...namedTrainerSamples];
 export function trainerView(sample:TrainerSample):BossView {
-  return {...(sample.aiCeiling?{aiCeiling:sample.aiCeiling}:{}),id:sample.id,name:sample.name,title:sample.title,introduction:'',victory:'',defeat:'',...(sample.role ? {role:sample.role} : {}),...(sample.npcRank?{npcRank:sample.npcRank}:{}),portrait:sample.portrait,kind:sample.kind,generation:sample.generation,specialty:sample.specialty};
+  return {...(sample.aiCeiling?{aiCeiling:sample.aiCeiling}:{}),id:sample.id,name:sample.name,title:sample.title,introduction:sample.kind==='named'?namedTrainerIntro(sample.id):'',victory:'',defeat:'',...(sample.role ? {role:sample.role} : {}),...(sample.npcRank?{npcRank:sample.npcRank}:{}),portrait:sample.portrait,kind:sample.kind,generation:sample.generation,specialty:sample.specialty};
 }

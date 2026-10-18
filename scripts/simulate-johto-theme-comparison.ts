@@ -24,11 +24,13 @@ import {megaStones,canEquipGimmick} from '../src/data/gimmicks';
 import {matchingZCrystals,zCrystals} from '../src/data/z-crystals';
 import type {TrainerEquipment} from '../src/data/trainer-equipment';
 import {runBattle,engineVersion,FORMAT,type Seed} from '../src/battle/run';
+import {namedBattleTelemetry} from './lib/named-battle-telemetry';
 
 const phase=process.argv.includes('--before')?'before':'after';
 assert.equal(phase==='before',!!process.env.NPC_BALANCE_BASELINE,'Before runs require the read-only baseline loader; after runs must use live data.');
 const root=process.env.THEME_BALANCE_OUTPUT??'artifacts/experiments/balance/johto-expansion-20261018';
 const seeds=Number(process.env.THEME_BALANCE_SEEDS??4),limit=Number(process.env.THEME_BALANCE_LIMIT??Infinity);
+const telemetry=process.env.THEME_BALANCE_TELEMETRY==='1';
 assert.ok(Number.isSafeInteger(seeds)&&seeds>0);mkdirSync(root,{recursive:true});
 const digest=(s:string)=>createHash('sha256').update(s).digest('hex');
 const rules=Object.keys(battleRules) as BattleRule[];
@@ -81,7 +83,7 @@ function enemy(theme:TowerTheme,floor:number,n:number,rule:BattleRule,hidden=fal
  const result:Enemy={npcId:sample.id,name:sample.name,kind:hidden?'hidden':named?'named':'ordinary',packed:packTeam(team.map(p=>p.name),profiles,Object.fromEntries(team.map(p=>[p.name,p.item??''])),team.filter(p=>p.gigantamax).map(p=>p.name)),ai:npcAi(floor,sample,{boss:floor%50===0}),rule:packedNpcRule(team.map(p=>({item:p.item??''})),tera),tera,...(signature?.rule==='tera'?{teraSpecies:signature.species}:{})};
  enemyCache.set(key,result);return result;
 }
-type Outcome={key:string;winner:string|null;turns:number;hash:string;error?:string};
+type Outcome={key:string;winner:string|null;turns:number;hash:string;telemetry?:ReturnType<typeof namedBattleTelemetry>;error?:string};
 const cachePath=root+'/outcomes.jsonl',cache=new Map<string,Outcome>();
 if(existsSync(cachePath))for(const line of readFileSync(cachePath,'utf8').split('\n').filter(Boolean)){const row=JSON.parse(line) as Outcome;cache.set(row.key,row);}
 type Row={phase:string;theme:TowerTheme;floor:number;band:string;kind:string;npcId:string;name:string;caseId:string;rule:BattleRule;n:number;key:string;winner:string|null;turns:number;error?:string};
@@ -91,10 +93,14 @@ async function battle(theme:TowerTheme,floor:number,n:number,index:number,rule:B
  const foe=enemy(theme,floor,n,rule,hidden),p1=playerTeam(index,floor,rule),seed:Seed=[n,floor,37,101],equipment=gear(floor,rule);
  const key=digest(JSON.stringify({p1,p2:foe.packed,seed,rule,ai:foe.ai,enemyRule:foe.rule,tera:foe.tera,teraSpecies:foe.teraSpecies,equipment}));
  let outcome=cache.get(key);
- if(!outcome){
+ if(!outcome||(telemetry&&foe.kind!=='ordinary'&&!outcome.telemetry&&!outcome.error)){
   try{
    const log=await runBattle({teams:{p1,p2:foe.packed},seed,rule,opponentRule:foe.rule,opponentTeraSpecies:foe.teraSpecies,teraTickets:{p1:0,p2:foe.tera},trainerEquipment:equipment,player:new ZMovePolicy('p1'),opponent:createNpcPolicy(foe.ai)});
-   outcome={key,winner:log.winner,turns:log.turns,hash:digest(log.publicProtocol.filter(l=>!l.startsWith('|t:|')).join('\n'))};
+   outcome={key,winner:log.winner,turns:log.turns,hash:digest(log.publicProtocol.filter(l=>!l.startsWith('|t:|')).join('\n')),...(telemetry&&foe.kind!=='ordinary'?{telemetry:namedBattleTelemetry(log)}:{})};
+   if(telemetry&&['named-bugsy','named-chuck','named-jasmine'].includes(foe.npcId)&&n===1&&rule==='basic'){
+    mkdirSync(root+'/traces',{recursive:true});
+    writeFileSync(`${root}/traces/${phase}-${foe.npcId}-${floor}-${cases[index].id}.json`,JSON.stringify({foe,seed,teams:log.teams,winner:log.winner,publicProtocol:log.publicProtocol,decisions:log.decisions.filter(d=>d.side==='p2').map(d=>({turn:d.observation.turn,action:d.action,own:d.observation.ownTeam.find(p=>p.active),opponent:d.observation.opponent}))},null,2));
+   }
   }catch(error){outcome={key,winner:null,turns:0,hash:'',error:String(error)};}
   cache.set(key,outcome);appendFileSync(cachePath,JSON.stringify(outcome)+'\n');fresh++;
  }else reused++;
@@ -102,7 +108,7 @@ async function battle(theme:TowerTheme,floor:number,n:number,index:number,rule:B
  rows.push(row);appendFileSync(rowsPath,JSON.stringify(row)+'\n');
  if(index===0)manifest.push({theme,floor,n,rule,hidden,foe});
 }
-const themes=(phase==='before'?['johto']:Object.keys(towerThemes)) as TowerTheme[];
+const themes=(phase==='before'&&process.env.THEME_BALANCE_ALL_THEMES!=='1'?['johto']:Object.keys(towerThemes)) as TowerTheme[];
 outer:for(const theme of themes)for(let floor=1;floor<=100;floor++){
  for(let n=1;n<=seeds;n++)for(let i=0;i<cases.length;i++)for(const rule of rules){if(rows.length>=limit)break outer;await battle(theme,floor,n,i,rule);}
  if(floor%10===0)console.log(`${phase} ${theme} F${floor}: rows=${rows.length} actual=${fresh} cache=${reused} errors=${rows.filter(r=>r.error).length} seconds=${Math.round((Date.now()-started)/1000)}`);

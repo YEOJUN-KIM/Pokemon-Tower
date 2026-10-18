@@ -1363,7 +1363,12 @@
       "referenceFloor": 50,
       "iv": 12,
       "statPoints": 8,
-      "floorRange": "50층 첫 관문·중간 보스"
+      "floorRange": "50층 첫 관문·중간 보스",
+      "selectionRules": {
+        "preferredLast": [
+          "Dragonite"
+        ]
+      }
     },
     {
       "id": "named-lance",
@@ -1507,7 +1512,12 @@
       "referenceFloor": 100,
       "iv": 31,
       "statPoints": 66,
-      "floorRange": "100층 최종전"
+      "floorRange": "100층 최종전",
+      "selectionRules": {
+        "preferredLast": [
+          "Dragonite"
+        ]
+      }
     },
     {
       "id": "named-flannery",
@@ -2066,7 +2076,12 @@
       "referenceFloor": 100,
       "iv": 31,
       "statPoints": 66,
-      "floorRange": "100층 최종전"
+      "floorRange": "100층 최종전",
+      "selectionRules": {
+        "preferredLead": [
+          "Groudon"
+        ]
+      }
     },
     {
       "id": "named-steven",
@@ -3039,7 +3054,12 @@
       "referenceFloor": 50,
       "iv": 12,
       "statPoints": 8,
-      "floorRange": "50층 첫 관문·중간 보스"
+      "floorRange": "50층 첫 관문·중간 보스",
+      "selectionRules": {
+        "preferredLast": [
+          "Garchomp"
+        ]
+      }
     },
     {
       "id": "named-cynthia",
@@ -3183,7 +3203,12 @@
       "referenceFloor": 100,
       "iv": 31,
       "statPoints": 66,
-      "floorRange": "100층 최종전"
+      "floorRange": "100층 최종전",
+      "selectionRules": {
+        "preferredLast": [
+          "Garchomp"
+        ]
+      }
     },
     {
       "id": "named-elesa",
@@ -7185,7 +7210,15 @@
       "referenceFloor": 50,
       "iv": 12,
       "statPoints": 8,
-      "floorRange": "50층 첫 관문·중간 보스"
+      "floorRange": "50층 첫 관문·중간 보스",
+      "selectionRules": {
+        "preferredLead": [
+          "Glimmora"
+        ],
+        "preferredLast": [
+          "Kingambit"
+        ]
+      }
     },
     {
       "id": "named-geeta",
@@ -7319,7 +7352,15 @@
       "referenceFloor": 100,
       "iv": 31,
       "statPoints": 66,
-      "floorRange": "100층 최종전"
+      "floorRange": "100층 최종전",
+      "selectionRules": {
+        "preferredLead": [
+          "Glimmora"
+        ],
+        "preferredLast": [
+          "Kingambit"
+        ]
+      }
     },
     {
       "id": "named-bugsy",
@@ -8384,7 +8425,17 @@
             "statSystem": "points"
           }
         }
-      ]
+      ],
+      "selectionRules": {
+        "required": [
+          "Steelix"
+        ],
+        "atLeastOneOf": [
+          "Metagross",
+          "Empoleon",
+          "Magnezone"
+        ]
+      }
     },
     {
       "id": "named-pryce",
@@ -8603,7 +8654,12 @@
             "statSystem": "points"
           }
         }
-      ]
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Abomasnow"
+        ]
+      }
     },
     {
       "name": "이향",
@@ -16143,7 +16199,12 @@
       "referenceFloor": 45,
       "iv": 10,
       "statPoints": 7,
-      "floorRange": "5~45층"
+      "floorRange": "5~45층",
+      "selectionRules": {
+        "preferredLead": [
+          "Abomasnow"
+        ]
+      }
     },
     {
       "id": "named-glacia",
@@ -16277,7 +16338,12 @@
       "referenceFloor": 95,
       "iv": 28,
       "statPoints": 58,
-      "floorRange": "55~95층"
+      "floorRange": "55~95층",
+      "selectionRules": {
+        "preferredLead": [
+          "Abomasnow"
+        ]
+      }
     },
     {
       "id": "named-drake",
@@ -16691,7 +16757,12 @@
       "referenceFloor": 50,
       "iv": 12,
       "statPoints": 8,
-      "floorRange": "50층 첫 관문·중간 보스"
+      "floorRange": "50층 첫 관문·중간 보스",
+      "selectionRules": {
+        "preferredLast": [
+          "Milotic"
+        ]
+      }
     },
     {
       "id": "named-wallace",
@@ -16826,7 +16897,12 @@
       "referenceFloor": 100,
       "iv": 31,
       "statPoints": 66,
-      "floorRange": "100층 최종전"
+      "floorRange": "100층 최종전",
+      "selectionRules": {
+        "preferredLast": [
+          "Milotic"
+        ]
+      }
     },
     {
       "id": "named-archie",
@@ -17114,7 +17190,12 @@
       "referenceFloor": 100,
       "iv": 31,
       "statPoints": 66,
-      "floorRange": "100층 최종전"
+      "floorRange": "100층 최종전",
+      "selectionRules": {
+        "preferredLead": [
+          "Kyogre"
+        ]
+      }
     },
     {
       "id": "named-roark",
@@ -18872,7 +18953,12 @@
       "referenceFloor": 45,
       "iv": 10,
       "statPoints": 7,
-      "floorRange": "5~45층"
+      "floorRange": "5~45층",
+      "selectionRules": {
+        "preferredLead": [
+          "Abomasnow"
+        ]
+      }
     },
     {
       "id": "named-candice",
@@ -19016,7 +19102,12 @@
       "referenceFloor": 95,
       "iv": 28,
       "statPoints": 58,
-      "floorRange": "55~95층"
+      "floorRange": "55~95층",
+      "selectionRules": {
+        "preferredLead": [
+          "Abomasnow"
+        ]
+      }
     },
     {
       "id": "named-aaron",
@@ -19429,7 +19520,12 @@
       "referenceFloor": 45,
       "iv": 10,
       "statPoints": 7,
-      "floorRange": "5~45층"
+      "floorRange": "5~45층",
+      "selectionRules": {
+        "preferredLead": [
+          "Hippowdon"
+        ]
+      }
     },
     {
       "id": "named-bertha",
@@ -19563,7 +19659,12 @@
       "referenceFloor": 95,
       "iv": 28,
       "statPoints": 58,
-      "floorRange": "55~95층"
+      "floorRange": "55~95층",
+      "selectionRules": {
+        "preferredLead": [
+          "Hippowdon"
+        ]
+      }
     },
     {
       "id": "named-flint",
@@ -20236,7 +20337,12 @@
       "referenceFloor": 50,
       "iv": 12,
       "statPoints": 8,
-      "floorRange": "50층 첫 관문·중간 보스"
+      "floorRange": "50층 첫 관문·중간 보스",
+      "selectionRules": {
+        "preferredLead": [
+          "Empoleon"
+        ]
+      }
     },
     {
       "id": "named-barry",
@@ -20371,7 +20477,12 @@
       "referenceFloor": 100,
       "iv": 31,
       "statPoints": 66,
-      "floorRange": "100층 최종전"
+      "floorRange": "100층 최종전",
+      "selectionRules": {
+        "preferredLead": [
+          "Empoleon"
+        ]
+      }
     },
     {
       "id": "named-cilan",
@@ -26760,7 +26871,12 @@
       "referenceFloor": 45,
       "iv": 10,
       "statPoints": 7,
-      "floorRange": "5~45층"
+      "floorRange": "5~45층",
+      "selectionRules": {
+        "preferredLead": [
+          "Abomasnow"
+        ]
+      }
     },
     {
       "id": "named-wulfric",
@@ -26904,7 +27020,12 @@
       "referenceFloor": 95,
       "iv": 28,
       "statPoints": 58,
-      "floorRange": "55~95층"
+      "floorRange": "55~95층",
+      "selectionRules": {
+        "preferredLead": [
+          "Abomasnow"
+        ]
+      }
     },
     {
       "id": "named-malva",
@@ -32804,7 +32925,12 @@
       "referenceFloor": 45,
       "iv": 10,
       "statPoints": 7,
-      "floorRange": "5~45층"
+      "floorRange": "5~45층",
+      "selectionRules": {
+        "preferredLead": [
+          "Tyranitar"
+        ]
+      }
     },
     {
       "id": "named-gordie",
@@ -32948,7 +33074,12 @@
       "referenceFloor": 95,
       "iv": 28,
       "statPoints": 58,
-      "floorRange": "55~95층"
+      "floorRange": "55~95층",
+      "selectionRules": {
+        "preferredLead": [
+          "Tyranitar"
+        ]
+      }
     },
     {
       "id": "named-melony",
@@ -39239,7 +39370,12 @@
       "referenceFloor": 100,
       "iv": 31,
       "statPoints": 66,
-      "floorRange": "100층 최종전"
+      "floorRange": "100층 최종전",
+      "selectionRules": {
+        "preferredLead": [
+          "Groudon"
+        ]
+      }
     },
     {
       "id": "galactic-executive-mars",
@@ -41994,7 +42130,12 @@
       "referenceFloor": 100,
       "iv": 31,
       "statPoints": 66,
-      "floorRange": "100층 최종전"
+      "floorRange": "100층 최종전",
+      "selectionRules": {
+        "preferredLead": [
+          "Kyogre"
+        ]
+      }
     },
     {
       "id": "aether-executive-faba",

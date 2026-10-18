@@ -37,10 +37,12 @@ test('item journal, inventory and current boosts survive reconstruction without 
   store.db.prepare('INSERT INTO consumable_shops VALUES (?,?,?)').run(id,11,JSON.stringify(['attack','speed','guard']));
   store.purchase('p',id,11,'attack');store.purchase('p',id,11,'attack');assert.equal(store.view('p').run!.battleItems!.attack,2);assert.deepEqual(store.view('p').run!.upgrades,[]);
   const battle=store.enter('p',id,11,starters),before=await service.state('p');
+  // The random opponent can start with Intimidate; the item raises the current rank.
+  const expectedAttack=(before.battle!.field!.boosts!.p1.atk??0)+1;
   const used=await service.action('p',battle,before.battle!.requestId,'item attack');
-  assert.equal(used.battle!.turn,before.battle!.turn);assert.equal(used.battle!.field!.boosts!.p1.atk,1);assert.equal(used.tower.run!.battleItems!.attack,1);
+  assert.equal(used.battle!.turn,before.battle!.turn);assert.equal(used.battle!.field!.boosts!.p1.atk,expectedAttack);assert.equal(used.tower.run!.battleItems!.attack,1);
   await assert.rejects(()=>service.action('p',battle,before.battle!.requestId,'item attack'),/행동/);
-  await service.dispose();service=new TowerService(store);const restored=await service.state('p');assert.equal(restored.battle!.field!.boosts!.p1.atk,1);assert.equal(restored.tower.run!.battleItems!.attack,1);
+  await service.dispose();service=new TowerService(store);const restored=await service.state('p');assert.equal(restored.battle!.field!.boosts!.p1.atk,expectedAttack);assert.equal(restored.tower.run!.battleItems!.attack,1);
   const switched=await service.action('p',battle,restored.battle!.requestId,'switch 2');assert.equal(switched.battle!.field!.boosts!.p1.atk??0,0);
  }finally{await service.dispose();store.close();}
 });

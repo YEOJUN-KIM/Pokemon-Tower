@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {validateSelectionRules} from '../../src/data/npc-selection-rules.ts';
 
 /** The reviewed source is authoritative; the runtime file is only a projection. */
 export function projectNpcRuntime(source){
@@ -11,12 +12,13 @@ export function projectNpcRuntime(source){
   assert.ok(!s.ace||s.team.some(p=>p.species===s.ace),`Missing ace: ${key}`);
   assert.ok(!s.signature||s.team.some(p=>p.species===s.signature.species),`Missing gimmick carrier: ${key}`);
   assert.ok((s.required??[]).every(name=>s.team.some(p=>p.species===name)),`Missing required member: ${key}`);
+  validateSelectionRules(s.team.map(p=>p.species),s.selectionRules,[...s.required??[],...s.ace?[s.ace]:[],...s.signature?[s.signature.species]:[]]);
   for(const p of s.team){
    assert.equal(p.profile.moves.length,4,`Invalid move count: ${key}/${p.species}`);
    for(const n of Object.values(p.profile.ivs))assert.ok(Number.isInteger(n)&&n>=0&&n<=31,`Invalid IV: ${key}`);
    const points=Object.values(p.profile.evs);
    assert.ok(points.every(n=>Number.isInteger(n)&&n>=0&&n<=32)&&points.reduce((a,b)=>a+b,0)<=66,`Invalid training points: ${key}`);
   }
-  return {id:s.id,stage:s.stage,...(s.allFloors?{allFloors:true,select:s.select,required:s.required}:{}),role:s.role,ace:s.ace,signature:s.signature,gimmickEnabled:s.gimmickEnabled,legendaryMinFloor:s.legendaryMinFloor,team:s.team.map(p=>({species:p.species,item:p.item,gigantamax:p.gigantamax,profile:p.profile}))};
+  return {id:s.id,stage:s.stage,...(s.allFloors?{allFloors:true,select:s.select,required:s.required}:{}),...(s.selectionRules?{selectionRules:s.selectionRules}:{}),role:s.role,ace:s.ace,signature:s.signature,gimmickEnabled:s.gimmickEnabled,legendaryMinFloor:s.legendaryMinFloor,team:s.team.map(p=>({species:p.species,item:p.item,gigantamax:p.gigantamax,profile:p.profile}))};
  });
 }

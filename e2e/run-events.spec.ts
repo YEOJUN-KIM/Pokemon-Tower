@@ -5,6 +5,9 @@ import {Accounts} from '../src/server/accounts';
 import {starters} from '../src/data/teams';
 import {mkdirSync} from 'node:fs';
 
+// Each scenario provisions an account; isolate the shared test DB's signup quota.
+test.beforeEach(()=>{const store=new TowerStore('.data/e2e.sqlite');try{store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();}finally{store.close();}});
+
 for(const width of [1280,390])for(const choice of ['open','skip','resume-ticket'] as const)test(`mystery chest ${choice} at ${width}, persists without spending a floor`,async({page,context})=>{
  const suffix=randomBytes(8).toString('hex'),owner='chest-'+suffix,store=new TowerStore('.data/e2e.sqlite',()=>0);
  try{

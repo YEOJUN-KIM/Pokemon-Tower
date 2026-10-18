@@ -15,6 +15,7 @@ import {towerDifficulty,eliteChance,type TowerProgression} from '../data/tower-p
 import {megaStones,DYNAMAX_ITEM,canEquipGimmick} from '../data/gimmicks';
 import {allowedOpponentSpecies,evolvedOpponentSpecies} from '../data/opponent-species';
 import {normalNpcTemplate,templateProfile} from './npc-templates';
+import {orderSelectedTeam,satisfiesSelectionRules} from '../data/npc-selection-rules';
 import {statKeys,type TrainingProfile} from '../data/training';
 import {separateForms} from '../data/selectable-forms';
 import {namedOpponentIVs} from './named-opponent-ivs';
@@ -156,12 +157,14 @@ export function generateOpponentTeam(floor:number,seed:Seed,previous:string[]=[]
     const template=normalNpcTemplate(sample?.id ?? trainer!.boss.id,floor,sample?.role ?? trainer?.boss.role);
     if(template){
       const named=!!trainer||sample?.kind==='named';
-      const selected=template.select?selectNamedEntries(template.team.map(p=>p.species),random,template.ace||undefined,template.signature?.species,{accept:names=>(template.required??[]).every(name=>names.includes(name))}):template.team.map(p=>p.species);
+      const selected=template.select?selectNamedEntries(template.team.map(p=>p.species),random,template.ace||undefined,template.signature?.species,{accept:names=>(template.required??[]).every(name=>names.includes(name))&&satisfiesSelectionRules(names,template.selectionRules)}):template.team.map(p=>p.species);
+      if(!satisfiesSelectionRules(selected,template.selectionRules))throw Error('NPC team does not satisfy selection rules');
       const enabled=normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'));
       let team=selected.map(name=>template.team.find(p=>p.species===name)!).map(p=>{const profile=templateProfile(p.profile,floor);return {name:p.species,moves:profile.moves,item:p.item,ability:profile.ability,gigantamax:p.gigantamax,profile};});
       if(template.allFloors&&enabled)team=equipNpcGimmick(team,template.signature) as typeof team;
       // Builds stay fixed; candidate membership and lead order use the saved seed.
       for(let i=team.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[team[i],team[j]]=[team[j],team[i]];}
+      team=orderSelectedTeam(team,p=>p.name,template.selectionRules);
       return withNamedIVs(enabled?team:stripNpcGimmicks(team),floor,seed,progression,named);
     }
   }

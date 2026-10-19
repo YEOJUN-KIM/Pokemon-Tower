@@ -18,6 +18,7 @@
     "battle": "tsx src/cli.ts",
     "battle:auto": "tsx src/cli.ts --auto",
     "tower:audit": "tsx src/tower-audit.ts",
+    "raid:simulate": "tsx scripts/simulate-raids.ts",
     "data:import": "tsx scripts/import-battle-roster.ts",
     "battle:audit": "tsx scripts/audit-battle-roster.ts",
     "sprites:audit": "node scripts/audit-sprite-assets.mjs",

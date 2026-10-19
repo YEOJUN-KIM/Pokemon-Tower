@@ -1,0 +1,48 @@
+{
+  "totalBattles": 20000,
+  "bosses": 20,
+  "runsPerBoss": 1000,
+  "totalsVerified": [
+    "wins+losses",
+    "phaseLosses",
+    "routeBranches",
+    "arceus2000TypeAppearances",
+    "teams",
+    "floors"
+  ],
+  "sourceFilesUnchanged": true,
+  "sourceAndSimulatorHashesMatch": true,
+  "raidAndSimulatorTests": {
+    "passed": 111,
+    "failed": 0
+  },
+  "smoke": {
+    "boss": "volcarona",
+    "runs": 6,
+    "repeated": true,
+    "replayMatched": true
+  },
+  "workerDeterminism": {
+    "battles": 200,
+    "workers": [
+      1,
+      4
+    ],
+    "byteIdenticalCSVs": 5
+  },
+  "fullRunRepeat": {
+    "battlesPerRun": 20000,
+    "byteIdenticalBattleCSV": true
+  },
+  "typescriptPassed": true,
+  "zeroSurvivorWins": 34,
+  "resultHashes": {
+    "md": "bd5def40a0fb0bb41a09f365a80faaa6125adc12c80602d48e354fa032b7fdba",
+    "csv": "d9d4ffe59b9ab91f67831343b8fef65611d91042f5e36029ac3b947a2ff2c9ac",
+    "branches.csv": "4da0312fd1e56cc427f8938842b7fa01f8225a2c73d48461792c0b7d5ec4fdcc",
+    "phases.csv": "038485153be576fe83c1374c17db08b866cef616960d8ca2aa1a98db4d4e930d",
+    "teams.csv": "644bbdf269fe4b589f957a3bed06cf03470018e10ce31a5c96f545c8df8cda34",
+    "battles.csv": "39857878e44d188778747702194a72fbd0327ac22adcfbbc92379cc6e5cd3656",
+    "json": "df4315aef4579bba9e0de3549e190bb5116c1d5f00146b07c1c99af2a09ec50f"
+  }
+}

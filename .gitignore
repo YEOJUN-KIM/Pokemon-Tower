@@ -27,6 +27,10 @@ artifacts/**
 !artifacts/**/*.md
 !artifacts/reports/**/*.json
 !artifacts/reports/npc/*.csv
+!artifacts/reports/raid-winrate-simulation.csv
+!artifacts/reports/raid-winrate-simulation.branches.csv
+!artifacts/reports/raid-winrate-simulation.phases.csv
+!artifacts/reports/raid-winrate-simulation.teams.csv
 # Curated QA media referenced by current documentation.
 !artifacts/qa/previews/egg-results/background-colors.png
 !artifacts/qa/previews/egg-results/background-effects.gif

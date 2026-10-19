@@ -9,7 +9,6 @@
 .products button {display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:center;gap:8px;text-align:left;font-size:14px;flex:none;}
 .products img,.products svg {width:32px;height:32px;object-fit:contain;image-rendering:pixelated;}
 .products small {white-space:nowrap;font-size:12px;}
-.scope button[aria-pressed=true],.scope button[data-game-cursor=true],.scope button:focus-visible {border-color:#ffeba3;background:#354b55;}
 .scope button[data-purchased=true] {color:#aebdc2;}
 .productDetail {display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:0;overflow:auto;padding:18px;border:1px solid #597784;text-align:center;line-height:1.6;}
 .productDetail img,.productDetail svg {width:72px;height:72px;object-fit:contain;image-rendering:pixelated;}

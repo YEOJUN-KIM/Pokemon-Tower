@@ -218,24 +218,10 @@
   box-shadow: none;
   color: #f0f8fa;
 }
-:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .action-button:hover:not(:disabled)) {
-  background: #2f5060;
-  transform: none;
-}
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-button.is-z-powered) {
   background: linear-gradient(120deg,#59431e,#302e29 75%);
   border-color: #e6bc53;
   box-shadow: inset 0 1px 0 #fff0b540,0 0 12px #efbe4326;
-}
-:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-button.is-z-powered:hover:not(:disabled)) {
-  background: linear-gradient(120deg,#745723,#403a2b 75%);
-  border-color: #ffe39a;
-}
-:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-button.is-z-powered:is([data-game-cursor=true],:focus-visible)) {
-  background: linear-gradient(120deg,#745723,#403a2b 75%)!important;
-  outline-color: #ffe39a!important;
-  border-color: #ffe39a!important;
-  box-shadow: inset 0 1px 0 #fff0b540,0 0 18px #efbe4359!important;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-button.is-z-powered strong) {
   display: block;
@@ -247,9 +233,6 @@
   color: #ffe7a0;
   text-shadow: 1px 2px 0 #1c160d,0 0 10px #ffc84466;
   padding-right: 3px;
-}
-:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-move-button.is-z-powered:is([data-game-cursor=true],:focus-visible) strong) {
-  color: #ffe7a0!important;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-move-button.is-z-powered .battle-choice-arrow) {
   color: #ffe39a;

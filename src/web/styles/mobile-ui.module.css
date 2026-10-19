@@ -75,10 +75,6 @@
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .workspace footer>.battle-keyboard-hints) {
     display: none!important;
   }
-  :global(body) :where(.scope) :global(:is(button,a,input,select,textarea,[tabindex]):is(:focus-visible,[data-game-cursor=true])) {
-    outline: none!important;
-    outline-offset: 0!important;
-  }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-choice-arrow) {
     display: none!important;
   }

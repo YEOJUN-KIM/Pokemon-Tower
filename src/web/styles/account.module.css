@@ -38,10 +38,6 @@
   flex: 1;
   white-space: nowrap;
 }
-:where(.scope[data-ui-screen="account"]) :global(.account-card nav button[aria-pressed=true]) {
-  background: #315f51;
-  color: white;
-}
 :where(.scope[data-ui-screen="account"]) :global(.account-card form),:where(.scope[data-ui-screen="account"]) :global(.account-card label) {
   display: grid;
   gap: 10px;

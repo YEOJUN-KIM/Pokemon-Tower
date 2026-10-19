@@ -101,14 +101,6 @@
   color: #dddde2;
   opacity: 1;
 }
-:global(body) :where(.scope) :global(.dex-center .dex-search>input:is([data-game-cursor=true],:focus)) {
-  outline: 2px solid #98efd1!important;
-  outline-offset: 2px!important;
-  background: #405d59!important;
-  border-color: #98efd1!important;
-  box-shadow: none!important;
-  color: #f3fff8!important;
-}
 @media(max-width:760px) {
   :global(body) :where(.scope) :global(.dex-center .dex-search>input) {
     height: 30px;
@@ -131,10 +123,6 @@
   color: #ba969d;
   border-color: #76606d;
   opacity: .65;
-}
-:global(body) :where(.scope) :global(.dex-center .dex-toolbar button.dex-search-reset:is([data-game-cursor=true],:focus-visible)) {
-  background: #80515e!important;
-  color: #fff0ec!important;
 }
 @media(max-width:760px) {
   :global(body) :where(.scope) :global(.dex-center .dex-toolbar :is(input[type=search],button)) {
@@ -189,45 +177,11 @@
   box-shadow: none;
   color: #334e41;
 }
-:global(body) :where(.scope) :global(.dex-center .dex-card.selected) {
-  background: #fff5c5;
-  border-color: #ba9b36;
-  box-shadow: none;
-}
 /* A mint cursor follows the PC display; the softer gold marks the selected partner. */
-:global(body) :where(.scope) :global(.dex-center button[data-game-cursor=true]),:global(body) :where(.scope) :global(.dex-center button:focus-visible),:global(body:has(.dex-center)) :where(.scope) :global(.dex-dialog button[data-game-cursor=true]),:global(body:has(.dex-center)) :where(.scope) :global(.dex-dialog button:focus-visible) {
-  outline: 2px solid #98efd1!important;
-  outline-offset: 2px!important;
-  box-shadow: none!important;
-  border-color: #98efd1!important;
-  background: #405d59!important;
-  color: #f3fff8!important;
-}
-:global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-center.dex-console .dex-card[data-game-cursor=true]), :global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-center.dex-console .dex-card:focus-visible) {
-  background: #d6f0df!important;
-  border-color: #397b62!important;
-  outline-color: #397b62!important;
-  box-shadow: none!important;
-  color: #244e3b!important;
-}
-:global(body) :where(.scope) :global(.dex-center .dex-card[data-game-cursor=true]>strong),:global(body) :where(.scope) :global(.dex-center .dex-card:focus-visible>strong) {
-  color: #244e3b!important;
-}
-:global(body) :where(.scope) :global(.dex-center .dex-party-slot:has([data-game-cursor=true])),:global(body) :where(.scope) :global(.dex-center .dex-party-slot:has(button:focus-visible)) {
-  background: #405d59;
-  border-color: #98efd1;
-  outline: none;
-  box-shadow: none!important;
-}
 :global(body) :where(.scope) :global(.dex-center .dex-party-menu-button) {
   font-size: 0!important;
   color: transparent!important;
   transition: none;
-}
-:global(body) :where(.scope) :global(.dex-center .dex-party-slot button.dex-party-menu-button[data-game-cursor=true]),:global(body) :where(.scope) :global(.dex-center .dex-party-slot button.dex-party-menu-button:focus-visible) {
-  background-color: transparent!important;
-  background-image: none!important;
-  color: transparent!important;
 }
 :global(body) :where(.scope) :global(.dex-center .dex-party-slot>strong) {
   color: #f3fff8;
@@ -241,11 +195,6 @@
 :global(body) :where(.scope) :global(.dex-center .dex-party-slot .pokemon-image-frame img) {
   max-height: none;
   max-width: none;
-}
-:global(body) :where(.scope) :global(.dex-center .dex-card.in-party:not(.selected)) {
-  background: #d1e7dc;
-  border-color: #75ab94;
-  color: #334e41;
 }
 :global(body) :where(.scope) :global(.dex-center .dex-rule-settings) {
   margin-left: auto;
@@ -573,9 +522,6 @@
   color: #697f71;
   font-size: 10px;
 }
-:global(body:has(.dex-center)) :where(.scope) :global(.dex-partner-dialog .dex-action-options>button:is([data-game-cursor=true],:focus-visible) small) {
-  color: #d8eee1;
-}
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-partner-dialog .dex-action-options>button:last-child) {
   background: #8b303a;
   border-color: #cc8288;
@@ -805,14 +751,6 @@
   border-radius: 6px;
   font-size: 12px;
 }
-:global(body) :where(.scope) :global(.dex-center .dex-nav a:hover) {
-  background: #a44751;
-  border-color: #ecc0bd;
-}
-:global(body) :where(.scope) :global(.dex-center .dex-nav a:focus-visible) {
-  outline: 2px solid #98efd1;
-  outline-offset: 2px;
-}
 :global(body) :where(.scope) :global(.dex-center .dex-partner-stage) {
   flex: 0 1 160px;
   max-height: 160px;
@@ -989,10 +927,6 @@
   border-color: #889498;
   color: #f1f4ef;
 }
-:global(body) :where(.scope) :global(.dex-center .dex-nav a:hover) {
-  background: #5c6a70;
-  border-color: #b1bec0;
-}
 :global(body) :where(.scope) :global(.dex-center .dex-toolbar) {
   background: #29343c;
   border: 1px solid #596970;
@@ -1085,11 +1019,6 @@
 :where(.scope) :global(.summary-form-preview button) {
   padding: 10px 14px;
   word-break: keep-all;
-}
-:where(.scope) :global(.summary-form-preview button[aria-pressed=true]) {
-  background: #405d59;
-  color: #f3fff8;
-  border-color: #98efd1;
 }
 :where(.scope) :global(.summary-hero>div:first-child) {
   min-width: 0;

@@ -1,4 +1,5 @@
 'use client';
+import {GameMenuFooter} from './game-menu';
 import Link from 'next/link';
 import {useGameKeyboard,selectGameCursor} from './game-keyboard';
 import {BaseStatRadar} from './base-stat-radar';
@@ -194,7 +195,7 @@ export default function Pokedex({entries,initialTower,onStart,startError='',retu
     </section>
     <aside className="dex-right-panel"><section className="dex-start-party" data-testid="team-selection" aria-label="출발 파티"><div className="dex-catalog-heading"><h2>출발 파티</h2><span>{party.length} / 3</span></div><div className="dex-party-slots" data-testid="team-preview">{[0,1,2].map(slot=>{
       const entry=entries.find(value=>value.species===party[slot]);
-      return entry ? <div className="dex-party-slot" key={slot}><span>{slot===0 ? '01 · 선봉' : `0${slot+1}`}</span><Picture shiny={training.find(t=>t.species===entry.species)?.profile.shiny} forme={training.find(t=>t.species===entry.species)?.profile.forme} entry={entry}/><strong>{entry.name}</strong><button className="dex-party-menu-button" aria-label={`${entry.name} 파티 메뉴`} disabled={starting} onClick={()=>{setSelected(entry.species);setPartyMenu(entry.species);}}>선택</button></div> : <div key={slot} className="dex-party-slot preview-empty" aria-label={`${slot+1}번 미선택`}><span>0{slot+1}</span><i>＋</i><small>포켓몬 선택</small></div>;
+      return entry ? <button className="dex-party-slot" key={slot} aria-label={`${entry.name} 파티 메뉴`} disabled={starting} onClick={()=>{setSelected(entry.species);setPartyMenu(entry.species);}}><span>{slot===0 ? '01 · 선봉' : `0${slot+1}`}</span><Picture shiny={training.find(t=>t.species===entry.species)?.profile.shiny} forme={training.find(t=>t.species===entry.species)?.profile.forme} entry={entry}/><strong>{entry.name}</strong></button> : <div key={slot} className="dex-party-slot preview-empty" aria-label={`${slot+1}번 미선택`}><span>0{slot+1}</span><i>＋</i><small>포켓몬 선택</small></div>;
     })}</div><p>{activeRun ? '진행 중인 도전은 이어하기로 계속하세요.' : '3마리를 선택하면 출발할 수 있어요. 첫 번째가 선봉입니다.'}</p><button className="primary-button dex-start-button" disabled={busy || starting || !!activeRun || party.length!==3} onClick={()=>setRuleMenu(true)}>{starting ? '준비 중…' : '새 도전 시작'} ↗</button></section>
     </aside></div>
     {ruleMenu && <PokedexDialog title="새 도전 · 배틀 룰 선택" className="dex-settings-dialog dex-start-dialog" returnFocus=".dex-start-button" onClose={()=>{if(!starting)setRuleMenu(false);}}><p>이번 도전에서 사용할 배틀 룰을 선택하세요.</p><RulePicker value={rule} onChange={setRule} disabled={busy||starting}/><button className="primary-button" disabled={busy||starting} onClick={()=>void start()}>이 룰로 도전 시작</button></PokedexDialog>}
@@ -206,6 +207,6 @@ export default function Pokedex({entries,initialTower,onStart,startError='',retu
     {adjusting && saved && tower && <PokedexDialog title={`${current.name} 능력치 조정`} className="dex-settings-dialog" returnFocus='.dex-card[aria-pressed="true"]' large onClose={()=>setAdjusting(false)}><TrainingEditor key={saved.species} entry={saved} points={tower.growthPoints} onSave={saveTraining} showMoves={false}/>{savedNotice && <p role="status" className="dex-save-notice">{savedNotice}</p>}</PokedexDialog>}
     {editingMoves && saved && <PokedexDialog title={`${current.name} 기술배치`} className="dex-settings-dialog" returnFocus='.dex-card[aria-pressed="true"]' large onClose={()=>setEditingMoves(false)}><MoveEditor key={saved.species} entry={saved} onSave={saveTraining}/>{savedNotice && <p role="status" className="dex-save-notice">{savedNotice}</p>}</PokedexDialog>}
 
-    <footer><div className="dex-control-hints"><span><kbd>방향키</kbd> 이동</span><span><kbd>Enter / Z</kbd> 선택·설정</span><span><kbd>X</kbd> {returnToBattle ? "배틀·뒤로" : "타이틀·뒤로"}</span><span><kbd>F</kbd> 즐겨찾기</span><span><kbd>V</kbd> 즐겨찾기 목록</span><span><kbd>R</kbd> 필터 초기화</span><span><kbd>← / →</kbd> 목록 끝에서 페이지</span></div><span><a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noreferrer">Sprites: PokéAPI</a> / <a href="https://play.pokemonshowdown.com/sprites/" target="_blank" rel="noreferrer">Smogon</a></span></footer>
+    <footer><GameMenuFooter controls={[{key:'방향키',label:'이동'},{key:'Enter / Z',label:'선택·설정'},{key:'X',label:returnToBattle?'배틀·뒤로':'타이틀·뒤로'},{key:'F',label:'즐겨찾기'},{key:'V',label:'즐겨찾기 목록'},{key:'R',label:'필터 초기화'},{key:'← / →',label:'목록 끝에서 페이지'}]}/><span><a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noreferrer">Sprites: PokéAPI</a> / <a href="https://play.pokemonshowdown.com/sprites/" target="_blank" rel="noreferrer">Smogon</a></span></footer>
   </main>;
 }

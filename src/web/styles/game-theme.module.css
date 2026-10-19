@@ -15,17 +15,6 @@
   background: #2b3b4b;
   color: #bbcad7;
 }
-:where(.scope) :global(.app-shell .nav-item.selected) {
-  background: #873846;
-  color: #ffdae0;
-  border: 1px solid #ae5362;
-}
-:where(.scope) :global(.app-shell .nav-item:hover) {
-  background: #283748;
-}
-:where(.scope) :global(.app-shell .nav-item.selected:hover) {
-  background: #984253;
-}
 :where(.scope) :global(.app-shell .sidebar-note p),:where(.scope) :global(.app-shell .sidebar-foot small) {
   color: var(--game-muted);
 }
@@ -110,10 +99,6 @@
   border-color: #415364;
   color: var(--game-text);
 }
-:where(.scope[data-ui-screen="battle"]) :global(.app-shell .action-button:hover:not(:disabled)) {
-  background: #30455a;
-  border-color: #8bafc5;
-}
 :where(.scope[data-ui-screen="battle"]) :global(.app-shell .action-button small) {
   color: #a9bccb;
 }
@@ -164,26 +149,15 @@
   border-color: #fbcaa7;
   color: #243341;
 }
-:where(.scope) :global(.primary-button:hover),:where(.scope[data-ui-screen="title"]) :global(.title-menu .title-play:hover) {
-  background: #f5b58e;
-}
 :where(.scope) :global(.secondary-button) {
   background: #22313f;
   border-color: #425263;
   color: #c6d5e0;
 }
-:where(.scope) :global(.secondary-button:hover:not(:disabled)) {
-  background: #304253;
-}
 :where(.scope) :global(.app-shell .pokemon-choice) {
   background: linear-gradient(145deg,#2a3948,#202d3a);
   border-color: #415263;
   color: var(--game-text);
-}
-:where(.scope) :global(.app-shell .pokemon-choice.picked) {
-  background: #2c4949;
-  border-color: #8fd1b8;
-  box-shadow: inset 0 0 0 1px #8fd1b8;
 }
 :where(.scope) :global(.app-shell .pokemon-choice small),:where(.scope) :global(.app-shell .choice-order) {
   color: #a8bfcd;
@@ -390,10 +364,6 @@
 :where(.scope) :global(.move-slots small),:where(.scope) :global(.move-slots span) {
   font-size: 10px;
   color: #a3b9c9;
-}
-:where(.scope) :global(.move-slots .selected),:where(.scope) :global(.move-library .selected) {
-  border-color: #f19b73;
-  background: #48333d;
 }
 :where(.scope) :global(.move-search) {
   display: flex;
@@ -1390,11 +1360,6 @@
 :where(.scope) :global(.shop-categories button) {
   flex: 1;
 }
-:where(.scope) :global(.shop-categories button[aria-pressed=true]) {
-  background: #65503a;
-  color: #ffe5a0;
-  border-color: #e1bc71;
-}
 :where(.scope) :global(.tower-shop .shop-products) {
   margin: 12px 0;
   gap: 10px;
@@ -1614,23 +1579,6 @@
     grid-template-rows: 34px minmax(0,1fr) 190px;
   }
 }
-:where(.scope) :global([data-game-cursor=true]) {
-  outline: 2px solid #ffd19b!important;
-  outline-offset: 2px!important;
-  box-shadow: none!important;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.action-button[data-game-cursor=true]),:where(.scope) :global(.dex-action-options button[data-game-cursor=true]) {
-  background: #4b443d!important;
-}
-:where(.scope) :global(.dex-party-slot:has([data-game-cursor=true])) {
-  background: #493f38;
-}
-:where(.scope) :global(.dex-card[data-game-cursor=true]) {
-  border-color: #ffd19b!important;
-}
-:global(body:has([data-game-cursor])) :where(.scope) :global(button:focus:not(:focus-visible)) {
-  outline: none;
-}
 :where(.scope) :global(.held-item-options) {
   display: grid;
   gap: 8px;
@@ -1677,26 +1625,7 @@
     line-height: 1.4;
   }
 }
-:global(body[data-game-input="cursor"]:has([data-game-cursor])) :where(.scope) :global(button:not([data-game-cursor="true"]):focus) {
-  outline: none!important;
-}
 /* High contrast, steady game selection; no flashing or layout movement. */
-:where(.scope) :global([data-game-cursor=true]) {
-  outline: 2px solid #ffe36c!important;
-  outline-offset: 2px!important;
-  box-shadow: none!important;
-}
-:where(.scope) :global(.dex-card[data-game-cursor=true]),:where(.scope[data-ui-screen="battle"]) :global(.action-button[data-game-cursor=true]),:where(.scope) :global(.pokemon-choice[data-game-cursor=true]),:where(.scope) :global(.dex-filter-options button[data-game-cursor=true]) {
-  background: linear-gradient(145deg,#66563c,#3d3b32)!important;
-  border-color: #ffe36c!important;
-}
-:where(.scope) :global(.dex-card[data-game-cursor=true]>strong),:where(.scope[data-ui-screen="battle"]) :global(.action-button[data-game-cursor=true] strong),:where(.scope) :global(.pokemon-choice[data-game-cursor=true]>strong) {
-  color: #fff4ba!important;
-}
-:where(.scope) :global(.dex-party-slot:has([data-game-cursor=true])) {
-  border-color: #ffe36c;
-  background: #514730;
-}
 :where(.scope) :global(.recruit-iv-up) {
   display: inline-flex;
   align-items: center;

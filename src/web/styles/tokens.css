@@ -13,5 +13,11 @@
   --game-muted: #c1b9c9;
   --game-accent: #ffd26e;
   --game-red: #aa4148;
+  --menu-focus: #98efd1;
+  --menu-selected-bg: #405d59;
+  --menu-surface: #302e40;
+  --menu-row-height: 48px;
+  --menu-padding: 12px;
+  --menu-gap: 6px;
   color-scheme: dark;
 }

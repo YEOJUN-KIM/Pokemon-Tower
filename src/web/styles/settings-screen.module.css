@@ -37,11 +37,6 @@
   color: #b7c9d5;
   font-size: 14px;
 }
-:where(.scope[data-ui-screen="settings"]) :global(.settings-tabs button[aria-selected=true]) {
-  background: #254c50;
-  border-color: #85d8c2;
-  color: #edfff8;
-}
 :global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-panel) {
   padding: 18px 24px;
   margin-bottom: 14px;
@@ -83,10 +78,6 @@
   font-size: 10px;
   margin-right: 5px;
 }
-:where(.scope[data-ui-screen="settings"]) :global(.settings-panel :is(input,select)[data-game-cursor=true]) {
-  outline: 2px solid #a4ffe0;
-  outline-offset: 4px;
-}
 :where(.scope[data-ui-screen="settings"]) :global(.settings-options) {
   display: flex;
   gap: 8px;
@@ -98,11 +89,6 @@
   background: #2b3545;
   color: #cbdce6;
   font-size: 12px;
-}
-:where(.scope[data-ui-screen="settings"]) :global(.settings-options button[aria-pressed=true]) {
-  border-color: #85d8c2;
-  background: #254c50;
-  color: #edfff8;
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-choice-trigger) {
   display: flex;
@@ -138,10 +124,6 @@
   color: #dce9ed;
   text-align: left;
   font-size: 12px;
-}
-:where(.scope[data-ui-screen="settings"]) :global(.settings-choice-grid button[aria-pressed=true]) {
-  background: #254c50;
-  border-color: #85d8c2;
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-picker) {
   display: flex;
@@ -226,14 +208,6 @@
     gap: 10px 14px;
     font-size: 10px;
   }
-}
-:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed :is([data-game-cursor=true],button:focus-visible,a:focus-visible,input:focus-visible)) {
-  outline: 1px solid #90aab7!important;
-  outline-offset: 2px!important;
-  box-shadow: none!important;
-}
-:global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed .dex-action-options button[data-game-cursor=true]) {
-  background: #354452!important;
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-preview-actions) {
   display: grid;

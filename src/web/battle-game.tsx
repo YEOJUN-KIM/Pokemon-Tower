@@ -1,4 +1,5 @@
 'use client';
+import {GameMenuFooter} from './game-menu';
 import {isVillainAmbush} from '../data/villain-tracks';
 import {Ball,SendOut,PokemonFeedback,ShinySparkles,Sprite,HealthCard} from './battle-pokemon';
 import {RunEventScene,RunEventPanel} from './run-event';
@@ -361,7 +362,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
 
 
         </div>
-        <footer><span className="battle-keyboard-hints"><span><kbd>Enter / Z</kbd> 결정</span><span><kbd>X</kbd> 취소/메뉴</span>{gimmickHint && <span title="기술 선택 화면에서 사용 · 기술 결정 시 발동"><kbd>A</kbd> {gimmickHint}</span>}<span><kbd>S</kbd> 로그</span><span><kbd>C</kbd> 필드</span><span><kbd>Shift</kbd> 건너뛰기</span></span><span>Fan-made · <a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noreferrer">Sprites: PokéAPI</a> / <a href="https://play.pokemonshowdown.com/sprites/" target="_blank" rel="noreferrer">Smogon</a> · <a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noreferrer">Battle: Showdown</a></span></footer>
+        <footer><GameMenuFooter controls={[{key:'방향키',label:'이동'},{key:'Enter / Z',label:'결정'},{key:'X',label:'취소/메뉴'},...(gimmickHint?[{key:'A',label:gimmickHint}]:[]),{key:'S',label:'로그'},{key:'C',label:'필드'},{key:'Shift',label:'건너뛰기'}]}/><span>Fan-made · <a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noreferrer">Sprites: PokéAPI</a> / <a href="https://play.pokemonshowdown.com/sprites/" target="_blank" rel="noreferrer">Smogon</a> · <a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noreferrer">Battle: Showdown</a></span></footer>
       </main>
     </div>
   </div>;

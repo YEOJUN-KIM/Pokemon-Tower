@@ -5,7 +5,6 @@ dialog[open].dialog {display:flex;flex-direction:column;}
 .scope>.pockets,.scope>button,.scope>small,.scope>[role=alert] {flex-shrink:0;}
 .pockets {display:flex;flex-wrap:wrap;gap:6px;}
 .scope button {font:inherit;color:inherit;background:#293d49;border:1px solid #597784;border-radius:0;min-height:38px;padding:8px 12px;text-align:left;}
-.scope button[aria-pressed=true],.scope button[data-game-cursor=true],.scope button:focus-visible {background:#354b55;border-color:#ffeba3;}
 .scope button:disabled {opacity:.45;}
 .layout {display:grid;grid-template-columns:minmax(220px,330px) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:18px;height:100%;min-height:0;}
 .list {display:flex;flex-direction:column;gap:3px;min-height:0;overflow:auto;overscroll-behavior:contain;}

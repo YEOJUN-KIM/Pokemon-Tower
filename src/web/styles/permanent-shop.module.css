@@ -315,11 +315,6 @@
   color: #d4e0e2;
   border: 1px solid #71858c;
 }
-:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-tabs button[aria-selected="true"]) {
-  background: #91424a;
-  color: #fff;
-  border-color: #d1949a;
-}
 @media(max-width:900px) {
   :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-products) {
     grid-template-columns: 1fr;
@@ -388,11 +383,6 @@
 :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop button:disabled),:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-dialog button:disabled) {
   opacity: .45;
   cursor: default;
-}
-:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop button[data-game-cursor]),:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-dialog button[data-game-cursor]),:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop button:focus-visible),:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-dialog button:focus-visible) {
-  outline: 2px solid #66d6bc;
-  outline-offset: 2px;
-  box-shadow: none!important;
 }
 :where(.scope[data-ui-screen="upgrades"]) :global(.egg-station) {
   display: flex;
@@ -557,10 +547,6 @@
   color: #334e41;
   border: 1px solid #acbfb2;
   padding: 10px;
-}
-:where(.scope[data-ui-screen="upgrades"]) :global(.shiny-targets .shiny-dex-card[aria-pressed="true"]) {
-  background: #fff5c5;
-  border-color: #ba9b36;
 }
 :where(.scope[data-ui-screen="upgrades"]) :global(.shiny-dex-number) {
   align-self: flex-start;
@@ -934,12 +920,6 @@
   position: sticky;
   bottom: 0;
   background: #326f61;
-}
-:global(body) :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop button[data-game-cursor=true]),:global(body) :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop button:focus-visible),:global(body) :where(.scope[data-ui-screen="upgrades"]) :global(dialog.permanent-dialog button[data-game-cursor=true]),:global(body) :where(.scope[data-ui-screen="upgrades"]) :global(dialog.permanent-dialog button:focus-visible) {
-  outline: 2px solid #66d6bc!important;
-  outline-offset: 2px!important;
-  border-color: #66d6bc!important;
-  box-shadow: none!important;
 }
 @media(max-width:700px) {
   :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop) {

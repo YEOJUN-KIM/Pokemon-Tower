@@ -20,6 +20,7 @@ import battle from './battle-layout.module.css';
 import settings from './settings-screen.module.css';
 import pokedex from './pokedex.module.css';
 import health from './battle-health.module.css';
+import menu from './game-menu.module.css';
 
 type Screen='title'|'battle'|'pokedex'|'settings'|'upgrades'|'account';
 
@@ -29,6 +30,7 @@ export function ScreenStyles({children}:{children:ReactNode}) {
   const screen:Screen=path==='/battle'?'battle':path==='/pokedex'?'pokedex':path==='/settings'?'settings':path==='/upgrades'?'upgrades':path==='/account'?'account':'title';
   const classes=[boundary.root,
     foundation.scope,
+    menu.scope,
     gameTheme.scope,
     retroTheme.scope,
     gimmicks.scope,

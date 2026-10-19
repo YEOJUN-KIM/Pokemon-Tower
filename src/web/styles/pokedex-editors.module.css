@@ -92,12 +92,6 @@
   color: #476750;
   border-radius: 6px;
 }
-:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-tabs button[aria-selected=true]) {
-  background: #467c66;
-  border-color: #32624f;
-  color: #f3fff8;
-  box-shadow: inset 0 -3px #a0d9ba;
-}
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.training-budget,.stat-radar,.nature-matrix)) {
   background: #e0eadb;
   border: 1px solid #b4c6b3;
@@ -186,12 +180,6 @@
   border: 1px solid #a4bca5;
   border-radius: 5px;
 }
-:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .nature-matrix button[aria-pressed=true]) {
-  background: #467c66;
-  color: #f3fff8;
-  border-color: #32624f;
-  box-shadow: none;
-}
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(select,.move-search>input)) {
   background-color: #f8faf2;
   color: #355342;
@@ -228,11 +216,6 @@
   border-radius: 7px;
   box-shadow: none;
 }
-:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .move-slots button.selected) {
-  background: #d1e8d9;
-  border-color: #59896c;
-  box-shadow: inset 0 -3px #88bba1;
-}
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .move-slots small) {
   color: #68806e;
 }
@@ -247,10 +230,6 @@
   border: 1px solid #bacdba;
   color: #355342;
   border-radius: 6px;
-}
-:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .move-library button.selected) {
-  background: #d1e8d9;
-  border-color: #59896c;
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.move-library-heading small,.move-metadata,.move-description)) {
   color: #68806e;
@@ -267,9 +246,6 @@
   z-index: 2;
   box-shadow: 0 -5px 0 #eef2e9;
 }
-:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.move-slots button,.move-library button)[data-game-cursor=true] :is(small,.move-metadata,.move-description)) {
-  color: #d8eee1;
-}
 @media(max-width:760px) {
   :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog) {
     padding: 10px;
@@ -283,10 +259,6 @@
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog button) {
   transition: none;
-}
-:global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog button:is([data-game-cursor=true],:focus-visible)) {
-  background: #405d59!important;
-  color: #f3fff8!important;
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-start-dialog) {
   width: min(520px,calc(100% - 24px));
@@ -307,11 +279,6 @@
   background: #e1eadc;
   border-color: #a4b8a7;
   color: #355342;
-}
-:global(body:has(.dex-center)) :where(.scope) :global(.dex-start-dialog .rule-picker-options button[aria-pressed=true]) {
-  background: #467c66;
-  border-color: #32624f;
-  color: #f3fff8;
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-start-dialog>.primary-button) {
   width: 100%;
@@ -571,10 +538,6 @@
   min-height: 24px;
   border-radius: 4px;
 }
-:where(.scope) :global(.training-stat:has(.training-stat-select[data-game-cursor=true])) {
-  background: #8ec4a625;
-  border-radius: 5px;
-}
 :global(body) :where(.scope) :global(.training-editor .training-trait-button) {
   display: flex;
   align-items: center;
@@ -658,14 +621,6 @@
 :where(.scope) :global(.training-tera-options .tera-type-icon) {
   width: 48px;
   height: 48px;
-}
-:global(body) :where(.scope) :global(.training-picker button[aria-pressed=true]) {
-  border: 2px solid #54846b;
-  background: #d1e8d9;
-}
-:global(body) :where(.scope) :global(.training-picker button[data-game-cursor=true]) {
-  background: #405d59!important;
-  color: #fff!important;
 }
 @media(max-width:540px) {
   :where(.scope) :global(.training-tera-options) {

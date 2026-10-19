@@ -17,7 +17,6 @@
 .actions {flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 24px 20px;border-top:1px solid #54727e;}
 .confirm,.choice {display:flex;align-items:center;justify-content:center;gap:12px;min-height:48px;padding:10px 24px;border:2px solid #7ba9aa;border-radius:0;background:#253f4d;color:#fff4d2;font:inherit;font-size:20px;line-height:1.4;font-weight:700;cursor:pointer;}
 .confirm {min-width:180px;}
-.confirm:is([data-game-cursor=true],:focus-visible,:hover),.choice:is([data-game-cursor=true],:focus-visible,:hover) {border-color:var(--reward-accent);background:#34505c;outline:2px solid #0c1725;outline-offset:2px;}
 .pointer {opacity:0;color:#f4e5ac;}
 .confirm:is([data-game-cursor=true],:focus-visible,:hover) .pointer {opacity:1;}
 .confirm:disabled,.choice:disabled {opacity:.5;cursor:default;}

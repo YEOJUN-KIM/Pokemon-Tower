@@ -1,0 +1,212 @@
+/* One interaction contract across screens. Legacy layout modules only own placement.
+   The bounded priority rules also cover dialogs with their own component modules. */
+:global(body) :where(.scope)[data-ui-screen] :global(button),
+:global(body) :where(.scope)[data-ui-screen] :global(a[href]) {
+  border-radius: 0!important;
+  outline: none!important;
+  box-shadow: none!important;
+  transform: none!important;
+  transition: border-color 80ms linear,background-color 80ms linear!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(button) {
+  border: 1px solid var(--game-line)!important;
+  background: var(--menu-surface)!important;
+  color: var(--game-text)!important;
+  font-family: inherit;
+}
+/* Selection, native Tab, mouse hover and the game cursor share exactly one paint. */
+:global(body) :where(.scope)[data-ui-screen] :global([data-game-cursor=true]),
+:global(body:not([data-game-input=cursor])) :where(.scope)[data-ui-screen] :global(:is(button,a[href],summary):focus-visible),
+:global(body) :where(.scope)[data-ui-screen] :global(:is(input,select):focus-visible),
+:global(body) :where(.scope)[data-ui-screen] :global(button:is([aria-pressed=true],[aria-selected=true],.selected,.picked,.is-selected):not(:disabled)),
+:global(body) :where(.scope)[data-ui-screen] :global(.training-stat:focus-within) {
+  outline: none!important;
+  border-color: var(--menu-focus)!important;
+  background: var(--menu-selected-bg)!important;
+  color: var(--game-text)!important;
+  box-shadow: inset 0 0 0 1px var(--menu-focus)!important;
+}
+@media(hover:hover) {
+  :global(body:not([data-game-input=cursor])) :where(.scope)[data-ui-screen] :global(:is(button,a[href],summary):hover:not(:disabled):not([aria-disabled=true])) {
+    outline: none!important;
+    border-color: var(--menu-focus)!important;
+    background: var(--menu-selected-bg)!important;
+    color: var(--game-text)!important;
+    box-shadow: inset 0 0 0 1px var(--menu-focus)!important;
+  }
+}
+:global(body) :where(.scope)[data-ui-screen] :global(button:disabled) {opacity: .45;cursor:default;}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(input:not([type=checkbox]):not([type=range]),select)) {
+  border: 1px solid var(--game-line)!important;
+  border-radius: 0!important;
+  background-color: var(--menu-surface)!important;
+  color: var(--game-text)!important;
+  box-shadow: none;
+  font: inherit;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.dex-dialog,.shop-product,.move-library,.move-slots,.training-point-panel,.training-save-bar,.dex-card,.dex-party-slot,.battle-party-card,.pokemon-choice,.stat-radar,.shop-wallet)) {
+  border-radius: 0!important;
+  box-shadow: none!important;
+  border-color: var(--game-line);
+}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.dex-heading,.dex-toolbar,.dex-catalog,.dex-list,.dex-partner-display,.dex-start-party,.dex-pagination,.dex-action-partner,.maintenance-heading,.shop-heading)) {
+  border-radius:0!important;box-shadow:none!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.dex-catalog,.dex-partner-display,.dex-start-party)) {
+  border-width:1px!important;padding:12px!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(:is([data-game-tabs],.shop-categories,.training-tabs) button) {
+  min-height:36px!important;padding:6px var(--menu-padding)!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-choice-list) {
+  display: grid;grid-template-columns: minmax(0,1fr);gap:var(--menu-gap)!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-choice-grid) {
+  grid-template-columns: repeat(auto-fit,minmax(110px,1fr));
+}
+/* All popup choices, including legacy selection groups, use the same row geometry. */
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.game-choice,.dex-action-options>button,.held-item-options>button,.training-ability-options>button,.training-tera-options>button,.maintenance-menu>button,.machine-mode>button,.recruit-dialog-actions>button,.settings-choice-grid>button,.dex-filter-options>button,.learning-moves>button)) {
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: var(--menu-row-height)!important;
+  padding: 8px var(--menu-padding)!important;
+  border-width: 1px!important;
+  gap: var(--menu-gap)!important;
+  text-align: left;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.dex-action-options,.held-item-options,.training-ability-options,.training-tera-options,.maintenance-menu,.recruit-dialog-actions,.machine-mode,.settings-choice-grid,.dex-filter-options,.learning-moves)) {
+  gap:var(--menu-gap)!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.game-choice-list,.dex-action-options,.held-item-options,.training-ability-options,.training-tera-options,.settings-choice-grid,.dex-filter-options)>button) {
+  height:var(--menu-row-height)!important;
+  overflow:hidden;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.game-choice-list,.held-item-options,.training-ability-options)>button small) {
+  display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  color:var(--game-muted)!important;font-size:11px;line-height:16px;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(dialog.dex-dialog[open]) {
+  display:flex!important;flex-direction:column;
+  box-sizing:border-box;gap:var(--menu-gap);
+  max-height:calc(100dvh - 24px)!important;max-width:calc(100vw - 24px);
+  padding:12px!important;overflow:hidden!important;
+  border:1px solid var(--game-line)!important;
+  background:var(--game-panel)!important;color:var(--game-text)!important;
+  outline:none!important;box-shadow:none!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.dex-dialog-heading) {
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  flex-shrink:0;padding:0 0 8px!important;margin:0!important;
+  background:transparent!important;border:0!important;border-bottom:1px solid var(--game-line)!important;
+  border-radius:0!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.dex-dialog-heading h2) {
+  color:var(--game-text)!important;font-size:16px!important;margin:0;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.dex-dialog-heading>button) {
+  min-width:36px;min-height:36px;padding:4px!important;flex-shrink:0;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-dialog-body) {
+  display:flex;flex-direction:column;gap:var(--menu-gap);
+  flex:1;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain;
+  scrollbar-width:thin;scrollbar-color:var(--game-line) var(--menu-surface);
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-dialog-body>*) {flex-shrink:0;}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-dialog-body:has(>.training-editor,>.move-editor,>.tower-shop,>[data-testid=bag])) {overflow:hidden;}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-dialog-body>:is(.training-editor,.move-editor,.tower-shop,[data-testid=bag])) {
+  display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.tower-shop>[data-keyboard-tab-panel]) {
+  flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.tower-shop>.shop-categories) {
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--menu-gap)!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.tower-shop>.shop-categories button) {
+  min-width:0!important;width:100%;font-size:11px!important;padding:6px!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.dex-dialog:has(.training-editor,.move-editor)) {
+  height:min(780px,calc(100dvh - 24px))!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-dialog-body .training-editor>[role=tabpanel]:not([hidden])) {
+  flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.move-editor>.move-library) {
+  flex:1;min-height:80px;max-height:none;overflow:auto;
+  background:var(--menu-surface)!important;padding:var(--menu-gap)!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.move-editor>p,.move-search>label,.move-slots small)) {color:var(--game-muted)!important;}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-top-layout) {gap:12px!important;}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.training-point-panel,.training-save-bar,.training-budget,.training-stat,.move-slots,.stat-radar)) {
+  background:var(--menu-surface)!important;color:var(--game-text)!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.training-stat,.training-stat-labels)) {
+  display:grid!important;grid-template-columns:minmax(52px,1fr) 42px 58px 76px 44px!important;gap:6px!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-stat-select.training-stat) {
+  width:100%;min-height:40px!important;padding:4px 8px!important;font-size:12px!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-point-value) {
+  display:flex;align-items:center;justify-content:space-between;gap:6px;color:var(--game-text);
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-point-value>span) {color:var(--menu-focus);}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-point-value output) {font-variant-numeric:tabular-nums;}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.training-choice,.training-help,.training-stat-labels,.training-save-bar>span,.training-iv-value small,.move-description,.move-metadata,.move-search>span,.training-stat-name)) {color:var(--game-muted)!important;}
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.training-base-value,.training-iv-value,.training-stat-value,.training-budget strong)) {color:var(--game-text)!important;}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-iv-value) {background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-editor :is(h3,.training-section-title>span,.training-budget span)) {color:var(--game-muted)!important;}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-help) {font-size:11px;margin:4px 0;}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-help[open]) {max-height:110px;overflow:auto;}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-save-bar) {position:static!important;padding:8px!important;margin-top:auto;}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-editor #training-panel-traits) {padding:8px 0;}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-choice) {gap:4px!important;}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-choice:has(.training-trait-button:is([data-game-cursor=true],:focus-visible))) {border-left:2px solid var(--menu-focus);}
+/* Price and state are text. They never inherit the command surface. */
+:global(body) :where(.scope)[data-ui-screen] :global(:is(.game-status,.shop-product-status,.dex-menu-picked,.recruit-known-species,.recruit-new-species)) {
+  display:inline-block;min-height:0!important;padding:0!important;border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;color:var(--game-muted)!important;
+  font-size:11px!important;line-height:1.5;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-price) {
+  display:inline-flex;align-items:baseline;justify-content:flex-end;gap:4px;align-self:center;
+  color:var(--game-accent);font-size:16px;white-space:nowrap;font-variant-numeric:tabular-nums;
+  border:0;background:transparent;padding:0;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-price small) {font-size:11px;color:var(--game-muted);}
+:global(body) :where(.scope)[data-ui-screen] :global(button.shop-product) {
+  display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center;
+  width:100%;height:auto;min-height:88px!important;gap:12px!important;text-align:left;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.shop-product-info) {display:flex;flex-direction:column;gap:4px;min-width:0;}
+:global(body) :where(.scope)[data-ui-screen] :global(.shop-product :is(.shop-product-title,.shop-product-meta,.shop-product-description,.shop-product-status)) {
+  position:static!important;max-width:none!important;width:auto!important;margin:0!important;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.shop-product-description) {font-size:11px!important;line-height:1.5!important;}
+:global(body) :where(.scope)[data-ui-screen] :global(.shop-product-title) {color:var(--game-text)!important;}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-menu-footer) {
+  display:flex!important;flex-wrap:wrap;align-items:center;gap:6px 14px!important;
+  flex-shrink:0;margin-top:auto;padding:8px 0 0!important;border-top:1px solid var(--game-line);
+  color:var(--game-muted)!important;font:inherit;font-size:11px!important;line-height:1.5;
+}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-menu-footer>span) {display:inline-flex;align-items:center;gap:5px;white-space:nowrap;}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-menu-footer kbd) {
+  font:inherit;color:var(--game-text)!important;background:transparent!important;
+  border:1px solid var(--game-line)!important;border-radius:0!important;padding:1px 4px!important;box-shadow:none!important;
+}
+/* A specialized child owns its footer; the generic dialog footer stays hidden. */
+:global(body) :where(.scope)[data-ui-screen] :global(.dex-dialog:has(>.game-dialog-body .game-menu-footer)>.game-menu-footer) {display:none!important;}
+@media(max-width:760px) {
+  :global(body) :where(.scope)[data-ui-screen] :global(.training-top-layout) {display:block!important;}
+  :global(body) :where(.scope)[data-ui-screen] :global(.training-top-layout>.stat-radar) {display:none;}
+  :global(body) :where(.scope)[data-ui-screen] :global(:is(.training-stat,.training-stat-labels)) {grid-template-columns:minmax(46px,1fr) 34px 45px 64px 36px!important;gap:3px!important;}
+  :global(body) :where(.scope)[data-ui-screen] :global(.game-menu-footer) {font-size:10px!important;gap:4px 8px!important;}
+  :global(body) :where(.scope)[data-ui-screen] :global(.training-tera-options) {grid-template-columns:repeat(3,minmax(0,1fr))!important;}
+  :global(body) :where(.scope)[data-ui-screen] :global(button.shop-product) {min-height:96px!important;gap:8px!important;}
+}
+@media(max-height:760px) {
+  :global(body) :where(.scope)[data-ui-screen] :global(.training-top-layout>.stat-radar) {display:none;}
+  :global(body) :where(.scope)[data-ui-screen] :global(.training-top-layout) {grid-template-columns:minmax(0,1fr)!important;}
+}
+@media(prefers-reduced-motion:reduce) {
+  :global(body) :where(.scope)[data-ui-screen] :global(:is(button,a[href])) {transition:none!important;}
+}

@@ -201,10 +201,6 @@
   content: '✓';
   color: #ffbe97;
 }
-:where(.scope) :global(.dex-form-filters input:focus-visible+span) {
-  outline: 2px solid #d17a41;
-  outline-offset: 2px;
-}
 :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-layout) {
   grid-template-columns: minmax(0,.95fr) minmax(0,1.05fr);
   gap: 22px;
@@ -256,22 +252,11 @@
   overflow: hidden;
   transition: border-color .15s,background .15s,box-shadow .15s;
 }
-:where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-card:hover) {
-  border-color: #92a8ba;
-  background: #2d3d4d;
-}
-:where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-card.selected) {
-  border-color: #f7a57f;
-  background: linear-gradient(145deg,#4a3d3c,#2c3038);
-  box-shadow: inset 0 0 0 1px #f7a57f,0 0 16px #f3a07712;
-}
 :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-card.selected:after) {
   content: '';
   position: absolute;
   right: 0;
   top: 0;
-  border-top: 14px solid #f7a57f;
-  border-left: 14px solid transparent;
 }
 :where(.scope) :global(.dex-card-top),:where(.scope) :global(.dex-card-bottom) {
   width: 100%;
@@ -1266,10 +1251,6 @@
   color: #e1edf8;
   border-radius: 8px;
 }
-:where(.scope) :global(.dex-action-options>button:hover:not(:disabled)) {
-  border-color: #efaa83;
-  background: #3a3d43;
-}
 :where(.scope) :global(.dex-action-options>button>b) {
   font: 700 14px monospace;
   color: #dfab84;
@@ -1492,14 +1473,7 @@
   border-color: #567b74;
 }
 :where(.scope) :global(.nature-matrix button[aria-pressed=true]) {
-  background: #eeaf82;
-  color: #182b3a;
-  border-color: #fff0bf;
   font-weight: 800;
-  box-shadow: 0 0 0 1px #eeaf82;
-}
-:where(.scope) :global(.nature-matrix button:hover:not(:disabled)) {
-  border-color: #f4c09b;
 }
 :where(.scope) :global(.dex-training-dialog .training-ability) {
   max-width: 300px;
@@ -1737,11 +1711,6 @@
   color: #9eafbf;
   font-size: 19px;
   line-height: 1;
-}
-:where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-favorite:hover:not(:disabled)) {
-  background: #3d4d5e;
-  border-color: #627384;
-  color: #ffdc88;
 }
 :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-favorite.active) {
   color: #ffce73;
@@ -2320,15 +2289,6 @@
     min-height: 27px;
   }
 }
-:where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-party-slot:has(button:focus-visible)) {
-  outline: 2px solid #f7a57f;
-  outline-offset: 2px;
-  background: #423c3b;
-}
-:where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-card:focus-visible) {
-  outline: 2px solid #f7a57f;
-  outline-offset: 2px;
-}
 :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-party-slot) {
   position: relative;
 }
@@ -2342,9 +2302,6 @@
   border-radius: 8px;
   color: transparent;
   font-size: 0;
-}
-:where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-party-menu-button:hover) {
-  background: #f7a57f12;
 }
 /* Game cursor filters: native text editing exists only inside the search dialog. */
 :where(.scope) :global(.dex-filter-control) {
@@ -2392,11 +2349,6 @@
   background: transparent;
   height: 40px;
 }
-:where(.scope) :global(.dex-form-filters button[aria-pressed=true]) {
-  border-color: #df9176;
-  background: #f09b7414;
-  color: #ffd1b4;
-}
 :where(.scope) :global(.dex-filter-options) {
   display: grid;
   gap: 8px;
@@ -2416,10 +2368,6 @@
   color: #e8eef4;
   font: inherit;
   font-size: 13px;
-}
-:where(.scope) :global(.dex-filter-options button[aria-pressed=true]) {
-  border-color: #f1ab7c;
-  background: #a65b5938;
 }
 :where(.scope) :global(.dex-filter-options i) {
   font-style: normal;
@@ -2498,11 +2446,6 @@
   color: #d8e6ef;
   font: inherit;
   font-size: 12px;
-}
-:where(.scope) :global(.training-tabs button[aria-selected=true]) {
-  background: #61453b;
-  border-color: #f1af82;
-  color: #ffe2bc;
 }
 :where(.scope) :global(.training-tab-hint) {
   display: block;
@@ -2618,11 +2561,6 @@
   font-size: 12px;
   cursor: pointer;
 }
-:where(.scope) :global(.rule-picker-options button[aria-pressed="true"]) {
-  background: #26334e;
-  color: white;
-  border-color: #26334e;
-}
 :where(.scope) :global(.rule-picker p) {
   font-size: 11px;
   line-height: 1.5;
@@ -2638,18 +2576,9 @@
   border-color: #9da6ba;
   font-size: 11px;
 }
-:where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .rule-picker-options button[aria-pressed="true"]) {
-  background: #e9eef6;
-  color: #182137;
-  border-color: #e9eef6;
-}
 :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .rule-picker-options button) {
   background: #343d52!important;
   color: #edf2fa!important;
-}
-:where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .rule-picker-options button[aria-pressed="true"]) {
-  background: #e9eef6!important;
-  color: #182137!important;
 }
 :global(body) :where(.scope) :global(.dex-dialog:has(.pokemon-summary)) {
   width: min(860px,calc(100vw - 28px));

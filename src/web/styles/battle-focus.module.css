@@ -1,33 +1,9 @@
 /* src/web/battle-focus.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
 /* Keep the cursor clear without the old double yellow frame. */
-:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live button[data-game-cursor=true]),
-:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live button:focus-visible),
-:global(body:has(.battle-live)) :where(.scope) :global(dialog button[data-game-cursor=true]),
-:global(body:has(.battle-live)) :where(.scope) :global(dialog button:focus-visible) {
-  outline: 2px solid #98efd1!important;
-  outline-offset: 2px!important;
-  border-color: #98efd1!important;
-  box-shadow: none!important;
-}
-:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live :is(.action-button,.pokemon-choice,.battle-party-option)[data-game-cursor=true]),:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live :is(.action-button,.pokemon-choice,.battle-party-option):focus-visible),:global(body:has(.battle-live)) :where(.scope) :global(dialog .dex-action-options button[data-game-cursor=true]),:global(body:has(.battle-live)) :where(.scope) :global(dialog .dex-action-options button:focus-visible) {
-  background: #405d59!important;
-  color: #f3fff8!important;
-}
-:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live :is(.action-button,.pokemon-choice)[data-game-cursor=true] strong) {
-  color: #f3fff8!important;
-}
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-choice-arrow) {
   color: #98efd1;
 }
-:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live :is(.gimmick-dock,.tera-command-side) button[data-game-cursor=true]),:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live :is(.gimmick-dock,.tera-command-side) button:focus-visible) {
-  outline-offset: 2px!important;
-  border-radius: 8px;
-  box-shadow: none!important;
-}
 /* Pointer clicks do not need a native focus frame; Tab remains visible. */
-:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .gimmick-icon-button:focus:not(:focus-visible):not([data-game-cursor=true])) {
-  outline: none!important;
-}
 :global(body[data-game-input=pointer]) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .gimmick-icon-button) {
   outline: none!important;
 }

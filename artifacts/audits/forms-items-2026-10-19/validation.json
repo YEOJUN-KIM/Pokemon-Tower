@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-19",
+  "applicationChanges": false,
+  "existingTests": {
+    "passed": 47,
+    "failed": 0,
+    "files": ["selectable-forms", "form-equipment", "form-preview", "form-display-consistency", "form-moves", "bloodmoon-mega-abilities", "gimmicks", "primal-player", "tera", "raid-phases", "held-item-shop", "pokedex-entries"]
+  },
+  "projectTypecheck": "passed: node node_modules/typescript/bin/tsc --noEmit",
+  "auditScriptTypecheck": "passed: node node_modules/typescript/bin/tsc --ignoreConfig --noEmit --strict --skipLibCheck --target es2022 --module esnext --moduleResolution bundler --jsx react-jsx --resolveJsonModule --esModuleInterop --types node scripts/audit-forms-items.ts",
+  "auditRuntime": {
+    "uncaughtError": false,
+    "rawProbes": 159,
+    "rawProbeExecutionErrors": 0,
+    "rareSpeciesBattles": 242,
+    "rareSpeciesBattleErrors": 0,
+    "ordinaryPrioritySessions": 8,
+    "raidSessions": 19,
+    "expectedReproducedRaidAdmissionFailures": 6,
+    "expectedReproducedHeldItemAdmissionFailures": 1,
+    "raidRuleComparisonCases": 2
+  },
+  "limits": [
+    "No production game code, item data, UI, balancing, or Raid definitions were changed.",
+    "Expected rejected battle cases are findings, not audit execution failures.",
+    "The project tsconfig excludes scripts; the audit script was also checked separately.",
+    "Sprite paths and runtime UI state were inspected; no complete browser visual review or independent cartridge learnset comparison was performed."
+  ]
+}

@@ -1,0 +1,186 @@
+[
+  {
+    "species": "Zacian",
+    "item": "Rusted Sword",
+    "ok": true,
+    "view": {
+      "nature": "Serious",
+      "ability": "Intrepid Sword",
+      "item": "Rusted Sword",
+      "teraType": "Fairy",
+      "moves": [
+        "Play Rough",
+        "Close Combat",
+        "Wild Charge",
+        "Steel Beam"
+      ],
+      "stats": {
+        "hp": 167,
+        "atk": 170,
+        "def": 135,
+        "spa": 100,
+        "spd": 135,
+        "spe": 168
+      },
+      "gender": "N",
+      "shiny": false,
+      "species": "Zacian",
+      "displaySpecies": "Zacian-Crowned",
+      "condition": "167/167",
+      "active": true,
+      "types": [
+        "Fairy",
+        "Steel"
+      ]
+    },
+    "mapped": true
+  },
+  {
+    "species": "Zamazenta",
+    "item": "Rusted Shield",
+    "ok": true,
+    "view": {
+      "nature": "Serious",
+      "ability": "Dauntless Shield",
+      "item": "Rusted Shield",
+      "teraType": "Fighting",
+      "moves": [
+        "Close Combat",
+        "Wild Charge",
+        "Steel Beam",
+        "Body Slam"
+      ],
+      "stats": {
+        "hp": 167,
+        "atk": 140,
+        "def": 160,
+        "spa": 100,
+        "spd": 160,
+        "spe": 148
+      },
+      "gender": "N",
+      "shiny": false,
+      "species": "Zamazenta",
+      "displaySpecies": "Zamazenta-Crowned",
+      "condition": "167/167",
+      "active": true,
+      "types": [
+        "Fighting",
+        "Steel"
+      ]
+    },
+    "mapped": true
+  },
+  {
+    "species": "Arceus",
+    "item": "Flame Plate",
+    "ok": true,
+    "view": {
+      "nature": "Serious",
+      "ability": "Multitype",
+      "item": "Flame Plate",
+      "teraType": "Normal",
+      "moves": [
+        "Last Resort",
+        "Steel Beam",
+        "Flare Blitz",
+        "Future Sight"
+      ],
+      "stats": {
+        "hp": 195,
+        "atk": 140,
+        "def": 140,
+        "spa": 140,
+        "spd": 140,
+        "spe": 140
+      },
+      "gender": "N",
+      "shiny": false,
+      "species": "Arceus",
+      "displaySpecies": "Arceus",
+      "condition": "195/195",
+      "active": true,
+      "types": [
+        "Fire"
+      ]
+    },
+    "mapped": true
+  },
+  {
+    "species": "Silvally",
+    "item": "Fire Memory",
+    "ok": true,
+    "view": {
+      "nature": "Serious",
+      "ability": "RKS System",
+      "item": "Fire Memory",
+      "teraType": "Normal",
+      "moves": [
+        "Last Resort",
+        "Steel Beam",
+        "Outrage",
+        "Flamethrower"
+      ],
+      "stats": {
+        "hp": 170,
+        "atk": 115,
+        "def": 115,
+        "spa": 115,
+        "spd": 115,
+        "spe": 115
+      },
+      "gender": "N",
+      "shiny": false,
+      "species": "Silvally",
+      "displaySpecies": "Silvally",
+      "condition": "170/170",
+      "active": true,
+      "types": [
+        "Fire"
+      ]
+    },
+    "mapped": true
+  },
+  {
+    "species": "Genesect",
+    "item": "Burn Drive",
+    "ok": true,
+    "view": {
+      "nature": "Serious",
+      "ability": "Download",
+      "item": "Burn Drive",
+      "teraType": "Bug",
+      "moves": [
+        "Bug Buzz",
+        "Steel Beam",
+        "Last Resort",
+        "Gunk Shot"
+      ],
+      "stats": {
+        "hp": 146,
+        "atk": 140,
+        "def": 115,
+        "spa": 140,
+        "spd": 115,
+        "spe": 119
+      },
+      "gender": "N",
+      "shiny": false,
+      "species": "Genesect",
+      "displaySpecies": "Genesect",
+      "condition": "146/146",
+      "active": true,
+      "types": [
+        "Bug",
+        "Steel"
+      ]
+    },
+    "mapped": true
+  },
+  {
+    "species": "Giratina",
+    "item": "Griseous Core",
+    "ok": false,
+    "error": "Error: 배틀을 계속할 수 없습니다. 새 배틀을 시작해 주세요."
+  }
+]

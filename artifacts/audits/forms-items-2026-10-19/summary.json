@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-19",
+  "format": "gen9nationaldexag@@@Max Team Size = 3,Adjust Level = 50,+Dragonite-Mega,+Dragoninite,+Golisopod-Mega,+Golisopite",
+  "showdown": "0.11.11",
+  "nationalDex": 1025,
+  "roster": 648,
+  "dexEntries": 615,
+  "selectableForms": 62,
+  "familyForms": 26,
+  "multipleFamilies": 241,
+  "formRows": 682,
+  "rareBases": 125,
+  "rarePlayable": 121,
+  "megas": 97,
+  "oldMegas": 48,
+  "newMegas": 49,
+  "registeredMegas": 49,
+  "workingMegas": 49,
+  "shopRows": 144,
+  "missingShop": 92,
+  "missingIcons": 0,
+  "raidExact": 455,
+  "raidProbed": 462,
+  "duplicates": {
+    "normalizedItems": [],
+    "dexSpecies": [],
+    "selectableIds": []
+  }
+}

@@ -3,7 +3,7 @@
     "src/battle/npc-policy.ts": "22206328062533e0b44312f7cdfbc5df5ba39a88788abc45f5921c728dd6cb2e",
     "src/battle/tower-policy.ts": "4fd3c29dea61cf0bf2c3a046d1929da306bfa8b798d093a0ec79d029960e8998",
     "src/battle/z-decision.ts": "851fa606cdc87cc0f9d81ded577ec24d80f1bf0492f057c0511202b7419f24e2",
-    "src/battle/gimmicks.ts": "04fadd02268bd0d919853d93f7bb7193d6c86d3379d0f3588f70afce60014f5c",
+    "src/battle/gimmicks.ts": "fd415295dff8dd7a5d44ec1c736581005ce7c528c19049b7f03992487de07917",
     "src/data/npc-ai.ts": "492465e2e50bf457220ded7ae9c67ece98fc0d94687116f7902798876b2c6d06",
     "src/data/npc-selection-rules.ts": "cbd1fe1da13113468d0065384fead4c3423c246ca576687fe3bf7ef226de8dcd",
     "src/server/opponent-team.ts": "f10a249fe0683dd1e5652fa8557ec55592e89511b7864272fdb0abaca7a58ea6",
@@ -73,5 +73,11 @@
     "source": "2a5f2da874899aeb0e4c827c59def9427aec9952c18a48803ea05b3f8c6f125b"
   },
   "galarRebase": "Galar content updated; every non-Galar row is independently pinned by galar-preservation.json.",
-  "galarAiRebase": "Only explicit new Raihan/Leon decision flags; all NPC data stays pinned by galar-ai-preservation.json."
+  "galarAiRebase": "Only explicit new Raihan/Leon decision flags; all NPC data stays pinned by galar-ai-preservation.json.",
+  "formEquipmentRebase": {
+    "reason": "Explicitly authorized form equipment, shop products and versioned Mega/Ultra integration; NPC rows and decision policies remain unchanged.",
+    "files": [
+      "src/battle/gimmicks.ts"
+    ]
+  }
 }

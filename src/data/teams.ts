@@ -4,6 +4,8 @@ import {teraTypesForSpecies} from './tera';
 import roster from './battle-roster.json' with {type:'json'};
 import {statKeys,type TrainingProfile} from './training';
 import {separateForms,selectedForm} from './selectable-forms';
+import {hasFixedFormItem,equipmentBase,equipmentFormSpecies} from './form-items';
+import {equippedFormSet} from './equipped-form';
 export const POINT_TEAM_MARKER='towerpointsv1';
 const { Teams } = Showdown;
 
@@ -51,7 +53,7 @@ export function trainedSet(name:string,profile?:TrainingProfile) {
   if (!Object.hasOwn(pokemonSets, name)) throw new Error(`Unknown species: ${name}`);
   const base=structuredClone(pokemonSets[name as keyof typeof pokemonSets]);
   const form=selectedForm(name,profile?.forme);
-  if(profile?.forme&&!form)throw Error('Invalid selected form');
+  if(profile?.forme&&!form&&!(equipmentFormSpecies.has(name)&&equipmentBase(profile.forme)===name))throw Error('Invalid selected form');
   if(form){base.species=profile!.forme!;base.item=form.requiredItem??'';}
   // Keep a stable, legal nickname across the three Paldean breeds.
   if(name==='Tauros-Paldea-Combat')base.name='Tauros-Paldea';
@@ -69,7 +71,7 @@ export function trainedSet(name:string,profile?:TrainingProfile) {
   const types=teraTypesForSpecies(base.species);
   return {...base,teraType:profile?.teraType ?? (types.length===1?types[0]:Showdown.Dex.species.get(name).types[0])};
 }
-export const packTeam = (names: string[],profiles:Record<string,TrainingProfile>={},items:Record<string,string>={},gigantamax:string[]=[]) => Teams.pack(names.map(name=>({...trainedSet(name,profiles[name]),item:selectedForm(name,profiles[name]?.forme)?.requiredItem??items[name]??'',...(gigantamax.includes(name)?{gigantamax:true}:{})})));
+export const packTeam = (names: string[],profiles:Record<string,TrainingProfile>={},items:Record<string,string>={},gigantamax:string[]=[]) => Teams.pack(names.map(name=>{const fixed=selectedForm(name,profiles[name]?.forme)?.requiredItem;return equippedFormSet({...trainedSet(name,profiles[name]),item:hasFixedFormItem(name,fixed)?fixed!:items[name]??'',...(gigantamax.includes(name)?{gigantamax:true}:{})});}));
 export const packPlayerTeam = (names:string[],profiles:Record<string,TrainingProfile>={},items:Record<string,string>={},trainerDynamax=false) => packTeam(names,profiles,items,names.filter(name=>(trainerDynamax||items[name]==='Dynamax Band') && !megaStones[items[name]] && !!Showdown.Dex.species.get(profiles[name]?.forme??name).canGigantamax));
 export const playerTeam = packTeam(starters);
 export const opponentTeam = packTeam(['Pikachu', 'Gyarados', 'Snorlax']);

@@ -19,7 +19,8 @@ import {upgrades,type UpgradeKind} from '../data/shop';
 
 const require = createRequire(import.meta.url);
 export const engineVersion: string = require('pokemon-showdown/package.json').version;
-import {FORMAT,PRE_GOLISOPOD_FORMAT,PRE_TERA_FORMAT,PRE_NPC_FORMAT,supportedFormats} from '../data/battle-rules';
+import {FORMAT,PRE_FORM_ITEM_FORMAT,PRE_GOLISOPOD_FORMAT,PRE_TERA_FORMAT,PRE_NPC_FORMAT,supportedFormats} from '../data/battle-rules';
+import {equippedFormSet} from '../data/equipped-form';
 export {FORMAT} from '../data/battle-rules';
 export type Seed = [number, number, number, number];
 export type BattleLog = {
@@ -59,7 +60,7 @@ export async function runBattle(options: {
   const seed: Seed = options.seed ?? [1, 2, 3, 4];
   if (seed.length !== 4 || seed.some(n => !Number.isInteger(n) || n < 0 || n > 65535)) throw new Error('Invalid seed');
   const format=options.format ?? FORMAT;if(!supportedFormats.includes(format))throw Error('Unsupported battle format');
-  const towerFormat=[FORMAT,PRE_GOLISOPOD_FORMAT,PRE_NPC_FORMAT,PRE_TERA_FORMAT].includes(format);
+  const towerFormat=[FORMAT,PRE_FORM_ITEM_FORMAT,PRE_GOLISOPOD_FORMAT,PRE_NPC_FORMAT,PRE_TERA_FORMAT].includes(format);
   if(options.teraTickets && ['p1','p2'].some(side=>!Number.isSafeInteger(options.teraTickets![side as 'p1'|'p2']) || options.teraTickets![side as 'p1'|'p2']<0))throw Error('Invalid tera tickets');
   const teams = options.teams ?? {p1: playerTeam, p2: opponentTeam};
   const fixedOpponentOrder=options.fixedOpponentOrder??options.opponent.fixedOrder??false;
@@ -72,10 +73,11 @@ export async function runBattle(options: {
   }
   const packed=Object.fromEntries(Object.entries(teams).map(([side,team])=>[side,Teams.unpack(team)!])) as Record<'p1'|'p2',NonNullable<ReturnType<typeof Teams.unpack>>>;
   if(towerFormat)for(const set of Object.values(packed).flat())if(!canEquipGimmick(set.species,set.item))throw Error('Incompatible gimmick item');
-  const engineTeams=teams;
+  if(format===FORMAT)for(const side of ['p1','p2'] as const)packed[side]=packed[side].map(set=>equippedFormSet(set));
+  const engineTeams=format===FORMAT?{p1:Teams.pack(packed.p1),p2:Teams.pack(packed.p2)}:teams;
   const active=[...new Set(options.upgrades ?? [])].sort() as UpgradeKind[];
   if(active.some(kind=>!Object.hasOwn(upgrades,kind))) throw new Error('Invalid upgrade');
-  for (const [side,team] of Object.entries(teams)) {
+  for (const [side,team] of Object.entries(engineTeams)) {
     const unpacked = Teams.unpack(team);
     if (!unpacked || unpacked.length !== (side==='p2'&&options.raid?options.raid.phases.length:3)) throw new Error('Expected fixed 3-Pokemon team');
     const legality=structuredClone(unpacked);
@@ -117,8 +119,8 @@ export async function runBattle(options: {
       super._writeLine(type,message);
       if(type!=='start' || !this.battle) return;
       if(options.battleItems)itemController=installBattleItems(this.battle,options.battleItems);
-      if(towerFormat)installTowerGimmicks(this.battle,packed,format!==PRE_TERA_FORMAT ? options.teraTickets : undefined,options.rule,options.opponentRule,options.opponentTeraSpecies,options.trainerEquipment);
-      if(format===FORMAT)installGolisopodMega(this.battle);
+      if(towerFormat)installTowerGimmicks(this.battle,packed,format!==PRE_TERA_FORMAT ? options.teraTickets : undefined,options.rule,options.opponentRule,options.opponentTeraSpecies,options.trainerEquipment,format===FORMAT);
+      if(format===FORMAT||format===PRE_FORM_ITEM_FORMAT)installGolisopodMega(this.battle);
       if(options.raid)installRaid(this.battle,options.raid);
       // Phase bosses cannot be pulled into a later phase by Roar/Red Card.
       if(fixedOpponentOrder)this.battle.onEvent('DragOut',this.battle.format,(pokemon:import('pokemon-showdown').Pokemon)=>pokemon.side.id==='p2'?false:undefined);
@@ -194,7 +196,8 @@ export async function runBattle(options: {
           }
           if(switching && observation.switching)observation.switching={...observation.switching,...switching.view()};
           if(side==='p1' && itemController)observation.legalActions.push(...itemController.legal().map(kind=>({command:'item '+kind,label:upgrades[kind].name,estimatedDamage:0})));
-          const action = await policy.choose(structuredClone(observation));
+          let action = await policy.choose(structuredClone(observation));
+          if(side==='p2'&&format===FORMAT&&observation.legalActions.some(a=>a.command===action+' ultra'))action+=' ultra';
           if (!observation.legalActions.some(a => a.command === action)) throw new Error(`Illegal action: ${action}`);
           log.decisions.push({side, observation:structuredClone(observation), action});
           if(side==='p1' && action.startsWith('item ') && itemController){itemController.use(action.slice(5) as UpgradeKind);await settleItem();continue;}

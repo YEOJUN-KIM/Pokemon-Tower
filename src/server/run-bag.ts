@@ -8,6 +8,7 @@ import {allowsGimmick} from '../data/run-rules';
 import type {BattleRule} from '../data/run-rules';
 import {canEquipGimmick} from '../data/gimmicks';
 import {selectedForm} from '../data/selectable-forms';
+import {hasFixedFormItem} from '../data/form-items';
 import {vitamins,upgrades,VITAMIN_LIMIT} from '../data/shop';
 import {moveInfo} from '../data/move-info';
 import {trainingOptions,validateProfile,defaultProfile} from './training';
@@ -25,7 +26,7 @@ export class RunBag{
  view():BagView{
   const {runId,roster,profiles,held,rule,partners}=this.context,entries:BagEntry[]=[];
   const floor=(this.db.prepare('SELECT floor FROM runs WHERE id=?').get(runId) as {floor:number}).floor,vitaminUsage=readVitaminUsage(this.db,runId,floor);
-  const canHold=(species:string,item:string)=>!selectedForm(species,profiles[species]?.forme)?.requiredItem&&canEquipGimmick(species,item);
+  const canHold=(species:string,item:string)=>!hasFixedFormItem(species,selectedForm(species,profiles[species]?.forme)?.requiredItem)&&canEquipGimmick(species,item,profiles[species]?.forme);
   const owned=new Set([...(this.db.prepare('SELECT item FROM run_item_bag WHERE run_id=? AND quantity>0').all(runId) as {item:string}[]).map(r=>r.item),...Object.values(held)]);
   for(const item of owned){if(!isHeldItem(item)){entries.push({id:`held:${item}`,item,pocket:'tools',name:itemName(item),description:'이 모습에 고정된 전용 도구입니다.',icon:'',holder:Object.entries(held).find(([,value])=>value===item)?.[0],action:'view',targets:[]});continue;}entries.push({id:`held:${item}`,item,pocket:zCrystals[item]?'z':'tools',name:itemName(item),description:heldItems[item].description,icon:`/sprites/items/${itemIcon(item)}.${itemIconExtension(item)}`,holder:Object.entries(held).find(([,value])=>value===item)?.[0],action:'equip',targets:roster.filter(s=>canHold(s,item))});}
   for(const row of this.db.prepare('SELECT id,effect_json,quantity FROM run_reward_inventory WHERE run_id=? AND quantity>0 ORDER BY rowid').all(runId) as {id:string;effect_json:string;quantity:number}[]){

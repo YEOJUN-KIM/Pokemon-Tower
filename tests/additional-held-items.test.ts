@@ -117,7 +117,7 @@ test('natural Booster activation survives completion and next-floor packing, wit
 test('gimmick family draws keep Dynamax reachable alongside many Mega stones and exclude ineligible tools',()=>{
  let seed=7345;const random=()=>{seed^=seed<<13;seed^=seed>>>17;seed^=seed<<5;return (seed>>>0)/4294967296;};
  for(const floor of [10,30]){
-  const counts={mega:0,dynamax:0,z:0,primal:0,tera:0};let shops=0;
+  const counts={form:0,mega:0,dynamax:0,z:0,primal:0,tera:0};let shops=0;
   for(let i=0;i<4000;i++){
    const offers=rollItemOffers(floor,random,item=>!['Red Orb','Blue Orb'].includes(item));
    let found=false;for(const item of offers){const family=gimmickItemFamily(item);if(family){counts[family]++;found=true;}}

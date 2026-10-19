@@ -3781,5 +3781,347 @@
     "key": "cherrim-sunshine",
     "animatedFront": true,
     "animatedBack": true
+  },
+  "equipment-arceus-fire": {
+    "key": "arceus-fire",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-water": {
+    "key": "arceus-water",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-electric": {
+    "key": "arceus-electric",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-grass": {
+    "key": "arceus-grass",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-ice": {
+    "key": "arceus-ice",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-fighting": {
+    "key": "arceus-fighting",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-poison": {
+    "key": "arceus-poison",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-ground": {
+    "key": "arceus-ground",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-flying": {
+    "key": "arceus-flying",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-psychic": {
+    "key": "arceus-psychic",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-bug": {
+    "key": "arceus-bug",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-rock": {
+    "key": "arceus-rock",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-ghost": {
+    "key": "arceus-ghost",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-dragon": {
+    "key": "arceus-dragon",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-dark": {
+    "key": "arceus-dark",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-steel": {
+    "key": "arceus-steel",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-arceus-fairy": {
+    "key": "arceus-fairy",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-fire": {
+    "key": "silvally-fire",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-water": {
+    "key": "silvally-water",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-electric": {
+    "key": "silvally-electric",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-grass": {
+    "key": "silvally-grass",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-ice": {
+    "key": "silvally-ice",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-fighting": {
+    "key": "silvally-fighting",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-poison": {
+    "key": "silvally-poison",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-ground": {
+    "key": "silvally-ground",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-flying": {
+    "key": "silvally-flying",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-psychic": {
+    "key": "silvally-psychic",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-bug": {
+    "key": "silvally-bug",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-rock": {
+    "key": "silvally-rock",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-ghost": {
+    "key": "silvally-ghost",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-dragon": {
+    "key": "silvally-dragon",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-dark": {
+    "key": "silvally-dark",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-steel": {
+    "key": "silvally-steel",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-silvally-fairy": {
+    "key": "silvally-fairy",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-genesect-burn": {
+    "key": "genesect-burn",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-genesect-chill": {
+    "key": "genesect-chill",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-genesect-douse": {
+    "key": "genesect-douse",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
+  },
+  "equipment-genesect-shock": {
+    "key": "genesect-shock",
+    "animatedFront": false,
+    "animatedBack": false,
+    "front": true,
+    "back": true,
+    "shinyFront": true,
+    "shinyBack": true
   }
 }

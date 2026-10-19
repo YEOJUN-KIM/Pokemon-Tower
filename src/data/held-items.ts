@@ -1,5 +1,6 @@
 import zItems from './z-crystals.json' with {type:'json'};
 import megaItems from './mega-items.json' with {type:'json'};
+import {formItems} from './form-items';
 import {additionalHeldItems} from './additional-held-items';
 export const baseHeldItems={
   'Red Orb':{name:'주홍구슬',description:'그란돈에게 지니게 하면 등장할 때 원시그란돈으로 원시회귀합니다. 메가진화·혼합 룰에서 팀의 메가진화/다이맥스 공용 사용권을 소비합니다.',price:5000,consumable:false},
@@ -41,7 +42,7 @@ export const baseHeldItems={
   'Light Clay':{name:'빛의점토',description:'리플렉터·빛의장막·오로라베일의 지속 시간을 5턴에서 8턴으로 늘립니다.',price:900,consumable:false},
   ...additionalHeldItems,
 } as const;
-export const heldItems={...baseHeldItems,...megaItems,...zItems,'Dynamax Band':{name:'다이맥스밴드',description:'트레이너가 보유하면 팀의 포켓몬 한 마리가 배틀당 한 번, 3턴 동안 다이맥스할 수 있습니다.',price:5000,consumable:false},'Tera Orb':{name:'테라스탈오브',description:'트레이너가 보유하면 팀의 포켓몬 한 마리가 배틀당 한 번 테라스탈할 수 있습니다.',price:5000,consumable:false}} as const;
+export const heldItems:Record<string,{name:string;description:string;price:number;consumable:boolean}>={...baseHeldItems,...megaItems,...zItems,...formItems,'Dynamax Band':{name:'다이맥스밴드',description:'트레이너가 보유하면 팀의 포켓몬 한 마리가 배틀당 한 번, 3턴 동안 다이맥스할 수 있습니다.',price:5000,consumable:false},'Tera Orb':{name:'테라스탈오브',description:'트레이너가 보유하면 팀의 포켓몬 한 마리가 배틀당 한 번 테라스탈할 수 있습니다.',price:5000,consumable:false}} as const;
 export type HeldItem=keyof typeof heldItems;
 export const heldItemKeys=Object.keys(heldItems) as HeldItem[];
 const heldItemsById=new Map(heldItemKeys.map(item=>[item.toLowerCase().replace(/[^a-z0-9]/g,''),item]));

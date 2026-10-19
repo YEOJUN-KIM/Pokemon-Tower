@@ -390,5 +390,13 @@
     "price": 5000,
     "description": "이상해꽃에게 지니게 하면 기술 사용 전에 메가진화할 수 있습니다. 팀에서 특수 기믹은 배틀당 한 번만 사용합니다.",
     "consumable": false
+  },
+  "Zygardite": {
+    "name": "지가르데나이트",
+    "species": "Zygarde",
+    "forme": "Zygarde-Mega",
+    "price": 5000,
+    "description": "지가르데에게 지니게 하면 스웜체인지가 적용됩니다. HP가 절반 이하가 되어 퍼펙트폼이 된 뒤 메가진화할 수 있습니다. 팀의 메가진화 사용 제한을 적용합니다.",
+    "consumable": false
   }
 }

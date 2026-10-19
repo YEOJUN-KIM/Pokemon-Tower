@@ -73,7 +73,7 @@ test('all selectable family forms keep equipment under the collection member aft
   }
 });
 
-test('24th floor preparation exposes equipment, transfers a held item to Gengar and preserves fixed masks',()=>{
+test('24th floor preparation exposes equipment, transfers a held item and allows mask replacement',()=>{
   const store=new TowerStore(':memory:');
   try{
     store.ensurePlayer('prep');
@@ -84,6 +84,7 @@ test('24th floor preparation exposes equipment, transfers a held item to Gengar 
     }
     const row=store.battle(store.start('prep',['Urshifu','Gengar','Ogerpon'],'chaos'));
     store.db.prepare("UPDATE runs SET floor=24,state='select' WHERE id=?").run(row.run_id);
+    store.db.prepare('INSERT INTO run_item_bag VALUES (?,?,1)').run(row.run_id,'Hearthflame Mask');store.equipItem('prep',row.run_id,24,'Ogerpon','Hearthflame Mask');
     store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(row.run_id,'Urshifu','Mystic Water');
     store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(row.run_id,'Gengar','Leftovers');
     const tower=store.view('prep');
@@ -93,8 +94,7 @@ test('24th floor preparation exposes equipment, transfers a held item to Gengar 
     assert.ok(html.includes(pokemonName('Urshifu-Rapid-Strike')));
     store.equipItem('prep',row.run_id,24,'Gengar','Mystic Water','Urshifu');
     assert.deepEqual(store.view('prep').run!.heldItems,{Gengar:'Mystic Water',Ogerpon:'Hearthflame Mask'});
-    assert.throws(()=>store.equipItem('prep',row.run_id,24,'Ogerpon','Mystic Water','Gengar'),/전용 도구/);
-    assert.throws(()=>store.equipItem('prep',row.run_id,24,'Ogerpon',null),/전용 도구/);
+    store.equipItem('prep',row.run_id,24,'Ogerpon',null);assert.equal(store.view('prep').run!.partnerForms!.Ogerpon,undefined);store.equipItem('prep',row.run_id,24,'Ogerpon','Hearthflame Mask');
     store.db.prepare('INSERT INTO run_trainer_equipment VALUES (?,?)').run(row.run_id,'Dynamax Band');
     const next=store.battle(store.enter('prep',row.run_id,24,['Gengar','Urshifu','Ogerpon']));
     const team=Showdown.Teams.unpack(next.player_team)!;
@@ -110,7 +110,7 @@ test('each Ogerpon mask transforms without changing the collection identity or h
     profile.moves=['Protect','Ivy Cudgel'];
     const enemy=Showdown.Teams.unpack(packTeam(['Blastoise','Venusaur','Gyarados']))!;
     for(const set of enemy)set.moves=['Protect'];
-    const session=new BattleSession(async()=>{},[1,2,3,4],{rule:'tera',teraTickets:{p1:1,p2:0},teams:{p1:packPlayerTeam(['Ogerpon','Blastoise','Venusaur'],{Ogerpon:profile}),p2:Showdown.Teams.pack(enemy)}});
+    const session=new BattleSession(async()=>{},[1,2,3,4],{rule:'tera',teraTickets:{p1:1,p2:0},teams:{p1:packPlayerTeam(['Ogerpon','Blastoise','Venusaur'],{Ogerpon:profile},selectableForms[normal]?.requiredItem?{Ogerpon:selectableForms[normal].requiredItem!}:{}),p2:Showdown.Teams.pack(enemy)}});
     try{
       const before=await session.ready();
       const after=await session.submit(before.id,before.requestId,'move 1 terastallize');

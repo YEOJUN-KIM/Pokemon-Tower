@@ -1,8 +1,10 @@
 import data from './selectable-forms.json' with {type:'json'};
 import type {StatBlock} from './training';
+import {equipmentBase} from './form-items';
 export type SelectableForm={id:number;nationalId:number;baseSpecies:string;name:string;region?:string;regionLabel?:string;generation:number;types:string[];displayTypes:string[];ability:string;abilities:string[];baseStats:StatBlock;heightm:number;bst:number;legendary:boolean;mythical:boolean;requiredItem?:string;moves:string[];selfMoves:string[];legalMoves:string[];collection:'separate'|'family'};
 export const selectableForms=data as Record<string,SelectableForm>;
 export function collectionSpecies(species:string){
+ if(equipmentBase(species)!==species)return equipmentBase(species);
  if(species==='Tauros-Paldea')return 'Tauros-Paldea-Combat';
  const form=selectableForms[species];
  return form?.collection==='family'?form.baseSpecies:species;

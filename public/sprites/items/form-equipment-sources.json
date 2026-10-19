@@ -1,0 +1,990 @@
+{
+  "importedAt": "2026-10-19T08:52:07.662Z",
+  "files": [
+    {
+      "path": "public/sprites/items/rusted-sword.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rusted-sword.png",
+      "sha256": "c259c9c4e3a6129610bb3ff8ccfbb85ea8676ea557546e6e99eb584276d39c3d"
+    },
+    {
+      "path": "public/sprites/items/rusted-shield.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rusted-shield.png",
+      "sha256": "c0f52f9e3dbfcaa334a1df3d95a9e95d5c0d45995496cd55f148bfd52bed469b"
+    },
+    {
+      "path": "public/sprites/items/wellspring-mask.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/wellspring-mask.png",
+      "sha256": "d25b64d3a51ec1aa60c352022fc8c755b3b22700254ec8f2172890ba0a546dfe"
+    },
+    {
+      "path": "public/sprites/items/hearthflame-mask.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/hearthflame-mask.png",
+      "sha256": "6b13f9b2b0c81f3e120be11bfa821bd4d124d2c8827cb5a53b90d54a0f3ff0fb"
+    },
+    {
+      "path": "public/sprites/items/cornerstone-mask.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/cornerstone-mask.png",
+      "sha256": "a6a244923275519766641fff2c8d94f7658ad36cd70499f0730cc778a0752827"
+    },
+    {
+      "path": "public/sprites/items/flame-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/flame-plate.png",
+      "sha256": "7919e275fcc5b80807587b300837b0dd704f82cf7c30dac39137ff371d0e16aa"
+    },
+    {
+      "path": "public/sprites/items/splash-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/splash-plate.png",
+      "sha256": "ad1599af4f245d8d10e9146919b3f9db6565f7c7b93ef9a940905d015b386cb1"
+    },
+    {
+      "path": "public/sprites/items/zap-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/zap-plate.png",
+      "sha256": "bccba97e45978335d14a67b8e58419df63581ddba77a58dd81ba6ce99cdf17ce"
+    },
+    {
+      "path": "public/sprites/items/meadow-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/meadow-plate.png",
+      "sha256": "6be2fe1bbb8e6893cf6ab9bc7237143e3181cfda7443449346ed1dfcf98d1b48"
+    },
+    {
+      "path": "public/sprites/items/icicle-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/icicle-plate.png",
+      "sha256": "fbc2f53fcbea43a2a1efd26faab6d92cdb0901fd6fe5bec8a94a7b9646217298"
+    },
+    {
+      "path": "public/sprites/items/fist-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fist-plate.png",
+      "sha256": "9cb2a927412eac7c366db83d351a070840210777fcc793cfa2c531200e50d48e"
+    },
+    {
+      "path": "public/sprites/items/toxic-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/toxic-plate.png",
+      "sha256": "dc050b4180424047df0d11edaa58417d54a2b9475c754a8c935c192665d0a73e"
+    },
+    {
+      "path": "public/sprites/items/earth-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/earth-plate.png",
+      "sha256": "fc82c71a700eec95ec6d1197ba985abb1c59076a3b04c03eccb717668806c508"
+    },
+    {
+      "path": "public/sprites/items/sky-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/sky-plate.png",
+      "sha256": "328d47f7152dcbf7d67af248a15262162cec7b72f3ad9eb29aabe15b35390ea1"
+    },
+    {
+      "path": "public/sprites/items/mind-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/mind-plate.png",
+      "sha256": "218aa776f911a00b8cbec6d140ccc46a55689f34c333a13511ef2c6626adb171"
+    },
+    {
+      "path": "public/sprites/items/insect-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/insect-plate.png",
+      "sha256": "51b836ea1d5a284c663b116c51a5d5a5afce96d5a3d6863bff500b0b7a2b3ca6"
+    },
+    {
+      "path": "public/sprites/items/stone-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/stone-plate.png",
+      "sha256": "65cf9d01c4b23bce4b4f6c61fe2d54c05b95a6766850616b59548cc045b83c1b"
+    },
+    {
+      "path": "public/sprites/items/spooky-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/spooky-plate.png",
+      "sha256": "12ad5b66b8943d359bda401f8cb04e65cbcaca6b9e1f7073810869e61b5230e3"
+    },
+    {
+      "path": "public/sprites/items/draco-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/draco-plate.png",
+      "sha256": "52e4665f0350eac7ac7c8dcb24dcd8ef1ed9f0d8ce9d288a8e00c1add7795d85"
+    },
+    {
+      "path": "public/sprites/items/dread-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/dread-plate.png",
+      "sha256": "42141aed10b8d4fe0e63d0a13e3a9555b6fa2527c6f8af43ff122ed4b439ed36"
+    },
+    {
+      "path": "public/sprites/items/iron-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/iron-plate.png",
+      "sha256": "0bec83ad23dee09d79ab53d4783e88d58540c5fe4bdefca78ba2673c4fe9517e"
+    },
+    {
+      "path": "public/sprites/items/pixie-plate.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/pixie-plate.png",
+      "sha256": "ba374c3451099fe36eff4be7225609841559137694d6d74469fa163be09385f7"
+    },
+    {
+      "path": "public/sprites/items/fire-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fire-memory.png",
+      "sha256": "bdf23fe61b3d55df7a5672603c803c0aa7e9b637551add851337c7997a71dbe9"
+    },
+    {
+      "path": "public/sprites/items/water-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/water-memory.png",
+      "sha256": "ad86ddf476ae7e2908bf2ca32a38ec81ee20d3183e9a7f2a724a29fe86c468a4"
+    },
+    {
+      "path": "public/sprites/items/electric-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/electric-memory.png",
+      "sha256": "d525deffb01b73c0e430ddfa166ff0885a7f3fec316e18b78c2ee10e96071775"
+    },
+    {
+      "path": "public/sprites/items/grass-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/grass-memory.png",
+      "sha256": "4d29d44b7f0643836161794b180163c12e4c0a0f177d1c140f50c4fd16e8d611"
+    },
+    {
+      "path": "public/sprites/items/ice-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ice-memory.png",
+      "sha256": "a1e2bdc4cc152f208f57ac161c33d19a3071247c3522cdc5f6fb78c31e2a3476"
+    },
+    {
+      "path": "public/sprites/items/fighting-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fighting-memory.png",
+      "sha256": "75e2a49593b9739db66a324b9b402941c2acb180069548d20e61c8c4ef2723bd"
+    },
+    {
+      "path": "public/sprites/items/poison-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poison-memory.png",
+      "sha256": "ec186a9a3068826b91319e1547bc518306ca7c8ddd7398dd535ffd567594a9f6"
+    },
+    {
+      "path": "public/sprites/items/ground-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ground-memory.png",
+      "sha256": "807d1ced87bb8fddc56fded762392f299cf5d305d65e9c13fed61dcbcb69db12"
+    },
+    {
+      "path": "public/sprites/items/flying-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/flying-memory.png",
+      "sha256": "1e1b041c5bd98197ce66d0edb4ee43f534a5c43cb4a110219a9b47524add4a6c"
+    },
+    {
+      "path": "public/sprites/items/psychic-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/psychic-memory.png",
+      "sha256": "c88b9a9931ab15dfe631ca19d5f368461dc8fcddfeb48534f9e34662e221877e"
+    },
+    {
+      "path": "public/sprites/items/bug-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/bug-memory.png",
+      "sha256": "25c1b7ea83ee78cce0779a73fb176a0b036205a0756006d148edd6a882b0c923"
+    },
+    {
+      "path": "public/sprites/items/rock-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rock-memory.png",
+      "sha256": "81a3c1cfb00e9c25315fa8ae38c676f14318982f63843299395c7aa0c47e3c29"
+    },
+    {
+      "path": "public/sprites/items/ghost-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ghost-memory.png",
+      "sha256": "31b0b3191c1e14da1fe706785a4f0685c530a9152c60441a9c9c2e8359ebd60d"
+    },
+    {
+      "path": "public/sprites/items/dragon-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/dragon-memory.png",
+      "sha256": "020ac1d7dd7006b6b13138555500e1b29d48d0675bd48dde855879eda1ec3d2e"
+    },
+    {
+      "path": "public/sprites/items/dark-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/dark-memory.png",
+      "sha256": "12c414ac043189fcaf5988b80cc4eb8f2ec0790ada52689133e802fc1f9540af"
+    },
+    {
+      "path": "public/sprites/items/steel-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/steel-memory.png",
+      "sha256": "e9b07b1f29da27a249ec690b0cc121c77ef2f8570e5b7e6afb17fbe534b437be"
+    },
+    {
+      "path": "public/sprites/items/fairy-memory.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fairy-memory.png",
+      "sha256": "d1c18a2a44b1a9ac6f3373f7fdb2b791dbba4ac40bc1db81b4dc23d5ebd4b576"
+    },
+    {
+      "path": "public/sprites/items/burn-drive.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/burn-drive.png",
+      "sha256": "889a981e128d7f79d76d0a418a228f65bc5c1203936e6f1d9391d60a0ea06c6a"
+    },
+    {
+      "path": "public/sprites/items/chill-drive.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/chill-drive.png",
+      "sha256": "5799efd05d3b8df1d5bdd8a8dce136cbffc1751dabfd9ee07ae9916935c5eda2"
+    },
+    {
+      "path": "public/sprites/items/douse-drive.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/douse-drive.png",
+      "sha256": "2b06f5c69852ec7fc70dea5146ca6bcc8e5ecaa4bb91a6553fc9b14eed8477a9"
+    },
+    {
+      "path": "public/sprites/items/shock-drive.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/shock-drive.png",
+      "sha256": "c123213249286eff9c4f42839b2eeddb43c947a9305a6de943fa7e3de1b67ff4"
+    },
+    {
+      "path": "public/sprites/items/ultranecrozium-z.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultranecrozium-z--bag.png",
+      "sha256": "9e353cfb65710c7f8d661cc6e4dc2696b2125557bb3b318ce9e44fba803f853d"
+    },
+    {
+      "path": "public/sprites/items/zygardite.png",
+      "url": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/zygardite.png",
+      "sha256": "e7d06c6d08cd6e7933685e1f12ea41ab37023bf76e01bb2b3e4ce5558e1ca426"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-fire.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-fire.png",
+      "sha256": "07060e63200841677101631cc26583b04232ef2a7a52fc1fb7ed100464dd0282"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-fire.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-fire.png",
+      "sha256": "4b52595b0a4e3c73ebf2083d2b8a75f2a3fc37e3add9c28a87f3b43438aa84d0"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-fire.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-fire.png",
+      "sha256": "13859850d39397f283c8c12d4b6932a29d29d6f46944913f2b38ab6ccead7214"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-fire.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-fire.png",
+      "sha256": "90d330bf10102a46c552562cf7cb58e2f331e58eb7673aa5cc83e70b31011e68"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-water.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-water.png",
+      "sha256": "eb9cc85c2e4b8af75a57df677e7cc58c24ea51c8ea74f7f82fc7ab8dfb68a8b0"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-water.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-water.png",
+      "sha256": "400a7b7d72a474acc2097fd9fd92696bd78d1f0254eddfa418f9fae7de417915"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-water.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-water.png",
+      "sha256": "4edb993c79e96db63acd8b671b4a23345cb4cd620912dd4dbfff40d4832288b2"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-water.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-water.png",
+      "sha256": "573b79c41c601b198c2549e602ffb707dc71a111b8a30c1846eae026e1f332ca"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-electric.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-electric.png",
+      "sha256": "9d5832fea04914ed99df2d209d195a68f017005c7d3ab114c4ae6f1152d4443f"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-electric.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-electric.png",
+      "sha256": "eeb74f06a9ff3c699209c31d0c7d39611405d3648f63c0b023e7916752b02897"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-electric.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-electric.png",
+      "sha256": "dcd2c89495ac385177309f91fe71729c6042e694e936d6592ddd4270e12f17c3"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-electric.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-electric.png",
+      "sha256": "30aac5a9b84b0790cd8f71b463e1cb5128987beb8fb53a831425ce37f94ee968"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-grass.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-grass.png",
+      "sha256": "66d52895c7ae69966e345f1eade8228dc57e41374940e33211f659db8c8d4335"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-grass.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-grass.png",
+      "sha256": "16b9ff1c920643930049ebc5803609b8980a8374a26d7e93461c5c48a70a302b"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-grass.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-grass.png",
+      "sha256": "61217432a11803a7d10b72311b63d0bd302568aec30ef95f51fd9d489bc03f04"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-grass.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-grass.png",
+      "sha256": "7b92810f1405e0771868bfd6eec78c1857824c5a7ec4826efce015fc64a5cd41"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-ice.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-ice.png",
+      "sha256": "bf438f7919ee2055b1cfc652ae45993a4d5f411bee4dfa7f6e6ae0d166b13f54"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-ice.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-ice.png",
+      "sha256": "cbbbdfdb49897e555aefa402a624ea6b70cd582fb36f1f9b26b160dc4a53150b"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-ice.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-ice.png",
+      "sha256": "04491579ae0a5a12f40870b3b54f71e1a4182151708affdead2b69b310056cdf"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-ice.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-ice.png",
+      "sha256": "99151038d2639acf80130fce7bdbec4b59c84eceeb69468bb44209261d63c67a"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-fighting.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-fighting.png",
+      "sha256": "9e4cf03d757677e9a212f21fad50ed53b8cfc78ee54ecfa5de14a6b5f5198196"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-fighting.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-fighting.png",
+      "sha256": "1ce8ef8574912ba8c9041dc05a6b3aec572377c84b71474cdea901550b7d036d"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-fighting.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-fighting.png",
+      "sha256": "d27e2b6d7f1d04e9218ea9039f2d1b9f4d39a168d01e1fd274a5adde51cdab2d"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-fighting.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-fighting.png",
+      "sha256": "2e56c87fa6a19c0a9ed52f9054eb36cd62604b40c7399f655de4b17e4e3eaa6c"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-poison.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-poison.png",
+      "sha256": "3eb01cb8f2561d47046566baf484374fe17c55dbc1da8e7d02fa05b54ea9c000"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-poison.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-poison.png",
+      "sha256": "e638756bffb889b16ea56b616bba11fc16a8eee53a0ca3cd3745fe48fd32c7b8"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-poison.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-poison.png",
+      "sha256": "77ae4354104fa8984e4596af947e408db88da3180cbbffdcea66acfcd55c7782"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-poison.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-poison.png",
+      "sha256": "bdd11b4adeb777c69ad7533e110af3bfc0b75dd80693327461235d9281a70efb"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-ground.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-ground.png",
+      "sha256": "12ef504098e7ab61c4706abe48c7088f3bf0469b20fc2d05d36c9a5232b46e6a"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-ground.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-ground.png",
+      "sha256": "98ff628a0aae303642ce7a4ad529c1f4cca8a76b2aab47170db740e0e77f1af7"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-ground.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-ground.png",
+      "sha256": "ecfc750edaa42c347e5a9ec9fe7bce4b2bba74b25f147eb13d33d994a8df42f3"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-ground.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-ground.png",
+      "sha256": "6616f1a1a1e335befd19394ed3e0198f26371495232b60d5ba825612feaacbaa"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-flying.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-flying.png",
+      "sha256": "dcc6163c18dfcea501746be74d1f654a40deea010cf81e6c154cc59619524135"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-flying.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-flying.png",
+      "sha256": "1afcffcf801ac37f4918fe2169a1d3327cf2c439cb7b6a51232318c6f59d0b77"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-flying.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-flying.png",
+      "sha256": "9d585446aedcddce7cee67704bd84692c2aab579fd866d3c1208a583724317cd"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-flying.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-flying.png",
+      "sha256": "a6235a64d72a6fe93aaf347437152596fd0f439b2c0981418d99df865561d17d"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-psychic.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-psychic.png",
+      "sha256": "b1b382c518c03d15558e886f8f67f1707569e9671c5c938fd95bb5a0c1086e33"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-psychic.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-psychic.png",
+      "sha256": "c9e39ccef57f8891fed5f1f191a83dade458555295e1176d7bad91fba34648b7"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-psychic.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-psychic.png",
+      "sha256": "d346dc6875d41f74530e8ecc1beafeb84447f32483a5a017b52b4d4f3cb10177"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-psychic.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-psychic.png",
+      "sha256": "97b0683fb7f0719e87b2ac475f6b519154df0cdc54ad202f5d5cead59aa1903e"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-bug.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-bug.png",
+      "sha256": "7979dddbb0f5dbe605c43ea3233312a26dc898e1cbfb640f7d19c45dae4ed789"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-bug.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-bug.png",
+      "sha256": "c0878b1e39c7c74ce5bd6b779e1fbe38f1f5a878cea047d56b4ae47f6cf7b4eb"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-bug.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-bug.png",
+      "sha256": "8ec83371b5310196aa0de57a1ff6d90eccc879b47d2c22b377a8cbeb0d27f1f3"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-bug.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-bug.png",
+      "sha256": "6f228c75f3a53513ae5e068acc9599f4f9dfadbf6e8b204d64403d103ac83c19"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-rock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-rock.png",
+      "sha256": "cf6523a8f42bcec4e3ce26d348f5522ae293f065a9187fc39a942aa006d63474"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-rock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-rock.png",
+      "sha256": "9cb0ad9046f4cdd5946300f073dcdeba38796e2152bf3ba4c8913321b89270bb"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-rock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-rock.png",
+      "sha256": "9a36db4eef11ad88185a677d869d448e03678a958be7b5f901bc48e679fe853f"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-rock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-rock.png",
+      "sha256": "4dd2bc05941ef063eeb2c6141c7b315482c3643137801466e498988012ba15b4"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-ghost.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-ghost.png",
+      "sha256": "e05b05f7631a49a6e77412adfe90412d30277c2c68cbb3197d715313efc4143e"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-ghost.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-ghost.png",
+      "sha256": "e01dc3e8c6457d8d4a72945838859924f290cc68fb035b8d7196e6247fd690e7"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-ghost.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-ghost.png",
+      "sha256": "8b0858a5a067c706b61709632e4c7296b95740dc79c861adb8b8cb81d95f4e1d"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-ghost.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-ghost.png",
+      "sha256": "4637c6b7bc56a5421ee6dcabd1cd8e6060236d4906bf3a31fedc78ee222f1889"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-dragon.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-dragon.png",
+      "sha256": "3d2ab4a6fbf61b0f4ea86b9e5ab5d08bfb22be752a024763583edefb3472d070"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-dragon.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-dragon.png",
+      "sha256": "20bc5abfcc214939b22f64c52033081a6294770fd649a64767d3d59d51376949"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-dragon.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-dragon.png",
+      "sha256": "ea9f62f429ff7c02ec7c22288fe9ac31de088f044af77a232e6e8e184121c008"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-dragon.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-dragon.png",
+      "sha256": "d6717ed8c0cac0af30ddd3bc0a48ad6037163ef5c518081017d6ccff4c3383f9"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-dark.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-dark.png",
+      "sha256": "1694fea0a66c93f15bc140aabed490bb1566e55cf0a7353dbc9acdd206399ccb"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-dark.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-dark.png",
+      "sha256": "f3dfa624a79de64278e609df69d81dbed1c750c3af0888a9927829836e716e6c"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-dark.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-dark.png",
+      "sha256": "9f8b9f12ea00993be32be15c7700ff03d5238bbaaeae00ef3dc5af59230ea8be"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-dark.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-dark.png",
+      "sha256": "a4eaabe3711f01c2ce3a5bf733263975ea57b9ad3bee51e12fc6c90259a00f9e"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-steel.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-steel.png",
+      "sha256": "736a8ad78d9abc5ff6eb3ed6d8f97a00b4dba10347fa430f635f988b6999b94d"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-steel.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-steel.png",
+      "sha256": "567245bd387eda1056f922ebbde9ed6a84f3adb0759eaab761fb5324c585e6b0"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-steel.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-steel.png",
+      "sha256": "ae33ab7a9c321b2add6496f9c1e3b8fd894fae3c1520650de8f3cf11897fc909"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-steel.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-steel.png",
+      "sha256": "52c77125ebcb5213969598eea012e83de031c258c13b279cfd307d49aef697d0"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/arceus-fairy.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/arceus-fairy.png",
+      "sha256": "557737ac56565e24edb6326b33d7937322df2974711d386e78bb4ff512df995a"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/arceus-fairy.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/arceus-fairy.png",
+      "sha256": "677beb56e550245204930625acc4a1b221b6ee5a969c0c20c6d23928b5c558e2"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/arceus-fairy.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/arceus-fairy.png",
+      "sha256": "f867d50ff2b890d3271baf936c686511b6709f6e73b678a62a5e645f449d9ac5"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/arceus-fairy.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/arceus-fairy.png",
+      "sha256": "eab1c56def395fc65a0e4a79831eb0adb023323d1853edcc05cc868fb0cedbd7"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-fire.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-fire.png",
+      "sha256": "9136e5f407ca84f16eedf370315691c8d79339db67756c3004421e23316ca5b8"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-fire.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-fire.png",
+      "sha256": "e4239c4b58363bc1013a329b7d6ba25cbb2c212f791ffff70675da37bce3ff07"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-fire.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-fire.png",
+      "sha256": "14e4dfc65ee5601a017cea7f62c2ae38d1c6ce025be3325af880c63d99163b7d"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-fire.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-fire.png",
+      "sha256": "11d0fbd3a578df807903918874434e91d2a455bc64232712e3b3999018f965dd"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-water.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-water.png",
+      "sha256": "e0dc11da33ce02e08cc991be4c79a2c36508e2fb70f824abe3b777edae5876ab"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-water.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-water.png",
+      "sha256": "65e00b52283b00de38d8a758ce13c94115bef9938d2f7adb110d06eb73ec3e86"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-water.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-water.png",
+      "sha256": "77428b65ed607e66983f0cfde01e4efa407adb4e28b99d1f9c22de5561d7811d"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-water.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-water.png",
+      "sha256": "356b80a2b7e7716b8451acb2b43b52fe3fdf820c35a2ad46d0d2a3712100fc2e"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-electric.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-electric.png",
+      "sha256": "67d9dc5f87eacce40aa3d29f7acbf0e3fe708d0a8644138dd0546cc4720bf2eb"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-electric.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-electric.png",
+      "sha256": "e190bf3c04d913074babeeadc69abee4849d5efebcbc44903039046369b8731d"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-electric.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-electric.png",
+      "sha256": "d9e1371120894d4e3220889d90894c3da26475d8bda4078fe45ab1f1f205aff3"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-electric.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-electric.png",
+      "sha256": "a3dca8ddad8dbcfe71a1f9fa18bd9d32326161bb8f2d0b68e37a1c9a17250051"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-grass.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-grass.png",
+      "sha256": "8b0e54efffa842a4769b7bcacebfb8892122d77fab99a892d65ac9e162a30422"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-grass.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-grass.png",
+      "sha256": "dba4aa6223c0956f4284e21cf03bf39da313e8ec1071e9730ecdbd254b41b3f8"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-grass.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-grass.png",
+      "sha256": "4f230fe3bec4314af8f45eca304f9d2fc61f5cd77560736831a9f3d4987a1545"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-grass.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-grass.png",
+      "sha256": "ba1751d9b94402c31a62f1b0c03b4c7875ef358fe9814ea2001b9e5020f95996"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-ice.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-ice.png",
+      "sha256": "61c8a946c2e626223ee012fc3b148ba1dd561f5c55354df5e366007c94a8dfd4"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-ice.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-ice.png",
+      "sha256": "1c147fc80fb1cd4fc3dab5ad869ba1e05bb3a17f2e5bfa8bc7880f67adead1bb"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-ice.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-ice.png",
+      "sha256": "a4fc39eee8573f66564ac1bb01a37418c41fa6aa89f13e9f10519bb90c94bcae"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-ice.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-ice.png",
+      "sha256": "76f1563475ecd6229a3ca51143cb31323f3067f89a19d9c0b1e18c70aa80a47d"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-fighting.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-fighting.png",
+      "sha256": "660dcc28bf9a68a2e1031b4698ddc71a3044811e3b3a8ca7113e757c82c6a2f3"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-fighting.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-fighting.png",
+      "sha256": "81804f78376cbada5b23607b80ecc3bed75610b0540448e348ec700fbceeaa1f"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-fighting.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-fighting.png",
+      "sha256": "a4e52b3d1b834bc6bc2be53b6897dcef58a9aa265212f2746f8a3b1fb7e358c9"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-fighting.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-fighting.png",
+      "sha256": "8864f95d9b2b022178f9109aee3527b4a828abe4f27dab98c634b531a3f46b83"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-poison.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-poison.png",
+      "sha256": "eb86daa36db263d663017528a4e3a3c0952b63d7eb96d81faefb1b0847652481"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-poison.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-poison.png",
+      "sha256": "b41d636fc989a63661c2356d6829532a9b5bd4d711be995b2f5ff85be5355fd4"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-poison.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-poison.png",
+      "sha256": "22ed4fdfad4be2a610c400adc289687f30a23a00773a13e0454c14838f4f321c"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-poison.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-poison.png",
+      "sha256": "94e198b73264edbbae0d438ab3f39fc3aca5d5bd87e027dc5368166e855cf008"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-ground.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-ground.png",
+      "sha256": "72320d5ba35f9267447a22db373c0d4c813cbe0445ea00e8d654182171516404"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-ground.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-ground.png",
+      "sha256": "1334cfa2716bd1b532b9c7c27e747e7d5f901b89267b7c75c658b81529b99adc"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-ground.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-ground.png",
+      "sha256": "9c38484add6415bdea5849666d5db6707ca2822dfa666fc58582ab20d1b3bac5"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-ground.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-ground.png",
+      "sha256": "7a534f0e4fc18be67e8551b8a7e1f29deb9e8dfbb982cfd45a4cc692ae22e8ad"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-flying.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-flying.png",
+      "sha256": "d29b6fbc437f8ab5170a26594579d0e8cfa7fd7b9575d0506af781526b555ab4"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-flying.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-flying.png",
+      "sha256": "ff89394015071880536aa638898493b6e95fcb17d46f7cada12cf3f92b0cadd3"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-flying.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-flying.png",
+      "sha256": "cc25585f22cfb1e296165bd645a6d955acf0f7069c4e6d935d9ff05ec60862c7"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-flying.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-flying.png",
+      "sha256": "5031b21cd04d82b9a2f4be87b785f71935a90338001f759cc9c158ab29825a62"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-psychic.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-psychic.png",
+      "sha256": "b54a882bfbb77a3a9e075e848b123f4f657a072d57fd2c3d2ffc205e41e388dd"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-psychic.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-psychic.png",
+      "sha256": "d274fbc5256e8732b4a0ab7cc7149783cd3ccd594a6422ca0b0ad2a6c02e5bc4"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-psychic.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-psychic.png",
+      "sha256": "d8957a51ba68fa9d8691d2d0dc0bf82720165f4cd42d16013176e970b2dbd8a7"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-psychic.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-psychic.png",
+      "sha256": "30dc063beccab92524fbb2ed0ebe64addc36f098975356267eab78b6e33e6011"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-bug.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-bug.png",
+      "sha256": "929bc32c70f5e0627c157a84ebd71d0e1b929599adbdb71ceb8ad047bef4476c"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-bug.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-bug.png",
+      "sha256": "96d5f4f4a6a58900fa8887d2a81dfeab7ca2a5f48e12e34e68636f1eb5eb9dab"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-bug.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-bug.png",
+      "sha256": "c16a1070f517f0c738eb82fd2120f8dec1b8fbee38988750f4fd1e89da3a9ffa"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-bug.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-bug.png",
+      "sha256": "1faa74c5e462ffa7a7efd3d000ef845ab50a4c0e636e66d6e7db022d8a20c002"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-rock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-rock.png",
+      "sha256": "5bf4d0207ae9898e50cc6aa4ef014956c575dd91c4c6bdb77706a08285aa7a7b"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-rock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-rock.png",
+      "sha256": "2b5b74c06917c669a7127181751374d830feca8c7bdb425324579b6446ac330f"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-rock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-rock.png",
+      "sha256": "4a9842d3feb5ae8a5e5eb786bb41aa857dd8e8e33d68f84fa15e25d1e27a7ced"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-rock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-rock.png",
+      "sha256": "68ca66992ab7097a26f3b35b2dc9077fc5f90d41680db6fb0af52c5b394f7137"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-ghost.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-ghost.png",
+      "sha256": "7dc4c920e935bc24d46d8103c4fcde698c61a99927dbebc935d1cb41ba7a9956"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-ghost.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-ghost.png",
+      "sha256": "4effc068fd0e4ad334d5e873c16d2fe9e5b63129dc626799abd26a3d0d05b9be"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-ghost.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-ghost.png",
+      "sha256": "70a914e1e7f67f31af66f0c3d5760f24a4893d81aa82623ed44ddefcb9338451"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-ghost.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-ghost.png",
+      "sha256": "ba36f2bdb941e9197256095803f9279949ca7900138aef13af30e7f5bf6b8a88"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-dragon.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-dragon.png",
+      "sha256": "c2a8edde20f159dd6d2e06cb9478182daf5839f2f0672305191da93912fafabe"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-dragon.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-dragon.png",
+      "sha256": "88008cefda70b1475764abb4805ad569008e4b3be3be2d4bdbf413738422541e"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-dragon.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-dragon.png",
+      "sha256": "e2fe2ac75b0793f95b4f0ee246136df6d09dd245bd3355aaf3d7c2e5aad9560e"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-dragon.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-dragon.png",
+      "sha256": "23abe5a39a273cfb6cf6c30c9b4129f3a90c1f172e0eee55f508dc2096ac55d0"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-dark.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-dark.png",
+      "sha256": "111edc8d96c58b0d00d95ad565dacb331d1424478ec14e8a81a213cac83fdc21"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-dark.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-dark.png",
+      "sha256": "7ece9dd07a4021041765e1a87c9ab2e31bdffd91276eba42590ebeeea1cb7fc3"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-dark.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-dark.png",
+      "sha256": "ece770a23b17b954504c5b58c9c23fc5c55ce27c42137cb6cfd275d04a9a3bda"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-dark.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-dark.png",
+      "sha256": "bd4c98d73763259a116c52fa20d2facc81f6432a21dbcb5e941e7f214da6305c"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-steel.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-steel.png",
+      "sha256": "4bd81a1106ec326e866074bf397bd2eaee10d552b57f9c741fa9ef53a601888c"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-steel.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-steel.png",
+      "sha256": "f1c144cb25ad2ebd146e280864f5c540f286f9c47d4b03d8928b81725d22c5f2"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-steel.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-steel.png",
+      "sha256": "7e7a3545c68c1dc329a53f07740ca61725d9fa075d8ee8a4a4f29a4466031224"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-steel.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-steel.png",
+      "sha256": "64ce1b7bcd6af99e214ad8b2dd4ab8c9056f3b7be418a97b7b1d34372091a217"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/silvally-fairy.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/silvally-fairy.png",
+      "sha256": "e44b9a9d8ae89261ce9fbd5ebb9094454d3281c25b519077665e7ef5b473b2e4"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/silvally-fairy.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/silvally-fairy.png",
+      "sha256": "b412a001969019574105da195a99c2b84c8c5a70388ca7c0b9b55891ea54b6b1"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/silvally-fairy.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/silvally-fairy.png",
+      "sha256": "e4265c83d4318ef9af4c3ffefdb080f2004e3b91e8cc519c4d96ab282706dfa2"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/silvally-fairy.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/silvally-fairy.png",
+      "sha256": "5dffa15c6d4ba92541866797bee7f74b8cd9b0ac5e41e13d7d1aabf2a4baaca5"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/genesect-burn.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/genesect-burn.png",
+      "sha256": "c8a1f5ea9f5c7675c8108e18f3c6221bf07e13220da33f56460dc14aac100b16"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/genesect-burn.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/genesect-burn.png",
+      "sha256": "5a7152951a4a231a53a22a3eb2e0fc77176daaf57acd83ecbaa5674c9f09e25b"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/genesect-burn.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/genesect-burn.png",
+      "sha256": "cbd16b2f11f1fe24ff1e3f2af0542be09375ece680b840ac16877f83bf442edb"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/genesect-burn.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/genesect-burn.png",
+      "sha256": "fc97a757df2f09d62d576e8a8b3d3181aaccf96efa596cb1b9dc2116a45f6e14"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/genesect-chill.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/genesect-chill.png",
+      "sha256": "17ed85108eaa5a9caa09c6fc86e82fd2e1f0ee9bb5b0f27ab1f9d0a08953f048"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/genesect-chill.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/genesect-chill.png",
+      "sha256": "6b06b6aa32f36e10965fb07667412f9dcd2234521c613351fa7d70be114efd0c"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/genesect-chill.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/genesect-chill.png",
+      "sha256": "f7a3ae890cc2cb7a81511982cd0311107b2cafb30125b71fa967c2d426b2f7c2"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/genesect-chill.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/genesect-chill.png",
+      "sha256": "c2b728eff95c6d6c9e58f09423014f9bbcf705d1777d49e601202b9a990bd6a4"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/genesect-douse.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/genesect-douse.png",
+      "sha256": "b6a60cd07eb73c132704f84c3239da974a4ae5bfa59f6d570c43c35cb245d4b5"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/genesect-douse.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/genesect-douse.png",
+      "sha256": "5962b7cf67b1115fce091350245d3dc7980fa0fe577f266b9b2a352b29284c71"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/genesect-douse.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/genesect-douse.png",
+      "sha256": "f9e43c7be103bcfb1a1d6338f83a6d47cfc4a81c983596ed4665d9fa7a29a858"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/genesect-douse.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/genesect-douse.png",
+      "sha256": "446b3eaa98f810a2cd81813db1360042112bb473598aa9929c412a2e049d38b6"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5/genesect-shock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/genesect-shock.png",
+      "sha256": "684b95751bcb5c0482607940d0e65a87e5f734d65f34f3f0c19067601c9df1d1"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-shiny/genesect-shock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-shiny/genesect-shock.png",
+      "sha256": "9032396b46059d50fbd3c2e4d53ef6bbc59b7510f0066feb177199caf002f36b"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back/genesect-shock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/genesect-shock.png",
+      "sha256": "ea4d0af2e523b71a9216fa4163f1932ad4e4d5314f7d28eb5ba1c9a5e386d976"
+    },
+    {
+      "path": "public/vendor/showdown/pokemon/gen5-back-shiny/genesect-shock.png",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back-shiny/genesect-shock.png",
+      "sha256": "01f940f4eb0b9f214b14ad2100a197a71350a4b3b315ec984fd519e22be94e4e"
+    }
+  ]
+}

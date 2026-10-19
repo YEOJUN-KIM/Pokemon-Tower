@@ -194,5 +194,7 @@ CREATE TABLE IF NOT EXISTS run_villain_tracks(
 ) STRICT;
 CREATE TABLE IF NOT EXISTS run_event_followups(run_id TEXT NOT NULL REFERENCES runs(id),encounter_order INTEGER NOT NULL,origin_floor INTEGER NOT NULL,checked INTEGER NOT NULL DEFAULT 0 CHECK(checked IN (0,1)),PRIMARY KEY(run_id,encounter_order)) STRICT;
 CREATE TABLE IF NOT EXISTS tool_voucher_draws(voucher_id TEXT NOT NULL REFERENCES run_reward_inventory(id),draw_index INTEGER NOT NULL,candidates_json TEXT NOT NULL CHECK(json_valid(candidates_json)),selected_item TEXT,destination TEXT,target TEXT,PRIMARY KEY(voucher_id,draw_index)) STRICT;
+CREATE TABLE IF NOT EXISTS shop_choice_receipts(run_id TEXT NOT NULL REFERENCES runs(id),floor INTEGER NOT NULL,revision INTEGER NOT NULL,product TEXT NOT NULL,item TEXT NOT NULL,PRIMARY KEY(run_id,floor,revision,product)) STRICT;
+CREATE TABLE IF NOT EXISTS run_form_item_rules(run_id TEXT PRIMARY KEY REFERENCES runs(id),version INTEGER NOT NULL CHECK(version=1)) STRICT;
   PRAGMA user_version = 46;
 `;

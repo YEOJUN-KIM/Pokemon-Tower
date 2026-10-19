@@ -144,7 +144,7 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
       const form=value.split(',')[0];
       if(form.includes('-Mega')){
         const megaLine=lines.slice(index).find(l=>l.startsWith('|-mega|'+actor+'|')),stone=megaLine?.split('|')[4];
-        const reaction=`${side==='enemy' ? '상대 ' : ''}${pokemonName(pokemon.species)}의 ${itemName(stone)}이 키스톤에 반응하고 있다!`;
+        const reaction=form==='Rayquaza-Mega'?`${side==='enemy'?'상대 ':''}${pokemonName(pokemon.species)}의 화룡점정이 메가진화의 힘을 이끌어 낸다!`:`${side==='enemy' ? '상대 ' : ''}${pokemonName(pokemon.species)}의 ${itemName(stone)}이 키스톤에 반응하고 있다!`;
         frames.push({view:structuredClone(view),motion:null,announcement:reaction,duration:1000});
         frames.push({view:structuredClone(view),motion:{kind:'mega-charge',side:side!,color:'psychic'},announcement:reaction,duration:950});
         frames.push({view:structuredClone(view),motion:{kind:'mega-shell',side:side!,color:'psychic'},announcement:reaction,duration:650});

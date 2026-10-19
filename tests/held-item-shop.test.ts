@@ -4,6 +4,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {itemShopRule,itemRarityWeights,rollItemOffers,type ItemRarity} from '../src/data/held-item-shop';
 import {heldItemKeys} from '../src/data/held-items';
+import {shopProductOptions} from '../src/data/shop-products';
 import {TowerStore} from '../src/server/tower-store';
 import {starters} from '../src/data/teams';
 
@@ -29,7 +30,7 @@ test('saved stock survives reloads, rejects unlisted purchases without spending,
     const before=store.view('shop'),offers=before.run!.itemOffers!;assert.equal(offers.length,4);assert.deepEqual(store.view('shop').run!.itemOffers,offers);
     const absent=heldItemKeys.find(item=>!offers.includes(item) && itemShopRule(item).minClearedFloor===5)!;
     assert.throws(()=>store.purchaseItem('shop',run,6,absent,'Charizard'),/판매하지/);assert.deepEqual(store.view('shop'),before);
-    store.purchaseItem('shop',run,6,offers[0],isTrainerEquipment(offers[0])?null:starters.find(species=>canEquipGimmick(species,offers[0]))!);assert.deepEqual(store.view('shop').run!.itemOffers,offers);
+    const chosen=shopProductOptions(offers[0])[0];store.purchaseItem('shop',run,6,chosen,isTrainerEquipment(chosen)?null:starters.find(species=>canEquipGimmick(species,chosen))!);assert.deepEqual(store.view('shop').run!.itemOffers,offers);
     store.db.prepare("UPDATE runs SET floor=11 WHERE id=?").run(run);assert.equal(store.view('shop').run!.itemOffers!.length,4);assert.equal(store.db.prepare('SELECT COUNT(*) AS n FROM item_shops WHERE run_id=?').get(run)!.n,2);
   }finally{store.close();}
 });

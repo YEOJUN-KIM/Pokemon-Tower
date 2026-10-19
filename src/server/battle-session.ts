@@ -112,7 +112,10 @@ export class BattleSession {
           const current=request.side?.pokemon.find((p:{active:boolean})=>p.active),tera=current?.terastallized;
           this.movePP=(request.active?.[0]?.moves ?? []).map((move:{id:string;pp:number;maxpp:number})=>{
             const base=Showdown.Dex.moves.get(move.id);
-            return {name:base.name,pp:move.pp,maxpp:move.maxpp,...(move.id==='terablast' && tera ? {type:tera,power:tera==='Stellar'?100:80,accuracy:true,category:current.stats.atk>current.stats.spa?'Physical' as const:'Special' as const} : {})};
+            const item=Showdown.Dex.items.get(current?.item??''),form=current?.details?.split(',')[0]??'';
+            const equipmentType=move.id==='judgment'?item.onPlate:move.id==='multiattack'?item.onMemory:move.id==='technoblast'?item.onDrive:undefined;
+            const type=equipmentType??(move.id==='terastarstorm'&&form==='Terapagos-Stellar'?'Stellar':undefined);
+            return {name:base.name,pp:move.pp,maxpp:move.maxpp,...(type?{type,power:base.basePower,accuracy:base.accuracy,category:base.category}:{}),...(move.id==='terablast' && tera ? {type:tera,power:tera==='Stellar'?100:80,accuracy:true,category:current.stats.atk>current.stats.spa?'Physical' as const:'Special' as const} : {})};
           });
           this.zMovePP=request.active?.[0]?.canZMove?.map((option:{move:string}|null,index:number)=>{
             if(!option)return null;

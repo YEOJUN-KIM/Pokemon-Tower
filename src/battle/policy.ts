@@ -11,7 +11,7 @@ export type OwnPokemon = {
 export type Request = {
   wait?: boolean; teamPreview?: boolean; forceSwitch?: boolean[];
   side: {pokemon: OwnPokemon[]};
-  active?: {trapped?: boolean;maybeTrapped?:boolean; canMegaEvo?:boolean;canDynamax?:boolean;canTerastallize?:string;canZMove?:({move:string;target:string}|null)[];maxMoves?:{maxMoves:{move:string;disabled?:boolean}[]}; moves: {id: string; move: string; pp?: number; disabled?: boolean | string}[]}[];
+  active?: {trapped?: boolean;maybeTrapped?:boolean; canMegaEvo?:boolean;canUltraBurst?:boolean;canDynamax?:boolean;canTerastallize?:string;canZMove?:({move:string;target:string}|null)[];maxMoves?:{maxMoves:{move:string;disabled?:boolean}[]}; moves: {id: string; move: string; pp?: number; disabled?: boolean | string}[]}[];
 };
 export type Observation = {
   turn: number;
@@ -67,6 +67,7 @@ export function legalActions(request: Request, opponent?: string): Action[] {
         const score=estimateDamage(move.id,own,opponent);
         if(!isMax || !max?.disabled)actions.push({command: `move ${index+1}`,label,estimatedDamage:score});
         if(active.canTerastallize)actions.push({command:`move ${index+1} terastallize`,label:move.move,estimatedDamage:score});
+        if(active.canUltraBurst)actions.push({command: `move ${index+1} ultra`,label:move.move,estimatedDamage:score});
         if(active.canMegaEvo)actions.push({command: `move ${index+1} mega`,label:move.move,estimatedDamage:score});
         if(active.canDynamax && max && !max.disabled)actions.push({command: `move ${index+1} dynamax`,label:Dex.moves.get(max.move).name,estimatedDamage:score});
       }

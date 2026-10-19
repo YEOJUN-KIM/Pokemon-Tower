@@ -43,7 +43,7 @@ test('every playable Mega changes to its native Mega ability in the battle engin
    battle.setPlayer('p1',{name:'Player',team:Showdown.Teams.unpack(packTeam([stone.species,'Blastoise','Venusaur'],{},{[stone.species]:item}))!});
    battle.setPlayer('p2',{name:'Opponent',team:Showdown.Teams.unpack(packTeam(['Snorlax','Shuckle','Blissey']))!});
    battle.makeChoices('team 123','team 123');
-   const pokemon=battle.p1.active[0];assert.ok(battle.actions.runMegaEvo(pokemon),stone.forme);
+   const pokemon=battle.p1.active[0];if(item==='Zygardite'){pokemon.formeChange('Zygarde-Complete',battle.dex.abilities.get('Power Construct'),true);pokemon.canMegaEvo=battle.actions.canMegaEvo(pokemon);}assert.ok(battle.actions.runMegaEvo(pokemon),stone.forme);
    const expected=Showdown.toID(Showdown.Dex.species.get(stone.forme).abilities[0]);
    assert.equal(pokemon.species.name,stone.forme);assert.equal(pokemon.baseAbility,expected,stone.forme);
    // Trace immediately copies the opposing Snorlax's Immunity after gaining Trace.

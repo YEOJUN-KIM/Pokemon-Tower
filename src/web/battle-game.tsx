@@ -250,7 +250,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
     } catch (e) { setError(e instanceof Error ? e.message : '서버에 연결할 수 없습니다. 새로고침해 주세요.');if(body.type==='adjust-run'||body.type==='bag-use')throw e; }
     finally { if(mounted.current){setPortalActivation(null);setBusy(false);setPlaying(false);setTrainerIntro(null);setMotion(null);setNotice(null);setAnnouncement(null);} requestLock.current = false; }
   }
-  const send = (action: string) => {if(action.startsWith('move ') && gimmick && battle?.actions.some(a=>a.command===action+' '+gimmick))action+=' '+gimmick;setGimmick(null);setTab('root');if(action.startsWith('move '))lastMove.current=action.replace(/ (mega|dynamax|terastallize|zmove)$/,'');return submit({type: 'action', battleId: battle?.id, requestId: battle?.requestId, action});};
+  const send = (action: string) => {if(action.startsWith('move ') && gimmick && battle?.actions.some(a=>a.command===action+' '+gimmick))action+=' '+gimmick;setGimmick(null);setTab('root');if(action.startsWith('move '))lastMove.current=action.replace(/ (mega|dynamax|terastallize|zmove|ultra)$/,'');return submit({type: 'action', battleId: battle?.id, requestId: battle?.requestId, action});};
   const selectAction=()=>{if(document.querySelector('dialog[open]'))return;const buttons=Array.from(document.querySelectorAll<HTMLButtonElement>('.action-grid button:not(:disabled)'));selectGameCursor(buttons.find(button=>button.dataset.command===lastMove.current) ?? buttons[0] ?? document.querySelector<HTMLButtonElement>('.battle-panel .command-area>.primary-button'));};
   const focusAction=()=>requestAnimationFrame(selectAction);
   const acquireOffer=currentEvent?.hiddenShop?.offers.find(offer=>offer.id===acquireOfferId);

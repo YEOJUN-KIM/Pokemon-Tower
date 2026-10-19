@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(await service.state(player),{headers});
     }
     if(body.type==='purchase-item' && typeof body.runId==='string' && Number.isSafeInteger(body.floor)) {
-      service.store.purchaseItem(player,body.runId,body.floor,body.item,body.species,body.revision??0);
+      service.store.purchaseItem(player,body.runId,body.floor,body.item,body.species,body.revision??0,body.product);
       return NextResponse.json(await service.state(player),{headers});
     }
     if(body.type==='equip-item' && typeof body.runId==='string' && Number.isSafeInteger(body.floor)) {

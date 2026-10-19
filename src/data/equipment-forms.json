@@ -1,0 +1,310 @@
+{
+  "Arceus-Fire": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-fire",
+    "types": [
+      "Fire"
+    ]
+  },
+  "Arceus-Water": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-water",
+    "types": [
+      "Water"
+    ]
+  },
+  "Arceus-Electric": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-electric",
+    "types": [
+      "Electric"
+    ]
+  },
+  "Arceus-Grass": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-grass",
+    "types": [
+      "Grass"
+    ]
+  },
+  "Arceus-Ice": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-ice",
+    "types": [
+      "Ice"
+    ]
+  },
+  "Arceus-Fighting": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-fighting",
+    "types": [
+      "Fighting"
+    ]
+  },
+  "Arceus-Poison": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-poison",
+    "types": [
+      "Poison"
+    ]
+  },
+  "Arceus-Ground": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-ground",
+    "types": [
+      "Ground"
+    ]
+  },
+  "Arceus-Flying": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-flying",
+    "types": [
+      "Flying"
+    ]
+  },
+  "Arceus-Psychic": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-psychic",
+    "types": [
+      "Psychic"
+    ]
+  },
+  "Arceus-Bug": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-bug",
+    "types": [
+      "Bug"
+    ]
+  },
+  "Arceus-Rock": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-rock",
+    "types": [
+      "Rock"
+    ]
+  },
+  "Arceus-Ghost": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-ghost",
+    "types": [
+      "Ghost"
+    ]
+  },
+  "Arceus-Dragon": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-dragon",
+    "types": [
+      "Dragon"
+    ]
+  },
+  "Arceus-Dark": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-dark",
+    "types": [
+      "Dark"
+    ]
+  },
+  "Arceus-Steel": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-steel",
+    "types": [
+      "Steel"
+    ]
+  },
+  "Arceus-Fairy": {
+    "id": 493,
+    "baseSpecies": "Arceus",
+    "spriteKey": "equipment-arceus-fairy",
+    "types": [
+      "Fairy"
+    ]
+  },
+  "Silvally-Fire": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-fire",
+    "types": [
+      "Fire"
+    ]
+  },
+  "Silvally-Water": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-water",
+    "types": [
+      "Water"
+    ]
+  },
+  "Silvally-Electric": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-electric",
+    "types": [
+      "Electric"
+    ]
+  },
+  "Silvally-Grass": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-grass",
+    "types": [
+      "Grass"
+    ]
+  },
+  "Silvally-Ice": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-ice",
+    "types": [
+      "Ice"
+    ]
+  },
+  "Silvally-Fighting": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-fighting",
+    "types": [
+      "Fighting"
+    ]
+  },
+  "Silvally-Poison": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-poison",
+    "types": [
+      "Poison"
+    ]
+  },
+  "Silvally-Ground": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-ground",
+    "types": [
+      "Ground"
+    ]
+  },
+  "Silvally-Flying": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-flying",
+    "types": [
+      "Flying"
+    ]
+  },
+  "Silvally-Psychic": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-psychic",
+    "types": [
+      "Psychic"
+    ]
+  },
+  "Silvally-Bug": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-bug",
+    "types": [
+      "Bug"
+    ]
+  },
+  "Silvally-Rock": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-rock",
+    "types": [
+      "Rock"
+    ]
+  },
+  "Silvally-Ghost": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-ghost",
+    "types": [
+      "Ghost"
+    ]
+  },
+  "Silvally-Dragon": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-dragon",
+    "types": [
+      "Dragon"
+    ]
+  },
+  "Silvally-Dark": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-dark",
+    "types": [
+      "Dark"
+    ]
+  },
+  "Silvally-Steel": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-steel",
+    "types": [
+      "Steel"
+    ]
+  },
+  "Silvally-Fairy": {
+    "id": 773,
+    "baseSpecies": "Silvally",
+    "spriteKey": "equipment-silvally-fairy",
+    "types": [
+      "Fairy"
+    ]
+  },
+  "Genesect-Burn": {
+    "id": 649,
+    "baseSpecies": "Genesect",
+    "spriteKey": "equipment-genesect-burn",
+    "types": [
+      "Bug",
+      "Steel"
+    ]
+  },
+  "Genesect-Chill": {
+    "id": 649,
+    "baseSpecies": "Genesect",
+    "spriteKey": "equipment-genesect-chill",
+    "types": [
+      "Bug",
+      "Steel"
+    ]
+  },
+  "Genesect-Douse": {
+    "id": 649,
+    "baseSpecies": "Genesect",
+    "spriteKey": "equipment-genesect-douse",
+    "types": [
+      "Bug",
+      "Steel"
+    ]
+  },
+  "Genesect-Shock": {
+    "id": 649,
+    "baseSpecies": "Genesect",
+    "spriteKey": "equipment-genesect-shock",
+    "types": [
+      "Bug",
+      "Steel"
+    ]
+  }
+}

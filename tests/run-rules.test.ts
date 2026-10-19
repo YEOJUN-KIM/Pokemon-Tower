@@ -22,7 +22,7 @@ test('player rules persist and filter shops while new NPCs keep independent gimm
  const s=new TowerStore(':memory:');try{
  for(const rule of Object.keys(battleRules) as BattleRule[]){s.ensurePlayer(rule);const row=s.battle(s.start(rule,starters,rule));assert.equal(row.rule,rule);assert.equal(s.view(rule).run!.rule,rule);
  s.db.prepare("UPDATE runs SET floor=11,state='select' WHERE id=?").run(row.run_id);s.db.prepare('INSERT INTO item_shops VALUES (?,?,?)').run(row.run_id,11,JSON.stringify(['Charizardite X',DYNAMAX_ITEM,'Leftovers','Tera Orb']));
- const view=s.view(rule).run!;assert.equal(view.itemOffers!.includes('Charizardite X'),allowsGimmick(rule,'mega'));assert.equal(view.itemOffers!.includes(DYNAMAX_ITEM),allowsGimmick(rule,'dynamax'));assert.equal(view.teraShop,null);assert.equal(view.itemOffers!.includes('Tera Orb'),allowsGimmick(rule,'terastallize'));
+ const view=s.view(rule).run!;assert.equal(view.itemOffers!.includes('choice:charizard'),allowsGimmick(rule,'mega'));assert.equal(view.itemOffers!.includes(DYNAMAX_ITEM),allowsGimmick(rule,'dynamax'));assert.equal(view.teraShop,null);assert.equal(view.itemOffers!.includes('Tera Orb'),allowsGimmick(rule,'terastallize'));
  assert.throws(()=>s.purchaseTera(rule,row.run_id,11),/종료/);
  // This probe specifically needs a gimmick-bearing champion; reviewed Sinnoh
  // champions intentionally have none, so do not depend on a random run theme.

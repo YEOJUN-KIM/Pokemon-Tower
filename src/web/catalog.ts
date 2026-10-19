@@ -88,6 +88,7 @@ export function describeLine(line: string): string | null {
   if(event==='-zpower')return `${subject}는 Z파워를 해방했다!`;
   if(event==='-zbroken')return `${subject}의 방어를 뚫고 Z기술이 명중했다!`;
   if(event==='-mega')return `${subject}는 메가진화했다!`;
+  if(event==='-burst')return `${subject}가 울트라버스트했다!`;
   if(event==='-primal')return `${subject} 원시회귀!`;
   if(event==='-start' && value==='Dynamax')return `${subject}가 ${condition==='Gmax'?'거다이맥스':'다이맥스'}했다!`;
   if(event==='-terastallize')return `${subject}가 ${teraNames[value] ?? value} 타입으로 테라스탈했다!`;

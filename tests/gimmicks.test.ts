@@ -21,11 +21,11 @@ function teams(item:string,bench?:string){
  enemy.forEach(p=>p.moves=['Rest']);
  return {p1:Showdown.Teams.pack(own),p2:Showdown.Teams.pack(enemy)};
 }
-test('49 matching mega stones and a dynamax band have icons, legal forms and legendary shop grades',()=>{
- assert.equal(Object.keys(megaStones).length,49);
+test('50 matching mega stones and a dynamax band have icons, legal forms and legendary shop grades',()=>{
+ assert.equal(Object.keys(megaStones).length,50);
  const validator=new Showdown.TeamValidator(FORMAT);
  for(const [item,info]of Object.entries(megaStones)){
-  assert.ok(pokemonSets[info.species]);assert.equal(validator.validateSet({...structuredClone(pokemonSets[info.species]),item},{}),null,item);
+  assert.ok(pokemonSets[info.species]);assert.equal(validator.validateSet({...structuredClone(pokemonSets[info.species]),...(item==='Zygardite'?{ability:'Power Construct'}:{}),item},{}),null,item);
   assert.ok(Showdown.Dex.species.get(info.forme).isMega);
   assert.equal(itemShopRule(item as keyof typeof heldItems).rarity,'legendary');
   assert.ok(existsSync('public/sprites/items/'+itemIcon(item as keyof typeof heldItems)+'.'+itemIconExtension(item)));

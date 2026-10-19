@@ -2,7 +2,7 @@ import {allowsGimmick,type BattleRule} from '../data/run-rules';
 import type {Battle} from 'pokemon-showdown';
 import {DYNAMAX_ITEM,megaStones} from '../data/gimmicks';
 // Installed on one battle only. Old saved formats never enter this path.
-export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:string;species:string;item:string;gigantamax?:boolean}[]>,tickets?:import('../data/tera').TeraTickets,rule:BattleRule='chaos',opponentRule:BattleRule=rule,opponentTeraSpecies?:string,equipment?:readonly import('../data/trainer-equipment').TrainerEquipment[]){
+export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:string;species:string;item:string;gigantamax?:boolean}[]>,tickets?:import('../data/tera').TeraTickets,rule:BattleRule='chaos',opponentRule:BattleRule=rule,opponentTeraSpecies?:string,equipment?:readonly import('../data/trainer-equipment').TrainerEquipment[],specialForms=true){
  const ruleFor=(side:string)=>side==='p2'?opponentRule:rule;
  const baseDex=battle.dex,localDex=Object.create(baseDex) as typeof baseDex,localItems=Object.create(baseDex.items) as typeof baseDex.items;
  const ball=baseDex.items.get('Poke Ball');
@@ -15,9 +15,11 @@ export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:
  const used=new Set<string>();
  const transformed=new WeakSet<import('pokemon-showdown').Pokemon>();
  const teraUsed=new Set<string>();
+ const originalCanMega=battle.actions.canMegaEvo.bind(battle.actions);
+ if(specialForms)battle.actions.canMegaEvo=pokemon=>used.has(pokemon.side.id)?null:originalCanMega(pokemon);
  const originalZRequest=battle.actions.canZMove.bind(battle.actions);
  const originalZMove=battle.actions.getZMove.bind(battle.actions);
- const canZ=(pokemon:import('pokemon-showdown').Pokemon)=>allowsGimmick(ruleFor(pokemon.side.id),'zmove') && !(pokemon.side.id==='p1'&&equipment!==undefined&&transformed.has(pokemon)) && !pokemon.terastallized && !pokemon.volatiles.dynamax && !pokemon.species.isMega && !pokemon.species.isPrimal;
+ const canZ=(pokemon:import('pokemon-showdown').Pokemon)=>allowsGimmick(ruleFor(pokemon.side.id),'zmove') && !(pokemon.side.id==='p1'&&equipment!==undefined&&transformed.has(pokemon)&&!(specialForms&&pokemon.species.forme==='Ultra')) && !pokemon.terastallized && !pokemon.volatiles.dynamax && !pokemon.species.isMega && !pokemon.species.isPrimal;
  battle.actions.canZMove=pokemon=>canZ(pokemon)?originalZRequest(pokemon):undefined;
  battle.actions.getZMove=(move,pokemon,skipChecks)=>canZ(pokemon)?originalZMove(move,pokemon,skipChecks):undefined;
  const originalStart=battle.start.bind(battle);
@@ -60,7 +62,10 @@ export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:
       }
       return original(skipChecks);
      };
-     if(!allowsGimmick(ruleFor(side.id),'mega') || !entry || !megaStones[entry.item]){pokemon.canMegaEvo=null;pokemon.canMegaEvoX=null;pokemon.canMegaEvoY=null;}
+     const rayquaza=specialForms&&pokemon.baseSpecies.name==='Rayquaza'&&pokemon.baseMoves.includes('dragonascent' as typeof pokemon.baseMoves[number])&&!pokemon.getItem().zMove;
+     if(!allowsGimmick(ruleFor(side.id),'mega') || !entry || !megaStones[entry.item]&&!rayquaza){pokemon.canMegaEvo=null;pokemon.canMegaEvoX=null;pokemon.canMegaEvoY=null;}
+     let ultra=pokemon.canUltraBurst;
+     Object.defineProperty(pokemon,'canUltraBurst',{configurable:true,get:()=>specialForms&&allowsGimmick(ruleFor(side.id),'ultra')&&!used.has(side.id)&&!transformed.has(pokemon)&&!pokemon.terastallized&&!pokemon.volatiles.dynamax?ultra:null,set:(value)=>{ultra=value;}});
     }
    }
   }
@@ -75,11 +80,11 @@ export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:
     return;
    }
    used.add(side.id);
-   for(const p of side.pokemon){p.canMegaEvo=null;p.canMegaEvoX=null;p.canMegaEvoY=null;}
+   for(const p of side.pokemon){p.canMegaEvo=null;p.canMegaEvoX=null;p.canMegaEvoY=null;if(specialForms)p.canUltraBurst=null;}
    return;
   }
   used.add(side.id);side.dynamaxUsed=true;
-  for(const p of side.pokemon){p.canMegaEvo=null;p.canMegaEvoX=null;p.canMegaEvoY=null;}
+  for(const p of side.pokemon){p.canMegaEvo=null;p.canMegaEvoX=null;p.canMegaEvoY=null;if(specialForms)p.canUltraBurst=null;}
  }
  battle.onEvent('AfterMega',battle.format,(pokemon:import('pokemon-showdown').Pokemon)=>consume(pokemon.side,'mega',pokemon));
  const add=battle.add.bind(battle);

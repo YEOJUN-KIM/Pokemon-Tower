@@ -17,15 +17,15 @@ import {DamagePolicy} from '../src/battle/policy';
 import {ZMovePolicy} from '../src/battle/z-move-policy';
 import {DatabaseSync} from 'node:sqlite';
 
-test('18 type crystals and 16 signature crystals match installed engine and cost 3000',()=>{
+test('18 type crystals and 17 signature crystals include Ultra Burst equipment',()=>{
   assert.equal(Object.values(zCrystals).filter(c=>!c.from).length,18);
-  assert.equal(Object.values(zCrystals).filter(c=>c.from).length,16);
+  assert.equal(Object.values(zCrystals).filter(c=>c.from).length,17);
   for(const item of Object.keys(zCrystals) as HeldItem[]){const c=zCrystals[item];
     const native=Showdown.Dex.items.get(item);assert.ok(native.zMove);
-    assert.equal(c.price,3000);assert.equal(heldItems[item].consumable,false);
+    assert.equal(c.price,item==='Ultranecrozium Z'?5000:3000);assert.equal(heldItems[item].consumable,false);
     assert.equal(itemShopRule(item).rarity,'legendary');assert.equal(itemIcon(item),item.toLowerCase().replaceAll(' ','-'));assert.equal(itemIconExtension(item),'png');
     assert.equal(allowsRuleItem('basic',item),false);assert.equal(allowsRuleItem('z',item),true);assert.equal(allowsRuleItem('chaos',item),true);
-    assert.deepEqual(c.users,native.itemUser);
+    assert.deepEqual(c.users,item==='Ultranecrozium Z'?['Necrozma-Dusk-Mane','Necrozma-Dawn-Wings','Necrozma-Ultra']:native.itemUser);
   }
   assert.equal(canEquipGimmick('Decidueye','Decidium Z'),true);assert.equal(canEquipGimmick('Charizard','Decidium Z'),false);
 });

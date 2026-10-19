@@ -3,6 +3,8 @@ import gigantamaxForms from './gigantamax-forms.json' with {type:'json'};
 import forms from './battle-forms.json' with {type:'json'};
 import nationalDex from './pokedex.json' with {type:'json'};
 import {selectableForms} from './selectable-forms';
+import equipmentForms from './equipment-forms.json' with {type:'json'};
+import {formItemFor,formItems} from './form-items';
 import {moveTypeNames} from './move-info';
 
 const legacySpecies: Record<string, {id: number; name: string; types: string[]; color: string}> = {
@@ -29,6 +31,7 @@ const legacySpecies: Record<string, {id: number; name: string; types: string[]; 
 };
 export const species:Record<string,{id:number;name:string;types:string[];color:string;spriteKey?:string}>={...Object.fromEntries(nationalDex.map(entry=>[entry.species,{id:entry.id,name:entry.name,types:entry.types,color:(Object.keys(moveTypeNames).find(type=>moveTypeNames[type]===entry.types[0]) ?? 'Normal').toLowerCase()}])),...legacySpecies};
 for(const [name,form] of Object.entries(forms)){const base=species[form.baseSpecies];if(base)species[name]={...base,id:form.id,...(form.forme==='Primal'?{name:'원시'+base.name}:{}),spriteKey:('spriteKey' in form ? form.spriteKey as string : undefined),types:form.types.map(type=>moveTypeNames[type] ?? type)};}
+for(const [name,label] of Object.entries({'Necrozma-Ultra':'울트라네크로즈마','Zacian-Crowned':'자시안 검왕','Zamazenta-Crowned':'자마젠타 방패왕'}))species[name]={...species[name],name:label};
 for(const [name,form] of Object.entries(selectableForms)){const base=species[form.baseSpecies];if(base)species[name]={...base,id:form.id,spriteKey:String(form.id),name:form.name,types:form.displayTypes};}
 for(const name of ['Ogerpon-Teal-Tera','Ogerpon-Wellspring-Tera','Ogerpon-Hearthflame-Tera','Ogerpon-Cornerstone-Tera']){
  const normal=name==='Ogerpon-Teal-Tera'?'Ogerpon':name.replace(/-Tera$/,'');
@@ -36,5 +39,6 @@ for(const name of ['Ogerpon-Teal-Tera','Ogerpon-Wellspring-Tera','Ogerpon-Hearth
 }
 species['Tauros-Paldea']=species['Tauros-Paldea-Combat'];
 for(const [name,form] of Object.entries(megaForms)){const base=species[form.baseSpecies];if(base)species[name]={...base,spriteKey:form.spriteKey,name:'메가'+base.name+(name.endsWith('-X')?'X':name.endsWith('-Y')?'Y':''),types:form.types.map(type=>moveTypeNames[type]??type)};}
+for(const [name,form] of Object.entries(equipmentForms)){const base=species[form.baseSpecies];if(base)species[name]={...base,spriteKey:form.spriteKey,name:base.name+' ('+(formItems[formItemFor(name)??'']?.name??name)+')',types:form.types.map(type=>moveTypeNames[type]??type)};}
 for(const [name,form] of Object.entries(gigantamaxForms)){const base=species[name.replace(/-Gmax$/,'')]??species[form.baseSpecies];if(base)species[name]={...base,spriteKey:form.spriteKey,name:'거다이맥스 '+base.name};}
 export const pokemonName = (name: string) => species[name]?.name ?? name;

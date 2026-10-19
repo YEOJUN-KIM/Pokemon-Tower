@@ -59,7 +59,7 @@ test('all family forms make legal real battles, with native required tools and r
  for(const [name,form] of Object.entries(selectableForms)){
   if(form.collection!=='family')continue;
   const profile=defaultProfile(form.baseSpecies,name);validateProfile(form.baseSpecies,profile);
-  const packed=packTeam([form.baseSpecies,'Blastoise','Venusaur'],{[form.baseSpecies]:profile});
+  const packed=packTeam([form.baseSpecies,'Blastoise','Venusaur'],{[form.baseSpecies]:profile},form.requiredItem?{[form.baseSpecies]:form.requiredItem}:{});
   const set=Showdown.Teams.unpack(packed)![0];assert.equal(set.species,name);assert.equal(set.name,form.baseSpecies==='Tauros-Paldea-Combat'?'Tauros-Paldea':form.baseSpecies);assert.equal(set.item,form.requiredItem??'');
   const log=await runBattle({rule:'basic',teams:{p1:packed,p2:packTeam(['Unown','Luvdisc','Delibird'])},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});assert.ok(log.winner,name);
   if(['Calyrex-Shadow','Kyurem-White','Ogerpon-Wellspring'].includes(name))assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
@@ -71,7 +71,7 @@ test('selected form is frozen into a run; later collection changes affect only t
   store.ensurePlayer('snapshot');for(const name of ['Calyrex','Ogerpon'])store.db.prepare('INSERT INTO unlocks VALUES (?,?)').run('snapshot',name);
   for(const [base,form] of [['Calyrex','Calyrex-Shadow'],['Ogerpon','Ogerpon-Hearthflame']]){const before=store.trainingCollection('snapshot').find(p=>p.species===base)!;store.train('snapshot',base,before.revision,defaultProfile(base,form));}
   const row=store.battle(store.start('snapshot',['Calyrex','Ogerpon','Blastoise'],'basic'));
-  assert.equal(Showdown.Teams.unpack(row.player_team)![0].species,'Calyrex-Shadow');assert.equal(Showdown.Teams.unpack(row.player_team)![1].item,'Hearthflame Mask');
+  assert.equal(Showdown.Teams.unpack(row.player_team)![0].species,'Calyrex-Shadow');assert.equal(Showdown.Teams.unpack(row.player_team)![1].item,'');
   const entry=store.trainingCollection('snapshot').find(p=>p.species==='Calyrex')!;store.train('snapshot','Calyrex',entry.revision,defaultProfile('Calyrex','Calyrex-Ice'));
   assert.equal(store.battle(row.id).player_team,row.player_team);
   store.db.prepare("UPDATE runs SET state='select',floor=2 WHERE id=?").run(row.run_id);

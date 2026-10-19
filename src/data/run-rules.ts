@@ -11,5 +11,5 @@ export const battleRules={
 } as const;
 export type BattleRule=keyof typeof battleRules;
 export function isBattleRule(value:unknown):value is BattleRule{return typeof value==='string' && Object.hasOwn(battleRules,value);}
-export function allowsGimmick(rule:BattleRule,kind:Gimmick){return rule==='chaos'||rule===(kind==='terastallize'?'tera':kind==='zmove'?'z':kind);}
+export function allowsGimmick(rule:BattleRule,kind:Gimmick){return rule==='chaos'||rule===(kind==='terastallize'?'tera':kind==='zmove'||kind==='ultra'?'z':kind);}
 export function allowsRuleItem(rule:BattleRule,item:string){return zCrystals[item]?allowsGimmick(rule,'zmove'):megaStones[item] || primalOrbs[item]?allowsGimmick(rule,'mega'):item===DYNAMAX_ITEM?allowsGimmick(rule,'dynamax'):item==='Tera Orb'?allowsGimmick(rule,'terastallize'):true;}

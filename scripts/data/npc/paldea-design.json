@@ -276,7 +276,7 @@
         {
           "species": "Gallade",
           "ability": "Sharpness",
-          "item": "Expert Belt",
+          "item": "",
           "nature": "Jolly",
           "moves": [
             "Psycho Cut",
@@ -420,7 +420,7 @@
           "moves": [
             "Earthquake",
             "Poison Jab",
-            "Stone Edge",
+            "Toxic Spikes",
             "Recover"
           ],
           "role": "ace",
@@ -584,7 +584,7 @@
             "Draco Meteor",
             "Hurricane",
             "Taunt",
-            "Flamethrower"
+            "Super Fang"
           ],
           "role": "lead"
         },

@@ -33045,7 +33045,7 @@
         },
         {
           "species": "Gallade",
-          "item": "Expert Belt",
+          "item": "",
           "gigantamax": false,
           "role": "middle",
           "profile": {
@@ -33366,7 +33366,7 @@
             "moves": [
               "Earthquake",
               "Poison Jab",
-              "Stone Edge",
+              "Toxic Spikes",
               "Recover"
             ],
             "teraType": "Ground"
@@ -33694,7 +33694,7 @@
               "Draco Meteor",
               "Hurricane",
               "Taunt",
-              "Flamethrower"
+              "Super Fang"
             ]
           }
         },

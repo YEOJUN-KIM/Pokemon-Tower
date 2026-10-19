@@ -12,12 +12,12 @@ import {hiddenBossFixture} from './hidden-boss-fixture';
 
 test('hidden-boss event requires a supported chapter theme and its actual final champion',()=>{
  for(const theme of Object.keys(towerThemes) as TowerTheme[])for(const floor of [49,50,51,99,100]){
-  assert.equal(hiddenBossEligible(theme,floor,towerThemes[theme].champion),['johto','kanto','unova'].includes(theme)&&floor%50===0);
+  assert.equal(hiddenBossEligible(theme,floor,towerThemes[theme].champion),['johto','kanto','unova','paldea'].includes(theme)&&floor%50===0);
   assert.equal(hiddenBossEligible(theme,floor,'named-red'),false);
  }
 });
 
-for(const theme of ['johto','kanto'] as const)for(const floor of [50,100])test(`${theme} ${floor}: champion → guaranteed event → healed same team → hidden battle → chapter completion, once`,async()=>{
+for(const theme of ['johto','kanto','paldea'] as const)for(const floor of [50,100])test(`${theme} ${floor}: champion → guaranteed event → healed same team → hidden battle → chapter completion, once`,async()=>{
  const f=hiddenBossFixture(theme,floor),s=f.store,service=new TowerService(s);try{
   const roster=s.view(f.owner).run!.roster,before=s.view(f.owner).coins;
   const receipt=finishChallengerBattle(s,f.champion);s.complete(f.champion,receipt.log,receipt.view);

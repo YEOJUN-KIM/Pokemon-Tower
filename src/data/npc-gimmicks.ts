@@ -7,6 +7,7 @@ import type {OpponentEntry} from '../server/opponent-team';
 import {evolvedOpponentSpecies} from './opponent-species';
 import {primalOrbs} from './primal-forms';
 import {galarTrainer} from './galar-trainers';
+import {paldeaTrainer} from './paldea-trainers';
 
 export type NpcGimmick={rule:Exclude<BattleRule,'basic'|'chaos'>|'primal';species:string;item?:string};
 // Explicit tower adaptations for generations 1–5, not original-game claims.
@@ -61,6 +62,8 @@ const organizationGenerations:Record<string,number>={rocket:1,magma:3,aqua:3,gal
 // A first roster assignment, independent of the player's rule. Floor presets can
 // refine these assignments later without multiplying them by player rule.
 export function npcGimmick(id:string,generation:number|null,entries:readonly string[],ace?:string):NpcGimmick|null{
+ const paldea=paldeaTrainer(id);
+ if(paldea)return paldea.teraType&&entries.includes(paldea.ace)?{rule:'tera',species:paldea.ace}:null;
  const galar=galarTrainer(id);
  if(galar)return galar.signature&&entries.includes(galar.signature.species)?{rule:'dynamax',species:galar.signature.species}:null;
  const canonical=id.startsWith('named-')?id:'named-'+id.replace(/^[^-]+-(?:executive|boss)-/,'');

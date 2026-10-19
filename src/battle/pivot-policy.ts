@@ -5,7 +5,7 @@ import {hpFraction} from './z-decision';
 
 const dex=Showdown.Dex;
 export const ownHp=(p:OwnPokemon)=>hpFraction(p.condition)??0;
-export const ownTypes=(p:OwnPokemon)=>p.terastallized&&p.terastallized!=='Stellar'?[p.terastallized]:dex.species.get(p.details.split(',')[0]).types;
+export const ownTypes=(p:OwnPokemon)=>p.terastallized&&p.terastallized!=='Stellar'?[p.terastallized]:p.revealedTypes??dex.species.get(p.details.split(',')[0]).types;
 const factor=(type:string,types:string[])=>dex.getImmunity(type,types)?2**dex.getEffectiveness(type,types):0;
 const maxHp=(p:OwnPokemon)=>Number(p.condition.split(' ')[0].split('/')[1])||100;
 const stage=(n:number)=>n>=0?(2+n)/2:2/(2-n);
@@ -35,6 +35,7 @@ export function npcAttackDamage(name:string,p:OwnPokemon,o:Observation){
  const m=dex.moves.get(name);
  if(m.category==='Status'||m.flags.charge||!o.opponent)return 0;
  let n=estimateDamage(name,p,o.opponent.species);
+ if(p.revealedTypes){const native=dex.species.get(p.details.split(',')[0]).types;n*=(ownTypes(p).includes(m.type)?1.5:1)/(native.includes(m.type)?1.5:1);}
  if(m.multihit)n*=Array.isArray(m.multihit)?m.multihit[0]:m.multihit;
  const native=dex.species.get(o.opponent.species).types,visible=o.switching?.opponentTypes.length?o.switching.opponentTypes:native;
  const before=factor(m.type,native),after=factor(m.type,visible);

@@ -36,7 +36,7 @@ test('all named samples have three distinct legal allowed opponents after evolut
 });
 
 test('every live NPC template has three collectible members and an eligible gimmick carrier',()=>{
- assert.equal(templates.length,201);
+ assert.equal(templates.length,179);
  for(const row of templates){
   assert.equal(new Set(row.team.map(p=>p.species)).size,'select' in row&&row.select?row.team.length:3,row.id);
   for(const member of row.team)assert.ok(isCollectibleSpecies(member.species),row.id+': '+member.species);

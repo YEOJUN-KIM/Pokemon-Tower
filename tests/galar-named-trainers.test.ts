@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync,readFileSync} from 'node:fs';
+import {existsSync} from 'node:fs';
+import {readPrePaldeaFile as readFileSync} from './pre-paldea-preservation';
 import {createHash} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import {galarTrainers,galarSample} from '../src/data/galar-trainers';

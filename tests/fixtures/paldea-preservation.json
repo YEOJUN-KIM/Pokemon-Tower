@@ -1,0 +1,27 @@
+{
+  "commit": "ed0de99a8e1d9b7f2a8c9720572854daa004b294",
+  "excluded": [
+    "named-iono",
+    "named-giacomo",
+    "named-geeta",
+    "named-katy",
+    "named-brassius",
+    "named-kofu",
+    "named-larry",
+    "named-ryme",
+    "named-tulip",
+    "named-grusha",
+    "named-rika",
+    "named-poppy",
+    "named-larry-elite",
+    "named-hassel",
+    "named-nemona",
+    "named-penny",
+    "star-executive-giacomo",
+    "star-boss-penny"
+  ],
+  "hashes": {
+    "scripts/data/npc/normal-npc-samples.json": "b581bb370a27104a0aaccd2495796a2d172950837b06786d45a5662abacdd1c3",
+    "src/data/normal-npc-templates.json": "ed4a0ed3d9b213c42caebe1358553d48d163e19d308bcc72e1121fdb7bdeb5d5"
+  }
+}

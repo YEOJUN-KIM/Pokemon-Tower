@@ -26,7 +26,8 @@ test('all nine themes use regional signatures, distinct milestones and valid org
    for(const t of [...gym,...elite]){assert.equal(t.boss.generation,config.generation);assert.ok(t.entries.includes(t.ace!));}
    gym.forEach(t=>gyms.add(t.boss.id));elite.forEach(t=>elites.add(t.boss.id));
    assert.equal(towerTrainerEncounter(40,run,theme)!.boss.id,config.champion);assert.equal(towerTrainerEncounter(50,run,theme)!.boss.id,config.final);
-   assert.ok((config.organizations as readonly string[]).includes(runOrganization(run,theme)));
+   if(config.organizations.length)assert.ok((config.organizations as readonly string[]).includes(runOrganization(run,theme)));
+   else assert.equal(runOrganization(run,theme),undefined);
   }
   assert.equal(gyms.size,config.gyms.length);assert.equal(elites.size,config.elites.length);
   for(const id of [...config.gyms,...config.elites,config.champion,config.final])assert.ok(trainerCatalog.some(s=>s.id===id));
@@ -90,5 +91,5 @@ test('regional organizations draw all three ranks with supported teams',()=>{
   }
   assert.equal(ranks.size,3,organization);
  }
- assert.equal(seen.size,10);
+ assert.equal(seen.size,9); // Star is excluded from the reviewed Paldea chapter.
 });

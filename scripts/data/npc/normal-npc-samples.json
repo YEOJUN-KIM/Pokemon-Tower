@@ -4323,826 +4323,6 @@
       ]
     },
     {
-      "id": "named-iono",
-      "name": "모야모",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Bellibolt",
-      "signature": {
-        "rule": "tera",
-        "species": "Bellibolt"
-      },
-      "seed": [
-        6,
-        2,
-        3,
-        4
-      ],
-      "packed": "Kilowattrel||SitrusBerry|WindPower|Thunderbolt,AerialAce,VoltSwitch,Discharge|Serious|1,,,4,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Electric]Mismagius||SpellTag|Levitate|ShadowBall,Psyshock,NightShade,Psychic|Serious|1,,,4,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Electric]Bellibolt||Magnet|Electromorphosis|Thunderbolt,HyperVoice,Discharge,ParabolicCharge|Serious|2,,,4,1,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Electric",
-      "team": [
-        {
-          "species": "Kilowattrel",
-          "name": "찌리비크",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 0,
-              "def": 0,
-              "spa": 4,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Thunderbolt",
-              "Aerial Ace",
-              "Volt Switch",
-              "Discharge"
-            ],
-            "ability": "Wind Power",
-            "nature": "Serious",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Mismagius",
-          "name": "무우마직",
-          "item": "Spell Tag",
-          "itemName": "저주의부적",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 0,
-              "def": 0,
-              "spa": 4,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Shadow Ball",
-              "Psyshock",
-              "Night Shade",
-              "Psychic"
-            ],
-            "ability": "Levitate",
-            "nature": "Serious",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Bellibolt",
-          "name": "찌리배리",
-          "item": "Magnet",
-          "itemName": "자석",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 0,
-              "spa": 4,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Thunderbolt",
-              "Hyper Voice",
-              "Discharge",
-              "Parabolic Charge"
-            ],
-            "ability": "Electromorphosis",
-            "nature": "Serious",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-iono",
-      "name": "모야모",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Bellibolt",
-      "signature": {
-        "rule": "tera",
-        "species": "Bellibolt"
-      },
-      "seed": [
-        6,
-        2,
-        3,
-        4
-      ],
-      "packed": "Kilowattrel||SitrusBerry|WindPower|Thunderbolt,BraveBird,VoltSwitch,Thunder|Timid|8,,,29,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Electric]Mismagius||SpellTag|Levitate|ShadowBall,FutureSight,NightShade,Psychic|Timid|8,,,29,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Electric]Bellibolt||Magnet|Electromorphosis|Thunderbolt,HyperVoice,ZapCannon,ParabolicCharge|Modest|21,,,29,8,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Electric",
-      "team": [
-        {
-          "species": "Kilowattrel",
-          "name": "찌리비크",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 0,
-              "def": 0,
-              "spa": 29,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Thunderbolt",
-              "Brave Bird",
-              "Volt Switch",
-              "Thunder"
-            ],
-            "ability": "Wind Power",
-            "nature": "Timid",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Mismagius",
-          "name": "무우마직",
-          "item": "Spell Tag",
-          "itemName": "저주의부적",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 0,
-              "def": 0,
-              "spa": 29,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Shadow Ball",
-              "Future Sight",
-              "Night Shade",
-              "Psychic"
-            ],
-            "ability": "Levitate",
-            "nature": "Timid",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Bellibolt",
-          "name": "찌리배리",
-          "item": "Magnet",
-          "itemName": "자석",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 0,
-              "def": 0,
-              "spa": 29,
-              "spd": 8,
-              "spe": 0
-            },
-            "moves": [
-              "Thunderbolt",
-              "Hyper Voice",
-              "Zap Cannon",
-              "Parabolic Charge"
-            ],
-            "ability": "Electromorphosis",
-            "nature": "Modest",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-giacomo",
-      "name": "피냐",
-      "generation": 9,
-      "role": "villain",
-      "title": "악당조직",
-      "ace": "Kingambit",
-      "signature": {
-        "rule": "tera",
-        "species": "Kingambit"
-      },
-      "seed": [
-        5,
-        2,
-        3,
-        4
-      ],
-      "packed": "Kingambit||BlackGlasses|Defiant|ThroatChop,IronHead,NightSlash,SuckerPunch|Serious|2,5,,,1,|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Dark]Honchkrow||SitrusBerry|Insomnia|LashOut,DrillPeck,AerialAce,Assurance|Serious|2,5,1,,,|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Dark]Krookodile||SoftSand|Intimidate|StompingTantrum,Crunch,LashOut,BrickBreak|Serious|1,5,,,,2|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Dark",
-      "team": [
-        {
-          "species": "Kingambit",
-          "name": "대도각참",
-          "item": "Black Glasses",
-          "itemName": "검은안경",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 5,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Throat Chop",
-              "Iron Head",
-              "Night Slash",
-              "Sucker Punch"
-            ],
-            "ability": "Defiant",
-            "nature": "Serious",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Honchkrow",
-          "name": "돈크로우",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 5,
-              "def": 1,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Lash Out",
-              "Drill Peck",
-              "Aerial Ace",
-              "Assurance"
-            ],
-            "ability": "Insomnia",
-            "nature": "Serious",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Krookodile",
-          "name": "악비아르",
-          "item": "Soft Sand",
-          "itemName": "부드러운모래",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 5,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Stomping Tantrum",
-              "Crunch",
-              "Lash Out",
-              "Brick Break"
-            ],
-            "ability": "Intimidate",
-            "nature": "Serious",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "first-gate",
-      "stageName": "50층 첫 관문",
-      "sampleTier": 1,
-      "gimmickEnabled": true,
-      "referenceFloor": 50,
-      "iv": 12,
-      "statPoints": 8,
-      "floorRange": "50층 첫 관문·중간 보스"
-    },
-    {
-      "id": "named-giacomo",
-      "name": "피냐",
-      "generation": 9,
-      "role": "villain",
-      "title": "악당조직",
-      "ace": "Kingambit",
-      "signature": {
-        "rule": "tera",
-        "species": "Kingambit"
-      },
-      "seed": [
-        5,
-        2,
-        3,
-        4
-      ],
-      "packed": "Kingambit||BlackGlasses|Defiant|FoulPlay,IronHead,NightSlash,SuckerPunch|Adamant|24,32,,,10,|M|||50|,,towerpointsv1,,,Dark]Honchkrow||SitrusBerry|Insomnia|FoulPlay,BraveBird,AerialAce,Assurance|Adamant|24,32,10,,,|M|||50|,,towerpointsv1,,,Dark]Krookodile||SoftSand|Intimidate|Earthquake,FoulPlay,LashOut,FocusPunch|Jolly|10,32,,,,24|M|||50|,,towerpointsv1,,,Dark",
-      "team": [
-        {
-          "species": "Kingambit",
-          "name": "대도각참",
-          "item": "Black Glasses",
-          "itemName": "검은안경",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 24,
-              "atk": 32,
-              "def": 0,
-              "spa": 0,
-              "spd": 10,
-              "spe": 0
-            },
-            "moves": [
-              "Foul Play",
-              "Iron Head",
-              "Night Slash",
-              "Sucker Punch"
-            ],
-            "ability": "Defiant",
-            "nature": "Adamant",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Honchkrow",
-          "name": "돈크로우",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 24,
-              "atk": 32,
-              "def": 10,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Foul Play",
-              "Brave Bird",
-              "Aerial Ace",
-              "Assurance"
-            ],
-            "ability": "Insomnia",
-            "nature": "Adamant",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Krookodile",
-          "name": "악비아르",
-          "item": "Soft Sand",
-          "itemName": "부드러운모래",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 10,
-              "atk": 32,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 24
-            },
-            "moves": [
-              "Earthquake",
-              "Foul Play",
-              "Lash Out",
-              "Focus Punch"
-            ],
-            "ability": "Intimidate",
-            "nature": "Jolly",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "final-gate",
-      "stageName": "100층 최종 관문",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 100,
-      "iv": 31,
-      "statPoints": 66,
-      "floorRange": "100층 최종전"
-    },
-    {
-      "id": "named-geeta",
-      "name": "테사",
-      "generation": 9,
-      "role": "champion",
-      "title": "챔피언",
-      "ace": "Glimmora",
-      "signature": {
-        "rule": "tera",
-        "species": "Glimmora"
-      },
-      "seed": [
-        4,
-        2,
-        3,
-        4
-      ],
-      "packed": "Kingambit||ExpertBelt|Defiant|KowtowCleave,IronHead,SuckerPunch,SwordsDance|Serious|2,5,,,1,|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Dark]Glimmora||FocusSash|ToxicDebris|PowerGem,Venoshock,EarthPower,MortalSpin|Serious|1,,,5,,2|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Rock]Gogoat||MuscleBand|SapSipper|HornLeech,StompingTantrum,RockSlide,BulkUp|Serious|2,5,1,,,|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Grass",
-      "team": [
-        {
-          "species": "Kingambit",
-          "name": "대도각참",
-          "item": "Expert Belt",
-          "itemName": "달인의띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 5,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Kowtow Cleave",
-              "Iron Head",
-              "Sucker Punch",
-              "Swords Dance"
-            ],
-            "ability": "Defiant",
-            "nature": "Serious",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Glimmora",
-          "name": "킬라플로르",
-          "item": "Focus Sash",
-          "itemName": "기합의띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 0,
-              "def": 0,
-              "spa": 5,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Power Gem",
-              "Venoshock",
-              "Earth Power",
-              "Mortal Spin"
-            ],
-            "ability": "Toxic Debris",
-            "nature": "Serious",
-            "teraType": "Rock",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Gogoat",
-          "name": "고고트",
-          "item": "Muscle Band",
-          "itemName": "힘의머리띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 5,
-              "def": 1,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Horn Leech",
-              "Stomping Tantrum",
-              "Rock Slide",
-              "Bulk Up"
-            ],
-            "ability": "Sap Sipper",
-            "nature": "Serious",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "first-gate",
-      "stageName": "50층 첫 관문",
-      "sampleTier": 1,
-      "gimmickEnabled": true,
-      "referenceFloor": 50,
-      "iv": 12,
-      "statPoints": 8,
-      "floorRange": "50층 첫 관문·중간 보스",
-      "selectionRules": {
-        "preferredLead": [
-          "Glimmora"
-        ],
-        "preferredLast": [
-          "Kingambit"
-        ]
-      }
-    },
-    {
-      "id": "named-geeta",
-      "name": "테사",
-      "generation": 9,
-      "role": "champion",
-      "title": "챔피언",
-      "ace": "Glimmora",
-      "signature": {
-        "rule": "tera",
-        "species": "Glimmora"
-      },
-      "seed": [
-        4,
-        2,
-        3,
-        4
-      ],
-      "packed": "Kingambit||ExpertBelt|Defiant|KowtowCleave,IronHead,SuckerPunch,SwordsDance|Adamant|24,32,,,10,|M|||50|,,towerpointsv1,,,Dark]Glimmora||FocusSash|ToxicDebris|PowerGem,SludgeWave,EarthPower,MortalSpin|Timid|10,,,32,,24|M|||50|,,towerpointsv1,,,Rock]Gogoat||MuscleBand|SapSipper|HornLeech,Earthquake,RockSlide,BulkUp|Adamant|24,32,10,,,|M|||50|,,towerpointsv1,,,Grass",
-      "team": [
-        {
-          "species": "Kingambit",
-          "name": "대도각참",
-          "item": "Expert Belt",
-          "itemName": "달인의띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 24,
-              "atk": 32,
-              "def": 0,
-              "spa": 0,
-              "spd": 10,
-              "spe": 0
-            },
-            "moves": [
-              "Kowtow Cleave",
-              "Iron Head",
-              "Sucker Punch",
-              "Swords Dance"
-            ],
-            "ability": "Defiant",
-            "nature": "Adamant",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Glimmora",
-          "name": "킬라플로르",
-          "item": "Focus Sash",
-          "itemName": "기합의띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 10,
-              "atk": 0,
-              "def": 0,
-              "spa": 32,
-              "spd": 0,
-              "spe": 24
-            },
-            "moves": [
-              "Power Gem",
-              "Sludge Wave",
-              "Earth Power",
-              "Mortal Spin"
-            ],
-            "ability": "Toxic Debris",
-            "nature": "Timid",
-            "teraType": "Rock",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Gogoat",
-          "name": "고고트",
-          "item": "Muscle Band",
-          "itemName": "힘의머리띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 24,
-              "atk": 32,
-              "def": 10,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Horn Leech",
-              "Earthquake",
-              "Rock Slide",
-              "Bulk Up"
-            ],
-            "ability": "Sap Sipper",
-            "nature": "Adamant",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "final-gate",
-      "stageName": "100층 최종 관문",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 100,
-      "iv": 31,
-      "statPoints": 66,
-      "floorRange": "100층 최종전",
-      "selectionRules": {
-        "preferredLead": [
-          "Glimmora"
-        ],
-        "preferredLast": [
-          "Kingambit"
-        ]
-      }
-    },
-    {
       "id": "named-bugsy",
       "name": "호일",
       "generation": 2,
@@ -22686,3490 +21866,6 @@
       "floorRange": "100층 최종전"
     },
     {
-      "id": "named-katy",
-      "name": "단풍",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Ursaluna",
-      "signature": {
-        "rule": "tera",
-        "species": "Ursaluna"
-      },
-      "seed": [
-        4,
-        2,
-        3,
-        4
-      ],
-      "packed": "Heracross||SilverPowder|Swarm|Lunge,BrickBreak,Strength,Reversal|Serious|1,4,,,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Bug]Ursaluna||SoftSand|Guts|Bulldoze,BodyPress,StompingTantrum,MegaPunch|Serious|2,4,,,1,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Bug]Forretress||SitrusBerry|Sturdy|Lunge,FlashCannon,IronHead,HardPress|Serious|2,4,,,1,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Bug",
-      "team": [
-        {
-          "species": "Heracross",
-          "name": "헤라크로스",
-          "item": "Silver Powder",
-          "itemName": "은빛가루",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Lunge",
-              "Brick Break",
-              "Strength",
-              "Reversal"
-            ],
-            "ability": "Swarm",
-            "nature": "Serious",
-            "teraType": "Bug",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Ursaluna",
-          "name": "다투곰",
-          "item": "Soft Sand",
-          "itemName": "부드러운모래",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Bulldoze",
-              "Body Press",
-              "Stomping Tantrum",
-              "Mega Punch"
-            ],
-            "ability": "Guts",
-            "nature": "Serious",
-            "teraType": "Bug",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Forretress",
-          "name": "쏘콘",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Lunge",
-              "Flash Cannon",
-              "Iron Head",
-              "Hard Press"
-            ],
-            "ability": "Sturdy",
-            "nature": "Serious",
-            "teraType": "Bug",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-katy",
-      "name": "단풍",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Ursaluna",
-      "signature": {
-        "rule": "tera",
-        "species": "Ursaluna"
-      },
-      "seed": [
-        4,
-        2,
-        3,
-        4
-      ],
-      "packed": "Heracross||SilverPowder|Swarm|Megahorn,FocusPunch,DoubleEdge,Reversal|Jolly|8,29,,,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Bug]Ursaluna||SoftSand|Guts|HeadlongRush,FocusPunch,StompingTantrum,DoubleEdge|Adamant|21,29,,,8,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Bug]Forretress||SitrusBerry|Sturdy|Lunge,SteelBeam,IronHead,HardPress|Adamant|21,29,,,8,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Bug",
-      "team": [
-        {
-          "species": "Heracross",
-          "name": "헤라크로스",
-          "item": "Silver Powder",
-          "itemName": "은빛가루",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Megahorn",
-              "Focus Punch",
-              "Double-Edge",
-              "Reversal"
-            ],
-            "ability": "Swarm",
-            "nature": "Jolly",
-            "teraType": "Bug",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Ursaluna",
-          "name": "다투곰",
-          "item": "Soft Sand",
-          "itemName": "부드러운모래",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 8,
-              "spe": 0
-            },
-            "moves": [
-              "Headlong Rush",
-              "Focus Punch",
-              "Stomping Tantrum",
-              "Double-Edge"
-            ],
-            "ability": "Guts",
-            "nature": "Adamant",
-            "teraType": "Bug",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Forretress",
-          "name": "쏘콘",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 8,
-              "spe": 0
-            },
-            "moves": [
-              "Lunge",
-              "Steel Beam",
-              "Iron Head",
-              "Hard Press"
-            ],
-            "ability": "Sturdy",
-            "nature": "Adamant",
-            "teraType": "Bug",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-brassius",
-      "name": "콜사",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Sudowoodo",
-      "signature": {
-        "rule": "tera",
-        "species": "Sudowoodo"
-      },
-      "seed": [
-        5,
-        2,
-        3,
-        4
-      ],
-      "packed": "Sudowoodo||HardStone|Sturdy|RockSlide,BodyPress,Toxic,MegaPunch|Serious|2,4,,,1,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Grass]Arboliva||MiracleSeed|SeedSower|GigaDrain,HyperVoice,LeechSeed,TeraBlast|Serious|2,,1,4,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Grass]Tsareena||SitrusBerry|LeafGuard|SeedBomb,LowSweep,Toxic,PetalBlizzard|Serious|2,4,1,,,|F|10,10,10,10,10,10||50|,,towerpointsv1,,,Grass",
-      "team": [
-        {
-          "species": "Sudowoodo",
-          "name": "꼬지모",
-          "item": "Hard Stone",
-          "itemName": "딱딱한돌",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Rock Slide",
-              "Body Press",
-              "Toxic",
-              "Mega Punch"
-            ],
-            "ability": "Sturdy",
-            "nature": "Serious",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Arboliva",
-          "name": "올리르바",
-          "item": "Miracle Seed",
-          "itemName": "기적의씨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 1,
-              "spa": 4,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Giga Drain",
-              "Hyper Voice",
-              "Leech Seed",
-              "Tera Blast"
-            ],
-            "ability": "Seed Sower",
-            "nature": "Serious",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Tsareena",
-          "name": "달코퀸",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 1,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Seed Bomb",
-              "Low Sweep",
-              "Toxic",
-              "Petal Blizzard"
-            ],
-            "ability": "Leaf Guard",
-            "nature": "Serious",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-brassius",
-      "name": "콜사",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Sudowoodo",
-      "signature": {
-        "rule": "tera",
-        "species": "Sudowoodo"
-      },
-      "seed": [
-        5,
-        2,
-        3,
-        4
-      ],
-      "packed": "Sudowoodo||HardStone|Sturdy|HeadSmash,FocusPunch,Toxic,MegaKick|Adamant|21,29,,,8,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Grass]Arboliva||MiracleSeed|SeedSower|PetalDance,HyperVoice,LeechSeed,TeraBlast|Modest|21,,8,29,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Grass]Tsareena||SitrusBerry|LeafGuard|PowerWhip,HighJumpKick,Toxic,PetalBlizzard|Adamant|21,29,8,,,|F|28,28,28,28,28,28||50|,,towerpointsv1,,,Grass",
-      "team": [
-        {
-          "species": "Sudowoodo",
-          "name": "꼬지모",
-          "item": "Hard Stone",
-          "itemName": "딱딱한돌",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 8,
-              "spe": 0
-            },
-            "moves": [
-              "Head Smash",
-              "Focus Punch",
-              "Toxic",
-              "Mega Kick"
-            ],
-            "ability": "Sturdy",
-            "nature": "Adamant",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Arboliva",
-          "name": "올리르바",
-          "item": "Miracle Seed",
-          "itemName": "기적의씨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 0,
-              "def": 8,
-              "spa": 29,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Petal Dance",
-              "Hyper Voice",
-              "Leech Seed",
-              "Tera Blast"
-            ],
-            "ability": "Seed Sower",
-            "nature": "Modest",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Tsareena",
-          "name": "달코퀸",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 8,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Power Whip",
-              "High Jump Kick",
-              "Toxic",
-              "Petal Blizzard"
-            ],
-            "ability": "Leaf Guard",
-            "nature": "Adamant",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-kofu",
-      "name": "곤포",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Crabominable",
-      "signature": {
-        "rule": "tera",
-        "species": "Crabominable"
-      },
-      "seed": [
-        14,
-        2,
-        3,
-        4
-      ],
-      "packed": "Clawitzer||MysticWater|MegaLauncher|Surf,Venoshock,Waterfall,Scald|Serious|2,,1,4,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Water]Crabominable||BlackBelt|HyperCutter|BodyPress,IceSpinner,BrickBreak,DrainPunch|Serious|2,4,,,1,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Water]Dondozo||SitrusBerry|Unaware|Waterfall,Facade,OrderUp,AquaTail|Serious|2,4,,,1,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Water",
-      "team": [
-        {
-          "species": "Clawitzer",
-          "name": "블로스터",
-          "item": "Mystic Water",
-          "itemName": "신비의물방울",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 1,
-              "spa": 4,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Surf",
-              "Venoshock",
-              "Waterfall",
-              "Scald"
-            ],
-            "ability": "Mega Launcher",
-            "nature": "Serious",
-            "teraType": "Water",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Crabominable",
-          "name": "모단단게",
-          "item": "Black Belt",
-          "itemName": "검은띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Body Press",
-              "Ice Spinner",
-              "Brick Break",
-              "Drain Punch"
-            ],
-            "ability": "Hyper Cutter",
-            "nature": "Serious",
-            "teraType": "Water",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Dondozo",
-          "name": "어써러셔",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Waterfall",
-              "Facade",
-              "Order Up",
-              "Aqua Tail"
-            ],
-            "ability": "Unaware",
-            "nature": "Serious",
-            "teraType": "Water",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-kofu",
-      "name": "곤포",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Crabominable",
-      "signature": {
-        "rule": "tera",
-        "species": "Crabominable"
-      },
-      "seed": [
-        14,
-        2,
-        3,
-        4
-      ],
-      "packed": "Clawitzer||MysticWater|MegaLauncher|Surf,SludgeWave,Crabhammer,Scald|Modest|21,,8,29,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Water]Crabominable||BlackBelt|HyperCutter|FocusPunch,IceHammer,BrickBreak,CloseCombat|Adamant|21,29,,,8,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Water]Dondozo||SitrusBerry|Unaware|WaveCrash,DoubleEdge,Outrage,AquaTail|Adamant|21,29,,,8,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Water",
-      "team": [
-        {
-          "species": "Clawitzer",
-          "name": "블로스터",
-          "item": "Mystic Water",
-          "itemName": "신비의물방울",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 0,
-              "def": 8,
-              "spa": 29,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Surf",
-              "Sludge Wave",
-              "Crabhammer",
-              "Scald"
-            ],
-            "ability": "Mega Launcher",
-            "nature": "Modest",
-            "teraType": "Water",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Crabominable",
-          "name": "모단단게",
-          "item": "Black Belt",
-          "itemName": "검은띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 8,
-              "spe": 0
-            },
-            "moves": [
-              "Focus Punch",
-              "Ice Hammer",
-              "Brick Break",
-              "Close Combat"
-            ],
-            "ability": "Hyper Cutter",
-            "nature": "Adamant",
-            "teraType": "Water",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Dondozo",
-          "name": "어써러셔",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 8,
-              "spe": 0
-            },
-            "moves": [
-              "Wave Crash",
-              "Double-Edge",
-              "Outrage",
-              "Aqua Tail"
-            ],
-            "ability": "Unaware",
-            "nature": "Adamant",
-            "teraType": "Water",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-larry",
-      "name": "청목",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Staraptor",
-      "signature": {
-        "rule": "tera",
-        "species": "Staraptor"
-      },
-      "seed": [
-        25,
-        2,
-        3,
-        4
-      ],
-      "packed": "Snorlax||SitrusBerry|Immunity|BodySlam,Crunch,MegaPunch,IronHead|Serious|2,4,1,,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Normal]Dudunsparce||MuscleBand|SereneGrace|BreakingSwipe,DrillRun,Facade,Strength|Serious|2,4,,,1,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Normal]Staraptor||SilkScarf|Intimidate|Facade,AerialAce,Return,Revenge|Serious|1,4,,,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Normal",
-      "team": [
-        {
-          "species": "Snorlax",
-          "name": "잠만보",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 1,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Body Slam",
-              "Crunch",
-              "Mega Punch",
-              "Iron Head"
-            ],
-            "ability": "Immunity",
-            "nature": "Serious",
-            "teraType": "Normal",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Dudunsparce",
-          "name": "노고고치",
-          "item": "Muscle Band",
-          "itemName": "힘의머리띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Breaking Swipe",
-              "Drill Run",
-              "Facade",
-              "Strength"
-            ],
-            "ability": "Serene Grace",
-            "nature": "Serious",
-            "teraType": "Normal",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Staraptor",
-          "name": "찌르호크",
-          "item": "Silk Scarf",
-          "itemName": "실크스카프",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Facade",
-              "Aerial Ace",
-              "Return",
-              "Revenge"
-            ],
-            "ability": "Intimidate",
-            "nature": "Serious",
-            "teraType": "Normal",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-larry",
-      "name": "청목",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Staraptor",
-      "signature": {
-        "rule": "tera",
-        "species": "Staraptor"
-      },
-      "seed": [
-        25,
-        2,
-        3,
-        4
-      ],
-      "packed": "Snorlax||SitrusBerry|Immunity|BodySlam,Crunch,MegaKick,SteelRoller|Adamant|21,29,8,,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Normal]Dudunsparce||MuscleBand|SereneGrace|Outrage,Earthquake,Facade,Strength|Adamant|21,29,,,8,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Normal]Staraptor||SilkScarf|Intimidate|DoubleEdge,BraveBird,Return,CloseCombat|Jolly|8,29,,,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Normal",
-      "team": [
-        {
-          "species": "Snorlax",
-          "name": "잠만보",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 8,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Body Slam",
-              "Crunch",
-              "Mega Kick",
-              "Steel Roller"
-            ],
-            "ability": "Immunity",
-            "nature": "Adamant",
-            "teraType": "Normal",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Dudunsparce",
-          "name": "노고고치",
-          "item": "Muscle Band",
-          "itemName": "힘의머리띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 8,
-              "spe": 0
-            },
-            "moves": [
-              "Outrage",
-              "Earthquake",
-              "Facade",
-              "Strength"
-            ],
-            "ability": "Serene Grace",
-            "nature": "Adamant",
-            "teraType": "Normal",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Staraptor",
-          "name": "찌르호크",
-          "item": "Silk Scarf",
-          "itemName": "실크스카프",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Double-Edge",
-              "Brave Bird",
-              "Return",
-              "Close Combat"
-            ],
-            "ability": "Intimidate",
-            "nature": "Jolly",
-            "teraType": "Normal",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-ryme",
-      "name": "라임",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Toxtricity",
-      "signature": {
-        "rule": "tera",
-        "species": "Toxtricity"
-      },
-      "seed": [
-        14,
-        2,
-        3,
-        4
-      ],
-      "packed": "Spiritomb||SpellTag|Pressure|ShadowSneak,LashOut,WillOWisp,OminousWind|Serious|2,4,1,,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Ghost]Toxtricity||Magnet|PunkRock|Thunderbolt,TeraBlast,ThunderWave,Discharge|Serious|2,,1,4,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Ghost]Drifblim||SitrusBerry|Aftermath|ShadowBall,AirSlash,WillOWisp,Psychic|Serious|1,,,4,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Ghost",
-      "team": [
-        {
-          "species": "Spiritomb",
-          "name": "화강돌",
-          "item": "Spell Tag",
-          "itemName": "저주의부적",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 1,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Shadow Sneak",
-              "Lash Out",
-              "Will-O-Wisp",
-              "Ominous Wind"
-            ],
-            "ability": "Pressure",
-            "nature": "Serious",
-            "teraType": "Ghost",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Toxtricity",
-          "name": "스트린더",
-          "item": "Magnet",
-          "itemName": "자석",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 1,
-              "spa": 4,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Thunderbolt",
-              "Tera Blast",
-              "Thunder Wave",
-              "Discharge"
-            ],
-            "ability": "Punk Rock",
-            "nature": "Serious",
-            "teraType": "Ghost",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Drifblim",
-          "name": "둥실라이드",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 0,
-              "def": 0,
-              "spa": 4,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Shadow Ball",
-              "Air Slash",
-              "Will-O-Wisp",
-              "Psychic"
-            ],
-            "ability": "Aftermath",
-            "nature": "Serious",
-            "teraType": "Ghost",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-ryme",
-      "name": "라임",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Toxtricity",
-      "signature": {
-        "rule": "tera",
-        "species": "Toxtricity"
-      },
-      "seed": [
-        14,
-        2,
-        3,
-        4
-      ],
-      "packed": "Spiritomb||SpellTag|Pressure|Poltergeist,FoulPlay,WillOWisp,OminousWind|Adamant|21,29,8,,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Ghost]Toxtricity||Magnet|PunkRock|Thunderbolt,Boomburst,ThunderWave,Discharge|Modest|21,,8,29,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Ghost]Drifblim||SitrusBerry|Aftermath|ShadowBall,AirSlash,WillOWisp,Psychic|Timid|8,,,29,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Ghost",
-      "team": [
-        {
-          "species": "Spiritomb",
-          "name": "화강돌",
-          "item": "Spell Tag",
-          "itemName": "저주의부적",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 8,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Poltergeist",
-              "Foul Play",
-              "Will-O-Wisp",
-              "Ominous Wind"
-            ],
-            "ability": "Pressure",
-            "nature": "Adamant",
-            "teraType": "Ghost",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Toxtricity",
-          "name": "스트린더",
-          "item": "Magnet",
-          "itemName": "자석",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 0,
-              "def": 8,
-              "spa": 29,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Thunderbolt",
-              "Boomburst",
-              "Thunder Wave",
-              "Discharge"
-            ],
-            "ability": "Punk Rock",
-            "nature": "Modest",
-            "teraType": "Ghost",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Drifblim",
-          "name": "둥실라이드",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 0,
-              "def": 0,
-              "spa": 29,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Shadow Ball",
-              "Air Slash",
-              "Will-O-Wisp",
-              "Psychic"
-            ],
-            "ability": "Aftermath",
-            "nature": "Timid",
-            "teraType": "Ghost",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-tulip",
-      "name": "리파",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Florges",
-      "signature": {
-        "rule": "tera",
-        "species": "Florges"
-      },
-      "seed": [
-        3,
-        2,
-        3,
-        4
-      ],
-      "packed": "Florges||FairyFeather|FlowerVeil|AlluringVoice,GigaDrain,PollenPuff,HiddenPower|Serious|2,,1,4,,|F|10,10,10,10,10,10||50|,,towerpointsv1,,,Psychic]Farigiraf||SilkScarf|CudChew|Strength,Psyshock,HyperVoice,ExpandingForce|Serious|2,,1,4,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Psychic]Gallade||TwistedSpoon|Steadfast|ZenHeadbutt,DrainPunch,PsychoCut,BrickBreak|Serious|1,4,,,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Psychic",
-      "team": [
-        {
-          "species": "Florges",
-          "name": "플라제스",
-          "item": "Fairy Feather",
-          "itemName": "요정의깃털",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 1,
-              "spa": 4,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Alluring Voice",
-              "Giga Drain",
-              "Pollen Puff",
-              "Hidden Power"
-            ],
-            "ability": "Flower Veil",
-            "nature": "Serious",
-            "teraType": "Psychic",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Farigiraf",
-          "name": "키키링",
-          "item": "Silk Scarf",
-          "itemName": "실크스카프",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 1,
-              "spa": 4,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Strength",
-              "Psyshock",
-              "Hyper Voice",
-              "Expanding Force"
-            ],
-            "ability": "Cud Chew",
-            "nature": "Serious",
-            "teraType": "Psychic",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Gallade",
-          "name": "엘레이드",
-          "item": "Twisted Spoon",
-          "itemName": "휘어진스푼",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Zen Headbutt",
-              "Drain Punch",
-              "Psycho Cut",
-              "Brick Break"
-            ],
-            "ability": "Steadfast",
-            "nature": "Serious",
-            "teraType": "Psychic",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-tulip",
-      "name": "리파",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Florges",
-      "signature": {
-        "rule": "tera",
-        "species": "Florges"
-      },
-      "seed": [
-        3,
-        2,
-        3,
-        4
-      ],
-      "packed": "Florges||FairyFeather|FlowerVeil|Moonblast,PetalDance,PollenPuff,HiddenPower|Modest|21,,8,29,,|F|28,28,28,28,28,28||50|,,towerpointsv1,,,Psychic]Farigiraf||SilkScarf|CudChew|DoubleEdge,FutureSight,HyperVoice,ExpandingForce|Modest|21,,8,29,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Psychic]Gallade||TwistedSpoon|Steadfast|ZenHeadbutt,FocusPunch,PsychoCut,BrickBreak|Jolly|8,29,,,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Psychic",
-      "team": [
-        {
-          "species": "Florges",
-          "name": "플라제스",
-          "item": "Fairy Feather",
-          "itemName": "요정의깃털",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 0,
-              "def": 8,
-              "spa": 29,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Moonblast",
-              "Petal Dance",
-              "Pollen Puff",
-              "Hidden Power"
-            ],
-            "ability": "Flower Veil",
-            "nature": "Modest",
-            "teraType": "Psychic",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Farigiraf",
-          "name": "키키링",
-          "item": "Silk Scarf",
-          "itemName": "실크스카프",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 0,
-              "def": 8,
-              "spa": 29,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Double-Edge",
-              "Future Sight",
-              "Hyper Voice",
-              "Expanding Force"
-            ],
-            "ability": "Cud Chew",
-            "nature": "Modest",
-            "teraType": "Psychic",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Gallade",
-          "name": "엘레이드",
-          "item": "Twisted Spoon",
-          "itemName": "휘어진스푼",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Zen Headbutt",
-              "Focus Punch",
-              "Psycho Cut",
-              "Brick Break"
-            ],
-            "ability": "Steadfast",
-            "nature": "Jolly",
-            "teraType": "Psychic",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-grusha",
-      "name": "그루샤",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Altaria",
-      "signature": {
-        "rule": "tera",
-        "species": "Altaria"
-      },
-      "seed": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "packed": "Altaria||DragonFang|NaturalCure|DragonClaw,AerialAce,AirCutter,DragonBreath|Serious|1,4,,2,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Ice]Weavile||BlackGlasses|Pressure|LashOut,IceSpinner,ThroatChop,MegaPunch|Serious|1,4,,,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Ice]Glaceon||NeverMeltIce|SnowCloak|IceBeam,Synchronoise,AlluringVoice,HiddenPower|Serious|2,,,4,1,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Ice",
-      "team": [
-        {
-          "species": "Altaria",
-          "name": "파비코리",
-          "item": "Dragon Fang",
-          "itemName": "용의이빨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 2,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Dragon Claw",
-              "Aerial Ace",
-              "Air Cutter",
-              "Dragon Breath"
-            ],
-            "ability": "Natural Cure",
-            "nature": "Serious",
-            "teraType": "Ice",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Weavile",
-          "name": "포푸니라",
-          "item": "Black Glasses",
-          "itemName": "검은안경",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Lash Out",
-              "Ice Spinner",
-              "Throat Chop",
-              "Mega Punch"
-            ],
-            "ability": "Pressure",
-            "nature": "Serious",
-            "teraType": "Ice",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Glaceon",
-          "name": "글레이시아",
-          "item": "Never-Melt Ice",
-          "itemName": "녹지않는얼음",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 0,
-              "spa": 4,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Ice Beam",
-              "Synchronoise",
-              "Alluring Voice",
-              "Hidden Power"
-            ],
-            "ability": "Snow Cloak",
-            "nature": "Serious",
-            "teraType": "Ice",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-grusha",
-      "name": "그루샤",
-      "generation": 9,
-      "role": "gym",
-      "title": "체육관 관장",
-      "ace": "Altaria",
-      "signature": {
-        "rule": "tera",
-        "species": "Altaria"
-      },
-      "seed": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "packed": "Altaria||DragonFang|NaturalCure|Outrage,BraveBird,Hurricane,DracoMeteor|Naive|12,24,,22,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Ice]Weavile||BlackGlasses|Pressure|FoulPlay,IceSpinner,ThroatChop,DoubleEdge|Jolly|8,29,,,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Ice]Glaceon||NeverMeltIce|SnowCloak|IceBeam,Synchronoise,AlluringVoice,HiddenPower|Modest|21,,,29,8,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Ice",
-      "team": [
-        {
-          "species": "Altaria",
-          "name": "파비코리",
-          "item": "Dragon Fang",
-          "itemName": "용의이빨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 12,
-              "atk": 24,
-              "def": 0,
-              "spa": 22,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Outrage",
-              "Brave Bird",
-              "Hurricane",
-              "Draco Meteor"
-            ],
-            "ability": "Natural Cure",
-            "nature": "Naive",
-            "teraType": "Ice",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Weavile",
-          "name": "포푸니라",
-          "item": "Black Glasses",
-          "itemName": "검은안경",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Foul Play",
-              "Ice Spinner",
-              "Throat Chop",
-              "Double-Edge"
-            ],
-            "ability": "Pressure",
-            "nature": "Jolly",
-            "teraType": "Ice",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Glaceon",
-          "name": "글레이시아",
-          "item": "Never-Melt Ice",
-          "itemName": "녹지않는얼음",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 0,
-              "def": 0,
-              "spa": 29,
-              "spd": 8,
-              "spe": 0
-            },
-            "moves": [
-              "Ice Beam",
-              "Synchronoise",
-              "Alluring Voice",
-              "Hidden Power"
-            ],
-            "ability": "Snow Cloak",
-            "nature": "Modest",
-            "teraType": "Ice",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-rika",
-      "name": "칠리",
-      "generation": 9,
-      "role": "elite",
-      "title": "사천왕",
-      "ace": "Clodsire",
-      "signature": {
-        "rule": "tera",
-        "species": "Clodsire"
-      },
-      "seed": [
-        17,
-        2,
-        3,
-        4
-      ],
-      "packed": "Krookodile||SoftSand|Intimidate|StompingTantrum,Crunch,Toxic,DarkestLariat|Serious|1,4,,,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Ground]Clodsire||PoisonBarb|PoisonPoint|PoisonJab,StompingTantrum,Recover,BodySlam|Serious|2,4,1,,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Ground]Whiscash||MysticWater|Oblivious|Surf,StompingTantrum,Liquidation,Toxic|Serious|1,4,,2,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Ground",
-      "team": [
-        {
-          "species": "Krookodile",
-          "name": "악비아르",
-          "item": "Soft Sand",
-          "itemName": "부드러운모래",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Stomping Tantrum",
-              "Crunch",
-              "Toxic",
-              "Darkest Lariat"
-            ],
-            "ability": "Intimidate",
-            "nature": "Serious",
-            "teraType": "Ground",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Clodsire",
-          "name": "토오",
-          "item": "Poison Barb",
-          "itemName": "독바늘",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 1,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Poison Jab",
-              "Stomping Tantrum",
-              "Recover",
-              "Body Slam"
-            ],
-            "ability": "Poison Point",
-            "nature": "Serious",
-            "teraType": "Ground",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Whiscash",
-          "name": "메깅",
-          "item": "Mystic Water",
-          "itemName": "신비의물방울",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 2,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Surf",
-              "Stomping Tantrum",
-              "Liquidation",
-              "Toxic"
-            ],
-            "ability": "Oblivious",
-            "nature": "Serious",
-            "teraType": "Ground",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-rika",
-      "name": "칠리",
-      "generation": 9,
-      "role": "elite",
-      "title": "사천왕",
-      "ace": "Clodsire",
-      "signature": {
-        "rule": "tera",
-        "species": "Clodsire"
-      },
-      "seed": [
-        17,
-        2,
-        3,
-        4
-      ],
-      "packed": "Krookodile||SoftSand|Intimidate|Earthquake,FoulPlay,Toxic,DarkestLariat|Jolly|8,29,,,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Ground]Clodsire||PoisonBarb|PoisonPoint|GunkShot,Earthquake,Recover,BodySlam|Adamant|21,29,8,,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Ground]Whiscash||MysticWater|Oblivious|Surf,Earthquake,Liquidation,Toxic|Quiet|12,24,,22,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Ground",
-      "team": [
-        {
-          "species": "Krookodile",
-          "name": "악비아르",
-          "item": "Soft Sand",
-          "itemName": "부드러운모래",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Earthquake",
-              "Foul Play",
-              "Toxic",
-              "Darkest Lariat"
-            ],
-            "ability": "Intimidate",
-            "nature": "Jolly",
-            "teraType": "Ground",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Clodsire",
-          "name": "토오",
-          "item": "Poison Barb",
-          "itemName": "독바늘",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 8,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Gunk Shot",
-              "Earthquake",
-              "Recover",
-              "Body Slam"
-            ],
-            "ability": "Poison Point",
-            "nature": "Adamant",
-            "teraType": "Ground",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Whiscash",
-          "name": "메깅",
-          "item": "Mystic Water",
-          "itemName": "신비의물방울",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 12,
-              "atk": 24,
-              "def": 0,
-              "spa": 22,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Surf",
-              "Earthquake",
-              "Liquidation",
-              "Toxic"
-            ],
-            "ability": "Oblivious",
-            "nature": "Quiet",
-            "teraType": "Ground",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-poppy",
-      "name": "뽀삐",
-      "generation": 9,
-      "role": "elite",
-      "title": "사천왕",
-      "ace": "Tinkaton",
-      "signature": {
-        "rule": "tera",
-        "species": "Tinkaton"
-      },
-      "seed": [
-        17,
-        2,
-        3,
-        4
-      ],
-      "packed": "Magnezone||Magnet|MagnetPull|Thunderbolt,FlashCannon,IronHead,Toxic|Serious|2,,,4,1,|N|10,10,10,10,10,10||50|,,towerpointsv1,,,Steel]Tinkaton||FairyFeather|MoldBreaker|PlayRough,MetalClaw,BrickBreak,HardPress|Serious|1,4,,,,2|F|10,10,10,10,10,10||50|,,towerpointsv1,,,Steel]Corviknight||SharpBeak|Pressure|DrillPeck,FlashCannon,HeavySlam,BodyPress|Serious|2,4,,,1,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Steel",
-      "team": [
-        {
-          "species": "Magnezone",
-          "name": "자포코일",
-          "item": "Magnet",
-          "itemName": "자석",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 0,
-              "spa": 4,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Thunderbolt",
-              "Flash Cannon",
-              "Iron Head",
-              "Toxic"
-            ],
-            "ability": "Magnet Pull",
-            "nature": "Serious",
-            "teraType": "Steel",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Tinkaton",
-          "name": "두드리짱",
-          "item": "Fairy Feather",
-          "itemName": "요정의깃털",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Play Rough",
-              "Metal Claw",
-              "Brick Break",
-              "Hard Press"
-            ],
-            "ability": "Mold Breaker",
-            "nature": "Serious",
-            "teraType": "Steel",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Corviknight",
-          "name": "아머까오",
-          "item": "Sharp Beak",
-          "itemName": "예리한부리",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Drill Peck",
-              "Flash Cannon",
-              "Heavy Slam",
-              "Body Press"
-            ],
-            "ability": "Pressure",
-            "nature": "Serious",
-            "teraType": "Steel",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-poppy",
-      "name": "뽀삐",
-      "generation": 9,
-      "role": "elite",
-      "title": "사천왕",
-      "ace": "Tinkaton",
-      "signature": {
-        "rule": "tera",
-        "species": "Tinkaton"
-      },
-      "seed": [
-        17,
-        2,
-        3,
-        4
-      ],
-      "packed": "Magnezone||Magnet|MagnetPull|Thunderbolt,SteelBeam,SteelRoller,Toxic|Modest|21,,,29,8,|N|28,28,28,28,28,28||50|,,towerpointsv1,,,Steel]Tinkaton||FairyFeather|MoldBreaker|PlayRough,GigatonHammer,BrickBreak,HardPress|Jolly|8,29,,,,21|F|28,28,28,28,28,28||50|,,towerpointsv1,,,Steel]Corviknight||SharpBeak|Pressure|BraveBird,SteelBeam,HeavySlam,BodyPress|Adamant|21,29,,,8,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Steel",
-      "team": [
-        {
-          "species": "Magnezone",
-          "name": "자포코일",
-          "item": "Magnet",
-          "itemName": "자석",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 0,
-              "def": 0,
-              "spa": 29,
-              "spd": 8,
-              "spe": 0
-            },
-            "moves": [
-              "Thunderbolt",
-              "Steel Beam",
-              "Steel Roller",
-              "Toxic"
-            ],
-            "ability": "Magnet Pull",
-            "nature": "Modest",
-            "teraType": "Steel",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Tinkaton",
-          "name": "두드리짱",
-          "item": "Fairy Feather",
-          "itemName": "요정의깃털",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Play Rough",
-              "Gigaton Hammer",
-              "Brick Break",
-              "Hard Press"
-            ],
-            "ability": "Mold Breaker",
-            "nature": "Jolly",
-            "teraType": "Steel",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Corviknight",
-          "name": "아머까오",
-          "item": "Sharp Beak",
-          "itemName": "예리한부리",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 8,
-              "spe": 0
-            },
-            "moves": [
-              "Brave Bird",
-              "Steel Beam",
-              "Heavy Slam",
-              "Body Press"
-            ],
-            "ability": "Pressure",
-            "nature": "Adamant",
-            "teraType": "Steel",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-larry-elite",
-      "name": "청목",
-      "generation": 9,
-      "role": "elite",
-      "title": "사천왕",
-      "ace": "Flamigo",
-      "signature": {
-        "rule": "tera",
-        "species": "Flamigo"
-      },
-      "seed": [
-        3,
-        2,
-        3,
-        4
-      ],
-      "packed": "Flamigo||SharpBeak|Scrappy|WingAttack,UpperHand,LowSweep,AerialAce|Serious|1,4,,,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Flying]Oricorio||SitrusBerry|Dancer|AirSlash,RevelationDance,Acrobatics,Facade|Serious|1,4,,2,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Flying]Altaria||DragonFang|NaturalCure|BreakingSwipe,Pluck,DragonClaw,AerialAce|Serious|1,4,,,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Flying",
-      "team": [
-        {
-          "species": "Flamigo",
-          "name": "꼬이밍고",
-          "item": "Sharp Beak",
-          "itemName": "예리한부리",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Wing Attack",
-              "Upper Hand",
-              "Low Sweep",
-              "Aerial Ace"
-            ],
-            "ability": "Scrappy",
-            "nature": "Serious",
-            "teraType": "Flying",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Oricorio",
-          "name": "춤추새",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 2,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Air Slash",
-              "Revelation Dance",
-              "Acrobatics",
-              "Facade"
-            ],
-            "ability": "Dancer",
-            "nature": "Serious",
-            "teraType": "Flying",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Altaria",
-          "name": "파비코리",
-          "item": "Dragon Fang",
-          "itemName": "용의이빨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Breaking Swipe",
-              "Pluck",
-              "Dragon Claw",
-              "Aerial Ace"
-            ],
-            "ability": "Natural Cure",
-            "nature": "Serious",
-            "teraType": "Flying",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-larry-elite",
-      "name": "청목",
-      "generation": 9,
-      "role": "elite",
-      "title": "사천왕",
-      "ace": "Flamigo",
-      "signature": {
-        "rule": "tera",
-        "species": "Flamigo"
-      },
-      "seed": [
-        3,
-        2,
-        3,
-        4
-      ],
-      "packed": "Flamigo||SharpBeak|Scrappy|BraveBird,CloseCombat,LowSweep,AerialAce|Jolly|8,29,,,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Flying]Oricorio||SitrusBerry|Dancer|Hurricane,RevelationDance,Acrobatics,Facade|Naive|12,24,,22,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Flying]Altaria||DragonFang|NaturalCure|Outrage,BraveBird,DragonClaw,AerialAce|Jolly|8,29,,,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Flying",
-      "team": [
-        {
-          "species": "Flamigo",
-          "name": "꼬이밍고",
-          "item": "Sharp Beak",
-          "itemName": "예리한부리",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Brave Bird",
-              "Close Combat",
-              "Low Sweep",
-              "Aerial Ace"
-            ],
-            "ability": "Scrappy",
-            "nature": "Jolly",
-            "teraType": "Flying",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Oricorio",
-          "name": "춤추새",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 12,
-              "atk": 24,
-              "def": 0,
-              "spa": 22,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Hurricane",
-              "Revelation Dance",
-              "Acrobatics",
-              "Facade"
-            ],
-            "ability": "Dancer",
-            "nature": "Naive",
-            "teraType": "Flying",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Altaria",
-          "name": "파비코리",
-          "item": "Dragon Fang",
-          "itemName": "용의이빨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Outrage",
-              "Brave Bird",
-              "Dragon Claw",
-              "Aerial Ace"
-            ],
-            "ability": "Natural Cure",
-            "nature": "Jolly",
-            "teraType": "Flying",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-hassel",
-      "name": "팔자크",
-      "generation": 9,
-      "role": "elite",
-      "title": "사천왕",
-      "ace": "Baxcalibur",
-      "signature": {
-        "rule": "tera",
-        "species": "Baxcalibur"
-      },
-      "seed": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "packed": "Baxcalibur||DragonFang|ThermalExchange|DragonClaw,IcicleCrash,DragonBreath,Facade|Serious|1,4,,,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Dragon]Dragalge||PoisonBarb|PoisonPoint|Venoshock,Twister,FocusBlast,Scald|Serious|2,,1,4,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Dragon]Goodra||SitrusBerry|SapSipper|DragonBreath,BodyPress,Incinerate,Flamethrower|Serious|1,,,4,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Dragon",
-      "team": [
-        {
-          "species": "Baxcalibur",
-          "name": "드닐레이브",
-          "item": "Dragon Fang",
-          "itemName": "용의이빨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Dragon Claw",
-              "Icicle Crash",
-              "Dragon Breath",
-              "Facade"
-            ],
-            "ability": "Thermal Exchange",
-            "nature": "Serious",
-            "teraType": "Dragon",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Dragalge",
-          "name": "드래캄",
-          "item": "Poison Barb",
-          "itemName": "독바늘",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 1,
-              "spa": 4,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Venoshock",
-              "Twister",
-              "Focus Blast",
-              "Scald"
-            ],
-            "ability": "Poison Point",
-            "nature": "Serious",
-            "teraType": "Dragon",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Goodra",
-          "name": "미끄래곤",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 0,
-              "def": 0,
-              "spa": 4,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Dragon Breath",
-              "Body Press",
-              "Incinerate",
-              "Flamethrower"
-            ],
-            "ability": "Sap Sipper",
-            "nature": "Serious",
-            "teraType": "Dragon",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "named-hassel",
-      "name": "팔자크",
-      "generation": 9,
-      "role": "elite",
-      "title": "사천왕",
-      "ace": "Baxcalibur",
-      "signature": {
-        "rule": "tera",
-        "species": "Baxcalibur"
-      },
-      "seed": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "packed": "Baxcalibur||DragonFang|ThermalExchange|GlaiveRush,IcicleCrash,DracoMeteor,DoubleEdge|Jolly|8,29,,,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Dragon]Dragalge||PoisonBarb|PoisonPoint|SludgeWave,DracoMeteor,FocusBlast,Scald|Modest|21,,8,29,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Dragon]Goodra||SitrusBerry|SapSipper|DracoMeteor,FocusPunch,FireBlast,Flamethrower|Timid|8,,,29,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Dragon",
-      "team": [
-        {
-          "species": "Baxcalibur",
-          "name": "드닐레이브",
-          "item": "Dragon Fang",
-          "itemName": "용의이빨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Glaive Rush",
-              "Icicle Crash",
-              "Draco Meteor",
-              "Double-Edge"
-            ],
-            "ability": "Thermal Exchange",
-            "nature": "Jolly",
-            "teraType": "Dragon",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Dragalge",
-          "name": "드래캄",
-          "item": "Poison Barb",
-          "itemName": "독바늘",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 0,
-              "def": 8,
-              "spa": 29,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Sludge Wave",
-              "Draco Meteor",
-              "Focus Blast",
-              "Scald"
-            ],
-            "ability": "Poison Point",
-            "nature": "Modest",
-            "teraType": "Dragon",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Goodra",
-          "name": "미끄래곤",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 0,
-              "def": 0,
-              "spa": 29,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Draco Meteor",
-              "Focus Punch",
-              "Fire Blast",
-              "Flamethrower"
-            ],
-            "ability": "Sap Sipper",
-            "nature": "Timid",
-            "teraType": "Dragon",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "named-nemona",
-      "name": "네모",
-      "generation": 9,
-      "role": "champion",
-      "title": "최종 도전자",
-      "ace": "Pawmot",
-      "signature": {
-        "rule": "tera",
-        "species": "Pawmot"
-      },
-      "seed": [
-        4,
-        2,
-        3,
-        4
-      ],
-      "packed": "Goodra||WiseGlasses|SapSipper|DragonPulse,Flamethrower,Thunderbolt,SludgeBomb|Serious|1,,,5,,2|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Dragon]Pawmot||ExpertBelt|VoltAbsorb|WildCharge,BodyPress,IcePunch,MachPunch|Serious|1,5,,,,2|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Electric]Dudunsparce||MuscleBand|SereneGrace|BodySlam,DrillRun,RockSlide,Coil|Serious|2,5,,,1,|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Normal",
-      "team": [
-        {
-          "species": "Goodra",
-          "name": "미끄래곤",
-          "item": "Wise Glasses",
-          "itemName": "박식안경",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 0,
-              "def": 0,
-              "spa": 5,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Dragon Pulse",
-              "Flamethrower",
-              "Thunderbolt",
-              "Sludge Bomb"
-            ],
-            "ability": "Sap Sipper",
-            "nature": "Serious",
-            "teraType": "Dragon",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Pawmot",
-          "name": "빠르모트",
-          "item": "Expert Belt",
-          "itemName": "달인의띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 5,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Wild Charge",
-              "Body Press",
-              "Ice Punch",
-              "Mach Punch"
-            ],
-            "ability": "Volt Absorb",
-            "nature": "Serious",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Dudunsparce",
-          "name": "노고고치",
-          "item": "Muscle Band",
-          "itemName": "힘의머리띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 5,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Body Slam",
-              "Drill Run",
-              "Rock Slide",
-              "Coil"
-            ],
-            "ability": "Serene Grace",
-            "nature": "Serious",
-            "teraType": "Normal",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "first-gate",
-      "stageName": "50층 첫 관문",
-      "sampleTier": 1,
-      "gimmickEnabled": true,
-      "referenceFloor": 50,
-      "iv": 12,
-      "statPoints": 8,
-      "floorRange": "50층 첫 관문·중간 보스"
-    },
-    {
-      "id": "named-nemona",
-      "name": "네모",
-      "generation": 9,
-      "role": "champion",
-      "title": "최종 도전자",
-      "ace": "Pawmot",
-      "signature": {
-        "rule": "tera",
-        "species": "Pawmot"
-      },
-      "seed": [
-        4,
-        2,
-        3,
-        4
-      ],
-      "packed": "Goodra||WiseGlasses|SapSipper|DragonPulse,Flamethrower,Thunderbolt,SludgeBomb|Timid|10,,,32,,24|M|||50|,,towerpointsv1,,,Dragon]Pawmot||ExpertBelt|VoltAbsorb|WildCharge,CloseCombat,IcePunch,MachPunch|Jolly|10,32,,,,24|M|||50|,,towerpointsv1,,,Electric]Dudunsparce||MuscleBand|SereneGrace|BodySlam,Earthquake,RockSlide,Coil|Adamant|24,32,,,10,|M|||50|,,towerpointsv1,,,Normal",
-      "team": [
-        {
-          "species": "Goodra",
-          "name": "미끄래곤",
-          "item": "Wise Glasses",
-          "itemName": "박식안경",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 10,
-              "atk": 0,
-              "def": 0,
-              "spa": 32,
-              "spd": 0,
-              "spe": 24
-            },
-            "moves": [
-              "Dragon Pulse",
-              "Flamethrower",
-              "Thunderbolt",
-              "Sludge Bomb"
-            ],
-            "ability": "Sap Sipper",
-            "nature": "Timid",
-            "teraType": "Dragon",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Pawmot",
-          "name": "빠르모트",
-          "item": "Expert Belt",
-          "itemName": "달인의띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 10,
-              "atk": 32,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 24
-            },
-            "moves": [
-              "Wild Charge",
-              "Close Combat",
-              "Ice Punch",
-              "Mach Punch"
-            ],
-            "ability": "Volt Absorb",
-            "nature": "Jolly",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Dudunsparce",
-          "name": "노고고치",
-          "item": "Muscle Band",
-          "itemName": "힘의머리띠",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 24,
-              "atk": 32,
-              "def": 0,
-              "spa": 0,
-              "spd": 10,
-              "spe": 0
-            },
-            "moves": [
-              "Body Slam",
-              "Earthquake",
-              "Rock Slide",
-              "Coil"
-            ],
-            "ability": "Serene Grace",
-            "nature": "Adamant",
-            "teraType": "Normal",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "final-gate",
-      "stageName": "100층 최종 관문",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 100,
-      "iv": 31,
-      "statPoints": 66,
-      "floorRange": "100층 최종전"
-    },
-    {
-      "id": "named-penny",
-      "name": "모란",
-      "generation": 9,
-      "role": "villain",
-      "title": "조직 관계자",
-      "ace": "Sylveon",
-      "signature": {
-        "rule": "tera",
-        "species": "Sylveon"
-      },
-      "seed": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "packed": "Sylveon||FairyFeather|CuteCharm|AlluringVoice,Psyshock,Psychic,HyperVoice|Serious|2,,1,5,,|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Fairy]Jolteon||Magnet|VoltAbsorb|Thunderbolt,ShadowBall,Synchronoise,VoltSwitch|Serious|1,,,5,,2|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Electric]Leafeon||MiracleSeed|LeafGuard|LeafBlade,XScissor,Frustration,IronTail|Serious|1,5,,,,2|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Grass",
-      "team": [
-        {
-          "species": "Sylveon",
-          "name": "님피아",
-          "item": "Fairy Feather",
-          "itemName": "요정의깃털",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 1,
-              "spa": 5,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Alluring Voice",
-              "Psyshock",
-              "Psychic",
-              "Hyper Voice"
-            ],
-            "ability": "Cute Charm",
-            "nature": "Serious",
-            "teraType": "Fairy",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Jolteon",
-          "name": "쥬피썬더",
-          "item": "Magnet",
-          "itemName": "자석",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 0,
-              "def": 0,
-              "spa": 5,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Thunderbolt",
-              "Shadow Ball",
-              "Synchronoise",
-              "Volt Switch"
-            ],
-            "ability": "Volt Absorb",
-            "nature": "Serious",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Leafeon",
-          "name": "리피아",
-          "item": "Miracle Seed",
-          "itemName": "기적의씨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 5,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Leaf Blade",
-              "X-Scissor",
-              "Frustration",
-              "Iron Tail"
-            ],
-            "ability": "Leaf Guard",
-            "nature": "Serious",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "first-gate",
-      "stageName": "50층 첫 관문",
-      "sampleTier": 1,
-      "gimmickEnabled": true,
-      "referenceFloor": 50,
-      "iv": 12,
-      "statPoints": 8,
-      "floorRange": "50층 첫 관문·중간 보스"
-    },
-    {
-      "id": "named-penny",
-      "name": "모란",
-      "generation": 9,
-      "role": "villain",
-      "title": "조직 관계자",
-      "ace": "Sylveon",
-      "signature": {
-        "rule": "tera",
-        "species": "Sylveon"
-      },
-      "seed": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "packed": "Sylveon||FairyFeather|CuteCharm|Moonblast,Synchronoise,Psychic,HyperVoice|Modest|24,,10,32,,|M|||50|,,towerpointsv1,,,Fairy]Jolteon||Magnet|VoltAbsorb|Thunderbolt,ShadowBall,Synchronoise,VoltSwitch|Timid|10,,,32,,24|M|||50|,,towerpointsv1,,,Electric]Leafeon||MiracleSeed|LeafGuard|LeafBlade,XScissor,Frustration,IronTail|Jolly|10,32,,,,24|M|||50|,,towerpointsv1,,,Grass",
-      "team": [
-        {
-          "species": "Sylveon",
-          "name": "님피아",
-          "item": "Fairy Feather",
-          "itemName": "요정의깃털",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 24,
-              "atk": 0,
-              "def": 10,
-              "spa": 32,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Moonblast",
-              "Synchronoise",
-              "Psychic",
-              "Hyper Voice"
-            ],
-            "ability": "Cute Charm",
-            "nature": "Modest",
-            "teraType": "Fairy",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Jolteon",
-          "name": "쥬피썬더",
-          "item": "Magnet",
-          "itemName": "자석",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 10,
-              "atk": 0,
-              "def": 0,
-              "spa": 32,
-              "spd": 0,
-              "spe": 24
-            },
-            "moves": [
-              "Thunderbolt",
-              "Shadow Ball",
-              "Synchronoise",
-              "Volt Switch"
-            ],
-            "ability": "Volt Absorb",
-            "nature": "Timid",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Leafeon",
-          "name": "리피아",
-          "item": "Miracle Seed",
-          "itemName": "기적의씨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 10,
-              "atk": 32,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 24
-            },
-            "moves": [
-              "Leaf Blade",
-              "X-Scissor",
-              "Frustration",
-              "Iron Tail"
-            ],
-            "ability": "Leaf Guard",
-            "nature": "Jolly",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "final-gate",
-      "stageName": "100층 최종 관문",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 100,
-      "iv": 31,
-      "statPoints": 66,
-      "floorRange": "100층 최종전"
-    },
-    {
       "id": "magma-executive-tabitha",
       "name": "호걸",
       "generation": 3,
@@ -28751,542 +24447,6 @@
           "role": "Attack reduction / priority"
         }
       ]
-    },
-    {
-      "id": "star-executive-giacomo",
-      "name": "피냐",
-      "generation": 9,
-      "role": "villain",
-      "title": "star executive",
-      "ace": "Kingambit",
-      "signature": {
-        "rule": "tera",
-        "species": "Kingambit"
-      },
-      "seed": [
-        5,
-        2,
-        3,
-        4
-      ],
-      "packed": "Kingambit||BlackGlasses|Defiant|ThroatChop,IronHead,NightSlash,SuckerPunch|Serious|2,4,,,1,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Dark]Honchkrow||SitrusBerry|Insomnia|LashOut,DrillPeck,AerialAce,Assurance|Serious|2,4,1,,,|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Dark]Krookodile||SoftSand|Intimidate|StompingTantrum,Crunch,LashOut,BrickBreak|Serious|1,4,,,,2|M|10,10,10,10,10,10||50|,,towerpointsv1,,,Dark",
-      "team": [
-        {
-          "species": "Kingambit",
-          "name": "대도각참",
-          "item": "Black Glasses",
-          "itemName": "검은안경",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 1,
-              "spe": 0
-            },
-            "moves": [
-              "Throat Chop",
-              "Iron Head",
-              "Night Slash",
-              "Sucker Punch"
-            ],
-            "ability": "Defiant",
-            "nature": "Serious",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Honchkrow",
-          "name": "돈크로우",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 4,
-              "def": 1,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Lash Out",
-              "Drill Peck",
-              "Aerial Ace",
-              "Assurance"
-            ],
-            "ability": "Insomnia",
-            "nature": "Serious",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Krookodile",
-          "name": "악비아르",
-          "item": "Soft Sand",
-          "itemName": "부드러운모래",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 10,
-              "atk": 10,
-              "def": 10,
-              "spa": 10,
-              "spd": 10,
-              "spe": 10
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 4,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Stomping Tantrum",
-              "Crunch",
-              "Lash Out",
-              "Brick Break"
-            ],
-            "ability": "Intimidate",
-            "nature": "Serious",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-early",
-      "stageName": "전반 관장·사천왕",
-      "sampleTier": 1,
-      "gimmickEnabled": false,
-      "referenceFloor": 45,
-      "iv": 10,
-      "statPoints": 7,
-      "floorRange": "5~45층"
-    },
-    {
-      "id": "star-executive-giacomo",
-      "name": "피냐",
-      "generation": 9,
-      "role": "villain",
-      "title": "star executive",
-      "ace": "Kingambit",
-      "signature": {
-        "rule": "tera",
-        "species": "Kingambit"
-      },
-      "seed": [
-        5,
-        2,
-        3,
-        4
-      ],
-      "packed": "Kingambit||BlackGlasses|Defiant|FoulPlay,IronHead,NightSlash,SuckerPunch|Adamant|21,29,,,8,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Dark]Honchkrow||SitrusBerry|Insomnia|FoulPlay,BraveBird,AerialAce,Assurance|Adamant|21,29,8,,,|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Dark]Krookodile||SoftSand|Intimidate|Earthquake,FoulPlay,LashOut,FocusPunch|Jolly|8,29,,,,21|M|28,28,28,28,28,28||50|,,towerpointsv1,,,Dark",
-      "team": [
-        {
-          "species": "Kingambit",
-          "name": "대도각참",
-          "item": "Black Glasses",
-          "itemName": "검은안경",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 8,
-              "spe": 0
-            },
-            "moves": [
-              "Foul Play",
-              "Iron Head",
-              "Night Slash",
-              "Sucker Punch"
-            ],
-            "ability": "Defiant",
-            "nature": "Adamant",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Honchkrow",
-          "name": "돈크로우",
-          "item": "Sitrus Berry",
-          "itemName": "자뭉열매",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 21,
-              "atk": 29,
-              "def": 8,
-              "spa": 0,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Foul Play",
-              "Brave Bird",
-              "Aerial Ace",
-              "Assurance"
-            ],
-            "ability": "Insomnia",
-            "nature": "Adamant",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Krookodile",
-          "name": "악비아르",
-          "item": "Soft Sand",
-          "itemName": "부드러운모래",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 28,
-              "atk": 28,
-              "def": 28,
-              "spa": 28,
-              "spd": 28,
-              "spe": 28
-            },
-            "evs": {
-              "hp": 8,
-              "atk": 29,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 21
-            },
-            "moves": [
-              "Earthquake",
-              "Foul Play",
-              "Lash Out",
-              "Focus Punch"
-            ],
-            "ability": "Intimidate",
-            "nature": "Jolly",
-            "teraType": "Dark",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "leaders-late",
-      "stageName": "후반 관장·사천왕",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 95,
-      "iv": 28,
-      "statPoints": 58,
-      "floorRange": "55~95층"
-    },
-    {
-      "id": "star-boss-penny",
-      "name": "모란",
-      "generation": 9,
-      "role": "villain",
-      "title": "star boss",
-      "ace": "Sylveon",
-      "signature": {
-        "rule": "tera",
-        "species": "Sylveon"
-      },
-      "seed": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "packed": "Sylveon||FairyFeather|CuteCharm|AlluringVoice,Psyshock,Psychic,HyperVoice|Serious|2,,1,5,,|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Fairy]Jolteon||Magnet|VoltAbsorb|Thunderbolt,ShadowBall,Synchronoise,VoltSwitch|Serious|1,,,5,,2|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Electric]Leafeon||MiracleSeed|LeafGuard|LeafBlade,XScissor,Frustration,IronTail|Serious|1,5,,,,2|M|12,12,12,12,12,12||50|,,towerpointsv1,,,Grass",
-      "team": [
-        {
-          "species": "Sylveon",
-          "name": "님피아",
-          "item": "Fairy Feather",
-          "itemName": "요정의깃털",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 2,
-              "atk": 0,
-              "def": 1,
-              "spa": 5,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Alluring Voice",
-              "Psyshock",
-              "Psychic",
-              "Hyper Voice"
-            ],
-            "ability": "Cute Charm",
-            "nature": "Serious",
-            "teraType": "Fairy",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Jolteon",
-          "name": "쥬피썬더",
-          "item": "Magnet",
-          "itemName": "자석",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 0,
-              "def": 0,
-              "spa": 5,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Thunderbolt",
-              "Shadow Ball",
-              "Synchronoise",
-              "Volt Switch"
-            ],
-            "ability": "Volt Absorb",
-            "nature": "Serious",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Leafeon",
-          "name": "리피아",
-          "item": "Miracle Seed",
-          "itemName": "기적의씨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 12,
-              "atk": 12,
-              "def": 12,
-              "spa": 12,
-              "spd": 12,
-              "spe": 12
-            },
-            "evs": {
-              "hp": 1,
-              "atk": 5,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 2
-            },
-            "moves": [
-              "Leaf Blade",
-              "X-Scissor",
-              "Frustration",
-              "Iron Tail"
-            ],
-            "ability": "Leaf Guard",
-            "nature": "Serious",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "first-gate",
-      "stageName": "50층 첫 관문",
-      "sampleTier": 1,
-      "gimmickEnabled": true,
-      "referenceFloor": 50,
-      "iv": 12,
-      "statPoints": 8,
-      "floorRange": "50층 첫 관문·중간 보스"
-    },
-    {
-      "id": "star-boss-penny",
-      "name": "모란",
-      "generation": 9,
-      "role": "villain",
-      "title": "star boss",
-      "ace": "Sylveon",
-      "signature": {
-        "rule": "tera",
-        "species": "Sylveon"
-      },
-      "seed": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "packed": "Sylveon||FairyFeather|CuteCharm|Moonblast,Synchronoise,Psychic,HyperVoice|Modest|24,,10,32,,|M|||50|,,towerpointsv1,,,Fairy]Jolteon||Magnet|VoltAbsorb|Thunderbolt,ShadowBall,Synchronoise,VoltSwitch|Timid|10,,,32,,24|M|||50|,,towerpointsv1,,,Electric]Leafeon||MiracleSeed|LeafGuard|LeafBlade,XScissor,Frustration,IronTail|Jolly|10,32,,,,24|M|||50|,,towerpointsv1,,,Grass",
-      "team": [
-        {
-          "species": "Sylveon",
-          "name": "님피아",
-          "item": "Fairy Feather",
-          "itemName": "요정의깃털",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 24,
-              "atk": 0,
-              "def": 10,
-              "spa": 32,
-              "spd": 0,
-              "spe": 0
-            },
-            "moves": [
-              "Moonblast",
-              "Synchronoise",
-              "Psychic",
-              "Hyper Voice"
-            ],
-            "ability": "Cute Charm",
-            "nature": "Modest",
-            "teraType": "Fairy",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Jolteon",
-          "name": "쥬피썬더",
-          "item": "Magnet",
-          "itemName": "자석",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 10,
-              "atk": 0,
-              "def": 0,
-              "spa": 32,
-              "spd": 0,
-              "spe": 24
-            },
-            "moves": [
-              "Thunderbolt",
-              "Shadow Ball",
-              "Synchronoise",
-              "Volt Switch"
-            ],
-            "ability": "Volt Absorb",
-            "nature": "Timid",
-            "teraType": "Electric",
-            "statSystem": "points"
-          }
-        },
-        {
-          "species": "Leafeon",
-          "name": "리피아",
-          "item": "Miracle Seed",
-          "itemName": "기적의씨",
-          "gigantamax": false,
-          "profile": {
-            "ivs": {
-              "hp": 31,
-              "atk": 31,
-              "def": 31,
-              "spa": 31,
-              "spd": 31,
-              "spe": 31
-            },
-            "evs": {
-              "hp": 10,
-              "atk": 32,
-              "def": 0,
-              "spa": 0,
-              "spd": 0,
-              "spe": 24
-            },
-            "moves": [
-              "Leaf Blade",
-              "X-Scissor",
-              "Frustration",
-              "Iron Tail"
-            ],
-            "ability": "Leaf Guard",
-            "nature": "Jolly",
-            "teraType": "Grass",
-            "statSystem": "points"
-          }
-        }
-      ],
-      "stage": "final-gate",
-      "stageName": "100층 최종 관문",
-      "sampleTier": 2,
-      "gimmickEnabled": true,
-      "referenceFloor": 100,
-      "iv": 31,
-      "statPoints": 66,
-      "floorRange": "100층 최종전"
     },
     {
       "id": "rocket-grunt",
@@ -37292,6 +32452,1832 @@
               "Air Slash",
               "Solar Beam",
               "Ancient Power"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-brassius",
+      "name": "콜사",
+      "generation": 9,
+      "role": "gym",
+      "ace": "Sudowoodo",
+      "signature": {
+        "rule": "tera",
+        "species": "Sudowoodo"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Breloom",
+        "Arboliva",
+        "Sudowoodo"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Breloom"
+        ],
+        "preferredLast": [
+          "Sudowoodo"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "수면 + 넘치는씨 그래스필드 + 풀 테라 개척하기",
+      "team": [
+        {
+          "species": "Breloom",
+          "item": "Toxic Orb",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 24,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Adamant",
+            "ability": "Poison Heal",
+            "moves": [
+              "Spore",
+              "Bullet Seed",
+              "Mach Punch",
+              "Rock Tomb"
+            ]
+          }
+        },
+        {
+          "species": "Arboliva",
+          "item": "Sitrus Berry",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 0,
+              "def": 0,
+              "spa": 24,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Modest",
+            "ability": "Seed Sower",
+            "moves": [
+              "Energy Ball",
+              "Earth Power",
+              "Dazzling Gleam",
+              "Leech Seed"
+            ]
+          }
+        },
+        {
+          "species": "Sudowoodo",
+          "item": "Expert Belt",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 24,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Adamant",
+            "ability": "Sturdy",
+            "moves": [
+              "Trailblaze",
+              "Stone Edge",
+              "Fire Punch",
+              "Sucker Punch"
+            ],
+            "teraType": "Grass"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-iono",
+      "name": "모야모",
+      "generation": 9,
+      "role": "gym",
+      "ace": "Mismagius",
+      "signature": {
+        "rule": "tera",
+        "species": "Mismagius"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Kilowattrel",
+        "Bellibolt",
+        "Mismagius"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Kilowattrel"
+        ],
+        "preferredLast": [
+          "Mismagius"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "전기 운영 + 부유 전기 테라 무우마직",
+      "team": [
+        {
+          "species": "Kilowattrel",
+          "item": "Focus Sash",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 24,
+              "spd": 0,
+              "spe": 24
+            },
+            "nature": "Timid",
+            "ability": "Wind Power",
+            "moves": [
+              "Thunderbolt",
+              "Hurricane",
+              "Tailwind",
+              "Volt Switch"
+            ]
+          }
+        },
+        {
+          "species": "Bellibolt",
+          "item": "Leftovers",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 0,
+              "def": 0,
+              "spa": 24,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Modest",
+            "ability": "Electromorphosis",
+            "moves": [
+              "Parabolic Charge",
+              "Muddy Water",
+              "Reflect",
+              "Sucker Punch"
+            ]
+          }
+        },
+        {
+          "species": "Mismagius",
+          "item": "Expert Belt",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 24,
+              "spd": 0,
+              "spe": 24
+            },
+            "nature": "Timid",
+            "ability": "Levitate",
+            "moves": [
+              "Tera Blast",
+              "Shadow Ball",
+              "Mystical Fire",
+              "Energy Ball"
+            ],
+            "teraType": "Electric"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-kofu",
+      "name": "곤포",
+      "generation": 9,
+      "role": "gym",
+      "ace": "Crabominable",
+      "signature": {
+        "rule": "tera",
+        "species": "Crabominable"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Pelipper",
+        "Clawitzer",
+        "Crabominable"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Pelipper"
+        ],
+        "preferredLast": [
+          "Crabominable"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "비 + 메가런처 + 물 테라 집게해머",
+      "team": [
+        {
+          "species": "Pelipper",
+          "item": "Sitrus Berry",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 0,
+              "def": 0,
+              "spa": 24,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Modest",
+            "ability": "Drizzle",
+            "moves": [
+              "Hurricane",
+              "Surf",
+              "U-turn",
+              "Tailwind"
+            ]
+          }
+        },
+        {
+          "species": "Clawitzer",
+          "item": "Life Orb",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 0,
+              "def": 0,
+              "spa": 24,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Modest",
+            "ability": "Mega Launcher",
+            "moves": [
+              "Water Pulse",
+              "Dark Pulse",
+              "Dragon Pulse",
+              "Aura Sphere"
+            ]
+          }
+        },
+        {
+          "species": "Crabominable",
+          "item": "Punching Glove",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 24,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Adamant",
+            "ability": "Iron Fist",
+            "moves": [
+              "Crabhammer",
+              "Ice Hammer",
+              "Drain Punch",
+              "Thunder Punch"
+            ],
+            "teraType": "Water"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-ryme",
+      "name": "라임",
+      "generation": 9,
+      "role": "gym",
+      "ace": "Toxtricity",
+      "signature": {
+        "rule": "tera",
+        "species": "Toxtricity"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Mimikyu",
+        "Houndstone",
+        "Toxtricity"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Mimikyu"
+        ],
+        "preferredLast": [
+          "Toxtricity"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "상태이상 + 성묘 + 음파 기술",
+      "team": [
+        {
+          "species": "Mimikyu",
+          "item": "Sitrus Berry",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 24,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 24
+            },
+            "nature": "Jolly",
+            "ability": "Disguise",
+            "moves": [
+              "Will-O-Wisp",
+              "Play Rough",
+              "Shadow Sneak",
+              "Swords Dance"
+            ]
+          }
+        },
+        {
+          "species": "Houndstone",
+          "item": "Spell Tag",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 24,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Adamant",
+            "ability": "Fluffy",
+            "moves": [
+              "Last Respects",
+              "Play Rough",
+              "Crunch",
+              "Shadow Sneak"
+            ]
+          }
+        },
+        {
+          "species": "Toxtricity",
+          "item": "Throat Spray",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 0,
+              "def": 0,
+              "spa": 24,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Modest",
+            "ability": "Punk Rock",
+            "moves": [
+              "Overdrive",
+              "Boomburst",
+              "Hex",
+              "Sludge Bomb"
+            ],
+            "teraType": "Ghost"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-tulip",
+      "name": "리파",
+      "generation": 9,
+      "role": "gym",
+      "ace": "Florges",
+      "signature": {
+        "rule": "tera",
+        "species": "Florges"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Espathra",
+        "Gallade",
+        "Florges"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Espathra"
+        ],
+        "preferredLast": [
+          "Florges"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "특방 하락 + 예리함 물리 중견 + 에스퍼 테라",
+      "team": [
+        {
+          "species": "Espathra",
+          "item": "Focus Sash",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 24,
+              "spd": 0,
+              "spe": 24
+            },
+            "nature": "Timid",
+            "ability": "Opportunist",
+            "moves": [
+              "Lumina Crash",
+              "Dazzling Gleam",
+              "Reflect",
+              "Shadow Ball"
+            ]
+          }
+        },
+        {
+          "species": "Gallade",
+          "item": "Life Orb",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 24,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 24
+            },
+            "nature": "Jolly",
+            "ability": "Sharpness",
+            "moves": [
+              "Psycho Cut",
+              "Sacred Sword",
+              "Leaf Blade",
+              "Night Slash"
+            ]
+          }
+        },
+        {
+          "species": "Florges",
+          "item": "Sitrus Berry",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 0,
+              "def": 0,
+              "spa": 24,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Modest",
+            "ability": "Flower Veil",
+            "moves": [
+              "Psychic",
+              "Moonblast",
+              "Energy Ball",
+              "Calm Mind"
+            ],
+            "teraType": "Psychic"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-grusha",
+      "name": "그루샤",
+      "generation": 9,
+      "role": "gym",
+      "ace": "Altaria",
+      "signature": {
+        "rule": "tera",
+        "species": "Altaria"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Frosmoth",
+        "Cetitan",
+        "Altaria"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Frosmoth"
+        ],
+        "preferredLast": [
+          "Altaria"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "순풍 + 물리 압박 + 얼음 테라",
+      "team": [
+        {
+          "species": "Frosmoth",
+          "item": "Focus Sash",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 0,
+              "def": 0,
+              "spa": 24,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Timid",
+            "ability": "Ice Scales",
+            "moves": [
+              "Ice Beam",
+              "Bug Buzz",
+              "Tailwind",
+              "Quiver Dance"
+            ]
+          }
+        },
+        {
+          "species": "Cetitan",
+          "item": "Assault Vest",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 24,
+              "atk": 24,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Adamant",
+            "ability": "Thick Fat",
+            "moves": [
+              "Ice Spinner",
+              "Liquidation",
+              "Earthquake",
+              "Ice Shard"
+            ]
+          }
+        },
+        {
+          "species": "Altaria",
+          "item": "Never-Melt Ice",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 24,
+              "spd": 0,
+              "spe": 24
+            },
+            "nature": "Modest",
+            "ability": "Natural Cure",
+            "moves": [
+              "Ice Beam",
+              "Dragon Pulse",
+              "Moonblast",
+              "Hurricane"
+            ],
+            "teraType": "Ice"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-rika",
+      "name": "칠리",
+      "generation": 9,
+      "role": "elite",
+      "ace": "Clodsire",
+      "signature": {
+        "rule": "tera",
+        "species": "Clodsire"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Donphan",
+        "Camerupt",
+        "Clodsire"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Donphan"
+        ],
+        "preferredLast": [
+          "Clodsire"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "설치 + 안정적인 땅 운영 + 저수 토오",
+      "team": [
+        {
+          "species": "Donphan",
+          "item": "Rocky Helmet",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "nature": "Adamant",
+            "ability": "Sturdy",
+            "moves": [
+              "Stealth Rock",
+              "Earthquake",
+              "Knock Off",
+              "Ice Shard"
+            ]
+          }
+        },
+        {
+          "species": "Camerupt",
+          "item": "Assault Vest",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 32,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 0
+            },
+            "nature": "Modest",
+            "ability": "Solid Rock",
+            "moves": [
+              "Earth Power",
+              "Flamethrower",
+              "Flash Cannon",
+              "Ancient Power"
+            ]
+          }
+        },
+        {
+          "species": "Clodsire",
+          "item": "Leftovers",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "nature": "Careful",
+            "ability": "Water Absorb",
+            "moves": [
+              "Earthquake",
+              "Poison Jab",
+              "Toxic",
+              "Recover"
+            ],
+            "teraType": "Ground"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-poppy",
+      "name": "뽀삐",
+      "generation": 9,
+      "role": "elite",
+      "ace": "Tinkaton",
+      "signature": {
+        "rule": "tera",
+        "species": "Tinkaton"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Copperajah",
+        "Corviknight",
+        "Tinkaton"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Copperajah"
+        ],
+        "preferredLast": [
+          "Tinkaton"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "강철 내구 + 철벽 바디프레스 + 거대해머",
+      "team": [
+        {
+          "species": "Copperajah",
+          "item": "Sitrus Berry",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "nature": "Adamant",
+            "ability": "Sheer Force",
+            "moves": [
+              "Stealth Rock",
+              "Heavy Slam",
+              "Play Rough",
+              "High Horsepower"
+            ]
+          }
+        },
+        {
+          "species": "Corviknight",
+          "item": "Leftovers",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "nature": "Impish",
+            "ability": "Pressure",
+            "moves": [
+              "Iron Defense",
+              "Body Press",
+              "Brave Bird",
+              "Roost"
+            ]
+          }
+        },
+        {
+          "species": "Tinkaton",
+          "item": "Air Balloon",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Adamant",
+            "ability": "Mold Breaker",
+            "moves": [
+              "Gigaton Hammer",
+              "Play Rough",
+              "Knock Off",
+              "Brick Break"
+            ],
+            "teraType": "Steel"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-larry-elite",
+      "name": "청목",
+      "generation": 9,
+      "role": "elite",
+      "ace": "Flamigo",
+      "signature": {
+        "rule": "tera",
+        "species": "Flamigo"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Staraptor",
+        "Altaria",
+        "Flamigo"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Staraptor"
+        ],
+        "preferredLast": [
+          "Flamigo"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "위협 + 스카프 유턴 + 효율적 공격",
+      "team": [
+        {
+          "species": "Staraptor",
+          "item": "Choice Scarf",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Jolly",
+            "ability": "Intimidate",
+            "moves": [
+              "Brave Bird",
+              "Close Combat",
+              "U-turn",
+              "Double-Edge"
+            ]
+          }
+        },
+        {
+          "species": "Altaria",
+          "item": "Sitrus Berry",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Modest",
+            "ability": "Natural Cure",
+            "moves": [
+              "Draco Meteor",
+              "Hurricane",
+              "Flamethrower",
+              "Ice Beam"
+            ]
+          }
+        },
+        {
+          "species": "Flamigo",
+          "item": "Life Orb",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Jolly",
+            "ability": "Scrappy",
+            "moves": [
+              "Brave Bird",
+              "Close Combat",
+              "Throat Chop",
+              "Liquidation"
+            ],
+            "teraType": "Flying"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-hassel",
+      "name": "팔자크",
+      "generation": 9,
+      "role": "elite",
+      "ace": "Baxcalibur",
+      "signature": {
+        "rule": "tera",
+        "species": "Baxcalibur"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Noivern",
+        "Haxorus",
+        "Baxcalibur"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Noivern"
+        ],
+        "preferredLast": [
+          "Baxcalibur"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "순풍 + 용의춤 + 드래곤 테라",
+      "team": [
+        {
+          "species": "Noivern",
+          "item": "Focus Sash",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Timid",
+            "ability": "Infiltrator",
+            "moves": [
+              "Draco Meteor",
+              "Hurricane",
+              "Taunt",
+              "Tailwind"
+            ]
+          }
+        },
+        {
+          "species": "Haxorus",
+          "item": "Lum Berry",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Jolly",
+            "ability": "Mold Breaker",
+            "moves": [
+              "Dragon Dance",
+              "Outrage",
+              "Earthquake",
+              "Iron Head"
+            ]
+          }
+        },
+        {
+          "species": "Baxcalibur",
+          "item": "Dragon Fang",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Adamant",
+            "ability": "Thermal Exchange",
+            "moves": [
+              "Glaive Rush",
+              "Icicle Crash",
+              "Earthquake",
+              "Ice Shard"
+            ],
+            "teraType": "Dragon"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-geeta",
+      "name": "테사",
+      "generation": 9,
+      "role": "champion",
+      "ace": "Kingambit",
+      "signature": {
+        "rule": "tera",
+        "species": "Kingambit"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Glimmora",
+        "Espathra",
+        "Kingambit"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Glimmora"
+        ],
+        "preferredLast": [
+          "Kingambit"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "킬라플로르 설치 → 특방 압박 → 총대장 피니시",
+      "team": [
+        {
+          "species": "Glimmora",
+          "item": "Focus Sash",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Timid",
+            "ability": "Toxic Debris",
+            "moves": [
+              "Stealth Rock",
+              "Sludge Wave",
+              "Earth Power",
+              "Energy Ball"
+            ]
+          }
+        },
+        {
+          "species": "Espathra",
+          "item": "Life Orb",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Timid",
+            "ability": "Opportunist",
+            "moves": [
+              "Lumina Crash",
+              "Dazzling Gleam",
+              "Shadow Ball",
+              "Calm Mind"
+            ]
+          }
+        },
+        {
+          "species": "Kingambit",
+          "item": "Black Glasses",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "nature": "Adamant",
+            "ability": "Supreme Overlord",
+            "moves": [
+              "Kowtow Cleave",
+              "Iron Head",
+              "Sucker Punch",
+              "Swords Dance"
+            ],
+            "teraType": "Dark"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-nemona",
+      "name": "네모",
+      "generation": 9,
+      "role": "champion",
+      "ace": "Meowscarada",
+      "signature": {
+        "rule": "tera",
+        "species": "Meowscarada"
+      },
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Lycanroc",
+        "Pawmot",
+        "Meowscarada"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Lycanroc"
+        ],
+        "preferredLast": [
+          "Meowscarada"
+        ]
+      },
+      "gimmickEnabled": true,
+      "concept": "설치 + Volt Switch/U-turn + 변환자재 + 적극적 상성 운영",
+      "team": [
+        {
+          "species": "Lycanroc",
+          "item": "Focus Sash",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Jolly",
+            "ability": "Keen Eye",
+            "moves": [
+              "Stealth Rock",
+              "Accelerock",
+              "Stone Edge",
+              "Close Combat"
+            ]
+          }
+        },
+        {
+          "species": "Pawmot",
+          "item": "Punching Glove",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Jolly",
+            "ability": "Iron Fist",
+            "moves": [
+              "Double Shock",
+              "Close Combat",
+              "Ice Punch",
+              "Volt Switch"
+            ]
+          }
+        },
+        {
+          "species": "Meowscarada",
+          "item": "Life Orb",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Jolly",
+            "ability": "Protean",
+            "moves": [
+              "Flower Trick",
+              "Knock Off",
+              "U-turn",
+              "Sucker Punch"
+            ],
+            "teraType": "Grass"
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-ai-sada",
+      "name": "AI 올림",
+      "generation": 9,
+      "role": "villain",
+      "ace": "Roaring Moon",
+      "signature": null,
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Scream Tail",
+        "Flutter Mane",
+        "Roaring Moon"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Scream Tail"
+        ],
+        "preferredLast": [
+          "Roaring Moon"
+        ]
+      },
+      "gimmickEnabled": false,
+      "concept": "쾌청 + 고대활성 + 고동치는달 피니시",
+      "team": [
+        {
+          "species": "Scream Tail",
+          "item": "Heat Rock",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Jolly",
+            "ability": "Protosynthesis",
+            "moves": [
+              "Sunny Day",
+              "Reflect",
+              "Psychic",
+              "Play Rough"
+            ]
+          }
+        },
+        {
+          "species": "Flutter Mane",
+          "item": "Life Orb",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Timid",
+            "ability": "Protosynthesis",
+            "moves": [
+              "Moonblast",
+              "Shadow Ball",
+              "Mystical Fire",
+              "Power Gem"
+            ]
+          }
+        },
+        {
+          "species": "Roaring Moon",
+          "item": "Booster Energy",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Jolly",
+            "ability": "Protosynthesis",
+            "moves": [
+              "Dragon Dance",
+              "Crunch",
+              "Acrobatics",
+              "Earthquake"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "named-ai-turo",
+      "name": "AI 투로",
+      "generation": 9,
+      "role": "villain",
+      "ace": "Iron Valiant",
+      "signature": null,
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [
+        "Iron Bundle",
+        "Iron Hands",
+        "Iron Valiant"
+      ],
+      "selectionRules": {
+        "preferredLead": [
+          "Iron Bundle"
+        ],
+        "preferredLast": [
+          "Iron Valiant"
+        ]
+      },
+      "gimmickEnabled": false,
+      "concept": "개별 화력 + 쿼크차지 + 최종 무쇠무인",
+      "team": [
+        {
+          "species": "Iron Bundle",
+          "item": "Focus Sash",
+          "gigantamax": false,
+          "role": "lead",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Timid",
+            "ability": "Quark Drive",
+            "moves": [
+              "Freeze-Dry",
+              "Hydro Pump",
+              "Ice Beam",
+              "Encore"
+            ]
+          }
+        },
+        {
+          "species": "Iron Hands",
+          "item": "Assault Vest",
+          "gigantamax": false,
+          "role": "middle",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 32,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 2,
+              "spe": 0
+            },
+            "nature": "Adamant",
+            "ability": "Quark Drive",
+            "moves": [
+              "Drain Punch",
+              "Thunder Punch",
+              "Ice Punch",
+              "Earthquake"
+            ]
+          }
+        },
+        {
+          "species": "Iron Valiant",
+          "item": "Booster Energy",
+          "gigantamax": false,
+          "role": "ace",
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 0,
+              "atk": 0,
+              "def": 0,
+              "spa": 32,
+              "spd": 2,
+              "spe": 32
+            },
+            "nature": "Naive",
+            "ability": "Quark Drive",
+            "moves": [
+              "Moonblast",
+              "Close Combat",
+              "Psyshock",
+              "Shadow Ball"
             ]
           }
         }

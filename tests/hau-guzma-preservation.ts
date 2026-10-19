@@ -1,4 +1,4 @@
-import {readFileSync} from 'node:fs';
+import {readPrePaldeaFile as readFileSync} from './pre-paldea-preservation';
 import baseline from './fixtures/hau-guzma-preservation.json' with {type:'json'};
 
 /** Historical suites retain their original checksums. Only this task's two

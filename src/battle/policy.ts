@@ -6,6 +6,7 @@ export type OwnPokemon = {
   ident: string; details: string; condition: string; active: boolean;
   stats: {atk: number; def: number; spa: number; spd: number; spe: number};
   moves?:string[];item?:string;ability?:string;terastallized?:string;
+  revealedTypes?:string[];
 };
 export type Request = {
   wait?: boolean; teamPreview?: boolean; forceSwitch?: boolean[];

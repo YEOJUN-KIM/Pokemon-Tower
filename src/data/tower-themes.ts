@@ -8,7 +8,7 @@ export const towerThemes={
  kalos:{name:'칼로스',generation:6,gyms:named('viola,grant,korrina,ramos,clemont,valerie,olympia,wulfric'),elites:named('malva,siebold,wikstrom,drasna'),champion:'named-diantha',final:'named-serena',organizations:['flare']},
  alola:{name:'알로라',generation:7,gyms:named('ilima,lana,kiawe,mallow,sophocles,mina,nanu,hapu'),elites:named('hala,molayne,olivia,acerola,kahili'),champion:'named-kukui',final:'named-hau',organizations:['skull','aether']},
  galar:{name:'가라르',generation:8,gyms:named('nessa,kabu,bea,allister,gordie,melony,marnie,bede,raihan'),elites:named('marnie,bede,raihan'),champion:'named-leon',final:'named-leon',organizations:['macrocosmos']},
- paldea:{name:'팔데아',generation:9,gyms:named('katy,brassius,iono,kofu,larry,ryme,tulip,grusha'),elites:named('rika,poppy,larry-elite,hassel'),champion:'named-geeta',final:'named-nemona',organizations:['star']},
+ paldea:{hiddenBoss:true,name:'팔데아',generation:9,gyms:named('brassius,iono,kofu,ryme,tulip,grusha'),elites:named('rika,poppy,larry-elite,hassel'),champion:'named-geeta',final:'named-nemona',organizations:[]},
 } as const;
 export type TowerTheme=keyof typeof towerThemes;
 export function isTowerTheme(value:unknown):value is TowerTheme{return typeof value==='string' && Object.hasOwn(towerThemes,value);}

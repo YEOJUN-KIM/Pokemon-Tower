@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readPrePaldeaFile as readFileSync} from './pre-paldea-preservation';
 import {createHash} from 'node:crypto';
 import {PivotPolicy,pivotEntryCosts} from '../src/battle/pivot-policy';
 import {GalarAcePolicy} from '../src/battle/galar-ace-policy';

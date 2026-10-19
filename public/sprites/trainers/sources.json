@@ -1184,6 +1184,20 @@
       "artist": "Beliot419",
       "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/",
       "sha256": "607aabc0f3fc6e49f58b1be4c2a85466e3dc00c5298906a3c21bca7a96f83f54"
+    },
+    {
+      "portrait": "sada-ai",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/sada-ai.png",
+      "status": "downloaded",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "turo-ai",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/turo-ai.png",
+      "status": "downloaded",
+      "artist": "Brumirage",
+      "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
     }
   ]
 }

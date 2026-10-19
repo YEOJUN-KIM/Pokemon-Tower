@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
-import {readFileSync} from 'node:fs';
+import {readPrePaldeaFile as readFileSync} from './pre-paldea-preservation';
 import Showdown from 'pokemon-showdown';
 import baseline from './fixtures/hau-guzma-preservation.json' with {type:'json'};
 import design from '../scripts/data/npc/alola-design.json' with {type:'json'};
@@ -63,7 +63,9 @@ test('Hau special builds and Guzma HP/attack four-move entry build retain normal
 });
 function physicalTeam(){const names=['Garchomp','Metagross','Gyarados'];return packTeam(names,Object.fromEntries(names.map(n=>[n,{...defaultProfile(n),moves:[...pokemonSets[n].moves],nature:'Adamant',ivs:{hp:31,atk:31,def:31,spa:31,spd:31,spe:31},evs:{hp:16,atk:32,def:0,spa:0,spd:0,spe:18}}])));}
 for(const [id,floor,seed] of [['named-hau',50,1],['named-guzma',45,6]] as const)test(`${id}: actual signature sequence uses real v13 decisions and replays`,async()=>{
- const snapshot=snapshotTrainerEventBattle(`hau-guzma:physical:${seed}`,sample(id),floor,'basic',CURRENT_PROGRESSION),monitor=monitorEntryPolicy(createNpcPolicy(npcAi(floor,sample(id))));
+ // Pin the historical sequence to the configuration stored before advanced switching.
+ const ai=npcAi(floor,sample(id));delete ai.advancedSwitch;
+ const snapshot=snapshotTrainerEventBattle(`hau-guzma:physical:${seed}`,sample(id),floor,'basic',CURRENT_PROGRESSION),monitor=monitorEntryPolicy(createNpcPolicy(ai));
  const log=await runBattle({teams:{p1:physicalTeam(),p2:snapshot.opponentTeam},rule:'basic',opponentRule:packedNpcRule(snapshot.team.map(p=>({item:p.item??''})),0),seed:snapshot.seed,player:new DamagePolicy(),opponent:monitor.policy});
  const t=monitor.finish(log);
  if(id==='named-hau'){

@@ -1,0 +1,878 @@
+{
+  "trainers": [
+    {
+      "id": "named-brassius",
+      "name": "콜사",
+      "category": "gym",
+      "specialty": "Grass",
+      "tactic": "status",
+      "concept": "수면 + 넘치는씨 그래스필드 + 풀 테라 개척하기",
+      "team": [
+        {
+          "species": "Breloom",
+          "ability": "Poison Heal",
+          "item": "Toxic Orb",
+          "nature": "Adamant",
+          "moves": [
+            "Spore",
+            "Bullet Seed",
+            "Mach Punch",
+            "Rock Tomb"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Arboliva",
+          "ability": "Seed Sower",
+          "item": "Sitrus Berry",
+          "nature": "Modest",
+          "moves": [
+            "Energy Ball",
+            "Earth Power",
+            "Dazzling Gleam",
+            "Leech Seed"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Sudowoodo",
+          "ability": "Sturdy",
+          "item": "Expert Belt",
+          "nature": "Adamant",
+          "moves": [
+            "Trailblaze",
+            "Stone Edge",
+            "Fire Punch",
+            "Sucker Punch"
+          ],
+          "role": "ace",
+          "teraType": "Grass"
+        }
+      ],
+      "entries": [
+        "Breloom",
+        "Arboliva",
+        "Sudowoodo"
+      ],
+      "ace": "Sudowoodo",
+      "teraType": "Grass",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "tera",
+        "species": "Sudowoodo"
+      }
+    },
+    {
+      "id": "named-iono",
+      "name": "모야모",
+      "category": "gym",
+      "specialty": "Electric",
+      "tactic": "special",
+      "concept": "전기 운영 + 부유 전기 테라 무우마직",
+      "team": [
+        {
+          "species": "Kilowattrel",
+          "ability": "Wind Power",
+          "item": "Focus Sash",
+          "nature": "Timid",
+          "moves": [
+            "Thunderbolt",
+            "Hurricane",
+            "Tailwind",
+            "Volt Switch"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Bellibolt",
+          "ability": "Electromorphosis",
+          "item": "Leftovers",
+          "nature": "Modest",
+          "moves": [
+            "Parabolic Charge",
+            "Muddy Water",
+            "Reflect",
+            "Sucker Punch"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Mismagius",
+          "ability": "Levitate",
+          "item": "Expert Belt",
+          "nature": "Timid",
+          "moves": [
+            "Tera Blast",
+            "Shadow Ball",
+            "Mystical Fire",
+            "Energy Ball"
+          ],
+          "role": "ace",
+          "teraType": "Electric"
+        }
+      ],
+      "entries": [
+        "Kilowattrel",
+        "Bellibolt",
+        "Mismagius"
+      ],
+      "ace": "Mismagius",
+      "teraType": "Electric",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "tera",
+        "species": "Mismagius"
+      }
+    },
+    {
+      "id": "named-kofu",
+      "name": "곤포",
+      "category": "gym",
+      "specialty": "Water",
+      "tactic": "special",
+      "concept": "비 + 메가런처 + 물 테라 집게해머",
+      "team": [
+        {
+          "species": "Pelipper",
+          "ability": "Drizzle",
+          "item": "Sitrus Berry",
+          "nature": "Modest",
+          "moves": [
+            "Hurricane",
+            "Surf",
+            "U-turn",
+            "Tailwind"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Clawitzer",
+          "ability": "Mega Launcher",
+          "item": "Life Orb",
+          "nature": "Modest",
+          "moves": [
+            "Water Pulse",
+            "Dark Pulse",
+            "Dragon Pulse",
+            "Aura Sphere"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Crabominable",
+          "ability": "Iron Fist",
+          "item": "Punching Glove",
+          "nature": "Adamant",
+          "moves": [
+            "Crabhammer",
+            "Ice Hammer",
+            "Drain Punch",
+            "Thunder Punch"
+          ],
+          "role": "ace",
+          "teraType": "Water"
+        }
+      ],
+      "entries": [
+        "Pelipper",
+        "Clawitzer",
+        "Crabominable"
+      ],
+      "ace": "Crabominable",
+      "teraType": "Water",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "tera",
+        "species": "Crabominable"
+      }
+    },
+    {
+      "id": "named-ryme",
+      "name": "라임",
+      "category": "gym",
+      "specialty": "Ghost",
+      "tactic": "status",
+      "concept": "상태이상 + 성묘 + 음파 기술",
+      "team": [
+        {
+          "species": "Mimikyu",
+          "ability": "Disguise",
+          "item": "Sitrus Berry",
+          "nature": "Jolly",
+          "moves": [
+            "Will-O-Wisp",
+            "Play Rough",
+            "Shadow Sneak",
+            "Swords Dance"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Houndstone",
+          "ability": "Fluffy",
+          "item": "Spell Tag",
+          "nature": "Adamant",
+          "moves": [
+            "Last Respects",
+            "Play Rough",
+            "Crunch",
+            "Shadow Sneak"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Toxtricity",
+          "ability": "Punk Rock",
+          "item": "Throat Spray",
+          "nature": "Modest",
+          "moves": [
+            "Overdrive",
+            "Boomburst",
+            "Hex",
+            "Sludge Bomb"
+          ],
+          "role": "ace",
+          "teraType": "Ghost"
+        }
+      ],
+      "entries": [
+        "Mimikyu",
+        "Houndstone",
+        "Toxtricity"
+      ],
+      "ace": "Toxtricity",
+      "teraType": "Ghost",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "tera",
+        "species": "Toxtricity"
+      }
+    },
+    {
+      "id": "named-tulip",
+      "name": "리파",
+      "category": "gym",
+      "specialty": "Psychic",
+      "tactic": "special",
+      "concept": "특방 하락 + 예리함 물리 중견 + 에스퍼 테라",
+      "team": [
+        {
+          "species": "Espathra",
+          "ability": "Opportunist",
+          "item": "Focus Sash",
+          "nature": "Timid",
+          "moves": [
+            "Lumina Crash",
+            "Dazzling Gleam",
+            "Reflect",
+            "Shadow Ball"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Gallade",
+          "ability": "Sharpness",
+          "item": "Life Orb",
+          "nature": "Jolly",
+          "moves": [
+            "Psycho Cut",
+            "Sacred Sword",
+            "Leaf Blade",
+            "Night Slash"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Florges",
+          "ability": "Flower Veil",
+          "item": "Sitrus Berry",
+          "nature": "Modest",
+          "moves": [
+            "Psychic",
+            "Moonblast",
+            "Energy Ball",
+            "Calm Mind"
+          ],
+          "role": "ace",
+          "teraType": "Psychic"
+        }
+      ],
+      "entries": [
+        "Espathra",
+        "Gallade",
+        "Florges"
+      ],
+      "ace": "Florges",
+      "teraType": "Psychic",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "tera",
+        "species": "Florges"
+      }
+    },
+    {
+      "id": "named-grusha",
+      "name": "그루샤",
+      "category": "gym",
+      "specialty": "Ice",
+      "tactic": "setup",
+      "concept": "순풍 + 물리 압박 + 얼음 테라",
+      "team": [
+        {
+          "species": "Frosmoth",
+          "ability": "Ice Scales",
+          "item": "Focus Sash",
+          "nature": "Timid",
+          "moves": [
+            "Ice Beam",
+            "Bug Buzz",
+            "Tailwind",
+            "Quiver Dance"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Cetitan",
+          "ability": "Thick Fat",
+          "item": "Assault Vest",
+          "nature": "Adamant",
+          "moves": [
+            "Ice Spinner",
+            "Liquidation",
+            "Earthquake",
+            "Ice Shard"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Altaria",
+          "ability": "Natural Cure",
+          "item": "Never-Melt Ice",
+          "nature": "Modest",
+          "moves": [
+            "Ice Beam",
+            "Dragon Pulse",
+            "Moonblast",
+            "Hurricane"
+          ],
+          "role": "ace",
+          "teraType": "Ice"
+        }
+      ],
+      "entries": [
+        "Frosmoth",
+        "Cetitan",
+        "Altaria"
+      ],
+      "ace": "Altaria",
+      "teraType": "Ice",
+      "aiCeiling": "tactical",
+      "minFloor": 5,
+      "signature": {
+        "rule": "tera",
+        "species": "Altaria"
+      }
+    },
+    {
+      "id": "named-rika",
+      "name": "칠리",
+      "category": "elite",
+      "specialty": "Ground",
+      "tactic": "bulk",
+      "concept": "설치 + 안정적인 땅 운영 + 저수 토오",
+      "team": [
+        {
+          "species": "Donphan",
+          "ability": "Sturdy",
+          "item": "Rocky Helmet",
+          "nature": "Adamant",
+          "moves": [
+            "Stealth Rock",
+            "Earthquake",
+            "Knock Off",
+            "Ice Shard"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Camerupt",
+          "ability": "Solid Rock",
+          "item": "Assault Vest",
+          "nature": "Modest",
+          "moves": [
+            "Earth Power",
+            "Flamethrower",
+            "Flash Cannon",
+            "Ancient Power"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Clodsire",
+          "ability": "Water Absorb",
+          "item": "Leftovers",
+          "nature": "Careful",
+          "moves": [
+            "Earthquake",
+            "Poison Jab",
+            "Toxic",
+            "Recover"
+          ],
+          "role": "ace",
+          "teraType": "Ground"
+        }
+      ],
+      "entries": [
+        "Donphan",
+        "Camerupt",
+        "Clodsire"
+      ],
+      "ace": "Clodsire",
+      "teraType": "Ground",
+      "aiCeiling": "expert",
+      "minFloor": 5,
+      "signature": {
+        "rule": "tera",
+        "species": "Clodsire"
+      }
+    },
+    {
+      "id": "named-poppy",
+      "name": "뽀삐",
+      "category": "elite",
+      "specialty": "Steel",
+      "tactic": "bulk",
+      "concept": "강철 내구 + 철벽 바디프레스 + 거대해머",
+      "team": [
+        {
+          "species": "Copperajah",
+          "ability": "Sheer Force",
+          "item": "Sitrus Berry",
+          "nature": "Adamant",
+          "moves": [
+            "Stealth Rock",
+            "Heavy Slam",
+            "Play Rough",
+            "High Horsepower"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Corviknight",
+          "ability": "Pressure",
+          "item": "Leftovers",
+          "nature": "Impish",
+          "moves": [
+            "Iron Defense",
+            "Body Press",
+            "Brave Bird",
+            "Roost"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Tinkaton",
+          "ability": "Mold Breaker",
+          "item": "Air Balloon",
+          "nature": "Adamant",
+          "moves": [
+            "Gigaton Hammer",
+            "Play Rough",
+            "Knock Off",
+            "Brick Break"
+          ],
+          "role": "ace",
+          "teraType": "Steel"
+        }
+      ],
+      "entries": [
+        "Copperajah",
+        "Corviknight",
+        "Tinkaton"
+      ],
+      "ace": "Tinkaton",
+      "teraType": "Steel",
+      "aiCeiling": "expert",
+      "minFloor": 5,
+      "signature": {
+        "rule": "tera",
+        "species": "Tinkaton"
+      }
+    },
+    {
+      "id": "named-larry-elite",
+      "name": "청목",
+      "category": "elite",
+      "specialty": "Flying",
+      "tactic": "physical",
+      "concept": "위협 + 스카프 유턴 + 효율적 공격",
+      "team": [
+        {
+          "species": "Staraptor",
+          "ability": "Intimidate",
+          "item": "Choice Scarf",
+          "nature": "Jolly",
+          "moves": [
+            "Brave Bird",
+            "Close Combat",
+            "U-turn",
+            "Double-Edge"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Altaria",
+          "ability": "Natural Cure",
+          "item": "Sitrus Berry",
+          "nature": "Modest",
+          "moves": [
+            "Draco Meteor",
+            "Hurricane",
+            "Flamethrower",
+            "Ice Beam"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Flamigo",
+          "ability": "Scrappy",
+          "item": "Life Orb",
+          "nature": "Jolly",
+          "moves": [
+            "Brave Bird",
+            "Close Combat",
+            "Throat Chop",
+            "Liquidation"
+          ],
+          "role": "ace",
+          "teraType": "Flying"
+        }
+      ],
+      "entries": [
+        "Staraptor",
+        "Altaria",
+        "Flamigo"
+      ],
+      "ace": "Flamigo",
+      "teraType": "Flying",
+      "aiCeiling": "expert",
+      "minFloor": 5,
+      "signature": {
+        "rule": "tera",
+        "species": "Flamigo"
+      }
+    },
+    {
+      "id": "named-hassel",
+      "name": "팔자크",
+      "category": "elite",
+      "specialty": "Dragon",
+      "tactic": "setup",
+      "concept": "순풍 + 용의춤 + 드래곤 테라",
+      "team": [
+        {
+          "species": "Noivern",
+          "ability": "Infiltrator",
+          "item": "Focus Sash",
+          "nature": "Timid",
+          "moves": [
+            "Draco Meteor",
+            "Hurricane",
+            "Taunt",
+            "Tailwind"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Haxorus",
+          "ability": "Mold Breaker",
+          "item": "Lum Berry",
+          "nature": "Jolly",
+          "moves": [
+            "Dragon Dance",
+            "Outrage",
+            "Earthquake",
+            "Iron Head"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Baxcalibur",
+          "ability": "Thermal Exchange",
+          "item": "Dragon Fang",
+          "nature": "Adamant",
+          "moves": [
+            "Glaive Rush",
+            "Icicle Crash",
+            "Earthquake",
+            "Ice Shard"
+          ],
+          "role": "ace",
+          "teraType": "Dragon"
+        }
+      ],
+      "entries": [
+        "Noivern",
+        "Haxorus",
+        "Baxcalibur"
+      ],
+      "ace": "Baxcalibur",
+      "teraType": "Dragon",
+      "aiCeiling": "expert",
+      "minFloor": 5,
+      "signature": {
+        "rule": "tera",
+        "species": "Baxcalibur"
+      }
+    },
+    {
+      "id": "named-geeta",
+      "name": "테사",
+      "category": "champion",
+      "specialty": null,
+      "tactic": "balanced",
+      "concept": "킬라플로르 설치 → 특방 압박 → 총대장 피니시",
+      "team": [
+        {
+          "species": "Glimmora",
+          "ability": "Toxic Debris",
+          "item": "Focus Sash",
+          "nature": "Timid",
+          "moves": [
+            "Stealth Rock",
+            "Sludge Wave",
+            "Earth Power",
+            "Energy Ball"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Espathra",
+          "ability": "Opportunist",
+          "item": "Life Orb",
+          "nature": "Timid",
+          "moves": [
+            "Lumina Crash",
+            "Dazzling Gleam",
+            "Shadow Ball",
+            "Calm Mind"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Kingambit",
+          "ability": "Supreme Overlord",
+          "item": "Black Glasses",
+          "nature": "Adamant",
+          "moves": [
+            "Kowtow Cleave",
+            "Iron Head",
+            "Sucker Punch",
+            "Swords Dance"
+          ],
+          "role": "ace",
+          "teraType": "Dark"
+        }
+      ],
+      "entries": [
+        "Glimmora",
+        "Espathra",
+        "Kingambit"
+      ],
+      "ace": "Kingambit",
+      "teraType": "Dark",
+      "aiCeiling": "expert",
+      "minFloor": 5,
+      "signature": {
+        "rule": "tera",
+        "species": "Kingambit"
+      }
+    },
+    {
+      "id": "named-nemona",
+      "name": "네모",
+      "category": "hidden",
+      "specialty": null,
+      "tactic": "balanced",
+      "concept": "설치 + Volt Switch/U-turn + 변환자재 + 적극적 상성 운영",
+      "team": [
+        {
+          "species": "Lycanroc",
+          "ability": "Keen Eye",
+          "item": "Focus Sash",
+          "nature": "Jolly",
+          "moves": [
+            "Stealth Rock",
+            "Accelerock",
+            "Stone Edge",
+            "Close Combat"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Pawmot",
+          "ability": "Iron Fist",
+          "item": "Punching Glove",
+          "nature": "Jolly",
+          "moves": [
+            "Double Shock",
+            "Close Combat",
+            "Ice Punch",
+            "Volt Switch"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Meowscarada",
+          "ability": "Protean",
+          "item": "Life Orb",
+          "nature": "Jolly",
+          "moves": [
+            "Flower Trick",
+            "Knock Off",
+            "U-turn",
+            "Sucker Punch"
+          ],
+          "role": "ace",
+          "teraType": "Grass"
+        }
+      ],
+      "entries": [
+        "Lycanroc",
+        "Pawmot",
+        "Meowscarada"
+      ],
+      "ace": "Meowscarada",
+      "teraType": "Grass",
+      "aiCeiling": "expert",
+      "minFloor": 50,
+      "signature": {
+        "rule": "tera",
+        "species": "Meowscarada"
+      }
+    },
+    {
+      "id": "named-ai-sada",
+      "name": "AI 올림",
+      "category": "event",
+      "specialty": null,
+      "tactic": "setup",
+      "concept": "쾌청 + 고대활성 + 고동치는달 피니시",
+      "team": [
+        {
+          "species": "Scream Tail",
+          "ability": "Protosynthesis",
+          "item": "Heat Rock",
+          "nature": "Jolly",
+          "moves": [
+            "Sunny Day",
+            "Reflect",
+            "Psychic",
+            "Play Rough"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Flutter Mane",
+          "ability": "Protosynthesis",
+          "item": "Life Orb",
+          "nature": "Timid",
+          "moves": [
+            "Moonblast",
+            "Shadow Ball",
+            "Mystical Fire",
+            "Power Gem"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Roaring Moon",
+          "ability": "Protosynthesis",
+          "item": "Booster Energy",
+          "nature": "Jolly",
+          "moves": [
+            "Dragon Dance",
+            "Crunch",
+            "Acrobatics",
+            "Earthquake"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Scream Tail",
+        "Flutter Mane",
+        "Roaring Moon"
+      ],
+      "ace": "Roaring Moon",
+      "teraType": null,
+      "aiCeiling": "expert",
+      "minFloor": 75,
+      "signature": null
+    },
+    {
+      "id": "named-ai-turo",
+      "name": "AI 투로",
+      "category": "event",
+      "specialty": null,
+      "tactic": "balanced",
+      "concept": "개별 화력 + 쿼크차지 + 최종 무쇠무인",
+      "team": [
+        {
+          "species": "Iron Bundle",
+          "ability": "Quark Drive",
+          "item": "Focus Sash",
+          "nature": "Timid",
+          "moves": [
+            "Freeze-Dry",
+            "Hydro Pump",
+            "Ice Beam",
+            "Encore"
+          ],
+          "role": "lead"
+        },
+        {
+          "species": "Iron Hands",
+          "ability": "Quark Drive",
+          "item": "Assault Vest",
+          "nature": "Adamant",
+          "moves": [
+            "Drain Punch",
+            "Thunder Punch",
+            "Ice Punch",
+            "Earthquake"
+          ],
+          "role": "middle"
+        },
+        {
+          "species": "Iron Valiant",
+          "ability": "Quark Drive",
+          "item": "Booster Energy",
+          "nature": "Naive",
+          "moves": [
+            "Moonblast",
+            "Close Combat",
+            "Psyshock",
+            "Shadow Ball"
+          ],
+          "role": "ace"
+        }
+      ],
+      "entries": [
+        "Iron Bundle",
+        "Iron Hands",
+        "Iron Valiant"
+      ],
+      "ace": "Iron Valiant",
+      "teraType": null,
+      "aiCeiling": "expert",
+      "minFloor": 75,
+      "signature": null
+    }
+  ]
+}

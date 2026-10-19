@@ -5,7 +5,8 @@ import {unovaTrainer} from './unova-trainers';
 import {kalosTrainer} from './kalos-trainers';
 import {alolaTrainer,alolaSample} from './alola-trainers';
 import {galarTrainer,galarSample} from './galar-trainers';
-import {namedTrainerSamples,type TrainerSample} from './trainer-catalog';
+import {namedTrainerSamples,legacyNamedTrainerSamples,type TrainerSample} from './trainer-catalog';
+import {regionalTrainerSamples} from './regional-trainers';
 import {towerThemes,type TowerTheme} from './tower-themes';
 
 // Organization rosters are independent of the tower's regional chapters.
@@ -46,7 +47,9 @@ export type VillainRank='grunt'|'executive'|'boss';
 export type VillainEvent={organization:string;name:string;rank:VillainRank;bonus:number};
 export const villainRankNames:Record<VillainRank,string>={grunt:'조직원',executive:'간부',boss:'보스'};
 export const villainBonuses:Record<VillainRank,number>={grunt:0,executive:250,boss:1000};
-const leader=(id:string,aiCeiling:NonNullable<TrainerSample['aiCeiling']>='expert'):TrainerSample=>({...namedTrainerSamples.find(s=>s.id===`named-${id}`)!,aiCeiling});
+// Archived Star campaign snapshots retain metadata; Star is absent from the
+// reviewed Paldea route and receives no new sample implementation here.
+const leader=(id:string,aiCeiling:NonNullable<TrainerSample['aiCeiling']>='expert'):TrainerSample=>({...namedTrainerSamples.find(s=>s.id===`named-${id}`)??legacyNamedTrainerSamples.find(s=>s.id===`named-${id}`)??regionalTrainerSamples.find(s=>s.id===`named-${id}`)!,aiCeiling});
 const executive=(id:string,name:string,portrait:string,entries:string[],ace=entries[0]):TrainerSample=>({aiCeiling:'tactical',id,name,portrait,entries,ace,title:'',role:'villain',kind:'named',generation:null,specialty:null,tactic:'status',minFloor:16,concept:'조직 간부의 테마 파티'});
 export const villainLeaders:Record<string,{executive:TrainerSample;executives?:TrainerSample[];boss:TrainerSample}>={
  rocket:{executive:leader('archer','tactical'),boss:leader('giovanni')},

@@ -8,6 +8,7 @@ import {setImmediate as settleItem} from 'node:timers/promises';
 import {installTowerGimmicks} from './gimmicks';
 import {installGolisopodMega,golisopodMegaDex} from './golisopod-mega';
 import {validateRaidPhase} from './raid-transformation';
+import {validateRaidHP} from './raid-hp';
 import {DYNAMAX_ITEM,canEquipGimmick} from '../data/gimmicks';
 import { createRequire } from 'node:module';
 import Showdown from 'pokemon-showdown';
@@ -68,6 +69,7 @@ export async function runBattle(options: {
   const raidAdapter=options.raid?.transformationAdapter===1;
   const raidDex=golisopodMegaDex(Showdown.Dex);
   if(options.raid){
+    if(raidAdapter)validateRaidHP(options.raid);
     if(options.raid.opponentTeam!==teams.p2||options.raid.phases.length<2||options.raid.phases.length>(raidAdapter?4:3))throw Error('Invalid raid team snapshot');
     for(const phase of options.raid.phases){
       if(raidAdapter){validateRaidPhase(phase,options.raid.species,raidDex);continue;}
@@ -111,6 +113,7 @@ export async function runBattle(options: {
       errors=legality.flatMap((set,index)=>{
         const phase=options.raid!.phases[index];
         if(set.moves.map(Showdown.toID).join(',')!==phase.moves.map(Showdown.toID).join(','))throw Error('Raid phase moves mismatch');
+        if(phase.item!==undefined&&Showdown.toID(set.item)!==Showdown.toID(phase.item))throw Error('Raid phase item mismatch');
         set.species=phase.species;set.ability=phase.ability;
         set.teraType=phase.teraType??(raidDex.species.get(phase.species).forme==='Stellar'?'Stellar':set.teraType);
         // G-Max is a native volatile; its learnset/ability belong to the base form.

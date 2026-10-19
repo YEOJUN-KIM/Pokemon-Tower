@@ -12,13 +12,15 @@ export function raidPhaseSource(phase:RaidPhaseDefinition,dex=Showdown.Dex){
 
 export function validateRaidPhase(phase:RaidPhaseDefinition,base:string,dex=Showdown.Dex){
  const target=dex.species.get(phase.species),source=raidPhaseSource(phase,dex),kind=phase.transformation;
- const kinds=['none','aura','form','mega','primal','terastallize','stellar','dynamax','gigantamax','ultraBurst'];
- if(!kinds.includes(kind)||!target.exists||!source.exists||target.baseSpecies!==dex.species.get(base).baseSpecies||source.baseSpecies!==target.baseSpecies||!Object.values(target.abilities).includes(phase.ability)||!Array.isArray(phase.moves)||!phase.moves.length||phase.moves.length>4||phase.persistent!==undefined&&typeof phase.persistent!=='boolean')throw Error('Invalid raid phase form/ability');
+ const kinds=['none','aura','form','replacement','mega','primal','terastallize','stellar','dynamax','gigantamax','ultraBurst'];
+ if(!kinds.includes(kind)||!target.exists||!source.exists||kind!=='replacement'&&target.baseSpecies!==dex.species.get(base).baseSpecies||source.baseSpecies!==target.baseSpecies||!Object.values(target.abilities).includes(phase.ability)||!Array.isArray(phase.moves)||!phase.moves.length||phase.moves.length>4||phase.persistent!==undefined&&typeof phase.persistent!=='boolean')throw Error('Invalid raid phase form/ability');
  if(kind==='mega'&&!target.isMega||kind==='primal'&&!target.isPrimal||kind==='ultraBurst'&&target.forme!=='Ultra'||kind==='gigantamax'&&target.forme!=='Gmax'||kind==='stellar'&&target.forme!=='Stellar')throw Error('Invalid raid transformation target');
  if(['dynamax','gigantamax'].includes(kind)&&(target.cannotDynamax||target.isMega||target.isPrimal||target.forme==='Ultra')||['stellar','terastallize'].includes(kind)&&(target.isMega||target.isPrimal||target.forme==='Ultra'))throw Error('Incompatible raid battle state');
  if(target.forme==='Stellar'&&!['stellar','terastallize'].includes(kind)||target.forme==='Gmax'&&kind!=='gigantamax')throw Error('Raid form requires battle state');
  if(phase.teraType!==undefined&&!dex.types.isName(phase.teraType))throw Error('Invalid raid Tera type');
  if(['stellar','terastallize'].includes(kind)&&target.forme==='Stellar'&&phase.teraType!==undefined&&phase.teraType!=='Stellar')throw Error('Stellar form requires Stellar Tera');
+ if(phase.randomBranch)throw Error('Unresolved raid random branch');
+ if(phase.item!==undefined&&!dex.items.get(phase.item).exists)throw Error('Invalid raid phase item');
  // Unlike a player's starting set, a forced Phase is already in its current form.
  // Keep the engine's move/ability/stats validation, bypass only entry prerequisites.
  const validator=new Showdown.TeamValidator('gen9nationaldexag');
@@ -28,6 +30,7 @@ export function validateRaidPhase(phase:RaidPhaseDefinition,base:string,dex=Show
 }
 
 export function prepareRaidPhase(battle:Battle,pokemon:Pokemon,phase:RaidPhaseDefinition){
+ if(phase.item!==undefined)pokemon.item=battle.toID(phase.item);
  const source=raidPhaseSource(phase,battle.dex);
  pokemon.setSpecies(source);pokemon.baseSpecies=source;
  const ability=source.name===phase.species?phase.ability:source.abilities[0];
@@ -64,7 +67,8 @@ export function applyRaidPhaseTransformation(battle:Battle,pokemon:Pokemon,phase
  }
  // Native Tera Shift / Terastallization own Terapagos' entry and Stellar form.
  if(kind!=='dynamax'&&kind!=='gigantamax'&&pokemon.species.name!==target.name&&!(kind==='none'&&pokemon.species.baseSpecies===target.name))throw Error('Raid transformation did not reach its target');
- if(pokemon.species.name===target.name&&pokemon.ability!==battle.toID(phase.ability))pokemon.setAbility(phase.ability,null,null,true);
+ if((pokemon.species.name===target.name||kind==='gigantamax')&&pokemon.ability!==battle.toID(phase.ability))pokemon.setAbility(phase.ability,null,null,true);
+ pokemon.baseAbility=pokemon.ability;
  pokemon.details=pokemon.getUpdatedDetails();
  pokemon.hp=pokemon.maxhp; // Preserve the existing full-health phase boundary.
 }

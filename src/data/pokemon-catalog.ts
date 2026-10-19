@@ -37,6 +37,7 @@ for(const name of ['Ogerpon-Teal-Tera','Ogerpon-Wellspring-Tera','Ogerpon-Hearth
  const normal=name==='Ogerpon-Teal-Tera'?'Ogerpon':name.replace(/-Tera$/,'');
  species[name]={...species[normal],types:species[name].types};
 }
+for(const [name,label] of Object.entries({'Palafin-Hero':'돌핀맨 마이티폼','Zygarde-Complete':'지가르데 퍼펙트폼','Terapagos-Terastal':'테라파고스 테라스탈폼','Terapagos-Stellar':'테라파고스 스텔라폼'}))species[name]={...species[name],name:label};
 species['Tauros-Paldea']=species['Tauros-Paldea-Combat'];
 for(const [name,form] of Object.entries(megaForms)){const base=species[form.baseSpecies];if(base)species[name]={...base,spriteKey:form.spriteKey,name:'메가'+base.name+(name.endsWith('-X')?'X':name.endsWith('-Y')?'Y':''),types:form.types.map(type=>moveTypeNames[type]??type)};}
 for(const [name,form] of Object.entries(equipmentForms)){const base=species[form.baseSpecies];if(base)species[name]={...base,spriteKey:form.spriteKey,name:base.name+' ('+(formItems[formItemFor(name)??'']?.name??name)+')',types:form.types.map(type=>moveTypeNames[type]??type)};}

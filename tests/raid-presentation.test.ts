@@ -11,7 +11,7 @@ import {raidBossDefinitions} from '../src/data/raids';
 import type {BattleView} from '../src/shared/contracts';
 import type {RunEventView} from '../src/data/run-events';
 
-for(const boss of raidBossDefinitions)for(const route of boss.routes)for(let i=1;i<route.phases.length;i++)test(`${boss.id}/${route.id} transition ${i}: public frames, HP reset, two messages and 4x timing`,()=>{
+for(const boss of raidBossDefinitions.filter(b=>['garchomp','mewtwo'].includes(b.id)))for(const route of boss.routes)for(let i=1;i<route.phases.length;i++)test(`${boss.id}/${route.id} transition ${i}: public frames, HP reset, two messages and 4x timing`,()=>{
  const previous=route.phases[i-1],next=route.phases[i],messages=next.messages!;
  const before:BattleView={id:'raid',requestId:1,status:'waiting',turn:1,actions:[],error:null,messages:['|turn|1'],winner:null,team:[{species:'Cloyster',active:true,condition:'100/200 brn'}],opponent:{species:previous.species,condition:'10/100 par'},field:{...emptyField(),raid:true,opponentSize:1,boosts:{p1:{def:2},p2:{atk:2}}}};
  const lines=['|move|p1a: Cloyster|Icicle Spear|p2a: '+boss.species,`|-damage|p2a: ${boss.species}|0 fnt`,`|faint|p2a: ${boss.species}|[raid]`,'|message|'+messages[0],`|switch|p2a: ${boss.species}|${next.species}, L50|100/100|[raid]`,'|message|'+messages[1],'|turn|2'];

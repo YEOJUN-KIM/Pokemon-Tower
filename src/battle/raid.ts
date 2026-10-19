@@ -1,6 +1,7 @@
 import type {Battle,Pokemon} from 'pokemon-showdown';
 import {raidCategoryPresentation,type RaidSnapshot} from '../data/raids';
 import {applyRaidPhaseTransformation,prepareRaidPhase} from './raid-transformation';
+import {raidPhaseHP} from './raid-hp';
 
 // Consecutive server-owned slots retain the simulator's KO, multi-hit and turn scheduler.
 export function installRaid(battle:Battle,raid:RaidSnapshot){
@@ -57,9 +58,15 @@ export function installRaid(battle:Battle,raid:RaidSnapshot){
      const index=phaseOf.get(boss);if(index===undefined||applied.has(boss)||!boss.hp)continue;
      const phase=raid.phases[index];
      // Entry-driven forms (Tera Shift) must finish before native Tera runs.
-     const tera=['stellar','terastallize'].includes(phase.transformation);
+     const tera=!!phase.nativeEntry||['stellar','terastallize'].includes(phase.transformation);
      if(tera!==afterEntry)continue;
      applied.add(boss);newlyApplied.push(boss);applyRaidPhaseTransformation(battle,boss,phase);
+     if(raid.raidHpMultiplier!==undefined){
+      const oldMaxHP=boss.maxhp;
+      Object.assign(boss,raidPhaseHP(boss.baseMaxhp,boss.maxhp,raid.raidHpMultiplier,phase.hpRatio!));
+      boss.hp=boss.maxhp;
+      if(boss.maxhp!==oldMaxHP)battle.add('-heal',boss,boss.getHealth,'[silent]');
+     }
     }
    };
    // Resolve forced result abilities before SwitchIn, avoiding accidental

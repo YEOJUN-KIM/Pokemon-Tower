@@ -1,4 +1,5 @@
 'use client';
+import {isVillainAmbush} from '../data/villain-tracks';
 import {Ball,SendOut,PokemonFeedback,ShinySparkles,Sprite,HealthCard} from './battle-pokemon';
 import {RunEventScene,RunEventPanel} from './run-event';
 import {hiddenShopAvailability} from './hidden-shop';
@@ -131,7 +132,7 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
   const gimmickHint=({mega:'메가진화',dynamax:'다이맥스',tera:'테라스탈',z:'Z기술',chaos:'변신 선택',basic:''} as const)[run?.rule ?? 'chaos'];
   const active = battle?.team.find(p => p.active);
   const encounterMusic=trainerMusic(run?.boss ?? run?.trainer);
-  const scenery=run?.villainEncounter?.stage==='rocket-ambush'
+  const scenery=run?.villainEncounter&&isVillainAmbush(run.villainEncounter.stage)
     ?arenaTheme(run.villainEncounter.afterFloor,run.totalFloors,'trainer')
     :arenaTheme(run?.floor ?? 1,run?.totalFloors ?? 10,encounterMusic);
   const rareEncounter=useRef<{id:string;track:MusicTrack|null}>({id:'',track:null});

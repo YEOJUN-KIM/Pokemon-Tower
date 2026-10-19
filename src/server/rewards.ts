@@ -18,6 +18,7 @@ export function applyRewardOption(db:DatabaseSync,owner:string,option:RewardOpti
  const result=resolveReward(option,wallet.coins);
  const actual=[];
  for(const entry of result.entries){
+  if(entry.kind==='tool-voucher'){if(!runId)throw Error('Voucher needs run context');grantStoredReward(db,runId,entry);actual.push(entry);continue;}
   if(entry.kind==='pokemon-enhancement'){if(!runId)throw Error('Enhancement needs run context');applyPokemonEnhancement(db,owner,runId,entry);actual.push(entry);continue;}
   if(entry.kind==='growth-points'){grantGrowth(db,owner,entry.amount);actual.push(entry);continue;}
   if(entry.kind==='typed-egg-ticket'){if(!['superRare','shiny'].includes(entry.eggKind))throw Error('Invalid egg reward');grantEggTicket(db,owner,entry.eggKind,entry.amount);actual.push(entry);continue;}

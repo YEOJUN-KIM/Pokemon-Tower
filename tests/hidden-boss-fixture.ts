@@ -3,7 +3,8 @@ import {starters} from '../src/data/teams';
 import type {TowerTheme} from '../src/data/tower-themes';
 
 export function hiddenBossFixture(theme:TowerTheme='johto',floor=50,path=':memory:',owner='hidden'){
- const store=new TowerStore(path);store.ensurePlayer(owner);
+ // Keep guaranteed hidden-boss tests independent of unrelated probability tracks.
+ const store=new TowerStore(path,undefined,{});store.ensurePlayer(owner);
  const initial=store.start(owner,starters,'basic',{events:true}),run=store.battle(initial).run_id;
  store.db.prepare("UPDATE battles SET status='complete' WHERE id=?").run(initial);
  store.db.prepare('UPDATE run_themes SET theme=? WHERE run_id=?').run(theme,run);

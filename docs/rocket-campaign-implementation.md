@@ -1,5 +1,7 @@
 # 로켓단 Run Event 캠페인
 
+> 이 문서는 기존 v1 저장 데이터의 호환 동작을 기록한다. 2026-10-19 이후 신규 런의 독립 빌런 트랙·조직별 단계·교환권·누락 샘플 현황은 [현재 빌런 캠페인 문서](villain-campaign-tracks.md)를 따른다.
+
 현재 모든 적격 이벤트가 공통 10%·통과 횟수 쿨다운 2를 따른다. 로켓단만 후보로 남기던 수동 QA 설정과 3층부터 Raid를 강제하던 설정은 제거했다. 캠페인 단계별 weight와 단서 조건은 `src/data/villain-campaigns.ts`, 공통 발생률은 `src/data/run-events.ts`의 `eventEncounterSettings`를 따른다. 기존 이벤트/배틀 snapshot은 변경하지 않는다. 테스트는 명시적 registry/fixture로 특정 캠페인을 재현한다.
 
 ## 동작 및 기존 샘플

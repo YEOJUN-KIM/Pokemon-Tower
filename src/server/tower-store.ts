@@ -122,11 +122,12 @@ export class TowerStore {
       const battle=this.createBattle(runId,snapshot.floor,this.suggestedTeam(runId),undefined,snapshot);
       hidden.start(eventId,battle);return;
     }
-    if(isRocketStage(row.kind)&&choice==='challenge'){
+    if((isRocketStage(row.kind)||row.kind==='villain-campaign')&&choice==='challenge'){
       const campaigns=new VillainCampaigns(this.db),saved=campaigns.row(eventId)!;
       if(saved.battle_id)return;
       if(row.status!=='choice'||row.choice_id)throw new BattleRequestError('이미 마친 이벤트입니다.',409);
-      const battle=this.createBattle(runId,row.after_floor+1,this.suggestedTeam(runId),undefined,campaigns.snapshot(saved));
+      const snapshot=campaigns.snapshot(saved);
+      const battle=this.createBattle(runId,snapshot.floor??row.after_floor+1,this.suggestedTeam(runId),undefined,snapshot);
       campaigns.start(eventId,battle);return;
     }
     if(row.kind==='raid-encounter'&&choice==='challenge'){
@@ -136,7 +137,7 @@ export class TowerStore {
       const battle=this.createRaidBattle(runId,row.after_floor+1,this.suggestedTeam(runId),raids.snapshot(saved));
       raids.start(eventId,battle);return;
     }
-    if(row.kind!=='challenger-selection'||choice==='back'){this.events.choose(owner,runId,eventId,choice);return;}
+    if(row.kind!=='challenger-selection'||choice==='back'){this.events.choose(owner,runId,eventId,choice);this.events.followup(runId);return;}
     const events=new ChallengerEvents(this.db),saved=events.row(eventId)!;
     const definition=events.definition(eventId,choice);
     if(saved.selected_id){if(saved.selected_id===definition.id)return;throw new BattleRequestError('이미 다른 도전자를 선택했습니다.',409);}
@@ -151,8 +152,9 @@ export class TowerStore {
       const run=this.ownedRun(owner,runId);
       this.db.prepare('UPDATE run_routes SET pending_boss=0 WHERE run_id=?').run(runId);
       if(run.floor===run.total_floors){this.db.prepare("UPDATE runs SET state='cleared' WHERE id=?").run(runId);this.settleGrowth(runId,'cleared');}
-      else this.db.prepare("UPDATE runs SET state='select',floor=floor+1 WHERE id=?").run(runId);
+      else {this.db.prepare("UPDATE runs SET state='select',floor=floor+1 WHERE id=?").run(runId);this.events.encounter(runId,run.floor);}
     }
+    this.events.followup(runId);
   });}
   purchaseHiddenShop(owner:string,runId:string,eventId:string,productId:unknown,destination:unknown='bag',species:unknown=null){this.tx(()=>{
     const row=this.events.owned(owner,runId,eventId);if(row.kind!=='hidden-shop'||row.status!=='choice')throw new BattleRequestError('열려 있는 히든상점이 아닙니다.',409);
@@ -226,7 +228,7 @@ export class TowerStore {
     if (!player) throw new BattleRequestError('저장 데이터를 찾을 수 없습니다.', 404);
     const unlocked = (this.db.prepare('SELECT species FROM unlocks WHERE player_id = ? ORDER BY rowid').all(owner) as {species: string}[]).map(p => p.species).filter(isCollectibleSpecies);
     const row = this.latest(owner);
-    const villainEncounter=row?this.db.prepare("SELECT e.kind AS stage,e.after_floor AS afterFloor FROM villain_event_encounters v JOIN run_events e ON e.id=v.event_id WHERE e.run_id=? AND e.status!='complete'").get(row.id) as import('../shared/contracts').RunView['villainEncounter']:null;
+    const villainEncounter=row?this.db.prepare("SELECT json_extract(v.snapshot_json,'$.stage') AS stage,COALESCE(json_extract(v.snapshot_json,'$.floor')-1,e.after_floor) AS afterFloor FROM villain_event_encounters v JOIN run_events e ON e.id=v.event_id WHERE e.run_id=? AND e.status!='complete'").get(row.id) as import('../shared/contracts').RunView['villainEncounter']:null;
     const battle = this.currentBattle(owner);
     const raidBattle=!!battle&&!!new RaidEvents(this.db).forBattle(battle.id);
     const retry=row?this.retryState(row.id):null;
@@ -316,6 +318,7 @@ export class TowerStore {
       selected.forEach((name, slot) => this.db.prepare('INSERT INTO members VALUES (?, ?, ?)').run(id, slot, name));
       const profiles=Object.fromEntries(this.trainingCollection(owner).map(entry=>[entry.species,entry.profile]));
       this.db.prepare('UPDATE runs SET profiles=? WHERE id=?').run(JSON.stringify(profiles),id);
+      if(options.events&&this.eventRegistry===eventDefinitions)new VillainCampaigns(this.db).enableTrack(id);
       return this.createBattle(id, 1, selected);
     });
   }

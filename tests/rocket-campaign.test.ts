@@ -132,7 +132,7 @@ test('backward Teleport preserves persisted clues and organization stage across 
   assert.equal(s.view(f.owner).run!.floor,1);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),before);
   s.close();s=new TowerStore(path,()=>0,rocketRegistry);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),before);
   const snapshot=s.db.prepare('SELECT * FROM villain_event_encounters').all();s.db.exec('PRAGMA user_version=43');s.close();s=new TowerStore(path);
-  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,45);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),before);assert.deepEqual(s.db.prepare('SELECT * FROM villain_event_encounters').all(),snapshot);assert.deepEqual(s.db.prepare('PRAGMA foreign_key_check').all(),[]);
+  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,46);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),before);assert.deepEqual(s.db.prepare('SELECT * FROM villain_event_encounters').all(),snapshot);assert.deepEqual(s.db.prepare('PRAGMA foreign_key_check').all(),[]);
  }finally{s.close();}
 });
 
@@ -140,7 +140,7 @@ test('actual v43 database without either new table upgrades while preserving an 
  const path=`.data/tests/rocket-v43-${randomUUID()}.sqlite`;let s=new TowerStore(path);try{
   s.ensurePlayer('old');const id=s.start('old',starters),before=s.battle(id),view=s.view('old');
   s.db.exec('DROP TABLE villain_event_encounters; DROP TABLE run_organization_campaigns; PRAGMA user_version=43');s.close();s=new TowerStore(path);
-  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,45);assert.deepEqual(s.battle(id),before);assert.deepEqual(s.view('old'),view);
+  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,46);assert.deepEqual(s.battle(id),before);assert.deepEqual(s.view('old'),view);
   assert.equal(s.db.prepare('SELECT COUNT(*) AS n FROM run_organization_campaigns').get()!.n,0);assert.deepEqual(s.db.prepare('PRAGMA foreign_key_check').all(),[]);
  }finally{s.close();}
 });

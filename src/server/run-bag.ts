@@ -17,6 +17,7 @@ import {ownsRunItem} from './run-ownership';
 import {BattleRequestError} from './request-error';
 import type {InventoryReward} from '../data/rewards';
 import {grantCoins} from './player-wallet';
+import {ToolVouchers} from './tool-vouchers';
 
 type Context={runId:string;roster:string[];profiles:Record<string,TrainingProfile>;held:Record<string,string>;rule:BattleRule;partners:Record<string,MachinePartner>};
 export class RunBag{
@@ -29,6 +30,7 @@ export class RunBag{
   for(const item of owned){if(!isHeldItem(item)){entries.push({id:`held:${item}`,item,pocket:'tools',name:itemName(item),description:'이 모습에 고정된 전용 도구입니다.',icon:'',holder:Object.entries(held).find(([,value])=>value===item)?.[0],action:'view',targets:[]});continue;}entries.push({id:`held:${item}`,item,pocket:zCrystals[item]?'z':'tools',name:itemName(item),description:heldItems[item].description,icon:`/sprites/items/${itemIcon(item)}.${itemIconExtension(item)}`,holder:Object.entries(held).find(([,value])=>value===item)?.[0],action:'equip',targets:roster.filter(s=>canHold(s,item))});}
   for(const row of this.db.prepare('SELECT id,effect_json,quantity FROM run_reward_inventory WHERE run_id=? AND quantity>0 ORDER BY rowid').all(runId) as {id:string;effect_json:string;quantity:number}[]){
    const effect:InventoryReward=JSON.parse(row.effect_json);
+   if(effect.kind==='tool-voucher')entries.push({id:row.id,pocket:'tools',name:`${effect.rarity==='epic'?'에픽':effect.rarity} 도구 교환권`,description:'같은 등급 도구 4개 중 하나를 골라 보관하거나 장착합니다.',icon:'/sprites/items/life-orb.png',quantity:row.quantity,action:'voucher',targets:[],voucher:new ToolVouchers(this.db,runId).pending(row.id)});
    if(effect.kind==='vitamin'&&entries.some(e=>e.pocket==='consumables'&&e.name===vitamins[effect.stat].name)){entries.find(e=>e.pocket==='consumables'&&e.name===vitamins[effect.stat].name)!.quantity!+=row.quantity;continue;}
    if(effect.kind==='vitamin')entries.push({id:row.id,pocket:'consumables',name:vitamins[effect.stat].name,description:`${vitamins[effect.stat].name} · 포켓몬당 영양제 총 ${VITAMIN_LIMIT}개 제한`,icon:`/sprites/items/${vitamins[effect.stat].icon}.png`,quantity:row.quantity,action:'vitamin',targets:roster.filter(s=>!vitaminDisabledReason(vitaminUsage,s,vitamins[effect.stat].name))});
    else if(effect.kind==='machine')entries.push({id:row.id,pocket:'machines',move:effect.move,name:moveInfo[effect.move]?.name??effect.move,description:moveInfo[effect.move]?.description??'현재 Run 동안 반복해서 가르칠 수 있는 기술머신입니다.',icon:'/sprites/items/tm-normal.png',action:'machine',targets:roster.filter(s=>trainingOptions(s,profiles[s]?.forme).learnableMoves.includes(effect.move)&&!profiles[s]?.moves.includes(effect.move))});
@@ -43,6 +45,9 @@ export class RunBag{
   if(typeof requestId!=='string'||!/^[a-zA-Z0-9-]{16,80}$/.test(requestId)||typeof id!=='string')throw new BattleRequestError('배낭 사용 요청이 올바르지 않습니다.',400);
   const payload=JSON.stringify({bag:id,target:target??null,slot:slot??null}),old=this.db.prepare('SELECT payload FROM reward_use_receipts WHERE run_id=? AND request_id=?').get(runId,requestId) as {payload:string}|undefined;
   if(old){if(old.payload!==payload)throw new BattleRequestError('다른 동작으로 처리된 요청입니다.',409);return;}
+  if(this.db.prepare("SELECT 1 FROM run_reward_inventory WHERE id=? AND run_id=? AND json_extract(effect_json,'$.kind')='tool-voucher'").get(id,runId)){
+   new ToolVouchers(this.db,runId).use(id,target,equip);this.db.prepare('INSERT INTO reward_use_receipts VALUES (?,?,?)').run(runId,requestId,payload);return;
+  }
   const entry=this.view().entries.find(e=>e.id===id);if(!entry)throw new BattleRequestError('배낭에 없는 아이템입니다.',409);
   if(entry.action==='equip'){
    if(target===null){if(entry.holder)equip(entry.holder,null);}else{

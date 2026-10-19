@@ -187,5 +187,12 @@ CREATE TABLE IF NOT EXISTS villain_event_encounters(
  battle_id TEXT UNIQUE REFERENCES battles(id),claimed INTEGER NOT NULL DEFAULT 0 CHECK(claimed IN (0,1))
 ) STRICT;
 CREATE TABLE IF NOT EXISTS hidden_boss_events(event_id TEXT PRIMARY KEY REFERENCES run_events(id),snapshot_json TEXT NOT NULL CHECK(json_valid(snapshot_json)),battle_id TEXT UNIQUE REFERENCES battles(id),claimed INTEGER NOT NULL DEFAULT 0 CHECK(claimed IN (0,1))) STRICT;
-  PRAGMA user_version = 45;
+CREATE TABLE IF NOT EXISTS run_villain_tracks(
+ run_id TEXT PRIMARY KEY REFERENCES runs(id),organization TEXT NOT NULL,stage_index INTEGER NOT NULL DEFAULT 0 CHECK(stage_index>=0),
+ grunt_wins INTEGER NOT NULL DEFAULT 0 CHECK(grunt_wins BETWEEN 0 AND 2),pity INTEGER NOT NULL DEFAULT 0 CHECK(pity>=0),
+ last_event_order INTEGER,last_checked_order INTEGER NOT NULL DEFAULT -1,completed INTEGER NOT NULL DEFAULT 0 CHECK(completed IN (0,1))
+) STRICT;
+CREATE TABLE IF NOT EXISTS run_event_followups(run_id TEXT NOT NULL REFERENCES runs(id),encounter_order INTEGER NOT NULL,origin_floor INTEGER NOT NULL,checked INTEGER NOT NULL DEFAULT 0 CHECK(checked IN (0,1)),PRIMARY KEY(run_id,encounter_order)) STRICT;
+CREATE TABLE IF NOT EXISTS tool_voucher_draws(voucher_id TEXT NOT NULL REFERENCES run_reward_inventory(id),draw_index INTEGER NOT NULL,candidates_json TEXT NOT NULL CHECK(json_valid(candidates_json)),selected_item TEXT,destination TEXT,target TEXT,PRIMARY KEY(voucher_id,draw_index)) STRICT;
+  PRAGMA user_version = 46;
 `;

@@ -5,7 +5,7 @@ import {eventDefinitions,eventDefinition,eventEncounterSettings,type EventReward
 
 export type Roll=(max:number)=>number;
 
-export function selectRunEvent(afterFloor:number,previousOrder:number|null,roll:Roll,registry:RunEventRegistry=eventDefinitions,rulesVersion=1,order=afterFloor,eligible:(kind:string)=>boolean=kind=>!isRocketStage(kind)||campaignEligible(kind,emptyCampaign,afterFloor)):string|null {
+export function selectRunEvent(afterFloor:number,previousOrder:number|null,roll:Roll,registry:RunEventRegistry=eventDefinitions,rulesVersion=1,order=afterFloor,eligible:(kind:string)=>boolean=kind=>!isRocketStage(kind)||registry!==eventDefinitions&&campaignEligible(kind,emptyCampaign,afterFloor)):string|null {
   if(afterFloor%5===0)return null;
   if(previousOrder!==null && order-previousOrder<=eventEncounterSettings.cooldownFloors)return null;
   if(roll(100)>=eventEncounterSettings.encounterPercent)return null;

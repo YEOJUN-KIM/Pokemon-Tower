@@ -1,5 +1,6 @@
 'use client';
 import {useEffect,useRef,useState,useId} from 'react';
+import {ToolVoucherDialog} from './tool-voucher-dialog';
 import {ItemTargetList} from './item-target-list';
 import {vitaminDisabledReason} from '../shared/vitamin-eligibility';
 import {itemName} from '../data/held-items';
@@ -19,14 +20,16 @@ import styles from './styles/bag.module.css';
 type Props={run:RunView;busy:boolean;submit:(body:Record<string,unknown>)=>Promise<void>;error?:string};
 export function BagButton(props:Props){const [open,setOpen]=useState(false),trigger=useId();return <><button className="secondary-button" data-open-bag data-bag-trigger={trigger} disabled={props.busy||props.run.state!=='select'} onClick={()=>setOpen(true)}>배낭</button>{open&&<Bag {...props} returnFocus={`[data-bag-trigger="${trigger}"]`} onClose={()=>setOpen(false)}/>}</>;}
 export function Bag({run,busy,submit,error,onClose,returnFocus='[data-open-bag]'}:Props&{onClose:()=>void;returnFocus?:string}){
- const [pocket,setPocket]=useState<BagPocket>('tools'),[selected,setSelected]=useState(''),[stage,setStage]=useState<'list'|'targets'|'moves'>('list'),[target,setTarget]=useState('');
+ const [pocket,setPocket]=useState<BagPocket>('tools'),[selected,setSelected]=useState(''),[stage,setStage]=useState<'list'|'targets'|'moves'|'voucher'>('list'),[target,setTarget]=useState('');
  const root=useRef<HTMLDivElement>(null),receipts=useRef(new Map<string,string>());
  const bag=run.bag,entries=bag?.entries.filter(e=>e.pocket===pocket)??[],entry=entries.find(e=>e.id===selected)??entries[0];
  function changePocket(next:BagPocket){setPocket(next);setSelected('');setStage('list');requestAnimationFrame(()=>selectGameCursor(root.current?.querySelector<HTMLButtonElement>('[data-bag-entry]')??root.current?.querySelector<HTMLButtonElement>('[data-game-tabs] [aria-pressed=true]')));}
  useEffect(()=>{const node=root.current;if(!node)return;const observer=new MutationObserver(()=>{const button=node.querySelector<HTMLElement>('[data-game-cursor=true][data-bag-entry]');if(button)setSelected(button.dataset.bagEntry!);});observer.observe(node,{subtree:true,attributes:true,attributeFilter:['data-game-cursor']});return()=>observer.disconnect();},[]);
- function back(){if(busy)return;if(stage==='moves')setStage('targets');else if(stage==='targets')setStage('list');else onClose();}
- function begin(item=entry){if(!item||busy||item.action==='view')return;setSelected(item.id);setStage('targets');requestAnimationFrame(()=>selectGameCursor(root.current?.querySelector<HTMLButtonElement>('[data-bag-target]:not(:disabled)')));}
+ function back(){if(busy)return;if(stage==='moves')setStage('targets');else if(stage==='targets'||stage==='voucher')setStage('list');else onClose();}
+ function begin(item=entry){if(!item||busy||item.action==='view')return;setSelected(item.id);if(item.action==='voucher'){setStage('voucher');if(!item.voucher)void useVoucher(item,'open');return;}setStage('targets');requestAnimationFrame(()=>selectGameCursor(root.current?.querySelector<HTMLButtonElement>('[data-bag-target]:not(:disabled)')));}
  async function use(item:BagEntry,target:string|null,slot:number|null=null){const key=JSON.stringify([item.id,target,slot,item.quantity,run.bag?.currentMoves[target??'']]),requestId=receipts.current.get(key)??crypto.randomUUID();receipts.current.set(key,requestId);try{await submit({type:'bag-use',runId:run.id,requestId,entryId:item.id,target,slot});receipts.current.delete(key);setStage('list');}catch{/* Keep the same receipt for a safe retry; the parent displays the error. */}}
+ async function useVoucher(item:BagEntry,target:unknown){const key=JSON.stringify([item.id,target]),requestId=receipts.current.get(key)??crypto.randomUUID();receipts.current.set(key,requestId);await submit({type:'bag-use',runId:run.id,requestId,entryId:item.id,target});receipts.current.delete(key);}
+ if(stage==='voucher'&&entry?.voucher)return <ToolVoucherDialog entry={entry} run={run} busy={busy} error={error} onUse={target=>useVoucher(entry,target)} onClose={()=>setStage('list')}/>;
  return <PokedexDialog title="배낭 · 이번 도전" large onClose={back} returnFocus={returnFocus} className={styles.dialog}>
   <div ref={root} className={styles.scope} data-testid="bag" data-keyboard-pocket-scope={stage==='list'?true:undefined}>
    <nav className={styles.pockets} data-game-tabs aria-label="배낭 Pocket">{bag?.pockets.map(id=><button key={id} aria-pressed={pocket===id} onClick={()=>changePocket(id)}>{bagPocketNames[id]}</button>)}</nav>

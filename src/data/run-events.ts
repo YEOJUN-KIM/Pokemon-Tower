@@ -32,6 +32,7 @@ function rocketDefinition(kind:RocketStage):EventDefinition{
  choices:kind==='rocket-intro'?[{id:'challenge',label:'들어가 본다',outcome:'villain'},leave]:[{id:'challenge',label:'승부한다',outcome:'villain'}]};
 }
 export const eventDefinitions={
+ 'villain-campaign':{title:'조직의 흔적',summary:'타워 내부에서 조직원을 마주쳤다.',intro:'조직원이 앞을 가로막았다.',weight:0,choices:[{id:'challenge',label:'배틀 시작',outcome:'villain'}]},
  'hidden-boss':{title:'강한 상대의 등장',summary:'히든보스가 나타났다.',intro:'포켓몬들의 HP와 PP가 회복되었다.\n강한 상대가 나타났다.',weight:0,choices:[{id:'challenge',label:'배틀 시작',outcome:'hidden-boss'}]},
  'mystery-chest':{title:'길에서 발견한 상자',summary:'코인이나 알 뽑기권이 들어 있을지도 모른다.',intro:'길에서 작은 상자를 발견했다. 안쪽에서 달그락거리는 소리가 들린다. 열어볼까?',weight:50,choices:[{id:'open',label:'상자를 연다',outcome:'reward',cost:0,rewards:[{weight:legacyChestRewards.coinsPercent,reward:{kind:'coins',amount:legacyChestRewards.coins}},{weight:100-legacyChestRewards.coinsPercent,reward:{kind:'egg-ticket',amount:legacyChestRewards.eggTickets}}],message:'{reward}을 발견했다! {detail}'},leave]},
  'breeder-gift':{title:'브리더의 응원',summary:'브리더가 알 뽑기권 1장을 선물하려 한다.',intro:'길에서 만난 브리더가 손을 흔든다. “타워에 도전 중이군요! 새로운 친구를 만나는 데 이 뽑기권이 도움이 될 거예요.”',weight:30,choices:[{id:'open',label:'선물을 받는다',outcome:'reward',cost:0,rewards:[{weight:1,reward:{kind:'egg-ticket',amount:1}}],message:'브리더에게 알 뽑기권 1장을 받았다!'},leave]},
@@ -71,4 +72,4 @@ export function eventDefinition(kind:string,registry:RunEventRegistry=eventDefin
  return isRunEventKind(kind,registry)?registry[kind]:undefined;
 }
 // Event IDs and choice IDs are content strings, validated against the registry on the server.
-export type RunEventView={hiddenBoss?:{name:string;portrait:string};villain?:{organization:string;stage:RocketStage;portrait:string;name:string;clues?:number};id:string;kind:string;choiceId?:string|null;rulesVersion?:number;teleport?:{destinationFloor:number};result?:RewardResult;afterFloor:number;raid?:RaidEventView;challengers?:readonly ChallengerCandidate[];hiddenShop?:HiddenShopView;phase:'choice'|'battle'|'reward';reward:EventReward|null};
+export type RunEventView={hiddenBoss?:{name:string;portrait:string};villain?:{organization:string;stage:RocketStage|import('./villain-tracks').VillainTrackStage;portrait:string;name:string;clues?:number};id:string;kind:string;choiceId?:string|null;rulesVersion?:number;teleport?:{destinationFloor:number};result?:RewardResult;afterFloor:number;raid?:RaidEventView;challengers?:readonly ChallengerCandidate[];hiddenShop?:HiddenShopView;phase:'choice'|'battle'|'reward';reward:EventReward|null};

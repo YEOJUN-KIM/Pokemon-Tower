@@ -48,6 +48,6 @@ test('hidden event snapshot survives restart and loss/retry without changing opp
 test('v44 migration creates event storage without changing active battles',()=>{
  const path=`.data/tests/hidden-migration-${randomUUID()}.sqlite`;let s=new TowerStore(path);try{
   s.ensurePlayer('old');const id=s.start('old',starters),before=s.battle(id);s.db.exec('DROP TABLE hidden_boss_events; PRAGMA user_version=44');s.close();s=new TowerStore(path);
-  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,45);assert.deepEqual(s.battle(id),before);assert.equal(s.db.prepare('SELECT COUNT(*) AS n FROM hidden_boss_events').get()!.n,0);
+  assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,46);assert.deepEqual(s.battle(id),before);assert.equal(s.db.prepare('SELECT COUNT(*) AS n FROM hidden_boss_events').get()!.n,0);
  }finally{s.close();}
 });

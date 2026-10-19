@@ -13,7 +13,7 @@ export function initializeTowerDatabase(db:DatabaseSync,repairArchivedOwnership:
     db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
     const version = db.prepare('PRAGMA user_version').get() as {user_version: number};
     const eventHadOrder=(db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(c=>c.name==='encounter_order');
-    if (version.user_version > 45) throw new Error('Unsupported database schema');
+    if (version.user_version > 46) throw new Error('Unsupported database schema');
     // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
     if(version.user_version<43)db.exec('PRAGMA foreign_keys=OFF');
     try {transaction(db,() => {

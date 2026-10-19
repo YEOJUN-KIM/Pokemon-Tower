@@ -25,14 +25,17 @@ export class RunEvents {
  encounter(runId:string,afterFloor:number){
   if(!this.db.prepare('SELECT 1 FROM run_event_rules WHERE run_id=?').get(runId))return;
   if(this.view(runId))return;
+  const campaigns=new VillainCampaigns(this.db);
+  if(this.registry===eventDefinitions)campaigns.enableTrack(runId);
   const order=(this.db.prepare('SELECT cleared_count FROM run_encounter_progress WHERE run_id=?').get(runId) as {cleared_count:number}|undefined)?.cleared_count??0;
-  const previous=this.db.prepare('SELECT MAX(encounter_order) AS position FROM run_events WHERE run_id=?').get(runId) as {position:number|null};
+  if(campaigns.track(runId))this.db.prepare('INSERT OR IGNORE INTO run_event_followups(run_id,encounter_order,origin_floor) VALUES (?,?,?)').run(runId,order,afterFloor);
+  const previous=this.db.prepare("SELECT MAX(encounter_order) AS position FROM run_events WHERE run_id=? AND kind!='villain-campaign'").get(runId) as {position:number|null};
   const segment=teleportSegment(afterFloor);
   const eligible=(kind:string)=>{
-   return isRocketStage(kind)?new VillainCampaigns(this.db).eligible(runId,kind,afterFloor):kind!=='random-teleport'||(segment!==null&&!this.db.prepare('SELECT 1 FROM teleport_events t JOIN run_events e ON e.id=t.event_id WHERE e.run_id=? AND t.segment=?').get(runId,segment));
+   return isRocketStage(kind)?!campaigns.track(runId)&&campaigns.eligible(runId,kind,afterFloor):kind!=='random-teleport'||(segment!==null&&!this.db.prepare('SELECT 1 FROM teleport_events t JOIN run_events e ON e.id=t.event_id WHERE e.run_id=? AND t.segment=?').get(runId,segment));
   };
   const kind=selectRunEvent(afterFloor,previous.position,this.roll,this.registry,this.rulesVersion(runId),order,eligible);
-  if(!kind)return;
+  if(!kind){this.followup(runId);return;}
   const eventId=randomUUID();
   this.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status,encounter_order) VALUES (?,?,?,?,'choice',?)").run(eventId,runId,afterFloor,kind,order);
   if(kind==='random-teleport'){const snapshot=createTeleportSnapshot(afterFloor,this.roll);this.db.prepare('INSERT INTO teleport_events VALUES (?,?,?,?)').run(eventId,snapshot.segment,snapshot.originFloor,snapshot.destinationFloor);}
@@ -50,6 +53,21 @@ export class RunEvents {
    new ChallengerEvents(this.db).create(eventId,afterFloor+1,rule,progression,common);
   }
  }
+ followup(runId:string){
+  if(this.view(runId))return;
+  const pending=this.db.prepare('SELECT * FROM run_event_followups WHERE run_id=? AND checked=0 ORDER BY encounter_order LIMIT 1').get(runId) as {encounter_order:number;origin_floor:number}|undefined;
+  if(!pending)return;
+  this.db.prepare('UPDATE run_event_followups SET checked=1 WHERE run_id=? AND encounter_order=?').run(runId,pending.encounter_order);
+  const run=this.db.prepare('SELECT floor,state FROM runs WHERE id=?').get(runId) as {floor:number;state:string};
+  if(run.state!=='select')return;
+  const campaigns=new VillainCampaigns(this.db);
+  if(!campaigns.rollTrack(runId,run.floor,pending.encounter_order,this.roll))return;
+  const id=randomUUID(),rule=(this.db.prepare('SELECT rule FROM run_rules WHERE run_id=?').get(runId) as {rule:BattleRule}).rule;
+  const progression=(this.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(runId) as {version:TowerProgression}|undefined)?.version??'legacy';
+  // Use the current location after Teleport, while keeping the cleared encounter chronology.
+  this.db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status,encounter_order) VALUES (?,?,?,'villain-campaign','choice',?)").run(id,runId,Math.max(1,run.floor-1),pending.encounter_order);
+  campaigns.createTrack(id,runId,run.floor,pending.encounter_order,rule,progression,this.roll);
+ }
  private rulesVersion(runId:string){return (this.db.prepare('SELECT version FROM run_event_rules WHERE run_id=?').get(runId) as {version:number}|undefined)?.version??1;}
  view(runId:string):RunEventView|null{
   const row=this.db.prepare("SELECT * FROM run_events WHERE run_id=? AND status!='complete' ORDER BY encounter_order DESC LIMIT 1").get(runId) as EventRow|undefined;
@@ -66,8 +84,8 @@ export class RunEvents {
   if(!run || run.player_id!==owner)throw new BattleRequestError('이 도전의 이벤트가 아닙니다.',404);
   const event=this.db.prepare('SELECT * FROM run_events WHERE id=? AND run_id=?').get(eventId,runId) as EventRow|undefined;
   if(!event)throw new BattleRequestError('이벤트를 찾을 수 없습니다.',404);
-  const specialState=event.kind==='raid-encounter'?['battle','lost','recruit'].includes(run.state):(event.kind==='challenger-selection'||event.kind==='hidden-boss'||isRocketStage(event.kind))&&['battle','lost'].includes(run.state);
-  const expectedFloor=event.kind==='hidden-boss'?event.after_floor:event.kind==='random-teleport'&&event.choice_id==='teleport'?this.teleport(event.id).destination_floor:event.after_floor+1;
+  const specialState=event.kind==='raid-encounter'?['battle','lost','recruit'].includes(run.state):(event.kind==='challenger-selection'||event.kind==='hidden-boss'||event.kind==='villain-campaign'||isRocketStage(event.kind))&&['battle','lost'].includes(run.state);
+  const expectedFloor=event.kind==='villain-campaign'?new VillainCampaigns(this.db).snapshot(new VillainCampaigns(this.db).row(event.id)!).floor!:event.kind==='hidden-boss'?event.after_floor:event.kind==='random-teleport'&&event.choice_id==='teleport'?this.teleport(event.id).destination_floor:event.after_floor+1;
   const order=(this.db.prepare('SELECT cleared_count FROM run_encounter_progress WHERE run_id=?').get(runId) as {cleared_count:number}|undefined)?.cleared_count??0;
   if((run.state!=='select'&&!specialState) || run.floor!==expectedFloor || event.kind==='random-teleport'&&event.encounter_order!==order)throw new BattleRequestError('이미 지나간 이벤트입니다.',409);
   this.validateKind(event.kind);

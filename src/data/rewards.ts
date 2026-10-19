@@ -1,6 +1,7 @@
 import type {StatKey} from './training';
 import type {TrainerEquipment} from './trainer-equipment';
 export type InventoryReward=
+ | {kind:'tool-voucher';rarity:import('./held-item-shop').ItemRarity;choices:4;amount:number}
  | {kind:'growth-points';amount:number}
  | {kind:'vitamin';stat:StatKey;amount:number}
  | {kind:'item-exchange';items:readonly string[];amount:number;fallbackCoins:number;direct?:true}

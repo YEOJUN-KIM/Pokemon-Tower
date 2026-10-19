@@ -10,6 +10,7 @@ import styles from './styles/reward-panel.module.css';
 
 export function rewardEntryText(entry:RewardEntry):string {
  switch(entry.kind){
+  case 'tool-voucher':return `+ ${entry.rarity==='epic'?'에픽':entry.rarity} 도구 교환권 ${entry.amount}장 · 배낭에서 사용`;
   case 'pokemon-enhancement':return `${pokemonName(entry.species)} · ${entry.mode==='shiny'?'이로치 획득':entry.mode==='six-iv'?'6V 완성':'선택한 능력치 V 강화'}`;
   case 'growth-points':return `+ 성장 포인트 ${entry.amount.toLocaleString()}P`;
   case 'vitamin':return `+ ${vitamins[entry.stat].name} ${entry.amount}개 · 출전 준비에서 사용`;

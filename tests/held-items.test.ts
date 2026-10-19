@@ -41,7 +41,7 @@ test('v12 migration adds empty inventories without changing saved battle teams',
     store.close();store=new TowerStore(path);
     assert.deepEqual(store.battle(id),before);
     assert.deepEqual(store.view('migration').run!.heldItems,{});
-    assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,45);
+    assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,46);
     assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
   }finally{store.close();}
 });

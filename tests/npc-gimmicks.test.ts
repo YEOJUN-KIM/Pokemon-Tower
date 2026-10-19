@@ -71,6 +71,7 @@ test('all player rules save the same Leon gimmick; reopening restores NPC powers
   assert.equal(Showdown.Teams.unpack(boss.opponent_team)!.find(p=>p.species==='Charizard')!.item,'Life Orb');
   assert.equal(Showdown.Teams.unpack(boss.opponent_team)!.find(p=>p.species==='Charizard')!.gigantamax,true);
   assert.equal(JSON.parse(boss.boss!).gimmick.rule,'dynamax');assert.equal(JSON.parse(boss.tera_tickets).p2,0);
+  assert.equal(JSON.parse(boss.boss!).npcAi.pivot,'v1');assert.equal(JSON.parse(boss.boss!).npcAi.galarAce,'v2');
   const service=new TowerService(store);try{assert.equal((await service.state(rule)).battle!.opponentRule,'dynamax');}finally{await service.dispose();}
  }}finally{store.close();}
  const teams={p1:packTeam(starters,{Charizard:{...defaultProfile('Charizard'),moves:['Protect']}}),p2:packTeam(starters,{Charizard:{...defaultProfile('Charizard'),moves:['Flamethrower']}},{Charizard:'Firium Z'})};

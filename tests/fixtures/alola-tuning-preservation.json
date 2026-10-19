@@ -14,7 +14,7 @@
     "src/battle/tower-policy.ts": "4fd3c29dea61cf0bf2c3a046d1929da306bfa8b798d093a0ec79d029960e8998",
     "src/battle/z-decision.ts": "851fa606cdc87cc0f9d81ded577ec24d80f1bf0492f057c0511202b7419f24e2",
     "src/battle/gimmicks.ts": "04fadd02268bd0d919853d93f7bb7193d6c86d3379d0f3588f70afce60014f5c",
-    "src/data/npc-ai.ts": "8d473e24e0f6f11842cb3c6ff41d6958536d07d86474ae3d756c58f516309d71",
+    "src/data/npc-ai.ts": "492465e2e50bf457220ded7ae9c67ece98fc0d94687116f7902798876b2c6d06",
     "src/data/npc-selection-rules.ts": "cbd1fe1da13113468d0065384fead4c3423c246ca576687fe3bf7ef226de8dcd",
     "src/server/opponent-team.ts": "f10a249fe0683dd1e5652fa8557ec55592e89511b7864272fdb0abaca7a58ea6",
     "src/data/tower-progression.ts": "3d7851211f1c2905ab49ced03d1a3924b851ae2cde6ee6af0c1a0d1da70d18e5",
@@ -27,5 +27,6 @@
     "src/data/z-crystals.json": "f1e371a50242bcadb6e5664426e6f93f1bdebc7f98c7933e1426fad778403671",
     "src/data/villain-organizations.ts": "8e5e00b4f52d3fb30820e0a4fb22f8b71dea038d882313a9f420efd68db3577e"
   },
-  "galarRebase": "Authorized Galar update; non-Galar rows remain pinned by galar-preservation.json."
+  "galarRebase": "Authorized Galar update; non-Galar rows remain pinned by galar-preservation.json.",
+  "galarAiRebase": "Only explicit new Raihan/Leon decision flags; all NPC data stays pinned by galar-ai-preservation.json."
 }

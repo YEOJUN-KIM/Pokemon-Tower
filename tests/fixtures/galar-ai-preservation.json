@@ -1,0 +1,19 @@
+{
+  "commit": "aab4bda6e99c19f087f53ad17cf0edeb214cbf10",
+  "json": [
+    "scripts/data/npc/galar-design.json",
+    "scripts/data/npc/normal-npc-samples.json",
+    "src/data/normal-npc-templates.json"
+  ],
+  "hashes": {
+    "scripts/data/npc/galar-design.json": "e2bee3646ae15cb3857543f8740583766e0c0a72d53b623c3d9f8b2e153c73f2",
+    "scripts/data/npc/normal-npc-samples.json": "b4edb77b1d195eed42fb1b398843a98b6f7c067b9135e2ba2b2c615d94cd752a",
+    "src/data/normal-npc-templates.json": "729e49795dc7285bed0bc130714af7f2c9ae2d3e43d296676e4bd81ef6743476",
+    "src/battle/galar-policy.ts": "cc88f85ab7dffebe3ad7710823987b18647ab0075ccd6fe53fe38d819576808d",
+    "src/battle/npc-policy-v12.ts": "22206328062533e0b44312f7cdfbc5df5ba39a88788abc45f5921c728dd6cb2e",
+    "src/battle/tower-policy.ts": "4fd3c29dea61cf0bf2c3a046d1929da306bfa8b798d093a0ec79d029960e8998",
+    "src/battle/switch-policy.ts": "454e160e92a9404559f0623d5d23a0bc7c8ffa141410b6b96ac51f267968766f",
+    "src/data/tower-progression.ts": "3d7851211f1c2905ab49ced03d1a3924b851ae2cde6ee6af0c1a0d1da70d18e5",
+    "src/data/tower-themes.ts": "9b0b10aeb9c8bc21a232c40e69b8bd07cff7dffb8c8b88c0abe98f5c42488497"
+  }
+}

@@ -15,7 +15,7 @@ import {packTeam,pokemonSets} from '../src/data/teams';
 import {runBattle,replayBattle,engineVersion,FORMAT,type BattleLog} from '../src/battle/run';
 import {galarTuningTelemetry} from './lib/galar-tuning-telemetry';
 
-const root='artifacts/experiments/balance/paldea-20261019';mkdirSync(root,{recursive:true});mkdirSync(root+'/traces',{recursive:true});
+const root=process.env.PALDEA_AUDIT_OUTPUT??'artifacts/experiments/balance/paldea-20261019';mkdirSync(root,{recursive:true});mkdirSync(root+'/traces',{recursive:true});
 const cases=[{id:'starters',species:['Charizard','Blastoise','Venusaur']},{id:'offense',species:['Garchomp','Metagross','Lapras']},{id:'bulk',species:['Slowbro','Corviknight','Gastrodon']},{id:'signature',species:['Mimikyu','Kommo-o','Gyarados']}];
 function player(names:string[],floor:number,hazards=false){
  const profiles=Object.fromEntries(names.map(name=>{
@@ -60,5 +60,5 @@ const summary=paldeaTrainers.flatMap(t=>[...new Set(rows.filter(r=>r.id===t.id).
  return {id:t.id,name:t.name,floor,battles:all.length,errors:all.length-ok.length,npcWins:sum(r=>Number(r.winner==='Tower AI')),winRate:sum(r=>Number(r.winner==='Tower AI'))/ok.length,meanTurns:sum(r=>r.turns)/ok.length,meanDirectSwitches:sum(r=>r.voluntary)/ok.length,teraBattles:sum(r=>Number(r.tera>0)),proteanBattles:sum(r=>Number(r.protean>0)),volt:sum(r=>r.volt),uturn:sum(r=>r.uturn),advancedDirect:sum(r=>r.advancedDirect),hazardExits:sum(r=>r.hazardExits),koAbandoned:sum(r=>r.koAbandoned),unfavorableExits:sum(r=>r.unfavorableExits),pivotLoops:sum(r=>r.pivotLoops),priority:sum(r=>r.priority),moves,issues:ok.flatMap(r=>r.issues.map((issue:string)=>({case:r.case,n:r.n,issue})))};
 }));
 const paths=['scripts/data/npc/paldea-design.json','src/data/paldea-trainers.ts','src/battle/switch-evaluation.ts','src/battle/advanced-switch-policy.ts','src/battle/paldea-policy.ts','src/battle/pivot-policy.ts','src/battle/npc-policy.ts','src/data/npc-ai.ts'];
-writeFileSync(root+'/summary.json',JSON.stringify({baselineCommit:'ed0de99a8e1d9b7f2a8c9720572854daa004b294',engineVersion,FORMAT,seeds:8,cases,extra:'Nemona also has 16 hazard scenario battles; report base and hazard rows separately.',hashes:Object.fromEntries(paths.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')])),summary},null,2)+'\n');
+writeFileSync(root+'/summary.json',JSON.stringify({baselineCommit:process.env.PALDEA_AUDIT_BASELINE??'ed0de99a8e1d9b7f2a8c9720572854daa004b294',engineVersion,FORMAT,seeds:8,cases,extra:'Nemona also has 16 hazard scenario battles; report base and hazard rows separately.',hashes:Object.fromEntries(paths.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')])),summary},null,2)+'\n');
 console.log(JSON.stringify({battles:rows.length,errors:rows.filter(r=>r.error).length,summary:summary.map(({moves,issues,...s})=>({...s,issues:issues.length}))}));

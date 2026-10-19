@@ -49,6 +49,13 @@ export class PaldeaPolicy implements Policy{
   const ordinary=actions.filter(a=>/^move \d+$/.test(a.command));
   const support=ordinary.find(a=>{
    const m=dex.moves.get(a.label),key=own.ident+':'+m.id;if(finish||this.used.has(key))return false;
+   // Poppy Light Screen begin: scoped to the reviewed middle, no shared AI changes.
+   if(m.id==='lightscreen'&&this.ace==='Tinkaton'&&own.details.split(',')[0]==='Magnezone'){
+    const incoming=publicIncomingRisk(own,o,publicThreats(o,[]).filter(t=>t.category==='Special'&&t.weight===1));
+    const sturdy=Showdown.toID(own.ability)==='sturdy'&&ownHp(own)===1;
+    return !this.fields.has('p2:lightscreen')&&o.ownTeam.some(p=>!p.active&&ownHp(p)>0)&&last.exists&&last.category==='Special'&&incoming>=.12&&(sturdy||incoming<ownHp(own)*.8);
+   }
+   // Poppy Light Screen end.
    if(m.id==='stealthrock')return !this.fields.has('p1:stealthrock')&&ownHp(own)>.35&&o.ownTeam.filter(p=>ownHp(p)>0).length>=2;
    if(m.id==='sunnyday')return !this.fields.has('sun')&&ownHp(own)>.4;
    if(m.id==='tailwind')return !this.fields.has('p2:tailwind')&&ownHp(own)>.65&&o.turn<=3;

@@ -32619,7 +32619,7 @@
       "team": [
         {
           "species": "Kilowattrel",
-          "item": "Focus Sash",
+          "item": "",
           "gigantamax": false,
           "role": "lead",
           "profile": {
@@ -33012,7 +33012,7 @@
       "team": [
         {
           "species": "Espathra",
-          "item": "Focus Sash",
+          "item": "",
           "gigantamax": false,
           "role": "lead",
           "profile": {
@@ -33307,7 +33307,7 @@
         },
         {
           "species": "Camerupt",
-          "item": "Assault Vest",
+          "item": "",
           "gigantamax": false,
           "role": "middle",
           "profile": {
@@ -33389,7 +33389,7 @@
       "select": true,
       "required": [
         "Copperajah",
-        "Corviknight",
+        "Magnezone",
         "Tinkaton"
       ],
       "selectionRules": {
@@ -33401,7 +33401,7 @@
         ]
       },
       "gimmickEnabled": true,
-      "concept": "강철 내구 + 철벽 바디프레스 + 거대해머",
+      "concept": "설치 + 빛의장막 특수 압박 + 거대해머",
       "team": [
         {
           "species": "Copperajah",
@@ -33437,8 +33437,8 @@
           }
         },
         {
-          "species": "Corviknight",
-          "item": "Leftovers",
+          "species": "Magnezone",
+          "item": "Light Clay",
           "gigantamax": false,
           "role": "middle",
           "profile": {
@@ -33453,19 +33453,19 @@
             },
             "evs": {
               "hp": 32,
-              "atk": 32,
+              "atk": 0,
               "def": 0,
-              "spa": 0,
+              "spa": 32,
               "spd": 2,
               "spe": 0
             },
-            "nature": "Impish",
-            "ability": "Pressure",
+            "nature": "Modest",
+            "ability": "Sturdy",
             "moves": [
-              "Iron Defense",
-              "Body Press",
-              "Brave Bird",
-              "Roost"
+              "Light Screen",
+              "Tri Attack",
+              "Flash Cannon",
+              "Discharge"
             ]
           }
         },
@@ -33667,7 +33667,7 @@
       "team": [
         {
           "species": "Noivern",
-          "item": "Focus Sash",
+          "item": "",
           "gigantamax": false,
           "role": "lead",
           "profile": {

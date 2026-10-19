@@ -1,0 +1,1634 @@
+{
+  "commit": "e00845a293a250bb296c66ff19411a6cc073ef7a",
+  "ids": [
+    "named-iono",
+    "named-tulip",
+    "named-hassel",
+    "named-rika",
+    "named-poppy"
+  ],
+  "paths": {
+    "scripts/data/npc/paldea-design.json": {
+      "otherHash": "863a82a71e36686e63cf17f5dabdd98eb697b646c0f0be6a085c651eaa8775ec",
+      "rows": [
+        {
+          "id": "named-iono",
+          "name": "모야모",
+          "category": "gym",
+          "specialty": "Electric",
+          "tactic": "special",
+          "concept": "전기 운영 + 부유 전기 테라 무우마직",
+          "team": [
+            {
+              "species": "Kilowattrel",
+              "ability": "Wind Power",
+              "item": "Focus Sash",
+              "nature": "Timid",
+              "moves": [
+                "Thunderbolt",
+                "Hurricane",
+                "Tailwind",
+                "Volt Switch"
+              ],
+              "role": "lead"
+            },
+            {
+              "species": "Bellibolt",
+              "ability": "Electromorphosis",
+              "item": "Leftovers",
+              "nature": "Modest",
+              "moves": [
+                "Parabolic Charge",
+                "Muddy Water",
+                "Reflect",
+                "Sucker Punch"
+              ],
+              "role": "middle"
+            },
+            {
+              "species": "Mismagius",
+              "ability": "Levitate",
+              "item": "Expert Belt",
+              "nature": "Timid",
+              "moves": [
+                "Tera Blast",
+                "Shadow Ball",
+                "Mystical Fire",
+                "Energy Ball"
+              ],
+              "role": "ace",
+              "teraType": "Electric"
+            }
+          ],
+          "entries": [
+            "Kilowattrel",
+            "Bellibolt",
+            "Mismagius"
+          ],
+          "ace": "Mismagius",
+          "teraType": "Electric",
+          "aiCeiling": "tactical",
+          "minFloor": 5,
+          "signature": {
+            "rule": "tera",
+            "species": "Mismagius"
+          }
+        },
+        {
+          "id": "named-tulip",
+          "name": "리파",
+          "category": "gym",
+          "specialty": "Psychic",
+          "tactic": "special",
+          "concept": "특방 하락 + 예리함 물리 중견 + 에스퍼 테라",
+          "team": [
+            {
+              "species": "Espathra",
+              "ability": "Opportunist",
+              "item": "Focus Sash",
+              "nature": "Timid",
+              "moves": [
+                "Lumina Crash",
+                "Dazzling Gleam",
+                "Reflect",
+                "Shadow Ball"
+              ],
+              "role": "lead"
+            },
+            {
+              "species": "Gallade",
+              "ability": "Sharpness",
+              "item": "Life Orb",
+              "nature": "Jolly",
+              "moves": [
+                "Psycho Cut",
+                "Sacred Sword",
+                "Leaf Blade",
+                "Night Slash"
+              ],
+              "role": "middle"
+            },
+            {
+              "species": "Florges",
+              "ability": "Flower Veil",
+              "item": "Sitrus Berry",
+              "nature": "Modest",
+              "moves": [
+                "Psychic",
+                "Moonblast",
+                "Energy Ball",
+                "Calm Mind"
+              ],
+              "role": "ace",
+              "teraType": "Psychic"
+            }
+          ],
+          "entries": [
+            "Espathra",
+            "Gallade",
+            "Florges"
+          ],
+          "ace": "Florges",
+          "teraType": "Psychic",
+          "aiCeiling": "tactical",
+          "minFloor": 5,
+          "signature": {
+            "rule": "tera",
+            "species": "Florges"
+          }
+        },
+        {
+          "id": "named-rika",
+          "name": "칠리",
+          "category": "elite",
+          "specialty": "Ground",
+          "tactic": "bulk",
+          "concept": "설치 + 안정적인 땅 운영 + 저수 토오",
+          "team": [
+            {
+              "species": "Donphan",
+              "ability": "Sturdy",
+              "item": "Rocky Helmet",
+              "nature": "Adamant",
+              "moves": [
+                "Stealth Rock",
+                "Earthquake",
+                "Knock Off",
+                "Ice Shard"
+              ],
+              "role": "lead"
+            },
+            {
+              "species": "Camerupt",
+              "ability": "Solid Rock",
+              "item": "Assault Vest",
+              "nature": "Modest",
+              "moves": [
+                "Earth Power",
+                "Flamethrower",
+                "Flash Cannon",
+                "Ancient Power"
+              ],
+              "role": "middle"
+            },
+            {
+              "species": "Clodsire",
+              "ability": "Water Absorb",
+              "item": "Leftovers",
+              "nature": "Careful",
+              "moves": [
+                "Earthquake",
+                "Poison Jab",
+                "Toxic",
+                "Recover"
+              ],
+              "role": "ace",
+              "teraType": "Ground"
+            }
+          ],
+          "entries": [
+            "Donphan",
+            "Camerupt",
+            "Clodsire"
+          ],
+          "ace": "Clodsire",
+          "teraType": "Ground",
+          "aiCeiling": "expert",
+          "minFloor": 5,
+          "signature": {
+            "rule": "tera",
+            "species": "Clodsire"
+          }
+        },
+        {
+          "id": "named-poppy",
+          "name": "뽀삐",
+          "category": "elite",
+          "specialty": "Steel",
+          "tactic": "bulk",
+          "concept": "강철 내구 + 철벽 바디프레스 + 거대해머",
+          "team": [
+            {
+              "species": "Copperajah",
+              "ability": "Sheer Force",
+              "item": "Sitrus Berry",
+              "nature": "Adamant",
+              "moves": [
+                "Stealth Rock",
+                "Heavy Slam",
+                "Play Rough",
+                "High Horsepower"
+              ],
+              "role": "lead"
+            },
+            {
+              "species": "Corviknight",
+              "ability": "Pressure",
+              "item": "Leftovers",
+              "nature": "Impish",
+              "moves": [
+                "Iron Defense",
+                "Body Press",
+                "Brave Bird",
+                "Roost"
+              ],
+              "role": "middle"
+            },
+            {
+              "species": "Tinkaton",
+              "ability": "Mold Breaker",
+              "item": "Air Balloon",
+              "nature": "Adamant",
+              "moves": [
+                "Gigaton Hammer",
+                "Play Rough",
+                "Knock Off",
+                "Brick Break"
+              ],
+              "role": "ace",
+              "teraType": "Steel"
+            }
+          ],
+          "entries": [
+            "Copperajah",
+            "Corviknight",
+            "Tinkaton"
+          ],
+          "ace": "Tinkaton",
+          "teraType": "Steel",
+          "aiCeiling": "expert",
+          "minFloor": 5,
+          "signature": {
+            "rule": "tera",
+            "species": "Tinkaton"
+          }
+        },
+        {
+          "id": "named-hassel",
+          "name": "팔자크",
+          "category": "elite",
+          "specialty": "Dragon",
+          "tactic": "setup",
+          "concept": "순풍 + 용의춤 + 드래곤 테라",
+          "team": [
+            {
+              "species": "Noivern",
+              "ability": "Infiltrator",
+              "item": "Focus Sash",
+              "nature": "Timid",
+              "moves": [
+                "Draco Meteor",
+                "Hurricane",
+                "Taunt",
+                "Tailwind"
+              ],
+              "role": "lead"
+            },
+            {
+              "species": "Haxorus",
+              "ability": "Mold Breaker",
+              "item": "Lum Berry",
+              "nature": "Jolly",
+              "moves": [
+                "Dragon Dance",
+                "Outrage",
+                "Earthquake",
+                "Iron Head"
+              ],
+              "role": "middle"
+            },
+            {
+              "species": "Baxcalibur",
+              "ability": "Thermal Exchange",
+              "item": "Dragon Fang",
+              "nature": "Adamant",
+              "moves": [
+                "Glaive Rush",
+                "Icicle Crash",
+                "Earthquake",
+                "Ice Shard"
+              ],
+              "role": "ace",
+              "teraType": "Dragon"
+            }
+          ],
+          "entries": [
+            "Noivern",
+            "Haxorus",
+            "Baxcalibur"
+          ],
+          "ace": "Baxcalibur",
+          "teraType": "Dragon",
+          "aiCeiling": "expert",
+          "minFloor": 5,
+          "signature": {
+            "rule": "tera",
+            "species": "Baxcalibur"
+          }
+        }
+      ]
+    },
+    "scripts/data/npc/normal-npc-samples.json": {
+      "otherHash": "43ac91c79bb39b3ef88eb05e4cd3369e2f03ea7156e3d04d4b7fa217896e1516",
+      "rows": [
+        {
+          "id": "named-iono",
+          "name": "모야모",
+          "generation": 9,
+          "role": "gym",
+          "ace": "Mismagius",
+          "signature": {
+            "rule": "tera",
+            "species": "Mismagius"
+          },
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Kilowattrel",
+            "Bellibolt",
+            "Mismagius"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Kilowattrel"
+            ],
+            "preferredLast": [
+              "Mismagius"
+            ]
+          },
+          "gimmickEnabled": true,
+          "concept": "전기 운영 + 부유 전기 테라 무우마직",
+          "team": [
+            {
+              "species": "Kilowattrel",
+              "item": "Focus Sash",
+              "gigantamax": false,
+              "role": "lead",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Timid",
+                "ability": "Wind Power",
+                "moves": [
+                  "Thunderbolt",
+                  "Hurricane",
+                  "Tailwind",
+                  "Volt Switch"
+                ]
+              }
+            },
+            {
+              "species": "Bellibolt",
+              "item": "Leftovers",
+              "gigantamax": false,
+              "role": "middle",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 24,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 0
+                },
+                "nature": "Modest",
+                "ability": "Electromorphosis",
+                "moves": [
+                  "Parabolic Charge",
+                  "Muddy Water",
+                  "Reflect",
+                  "Sucker Punch"
+                ]
+              }
+            },
+            {
+              "species": "Mismagius",
+              "item": "Expert Belt",
+              "gigantamax": false,
+              "role": "ace",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Timid",
+                "ability": "Levitate",
+                "moves": [
+                  "Tera Blast",
+                  "Shadow Ball",
+                  "Mystical Fire",
+                  "Energy Ball"
+                ],
+                "teraType": "Electric"
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-tulip",
+          "name": "리파",
+          "generation": 9,
+          "role": "gym",
+          "ace": "Florges",
+          "signature": {
+            "rule": "tera",
+            "species": "Florges"
+          },
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Espathra",
+            "Gallade",
+            "Florges"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Espathra"
+            ],
+            "preferredLast": [
+              "Florges"
+            ]
+          },
+          "gimmickEnabled": true,
+          "concept": "특방 하락 + 예리함 물리 중견 + 에스퍼 테라",
+          "team": [
+            {
+              "species": "Espathra",
+              "item": "Focus Sash",
+              "gigantamax": false,
+              "role": "lead",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Timid",
+                "ability": "Opportunist",
+                "moves": [
+                  "Lumina Crash",
+                  "Dazzling Gleam",
+                  "Reflect",
+                  "Shadow Ball"
+                ]
+              }
+            },
+            {
+              "species": "Gallade",
+              "item": "Life Orb",
+              "gigantamax": false,
+              "role": "middle",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 24,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Jolly",
+                "ability": "Sharpness",
+                "moves": [
+                  "Psycho Cut",
+                  "Sacred Sword",
+                  "Leaf Blade",
+                  "Night Slash"
+                ]
+              }
+            },
+            {
+              "species": "Florges",
+              "item": "Sitrus Berry",
+              "gigantamax": false,
+              "role": "ace",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 24,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 0
+                },
+                "nature": "Modest",
+                "ability": "Flower Veil",
+                "moves": [
+                  "Psychic",
+                  "Moonblast",
+                  "Energy Ball",
+                  "Calm Mind"
+                ],
+                "teraType": "Psychic"
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-rika",
+          "name": "칠리",
+          "generation": 9,
+          "role": "elite",
+          "ace": "Clodsire",
+          "signature": {
+            "rule": "tera",
+            "species": "Clodsire"
+          },
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Donphan",
+            "Camerupt",
+            "Clodsire"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Donphan"
+            ],
+            "preferredLast": [
+              "Clodsire"
+            ]
+          },
+          "gimmickEnabled": true,
+          "concept": "설치 + 안정적인 땅 운영 + 저수 토오",
+          "team": [
+            {
+              "species": "Donphan",
+              "item": "Rocky Helmet",
+              "gigantamax": false,
+              "role": "lead",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Adamant",
+                "ability": "Sturdy",
+                "moves": [
+                  "Stealth Rock",
+                  "Earthquake",
+                  "Knock Off",
+                  "Ice Shard"
+                ]
+              }
+            },
+            {
+              "species": "Camerupt",
+              "item": "Assault Vest",
+              "gigantamax": false,
+              "role": "middle",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 32,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Modest",
+                "ability": "Solid Rock",
+                "moves": [
+                  "Earth Power",
+                  "Flamethrower",
+                  "Flash Cannon",
+                  "Ancient Power"
+                ]
+              }
+            },
+            {
+              "species": "Clodsire",
+              "item": "Leftovers",
+              "gigantamax": false,
+              "role": "ace",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Careful",
+                "ability": "Water Absorb",
+                "moves": [
+                  "Earthquake",
+                  "Poison Jab",
+                  "Toxic",
+                  "Recover"
+                ],
+                "teraType": "Ground"
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-poppy",
+          "name": "뽀삐",
+          "generation": 9,
+          "role": "elite",
+          "ace": "Tinkaton",
+          "signature": {
+            "rule": "tera",
+            "species": "Tinkaton"
+          },
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Copperajah",
+            "Corviknight",
+            "Tinkaton"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Copperajah"
+            ],
+            "preferredLast": [
+              "Tinkaton"
+            ]
+          },
+          "gimmickEnabled": true,
+          "concept": "강철 내구 + 철벽 바디프레스 + 거대해머",
+          "team": [
+            {
+              "species": "Copperajah",
+              "item": "Sitrus Berry",
+              "gigantamax": false,
+              "role": "lead",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Adamant",
+                "ability": "Sheer Force",
+                "moves": [
+                  "Stealth Rock",
+                  "Heavy Slam",
+                  "Play Rough",
+                  "High Horsepower"
+                ]
+              }
+            },
+            {
+              "species": "Corviknight",
+              "item": "Leftovers",
+              "gigantamax": false,
+              "role": "middle",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Impish",
+                "ability": "Pressure",
+                "moves": [
+                  "Iron Defense",
+                  "Body Press",
+                  "Brave Bird",
+                  "Roost"
+                ]
+              }
+            },
+            {
+              "species": "Tinkaton",
+              "item": "Air Balloon",
+              "gigantamax": false,
+              "role": "ace",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Adamant",
+                "ability": "Mold Breaker",
+                "moves": [
+                  "Gigaton Hammer",
+                  "Play Rough",
+                  "Knock Off",
+                  "Brick Break"
+                ],
+                "teraType": "Steel"
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-hassel",
+          "name": "팔자크",
+          "generation": 9,
+          "role": "elite",
+          "ace": "Baxcalibur",
+          "signature": {
+            "rule": "tera",
+            "species": "Baxcalibur"
+          },
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Noivern",
+            "Haxorus",
+            "Baxcalibur"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Noivern"
+            ],
+            "preferredLast": [
+              "Baxcalibur"
+            ]
+          },
+          "gimmickEnabled": true,
+          "concept": "순풍 + 용의춤 + 드래곤 테라",
+          "team": [
+            {
+              "species": "Noivern",
+              "item": "Focus Sash",
+              "gigantamax": false,
+              "role": "lead",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 32,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Timid",
+                "ability": "Infiltrator",
+                "moves": [
+                  "Draco Meteor",
+                  "Hurricane",
+                  "Taunt",
+                  "Tailwind"
+                ]
+              }
+            },
+            {
+              "species": "Haxorus",
+              "item": "Lum Berry",
+              "gigantamax": false,
+              "role": "middle",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Jolly",
+                "ability": "Mold Breaker",
+                "moves": [
+                  "Dragon Dance",
+                  "Outrage",
+                  "Earthquake",
+                  "Iron Head"
+                ]
+              }
+            },
+            {
+              "species": "Baxcalibur",
+              "item": "Dragon Fang",
+              "gigantamax": false,
+              "role": "ace",
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Adamant",
+                "ability": "Thermal Exchange",
+                "moves": [
+                  "Glaive Rush",
+                  "Icicle Crash",
+                  "Earthquake",
+                  "Ice Shard"
+                ],
+                "teraType": "Dragon"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "src/data/normal-npc-templates.json": {
+      "otherHash": "5b3a1803d2f1dc51840fcf8ed92f6cec3d99f4cb0f179ef07a2278aac7002efc",
+      "rows": [
+        {
+          "id": "named-iono",
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Kilowattrel",
+            "Bellibolt",
+            "Mismagius"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Kilowattrel"
+            ],
+            "preferredLast": [
+              "Mismagius"
+            ]
+          },
+          "role": "gym",
+          "ace": "Mismagius",
+          "signature": {
+            "rule": "tera",
+            "species": "Mismagius"
+          },
+          "gimmickEnabled": true,
+          "team": [
+            {
+              "species": "Kilowattrel",
+              "item": "Focus Sash",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Timid",
+                "ability": "Wind Power",
+                "moves": [
+                  "Thunderbolt",
+                  "Hurricane",
+                  "Tailwind",
+                  "Volt Switch"
+                ]
+              }
+            },
+            {
+              "species": "Bellibolt",
+              "item": "Leftovers",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 24,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 0
+                },
+                "nature": "Modest",
+                "ability": "Electromorphosis",
+                "moves": [
+                  "Parabolic Charge",
+                  "Muddy Water",
+                  "Reflect",
+                  "Sucker Punch"
+                ]
+              }
+            },
+            {
+              "species": "Mismagius",
+              "item": "Expert Belt",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Timid",
+                "ability": "Levitate",
+                "moves": [
+                  "Tera Blast",
+                  "Shadow Ball",
+                  "Mystical Fire",
+                  "Energy Ball"
+                ],
+                "teraType": "Electric"
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-tulip",
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Espathra",
+            "Gallade",
+            "Florges"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Espathra"
+            ],
+            "preferredLast": [
+              "Florges"
+            ]
+          },
+          "role": "gym",
+          "ace": "Florges",
+          "signature": {
+            "rule": "tera",
+            "species": "Florges"
+          },
+          "gimmickEnabled": true,
+          "team": [
+            {
+              "species": "Espathra",
+              "item": "Focus Sash",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Timid",
+                "ability": "Opportunist",
+                "moves": [
+                  "Lumina Crash",
+                  "Dazzling Gleam",
+                  "Reflect",
+                  "Shadow Ball"
+                ]
+              }
+            },
+            {
+              "species": "Gallade",
+              "item": "Life Orb",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 24,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 0,
+                  "spe": 24
+                },
+                "nature": "Jolly",
+                "ability": "Sharpness",
+                "moves": [
+                  "Psycho Cut",
+                  "Sacred Sword",
+                  "Leaf Blade",
+                  "Night Slash"
+                ]
+              }
+            },
+            {
+              "species": "Florges",
+              "item": "Sitrus Berry",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 24,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 24,
+                  "spd": 0,
+                  "spe": 0
+                },
+                "nature": "Modest",
+                "ability": "Flower Veil",
+                "moves": [
+                  "Psychic",
+                  "Moonblast",
+                  "Energy Ball",
+                  "Calm Mind"
+                ],
+                "teraType": "Psychic"
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-rika",
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Donphan",
+            "Camerupt",
+            "Clodsire"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Donphan"
+            ],
+            "preferredLast": [
+              "Clodsire"
+            ]
+          },
+          "role": "elite",
+          "ace": "Clodsire",
+          "signature": {
+            "rule": "tera",
+            "species": "Clodsire"
+          },
+          "gimmickEnabled": true,
+          "team": [
+            {
+              "species": "Donphan",
+              "item": "Rocky Helmet",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Adamant",
+                "ability": "Sturdy",
+                "moves": [
+                  "Stealth Rock",
+                  "Earthquake",
+                  "Knock Off",
+                  "Ice Shard"
+                ]
+              }
+            },
+            {
+              "species": "Camerupt",
+              "item": "Assault Vest",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 32,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Modest",
+                "ability": "Solid Rock",
+                "moves": [
+                  "Earth Power",
+                  "Flamethrower",
+                  "Flash Cannon",
+                  "Ancient Power"
+                ]
+              }
+            },
+            {
+              "species": "Clodsire",
+              "item": "Leftovers",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Careful",
+                "ability": "Water Absorb",
+                "moves": [
+                  "Earthquake",
+                  "Poison Jab",
+                  "Toxic",
+                  "Recover"
+                ],
+                "teraType": "Ground"
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-poppy",
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Copperajah",
+            "Corviknight",
+            "Tinkaton"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Copperajah"
+            ],
+            "preferredLast": [
+              "Tinkaton"
+            ]
+          },
+          "role": "elite",
+          "ace": "Tinkaton",
+          "signature": {
+            "rule": "tera",
+            "species": "Tinkaton"
+          },
+          "gimmickEnabled": true,
+          "team": [
+            {
+              "species": "Copperajah",
+              "item": "Sitrus Berry",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Adamant",
+                "ability": "Sheer Force",
+                "moves": [
+                  "Stealth Rock",
+                  "Heavy Slam",
+                  "Play Rough",
+                  "High Horsepower"
+                ]
+              }
+            },
+            {
+              "species": "Corviknight",
+              "item": "Leftovers",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 32,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 0
+                },
+                "nature": "Impish",
+                "ability": "Pressure",
+                "moves": [
+                  "Iron Defense",
+                  "Body Press",
+                  "Brave Bird",
+                  "Roost"
+                ]
+              }
+            },
+            {
+              "species": "Tinkaton",
+              "item": "Air Balloon",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Adamant",
+                "ability": "Mold Breaker",
+                "moves": [
+                  "Gigaton Hammer",
+                  "Play Rough",
+                  "Knock Off",
+                  "Brick Break"
+                ],
+                "teraType": "Steel"
+              }
+            }
+          ]
+        },
+        {
+          "id": "named-hassel",
+          "stage": "leaders-early",
+          "allFloors": true,
+          "select": true,
+          "required": [
+            "Noivern",
+            "Haxorus",
+            "Baxcalibur"
+          ],
+          "selectionRules": {
+            "preferredLead": [
+              "Noivern"
+            ],
+            "preferredLast": [
+              "Baxcalibur"
+            ]
+          },
+          "role": "elite",
+          "ace": "Baxcalibur",
+          "signature": {
+            "rule": "tera",
+            "species": "Baxcalibur"
+          },
+          "gimmickEnabled": true,
+          "team": [
+            {
+              "species": "Noivern",
+              "item": "Focus Sash",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 0,
+                  "def": 0,
+                  "spa": 32,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Timid",
+                "ability": "Infiltrator",
+                "moves": [
+                  "Draco Meteor",
+                  "Hurricane",
+                  "Taunt",
+                  "Tailwind"
+                ]
+              }
+            },
+            {
+              "species": "Haxorus",
+              "item": "Lum Berry",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Jolly",
+                "ability": "Mold Breaker",
+                "moves": [
+                  "Dragon Dance",
+                  "Outrage",
+                  "Earthquake",
+                  "Iron Head"
+                ]
+              }
+            },
+            {
+              "species": "Baxcalibur",
+              "item": "Dragon Fang",
+              "gigantamax": false,
+              "profile": {
+                "statSystem": "points",
+                "ivs": {
+                  "hp": 31,
+                  "atk": 31,
+                  "def": 31,
+                  "spa": 31,
+                  "spd": 31,
+                  "spe": 31
+                },
+                "evs": {
+                  "hp": 0,
+                  "atk": 32,
+                  "def": 0,
+                  "spa": 0,
+                  "spd": 2,
+                  "spe": 32
+                },
+                "nature": "Adamant",
+                "ability": "Thermal Exchange",
+                "moves": [
+                  "Glaive Rush",
+                  "Icicle Crash",
+                  "Earthquake",
+                  "Ice Shard"
+                ],
+                "teraType": "Dragon"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "hashes": {
+    "src/battle/advanced-switch-policy.ts": "c99127e68bfd39e871f65a0c7cefac3fe0fe1338d1c170fcd46095a3c01f3ba8",
+    "src/battle/switch-evaluation.ts": "25039deadad84696d1f796038f52afaa2b2bd06c704f38e882b9f1412827d058",
+    "src/battle/pivot-policy.ts": "f19377e7c198564334998229d0ab9cb16ea219cb07cfb5b8bb201c24b2c3a1d4",
+    "src/battle/npc-policy.ts": "ececb01d977b1c81f07c6778d120e8f747b051ac711dc474cce46ac0395efa94",
+    "src/battle/paldea-policy.ts": "b08a42f57d5c1a84ea8c54de8b317ac0efafa10e260e91e0fc5b4fc3c16cc77f",
+    "src/data/npc-ai.ts": "02664017a2e57220ad581f26f20bccff6dba3845d436f8fd46d7c8a7230dee80",
+    "src/data/npc-gimmicks.ts": "8917bee59d6c4c657c9bbe86bedceb5476f1549fa0b070f38a6cea7e25adcb8f",
+    "src/data/paldea-trainers.ts": "85c31369563375c589deb09e5edae452a6c1f5746b6de8d11ecdd93e575c2bde",
+    "src/data/tower-themes.ts": "444732e6b5ed56cd50fd7105e60b9bb876384dec4f72391239aae2ed52dce8ff",
+    "src/data/tower-progression.ts": "3d7851211f1c2905ab49ced03d1a3924b851ae2cde6ee6af0c1a0d1da70d18e5"
+  }
+}

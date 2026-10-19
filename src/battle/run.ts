@@ -6,7 +6,8 @@ import {installBattleItems} from './battle-items';
 import type {BattleItemBag} from '../data/battle-items';
 import {setImmediate as settleItem} from 'node:timers/promises';
 import {installTowerGimmicks} from './gimmicks';
-import {installGolisopodMega} from './golisopod-mega';
+import {installGolisopodMega,golisopodMegaDex} from './golisopod-mega';
+import {validateRaidPhase} from './raid-transformation';
 import {DYNAMAX_ITEM,canEquipGimmick} from '../data/gimmicks';
 import { createRequire } from 'node:module';
 import Showdown from 'pokemon-showdown';
@@ -64,16 +65,19 @@ export async function runBattle(options: {
   if(options.teraTickets && ['p1','p2'].some(side=>!Number.isSafeInteger(options.teraTickets![side as 'p1'|'p2']) || options.teraTickets![side as 'p1'|'p2']<0))throw Error('Invalid tera tickets');
   const teams = options.teams ?? {p1: playerTeam, p2: opponentTeam};
   const fixedOpponentOrder=options.fixedOpponentOrder??options.opponent.fixedOrder??false;
+  const raidAdapter=options.raid?.transformationAdapter===1;
+  const raidDex=golisopodMegaDex(Showdown.Dex);
   if(options.raid){
-    if(options.raid.opponentTeam!==teams.p2||options.raid.phases.length<2||options.raid.phases.length>3)throw Error('Invalid raid team snapshot');
+    if(options.raid.opponentTeam!==teams.p2||options.raid.phases.length<2||options.raid.phases.length>(raidAdapter?4:3))throw Error('Invalid raid team snapshot');
     for(const phase of options.raid.phases){
+      if(raidAdapter){validateRaidPhase(phase,options.raid.species,raidDex);continue;}
       const form=Showdown.Dex.species.get(phase.species);
       if(!form.exists||![form.name,form.baseSpecies].includes(options.raid.species)||!Object.values(form.abilities).includes(phase.ability))throw Error('Invalid raid phase form/ability');
     }
   }
   const packed=Object.fromEntries(Object.entries(teams).map(([side,team])=>[side,Teams.unpack(team)!])) as Record<'p1'|'p2',NonNullable<ReturnType<typeof Teams.unpack>>>;
   if(towerFormat)for(const set of Object.values(packed).flat())if(!canEquipGimmick(set.species,set.item))throw Error('Incompatible gimmick item');
-  if(format===FORMAT)for(const side of ['p1','p2'] as const)packed[side]=packed[side].map(set=>equippedFormSet(set));
+  if(format===FORMAT)for(const side of ['p1','p2'] as const)if(!(side==='p2'&&raidAdapter))packed[side]=packed[side].map(set=>equippedFormSet(set));
   const engineTeams=format===FORMAT?{p1:Teams.pack(packed.p1),p2:Teams.pack(packed.p2)}:teams;
   const active=[...new Set(options.upgrades ?? [])].sort() as UpgradeKind[];
   if(active.some(kind=>!Object.hasOwn(upgrades,kind))) throw new Error('Invalid upgrade');
@@ -99,7 +103,21 @@ export async function runBattle(options: {
       // cartridge event locks. Keep the actual shiny flag in the battle team.
       set.shiny=false;
     }
-    const errors = new TeamValidator(format).validateTeam(legality);
+    const validator=new TeamValidator(format);
+    let errors:string[]|null;
+    if(side==='p2'&&raidAdapter){
+      Object.defineProperty(validator,'dex',{value:raidDex});
+      validator.validateForme=()=>[];
+      errors=legality.flatMap((set,index)=>{
+        const phase=options.raid!.phases[index];
+        if(set.moves.map(Showdown.toID).join(',')!==phase.moves.map(Showdown.toID).join(','))throw Error('Raid phase moves mismatch');
+        set.species=phase.species;set.ability=phase.ability;
+        set.teraType=phase.teraType??(raidDex.species.get(phase.species).forme==='Stellar'?'Stellar':set.teraType);
+        // G-Max is a native volatile; its learnset/ability belong to the base form.
+        if(phase.transformation==='gigantamax')set.species=raidDex.species.get(phase.species).baseSpecies;
+        return validator.validateSet(set,{})??[];
+      });
+    }else errors=validator.validateTeam(legality);
     if (errors?.length) throw new Error(errors.join('\n'));
   }
   const log: BattleLog = {schemaVersion: 1, engineVersion, format, seed: [...seed], teams,
@@ -119,7 +137,7 @@ export async function runBattle(options: {
       super._writeLine(type,message);
       if(type!=='start' || !this.battle) return;
       if(options.battleItems)itemController=installBattleItems(this.battle,options.battleItems);
-      if(towerFormat)installTowerGimmicks(this.battle,packed,format!==PRE_TERA_FORMAT ? options.teraTickets : undefined,options.rule,options.opponentRule,options.opponentTeraSpecies,options.trainerEquipment,format===FORMAT);
+      if(towerFormat)installTowerGimmicks(this.battle,packed,format!==PRE_TERA_FORMAT ? options.teraTickets : undefined,options.rule,options.opponentRule,options.opponentTeraSpecies,options.trainerEquipment,format===FORMAT,raidAdapter);
       if(format===FORMAT||format===PRE_FORM_ITEM_FORMAT)installGolisopodMega(this.battle);
       if(options.raid)installRaid(this.battle,options.raid);
       // Phase bosses cannot be pulled into a later phase by Roar/Red Card.
@@ -192,12 +210,12 @@ export async function runBattle(options: {
           observation.legalActions=legalActions(request,opponent?.species);
           if(side==='p2'&&(options.raid||fixedOpponentOrder)&&!observation.legalActions[0]?.command.startsWith('team ')){
             const forced=observation.legalActions.every(a=>a.command.startsWith('switch '));
-            observation.legalActions=forced?observation.legalActions.slice(0,1):observation.legalActions.filter(a=>a.command.startsWith('move ')&&(!options.raid||!/ (mega|dynamax|terastallize|zmove)/.test(a.command)));
+            observation.legalActions=forced?observation.legalActions.slice(0,1):observation.legalActions.filter(a=>a.command.startsWith('move ')&&(!options.raid||!(raidAdapter?/ (mega|dynamax|terastallize|zmove|ultra)/:/ (mega|dynamax|terastallize|zmove)/).test(a.command)));
           }
           if(switching && observation.switching)observation.switching={...observation.switching,...switching.view()};
           if(side==='p1' && itemController)observation.legalActions.push(...itemController.legal().map(kind=>({command:'item '+kind,label:upgrades[kind].name,estimatedDamage:0})));
           let action = await policy.choose(structuredClone(observation));
-          if(side==='p2'&&format===FORMAT&&observation.legalActions.some(a=>a.command===action+' ultra'))action+=' ultra';
+          if(side==='p2'&&!raidAdapter&&format===FORMAT&&observation.legalActions.some(a=>a.command===action+' ultra'))action+=' ultra';
           if (!observation.legalActions.some(a => a.command === action)) throw new Error(`Illegal action: ${action}`);
           log.decisions.push({side, observation:structuredClone(observation), action});
           if(side==='p1' && action.startsWith('item ') && itemController){itemController.use(action.slice(5) as UpgradeKind);await settleItem();continue;}

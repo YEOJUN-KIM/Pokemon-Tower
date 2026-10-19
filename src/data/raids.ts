@@ -12,7 +12,8 @@ export const raidCategoryPresentation:Record<RaidCategory,{aura:string;entry:str
  legendary:{aura:'#f3c55c',entry:'주변을 짓누르는 위압감과 함께 전설의 포켓몬이 모습을 드러냈다!'},
  mythical:{aura:'#efa9df',entry:'신비로운 빛과 함께 환상의 포켓몬이 모습을 드러냈다!'},
 };
-export type RaidPhaseDefinition={species:string;ability:string;moves:readonly string[];transformation:'none'|'mega'|'aura';messages?:readonly [string,string];buffs?:Partial<Record<Exclude<StatKey,'hp'>,number>>};
+export type RaidTransformation='none'|'aura'|'form'|'mega'|'primal'|'terastallize'|'stellar'|'dynamax'|'gigantamax'|'ultraBurst';
+export type RaidPhaseDefinition={species:string;ability:string;moves:readonly string[];transformation:RaidTransformation;sourceSpecies?:string;teraType?:string;persistent?:boolean;messages?:readonly [string,string];buffs?:Partial<Record<Exclude<StatKey,'hp'>,number>>};
 export type RaidRouteDefinition={id:string;weight:number;attack:'atk'|'spa';recruit:{nature:string;ability:string;moves:readonly string[]};phases:readonly RaidPhaseDefinition[]};
 export type RaidBossDefinition={id:string;species:string;category:RaidCategory;weight:number;minFloor:number;ivRule:{perfect:number;protected:readonly StatKey[]};shinyRule:'standard';battleTraining:'elite';rewardProfile:'elite';routes:readonly RaidRouteDefinition[]};
 const garchompMoves=['Earthquake','Dragon Claw','Swords Dance','Iron Head'];
@@ -33,6 +34,6 @@ export const raidBossDefinitions:readonly RaidBossDefinition[]=[
  ]}]},
  {id:'mewtwo',species:'Mewtwo',category:'legendary',weight:20,minFloor:1,ivRule:{perfect:6,protected:[]},shinyRule:'standard',battleTraining:'elite',rewardProfile:'elite',routes:[mewtwoRoute('x'),mewtwoRoute('y')]},
 ];
-export type RaidSnapshot={version:1;bossId:string;species:string;category:RaidCategory;routeId:string;individual:TrainingProfile;phases:RaidPhaseDefinition[];opponentTeam:string;recruitTeam:string;reward:RewardOption};
+export type RaidSnapshot={version:1;transformationAdapter?:1;bossId:string;species:string;category:RaidCategory;routeId:string;individual:TrainingProfile;phases:RaidPhaseDefinition[];opponentTeam:string;recruitTeam:string;reward:RewardOption};
 // The choice screen deliberately receives no build, route, shiny or reward details.
 export type RaidEventView={spriteId:number;category:RaidCategory};

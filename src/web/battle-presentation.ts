@@ -80,7 +80,7 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
       const raidMessage=lines[index+1]?.includes('[raid]');
       frames.push({view:structuredClone(view),motion:null,announcement:actor,duration:raidMessage?1000:1300,minimumDuration:raidMessage?700:undefined});continue;
     }
-    if(event==='switch'&&line.split('|').includes('[raid]')){
+    if(event==='switch'&&line.split('|').includes('[raid]')&&!line.split('|').includes('[raid-adapter]')){
       const premonition=lines[index-1]?.split('|')[2];
       const resultLine=lines[index+1]?.startsWith('|message|')?lines[index+1]:undefined;
       const transition=raidTransitionFrames(view,line,premonition??'',resultLine);
@@ -139,6 +139,7 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
         view.team=view.team.map(p=>p.species===actual ? {...p,active:true,gender:genderFromDetails(value),displaySpecies:name,condition:condition ?? p.condition} : {...p,active:false});
       }
       motion = {kind:'switch',side,color:'normal',sendOut:event!=='replace'};
+      if(side==='enemy'&&line.split('|').includes('[raid-adapter]'))motion={kind:'raid-aura-reveal',side,color:'psychic',hpReset:true};
     }
     if(pokemon && ['detailschange','-formechange'].includes(event)){
       const form=value.split(',')[0];

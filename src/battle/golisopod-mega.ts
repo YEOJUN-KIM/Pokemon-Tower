@@ -5,10 +5,13 @@ import type {Battle} from 'pokemon-showdown';
 // Only the new opt-in format calls this. Shared Dex and old saved formats stay
 // untouched; normal Golisopod retains Emergency Exit.
 export function installGolisopodMega(battle:Battle){
- const base=battle.dex,local=Object.create(base) as typeof base;
+ battle.dex=golisopodMegaDex(battle.dex);
+}
+export function golisopodMegaDex(base:Battle['dex']){
+ const local=Object.create(base) as typeof base;
  const species=Object.create(base.species) as typeof base.species;
  const native=base.species.get('Golisopod-Mega');
  const corrected=Object.assign(Object.create(Object.getPrototypeOf(native)),native,{abilities:{...native.abilities,0:'Tough Claws'}}) as typeof native;
  species.get=(name:Parameters<typeof base.species.get>[0])=>{const result=base.species.get(name);return result.id==='golisopodmega'?corrected:result;};
- Object.defineProperty(local,'species',{value:species});battle.dex=local;
+ Object.defineProperty(local,'species',{value:species});return local;
 }

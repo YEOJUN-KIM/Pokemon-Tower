@@ -29,11 +29,11 @@ export function createRaidSnapshot(db:DatabaseSync,runId:string,floor:number,ran
  individual.shiny=rollEncounterShiny(max=>Math.floor(random()*max));
  individual.gender=speciesGender(boss.species,random());
  const set=(profile:typeof individual)=>({name:boss.species,species:boss.species,level:50,item:'',pokeball:POINT_TEAM_MARKER,...structuredClone(profile),gender:profile.gender??'N'});
- // Each phase starts from a legally validated base-species set; the adapter applies its form on entry.
+ // The saved starting slots are separate from the current-form validation view.
  const opponentTeam=Showdown.Teams.pack(route.phases.map(phase=>set({...individual,moves:[...phase.moves]})));
  const recruitProfile={...individual,evs:Object.fromEntries(statKeys.map(k=>[k,0])) as StatBlock};
  const reward=snapshotRankReward(db,runId,boss.rewardProfile,random).rewardDefinition;
- return {version:1,bossId:boss.id,species:boss.species,category:boss.category,routeId:route.id,individual,phases:structuredClone(route.phases) as RaidSnapshot['phases'],opponentTeam,recruitTeam:Showdown.Teams.pack([set(recruitProfile)]),reward:{...reward,title:'특별한 보상'}};
+ return {version:1,transformationAdapter:1,bossId:boss.id,species:boss.species,category:boss.category,routeId:route.id,individual,phases:structuredClone(route.phases) as RaidSnapshot['phases'],opponentTeam,recruitTeam:Showdown.Teams.pack([set(recruitProfile)]),reward:{...reward,title:'특별한 보상'}};
 }
 type RaidRow={event_id:string;snapshot_json:string;battle_id:string|null};
 export class RaidEvents{

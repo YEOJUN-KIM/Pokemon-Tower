@@ -3,7 +3,7 @@
     "src/battle/npc-policy.ts": "22206328062533e0b44312f7cdfbc5df5ba39a88788abc45f5921c728dd6cb2e",
     "src/battle/tower-policy.ts": "4fd3c29dea61cf0bf2c3a046d1929da306bfa8b798d093a0ec79d029960e8998",
     "src/battle/z-decision.ts": "851fa606cdc87cc0f9d81ded577ec24d80f1bf0492f057c0511202b7419f24e2",
-    "src/battle/gimmicks.ts": "fd415295dff8dd7a5d44ec1c736581005ce7c528c19049b7f03992487de07917",
+    "src/battle/gimmicks.ts": "a6d3256b7daf35ec2808738da44eb768cfff83b13dbc1268f57f22757f54057e",
     "src/data/npc-ai.ts": "492465e2e50bf457220ded7ae9c67ece98fc0d94687116f7902798876b2c6d06",
     "src/data/npc-selection-rules.ts": "cbd1fe1da13113468d0065384fead4c3423c246ca576687fe3bf7ef226de8dcd",
     "src/server/opponent-team.ts": "f10a249fe0683dd1e5652fa8557ec55592e89511b7864272fdb0abaca7a58ea6",
@@ -76,6 +76,12 @@
   "galarAiRebase": "Only explicit new Raihan/Leon decision flags; all NPC data stays pinned by galar-ai-preservation.json.",
   "formEquipmentRebase": {
     "reason": "Explicitly authorized form equipment, shop products and versioned Mega/Ultra integration; NPC rows and decision policies remain unchanged.",
+    "files": [
+      "src/battle/gimmicks.ts"
+    ]
+  },
+  "raidAdapterRebase": {
+    "reason": "Authorized Raid Phase adapter and per-side player gimmick installation; NPC builds and AI policies unchanged.",
     "files": [
       "src/battle/gimmicks.ts"
     ]

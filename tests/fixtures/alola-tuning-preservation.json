@@ -13,14 +13,14 @@
     "src/battle/npc-policy.ts": "22206328062533e0b44312f7cdfbc5df5ba39a88788abc45f5921c728dd6cb2e",
     "src/battle/tower-policy.ts": "4fd3c29dea61cf0bf2c3a046d1929da306bfa8b798d093a0ec79d029960e8998",
     "src/battle/z-decision.ts": "851fa606cdc87cc0f9d81ded577ec24d80f1bf0492f057c0511202b7419f24e2",
-    "src/battle/gimmicks.ts": "fd415295dff8dd7a5d44ec1c736581005ce7c528c19049b7f03992487de07917",
+    "src/battle/gimmicks.ts": "a6d3256b7daf35ec2808738da44eb768cfff83b13dbc1268f57f22757f54057e",
     "src/data/npc-ai.ts": "492465e2e50bf457220ded7ae9c67ece98fc0d94687116f7902798876b2c6d06",
     "src/data/npc-selection-rules.ts": "cbd1fe1da13113468d0065384fead4c3423c246ca576687fe3bf7ef226de8dcd",
     "src/server/opponent-team.ts": "f10a249fe0683dd1e5652fa8557ec55592e89511b7864272fdb0abaca7a58ea6",
     "src/data/tower-progression.ts": "3d7851211f1c2905ab49ced03d1a3924b851ae2cde6ee6af0c1a0d1da70d18e5",
     "src/server/npc-templates.ts": "01e16805f582e39dfd35bff9b135ded4e5cf382f0ccf1cdc7e4195aca9070861",
     "src/server/hidden-boss-events.ts": "e5789f432ce6325bd892ac4383e8ae37457b308a268b21836db07a30e1b53e21",
-    "src/battle/run.ts": "6f129b185dc1c65334c7d557f9f03b8a6091c4b37eecad46ccbd18cc413b83e6",
+    "src/battle/run.ts": "2bc3018d6932b548dc545b423e0618c06976e175c5fd6c7ad57e641770b069cd",
     "src/data/teams.ts": "96261da369587543fcab02f488996a05e37efc88b60f5d6d95b59fe0c51abac4",
     "src/data/held-items.ts": "fd4e84666142a21f8e3344bbb00af30b780971f51ad027b7e5500a7f0f3c89ed",
     "src/data/gimmicks.ts": "54de5464c05ae2730813ce85b24a554d31d16a1ee648bb1eb437f61b1104a427",
@@ -37,6 +37,13 @@
       "src/data/teams.ts",
       "src/data/held-items.ts",
       "src/data/gimmicks.ts"
+    ]
+  },
+  "raidAdapterRebase": {
+    "reason": "Authorized Raid Phase adapter and per-side player gimmick installation; NPC builds and AI policies unchanged.",
+    "files": [
+      "src/battle/gimmicks.ts",
+      "src/battle/run.ts"
     ]
   }
 }

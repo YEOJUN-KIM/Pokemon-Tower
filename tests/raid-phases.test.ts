@@ -25,6 +25,7 @@ for(const [bossId,routeId] of [['garchomp','mega'],['mewtwo','x'],['mewtwo','y']
    const boss=battle.p2.active[0];assert.equal(boss.species.name,f.snapshot.phases[index].species);
    boss.hp=1;boss.boosts.def=-6;boss.boosts.accuracy=-6;boss.setStatus('par');
    player.storedStats.spe=fast?10000:1;boss.storedStats.spe=fast?1:10000;
+   const pressure=boss.getAbility().id==='pressure';
    const pp=player.moveSlots[0].pp,turn=battle.turn,logStart=battle.log.length;
    // Always choose a damaging move, avoiding setup randomness in the mechanic fixture.
    battle.makeChoices('move 1','move 1');
@@ -32,7 +33,7 @@ for(const [bossId,routeId] of [['garchomp','mega'],['mewtwo','x'],['mewtwo','y']
    const moves=chunk.filter(l=>l.startsWith('|move|p2'));
    assert.equal(moves.length,fast?0:1,'old phase has at most its already-completed action');
    assert.ok(chunk.some(l=>l.startsWith('|-hitcount|p2')&&l.endsWith('|1')),'multi-hit stops at phase KO');
-   assert.ok(boss.fainted);assert.equal(player.moveSlots[0].pp,pp-(boss.getAbility().id==='pressure'?2:1));
+   assert.ok(boss.fainted);assert.equal(player.moveSlots[0].pp,pp-(pressure?2:1));
    assert.equal(battle.requestState,'switch');
    battle.makeChoices('',`switch ${index+2}`);
    const next=battle.p2.active[0];

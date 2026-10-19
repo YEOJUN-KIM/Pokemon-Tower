@@ -2,7 +2,7 @@ import {allowsGimmick,type BattleRule} from '../data/run-rules';
 import type {Battle} from 'pokemon-showdown';
 import {DYNAMAX_ITEM,megaStones} from '../data/gimmicks';
 // Installed on one battle only. Old saved formats never enter this path.
-export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:string;species:string;item:string;gigantamax?:boolean}[]>,tickets?:import('../data/tera').TeraTickets,rule:BattleRule='chaos',opponentRule:BattleRule=rule,opponentTeraSpecies?:string,equipment?:readonly import('../data/trainer-equipment').TrainerEquipment[],specialForms=true){
+export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:string;species:string;item:string;gigantamax?:boolean}[]>,tickets?:import('../data/tera').TeraTickets,rule:BattleRule='chaos',opponentRule:BattleRule=rule,opponentTeraSpecies?:string,equipment?:readonly import('../data/trainer-equipment').TrainerEquipment[],specialForms=true,raidBoss=false){
  const ruleFor=(side:string)=>side==='p2'?opponentRule:rule;
  const baseDex=battle.dex,localDex=Object.create(baseDex) as typeof baseDex,localItems=Object.create(baseDex.items) as typeof baseDex.items;
  const ball=baseDex.items.get('Poke Ball');
@@ -25,12 +25,18 @@ export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:
  const originalStart=battle.start.bind(battle);
  let installed=false;
  battle.start=()=>{
-  if(!installed && battle.sides.every(s=>s?.pokemon.length===3)){
+  if(!installed && (raidBoss?battle.sides[0]?.pokemon.length===3&&!!battle.sides[1]?.pokemon.length:battle.sides.every(s=>s?.pokemon.length===3))){
    installed=true;
    for(const side of battle.sides){
     side.dynamaxUsed=false;
     side.canDynamaxNow=()=>allowsGimmick(ruleFor(side.id),'dynamax') && !side.dynamaxUsed && (side.id==='p1'&&equipment!==undefined||!used.has(side.id));
     for(const pokemon of side.pokemon){
+     if(raidBoss&&side.id==='p2'){
+      pokemon.canMegaEvo=null;pokemon.canMegaEvoX=null;pokemon.canMegaEvoY=null;pokemon.canUltraBurst=null;pokemon.canTerastallize=null;
+      const maxRequest=pokemon.getDynamaxRequest.bind(pokemon);
+      pokemon.getDynamaxRequest=skip=>skip&&pokemon.volatiles.dynamax?maxRequest(true):undefined;
+      continue;
+     }
      const trainerEquipment=side.id==='p1'&&equipment!==undefined;
      // Enable G-Max after validation so a held Mega Stone remains a valid alternative.
      if(trainerEquipment&&equipment.includes('Dynamax Band')&&pokemon.canGigantamax)Object.defineProperty(pokemon,'gigantamax',{value:true,writable:true,configurable:true});
@@ -72,6 +78,7 @@ export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:
   return originalStart();
  };
  function consume(side:Battle['sides'][number],kind:'mega'|'dynamax'='mega',pokemon?:import('pokemon-showdown').Pokemon){
+  if(raidBoss&&side.id==='p2')return;
   if(side.id==='p1'&&equipment!==undefined){
    if(pokemon)transformed.add(pokemon);
    if(kind==='dynamax'){
@@ -94,7 +101,7 @@ export function installTowerGimmicks(battle:Battle,teams:Record<'p1'|'p2',{name:
    const p=args[1] as import('pokemon-showdown').Pokemon;consume(p.side,'dynamax',p);
   }
   if(args[0]==='-terastallize'){
-   const p=args[1] as import('pokemon-showdown').Pokemon;teraUsed.add(p.side.id);
+   const p=args[1] as import('pokemon-showdown').Pokemon;if(!(raidBoss&&p.side.id==='p2'))teraUsed.add(p.side.id);
    p.canMegaEvo=null;p.canMegaEvoX=null;p.canMegaEvoY=null;
   }
   if(args[0]==='-zpower'){

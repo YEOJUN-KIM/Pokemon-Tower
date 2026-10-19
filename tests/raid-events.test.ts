@@ -107,10 +107,10 @@ for(const kind of ['epic','machine'])test(`raid ${kind}: existing unique ownersh
 function startersFor(store:import('../src/server/tower-store').TowerStore,owner:string){return store.view(owner).run!.suggestedTeam;}
 for(const [bossId,routeId] of [['garchomp','mega'],['mewtwo','x'],['mewtwo','y']])test(`${bossId}/${routeId}: full validated battle wins all phases and settles through live session`,async()=>{
  const f=raidFixture(':memory:','live',bossId,routeId),{store,owner,run,event}=f;
- const profiles=Object.fromEntries(['Cloyster','Tyranitar','Hydreigon'].map(name=>{const p=defaultProfile(name);p.ivs={hp:31,atk:31,def:31,spa:31,spd:31,spe:31};p.runBonuses={hp:100,atk:100,def:100,spa:100,spd:100,spe:100};
+ const profiles=Object.fromEntries(['Cloyster','Mewtwo','Kyogre'].map(name=>{const p=defaultProfile(name);p.ivs={hp:31,atk:31,def:31,spa:31,spd:31,spe:31};p.runBonuses={hp:100,atk:100,def:100,spa:100,spd:100,spe:100};
   if(name==='Cloyster'){p.moves=['Icicle Spear','Rock Blast','Liquidation','Ice Shard'];p.ability='Skill Link';p.nature='Adamant';p.evs={hp:2,atk:32,def:0,spa:0,spd:0,spe:32};}
-  if(name==='Tyranitar')p.moves=['Crunch','Stone Edge','Earthquake','Ice Punch'];
-  if(name==='Hydreigon')p.moves=['Dark Pulse','Dragon Pulse','Flamethrower','Flash Cannon'];
+  if(name==='Mewtwo')p.moves=['Shadow Ball','Psystrike','Ice Beam','Recover'];
+  if(name==='Kyogre')p.moves=['Origin Pulse','Ice Beam','Thunder','Calm Mind'];
   return [name,p];}));
  const service=new TowerService(store);
  try{

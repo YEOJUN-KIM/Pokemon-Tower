@@ -23,7 +23,8 @@ import {defaultProfile} from '../src/server/training';
 import {TowerStore} from '../src/server/tower-store';
 
 const f=raidFixture();after(()=>f.store.close());
-function saved(bossId:string,routeId:string,random=()=>.5){return createRaidSnapshot(f.store.db,f.run,2,random,{bossId,routeId});}
+// Keep the original multi-slot/HP-pool transformation suite as legacy replay coverage.
+function saved(bossId:string,routeId:string,random=()=>.5){const raid=createRaidSnapshot(f.store.db,f.run,2,random,{bossId,routeId});return {...raid,hpMode:undefined,raidHpMultiplier:raidBossDefinitions.find(b=>b.id===bossId)!.raidHpMultiplier};}
 function start(raid:ReturnType<typeof saved>,forceKO=true){
  const battle=new Showdown.Battle({formatid:FORMAT,seed:'1,2,3,4'});
  const original=battle.statModify.bind(battle);

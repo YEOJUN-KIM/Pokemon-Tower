@@ -9,18 +9,19 @@ import {engineVersion,FORMAT} from '../src/battle/run';
 import {simulateRaid,type SimulationRow} from './lib/raid-simulation';
 import {simulationReport} from './lib/raid-simulation-report';
 import {simulationTeams} from './lib/raid-simulation-pool';
-import {raidFloorBrackets} from './lib/raid-floor-brackets';
+import {raidFloorBrackets,type RaidFloorBracketId} from './lib/raid-floor-brackets';
 import {floorSimulationReport,type OverallBaseline} from './lib/raid-floor-report';
 
 export function parseSimulationArgs(args:string[]){
- const options={runs:1000,seedBase:'raid-winrate-v1',workers:Math.min(4,availableParallelism()),out:'artifacts/reports/raid-winrate-simulation',boss:undefined as string|undefined,worker:false,floorBrackets:false};
+ const options={runs:1000,seedBase:'raid-winrate-v1',workers:Math.min(4,availableParallelism()),out:'artifacts/reports/raid-winrate-simulation',boss:undefined as string|undefined,worker:false,floorBrackets:false,brackets:undefined as RaidFloorBracketId[]|undefined};
  for(let i=0;i<args.length;i++){
   const flag=args[i];if(flag==='--worker'){options.worker=true;continue;}
   if(flag==='--floor-brackets'){options.floorBrackets=true;continue;}
-  if(!['--runs','--seed','--workers','--out','--boss'].includes(flag)||!args[i+1]||args[i+1].startsWith('--'))throw Error(`Invalid option ${flag}`);
+  if(!['--runs','--seed','--workers','--out','--boss','--brackets'].includes(flag)||!args[i+1]||args[i+1].startsWith('--'))throw Error(`Invalid option ${flag}`);
   const value=args[++i];
   if(flag==='--runs')options.runs=Number(value);if(flag==='--workers')options.workers=Number(value);
   if(flag==='--seed')options.seedBase=value;if(flag==='--out')options.out=value;if(flag==='--boss')options.boss=value;
+  if(flag==='--brackets')options.brackets=value.split(',') as RaidFloorBracketId[];
  }
  if(options.floorBrackets){
   if(!args.includes('--runs'))options.runs=500;
@@ -29,12 +30,13 @@ export function parseSimulationArgs(args:string[]){
  }
  if(!Number.isSafeInteger(options.runs)||options.runs<1||!Number.isSafeInteger(options.workers)||options.workers<1||options.workers>32)throw Error('Positive integer runs/workers required (workers <=32)');
  if(options.boss&&!raidBossDefinitions.some(b=>b.id===options.boss))throw Error('Unknown boss');
+ if(options.brackets&&(!options.worker||!options.brackets.length||options.brackets.some(id=>!raidFloorBrackets.some(b=>b.id===id))))throw Error('Invalid internal bracket selection');
  return options;
 }
-type JobOptions={bossIds:string[];runs:number;seedBase:string;workers:number;floorBrackets:boolean;onProgress?:(bossId:string,rows:SimulationRow[])=>void};
-async function simulateBoss(bossId:string,options:Pick<JobOptions,'runs'|'seedBase'|'floorBrackets'>){
+type JobOptions={bossIds:string[];runs:number;seedBase:string;workers:number;floorBrackets:boolean;brackets?:RaidFloorBracketId[];onProgress?:(bossId:string,rows:SimulationRow[])=>void};
+async function simulateBoss(bossId:string,options:Pick<JobOptions,'runs'|'seedBase'|'floorBrackets'|'brackets'>){
  const rows:SimulationRow[]=[];
- for(const bracket of options.floorBrackets?raidFloorBrackets.map(b=>b.id):[undefined])rows.push(...await simulateRaid({bossId,runs:options.runs,seedBase:options.seedBase,bracket}));
+ for(const bracket of options.brackets??(options.floorBrackets?raidFloorBrackets.map(b=>b.id):[undefined]))rows.push(...await simulateRaid({bossId,runs:options.runs,seedBase:options.seedBase,bracket}));
  return rows;
 }
 export async function runRaidSimulationJobs(options:JobOptions){
@@ -43,10 +45,10 @@ export async function runRaidSimulationJobs(options:JobOptions){
  const all=new Map<string,SimulationRow[]>();let cursor=0;
  async function work(){while(cursor<options.bossIds.length){const id=options.bossIds[cursor++];
   const rows=options.workers===1?await simulateBoss(id,options):await new Promise<SimulationRow[]>((accept,reject)=>{
-   const child=fork(fileURLToPath(import.meta.url),['--worker','--boss',id,'--runs',String(options.runs),'--seed',options.seedBase,...(options.floorBrackets?['--floor-brackets']:[])],{execArgv:['--import','tsx'],stdio:['ignore','ignore','inherit','ipc'],windowsHide:true});
+   const child=fork(fileURLToPath(import.meta.url),['--worker','--boss',id,'--runs',String(options.runs),'--seed',options.seedBase,...(options.floorBrackets?['--floor-brackets']:[]),...(options.brackets?['--brackets',options.brackets.join(',')]:[])],{execArgv:['--import','tsx'],stdio:['ignore','ignore','inherit','ipc'],windowsHide:true});
    let result:SimulationRow[]|undefined;child.on('message',(message:{rows:SimulationRow[]})=>{result=message.rows;});child.on('error',reject);child.on('exit',code=>code===0&&result?accept(result):reject(Error(`Worker ${id} exited ${code}`)));
   });
-  if(rows.length!==options.runs*(options.floorBrackets?raidFloorBrackets.length:1))throw Error('Incomplete simulation');
+  if(rows.length!==options.runs*(options.brackets?.length??(options.floorBrackets?raidFloorBrackets.length:1)))throw Error('Incomplete simulation');
   all.set(id,rows);options.onProgress?.(id,rows);
  }}
  await Promise.all(Array.from({length:Math.min(options.workers,options.bossIds.length)},work));

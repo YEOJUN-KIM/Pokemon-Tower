@@ -25,7 +25,7 @@ function snapshot(phases:RaidPhaseDefinition[]):RaidSnapshot{
  const species=dex.species.get(phases[0].species).baseSpecies;
  const base=Showdown.Teams.unpack(template.opponentTeam)![0];
  const opponentTeam=Showdown.Teams.pack(phases.map(p=>({...structuredClone(base),name:species,species,ability:dex.species.get(species).abilities[0],moves:[...p.moves]})));
- return {...structuredClone(template),raidHpMultiplier:undefined,species,phases,opponentTeam,transformationAdapter:1};
+ return {...structuredClone(template),hpMode:undefined,raidHpMultiplier:undefined,species,phases,opponentTeam,transformationAdapter:1};
 }
 function start(phases:RaidPhaseDefinition[],player=packTeam(['Mew','Blastoise','Venusaur']),rule:'basic'|'chaos'='chaos'){
  const raid=snapshot(phases),battle=new Showdown.Battle({formatid:FORMAT,seed:'1,2,3,4'});
@@ -174,7 +174,7 @@ test('validated four-phase battle keeps all slots, reaches later states and repl
 });
 
 test('unversioned saved Raid snapshots retain their original replay path',async()=>{
- const raid=structuredClone(template);delete raid.transformationAdapter;
+ const raid=structuredClone(template);delete raid.transformationAdapter;delete raid.hpMode;
  const log=await runBattle({raid,teams:{p1:packTeam(['Mewtwo','Rayquaza','Arceus']),p2:raid.opponentTeam},player:new DamagePolicy(),opponent:new DamagePolicy()});
  assert.ok(!log.publicProtocol.some(l=>l.includes('[raid-adapter]')));await replayBattle(log);
 });

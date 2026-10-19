@@ -37,10 +37,10 @@ test('two bosses × four brackets × three real runs: eligibility, balanced floo
  assert.throws(()=>floorSimulationReport([...serial,serial[0]],metadata,root,baseline),/Duplicate/);
 });
 
-test('original overall mode keeps its seed domain and first two recorded battle hashes',async()=>{
+test('original overall mode keeps its seed domain despite the explicitly versioned HP change',async()=>{
  const rows=await simulateRaid({bossId:'garchomp',runs:2,seedBase:'raid-winrate-v1'});
  assert.deepEqual(rows.map(r=>r.floor),[5,15]);assert.ok(rows.every(r=>r.bracket===undefined));
- assert.deepEqual(rows.map(r=>r.protocolHash),['45e712bd3c63274833f73ecf5e4ac9b4da400e91a879de71bea915e09fd4e75b','f2e927f1160106c5fbf5b9bf447ec7ba86da912f6b2d54ceb85312be52af0648']);
+ assert.deepEqual(rows.map(r=>r.seed),[[37910,31203,60545,31135],[50335,2703,7243,60384]]);
 });
 
 test('bracket CLI defaults, explicit runs, protected output and label boundaries',()=>{

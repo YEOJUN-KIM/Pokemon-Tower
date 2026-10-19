@@ -42,7 +42,7 @@ export function prepareRaidPhase(battle:Battle,pokemon:Pokemon,phase:RaidPhaseDe
 
 // Use exactly the simulator primitives used by ordinary transformations. These
 // server-owned transitions don't ask for an item/button or spend player charges.
-export function applyRaidPhaseTransformation(battle:Battle,pokemon:Pokemon,phase:RaidPhaseDefinition){
+export function applyRaidPhaseTransformation(battle:Battle,pokemon:Pokemon,phase:RaidPhaseDefinition,preserveHP=false){
  const target=battle.dex.species.get(phase.species),kind=phase.transformation;
  if(['terastallize','stellar'].includes(kind)){
   pokemon.teraType=phase.teraType??(target.forme==='Stellar'?'Stellar':pokemon.teraType);
@@ -70,5 +70,5 @@ export function applyRaidPhaseTransformation(battle:Battle,pokemon:Pokemon,phase
  if((pokemon.species.name===target.name||kind==='gigantamax')&&pokemon.ability!==battle.toID(phase.ability))pokemon.setAbility(phase.ability,null,null,true);
  pokemon.baseAbility=pokemon.ability;
  pokemon.details=pokemon.getUpdatedDetails();
- pokemon.hp=pokemon.maxhp; // Preserve the existing full-health phase boundary.
+ if(!preserveHP)pokemon.hp=pokemon.maxhp; // Legacy/replacement phase boundaries.
 }

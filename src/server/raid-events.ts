@@ -37,7 +37,7 @@ export function createRaidSnapshot(db:DatabaseSync,runId:string,floor:number,ran
  const opponentTeam=Showdown.Teams.pack(phases.map(phase=>({...set({...individual,moves:[...phase.moves]}),item:phase.item??''})));
  const recruitProfile={...individual,evs:Object.fromEntries(statKeys.map(k=>[k,0])) as StatBlock};
  const reward=snapshotRankReward(db,runId,boss.rewardProfile,random).rewardDefinition;
- const snapshot:RaidSnapshot={version:1,transformationAdapter:1,recruitment:boss.recruitment??{mode:'baseSpecies'},...(boss.raidHpMultiplier!==undefined?{raidHpMultiplier:boss.raidHpMultiplier}:{}),bossId:boss.id,species:boss.species,category:boss.category,routeId:route.id,individual,phases,opponentTeam,recruitTeam:Showdown.Teams.pack([set(recruitProfile)]),reward:{...reward,title:'특별한 보상'}};
+ const snapshot:RaidSnapshot={version:1,transformationAdapter:1,recruitment:boss.recruitment??{mode:'baseSpecies'},...(boss.hpMode?{hpMode:boss.hpMode}:boss.raidHpMultiplier!==undefined?{raidHpMultiplier:boss.raidHpMultiplier}:{}),bossId:boss.id,species:boss.species,category:boss.category,routeId:route.id,individual,phases,opponentTeam,recruitTeam:Showdown.Teams.pack([set(recruitProfile)]),reward:{...reward,title:'특별한 보상'}};
  snapshot.recruitTeam=packedRaidRecruitment(snapshot);
  validateRaidHP(snapshot);return snapshot;
 }

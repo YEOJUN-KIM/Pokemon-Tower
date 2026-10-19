@@ -133,13 +133,13 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
     if (side && ['switch','drag','replace'].includes(event)) {
       view.pendingFaints=view.pendingFaints?.filter(pending=>pending!==side);
       const name = value.split(',')[0];
-      if (side === 'enemy') view.opponent = {gender:genderFromDetails(value),shiny:value.split(', ').includes('shiny'),species:name,terastallized:value.match(/tera:([A-Za-z]+)/)?.[1],condition:condition ?? view.opponent?.condition ?? '100/100'};
+      if (side === 'enemy') view.opponent = {...(line.includes('[raid-threshold]')?{...view.opponent,displaySpecies:view.opponent?.dynamax?dynamaxDisplaySpecies(name,true):name}:{}),gender:genderFromDetails(value),shiny:value.split(', ').includes('shiny'),species:name,terastallized:value.match(/tera:([A-Za-z]+)/)?.[1]??(line.includes('[raid-threshold]')?view.opponent?.terastallized:undefined),condition:condition ?? view.opponent?.condition ?? '100/100'};
       else {
         const actual=after.team.find(p=>p.active)?.species==='Zoroark' ? 'Zoroark' : actor.split(': ')[1];
         view.team=view.team.map(p=>p.species===actual ? {...p,active:true,gender:genderFromDetails(value),displaySpecies:name,condition:condition ?? p.condition} : {...p,active:false});
       }
       motion = {kind:'switch',side,color:'normal',sendOut:event!=='replace'};
-      if(side==='enemy'&&line.split('|').includes('[raid-adapter]'))motion={kind:'raid-aura-reveal',side,color:'psychic',hpReset:true};
+      if(side==='enemy'&&line.split('|').includes('[raid-adapter]'))motion={kind:'raid-aura-reveal',side,color:'psychic',hpReset:!line.includes('[raid-threshold]')};
     }
     if(pokemon && ['detailschange','-formechange'].includes(event)){
       const form=value.split(',')[0];

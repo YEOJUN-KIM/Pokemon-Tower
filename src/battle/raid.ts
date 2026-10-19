@@ -2,9 +2,11 @@ import type {Battle,Pokemon} from 'pokemon-showdown';
 import {raidCategoryPresentation,type RaidSnapshot} from '../data/raids';
 import {applyRaidPhaseTransformation,prepareRaidPhase} from './raid-transformation';
 import {raidPhaseHP} from './raid-hp';
+import {installThresholdRaid} from './raid-threshold';
 
 // Consecutive server-owned slots retain the simulator's KO, multi-hit and turn scheduler.
 export function installRaid(battle:Battle,raid:RaidSnapshot){
+ if(raid.hpMode==='threshold-v1')return installThresholdRaid(battle,raid,installRaid);
  const phaseOf=new WeakMap<Pokemon,number>();
  const applied=new WeakSet<Pokemon>();
  const originalStart=battle.start.bind(battle);

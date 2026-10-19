@@ -1,4 +1,4 @@
-import type {RaidBossDefinition,RaidCategory,RaidPhaseDefinition,RaidRouteDefinition,RaidTransformation,RaidRecruitmentPolicy} from './raids';
+import type {RaidBossDefinition,RaidCategory,RaidPhaseDefinition,RaidRouteDefinition,RaidTransformation,RaidRecruitmentPolicy,RaidHPMode} from './raids';
 import {formItemFor,formItems,plateTypes} from './form-items';
 
 function p(species:string,ability:string,moves:readonly string[],hpRatio:number,transformation:RaidTransformation='form',extra:Partial<RaidPhaseDefinition>={}):RaidPhaseDefinition{
@@ -8,8 +8,8 @@ function p(species:string,ability:string,moves:readonly string[],hpRatio:number,
 function route(id:string,attack:'atk'|'spa',phases:RaidPhaseDefinition[],recruit?:Partial<RaidRouteDefinition['recruit']>):RaidRouteDefinition{
  return {id,weight:1,attack,phases,recruit:{nature:attack==='atk'?'Adamant':'Modest',ability:phases[0].ability,moves:phases[0].moves,...recruit}};
 }
-function boss(id:string,species:string,category:RaidCategory,raidHpMultiplier:number,routes:RaidRouteDefinition[],recruitment?:RaidRecruitmentPolicy):RaidBossDefinition{
- return {id,species,category,raidHpMultiplier,...(recruitment?{recruitment}:{}),weight:category==='normal'?80:20,minFloor:1,ivRule:{perfect:['legendary','mythical'].includes(category)?6:4,protected:['hp','spe']},shinyRule:'standard',battleTraining:'elite',rewardProfile:'elite',routes};
+function boss(id:string,species:string,category:RaidCategory,raidHpMultiplier:number,routes:RaidRouteDefinition[],recruitment?:RaidRecruitmentPolicy,hpMode:RaidHPMode='threshold-v1'):RaidBossDefinition{
+ return {id,species,category,hpMode,raidHpMultiplier,...(recruitment?{recruitment}:{}),weight:category==='normal'?80:20,minFloor:1,ivRule:{perfect:['legendary','mythical'].includes(category)?6:4,protected:['hp','spe']},shinyRule:'standard',battleTraining:'elite',rewardProfile:'elite',routes};
 }
 const palafinMoves=['Wave Crash','Jet Punch','Close Combat','Ice Punch'];
 const snorlaxMoves=['Body Slam','Crunch','High Horsepower','Heavy Slam'];
@@ -35,18 +35,18 @@ function necrozmaRoute(form:'Necrozma-Dusk-Mane'|'Necrozma-Dawn-Wings'){
 // The two original bosses remain in raids.ts without changing their saved builds.
 export const expandedRaidBosses:readonly RaidBossDefinition[]=[
  boss('metagross','Metagross','normal',2.2,[route('mega','atk',[
-  p('Metagross','Clear Body',['Meteor Mash','Zen Headbutt','Earthquake','Bullet Punch'],.55),
-  p('Metagross-Mega','Tough Claws',['Meteor Mash','Zen Headbutt','Ice Punch','Bullet Punch'],.45,'mega'),
+  p('Metagross','Clear Body',['Meteor Mash','Zen Headbutt','Earthquake','Bullet Punch'],.5),
+  p('Metagross-Mega','Tough Claws',['Meteor Mash','Zen Headbutt','Ice Punch','Bullet Punch'],.5,'mega'),
  ])]),
  boss('palafin','Palafin','normal',2,[route('hero','atk',[
-  p('Palafin','Zero to Hero',palafinMoves,.4),p('Palafin-Hero','Zero to Hero',palafinMoves,.6),
+  p('Palafin','Zero to Hero',palafinMoves,.5),p('Palafin-Hero','Zero to Hero',palafinMoves,.5),
  ])]),
  boss('snorlax','Snorlax','normal',2.3,[route('gigantamax','atk',[
-  p('Snorlax','Thick Fat',snorlaxMoves,.45),p('Snorlax-Gmax','Thick Fat',snorlaxMoves,.55,'gigantamax',{persistent:true}),
+  p('Snorlax','Thick Fat',snorlaxMoves,.5),p('Snorlax-Gmax','Thick Fat',snorlaxMoves,.5,'gigantamax',{persistent:true}),
  ])]),
  boss('hoopa','Hoopa','mythical',2.2,[route('unbound','spa',[
-  p('Hoopa','Magician',['Psychic','Shadow Ball','Energy Ball','Thunderbolt'],.45),
-  p('Hoopa-Unbound','Magician',['Hyperspace Fury','Psychic','Drain Punch','Thunderbolt'],.55),
+  p('Hoopa','Magician',['Psychic','Shadow Ball','Energy Ball','Thunderbolt'],.5),
+  p('Hoopa-Unbound','Magician',['Hyperspace Fury','Psychic','Drain Punch','Thunderbolt'],.5),
  ],{nature:'Serious'})]),
  boss('shaymin','Shaymin','mythical',2,[route('sky','spa',[
   p('Shaymin','Natural Cure',['Seed Flare','Earth Power','Psychic','Dazzling Gleam'],.5),
@@ -55,7 +55,7 @@ export const expandedRaidBosses:readonly RaidBossDefinition[]=[
  boss('volcarona','Volcarona','normal',2.2,[
   route('slither-wing','atk',[p('Volcarona','Flame Body',volcaronaMoves,.5),p('Slither Wing','Protosynthesis',['First Impression','Close Combat','Leech Life','Flare Blitz'],.5,'replacement')],{nature:'Serious'}),
   route('iron-moth','spa',[p('Volcarona','Flame Body',volcaronaMoves,.5),p('Iron Moth','Quark Drive',['Fiery Dance','Sludge Wave','Energy Ball','Dazzling Gleam'],.5,'replacement')]),
- ],{mode:'phaseSpecies',phase:2}),
+ ],{mode:'phaseSpecies',phase:2},'replacement-v1'),
  boss('ogerpon','Ogerpon','sub-legendary',2.8,[route('masks','atk',[
   p('Ogerpon','Defiant',[...ogerponMoves,'Knock Off'],.25),
   p('Ogerpon-Wellspring','Water Absorb',[...ogerponMoves,'Stomping Tantrum'],.25),
@@ -63,8 +63,8 @@ export const expandedRaidBosses:readonly RaidBossDefinition[]=[
   p('Ogerpon-Hearthflame','Mold Breaker',[...ogerponMoves,'Stomping Tantrum'],.25),
  ])]),
  boss('diancie','Diancie','mythical',2.2,[route('mega','spa',[
-  p('Diancie','Clear Body',['Diamond Storm','Moonblast','Earth Power','Psychic'],.55),
-  p('Diancie-Mega','Magic Bounce',['Diamond Storm','Moonblast','Earth Power','Mystical Fire'],.45,'mega'),
+  p('Diancie','Clear Body',['Diamond Storm','Moonblast','Earth Power','Psychic'],.5),
+  p('Diancie-Mega','Magic Bounce',['Diamond Storm','Moonblast','Earth Power','Mystical Fire'],.5,'mega'),
  ],{nature:'Serious'})]),
  boss('groudon','Groudon','legendary',2.6,[route('primal','atk',[
   p('Groudon','Drought',['Precipice Blades','Heat Crash','Stone Edge','Thunder Punch'],.5),
@@ -102,7 +102,7 @@ export const expandedRaidBosses:readonly RaidBossDefinition[]=[
   p('Zamazenta-Crowned','Dauntless Shield',['Behemoth Bash','Body Press','Crunch','Stone Edge'],.5),
  ])]),
  boss('terapagos','Terapagos','legendary',2.8,[route('stellar','spa',[
-  p('Terapagos-Terastal','Tera Shell',terapagosMoves,.55,'form',{sourceSpecies:'Terapagos',nativeEntry:true}),
-  p('Terapagos-Stellar','Teraform Zero',terapagosMoves,.45,'stellar'),
+  p('Terapagos-Terastal','Tera Shell',terapagosMoves,.5,'form',{sourceSpecies:'Terapagos',nativeEntry:true}),
+  p('Terapagos-Stellar','Teraform Zero',terapagosMoves,.5,'stellar'),
  ],{ability:'Tera Shift'})]),
 ];

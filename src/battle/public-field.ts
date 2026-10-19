@@ -10,7 +10,7 @@ export function advanceField(previous:PublicField,line:string):PublicField {
   const side=actor?.startsWith('p1') ? 'p1' : actor?.startsWith('p2') ? 'p2' : null,boosts=state.boosts!;
   const keys=['atk','def','spa','spd','spe','accuracy','evasion'];
   if(side){
-    const passesRanks=event==='switch' && tags.some(tag=>tag==='[from] move: Baton Pass');
+    const passesRanks=event==='switch' && tags.some(tag=>tag==='[from] move: Baton Pass'||tag==='[raid-threshold]');
     if(['switch','drag','faint','-clearboost'].includes(event) && !passesRanks)boosts[side]={};
     if(['-boost','-unboost','-setboost'].includes(event) && keys.includes(value)){
       const amount=Number(tags[0]);if(Number.isFinite(amount))boosts[side][value]=Math.max(-6,Math.min(6,event==='-setboost' ? amount : (boosts[side][value] ?? 0)+(event==='-unboost' ? -amount : amount)));

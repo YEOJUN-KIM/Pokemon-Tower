@@ -22,7 +22,7 @@ test('real engine smoke and determinism: one random-route boss × six runs twice
   assert.ok(row.survivors>=0&&row.survivors<=3);assert.ok(row.teamHP>=0&&row.teamHP<=100);
   if(row.lossPhase!==null){assert.ok(row.lossPhase>=1&&row.lossPhase<=2);assert.ok(row.bossPhaseHP!>=0&&row.bossPhaseHP!<=100);}
   assert.equal(row.effectiveHP,row.phaseHP.reduce((a,b)=>a+b,0));
-  row.observedPhases.forEach((hp,i)=>assert.equal(hp,row.phaseHP[i]));
+  row.observedPhases.forEach((hp,i)=>assert.equal(hp,(row.phaseMaxHP??row.phaseHP)[i]));
  }
  assert.ok(logs.every(log=>log.raid?.transformationAdapter===1&&log.decisions.length>0&&log.publicProtocol.some(l=>l.startsWith('|raid|'))));
  await replayBattle(logs[0]);

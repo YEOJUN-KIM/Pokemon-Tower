@@ -9,6 +9,8 @@ import {describeLine} from '../src/web/catalog';
 
 for(const [bossId,routeId] of [['garchomp','mega'],['mewtwo','x'],['mewtwo','y']])for(const fast of [true,false])test(`${bossId}/${routeId} ${fast?'player':'boss'} first: real simulator phase break, clean boss, cumulative player`,()=>{
  const f=raidFixture(':memory:','phase',bossId,routeId);
+ // Explicit coverage of the old independent slots/status-reset replay path.
+ delete f.snapshot.hpMode;
  const battle=new Showdown.Battle({formatid:FORMAT,seed:'1,2,3,4'});
  try{
   installRaid(battle,f.snapshot);

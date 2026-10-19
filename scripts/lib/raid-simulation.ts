@@ -9,7 +9,7 @@ import {runBattle,type Seed,type BattleLog} from '../../src/battle/run';
 import {ZMovePolicy} from '../../src/battle/z-move-policy';
 import type {Policy,Observation} from '../../src/battle/policy';
 import {encounterRandom} from '../../src/server/opponent-team';
-import {raidPhaseHP} from '../../src/battle/raid-hp';
+import {raidPhaseHP,raidGateHP,raidPhaseEnd,resizeRaidHP} from '../../src/battle/raid-hp';
 import {RaidSimulationPlayerPolicy} from './raid-simulation-player';
 import {simulationTeams,simulationFloors,simulationPlayerTeam} from './raid-simulation-pool';
 import {raidFloorBracket,type RaidFloorBracketId} from './raid-floor-brackets';
@@ -43,13 +43,20 @@ export class SimulationHealth {
 export function effectiveRaidHP(raid:RaidSnapshot){
  const base=Showdown.Dex.species.get(raid.species);
  const normal=trainedStat(base.baseStats.hp,raid.individual.ivs.hp,raid.individual.evs.hp,'hp',raid.individual.nature);
- const phases=raid.phases.map(phase=>{
+ const phaseMax=raid.phases.map(phase=>{
   const native=trainedStat(Showdown.Dex.species.get(phase.species).baseStats.hp,raid.individual.ivs.hp,raid.individual.evs.hp,'hp',raid.individual.nature);
+  if(raid.hpMode)return native*(['gigantamax','dynamax'].includes(phase.transformation)?2:1);
   return raidPhaseHP(native,native*(['gigantamax','dynamax'].includes(phase.transformation)?2:1),raid.raidHpMultiplier??1,phase.hpRatio??1).maxhp;
  });
- return {normal,phases,total:phases.reduce((a,b)=>a+b,0),multiplier:phases.reduce((a,b)=>a+b,0)/normal};
+ let previousHP=phaseMax[0],previousMax=phaseMax[0];
+ const phases=phaseMax.map((max,index)=>{
+  if(raid.hpMode!=='threshold-v1')return max;
+  const start=index?resizeRaidHP(previousHP,previousMax,max):max,end=raidGateHP(max,raidPhaseEnd(raid,index));
+  previousHP=end;previousMax=max;return start-end;
+ });
+ return {normal,phases,phaseMax,total:phases.reduce((a,b)=>a+b,0),multiplier:phases.reduce((a,b)=>a+b,0)/normal};
 }
-export type SimulationRow={bracket?:RaidFloorBracketId;bossId:string;boss:string;index:number;seed:Seed;floor:number;teamId:string;route:string;branchSpecies:string[];won:boolean;winner:string;turns:number;survivors:number;teamHP:number;lossPhase:number|null;bossPhaseHP:number|null;normalHP:number;phaseHP:number[];effectiveHP:number;effectiveMultiplier:number;playerSwitches:number;observedPhases:number[];protocolHash:string};
+export type SimulationRow={bracket?:RaidFloorBracketId;bossId:string;boss:string;index:number;seed:Seed;floor:number;teamId:string;route:string;branchSpecies:string[];won:boolean;winner:string;turns:number;survivors:number;teamHP:number;lossPhase:number|null;bossPhaseHP:number|null;normalHP:number;phaseHP:number[];phaseMaxHP?:number[];effectiveHP:number;effectiveMultiplier:number;playerSwitches:number;observedPhases:number[];protocolHash:string};
 export type SimulationOptions={bracket?:RaidFloorBracketId;bossId:string;runs:number;seedBase:string;onRow?:(row:SimulationRow)=>void;onLog?:(log:BattleLog)=>void};
 export async function simulateRaid(options:SimulationOptions):Promise<SimulationRow[]>{
  const boss=raidBossDefinitions.find(b=>b.id===options.bossId);if(!boss)throw Error('Unknown boss');
@@ -77,7 +84,7 @@ export async function simulateRaid(options:SimulationOptions):Promise<Simulation
   // receives only runBattle's whitelisted public opponent observation.
   const opponent:Policy={switchingInformation:delegate.switchingInformation,observePublicLine:line=>{p2.consume(line,'p2');delegate.observePublicLine(line);},choose:(o:Observation)=>{
    const active=o.ownTeam.find(p=>p.active);
-   if(active&&p2.phase){const measured=health(active.condition).max;const expected=hp.phases[p2.phase-1];
+   if(active&&p2.phase){const measured=health(active.condition).max;const expected=hp.phaseMax[p2.phase-1];
     if(measured>0){
      if(measured!==expected)throw Error(`Live Phase HP mismatch ${boss.id} P${p2.phase}: ${measured} != ${expected}`);
      p2.phaseMax[p2.phase-1]=measured;
@@ -93,6 +100,7 @@ export async function simulateRaid(options:SimulationOptions):Promise<Simulation
   if(!won&&(!activeBoss||activeBoss.max<=0))throw Error('Missing boss health');
   const row:SimulationRow={bossId:boss.id,boss:boss.species,index,seed,floor,teamId:team.id,route:raid.routeId,branchSpecies:raid.phases.slice(1).map(p=>p.species),won,winner:log.winner!,turns:log.turns,survivors:members.filter(m=>m.hp>0).length,teamHP:100*members.reduce((n,m)=>n+m.hp,0)/members.reduce((n,m)=>n+m.max,0),lossPhase:won?null:phase,bossPhaseHP:won?null:100*activeBoss!.hp/activeBoss!.max,normalHP:hp.normal,phaseHP:hp.phases,effectiveHP:hp.total,effectiveMultiplier:hp.multiplier,playerSwitches:log.decisions.filter(d=>d.side==='p1'&&d.action.startsWith('switch ')).length,observedPhases:p2.phaseMax,protocolHash:createHash('sha256').update(JSON.stringify(log.publicProtocol.filter(l=>!l.startsWith('|t:|')))).digest('hex')};
   if(options.bracket)row.bracket=options.bracket;
+  if(raid.hpMode)row.phaseMaxHP=hp.phaseMax;
   rows.push(row);options.onRow?.(row);options.onLog?.(log);
  }}finally{store.close();}
  return rows;

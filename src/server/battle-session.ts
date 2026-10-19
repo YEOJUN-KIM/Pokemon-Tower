@@ -215,7 +215,7 @@ export class BattleSession {
       const [, event, actor, data, condition] = line.split('|');
       if (!actor || !['switch', 'drag', 'replace', '-damage', '-heal', 'faint', '-status', '-curestatus','-formechange','detailschange','-start','-end','-transform','-terastallize'].includes(event)) continue;
       if (actor.startsWith('p2a:')) {
-        if (['switch', 'drag', 'replace'].includes(event)) opponent = {gender:genderFromDetails(data),shiny:data.split(', ').includes('shiny'),species: data.split(',')[0],terastallized:data.match(/tera:([A-Za-z]+)/)?.[1], condition:condition ?? opponent?.condition ?? '100/100'};
+        if (['switch', 'drag', 'replace'].includes(event)) opponent = {...(line.includes('[raid-threshold]')?{...opponent,displaySpecies:opponent?.dynamax?dynamaxDisplaySpecies(data.split(',')[0],true):data.split(',')[0]}:{}),gender:genderFromDetails(data),shiny:data.split(', ').includes('shiny'),species: data.split(',')[0],terastallized:data.match(/tera:([A-Za-z]+)/)?.[1]??(line.includes('[raid-threshold]')?opponent?.terastallized:undefined), condition:condition ?? opponent?.condition ?? '100/100'};
         else if (opponent && ['-damage', '-heal'].includes(event)) opponent.condition = data;
         else if (opponent && event === 'faint') opponent.condition = '0 fnt';
         else if (opponent && event === '-status') opponent.condition = `${opponent.condition.split(' ')[0]} ${data}`;

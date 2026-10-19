@@ -12,6 +12,7 @@ import {encounterRandom} from '../../src/server/opponent-team';
 import {raidPhaseHP} from '../../src/battle/raid-hp';
 import {RaidSimulationPlayerPolicy} from './raid-simulation-player';
 import {simulationTeams,simulationFloors,simulationPlayerTeam} from './raid-simulation-pool';
+import {raidFloorBracket,type RaidFloorBracketId} from './raid-floor-brackets';
 
 export function simulationSeed(key:string):Seed {const bytes=createHash('sha256').update(key).digest();return [0,2,4,6].map(i=>bytes.readUInt16BE(i)) as Seed;}
 type Health={hp:number;max:number};
@@ -48,24 +49,29 @@ export function effectiveRaidHP(raid:RaidSnapshot){
  });
  return {normal,phases,total:phases.reduce((a,b)=>a+b,0),multiplier:phases.reduce((a,b)=>a+b,0)/normal};
 }
-export type SimulationRow={bossId:string;boss:string;index:number;seed:Seed;floor:number;teamId:string;route:string;branchSpecies:string[];won:boolean;winner:string;turns:number;survivors:number;teamHP:number;lossPhase:number|null;bossPhaseHP:number|null;normalHP:number;phaseHP:number[];effectiveHP:number;effectiveMultiplier:number;playerSwitches:number;observedPhases:number[];protocolHash:string};
-export type SimulationOptions={bossId:string;runs:number;seedBase:string;onRow?:(row:SimulationRow)=>void;onLog?:(log:BattleLog)=>void};
+export type SimulationRow={bracket?:RaidFloorBracketId;bossId:string;boss:string;index:number;seed:Seed;floor:number;teamId:string;route:string;branchSpecies:string[];won:boolean;winner:string;turns:number;survivors:number;teamHP:number;lossPhase:number|null;bossPhaseHP:number|null;normalHP:number;phaseHP:number[];effectiveHP:number;effectiveMultiplier:number;playerSwitches:number;observedPhases:number[];protocolHash:string};
+export type SimulationOptions={bracket?:RaidFloorBracketId;bossId:string;runs:number;seedBase:string;onRow?:(row:SimulationRow)=>void;onLog?:(log:BattleLog)=>void};
 export async function simulateRaid(options:SimulationOptions):Promise<SimulationRow[]>{
  const boss=raidBossDefinitions.find(b=>b.id===options.bossId);if(!boss)throw Error('Unknown boss');
  if(!Number.isSafeInteger(options.runs)||options.runs<1)throw Error('Runs must be a positive integer');
+ const floors=(options.bracket?raidFloorBracket(options.bracket).floors:simulationFloors).filter(f=>f>=boss.minFloor);
+ if(!floors.length)throw Error('No eligible simulation floor');
+ // Preserve the original overall seed domain exactly. Bracket runs use an
+ // independent, explicit domain and still pair floor/team across bosses.
+ const seedBase=options.bracket?`${options.seedBase}:bracket:${options.bracket}`:options.seedBase;
  const store=new TowerStore(':memory:');store.ensurePlayer('sim');
  const run=store.battle(store.start('sim',starters,'basic')).run_id;
  const rows:SimulationRow[]=[],cache=new Map<string,ReturnType<typeof simulationPlayerTeam>>();
  try{for(let index=0;index<options.runs;index++){
-  const floor=simulationFloors.filter(f=>f>=boss.minFloor)[index%simulationFloors.filter(f=>f>=boss.minFloor).length];
+  const floor=floors[index%floors.length];
   if(!floor)throw Error('No eligible simulation floor');
   // Pair the same floor/team across bosses; no boss matchup enters selection.
-  const teamRandom=encounterRandom(simulationSeed(`${options.seedBase}:player:${index}`));
+  const teamRandom=encounterRandom(simulationSeed(`${seedBase}:player:${index}`));
   const pool=simulationTeams.filter(t=>t.minFloor<=floor),team=pool[Math.floor(teamRandom()*pool.length)];
   const key=team.id+':'+floor;
   let player=cache.get(key);if(!player){player=simulationPlayerTeam(team,floor);cache.set(key,player);}
-  const seed=simulationSeed(`${options.seedBase}:${boss.id}:${index}:battle`);
-  const raid=createRaidSnapshot(store.db,run,floor,encounterRandom(simulationSeed(`${options.seedBase}:${boss.id}:${index}:snapshot`)),{bossId:boss.id});
+  const seed=simulationSeed(`${seedBase}:${boss.id}:${index}:battle`);
+  const raid=createRaidSnapshot(store.db,run,floor,encounterRandom(simulationSeed(`${seedBase}:${boss.id}:${index}:snapshot`)),{bossId:boss.id});
   const hp=effectiveRaidHP(raid),p1=new SimulationHealth(),p2=new SimulationHealth(),delegate=new ZMovePolicy();
   // Metrics can inspect the boss's own private health, but the player policy
   // receives only runBattle's whitelisted public opponent observation.
@@ -79,13 +85,14 @@ export async function simulateRaid(options:SimulationOptions):Promise<Simulation
    }
    return delegate.choose(o);
   }};
-  const log=await runBattle({raid,teams:{p1:player.packed,p2:raid.opponentTeam},seed,rule:'basic',teraTickets:{p1:0,p2:0},player:new RaidSimulationPlayerPolicy(encounterRandom(simulationSeed(`${options.seedBase}:${boss.id}:${index}:policy`))),opponent,onPlayerLine:line=>p1.consume(line,'p1')});
+  const log=await runBattle({raid,teams:{p1:player.packed,p2:raid.opponentTeam},seed,rule:'basic',teraTickets:{p1:0,p2:0},player:new RaidSimulationPlayerPolicy(encounterRandom(simulationSeed(`${seedBase}:${boss.id}:${index}:policy`))),opponent,onPlayerLine:line=>p1.consume(line,'p1')});
   if(!['Player','Tower AI'].includes(log.winner??''))throw Error(`Non-binary result ${log.winner}: ${boss.id}/${index}`);
   const won=log.winner==='Player',members=[...p1.own.values()];
   if(members.length!==3||members.some(m=>m.max<=0))throw Error('Missing final player health');
   const activeBoss=[...p2.own.values()].at(-1),phase=p2.phase;
   if(!won&&(!activeBoss||activeBoss.max<=0))throw Error('Missing boss health');
   const row:SimulationRow={bossId:boss.id,boss:boss.species,index,seed,floor,teamId:team.id,route:raid.routeId,branchSpecies:raid.phases.slice(1).map(p=>p.species),won,winner:log.winner!,turns:log.turns,survivors:members.filter(m=>m.hp>0).length,teamHP:100*members.reduce((n,m)=>n+m.hp,0)/members.reduce((n,m)=>n+m.max,0),lossPhase:won?null:phase,bossPhaseHP:won?null:100*activeBoss!.hp/activeBoss!.max,normalHP:hp.normal,phaseHP:hp.phases,effectiveHP:hp.total,effectiveMultiplier:hp.multiplier,playerSwitches:log.decisions.filter(d=>d.side==='p1'&&d.action.startsWith('switch ')).length,observedPhases:p2.phaseMax,protocolHash:createHash('sha256').update(JSON.stringify(log.publicProtocol.filter(l=>!l.startsWith('|t:|')))).digest('hex')};
+  if(options.bracket)row.bracket=options.bracket;
   rows.push(row);options.onRow?.(row);options.onLog?.(log);
  }}finally{store.close();}
  return rows;

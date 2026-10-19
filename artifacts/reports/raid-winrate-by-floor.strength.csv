@@ -1,0 +1,5 @@
+bracket,battles,avgIV,minIV,maxIV,avgTrainingPoints,minPoints,maxPoints,avgHeldItems,usedTeams,starterUses,collectedUses,starterShare,heldItems,eligibleTeams
+early,10000,9.99,0,15,21.978,0,33,0.666,10,10000,0,100,"{""Sitrus Berry"":6660}","[{""floor"":5,""count"":10},{""floor"":15,""count"":10},{""floor"":25,""count"":10}]"
+mid,10000,15,15,15,33,33,33,1.664,20,5880,4120,58.8,"{""Sitrus Berry"":10000,""Muscle Band"":1820,""Leftovers"":3320,""Wise Glasses"":1500}","[{""floor"":35,""count"":16},{""floor"":45,""count"":16},{""floor"":55,""count"":20}]"
+late,10000,25,25,25,50,50,50,3,20,4960,5040,49.6,"{""Sitrus Berry"":10000,""Muscle Band"":6160,""Leftovers"":10000,""Wise Glasses"":3840}","[{""floor"":65,""count"":20},{""floor"":75,""count"":20}]"
+endgame,10000,25,25,25,50,50,50,3,20,5000,5000,50,"{""Sitrus Berry"":10000,""Muscle Band"":6020,""Leftovers"":10000,""Wise Glasses"":3980}","[{""floor"":85,""count"":20},{""floor"":95,""count"":20}]"

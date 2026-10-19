@@ -31,6 +31,13 @@ artifacts/**
 !artifacts/reports/raid-winrate-simulation.branches.csv
 !artifacts/reports/raid-winrate-simulation.phases.csv
 !artifacts/reports/raid-winrate-simulation.teams.csv
+!artifacts/reports/raid-winrate-by-floor.csv
+!artifacts/reports/raid-winrate-by-floor.comparison.csv
+!artifacts/reports/raid-winrate-by-floor.branches.csv
+!artifacts/reports/raid-winrate-by-floor.phases.csv
+!artifacts/reports/raid-winrate-by-floor.teams.csv
+!artifacts/reports/raid-winrate-by-floor.strength.csv
+!artifacts/reports/raid-winrate-by-floor.floors.csv
 # Curated QA media referenced by current documentation.
 !artifacts/qa/previews/egg-results/background-colors.png
 !artifacts/qa/previews/egg-results/background-effects.gif

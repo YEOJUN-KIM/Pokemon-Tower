@@ -61,7 +61,7 @@ export type RunView = {
   shopRerolls?:Record<'items'|'machines',{count:number;price:number;limit?:number}>;
   vitaminUsage?:import('./vitamin-eligibility').VitaminUsage;
   vitaminShop?:{offers:{stat:import('../data/training').StatKey;price:number;purchased:boolean}[];bonuses:Record<string,Partial<StatBlock>>;partners:Record<string,MachinePartner>;counts?:Record<string,number>;limit?:number}|null;
-  candidateDetails?:Record<string,{ability:string;nature:string;moves:string[];baseStats:StatBlock;types?:string[];teraType?:import('../data/tera').TeraType;shiny?:boolean}>;
+  candidateDetails?:Record<string,{forme?:string;ability:string;nature:string;moves:string[];baseStats:StatBlock;types?:string[];teraType?:import('../data/tera').TeraType;shiny?:boolean}>;
   machineShop?: {offers:MachineOffer[];currentMoves:Record<string,string[]>;partners:Record<string,MachinePartner>} | null;
   candidateMoves:Record<string,string[]>; collectionMoves:Record<string,string[]>; currentMoves:Record<string,string[]>; lastMoveGain:MoveGain|null;
   candidateIVs:Record<string,StatBlock>; collectionIVs:Record<string,StatBlock>; lastIVGain:IVGain|null;

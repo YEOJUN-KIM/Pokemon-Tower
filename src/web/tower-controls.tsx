@@ -48,8 +48,8 @@ export function TowerControls({tower, selected, setSelected, busy, submit,error}
   const start = () => submit(choosingNext ? {type: 'enter', runId: run.id, floor: run.floor, selected} : {type: 'start', selected,rule});
   if(shopping && run?.state==='select' && (isShopFloor(run.floor,run.totalFloors)||run.retries?.preparing))return <RunMaintenance tower={tower} busy={busy} submit={submit} error={error} onContinue={()=>setShopping(false)}/>;
   return <section className="tower-controls" data-testid={recruiting ? 'recruitment' : 'team-selection'}>
-    {replacing && chosen && run && <RecruitReplacementPicker chosen={chosen} roster={run.roster} busy={busy} onCancel={()=>{setReplacing(false);setReplaced(null);}} onChoose={name=>{setReplaced(name);setConfirming(true);}}/>}
-    {confirming && chosen && <RecruitConfirmation newSpecies={!tower.unlocked.includes(chosen)} archiveOnly={collectOnly} chosen={chosen} replaced={!collectOnly && needsReplacement ? replaced : null} incoming={run?.candidateIVs[chosen]} previous={run?.collectionIVs[chosen]} alreadyOwned={alreadyOwned} incomingMoves={run?.candidateMoves[chosen]} knownMoves={run?.collectionMoves[chosen]} currentMoves={run?.currentMoves[chosen]} onCancel={()=>setConfirming(false)} onConfirm={swap=>{setConfirming(false);setReplacing(false);void recruit(false,swap);}} />}
+    {replacing && chosen && run && <RecruitReplacementPicker chosen={run.candidateDetails?.[chosen]?.forme??chosen} roster={run.roster} busy={busy} onCancel={()=>{setReplacing(false);setReplaced(null);}} onChoose={name=>{setReplaced(name);setConfirming(true);}}/>}
+    {confirming && chosen && <RecruitConfirmation newSpecies={!tower.unlocked.includes(chosen)} archiveOnly={collectOnly} chosen={run?.candidateDetails?.[chosen]?.forme??chosen} replaced={!collectOnly && needsReplacement ? replaced : null} incoming={run?.candidateIVs[chosen]} previous={run?.collectionIVs[chosen]} alreadyOwned={alreadyOwned} incomingMoves={run?.candidateMoves[chosen]} knownMoves={run?.collectionMoves[chosen]} currentMoves={run?.currentMoves[chosen]} onCancel={()=>setConfirming(false)} onConfirm={swap=>{setConfirming(false);setReplacing(false);void recruit(false,swap);}} />}
     {recruiting && <VillainOutcome event={run.villainEvent}/>}
     {recruiting && inspecting && chosen && <RecruitCandidateDetails name={chosen} run={run} onClose={()=>setInspecting(false)}/>}
     <div className="selection-title"><div><div className="eyebrow">{recruiting ? 'A NEW PARTNER' : choosingNext ? (run.theme ? themeLabel(run.theme) : 'NEXT FLOOR') : 'BUILD YOUR TEAM'}</div>
@@ -61,11 +61,12 @@ export function TowerControls({tower, selected, setSelected, busy, submit,error}
       const improvements=incoming && previous && tower.unlocked.includes(name) ? statKeys.filter(stat=>incoming[stat]>previous[stat]) : [];
       const newMoves=recruiting ? (run.candidateMoves[name] ?? []).filter(move=>!(run.collectionMoves[name] ?? []).includes(move)) : [];
       const picked = recruiting ? chosen === name : selected.includes(name);
-      return <button key={name} className={`pokemon-choice ${picked ? 'picked' : ''}`} aria-pressed={picked} aria-label={`${pokemonName(name)} ${recruiting ? '영입 선택' : '선택'}`}
+      const display=(recruiting?run.candidateDetails?.[name]?.forme:undefined)??run?.partnerForms?.[name]??name;
+      return <button key={name} className={`pokemon-choice ${picked ? 'picked' : ''}`} aria-pressed={picked} aria-label={`${pokemonName(recruiting?display:name)} ${recruiting ? '영입 선택' : '선택'}`}
         disabled={busy || (!recruiting && !picked && selected.length >= 3)} onClick={() => pick(name)}>
         <span className="choice-order">{picked ? recruiting ? '✓' : `${selected.indexOf(name) + 1}번` : '+'}</span>
-        <img src={spriteUrl(run?.partnerForms?.[name]??name)} alt="" width={80} height={80} onError={e => { e.currentTarget.style.visibility = 'hidden'; }} />
-        <strong>{pokemonName(run?.partnerForms?.[name]??name)}</strong><small>{species[run?.partnerForms?.[name]??name]?.types.join(' · ')}</small>
+        <img src={spriteUrl(display)} alt="" width={80} height={80} onError={e => { e.currentTarget.style.visibility = 'hidden'; }} />
+        <strong>{pokemonName(display)}</strong><small>{species[display]?.types.join(' · ')}</small>
         {choosingNext && <small>지닌 도구 · <HeldItemLabel item={run.heldItems?.[name]}/></small>}
         {recruiting && <span className={tower.unlocked.includes(name) ? "recruit-known-species" : "recruit-new-species"}>{tower.unlocked.includes(name) ? "도감 등록됨" : "새 포켓몬 · 도감 미등록"}</span>}
         {improvements.length>0 && <span className="recruit-iv-up" title={improvements.map(stat=>`${statNames[stat]} ${previous![stat]} → ${incoming![stat]}`).join(' · ')}>↑ 개체값 상승 · {improvements.length}개</span>}

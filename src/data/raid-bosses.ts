@@ -1,4 +1,4 @@
-import type {RaidBossDefinition,RaidCategory,RaidPhaseDefinition,RaidRouteDefinition,RaidTransformation} from './raids';
+import type {RaidBossDefinition,RaidCategory,RaidPhaseDefinition,RaidRouteDefinition,RaidTransformation,RaidRecruitmentPolicy} from './raids';
 import {formItemFor,formItems,plateTypes} from './form-items';
 
 function p(species:string,ability:string,moves:readonly string[],hpRatio:number,transformation:RaidTransformation='form',extra:Partial<RaidPhaseDefinition>={}):RaidPhaseDefinition{
@@ -8,8 +8,8 @@ function p(species:string,ability:string,moves:readonly string[],hpRatio:number,
 function route(id:string,attack:'atk'|'spa',phases:RaidPhaseDefinition[],recruit?:Partial<RaidRouteDefinition['recruit']>):RaidRouteDefinition{
  return {id,weight:1,attack,phases,recruit:{nature:attack==='atk'?'Adamant':'Modest',ability:phases[0].ability,moves:phases[0].moves,...recruit}};
 }
-function boss(id:string,species:string,category:RaidCategory,raidHpMultiplier:number,routes:RaidRouteDefinition[]):RaidBossDefinition{
- return {id,species,category,raidHpMultiplier,weight:category==='normal'?80:20,minFloor:1,ivRule:{perfect:['legendary','mythical'].includes(category)?6:4,protected:['hp','spe']},shinyRule:'standard',battleTraining:'elite',rewardProfile:'elite',routes};
+function boss(id:string,species:string,category:RaidCategory,raidHpMultiplier:number,routes:RaidRouteDefinition[],recruitment?:RaidRecruitmentPolicy):RaidBossDefinition{
+ return {id,species,category,raidHpMultiplier,...(recruitment?{recruitment}:{}),weight:category==='normal'?80:20,minFloor:1,ivRule:{perfect:['legendary','mythical'].includes(category)?6:4,protected:['hp','spe']},shinyRule:'standard',battleTraining:'elite',rewardProfile:'elite',routes};
 }
 const palafinMoves=['Wave Crash','Jet Punch','Close Combat','Ice Punch'];
 const snorlaxMoves=['Body Slam','Crunch','High Horsepower','Heavy Slam'];
@@ -55,7 +55,7 @@ export const expandedRaidBosses:readonly RaidBossDefinition[]=[
  boss('volcarona','Volcarona','normal',2.2,[
   route('slither-wing','atk',[p('Volcarona','Flame Body',volcaronaMoves,.5),p('Slither Wing','Protosynthesis',['First Impression','Close Combat','Leech Life','Flare Blitz'],.5,'replacement')],{nature:'Serious'}),
   route('iron-moth','spa',[p('Volcarona','Flame Body',volcaronaMoves,.5),p('Iron Moth','Quark Drive',['Fiery Dance','Sludge Wave','Energy Ball','Dazzling Gleam'],.5,'replacement')]),
- ]),
+ ],{mode:'phaseSpecies',phase:2}),
  boss('ogerpon','Ogerpon','sub-legendary',2.8,[route('masks','atk',[
   p('Ogerpon','Defiant',[...ogerponMoves,'Knock Off'],.25),
   p('Ogerpon-Wellspring','Water Absorb',[...ogerponMoves,'Stomping Tantrum'],.25),
@@ -85,7 +85,7 @@ export const expandedRaidBosses:readonly RaidBossDefinition[]=[
  boss('kyurem','Kyurem','legendary',2.5,[
   route('black','atk',[p('Kyurem','Pressure',kyuremMoves,.5),p('Kyurem-Black','Teravolt',['Fusion Bolt','Icicle Spear','Dragon Claw','Earth Power'],.5)],{nature:'Serious'}),
   route('white','spa',[p('Kyurem','Pressure',kyuremMoves,.5),p('Kyurem-White','Turboblaze',['Fusion Flare','Ice Beam','Dragon Pulse','Earth Power'],.5)]),
- ]),
+ ],{mode:'phaseSpecies',phase:2}),
  boss('zygarde','Zygarde','legendary',3,[route('mega','spa',[
   p('Zygarde','Aura Break',['Thousand Arrows','Dragon Tail','Crunch','Glare'],.34),
   // Abilities below match the installed Dex, including the existing Z-A Mega.

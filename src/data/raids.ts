@@ -16,7 +16,10 @@ export const raidCategoryPresentation:Record<RaidCategory,{aura:string;entry:str
 export type RaidTransformation='none'|'aura'|'form'|'replacement'|'mega'|'primal'|'terastallize'|'stellar'|'dynamax'|'gigantamax'|'ultraBurst';
 export type RaidPhaseDefinition={species:string;ability:string;moves:readonly string[];transformation:RaidTransformation;sourceSpecies?:string;teraType?:string;item?:string;nativeEntry?:boolean;hpRatio?:number;randomBranch?:{id:string;options:readonly RaidPhaseDefinition[];excludePrevious?:boolean};branchChoice?:string;persistent?:boolean;messages?:readonly [string,string];buffs?:Partial<Record<Exclude<StatKey,'hp'>,number>>};
 export type RaidRouteDefinition={id:string;weight:number;attack:'atk'|'spa';recruit:{nature:string;ability:string;moves:readonly string[]};phases:readonly RaidPhaseDefinition[]};
-export type RaidBossDefinition={id:string;species:string;category:RaidCategory;weight:number;minFloor:number;raidHpMultiplier?:number;ivRule:{perfect:number;protected:readonly StatKey[]};shinyRule:'standard';battleTraining:'elite';rewardProfile:'elite';routes:readonly RaidRouteDefinition[]};
+// Human-facing Phase numbers, deliberately not zero-based array indices.
+export type RaidPhaseNumber=1|2|3|4;
+export type RaidRecruitmentPolicy={mode:'baseSpecies'}|{mode:'phaseSpecies';phase:RaidPhaseNumber};
+export type RaidBossDefinition={id:string;species:string;category:RaidCategory;weight:number;minFloor:number;raidHpMultiplier?:number;recruitment?:RaidRecruitmentPolicy;ivRule:{perfect:number;protected:readonly StatKey[]};shinyRule:'standard';battleTraining:'elite';rewardProfile:'elite';routes:readonly RaidRouteDefinition[]};
 const garchompMoves=['Earthquake','Dragon Claw','Swords Dance','Iron Head'];
 const xMoves=['Zen Headbutt','Drain Punch','Ice Punch','Bulk Up'];
 const yMoves=['Psystrike','Aura Sphere','Ice Beam','Calm Mind'];
@@ -36,6 +39,6 @@ export const raidBossDefinitions:readonly RaidBossDefinition[]=[
  {id:'mewtwo',species:'Mewtwo',category:'legendary',weight:20,minFloor:1,raidHpMultiplier:3,ivRule:{perfect:6,protected:[]},shinyRule:'standard',battleTraining:'elite',rewardProfile:'elite',routes:[mewtwoRoute('x'),mewtwoRoute('y')]},
  ...expandedRaidBosses,
 ];
-export type RaidSnapshot={version:1;transformationAdapter?:1;raidHpMultiplier?:number;bossId:string;species:string;category:RaidCategory;routeId:string;individual:TrainingProfile;phases:RaidPhaseDefinition[];opponentTeam:string;recruitTeam:string;reward:RewardOption};
+export type RaidSnapshot={version:1;transformationAdapter?:1;raidHpMultiplier?:number;recruitment?:RaidRecruitmentPolicy;bossId:string;species:string;category:RaidCategory;routeId:string;individual:TrainingProfile;phases:RaidPhaseDefinition[];opponentTeam:string;recruitTeam:string;reward:RewardOption};
 // The choice screen deliberately receives no build, route, shiny or reward details.
 export type RaidEventView={spriteId:number;category:RaidCategory};

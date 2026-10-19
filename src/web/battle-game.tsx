@@ -243,7 +243,8 @@ export default function BattleGame({prepareNewRun = false,entries}: {prepareNewR
       setTower(data.tower);
       if(body.type==='finish-loss'&&data.battle)setAcknowledgedResult(data.battle.id);
       if(body.type === 'recruit' && typeof body.chosen === 'string' && data.tower.run && (body.collectOnly || data.tower.run.roster.includes(body.chosen))) {
-        setRecruitment({archiveOnly:body.collectOnly===true,chosen:body.chosen,replaced:typeof body.replaced === 'string' ? body.replaced : null,roster:data.tower.run.roster,cleared:data.tower.run.state === 'cleared',ivGain:data.tower.run.lastIVGain,moveGain:data.tower.run.lastMoveGain,alreadyOwned:run?.roster.includes(body.chosen),newSpecies:!tower?.unlocked.includes(body.chosen),hiddenBossPending:data.tower.run.hiddenBossPending});
+        const display=run?.candidateDetails?.[body.chosen]?.forme??body.chosen;
+        setRecruitment({archiveOnly:body.collectOnly===true,chosen:display,replaced:typeof body.replaced === 'string' ? body.replaced : null,roster:data.tower.run.roster.map(name=>name===body.chosen?display:name),cleared:data.tower.run.state === 'cleared',ivGain:data.tower.run.lastIVGain,moveGain:data.tower.run.lastMoveGain,alreadyOwned:run?.roster.includes(body.chosen),newSpecies:!tower?.unlocked.includes(body.chosen),hiddenBossPending:data.tower.run.hiddenBossPending});
       }
       if(body.type === 'action' && data.battle?.status === 'complete') effect(data.battle.winner === 'Player' ? 'victory' : 'defeat');
       if (body.type === 'start' && prepareNewRun) router.replace('/battle', {scroll:false});

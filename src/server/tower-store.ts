@@ -5,6 +5,7 @@ import {isRocketStage} from '../data/villain-campaigns';
 import {recentEncounters} from './encounter-history';
 import {RewardInventory} from './reward-inventory';
 import {RaidEvents} from './raid-events';
+import type {RaidRecruitSet} from './raid-recruitment';
 import {rollEncounterShiny} from './shiny';
 import {RunBag} from './run-bag';
 import {ownsRunItem,ownsMachine,runMachines} from './run-ownership';
@@ -281,7 +282,7 @@ export class TowerStore {
       candidateIVs: row.state==='recruit' && battle ? Object.fromEntries(this.recruitmentTeam(battle).map(set=>[set.species,set.ivs ?? pokemonSets[set.species as keyof typeof pokemonSets].ivs])) : {},
       collectionIVs:row.state==='recruit' && battle ? Object.fromEntries((this.recruitmentTeam(battle).map(set=>set.species)).map(name=>[name,this.savedTraining(owner,name).profile.ivs])) : {},
       candidateMoves: row.state==='recruit' && battle ? Object.fromEntries(this.recruitmentTeam(battle).map(set=>[set.species,set.moves])) : {},
-      candidateDetails:row.state==='recruit' && battle?Object.fromEntries(this.recruitmentTeam(battle).filter(set=>isCollectibleSpecies(set.species)).map(set=>[set.species,{ability:set.ability,nature:set.nature,moves:set.moves.map(m=>Showdown.Dex.moves.get(m).name),baseStats:{...Showdown.Dex.species.get(set.species).baseStats},types:[...Showdown.Dex.species.get(set.species).types],teraType:set.teraType as import('../data/tera').TeraType|undefined,shiny:!!set.shiny}])):{},
+      candidateDetails:row.state==='recruit' && battle?Object.fromEntries(this.recruitmentTeam(battle).filter(set=>isCollectibleSpecies(set.species)).map(set=>[set.species,{...(set.raidForme?{forme:set.raidForme}:{}),ability:set.ability,nature:set.nature,moves:set.moves.map(m=>Showdown.Dex.moves.get(m).name),baseStats:{...Showdown.Dex.species.get(set.raidForme??set.species).baseStats},types:[...Showdown.Dex.species.get(set.raidForme??set.species).types],teraType:set.teraType as import('../data/tera').TeraType|undefined,shiny:!!set.shiny}])):{},
       collectionMoves: row.state==='recruit' && battle ? Object.fromEntries(this.recruitmentTeam(battle).map(set=>[set.species,this.unlockedMoves(owner,set.species)])) : {},
       currentMoves: row.state==='recruit' && battle ? Object.fromEntries(this.recruitmentTeam(battle).map(set=>[set.species,(JSON.parse((this.db.prepare('SELECT profiles FROM runs WHERE id=?').get(row.id) as {profiles:string}).profiles)[set.species] ?? this.savedTraining(owner,set.species).profile).moves])) : Object.fromEntries(this.roster(row.id).map(name=>[name,this.runProfiles(row.id)[name]?.moves ?? this.savedTraining(owner,name).profile.moves])),
       lastMoveGain: (()=>{const saved=this.db.prepare('SELECT move_gain FROM recruitments JOIN battles ON battles.id=recruitments.battle_id WHERE battles.run_id=? ORDER BY battles.encounter_order DESC, battles.attempt DESC LIMIT 1').get(row.id) as {move_gain:string|null}|undefined;return saved?.move_gain ? JSON.parse(saved.move_gain) : null;})(),
@@ -384,7 +385,7 @@ export class TowerStore {
       VALUES (?,?,?,?,?,?,?,?,?,'active',0,?,?,0,?,?,?,?,?,(SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id,runId,floor,player,raid.opponentTeam,JSON.stringify(seed),engineVersion,FORMAT,'tower-policy-v10',JSON.stringify([raid.species]),rule,attempt,JSON.stringify(this.battleItemBag(runId)),JSON.stringify(this.activeUpgrades(runId,floor).map(u=>u.kind).sort()),JSON.stringify({p1:0,p2:0}),JSON.stringify(this.trainerEquipment(runId)),runId);
     this.db.prepare("UPDATE runs SET state='battle' WHERE id=?").run(runId);return id;
   }
-  private recruitmentTeam(battle:BattleRow){const raids=new RaidEvents(this.db),row=raids.forBattle(battle.id);return Showdown.Teams.unpack(row?raids.snapshot(row).recruitTeam:battle.opponent_team)??[];}
+  private recruitmentTeam(battle:BattleRow):RaidRecruitSet[]{const raids=new RaidEvents(this.db),row=raids.forBattle(battle.id);return row?raids.recruitmentTeam(row):Showdown.Teams.unpack(battle.opponent_team)??[];}
   private createBattle(runId: string, floor: number, selected: string[],challenger?:SavedChallengerDefinition,special?:import('./trainer-event-battle').TrainerEventBattleSnapshot): string {
     const pending=this.retryState(runId).pending_battle_id;
     if(pending)return this.createRetryBattle(runId,selected,pending);
@@ -739,14 +740,15 @@ export class TowerStore {
         this.db.prepare('INSERT OR IGNORE INTO unlocks VALUES (?, ?)').run(owner, chosen);
         const opponent=this.recruitmentTeam(battle).find(set=>set.species===chosen)!;
         const incoming=(opponent.ivs ?? pokemonSets[chosen as keyof typeof pokemonSets].ivs) as StatBlock,before=this.savedTraining(owner,chosen);
-        const raidIndividual=new RaidEvents(this.db).forBattle(battleId)?{nature:opponent.nature,ability:opponent.ability,moves:opponent.moves,teraType:opponent.teraType as TrainingProfile['teraType'],gender:opponent.gender as TrainingProfile['gender'],shiny:!!opponent.shiny,forme:undefined}:{};
+        const raidIndividual=new RaidEvents(this.db).forBattle(battleId)?{nature:opponent.nature,ability:opponent.ability,moves:opponent.moves,teraType:opponent.teraType as TrainingProfile['teraType'],gender:opponent.gender as TrainingProfile['gender'],shiny:!!opponent.shiny,forme:opponent.raidForme}:{};
         const improved=Object.fromEntries(statKeys.map(stat=>[stat,Math.max(before.profile.ivs[stat],incoming[stat])])) as StatBlock;
         ivGain={species:chosen,changes:statKeys.filter(stat=>improved[stat]>before.profile.ivs[stat]).map(stat=>({stat,from:before.profile.ivs[stat],to:improved[stat]}))};
         this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,chosen,JSON.stringify({...before.profile,...raidIndividual,gender:wasUnlocked ? before.profile.gender : opponent.gender || 'N',ivs:improved,shiny:!!before.profile.shiny||!!opponent.shiny}),before.revision+1);
+        if(raidIndividual.forme)saveTrainingForm(this.db,owner,chosen,{...before.profile,...raidIndividual,ivs:improved});
         const snapshots=JSON.parse((this.db.prepare('SELECT profiles FROM runs WHERE id=?').get(run.id) as {profiles:string}).profiles) as Record<string,TrainingProfile>;
         const current=snapshots[chosen] ?? structuredClone(before.profile);Object.assign(current,raidIndividual);if(!roster.includes(chosen))current.gender=(opponent.gender || 'N') as import('../data/gender').PokemonGender;
         const known=this.unlockedMoves(owner,chosen);
-        const available=opponent.moves.filter(move=>moveLearnsets[chosen].legalMoves.includes(move));
+        const available=opponent.moves.filter(move=>(opponent.raidForme?profileLearnset(chosen,opponent.raidForme):moveLearnsets[chosen]).legalMoves.includes(move));
         moveGain={species:chosen,moves:available.filter(move=>!known.includes(move))};
         for(const move of available)this.db.prepare('INSERT OR IGNORE INTO move_unlocks VALUES (?,?,?)').run(owner,chosen,move);
         if(swap!==undefined && swap!==null) {

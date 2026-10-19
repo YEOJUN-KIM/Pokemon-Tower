@@ -12,6 +12,7 @@ import {POINT_TEAM_MARKER} from '../data/teams';
 import {applyRewardOption} from './rewards';
 import {resolveRaidPhases} from './raid-phases';
 import {validateRaidHP} from '../battle/raid-hp';
+import {packedRaidRecruitment,raidRecruitmentTeam} from './raid-recruitment';
 
 function weighted<T extends {weight:number}>(pool:readonly T[],random:()=>number):T{
  let draw=random()*pool.reduce((sum,p)=>sum+p.weight,0);
@@ -36,7 +37,8 @@ export function createRaidSnapshot(db:DatabaseSync,runId:string,floor:number,ran
  const opponentTeam=Showdown.Teams.pack(phases.map(phase=>({...set({...individual,moves:[...phase.moves]}),item:phase.item??''})));
  const recruitProfile={...individual,evs:Object.fromEntries(statKeys.map(k=>[k,0])) as StatBlock};
  const reward=snapshotRankReward(db,runId,boss.rewardProfile,random).rewardDefinition;
- const snapshot:RaidSnapshot={version:1,transformationAdapter:1,...(boss.raidHpMultiplier!==undefined?{raidHpMultiplier:boss.raidHpMultiplier}:{}),bossId:boss.id,species:boss.species,category:boss.category,routeId:route.id,individual,phases,opponentTeam,recruitTeam:Showdown.Teams.pack([set(recruitProfile)]),reward:{...reward,title:'특별한 보상'}};
+ const snapshot:RaidSnapshot={version:1,transformationAdapter:1,recruitment:boss.recruitment??{mode:'baseSpecies'},...(boss.raidHpMultiplier!==undefined?{raidHpMultiplier:boss.raidHpMultiplier}:{}),bossId:boss.id,species:boss.species,category:boss.category,routeId:route.id,individual,phases,opponentTeam,recruitTeam:Showdown.Teams.pack([set(recruitProfile)]),reward:{...reward,title:'특별한 보상'}};
+ snapshot.recruitTeam=packedRaidRecruitment(snapshot);
  validateRaidHP(snapshot);return snapshot;
 }
 type RaidRow={event_id:string;snapshot_json:string;battle_id:string|null};
@@ -46,6 +48,7 @@ export class RaidEvents{
  row(eventId:string){return this.db.prepare('SELECT * FROM raid_encounters WHERE event_id=?').get(eventId) as RaidRow|undefined;}
  forBattle(battleId:string){return this.db.prepare('SELECT * FROM raid_encounters WHERE battle_id=?').get(battleId) as RaidRow|undefined;}
  snapshot(row:RaidRow){return JSON.parse(row.snapshot_json) as RaidSnapshot;}
+ recruitmentTeam(row:RaidRow){return raidRecruitmentTeam(this.snapshot(row));}
  view(eventId:string){const row=this.row(eventId);if(!row)return {};const saved=this.snapshot(row),status=(this.db.prepare('SELECT status FROM run_events WHERE id=?').get(eventId) as {status:string}).status;return {raid:{spriteId:Showdown.Dex.species.get(saved.species).num,category:saved.category},phase:status==='reward'?'reward' as const:row.battle_id?'battle' as const:'choice' as const};}
  start(eventId:string,battleId:string){this.db.prepare('UPDATE raid_encounters SET battle_id=? WHERE event_id=?').run(battleId,eventId);this.db.prepare("UPDATE run_events SET choice_id='challenge' WHERE id=?").run(eventId);}
  retry(previous:string,next:string){this.db.prepare('UPDATE raid_encounters SET battle_id=? WHERE battle_id=?').run(next,previous);}

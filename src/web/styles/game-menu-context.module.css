@@ -1,0 +1,6 @@
+.space {height:48px;flex:0 0 48px;}
+.scope.scope {position:fixed!important;inset:auto 8px 8px!important;width:auto!important;height:48px!important;box-sizing:border-box;margin:0!important;padding:6px 10px!important;display:flex!important;align-items:center;justify-content:space-between;gap:8px;overflow:hidden!important;background:#202937!important;color:#e8edf3!important;border:1px solid #647080!important;border-radius:4px!important;}
+.scope.scope::backdrop {background:transparent;pointer-events:none;}
+:where(.scope) :global(.game-menu-footer) {flex:1;display:flex!important;justify-content:center;flex-wrap:wrap;gap:4px 16px!important;border:0!important;margin:0!important;padding:0!important;background:transparent!important;color:#e8edf3!important;font-size:11px!important;}
+@media(max-width:600px){.space {height:60px;flex-basis:60px;}.scope.scope {height:60px!important;padding:5px!important;}:where(.scope) :global(.game-menu-footer){gap:3px 8px!important;font-size:9px!important;}}
+.dialog.dialog.dialog.dialog {max-height:calc(100dvh - 110px)!important;inset:0!important;margin:auto!important;transform:translateY(-30px);}

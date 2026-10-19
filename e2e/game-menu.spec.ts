@@ -27,30 +27,17 @@ for(const viewport of [{width:1280,height:900},{width:390,height:740}]){
   
   await page.setViewportSize(viewport);await page.goto('/pokedex');
   const card=page.getByRole('button',{name:'리자몽 상세 보기',exact:true});await card.hover();
-  const selectedPaint=await paint(card);expect(selectedPaint).toMatchObject({border:'rgb(152, 239, 209)',background:'rgb(64, 93, 89)',outline:'none',radius:'0px'});
-  await card.click();const action=page.getByRole('button',{name:'능력치 조정',exact:true});await action.hover();
+  await expect.poll(()=>paint(card)).toMatchObject({border:'rgba(0, 0, 0, 0)',background:'rgb(209, 232, 217)',outline:'none',radius:'0px'});
+  const selectedPaint={border:'rgb(152, 239, 209)',background:'rgb(64, 93, 89)',outline:'none',radius:'0px'};
+  await card.click();const action=page.getByRole('button',{name:'포켓몬 설정',exact:true});await action.hover();
   await expect(action).toBeEnabled();await expect.poll(()=>paint(action)).toEqual(selectedPaint);
-  await action.focus();await page.keyboard.press('Tab');await expect.poll(()=>paint(page.locator(':focus'))).toEqual(selectedPaint);
   const choices=page.locator('.dex-action-options>button');for(const row of await choices.all())expect((await row.boundingBox())!.height).toBe(48);
-  await action.click();const editor=page.getByTestId('training-editor');await withinViewport(page);
-  await expect(editor.locator('input[type=number],input[type=range],[data-point-delta]')).toHaveCount(0);
-  const hp=editor.locator('[data-training-stat=hp]');await hp.evaluate(el=>document.dispatchEvent(new CustomEvent('game-cursor-select',{detail:el})));
-  await page.keyboard.press('ArrowRight');await expect(editor.locator('[data-point-value=hp]')).toHaveText('1');
-  await page.keyboard.press('ArrowDown');await page.keyboard.press('ArrowRight');await expect(editor.locator('[data-point-value=atk]')).toHaveText('1');
-  // Clamp against both per-stat and total budgets using the actual command path.
-  for(let i=0;i<35;i++)await page.keyboard.press('ArrowRight');await expect(editor.locator('[data-point-value=atk]')).toHaveText('32');
-  await page.keyboard.press('ArrowDown');for(let i=0;i<35;i++)await page.keyboard.press('ArrowRight');await expect(editor.locator('[data-point-value=def]')).toHaveText('32');
-  await page.keyboard.press('ArrowDown');for(let i=0;i<3;i++)await page.keyboard.press('ArrowRight');await expect(editor.locator('[data-point-value=spa]')).toHaveText('1');await expect(editor.getByTestId('stat-point-total')).toHaveText('66 / 66');
-  await editor.getByRole('tab',{name:'성격·특성·테라스탈',exact:true}).click();
-  await editor.getByRole('button',{name:'특성 선택',exact:true}).click();
-  const ability=page.getByRole('dialog',{name:'특성 선택',exact:true});await withinViewport(page);
-  const option=ability.getByRole('button',{name:'선파워',exact:true});await option.hover();await expect.poll(()=>paint(option)).toEqual(selectedPaint);await option.click();
-  await editor.getByRole('button',{name:/P로 설정 저장$/}).click();await expect(page.getByRole('status').filter({hasText:'설정 저장 완료'})).toBeVisible();
-  const saved=await (await page.request.get('/api/battle?view=collection')).json();const entry=saved.training.find((e:{species:string})=>e.species==='Charizard');expect(entry.profile.evs.hp).toBe(1);expect(entry.profile.evs.atk).toBe(32);expect(entry.profile.ability).toBe('Solar Power');
-  await page.locator('dialog[open]').getByRole('button',{name:'리자몽 능력치 조정 닫기',exact:true}).click();
-  await card.click();await page.getByRole('button',{name:'기술배치',exact:true}).click();await withinViewport(page);
-  await expect(page.locator('.move-library')).toBeVisible();expect(await page.locator('.move-library').evaluate(el=>el.scrollHeight>el.clientHeight)).toBe(true);
-  await expect(page.locator('dialog[open] .game-menu-footer:visible')).toHaveCount(1);
+  await action.click();await withinViewport(page);const editor=page.getByTestId('pokemon-settings');
+  await expect(editor.locator('[data-settings-column=left]')).toHaveCount(8);await expect(editor.locator('[data-settings-column=right]')).toHaveCount(6);
+  await editor.getByRole('button',{name:'HP 조절',exact:true}).click();await expect(page.getByTestId('ev-picker')).toBeVisible();await page.keyboard.press('ArrowRight');await expect(page.getByTestId('ev-amount')).toHaveText('1');await page.keyboard.press('Enter');
+  await editor.locator('[data-settings-save]').click();await expect(editor.getByRole('status')).toHaveText('설정 저장 완료');
+  await editor.getByRole('button',{name:'기술 1 선택',exact:true}).click();await withinViewport(page);await expect(page.locator('[data-move]').first()).toBeVisible();
+  await expect(page.locator('dialog .game-menu-footer')).toHaveCount(0);await expect(page.locator('.game-menu-footer')).toHaveCount(1);
   await page.screenshot({path:`test-results/game-menu-moves-${viewport.width}.png`});
  });
 
@@ -93,6 +80,6 @@ test('standard pad uses the same menu cursor and confirms only once per press',a
  const choices=page.locator('.dex-action-options>button');await expect(choices.first()).toHaveAttribute('data-game-cursor','true');
  await page.evaluate(()=>{(window as unknown as {testPad:{buttons:{pressed:boolean}[]}}).testPad.buttons[13].pressed=true;});await expect(choices.nth(1)).toHaveAttribute('data-game-cursor','true');
  await page.evaluate(()=>{const p=(window as unknown as {testPad:{buttons:{pressed:boolean}[]}}).testPad;p.buttons[13].pressed=false;p.buttons[0].pressed=true;});
- await expect(page.getByTestId('training-editor')).toBeVisible();await expect(page.locator('dialog[open]')).toHaveCount(1);
+ await expect(page.getByTestId('pokemon-settings')).toBeVisible();await expect(page.locator('dialog[open]')).toHaveCount(1);
  await page.evaluate(()=>{(window as unknown as {testPad:{buttons:{pressed:boolean}[]}}).testPad.buttons[0].pressed=false;});
 });

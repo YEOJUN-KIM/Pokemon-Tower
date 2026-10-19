@@ -4,6 +4,7 @@ import {useEffect,useRef} from 'react';
 import {effect} from './game-audio';
 
 type Select=(element:HTMLElement|null|undefined)=>void;
+export type GameMenuKey={key:string;event:KeyboardEvent;cursor:HTMLButtonElement|null;select:Select};
 function directionalButton(cursor:HTMLButtonElement,items:HTMLButtonElement[],key:string){
   const origin=cursor.getBoundingClientRect(),x=origin.x+origin.width/2,y=origin.y+origin.height/2,horizontal=['arrowleft','arrowright'].includes(key),positive=['arrowright','arrowdown'].includes(key);
   return items.filter(item=>item!==cursor).map(item=>{const rect=item.getBoundingClientRect(),dx=rect.x+rect.width/2-x,dy=rect.y+rect.height/2-y,along=horizontal?dx:dy,cross=horizontal?dy:dx,aligned=horizontal?rect.top<origin.bottom&&rect.bottom>origin.top:rect.left<origin.right&&rect.right>origin.left;
@@ -31,8 +32,10 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
       let current=target && items.includes(target as HTMLButtonElement) ? target as HTMLButtonElement : saved && items.includes(saved.element) ? saved.element : items.find(item=>keyOf(item)===saved?.key);
       if(!current && saved?.element.isConnected){const tabScope=saved.element.closest('[data-tab-scope]');if(tabScope)current=items.find(item=>item.closest('[data-tab-scope]')===tabScope);}
       current ??= typeof scope==='string' ? items.find(item=>item.matches('.dex-card.selected')) ?? items[0] : items.find(item=>item.matches('[data-initial-focus],[autofocus],.recruit-dialog-actions .primary-button')) ?? items.find(item=>!item.closest('.dex-dialog-heading')) ?? items[0];
-      if(marked.current!==current){marked.current?.removeAttribute('data-game-cursor');marked.current=current ?? null;}
+      const changed=marked.current!==current;
+      if(changed){marked.current?.removeAttribute('data-game-cursor');marked.current=current ?? null;}
       if(current){memory.current.set(scope,{element:current,key:keyOf(current)});current.setAttribute('data-game-cursor','true');if(typeof scope==='string')callbacks.current.onSelect?.(current);if(current.matches('[data-game-text-input]') && document.activeElement!==current)current.focus({preventScroll:true});else if(document.activeElement instanceof HTMLElement && document.activeElement.matches('[data-game-text-input]') && document.activeElement!==current)document.activeElement.blur();}
+      if(changed&&current)current.dispatchEvent(new CustomEvent('game-cursor-change',{bubbles:true}));
       return current ?? null;
     }
     const select:Select=element=>{const previous=marked.current;draw(element);if(element && marked.current!==previous)effect('cursor');};
@@ -43,6 +46,7 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
       if(event.key==='Tab'){document.body.dataset.gameInput='native';return;}
       if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','PageUp','PageDown','Enter'].includes(event.key) || ['z','x','c','a','s','q','e','v','f','r'].includes(event.key.toLowerCase()))document.body.dataset.gameInput='cursor';
       const key=event.key.toLowerCase(),scope=context(),cursor=draw();
+      if(scope instanceof HTMLDialogElement){const command=new CustomEvent<GameMenuKey>('game-menu-key',{cancelable:true,detail:{key,event,cursor,select}});scope.dispatchEvent(command);if(command.defaultPrevented){event.preventDefault();return;}}
       if(key==='b'&&scope instanceof HTMLDialogElement){const bag=scope.querySelector<HTMLButtonElement>('[data-testid=tower-shop] [data-open-bag]');if(bag){event.preventDefault();if(!event.repeat&&!bag.disabled)bag.click();return;}}
       const pocketScope=cursor?.closest('[data-keyboard-pocket-scope]')??(scope instanceof HTMLDialogElement?scope.querySelector('[data-keyboard-pocket-scope]'):null);
       if(pocketScope&&['arrowleft','arrowright'].includes(key)){

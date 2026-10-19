@@ -1,5 +1,6 @@
 'use client';
 import {useEffect,useRef,type ComponentProps,type ReactNode} from 'react';
+import {useManagedGameMenu} from './game-menu-context';
 
 export type GameControl={key:string;label:string};
 export const menuControls:GameControl[]=[{key:'방향키',label:'이동'},{key:'Enter / Z',label:'결정'},{key:'X',label:'뒤로'}];
@@ -17,8 +18,9 @@ export function GameAdjustRow({onAdjust,children,...props}:Omit<ComponentProps<'
  useEffect(()=>{const row=ref.current;const adjust=(event:Event)=>onAdjust((event as CustomEvent<number>).detail);row?.addEventListener('game-adjust',adjust);return()=>row?.removeEventListener('game-adjust',adjust);},[onAdjust]);
  return <button type="button" {...props} ref={ref} data-adjustable onClick={event=>{const box=event.currentTarget.getBoundingClientRect();onAdjust(event.detail===0||event.clientX>=box.left+box.width/2?1:-1);}}>{children}</button>;
 }
-export function GameMenuFooter({controls=menuControls,hidden=false,className=''}:{controls?:GameControl[];hidden?:boolean;className?:string}){
- if(hidden)return null;
+export function GameMenuFooter({controls=menuControls,hidden=false,className='',outlet=false}:{controls?:GameControl[];hidden?:boolean;className?:string;outlet?:boolean}){
+ const managed=useManagedGameMenu();
+ if(hidden||(managed&&!outlet))return null;
  return <div className={`game-menu-footer ${className}`} role="note" aria-label="조작 안내">{controls.map(control=><span key={control.key}><kbd>{control.key}</kbd>{control.label}</span>)}</div>;
 }
 export function GameStatus({children,className=''}:{children:ReactNode;className?:string}){

@@ -14,7 +14,7 @@ t('brassius','콜사','gym','Grass','status','수면 + 넘치는씨 그래스필
  'Arboliva;Seed Sower;Sitrus Berry;Modest;Energy Ball|Earth Power|Dazzling Gleam|Leech Seed',
  'Sudowoodo;Sturdy;Expert Belt;Adamant;Trailblaze|Stone Edge|Fire Punch|Sucker Punch']);
 t('iono','모야모','gym','Electric','special','전기 운영 + 부유 전기 테라 무우마직','Electric',[
- 'Kilowattrel;Wind Power;;Timid;Thunderbolt|Hurricane|Tailwind|Volt Switch',
+ 'Kilowattrel;Wind Power;;Timid;Thunderbolt|Hurricane|Air Slash|Volt Switch',
  'Bellibolt;Electromorphosis;Leftovers;Modest;Parabolic Charge|Muddy Water|Reflect|Sucker Punch',
  'Mismagius;Levitate;Expert Belt;Timid;Tera Blast|Shadow Ball|Mystical Fire|Energy Ball']);
 t('kofu','곤포','gym','Water','special','비 + 메가런처 + 물 테라 집게해머','Water',[
@@ -27,7 +27,7 @@ t('ryme','라임','gym','Ghost','status','상태이상 + 성묘 + 음파 기술'
  'Toxtricity;Punk Rock;Throat Spray;Modest;Overdrive|Boomburst|Hex|Sludge Bomb']);
 t('tulip','리파','gym','Psychic','special','특방 하락 + 예리함 물리 중견 + 에스퍼 테라','Psychic',[
  'Espathra;Opportunist;;Timid;Lumina Crash|Dazzling Gleam|Reflect|Shadow Ball',
- 'Gallade;Sharpness;Life Orb;Jolly;Psycho Cut|Sacred Sword|Leaf Blade|Night Slash',
+ 'Gallade;Sharpness;Expert Belt;Jolly;Psycho Cut|Sacred Sword|Leaf Blade|Night Slash',
  'Florges;Flower Veil;Sitrus Berry;Modest;Psychic|Moonblast|Energy Ball|Calm Mind']);
 t('grusha','그루샤','gym','Ice','setup','순풍 + 물리 압박 + 얼음 테라','Ice',[
  'Frosmoth;Ice Scales;Focus Sash;Timid;Ice Beam|Bug Buzz|Tailwind|Quiver Dance',
@@ -36,7 +36,7 @@ t('grusha','그루샤','gym','Ice','setup','순풍 + 물리 압박 + 얼음 테�
 t('rika','칠리','elite','Ground','bulk','설치 + 안정적인 땅 운영 + 저수 토오','Ground',[
  'Donphan;Sturdy;Rocky Helmet;Adamant;Stealth Rock|Earthquake|Knock Off|Ice Shard',
  'Camerupt;Solid Rock;;Modest;Earth Power|Flamethrower|Flash Cannon|Ancient Power',
- 'Clodsire;Water Absorb;Leftovers;Careful;Earthquake|Poison Jab|Toxic|Recover']);
+ 'Clodsire;Water Absorb;Leftovers;Careful;Earthquake|Poison Jab|Stone Edge|Recover']);
 t('poppy','뽀삐','elite','Steel','bulk','설치 + 빛의장막 특수 압박 + 거대해머','Steel',[
  'Copperajah;Sheer Force;Sitrus Berry;Adamant;Stealth Rock|Heavy Slam|Play Rough|High Horsepower',
  'Magnezone;Sturdy;Light Clay;Modest;Light Screen|Tri Attack|Flash Cannon|Discharge',
@@ -46,7 +46,7 @@ t('larry-elite','청목','elite','Flying','physical','위협 + 스카프 유턴 
  'Altaria;Natural Cure;Sitrus Berry;Modest;Draco Meteor|Hurricane|Flamethrower|Ice Beam',
  'Flamigo;Scrappy;Life Orb;Jolly;Brave Bird|Close Combat|Throat Chop|Liquidation']);
 t('hassel','팔자크','elite','Dragon','setup','순풍 + 용의춤 + 드래곤 테라','Dragon',[
- 'Noivern;Infiltrator;;Timid;Draco Meteor|Hurricane|Taunt|Tailwind',
+ 'Noivern;Infiltrator;;Timid;Draco Meteor|Hurricane|Taunt|Flamethrower',
  'Haxorus;Mold Breaker;Lum Berry;Jolly;Dragon Dance|Outrage|Earthquake|Iron Head',
  'Baxcalibur;Thermal Exchange;Dragon Fang;Adamant;Glaive Rush|Icicle Crash|Earthquake|Ice Shard']);
 t('geeta','테사','champion',null,'balanced','킬라플로르 설치 → 특방 압박 → 총대장 피니시','Dark',[

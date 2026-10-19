@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readPrePaldeaRound2 as readFileSync} from './pre-paldea-round2';
 import {createHash} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import baseline from './fixtures/paldea-tuning-baseline.json' with {type:'json'};

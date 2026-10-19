@@ -79,7 +79,7 @@
           "moves": [
             "Thunderbolt",
             "Hurricane",
-            "Tailwind",
+            "Air Slash",
             "Volt Switch"
           ],
           "role": "lead"
@@ -276,7 +276,7 @@
         {
           "species": "Gallade",
           "ability": "Sharpness",
-          "item": "Life Orb",
+          "item": "Expert Belt",
           "nature": "Jolly",
           "moves": [
             "Psycho Cut",
@@ -420,7 +420,7 @@
           "moves": [
             "Earthquake",
             "Poison Jab",
-            "Toxic",
+            "Stone Edge",
             "Recover"
           ],
           "role": "ace",
@@ -584,7 +584,7 @@
             "Draco Meteor",
             "Hurricane",
             "Taunt",
-            "Tailwind"
+            "Flamethrower"
           ],
           "role": "lead"
         },

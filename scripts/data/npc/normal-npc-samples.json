@@ -32645,7 +32645,7 @@
             "moves": [
               "Thunderbolt",
               "Hurricane",
-              "Tailwind",
+              "Air Slash",
               "Volt Switch"
             ]
           }
@@ -33045,7 +33045,7 @@
         },
         {
           "species": "Gallade",
-          "item": "Life Orb",
+          "item": "Expert Belt",
           "gigantamax": false,
           "role": "middle",
           "profile": {
@@ -33366,7 +33366,7 @@
             "moves": [
               "Earthquake",
               "Poison Jab",
-              "Toxic",
+              "Stone Edge",
               "Recover"
             ],
             "teraType": "Ground"
@@ -33694,7 +33694,7 @@
               "Draco Meteor",
               "Hurricane",
               "Taunt",
-              "Tailwind"
+              "Flamethrower"
             ]
           }
         },

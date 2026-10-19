@@ -90,9 +90,9 @@ const globalStore = globalThis as typeof globalThis & {towerPersistentService?: 
 export function getTowerService() {
   // Refresh the development singleton once when this schema/behavior version changes.
   // Its recorded inputs recover the battle in the new service without spending tickets twice.
-  if(globalStore.towerPersistentServiceVersion!==78){
+  if(globalStore.towerPersistentServiceVersion!==79){
     const previous=globalStore.towerPersistentService;
-    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=78;
+    globalStore.towerPersistentService=undefined;globalStore.towerPersistentServiceVersion=79;
     if(previous)void previous.dispose().then(()=>previous.store.close()).catch(error=>console.error('Previous tower service shutdown failed',error));
   }
   // Runtime save data must not be traced into the deployment bundle.

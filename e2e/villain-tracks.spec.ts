@@ -8,8 +8,8 @@ import {grantStoredReward} from '../src/server/inventory-grants';
 import {ToolVouchers} from '../src/server/tool-vouchers';
 import {mkdirSync} from 'node:fs';
 const capture='artifacts/qa/screenshots/villain-tracks';mkdirSync(capture,{recursive:true});
-for(const width of [1280,390])for(const reducedMotion of ['no-preference','reduce'] as const)test(`independent chain and shared voucher ${width}px ${reducedMotion}`,async({page,context})=>{
- const owner='track_'+randomBytes(8).toString('hex'),f=trackFixture('.data/e2e.sqlite','galactic',owner),s=f.store;
+for(const organization of ['rocket','skull'] as const)for(const width of [1280,390])for(const reducedMotion of ['no-preference','reduce'] as const)test(`${organization} completed chain and shared voucher ${width}px ${reducedMotion}`,async({page,context})=>{
+ const owner='track_'+randomBytes(8).toString('hex'),f=trackFixture('.data/e2e.sqlite',organization,owner),s=f.store;
  try{
   const auth=await new Accounts(s.db).register(owner,'villain-test-password',owner,undefined);
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
@@ -22,6 +22,7 @@ for(const width of [1280,390])for(const reducedMotion of ['no-preference','reduc
   for(const [i,stage] of ['grunt-1','grunt-2','officer','executive','boss'].entries()){
    if(i)trackEncounter(s,f.run,stage==='boss'?75:stage==='executive'?45:stage==='officer'?25:12,i*20+1);
    const event=s.view(owner).run!.event!,snapshot=new VillainCampaigns(s.db).row(event.id)!.snapshot_json;expect(event.villain!.stage).toBe(stage);
+   expect(JSON.parse(snapshot).sample.id).toBe((organization==='rocket'?['rocket-grunt','rocket-grunt','named-ariana','named-archer','named-giovanni']:['skull-grunt','skull-grunt','named-guzma','named-faba','named-lusamine'])[i]);
    await page.goto('/battle');
    await expect(page.locator('[data-event-choice]')).toHaveCount(0);
    if(i<2)await expect(page.getByTestId('rocket-ambush-notice')).toBeAttached();
@@ -30,7 +31,7 @@ for(const width of [1280,390])for(const reducedMotion of ['no-preference','reduc
    finishChallengerBattle(s,b.id);await page.reload();await expect(page.getByTestId('reward-modal')).toBeVisible();
    expect(s.view(owner).run!.floor).toBe(b.floor);expect(s.view(owner).run!.candidates).toEqual([]);
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-   await page.screenshot({path:`${capture}/${stage}-${width}-${reducedMotion}.png`,animations:'disabled'});
+   await page.screenshot({path:`${capture}/${organization}-${stage}-${width}-${reducedMotion}.png`,animations:'disabled'});
    await page.getByRole('button',{name:'확인',exact:true}).click();await expect(page.getByTestId('reward-modal')).toHaveCount(0);
   }
   expect(new VillainCampaigns(s.db).track(f.run)!.completed).toBe(1);
@@ -39,7 +40,7 @@ for(const width of [1280,390])for(const reducedMotion of ['no-preference','reduc
   await page.reload();await page.getByRole('button',{name:'배낭',exact:true}).click();
   const voucher=page.locator(`[data-bag-entry="${id}"]`);await voucher.click();await page.getByRole('button',{name:'사용',exact:true}).click();
   const candidates=page.getByTestId('tool-voucher-candidates');await expect(candidates.getByRole('button')).toHaveCount(4);await expect(candidates.locator('img')).toHaveCount(4);await expect.poll(()=>candidates.locator('img').evaluateAll(images=>images.every(image=>(image as HTMLImageElement).naturalWidth>0))).toBe(true);const first=new ToolVouchers(s.db,f.run).pending(id)!;
-  await page.screenshot({path:`${capture}/voucher-${width}-${reducedMotion}.png`,animations:'disabled'});
+  await page.screenshot({path:`${capture}/${organization}-voucher-${width}-${reducedMotion}.png`,animations:'disabled'});
   await page.reload();await page.getByRole('button',{name:'배낭',exact:true}).click();await page.locator(`[data-bag-entry="${id}"]`).click();await page.getByRole('button',{name:'사용',exact:true}).click();
   expect(new ToolVouchers(s.db,f.run).pending(id)).toEqual(first);await candidates.getByRole('button').first().click();
   await page.getByTestId('purchase-item-bag').click();await expect.poll(()=>s.db.prepare('SELECT quantity FROM run_reward_inventory WHERE id=?').get(id)!.quantity).toBe(0);

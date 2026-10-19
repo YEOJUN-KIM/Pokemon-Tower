@@ -7,51 +7,54 @@
       "organization": "rocket",
       "runs": 10000,
       "stageAverages": {
-        "grunt-1": 7.41,
-        "grunt-2": 15.8
+        "grunt-1": 7.42,
+        "grunt-2": 15.83,
+        "officer": 30.7,
+        "executive": 50.35,
+        "boss": 80.38
       },
-      "bossP50": null,
-      "bossP75": null,
-      "bossP90": null,
-      "completionPercent": 0,
-      "bossMissingPercent": 100,
-      "boss75To78Percent": null,
-      "meanInterval": 8.39,
-      "blockedAt": "officer"
+      "bossP50": 80,
+      "bossP75": 82,
+      "bossP90": 85,
+      "completionPercent": 99.98,
+      "bossMissingPercent": 0.02,
+      "boss75To78Percent": 33.286657331466294,
+      "meanInterval": 18.24,
+      "blockedAt": null
     },
     {
       "organization": "magma",
       "runs": 10000,
       "stageAverages": {
-        "grunt-1": 7.39,
-        "grunt-2": 15.75,
-        "executive": 50.34,
-        "boss": 80.36
+        "grunt-1": 7.44,
+        "grunt-2": 15.82,
+        "executive": 50.42,
+        "boss": 80.34
       },
       "bossP50": 80,
-      "bossP75": 83,
+      "bossP75": 82,
       "bossP90": 85,
-      "completionPercent": 99.99,
-      "bossMissingPercent": 0.01,
-      "boss75To78Percent": 33.383338333833386,
-      "meanInterval": 24.32,
+      "completionPercent": 99.96,
+      "bossMissingPercent": 0.04,
+      "boss75To78Percent": 33.85354141656663,
+      "meanInterval": 24.3,
       "blockedAt": null
     },
     {
       "organization": "aqua",
       "runs": 10000,
       "stageAverages": {
-        "grunt-1": 7.37,
-        "grunt-2": 15.77,
-        "executive": 50.49,
-        "boss": 80.38
+        "grunt-1": 7.38,
+        "grunt-2": 15.82,
+        "executive": 50.41,
+        "boss": 80.4
       },
       "bossP50": 80,
       "bossP75": 83,
       "bossP90": 85,
       "completionPercent": 99.98,
       "bossMissingPercent": 0.02,
-      "boss75To78Percent": 33.34666933386677,
+      "boss75To78Percent": 33.526705341068215,
       "meanInterval": 24.34,
       "blockedAt": null
     },
@@ -59,82 +62,47 @@
       "organization": "galactic",
       "runs": 10000,
       "stageAverages": {
-        "grunt-1": 7.35,
-        "grunt-2": 15.77,
-        "officer": 30.76,
-        "executive": 50.4,
-        "boss": 80.39
+        "grunt-1": 7.4,
+        "grunt-2": 15.76,
+        "officer": 30.7,
+        "executive": 50.43,
+        "boss": 80.29
       },
       "bossP50": 80,
-      "bossP75": 83,
+      "bossP75": 82,
       "bossP90": 85,
-      "completionPercent": 100,
-      "bossMissingPercent": 0,
-      "boss75To78Percent": 33.48,
-      "meanInterval": 18.26,
+      "completionPercent": 99.97,
+      "bossMissingPercent": 0.03,
+      "boss75To78Percent": 34.39031709512854,
+      "meanInterval": 18.22,
       "blockedAt": null
     },
     {
       "organization": "plasma",
       "runs": 10000,
       "stageAverages": {
-        "grunt-1": 7.41,
-        "grunt-2": 15.83,
-        "executive": 50.3,
-        "boss": 80.32
+        "grunt-1": 7.39,
+        "grunt-2": 15.76,
+        "executive": 50.4,
+        "boss": 80.33
       },
       "bossP50": 80,
       "bossP75": 82,
       "bossP90": 85,
       "completionPercent": 99.99,
       "bossMissingPercent": 0.01,
-      "boss75To78Percent": 33.98339833983398,
-      "meanInterval": 24.3,
+      "boss75To78Percent": 33.49334933493349,
+      "meanInterval": 24.31,
       "blockedAt": null
     },
     {
       "organization": "flare",
       "runs": 10000,
       "stageAverages": {
-        "grunt-1": 7.36,
-        "grunt-2": 15.76,
+        "grunt-1": 7.4,
+        "grunt-2": 15.82,
         "officer": 30.7,
         "executive": 50.39,
-        "boss": 80.38
-      },
-      "bossP50": 80,
-      "bossP75": 83,
-      "bossP90": 85,
-      "completionPercent": 100,
-      "bossMissingPercent": 0,
-      "boss75To78Percent": 33.24,
-      "meanInterval": 18.25,
-      "blockedAt": null
-    },
-    {
-      "organization": "skull",
-      "runs": 10000,
-      "stageAverages": {
-        "grunt-1": 7.44,
-        "grunt-2": 15.83,
-        "officer": 30.75
-      },
-      "bossP50": null,
-      "bossP75": null,
-      "bossP90": null,
-      "completionPercent": 0,
-      "bossMissingPercent": 100,
-      "boss75To78Percent": null,
-      "meanInterval": 11.65,
-      "blockedAt": "executive"
-    },
-    {
-      "organization": "macrocosmos",
-      "runs": 10000,
-      "stageAverages": {
-        "grunt-1": 7.41,
-        "grunt-2": 15.73,
-        "executive": 50.43,
         "boss": 80.42
       },
       "bossP50": 80,
@@ -142,8 +110,45 @@
       "bossP90": 85,
       "completionPercent": 99.99,
       "bossMissingPercent": 0.01,
-      "boss75To78Percent": 33.333333333333336,
-      "meanInterval": 24.34,
+      "boss75To78Percent": 32.62326232623262,
+      "meanInterval": 18.25,
+      "blockedAt": null
+    },
+    {
+      "organization": "skull",
+      "runs": 10000,
+      "stageAverages": {
+        "grunt-1": 7.37,
+        "grunt-2": 15.72,
+        "officer": 30.69,
+        "executive": 50.47,
+        "boss": 80.41
+      },
+      "bossP50": 80,
+      "bossP75": 83,
+      "bossP90": 85,
+      "completionPercent": 100,
+      "bossMissingPercent": 0,
+      "boss75To78Percent": 32.87,
+      "meanInterval": 18.26,
+      "blockedAt": null
+    },
+    {
+      "organization": "macrocosmos",
+      "runs": 10000,
+      "stageAverages": {
+        "grunt-1": 7.37,
+        "grunt-2": 15.72,
+        "executive": 50.41,
+        "boss": 80.3
+      },
+      "bossP50": 80,
+      "bossP75": 82,
+      "bossP90": 85,
+      "completionPercent": 99.98,
+      "bossMissingPercent": 0.02,
+      "boss75To78Percent": 34.016803360672135,
+      "meanInterval": 24.31,
       "blockedAt": null
     }
   ]

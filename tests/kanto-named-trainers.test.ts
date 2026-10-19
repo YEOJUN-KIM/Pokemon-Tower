@@ -48,6 +48,7 @@ for(const id of ids){
 
 test('Kanto-only review never changes Johto or Rocket boss identities and builds',()=>{
  const johto=new Set(namedTrainerSamples.filter(s=>s.generation===2).map(s=>s.id));johto.add('named-giovanni');
+ johto.delete('named-ariana'); // Added after this Kanto-only historical baseline.
  const hash=createHash('sha256').update(JSON.stringify(runtime.filter(r=>johto.has(r.id)||r.id.startsWith('rocket-')))).digest('hex');
  assert.equal(hash,'607183d0a54d077aab6ae53b44e9776e8319ef9b4dba97a2822634ed0e8726c3');
  assert.notDeepEqual(normalNpcTemplate('named-koga-kanto',95,'gym'),normalNpcTemplate('named-koga',95,'elite'));

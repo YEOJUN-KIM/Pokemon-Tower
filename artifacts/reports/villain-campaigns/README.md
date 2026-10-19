@@ -1,28 +1,49 @@
-# 빌런 캠페인 검증 — 2026-10-19
+# 빌런 캠페인 완성 검증 — 2026-10-19
+
+기준 커밋: `13e78cdd4c6ba04379b877e63c6506998e991901`. 신규 아테나와 기존 자오보를 연결했다. 확률·간격·최소 층·보상·Tool Voucher·retry/부활 시스템은 그대로다.
+
+## 최종 연결
+
+- Rocket: `rocket-grunt ×2 → named-ariana → named-archer → named-giovanni → complete`.
+- Skull/Aether: `skull-grunt ×2 → named-guzma → named-faba → named-lusamine → complete`.
+- 플루메리 alias는 이번 캠페인에서 사용하지 않는다. 기존에 중단돼 있던 진행도도 초기화나 migration 없이 재개한다.
+
+## 아테나
+
+ID `named-ariana`, 세대 2, villain/officer, 최소 25층, tactical ceiling, ace Arbok, 기믹 없음. 기존 Named catalog와 reviewed source에 등록하고 exporter로 runtime을 생성했다. 선봉 규칙은 `preferredLead:[Arbok]` 하나뿐이다. 팀은 아래 3종 고정이다.
+
+| 포켓몬 | 특성 | 도구 | 기술 |
+|---|---|---|---|
+| Arbok | Intimidate | Black Sludge | Gunk Shot / Crunch / Glare / Earthquake |
+| Vileplume | Effect Spore | Leftovers | Giga Drain / Sludge Bomb / Sleep Powder / Moonblast |
+| Honchkrow | Moxie | Life Orb | Brave Bird / Sucker Punch / Night Slash / Roost |
+
+초상화는 기존 trainer importer의 `--only=ariana`로 가져와 출처를 등록했다. 기존 179개 reviewed/runtime 샘플 전체의 해시가 기준 커밋과 같음을 자동 테스트로 확인했다. 아폴로·비주기·구즈마·자오보·루자미네의 팀 해시도 개별 확인한다.
 
 ## 등장 분포
 
-조직별 10,000런, 총 80,000런. 모든 전투 승리·Teleport 없는 정상 100층 진행을 가정한다. 실제 구현과 같은 eligibility/pity 함수를 호출하며 2~100층 진입 시점을 시뮬레이션한다. 샘플 누락 잠금도 그대로 적용한다.
+조직별 10,000런, 총 80,000런. 모든 전투 승리·Teleport 없는 정상 100층 진행을 가정한다. 실제 구현과 같은 eligibility/pity 함수를 사용하고 2~100층 진입 시점을 시뮬레이션한다. 공통 base 5 / miss +3pp / cap 35 / gap 3 / boss gap 5를 유지한다.
 
-| 조직 | 단계별 평균 층 | 보스 p50/p75/p90 | 완료율 | 보스 미등장 | 평균 단계 간격 |
+| 조직 | 단계별 평균 층 | 보스 p50/p75/p90 | 완료율 | 보스 미등장 | 평균 간격 |
 |---|---|---|---:|---:|---:|
-| rocket | grunt-1: 7.41, grunt-2: 15.8 | —/—/— | 0% | 100% | 8.39 |
-| magma | grunt-1: 7.39, grunt-2: 15.75, executive: 50.34, boss: 80.36 | 80/83/85 | 99.99% | 0.01% | 24.32 |
-| aqua | grunt-1: 7.37, grunt-2: 15.77, executive: 50.49, boss: 80.38 | 80/83/85 | 99.98% | 0.02% | 24.34 |
-| galactic | grunt-1: 7.35, grunt-2: 15.77, officer: 30.76, executive: 50.4, boss: 80.39 | 80/83/85 | 100% | 0% | 18.26 |
-| plasma | grunt-1: 7.41, grunt-2: 15.83, executive: 50.3, boss: 80.32 | 80/82/85 | 99.99% | 0.01% | 24.3 |
-| flare | grunt-1: 7.36, grunt-2: 15.76, officer: 30.7, executive: 50.39, boss: 80.38 | 80/83/85 | 100% | 0% | 18.25 |
-| skull | grunt-1: 7.44, grunt-2: 15.83, officer: 30.75 | —/—/— | 0% | 100% | 11.65 |
-| macrocosmos | grunt-1: 7.41, grunt-2: 15.73, executive: 50.43, boss: 80.42 | 80/83/85 | 99.99% | 0.01% | 24.34 |
+| rocket | grunt-1: 7.42, grunt-2: 15.83, officer: 30.7, executive: 50.35, boss: 80.38 | 80/82/85 | 99.98% | 0.02% | 18.24 |
+| magma | grunt-1: 7.44, grunt-2: 15.82, executive: 50.42, boss: 80.34 | 80/82/85 | 99.96% | 0.04% | 24.3 |
+| aqua | grunt-1: 7.38, grunt-2: 15.82, executive: 50.41, boss: 80.4 | 80/83/85 | 99.98% | 0.02% | 24.34 |
+| galactic | grunt-1: 7.4, grunt-2: 15.76, officer: 30.7, executive: 50.43, boss: 80.29 | 80/82/85 | 99.97% | 0.03% | 18.22 |
+| plasma | grunt-1: 7.39, grunt-2: 15.76, executive: 50.4, boss: 80.33 | 80/82/85 | 99.99% | 0.01% | 24.31 |
+| flare | grunt-1: 7.4, grunt-2: 15.82, officer: 30.7, executive: 50.39, boss: 80.42 | 80/83/85 | 99.99% | 0.01% | 18.25 |
+| skull | grunt-1: 7.37, grunt-2: 15.72, officer: 30.69, executive: 50.47, boss: 80.41 | 80/83/85 | 100% | 0% | 18.26 |
+| macrocosmos | grunt-1: 7.37, grunt-2: 15.72, executive: 50.41, boss: 80.3 | 80/82/85 | 99.98% | 0.02% | 24.31 |
 
-로켓단은 아테나, 스컬단은 플루메리 샘플 누락으로 중단된다. 이를 확률 문제로 숨기거나 임의 NPC로 건너뛰지 않았다. 나머지 조직은 75~78층 보스 비중 약 33%, 중앙값 80층이므로 초기 제안 5/+3/35%, 간격 3/보스 5를 유지했다.
+Rocket 99.98%, Skull/Aether 100%로 중단 문제가 해소됐다. 보스 p50은 80층이고 75~78층 비중은 약 33%다. 조직별 확률을 따로 조작하지 않았다.
 
 ## 전투 벤치마크
 
-기존 simulate-hoenn-npcs의 네 팀·육성·장비 기준을 재사용했다. 최소 등장 층, basic/chaos, seed 3개씩. 독립 자동 전투이며 인간 승률/연속 런 생존율이 아니다.
+기존 simulate-hoenn-npcs의 네 팀·육성·장비 기준을 사용했다. 최소 등장 층, basic/chaos, seed 3개씩이며 실제 플레이어 승률이 아닌 독립 자동 전투 결과다.
 
 | NPC | 층 | 플레이어 승리 | 오류 |
 |---|---:|---:|---:|
+| named-ariana | 25 | 18/24 | 0 |
 | named-archer | 45 | 17/24 | 0 |
 | named-giovanni | 75 | 22/24 | 0 |
 | magma-executive-tabitha | 45 | 22/24 | 0 |
@@ -38,36 +59,34 @@
 | flare-executive-xerosic | 45 | 13/24 | 0 |
 | named-lysandre | 75 | 8/24 | 0 |
 | named-guzma | 25 | 24/24 | 0 |
+| named-faba | 45 | 18/24 | 0 |
 | named-lusamine | 75 | 8/24 | 0 |
 | named-oleana | 45 | 13/24 | 0 |
 | named-rose | 75 | 13/24 | 0 |
 
-총 432전, 오류 0. 각 대상에서 플레이어 승리 사례가 확인되었다. 아강·태홍 6/24, 비주기 22/24 등 난이도 편차는 후속 검토 대상이다. 이번 작업에서는 검토된 팀과 AI를 변경하지 않았다.
+총 480전, 오류 0. 아테나는 25층에서 플레이어 18/24승(75%), 평균 5.8턴이었다. 기술·특성·아이템은 Showdown validator로 확인했다. 무료 승리/사실상 승리 불가에 해당하지 않아 Life Orb를 유지했다. 기존 다른 간부·보스의 팀을 재설계하지 않았다.
 
-## 실행 결과
+## 자동 검증
 
-- 타입 검사 및 운영 빌드 통과.
-- 신규 캠페인/교환권/Teleport 후속 테스트 22개 통과.
-- Run Event·Chest·Merchant·Breeder·Teleport·Raid·Challenger·Rocket v1·Hidden Boss·Bag·Retry 보상 관련 회귀 138개 통과. 추가로 Raid 확률 회귀 1개 및 최신 Hidden Boss/신규 트랙 묶음 32개 통과.
-- E2E 10개 통과: Rocket v1 6개(마지막 공격/기절 포함), 신규 독립 트랙과 교환권 4개(1280/390px × 기본/동작 줄이기, 4배속, refresh/reconnect).
-- 후보마다 기존 도구 아이콘을 추가했다. 추가 후 신규 E2E 4개를 재실행해 아이콘 4개와 naturalWidth>0, 데스크톱/모바일 레이아웃을 확인했다.
-- CSS 구조 검사 통과. workspace 구조 검사는 기존 scripts/report-* 및 audit-alola의 docs 출력 규칙 위반 15건으로 실패한다. 해당 스크립트는 이번 작업에서 변경하지 않았다.
-- 전체 단위 테스트 1,198개 중 1,195개 통과, 3개 실패. 실패는 변경하지 않은 tests/paldea-round2.test.ts의 이전 빌드 baseline 기대값(Expert Belt / Stone Edge)과 현재 실제 샘플(빈 도구 / Toxic Spikes)의 불일치다. 해당 테스트·샘플·audit variant의 의미 있는 변경은 이번 diff에 없음을 확인했다. NPC 팀을 새로 디자인하지 말라는 범위에 따라 수정하지 않았다.
+- 타입 검사 / 운영 빌드 / reviewed-runtime exporter 일치 검사 통과.
+- 핵심 샘플·캠페인·교환권·카탈로그·일반모드 33개 통과. 신규 완성 검증 6개를 추가했다.
+- Run Event·Chest·Merchant·Breeder·Teleport·Raid·Challenger·Rocket v1·Hidden Boss·Bag·장착·Retry·트레이너 장비 등 회귀 163개 통과.
+- 새 NPC 한 행이 추가됐으므로 과거 checksum 검사에서 그 한 행만 제외하도록 historical projection을 갱신했다. 대신 기존 179개 전체 reviewed/runtime 행을 기준 커밋으로 고정하는 검사를 추가했다. 관련 preservation·팔데아 현재 검사 등 89개 통과.
+- E2E 14개 통과: Rocket v1 6개(마지막 공격/기절 포함), Rocket/Skull 완주·교환권 8개(1280/390px × 기본/동작 줄이기, 4배속, reconnect).
+- template 수 증가에 따른 검사 기대값을 180으로 갱신했고 관련 8개도 통과했다.
+- 전체 단위 테스트 1,204개 중 1,201개 통과, 3개 실패. 남은 실패는 기준 커밋에서도 존재하던 tests/paldea-round2.test.ts의 Expert Belt / Stone Edge 기대값과 현재 빈 도구 / Toxic Spikes 데이터 불일치다. 이번 변경으로 인한 실패는 없으며, 다른 NPC 팀을 변경하지 않는 범위에 따라 유지했다.
+- CSS 구조 검사와 최종 diff 공백 검사 통과.
 
-## 재현 자료
+## 재현
 
-- [실행 분포 JSON](distribution.json)
-- [전투 결과 및 입력 해시](battles.json)
-- [현재 설계와 수동 QA](../../../docs/villain-campaign-tracks.md)
+- `node scripts/export-normal-npc-runtime.mjs --check`
+- `node node_modules/tsx/dist/cli.mjs scripts/simulate-villain-campaigns.ts`
+- `node node_modules/tsx/dist/cli.mjs scripts/simulate-villain-battles.ts`
+- `node node_modules/tsx/dist/cli.mjs --test tests/villain-tracks.test.ts tests/villain-campaign-completion.test.ts`
+- `node --import tsx node_modules/@playwright/test/cli.js test e2e/villain-tracks.spec.ts e2e/villain-campaign.spec.ts`
 
-UI 캡처: artifacts/qa/screenshots/villain-tracks/ (생성 이미지, 저장소 ignore 대상).
+[분포 원본](distribution.json) · [전투 원본/입력 해시](battles.json) · [현재 설계와 수동 QA](../../../docs/villain-campaign-tracks.md)
 
-## 변경 파일 범위
+## 범위와 TODO
 
-- 데이터: villain-tracks.ts 신규, run-events.ts / rewards.ts / bag.ts 확장.
-- 서버: villain-track-samples.ts / villain-track-rewards.ts / tool-vouchers.ts 신규, villain-campaigns.ts / run-events.ts / tower-store.ts / run-bag.ts / rewards.ts 통합.
-- 저장: schema.ts / storage/migrations.ts (46), tower-service.ts singleton 갱신.
-- UI: tool-voucher-dialog.tsx 신규, bag.tsx / item-acquisition-dialog.tsx / run-event.tsx / battle-game.tsx / event-presentation.ts / reward-panel.tsx / shared/contracts.ts 확장.
-- 검증: villain-tracks.test.ts / tool-vouchers.test.ts / villain-track-fixture.ts / e2e/villain-tracks.spec.ts 신규. 기존 migration 기대값을 46으로 갱신하고 hidden-boss-fixture 및 raid-playtest를 독립 트랙과 분리해 고정했다.
-- 시뮬레이션: simulate-villain-campaigns.ts / simulate-villain-battles.ts / lib/villain-benchmark.ts 신규.
-- 문서: docs/villain-campaign-tracks.md 신규, 기존 Rocket 문서에 v1 안내 추가.
+아테나 등록/팀/초상화, 캠페인의 두 sample ID와 짧은 7세대 결과 문구, 테스트·현재 문서·시뮬레이션 결과만 수정했다. 개발 singleton 버전만 갱신해 이미 실행 중인 서버도 새 데이터로 재생성한다. DB 버전 46과 저장 snapshot은 유지한다. 업적·영구 격파 기록·토큰은 이번에도 구현하지 않았다.

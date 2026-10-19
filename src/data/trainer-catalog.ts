@@ -50,6 +50,7 @@ export const namedTrainerSamples:TrainerSample[]=[
   named(1,'blue','그린','champion',null,'balanced',['Pidgeot','Alakazam','Arcanine','Blastoise','Exeggutor','Machamp'],'다양한 타입과 공격 방식'),
   named(2,'falkner','비상','gym','Flying','speed',['Pidgeot','Noctowl','Skarmory','Swellow','Xatu','Honchkrow'],'비행 파티의 속도와 방어'),
   named(2,'archer','아폴로','villain',null,'status',['Houndoom','Golbat','Weezing','Muk','Crobat','Raticate'],'로켓단의 악·독 조합','archer','tactical'),
+  {...named(2,'ariana','아테나','villain',null,'status',['Arbok','Vileplume','Honchkrow'],'위협·마비·수면으로 흐름을 늦추고 돈크로우로 마무리','ariana','tactical'),title:'로켓단 간부',minFloor:25},
   named(2,'lance','목호','champion',null,'physical',['Dragonite','Gyarados','Charizard','Aerodactyl','Kingdra','Salamence'],'강한 드래곤과 비행 파트너'),
   named(3,'flannery','민지','gym','Fire','special',['Torkoal','Camerupt','Blaziken','Magcargo','Ninetales','Rapidash'],'느린 불꽃과 빠른 공격수'),
   named(3,'maxie','마적','villain',null,'physical',['Camerupt','Mightyena','Crobat','Weezing','Solrock','Claydol'],'마그마단의 땅·악·비행'),

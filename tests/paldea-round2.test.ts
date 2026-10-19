@@ -16,7 +16,7 @@ const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
 test('Paldea round 2 changes exactly the four requested build fields; Poppy and every other NPC are preserved',()=>{
  for(const [path,reference]of Object.entries(baseline.paths)){
   const d=JSON.parse(readFileSync(path,'utf8')),rows=d.trainers??d.samples??d;
-  assert.equal(hash(JSON.stringify(rows.filter((r:{id:string})=>!baseline.ids.includes(r.id)))),reference.otherHash,path);
+  assert.equal(hash(JSON.stringify(rows.filter((r:{id:string})=>r.id!=='named-ariana'&&!baseline.ids.includes(r.id)))),reference.otherHash,path);
   const expected=structuredClone(reference.rows);
   for(const row of expected)for(const p of row.team){
    const build='profile' in p?p.profile:p;

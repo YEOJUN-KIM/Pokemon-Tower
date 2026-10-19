@@ -25,23 +25,35 @@ DB 45 → 46은 위 세 테이블 추가이다. 기존 전투·행동·보상 sn
 
 | 조직 | officer (25+) | executive (45+) | boss (75+) |
 |---|---|---|---|
-| rocket | **아테나 샘플 없음 — 잠금** | `named-archer` 아폴로 | `named-giovanni` 비주기 |
+| rocket | `named-ariana` 아테나 | `named-archer` 아폴로 | `named-giovanni` 비주기 |
 | magma | 없음 | `magma-executive-tabitha` 호걸 | `named-maxie` 마적 |
 | aqua | 없음 | `aqua-executive-shelly` 이연 | `named-archie` 아강 |
 | galactic | `galactic-executive-mars` 마스 | `galactic-executive-jupiter` 주피터 | `named-cyrus` 태홍 |
 | plasma | 없음 | `plasma-executive-colress` 아크로마 | `named-ghetsis` 게치스 |
 | flare | `flare-executive-aliana` 아케비 | `flare-executive-xerosic` 크세로시키 | `named-lysandre` 플라드리 |
-| skull | `named-guzma` 구즈마 | **플루메리 샘플 없음 — 잠금** | `named-lusamine` 루자미네 |
+| skull | `named-guzma` 구즈마 | `named-faba` 자오보 | `named-lusamine` 루자미네 |
 | macrocosmos | 없음 | `named-oleana` 올리브 | `named-rose` 로즈 |
 
-`organizationGrunt`, trainer catalog, `villainLeaders`, reviewed NPC template를 해석하는 작은 resolver만 추가했다. trainer·팀·초상화 정의를 중복 생성하거나 팀 밸런스를 변경하지 않았다. `아테나/Ariana`, `플루메리/Plumeria`는 현재 활성 카탈로그/팀 template에 실제 샘플이 없어 `sampleId:null`로 명시했다. 다른 NPC 대체·단계 건너뛰기는 하지 않는다. **따라서 로켓단은 조무래기 2승 뒤, 스컬단은 구즈마 뒤에서 진행이 잠긴다.** 샘플이 준비되면 데이터의 해당 ID만 연결한다.
+`organizationGrunt`, trainer catalog, `villainLeaders`, reviewed NPC template를 재사용한다. 로켓단은 `rocket-grunt ×2 → named-ariana → named-archer → named-giovanni`, 스컬/에테르는 `skull-grunt ×2 → named-guzma → named-faba → named-lusamine`으로 완주한다. 구즈마 격파로 재단 내부의 기록을 확보하고, 자오보 격파로 루자미네의 위치를 확인한다. 기존 플루메리 alias는 이번 캠페인에서 사용하지 않는다.
+
+### 아테나 신규 샘플
+
+아테나만 새로 추가했다. 성도 계열의 기존 `named-*` 카탈로그 명명과 공통 reviewed source `scripts/data/npc/normal-npc-samples.json`을 사용하고, `scripts/export-normal-npc-runtime.mjs`로 runtime을 생성한다. `named-ariana`, 세대 2, villain/officer, 최소 25층, AI ceiling tactical, ace Arbok, 기믹 없음이다. 고정 3종이며 `selectionRules: {preferredLead:['Arbok']}`만 적용한다. Ace를 마지막에 두는 규칙이나 추가 required 조건은 없다.
+
+| 포켓몬 | 특성 | 도구 | 기술 |
+|---|---|---|---|
+| Arbok | Intimidate | Black Sludge | Gunk Shot / Crunch / Glare / Earthquake |
+| Vileplume | Effect Spore | Leftovers | Giga Drain / Sludge Bomb / Sleep Powder / Moonblast |
+| Honchkrow | Moxie | Life Orb | Brave Bird / Sucker Punch / Night Slash / Roost |
+
+기존 importer에 `--only=ariana` 선택 가져오기를 추가해 초상화와 출처를 등록했다. 기존 아폴로·비주기·구즈마·자오보·루자미네의 reviewed 팀은 기준 커밋 `13e78cdd`와 해시가 같다. 중단돼 있던 로켓단 stage_index=2, 스컬단 stage_index=3 저장도 그대로 이어진다. schema/확률/보상/retry 변경이나 진행도 초기화는 없다.
 
 ## 확률과 eligibility
 
 설정: [villain-tracks.ts](../src/data/villain-tracks.ts). 일반 이벤트 registry의 신규 `villain-campaign` weight는 0이다. 독립 판정 성공 시 기존 Run Event 행을 생성한다. 신규 캠페인이 있는 런에서 과거 `rocket-*`는 일반 weighted 후보에서 제외한다. 과거 explicit fixture/v1 런은 기존 정의를 사용한다.
 
 - 조무래기 최소 1, officer 25, executive 45, boss 75. 보스 75는 기존 `normalNpcFloorRules.villainBoss`를 공유한다.
-- 다음 미완료 단계 하나만 eligible. 샘플 누락·완료 상태·최소 층 미달·간격 미달이면 추첨하지 않는다.
+- 다음 미완료 단계 하나만 eligible. 완료 상태·최소 층 미달·간격 미달이면 추첨하지 않는다.
 - base **5%**, 실패마다 **+3%p**, cap **35%**.
 - 일반 단계 사이 **일반 클리어 3회**, 다음 단계가 보스면 **5회**.
 - eligible 판정 실패만 pity를 증가시킨다. 이벤트가 생성되면 0으로 초기화한다. 새로고침·중복 POST·특수 전투·간격/최소 층 대기는 실패 횟수로 세지 않는다.
@@ -76,13 +88,18 @@ Elite는 기존 직접 에픽 보상, Master는 성장/알/장비 선택을 유�
 
 - 등장 분포: `node node_modules/tsx/dist/cli.mjs scripts/simulate-villain-campaigns.ts`.
 - 전투: `node node_modules/tsx/dist/cli.mjs scripts/simulate-villain-battles.ts`.
-- 결과: [분포 JSON](../artifacts/reports/villain-campaigns/distribution.json), [432전 JSON](../artifacts/reports/villain-campaigns/battles.json), [검증 보고서](../artifacts/reports/villain-campaigns/README.md).
+- 결과: [분포 JSON](../artifacts/reports/villain-campaigns/distribution.json), [480전 JSON](../artifacts/reports/villain-campaigns/battles.json), [검증 보고서](../artifacts/reports/villain-campaigns/README.md).
 
-8조직 × 10,000런. Teleport 없는 정상 진행, 모든 전투 승리 가정이다. 구현과 같은 eligibility·pity 함수를 사용한다. 샘플이 갖춰진 6조직 완료율 **99.98~100%**, 보스 p50 **80층**, p75 **82~83층**, p90 **85층**. 75~78층 비중은 약 33%로 특정 층에 고정되지 않았다. missing sample 두 조직은 0%이며 정상 완료율과 섞어 제시하지 않는다. 제안된 확률을 유지했다.
+8조직 × 10,000런. Teleport 없는 정상 진행, 모든 전투 승리 가정이며 구현과 같은 eligibility·pity 함수를 사용한다. 8조직 모두 완료 가능하다. 공통 5/+3/35%, 간격 3/보스 5를 유지했다.
 
-전투는 기존 지역별 시뮬레이션의 네 roster·육성·장비 벤치마크를 재사용해 각 최소 층에서 basic/chaos, seed 3개로 432전 실행했다. 오류 0, 모든 대상에 플레이어 승리 사례가 있다. 아강/태홍은 6/24, 비주기는 22/24 등 편차가 있어 후속 밸런스 검토 대상으로 남긴다. 자동 플레이의 독립 배틀 결과이며 실제 유저 승률이나 소모품·연속 런 완주율을 의미하지 않는다.
+| 조직 | grunt1 / grunt2 평균 | officer 평균 | executive 평균 | boss 평균 | boss p50/p75/p90 | 완료율 | 보스 미등장 |
+|---|---|---:|---:|---:|---|---:|---:|
+| Rocket | 7.42 / 15.83 | Ariana 30.70 | Archer 50.35 | Giovanni 80.38 | 80/82/85 | 99.98% | 0.02% |
+| Skull/Aether | 7.37 / 15.72 | Guzma 30.69 | Faba 50.47 | Lusamine 80.41 | 80/83/85 | 100% | 0% |
 
-자동 테스트에는 조직 순서/누락, rarity와 후보 중복, 네 가지 일반/빌런 조합, 한 대기 이벤트 제약, pity/간격, 회귀 이동, 승리/패배/재시도/중복/rollback, 이전 단계 제거, v45 migration, 보상 분기가 포함된다. 화면 테스트는 desktop 1280 / mobile 390, motion 기본/줄이기, 4배속, 자동 전투·보상·새로고침·교환권 후보/보관을 검증한다.
+전투는 기존 지역별 시뮬레이션의 네 roster·육성·장비 벤치마크를 재사용해 각 최소 층에서 basic/chaos, seed 3개로 480전 실행했다. 오류 0. 신규 아테나는 25층에서 플레이어 18/24승(75%), 평균 5.8턴이었다. 기술·특성·아이템 legality 검증도 통과해 추천한 Life Orb 및 기술을 유지했다. 자동 플레이의 독립 배틀 결과이며 실제 유저 승률이나 소모품·연속 런 완주율을 의미하지 않는다. 구즈마나 다른 보스의 기존 밸런스는 이번 작업에서 변경하지 않았다.
+
+자동 테스트는 두 캠페인의 정확한 NPC ID/순서/완료 후 제거, 최소 층과 간격, 기존 중단 저장 재개, 아테나의 고정 3종·선봉·기믹 없음·legality, 기준 커밋 기존 5 NPC 팀 해시, 공통 보상 분기와 기존 exact-once/reconnect/retry 회귀를 검증한다. 화면 테스트는 각 캠페인에 대해 desktop 1280 / mobile 390, motion 기본/줄이기, 4배속, 자동 전투·보상·새로고침·공용 교환권 후보/아이콘/보관을 확인한다.
 
 ## 수동 QA
 
@@ -94,7 +111,6 @@ Elite는 기존 직접 에픽 보상, Master는 성장/알/장비 선택을 유�
 
 ## 남은 작업
 
-- 아테나·플루메리의 검토된 실제 NPC/team sample 제공 후 ID 연결. 임의 팀 추가 없음.
 - 확률·코인·영양제/교환권·기믹 fallback 가치의 최종 조정.
 - Elite/Master 교환권 적용 여부는 보상 가치 검토 후 결정.
 - 빌런 격파 업적, 영구 격파 기록, 영구 토큰은 **미구현 TODO**. 새 업적 시스템은 추가하지 않았다.

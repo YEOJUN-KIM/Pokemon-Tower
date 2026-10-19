@@ -25,7 +25,7 @@ import {TowerService} from '../src/server/tower-service';
 import {randomUUID} from 'node:crypto';
 
 test('every non-Paldea reviewed/runtime row stays equal to HEAD',()=>{
- for(const [path,hash]of Object.entries(preservation.hashes)){const d=JSON.parse(readFileSync(path,'utf8'));const rows=(d.samples??d).filter((r:{id:string})=>!preservation.excluded.includes(r.id)&&!paldeaTrainers.some(t=>t.id===r.id));assert.equal(createHash('sha256').update(JSON.stringify(rows)).digest('hex'),hash,path);}
+ for(const [path,hash]of Object.entries(preservation.hashes)){const d=JSON.parse(readFileSync(path,'utf8'));const rows=(d.samples??d).filter((r:{id:string})=>r.id!=='named-ariana'&&!preservation.excluded.includes(r.id)&&!paldeaTrainers.some(t=>t.id===r.id));assert.equal(createHash('sha256').update(JSON.stringify(rows)).digest('hex'),hash,path);}
 });
 test('exactly 14 reviewed triples, 12 live identities, 2 event-only identities',()=>{
  assert.equal(paldeaTrainers.length,14);assert.equal(trainerCatalog.filter(t=>t.generation===9).length,12);assert.equal(paldeaEventSamples.length,2);

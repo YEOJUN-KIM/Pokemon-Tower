@@ -1095,6 +1095,128 @@
       ]
     },
     {
+      "id": "named-ariana",
+      "name": "아테나",
+      "generation": 2,
+      "title": "officer",
+      "role": "villain",
+      "ace": "Arbok",
+      "signature": null,
+      "stage": "leaders-early",
+      "allFloors": true,
+      "select": true,
+      "required": [],
+      "selectionRules": {
+        "preferredLead": [
+          "Arbok"
+        ]
+      },
+      "gimmickEnabled": false,
+      "concept": "위협·마비·수면으로 흐름을 늦추고 돈크로우로 마무리",
+      "powerTier": "officer",
+      "team": [
+        {
+          "species": "Arbok",
+          "item": "Black Sludge",
+          "gigantamax": false,
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 18,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 16
+            },
+            "nature": "Adamant",
+            "ability": "Intimidate",
+            "moves": [
+              "Gunk Shot",
+              "Crunch",
+              "Glare",
+              "Earthquake"
+            ],
+            "teraType": "Poison"
+          }
+        },
+        {
+          "species": "Vileplume",
+          "item": "Leftovers",
+          "gigantamax": false,
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 26,
+              "atk": 0,
+              "def": 8,
+              "spa": 32,
+              "spd": 0,
+              "spe": 0
+            },
+            "nature": "Modest",
+            "ability": "Effect Spore",
+            "moves": [
+              "Giga Drain",
+              "Sludge Bomb",
+              "Sleep Powder",
+              "Moonblast"
+            ],
+            "teraType": "Grass"
+          }
+        },
+        {
+          "species": "Honchkrow",
+          "item": "Life Orb",
+          "gigantamax": false,
+          "profile": {
+            "statSystem": "points",
+            "ivs": {
+              "hp": 31,
+              "atk": 31,
+              "def": 31,
+              "spa": 31,
+              "spd": 31,
+              "spe": 31
+            },
+            "evs": {
+              "hp": 10,
+              "atk": 32,
+              "def": 0,
+              "spa": 0,
+              "spd": 0,
+              "spe": 24
+            },
+            "nature": "Adamant",
+            "ability": "Moxie",
+            "moves": [
+              "Brave Bird",
+              "Sucker Punch",
+              "Night Slash",
+              "Roost"
+            ],
+            "teraType": "Dark"
+          }
+        }
+      ]
+    },
+    {
       "id": "named-lance",
       "name": "목호",
       "generation": 2,

@@ -1198,6 +1198,11 @@
       "status": "downloaded",
       "artist": "Brumirage",
       "creditSource": "https://play.pokemonshowdown.com/sprites/trainers/"
+    },
+    {
+      "portrait": "ariana",
+      "url": "https://play.pokemonshowdown.com/sprites/trainers/ariana.png",
+      "status": "downloaded"
     }
   ]
 }

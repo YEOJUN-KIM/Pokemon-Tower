@@ -9,7 +9,9 @@ export function readPrePaldeaFile(path:string,encoding:'utf8'):string{
  if(Object.hasOwn(baseline.common,path))return baseline.common[path as keyof typeof baseline.common];
  const text=readFileSync(path,encoding),plan=baseline.paths[path as keyof typeof baseline.paths];
  if(!plan)return text;
- const d=JSON.parse(text),ids=new Set([...plan.oldRows.map(r=>r.id),...paldeaTrainers.map(t=>t.id)]);
+ // Ariana is a later authorized addition, absent from these historical checksums.
+ // villain-campaign-completion.test.ts pins every pre-existing row to 13e78cdd.
+ const d=JSON.parse(text),ids=new Set([...plan.oldRows.map(r=>r.id),...paldeaTrainers.map(t=>t.id),'named-ariana']);
  const rows=[...(d.samples??d).filter((r:{id:string})=>!ids.has(r.id)),...plan.oldRows].sort((a,b)=>plan.order.indexOf(a.id+':'+a.stage)-plan.order.indexOf(b.id+':'+b.stage));
  return JSON.stringify(Array.isArray(d)?rows:{...d,samples:rows});
 }

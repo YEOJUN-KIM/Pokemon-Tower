@@ -17,32 +17,36 @@ import {eventDefinitions,eventEncounterSettings} from '../src/data/run-events';
 import {canEquipGimmick} from '../src/data/gimmicks';
 import {starters} from '../src/data/teams';
 
-test('fixed organization order references reviewed samples/templates and explicitly locks missing samples',()=>{
+test('fixed organization order references complete reviewed samples/templates',()=>{
  assert.equal(eventEncounterSettings.encounterPercent,10);
  assert.deepEqual(Object.keys(villainCampaignTracks),['rocket','magma','aqua','galactic','plasma','flare','skull','macrocosmos']);
  for(const [org,track] of Object.entries(villainCampaignTracks)){
   assert.deepEqual(track.stages.slice(0,2).map(s=>s.key),['grunt-1','grunt-2']);
   for(const stage of track.stages){
-   if(!stage.sampleId){assert.ok(['rocket','skull'].includes(org));continue;}
+   assert.ok(stage.sampleId,`${org}/${stage.key} must have a reviewed sample`);
    const sample=villainTrackSample(stage.sampleId);assert.equal(sample.role,'villain');
    assert.ok(normalNpcTemplate(sample.id,villainStageMinFloor[stage.rank],sample.role),sample.id);
    const snapshot=snapshotTrainerEventBattle(`validation-${org}-${stage.key}`,sample,villainStageMinFloor[stage.rank],'basic',CURRENT_PROGRESSION);
    assert.equal(snapshot.team.length,3);assert.ok(snapshot.opponentTeam);assert.equal(snapshot.aiVersion,'tower-policy-v13');
   }
  }
- assert.equal(campaignStage('rocket',2)!.sampleId,null);assert.equal(campaignStage('skull',3)!.sampleId,null);
+ assert.deepEqual(villainCampaignTracks.rocket.stages.map(s=>s.sampleId),['rocket-grunt','rocket-grunt','named-ariana','named-archer','named-giovanni']);
+ assert.deepEqual(villainCampaignTracks.skull.stages.map(s=>s.sampleId),['skull-grunt','skull-grunt','named-guzma','named-faba','named-lusamine']);
+ assert.equal(JSON.stringify(villainCampaignTracks.skull).includes('plumeria'),false);
  assert.equal(JSON.stringify(villainCampaignTracks).includes('named-n"'),false);
 });
 
-test('minimum floor, chronology gap, bounded pity, boss unlock gap and missing sample eligibility',()=>{
+test('minimum floor, chronology gap, bounded pity and boss unlock gap',()=>{
  assert.deepEqual(Array.from({length:12},(_,i)=>villainChance(i)),[5,8,11,14,17,20,23,26,29,32,35,35]);
- for(const stage of villainCampaignTracks.galactic.stages){
+ for(const stage of Object.values(villainCampaignTracks).flatMap(t=>t.stages)){
   const min=villainStageMinFloor[stage.rank],gap=stage.rank==='boss'?5:3;
   assert.equal(villainTrackEligible(stage,min-1,100,null),false);
   assert.equal(villainTrackEligible(stage,min,12,10),false);
   assert.equal(villainTrackEligible(stage,min,10+gap,10),true);
  }
- assert.equal(villainTrackEligible(campaignStage('rocket',2),100,100,null),false);
+ assert.equal(villainTrackEligible(campaignStage('rocket',2),24,100,null),false);
+ assert.equal(villainTrackEligible(campaignStage('rocket',2),25,100,null),true);
+ assert.equal(villainTrackEligible(undefined,100,100,null),false);
 });
 
 for(const general of [false,true])for(const villain of [false,true])test(`independent results: general ${general}, villain ${villain}; sequential modals and one saved judgement`,()=>{
@@ -58,7 +62,7 @@ for(const general of [false,true])for(const villain of [false,true])test(`indepe
  }finally{s.close();}
 });
 
-for(const organization of Object.keys(villainCampaignTracks) as VillainOrganization[])test(`${organization}: sequential wins, no replay, exact reward and completed/locked end`,()=>{
+for(const organization of Object.keys(villainCampaignTracks) as VillainOrganization[])test(`${organization}: sequential wins, no replay, exact reward and completed end`,()=>{
  const f=trackFixture(':memory:',organization),s=f.store;
  try{
   s.chooseEvent(f.owner,f.run,s.view(f.owner).run!.event!.id,'skip');
@@ -66,7 +70,6 @@ for(const organization of Object.keys(villainCampaignTracks) as VillainOrganizat
   for(const [index,stage] of villainCampaignTracks[organization].stages.entries()){
    if(index)trackEncounter(s,f.run,Math.max(2,villainStageMinFloor[stage.rank]),index*20+1);
    const e=s.view(f.owner).run!.event;
-   if(!stage.sampleId){assert.equal(e,null);assert.equal(campaigns.track(f.run)!.stage_index,index);break;}
    assert.equal(e!.villain!.stage,stage.key);assert.equal(e!.kind,'villain-campaign');
    assert.throws(()=>s.chooseEvent(f.owner,f.run,e!.id,'skip'));
    const saved=campaigns.row(e!.id)!,snap=campaigns.snapshot(saved),before=s.view(f.owner),floor=before.run!.floor;
@@ -79,7 +82,7 @@ for(const organization of Object.keys(villainCampaignTracks) as VillainOrganizat
    if(stage.rank==='boss')assert.equal(s.db.prepare("SELECT quantity FROM reward_egg_tickets WHERE player_id=? AND kind='superRare'").get(f.owner)!.quantity,1);
    s.continueEvent(f.owner,f.run,e!.id);assert.equal(s.view(f.owner).run!.event,null);
   }
-  if(!['rocket','skull'].includes(organization)){assert.equal(campaigns.track(f.run)!.completed,1);trackEncounter(s,f.run,100,150);assert.equal(s.view(f.owner).run!.event,null);}
+  assert.equal(campaigns.track(f.run)!.completed,1);trackEncounter(s,f.run,100,150);assert.equal(s.view(f.owner).run!.event,null);
  }finally{s.close();}
 });
 

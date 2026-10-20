@@ -52,7 +52,7 @@ test('selection validation, reward transaction rollback, idempotency, recruitmen
     store.db.exec('DROP TRIGGER fail_payment');
     store.complete(id, log, fakeView(id, log));
     store.complete(id, log, fakeView(id, log));
-    assert.equal(store.view('alice').coins, 100);
+    assert.equal(store.view('alice').coins, 180);
     assert.equal(store.view('alice').run!.state, 'recruit');
     assert.throws(() => store.recruit('alice', row.run_id, id, 'Arcanine', null), /상대 팀/);
     store.recruit('alice', row.run_id, id, 'Pikachu', null);
@@ -144,8 +144,8 @@ test('disk restart replays accepted actions and recovers an uncommitted final re
     service = new TowerService(store);
     const recovered = await service.state('alice');
     assert.equal(recovered.battle!.status, 'complete');
-    assert.equal(recovered.tower.coins, 100);
-    assert.equal((await service.state('alice')).tower.coins, 100);
+    assert.equal(recovered.tower.coins, 180);
+    assert.equal((await service.state('alice')).tower.coins, 180);
     const saved = JSON.parse(store.battle(id).log!) as BattleLog;
     assert.equal((await replayBattle(saved)).winner, 'Player');
   } finally { await service.dispose(); store.close(); }

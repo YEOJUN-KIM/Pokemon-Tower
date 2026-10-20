@@ -35,7 +35,7 @@ test('v2 chest table partitions every draw into 50/30/20 without changing encoun
  assert.equal(eventDefinition('mystery-chest',undefined,2)!.title,'미스터리 상자');
 });
 
-for(const [draw,id,coins,tickets] of [[0,'empty',1000,0],[25,'trap',850,0],[50,'coins',1300,0],[65,'ticket',1000,1],[80,'treasure',2000,1],[90,'tickets',1000,3]] as const){
+for(const [draw,id,coins,tickets] of [[0,'empty',1000,0],[25,'trap',850,0],[50,'coins',1300,0],[65,'ticket',1000,1],[80,'treasure',2000,1],[90,'tickets',1000,2]] as const){
  test(`v2 ${id}: exact reward, one draw, duplicate delivery, reload and confirmation`,()=>{
   const path=`.data/tests/mystery-${randomUUID()}.sqlite`,f=setup(path);let store=f.store;
   try{

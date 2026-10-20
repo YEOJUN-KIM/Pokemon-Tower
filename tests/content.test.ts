@@ -103,7 +103,7 @@ test('a saved ten-floor run completes real battles, replaces members, restores f
     }
     assert.equal(store.view(owner).run!.state,'cleared');
     assert.equal(store.view(owner).run!.floor,10);
-    assert.equal(expectedCoins,3400);
+    assert.equal(expectedCoins,2250);
     assert.equal(store.roster(runId).length,6);
     assert.throws(() => store.enter(owner,runId,11,starters),/잘못된 층/);
     assert.ok(store.start(owner,['Garchomp','Metagross','Dragonite']));

@@ -15,7 +15,7 @@ import {eventEncounterSettings} from '../src/data/run-events';
 test('challenger encounter preserves shared encounter chance, legacy weights and floor eligibility',()=>{
  for(const version of [1,2])for(let draw=eventEncounterSettings.encounterPercent;draw<100;draw++)assert.equal(selectRunEvent(4,null,()=>draw,undefined,version),null);
  assert.equal(selectRunEvent(4,null,max=>max===100?0:100,undefined,2),'challenger-selection');
- let call=0;assert.equal(selectRunEvent(1,null,()=>call++===0?0:99,undefined,1),'traveling-merchant');
+ let call=0;assert.equal(selectRunEvent(1,null,()=>call++===0?0:84,undefined,1),'traveling-merchant');
  assert.equal(selectRunEvent(5,null,()=>0,undefined,2),null);
  assert.equal(selectRunEvent(4,3,()=>0,undefined,2),null);
 });

@@ -36,8 +36,8 @@ function matchesTarget(name:string,target:EggFocusTarget):boolean {
   }
 }
 
-export function selectTunedEggSpecies(candidates:readonly string[],grade:EggGrade,matches:(name:string)=>boolean,roll:(max:number)=>number):string {
-  const focusedPool=selectFocusedEggPool(candidates,matches,roll);
+export function selectTunedEggSpecies(candidates:readonly string[],grade:EggGrade,matches:(name:string)=>boolean,roll:(max:number)=>number,focusWeight?:number):string {
+  const focusedPool=selectFocusedEggPool(candidates,matches,roll,focusWeight);
   // Keep the original relative category weights wherever that category has
   // candidates. E.g. Hoenn focus must not try to draw a Hoenn Ultra Beast.
   const weights=grade==='superRare'?superRareCategoryWeights:rareEggWeights;

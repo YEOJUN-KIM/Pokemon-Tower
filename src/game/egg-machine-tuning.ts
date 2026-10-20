@@ -11,7 +11,7 @@ export function selectWeightedEggPool<T>(groups:readonly {candidates:readonly T[
 // This selects only within the already drawn rarity. No rarity or
 // shiny rolls, prices, persistence, or species metadata belong in this function.
 export function selectFocusedEggPool<T>(
-  candidates:readonly T[],matches:((candidate:T)=>boolean)|null,roll:(max:number)=>number,
+  candidates:readonly T[],matches:((candidate:T)=>boolean)|null,roll:(max:number)=>number,focusWeight:number=eggMachineTuningRules.focusWeight,
 ):readonly T[] {
   if(!candidates.length)throw new Error('Empty egg candidate pool');
   if(!matches)return candidates;
@@ -20,8 +20,8 @@ export function selectFocusedEggPool<T>(
   // Missing groups never trigger retries or reroll the rarity. With one
   // available group, no focus roll is needed.
   return selectWeightedEggPool([
-    {candidates:focused,weight:eggMachineTuningRules.focusWeight},
-    {candidates:other,weight:eggMachineTuningRules.otherWeight},
+    {candidates:focused,weight:focusWeight},
+    {candidates:other,weight:100-focusWeight},
   ],roll);
 }
 

@@ -116,7 +116,7 @@ test('failed victory receipt rolls back campaign, wallet and battle together',()
  const f=rocketFixture(),s=f.store;try{
   s.chooseEvent(f.owner,f.run,f.event.id,'challenge');const b=s.currentBattle(f.owner)!;
   s.db.exec("CREATE TRIGGER fail_rocket BEFORE UPDATE OF claimed ON villain_event_encounters BEGIN SELECT RAISE(ABORT,'receipt failure'); END");
-  assert.throws(()=>finishChallengerBattle(s,b.id),/receipt failure/);assert.equal(s.battle(b.id).status,'active');assert.equal(s.view(f.owner).coins,100);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),emptyCampaign);
+  assert.throws(()=>finishChallengerBattle(s,b.id),/receipt failure/);assert.equal(s.battle(b.id).status,'active');assert.equal(s.view(f.owner).coins,180);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),emptyCampaign);
   s.db.exec('DROP TRIGGER fail_rocket');finishChallengerBattle(s,b.id);assert.equal(new VillainCampaigns(s.db).state(f.run).started,1);
  }finally{s.close();}
 });

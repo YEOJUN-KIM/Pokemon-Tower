@@ -52,8 +52,8 @@ test('maintenance saves current legal moves and permanent settings atomically, c
   store.db.prepare("UPDATE runs SET floor=11,state='select' WHERE id=?").run(id);store.db.prepare('UPDATE players SET coins=10000,growth_points=100 WHERE id=?').run('p');
   const vitamin={stat:'spa' as const};useVitaminReward(store,'p',id,11,vitamin.stat,'Charizard');
   const adjustment=store.view('p').run!.adjustment!,entry=adjustment.entries.find(e=>e.species==='Charizard')!,draft=structuredClone(entry.profile);draft.evs.atk=8;draft.moves[0]=entry.unlockedMoves.find(m=>!draft.moves.includes(m))!;
-  store.train('p','Charizard',entry.revision,draft,{id,floor:11,snapshot:adjustment.snapshot});assert.equal(store.view('p').growthPoints,92);assert.equal(store.trainingCollection('p').find(e=>e.species==='Charizard')!.profile.evs.atk,8);assert.deepEqual(store.view('p').run!.currentMoves.Charizard,draft.moves);assert.equal(vitaminBonus(store,id,'Charizard',vitamin.stat),5);
-  assert.throws(()=>store.train('p','Charizard',entry.revision,draft,{id,floor:11,snapshot:adjustment.snapshot}),/변경/);assert.equal(store.view('p').growthPoints,92);
+  store.train('p','Charizard',entry.revision,draft,{id,floor:11,snapshot:adjustment.snapshot});assert.equal(store.view('p').growthPoints,36);assert.equal(store.trainingCollection('p').find(e=>e.species==='Charizard')!.profile.evs.atk,8);assert.deepEqual(store.view('p').run!.currentMoves.Charizard,draft.moves);assert.equal(vitaminBonus(store,id,'Charizard',vitamin.stat),5);
+  assert.throws(()=>store.train('p','Charizard',entry.revision,draft,{id,floor:11,snapshot:adjustment.snapshot}),/변경/);assert.equal(store.view('p').growthPoints,36);
   const fresh=store.view('p').run!.adjustment!,saved=fresh.entries.find(e=>e.species==='Charizard')!;
   const request={id,floor:11,snapshot:fresh.snapshot},invalid=structuredClone(saved.profile);invalid.ivs.atk++;
   const unchanged=store.view('p');assert.throws(()=>store.train('p','Charizard',saved.revision,invalid,request));assert.deepEqual(store.view('p'),unchanged);

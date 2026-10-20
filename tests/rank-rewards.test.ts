@@ -40,8 +40,8 @@ for(const [name,draw] of [['coins',0],['eggs',.3],['vitamins',.55],['growth',.7]
   const before=store.view(owner);win(f);const result=store.view(owner).run!.event!.result!;
   assert.equal(result.selections,undefined);assert.equal(result.title,'희귀한 보상');
   if(name==='coins')assert.equal(store.view(owner).coins,before.coins+1500);
-  if(name==='eggs')assert.equal(store.permanentView(owner).eggTickets,5);
-  if(name==='growth')assert.equal(store.view(owner).growthPoints,before.growthPoints+300);
+  if(name==='eggs')assert.equal(store.permanentView(owner).eggTickets,rankRewardProfiles.elite.eggMax);
+  if(name==='growth')assert.equal(store.view(owner).growthPoints,before.growthPoints+rankRewardProfiles.elite.growth);
   if(name==='vitamins'){assert.equal(result.entries.length,2);assert.equal(new Set(result.entries.map(e=>e.kind==='vitamin'?e.stat:'')).size,2);assert.ok(result.entries.every(e=>e.kind==='vitamin'&&e.amount===1));}
   store.continueEvent(owner,run,f.event.id);
   const entries=store.view(owner).run!.rewardInventory!;
@@ -56,7 +56,7 @@ for(const [name,draw] of [['coins',0],['eggs',.3],['vitamins',.55],['growth',.7]
 });
 test('elite egg count and vitamin count use the configured inclusive range',()=>{
  const f=rankRewardFixture('elite',[0]);try{
-  for(const draw of [0,.4,.99]){const entries=snapshotRankReward(f.store.db,f.run,'elite',(()=>{const q=[.3,draw];return()=>q.shift()??0;})()).rewardDefinition.entries;assert.equal(entries[0].kind,'egg-ticket');assert.equal('amount' in entries[0]?entries[0].amount:0,3+Math.floor(draw*3));}
+  for(const draw of [0,.4,.99]){const entries=snapshotRankReward(f.store.db,f.run,'elite',(()=>{const q=[.3,draw];return()=>q.shift()??0;})()).rewardDefinition.entries;assert.equal(entries[0].kind,'egg-ticket');assert.equal('amount' in entries[0]?entries[0].amount:0,rankRewardProfiles.elite.eggMin+Math.floor(draw*(rankRewardProfiles.elite.eggMax-rankRewardProfiles.elite.eggMin+1)));}
   for(const draw of [0,.99]){const q=[.55,draw,0,0],entries=snapshotRankReward(f.store.db,f.run,'elite',()=>q.shift()??0).rewardDefinition.entries;assert.equal(entries.length,draw===0?1:2);}
  }finally{f.store.close();}
 });
@@ -69,15 +69,15 @@ for(const eggDraw of [0,.7,.99])test(`master snapshot ${eggDraw}: three categori
   store.selectEventReward(f.owner,f.run,f.event.id,'master-reward','eggs');store.selectEventReward(f.owner,f.run,f.event.id,'master-reward','eggs');
   assert.throws(()=>store.selectEventReward(f.owner,f.run,f.event.id,'master-reward','growth'));
   assert.equal(store.view(f.owner).growthPoints,before.growthPoints);assert.deepEqual(store.trainerEquipment(f.run),[]);
-  if(expected.kind==='egg-ticket')assert.equal(store.permanentView(f.owner).eggTickets,10);
+  if(expected.kind==='egg-ticket')assert.equal(store.permanentView(f.owner).eggTickets,rankRewardProfiles.master.tickets);
   else {assert.equal(expected.kind,'typed-egg-ticket');if(expected.kind==='typed-egg-ticket')assert.equal(store.permanentView(f.owner).rewardEggTickets![expected.eggKind],1);}
   const saved=store.view(f.owner).run!.event!.result;store.close();store=new TowerStore(path);assert.deepEqual(store.view(f.owner).run!.event!.result,saved);
  }finally{store.close();}
 });
 test('master growth and trainer equipment go to separate existing systems; duplicates and no-stock fallback are defined',()=>{
- for(const choice of ['growth','equipment']){const f=rankRewardFixture('master',[0,0]);try{win(f);const before=f.store.view(f.owner);f.store.selectEventReward(f.owner,f.run,f.event.id,'master-reward',choice);if(choice==='growth')assert.equal(f.store.view(f.owner).growthPoints,before.growthPoints+1500);else{assert.deepEqual(f.store.trainerEquipment(f.run),['Dynamax Band']);assert.deepEqual(f.store.view(f.owner).run!.itemBag,{});}}finally{f.store.close();}}
+ for(const choice of ['growth','equipment']){const f=rankRewardFixture('master',[0,0]);try{win(f);const before=f.store.view(f.owner);f.store.selectEventReward(f.owner,f.run,f.event.id,'master-reward',choice);if(choice==='growth')assert.equal(f.store.view(f.owner).growthPoints,before.growthPoints+rankRewardProfiles.master.growth);else{assert.deepEqual(f.store.trainerEquipment(f.run),['Dynamax Band']);assert.deepEqual(f.store.view(f.owner).run!.itemBag,{});}}finally{f.store.close();}}
  const f=rankRewardFixture('master',[0,0]);try{
-  f.store.db.prepare('INSERT INTO run_trainer_equipment VALUES (?,?)').run(f.run,'Dynamax Band');win(f);const before=f.store.view(f.owner);f.store.selectEventReward(f.owner,f.run,f.event.id,'master-reward','equipment');assert.equal(f.store.view(f.owner).growthPoints,before.growthPoints+1500);assert.equal(f.store.trainerEquipment(f.run).length,1);
+  f.store.db.prepare('INSERT INTO run_trainer_equipment VALUES (?,?)').run(f.run,'Dynamax Band');win(f);const before=f.store.view(f.owner);f.store.selectEventReward(f.owner,f.run,f.event.id,'master-reward','equipment');assert.equal(f.store.view(f.owner).growthPoints,before.growthPoints+rankRewardProfiles.master.growth);assert.equal(f.store.trainerEquipment(f.run).length,1);
   f.store.db.prepare('INSERT INTO run_trainer_equipment VALUES (?,?)').run(f.run,'Tera Orb');const next=snapshotRankReward(f.store.db,f.run,'master',()=>0);assert.equal(next.selections![0].candidates[2].effects[0].kind,'coins');
  }finally{f.store.close();}
 });

@@ -65,7 +65,7 @@ export function PokemonSettings({entry,pokemon,points,onSave,onClose,initial='st
      {allowFormChange&&settingForms(entry).length>1&&row('form','right','폼체인지',<><span>폼체인지</span><strong>{chosenForm?.name??pokemon.name}</strong></>,()=>open({kind:'form'}))}
     </section>
    </div>
-   <div className={styles.save}><div><span>{inRun?'저장한 설정은 이번 출전부터 적용':'저장한 설정은 새 도전부터 적용'}</span><small>배분 +1당 1P · 성격 / 특성 변경 각각 50P · 감소 시 환불 없음</small></div><GameChoice data-settings-save className={styles.apply} disabled={busy||!changed||points<cost} onClick={()=>void save()}>{busy?'저장 중…':points<cost?`성장 ${cost}P 필요`:`${cost}P로 설정 저장`}</GameChoice></div>
+   <div className={styles.save}><div><span>{inRun?'저장한 설정은 이번 출전부터 적용':'저장한 설정은 새 도전부터 적용'}</span><small>배분 +1당 8P · 성격 / 특성 변경 각각 50P · 감소 시 환불 없음</small></div><GameChoice data-settings-save className={styles.apply} disabled={busy||!changed||points<cost} onClick={()=>void save()}>{busy?'저장 중…':points<cost?`성장 ${cost}P 필요`:`${cost}P로 설정 저장`}</GameChoice></div>
    <p className={styles.message} role="status">{message||(!changed?'저장된 설정':'변경 사항을 저장해 주세요.')}</p>
   </div>
   {picker&&<SettingsPicker picker={picker} entry={shown} draft={draft} pokemon={pokemon} onApply={profile=>{setDraft(profile);setMessage('');setPicker(null);}} onClose={()=>setPicker(null)} returnFocus={`[data-settings-row="${returnRow}"]`}/>}

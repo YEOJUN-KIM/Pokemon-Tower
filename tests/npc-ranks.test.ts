@@ -160,7 +160,7 @@ for(const rank of ranks)test(`ranked challenger ${rank}: frozen offer/team/rewar
   finishChallengerBattle(store,retry);assert.deepEqual(store.view(owner).run!.event!.result!.entries,definition.rewardDefinition.entries);
   assert.equal(store.view(owner).run!.candidates.length,0);assert.throws(()=>store.recruit(owner,run,retry,null,null));
   if(rank==='master'){
-   assert.throws(()=>store.continueEvent(owner,run,event.id));store.selectEventReward(owner,run,event.id,'master-reward','eggs');store.selectEventReward(owner,run,event.id,'master-reward','eggs');assert.equal(store.permanentView(owner).eggTickets,10);
+   assert.throws(()=>store.continueEvent(owner,run,event.id));store.selectEventReward(owner,run,event.id,'master-reward','eggs');store.selectEventReward(owner,run,event.id,'master-reward','eggs');assert.equal(store.permanentView(owner).eggTickets,3);
   }
   store.continueEvent(owner,run,event.id);assert.equal(store.view(owner).run!.event,null);
  }finally{store.close();}

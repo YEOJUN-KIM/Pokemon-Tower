@@ -58,12 +58,12 @@ export default function TitleScreen() {
     <div className="title-stage">
     <div className="title-backdrop" aria-hidden="true" />
     <section className="title-content">
-      <h1 className="title-logo" aria-label="POKÉMON TOWER." />
+      <h1 className="title-logo" aria-label="POKÉMON TOWER."><span aria-hidden="true">POKÉMON</span><strong aria-hidden="true">TOWER<span>.</span></strong></h1>
       <nav className="title-menu" aria-label="타이틀 메뉴">
         <Link className="title-option title-play" href={continuing ? '/battle' : '/battle?prepare=1'} aria-disabled={busy} onClick={e => {if (busy) e.preventDefault();}}><MenuIcon kind="play"/><span>{continuing ? '이어하기' : '게임 시작'}</span><span className="title-arrow" aria-hidden="true">▹</span></Link>
         <Link className="title-option" href="/pokedex"><MenuIcon kind="dex"/><span>포켓몬 도감</span><span className="title-arrow" aria-hidden="true">▹</span></Link>
         <Link className="title-option" href="/upgrades"><MenuIcon kind="upgrade"/><span>업그레이드</span><span className="title-arrow" aria-hidden="true">▹</span></Link>
-        <Link className="title-option" href="/upgrades#permanent-tab-eggs"><MenuIcon kind="egg"/><span>알뽑기</span><span className="title-arrow" aria-hidden="true">▹</span></Link>
+        <Link className="title-option" href="/eggs"><MenuIcon kind="egg"/><span>알뽑기</span><span className="title-arrow" aria-hidden="true">▹</span></Link>
         <Link className="title-option" href="/settings"><MenuIcon kind="settings"/><span>설정</span><span className="title-arrow" aria-hidden="true">▹</span></Link>
       </nav>
       {error && <p className="title-error" role="alert">{error} 새로고침하거나 배틀룸에서 다시 연결해 주세요.</p>}

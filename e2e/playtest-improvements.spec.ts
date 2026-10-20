@@ -53,7 +53,7 @@ test('egg moves are badges and shiny names retain their star',async({page})=>{
   const state=await page.request.get('/api/battle?view=collection').then(r=>r.json());
   const egg={species:'Gengar',isNew:true,shiny:true,newShiny:true,ivs:{hp:31,atk:31,def:31,spa:31,spd:31,spe:31},newMoves:['Shadow Ball'],ivGain:{species:'Gengar',changes:[]}};
   await page.route('**/api/battle*',route=>route.fulfill({json:{...state,tower:{...state.tower,growthPoints:20000},...(route.request().method()==='POST'?{permanentResult:{message:'알이 부화했어요!',eggs:[egg]}}:{})}}));
-  await page.goto('/upgrades');await page.getByRole('button',{name:'10회 뽑기 · 2,000P',exact:true}).click();
+  await page.goto('/eggs');await page.getByRole('button',{name:'10회 뽑기 · 2,000P',exact:true}).click();
   const card=page.getByTestId('egg-result');await expect(card).toBeVisible();await expect(card.locator('h3')).toContainText('팬텀 ✦');await expect(card.locator('.egg-new-moves b')).toHaveText('새 기술');await expect(card.locator('.egg-new-moves span')).toHaveCSS('border-top-width','1px');
   await page.screenshot({path:'test-results/egg-move-badge.png',fullPage:true});
 });

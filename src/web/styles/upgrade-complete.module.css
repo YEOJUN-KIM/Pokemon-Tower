@@ -1,0 +1,37 @@
+.dialog.dialog.dialog.dialog {width:min(480px,calc(100vw - 32px))!important;max-width:480px!important;padding:0!important;border:2px solid #9cc7b0!important;border-radius:12px!important;background:#202c32!important;color:#f1f3e6!important;box-shadow:0 0 0 5px #121d23,0 24px 80px #0008;max-height:calc(100dvh - 32px)!important;overflow:auto;}
+.dialog::backdrop {background:#0b1128b8;backdrop-filter:blur(3px);}
+:where(.scope).dialog.dialog.dialog.dialog :global(.dex-dialog-heading) {margin:0!important;padding:14px 20px!important;background:#293c40!important;border-bottom:1px solid #6b8c7a!important;}
+:where(.scope).dialog.dialog.dialog.dialog :global(.dex-dialog-heading h2) {color:#d6e9d4!important;font-size:14px!important;letter-spacing:.08em;}
+:where(.scope).dialog.dialog.dialog.dialog :global(.dex-dialog-heading button) {width:30px!important;min-height:30px!important;padding:0!important;background:transparent!important;border:1px solid #6b8c7a!important;color:#d6e9d4!important;}
+:where(.scope).dialog.dialog.dialog.dialog :global(.game-dialog-body) {padding:24px!important;}
+:where(.scope).dialog.dialog.dialog.dialog :global(.game-menu-footer) {margin:0!important;padding:10px 16px!important;border-top:1px solid #526a62!important;background:#19252c!important;color:#c1d2cc!important;justify-content:center;}
+.content {display:grid;justify-items:center;text-align:center;gap:18px;color:#f1f3e6;}
+.emblem {position:relative;display:grid;place-items:center;width:82px;height:82px;background:radial-gradient(circle,#d7e9bb29,transparent 72%);color:#e8ce81;animation:arrive .32s ease-out both;}
+.emblem svg {width:72px;height:72px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.emblem>span {position:absolute;right:0;bottom:0;display:grid;place-items:center;width:24px;height:24px;background:#b9ddc1;color:#203f34;border:3px solid #202c32;border-radius:50%;font-size:14px;font-weight:800;}
+.identity {display:grid;gap:10px;justify-items:center;}
+.kicker {color:#c9b77b;font-size:9px;letter-spacing:.18em;}
+.identity h3 {margin:0!important;color:#fff4d0!important;font-size:25px!important;line-height:1.4;}
+.identity p {max-width:340px;margin:0!important;color:#c5d4d0!important;font-size:12px!important;line-height:1.9;word-break:keep-all;}
+.effect {width:100%;box-sizing:border-box;padding:17px 12px;border:1px solid #6e8b76;background:#17242b;border-radius:8px;}
+.effect>span {color:#c5d4d0;font-size:11px;}
+.values {display:flex;align-items:center;justify-content:center;gap:22px;margin-top:12px;}
+.values>span:first-child {color:#a8bab4;font-size:24px;}
+.values>strong {color:#e7d696;font-size:36px;line-height:1.2;}
+.values small {margin-left:4px;font-size:12px;}
+.arrow {color:#91b7a0;font-size:24px;}
+.progress {display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;color:#bdd5c6;font-size:10px;}
+.progress>div {display:flex;gap:5px;flex:1;}
+.progress i {height:6px;flex:1;border:1px solid #5a7367;background:#17242b;}
+.progress i[data-filled=true] {border-color:#b6d7b6;background:#b6d7b6;}
+.timing {display:flex;gap:7px;align-items:center;margin:0!important;color:#c6dbce!important;font-size:11px!important;}
+.timing>span {color:#c7dfb1;}
+.receipt {display:grid;gap:10px;margin:20px 0;padding:16px 0;border-top:1px dashed #61796e;color:#bccbc6;font-size:11px;}
+.receipt>div {display:flex;justify-content:space-between;gap:12px;}
+.receipt dd {margin:0;color:#e7edda;}
+.receipt>div:last-child dd {color:#e7d696;font-weight:700;}
+.dialog .confirm {display:block;width:100%;min-height:46px;padding:12px!important;background:#446c5d!important;border:2px solid #a6c8a5!important;color:#f6f6df!important;font:inherit;font-size:13px;}
+.dialog .confirm:hover {background:#537e6b!important;}
+@keyframes arrive {from {opacity:0;transform:translateY(8px) scale(.85);}to {opacity:1;transform:none;}}
+@media(max-width:480px) {:where(.scope).dialog.dialog.dialog.dialog :global(.game-dialog-body) {padding:20px!important;}.identity h3 {font-size:22px!important;}.content {gap:15px;}.emblem {width:68px;height:68px;}.emblem svg {width:64px;height:64px;}.values>strong {font-size:32px;}}
+@media(prefers-reduced-motion:reduce) {.emblem {animation:none;}}

@@ -26,7 +26,7 @@ test('boss preview becomes a persisted encounter and v2 migration preserves old 
     const template=normalNpcTemplate(preview.id,5,preview.role),pool=template?template.team.map(p=>p.species):[...encounter.entries,...(npcExtraCandidates[preview.id]??[])];
     assert.equal(opponents.length,3);for(const set of opponents)assert.ok(pool.includes(set.species),set.species);
     const saved=store.view('boss-test');
-    assert.equal(store.battle(id).reward,450);
+    assert.equal(store.battle(id).reward,330);
     const {gimmick,npcAi,...identity}=saved.run!.boss!;assert.deepEqual(identity,preview);assert.equal(npcAi?.tier,'tactical');
     if(gimmick)assert.ok(opponents.some(set=>set.species===gimmick.species));
     store.close();store=new TowerStore(path);

@@ -7,7 +7,7 @@ import {localAccountUsername} from './local-account';
 export function accountDestination(value:unknown) {
   if(typeof value!=='string'||!value.startsWith('/')||value.startsWith('//'))return '/';
   const url=new URL(value,'http://internal');
-  if(url.origin!=='http://internal'||!['/','/battle','/pokedex','/upgrades','/settings'].includes(url.pathname))return '/';
+  if(url.origin!=='http://internal'||!['/','/battle','/pokedex','/upgrades','/eggs','/settings'].includes(url.pathname))return '/';
   return url.pathname+url.search;
 }
 export async function pageAccount() {

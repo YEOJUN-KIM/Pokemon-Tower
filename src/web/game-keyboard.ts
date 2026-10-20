@@ -20,9 +20,9 @@ export function selectGameCursor(element:HTMLElement|null|undefined) {
 }
 
 /** Cursor state belongs to each screen/dialog, never to document.activeElement. */
-export function useGameKeyboard(selector:string,columns:number,enabled:boolean,shortcut?:(event:KeyboardEvent,cursor:HTMLButtonElement|null,select:Select)=>boolean,onSelect?:(cursor:HTMLButtonElement)=>void) {
+export function useGameKeyboard(selector:string,columns:number,enabled:boolean,shortcut?:(event:KeyboardEvent,cursor:HTMLButtonElement|null,select:Select)=>boolean,onSelect?:(cursor:HTMLButtonElement)=>void,padShortcuts:readonly (readonly [number,string])[]=[]) {
   const memory=useRef(new Map<Element|string,{element:HTMLButtonElement;key:string}>()),marked=useRef<HTMLElement|null>(null);
-  const callbacks=useRef({shortcut,onSelect});callbacks.current={shortcut,onSelect};
+  const callbacks=useRef({shortcut,onSelect,padShortcuts});callbacks.current={shortcut,onSelect,padShortcuts};
   useEffect(()=>{
     if(!enabled)return;
     const keyOf=(button:HTMLButtonElement)=>button.dataset.command ?? button.dataset.species ?? button.dataset.machine ?? button.dataset.target ?? button.dataset.learningSlot ?? button.getAttribute('aria-label') ?? button.textContent?.trim() ?? '';
@@ -208,6 +208,7 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
         if(pad.buttons[14]?.pressed||(pad.axes[0]??0)<-.55)keys.add('ArrowLeft');
         if(pad.buttons[15]?.pressed||(pad.axes[0]??0)>.55)keys.add('ArrowRight');
         for(const [button,key] of [[0,'z'],[1,'x'],[2,'a'],[4,'q'],[5,'e']] as const)if(pad.buttons[button]?.pressed)keys.add(key);
+        for(const [button,key] of callbacks.current.padShortcuts)if(pad.buttons[button]?.pressed)keys.add(key);
         for(const key of keys){const previous=heldKeys.get(key);if(previous===undefined||(key.startsWith('Arrow')&&now-previous>=160)){handle(new KeyboardEvent('keydown',{key,cancelable:true}));heldKeys.set(key,now);}}
       }
       for(const key of heldKeys.keys())if(!keys.has(key))heldKeys.delete(key);

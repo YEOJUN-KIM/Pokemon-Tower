@@ -27,7 +27,7 @@ type Screen='title'|'battle'|'pokedex'|'settings'|'upgrades'|'account';
 /** One explicit style boundary, including dialogs and embedded collection screens. */
 export function ScreenStyles({children}:{children:ReactNode}) {
   const path=usePathname();
-  const screen:Screen=path==='/battle'?'battle':path==='/pokedex'?'pokedex':path==='/settings'?'settings':path==='/upgrades'?'upgrades':path==='/account'?'account':'title';
+  const screen:Screen=path==='/battle'?'battle':path==='/pokedex'?'pokedex':path==='/settings'?'settings':path==='/upgrades'||path==='/eggs'?'upgrades':path==='/account'?'account':'title';
   const classes=[boundary.root,
     foundation.scope,
     menu.scope,

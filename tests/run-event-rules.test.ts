@@ -3,12 +3,12 @@ import test from 'node:test';
 import {selectRunEvent,rollEventReward} from '../src/game/run-events';
 import {eventEncounterSettings,legacyChestRewards,merchantTicketPrice,eventDefinitions} from '../src/data/run-events';
 
-test('event selection preserves every existing weighted draw and random call order',()=>{
-  for(let draw=0;draw<100;draw++){
+test('event selection partitions the rebalanced weights and preserves random call order',()=>{
+  for(let draw=0;draw<85;draw++){
     const calls:number[]=[];
     const selected=selectRunEvent(1,null,max=>{calls.push(max);return calls.length===1?9:draw;});
-    assert.equal(selected,draw<50?'mystery-chest':draw<80?'breeder-gift':'traveling-merchant');
-    assert.deepEqual(calls,[100,100]);
+    assert.equal(selected,draw<50?'mystery-chest':draw<65?'breeder-gift':'traveling-merchant');
+    assert.deepEqual(calls,[100,85]);
   }
 });
 

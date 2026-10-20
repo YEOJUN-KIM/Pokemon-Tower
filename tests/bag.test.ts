@@ -13,7 +13,7 @@ const view=(f:ReturnType<typeof hiddenShopFixture>)=>f.store.view(f.owner).run!.
 
 test('immediate vitamin purchase uses the canonical Bag row when the same vitamin is already stored',()=>{
  const f=hiddenShopFixture();try{
-  grantStoredReward(f.store.db,f.run,{kind:'vitamin',stat:'atk',amount:2});f.pin(['vitamin-atk','item-Life Orb','machine-Earthquake','egg-ticket-5']);const before=f.store.view(f.owner);
+  grantStoredReward(f.store.db,f.run,{kind:'vitamin',stat:'atk',amount:2});f.pin(['vitamin-atk','item-Life Orb','machine-Earthquake','egg-ticket-2']);const before=f.store.view(f.owner);
   f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,'vitamin-atk','use','Charizard');f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,'vitamin-atk','use','Charizard');
   assert.equal(f.store.view(f.owner).coins,before.coins-400);assert.equal(view(f).entries.find(e=>e.action==='vitamin')!.quantity,2);assert.equal(f.store.db.prepare('SELECT points FROM run_stat_boosts WHERE run_id=? AND species=? AND stat=?').get(f.run,'Charizard','atk')!.points,5);
   assert.ok(!view(f).entries.find(e=>e.action==='vitamin')!.targets.length);assert.equal(f.store.view(f.owner).run!.vitaminUsage!.usedStats[0],'atk');
@@ -36,7 +36,7 @@ test('Bag unifies pockets without duplicating stores; equipped tool stays visibl
 
 test('TM ownership is run scoped, reusable across Pokemon, compatibility checked only on use; purchases preserve snapshot and duplicate receipt',()=>{
  const f=hiddenShopFixture();try{
-  f.pin(['machine-Earthquake','item-Life Orb','vitamin-atk','egg-ticket-5']);const raw=f.store.db.prepare('SELECT snapshot_json FROM hidden_shop_events WHERE event_id=?').get(f.eventId)!.snapshot_json;
+  f.pin(['machine-Earthquake','item-Life Orb','vitamin-atk','egg-ticket-2']);const raw=f.store.db.prepare('SELECT snapshot_json FROM hidden_shop_events WHERE event_id=?').get(f.eventId)!.snapshot_json;
   f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,'machine-Earthquake');f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,'machine-Earthquake');const entry=view(f).entries.find(e=>e.move==='Earthquake')!;assert.ok(entry);assert.equal(entry.quantity,undefined);
   const before=f.store.trainingCollection(f.owner);const targets=entry.targets;assert.ok(targets.length>=2);
   for(const species of targets.slice(0,2)){const id=randomUUID();f.store.useBag(f.owner,f.run,id,entry.id,species,0);f.store.useBag(f.owner,f.run,id,entry.id,species,0);assert.ok(view(f).currentMoves[species].includes('Earthquake'));assert.ok(ownsMachine(f.store.db,f.run,'Earthquake'));}
@@ -49,7 +49,7 @@ test('TM ownership is run scoped, reusable across Pokemon, compatibility checked
 
 test('hidden immediate vitamin/equip atomically validate, charge and receipt; invalid target or receipt failure rolls back everything',()=>{
  const f=hiddenShopFixture();try{
-  f.pin(['vitamin-atk','item-Life Orb','machine-Earthquake','egg-ticket-5']);const before=f.store.view(f.owner);
+  f.pin(['vitamin-atk','item-Life Orb','machine-Earthquake','egg-ticket-2']);const before=f.store.view(f.owner);
   assert.throws(()=>f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,'vitamin-atk','use','Missing'));assert.deepEqual(f.store.view(f.owner),before);
   f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,'vitamin-atk','use','Charizard');f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,'vitamin-atk','use','Charizard');assert.equal(f.store.db.prepare('SELECT COUNT(*) AS n FROM vitamin_purchases WHERE run_id=?').get(f.run)!.n,1);
   f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,'item-Life Orb','use','Blastoise');assert.equal(f.store.view(f.owner).run!.heldItems!.Blastoise,'Life Orb');assert.equal(f.store.view(f.owner).run!.event!.hiddenShop!.purchasedCount,2);

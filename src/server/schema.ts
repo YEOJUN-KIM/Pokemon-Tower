@@ -148,6 +148,7 @@ CREATE TABLE IF NOT EXISTS permanent_upgrades(player_id TEXT PRIMARY KEY REFEREN
 CREATE TABLE IF NOT EXISTS permanent_receipts(player_id TEXT NOT NULL REFERENCES players(id),request_id TEXT NOT NULL,payload TEXT NOT NULL,result TEXT NOT NULL,PRIMARY KEY(player_id,request_id)) STRICT;
 CREATE TABLE IF NOT EXISTS run_routes(run_id TEXT PRIMARY KEY REFERENCES runs(id),second_theme TEXT NOT NULL,pending_boss INTEGER NOT NULL DEFAULT 0) STRICT;
 CREATE TABLE IF NOT EXISTS permanent_retry_upgrades(player_id TEXT PRIMARY KEY REFERENCES players(id),level INTEGER NOT NULL DEFAULT 0 CHECK(level BETWEEN 0 AND 3)) STRICT;
+CREATE TABLE IF NOT EXISTS permanent_research(player_id TEXT NOT NULL REFERENCES players(id),product TEXT NOT NULL CHECK(product IN ('allowance','eggFocus')),level INTEGER NOT NULL CHECK(level BETWEEN 1 AND 3),PRIMARY KEY(player_id,product)) STRICT;
 CREATE TABLE IF NOT EXISTS run_retries(run_id TEXT PRIMARY KEY REFERENCES runs(id),retry_limit INTEGER NOT NULL CHECK(retry_limit BETWEEN 0 AND 3),used INTEGER NOT NULL DEFAULT 0 CHECK(used BETWEEN 0 AND 3),pending_battle_id TEXT REFERENCES battles(id)) STRICT;
 CREATE TABLE IF NOT EXISTS run_trainer_equipment(run_id TEXT NOT NULL REFERENCES runs(id),item TEXT NOT NULL CHECK(item IN ('Dynamax Band','Tera Orb')),PRIMARY KEY(run_id,item)) STRICT;
 CREATE TABLE IF NOT EXISTS run_event_rules(run_id TEXT PRIMARY KEY REFERENCES runs(id),version INTEGER NOT NULL CHECK(version IN (1,2))) STRICT;

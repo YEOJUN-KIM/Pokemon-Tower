@@ -13,6 +13,7 @@ const initialFloors = [
   {number: 9, name: '정상으로 가는 길', opponents: ['Metagross', 'Garchomp', 'Lapras'], reward: 500},
   {number: 10, name: '타워의 정상', opponents: ['Garchomp', 'Metagross', 'Dragonite'], reward: 550},
 ] as const satisfies readonly Floor[];
-// Content expansion first; reward and encounter balance remain provisional.
-export const floors:readonly Floor[]=[...initialFloors.map(floor=>({...floor,name:floor.number===10 ? '첫 번째 챔피언 관문' : floor.name})),
-  ...Array.from({length:90},(_,index):Floor=>{const number=index+11;return {number,name:number===100 ? '타워의 정상' : number===50 ? '첫 번째 관문' : number>=51&&number<=60 ? '숨 고르기 구간' : number%10===0 ? '챔피언 관문' : number%5===0 ? '관장의 시험' : '더 높은 곳으로',opponents:initialFloors[(number-1)%10].opponents,reward:100+(number-1)*50+(number%5===0 && number%10!==0 ? 150 : 0)};})];
+// Slow ten-floor income growth keeps fixed-price shops relevant in the late game.
+export const floorCoinReward=(number:number)=>180+Math.floor((number-1)/10)*15+(number%10===0?300:number%5===0?150:0);
+export const floors:readonly Floor[]=[...initialFloors.map(floor=>({...floor,reward:floorCoinReward(floor.number),name:floor.number===10 ? '첫 번째 챔피언 관문' : floor.name})),
+  ...Array.from({length:90},(_,index):Floor=>{const number=index+11;return {number,name:number===100 ? '타워의 정상' : number===50 ? '첫 번째 관문' : number>=51&&number<=60 ? '숨 고르기 구간' : number%10===0 ? '챔피언 관문' : number%5===0 ? '관장의 시험' : '더 높은 곳으로',opponents:initialFloors[(number-1)%10].opponents,reward:floorCoinReward(number)};})];

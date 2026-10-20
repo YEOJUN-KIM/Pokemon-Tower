@@ -312,7 +312,7 @@ export class TowerStore {
       const allowed = (this.db.prepare('SELECT species FROM unlocks WHERE player_id = ?').all(owner) as {species: string}[]).map(p => p.species).filter(isCollectibleSpecies);
       this.validateSelection(selected, allowed);
       if(current?.state==='lost')this.settleGrowth(current.id,'lost');
-      this.db.prepare('UPDATE players SET coins=0 WHERE id=?').run(owner);
+      this.db.prepare('UPDATE players SET coins=? WHERE id=?').run(this.permanentView(owner).startingCoins??0,owner);
       const id = randomUUID();
       const theme=randomTowerTheme(id);
       this.db.prepare('INSERT INTO runs(id, player_id, floor, state, created_at, total_floors) VALUES (?, ?, 1, ?, ?, ?)').run(id, owner, 'select', Date.now(), floors.length);

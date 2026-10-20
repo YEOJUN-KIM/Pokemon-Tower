@@ -11,7 +11,7 @@ for(const width of [1280,390])test(`egg machine: odds popup, independent draws, 
   store.ensurePlayer(owner);store.db.prepare('UPDATE players SET growth_points=2000 WHERE id=?').run(owner);
   store.db.prepare('INSERT INTO permanent_upgrades VALUES (?,0,0,2)').run(owner);
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
-  await page.setViewportSize({width,height:900});await page.goto('/upgrades');await page.getByRole('tab',{name:'알 뽑기',exact:true}).click();
+  await page.setViewportSize({width,height:900});await page.goto('/eggs');
   await expect(page.locator('.egg-machine')).toBeVisible();await expect(page.getByTestId('egg-kind-picker')).toHaveCount(0);
   await expect(page.locator('.egg-machine-art')).toHaveAttribute('src','/sprites/eggs/machine.png');
   await page.getByRole('button',{name:'알 확률',exact:true}).click();const odds=page.getByRole('dialog',{name:'알 확률',exact:true});

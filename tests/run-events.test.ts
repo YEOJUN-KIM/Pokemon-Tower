@@ -110,7 +110,7 @@ test('breeder gifts one permanent ticket, persists its identity and supports dec
 test('merchant atomically charges coins once, rejects insufficient funds, and rolls back a failed ticket grant',()=>{
  const {store,run,battle}=setup();try{
   const event=finishFloor(store,run,battle)!;store.db.prepare("UPDATE run_events SET kind='traveling-merchant' WHERE id=?").run(event.id);
-  assert.throws(()=>store.chooseEvent('owner',run,event.id,'open'),/300코인/);
+  assert.throws(()=>store.chooseEvent('owner',run,event.id,'open'),new RegExp(`${merchantTicketPrice}코인`));
   assert.equal(store.view('owner').run!.event!.phase,'choice');assert.equal(store.permanentView('owner').eggTickets,0);
   store.db.prepare('UPDATE players SET coins=? WHERE id=?').run(merchantTicketPrice,'owner');
   store.db.exec("CREATE TRIGGER fail_ticket BEFORE INSERT ON permanent_upgrades BEGIN SELECT RAISE(ABORT,'ticket failed'); END");
@@ -134,7 +134,7 @@ test('v32 migration preserves a pending chest and its paid reward',()=>{
 
 test('event kind weights partition the encounter without increasing its frequency',async()=>{
  const {RunEvents}=await import('../src/server/run-events');
- for(const [draw,expected] of [[0,'mystery-chest'],[49,'mystery-chest'],[50,'breeder-gift'],[79,'breeder-gift'],[80,'traveling-merchant'],[99,'traveling-merchant']] as const){
+ for(const [draw,expected] of [[0,'mystery-chest'],[49,'mystery-chest'],[50,'breeder-gift'],[64,'breeder-gift'],[65,'traveling-merchant'],[84,'traveling-merchant']] as const){
   const {store,run}=setup();try{let call=0;new RunEvents(store.db,()=>call++===0?0:draw,{...eventDefinitions}).encounter(run,1);assert.equal(new RunEvents(store.db,()=>0).view(run)!.kind,expected);}finally{store.close();}
  }
 });

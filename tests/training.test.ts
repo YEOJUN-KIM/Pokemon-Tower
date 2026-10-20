@@ -21,7 +21,7 @@ test('6Z start, legal stat points/natures/moves/abilities, charged once and isol
     assert.throws(()=>store.train('training','Charizard',0,edited),/해금/);
     store.db.prepare('INSERT INTO move_unlocks VALUES (?,?,?)').run('training','Charizard','Earthquake');
     store.train('training','Charizard',0,edited);
-    assert.equal(store.view('training').growthPoints,836);
+    assert.equal(store.view('training').growthPoints,388);
     assert.throws(()=>store.train('training','Charizard',0,edited),/이미 변경/);
     const invalid=structuredClone(edited);invalid.evs.hp=3;
     assert.throws(()=>store.train('training','Charizard',1,invalid),/66/);
@@ -29,7 +29,7 @@ test('6Z start, legal stat points/natures/moves/abilities, charged once and isol
     assert.throws(()=>store.train('training','Charizard',1,invalid),/영입/);
     const wrongNature=structuredClone(edited);wrongNature.nature='Fake';
     assert.throws(()=>store.train('training','Charizard',1,wrongNature),/성격/);
-    assert.equal(store.view('training').growthPoints,836);
+    assert.equal(store.view('training').growthPoints,388);
     const current=Showdown.Teams.unpack(store.battle(id).player_team)![0];assert.equal(current.ability,'Blaze');assert.equal(current.evs?.spa ?? 0,0);assert.equal(current.nature,'Serious');
     const run=row.run_id;store.db.prepare("UPDATE runs SET floor=2,state='select' WHERE id=?").run(run);
     const second=store.enter('training',run,2,starters);assert.equal(Showdown.Teams.unpack(store.battle(second).player_team)![0].ability,'Blaze');

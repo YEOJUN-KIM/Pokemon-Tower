@@ -21,7 +21,7 @@ test('generation: 4/5 distinct products, every currency/price permitted, both cu
   const coin=snapshotHiddenShop([vitamin],()=>0).offers[0],growth=snapshotHiddenShop([vitamin],()=>.999);
   assert.equal(coin.currency,'coins');assert.equal(growth.offers[0].currency,'growth-points');
   const single={...vitamin,allowedCurrencies:['growth-points'] as const};assert.equal(snapshotHiddenShop([single],()=>0).offers[0].currency,'growth-points');
-  for(const snapshot of snapshots){assert.equal(new Set(snapshot.offers.map(o=>o.id)).size,snapshot.offers.length);for(const o of snapshot.offers){const p=f.products.find(p=>p.id===o.id)!;assert.ok(p.allowedCurrencies.includes(o.currency));const [min,max]=pool[o.category].prices[o.currency];assert.ok(o.price>=min&&o.price<=max);}}
+  for(const snapshot of snapshots){assert.equal(new Set(snapshot.offers.map(o=>o.id)).size,snapshot.offers.length);for(const o of snapshot.offers){const p=f.products.find(p=>p.id===o.id)!;assert.ok(p.allowedCurrencies.includes(o.currency));const [min,max]=pool[o.category].prices[o.currency],quantity=o.category==='egg-tickets'?o.quantity:1;assert.ok(o.price>=min*quantity&&o.price<=max*quantity);}}
   assert.ok(!f.products.some(p=>p.effect.kind==='typed-egg-ticket'&&p.effect.eggKind==='shiny'));
   for(const product of f.products)if(product.icon)assert.ok(existsSync(`public${product.icon}`),product.icon);
  }finally{f.store.close();}
@@ -56,7 +56,7 @@ test('purchased vitamin and TM use existing reward inventory and keep vitamin ca
 
 test('event selection uses the shared encounter roll, cooldown and checkpoint exclusion; v1 remains unchanged',()=>{
  const total=Object.entries(eventDefinitions).filter(([kind])=>!kind.startsWith('rocket-')).reduce((n,[,d])=>n+d.weight,0),hiddenEnd=total-eventDefinitions['raid-encounter'].weight-eventDefinitions['random-teleport'].weight,roll=(max:number)=>max===100?0:hiddenEnd-1;
- assert.equal(hiddenEnd,132);assert.equal(selectRunEvent(1,null,roll,undefined,2),'hidden-shop');
+ assert.equal(hiddenEnd,117);assert.equal(selectRunEvent(1,null,roll,undefined,2),'hidden-shop');
  assert.equal(selectRunEvent(5,null,roll,undefined,2),null);assert.equal(selectRunEvent(3,1,roll,undefined,2),null);
  assert.equal(selectRunEvent(1,null,()=>99,undefined,2),null);
  assert.equal(selectRunEvent(1,null,max=>max===100?99:0,undefined,1),null);
@@ -71,7 +71,7 @@ test('event selection uses the shared encounter roll, cooldown and checkpoint ex
 
 test('mixed payment, duplicate product receipt, third purchase rejection, price and currency stay snapshotted',()=>{
  const f=hiddenShopFixture();try{
-  const snapshot=f.pin(['vitamin-atk','vitamin-spa','egg-ticket-3'],['coins','growth-points','coins']);
+  const snapshot=f.pin(['vitamin-atk','vitamin-spa','egg-ticket-1'],['coins','growth-points','coins']);
   const before=f.store.view(f.owner);
   f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,snapshot.offers[0].id);
   f.store.purchaseHiddenShop(f.owner,f.run,f.eventId,snapshot.offers[0].id);
@@ -165,11 +165,11 @@ test('per-product currency overrides and future tuning do not mutate a saved sho
 
 test('restart preserves exact snapshot, purchase receipt and limit; leaving without buying completes event',()=>{
  const path=`.data/tests/hidden-${randomUUID()}.sqlite`,f=hiddenShopFixture(path);let store=f.store;try{
-  f.pin(['vitamin-atk','egg-ticket-5','vitamin-def'],['growth-points','coins']);
+  f.pin(['vitamin-atk','egg-ticket-2','vitamin-def'],['growth-points','coins']);
   store.purchaseHiddenShop(f.owner,f.run,f.eventId,'vitamin-atk');const before=store.view(f.owner);
   store.close();store=new TowerStore(path);
   assert.deepEqual(store.view(f.owner),before);store.purchaseHiddenShop(f.owner,f.run,f.eventId,'vitamin-atk');assert.deepEqual(store.view(f.owner),before);
-  store.purchaseHiddenShop(f.owner,f.run,f.eventId,'egg-ticket-5');assert.equal(store.view(f.owner).run!.event!.hiddenShop!.purchasedCount,2);
+  store.purchaseHiddenShop(f.owner,f.run,f.eventId,'egg-ticket-2');assert.equal(store.view(f.owner).run!.event!.hiddenShop!.purchasedCount,2);
   store.chooseEvent(f.owner,f.run,f.eventId,'leave');assert.equal(store.view(f.owner).run!.event,null);
   assert.throws(()=>store.purchaseHiddenShop(f.owner,f.run,f.eventId,'vitamin-def'),/열려/);
   assert.equal(store.view(f.owner).run!.floor,2);store.enter(f.owner,f.run,2,starters);

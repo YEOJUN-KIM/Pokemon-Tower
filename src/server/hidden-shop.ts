@@ -44,7 +44,8 @@ export function snapshotHiddenShop(products:readonly HiddenShopProduct[],random:
   const currency=product.allowedCurrencies[Math.floor(random()*product.allowedCurrencies.length)];
   const [min,max]=product.prices[currency];
   const {allowedCurrencies:_,prices:__,...display}=product;
-  offers.push({...display,currency,price:min+Math.floor(random()*(max-min+1)),purchased:false});
+  const unitPrice=min+Math.floor(random()*(max-min+1));
+  offers.push({...display,currency,price:unitPrice*(category==='egg-tickets'?product.quantity:1),purchased:false});
  }
  return {version:1,purchaseLimit:settings.purchaseLimit,offers};
 }

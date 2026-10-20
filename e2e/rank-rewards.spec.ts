@@ -44,7 +44,7 @@ for(const width of [1280,390])test(`rank previews hide rewards and Master expose
   const payload={type:'event-reward-select',runId:run,eventId:event.id,selectionId:'master-reward',candidateId:'eggs',effects:[{kind:'growth-points',amount:999999}]};
   const replies=await Promise.all([1,2].map(()=>page.request.post('/api/battle',{headers:{origin:'http://127.0.0.1:3001'},data:payload})));expect(replies.every(r=>r.ok())).toBe(true);expect(store.permanentView(owner).rewardEggTickets!.superRare).toBe(1);
   await modal.getByRole('button',{name:'받기',exact:true}).click();await expect(modal).toHaveCount(0);
-  await page.goto('/upgrades');await page.getByRole('tab',{name:'알 뽑기',exact:true}).click();const ticket=page.getByRole('button',{name:/슈퍼레어 알 티켓.*1개 부화/});await expect(ticket).toBeVisible();await ticket.click();await expect(page.getByRole('dialog').filter({hasText:'부화'})).toBeVisible();expect(store.permanentView(owner).rewardEggTickets?.superRare??0).toBe(0);
+  await page.goto('/eggs');const ticket=page.getByRole('button',{name:/슈퍼레어 알 티켓.*1개 부화/});await expect(ticket).toBeVisible();await ticket.click();await expect(page.getByRole('dialog').filter({hasText:'부화'})).toBeVisible();expect(store.permanentView(owner).rewardEggTickets?.superRare??0).toBe(0);
  }finally{store.close();}
 });
 for(const [category,draw] of [['vitamin',.55],['epic',.8],['machine',.9]] as const)test(`Elite ${category}: automatic reward, usable inventory and no vitamin shop`,async({page,context})=>{

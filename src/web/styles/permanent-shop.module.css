@@ -1,4 +1,6 @@
 /* src/web/permanent-shop.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
+:where(.scope[data-ui-screen="upgrades"]) :global(.egg-focus-control) {display:grid;gap:8px;margin:12px 0;}
+:where(.scope[data-ui-screen="upgrades"]) :global(.egg-focus-control select) {max-width:100%;padding:10px;border:2px solid #727f95;border-radius:8px;background:#172038;color:#fff;font:inherit;}
 :where(.scope[data-ui-screen="upgrades"]) :global(.egg-odds-list) {
   display: grid;
   grid-template-columns: repeat(3,minmax(0,1fr));
@@ -264,27 +266,26 @@
   overflow-wrap: break-word;
   text-wrap: pretty;
 }
-:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop nav) {
+:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-page-header) {
   display: flex;
   align-items: center;
-  gap: 20px;
-  background: #91424a;
-  border: 1px solid #bb747b;
-  border-radius: 10px;
-  padding: 14px 18px;
+  border-bottom: 1px solid #63766f;
+  padding: 16px 0 22px;
 }
 :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop h1) {
-  font-size: 22px;
+  font-size: 26px;
   margin: 0;
   flex: 1;
 }
-:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop nav a) {
-  color: #fff;
+:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-page-footer a) {
+  color: #c8d6d5;
   text-decoration: none;
   padding: 8px;
-  border: 1px solid #d1949a;
-  border-radius: 6px;
+  border-bottom: 1px solid #71858c;
 }
+:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-page-header h1) {border-left:3px solid #a7c9b8;padding-left:14px;line-height:1.4;}
+:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-page-footer) {display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 0;border-top:1px solid #53645f;}
+:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-page-footer kbd) {display:inline-grid;place-items:center;min-width:22px;min-height:22px;margin-right:6px;border:1px solid #8a9e96;background:#25332f;color:#edf3f0;font:inherit;}
 :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-wallet) {
   display: flex;
   align-items: center;
@@ -300,20 +301,6 @@
   display: grid;
   grid-template-columns: repeat(3,minmax(0,1fr));
   gap: 18px;
-}
-:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-tabs) {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid #71858c;
-  padding-bottom: 12px;
-}
-:where(.scope[data-ui-screen="upgrades"]) :global(.permanent-tabs button) {
-  flex: 1;
-  max-width: 240px;
-  background: #45545e;
-  color: #d4e0e2;
-  border: 1px solid #71858c;
 }
 @media(max-width:900px) {
   :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-products) {
@@ -926,14 +913,14 @@
     padding: 12px;
     font-size: 12px;
   }
-  :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop nav) {
+  :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-page-header) {
     gap: 8px;
     padding: 10px;
   }
   :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop h1) {
-    font-size: 15px;
+    font-size: 20px;
   }
-  :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-shop nav a) {
+  :where(.scope[data-ui-screen="upgrades"]) :global(.permanent-page-footer a) {
     padding: 8px 5px;
     font-size: 10px;
   }

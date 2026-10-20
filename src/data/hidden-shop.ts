@@ -10,7 +10,7 @@ export const hiddenShopProductPool:Record<HiddenShopCategory,ProductGroup>={
  vitamin:{weight:32,allowedCurrencies:['coins','growth-points'],prices:{coins:[400,700],'growth-points':[80,150]},quantities:[1]},
  'held-item':{weight:20,allowedCurrencies:['coins','growth-points'],prices:{coins:[1500,2500],'growth-points':[250,450]},quantities:[1]},
  machine:{weight:20,allowedCurrencies:['coins','growth-points'],prices:{coins:[1200,2000],'growth-points':[200,400]},quantities:[1]},
- 'egg-tickets':{weight:24,allowedCurrencies:['coins','growth-points'],prices:{coins:[800,1500],'growth-points':[150,300]},quantities:[3,5]},
+ 'egg-tickets':{weight:24,allowedCurrencies:['coins','growth-points'],prices:{coins:[900,1400],'growth-points':[160,200]},quantities:[1,2]},
  'super-rare-ticket':{weight:3,allowedCurrencies:['coins','growth-points'],prices:{coins:[3000,5000],'growth-points':[600,1000]},quantities:[1]},
  equipment:{weight:1,allowedCurrencies:['coins','growth-points'],prices:{coins:[5000,8000],'growth-points':[1000,1500]},quantities:[1]},
 };

@@ -20,7 +20,7 @@ for(const width of [1280,390])test(`Pokemon dialogue preserves playback, full HP
   expect(await current.locator('.latest').evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(width===390?20:25);
   await expect(current).toHaveCSS('border-top-width','0px');await expect(current).toHaveCSS('box-shadow','none');
   const seen:string[]=[];await page.exposeFunction('recordDialogue',(text:string)=>seen.push(text));
-  await page.evaluate(()=>{const node=document.querySelector('[role="log"]');new MutationObserver(()=>{(window as unknown as {recordDialogue:(text:string)=>void}).recordDialogue(node?.textContent??'');}).observe(node!,{subtree:true,childList:true,characterData:true});});
+  await page.evaluate(()=>{const node=document.querySelector('.battle-messages');new MutationObserver(()=>{(window as unknown as {recordDialogue:(text:string)=>void}).recordDialogue(node?.textContent??'');}).observe(node!,{subtree:true,childList:true,characterData:true});});
   await page.getByRole('button',{name:'싸운다',exact:true}).click();await page.locator('[data-command="move 1"]').click();
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','true');await expect(current).toHaveAttribute('data-typing','true');
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false',{timeout:25000});await expect(current).toHaveAttribute('data-typing','false');
@@ -40,7 +40,7 @@ for(const width of [1280,390])test(`Pokemon dialogue preserves playback, full HP
   const target=`p2a: ${base.opponent.species}`,actor=`p1a: ${base.team.find((pokemon:{active:boolean})=>pokemon.active).species}`;
   const presented={...base,requestId:base.requestId+1,messages:[...base.messages,`|move|${actor}|Flamethrower|${target}`,`|-supereffective|${target}`,`|-crit|${target}`,`|-damage|${target}|50/100`],opponent:{...base.opponent,condition:'50/100'}};
   await page.route('**/api/battle',route=>route.request().method()==='POST'?route.fulfill({json:{...state,battle:presented}}):route.continue());
-  await page.evaluate(()=>{localStorage.setItem('tower-playback-speed-v1','4');const timings:{text:string;at:number}[]=[];(window as unknown as {dialogueTimings:typeof timings}).dialogueTimings=timings;const node=document.querySelector('[role=log]')!;new MutationObserver(()=>{const text=node.querySelector('span')?.textContent??'';if(timings.at(-1)?.text!==text)timings.push({text,at:performance.now()});}).observe(node,{childList:true,subtree:true,characterData:true});});
+  await page.evaluate(()=>{localStorage.setItem('tower-playback-speed-v1','4');const timings:{text:string;at:number}[]=[];(window as unknown as {dialogueTimings:typeof timings}).dialogueTimings=timings;const node=document.querySelector('.battle-messages')!;new MutationObserver(()=>{const text=node.querySelector('[data-dialogue-text]')?.textContent??'';if(timings.at(-1)?.text!==text)timings.push({text,at:performance.now()});}).observe(node,{childList:true,subtree:true,characterData:true});});
   await page.getByRole('button',{name:'싸운다',exact:true}).click();await page.locator('[data-command="move 1"]').click();
   await expect(current).toHaveAttribute('data-tone','critical');await expect(visual).toHaveText('급소에 맞았다!');await expect(current.locator('.latest')).toHaveCSS('color','rgb(239, 210, 122)');
   await current.screenshot({path:`test-results/dialogue-critical-${width}.png`});

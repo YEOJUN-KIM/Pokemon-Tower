@@ -39,6 +39,7 @@ function Chest(){return <svg className={styles.chest} viewBox="0 0 160 140" role
 export function eventDialogue(event:RunEventView){
  if(event.kind==='villain-campaign'&&event.phase==='choice')return event.villain?.stage==='boss'?`폐쇄된 지휘실.\n${event.villain.name}를 발견했다.`:event.villain?.stage==='officer'||event.villain?.stage==='executive'?`기록에 남은 보안 구역.\n${event.villain.name}를 발견했다.`:'조직원이 앞을 가로막았다.';
  if(event.result){
+  if(event.kind==='challenger-selection'&&event.phase==='reward'&&hasActualRewards(event.result))return '도전한 트레이너에게 승리했다!\n승리의 보상을 확인해보자.';
   const title=event.villain&&isRocketStage(event.villain.stage)?campaignRewardTitle(event.villain.stage,event.villain.clues??1):event.result.title;
   const details=event.result.entries.filter(entry=>entry.kind==='message'||entry.kind==='coin-loss').map(rewardEntryText);
   if(event.kind==='mystery-chest'&&hasActualRewards(event.result))return `상자를 열었다.\n${event.result.entries.filter(entry=>entry.kind!=='message'&&entry.kind!=='coin-loss').map(rewardEntryText).join(' · ')||'보상'}을 발견했다!`;
@@ -57,13 +58,13 @@ export function RunEventScene(props:Parameters<typeof RunEventSceneContents>[0])
  return <>{showPlayer&&<div className={`${styles.scope} ${styles.player} intro-trainer intro-player`} data-event-player><PlayerPortrait/></div>}<RunEventSceneContents {...props}/></>;
 }
 
-function RunEventSceneContents({event,portalActivationMs,busy=false,challengerId,coins=0,growthPoints=0,shopOfferId,onShopFocus=()=>{}}:{event:RunEventView;portalActivationMs?:number;busy?:boolean;challengerId?:string;coins?:number;growthPoints?:number;shopOfferId?:string;onShopFocus?:(id:string)=>void}){
+function RunEventSceneContents({event,selecting=false,portalActivationMs,busy=false,challengerId,coins=0,growthPoints=0,shopOfferId,onShopFocus=()=>{}}:{event:RunEventView;selecting?:boolean;portalActivationMs?:number;busy?:boolean;challengerId?:string;coins?:number;growthPoints?:number;shopOfferId?:string;onShopFocus?:(id:string)=>void}){
  if(event.kind==='raid-encounter'&&event.raid){
   if(event.phase==='choice'&&!event.choiceId)return <RaidScene raid={event.raid}/>;
   return event.phase==='reward'?<RaidVictoryScene raid={event.raid}/>:null;
  }
  if(event.hiddenShop)return <HiddenShop shop={event.hiddenShop} coins={coins} growthPoints={growthPoints} busy={busy} selectedId={shopOfferId} onFocus={onShopFocus}/>;
- if(event.challengers)return <ChallengerDetail result={event.phase==='reward'} candidate={event.challengers.find(candidate=>candidate.id===(event.phase==='reward'?event.choiceId:challengerId??event.challengers?.[0]?.id))}/>;
+ if(event.challengers)return <ChallengerDetail result={event.phase==='reward'||!selecting} candidate={event.challengers.find(candidate=>candidate.id===(event.phase==='reward'?event.choiceId:challengerId??event.challengers?.[0]?.id))}/>;
  const opened=event.phase==='reward',reward=event.reward,definition=eventDefinition(event.kind,undefined,event.rulesVersion),presentation=getEventPresentation(event.kind);
  if(!definition || !presentation || presentation.artwork==='raid')return null;
  const rewardName=reward?.kind==='coins'?`${reward.amount.toLocaleString()}코인`:`알 뽑기권 ${reward?.amount??1}장`;
@@ -75,7 +76,6 @@ function RunEventSceneContents({event,portalActivationMs,busy=false,challengerId
  </div>{!opened&&<aside className={`${styles.scope} ${styles.scene}`} role="region" aria-label="이벤트 설명" data-testid="event-info">
   <small>{event.afterFloor}층을 지나던 길 · 이벤트</small>
   <h2>{definition.title}</h2>
-  <p className={styles.description}>{definition.summary}</p>
  </aside>}</>;
 }
 
@@ -84,12 +84,12 @@ export function RunEventPanel({event,runId,busy,selecting,onChoose,submit,challe
  const mode=event.phase==='reward'?'reward':selecting||event.raid||event.villain||event.hiddenBoss||event.kind==='random-teleport'?'choices':'intro';
  const [revealed,setRevealed]=useState<string|null>(null);
  const awaitingConfirm=event.phase==='choice'&&!event.choiceId&&!!(event.villain||event.hiddenBoss||event.raid);
- if(event.hiddenShop)return <HiddenShopDetail shop={event.hiddenShop} selectedId={shopOfferId} coins={coins} growthPoints={growthPoints} busy={busy} bagButton={bagButton} onPurchase={productId=>onHiddenPurchase?onHiddenPurchase(productId):void submit({type:'hidden-shop-purchase',runId,eventId:event.id,productId})} onLeave={()=>void submit({type:'event-choice',runId,eventId:event.id,choice:'leave'})}/>;
- return <><section className={`${styles.scope} ${styles.bottom} battle-messages`} data-event-step={mode} data-villain={!!event.villain||!!event.hiddenBoss} data-teleport={event.kind==='random-teleport'} data-challenger-selection={!!event.challengers&&mode!=='reward'} aria-label="이벤트 상황">
+ if(event.hiddenShop)return <HiddenShopDetail messageKey={event.id} shop={event.hiddenShop} selectedId={shopOfferId} coins={coins} growthPoints={growthPoints} busy={busy} bagButton={bagButton} onPurchase={productId=>onHiddenPurchase?onHiddenPurchase(productId):void submit({type:'hidden-shop-purchase',runId,eventId:event.id,productId})} onLeave={()=>void submit({type:'event-choice',runId,eventId:event.id,choice:'leave'})}/>;
+ return <><section className={`${styles.scope} ${styles.bottom} battle-messages`} data-event-step={mode} data-villain={!!event.villain||!!event.hiddenBoss} data-teleport={event.kind==='random-teleport'} data-challenger-selection={!!event.challengers&&mode==='choices'} aria-label="이벤트 상황">
   <div className="message-heading"><span><i className="record-dot"/>{event.raid&&mode==='reward'?'레이드 승리':'이벤트'}</span><span>{event.raid&&mode==='reward'?'특별한 보상':mode==='choices'?'어떻게 할까요?':`${event.afterFloor}층을 지나던 길`}</span></div>
-  {event.challengers && mode!=='reward'?<><GameDialogue text="도전할 트레이너를 선택하세요." label="이벤트 안내"/><ChallengerCandidates candidates={event.challengers} selectedId={challengerId??event.challengers[0]?.id} busy={busy} onFocus={onChallengerFocus} onConfirm={choice=>void submit({type:'event-choice',runId,eventId:event.id,choice})}/></>:mode==='reward'?<GameDialogueConfirm key={`${event.id}-result`} kind="event" label="이벤트 결과 · 계속" disabled={busy} onConfirm={()=>{if(result&&hasActualRewards(result))setRevealed(event.id);else void submit({type:'event-continue',runId,eventId:event.id});}}><GameDialogue text={eventDialogue(event)} label="이벤트 결과"/></GameDialogueConfirm>:<>
-   {mode==='intro'?<GameDialogueConfirm kind="event" label="이벤트 메시지 · 계속" disabled={busy} onConfirm={onChoose}><GameDialogue text={eventDialogue(event)} label="이벤트 안내"/></GameDialogueConfirm>:awaitingConfirm?<GameDialogueConfirm kind="event" label="조우 메시지 · 계속" disabled={busy} onConfirm={()=>submit({type:'event-choice',runId,eventId:event.id,choice:'challenge'})}><GameDialogue text={eventDialogue(event)} label="이벤트 안내"/></GameDialogueConfirm>:(mode!=='choices'||!!event.villain||!!event.hiddenBoss||event.kind==='random-teleport')&&<GameDialogue text={eventDialogue(event)} label="이벤트 안내"/>}
-   {!awaitingConfirm&&!event.hiddenBoss&&event.kind!=='villain-campaign'&&<RunEventChoices event={event} runId={runId} busy={busy} submit={submit} mode={mode} onChoose={onChoose}/>}
+  {event.challengers && mode==='choices'?<><ChallengerCandidates candidates={event.challengers} selectedId={challengerId??event.challengers[0]?.id} busy={busy} onFocus={onChallengerFocus} onConfirm={choice=>void submit({type:'event-choice',runId,eventId:event.id,choice})}/></>:mode==='reward'?<GameDialogueConfirm key={`${event.id}-result`} kind="event" label="이벤트 결과 · 계속" disabled={busy} onConfirm={()=>{if(result&&hasActualRewards(result))setRevealed(event.id);else void submit({type:'event-continue',runId,eventId:event.id});}}><GameDialogue messageKey={`${event.id}:${event.phase}:${mode}`} text={eventDialogue(event)} label="이벤트 결과"/></GameDialogueConfirm>:<>
+   {mode==='intro'?<GameDialogueConfirm kind="event" label="이벤트 메시지 · 계속" disabled={busy} onConfirm={onChoose}><GameDialogue messageKey={`${event.id}:${event.phase}:${mode}`} text={eventDialogue(event)} label="이벤트 안내"/></GameDialogueConfirm>:awaitingConfirm?<GameDialogueConfirm kind="event" label="조우 메시지 · 계속" disabled={busy} onConfirm={()=>submit({type:'event-choice',runId,eventId:event.id,choice:'challenge'})}><GameDialogue messageKey={`${event.id}:${event.phase}:${mode}`} text={eventDialogue(event)} label="이벤트 안내"/></GameDialogueConfirm>:(mode!=='choices'||!!event.villain||!!event.hiddenBoss||event.kind==='random-teleport')&&<GameDialogue messageKey={`${event.id}:${event.phase}:${mode}`} text={eventDialogue(event)} label="이벤트 안내"/>}
+   {!awaitingConfirm&&!event.challengers&&!event.hiddenBoss&&event.kind!=='villain-campaign'&&<RunEventChoices event={event} runId={runId} busy={busy} submit={submit} mode={mode} onChoose={onChoose}/>}
   </>}
  </section>{mode==='reward'&&result&&hasActualRewards(result)&&revealed===event.id&&<RewardModal result={result!} heading="보상" busy={busy} onSelect={(selectionId,candidateId)=>void submit({type:'event-reward-select',runId,eventId:event.id,selectionId,candidateId})} onConfirm={()=>void submit({type:'event-continue',runId,eventId:event.id})}/>}</>;
 }

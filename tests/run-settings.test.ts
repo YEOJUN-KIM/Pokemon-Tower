@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {TowerStore} from '../src/server/tower-store';
 import {defaultProfile} from '../src/server/training';
+import Showdown from 'pokemon-showdown';
+import {finishChallengerBattle} from './challenger-fixture';
 
 test('floor preparation reuses run training, keeps the current form and rejects stale/event/battle writes',()=>{
  const store=new TowerStore(':memory:');try{
@@ -26,4 +28,29 @@ test('floor preparation reuses run training, keeps the current form and rejects 
   store.db.prepare("UPDATE run_events SET status='complete' WHERE id='pending'").run();store.enter('settings',run,2,['Shaymin','Charizard','Blastoise']);
   assert.throws(()=>store.train('settings','Shaymin',saved.revision,draft,next),/정비/);
  }finally{store.close();}
+});
+
+test('run point edits validate against run IVs and preserve distinct permanent IVs and the created battle',()=>{
+ for(const [runIV,permanentIV] of [[0,31],[31,3]]){
+  const store=new TowerStore(':memory:');try{
+   const owner='separate';store.ensurePlayer(owner);store.db.prepare('UPDATE players SET growth_points=1000 WHERE id=?').run(owner);
+   const id=store.start(owner,['Charizard','Blastoise','Venusaur'],'basic'),battle=store.battle(id),originalTeam=battle.player_team;
+   const profiles=JSON.parse(store.db.prepare('SELECT profiles FROM runs WHERE id=?').get(battle.run_id)!.profiles as string);profiles.Charizard.ivs.hp=runIV;
+   store.db.prepare('UPDATE runs SET profiles=? WHERE id=?').run(JSON.stringify(profiles),battle.run_id);
+   const permanent=defaultProfile('Charizard');permanent.ivs.hp=permanentIV;permanent.evs.hp=5;
+   store.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,1)').run(owner,'Charizard',JSON.stringify(permanent));
+   finishChallengerBattle(store,id);store.db.prepare("UPDATE runs SET state='select',floor=2 WHERE id=?").run(battle.run_id);
+   const adjustment=store.view(owner).run!.adjustment!,entry=adjustment.entries.find(e=>e.species==='Charizard')!,request={id:battle.run_id,floor:2,snapshot:adjustment.snapshot};
+   assert.equal(entry.profile.ivs.hp,runIV);
+   const invalid=structuredClone(entry.profile);invalid.ivs.hp=runIV===31?30:1;
+   assert.throws(()=>store.train(owner,'Charizard',entry.revision,invalid,request),/개체값/);
+   const draft=structuredClone(entry.profile);draft.evs.hp=7;store.train(owner,'Charizard',entry.revision,draft,request);
+   const saved=store.view(owner),runProfile=saved.run!.adjustment!.entries.find(e=>e.species==='Charizard')!.profile;
+   assert.equal(saved.growthPoints,993);assert.equal(runProfile.evs.hp,7);assert.equal(runProfile.ivs.hp,runIV);
+   const collection=store.trainingCollection(owner).find(e=>e.species==='Charizard')!.profile;assert.equal(collection.evs.hp,7);assert.equal(collection.ivs.hp,permanentIV);
+   assert.equal(store.battle(id).player_team,originalTeam);
+   const next=store.enter(owner,battle.run_id,2,['Charizard','Blastoise','Venusaur']),team=Showdown.Teams.unpack(store.battle(next).player_team)!;
+   assert.equal(team[0].evs!.hp,7);assert.equal(team[0].ivs!.hp,runIV);
+  }finally{store.close();}
+ }
 });

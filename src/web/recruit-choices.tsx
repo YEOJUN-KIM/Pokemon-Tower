@@ -19,7 +19,7 @@ export function RecruitChoices({tower,busy,submit,error}:{tower:TowerView;busy:b
  function recruit(collectOnly:boolean,replaced:string|null=null){setMenu(false);setReplacing(false);void submit({type:'recruit',runId:run.id,battleId:run.battleId,chosen,replaced,collectOnly});}
  return <section data-testid="recruitment" className={`${styles.scope} ${styles.candidates}`} aria-busy={busy}>
   {error&&<p role="alert">{error}</p>}
-  <GameDialogue text={run.raid?'배틀에서 승리했다!':`배틀에서 승리했다! ${run.reward.toLocaleString()}코인을 얻었다.`} label="승리 보상"/>
+  <GameDialogue messageKey={`${run.id}:${run.battleId}:victory`} text={run.raid?'배틀에서 승리했다!':`배틀에서 승리했다! ${run.reward.toLocaleString()}코인을 얻었다.`} label="승리 보상"/>
   <GameChoiceList grid className={styles.cards} data-keyboard-horizontal>{run.candidates.map((name,index)=>{
    const candidate=run.candidateDetails?.[name],shown=candidate?.forme??name,catalog=species[shown];
    const owned=tower.unlocked.includes(name),previous=run.collectionIVs[name],incoming=run.candidateIVs[name];

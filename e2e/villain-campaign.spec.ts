@@ -32,7 +32,7 @@ for(const width of [1280,390])for(const reducedMotion of ['no-preference','reduc
     expect(await page.locator('[data-villain=true].battle-messages').evaluate(el=>el.scrollHeight<=el.clientHeight+1)).toBe(true);
     await page.screenshot({path:`${capture}/${index}-${stage}-${width}-${reducedMotion}.png`,fullPage:true,animations:'disabled'});
     if(stage==='rocket-ambush')await expect(page.locator('.arena')).toHaveAttribute('data-scenery',arenaTheme(event.afterFloor,100,'trainer'));
-    if(stage==='rocket-officer'){await expect(page.locator('[data-villain=true] .latest')).toHaveCSS('white-space','pre-line');await expect(page.locator('[data-villain=true] .latest')).toHaveAttribute('data-full-text','폐쇄된 보안 구역.\n로켓단 간부를 발견했다.');}
+    if(stage==='rocket-officer'){await expect(page.locator('[data-villain=true] .latest')).toHaveCSS('white-space','pre-line');await expect(page.locator('[data-villain=true] .latest')).toHaveText('폐쇄된 보안 구역.\n로켓단 간부를 발견했다.');}
     const snapshot=new VillainCampaigns(store.db).row(event.id)!.snapshot_json;
     await expect(page.getByRole('log',{name:'이벤트 안내'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();
     await expect.poll(()=>store.currentBattle(owner)?.id).toBeTruthy();

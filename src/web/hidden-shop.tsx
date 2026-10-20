@@ -27,9 +27,9 @@ export function HiddenShop({shop,coins,growthPoints,busy,selectedId,onFocus}:{sh
  </section>;
 }
 
-export function HiddenShopDetail({shop,selectedId,coins,growthPoints,busy,onPurchase,onLeave,bagButton}:{shop:HiddenShopView;selectedId?:string;coins:number;growthPoints:number;busy:boolean;onPurchase:(id:string)=>void;onLeave:()=>void;bagButton?:import('react').ReactNode}){
+export function HiddenShopDetail({messageKey,shop,selectedId,coins,growthPoints,busy,onPurchase,onLeave,bagButton}:{messageKey?:string;shop:HiddenShopView;selectedId?:string;coins:number;growthPoints:number;busy:boolean;onPurchase:(id:string)=>void;onLeave:()=>void;bagButton?:import('react').ReactNode}){
  const offer=shop.offers.find(o=>o.id===selectedId)??shop.offers[0];if(!offer)return null;
  const status=hiddenShopAvailability(shop,offer,coins,growthPoints),available=status==='구매 가능';
  const speech=shop.purchasedCount>=shop.purchaseLimit?'감사합니다. 오늘 거래는 여기까지야.':status.includes('부족')?'가진 재화가 조금 부족한 것 같은데.':shop.purchasedCount===1?'감사합니다. 하나 더 고를 수 있어.':offer.purchased?'그건 이미 가져갔잖아.':'흔히 볼 수 없는 물건들이야. 천천히 골라.';
- return <section className={`${styles.scope} ${styles.dialogue} battle-messages`} aria-label="수상한 상인 대화"><strong>수상한 상인</strong><GameDialogue text={speech} label="상인 대화"/><div className={`${styles.actions} event-choices`}><button disabled={busy||!available} data-hidden-shop-buy onClick={()=>onPurchase(offer.id)}>구매</button>{bagButton}<button disabled={busy} data-hidden-shop-leave onClick={onLeave}>나가기</button></div><GameMenuFooter controls={[{key:'↑ / ↓ · 1–5',label:'상품 확인'},{key:'Enter / Z',label:'구매'},{key:'B',label:'배낭'},{key:'X',label:'나가기'}]}/></section>;
+ return <section className={`${styles.scope} ${styles.dialogue} battle-messages`} aria-label="수상한 상인 대화"><strong>수상한 상인</strong><GameDialogue messageKey={`${messageKey}:shop:${offer.id}:${shop.purchasedCount}`} text={speech} label="상인 대화"/><div className={`${styles.actions} event-choices`}><button disabled={busy||!available} data-hidden-shop-buy onClick={()=>onPurchase(offer.id)}>구매</button>{bagButton}<button disabled={busy} data-hidden-shop-leave onClick={onLeave}>나가기</button></div><GameMenuFooter controls={[{key:'↑ / ↓ · 1–5',label:'상품 확인'},{key:'Enter / Z',label:'구매'},{key:'B',label:'배낭'},{key:'X',label:'나가기'}]}/></section>;
 }

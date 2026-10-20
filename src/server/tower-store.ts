@@ -832,17 +832,19 @@ export class TowerStore {
       if(run && adjustment!.snapshot!==createHash('sha256').update(JSON.stringify(this.runProfiles(run.id))).digest('hex'))throw new BattleRequestError('파티 설정이 변경됐습니다. 다시 확인하세요.',409);
       const before=this.trainingCollection(owner).find(entry=>entry.species===name)!;
       if(revision!==before.revision)throw new BattleRequestError('설정이 이미 변경됐습니다. 도감을 다시 불러오세요.',409);
-      const profile={...validateProfile(name,value),gender:(value as TrainingProfile).gender ?? before.profile.gender,shiny:before.profile.shiny ?? false};
-      const formChanged=profile.forme!==(run?this.runProfiles(run.id)[name]?.forme:before.profile.forme);
+      // Archive/raid acquisitions can leave the run individual and permanent IVs different.
+      const baseline=run?this.runProfiles(run.id)[name]??before.profile:before.profile;
+      const profile={...validateProfile(name,value),gender:(value as TrainingProfile).gender ?? baseline.gender,shiny:baseline.shiny ?? false};
+      const formChanged=profile.forme!==baseline.forme;
       if(run&&formChanged)throw new BattleRequestError('모습은 출발 전에 설정하세요.',400);
       const target=trainingFormProfile(this.db,owner,name,before.profile,profile.forme??name);
-      const cost=trainingCost(formChanged?{...before.profile,ability:target.ability}:before.profile,profile);
+      const cost=trainingCost(formChanged?{...baseline,ability:target.ability}:baseline,profile);
       const known=new Set([...before.unlockedMoves,...profileLearnset(name,profile.forme).selfMoves,...(run?runMachines(this.db,run.id):[])]);
       if(profile.moves.some(move=>!known.has(move)))throw new BattleRequestError('아직 해금하지 않은 기술입니다. 상대 포켓몬을 영입해 기술을 모으세요.',400);
-      if(statKeys.some(stat=>profile.ivs[stat]!==before.profile.ivs[stat]))throw new BattleRequestError('개체값은 상대 포켓몬 영입으로만 높일 수 있습니다.',400);
+      if(statKeys.some(stat=>profile.ivs[stat]!==baseline.ivs[stat]))throw new BattleRequestError('개체값은 상대 포켓몬 영입으로만 높일 수 있습니다.',400);
       if(!this.db.prepare('UPDATE players SET growth_points=growth_points-? WHERE id=? AND growth_points>=?').run(cost,owner,cost).changes)throw new BattleRequestError('성장 포인트가 부족합니다.',400);
       saveTrainingForm(this.db,owner,name,before.profile,false);
-      const permanentProfile=run?{...profile,moves:profile.moves.every(move=>before.unlockedMoves.includes(move))?profile.moves:before.profile.moves}:profile;
+      const permanentProfile=run?{...profile,ivs:{...before.profile.ivs},shiny:before.profile.shiny??false,moves:profile.moves.every(move=>before.unlockedMoves.includes(move))?profile.moves:before.profile.moves}:profile;
       saveTrainingForm(this.db,owner,name,permanentProfile);
       this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,name,JSON.stringify(permanentProfile),revision+1);
       if(run){const snapshots=this.runProfiles(run.id);snapshots[name]=profile;this.db.prepare('UPDATE runs SET profiles=? WHERE id=?').run(JSON.stringify(snapshots),run.id);}

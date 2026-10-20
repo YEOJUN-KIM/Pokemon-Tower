@@ -19,6 +19,7 @@
     "battle:auto": "tsx src/cli.ts --auto",
     "tower:audit": "tsx src/tower-audit.ts",
     "raid:simulate": "tsx scripts/simulate-raids.ts",
+    "raid:simulate:stats": "tsx scripts/simulate-raid-stat-tuning.ts",
     "raid:simulate:threshold": "tsx scripts/simulate-raid-threshold.ts",
     "data:import": "tsx scripts/import-battle-roster.ts",
     "battle:audit": "tsx scripts/audit-battle-roster.ts",

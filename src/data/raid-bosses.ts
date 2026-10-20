@@ -9,7 +9,7 @@ function route(id:string,attack:'atk'|'spa',phases:RaidPhaseDefinition[],recruit
  return {id,weight:1,attack,phases,recruit:{nature:attack==='atk'?'Adamant':'Modest',ability:phases[0].ability,moves:phases[0].moves,...recruit}};
 }
 function boss(id:string,species:string,category:RaidCategory,raidHpMultiplier:number,routes:RaidRouteDefinition[],recruitment?:RaidRecruitmentPolicy,hpMode:RaidHPMode='threshold-v1'):RaidBossDefinition{
- return {id,species,category,hpMode,raidHpMultiplier,...(recruitment?{recruitment}:{}),weight:category==='normal'?80:20,minFloor:1,ivRule:{perfect:['legendary','mythical'].includes(category)?6:4,protected:['hp','spe']},shinyRule:'standard',battleTraining:'elite',rewardProfile:'elite',routes};
+ return {id,species,category,hpMode,raidHpMultiplier,...(recruitment?{recruitment}:{}),weight:category==='normal'?80:20,minFloor:1,ivRule:{perfect:['legendary','mythical'].includes(category)?6:4,protected:['hp','spe']},shinyRule:'standard',battleTraining:'elite',rewardProfile:'raid-premium',routes};
 }
 const palafinMoves=['Wave Crash','Jet Punch','Close Combat','Ice Punch'];
 const snorlaxMoves=['Body Slam','Crunch','High Horsepower','Heavy Slam'];

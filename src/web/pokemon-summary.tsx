@@ -32,7 +32,9 @@ export function PokemonSummary({entry,profile,formOptions,showMoveDetails=false,
   {comparison?.ivs&&<section className={comparisonStyles.comparison} aria-label="후보 개체값 비교"><h3>개체값</h3><div className={comparisonStyles.stats}>{statKeys.map(stat=>{
    const incoming=comparison.ivs![stat],previous=comparison.owned?comparison.previousIVs?.[stat]:undefined,improved=improvedIVs[stat]!==undefined;
    return <div key={stat} data-iv-stat={stat} data-improved={improved||undefined}><span>{statNames[stat]}</span><strong>{improved&&<span>{previous} → </span>}<b data-improved-value={improved||undefined} className={improved?comparisonStyles.improved:undefined}>{incoming}{improved?' ↑':''}</b></strong></div>;
-  })}</div></section>}
+  })}</div>
+  {profile?.evs&&<section className={comparisonStyles.training} aria-label="후보 육성 포인트"><h3>육성 포인트</h3><div className={comparisonStyles.stats}>{statKeys.map(stat=><div key={stat}><span>{statNames[stat]}</span><strong>{profile.evs![stat]}</strong></div>)}</div></section>}
+  </section>}
   <div className="summary-body"><section className="summary-stats" aria-label="종족값"><div className="summary-section-heading"><h3>종족값</h3><span>합계 <strong>{total}</strong></span></div><BaseStatRadar stats={stats}/><dl className="summary-stat-list">{statKeys.map(k=><div key={k}><dt>{statNames[k]}</dt><dd>{stats[k]}</dd></div>)}</dl></section>
   <div className="summary-right"><dl className="summary-traits"><div className="summary-ability" tabIndex={abilityDescription?0:undefined} aria-describedby={abilityDescription?abilityTooltipId:undefined}><dt>특성</dt><dd>{abilityNames[ability]??ability}</dd>{abilityDescription&&<span className="summary-ability-tooltip" id={abilityTooltipId} role="tooltip">{abilityDescription}</span>}</div><div><dt>성격</dt><dd>{natureName}</dd></div></dl><section className="summary-moves"><h3>기술배치</h3><ul>{configured.map((move,i)=>{
     const id=(name:string)=>name.toLowerCase().replace(/[^a-z0-9]/g,''),isNew=!!comparison&&!comparison.knownMoves.some(known=>id(known)===id(move));

@@ -1,0 +1,87 @@
+{
+  "typecheck": "passed",
+  "productionBuild": "passed",
+  "cssStructure": "passed",
+  "raidTests": {
+    "passed": 151,
+    "failed": 0,
+    "excluded": "raid-presentation.test.ts: existing reward title expectation failure; its other five cases passed in full suite"
+  },
+  "browserTests": {
+    "passed": 4,
+    "failed": 0,
+    "coverage": [
+      "6V visible",
+      "66 points visible",
+      "mobile scrolling",
+      "reward form",
+      "reload before recruitment",
+      "preview vs actual collection",
+      "saved snapshot unchanged"
+    ]
+  },
+  "fullSuite": {
+    "tests": 1437,
+    "passed": 1422,
+    "failed": 15,
+    "allFailureNamesReproducedOnUnmodifiedHEAD": true,
+    "failures": [
+      "Alola preserves every out-of-scope source/runtime entry, including tuned Kalos and legacy Hau baseline",
+      "Kalos preserves all other reviewed/runtime rows and common policy engines",
+      "Paldea round 2 changes exactly the four requested build fields; Poppy and every other NPC are preserved",
+      "Raid discovery renders only for an unchallenged choice, rewards use a victory backdrop",
+      "Toxic Spikes candidate really poisons a grounded entry and is removed by Poison entry",
+      "Unova preserves every other region runtime and reviewed definition and every common policy",
+      "all Advanced Switch, pivot, hazard, Tera, boss and regional routing policy sources are byte-equivalent to the baseline",
+      "all NPC data, floors, training and historical policy sources remain byte-equivalent",
+      "conditional variants alter only their packed team copies and never modify live Expert Belt / Stone Edge builds",
+      "fixed organization order references complete reviewed samples/templates",
+      "hidden shop compact cards move snapshot descriptions into the selected bottom message",
+      "only the four requested items and Poppy middle change; all other data and common AI stay frozen",
+      "production encounter gate stays at the reviewed 10 percent, without changing v1 weighted selection",
+      "tests\\trainer-equipment.test.ts",
+      "three-trainer tuning preserves other NPC rows, shared builds and all common engines"
+    ]
+  },
+  "regressions": {
+    "all20BossIdentitiesMechanicsUnchanged": true,
+    "unchanged12BossesAllSummaryMetricsIdentical": true,
+    "battleHPMechanicsAndShinySourcesMatchHEAD": true,
+    "rewardLegalityAllRoutesAtFloors": [
+      1,
+      2,
+      50,
+      85,
+      95,
+      100
+    ],
+    "battleRewardSeparation": true,
+    "diskReopenRetryFormDeterminism": true,
+    "sourceAndHistoricalReportHashesVerified": true
+  },
+  "simulation": {
+    "battles": 10000,
+    "perBoss": 500,
+    "floors": {
+      "85": 250,
+      "95": 250
+    },
+    "adjustments": 1,
+    "hardOutliers": [
+      "Mewtwo",
+      "Zacian",
+      "Rayquaza",
+      "Kyogre",
+      "Groudon"
+    ],
+    "easyOutliers": []
+  },
+  "localLogs": [
+    ".data/raid-stat-tuning-tests.txt",
+    ".data/raid-stat-baseline-tests.txt",
+    ".data/raid-stat-tuning-raid-tests.txt",
+    ".data/raid-stat-tuning-e2e.txt",
+    ".data/raid-stat-tuning-build.txt",
+    ".data/raid-stat-tuning-simulation.txt"
+  ]
+}

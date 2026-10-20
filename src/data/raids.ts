@@ -1,6 +1,7 @@
 import type {StatKey,TrainingProfile} from './training';
 import type {RewardOption} from './rewards';
 import {expandedRaidBosses} from './raid-bosses';
+import {raidBattleTuning,type RaidBattleTraining} from './raid-training';
 
 // Temporary v1 tuning. Encounter chance/cooldown still belong to the shared event rules.
 export const raidEventSettings={weight:20,minFloor:1,minRulesVersion:2} as const;
@@ -20,7 +21,7 @@ export type RaidRouteDefinition={id:string;weight:number;attack:'atk'|'spa';recr
 export type RaidPhaseNumber=1|2|3|4;
 export type RaidRecruitmentPolicy={mode:'baseSpecies'}|{mode:'phaseSpecies';phase:RaidPhaseNumber};
 export type RaidHPMode='threshold-v1'|'replacement-v1';
-export type RaidBossDefinition={id:string;species:string;category:RaidCategory;weight:number;minFloor:number;hpMode?:RaidHPMode;raidHpMultiplier?:number;recruitment?:RaidRecruitmentPolicy;ivRule:{perfect:number;protected:readonly StatKey[]};shinyRule:'standard';battleTraining:'elite';rewardProfile:'elite';routes:readonly RaidRouteDefinition[]};
+export type RaidBossDefinition={id:string;species:string;category:RaidCategory;weight:number;minFloor:number;hpMode?:RaidHPMode;raidHpMultiplier?:number;recruitment?:RaidRecruitmentPolicy;ivRule:{perfect:number;protected:readonly StatKey[]};shinyRule:'standard';battleTraining:RaidBattleTraining;rewardProfile:'raid-premium';routes:readonly RaidRouteDefinition[]};
 const garchompMoves=['Earthquake','Dragon Claw','Swords Dance','Iron Head'];
 const xMoves=['Zen Headbutt','Drain Punch','Ice Punch','Bulk Up'];
 const yMoves=['Psystrike','Aura Sphere','Ice Beam','Calm Mind'];
@@ -32,14 +33,15 @@ function mewtwoRoute(id:'x'|'y'):RaidRouteDefinition{
   {species:form,ability,moves,transformation:'aura',hpRatio:1/3,messages:[`${name}가 엄청난 힘을 방출한다...`,`${name}의 힘이 더욱 강해졌다!`],buffs:{[x?'atk':'spa']:1,spe:1}},
  ]};
 }
-export const raidBossDefinitions:readonly RaidBossDefinition[]=[
- {id:'garchomp',species:'Garchomp',category:'normal',weight:80,minFloor:1,hpMode:'threshold-v1',raidHpMultiplier:2,ivRule:{perfect:4,protected:['atk','spe']},shinyRule:'standard',battleTraining:'elite',rewardProfile:'elite',routes:[{id:'mega',weight:1,attack:'atk',recruit:{nature:'Jolly',ability:'Rough Skin',moves:garchompMoves},phases:[
+const baseRaidBossDefinitions:readonly RaidBossDefinition[]=[
+ {id:'garchomp',species:'Garchomp',category:'normal',weight:80,minFloor:1,hpMode:'threshold-v1',raidHpMultiplier:2,ivRule:{perfect:4,protected:['atk','spe']},shinyRule:'standard',battleTraining:'elite',rewardProfile:'raid-premium',routes:[{id:'mega',weight:1,attack:'atk',recruit:{nature:'Jolly',ability:'Rough Skin',moves:garchompMoves},phases:[
   {species:'Garchomp',ability:'Rough Skin',moves:garchompMoves,transformation:'none',hpRatio:.5},
   {species:'Garchomp-Mega',ability:'Sand Force',moves:garchompMoves,transformation:'mega',hpRatio:.5,messages:['강한 기운이 한카리아스를 감싼다...','한카리아스가 메가한카리아스로 변했다!']},
  ]}]},
- {id:'mewtwo',species:'Mewtwo',category:'legendary',weight:20,minFloor:1,hpMode:'threshold-v1',raidHpMultiplier:3,ivRule:{perfect:6,protected:[]},shinyRule:'standard',battleTraining:'elite',rewardProfile:'elite',routes:[mewtwoRoute('x'),mewtwoRoute('y')]},
+ {id:'mewtwo',species:'Mewtwo',category:'legendary',weight:20,minFloor:1,hpMode:'threshold-v1',raidHpMultiplier:3,ivRule:{perfect:6,protected:[]},shinyRule:'standard',battleTraining:'elite',rewardProfile:'raid-premium',routes:[mewtwoRoute('x'),mewtwoRoute('y')]},
  ...expandedRaidBosses,
 ];
-export type RaidSnapshot={version:1;transformationAdapter?:1;hpMode?:RaidHPMode;raidHpMultiplier?:number;recruitment?:RaidRecruitmentPolicy;bossId:string;species:string;category:RaidCategory;routeId:string;individual:TrainingProfile;phases:RaidPhaseDefinition[];opponentTeam:string;recruitTeam:string;reward:RewardOption};
+export const raidBossDefinitions:readonly RaidBossDefinition[]=baseRaidBossDefinitions.map(boss=>({...boss,...raidBattleTuning[boss.id]}));
+export type RaidSnapshot={version:1;rewardProfile?:'raid-premium';transformationAdapter?:1;hpMode?:RaidHPMode;raidHpMultiplier?:number;recruitment?:RaidRecruitmentPolicy;bossId:string;species:string;category:RaidCategory;routeId:string;individual:TrainingProfile;phases:RaidPhaseDefinition[];opponentTeam:string;recruitTeam:string;reward:RewardOption};
 // The choice screen deliberately receives no build, route, shiny or reward details.
 export type RaidEventView={spriteId:number;category:RaidCategory};

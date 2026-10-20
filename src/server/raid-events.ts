@@ -12,7 +12,8 @@ import {POINT_TEAM_MARKER} from '../data/teams';
 import {applyRewardOption} from './rewards';
 import {resolveRaidPhases} from './raid-phases';
 import {validateRaidHP} from '../battle/raid-hp';
-import {packedRaidRecruitment,raidRecruitmentTeam} from './raid-recruitment';
+import {premiumRaidRecruitment,raidRecruitmentTeam} from './raid-recruitment';
+import {raidTrainingPoints} from './raid-training';
 
 function weighted<T extends {weight:number}>(pool:readonly T[],random:()=>number):T{
  let draw=random()*pool.reduce((sum,p)=>sum+p.weight,0);
@@ -25,20 +26,23 @@ export function createRaidSnapshot(db:DatabaseSync,runId:string,floor:number,ran
  const route=fixture?.routeId?boss.routes.find(r=>r.id===fixture.routeId)!:weighted(boss.routes,random);
  if(!route)throw Error('Unknown raid route');
  const phases=resolveRaidPhases(route.phases,boss.species,random);
- const individual=npcTrainingProfile(boss.species,[...route.recruit.moves],floor,boss.battleTraining,route.attack==='spa'?'special':'physical',random,npcRankTraining(floor,'elite'));
- const perfect=new Set(boss.ivRule.protected),remaining=statKeys.filter(k=>!perfect.has(k));
+ const individual=npcTrainingProfile(boss.species,[...route.recruit.moves],floor,'elite',route.attack==='spa'?'special':'physical',random,npcRankTraining(floor,'elite'));
+ individual.evs=raidTrainingPoints(individual.evs,boss.battleTraining);
+ const protectedStats=boss.id==='mewtwo'?[route.attack,'spe'] as const:boss.ivRule.protected;
+ const perfect=new Set(protectedStats),remaining=statKeys.filter(k=>!perfect.has(k));
  while(perfect.size<boss.ivRule.perfect)perfect.add(remaining.splice(Math.floor(random()*remaining.length),1)[0]);
  individual.ivs=Object.fromEntries(statKeys.map(k=>[k,perfect.has(k)?31:Math.floor(random()*31)])) as StatBlock;
+ if(boss.battleTraining!=='elite')individual.ivs.hp=Math.max(16,individual.ivs.hp);
  individual.nature=route.recruit.nature;individual.ability=route.recruit.ability;
  individual.shiny=rollEncounterShiny(max=>Math.floor(random()*max));
  individual.gender=speciesGender(boss.species,random());
  const set=(profile:typeof individual)=>({name:boss.species,species:boss.species,level:50,item:'',pokeball:POINT_TEAM_MARKER,...structuredClone(profile),gender:profile.gender??'N'});
  // The saved starting slots are separate from the current-form validation view.
  const opponentTeam=Showdown.Teams.pack(phases.map(phase=>({...set({...individual,moves:[...phase.moves]}),item:phase.item??''})));
- const recruitProfile={...individual,evs:Object.fromEntries(statKeys.map(k=>[k,0])) as StatBlock};
- const reward=snapshotRankReward(db,runId,boss.rewardProfile,random).rewardDefinition;
- const snapshot:RaidSnapshot={version:1,transformationAdapter:1,recruitment:boss.recruitment??{mode:'baseSpecies'},...(boss.hpMode?{hpMode:boss.hpMode}:boss.raidHpMultiplier!==undefined?{raidHpMultiplier:boss.raidHpMultiplier}:{}),bossId:boss.id,species:boss.species,category:boss.category,routeId:route.id,individual,phases,opponentTeam,recruitTeam:Showdown.Teams.pack([set(recruitProfile)]),reward:{...reward,title:'특별한 보상'}};
- snapshot.recruitTeam=packedRaidRecruitment(snapshot);
+ // Item/money reward table stays elite; Pokémon quality has its own profile.
+ const reward=snapshotRankReward(db,runId,'elite',random).rewardDefinition;
+ const snapshot:RaidSnapshot={version:1,rewardProfile:boss.rewardProfile,transformationAdapter:1,recruitment:boss.recruitment??{mode:'baseSpecies'},...(boss.hpMode?{hpMode:boss.hpMode}:boss.raidHpMultiplier!==undefined?{raidHpMultiplier:boss.raidHpMultiplier}:{}),bossId:boss.id,species:boss.species,category:boss.category,routeId:route.id,individual,phases,opponentTeam,recruitTeam:'',reward:{...reward,title:'특별한 보상'}};
+ snapshot.recruitTeam=premiumRaidRecruitment(snapshot);
  validateRaidHP(snapshot);return snapshot;
 }
 type RaidRow={event_id:string;snapshot_json:string;battle_id:string|null};

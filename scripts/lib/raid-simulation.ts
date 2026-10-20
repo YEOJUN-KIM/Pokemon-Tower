@@ -4,7 +4,7 @@ import {TowerStore} from '../../src/server/tower-store';
 import {createRaidSnapshot} from '../../src/server/raid-events';
 import {raidBossDefinitions,type RaidSnapshot} from '../../src/data/raids';
 import {starters} from '../../src/data/teams';
-import {trainedStat} from '../../src/data/training';
+import {trainedStat,type StatBlock} from '../../src/data/training';
 import {runBattle,type Seed,type BattleLog} from '../../src/battle/run';
 import {ZMovePolicy} from '../../src/battle/z-move-policy';
 import type {Policy,Observation} from '../../src/battle/policy';
@@ -56,7 +56,7 @@ export function effectiveRaidHP(raid:RaidSnapshot){
  });
  return {normal,phases,phaseMax,total:phases.reduce((a,b)=>a+b,0),multiplier:phases.reduce((a,b)=>a+b,0)/normal};
 }
-export type SimulationRow={bracket?:RaidFloorBracketId;bossId:string;boss:string;index:number;seed:Seed;floor:number;teamId:string;route:string;branchSpecies:string[];won:boolean;winner:string;turns:number;survivors:number;teamHP:number;lossPhase:number|null;bossPhaseHP:number|null;normalHP:number;phaseHP:number[];phaseMaxHP?:number[];effectiveHP:number;effectiveMultiplier:number;playerSwitches:number;observedPhases:number[];protocolHash:string};
+export type SimulationRow={bossIVs?:StatBlock;bossTraining?:StatBlock;rewardIVs?:StatBlock;rewardTraining?:StatBlock;rewardNature?:string;rewardSpecies?:string;bracket?:RaidFloorBracketId;bossId:string;boss:string;index:number;seed:Seed;floor:number;teamId:string;route:string;branchSpecies:string[];won:boolean;winner:string;turns:number;survivors:number;teamHP:number;lossPhase:number|null;bossPhaseHP:number|null;normalHP:number;phaseHP:number[];phaseMaxHP?:number[];effectiveHP:number;effectiveMultiplier:number;playerSwitches:number;observedPhases:number[];protocolHash:string};
 export type SimulationOptions={bracket?:RaidFloorBracketId;bossId:string;runs:number;seedBase:string;onRow?:(row:SimulationRow)=>void;onLog?:(log:BattleLog)=>void};
 export async function simulateRaid(options:SimulationOptions):Promise<SimulationRow[]>{
  const boss=raidBossDefinitions.find(b=>b.id===options.bossId);if(!boss)throw Error('Unknown boss');
@@ -99,6 +99,8 @@ export async function simulateRaid(options:SimulationOptions):Promise<Simulation
   const activeBoss=[...p2.own.values()].at(-1),phase=p2.phase;
   if(!won&&(!activeBoss||activeBoss.max<=0))throw Error('Missing boss health');
   const row:SimulationRow={bossId:boss.id,boss:boss.species,index,seed,floor,teamId:team.id,route:raid.routeId,branchSpecies:raid.phases.slice(1).map(p=>p.species),won,winner:log.winner!,turns:log.turns,survivors:members.filter(m=>m.hp>0).length,teamHP:100*members.reduce((n,m)=>n+m.hp,0)/members.reduce((n,m)=>n+m.max,0),lossPhase:won?null:phase,bossPhaseHP:won?null:100*activeBoss!.hp/activeBoss!.max,normalHP:hp.normal,phaseHP:hp.phases,effectiveHP:hp.total,effectiveMultiplier:hp.multiplier,playerSwitches:log.decisions.filter(d=>d.side==='p1'&&d.action.startsWith('switch ')).length,observedPhases:p2.phaseMax,protocolHash:createHash('sha256').update(JSON.stringify(log.publicProtocol.filter(l=>!l.startsWith('|t:|')))).digest('hex')};
+  const reward=Showdown.Teams.unpack(raid.recruitTeam)![0];
+  Object.assign(row,{bossIVs:{...raid.individual.ivs},bossTraining:{...raid.individual.evs},rewardIVs:reward.ivs??{hp:31,atk:31,def:31,spa:31,spd:31,spe:31},rewardTraining:{...reward.evs},rewardNature:reward.nature,rewardSpecies:reward.species});
   if(options.bracket)row.bracket=options.bracket;
   if(raid.hpMode)row.phaseMaxHP=hp.phaseMax;
   rows.push(row);options.onRow?.(row);options.onLog?.(log);

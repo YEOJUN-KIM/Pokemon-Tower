@@ -1,3 +1,4 @@
+import {statKeys} from '../src/data/training';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
@@ -33,7 +34,7 @@ for(const [bossId,routeId,target] of branches)test(`${bossId}/${routeId}: saved 
   assert.deepEqual(f.snapshot.recruitment,{mode:'phaseSpecies',phase:2});
   const recruit=Showdown.Teams.unpack(f.snapshot.recruitTeam)![0],normal=defaultProfile(base,forme);
   assert.equal(recruit.species,target);assert.equal(recruit.ability,normal.ability);assert.deepEqual(recruit.moves,normal.moves);assert.equal(recruit.item,'');assert.equal(recruit.gender,'N');
-  assert.ok(!recruit.evs||Object.values(recruit.evs).every(n=>n===0));assert.deepEqual(recruit.ivs??f.snapshot.individual.ivs,f.snapshot.individual.ivs);
+  assert.equal(statKeys.reduce((sum,k)=>sum+(recruit.evs?.[k]??0),0),66);assert.ok(Object.values((recruit.ivs??{hp:31,atk:31,def:31,spa:31,spd:31,spe:31})).every(n=>n===31));
   store.chooseEvent(f.owner,f.run,f.event.id,'challenge');const first=store.currentBattle(f.owner)!.id;
   store.db.prepare('UPDATE run_retries SET retry_limit=1 WHERE run_id=?').run(f.run);
   finishRaidBattle(store,first,'Tower AI');store.retry(f.owner,f.run,first);
@@ -122,7 +123,7 @@ for(const collectOnly of [false,true])test(`existing Kyurem form settings are up
   f.store.recruit(f.owner,f.run,id,'Kyurem',null,undefined,collectOnly);
   const saved=f.store.trainingCollection(f.owner).find(p=>p.species==='Kyurem')!.profile,expected=defaultProfile('Kyurem','Kyurem-Black');
   assert.equal(saved.forme,'Kyurem-Black');assert.deepEqual(saved.moves,expected.moves);assert.equal(saved.ability,expected.ability);
-  assert.deepEqual(saved.evs,old.evs);assert.deepEqual(saved.ivs,old.ivs);assert.equal(saved.shiny,true);
+  assert.deepEqual(saved.evs,Showdown.Teams.unpack(f.snapshot.recruitTeam)![0].evs);assert.deepEqual(saved.ivs,old.ivs);assert.equal(saved.shiny,true);
   if(collectOnly){assert.ok(!f.store.view(f.owner).run!.roster.includes('Kyurem'));assert.equal(f.store.db.prepare('SELECT profiles FROM runs WHERE id=?').get(f.run)!.profiles,profiles);}
   else assert.equal(f.store.view(f.owner).run!.partnerForms?.Kyurem,'Kyurem-Black');
  }finally{f.store.close();}

@@ -31,8 +31,9 @@ for(const [bossId,routeId] of [['garchomp','mega'],['mewtwo','x'],['mewtwo','y']
   const f=raidFixture(':memory:','owner',bossId,routeId),{store,owner,run,event,snapshot}=f;
   try{
    const ivs=snapshot.individual.ivs;
-   assert.equal(Object.values(ivs).filter(v=>v===31).length,bossId==='garchomp'?4:6);assert.equal(ivs.atk,31);assert.equal(ivs.spe,31);
-   assert.equal(statKeys.reduce((sum,k)=>sum+snapshot.individual.evs[k],0),npcRankTraining(2,'elite').evBudget);
+   const rewardSet=Showdown.Teams.unpack(snapshot.recruitTeam)![0];
+   assert.equal(Object.values(ivs).filter(v=>v===31).length,bossId==='garchomp'?4:3);assert.equal(ivs[routeId==='y'?'spa':'atk'],31);assert.equal(ivs.spe,31);
+   assert.equal(statKeys.reduce((sum,k)=>sum+snapshot.individual.evs[k],0),Math.round(npcRankTraining(2,'elite').evBudget*(bossId==='mewtwo'?.57:1)));
    assert.deepEqual(new RaidEvents(store.db).snapshot(new RaidEvents(store.db).row(event.id)!),snapshot);
    store.chooseEvent(owner,run,event.id,'challenge');const battle=store.currentBattle(owner)!;
    store.chooseEvent(owner,run,event.id,'challenge');assert.equal(store.currentBattle(owner)!.id,battle.id);
@@ -44,13 +45,13 @@ for(const [bossId,routeId] of [['garchomp','mega'],['mewtwo','x'],['mewtwo','y']
    // Walk every phase with a strong legal Ice build below; lifecycle settlement is independent of winner.
    const receipt=finishRaidBattle(store,battle.id);store.complete(battle.id,receipt.log,receipt.view);
    assert.equal(store.view(owner).run!.state,'recruit');assert.deepEqual(store.view(owner).run!.candidates,[snapshot.species]);
-   assert.deepEqual(store.view(owner).run!.candidateIVs[snapshot.species],ivs);
+   assert.deepEqual(store.view(owner).run!.candidateIVs[snapshot.species],(rewardSet.ivs??{hp:31,atk:31,def:31,spa:31,spd:31,spe:31}));
    const reward=store.db.prepare('SELECT result_json FROM run_events WHERE id=?').get(event.id)!.result_json;
    assert.ok(reward);store.recruit(owner,run,battle.id,snapshot.species,null);
    assert.throws(()=>store.recruit(owner,run,battle.id,snapshot.species,null));
    const profiles=JSON.parse(store.db.prepare('SELECT profiles FROM runs WHERE id=?').get(run)!.profiles as string),profile=profiles[snapshot.species];
-   assert.deepEqual(profile.ivs,ivs);assert.equal(profile.nature,snapshot.individual.nature);assert.equal(profile.ability,snapshot.individual.ability);assert.deepEqual(profile.moves,snapshot.individual.moves);assert.equal(profile.shiny,snapshot.individual.shiny);
-   assert.equal((Object.values(profile.evs) as number[]).reduce((n,v)=>n+v,0),0);assert.equal(profile.forme,undefined);
+   assert.deepEqual(profile.ivs,(rewardSet.ivs??{hp:31,atk:31,def:31,spa:31,spd:31,spe:31}));assert.equal(profile.nature,rewardSet.nature);assert.equal(profile.ability,rewardSet.ability);assert.deepEqual(profile.moves,rewardSet.moves);assert.equal(profile.shiny,snapshot.individual.shiny);
+   assert.equal((Object.values(profile.evs) as number[]).reduce((n,v)=>n+v,0),66);assert.equal(profile.forme,undefined);
    assert.equal(store.view(owner).run!.floor,2);assert.equal(store.view(owner).run!.event!.result!.title,'특별한 보상');
    store.continueEvent(owner,run,event.id);assert.equal(store.view(owner).run!.event,null);
    const normal=store.enter(owner,run,2,store.view(owner).run!.suggestedTeam);assert.notEqual(normal,battle.id);
@@ -131,7 +132,7 @@ for(const [bossId,routeId] of [['garchomp','mega'],['mewtwo','x'],['mewtwo','y']
   assert.equal(state.tower.run!.candidates.length,1);assert.equal(state.battle!.field!.opponentSize,1);
  }finally{await service.dispose();store.close();}
 });
-test('full roster uses existing replacement and preserves the player training EV profile',()=>{
+test('full roster uses existing replacement and grants premium Raid training',()=>{
  const {store,owner,run,event,snapshot}=raidFixture();try{
   for(const [i,name] of ['Arcanine','Gyarados','Snorlax'].entries())store.db.prepare('INSERT INTO members VALUES (?,?,?)').run(run,i+3,name);
   const p=defaultProfile('Garchomp');p.evs.atk=12;p.evs.spe=8;
@@ -142,7 +143,7 @@ test('full roster uses existing replacement and preserves the player training EV
   store.recruit(owner,run,id,'Garchomp','Snorlax');const view=store.view(owner);
   assert.equal(view.run!.roster.length,6);assert.ok(!view.run!.roster.includes('Snorlax'));assert.ok(view.run!.roster.includes('Garchomp'));
   const saved=JSON.parse(store.db.prepare('SELECT profiles FROM runs WHERE id=?').get(run)!.profiles as string).Garchomp;
-  assert.deepEqual(saved.evs,p.evs);assert.deepEqual(saved.ivs,snapshot.individual.ivs);
+  const reward=Showdown.Teams.unpack(snapshot.recruitTeam)![0];assert.deepEqual(saved.evs,reward.evs);assert.deepEqual(saved.ivs,(reward.ivs??{hp:31,atk:31,def:31,spa:31,spd:31,spe:31}));
  }finally{store.close();}
 });
 test('standard shiny draw can be injected without changing odds or phase/recruit flags',()=>{

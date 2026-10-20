@@ -52,3 +52,7 @@ artifacts/**
 artifacts/temporary/
 artifacts/**/*.jsonl
 artifacts/**/*.log
+
+!artifacts/reports/raid-stat-tuned-endgame.csv
+!artifacts/reports/raid-stat-tuned-endgame.branches.csv
+!artifacts/reports/raid-stat-tuned-endgame.phases.csv

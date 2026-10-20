@@ -28,6 +28,6 @@ export function RecruitCandidateDetails({name,run,onClose,owned=false,returnFocu
   canMega:original?.canMega??false,canGigantamax:original?.canGigantamax??false,
  }:undefined;
  return <PokedexDialog title={pokemonName(display)+' · 영입 후보 정보'} large onClose={onClose} returnFocus={returnFocus} context="recruit-info" className={`${styles.scope} ${styles.panel} ${styles.infoPanel}`} controls={[{key:'↑ / ↓',label:'정보 확인'},{key:'Esc / X',label:'돌아가기'}]}>
-  {entry&&details?<section ref={root} data-testid="recruit-candidate-details"><PokemonSummary key={name} entry={entry} profile={{ability:details.ability,nature:details.nature,moves:details.moves,teraType:details.teraType,shiny:details.shiny,gender:details.gender}} comparison={{ivs:run.candidateIVs[name],previousIVs:run.collectionIVs[name],knownMoves:run.collectionMoves[name]??[],owned}} showMoveDetails/></section>:<p>이 배틀의 후보 정보가 없습니다. 배틀을 다시 불러와 주세요.</p>}
+  {entry&&details?<section ref={root} data-testid="recruit-candidate-details"><PokemonSummary key={name} entry={entry} profile={{evs:details.evs,ability:details.ability,nature:details.nature,moves:details.moves,teraType:details.teraType,shiny:details.shiny,gender:details.gender}} comparison={{ivs:run.candidateIVs[name],previousIVs:run.collectionIVs[name],knownMoves:run.collectionMoves[name]??[],owned}} showMoveDetails/></section>:<p>이 배틀의 후보 정보가 없습니다. 배틀을 다시 불러와 주세요.</p>}
  </PokedexDialog>;
 }

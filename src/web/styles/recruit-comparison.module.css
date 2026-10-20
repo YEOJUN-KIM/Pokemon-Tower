@@ -1,6 +1,7 @@
 .scope {position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto 1fr;gap:12px 24px;padding:8px;color:#e9eef5;}
 .comparison {grid-column:2;grid-row:3;margin:0;padding:10px;border:1px solid #637084;border-radius:6px;background:#243142;color:#e9eef5;}
 .comparison h3 {margin:0 0 8px;font-size:12px;}
+.training {margin-top:12px;}
 .stats {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;}
 .stats>div {display:flex;flex-direction:column;gap:5px;padding:7px;background:#1c2432;border-radius:4px;font-size:11px;}
 .stats strong>span {color:#c0cad8;font-weight:400;}

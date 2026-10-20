@@ -5,6 +5,26 @@ import {pokemonSets,trainedSet} from '../data/teams';
 import {isCollectibleSpecies} from '../data/pokedex-roster';
 import {defaultProfile} from './training';
 import {genderOptions} from './pokemon-gender';
+import {statKeys,type StatBlock} from '../data/training';
+
+// Build from ordinary player defaults, never from a Phase's moves, ability or points.
+export function premiumRaidRecruitment(raid:RaidSnapshot):string{
+ const target=resolveRaidRecruitSpecies(raid),{base,forme}=identity(target);
+ const route=raidBossDefinitions.find(b=>b.id===raid.bossId)!.routes.find(r=>r.id===raid.routeId)!;
+ const attack=raid.bossId==='zygarde'?'atk':route.attack;
+ const profile=defaultProfile(base,forme);
+ // The base Mewtwo defaults are special. Its X reward needs a legal player
+ // physical build to match Jolly/Atk training, without copying the Phase build.
+ if(base==='Mewtwo'&&route.id==='x')profile.moves=['Zen Headbutt','Drain Punch','Earthquake','Ice Punch'];
+ profile.ivs=Object.fromEntries(statKeys.map(k=>[k,31])) as StatBlock;
+ profile.nature=route.recruit.nature==='Serious'?(attack==='atk'?'Adamant':'Modest'):route.recruit.nature;
+ profile.evs={hp:2,atk:0,def:0,spa:0,spd:0,spe:32};profile.evs[attack]=32;
+ if(base==='Snorlax')profile.evs={hp:32,atk:32,def:0,spa:0,spd:2,spe:0};
+ profile.shiny=!!raid.individual.shiny;profile.gender=raid.individual.gender;
+ const genders=genderOptions(base);
+ if(!genders.includes(profile.gender!))profile.gender=genders[0];
+ return Showdown.Teams.pack([trainedSet(base,profile)]);
+}
 
 export type RaidRecruitSet=NonNullable<ReturnType<typeof Showdown.Teams.unpack>>[number]&{raidForme?:string};
 type Handling={production?:boolean;warn?:(message:string)=>void};

@@ -9,7 +9,7 @@ import type {BattleRule} from '../data/run-rules';
 import {canEquipGimmick} from '../data/gimmicks';
 import {selectedForm} from '../data/selectable-forms';
 import {hasFixedFormItem} from '../data/form-items';
-import {vitamins,upgrades,VITAMIN_LIMIT} from '../data/shop';
+import {vitamins,upgrades,vitaminDescription} from '../data/shop';
 import {moveInfo} from '../data/move-info';
 import {trainingOptions,validateProfile,defaultProfile} from './training';
 import {vitaminDisabledReason} from '../shared/vitamin-eligibility';
@@ -33,7 +33,7 @@ export class RunBag{
    const effect:InventoryReward=JSON.parse(row.effect_json);
    if(effect.kind==='tool-voucher')entries.push({id:row.id,pocket:'tools',name:`${effect.rarity==='epic'?'에픽':effect.rarity} 도구 교환권`,description:'같은 등급 도구 4개 중 하나를 골라 보관하거나 장착합니다.',icon:'/sprites/items/life-orb.png',quantity:row.quantity,action:'voucher',targets:[],voucher:new ToolVouchers(this.db,runId).pending(row.id)});
    if(effect.kind==='vitamin'&&entries.some(e=>e.pocket==='consumables'&&e.name===vitamins[effect.stat].name)){entries.find(e=>e.pocket==='consumables'&&e.name===vitamins[effect.stat].name)!.quantity!+=row.quantity;continue;}
-   if(effect.kind==='vitamin')entries.push({id:row.id,pocket:'consumables',name:vitamins[effect.stat].name,description:`${vitamins[effect.stat].name} · 포켓몬당 영양제 총 ${VITAMIN_LIMIT}개 제한`,icon:`/sprites/items/${vitamins[effect.stat].icon}.png`,quantity:row.quantity,action:'vitamin',targets:roster.filter(s=>!vitaminDisabledReason(vitaminUsage,s,vitamins[effect.stat].name))});
+   if(effect.kind==='vitamin')entries.push({id:row.id,pocket:'consumables',name:vitamins[effect.stat].name,description:vitaminDescription(effect.stat),icon:`/sprites/items/${vitamins[effect.stat].icon}.png`,quantity:row.quantity,action:'vitamin',targets:roster.filter(s=>!vitaminDisabledReason(vitaminUsage,s,vitamins[effect.stat].name))});
    else if(effect.kind==='machine')entries.push({id:row.id,pocket:'machines',move:effect.move,name:moveInfo[effect.move]?.name??effect.move,description:moveInfo[effect.move]?.description??'현재 Run 동안 반복해서 가르칠 수 있는 기술머신입니다.',icon:'/sprites/items/tm-normal.png',action:'machine',targets:roster.filter(s=>trainingOptions(s,profiles[s]?.forme).learnableMoves.includes(effect.move)&&!profiles[s]?.moves.includes(effect.move))});
    else if(effect.kind==='item-exchange')entries.push({id:row.id,pocket:'tools',name:effect.items.length===1?itemName(effect.items[0]):'에픽 지닌 도구 교환권',description:'미보유 도구를 선택해 배낭에 등록합니다.',icon:'/sprites/items/life-orb.png',action:'exchange',targets:effect.items.filter(item=>!ownsRunItem(this.db,runId,item,row.id))});
   }

@@ -4,6 +4,7 @@ import {createNpcPolicy as archivedNpcPolicy} from '../battle/npc-policy-v11';
 import {applyPublicTypes} from '../battle/public-types';
 import {packedNpcRule} from '../data/npc-gimmicks';
 import {ZMovePolicy} from '../battle/z-move-policy';
+import {resolveBattleMovePreviews} from '../battle/move-preview';
 import {moveInfo} from '../data/move-info';
 import {TeraPolicy,GimmickPolicy,LegacyGimmickPolicy} from '../battle/gimmick-policy';
 import {SwitchingPolicy,CautiousSwitchingPolicy} from '../battle/switch-policy';
@@ -105,17 +106,16 @@ export class BattleSession {
         if (line.startsWith('|turn|')) this.turns = Number(line.split('|')[2]);
         if (line.startsWith('|win|')) this.winner = line.split('|')[2];
       },
-      onPlayerLine: line => {
+      onPlayerLine: (line,engine) => {
         if(line.startsWith('|request|')){
           const request=JSON.parse(line.slice(9));
           if(!request || request.wait)return;
           const current=request.side?.pokemon.find((p:{active:boolean})=>p.active),tera=current?.terastallized;
-          this.movePP=(request.active?.[0]?.moves ?? []).map((move:{id:string;pp:number;maxpp:number})=>{
-            const base=Showdown.Dex.moves.get(move.id);
-            const item=Showdown.Dex.items.get(current?.item??''),form=current?.details?.split(',')[0]??'';
-            const equipmentType=move.id==='judgment'?item.onPlate:move.id==='multiattack'?item.onMemory:move.id==='technoblast'?item.onDrive:undefined;
-            const type=equipmentType??(move.id==='terastarstorm'&&form==='Terapagos-Stellar'?'Stellar':undefined);
-            return {name:base.name,pp:move.pp,maxpp:move.maxpp,...(type?{type,power:base.basePower,accuracy:base.accuracy,category:base.category}:{}),...(move.id==='terablast' && tera ? {type:tera,power:tera==='Stellar'?100:80,accuracy:true,category:current.stats.atk>current.stats.spa?'Physical' as const:'Special' as const} : {})};
+          const moveSlots=request.active?.[0]?.moves??[];
+          const previews=engine?resolveBattleMovePreviews(engine,'p1',moveSlots.map((move:{id:string})=>move.id)):[];
+          this.movePP=moveSlots.map((move:{id:string;pp:number;maxpp:number},index:number)=>{
+            const base=Showdown.Dex.moves.get(move.id),resolved=previews[index];
+            return {name:base.name,pp:move.pp,maxpp:move.maxpp,type:resolved?.type??base.type,category:resolved?.category??base.category,power:move.id==='terablast'&&tera?(tera==='Stellar'?100:80):base.basePower,accuracy:base.accuracy};
           });
           this.zMovePP=request.active?.[0]?.canZMove?.map((option:{move:string}|null,index:number)=>{
             if(!option)return null;

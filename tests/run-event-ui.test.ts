@@ -53,3 +53,17 @@ test('challenger detail only exposes optional special hint, rank and reward cate
   assert.equal(renderToStaticMarkup(createElement(ChallengerDetail,{candidate:undefined})),'');
  }finally{hooks.deregister();}
 });
+
+test('event results keep both actors, and only chests receive treasure glow and stars',async()=>{
+ const hooks=registerHooks({load(url,context,next){return url.endsWith('.css')?{format:'module',source:'export default {}',shortCircuit:true}:next(url,context);}});
+ try{
+  const {RunEventScene}=await import('../src/web/run-event');
+  for(const kind of ['traveling-merchant','breeder-gift','hidden-boss','villain-campaign'] as const)for(const phase of ['choice','reward'] as const){
+   const event:RunEventView={id:'scene',kind,phase,afterFloor:82,reward:{kind:'coins',amount:150}};
+   const html=renderToStaticMarkup(createElement(RunEventScene,{event}));
+   assert.ok(html.includes('data-event-player'));assert.ok(html.includes('data-event-target'));assert.ok(html.includes('data-trainer-asset="battle-sprite"'));assert.ok(!html.includes('data-event-reward-effect'));
+  }
+  const chest:RunEventView={id:'scene',kind:'mystery-chest',phase:'reward',afterFloor:82,reward:{kind:'coins',amount:150}};
+  const html=renderToStaticMarkup(createElement(RunEventScene,{event:chest}));assert.equal((html.match(/data-event-reward-effect/g)??[]).length,2);
+ }finally{hooks.deregister();}
+});

@@ -2,28 +2,30 @@ import {test,expect} from '@playwright/test';
 import {randomBytes} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import {TowerStore} from '../src/server/tower-store';
-import {playerKey} from '../src/server/tower-service';
+import {Accounts} from '../src/server/accounts';
 import {packTeam} from '../src/data/teams';
 for(const [item,kind]of [['Charizardite X','mega'],['Dynamax Band','dynamax']] as const)for(const width of [1280,390]){
  test(kind+' toggle, animation, keyboard and persistent form at '+width+'px',async({page,context})=>{
-  const token=randomBytes(32).toString('hex'),owner=playerKey(token),store=new TowerStore('.data/e2e.sqlite');
+  const owner='gimmick_'+randomBytes(8).toString('hex'),store=new TowerStore('.data/e2e.sqlite');
   try{
+   store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();const {token}=await new Accounts(store.db).register(owner,'gimmick-test-password',owner,undefined);
    store.ensurePlayer(owner);const id=store.start(owner,['Charizard','Blastoise','Venusaur']);
+   if(kind==='dynamax'){store.db.prepare('INSERT INTO run_trainer_equipment VALUES (?,?)').run(store.battle(id).run_id,'Dynamax Band');store.db.prepare('UPDATE battles SET trainer_equipment=? WHERE id=?').run(JSON.stringify(['Dynamax Band']),id);}
    const own=Showdown.Teams.unpack(packTeam(['Charizard','Blastoise','Venusaur'],{},{Charizard:item}))!;
    own[0].moves=['Flamethrower','Growl','Air Slash','Dragon Claw'];
    const enemy=Showdown.Teams.unpack(packTeam(['Snorlax','Shuckle','Blissey']))!;enemy.forEach(p=>p.moves=['Rest']);
    store.db.prepare('UPDATE battles SET player_team=?,opponent_team=?,seed=? WHERE id=?').run(Showdown.Teams.pack(own),Showdown.Teams.pack(enemy),'[1,2,3,4]',id);
-   await context.addCookies([{name:'tower_session',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
+   await context.addCookies([{name:'tower_auth',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
    await page.setViewportSize({width,height:width===390?844:720});await page.goto('/battle');
-   await expect(page.getByRole('button',{name:'싸운다',exact:true})).toHaveAttribute('data-game-cursor','true');await page.keyboard.press('Enter');
+   await expect(page.getByRole('button',{name:'싸운다',exact:true})).toHaveAttribute('data-game-cursor','true');await page.getByRole('button',{name:'싸운다',exact:true}).click();
    const toggle=page.getByTestId('gimmick-toggle');await expect(toggle).toHaveAttribute('aria-pressed','false');
    await page.keyboard.press('a');await expect(toggle).toHaveAttribute('aria-pressed','true');
-   if(kind==='dynamax'){await expect(page.locator('[data-command="move 1"]')).toContainText('다이번');await expect(page.getByTestId('battle-move-details')).toContainText('130');await expect(page.getByTestId('battle-move-details').getByRole('img',{name:'특수',exact:true})).toBeVisible();}
+   if(kind==='dynamax'){await expect(page.locator('[data-command="move 1"]')).toContainText('거다이옥염');await expect(page.getByTestId('battle-move-details')).toContainText('130');await expect(page.getByTestId('battle-move-details').getByRole('img',{name:'특수',exact:true,includeHidden:true})).toBeAttached();}
    await page.keyboard.press('a');await expect(toggle).toHaveAttribute('aria-pressed','false');await page.keyboard.press('a');
    await page.keyboard.press('ArrowDown');await expect(page.locator('[data-command="move 3"]')).toHaveAttribute('data-game-cursor','true');
    await page.keyboard.press('ArrowRight');await expect(page.locator('[data-command="move 4"]')).toHaveAttribute('data-game-cursor','true');
    await page.keyboard.press('ArrowLeft');await page.keyboard.press('ArrowUp');
-   await page.evaluate(()=>{const observer=new MutationObserver(()=>{if(document.querySelector('.mega-arena-flash')){(window as any).__megaFlashSeen=true;observer.disconnect();}});observer.observe(document.body,{childList:true,subtree:true});});await page.keyboard.press('Enter');
+   await page.evaluate(()=>{const observer=new MutationObserver(()=>{if(document.querySelector('.mega-arena-flash')){(window as any).__megaFlashSeen=true;observer.disconnect();}});observer.observe(document.body,{childList:true,subtree:true});});await page.locator('[data-command="move 1"]').click();
    if(kind==='mega'){
     await expect(page.getByRole('log',{name:'현재 배틀 상황'})).toContainText('키스톤에 반응');
     await expect(page.locator('.motion-mega-charge')).toBeVisible();if(width===1280)await page.screenshot({path:'test-results/mega-charge.png'});

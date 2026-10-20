@@ -3,11 +3,8 @@ import {raidCategoryPresentation,type RaidEventView} from '../data/raids';
 import {PokemonImage} from './pokemon-image';
 import styles from './styles/raid.module.css';
 
-export function RaidVictoryScene(){
- return <section className={`${styles.scene} ${styles.victory}`} data-testid="raid-victory" aria-label="레이드 승리">
-  <span className={styles.victoryMark} aria-hidden="true">✦</span>
-  <h2>레이드 승리!</h2><p>강적과의 배틀에서 승리했다.</p><strong>특별한 보상</strong>
- </section>;
+export function RaidVictoryScene({raid}:{raid:RaidEventView}){
+ return <section className={`${styles.scene} ${styles.encounter}`} data-event-target data-testid="raid-victory" aria-label="레이드 승리"><PokemonImage id={raid.spriteId} name="레이드 포켓몬" width={180} height={180} fallback={<span>◇</span>}/></section>;
 }
 
 export function RaidScene({raid}:{raid:RaidEventView}){

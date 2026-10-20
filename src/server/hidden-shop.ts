@@ -2,7 +2,7 @@ import type {DatabaseSync} from 'node:sqlite';
 import {createHash} from 'node:crypto';
 import {hiddenShopEventSettings as settings,hiddenShopProductPool as pool,hiddenShopProductOverrides,type HiddenShopCategory,type HiddenShopProduct,type HiddenShopSnapshot,type HiddenShopView} from '../data/hidden-shop';
 import {epicRewardItems,eligibleRewardMachines,weightedRewardId} from './challenger-rewards';
-import {vitamins} from '../data/shop';
+import {vitamins,vitaminDescription} from '../data/shop';
 import {statKeys} from '../data/training';
 import {heldItems,itemName,itemIcon} from '../data/held-items';
 import {moveInfo} from '../data/move-info';
@@ -24,7 +24,7 @@ export function hiddenShopProducts(db:DatabaseSync,runId:string):HiddenShopProdu
    products.push({id:productId,name,category,quantity,icon:image,description,allowedCurrencies:override?.allowedCurrencies??pool[category].allowedCurrencies,prices:override?.prices??pool[category].prices,effect:{...effect,...('amount' in effect?{amount:quantity}:{})}});
   }
  };
- for(const stat of statKeys)add('vitamin',`vitamin-${stat}`,vitamins[stat].name,vitamins[stat].icon,'배낭에 보관 · 포켓몬당 영양제 총 3개 제한',{kind:'vitamin',stat,amount:1});
+ for(const stat of statKeys)add('vitamin',`vitamin-${stat}`,vitamins[stat].name,vitamins[stat].icon,vitaminDescription(stat),{kind:'vitamin',stat,amount:1});
  for(const item of epicRewardItems.filter(item=>allowsRuleItem(rule,item)&&!ownsRunItem(db,runId,item)))add('held-item',`item-${item}`,itemName(item),itemIcon(item),heldItems[item].description,{kind:'item-exchange',items:[item],amount:1,fallbackCoins:0});
  for(const move of eligibleRewardMachines(db,runId))add('machine',`machine-${move}`,`기술머신 ${moveInfo[move]?.name??move}`,'tm-normal','배낭에 등록 · 이번 Run 동안 반복 사용 가능',{kind:'machine',move,amount:1});
  add('egg-tickets','egg-ticket','알 티켓','lucky-egg','영구 상점의 일반 알 뽑기에서 사용',{kind:'egg-ticket',amount:1});
@@ -66,7 +66,7 @@ export class HiddenShop{
  }
  view(eventId:string):HiddenShopView{
   const snapshot=this.snapshot(eventId);
-  return {purchaseLimit:snapshot.purchaseLimit,purchasedCount:snapshot.offers.filter(p=>p.purchased).length,offers:snapshot.offers.map(({effect:_,...offer})=>offer)};
+  return {purchaseLimit:snapshot.purchaseLimit,purchasedCount:snapshot.offers.filter(p=>p.purchased).length,offers:snapshot.offers.map(({effect,...offer})=>({...offer,...(effect.kind==='vitamin'?{description:vitaminDescription(effect.stat)}:effect.kind==='item-exchange'&&effect.items.length===1?{description:heldItems[effect.items[0]]?.description??offer.description}:{})}))};
  }
  purchase(owner:string,runId:string,eventId:string,productId:unknown){
   const snapshot=this.snapshot(eventId),offer=snapshot.offers.find(p=>p.id===productId);

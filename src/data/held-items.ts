@@ -1,10 +1,13 @@
 import zItems from './z-crystals.json' with {type:'json'};
-import megaItems from './mega-items.json' with {type:'json'};
+import megaData from './mega-items.json' with {type:'json'};
+import {pokemonName} from './pokemon-catalog';
+const removalProtection='대응 포켓몬이 지니면 빼앗기거나 교환·제거되지 않는다.';
+const megaItems=Object.fromEntries(Object.entries(megaData).map(([key,item])=>[key,{...item,description:`${pokemonName(item.species)}의 ${pokemonName(item.forme)} 메가진화를 가능하게 한다. ${removalProtection}`} ]));
 import {formItems} from './form-items';
 import {additionalHeldItems} from './additional-held-items';
 export const baseHeldItems={
-  'Red Orb':{name:'주홍구슬',description:'그란돈에게 지니게 하면 등장할 때 원시그란돈으로 원시회귀합니다. 메가진화·혼합 룰에서 팀의 메가진화/다이맥스 공용 사용권을 소비합니다.',price:5000,consumable:false},
-  'Blue Orb':{name:'쪽빛구슬',description:'가이오가에게 지니게 하면 등장할 때 원시가이오가로 원시회귀합니다. 메가진화·혼합 룰에서 팀의 메가진화/다이맥스 공용 사용권을 소비합니다.',price:5000,consumable:false},
+  'Red Orb':{name:'주홍구슬',description:'그란돈에게 지니게 하면 등장할 때 원시그란돈으로 원시회귀합니다. 대응 포켓몬이 지니면 빼앗기거나 교환·제거되지 않으며, 금제·매직룸으로 원시회귀가 무효화되지 않습니다.',price:5000,consumable:false},
+  'Blue Orb':{name:'쪽빛구슬',description:'가이오가에게 지니게 하면 등장할 때 원시가이오가로 원시회귀합니다. 대응 포켓몬이 지니면 빼앗기거나 교환·제거되지 않으며, 금제·매직룸으로 원시회귀가 무효화되지 않습니다.',price:5000,consumable:false},
   'Sitrus Berry':{name:'자뭉열매',description:'배틀마다 1회, HP가 절반 이하가 되면 최대 HP의 1/4을 회복합니다.',price:225,consumable:false},
   Leftovers:{name:'먹다남은음식',description:'매 턴 종료 시 최대 HP의 1/16을 회복합니다.',price:600,consumable:false},
   Charcoal:{name:'목탄',description:'불꽃 타입 공격 기술의 위력이 20% 증가합니다.',price:300,consumable:false},

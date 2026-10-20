@@ -51,7 +51,7 @@ export async function runBattle(options: {
   player: Policy; opponent: Policy; seed?: Seed; format?:string;
   teams?: {p1: string; p2: string};
   onPublicLine?: (line: string) => void;
-  onPlayerLine?: (line: string) => void;
+  onPlayerLine?: (line: string,battle?:Showdown.Battle) => void;
   upgrades?: UpgradeKind[];
   teraTickets?:import('../data/tera').TeraTickets;
   trainerEquipment?:readonly import('../data/trainer-equipment').TrainerEquipment[];
@@ -180,7 +180,7 @@ export async function runBattle(options: {
       for (const line of chunk.split('\n')) {
         switching?.consume(line);
         if(line.startsWith('|') && !line.startsWith('|request|') && !line.startsWith('|error|'))policy.observePublicLine?.(line);
-        if (side === 'p1') options.onPlayerLine?.(line);
+        if (side === 'p1') options.onPlayerLine?.(line,engine.battle??undefined);
         const parts = line.split('|');
         if (parts[1] === 'error') throw new Error(parts.slice(2).join('|'));
         if (parts[1] === 'turn') {

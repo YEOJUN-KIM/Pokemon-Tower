@@ -1,3 +1,4 @@
+import {statNames,type StatKey} from './training';
 export const upgrades = {
   attack: {name:'플러스파워',icon:'x-attack',description:'출전 팀의 공격·특수공격 20% 증가',price:300},
   speed: {name:'스피드업',icon:'x-speed',description:'출전 팀의 스피드 20% 증가',price:300},
@@ -32,3 +33,5 @@ export const vitamins={hp:{name:"맥스업",icon:"hp-up"},atk:{name:"타우린",
 export const VITAMIN_BOOST=5;
 export const VITAMIN_LIMIT=3;
 export const vitaminPrice=(floor:number)=>1400+100*(floor-1);
+
+export function vitaminDescription(stat:StatKey){return `${statNames[stat]} 능력 포인트를 ${VITAMIN_BOOST} 올린다.`;}

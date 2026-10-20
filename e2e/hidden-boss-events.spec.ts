@@ -23,7 +23,7 @@ for(const [theme,floor,width] of [['johto',50,1280],['johto',100,390],['kanto',5
   await page.getByRole('button',{name:'싸운다',exact:true}).click();await page.locator('[data-command="move 1"]').click();
   await expect(page.locator('.enemy-position .motion-faint')).toBeAttached();
   await expect(page.getByTestId('rocket-ambush-notice')).toBeVisible();
-  await expect(page.getByLabel('이벤트 상황')).toContainText('HP와 PP가 회복');await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('trainer-entrance')).toHaveAttribute('data-phase','enter');await page.keyboard.press('Enter');
+  await expect(page.getByLabel('이벤트 상황')).toContainText('HP와 PP가 회복');await expect(page.getByRole('log',{name:'이벤트 안내'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('trainer-entrance')).toHaveAttribute('data-phase','enter');await expect(page.getByRole('log',{name:'현재 배틀 상황'})).toHaveAttribute('data-typing','false');await page.keyboard.press('Enter');
   await expect.poll(()=>s.currentBattle(owner)?.id).not.toBe(f.champion);
   await expect.poll(()=>s.view(owner).run!.state).toBe('battle');
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');

@@ -40,7 +40,7 @@ for(const width of [1280,390])for(const reducedMotion of ['no-preference','reduc
     expect(new VillainCampaigns(store.db).row(event.id)!.snapshot_json).toBe(snapshot);
     finishChallengerBattle(store,battle.id);await page.reload();
     await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await expect(page.getByRole('log',{name:'이벤트 결과'})).toContainText(index===0?'로켓단의 아지트에서 물품을 발견했다.':index===1?'단서 1 / 2':index===2?'단서 2 / 2':index===3?'비주기의 위치':'캠페인 완료');await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('reward-modal')).toBeVisible();
-    await expect(page.locator('[data-testid=event-artwork] img')).toHaveCount(0);
+    await expect(page.locator('[data-event-player]')).toBeVisible();await expect(page.locator('[data-event-target] img')).toBeVisible();
     if(stage==='rocket-ambush')await expect(page.locator('.arena')).toHaveAttribute('data-scenery',arenaTheme(event.afterFloor,100,'trainer'));
     expect(store.view(owner).run!.state).toBe('select');expect(store.view(owner).run!.candidates).toEqual([]);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

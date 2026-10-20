@@ -1,0 +1,987 @@
+{
+  "aaron": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "acerola": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "acetrainer-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "aetherfoundation": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "agatha": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "alder": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "aliana": {
+    "kind": "illustration",
+    "width": 270,
+    "height": 431
+  },
+  "allister": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "aquagrunt": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "archer": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "archie": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "ariana": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "aromalady-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "ash-johto-back-sheet": {
+    "kind": "sprite-sheet",
+    "width": 2172,
+    "height": 724
+  },
+  "ash-johto": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "backpacker": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "barry": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "bea": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "bede": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "bertha": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "birdkeeper-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "blackbelt-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "blaine": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "blue": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "brassius": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "brawly": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "brock": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "bruno": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "brycen": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "bugcatcher-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "bugsy": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "burgh": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "byron": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "caitlin": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "candice": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "channeler-gen3": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "cheren": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "chili": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "chuck": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "cilan": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "clair": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "clay": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "clemont": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "collector": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "colress": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "courtney": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "crasherwake": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "cress": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "cynthia": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "cyrus": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "diantha": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "dragon-tamer-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "drake": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "drasna": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "drayden": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "elesa": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "erika": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "faba": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "fairytalegirl": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "falkner": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "fantina": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "firebreather-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "fisherman-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "flannery": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "flaregrunt": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "flint": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "galacticgrunt": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "gardenia": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "geeta": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "gentleman-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "ghetsis": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "giacomo": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "giovanni": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "glacia": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "gordie": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "grant": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "grimsley": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "grusha": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "guitarist-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "guzma": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "hala": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "hapu": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "hassel": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "hau": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "hiker-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "hop": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "ilima": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "iono": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "iris": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "jasmine": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "juan": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "jupiter": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "kabu": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "kahili": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "karen": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "katy": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "kiawe": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "kofu": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "koga": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "korrina": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "kukui": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "lana": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "lance": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "larry": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "lass-gen3": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "lenora": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "leon": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "lorelei": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "ltsurge": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "lucian": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "lusamine": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "lysandre": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "magmagrunt": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "mallow": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "malva": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "marlon": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "marnie": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "mars": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "marshal": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "matt": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "maxie": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "maylene": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "melony": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "milo": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "mina": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "misty": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "molayne": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "morty": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "n": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "nanu": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "nemona": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "nessa": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "norman": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "officeworker": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "oleana": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "olivia": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "olympia": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "opal": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "penny": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "phoebe": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "piers": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "plasmagrunt": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "player-back-sheet": {
+    "kind": "sprite-sheet",
+    "width": 384,
+    "height": 128
+  },
+  "player-front": {
+    "kind": "battle-sprite",
+    "width": 96,
+    "height": 144
+  },
+  "plumeria": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "pokemonbreeder-gen3": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "pokemonranger-gen3": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "poppy": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "pryce": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "psychic-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "raihan": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "ramos": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "red": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "rika": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "roark": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "rocketgrunt": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "rose": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "roughneck-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "roxanne": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "roxie": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "ruinmaniac-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "ryme": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "sabrina": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "sada-ai": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "saturn": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "schoolkid-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "scientist-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "serena": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "shauntal": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "shelly": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "sidney": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "siebold": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "skier-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "skullgrunt": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "skyla": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "sophocles": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "steven": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "tabitha": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "tateandliza": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "teamstargrunt": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "tulip": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "turo-ai": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "valerie": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "veteran-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "viola": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "volkner": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "wallace": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "wattson": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "whitney": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "wikstrom": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "will": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "winona": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "worker-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "wulfric": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "xerosic": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "youngster-gen4": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  },
+  "zinzolin": {
+    "kind": "battle-sprite",
+    "width": 80,
+    "height": 80
+  }
+}

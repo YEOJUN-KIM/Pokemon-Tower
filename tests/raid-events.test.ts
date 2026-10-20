@@ -32,8 +32,8 @@ for(const [bossId,routeId] of [['garchomp','mega'],['mewtwo','x'],['mewtwo','y']
   try{
    const ivs=snapshot.individual.ivs;
    const rewardSet=Showdown.Teams.unpack(snapshot.recruitTeam)![0];
-   assert.equal(Object.values(ivs).filter(v=>v===31).length,bossId==='garchomp'?4:3);assert.equal(ivs[routeId==='y'?'spa':'atk'],31);assert.equal(ivs.spe,31);
-   assert.equal(statKeys.reduce((sum,k)=>sum+snapshot.individual.evs[k],0),Math.round(npcRankTraining(2,'elite').evBudget*(bossId==='mewtwo'?.57:1)));
+   assert.equal(Object.values(ivs).filter(v=>v===31).length,bossId==='garchomp'?4:1);assert.equal(ivs[routeId==='y'?'spa':'atk'],bossId==='garchomp'?31:23);assert.equal(ivs.spe,bossId==='garchomp'?31:23);
+   assert.equal(statKeys.reduce((sum,k)=>sum+snapshot.individual.evs[k],0),Math.round(npcRankTraining(2,'elite').evBudget*(bossId==='mewtwo'?.43:1)));
    assert.deepEqual(new RaidEvents(store.db).snapshot(new RaidEvents(store.db).row(event.id)!),snapshot);
    store.chooseEvent(owner,run,event.id,'challenge');const battle=store.currentBattle(owner)!;
    store.chooseEvent(owner,run,event.id,'challenge');assert.equal(store.currentBattle(owner)!.id,battle.id);

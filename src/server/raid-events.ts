@@ -32,6 +32,12 @@ export function createRaidSnapshot(db:DatabaseSync,runId:string,floor:number,ran
  const perfect=new Set(protectedStats),remaining=statKeys.filter(k=>!perfect.has(k));
  while(perfect.size<boss.ivRule.perfect)perfect.add(remaining.splice(Math.floor(random()*remaining.length),1)[0]);
  individual.ivs=Object.fromEntries(statKeys.map(k=>[k,perfect.has(k)?31:Math.floor(random()*31)])) as StatBlock;
+ // Keep the legacy draw order and non-core IVs. Guaranteed Raid core IVs can
+ // be below 31; they never affect the independently packed premium reward.
+ if(boss.ivRule.protectedIv!==undefined){
+  if(!Number.isInteger(boss.ivRule.protectedIv)||boss.ivRule.protectedIv<0||boss.ivRule.protectedIv>31)throw Error('Invalid Raid protected IV');
+  for(const stat of protectedStats)individual.ivs[stat]=boss.ivRule.protectedIv;
+ }
  if(boss.battleTraining!=='elite')individual.ivs.hp=Math.max(16,individual.ivs.hp);
  individual.nature=route.recruit.nature;individual.ability=route.recruit.ability;
  individual.shiny=rollEncounterShiny(max=>Math.floor(random()*max));

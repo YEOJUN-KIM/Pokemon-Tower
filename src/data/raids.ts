@@ -1,7 +1,7 @@
 import type {StatKey,TrainingProfile} from './training';
 import type {RewardOption} from './rewards';
 import {expandedRaidBosses} from './raid-bosses';
-import {raidBattleTuning,type RaidBattleTraining} from './raid-training';
+import {raidBattleTuning,type RaidBattleTraining,type RaidIVRule} from './raid-training';
 
 // Temporary v1 tuning. Encounter chance/cooldown still belong to the shared event rules.
 export const raidEventSettings={weight:20,minFloor:1,minRulesVersion:2} as const;
@@ -21,7 +21,7 @@ export type RaidRouteDefinition={id:string;weight:number;attack:'atk'|'spa';recr
 export type RaidPhaseNumber=1|2|3|4;
 export type RaidRecruitmentPolicy={mode:'baseSpecies'}|{mode:'phaseSpecies';phase:RaidPhaseNumber};
 export type RaidHPMode='threshold-v1'|'replacement-v1';
-export type RaidBossDefinition={id:string;species:string;category:RaidCategory;weight:number;minFloor:number;hpMode?:RaidHPMode;raidHpMultiplier?:number;recruitment?:RaidRecruitmentPolicy;ivRule:{perfect:number;protected:readonly StatKey[]};shinyRule:'standard';battleTraining:RaidBattleTraining;rewardProfile:'raid-premium';routes:readonly RaidRouteDefinition[]};
+export type RaidBossDefinition={id:string;species:string;category:RaidCategory;weight:number;minFloor:number;hpMode?:RaidHPMode;raidHpMultiplier?:number;recruitment?:RaidRecruitmentPolicy;ivRule:RaidIVRule;shinyRule:'standard';battleTraining:RaidBattleTraining;rewardProfile:'raid-premium';routes:readonly RaidRouteDefinition[]};
 const garchompMoves=['Earthquake','Dragon Claw','Swords Dance','Iron Head'];
 const xMoves=['Zen Headbutt','Drain Punch','Ice Punch','Bulk Up'];
 const yMoves=['Psystrike','Aura Sphere','Ice Beam','Calm Mind'];
@@ -30,7 +30,7 @@ function mewtwoRoute(id:'x'|'y'):RaidRouteDefinition{
  return {id,weight:50,attack:x?'atk':'spa',recruit:{nature:x?'Jolly':'Timid',ability:'Pressure',moves},phases:[
   {species:'Mewtwo',ability:'Pressure',moves,transformation:'none',hpRatio:1/3},
   {species:form,ability,moves,transformation:'mega',hpRatio:1/3,messages:['강한 기운이 뮤츠를 감싼다...',`뮤츠가 ${name}로 변했다!`]},
-  {species:form,ability,moves,transformation:'aura',hpRatio:1/3,messages:[`${name}가 엄청난 힘을 방출한다...`,`${name}의 힘이 더욱 강해졌다!`],buffs:{[x?'atk':'spa']:1,spe:1}},
+  {species:form,ability,moves,transformation:'aura',hpRatio:1/3,messages:[`${name}가 엄청난 힘을 방출한다...`,`${name}의 힘이 더욱 강해졌다!`],buffs:{[x?'atk':'spa']:1}},
  ]};
 }
 const baseRaidBossDefinitions:readonly RaidBossDefinition[]=[

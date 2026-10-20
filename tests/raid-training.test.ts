@@ -23,11 +23,12 @@ test('only the requested eight Bosses have reduced battle profiles, with exact l
    assert.deepEqual(s.individual.evs,raidTrainingPoints(elite.evs,boss.battleTraining));
    const ratio=boss.battleTraining==='elite'?1:raidBattleTrainingProfiles[boss.battleTraining].eliteRatio;
    assert.equal(Object.values(s.individual.evs).reduce((a,b)=>a+b,0),Math.round(npcRankTraining(floor,'elite').evBudget*ratio));
-   assert.equal(Object.values(s.individual.ivs).filter(v=>v===31).length,boss.ivRule.perfect);
+   const protectedStats=boss.id==='mewtwo'?[route.attack,'spe'] as const:boss.ivRule.protected;
+   assert.equal(Object.values(s.individual.ivs).filter(v=>v===31).length,boss.ivRule.perfect-(boss.ivRule.protectedIv===undefined?0:protectedStats.length));
    if(boss.battleTraining!=='elite'){
     assert.ok(s.individual.ivs.hp>=16);
     for(const stat of ['hp','def','spd'] as const)assert.equal(s.individual.evs[stat],elite.evs[stat]);
-    for(const stat of boss.id==='mewtwo'?[route.attack,'spe'] as const:boss.ivRule.protected)assert.equal(s.individual.ivs[stat],31);
+    for(const stat of protectedStats)assert.equal(s.individual.ivs[stat],boss.ivRule.protectedIv??31);
    }
    const reward=Showdown.Teams.unpack(s.recruitTeam)![0];
    assert.ok(statKeys.every(k=>(reward.ivs??{hp:31,atk:31,def:31,spa:31,spd:31,spe:31})[k]===31));
@@ -53,6 +54,6 @@ test('Mewtwo premium preview matches collection and run after recruitment, indep
   const current=JSON.parse(store.db.prepare('SELECT profiles FROM runs WHERE id=?').get(run)!.profiles as string).Mewtwo;
   const saved=store.trainingCollection(owner).find(p=>p.species==='Mewtwo')!.profile;
   for(const p of [current,saved]){assert.deepEqual(p.ivs,(reward.ivs??{hp:31,atk:31,def:31,spa:31,spd:31,spe:31}));assert.deepEqual(p.evs,reward.evs);assert.equal(p.nature,reward.nature);}
-  assert.equal(Object.values(snapshot.individual.ivs).filter(v=>v===31).length,3);
+  assert.equal(snapshot.individual.ivs.atk,23);assert.equal(snapshot.individual.ivs.spe,23);
  }finally{f.store.close();}
 });

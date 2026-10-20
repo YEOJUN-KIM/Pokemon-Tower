@@ -1,0 +1,50 @@
+{
+  "status": "pass",
+  "totalBattles": 10000,
+  "unchangedBosses": 15,
+  "unchangedBattleRows": 7500,
+  "all20DefinitionChangesWhitelisted": true,
+  "sourceDiffLimitedToRaidDataAndSnapshotIV": true,
+  "sourceManifestMatches": true,
+  "priorReportsUnchanged": true,
+  "allRewardSamplesUnchanged": true,
+  "nativeHPMeasurementsMatch": true,
+  "phaseLossTotalsMatch": true,
+  "repeatedRunAll20WinCountsMatch": true,
+  "rawSHA256": "abb0c09f3ce6eda6a036f9ae8234740a3efea0804059d8753eb6d56b0672e6ec",
+  "focused": {
+    "pass": 51,
+    "fail": 0
+  },
+  "otherRaidRegression": {
+    "pass": 108,
+    "fail": 0
+  },
+  "premiumPersistenceRoutes": 6,
+  "typecheck": "pass",
+  "fullSuite": {
+    "tests": 1445,
+    "pass": 1430,
+    "fail": 15,
+    "failures": [
+      "Alola preserves every out-of-scope source/runtime entry, including tuned Kalos and legacy Hau baseline",
+      "three-trainer tuning preserves other NPC rows, shared builds and all common engines",
+      "all NPC data, floors, training and historical policy sources remain byte-equivalent",
+      "hidden shop compact cards move snapshot descriptions into the selected bottom message",
+      "Kalos preserves all other reviewed/runtime rows and common policy engines",
+      "production encounter gate stays at the reviewed 10 percent, without changing v1 weighted selection",
+      "Paldea round 2 changes exactly the four requested build fields; Poppy and every other NPC are preserved",
+      "all Advanced Switch, pivot, hazard, Tera, boss and regional routing policy sources are byte-equivalent to the baseline",
+      "conditional variants alter only their packed team copies and never modify live Expert Belt / Stone Edge builds",
+      "Toxic Spikes candidate really poisons a grounded entry and is removed by Poison entry",
+      "only the four requested items and Poppy middle change; all other data and common AI stay frozen",
+      "Raid discovery renders only for an unchallenged choice, rewards use a victory backdrop",
+      "tests\\trainer-equipment.test.ts",
+      "Unova preserves every other region runtime and reviewed definition and every common policy",
+      "fixed organization order references complete reviewed samples/templates"
+    ],
+    "unknownFailureNames": [],
+    "knownBaselineReport": "raid-stat-tuned-endgame.validation.json"
+  },
+  "productionBuild": "pass"
+}

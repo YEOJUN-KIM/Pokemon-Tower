@@ -1,0 +1,41 @@
+{
+  "status": "pass",
+  "totalBattles": 1000,
+  "floorsPerBoss": {
+    "85": 250,
+    "95": 250
+  },
+  "untouchedDefinitions": 18,
+  "untouchedSnapshotSignatures": 9000,
+  "otherBossBattlesRerun": 0,
+  "previousReportsAndSourceHashesMatch": true,
+  "rewardSamplesUnchanged": 1000,
+  "rewardSixIVs31": true,
+  "rewardTotalPoints": 66,
+  "zacianFinalCoreIV": {
+    "atk": 0,
+    "spe": 0
+  },
+  "zacianTrainingEliteRatio": 0.34,
+  "zacianAbilityAudit": {
+    "before": {
+      "entryBoosts": 1,
+      "afterCrownedBoosts": 1
+    },
+    "after": {
+      "entryBoosts": 1,
+      "afterCrownedBoosts": 1
+    }
+  },
+  "oldMewtwoThreePhaseAuraPreserved": true,
+  "currentMewtwoTwoPhaseNoAura": true,
+  "tests": {
+    "total": 168,
+    "pass": 168,
+    "fail": 0
+  },
+  "typecheck": "pass",
+  "productionBuild": "pass",
+  "fullSuiteRerun": false,
+  "rawBattlesSHA256": "3293e1648b73cbb1db09c9686c03d0e6412cda24e14dbdfcce805e9484940c2c"
+}

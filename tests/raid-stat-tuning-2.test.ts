@@ -9,7 +9,7 @@ import {encounterRandom} from '../src/server/opponent-team';
 import {TowerStore} from '../src/server/tower-store';
 import {raidFixture,finishRaidBattle} from './raid-fixture';
 
-const changes=[['mewtwo',23,'raid-top'],['zacian',21,'raid-very-strong'],['rayquaza',24,'raid-top'],['kyogre',24,'raid-very-strong'],['groudon',25,'raid-very-strong']] as const;
+const changes=[['mewtwo',23,'raid-top'],['zacian',0,'raid-very-strong'],['rayquaza',24,'raid-top'],['kyogre',24,'raid-very-strong'],['groudon',25,'raid-very-strong']] as const;
 test('five Raid core IV overrides retain every other IV, bulk points, RNG and premium reward',()=>{
  const f=raidFixture();try{
   for(const [id,iv,oldTraining] of changes){
@@ -38,12 +38,12 @@ test('five Raid core IV overrides retain every other IV, bulk points, RNG and pr
  }finally{f.store.close();}
 });
 
-test('Mewtwo X and Y retain their attack Aura and all three gates; only Speed Aura is absent',()=>{
+test('Mewtwo X and Y use only the half-bar Mega gate without Aura or entry ranks',()=>{
  const boss=raidBossDefinitions.find(b=>b.id==='mewtwo')!;
  for(const route of boss.routes){
-  assert.equal(route.phases.length,3);assert.deepEqual(route.phases.map(p=>p.hpRatio),[1/3,1/3,1/3]);
-  assert.deepEqual(route.phases[2].buffs,{[route.attack]:1});assert.equal(route.phases[2].transformation,'aura');
-  assert.equal(route.phases[2].messages?.length,2);
+  assert.equal(route.phases.length,2);assert.deepEqual(route.phases.map(p=>p.hpRatio),[.5,.5]);
+  assert.ok(route.phases.every(p=>!p.buffs&&p.transformation!=='aura'));
+  assert.equal(route.phases[1].messages?.length,2);
  }
 });
 

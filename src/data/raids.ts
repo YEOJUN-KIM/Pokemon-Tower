@@ -28,9 +28,8 @@ const yMoves=['Psystrike','Aura Sphere','Ice Beam','Calm Mind'];
 function mewtwoRoute(id:'x'|'y'):RaidRouteDefinition{
  const x=id==='x',form=x?'Mewtwo-Mega-X':'Mewtwo-Mega-Y',name=x?'메가뮤츠X':'메가뮤츠Y',moves=x?xMoves:yMoves,ability=x?'Steadfast':'Insomnia';
  return {id,weight:50,attack:x?'atk':'spa',recruit:{nature:x?'Jolly':'Timid',ability:'Pressure',moves},phases:[
-  {species:'Mewtwo',ability:'Pressure',moves,transformation:'none',hpRatio:1/3},
-  {species:form,ability,moves,transformation:'mega',hpRatio:1/3,messages:['강한 기운이 뮤츠를 감싼다...',`뮤츠가 ${name}로 변했다!`]},
-  {species:form,ability,moves,transformation:'aura',hpRatio:1/3,messages:[`${name}가 엄청난 힘을 방출한다...`,`${name}의 힘이 더욱 강해졌다!`],buffs:{[x?'atk':'spa']:1}},
+  {species:'Mewtwo',ability:'Pressure',moves,transformation:'none',hpRatio:.5},
+  {species:form,ability,moves,transformation:'mega',hpRatio:.5,messages:['강한 기운이 뮤츠를 감싼다...',`뮤츠가 ${name}로 변했다!`]},
  ]};
 }
 const baseRaidBossDefinitions:readonly RaidBossDefinition[]=[

@@ -49,7 +49,7 @@ for(const boss of raidBossDefinitions)for(const route of boss.routes)test(`${bos
    assert.equal(current.maxhp,hp.phaseMax[i]);assert.equal(current.getAbility().name,phase.ability);assert.deepEqual(current.moveSlots.map(m=>m.id),phase.moves.map(Showdown.toID));
    if(['mewtwo','zacian','rayquaza','kyogre','groudon'].includes(boss.id))for(const key of ['atk','def','spa','spd','spe'] as const)assert.equal(current.storedStats[key],trainedStat(current.species.baseStats[key],raid.individual.ivs[key],raid.individual.evs[key],key,raid.individual.nature));
    if(boss.id==='snorlax'&&i===1){assert.equal(current.maxhp,current.baseMaxhp*2);assert.ok(current.volatiles.dynamax);}
-   if(boss.id==='mewtwo'&&i===2){assert.equal(current.boosts.spe,0);assert.equal(current.boosts[route.attack],1);}
+   if(boss.id==='mewtwo'){assert.equal(current.boosts.spe,0);assert.equal(current.boosts[route.attack],0);}
    if(boss.id==='terapagos'&&i===1)assert.equal(current.terastallized,'Stellar');
    if(raid.hpMode==='threshold-v1'){
     assert.equal(current,first,'same individual, not a fresh phase life');

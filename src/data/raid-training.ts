@@ -10,6 +10,7 @@ export const raidBattleTrainingProfiles={
  'raid-rayquaza-2':{eliteRatio:.48},
  'raid-kyogre-2':{eliteRatio:.50},
  'raid-groudon-2':{eliteRatio:.54},
+ 'raid-zacian-final':{eliteRatio:.34},
 } as const;
 export type RaidBattleTraining='elite'|keyof typeof raidBattleTrainingProfiles;
 export type RaidIVRule={perfect:number;protected:readonly StatKey[];protectedIv?:number};
@@ -17,7 +18,7 @@ export const raidBattleTuning:Record<string,{battleTraining:Exclude<RaidBattleTr
  mewtwo:{battleTraining:'raid-mewtwo-2',ivRule:{perfect:3,protected:['spa','spe'],protectedIv:23}},
  arceus:{battleTraining:'raid-top',ivRule:{perfect:3,protected:['spa']}},
  rayquaza:{battleTraining:'raid-rayquaza-2',ivRule:{perfect:3,protected:['atk','spe'],protectedIv:24}},
- zacian:{battleTraining:'raid-zacian-2',ivRule:{perfect:3,protected:['atk','spe'],protectedIv:21}},
+ zacian:{battleTraining:'raid-zacian-final',ivRule:{perfect:3,protected:['atk','spe'],protectedIv:0}},
  kyogre:{battleTraining:'raid-kyogre-2',ivRule:{perfect:3,protected:['spa'],protectedIv:24}},
  groudon:{battleTraining:'raid-groudon-2',ivRule:{perfect:3,protected:['atk'],protectedIv:25}},
  terapagos:{battleTraining:'raid-very-strong',ivRule:{perfect:3,protected:['spa']}},

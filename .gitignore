@@ -44,6 +44,8 @@ artifacts/**
 !artifacts/reports/raid-stat-tuned-2-endgame.csv
 !artifacts/reports/raid-stat-tuned-2-endgame.branches.csv
 !artifacts/reports/raid-stat-tuned-2-endgame.phases.csv
+!artifacts/reports/raid-final-endgame.csv
+!artifacts/reports/raid-final-iv19.csv
 # Curated QA media referenced by current documentation.
 !artifacts/qa/previews/egg-results/background-colors.png
 !artifacts/qa/previews/egg-results/background-effects.gif

@@ -7,12 +7,12 @@ import styles from './styles/challenger-candidates.module.css';
 
 export function ChallengerDetail({candidate}:{candidate:ChallengerCandidate|undefined}){
  if(!candidate)return null;
- return <aside id="challenger-preview" className={`${styles.scope} ${styles.detail}`} aria-label="도전자 상세" data-testid="challenger-detail" data-candidate={candidate.id}>
-  <span className={styles.portrait} data-mirror={candidate.mirror||undefined}>{candidate.mirror?<PlayerMirrorPortrait/>:<img src={`/sprites/trainers/${candidate.portrait}.png`} width="120" height="144" alt=""/>}</span>
+ return <><div className={`${styles.scope} ${styles.opponent} enemy-position`} data-event-target><span className={styles.portrait} data-mirror={candidate.mirror||undefined}>{candidate.mirror?<PlayerMirrorPortrait/>:<img src={`/sprites/trainers/${candidate.portrait}.png`} width="120" height="144" alt={`${candidate.title} 트레이너`}/>}</span></div><aside id="challenger-preview" className={`${styles.scope} ${styles.detail}`} aria-label="도전자 상세" data-testid="challenger-detail" data-candidate={candidate.id}>
+
   <h2>{candidate.title}</h2><p>{candidate.difficulty} {'★'.repeat(candidate.danger)}</p>
   {candidate.specialHint&&<p className={styles.hint} data-testid="challenger-special-hint">{candidate.specialHint}</p>}
   <strong className={styles.reward}>{candidate.rewardPreview}</strong>
- </aside>;
+ </aside></>;
 }
 
 export function ChallengerCandidates({candidates,selectedId,busy,onFocus,onConfirm}:{candidates:readonly ChallengerCandidate[];selectedId:string;busy:boolean;onFocus:(id:string)=>void;onConfirm:(id:string)=>void}){

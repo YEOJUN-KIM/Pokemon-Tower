@@ -5,6 +5,15 @@ import {Accounts} from '../src/server/accounts';
 import {starters} from '../src/data/teams';
 import {mkdirSync} from 'node:fs';
 
+// A completed event can retain the game's existing villain follow-up instead of team selection.
+async function nextStage(page:import('@playwright/test').Page,store:TowerStore,owner:string){
+ const next=store.view(owner).run!;
+ if(next.state==='battle'||next.event){
+  await expect(page.locator('.battle-panel')).toBeVisible();expect(next.floor).toBe(2);
+  expect(next.event?.villain||store.currentBattle(owner)?.trainer).toBeTruthy();
+ }else await expect(page.getByRole('dialog',{name:'출전 준비',exact:true})).toBeVisible();
+}
+
 // Each scenario provisions an account; isolate the shared test DB's signup quota.
 test.beforeEach(()=>{const store=new TowerStore('.data/e2e.sqlite');try{store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();}finally{store.close();}});
 
@@ -32,12 +41,14 @@ for(const width of [1280,390])for(const choice of ['open','skip','resume-ticket'
   expect(messages.y).toBeGreaterThanOrEqual(arena.y+arena.height-1);expect(Math.abs(messages.x-arena.x)).toBeLessThan(2);expect(Math.abs(messages.width-arena.width)).toBeLessThan(2);
   await expect(dialog.locator('.command-area')).toHaveCount(0);
   await expect(dialog.locator('.arena-orbit')).toHaveCount(0);
+  const player=(await dialog.locator('[data-event-player]').boundingBox())!,target=(await dialog.locator('[data-event-target]').boundingBox())!;
+  expect(player.x+player.width/2).toBeLessThan(target.x+target.width/2);expect(player.y+player.height).toBeGreaterThan(target.y+target.height);
   const info=dialog.getByTestId('event-info');
   if(choice==='resume-ticket')await expect(info).toHaveCount(0);
   else{
    await expect(info).toContainText('코인이나 알 뽑기권');const infoBox=(await info.boundingBox())!;
    expect(infoBox.width).toBeLessThanOrEqual(310);expect(infoBox.height).toBeLessThan(arena.height/2);
-   expect(infoBox.y).toBeGreaterThanOrEqual(arena.y);expect(messages.y-infoBox.y-infoBox.height).toBeLessThanOrEqual(16);
+   expect(infoBox.y).toBeGreaterThanOrEqual(arena.y);expect(infoBox.y-arena.y).toBeLessThanOrEqual(16);
    expect(infoBox.y+infoBox.height).toBeLessThanOrEqual(messages.y);
   }
 
@@ -85,9 +96,9 @@ for(const width of [1280,390])for(const choice of ['open','skip','resume-ticket'
    await dialog.screenshot({path:`artifacts/qa/screenshots/events/chest-${choice}-${width}.png`});
    await dialog.getByRole('button',{name:'계속하기',exact:true}).click();
   }
-  await expect(dialog).toHaveCount(0);await expect(page.getByRole('dialog',{name:'2층 출전 준비',exact:true})).toBeVisible();
+  await expect(dialog).toHaveCount(0);await nextStage(page,store,owner);
   expect(store.view(owner).run!.floor).toBe(2);expect(store.view(owner).run!.event).toBeNull();
-  await page.reload();await expect(dialog).toHaveCount(0);await expect(page.getByRole('dialog',{name:'2층 출전 준비',exact:true})).toBeVisible();
+  await page.reload();await expect(dialog).toHaveCount(0);await nextStage(page,store,owner);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  }finally{store.close();}
 });
@@ -127,6 +138,6 @@ for(const width of [1280,390])for(const kind of ['breeder-gift','traveling-merch
    expect(store.permanentView(owner).eggTickets).toBe(1);expect(store.view(owner).coins).toBe(kind==='traveling-merchant'?0:300);
    await event.getByRole('button',{name:'계속하기',exact:true}).click();
   }else{expect(store.permanentView(owner).eggTickets).toBe(0);expect(store.view(owner).coins).toBe(300);}
-  await expect(event).toHaveCount(0);await expect(page.getByRole('dialog',{name:'2층 출전 준비',exact:true})).toBeVisible();expect(store.view(owner).run!.floor).toBe(2);
+  await expect(event).toHaveCount(0);await nextStage(page,store,owner);expect(store.view(owner).run!.floor).toBe(2);
  }finally{store.close();}
 });

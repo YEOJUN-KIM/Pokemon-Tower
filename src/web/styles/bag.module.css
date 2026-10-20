@@ -30,3 +30,5 @@ dialog[open].dialog {display:flex;flex-direction:column;}
 .learnablePokemonChip>span:first-child {flex-shrink:0;}
 
 @media(max-width:760px){.learnablePokemonChip {flex-basis:calc((100% - 8px)/2);}}
+
+.trigger.trigger.trigger {min-height:48px!important;min-width:120px;padding:10px 22px!important;font-size:15px!important;border-radius:5px!important;}

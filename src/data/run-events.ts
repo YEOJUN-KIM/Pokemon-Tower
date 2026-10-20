@@ -5,7 +5,7 @@ import {raidEventSettings,type RaidEventView} from './raids';
 import {hiddenShopEventSettings,type HiddenShopView} from './hidden-shop';
 import type {RewardResult,WeightedRewardOption} from './rewards';
 // Shared encounter gate. Event-kind weights and reward tables are separate below.
-export const eventEncounterSettings={encounterPercent:10,cooldownFloors:2} as const;
+export const eventEncounterSettings={encounterPercent:90,cooldownFloors:2} as const;
 // Frozen reward table for saved v1 runs; v2 uses mysteryChestResults.
 export const legacyChestRewards={coinsPercent:80,coins:150,eggTickets:1} as const;
 export type EventReward={kind:'coins'|'egg-ticket';amount:number};

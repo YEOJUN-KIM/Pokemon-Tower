@@ -70,3 +70,8 @@
 @media(max-height:800px) and (min-width:701px){.identity {min-height:65px;}:where(.scope) :global(.pokemon-image-frame) {height:65px!important;width:80px!important;}.row.row.row {min-height:32px!important;padding:4px 8px!important;}.content {gap:6px;}.column {gap:3px;}}
 
 @media(max-height:700px) and (max-width:700px){.scope.scope.scope.scope {padding:6px!important;}.content {gap:5px;}.scope:where(.scope) .identity :global(.pokemon-image-frame) {width:52px!important;height:52px!important;}.identity {min-height:52px;}.row.row.row {min-height:32px!important;padding:4px!important;}.column {gap:3px;}.save {padding-top:6px;}}
+
+.formGrid.formGrid {display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px;}
+.formCard.formCard.formCard {display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:16px 10px!important;border-radius:6px!important;height:auto!important;min-height:170px!important;text-align:center;}
+.formCard[aria-pressed="true"] {border-color:#98efd1;background:#405d59;}
+.formCard strong {font-size:13px;white-space:normal;}

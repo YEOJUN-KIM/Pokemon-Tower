@@ -26,7 +26,7 @@ for(const width of [1280,390])test(`challenger candidates at ${width}: random th
    await expect(detail).not.toContainText(candidate.battleStyle);await expect(detail).not.toContainText('위험도');
    await expect(page.getByTestId('challenger-special-hint')).toHaveCount(0);
    expect(store.view(owner).run!.event!.phase).toBe('choice');
-   expect(await detail.locator('img').evaluate((el:HTMLImageElement)=>el.complete&&el.naturalWidth>0&&getComputedStyle(el).imageRendering==='pixelated')).toBe(true);
+   expect(await page.locator('[data-event-target] img').evaluate((el:HTMLImageElement)=>el.complete&&el.naturalWidth>0&&getComputedStyle(el).imageRendering==='pixelated')).toBe(true);
   }
   await page.keyboard.press('1');await page.keyboard.press('ArrowDown');await expect(detail).toHaveAttribute('data-candidate',expected[1].id);
   await page.keyboard.press('ArrowUp');await expect(detail).toHaveAttribute('data-candidate',expected[0].id);
@@ -38,14 +38,16 @@ for(const width of [1280,390])test(`challenger candidates at ${width}: random th
   await candidates.locator(`[data-challenger=${expected[2].id}]`).click();await expect(detail).toHaveAttribute('data-candidate',expected[2].id);
   expect(store.view(owner).run!.event!.phase).toBe('choice');
   const info=await detail.boundingBox(),bottom=await candidates.boundingBox(),back=await candidates.locator('[data-challenger=back]').boundingBox();expect(info!.y+info!.height).toBeLessThanOrEqual(bottom!.y);expect(info!.x).toBeGreaterThanOrEqual(0);expect(info!.x+info!.width).toBeLessThanOrEqual(width);expect(back!.y+back!.height).toBeLessThanOrEqual(width===390?844:900);
-  if(width===390)expect(Math.abs(info!.x+info!.width/2-width/2)).toBeLessThan(1);else expect(info!.x+info!.width).toBeLessThan(width/2);
+  expect(info!.x+info!.width).toBeLessThan(width/2);
+  const player=(await page.locator('[data-event-player]').boundingBox())!,target=(await page.locator('[data-event-target]').boundingBox())!;
+  expect(player.x+player.width/2).toBeLessThan(target.x+target.width/2);expect(player.y+player.height).toBeGreaterThan(target.y+target.height);
   mkdirSync('artifacts/qa/screenshots/challengers',{recursive:true});
   await page.screenshot({path:`artifacts/qa/screenshots/challengers/candidates-${width}.png`});
   await page.screenshot({path:`artifacts/qa/screenshots/challengers/hard-info-${width}.png`});
   await page.reload();await expect(candidates).toBeVisible();expect(store.view(owner).run!.event!.challengers).toEqual(event.challengers);
   expect(await candidates.locator('[data-challenger]:not([data-challenger=back])').evaluateAll(els=>els.map(el=>el.getAttribute('data-challenger')))).toEqual(expected.map(c=>c.id));
   if(width===1280){await page.keyboard.press('ArrowDown');await page.keyboard.press('ArrowDown');await page.keyboard.press('ArrowDown');await expect(detail).toHaveCount(0);await page.keyboard.press('z');}else await candidates.getByRole('button',{name:'4. 돌아간다',exact:false}).click();
-  await expect(candidates).toHaveCount(0);await expect(page.getByRole('dialog',{name:'2층 출전 준비',exact:true})).toBeVisible();expect(store.view(owner).run!.floor).toBe(2);expect(store.view(owner).run!.event).toBeNull();
+  await expect(candidates).toHaveCount(0);await expect(page.getByRole('dialog',{name:'출전 준비',exact:true})).toBeVisible();expect(store.view(owner).run!.floor).toBe(2);expect(store.view(owner).run!.event).toBeNull();
  }finally{store.close();}
 });
 for(const id of ['easy','medium','hard'])test(`challenger ${id}: actual battle, victory popup and server choice`,async({page,context})=>{
@@ -76,7 +78,7 @@ for(const id of ['easy','medium','hard'])test(`challenger ${id}: actual battle, 
    expect(store.view(owner).coins).toBe(1100); // prior floor 100 + hard 1,000; forged effects ignored
   }
   await modal.getByRole('button',{name:'확인',exact:true}).click();await expect(modal).toHaveCount(0);
-  await expect(page.getByRole('dialog',{name:'2층 출전 준비',exact:true})).toBeVisible();
+  await expect(page.getByRole('dialog',{name:'출전 준비',exact:true})).toBeVisible();
   expect(store.view(owner).run!.floor).toBe(2);expect(store.view(owner).run!.candidates).toEqual([]);
  }finally{store.close();}
 });

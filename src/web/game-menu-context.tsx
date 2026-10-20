@@ -20,11 +20,11 @@ export function useDialogControls(context:string,controls:GameControl[]=menuCont
 }
 
 /** The existing screen footer stays in one place, even above native modal backdrops. */
-export function GameMenuBar({controls,children}:{controls:GameControl[];children?:ReactNode}){
+export function GameMenuBar({controls,children,context='dex'}:{controls:GameControl[];children?:ReactNode;context?:string}){
  const owner=useContext(Context),active=owner?.layers.at(-1),ref=useRef<HTMLElement>(null);
  useEffect(()=>{
   const frame=requestAnimationFrame(()=>{const footer=ref.current;if(!footer)return;if(footer.matches(':popover-open'))footer.hidePopover();if(active)footer.showPopover();});
   return()=>cancelAnimationFrame(frame);
  },[active]);
- return <><div className={styles.space} aria-hidden/><footer ref={ref} popover="manual" className={`dex-bottom ${styles.scope}`} data-menu-context={active?.context??'dex'}>{!active&&children}<GameMenuFooter outlet controls={active?.controls??controls}/></footer></>;
+ return <><div className={styles.space} aria-hidden/><footer ref={ref} popover="manual" className={`dex-bottom ${styles.scope}`} data-menu-context={active?.context??context}>{!active&&children}<GameMenuFooter outlet controls={active?.controls??controls}/></footer></>;
 }

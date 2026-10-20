@@ -69,3 +69,18 @@
 .bottom[data-villain=true] .actions .choice {min-height:44px;padding:4px 14px 4px 8px;font-size:18px;}
 :global(body) :where(.scope).bottom[data-villain=true] :global(.game-dialogue.current-messages) {min-height:0;flex:0 0 auto;margin:0;padding:4px 12px 12px;}
 :global(body) :where(.scope).bottom[data-villain=true] :global(.game-dialogue.current-messages p.latest) {font-size:20px;line-height:1.5;}
+
+/* Event choices already use a pointer; preserve that paint above the shared hover/cursor rules. */
+:global(body) :where(.scope).actions.actions.actions .choice.choice {border:0!important;background:transparent!important;outline:none!important;box-shadow:none!important;}
+
+/* The same near/far ground anchors as the battle sprites. */
+.player.player {z-index:4;pointer-events:none;animation:none;}
+:global(body) :where(.scope).artwork.artwork {inset:auto;left:var(--far-x,75%);bottom:var(--far-ground,36%);width:260px;height:230px;transform:translateX(-50%);}
+:where(.scope).scene.scene {top:12px;bottom:auto;max-height:calc(55% - 20px);}
+@media(max-width:760px){
+ :global(body) :where(.scope).artwork.artwork {width:180px;height:175px;}
+ :where(.scope).scene.scene {top:8px;left:8px;width:43%;padding:10px;max-height:48%;}
+ :where(.scope).scene.scene h2 {font-size:13px;line-height:1.4;}
+ :where(.scope).scene.scene .description {font-size:10px;line-height:1.5;}
+ .npc {width:135px;height:155px;}
+}

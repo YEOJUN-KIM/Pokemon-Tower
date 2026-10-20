@@ -1,4 +1,4 @@
-import chart from './type-chart.json';
+import chart from './type-chart.json' with {type:'json'};
 const table:Record<string,Record<string,number>>=chart;
 export function typeEffectiveness(attack:string,defending:string[]){return defending.reduce((n,type)=>n*(table[attack]?.[type]??1),1);}
 export function publicMoveEffectiveness({type,defending,ability='',ownAbility='',move='',ignoreAbility=false}:{type:string;defending:string[];ability?:string;ownAbility?:string;move?:string;ignoreAbility?:boolean}){

@@ -1,5 +1,6 @@
 'use client';
 import {useEffect, useRef} from 'react';
+import {useDialogControls} from './game-menu-context';
 import type {BattleView, TowerView} from './contracts';
 import {VillainOutcome} from './villain-outcome';
 import {BossPortrait} from './boss-dialog';
@@ -16,6 +17,7 @@ export function ResultBanner({battle, tower}: {battle: BattleView; tower: TowerV
 }
 
 export function BattleResultDialog({battle, tower, onContinue,onRetry,busy=false}: {battle: BattleView; tower: TowerView; onContinue: () => void;onRetry?:()=>void;busy?:boolean}) {
+  useDialogControls('battle-result',[{key:'↑ / ↓',label:'선택'},{key:'Enter / Z',label:'결정'}]);
   const dialog = useRef<HTMLDialogElement>(null);
   const result = resultText(battle);
   const recruiting = tower.run?.state === 'recruit';

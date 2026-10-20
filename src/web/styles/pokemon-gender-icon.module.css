@@ -1,0 +1,3 @@
+.icon.icon.icon {display:inline-block;margin-left:.3em;font-size:.85em;font-weight:700;line-height:1;vertical-align:baseline;}
+.icon.icon.icon[data-pokemon-gender="M"] {color:#679acb;}
+.icon.icon.icon[data-pokemon-gender="F"] {color:#cc85a5;}

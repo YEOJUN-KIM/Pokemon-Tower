@@ -1,0 +1,2 @@
+.confirm {cursor:pointer;}
+.confirm:focus-visible {outline:1px solid #98efd1;outline-offset:-3px;}

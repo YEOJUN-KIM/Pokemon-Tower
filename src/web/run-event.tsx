@@ -1,4 +1,5 @@
 'use client';
+import {PlayerPortrait} from './boss-dialog';
 import {isVillainAmbush} from '../data/villain-tracks';
 import {isRocketStage} from '../data/villain-campaigns';
 import {campaignRewardTitle} from '../data/villain-campaigns';
@@ -43,7 +44,12 @@ export function eventDialogue(event:RunEventView){
  return choice?.outcome==='reward'?choice.message.replaceAll('{reward}',name).replaceAll('{detail}',reward?.kind==='coins'?'타워 코인에 더해졌다.':'알 뽑기에서 사용할 수 있다.'):name;
 }
 
-export function RunEventScene({event,portalActivationMs,busy=false,challengerId,coins=0,growthPoints=0,shopOfferId,onShopFocus=()=>{}}:{event:RunEventView;portalActivationMs?:number;busy?:boolean;challengerId?:string;coins?:number;growthPoints?:number;shopOfferId?:string;onShopFocus?:(id:string)=>void}){
+export function RunEventScene(props:Parameters<typeof RunEventSceneContents>[0]){
+ const event=props.event,showPlayer=event.kind!=='raid-encounter'&&!event.hiddenShop&&!(event.phase==='reward'&&(event.villain||event.hiddenBoss));
+ return <>{showPlayer&&<div className={`${styles.scope} ${styles.player} intro-trainer intro-player`} data-event-player><PlayerPortrait/></div>}<RunEventSceneContents {...props}/></>;
+}
+
+function RunEventSceneContents({event,portalActivationMs,busy=false,challengerId,coins=0,growthPoints=0,shopOfferId,onShopFocus=()=>{}}:{event:RunEventView;portalActivationMs?:number;busy?:boolean;challengerId?:string;coins?:number;growthPoints?:number;shopOfferId?:string;onShopFocus?:(id:string)=>void}){
  if(event.kind==='raid-encounter'&&event.raid){
   if(event.phase==='choice'&&!event.choiceId)return <RaidScene raid={event.raid}/>;
   return event.phase==='reward'?<RaidVictoryScene/>:null;
@@ -56,7 +62,7 @@ export function RunEventScene({event,portalActivationMs,busy=false,challengerId,
  const opened=event.phase==='reward',reward=event.reward,definition=eventDefinition(event.kind,undefined,event.rulesVersion),presentation=getEventPresentation(event.kind);
  if(!definition || !presentation || presentation.artwork==='raid')return null;
  const rewardName=reward?.kind==='coins'?`${reward.amount.toLocaleString()}코인`:`알 뽑기권 ${reward?.amount??1}장`;
- return <>{event.villain&&!isVillainAmbush(event.villain.stage)&&<div className={`${styles.scope} ${styles.facility}`} aria-hidden="true"/>}<div className={`${styles.scope} ${styles.artwork}`} data-opened={opened} data-teleport={event.kind==='random-teleport'} data-reward-tone={event.result?.tone} data-testid="event-artwork">
+ return <>{event.villain&&!isVillainAmbush(event.villain.stage)&&<div className={`${styles.scope} ${styles.facility}`} aria-hidden="true"/>}<div className={`${styles.scope} ${styles.artwork} enemy-position`} data-event-target data-opened={opened} data-teleport={event.kind==='random-teleport'} data-reward-tone={event.result?.tone} data-testid="event-artwork">
   <div className={styles.object}>{(isVillainAmbush(event.villain?.stage??'')||!!event.hiddenBoss)&&!opened&&<AmbushNotice/>}<span className={styles.glow} aria-hidden="true"/>{event.villain?.stage==='rocket-intro'&&!opened?<div className={styles.managementDoor} role="img" aria-label="열려 있는 관리 구역"><span>직원 전용</span><i/></div>:presentation.artwork==='teleport'?<TeleportPortal activationMs={portalActivationMs} arrived={opened}/>:presentation.artwork==='chest'?<Chest/>:<img className={styles.npc} src={`/sprites/trainers/${event.hiddenBoss?.portrait??event.villain?.portrait??presentation.sprite}.png`} alt={event.hiddenBoss?.name??event.villain?.name??presentation.alt} width="180" height="200"/>}
    {opened&&(!event.result||['good','great'].includes(event.result.tone))&&<div className={styles.stars} aria-hidden="true"><i>✦</i><i>✧</i><i>✦</i><i>✧</i></div>}
    {opened&&!event.result&&<strong className={styles.reward} data-testid="event-reward">{rewardName}</strong>}

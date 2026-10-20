@@ -1,5 +1,6 @@
 'use client';
 import {useEffect,useRef} from 'react';
+import {useDialogControls} from './game-menu-context';
 import type {RewardResult} from '../data/rewards';
 import {selectGameCursor} from './game-keyboard';
 import {RewardPanel,type RewardPanelProps} from './reward-panel';
@@ -10,6 +11,7 @@ export const rewardRevealDelay=650;
 // A real top-layer dialog keeps all background controls inert, including those
 // outside the battle panel. The game keyboard already scopes to open dialogs.
 export function RewardModal({result,...props}:RewardPanelProps & {result:RewardResult}){
+ useDialogControls('event-reward',[{key:'방향키',label:'보상 선택'},{key:'Enter / Z',label:'결정'}]);
  const ref=useRef<HTMLDialogElement>(null);
  useEffect(()=>{
   const dialog=ref.current;if(!dialog)return;

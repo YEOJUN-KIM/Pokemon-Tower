@@ -16,3 +16,8 @@
 .confirm button {border:2px solid #91b5c3;background:#293d49;min-height:44px;text-align:center;padding:8px 20px;}
 .confirm small {font-size:11px;color:#b3c9d1;text-align:center;line-height:1.6;}
 @media(max-width:760px){.detail {left:50%;transform:translate(-50%,-50%);width:230px;padding:12px;gap:6px;}.menu {gap:8px;grid-template-columns:minmax(0,1fr) 95px;}.confirm {max-width:95px;}.confirm small {display:none;}.confirm button {padding:8px;}.scope button {font-size:14px;}.detail h2 {font-size:17px;}}
+
+:where(.scope).detail.detail {left:12px;top:12px;transform:none;width:250px;max-height:50%;}
+.opponent.opponent {z-index:5;pointer-events:none;}
+.opponent .portrait {width:170px;height:200px;}
+@media(max-width:760px){:where(.scope).detail.detail{left:8px;top:8px;width:43%;padding:9px;gap:5px;}:where(.scope).detail.detail h2{font-size:13px;}:where(.scope).detail.detail p{font-size:10px;}.opponent .portrait{width:130px;height:155px;}}

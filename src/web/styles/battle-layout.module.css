@@ -354,3 +354,9 @@
 @media(max-width:760px) {
  :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel[data-event=true]) {grid-template-rows:40px minmax(0,1fr) 298px;grid-template-areas:'top' 'arena' 'log';}
 }
+
+/* Preparation uses the full existing log row; combat keeps its command grid. */
+:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel[data-preparing=true]) {grid-template-areas:'top top' 'arena arena' 'log log';grid-template-rows:44px minmax(0,1fr) 244px;}
+@media(max-width:760px){
+ :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-panel[data-preparing=true]) {grid-template-areas:'top' 'arena' 'log';grid-template-rows:40px minmax(0,1fr) 244px;}
+}

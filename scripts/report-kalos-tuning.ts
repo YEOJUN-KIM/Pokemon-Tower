@@ -71,5 +71,5 @@ md.push('## 보존과 검증','',
  '`node --import tsx scripts/review-kalos-npc-samples.ts` → `node scripts/export-normal-npc-runtime.mjs --check`.','',
  '시뮬레이터의 KALOS_NPCS=named-wikstrom,named-ramos,named-siebold, KALOS_RULES=basic, KALOS_SEEDS=10, KALOS_OUTPUT을 지정한다. 별도 상대는 KALOS_CASES=scripts/data/npc/kalos-tuning-cases.json, KALOS_SEED_START=11을 사용한다. Before는 NPC_BALANCE_BASELINE=.../baseline-runtime.json과 --import ./scripts/lib/unova-baseline.mjs, --before를 사용한다.','',
  '`node --import tsx scripts/report-kalos-tuning.ts`는 동일 전투 키, 런타임 해시, 대상 밖 보존, 표본 수와 오류를 확인하고 이 보고서와 audit JSON을 생성한다. 원자료는 artifacts/experiments/balance/kalos-tuning-20261018에 있다.','');
-writeFileSync('docs/gameplay/kalos-npc-tuning.md',md.join('\n'));
+writeFileSync('artifacts/reports/npc/kalos-npc-tuning.md',md.join('\n'));
 console.log(JSON.stringify(summaries.map(s=>({name:s.name,primary:s.primary,holdout:s.holdout,mega:s.mega}))));

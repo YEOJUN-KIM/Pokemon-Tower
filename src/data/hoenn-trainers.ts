@@ -6,7 +6,7 @@ const mega=(species:string,item:string):NpcGimmick=>({rule:'mega',species,item})
 const z=(species:string,item:string):NpcGimmick=>({rule:'z',species,item});
 const row=(id:string,name:string,category:HoennTrainer['category'],power:string,ace:string,pool:string,concept:string,signature:NpcGimmick|null=null,selectionRules?:SelectionRules,aiCeiling?:HoennTrainer['aiCeiling']):HoennTrainer=>({id,name,category,power,ace,entries:pool.split(','),concept,signature,selectionRules,aiCeiling});
 // Candidate membership is a tower adaptation; provenance and roster substitutions
-// are documented in docs/gameplay/hoenn-named-trainers.md. No special encounters.
+// are documented in artifacts/reports/npc/hoenn-named-trainers.md. No special encounters.
 export const hoennTrainers:HoennTrainer[]=[
  row('named-roxanne','원규','gym','Gym','Probopass','Probopass,Armaldo,Cradily,Aggron,Relicanth,Golem','마비로 속도를 제어하고 바위 물리 공격수로 압박',null,{preferredLead:['Probopass'],atLeastOneOf:['Armaldo','Aggron','Golem']},'tactical'),
  row('named-brawly','철구','gym','Gym','Hariyama','Hariyama,Medicham,Machamp,Breloom,Heracross,Hitmontop','내구형 격투 에이스와 빠른 공격수·선공기',z('Hariyama','Fightinium Z'),{atLeastOneOf:['Medicham','Breloom','Heracross']}),

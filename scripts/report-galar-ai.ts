@@ -50,12 +50,12 @@ for(const id of [...new Set<string>(after.summary.map((s:any)=>s.id))]){const aa
 doc+=`\n나머지 11명의 요약 지표 전체가 기준 실행과 동일함을 스크립트에서 검증했다. 금랑의 피벗은 두 층 합계 2회로 제한적으로 쓰였고 승률은 유지됐다. 단델은 원래 사용하지 못하던 행동이 활성화되어 승률이 상승했다. 50층의 32/32 승리는 이 고정 소규모 표본 결과이며 일반 플레이 승률로 일반화할 수 없다. 승률을 맞추기 위한 데이터 버프는 하지 않았다.\n\n## 판단 감사와 검증\n\n기록된 피벗 승인 ${pivots}회, 새 계층 직접 교체 ${hardSwitches}회, 보수적 KO 우선 ${koChoices}회. 모든 승인에서 KO 불가·후속 위험 35% 이상 감소·최소 0.15 개선·진입 비용 후 순이득·3턴 간격·전투당 최대 4회를 재검증했다. 이 벤치마크의 비용이 0이 아닌 피벗 승인은 ${hazardPivots}회다. 플레이어 파티의 hazard 사례가 부족하므로 hazard의 정확성은 별도 인공 상황 및 실제 엔진 테스트로 검증했다. 기존 행동 이상 탐지기의 중복 행동 경고는 0건이다.\n\n새 행동 테스트 34개는 피벗/직접 교체/면역/KO/유리 대면/쿨다운, hazard 전체, King's Shield 상태 및 남용 방지, Solar Beam/Max Overgrowth, 실제 엔진의 후속 연결과 리플레이를 포함한다. 전체 회귀·타입·빌드 결과는 아래 최종 검증 기록을 참조한다.\n\n네모는 향후 자신의 AI 설정에 \`pivot: 'v1'\`을 부여해 같은 평가 계층을 사용할 수 있다. 빠르모트 Volt Switch를 실제 엔진에서 검사했고 종족 조건은 없다. 이번 작업에서 네모의 데이터나 활성 정책은 추가하지 않았다.\n\n원본: \`${root}/{before,after}-{summary,battles}.json\`, \`{before,after}-logs.jsonl\`. 대표 전체 로그는 \`traces/\`, 검증 집계는 \`decision-audit.json\`에 보관한다. 재생성: \`node node_modules/tsx/dist/cli.mjs scripts/report-galar-ai.ts\`.\n`;
 doc=doc.replace('金랑','금랑');
 doc+='\n100층에서 남은 Max 미사용 사망 1건(signature seed 4)은 U-turn 후 진입한 리자몽이 같은 턴 Kommo-o의 급소 Outrage를 받아 쓰러진 사례다. 리자몽에게 일반 공격/다이맥스 선택 요청이 오기 전이었으며 Solar Beam 충전 사고는 아니다. 대표 로그 `traces/leon-max-unused.json`에서 확인할 수 있다.\n';
-const testLog=readFileSync('artifacts/galar-ai-all-tests.log','utf8'),buildLog=readFileSync('artifacts/galar-ai-build.log','utf8');
+const testLog=readFileSync('artifacts/experiments/balance/raw/galar-ai-all-tests.log','utf8'),buildLog=readFileSync('artifacts/experiments/balance/raw/galar-ai-build.log','utf8');
 const passed=testLog.match(/ℹ pass (\d+)/)?.[1],failed=testLog.match(/ℹ fail (\d+)/)?.[1];
 doc+='\n## 최종 검증 기록\n\n';
 doc+=passed&&failed==='0'?`- 전체 회귀: ${passed}/${passed} 통과.\n`:'- 전체 회귀: 최종 실행 진행 중.\n';
-doc+=`- 신규 행동 테스트: 34/34 통과. 가라르 기존 데이터/행동·밸런스 테스트도 전체 회귀에 포함.\n- TypeScript: \`node node_modules/typescript/bin/tsc --noEmit\` 통과.\n- 프로덕션 빌드: ${buildLog.includes('ƒ  (Dynamic)')?'통과':'최종 실행 진행 중'}.\n- 저장/재접속의 정책 플래그 복원 및 실제 엔진 리플레이 통과. 기존 플래그 없는 저장 설정은 기존 정책 선택을 검사.\n- 결과 로그: \`artifacts/galar-ai-all-tests.log\`, \`artifacts/galar-ai-focused.log\`, \`artifacts/galar-ai-build.log\`.\n- 문서: 이 보고서와 이전 데이터 조정 보고서 \`docs/gameplay/galar-npc-tuning.md\` 연결.\n`;
-writeFileSync('docs/gameplay/galar-npc-ai.md',doc);
+doc+=`- 신규 행동 테스트: 34/34 통과. 가라르 기존 데이터/행동·밸런스 테스트도 전체 회귀에 포함.\n- TypeScript: \`node node_modules/typescript/bin/tsc --noEmit\` 통과.\n- 프로덕션 빌드: ${buildLog.includes('ƒ  (Dynamic)')?'통과':'최종 실행 진행 중'}.\n- 저장/재접속의 정책 플래그 복원 및 실제 엔진 리플레이 통과. 기존 플래그 없는 저장 설정은 기존 정책 선택을 검사.\n- 결과 로그: \`artifacts/experiments/balance/raw/galar-ai-all-tests.log\`, \`artifacts/experiments/balance/raw/galar-ai-focused.log\`, \`artifacts/experiments/balance/raw/galar-ai-build.log\`.\n- 문서: 이 보고서와 이전 데이터 조정 보고서 \`artifacts/reports/npc/galar-npc-tuning.md\` 연결.\n`;
+writeFileSync('artifacts/reports/npc/galar-npc-ai.md',doc);
 writeFileSync(`${root}/decision-audit.json`,JSON.stringify({battles:832,pivots,hardSwitches,koChoices,hazardPivots,unchangedOtherNpcs:11},null,2)+'\n');
 mkdirSync(`${root}/traces`,{recursive:true});
 for(const [name,predicate]of [
@@ -63,4 +63,4 @@ for(const [name,predicate]of [
  ['leon-shield',(r:any)=>r.id==='named-leon'&&r.log.publicProtocol.some((l:string)=>l.includes("|King's Shield|"))],
  ['leon-max-unused',(r:any)=>r.id==='named-leon'&&r.floor===100&&!r.log.publicProtocol.some((l:string)=>l.startsWith('|-start|p2a: Charizard|Dynamax'))],
 ] as const){const r=rawAfter.find(predicate);if(r)writeFileSync(`${root}/traces/${name}.json`,JSON.stringify(r,null,2)+'\n');}
-console.log({pivots,hardSwitches,koChoices,hazardPivots,report:'docs/gameplay/galar-npc-ai.md'});
+console.log({pivots,hardSwitches,koChoices,hazardPivots,report:'artifacts/reports/npc/galar-npc-ai.md'});

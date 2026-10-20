@@ -14,7 +14,7 @@ const moveBattles=(id:string,move:string,floor=95)=>occurrence(id,r=>Object.entr
 const moveTotal=(id:string,move:string,floor=95)=>Object.entries(current(id,floor).moves).reduce((n,[k,v])=>n+(k.endsWith('/'+move)?v as number:0),0);
 const effectBattles=(id:string,effect:string)=>occurrence(id,r=>(r.effects[effect]??0)>0);
 const weatherBattles=(id:string,weather:string)=>occurrence(id,r=>(r.weather[weather]??0)>0);
-const testLog=readFileSync('artifacts/galar-tuning-all-tests.log','utf8'),tests=testLog.match(/ℹ tests (\d+)/)?.[1],passed=testLog.match(/ℹ pass (\d+)/)?.[1],failed=testLog.match(/ℹ fail (\d+)/)?.[1];
+const testLog=readFileSync('artifacts/experiments/balance/raw/galar-tuning-all-tests.log','utf8'),tests=testLog.match(/ℹ tests (\d+)/)?.[1],passed=testLog.match(/ℹ pass (\d+)/)?.[1],failed=testLog.match(/ℹ fail (\d+)/)?.[1];
 const allister=current('named-allister'),raihan=current('named-raihan'),leon=current('named-leon',100),bede=current('named-bede');
 const lines=['# 가라르 NPC 소규모 밸런스 조정 및 행동 검증','',
  '기준 커밋: `edc1d6eb0261e5db9ae17f59d3a6349d5c9f21ec`. 지정한 네 가지 변경만 적용했다. 파티 구성, 육성치, 출전 순서, AI 판단 코드, 비트를 포함한 나머지 10종의 샘플은 그대로다.','',
@@ -106,8 +106,8 @@ lines.push('','띠가 발동했다고 무조건 추가 행동을 얻었다고 �
  '', '재현: 기준 커밋 상태에서 `node node_modules/tsx/dist/cli.mjs scripts/audit-galar-tuning.ts before`, 지정 조정 적용 후 같은 명령의 `after`를 실행한다. `--reanalyze`는 저장된 전체 로그만 다시 집계하며 원래 실행 해시를 유지한다. `scripts/report-galar-tuning.ts`로 이 문서를 생성한다.',
  '', '수정/추가 파일:','');
 const paths=execFileSync('git',['status','--porcelain'],{encoding:'utf8'}).trimEnd().split('\n').map(l=>l.slice(3).trim()).filter(Boolean);
-for(const p of [...new Set([...paths,'scripts/report-galar-tuning.ts','docs/gameplay/galar-npc-tuning.md'])])lines.push(`- \`${p}\``);
+for(const p of [...new Set([...paths,'scripts/report-galar-tuning.ts','artifacts/reports/npc/galar-npc-tuning.md'])])lines.push(`- \`${p}\``);
 for(const phase of ['before','after'])for(const line of readFileSync(`${root}/${phase}-logs.jsonl`,'utf8').trim().split('\n')){
  const e=JSON.parse(line);if(['named-leon','named-allister','named-raihan','named-bede'].includes(e.id)&&e.floor>=95&&e.n===1||phase==='after'&&e.id==='named-leon'&&e.floor===100&&e.case==='starters'&&e.n===2)writeFileSync(`${root}/traces/${phase}-${e.id}-${e.floor}-${e.case}-${e.n}.json`,JSON.stringify(e,null,2)+'\n');
 }
-writeFileSync('docs/gameplay/galar-npc-tuning.md',lines.join('\n')+'\n');console.log('Wrote docs/gameplay/galar-npc-tuning.md');
+writeFileSync('artifacts/reports/npc/galar-npc-tuning.md',lines.join('\n')+'\n');console.log('Wrote artifacts/reports/npc/galar-npc-tuning.md');

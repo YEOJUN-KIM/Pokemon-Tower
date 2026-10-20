@@ -1,118 +1,24 @@
-# NPC AI tiers (tower-policy-v11)
+# NPC AI와 저장 정책
 
-## Existing policies and compatibility
+새 일반 전투의 기본 정책은 src/server/tower-store.ts의 AI_VERSION = tower-policy-v13이다. 저장된 전투는 해당 ai_version으로 복구하며 v12/v11 및 이전 정책 파일도 실제 재생에 사용한다. 이름에 버전이 있다는 이유로 삭제하지 않는다.
 
-| Policy | Capability added | Archived version |
-| --- | --- | --- |
-| TowerPolicy | Damage, recovery, status, setup, Counter/Mirror Coat/Destiny Bond | v2 |
-| LegacyGimmickPolicy / GimmickPolicy / TeraPolicy | Mega, Dynamax, Tera | v3 / v4 / v5 |
-| SwitchingPolicy / CautiousSwitchingPolicy | Matchups, entry hazards, own immunity, finishing/boost guards, bounded switches, trapping warning | v6 / v7 |
-| LearningOpponentPolicy | Public immunity evidence, alternative attacks and safe response switches | v8 |
-| ZMovePolicy | Learning plus Z move timing | v9 / v10 |
+## 설정과 책임
 
-Before this change, modern encounters shared v10; legacy progression used v9.
-v10 also restores independent NPC gimmick rules from packed teams in BattleSession.
-Raid uses that same v10 policy with its separate engine rules.
+| 위치 | 책임 |
+|---|---|
+| src/data/npc-ai.ts | 층·역할·Rank·aiCeiling·지역에 따른 tier/전술 설정 |
+| src/battle/npc-policy.ts | 현재 v13 정책 조합 |
+| src/battle/npc-policy-v12.ts | v12 조합과 v13이 재사용하는 기반 |
+| src/battle/npc-policy-v11.ts | v11 보관 경로 |
+| src/server/battle-session.ts | 저장 버전별 실제 정책 선택 |
+| src/server/tower-service.ts | 지원 버전 확인·저장 전투 복구 |
 
-v11 selects existing layers in `createNpcPolicy`:
+Basic/Tactical/Expert는 판단 능력이며 레벨·IV·능력 포인트·기술·도구와 별개다. 공통 층 기준은 1~19 Basic, 20~49 Tactical, 50+ Expert이지만 일반 NPC 상한, 네임드/보스/도전자와 지역별 설정이 우선한다. 명시한 aiCeiling도 보존한다.
 
-* **Basic:** TowerPolicy; ordinary moves and forced replacements only.
-* **Tactical:** CautiousSwitchingPolicy plus the shared Z move timing helper.
-* **Expert:** ZMovePolicy (including LearningOpponentPolicy).
+v13은 v12 기반에 등장 우선기 판단을 조합하고, 저장된 NpcAi 설정에 따라 가라르 운영·에이스 보존·팔데아 테라·피벗/교체 정책을 사용한다. 지역별 조건은 data/npc-ai.ts와 해당 지역 데이터, 실제 행동 점수와 제약은 battle의 정책 클래스가 기준이다. 모든 NPC가 모든 기능을 사용하는 것은 아니다.
 
-The old classes retain their decisions when constructed without the optional
-score callback. v2–v10 and damage-policy-v1 remain accepted by TowerService.
-Both v10 and v11 restore independent NPC gimmick rules and the saved Tera carrier.
-Raid remains on v10. No Raid QA/encounter setting changed.
+AI는 자신의 팀과 공개 관측만 전달받는다. 실제 상대 비공개 도구·기술·선택 행동을 읽어 판단하지 않는다. 이전 AI와 Raid/특수 전투의 저장 정책도 그대로 재생한다.
 
-## Selection and ceilings
+관련 검증은 tests/npc-ai.test.ts·지역별 NPC 검사와 tests/npc-ai.test.ts 등 실제 저장/공개 관측 검사다. 현재 존재하는 테스트 목록과 명령은 [개발 도구](../../scripts/README.md)에서 확인한다. 실험 승률은 사람의 난이도 검증을 대체하지 않는다.
 
-`npcAi(floor, sample, options)` calculates decision capability independently of
-level, IVs, EVs, damage, held items, movesets, and team composition.
-
-Floor baseline: 1–19 Basic, 20–49 Tactical, 50–100 Expert. This uses the actual
-floor, including chapter two and Teleport destinations, without rescaling stats.
-
-| Encounter | Effective tier/default ceiling |
-| --- | --- |
-| Ordinary NPC / normal rank Challenger | Floor baseline, capped at Tactical |
-| Elite/Master common NPC | At least Tactical; Expert at 50+ |
-| Named / gym | At least Tactical; Tactical ceiling before 40, Expert ceiling from 40 (Expert baseline starts at 50) |
-| Elite Four | At least Tactical; Expert at 50+ |
-| Champion / final 50F or 100F boss / hidden final boss | Expert |
-| Organization grunt | Basic before 20, then Tactical |
-| Organization executive (including Rocket Archer) | Tactical ceiling, at least Tactical |
-| Organization leader (including Rocket Giovanni) | Expert |
-| Master Challenger | Expert even at low floors |
-| Raid | Existing v10 path and special battle rules |
-
-`TrainerSample.aiCeiling` and `NpcSample.aiCeiling` are optional. Explicit
-ceilings always win, including an explicitly Basic named opponent. Named and
-elite encounters have a Tactical minimum before applying their ceiling. Leader
-metadata is stored with the samples; policies contain no NPC identity checks.
-
-## Tactic
-
-The existing seven tactics are reused: balanced, physical, special, speed,
-status, setup, bulk. Previously they affected team/move/training generation,
-not turn decisions. No separate personality or Pokemon role system was added.
-Existing encounter `role`, `kind`, and `npcRank` drive tier selection.
-
-The optional common TowerPolicy scoring callback adds at most five points:
-
-* balanced: zero bias;
-* physical/special: up to 6% for the respective attack category;
-* speed: up to 6% for priority and pivot attacks;
-* status: +5 for viable Toxic, Will-O-Wisp, Thunder Wave and Leech Seed;
-* setup: +5 for viable existing setup moves above 70% HP;
-* bulk: +5 for viable recovery at <=50% HP or disruption above 50% HP.
-
-Zero-score moves never gain a preference. Status moves gain no preference
-against a nearly defeated opponent or when an estimated finishing attack is
-available. Existing immunity, status, repeated setup and healing gates remain.
-Bias never overrides switching guards or introduces randomness.
-
-## Persistence and public information
-
-The resolved `{tier,tactic}` is persisted as `npcAi` inside the existing boss or
-trainer JSON; `ai_version` is still stored in the battles table. No DB migration
-is necessary. Reconnect uses these saved values and reconstructs policy state
-by replaying accepted inputs and public events. Retry copies the same version,
-NPC JSON, opponent team, seed and rewards through the existing SQL path.
-
-Trainer event snapshots (Rocket and hidden boss) freeze `aiVersion` and
-`trainer.npcAi` when created. Challenger candidates freeze their version and
-configuration before selection. Pre-tier pending snapshots without these
-fields retain v10 (v9 for legacy progression). Existing battle rows never get
-upgraded. Snapshot/reward lifecycle and recruitment rules are unchanged.
-
-Expert receives its own request, public species/HP, public switching context
-and protocol events excluding private requests. Existing immunity evidence is
-scoped to the current opponent entry and reset on public identity/type changes;
-this change does not add a cross-entry scouting database or search ahead into
-the engine. Opponent move knowledge is the existing public last move. Hidden
-sets, held items, unrevealed abilities, player inputs and future RNG are not
-available to the policy.
-
-## Verification
-
-`tests/npc-ai.test.ts` covers capabilities, immunity learning, all four active
-gimmicks, scoring bounds, all sample ceilings/defaults, frozen settings,
-retry/reconnect, archived policy acceptance, deterministic real battles,
-decision replay, and complete v10/v11 Expert balanced history equivalence.
-Rocket regression tests also assert the saved version/configuration on entry
-and retry. Existing Raid, Challenger, hidden boss and Teleport suites exercise
-their original lifecycle paths. See the implementation report in the chat for
-the commands actually executed and their results.
-
-Final verification (2026-10-18):
-
-* `node node_modules/tsx/dist/cli.mjs --test tests/*.test.ts`: 749 passed.
-* `node node_modules/typescript/bin/tsc --noEmit`: passed.
-* `node --require ./scripts/windows-build-links.cjs node_modules/next/dist/bin/next build`: passed.
-* `node --import tsx node_modules/@playwright/test/cli.js test e2e/switch-policy.spec.ts e2e/villain-campaign.spec.ts e2e/challenger-events.spec.ts e2e/raid-events.spec.ts e2e/teleport.spec.ts --reporter=line`: 37 passed.
-
-The switching E2E fixture explicitly selects v6 or each v11 tier, uses current
-account authentication, and isolates its test signup quota. Desktop and mobile
-checks demonstrate Basic staying in and Tactical/Expert switching, then verify
-the saved configuration and battle state after reload.
+[NPC 입력](NPC_DATA.md) · [DB와 버전](DATABASE.md) · [현재 NPC 규칙](../gameplay/NPC.md)

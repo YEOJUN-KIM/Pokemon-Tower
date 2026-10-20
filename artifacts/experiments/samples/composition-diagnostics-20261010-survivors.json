@@ -1052,15 +1052,15 @@
       "sha256": "5e13c5393eae2f8e165cc7ec1f098f45009a9cb5b53347190a824dc3e2c29f43"
     },
     {
-      "path": "artifacts/composition-diagnostics-20261010-basic-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-diagnostics-20261010-basic-battles.jsonl",
       "sha256": "1f81463d663116d68538669ea40cc80c7e61e4d49ec2348379e8fe1223dc749e"
     },
     {
-      "path": "artifacts/composition-diagnostics-20261010-tera-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-diagnostics-20261010-tera-battles.jsonl",
       "sha256": "116fcfbc2e8d7678aa0d9ca7f89a283da0c751dfb5c79ad45a0ed5f76e58f836"
     },
     {
-      "path": "artifacts/composition-diagnostics-20261010-chaos-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-diagnostics-20261010-chaos-battles.jsonl",
       "sha256": "444c2eb33c6389f31a61ac6ec43bebb6fa185f0f28612d0380e4c8a67011d19c"
     }
   ]

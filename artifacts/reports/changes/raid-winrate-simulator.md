@@ -31,7 +31,7 @@ npm run raid:simulate -- --runs 100 --seed raid-winrate-v1 --workers 4 --out .da
 
 플레이어는 자신의 팀과 공개된 상대 정보만 받는다. 기존 공격·상성·상태·회복·강화 판단을 사용하고, 불리한 공개 상성이나 낮은 HP에서만 55% 확률로 기존 자발 교체 판단을 허용한다. 첫 멤버로 선발하며 상대 전용 카운터나 숨겨진 상대 세트를 읽지 않는다. 실제 기본 룰 Lv50를 사용한다.
 
-팀은 초기 해금 10조합과 일반 수집 10조합이다. seed 기반 선택에는 보스 ID를 넣지 않아 동일 run index는 모든 보스에서 같은 층·팀을 사용한다. 수집 팀의 등장 시점은 기존 `towerDifficulty()`의 BST 상한을 확인한다. 육성·아이템·완전 회복 가정과 층별 표본은 [측정 보고서](../raid-winrate-simulation.md)에 공개한다. 이는 실제 유저 데이터를 이용해 보정한 사람 승률이나 실제 도전 빈도로 가중한 승률이 아니다.
+팀은 초기 해금 10조합과 일반 수집 10조합이다. seed 기반 선택에는 보스 ID를 넣지 않아 동일 run index는 모든 보스에서 같은 층·팀을 사용한다. 수집 팀의 등장 시점은 기존 `towerDifficulty()`의 BST 상한을 확인한다. 육성·아이템·완전 회복 가정과 층별 표본은 [측정 보고서](../../experiments/balance/raid-winrate-simulation.md)에 공개한다. 이는 실제 유저 데이터를 이용해 보정한 사람 승률이나 실제 도전 빈도로 가중한 승률이 아니다.
 
 각 전투는 `seed base : boss ID : zero-based run index : snapshot/battle/policy`를 SHA-256으로 해시해 독립적인 난수열을 사용한다. 같은 코드·엔진·설정·seed에서는 worker 수와 무관하게 같은 결과다. Phase 분기를 승리나 통계 집계에서 다시 추첨하지 않는다.
 
@@ -53,6 +53,6 @@ npm run raid:simulate -- --runs 100 --seed raid-winrate-v1 --workers 4 --out .da
 - 보고서에 0 survivors 승리를 명시한 뒤 동일 20,000전을 재실행했으며 개별 전투 CSV가 SHA-256까지 동일했다. 두 실행을 합쳐 2,000전 표본으로 해석하지 않고 보스별 최초 1,000개의 동일 seed 표본을 보고한다. 0 survivors 승리는 34건이었다.
 - TypeScript 및 `git diff --check` 통과. 기준 커밋 대비 `src/` diff가 없고 실행 전후 전체 `src` 해시도 동일하다.
 
-[전체 결과 Markdown](../raid-winrate-simulation.md), [보스별 CSV](../raid-winrate-simulation.csv), [재현 manifest와 세부 집계](../raid-winrate-simulation.json), [검증 기록](../raid-winrate-simulation.validation.json).
+[전체 결과 Markdown](../../experiments/balance/raid-winrate-simulation.md), [보스별 CSV](../../experiments/balance/raid-winrate-simulation.csv), [재현 manifest와 세부 집계](../../experiments/balance/raid-winrate-simulation.json), [검증 기록](../../experiments/balance/raid-winrate-simulation.validation.json).
 
 원시 실행 로그는 `.data/raid-winrate-run.log`, 회귀 로그는 `.data/raid-winrate-tests.log`에 보관한다. 극단적인 결과도 기록만 하며 이번 작업에는 승률을 목표값에 맞추는 수정이 없다.

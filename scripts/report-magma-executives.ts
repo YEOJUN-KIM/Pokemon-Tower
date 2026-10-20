@@ -97,17 +97,17 @@ md.push('공통 빌드 정의 자체는 바꾸지 않고 두 간부용 override�
 );
 const verification=root+'/verification.md';if(existsSync(verification))md.push(readFileSync(verification,'utf8'),'');
 md.push(audit.verdict);
-writeFileSync('docs/gameplay/magma-executive-balance-report.md',md.join('\n')+'\n');
+writeFileSync('artifacts/reports/npc/magma-executive-balance-report.md',md.join('\n')+'\n');
 // Refresh only the two current design sections. Keep the original broad report
 // and its measurements as historical baseline evidence.
-const designPath='docs/gameplay/hoenn-named-trainers.md';let design=readFileSync(designPath,'utf8');
+const designPath='artifacts/reports/npc/hoenn-named-trainers.md';let design=readFileSync(designPath,'utf8');
 for(const t of hoennTrainers.filter(t=>ids.includes(t.id))){const s=source.samples.find((s:any)=>s.id===t.id),title=`## ${t.name} (${t.id})`,start=design.indexOf(title);assert.ok(start>=0);let end=design.indexOf('\n## ',start+title.length);if(end<0)end=design.length;
  const l=lineups.find((l:any)=>l.id===t.id&&l.floor===95);
  const section=[title,'',`Category: executive; Power Tier: ${t.power}; Ace: Camerupt; AI: Tactical ceiling.`, '',`Concept: ${t.concept}.`, '',`Gimmick: ${t.signature?'Mega Camerupt / Cameruptite':'None'}.`, '',`selectionRules: \`${JSON.stringify(t.selectionRules)}\`.`, '', '| 후보 | 특성 | 기본 아이템 | 기술 ×4 | 역할 |','|---|---|---|---|---|',...s.team.map((p:any)=>`| ${p.species} | ${p.profile.ability} | ${p.item} | ${p.profile.moves.join(' / ')} | ${p.role} |`),'','signature carrier는 허용 층부터 지정 기믹 도구로 바뀐다. 기존 층별 성장·선출기를 사용한다.', '',`Representative Lineups (F95, 1000회): ${Object.entries(l.teams).sort((a:any,b:any)=>b[1]-a[1]).slice(0,3).map(([names,n])=>`${names}: ${n}회`).join('; ')}.`, '', 'Design Notes: 마그카르고를 점토도리로 교체하고 저수 선인왕을 추가한 두 자리 조직 확장이다. 점토도리/선인왕을 원작 간부 소유로 주장하지 않는다. 크로뱃의 미사용 기가드레인에 물 대응을 의존하지 않는다. [추가 조정 검증](magma-executive-balance-report.md)에 기준 commit·세트·승률·holdout·선출·메가 비교를 기록했다.', ''].join('\n');
  design=design.slice(0,start)+section+design.slice(end);
 }
 writeFileSync(designPath,design);
-const oldReport='docs/gameplay/hoenn-named-trainer-balance-report.md';let old=readFileSync(oldReport,'utf8');const notice='> 이 문서는 commit 5325869의 1차 기준 결과다. 마그마 간부 둘의 최신 결과는 [추가 조정 보고서](magma-executive-balance-report.md)를 따른다.';
+const oldReport='artifacts/reports/npc/hoenn-named-trainer-balance-report.md';let old=readFileSync(oldReport,'utf8');const notice='> 이 문서는 commit 5325869의 1차 기준 결과다. 마그마 간부 둘의 최신 결과는 [추가 조정 보고서](magma-executive-balance-report.md)를 따른다.';
 if(!old.includes(notice))old=old.replace('\n','\n\n'+notice+'\n');writeFileSync(oldReport,old);
 console.log(JSON.stringify({verdict:audit.verdict,metrics:metrics.map(t=>({id:t.id,floors:t.floors,gimmicks:t.gimmicks.after}))}));
 

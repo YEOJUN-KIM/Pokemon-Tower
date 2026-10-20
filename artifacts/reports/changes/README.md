@@ -4,6 +4,7 @@
 
 | 주제 | 주요 기록 |
 |---|---|
+| 1차 완성 후 파일·문서 정리 | [정리 범위와 검증](WORKSPACE_CLEANUP-2026-10-20.md) |
 | 비전투 이벤트·배포 준비 | [이벤트와 배포 검증](NONCOMBAT_EVENTS_RELEASE.md) |
 | 알 뽑기·이로치 교환·테라 아이콘·버튼 문구 | [수집·알 화면 개편](COLLECTION_EGG_UI.md) |
 | 알 등급별 전체 포켓몬 목록 | [뽑기 대상 분류](EGG_POOL_CLASSIFICATION.md) |

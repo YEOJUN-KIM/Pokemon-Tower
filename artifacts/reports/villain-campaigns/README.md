@@ -85,7 +85,7 @@ Rocket 99.98%, Skull/Aether 100%로 중단 문제가 해소됐다. 보스 p50은
 - `node node_modules/tsx/dist/cli.mjs --test tests/villain-tracks.test.ts tests/villain-campaign-completion.test.ts`
 - `node --import tsx node_modules/@playwright/test/cli.js test e2e/villain-tracks.spec.ts e2e/villain-campaign.spec.ts`
 
-[분포 원본](distribution.json) · [전투 원본/입력 해시](battles.json) · [현재 설계와 수동 QA](../../../docs/villain-campaign-tracks.md)
+[분포 원본](distribution.json) · [전투 원본/입력 해시](battles.json) · [현재 설계와 수동 QA](../../../docs/engineering/VILLAIN_CAMPAIGNS.md)
 
 ## 범위와 TODO
 

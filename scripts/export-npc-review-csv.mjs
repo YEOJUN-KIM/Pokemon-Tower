@@ -21,7 +21,7 @@ for(const s of [...data.samples].sort((a,b)=>a.id.localeCompare(b.id)||(a.sample
  const staged=!!s.stage,active=s.gimmickEnabled!==false,id=s.id+':'+(s.allFloors?'all':s.stage??'reference-max');
  assert.ok(!ids.has(id),'Duplicate sample: '+id);ids.add(id);
  assert.equal(new Set(s.team.map(p=>p.species)).size,s.team.length);
- assert.ok(s.allFloors?s.team.length>=3&&s.team.length<=6:s.team.length===3);
+ assert.ok(s.select?s.team.length>=3&&s.team.length<=6:s.team.length===3);
  assert.ok(!s.ace||s.team.some(p=>p.species===s.ace));
  assert.ok(!s.signature||s.team.some(p=>p.species===s.signature.species));
  const category=normalNpcCategory(s.role,s.id,'named');
@@ -35,7 +35,7 @@ for(const s of [...data.samples].sort((a,b)=>a.id.localeCompare(b.id)||(a.sample
   const f=p.profile;
   assert.equal(f.moves.length,4);
   const total=stats.reduce((n,k)=>n+f.evs[k],0);
-  if(s.allFloors)assert.ok(total<=66);else assert.equal(total,s.statPoints??data.statPoints);
+  if(s.select)assert.ok(total<=66);else assert.equal(total,s.statPoints??data.statPoints);
   for(const k of stats){assert.ok(Number.isInteger(f.ivs[k])&&f.ivs[k]>=0&&f.ivs[k]<=31);assert.ok(Number.isInteger(f.evs[k])&&f.evs[k]>=0&&f.evs[k]<=data.maxPointsPerStat);}
   assert.ok(active||!p.gigantamax);
   detail.push([2,id,s.id,i+1,p.species,p.item,f.ability,f.nature,f.teraType??'',Number(!!p.gigantamax),Number(p.species===s.ace),Number(active&&p.species===s.signature.species),...f.moves,...stats.map(k=>f.ivs[k]),...stats.map(k=>f.evs[k]),p.battleForm?.species??'',p.battleForm?.ability??'',p.battleForm?.types.join('/')??'']);

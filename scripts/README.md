@@ -28,4 +28,4 @@ CSS 화면 비교는 node scripts/css-snapshot.mjs before / after입니다. 실�
 
 브라우저 테스트의 JSON import attribute 수집 오류가 나면 node --import tsx node_modules/@playwright/test/cli.js test ... 로 실행합니다. 실제 E2E는 최신 빌드와 설치된 Chrome을 사용합니다.
 
-NPC 단계 부트스트랩 build-normal-npc-samples.ts는 현재 allFloors 검토 입력이 있으면 덮어쓰기를 거부합니다. 일상적인 수정·export·검증 순서는 [NPC 데이터 안내](../docs/engineering/NPC_DATA.md)를 따릅니다.
+옛 단계별 전체 NPC 부트스트랩과 일회성 Raid 튜닝 스크립트는 삭제했습니다. 현재 NPC는 검토 입력 → export → --check를 사용합니다. Raid 측정은 pnpm raid:simulate --out artifacts/temporary/raid-새실험 형식으로 출력 경로를 지정합니다. 이전 측정은 Git과 분류된 보고서로 확인합니다.

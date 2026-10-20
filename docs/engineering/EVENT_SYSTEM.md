@@ -1,34 +1,36 @@
 # 이벤트 확장 방법
 
-기준: 2026-10-18. 일반 랜덤 이벤트는 전체 발생 판정, 종류 선택, 내부 결과 선택을 별도로 관리한다. 로켓단 전용 후보 제한·3층부터 강제 Raid 같은 수동 QA 우회는 제거했다.
+기준: 2026-10-20. 일반 랜덤 이벤트는 전체 발생 판정, 종류 선택, 내부 결과 선택을 별도로 관리한다. 로켓단 전용 후보 제한·3층부터 강제 Raid 같은 수동 QA 우회는 제거했다.
 
 ## 세 단계 확률의 기준
 
 | 단계 | 수정 위치 | 의미 |
 |---|---|---|
-| 전체 발생 10%·쿨다운 2 | `src/data/run-events.ts`의 `eventEncounterSettings` | 적격 일반층에서 이벤트를 만들지 판정 |
+| 전체 발생 15%·쿨다운 2 | `src/data/run-events.ts`의 `eventEncounterSettings` | 적격 일반층에서 이벤트를 만들지 판정 |
 | 이벤트 종류 weight | 같은 파일의 `eventDefinitions`, 각 이벤트 data 설정 | 발생한 이벤트 중 종류를 상대 가중치로 추첨 |
 | 선택 후 내부 결과 | `legacyChestRewards`, `mysteryChestResults`, 각 콘텐츠의 보상/후보 표 | 해당 이벤트를 골랐을 때의 결과·팀·보상 추첨 |
 
-`game/run-events.ts`의 `selectRunEvent`가 5의 배수 통과 층 제외, 통과 순서 쿨다운, 10% 판정, minFloor/minRulesVersion 및 적격 조건을 순서대로 처리한다. minFloor는 이미 통과한 afterFloor 기준이다. 쿨다운은 `order - previousOrder <= 2`에서 만남을 막는다. 순간이동으로 층 숫자가 줄거나 재방문해도 서버의 cleared_count/encounter_order를 사용한다. 같은 층 재도전은 새 통과로 중복 집계하지 않는다.
+`game/run-events.ts`의 `selectRunEvent`가 5의 배수 통과 층 제외, 통과 순서 쿨다운, 15% 판정, minFloor/minRulesVersion 및 적격 조건을 순서대로 처리한다. minFloor는 이미 통과한 afterFloor 기준이다. 쿨다운은 `order - previousOrder <= 2`에서 만남을 막는다. 순간이동으로 층 숫자가 줄거나 재방문해도 서버의 cleared_count/encounter_order를 사용한다. 같은 층 재도전은 새 통과로 중복 집계하지 않는다.
+
+신규 런의 빌런은 data/villain-tracks.ts의 독립 확률/간격으로 판정한다. 일반 registry의 villain-campaign은 weight 0이며, 신규 캠페인이 있는 런은 옛 rocket-* 종류를 일반 후보에서 제외한다. [독립 트랙](VILLAIN_CAMPAIGNS.md)과 과거 로켓단 v1 경로를 혼동하지 않는다.
 
 서버는 이미 대기 중인 이벤트를 다시 만들지 않으며 조직 진행·구간별 포탈 사용 여부를 적격 조건으로 추가한다. 고정 선물은 별도 난수를 소비하지 않는다. 기존 난수 소비 순서와 저장 결과를 보존한다.
 
 ## 종류와 조건
 
-기본 비중은 상자 50, 브리더 30, 여행 상인 20다. v2에는 도전자 20, 히든상점 12, Raid 20, 순간이동 10, 조건을 만족한 로켓단 단계 100이 추가된다. **항상 이 합계로 나누는 것이 아니라 현재 적격한 종류끼리만 정규화**한다. 전역 확률과 종류 weight를 같은 퍼센트로 읽지 않는다.
+기본 비중은 상자 50, 브리더 15, 여행 상인 20다. v2에는 도전자 20, 히든상점 12, Raid 20, 순간이동 10, 조건을 만족한 로켓단 단계 100이 추가된다. **항상 이 합계로 나누는 것이 아니라 현재 적격한 종류끼리만 정규화**한다. 전역 확률과 종류 weight를 같은 퍼센트로 읽지 않는다.
 
 - `data/challengers.ts`, `hidden-shop.ts`, `raids.ts`, `teleport.ts`는 각 콘텐츠의 종류 weight와 최소 조건을 제공한다.
-- `data/villain-campaigns.ts`의 단계별 weight와 조건은 저장된 단서/간부/보스 상태로 필터링된다. 최초 설정 100의 이전 안정값이 없으므로 이번 감사에서 임의 조정하지 않았다.
+- `data/villain-campaigns.ts`의 단계별 weight와 조건은 저장된 단서/간부/보스 상태로 필터링된다. 이 정의는 과거 로켓단 v1 캠페인 호환용이며 신규 독립 트랙의 발생률이 아니다.
 - 포탈은 같은 챕터의 목적지를 snapshot하고 구간별 한 번만 등장한다. 49/50/99/100 통과 지점은 포탈 후보가 아니다.
-- `hidden-boss`는 weight 0인 확정 챕터 완료 이벤트다. `TowerStore.scheduleHiddenBoss`/`server/hidden-boss-events.ts`에서 생성하며 일반 10% 추첨을 적용하지 않는다.
+- `hidden-boss`는 weight 0인 확정 챕터 완료 이벤트다. `TowerStore.scheduleHiddenBoss`/`server/hidden-boss-events.ts`에서 생성하며 일반 15% 추첨을 적용하지 않는다.
 - Mirror는 별도 이벤트가 아니라 도전자 후보 생성 후 3%로 최대 한 슬롯을 교체한다.
 
 ## 규칙 버전과 기존 저장
 
 `currentEventRulesVersion=2`는 **새 런**의 이벤트 규칙이다. 서버가 run_event_rules의 저장 버전을 선택기와 선택지 조회에 넘긴다. 기본 pure 함수 인자는 과거 v1이며 임의로 v2로 바꾸지 않는다.
 
-v1 상자는 legacyChestRewards(80% 150코인 / 20% 티켓 1장), v2 상자는 mysteryChestResults(꽝/손실/보상 표)를 사용한다. minRulesVersion=2 종류는 v1에서 제외한다. DB schema 45와 이벤트 rules version 1/2는 별개다. 기존 대기·지급·완료 이벤트, 선택 ID·결과·영수증을 재작성하지 않는다.
+v1 상자는 legacyChestRewards(80% 150코인 / 20% 티켓 1장), v2 상자는 mysteryChestResults(꽝/손실/보상 표)를 사용한다. minRulesVersion=2 종류는 v1에서 제외한다. DB schema 46와 이벤트 rules version 1/2는 별개다. 기존 대기·지급·완료 이벤트, 선택 ID·결과·영수증을 재작성하지 않는다.
 
 ## 처리 책임
 
@@ -61,7 +63,7 @@ v1 상자는 legacyChestRewards(80% 150코인 / 20% 티켓 1장), v2 상자는 m
 
 ## 자동 검사
 
-- `tests/maintenance-settings.test.ts`: 10% 발생 경계·설정 범위·weight·선택 ID/결과 ID·비용 무결성.
+- `tests/maintenance-settings.test.ts`: 15% 발생 경계·설정 범위·weight·선택 ID/결과 ID·비용 무결성.
 - `tests/run-event-rules.test.ts`: v1 100개 weight 구간·난수 호출 순서·체크포인트·쿨다운·고정 선물 무추첨.
 - `tests/raid-playtest.test.ts`: 실제 registry에서 강제 Raid/빌런 필터 없이 전체 발생률과 쿨다운 사용.
 - `run-events.test.ts`, `mystery-chest.test.ts`, `challenger-events.test.ts`, `raid-events.test.ts`, `teleport.test.ts`, `rocket-campaign.test.ts`, `hidden-boss-events.test.ts`: 소유권·저장·복구·과거 migration·반복 요청·롤백 및 콘텐츠별 조건.

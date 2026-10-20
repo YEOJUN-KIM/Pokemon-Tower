@@ -1,6 +1,6 @@
 {
   "postHoc": true,
-  "sourceAudit": "artifacts/opponent-learning-20261011-audit.json",
+  "sourceAudit": "artifacts/experiments/ai/raw/opponent-learning-20261011-audit.json",
   "battles": 12,
   "returns": 12,
   "opponentChanged": 12,

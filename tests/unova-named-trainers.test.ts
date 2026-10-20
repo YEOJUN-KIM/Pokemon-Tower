@@ -1,11 +1,9 @@
-import {readPreHauGuzmaFile as readFileSync} from './hau-guzma-preservation';
 import {kalosTrainers} from '../src/data/kalos-trainers';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
 import {createHash,randomUUID} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
-import preservation from './fixtures/alola-preservation.json' with {type:'json'};
 import {unovaTrainers} from '../src/data/unova-trainers';
 import {sinnohTrainers} from '../src/data/sinnoh-trainers';
 import {trainerCatalog,namedTrainerSamples,legacyNamedTrainerSamples} from '../src/data/trainer-catalog';
@@ -34,15 +32,7 @@ function sampleFor(id:string){
  if(id==='plasma-grunt')return organizationGrunt('plasma');
  const g=villainLeaders.plasma;return {...(id.includes('-boss-')?g.boss:[g.executive,...g.executives??[]].find(s=>id.endsWith('-'+s.portrait))!),id,role:'villain' as const};
 }
-test('Unova preserves every other region runtime and reviewed definition and every common policy',()=>{
- const ids=new Set([...kalosTrainers.map(t=>t.id),'named-lysandre',...unovaTrainers.map(t=>t.id),'named-ghetsis']);
- const sort=(a:{id:string;stage:string},b:{id:string;stage:string})=>(a.id+a.stage).localeCompare(b.id+b.stage);
- const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((r:{id:string})=>!preservation.excludedAlola.includes(r.id)&&!ids.has(r.id)).sort(sort);
- const reviewed=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((r:{id:string})=>!preservation.excludedAlola.includes(r.id)&&!ids.has(r.id)).sort(sort);
- assert.equal(runtime.length,preservation.unova.count);assert.equal(digest(runtime),preservation.unova.runtime);assert.equal(digest(reviewed),preservation.unova.source);
- for(const [path,hash]of Object.entries(preservation.common))assert.equal(createHash('sha256').update(readFileSync(path,'utf8').replace(/\r\n/g,'\n')).digest('hex'),hash,path);
- for(const t of sinnohTrainers)assert.ok(normalNpcTemplate(t.id,95,t.category==='boss'||t.category==='executive'?'villain':t.category)?.team.every(p=>!p.profile.moves.includes('Trick Room')));
-});
+
 for(const t of unovaTrainers)test(`${t.id}: legal fixed builds, varying triples, real ace and unchanged floor training`,()=>{
  const sample=sampleFor(t.id),validator=new Showdown.TeamValidator(FORMAT);
  for(const floor of t.category==='hidden'?[5,50,95,100]:[5,45,55,95]){

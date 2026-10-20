@@ -1,6 +1,6 @@
 # NPC 데이터와 생성 규약
 
-기준: 2026-10-18. runtime JSON을 직접 편집하지 않는다. 현재 네임드/조직원 입력은 일반 단계별 314행과 단일 후보 빌드 6행, 합계 **320행·977마리 후보**다. 164종×2단계 고정 3마리라는 가정은 더 이상 전체 입력에 적용하지 않는다.
+기준: 2026-10-20. runtime JSON을 직접 편집하지 않는다. 현재 검토 입력은 **180행·911마리 후보**이며 **156행은 allFloors 단일 후보 빌드**, 나머지 24행은 단계별 입력이다. 고정 3마리·두 단계라는 가정을 전체 입력에 적용하지 않는다.
 
 ## 실제 source of truth
 
@@ -13,9 +13,9 @@ scripts/data/npc/normal-npc-samples.json (사람이 검토·수정하는 현재 
     → 배틀 팀 snapshot 저장
 ```
 
-`allFloors/select/required`가 있는 6종(비상·꼭두·이향·아폴로·비주기·로켓단 조직원)은 5~6마리 후보에서 기존 선택기로 실제 3마리를 구성한다. 캐노니컬 ID/캠페인 별칭은 `data/npc-review-presets.ts`에서 연결하며 에이스·필수 멤버·팀 컨셉을 보존한다. 일반 샘플과 상세 빌드는 [파일럿](../gameplay/named-trainer-sample-pilot.md)을 참고한다.
+allFloors 입력은 같은 후보 빌드를 층 전체에서 재사용하며, select/required·selectionRules가 실제 3마리 선출을 제어한다. 후보 수와 필수 멤버는 입력마다 다르다. 단계별 입력은 stage로 선택한다. 캐노니컬 ID/별칭은 data/npc-review-presets.ts에서 연결한다. 과거 [6종 파일럿](../../artifacts/reports/npc/named-trainer-sample-pilot.md)은 도입 당시 기록이며 현재 전체 후보 목록이 아니다.
 
-`npc-team-samples.json`은 별도의 최고 단계 참고 입력이다. `build-npc-review.ts → build-normal-npc-samples.ts`는 초기 단계별 자료를 만들던 부트스트랩이다. 현재 리뷰 완료 입력에 allFloors 빌드가 있으면 **build-normal-npc-samples.ts는 쓰기 전에 중단**한다. 이 옛 생성기를 일상적인 재생성 경로로 사용하면 최신 빌드가 사라지므로, 현재는 normal-npc-samples.json을 수정하고 runtime export만 실행한다. 전체 생성기를 다시 설계하는 작업은 이번 감사 범위에 포함하지 않았다.
+npc-team-samples.json은 별도의 최고 단계 참고 입력이다. 현재 검토 입력을 재현하지 못하는 옛 단계별 생성기는 삭제했다. 일상적인 수정은 normal-npc-samples.json → runtime export → --check 순서로 진행한다. 지역별 build 도구는 해당 지역을 수정하는 전용 도구이므로 쓰기 범위와 기존 입력 보존 검사를 먼저 확인한다.
 
 ## 그 외 NPC·AI 설정
 
@@ -50,10 +50,10 @@ pnpm typecheck
 
 export는 중복 ID/단계, 후보 수·중복 멤버, 에이스/기믹 담당/필수 멤버, 기술 수·IV·능력 포인트를 검사한다. `--check`는 쓰지 않고 원본 projection과 runtime을 비교한다. 같은 입력을 다시 export하면 동일한 JSON을 생성한다.
 
-샘플을 추가할 때 기존 형식의 staged 3마리 또는 allFloors/select 후보 행을 원본에 정의하고, 트레이너 ID/별칭·합법 기술·폼·기믹 담당·에이스를 맞춘다. export 후 `tests/npc-templates.test.ts`, `named-pilot.test.ts`, `normal-mode-stages.test.ts`, `maintenance-settings.test.ts` 및 관련 실제 전투 검사를 실행한다. 단순 입력 누락/참조 검사와 실제 Showdown 합법성·변신·복구 검사는 서로 대체하지 않는다.
+샘플을 추가할 때 기존 형식의 고정 3마리 또는 단계형/단일형 select 후보 행을 원본에 정의하고, 트레이너 ID/별칭·합법 기술·폼·기믹 담당·에이스를 맞춘다. export 후 `tests/npc-templates.test.ts`, `named-pilot.test.ts`, `normal-mode-stages.test.ts`, `maintenance-settings.test.ts` 및 관련 실제 전투 검사를 실행한다. 단순 입력 누락/참조 검사와 실제 Showdown 합법성·변신·복구 검사는 서로 대체하지 않는다.
 
 ## 리뷰 CSV (게임 입력 아님)
 
-출력은 `artifacts/reports/npc/`다. summary는 **schema_version=2, 28열**, details는 **schema_version=2, 31열**이다. summary에 candidate_count와 species_4~6을 추가해 단일 후보 빌드 전체를 표현한다. sample_id는 단계형 `npc_id:stage`, 단일형 `npc_id:all`, 최고 단계 참고 `npc_id:reference-max`다. details 기본키는 (sample_id,slot)이며 후보 slot은 최대 6이다.
+출력은 `artifacts/reports/npc/`다. summary는 **schema_version=2, 28열**, details는 **schema_version=2, 31열**이다. summary에 candidate_count와 species_4~6을 추가해 단계형과 단일형 후보 빌드 전체를 표현한다. sample_id는 단계형 `npc_id:stage`, 단일형 `npc_id:all`, 최고 단계 참고 `npc_id:reference-max`다. details 기본키는 (sample_id,slot)이며 후보 slot은 최대 6이다.
 
-현재 normal CSV는 320행/977행, reference CSV는 164행/492행이다. UTF-8 BOM·CRLF·RFC 4180 인용을 사용하며 저장된 CSV를 다시 읽어 전체 셀을 원본과 대조한다. 포인트는 게임의 능력 포인트이며 Showdown 일반 EV와 혼동하지 않는다. CSV만 고치거나 리뷰 artifacts를 게임 입력으로 사용하지 않는다.
+현재 normal CSV는 180행/911행, reference CSV는 164행/492행이다. UTF-8 BOM·CRLF·RFC 4180 인용을 사용하며 저장된 CSV를 다시 읽어 전체 셀을 원본과 대조한다. 포인트는 게임의 능력 포인트이며 Showdown 일반 EV와 혼동하지 않는다. CSV만 고치거나 리뷰 artifacts를 게임 입력으로 사용하지 않는다.

@@ -27,25 +27,6 @@ artifacts/**
 !artifacts/**/*.md
 !artifacts/reports/**/*.json
 !artifacts/reports/npc/*.csv
-!artifacts/reports/raid-winrate-simulation.csv
-!artifacts/reports/raid-winrate-simulation.branches.csv
-!artifacts/reports/raid-winrate-simulation.phases.csv
-!artifacts/reports/raid-winrate-simulation.teams.csv
-!artifacts/reports/raid-winrate-by-floor.csv
-!artifacts/reports/raid-winrate-by-floor.comparison.csv
-!artifacts/reports/raid-winrate-by-floor.branches.csv
-!artifacts/reports/raid-winrate-by-floor.phases.csv
-!artifacts/reports/raid-winrate-by-floor.teams.csv
-!artifacts/reports/raid-winrate-by-floor.strength.csv
-!artifacts/reports/raid-winrate-by-floor.floors.csv
-!artifacts/reports/raid-threshold-endgame.csv
-!artifacts/reports/raid-threshold-endgame.branches.csv
-!artifacts/reports/raid-threshold-endgame.phases.csv
-!artifacts/reports/raid-stat-tuned-2-endgame.csv
-!artifacts/reports/raid-stat-tuned-2-endgame.branches.csv
-!artifacts/reports/raid-stat-tuned-2-endgame.phases.csv
-!artifacts/reports/raid-final-endgame.csv
-!artifacts/reports/raid-final-iv19.csv
 # Curated QA media referenced by current documentation.
 !artifacts/qa/previews/egg-results/background-colors.png
 !artifacts/qa/previews/egg-results/background-effects.gif
@@ -57,7 +38,3 @@ artifacts/**
 artifacts/temporary/
 artifacts/**/*.jsonl
 artifacts/**/*.log
-
-!artifacts/reports/raid-stat-tuned-endgame.csv
-!artifacts/reports/raid-stat-tuned-endgame.branches.csv
-!artifacts/reports/raid-stat-tuned-endgame.phases.csv

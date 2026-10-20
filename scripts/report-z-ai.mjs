@@ -124,7 +124,7 @@ const report=[
  'node --import tsx scripts/refresh-z-ai-traces.ts',
  'node --import tsx scripts/validate-z-ai-traces.ts',
  'node scripts/report-z-ai.mjs',
- '# report.md를 검토한 뒤 docs/gameplay/z-move-ai-balance-report.md에 반영한다.',
+ '# report.md를 검토한 뒤 artifacts/reports/npc/z-move-ai-balance-report.md에 반영한다.',
  '```','',
  '기존 관동/선출 보고서 생성기도 이제 기본적으로 실험 폴더의 documents에 생성한다. 추적 문서를 명시적으로 갱신하려면 NPC_REPORT_DOCS_OUTPUT을 지정한다. 기존 workspace 검사에서 발견된 직접 docs 출력 문제를 정리한 것이며 NPC 데이터 변경은 없다.',
 ];

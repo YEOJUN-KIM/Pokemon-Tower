@@ -39,6 +39,6 @@ Mewtwo <20%이므로 다음 단계에서 P3 공격계+1 제거를 검토할 수 
 
 집중 테스트 **51/51**, 다른 Raid 회귀 **108/108**, TypeScript 및 production build 통과. 집중 테스트에는 600개의 seed/route/floor 비교로 비핵심 IV·방어 포인트·보상·이후 난수 결과 보존을 검사하는 테스트가 포함된다. 실제 엔진 Phase별 `storedStats`도 Lv50 포인트/성격 계산과 비교했다. 화면 구조를 바꾸는 작업은 없다.
 
-전체 테스트는 **1,445개 중 1,430개 통과, 15개 실패**다. 실패 이름 15개 모두 Tune1 검증 보고서의 기존 실패 목록과 일치하며 신규 실패 이름은 없다. 상세 결과와 기존 실패 목록은 [검증 JSON](../raid-stat-tuned-2-endgame.validation.json)에 기록했다. 기존 `raid-presentation`의 승리 문구 기대값 불일치와 NPC 고정 baseline/encounter 기대값, trainer-equipment CSS import 등이 포함되며 이번 범위에서 수정하지 않았다.
+전체 테스트는 **1,445개 중 1,430개 통과, 15개 실패**다. 실패 이름 15개 모두 Tune1 검증 보고서의 기존 실패 목록과 일치하며 신규 실패 이름은 없다. 상세 결과와 기존 실패 목록은 [검증 JSON](../../experiments/balance/raid-stat-tuned-2-endgame.validation.json)에 기록했다. 기존 `raid-presentation`의 승리 문구 기대값 불일치와 NPC 고정 baseline/encounter 기대값, trainer-equipment CSS import 등이 포함되며 이번 범위에서 수정하지 않았다.
 
-20종 4단계 비교, 85/95층 route별 실제 IV/포인트와 Lv50 native 스탯, Phase loss, 보상 표본은 [측정 보고서](../raid-stat-tuned-2-endgame.md)에 있다. final native stat 표는 공격 중 랭크 변화 이전 값이며 Aura/특성 랭크는 별도로 표시한다.
+20종 4단계 비교, 85/95층 route별 실제 IV/포인트와 Lv50 native 스탯, Phase loss, 보상 표본은 [측정 보고서](../../experiments/balance/raid-stat-tuned-2-endgame.md)에 있다. final native stat 표는 공격 중 랭크 변화 이전 값이며 Aura/특성 랭크는 별도로 표시한다.

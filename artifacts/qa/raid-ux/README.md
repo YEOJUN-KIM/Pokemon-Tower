@@ -80,7 +80,7 @@ node --import tsx --import ./artifacts/qa/raid-ux/standard-event-tests.mjs --tes
 node --import tsx node_modules/@playwright/test/cli.js test e2e/raid-events.spec.ts e2e/raid-transition-ux.spec.ts e2e/hidden-shop.spec.ts e2e/mystery-chest.spec.ts
 ```
 
-회귀 로그: [raid-ux-regression.log](../../raid-ux-regression.log).
+회귀 로그: [raid-ux-regression.log](../../experiments/balance/raw/raid-ux-regression.log).
 
 ## 화면
 

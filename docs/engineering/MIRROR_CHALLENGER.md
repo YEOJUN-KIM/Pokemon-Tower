@@ -4,7 +4,7 @@
 
 ## 1–3. 등장 확률·Sample·삽입
 
-`src/data/mirror-challenger.ts`의 `mirrorChallengerSettings.mirrorCandidateChance` 초기값은 **0.03(3%)**입니다. 이는 도전자 이벤트 발생 후의 조건부 판정이며 전체 이벤트 발생률과 별개입니다. 현재 전체 이벤트 10%, 도전자 가중치 20/132일 때 검사 가능한 층당 Mirror 후보가 포함될 확률의 상한은 약 **0.0455%**입니다. 원본 팀이나 적격 Sample이 없으면 실제 비율은 더 낮아집니다.
+`src/data/mirror-challenger.ts`의 `mirrorChallengerSettings.mirrorCandidateChance` 초기값은 **0.03(3%)**입니다. 이는 도전자 이벤트 발생 후의 조건부 판정이며 전체 이벤트 발생률과 별개입니다. 전체 일반 이벤트 발생률은 15%이며 도전자 비중은 해당 층의 적격 종류 weight 합에 따라 달라진다. Mirror 슬롯 판정 3%를 전체 이벤트 발생률로 읽지 않는다. 원본 팀·적격 Sample 조건도 함께 적용한다.
 
 기존 `drawChallengers()`로 후보 3명과 각 팀/보상을 먼저 생성한 뒤 독립 난수로 판정합니다. 성공하면 무작위 슬롯 하나를 교체합니다. 한 만남에 최대 1명이며 다른 두 후보와 표시 클래스명/ID가 겹치지 않게 기존 Sample에서 고릅니다. 실패 시 기존 세 후보를 그대로 반환하고 NPC/Rank/팀의 기존 난수 순서를 늘리지 않습니다. Mirror 난수는 이벤트 ID의 별도 SHA-256 seed입니다.
 
@@ -62,7 +62,7 @@ IV/EV는 복사하지 않습니다. 기존 `npcRankTraining(floor,'elite')`와 `
 | 6V | 0.5 | 한 포켓몬의 모든 IV를 31로 |
 | 이로치 변환 | 0.5 | 한 포켓몬의 이로치 획득 |
 
-장비가 없거나 강화 종류에 적격 대상이 없으면 같은 snapshot에서 성장 포인트 1,500P로 대체합니다. 장비를 생성 후 보유하게 된 경우 기존 Master 장비 grant의 fallback도 1,500P입니다. 모든 숫자는 임시값이며 전체 이벤트 완료 후 경제를 조정합니다.
+장비가 없거나 강화 종류에 적격 대상이 없으면 같은 snapshot에서 성장 포인트 1,500P로 대체합니다. Mirror 장비의 중복/부적격 대체값도 저장된 snapshot을 따릅니다. 현재 수치는 src/data/mirror-challenger.ts가 기준이며 Master의 별도 보상 프로필과 혼동하지 않습니다.
 
 ## 13–15. 1V·6V·이로치 대상 선택
 

@@ -16523,7 +16523,7 @@
   },
   "followup": {
     "report": "artifacts/reports/npc/kalos-tuning.json",
-    "documentation": "docs/gameplay/kalos-npc-tuning.md",
+    "documentation": "artifacts/reports/npc/kalos-npc-tuning.md",
     "supersededNpcIds": [
       "named-wikstrom",
       "named-ramos",

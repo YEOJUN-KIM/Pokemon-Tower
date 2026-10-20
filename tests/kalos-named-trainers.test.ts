@@ -1,8 +1,6 @@
-import {readPreHauGuzmaFile as readFileSync} from './hau-guzma-preservation';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
-import {createHash} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import {kalosTrainers} from '../src/data/kalos-trainers';
 import {trainerCatalog} from '../src/data/trainer-catalog';
@@ -19,7 +17,6 @@ import {FORMAT,runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {pokemonSets,packTeam,starters} from '../src/data/teams';
 import {snapshotTrainerEventBattle} from '../src/server/trainer-event-battle';
 import {kalosBattleTelemetry} from '../scripts/lib/kalos-battle-telemetry';
-import preservation from './fixtures/alola-preservation.json' with {type:'json'};
 
 function sampleFor(id:string){
  const named=trainerCatalog.find(s=>s.id===id);if(named)return named;
@@ -27,15 +24,7 @@ function sampleFor(id:string){
  const g=villainLeaders.flare;return {...(id.includes('-boss-')?g.boss:[g.executive,...g.executives??[]].find(s=>id.endsWith('-'+s.portrait))!),id,role:'villain' as const};
 }
 const packed=(team:ReturnType<typeof generateOpponentTeam>)=>packTeam(team.map(p=>p.name),Object.fromEntries(team.map(p=>[p.name,p.profile!])),Object.fromEntries(team.map(p=>[p.name,p.item??''])));
-test('Kalos preserves all other reviewed/runtime rows and common policy engines',()=>{
- const ids=new Set([...kalosTrainers.map(t=>t.id),'named-lysandre']);
- const sort=(a:{id:string;stage:string},b:{id:string;stage:string})=>(a.id+a.stage).localeCompare(b.id+b.stage);
- const digest=(v:unknown)=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
- const runtime=JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8')).filter((r:{id:string})=>!preservation.excludedAlola.includes(r.id)&&!ids.has(r.id)).sort(sort);
- const source=JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples.filter((r:{id:string})=>!preservation.excludedAlola.includes(r.id)&&!ids.has(r.id)).sort(sort);
- assert.equal(runtime.length,preservation.kalos.count);assert.equal(digest(runtime),preservation.kalos.runtime);assert.equal(digest(source),preservation.kalos.source);
- for(const [path,hash] of Object.entries(preservation.common))assert.equal(createHash('sha256').update(readFileSync(path,'utf8').replace(/\r\n/g,'\n')).digest('hex'),hash,path);
-});
+
 for(const t of kalosTrainers)test(`${t.id}: fixed legal sets, varied triples, ace/carrier, floor gates and standard training`,()=>{
  const sample=sampleFor(t.id),validator=new Showdown.TeamValidator(FORMAT);
  for(const floor of [5,45,50,54,55,75,95,100]){

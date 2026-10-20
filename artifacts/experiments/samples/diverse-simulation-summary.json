@@ -358,19 +358,19 @@
   ],
   "files": [
     {
-      "path": "artifacts/diverse-fresh-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/diverse-fresh-battles.jsonl",
       "battles": 3758,
       "bytes": 12689414,
       "sha256": "8c84874e98f451762a462458bb1795d03e4ff520e5e3678031900a48dca76371"
     },
     {
-      "path": "artifacts/diverse-trained-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/diverse-trained-battles.jsonl",
       "battles": 20232,
       "bytes": 71135534,
       "sha256": "625756b9cd1f75067c1f2405f42f593bc79a61d1d96eeb2584b29e8ba444214f"
     },
     {
-      "path": "artifacts/diverse-mixed-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/diverse-mixed-battles.jsonl",
       "battles": 10631,
       "bytes": 37734592,
       "sha256": "3aaf304382870316eb67538922f3fe893c938a9f6c75080f02b040579973dbf6"

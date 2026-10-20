@@ -55,7 +55,7 @@ const e=final['named-guzma'].entry,c=ordinary['named-guzma'].entry;
 const entryRows=[['등장 합계','golisopodEntries'],['최초 출전 전투','firstAppearances'],['재등장','reappearances'],['첫 행동 만나자마자 가능 요청','firstImpressionAvailable'],['만나자마자 선택/실사용','firstImpressionUsed'],['만나자마자 불법 선택','firstImpressionInvalid'],['만나자마자 실패','firstImpressionFailed'],['만나자마자 직접 KO','firstImpressionKOs'],['아쿠아제트 실사용','aquaJetUsed'],['비상탈출 발동','emergencyExit'],['비상탈출 후 재등장','exitReturns'],['모든 재등장 후 만나자마자','firstImpressionAfterReturn'],['비상탈출 재등장 후 만나자마자','firstImpressionAfterExitReturn'],['완전한 FI→EE→재등장→FI 연쇄','completeEntryChains'],['메가진화','golisopodMegaActivations'],['자발 교체','voluntarySwitches'],['강제 교체/피벗 수신 선택','forcedSwitches'],['2턴 내 자발 왕복 루프','switchLoops']].map(([label,key])=>`|${label}|${c[key]??0}|${e[key]??0}|`).join('\n');
 const regression=Object.entries(pairedRegression).map(([id,v])=>`|${names[id]}|${totals['regression-before'][id].npcWins}/96 → ${totals['regression-after'][id].npcWins}/96|${v.changedOutcomes}|${v.changedTelemetry}|`).join('\n');
 const examples=final['named-guzma'].winningTypeRiskReductionExamples.map(v=>`- ${v.floor}층 ${v.case}, seed ${v.seed}, ${v.turn}턴: ${v.from} → ${v.to}, 공개 타입 위험 ${v.beforeThreat}배 → ${v.afterThreat}배. 해당 전투 구즈마 승리.`).join('\n');
-writeFileSync('docs/gameplay/hau-guzma-npc-ai.md',`# 하우·구즈마 / 선공기 AI 검증
+writeFileSync('artifacts/reports/npc/hau-guzma-npc-ai.md',`# 하우·구즈마 / 선공기 AI 검증
 
 2026-10-19. 기준 커밋: \`7f2be76aecfdc4b92911a774cd8d9b29912e6ef8\`.
 후속 지시인 “너무 낮으면 메가갑주무사”까지 반영한 최종 결과다. 하우 **유지 가능**, 구즈마 **목표 난이도 달성: 표본상 캡틴 상위~사천왕권**으로 판단한다. 모든 상대 조합에서 순서를 보장한다는 뜻은 아니다.

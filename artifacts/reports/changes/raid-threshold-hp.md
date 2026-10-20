@@ -48,7 +48,7 @@ Volcarona만 `replacement-v1`이다. P1 168 HP를 끝까지 KO한 뒤 저장된 
 
 ## 결과 해석
 
-전체 20종의 표, native Phase 최대 HP/interval, 분기와 Phase별 패배는 [측정 보고서](../raid-threshold-endgame.md), 기계 검증 결과는 [validation JSON](../raid-threshold-endgame.validation.json)에 있다.
+전체 20종의 표, native Phase 최대 HP/interval, 분기와 Phase별 패배는 [측정 보고서](../../experiments/balance/raid-threshold-endgame.md), 기계 검증 결과는 [validation JSON](../../experiments/balance/raid-threshold-endgame.validation.json)에 있다.
 
 Snorlax는 기본 243 → G-Max 486으로 바뀌지만 총 interval은 121+244=365 HP, **1.50x**다. Zygarde는 191 → 299 → 299에서 65+98+99=262 HP, **1.37x**다. Terapagos는 기본종 173, 입장 Terastal 178 → Stellar 243에서 89+122=211 HP, **1.22x**다. 나머지 같은-HP 폼은 **1.00x**이고 Volcarona는 두 별도 종을 합해 평균 **1.99x**다. 회복과 경계에서 버린 초과 피해는 Effective HP budget에 포함하지 않는다.
 

@@ -57,7 +57,7 @@ Phase 누락, 잘못된 Phase 번호, 미지원 Species/Form, 잘못된 정책�
 - 나머지 18종의 모든 경로는 기본 종을 지급하고 저장된 기존 보상 팀을 그대로 유지한다. Metagross/Groudon/Rayquaza/Necrozma/Terapagos도 포함한다.
 - 구형 스냅샷의 네 분기, Phase/Species 오류와 운영 fallback, 기존 Kyurem 폼별 육성 설정 덮어쓰기, 도감만 등록하는 경로를 검증했다.
 - Chrome E2E: **11/11 통과**. 새 네 보상 분기와 기존 7개 Raid 영입·보상·건너뛰기 흐름. Kyurem은 모바일 너비 390px에서 검증했다.
-- 전체 Node 테스트: **1304건 중 1301 통과, 3 실패**. 기존 `tests/paldea-round2.test.ts`의 빌드 필드 보존·조건부 변형·Toxic Spikes fixture 불일치다. 기준 커밋의 기존 [Raid 확장 보고서](../raid-roster-expansion.md)에도 같은 3건이 기록되어 있으며 관련 데이터·테스트·변형 스크립트를 이번 작업에서 수정하지 않았다.
+- 전체 Node 테스트: **1304건 중 1301 통과, 3 실패**. 기존 `tests/paldea-round2.test.ts`의 빌드 필드 보존·조건부 변형·Toxic Spikes fixture 불일치다. 기준 커밋의 기존 [Raid 확장 보고서](../../experiments/balance/raid-roster-expansion.md)에도 같은 3건이 기록되어 있으며 관련 데이터·테스트·변형 스크립트를 이번 작업에서 수정하지 않았다.
 - TypeScript, 프로덕션 빌드, CSS 구조 검사, `git diff --check` 통과.
 - Workspace 검사는 기존 보고 스크립트 15개의 `docs` 출력 경로 경고가 남아 있다.
 - 기준 커밋의 20종 정의를 별도 로드해 `recruitment` 필드만 제외한 구조를 비교했으며 완전히 동일했다. HP·기술·특성·페이즈·변신·등장 가중치·층수는 유지된다. 전투 엔진·AI·상점 코드는 변경하지 않았다.

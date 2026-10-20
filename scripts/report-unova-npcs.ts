@@ -148,5 +148,5 @@ md.push('## 이상치 분류와 남은 제약','',
 md.push('### 풍란 Return 누락 후속 수정','', 'Unfezant의 Return은 기존 20회 선출에서 0회 사용이었다. Quick Attack도 고정 벤치마크 480전에서 0회 선택되어 채택하지 않았다. 최종 세트는 Brave Bird / Facade / Night Slash / U-turn이다. Facade는 비행 반감 전기 타입에 Normal 자속으로 대응하고 상태이상 때도 기능한다. 고정 벤치마크 480전에서는 Facade도 0회였지만, 별도의 실제 전기 팀(Ampharos/Luxray/Eelektross) 대전에서는 Facade 1회 실행을 확인했다. 후자는 회귀 테스트로 고정했다. 공통 AI는 변경하지 않았다.','', `후속 고정 벤치마크 ${skylaFollowup.length}전, 오류 ${skylaFollowup.filter(r=>r.error).length}회. 이 자료는 audit usage의 풍란 항목에 반영했다. 위 전체 Before/After·경로·70,000회 선출 표는 Return 교체 전 측정이며 재측정 결과로 표시하지 않는다. 기존 전체 테스트·build 결과도 교체 전 실행 기록이다. 후속 변경 후 하나지방 테스트 31개, TypeScript 검사와 export 일치 검사를 통과했다.`, '');
 if(validation)md.push('### 최종 실제 실행 결과','',...validation.results.map((r:{check:string;result:string})=>`- ${r.check}: ${r.result}`),'');
 md.push('**하나지방 필수 NPC 샘플 완료**','');
-writeFileSync('docs/gameplay/unova-named-trainers.md',md.join('\n'));
+writeFileSync('artifacts/reports/npc/unova-named-trainers.md',md.join('\n'));
 console.log(JSON.stringify({focused:audit.focused,route:audit.route,legend,draws:lineups.reduce((s:number,l:any)=>s+l.draws,0),trickRoomUsers}));

@@ -100,6 +100,6 @@ md.push('## 검증 및 재현','',
  `기믹 telemetry: 최종 집중 ${after.length}전에서 available=${gimmicks.available}, used=${gimmicks.used}; 무기믹 설계와 일치한다. 기존 기믹 엔진의 전 룰 실행/리플레이는 회귀 테스트로 검사한다.`, '',
  '**신오 필수 NPC 샘플 완료**','');
 if(validation)md.push('## 최종 실행 결과','',...validation.results.map((r:{check:string;result:string})=>`- ${r.check}: ${r.result}`),'', '전체 회귀에는 retry, reconnect, snapshot, hidden boss, raid, run events, Teleport, 기존 Mega/Z/Dynamax/Tera 및 저장된 전투 replay가 포함된다. 초기 실패는 변경된 후보 수·고정 3마리·기믹 가정과 충돌한 fixture에서 발생했고, 최종 실행 결과는 이를 수정한 뒤의 결과다.','');
-writeFileSync('docs/gameplay/sinnoh-named-trainers.md',md.join('\n'));
+writeFileSync('artifacts/reports/npc/sinnoh-named-trainers.md',md.join('\n'));
 console.log(JSON.stringify({focused:audit.focused,route:audit.route,cyrus:audit.cyrus,trickRoomUsers:audit.trickRoomUsers}));
 

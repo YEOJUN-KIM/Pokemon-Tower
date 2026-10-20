@@ -133,5 +133,5 @@ md.push('## 플라드리 결과','',`Gyarados Ace/carrier, Mega ${lysandre.used}
  '- before: NPC_BALANCE_BASELINE을 baseline-runtime.json, UNOVA_METADATA_BASELINE을 baseline-metadata.json으로 설정한 뒤 `node --import ./scripts/lib/unova-baseline.mjs --import tsx scripts/simulate-kalos-npcs.ts --before`. 기존 범용 loader hook을 그대로 재사용한다.',
  '- 보고서: `node --import tsx scripts/report-kalos-npcs.ts`. 원자료는 artifacts/experiments/balance/kalos-20261018 아래에 있다.', '',
  ...(validation?validation.results.map((r:any)=>`- ${r.check}: ${r.result}`):['- 최종 검증 집계 대기.']), '',`**${verdict}**`,'');
-writeFileSync('docs/gameplay/kalos-named-trainers.md',md.join('\n'));
+writeFileSync('artifacts/reports/npc/kalos-named-trainers.md',md.join('\n'));
 console.log(JSON.stringify({verdict,focused:audit.focused,coverage:audit.coverage,megas:megas.map(m=>({id:m.id,available:m.available,used:m.used})),trickRoomUsers,draws:lineups.reduce((n:number,l:any)=>n+l.draws,0)}));

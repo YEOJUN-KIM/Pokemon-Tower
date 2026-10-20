@@ -1,18 +1,18 @@
 # 저장 데이터
 
-기준: 2026-10-18. Node.js `node:sqlite`를 사용하며 현재 코드가 지원하는 DB 스키마는 **45**다. `src/server/schema.ts`의 `PRAGMA user_version`과 `src/server/storage/migrations.ts`가 기준이다. 개별 저장·백업 버전은 `PRAGMA user_version`으로 별도 확인한다. 코드보다 새로운 DB는 열지 않는다.
+기준: 2026-10-20. Node.js `node:sqlite`를 사용하며 현재 코드가 지원하는 DB 스키마는 **46**다. `src/server/schema.ts`의 `PRAGMA user_version`과 `src/server/storage/migrations.ts`가 기준이다. 개별 저장·백업 버전은 `PRAGMA user_version`으로 별도 확인한다. 코드보다 새로운 DB는 열지 않는다.
 
 ## 서로 다른 버전
 
 | 버전 | 의미·기준 |
 |---|---|
-| DB schema 45 | 테이블·제약·migration; 이벤트 종류 수나 AI 버전이 아님 |
+| DB schema 46 | 테이블·제약·migration; 이벤트 종류 수나 AI 버전이 아님 |
 | run_event_rules 1/2 | 런의 이벤트 규칙. 새 런은 `currentEventRulesVersion=2`, 과거 v1은 유지 |
 | run_npc_rules 1 | 새 공통 Sample/Rank 생성 경로 표식. 기존 런에 소급 부여하지 않음 |
 | NPC encounter snapshot 1/2 | 저장한 팀 구성/Rank의 직렬화 구조 |
-| tower-policy-v11 및 이전 버전 | 배틀 행동 정책. 배틀 행의 버전을 그대로 복구 |
+| tower-policy-v13 및 이전 버전 | 배틀 행동 정책. 배틀 행의 버전을 그대로 복구 |
 
-규칙 버전을 올리거나 현재 상수 값을 바꿨다는 이유로 기존 결과 JSON/팀/시드/영수증을 재작성하지 않는다. 이번 중간점검에는 새 DB migration이나 저장 버전 변경이 없다.
+규칙 버전을 올리거나 현재 상수 값을 바꿨다는 이유로 기존 결과 JSON/팀/시드/영수증을 재작성하지 않는다. schema 46은 run_villain_tracks·run_event_followups·tool_voucher_draws를 포함한다. 이번 파일 정리에서는 추가 migration을 만들지 않았다.
 
 ## 저장 책임과 트랜잭션
 
@@ -28,7 +28,8 @@
 - `hidden_shop_events`: 상품·재화·가격·effect·구매 여부/한도를 하나의 JSON으로 보존한다.
 - `run_encounter_progress`와 battles/run_events의 `encounter_order`: 순간이동으로 층을 재방문해도 통과 순서·쿨다운·전투 시도를 구분한다. 재도전 횟수는 `run_retries.used`이며 배틀 attempt와 혼동하지 않는다.
 - `teleport_events`: 구간별 목적지와 원래 층을 고정 저장한다.
-- `run_organization_campaigns`: 런별 조직 단서·간부·보스 진행. 일반층의 옛 빌런 독립 추첨 대신 이벤트 캠페인이 사용한다.
+- `run_villain_tracks`, `run_event_followups`, `tool_voucher_draws`: 신규 독립 조직 트랙·이벤트 snapshot·도구 교환 후보/사용 회차를 저장한다. 45→46에서 추가하며 기존 snapshot을 다시 만들지 않는다. [빌런 트랙](VILLAIN_CAMPAIGNS.md).
+- `run_organization_campaigns`: 과거 v1 로켓단 호환용. 런별 조직 단서·간부·보스 진행. 일반층의 옛 빌런 독립 추첨 대신 이벤트 캠페인이 사용한다.
 - `pokemon_training`은 공통 성장/폼 선택, `pokemon_form_training`은 폼별 기술·특성·테라 타입을 보존한다. 공통 revision으로 동시 저장을 검증한다.
 - 공통 배낭은 기존 인벤토리/영수증을 재사용한다. 영양제 판매가 종료돼도 섭취 ledger·효과·소모 기록을 삭제하지 않는다.
 

@@ -8,7 +8,7 @@ import {itemName} from '../src/data/held-items';
 import {npcAi} from '../src/data/npc-ai';
 
 const benchmark=JSON.parse(readFileSync('artifacts/experiments/balance/galar-20261019/summary.json','utf8'));
-const testLog=readFileSync('artifacts/galar-all-tests-final.log','utf8');
+const testLog=readFileSync('artifacts/experiments/balance/raw/galar-all-tests-final.log','utf8');
 const testCount=testLog.match(/ℹ tests (\d+)/)?.[1],passCount=testLog.match(/ℹ pass (\d+)/)?.[1],failCount=testLog.match(/ℹ fail (\d+)/)?.[1];
 const koreanAbility=(a:string)=>(abilities as Record<string,string>)[a]??a;
 const label=(s:string)=>pokemonName(s)+(s.endsWith('-Galar')?'(가라르)':'');
@@ -43,7 +43,7 @@ lines.push('','## AI와 기존 규칙 재사용','',
  '## 검증','',
  `- 최종 전체 테스트: ${testCount??'집계 중'}개, 통과 ${passCount??'집계 중'}, 실패 ${failCount??'집계 중'}. 가라르 전용 49개도 최종 코드로 별도 재실행해 통과했다.`,
  '- 가라르 전용: 데이터 존재·합법성, 층별 20개 시드의 고정 3마리·순서·결정성, 13종 실제 전투 및 리플레이, 12종 도구 없는 실제 거다이맥스, 4종 날씨, 단단지 네트·스텔스록, 매직미러 반사·마비, 거다이선율 베일, 로즈 교체 금지·대왕끼리동 전용 권한, 무한다이노의 미사용 자원 상황에서도 다이맥스 금지.',
- '- 공용 회귀: 저장 및 재접속, 지역별 관문·파티, 기존 1~7세대 실제 전투·리플레이, NPC 도구·프로필·합법성, 과거 데이터 보존을 포함한다. 전체 테스트 결과는 최종 실행 로그 `artifacts/galar-all-tests-final.log`에 기록한다.',
+ '- 공용 회귀: 저장 및 재접속, 지역별 관문·파티, 기존 1~7세대 실제 전투·리플레이, NPC 도구·프로필·합법성, 과거 데이터 보존을 포함한다. 전체 테스트 결과는 최종 실행 로그 `artifacts/experiments/balance/raw/galar-all-tests-final.log`에 기록한다.',
  '- TypeScript 검사와 검토 소스 → 런타임 투영 일치 검사 통과. Next.js 프로덕션 빌드 통과. Windows sandbox에서는 Turbopack junction 생성이 차단되어 승인된 외부 실행으로 확인했다.','',
  '## 밸런스 시뮬레이션','',
  `총 ${benchmark.summary.reduce((n:number,r:any)=>n+r.battles,0)}전투, 오류 ${benchmark.summary.reduce((n:number,r:any)=>n+r.errors,0)}건. NPC별 두 층 × 4개 기존 지역 테스트 상대 조합 × 8개 시드. 플레이어는 층별 포인트·IV 상한, 기존 기본 기술, Expert Belt/Leftovers/Sitrus Berry, ZMovePolicy를 사용했다. 플레이어 기믹은 basic이다. 아래 승률은 이 고정 벤치마크에 한정되며 실제 사용자 승률을 뜻하지 않는다.`,
@@ -60,6 +60,6 @@ lines.push('','추가 조정 후보: 어니언(후반 87.5%), 순무(81.3%), 야
  '- 이 샘플에서 사용하는 기술·특성·거다이맥스 효과 중 별도의 미구현 항목은 확인되지 않았다. Showdown 엔진의 기존 구현을 사용한다. 두랄루돈의 굳건한신념은 싱글 배틀에서는 유의미한 대상 유도 효과가 없는 특성이다.',
  '', '## 추가/수정 파일','');
 const paths=execFileSync('git',['status','--porcelain'],{encoding:'utf8'}).trimEnd().split('\n').map(l=>l.slice(3).trim()).filter(Boolean);
-for(const p of [...new Set([...paths,'scripts/report-galar-npcs.ts','docs/gameplay/galar-named-trainers.md'])])lines.push(`- \`${p}\``);
-writeFileSync('docs/gameplay/galar-named-trainers.md',lines.join('\n')+'\n');
-console.log('Wrote docs/gameplay/galar-named-trainers.md');
+for(const p of [...new Set([...paths,'scripts/report-galar-npcs.ts','artifacts/reports/npc/galar-named-trainers.md'])])lines.push(`- \`${p}\``);
+writeFileSync('artifacts/reports/npc/galar-named-trainers.md',lines.join('\n')+'\n');
+console.log('Wrote artifacts/reports/npc/galar-named-trainers.md');

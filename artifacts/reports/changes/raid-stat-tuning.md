@@ -16,4 +16,4 @@
 
 <35%: Mewtwo 5.6%, Zacian 13.6%, Rayquaza 26.6%, Kyogre 28.8%, Groudon 34.2%. >85%는 없다. 특히 Mewtwo와 Zacian은 권장 스탯 완화만으로 목표에 도달하지 않았다. Aura 등 후속 변경은 이번 작업에서 적용하지 않았다.
 
-자세한 전투/보상 표, 세 모델 비교, Phase/branch 지표는 [Endgame 보고서](../raid-stat-tuned-endgame.md), 자동 검증 결과는 [validation JSON](../raid-stat-tuned-endgame.validation.json)을 참조한다. 원시 전투별 actual IV/points/seed/HP/protocol hash는 로컬 `artifacts/reports/raid-stat-tuned-endgame.battles.csv`에 보존한다.
+자세한 전투/보상 표, 세 모델 비교, Phase/branch 지표는 [Endgame 보고서](../../experiments/balance/raid-stat-tuned-endgame.md), 자동 검증 결과는 [validation JSON](../../experiments/balance/raid-stat-tuned-endgame.validation.json)을 참조한다. 원시 전투별 actual IV/points/seed/HP/protocol hash는 로컬 `artifacts/reports/raid-stat-tuned-endgame.battles.csv`에 보존한다.

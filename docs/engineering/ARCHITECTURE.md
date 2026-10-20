@@ -1,6 +1,6 @@
 # 코드 구조
 
-기준: 2026-10-18. 현재 지원 DB 스키마는 **45**, 기본 새 전투 정책은 **tower-policy-v11**이다. 이벤트 규칙은 새 런 v2/기존 런 v1, 공통 NPC 생성 표식은 run_npc_rules v1이며 서로 다른 버전 체계다.
+기준: 2026-10-20. 현재 지원 DB 스키마는 **46**, 기본 새 전투 정책은 **tower-policy-v13**이다. 이벤트 규칙은 새 런 v2/기존 런 v1, 공통 NPC 생성 표식은 run_npc_rules v1이며 서로 다른 버전 체계다.
 
 | 위치 | 현재 책임 |
 |---|---|
@@ -12,8 +12,8 @@
 | `src/shared` | 브라우저에 공개 가능한 DTO·도감 타입 |
 | `src/web` | 서버 상태 표시·입력·포켓몬 이미지·소리·연출·CSS Modules |
 | `scripts/data/npc` | 사람이 검토·수정하는 NPC 샘플 입력; runtime JSON과 구분 |
-| `scripts` | 입력 부트스트랩·런타임 export·검증·시뮬레이션·개인 실행/배포 |
-| `artifacts` | 리뷰 CSV·보고서·실험·QA 출력. 게임의 입력으로 사용하지 않음 |
+| `scripts` | 검토 입력·런타임 export·검증·시뮬레이션·개인 실행/배포 |
+| `artifacts` | 리뷰 CSV·보고서·실험·QA 출력. 게임 런타임에서는 읽지 않음. 일부 테스트·실험은 고정 입력으로 읽음 |
 
 ## 실행과 저장 경계
 
@@ -29,14 +29,17 @@
 
 | 설정 | 수정 위치 |
 |---|---|
-| 전체 이벤트 10%·통과 횟수 쿨다운 2 | `data/run-events.ts`의 `eventEncounterSettings` |
+| 전체 이벤트 15%·통과 횟수 쿨다운 2 | `data/run-events.ts`의 `eventEncounterSettings` |
 | 이벤트 종류 weight·선택지·비용 | `data/run-events.ts` registry와 각 이벤트의 data 설정 |
 | v1/v2 상자 내부 결과 | 같은 파일의 `legacyChestRewards` / `mysteryChestResults` |
+| 독립 빌런 등장·간격·보상 | `data/villain-tracks.ts`의 villainTrackSettings·villainStageMinFloor·villainRewardSettings |
+| Raid 보스·HP·육성 | `data/raids.ts`·`raid-bosses.ts`·`raid-training.ts` |
 | NPC stage/기믹 층 | `data/normal-mode-stages.ts`의 `normalNpcFloorRules`·선택 함수 |
 | 일반 상대 전설/환상·육성 곡선 | `data/tower-progression.ts`의 `towerDifficulty` |
 | NPC Rank/도구 슬롯·AI tier | `data/npc-ranks.ts` / `data/npc-ai.ts` |
 | 소모품·TM·지닌 도구 가격/희귀도 | `data/shop.ts`, `data/held-item-shop.ts`, `data/held-items.ts` |
 | 히든상점·도전자 보상 | `data/hidden-shop.ts`, `data/challenger-rewards.ts` |
+| 일반 승리 코인·영구 육성 비용 | `data/floors.ts`·`data/training.ts` |
 | 영구 업그레이드·부화 가격·확률 | `data/permanent-upgrades.ts`, `data/egg-grades.ts`, `data/egg-kinds.ts` |
 
 실제 saved 팀·시드·AI 버전·선택 후보·보상은 재접속이나 콘텐츠 수정으로 다시 추첨하지 않는다. 기존 진행/정책 호환 분기를 단순 dead code로 삭제하지 않는다.
@@ -45,4 +48,4 @@
 
 이벤트 등록/outcome 저장/표시는 [이벤트 개발](EVENT_SYSTEM.md), NPC 입력→export→런타임 경로는 [NPC 데이터](NPC_DATA.md), 마이그레이션은 [DB](DATABASE.md)를 따른다. 신규 이벤트 ID를 추가할 때 기존 run_events 테이블을 재작성할 필요는 없다. 새로운 저장 구조가 필요한 경우에만 스키마·이전 경로를 함께 확장한다.
 
-TowerStore·BattleGame·Pokedex는 큰 편이나 현재 저장·연출·편집 경계가 있다. 파일 크기만으로 나누지 않으며, 실제 독립 책임을 확장할 때 해당 경계를 검증한다. 실험/시뮬레이션 도구와 과거 AI 정책도 참조가 있는 한 유지한다. 이번 감사의 분류와 검증은 [중간점검](REFACTORING.md)을 참고한다.
+TowerStore·BattleGame·Pokedex는 큰 편이나 현재 저장·연출·편집 경계가 있다. 파일 크기만으로 나누지 않으며, 실제 독립 책임을 확장할 때 해당 경계를 검증한다. 실험/시뮬레이션 도구와 과거 AI 정책도 참조가 있는 한 유지한다. 과거 중간점검의 분류와 검증은 [중간점검](../../artifacts/reports/changes/REFACTORING-2026-10-18.md)을 참고한다.

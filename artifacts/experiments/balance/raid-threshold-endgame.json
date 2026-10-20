@@ -1,0 +1,2164 @@
+{
+  "metadata": {
+    "commit": "f3976bfee1f097e33bf00c4374c86b8709827b36",
+    "engineVersion": "0.11.11",
+    "format": "gen9nationaldexag@@@Max Team Size = 3,Adjust Level = 50,+Dragonite-Mega,+Dragoninite,+Golisopod-Mega,+Golisopite,+Zygarde-Mega,+Zygardite",
+    "runsPerBoss": 500,
+    "totalBattles": 10000,
+    "seedBase": "raid-winrate-v1",
+    "bracket": "endgame",
+    "floors": [
+      85,
+      95
+    ],
+    "workers": 4,
+    "elapsedSeconds": 54.913,
+    "beforePath": "artifacts/experiments/balance/raid-winrate-by-floor.json",
+    "beforeHash": "d4e0443425e9e5d68f133f2ab02580fca989d1b71d90c1210bb222967f6513c9",
+    "protectedFiles": {
+      "artifacts/experiments/balance/raid-winrate-by-floor.battles.csv": "6830818e2e062990fffd8bf91380bf5dc8827763d2fd221e4754ddbc7e49b33d",
+      "artifacts/experiments/balance/raid-winrate-by-floor.branches.csv": "241fd8858ce85ccccc9d7a3f8560c239575755b409b1f6e4ae4fd6d7f3d34db1",
+      "artifacts/experiments/balance/raid-winrate-by-floor.comparison.csv": "de83928938dd7d18404807d6d0b271294ace59bfe0e9ac0bef4e137b524038ca",
+      "artifacts/experiments/balance/raid-winrate-by-floor.csv": "e1d5ffabd4b20476f924e0f077577ac32ae7c9e94ee116456d1a523dcb9f8c46",
+      "artifacts/experiments/balance/raid-winrate-by-floor.floors.csv": "35622030de4ec163fd8c1cf5837ce1e5edd4726c485f5c3228146980f5b3c81d",
+      "artifacts/experiments/balance/raid-winrate-by-floor.json": "d4e0443425e9e5d68f133f2ab02580fca989d1b71d90c1210bb222967f6513c9",
+      "artifacts/experiments/balance/raid-winrate-by-floor.md": "c12ee2e981e87d3ed6fc0848f3798e6610c690fe4e596f1fffea6eaf70fdcb17",
+      "artifacts/experiments/balance/raid-winrate-by-floor.phases.csv": "36054880b9e0dbee11bd099b9e4e55867b538607bd559797c1e8a28a2decdcf7",
+      "artifacts/experiments/balance/raid-winrate-by-floor.strength.csv": "b3ffd8bdfd5382275bf04570b62972de6682591e675461f7a5f161f5308aa670",
+      "artifacts/experiments/balance/raid-winrate-by-floor.teams.csv": "712e8e83ed41fb2d867c028a69740bc402b64def58b4808311fd13737fa37f74",
+      "artifacts/experiments/balance/raid-winrate-by-floor.validation.json": "2c42417bab69bf3a1c357dcc2943c38576d26bf10efc5db8d0012e05f05d4204",
+      "artifacts/experiments/balance/raid-winrate-simulation.battles.csv": "39857878e44d188778747702194a72fbd0327ac22adcfbbc92379cc6e5cd3656",
+      "artifacts/experiments/balance/raid-winrate-simulation.branches.csv": "4da0312fd1e56cc427f8938842b7fa01f8225a2c73d48461792c0b7d5ec4fdcc",
+      "artifacts/experiments/balance/raid-winrate-simulation.csv": "d9d4ffe59b9ab91f67831343b8fef65611d91042f5e36029ac3b947a2ff2c9ac",
+      "artifacts/experiments/balance/raid-winrate-simulation.json": "df4315aef4579bba9e0de3549e190bb5116c1d5f00146b07c1c99af2a09ec50f",
+      "artifacts/experiments/balance/raid-winrate-simulation.md": "bd5def40a0fb0bb41a09f365a80faaa6125adc12c80602d48e354fa032b7fdba",
+      "artifacts/experiments/balance/raid-winrate-simulation.phases.csv": "038485153be576fe83c1374c17db08b866cef616960d8ca2aa1a98db4d4e930d",
+      "artifacts/experiments/balance/raid-winrate-simulation.teams.csv": "644bbdf269fe4b589f957a3bed06cf03470018e10ce31a5c96f545c8df8cda34",
+      "artifacts/experiments/balance/raid-winrate-simulation.validation.json": "d159a23ea7bc385a17f22db0462d35d5911c9a9ae6347f1379fab7b6e2cc7450"
+    },
+    "sourceFiles": {
+      "src/app/account/page.tsx": "356095fde33adb1904bbbb3b1e0e94c844650096f32547e2a1f7a0cd9e9bed64",
+      "src/app/api/account/local/route.ts": "9b336d6f503945f2f4c85fcca5c61789fad158b470b38fbea581b8d5fe9ae716",
+      "src/app/api/account/route.ts": "6af230456113cd25b84cd044f7344fa25585424670104c8b5744b35ab971e7c6",
+      "src/app/api/battle/route.ts": "340dee120a371de1a5a7cfe517effa80ac7d52fad13a9c8cc19db3e0238df4b2",
+      "src/app/api/health/route.ts": "fefb01cd7804b6a3b0182c4528e01983da1d3d2fb6e5b9245cc5223f385fdec4",
+      "src/app/apple-icon.png": "3bc71976abdcfe227528e196ad1b12c0b9ad351a18b1ebe6aedf2ded322feaf4",
+      "src/app/battle/page.tsx": "308d4965296c5ad63f08dfbcaae13a88b978645d30f276f181adb4c2a9e06869",
+      "src/app/favicon.ico": "58a08ed7da3068d2e3b6f1a78aeafbdefe1e911e9c2dcbaf04ca4fd590b9038c",
+      "src/app/globals.css": "1ec866e4e7edfc2fa049f2514ad27213462334be717c3ac81de13beac61bcc74",
+      "src/app/icon.png": "80e31606ef1f7fb262d380e2a1cef844c8c97acd4783271437ccefd6996f52ed",
+      "src/app/layout.tsx": "3d0d16b5382533236949f3aa582ae91ebf23c2a99a5cf7b8a93c89a79c94699c",
+      "src/app/page.tsx": "195b5ba74dad46e7f63def770ed341446dcfdbaf34a6b1dd8181d244d495f7a2",
+      "src/app/pokedex/page.tsx": "d3618b1bf9d1558d9faef3ab724b94827f372a4b36d47c50c3b405e8065590e8",
+      "src/app/settings/page.tsx": "cccc93b06bfa1645293e230b14cf7675b97ae6059cef07480c94b3935c9f0de5",
+      "src/app/upgrades/page.tsx": "7858794a5538cc93dca93d60a08f6a9c75596ff5ff27984245c8b71410697fa7",
+      "src/battle/ablation-support-player-policy.ts": "2e893030fb87583770a941056d0f2a8d28caec1aae54c5d7226d5653603bcdab",
+      "src/battle/adaptive-coverage-player-policy.ts": "31e198a00c673374cf1a562996c5a9375f25c18306cc8a524c8248b15e46d527",
+      "src/battle/advanced-switch-policy.ts": "c99127e68bfd39e871f65a0c7cefac3fe0fe1338d1c170fcd46095a3c01f3ba8",
+      "src/battle/battle-items.ts": "262a4785c399ae225b69cc27d0b96ee02525858438b16dec7d840f9f2d6d39ec",
+      "src/battle/composition-policy.ts": "79a52a1ef8382a933067995d00cd26563fab40b3b0a6d230a84eaaa817cc20d9",
+      "src/battle/coverage-factor-policy.ts": "abc0e62deed66ac70740da6be8dfedbdc76986279ad9b582621bb155744362a8",
+      "src/battle/damage-aware-support-player-policy.ts": "f8418bd8aa4bf04b4f0082e1906a2717808c2a4a5fcdf131f63ac2dc4d310c3d",
+      "src/battle/galar-ace-policy.ts": "fd3a707c6f6daf3bdfbf8286fbe6cd725c2874e97de4cd62707bd1d2ee9b71f6",
+      "src/battle/galar-policy.ts": "cc88f85ab7dffebe3ad7710823987b18647ab0075ccd6fe53fe38d819576808d",
+      "src/battle/gimmick-policy.ts": "cbc4eb88922663f33a796f9538d8b60b027f64339c59eda3228ef33b7f459b1f",
+      "src/battle/gimmicks.ts": "efff902c90ea2f817b1cfb540743e5cb6449a5a59cd3dadfe20f557e68bcaf14",
+      "src/battle/golisopod-mega.ts": "93641c3b0d7fa310149ad1fc53bf5c44c037dba711fa0be6219b6c67966b85a9",
+      "src/battle/learning-opponent-policy.ts": "69556588366436f185c297953861cac9a1b4ddabb59f43e41607f8ec5e1a8ec1",
+      "src/battle/matchup-aware-support-player-policy.ts": "2feaa4971b428b8d8a4003af9a935c22baff3d6559faa15395b8e93b3f9caa07",
+      "src/battle/measured-support-player-policy.ts": "65882832d203a76e4acb71c0f3a37d2a7db055d10b936ba633a209016fde199f",
+      "src/battle/npc-policy-v11.ts": "55a8d77c1ee445754818e9567d616eff2b68e2695b86b81d71574c070d17edb6",
+      "src/battle/npc-policy-v12.ts": "22206328062533e0b44312f7cdfbc5df5ba39a88788abc45f5921c728dd6cb2e",
+      "src/battle/npc-policy.ts": "2e9a2760e36566301306418a52c8a3a115cbb8e539bf55117ae64279bf6349f1",
+      "src/battle/observed-damage.ts": "8b720dd37ca076696fdc1afbff7a5d848e844f502bc5568790786fd385e2d840",
+      "src/battle/paldea-policy.ts": "2596a6e517a8b335ee961bc9ad795864cb92e115b5806f8f2cec3157133cc55a",
+      "src/battle/pivot-policy.ts": "3661b63dc1f66586c64120df8d5ecbfd2c9502bb266a269eeae647dad9eeaf76",
+      "src/battle/policy.ts": "d9d34f82887645eb43904fd1283fd60a7f0c79a7e3b47033e00acce042e81e9f",
+      "src/battle/priority-entry-policy.ts": "b036fc54ea64d5438c24cbf6ed8aa48413495b223654a305368264f11a9bef9d",
+      "src/battle/public-field.ts": "d5c3dd0e18db05da1cb610242dd49c55c01a3689f9f05ffe74b3f319a1d3a89f",
+      "src/battle/public-immunity-v2.ts": "9294fdbcd16cfae1165c05b8a59eb931c128cf469857665c2d56b2959750d50e",
+      "src/battle/public-types.ts": "32fd075993f2d7ed4120246e49f610e89d7d7f799c5fe7aa2c3098e495e703d6",
+      "src/battle/raid-hp.ts": "1e0a5021d52205138bf39543ff58fef12080d34a05460392847d3b6e1ffd34b2",
+      "src/battle/raid-threshold.ts": "1551a8b09f493924148d15a45a6daa3cfbb28b7ed0e622a606cd5809d72a9ffd",
+      "src/battle/raid-transformation.ts": "eb6cb53575d04fce64ae3bc8c2212f231f79334081d4d33f3370c42bf99f5108",
+      "src/battle/raid.ts": "8e4495331f2850b073a8eb955fa9482cf0de5abca418e62e0f7409bbefb829f6",
+      "src/battle/revealed-immunity.ts": "b87a832bbccdcf54be0b43d093afe6bbdf3b07fe5ee036fb9a7f3c13f80d9aca",
+      "src/battle/run.ts": "adac96f0393a03b737ddb926637dca2729ebfa1f9650b8cedeaeee13b6f98dd8",
+      "src/battle/support-player-policy.ts": "40fff282a6a33716cff1a1366b853e3cd6c57ed28385784431a9b9725b5fc8f1",
+      "src/battle/switch-evaluation.ts": "25039deadad84696d1f796038f52afaa2b2bd06c704f38e882b9f1412827d058",
+      "src/battle/switch-information.ts": "269059743e6a660db9ac552053a3844c44ff7a68663109923d776c000b9215e2",
+      "src/battle/switch-policy.ts": "f7e1be5e7c63437663c23729962a6f80ef189ebb17fc7687a09ef1794139d1d8",
+      "src/battle/tactic-score.ts": "437a141aa245a6d54f88e84a0f2ed294fda0f08e4b890a2467d2ea94e7c0488a",
+      "src/battle/team-composition.ts": "1c6b70a5fe2e83d0dc2d9441bd07371fe6fd752f687233a9d1b0bf14a0779133",
+      "src/battle/tower-policy.ts": "4fd3c29dea61cf0bf2c3a046d1929da306bfa8b798d093a0ec79d029960e8998",
+      "src/battle/z-decision.ts": "851fa606cdc87cc0f9d81ded577ec24d80f1bf0492f057c0511202b7419f24e2",
+      "src/battle/z-move-policy.ts": "968e8e897323195f974c40e27092592ab73602c70e67a84163392b93ac4ef09a",
+      "src/cli.ts": "c0b7b572253b3414a3123de4983cdd7fe9c6a23b467b56c2a88ba537102d0b44",
+      "src/data/ability-descriptions.json": "28ec974c99bf1fceff2c9c207d9b5060ace0bcf5387fa5d93b8dea647c8b1648",
+      "src/data/ability-localization.json": "83e9157fb22c424216d02efe2664c2fb6cdca3219efee32a9ab9813ed3e06d34",
+      "src/data/ability-names.json": "d5e3a9cff5eb7d969deea2cd0237b658d9f25a8196711c218297d98990b195c6",
+      "src/data/additional-animations.json": "6242f554b2441e050024233d6f983ef05f5d4191c1d1f069b94131868a53362d",
+      "src/data/additional-held-items.ts": "25b2d8d0a85265813505e2cee910b30ed1dac1d7094c3a370c98f4bae759fa09",
+      "src/data/alola-trainers.ts": "6d1ca1546d81aba6b4123f4aada9dd5cb5164b8610cc193b2eb7a00dbc019b6c",
+      "src/data/bag.ts": "e64fbe2ea74ebe0c1262bf48ce019e57ab5f77551d76b286321ceb9139b30c22",
+      "src/data/battle-forms.json": "3ff87802b215c937a401a09401afdccb3acdeb96231d11704f5472619e4fb8b9",
+      "src/data/battle-items.ts": "80025726c59c4d05d9becdd5bcfded15af400d713862511fcca9d2a5048f1e75",
+      "src/data/battle-preview-forms.ts": "acd4d7c8bad0299f9444bab12c08e8b7c0337ab241c0b9ebfbbf28788461d0b6",
+      "src/data/battle-roster.json": "9ded5b58f59b23d53931fe08331cd4ef1e7275f45a3d6fc413ec01853ef43f7e",
+      "src/data/battle-rules.ts": "9b6ad43441ef510afc55a5a025fb302ab4d3685935b752747ada14399f489f9c",
+      "src/data/boss-gimmicks.ts": "ab8459995a2ee35e6fe4f2bcede5ee965ccc8b13f0fd76672f75de96193521a4",
+      "src/data/challenger-rewards.ts": "2df5e48df532113ea030be4bf2365d90257393806300d8a3dab3379aef062880",
+      "src/data/challengers.ts": "a1866a7473bce204b34359ec70844feafa93efa1a1827ee4bebc334207d20c67",
+      "src/data/champion-builds.ts": "1154c223e0ba6a16d1825195c13275cf5e304e2ca9970d36dbae7fb0907ae1ac",
+      "src/data/egg-grades.ts": "40757ec485616cfedd0e63f218299ec1be92e5e19bb641c7c483f83da9645943",
+      "src/data/egg-kinds.ts": "c81caaead9a7ed5ca2eabfc88bbc1b64d8160c2902afc6cf605b080320a3f8b2",
+      "src/data/egg-machine-tuning.ts": "fe5978ffb7db0ef979d466f31902b7ac2acdf0b21a98b8a93cfa842bcf479622",
+      "src/data/equipment-forms.json": "157f79df7de25c716d59d56530425bad5bc7baf99a3bcf7b816fc9785f023c88",
+      "src/data/equipped-form.ts": "3ed438706e9ee31afb8038bfa5865d9baa0f002f7f4e033215ed99ff4d9bd5d3",
+      "src/data/floors.ts": "c52bc329f3a1473709bfae199bb70b0e5abee8f4f13366274f71b156aea0f3fa",
+      "src/data/form-items.ts": "88cd9c34488f4f2e941514e1c88e50aeab2a12e0a5fb14ffe2f107ada1c93c58",
+      "src/data/form-sprite-availability.json": "d169123b059b23ac66158856736ff825c1ed1a4895a36c39470ab75f6c8c515f",
+      "src/data/front-only-back-sprites.json": "253257219f5d021d8ab499e5725a2e0383fd9c57eab43824f7e47f532530a150",
+      "src/data/galar-trainers.ts": "5569596b695a4000e713ca908cff44092a1aecaba76262a94d251ba123dd72f6",
+      "src/data/gender.ts": "ac5cf2b38c79242efc383a4e2abd3925325a003240e9bd19b0c9c4f0ead3ce5b",
+      "src/data/gigantamax-forms.json": "667370b6d0a4dfea4196e1875b7650d6712069e79171ab12a5dabcfb878818ed",
+      "src/data/gigantamax-moves.json": "6106302405055e91e577773a35ca943926c249dce220ac4adbed2756ca82155e",
+      "src/data/gimmicks.ts": "13bf45df8beb88f7b9eb8a33d9c4b24b502ed36bafd7db93210c8085bc8eedcd",
+      "src/data/held-item-shop.ts": "76310cc57d5d7b52a57ef3b73a207cdd8b8683b2c68ec82fd6dea0f44069ff0e",
+      "src/data/held-items.ts": "f5ed7911797da25f24137a1f4886ae155ae5acf91fa1d0a4dfedec92c1c86b03",
+      "src/data/hidden-shop.ts": "721df63067cdbe2f7dfe8bd2008f80582e2c9f00108919eff448c9dec5b6edb6",
+      "src/data/hoenn-trainers.ts": "9a770a3ce4753660baea53c39d0f0a6b8f966252e3fefe9f4586d195ab9103a1",
+      "src/data/johto-builds.ts": "4051f2c11907ed49bdf7bd1834afa9089e716ad7517887ce47500d0165a84b77",
+      "src/data/johto-original-trainers.json": "6dc5c0cec3ea0c5d48760295f7f9db511f5696cddb60c2ecf7935050f044e476",
+      "src/data/kalos-trainers.ts": "1e175bd3fe2691feca5b5db86c84ba7a4567157921d2901255c58c740d9b2a74",
+      "src/data/legacy-challengers.ts": "0963b383b5c792f458aa3c5af2a283924740019ad5378eb8000ef395d14d7473",
+      "src/data/local-pokemon-sprites.ts": "9d1d2963c0ebcb5e7e79a055591a4f6bc2c10f8d21af550da3bb1389153b0da0",
+      "src/data/local-sprite-missing.json": "6a996131ba9b476b37f1f58c85700d2952ae744d4f99e4e2e21989c3a7445a93",
+      "src/data/machine-rarities.ts": "aabaeed39ee64bc08f16f827b4a352afe371ea966ec5c52584989753b6d58249",
+      "src/data/mega-abilities.ts": "f97447d90ade8454f872af42fa5ad6654256b193d96253b81743de3360b90946",
+      "src/data/mega-forms.json": "a0497ab5c048ecb8b3093bba70f57575e6234614bde74b4cffa70de080a2d740",
+      "src/data/mega-items.json": "725d7058c1a9251d0b7bd9ce81269767c58d782863b73b167016e69d3004a912",
+      "src/data/mega-preview-forms.json": "5abc4f39f87561af212d5b9595d431f53e2f61c4445be4afb9071c8bf4a1d3f9",
+      "src/data/mega-sprite-availability.json": "7cd1421cee28f5b96d0fd0c83cae8a773cefa20b8a1cbae8a2d4e3c1a02ff050",
+      "src/data/mirror-challenger.ts": "8b0f66d709543c735e7dddb59e400e50d611af2f5999707991d39ce12999e354",
+      "src/data/move-catalog.json": "e0ee6a53e2f04c2b8ad565474028a24bfd2b915d0f0b882afd7eb419a5be956c",
+      "src/data/move-info.ts": "560ee6ababd5a80ecdda91a072de38517df5639e70c65724a5213a906ff69387",
+      "src/data/move-learnsets.json": "850fbb16b587f579874da783f9690c66a9517c656dca47f8daaf05673d6edb8e",
+      "src/data/music-rarity.json": "13048a57836fc4444e73a5c7c622b662b06c823b5d0bb7e902c39e2882964694",
+      "src/data/named-trainer-intros.ts": "38e3d431befc3715acf7930ddf9497588f2763a81f83d80e4d79983a01458c53",
+      "src/data/non-pixel-front-sprites.json": "c872d53dc02099305909efd25dcebfe5adcd83e65d699fca8df13c9616457adb",
+      "src/data/normal-mode-stages.ts": "58da386ae5b9883c72b81924b937e98a7fb638da2afcbd6e4d40e3de24e4a5b6",
+      "src/data/normal-npc-templates.json": "c5b96024b616dfce9e7a1fe643e994ad0347cea344741cfbdab782ef61d3cf3f",
+      "src/data/npc-ai.ts": "02664017a2e57220ad581f26f20bccff6dba3845d436f8fd46d7c8a7230dee80",
+      "src/data/npc-gimmicks.ts": "4ffc920d4d1a0e0b33b74dba82dec32c21fa16e35d6fa1e88e4b43c59166fbf8",
+      "src/data/npc-ranks.ts": "8d8aabdfa9de13fc2509b7a40fc0385ed43b58a8dd06e59a7d5b4a49d6b5f485",
+      "src/data/npc-review-presets.ts": "37d3c89196c4d670a01f73c1f18eaefe12a3a57f8fe7afff36be2805706bd880",
+      "src/data/npc-samples.ts": "1563afca7fea412e17cd899de71404b4ba75b049c757d7a63c941f5a080586a1",
+      "src/data/npc-selection-rules.ts": "cbd1fe1da13113468d0065384fead4c3423c246ca576687fe3bf7ef226de8dcd",
+      "src/data/npc-training.ts": "69d6888d84fa2921b2e7502972ad3db26bac09dd78025b02dc1fce2b358f0111",
+      "src/data/opponent-species.ts": "e223488e4850772cbf3032626f01a789c872009ca82a994c1992316b6cf61f11",
+      "src/data/paldea-trainers.ts": "85c31369563375c589deb09e5edae452a6c1f5746b6de8d11ecdd93e575c2bde",
+      "src/data/permanent-upgrades.ts": "4779ce59520390dd13dcf214a1611b066c2ecf6bf3aeeb7d2b97cc09cd4a6d49",
+      "src/data/pixel-sprites.json": "3a3bc8293329fc04ce33396d0edb3396380909fe0339d953ce34dd304e8d9491",
+      "src/data/pixel-sprites.ts": "8e07a15c84c085b3349e4a9850ec9a511db6f01ffd0b891e4e229c7b03c6246c",
+      "src/data/pokedex-roster.ts": "37982e6b297b55042394ef4f87caa82306819a5f0559945f298383490ee543ee",
+      "src/data/pokedex.json": "81f8e7981c4a0a847cbab5ca10250ebdb0fec1f6633becbb44f8e8f6782a274e",
+      "src/data/pokemon-catalog.ts": "dee0234884fd36844c208232b286079691d936b64081a778a44400a5aa06d5e9",
+      "src/data/pokemon-heights.json": "047b0dfb2aa8abe3b040a6414b059289da32599b8cea986107e8edb3070c7aa3",
+      "src/data/pokemon-rarity.ts": "593da67dd827618d8d1125c4fc3397fefb4504ca1a2f1b185a1e2690002539bd",
+      "src/data/pokemon-size.ts": "30d8c9be535cde4fe91e86a5bdb36322b5e3224453d71e031e3713b8d5fe2faf",
+      "src/data/primal-forms.ts": "9ba2f606d1ddd6b581b2f6f6ae9f20c9ab11573a512fd47c09ad262fb481761a",
+      "src/data/raid-bosses.ts": "1125d31b87d72e28cea07459a423ca1f85ace67531718764f9045869be7244af",
+      "src/data/raids.ts": "d57aa6a068009316119a3a86932272af5f945a91d714cc0bc35a825771da08fb",
+      "src/data/regional-trainers.ts": "93508236559b23121f946e1c7d87917346fa22086f8c68affc3adcd0df1cc14c",
+      "src/data/removed-pokemon-sprite-ids.json": "4e236c56c6b2a96afb6b432d3b7bfd2fbebbdb6d8e17d0c2c55cc4d1f731077e",
+      "src/data/reward-inventory.ts": "7581db1d94729adb93ce16eea9a46250b946b83183ab54e183988b265dcb7ddf",
+      "src/data/rewards.ts": "476dabbe5c8226bd4a481350524166a77d72f800b9e100f9c252334f2287a40e",
+      "src/data/run-events.ts": "8dcc06c24115e056d9beb67ae001cc692928713db10ece0dd476b406375a5a2a",
+      "src/data/run-rules.ts": "cff3fb3da9e29349d071b1b056ad6a9c084415eda6f2626567829d91bb28c748",
+      "src/data/selectable-forms.json": "85db6b0b48b984d368b3316ee006ff98310348ddea25ca13e2209f850ce64616",
+      "src/data/selectable-forms.ts": "9aad993aa866137493e5bddd79af805e2aead9bde2778b30db9b0d56bbb7e852",
+      "src/data/shop-products.ts": "66759e2bd842552ceea711e3625a35aba430d2502856dd59fdbc4e3c730d673b",
+      "src/data/shop.ts": "37498eb81ab720e8d405917686186ce053590631c9dcffb92c96a65bde4ccf72",
+      "src/data/sinnoh-trainers.ts": "3a750e47c0055f4a9b146d4272d47151729f9ed5ca700b7cd635a7b53afe3118",
+      "src/data/sprite-animation.ts": "17b23198993a95eef2f4cd640814e9ef409d74bcb3120816c1ee5aee233cac4f",
+      "src/data/teams.ts": "57c0558b9bef9affe09c99708108042ee7fee0193b93d65cbad9c668371ff032",
+      "src/data/teleport.ts": "b4073762b1af40b821cf20b6d922db95ac981784eba2d6dccc63a8e3c7a4b5da",
+      "src/data/tera.ts": "98ce0760782edcd6521e99dc59db2c081e5f81f13d97d72a495329a9d9b445ef",
+      "src/data/tower-progression.ts": "f7bdabdee2d33b5afae10d03d6e485d82d24794548afc1723449c4556cd2baa3",
+      "src/data/tower-themes.ts": "4408e7916c71b572c4d70e3465d62feaf1f1aabb82472a1a9bd7e11323ee5d34",
+      "src/data/tower-trainers.ts": "60dd354f06caa3f42c09eee54c2cb29ac6d170940ab5adbe47c0f87b3459293d",
+      "src/data/trainer-catalog.ts": "fa2ea0314add4c2efaa203d64ce51f92ac97beefa9ef89fed37c5092bb1c5081",
+      "src/data/trainer-equipment.ts": "ffff46677f685c822e9c2b8fcdfd023732c2d26c7a63812c6009f20807ed233b",
+      "src/data/training.ts": "381e89cbea8b8e4663186ea2f35480ec65e16576ce6d909089792728270bb591",
+      "src/data/type-chart.json": "e43e394d355879d5765f33379a29964fd79fc1ddb78c440693a9218706a80acd",
+      "src/data/type-effectiveness.ts": "c4a1220f1416168fb6839a622221c599b54c177fa706235696b2e71333b8c094",
+      "src/data/unova-trainers.ts": "31d4096825f240957ba614562aeac34eabf0cfbadde3f4e0c7c8923ec3ef6187",
+      "src/data/villain-campaigns.ts": "7ad25bcd9db0b6452ddfbefb0185a5e0fc753554bf3cff4c792b1e3af240793d",
+      "src/data/villain-organizations.ts": "4a9832686fbbe76ec033eb6b74835339da3b33a25067b9ee0704aeb82c60d5cc",
+      "src/data/villain-tracks.ts": "5ac1df0a05bd501b1342b542815f4d355808df98505762926c3c80bb2c7302a1",
+      "src/data/z-crystals.json": "f1e371a50242bcadb6e5664426e6f93f1bdebc7f98c7933e1426fad778403671",
+      "src/data/z-crystals.ts": "df766ff718cdfaa8cbba484a574364c01e07754f57a2d5fa21b6b84ca25269ea",
+      "src/data/z-moves.json": "0ba31b78a82840c14e3732df6e2401108caa7a9a8095ff51b60e82baf292ce46",
+      "src/game/egg-machine-tuning.ts": "b157c483d23ff5ec6cd1f4ec157c7935867106bc93936a612f0161d899b185ec",
+      "src/game/rewards.ts": "80e80026df9d5aeb76a12fe1a3dca7a899f3c8e5d7a6a13307822cfbab51c291",
+      "src/game/run-events.ts": "cade15c6f1c7a2f5cfc029578df950db48df3975bc774d30fe451d0d648f30ca",
+      "src/server/accounts.ts": "3ebc3afc61e4b2674fcd4180f2f0dd4d42d8a683873458c197378d515ec257aa",
+      "src/server/battle-session.ts": "e2014c71102bd803fd1a81770d67acb73506c430eb06300bcc6e0c660818f610",
+      "src/server/challenger-events.ts": "1e6c566a1433322de18d9b33002b21d27a6633206d92f78f2466c87fa4f9ee93",
+      "src/server/challenger-rewards.ts": "5d1aed300a5200810b508b5f0f2418b65b3dcfb27337094e0b0e9c3d16915cdf",
+      "src/server/egg-machine-tuning.ts": "a2c71f0d66a1e809bca8933260dfd4739803e55d5bdd6ac5760a5608b9412ac7",
+      "src/server/egg-pool.ts": "96b9825f1b896be2c77cd4556250e13b4b1c37c4869074335e4fd1f1cbadd37d",
+      "src/server/encounter-history.ts": "4d5e1904b0ae35d2d53cf96acf60c7f05b48b6417d77004933226f3aa5143d2b",
+      "src/server/hidden-boss-events.ts": "e5789f432ce6325bd892ac4383e8ae37457b308a268b21836db07a30e1b53e21",
+      "src/server/hidden-shop.ts": "aa463e01f7a7a564d24467e46214b57aab518dec5bd8d34d3ba1899ce8c3b978",
+      "src/server/inventory-grants.ts": "c2cae08a6c580f1a2a96e07f4023fdbb86644d23decd1e68a8e0ef2d3df13b57",
+      "src/server/local-account.ts": "9ac9cf9585215163c27cda279b96f7eeafc336bb158649b3c34b645097ffa72f",
+      "src/server/mirror-challenger.ts": "fa17c5318564923be76b56ab11aced742de60b3a6fc70c61b2a657920e895049",
+      "src/server/move-learnsets.ts": "84a27b99f736b1d625acfbc284229830cee12c9158c452b749dcac216af93305",
+      "src/server/named-opponent-ivs.ts": "74061026a40a01b335335059dbcb200098fc75abaff0cc28c8769f68920fc782",
+      "src/server/npc-builds.ts": "3188d270140d123a0858add30365c394416a3c24051e5714cac3afc9dcd7c862",
+      "src/server/npc-encounters.ts": "d274279e864061486b4933f848d0164a5d74a65221d6454fb4fca0fb96bc67be",
+      "src/server/npc-templates.ts": "d2b36646e84e941bcd8ee89a285ff252b6ee00aec159aca0ade969979a5b7be1",
+      "src/server/npc-training.ts": "48834db219c07a28484fe05d89f01ace3415bebd29bd08c314e20902d9a38600",
+      "src/server/opponent-team.ts": "9cef6e47b00e1164a60f64ac8a85cb1c03912e531ef9ff4cb5aed5909ccc6b22",
+      "src/server/opponent-training.ts": "da280488ad1431fef7deebad1dc4ec3abea259b6ddee5038dc93652e68e6063b",
+      "src/server/page-account.ts": "218a24b088c3c563c50de5a533a880a21ba6973937febac13b3368b84c661237",
+      "src/server/permanent-shop.ts": "f33d64d2436a9fb79d01cd0c576c3b959712dbafa342c4873e3015e9217aaaca",
+      "src/server/player-wallet.ts": "557d412b4fd26eb43ce9af3b93d67288520419a48add482afb35eae85ee9393f",
+      "src/server/pokedex-entries.ts": "e5dfe9cf52466c2dbd55f28aeb0bd2a27227f2ea8a17816689c3e0c22d27776a",
+      "src/server/pokemon-enhancements.ts": "66b2dadc8152fe578da0c64379f860c65a744997a51a7929217b9ecf38c02cbc",
+      "src/server/pokemon-gender.ts": "8a8876231f31e0e9e09933a0a4e0ef8861cd94c02ca47164c8626f870c2074a8",
+      "src/server/raid-events.ts": "7294628f08ef53baed653f925ecaa14cffdd4fd3e829d497ca6b0a4eca483946",
+      "src/server/raid-phases.ts": "df64590c96e6720a357f354116f2156fc899f784c9c17c9c631338e3c131f2d5",
+      "src/server/raid-recruitment.ts": "b0877ab995d0764d764abd31b8f47d144dfb2c6b6ac2f579c22adca1c9074407",
+      "src/server/request-error.ts": "7dd2d3bf2f3452f4d68b7375448057e6815cd4890fb181f43a9a8be156eeecf8",
+      "src/server/reward-inventory.ts": "8ff0805c6acbab13a889bb2fe0c364c7d7e95c49d92859195e0b475e94debeb2",
+      "src/server/rewards.ts": "913f6c276262a1ef3e5b5b0491d8cb11131248ccb667d91b797646f404bf5bd3",
+      "src/server/run-bag.ts": "321cbe072207b6bb5dc8c282fbdf47250b11665f85be1ab42046feab61b131a0",
+      "src/server/run-events.ts": "f6a67681f3f307f2bc187c5a8e7c1e501cb4654a0d11368c6379758d48b21391",
+      "src/server/run-ownership.ts": "e12acf2b2654611c7417dd9cc8197badf91ef21725c7cc46ceb40f880b8c5ca6",
+      "src/server/schema.ts": "8b19916753338579d0dc02b4dc60ebb47c3da2f53c9c1c523b79a81686eeb785",
+      "src/server/shiny.ts": "0367baab67008c5272c39709f3829fe0654e726475c706a34ad2e73805c0fafb",
+      "src/server/storage/form-training.ts": "8fa40f801fe1465d5733361b4e210f159f92dc224186f16ac6b79105b471fa48",
+      "src/server/storage/migrations.ts": "d014430810964c4c43e5eacb691819be60b1a122c38f43bca8bcab7e9bc32cf3",
+      "src/server/storage/run-bag-migration.ts": "f41d220d2fa1204056c8adc5684961744311370e41adc2d68658f49c61435e99",
+      "src/server/storage/transaction.ts": "0af1d4bbb950a31dcd67aee7d17d90adfdc8b71d397e06570337340c180c28b4",
+      "src/server/tool-vouchers.ts": "0c4965171a3c24457fff43a76417c682eb4c7747e4afdd9aa45372e212ecd96f",
+      "src/server/tower-service.ts": "1fafda073595f96c04513525c1519697a64da15de30f7caa8c4f43a3ebe8e83d",
+      "src/server/tower-store.ts": "82bda46831acb032419d91038e42ab0249459b798c43009987ab66f4e5edc289",
+      "src/server/trainer-event-battle.ts": "e9bceba3dc13b7180360a02655f404266dac9b0af93d29d91fca445a7346a1d8",
+      "src/server/training.ts": "2ef85d6977cd09823430f553d464349be53f86a197a8aa5e133f4510141a6d1c",
+      "src/server/villain-campaigns.ts": "b22b7b06c7b410b27ca9a38d4b5958f8c9b607ff3418f50045bb61d328999c7d",
+      "src/server/villain-track-rewards.ts": "cd65622f4d6593e0d1fed6dabd8d5efa1316e5ffd75f97f2f7a2041e8d3b05b4",
+      "src/server/villain-track-samples.ts": "225a9ae91ff6bfab61a31be8e829c61355c275e599ab1d305b74c1b5a0f1b2b9",
+      "src/shared/contracts.ts": "0909a87890d9e85e6e834b88cfb5420c3c56eb1f34172dceb31ab9783a82504a",
+      "src/shared/pokedex.ts": "ffb9fbe8df23cd071e0daad0650f6c8735ba36fe0ca645ae49852dc8c1056daf",
+      "src/shared/vitamin-eligibility.ts": "8613df21881bc4894606acb1f61a43ead8ec22e6cb334ac15b55af5b9a7aedb0",
+      "src/tower-audit.ts": "2eb6529f1bc5622dbe62874beff2286bd8bbc52c08fe0d39490c7159b733458c",
+      "src/web/account-screen.tsx": "9eba44f8db760026cac3fe633e29e465b5aa9ff927aee4fc344238c65fdb62e3",
+      "src/web/audio-settings.tsx": "93f8276b3af813842aabf5f03df3de2fe5774a3fe4fd5e317e812cbbd50da2dc",
+      "src/web/bag.tsx": "9dc6028dab519022f7576f375299ecce3b1e55da14753c8b8f2b0a9f6c47343d",
+      "src/web/base-stat-radar.tsx": "4366a5ae1885380656af550437fe18d0cefd9fa8a2d923936321d04c578cc613",
+      "src/web/battle-commands.tsx": "bd97d48e0694e0b8c9ba97bd3d5370677d48b563f9294a72d6d06bf194f03e81",
+      "src/web/battle-effects.ts": "2e896e051e4baed2b0d5cf7a1ade3ef25d069212c80a8ec2dfdfa0ea00eb2558",
+      "src/web/battle-field-overlay.tsx": "bdaf1b9b0f9efb48a33ef9bf3817020581b96ea5dbfbfb69d49c854427729c34",
+      "src/web/battle-field.ts": "082c4141255c695f5eff6e18e3aed9a51a4aebe35fcbb468c414e9d05742d12c",
+      "src/web/battle-game.tsx": "15264b20388ec3d50183e919efcc5014dbb2750c00b92bf22e7ed50983166ebb",
+      "src/web/battle-inspection.tsx": "b69d4bf0013f8b52b59d78032ca4566c185635571abd49f3d74de29180e380ea",
+      "src/web/battle-message-data.ts": "d2fe874dee143c0c34e9c5942b8e816f44ffac63e744a2240eb33fda292ca8a9",
+      "src/web/battle-messages.tsx": "576961b3b5a98e7cf944b2d149000b7d3deb8317e369c6e6453e049235422b23",
+      "src/web/battle-pokemon.tsx": "0e0618f4a54d7486453b4813c7ef09353eb29f741090fa35b4db3d68e1768256",
+      "src/web/battle-presentation.ts": "9bdf5543161dcc4f02e250eda60e9da98e070b1ca63451f48b9965bf076d5f53",
+      "src/web/battle-result.tsx": "9b1abe35cc4b722042e706b954742be3444168d5a056367b09a0f12aac80d6c3",
+      "src/web/battle-status.ts": "857e4ef4e7ad33fdb3321e64cc04516a6f001e5532a02e56b1595441f0a0f29e",
+      "src/web/battle-types.ts": "8be198087978431429f14b5eb35a2f097690ca9853a775babf3bc669b7da5dcf",
+      "src/web/boss-dialog.tsx": "a3b9f30f89f6e8473aae80af0028dde88bdda418786037543e4f1a558f26f714",
+      "src/web/catalog.ts": "8f7e6a076c0b04a0cd0655734ec45821849020dc1055e30ef10677f9d1199f30",
+      "src/web/challenger-candidates.tsx": "d53dffa796a62d6d797ab1eed0433bddbc3b84f3df8cace9aeebc30ff0b4bc0d",
+      "src/web/contracts.ts": "4a395eaf1572c6805eedf68712d6a4182b6d7342de09c0161d3d144f8153e283",
+      "src/web/dex-filter-dialog.tsx": "99db1ee892cf55552dd5afe38fe3e18db21a109c254f8eca1cacc4ad6bb6032c",
+      "src/web/egg-hatch-dialog.tsx": "10de4ddab61f70763b9d1cbe71b60cd6e7bb66c952012f4646774e318bf6e710",
+      "src/web/egg-visual.tsx": "43459d3a9d2e3a39ab27d61ebfc2a82c6eff036913e7b6c61c4a52f8e3c7ad77",
+      "src/web/encounter-presentation.ts": "c7125fb92a6eed53ed983e184e097b9e637a6b83029f296903de997c98008f9f",
+      "src/web/event-presentation.ts": "ee4dc946fb4f02662d7b74ea5109a5974f2934c6291ec8bb44cddac431d851ef",
+      "src/web/form-editor-data.ts": "b42ec7cd607e114056192bbce016aaa422ce4ebf3decf4c4ccd6f46443d0f39a",
+      "src/web/form-editor.tsx": "4c77c3f58979a1416a9f105a8a3252d6ae45fc674ff0dc1ce0f689210b7677b2",
+      "src/web/game-audio.ts": "2a5afa2dc61a8910cdcddbc1ca235c6b0d3de8c8e4c2147614e96f141da7f7a4",
+      "src/web/game-dialogue.tsx": "9b3a121671d562e990f36284b26db372a7212db72fa64f6999b92cf5bc523a3f",
+      "src/web/game-keyboard.ts": "59fb871b8fa52ddfdbb3c017bc6c0d784f09c649e73203c361cd4a3bf3fa5f50",
+      "src/web/gimmick-emblem.tsx": "ce755191ee880e0872ac732ae29fb2d85fc0211ea44aabc74b9f5bab84397730",
+      "src/web/gimmick-item-icon.tsx": "3a580fd3acad9f43c78369236d9ed2a62c0f2235ba4bbc23c8091d370b26c86a",
+      "src/web/held-item-controls.tsx": "a05786a7417a2428a9b7e8f5193f7cea117dad24afb5744ff1cb71982ee8408d",
+      "src/web/held-item-label.tsx": "29e3e64bdf471bee908dfdb5c3a26e22dc0756b72d556370617ffcbd860b9930",
+      "src/web/hidden-shop.tsx": "04f7784365b38157b025e59ea8f45d71e386ed1a6572865e91016df0c559c473",
+      "src/web/item-acquisition-dialog.tsx": "f4bd46d32b03d0de25007cd65e7dc7a71f506e2277a2332d821ae6042944c84f",
+      "src/web/item-target-list.tsx": "46090a15823e8aa88431932c4416ae0ba211bebe616f06ad61cbc9d956ac624a",
+      "src/web/iv-summary.ts": "670c2c557534225858a86d368f822ea8762563ed0d034a605f80810aafb56aaf",
+      "src/web/machine-dialog.tsx": "d1812959ab07e95ed9d0d2fd5774b248fefbd551e196f2f25570a41a2de804eb",
+      "src/web/move-animation-plan.ts": "875116d14a8c349466c2d4dacd0d10a22fe9d04e35edd1d19ad9c5128ab959ce",
+      "src/web/move-category-badge.tsx": "14eda639b68478f8431b60595e07f0b0ad8a64e49205db5fa480877e2da173ab",
+      "src/web/move-details.tsx": "f979c0d7070fa8d2078918141f6d0a5d6965ecba3bb88ac0dd0d520671c17cdb",
+      "src/web/move-editor.tsx": "f1e9df85e0bfb0073b4edaa3654b5b92f4e7a5d96ef6279cc304e4fec5767ca8",
+      "src/web/move-learning-panel.tsx": "af145048f3a08a56af475fb5099f7056cb8655899fe9b2e03d92f454729e2a7c",
+      "src/web/move-matchup.ts": "af1b76dbba2ccfe7278dfa4b47d9b25c23f2362642cabb8b30095c35febec83e",
+      "src/web/move-visuals.tsx": "1df75eb68314f14481f9c749266e5d9ca95823ba2b063117a5bcc4d31299bf6e",
+      "src/web/music-score.ts": "3d6f1101e3ebd4207644584116c354eb79a702d2d62830f33765145320e74f44",
+      "src/web/nature-matrix.tsx": "b914f9429ed531c718b48cd9359966aa5ecd9332edb356a599ddfd318a0c9ae1",
+      "src/web/permanent-shop.tsx": "a221002c84cb050bdf6fedbd31cd6ea680969dbedb1c56eaf2976bf7a1e0ca46",
+      "src/web/playback-settings.tsx": "e9eb4994f26506457674ade37e50ccc79140e24408636cbfe56c5ff73c101e47",
+      "src/web/player-mirror-portrait.tsx": "6c736ef0bd3d63424112b806e3791aa6ebf9d3b0408c9e4211919aaa04a8462b",
+      "src/web/pokedex-data.ts": "f1031c717276e7ba161000efc747014ce2ed226e981a0f6a21695a0e3f9bff7d",
+      "src/web/pokedex-dialog.tsx": "fc273e179909315cb0e40bce164c8ecd89ce6dfc39e0d9c48d3786bd382ca4dd",
+      "src/web/pokedex.tsx": "5b918763714d269a6cdaf60dcdd1d3b15633485b8b6b92087b65fdf21a23e838",
+      "src/web/pokemon-image.tsx": "dea46ade760487cc8c32bdf9e13421e5f4185d9cc8da720d828f4533c022730c",
+      "src/web/pokemon-search.ts": "29f0e41c3acb127b3dd986e8de24871c0c88a635b7e7451c36312c2efb8aebd8",
+      "src/web/pokemon-summary.tsx": "366d2b33de74824f2b3135b2fed335b5decefe1c0284618668618dc0d9e6cc69",
+      "src/web/portal-effects.ts": "43bb8dbed37a6511948930e8dfdc0c7e8b3baeea712a5b9e4459144645364b80",
+      "src/web/raid-scene.tsx": "e36a398db5f86f9e52b95fb4296dbbff01782c90ff045b17ca4baac48a90eaf8",
+      "src/web/recruit-candidate-details.tsx": "f98ef84eb1f0382ff8b3737ad5c859b3fe2cbb4c78f6a1e9fb2ed5c0e9340dd8",
+      "src/web/recruit-dialog.tsx": "08f0fcccd9d5ccc367ae97eeb63daa100a40cf6d866f3f80749d4ced2a743344",
+      "src/web/restart-notice.ts": "e185edd86325a97d75a3237082a58e554d93aef06ceba1acd253b1dc2870517a",
+      "src/web/reward-inventory.tsx": "3a9afd66bca4fe5bb3851a5043a8b4a7be628ae6c33d900dbb65eb271f3df36b",
+      "src/web/reward-modal.tsx": "5cf45100ebd3f1ff715968f926b22aaf545e8199d0bce338816597aff022b922",
+      "src/web/reward-panel.tsx": "e36114fd89f2f34d0acf54214bb834c2664edacc67caa7bef86e0ee2f18d5140",
+      "src/web/rule-picker.tsx": "eef248d39f08f44331e7429f922ebcf3fd4130d405c01817d20d4b11ae702199",
+      "src/web/run-event.tsx": "a6923e453666f3b277252f26068d36380ccf37de1af534a6b991bdab3179488e",
+      "src/web/run-maintenance.tsx": "56f1733543bc416dd0b3cc6335a59b0d8fb2c747107b7e42a29963d242b0e101",
+      "src/web/run-partner-list.tsx": "f01ddbaa6802db88446cf006dc6986ccb0f36978b644b0f7a4c42f62916e2ca9",
+      "src/web/settings-choice.tsx": "0f81cd2a74809b656b347033347c16bcbead9a8b9d2ca8bb1eae11c89bfaca09",
+      "src/web/settings-screen.tsx": "48555552cbf53cde50cff8b2ae67affc832f09a1ac6dd2f741c445d5991c4595",
+      "src/web/shop-product.tsx": "fafef513c8d04567cadf83d698e2a2124d412f04515e4bf54345af58ad147ffe",
+      "src/web/sound-design.ts": "db7de230c3f983665ce26cf535d9e85acca97b155656bb06a0aa990dd2231b1e",
+      "src/web/sprite-framing.ts": "485c9ce6e0f2b6822d2ddccfd968205a151732b12d1fbd626b57303a7bcd323b",
+      "src/web/stat-radar.tsx": "7fbe9420ed35be0eccb22180934e86ed6d801598a1695013aef67e707a5b2c1c",
+      "src/web/styles/account.module.css": "2c6309e3c50de0481d8c57d09b3d7bd6e3498e8b1418fff0ea00ebea1df3bde4",
+      "src/web/styles/bag.module.css": "7698c10f88ce0177735f9b45fe5a13e32220fea0da80e8f0f68f51c10abc1067",
+      "src/web/styles/battle-focus.module.css": "bed45a93b9aa7ff91eaaa1fb2da8aabc5578f745e79bb98ba95cf91342b19601",
+      "src/web/styles/battle-health.module.css": "32006a68d96d3446c173a9b641de365816d5281e3dedf4de1cba673d8540d489",
+      "src/web/styles/battle-layout.module.css": "0b9c6ff962c564f37464b26ec5e23f146511917fc1d9ae0c074ff9cc726d84c5",
+      "src/web/styles/boundary.module.css": "2ab16143bb399782a6d6a79003c1222736c7e7b8131d87185050c3d1a330749d",
+      "src/web/styles/challenger-candidates.module.css": "02b2ba93c49583a90d48b9a04eacc7f962cbe58721d081b57733f4d40698130f",
+      "src/web/styles/foundation.module.css": "0125b00f70dea2e8e879fffb9148ed98d0a299d14a68f0930efbf39c91be8aa0",
+      "src/web/styles/game-dialogue.module.css": "f6907e45160316f38750531ec5a1d7dcb792e4029c8323099f96282cfd0b8010",
+      "src/web/styles/game-theme.module.css": "39abb9a1b7984116acaf26291134b5a45924bdeb01866cd56b5fc277f2962abc",
+      "src/web/styles/gimmick-theme.module.css": "c2d19c3281afafe7a540e0f8e9dce9fd6517078625f7abfe292c2acb0a0285cc",
+      "src/web/styles/hidden-shop.module.css": "50c5630587a21ac4a53910d5b928d46247e2de152880551188cef9e2d84f85d9",
+      "src/web/styles/item-target-list.module.css": "927e7f33a638812ad334ef3ce6f9e44a61fea728c7de242595bd82325f4cc2e1",
+      "src/web/styles/mobile-ui.module.css": "3e463fa845e47eeb419a5fc8e8b1938f120828f8dd01bf82957e15f33de15a9b",
+      "src/web/styles/move-visuals.module.css": "12c67a78c0ef22f0c9074a05f6563cb3b1a86b8b5d557d9862b79315e4ced92d",
+      "src/web/styles/permanent-shop.module.css": "63ed0a3eaa7687f19f0a841c4061d558046b3face5d85668582769c349cc846a",
+      "src/web/styles/player-mirror-portrait.module.css": "397f691f0a5f4fe98246490fd8c0e84b4d4d90a40e6b0d5677f1bb343fe1f178",
+      "src/web/styles/pokedex-center.module.css": "6be918e9ac3ed9602f3f1259844bc4917d26c5416717b7028a5c7db5f9509bc4",
+      "src/web/styles/pokedex-editors.module.css": "283d34639f89d8bb129332f124671f68abc089be889cbe475804294d297dc761",
+      "src/web/styles/pokedex.module.css": "24d96a89c78882ff393835339a4d8a1491a4fdc285602293a765e9b4d766ed3e",
+      "src/web/styles/raid.module.css": "0d2d637c9676af2c8a340250e96306f11de71236f9acc5c7e00a56b52cacad85",
+      "src/web/styles/retro-theme.module.css": "96b6d30266fd514af9793f3f7d033e4a39e29030eafac351ebeb25bb68eef3d2",
+      "src/web/styles/reward-panel.module.css": "4e3bc9ca01c37e0adab73a1613732d89a5b422db379e0cb7e3420b8f3c142101",
+      "src/web/styles/run-event.module.css": "6f07cb261417373d38b8348839ecf0a8cf5010d2b88cfe80514946c48e1d1f60",
+      "src/web/styles/run-maintenance.module.css": "9f654219c83c825323b910bbf3a23ca1b7651bd6daed5d8b5d51b51daab8af26",
+      "src/web/styles/screen-styles.tsx": "1192243734b68ca3cd450f3e33cc8721ffeb403a4e9ae988039040f45dfbe4cc",
+      "src/web/styles/settings-screen.module.css": "27427175c3d88313a58c8f8bd709a04cf277d027108591f92c5552296020aa9c",
+      "src/web/styles/shiny-sendout.module.css": "1aea7b8fdc24d70afce863f0e94409dcc8af41206e386a133fe1cfbf3417ff99",
+      "src/web/styles/shop-heading.module.css": "4bc2721056c00e52f8203f47a32df3549cc35533899f37f0c4e8a9663daa50ce",
+      "src/web/styles/teleport-portal.module.css": "4d45d52555112cd6db9aaf40bc4373c783525f8017666f60cef7f5f59e67797f",
+      "src/web/styles/tera-theme.module.css": "d099c151d66178bba5af44da99f7d789810b0da54593855b5cafb712890b6baa",
+      "src/web/styles/title-screen.module.css": "566ddd8c98b206d23b850baa80d87b9dcad9f18cbb1a0d7da11c968306144c1c",
+      "src/web/styles/tm-icon.module.css": "3be85bb7cbc89436a3dc31693ad7eca7f58895b27b4bfa9637c708b1b1949e54",
+      "src/web/styles/tokens.css": "8a72ac410d0b4aadda0df0707686426301d54ea3b15c0882a06a1fe35324990d",
+      "src/web/styles/training-wallet.module.css": "8e4facad7a3dba44bc960f64af590a133ff81692bdb7050cc22fff6023bb779b",
+      "src/web/teleport-portal.tsx": "38eea9b8615ffb16fbf5cc301c687c8e05059daa0fddfbee692169d03fbaed14",
+      "src/web/tera-crystal.tsx": "bdda900c0bc93ec624a54a7925743cf36702281c5caef016e9ca6fe4e55d7130",
+      "src/web/tera-type-icon.tsx": "cf5c60b9c458e73992ab808d2a2847f254f2fda82b2f6bd91ada7490d8afc19f",
+      "src/web/title-screen.tsx": "75386f06102def410c82f3fa7af4b861a0d22f820f019336da97d901c24c6bd8",
+      "src/web/tm-icon.tsx": "4c4899da743b47e06ebdfba394aaeac3e4aba1a44bde8430f0b3189133582004",
+      "src/web/tool-voucher-dialog.tsx": "ee93c1320cfab6e023ac956d23dd3be06260f6c3a82372ad82a1c3c7bada8336",
+      "src/web/tower-clear.tsx": "36debae93dbe3b3c207ddfa53c368654d491e5361593ae14b294b77b65105dbe",
+      "src/web/tower-controls.tsx": "bf05092300fd4175e50dcc1f88311a8db9e559f7ccea2d954b2b1fa7310ded7c",
+      "src/web/tower-shop.tsx": "62dbba4f0984062d6a35159ace3b308ef7b8022de6201160eb2e8c8eb9fae2f5",
+      "src/web/trainer-equipment.tsx": "6c3f38775e7291109ca1874cb1537884a9d3374ce84508943fee5bcfc2c73347",
+      "src/web/trainer-samples.ts": "2a9977c321bf2431ffbba1ea05342e01262407e179c17e212c6af9026c989d25",
+      "src/web/training-editor.tsx": "ba79815f54866e8a67d11f7c76fc46762b22bfd3e50dcc768591c98829cce839",
+      "src/web/type-badge.tsx": "19543d0afcc776dda861af3a96c0828fbcf596a52d2f1abbfc8396cc578d3b6d",
+      "src/web/use-touch-hold.ts": "cd3a5cde332b4f0fec50cf3b57622e5794081c309bbeb9a1bf591f3554ecdcf8",
+      "src/web/villain-outcome.tsx": "74596bc231f62bba644955ab389decc2e436662b27436c8e5f40f17640934215",
+      "src/web/z-crystal.tsx": "b671b50361a4432d353507e45d356f4a9083ac81d34d6b4494da7ed03d8d1e2c"
+    },
+    "poolHash": "5066eb2162dd9a3145d3fd2f957882d114448f54f8029dc0910f3d20d4c73795",
+    "policyHash": "ef4887a6310fc3528cfdc27757792f217ed194eebed46d2c659314837cd21172",
+    "raidDefinitionsHash": "f48e341cfa85324b008fd6ba3dbc3adad1bea96e3619b5a10b757ad996488828"
+  },
+  "groups": [
+    {
+      "bossId": "mewtwo",
+      "boss": "Mewtwo",
+      "hpMode": "threshold-v1",
+      "before": 0,
+      "after": 5,
+      "delta": 5,
+      "summary": {
+        "battles": 500,
+        "playerWins": 25,
+        "bossWins": 475,
+        "winRate": 5,
+        "avgTurns": 5.436,
+        "medianTurns": 5,
+        "minTurns": 3,
+        "maxTurns": 9,
+        "avgSurvivors": 1.2,
+        "avgHPLeft": 22.71771324907031,
+        "medianHPLeft": 11.406844106463879,
+        "survivorShares": [
+          80,
+          20,
+          0
+        ],
+        "avgBossPhaseHP": 57.3400167084377,
+        "effectiveHP": 189,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 189,
+      "phaseMaxHP": [
+        189,
+        189,
+        189
+      ],
+      "phaseBudgets": [
+        63,
+        63,
+        63
+      ]
+    },
+    {
+      "bossId": "zacian",
+      "boss": "Zacian",
+      "hpMode": "threshold-v1",
+      "before": 0.4,
+      "after": 10.8,
+      "delta": 10.4,
+      "summary": {
+        "battles": 500,
+        "playerWins": 54,
+        "bossWins": 446,
+        "winRate": 10.8,
+        "avgTurns": 3.982,
+        "medianTurns": 4,
+        "minTurns": 2,
+        "maxTurns": 7,
+        "avgSurvivors": 2,
+        "avgHPLeft": 43.183670212363644,
+        "medianHPLeft": 39.010989010989015,
+        "survivorShares": [
+          20.37037037037037,
+          59.25925925925926,
+          20.37037037037037
+        ],
+        "avgBossPhaseHP": 57.595131326073,
+        "effectiveHP": 175,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 175,
+      "phaseMaxHP": [
+        175,
+        175
+      ],
+      "phaseBudgets": [
+        87,
+        88
+      ]
+    },
+    {
+      "bossId": "kyogre",
+      "boss": "Kyogre",
+      "hpMode": "threshold-v1",
+      "before": 0.6,
+      "after": 13.8,
+      "delta": 13.200000000000001,
+      "summary": {
+        "battles": 500,
+        "playerWins": 69,
+        "bossWins": 431,
+        "winRate": 13.8,
+        "avgTurns": 3.916,
+        "medianTurns": 4,
+        "minTurns": 2,
+        "maxTurns": 10,
+        "avgSurvivors": 1.7826086956521738,
+        "avgHPLeft": 52.79045041804315,
+        "medianHPLeft": 61.40684410646388,
+        "survivorShares": [
+          42.028985507246375,
+          37.68115942028985,
+          20.28985507246377
+        ],
+        "avgBossPhaseHP": 45.84712132161831,
+        "effectiveHP": 183,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 183,
+      "phaseMaxHP": [
+        183,
+        183
+      ],
+      "phaseBudgets": [
+        91,
+        92
+      ]
+    },
+    {
+      "bossId": "rayquaza",
+      "boss": "Rayquaza",
+      "hpMode": "threshold-v1",
+      "before": 0,
+      "after": 19.4,
+      "delta": 19.4,
+      "summary": {
+        "battles": 500,
+        "playerWins": 97,
+        "bossWins": 403,
+        "winRate": 19.4,
+        "avgTurns": 3.73,
+        "medianTurns": 4,
+        "minTurns": 2,
+        "maxTurns": 7,
+        "avgSurvivors": 1.7525773195876289,
+        "avgHPLeft": 32.76880048366064,
+        "medianHPLeft": 36.95198329853862,
+        "survivorShares": [
+          26.804123711340207,
+          71.1340206185567,
+          2.0618556701030926
+        ],
+        "avgBossPhaseHP": 46.664642838287335,
+        "effectiveHP": 188,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 188,
+      "phaseMaxHP": [
+        188,
+        188
+      ],
+      "phaseBudgets": [
+        94,
+        94
+      ]
+    },
+    {
+      "bossId": "groudon",
+      "boss": "Groudon",
+      "hpMode": "threshold-v1",
+      "before": 1,
+      "after": 21,
+      "delta": 20,
+      "summary": {
+        "battles": 500,
+        "playerWins": 105,
+        "bossWins": 395,
+        "winRate": 21,
+        "avgTurns": 4.248,
+        "medianTurns": 4,
+        "minTurns": 2,
+        "maxTurns": 9,
+        "avgSurvivors": 1.4190476190476191,
+        "avgHPLeft": 39.6862577471754,
+        "medianHPLeft": 31.73277661795407,
+        "survivorShares": [
+          65.71428571428571,
+          26.666666666666668,
+          7.619047619047619
+        ],
+        "avgBossPhaseHP": 53.26277927647499,
+        "effectiveHP": 183,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 183,
+      "phaseMaxHP": [
+        183,
+        183
+      ],
+      "phaseBudgets": [
+        91,
+        92
+      ]
+    },
+    {
+      "bossId": "arceus",
+      "boss": "Arceus",
+      "hpMode": "threshold-v1",
+      "before": 0.4,
+      "after": 29.4,
+      "delta": 29,
+      "summary": {
+        "battles": 500,
+        "playerWins": 147,
+        "bossWins": 353,
+        "winRate": 29.4,
+        "avgTurns": 5.962,
+        "medianTurns": 6,
+        "minTurns": 3,
+        "maxTurns": 11,
+        "avgSurvivors": 1.2925170068027212,
+        "avgHPLeft": 22.610990307925842,
+        "medianHPLeft": 14.829659318637274,
+        "survivorShares": [
+          72.10884353741497,
+          26.53061224489796,
+          1.3605442176870748
+        ],
+        "avgBossPhaseHP": 42.911567283942084,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 203,
+      "phaseMaxHP": [
+        203,
+        203,
+        203
+      ],
+      "phaseBudgets": [
+        69,
+        67,
+        67
+      ]
+    },
+    {
+      "bossId": "terapagos",
+      "boss": "Terapagos",
+      "hpMode": "threshold-v1",
+      "before": 3.4,
+      "after": 30,
+      "delta": 26.6,
+      "summary": {
+        "battles": 500,
+        "playerWins": 150,
+        "bossWins": 350,
+        "winRate": 30,
+        "avgTurns": 5.254,
+        "medianTurns": 5,
+        "minTurns": 3,
+        "maxTurns": 9,
+        "avgSurvivors": 1.2466666666666666,
+        "avgHPLeft": 24.417637403157677,
+        "medianHPLeft": 31.73277661795407,
+        "survivorShares": [
+          74,
+          25.333333333333332,
+          0
+        ],
+        "avgBossPhaseHP": 39.595822681965025,
+        "effectiveHP": 211,
+        "effectiveMultiplier": 1.2196531791907546
+      },
+      "baseHP": 173,
+      "phaseMaxHP": [
+        178,
+        243
+      ],
+      "phaseBudgets": [
+        89,
+        122
+      ]
+    },
+    {
+      "bossId": "shaymin",
+      "boss": "Shaymin",
+      "hpMode": "threshold-v1",
+      "before": 16.8,
+      "after": 36,
+      "delta": 19.2,
+      "summary": {
+        "battles": 500,
+        "playerWins": 180,
+        "bossWins": 320,
+        "winRate": 36,
+        "avgTurns": 5.246,
+        "medianTurns": 5,
+        "minTurns": 2,
+        "maxTurns": 11,
+        "avgSurvivors": 1.988888888888889,
+        "avgHPLeft": 44.980742451700614,
+        "medianHPLeft": 41.99832719036013,
+        "survivorShares": [
+          25,
+          51.111111111111114,
+          23.88888888888889
+        ],
+        "avgBossPhaseHP": 36.19023224043729,
+        "effectiveHP": 183,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 183,
+      "phaseMaxHP": [
+        183,
+        183
+      ],
+      "phaseBudgets": [
+        91,
+        92
+      ]
+    },
+    {
+      "bossId": "kyurem",
+      "boss": "Kyurem",
+      "hpMode": "threshold-v1",
+      "before": 6.4,
+      "after": 41.8,
+      "delta": 35.4,
+      "summary": {
+        "battles": 500,
+        "playerWins": 209,
+        "bossWins": 291,
+        "winRate": 41.8,
+        "avgTurns": 4.78,
+        "medianTurns": 5,
+        "minTurns": 2,
+        "maxTurns": 12,
+        "avgSurvivors": 1.8564593301435406,
+        "avgHPLeft": 45.76447824185704,
+        "medianHPLeft": 41.11776447105788,
+        "survivorShares": [
+          37.32057416267943,
+          38.27751196172249,
+          23.923444976076556
+        ],
+        "avgBossPhaseHP": 41.34119746233147,
+        "effectiveHP": 208,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 208,
+      "phaseMaxHP": [
+        208,
+        208
+      ],
+      "phaseBudgets": [
+        104,
+        104
+      ]
+    },
+    {
+      "bossId": "ogerpon",
+      "boss": "Ogerpon",
+      "hpMode": "threshold-v1",
+      "before": 7.8,
+      "after": 44.6,
+      "delta": 36.800000000000004,
+      "summary": {
+        "battles": 500,
+        "playerWins": 223,
+        "bossWins": 277,
+        "winRate": 44.6,
+        "avgTurns": 5.588,
+        "medianTurns": 6,
+        "minTurns": 3,
+        "maxTurns": 9,
+        "avgSurvivors": 1.336322869955157,
+        "avgHPLeft": 22.73387402774727,
+        "medianHPLeft": 18.840579710144926,
+        "survivorShares": [
+          61.88340807174888,
+          31.838565022421523,
+          2.690582959641256
+        ],
+        "avgBossPhaseHP": 54.1449801776261,
+        "effectiveHP": 163,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 163,
+      "phaseMaxHP": [
+        163,
+        163,
+        163,
+        163
+      ],
+      "phaseBudgets": [
+        41,
+        40,
+        41,
+        41
+      ]
+    },
+    {
+      "bossId": "zygarde",
+      "boss": "Zygarde",
+      "hpMode": "threshold-v1",
+      "before": 1.4,
+      "after": 47.2,
+      "delta": 45.800000000000004,
+      "summary": {
+        "battles": 500,
+        "playerWins": 236,
+        "bossWins": 264,
+        "winRate": 47.2,
+        "avgTurns": 5.898,
+        "medianTurns": 6,
+        "minTurns": 3,
+        "maxTurns": 10,
+        "avgSurvivors": 1.6228813559322033,
+        "avgHPLeft": 37.927901325673965,
+        "medianHPLeft": 37.675350701402806,
+        "survivorShares": [
+          36.440677966101696,
+          59.74576271186441,
+          2.1186440677966103
+        ],
+        "avgBossPhaseHP": 33.64751190838146,
+        "effectiveHP": 262,
+        "effectiveMultiplier": 1.3717277486911064
+      },
+      "baseHP": 191,
+      "phaseMaxHP": [
+        191,
+        299,
+        299
+      ],
+      "phaseBudgets": [
+        65,
+        98,
+        99
+      ]
+    },
+    {
+      "bossId": "necrozma",
+      "boss": "Necrozma",
+      "hpMode": "threshold-v1",
+      "before": 9.2,
+      "after": 48.2,
+      "delta": 39,
+      "summary": {
+        "battles": 500,
+        "playerWins": 241,
+        "bossWins": 259,
+        "winRate": 48.2,
+        "avgTurns": 5.226,
+        "medianTurns": 5,
+        "minTurns": 3,
+        "maxTurns": 10,
+        "avgSurvivors": 1.6556016597510372,
+        "avgHPLeft": 35.17084209318273,
+        "medianHPLeft": 38.827838827838825,
+        "survivorShares": [
+          39.004149377593365,
+          56.43153526970954,
+          4.564315352697095
+        ],
+        "avgBossPhaseHP": 30.58344058344045,
+        "effectiveHP": 180,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 180,
+      "phaseMaxHP": [
+        180,
+        180,
+        180
+      ],
+      "phaseBudgets": [
+        61,
+        60,
+        59
+      ]
+    },
+    {
+      "bossId": "garchomp",
+      "boss": "Garchomp",
+      "hpMode": "threshold-v1",
+      "before": 11.2,
+      "after": 54.2,
+      "delta": 43,
+      "summary": {
+        "battles": 500,
+        "playerWins": 271,
+        "bossWins": 229,
+        "winRate": 54.2,
+        "avgTurns": 4.1,
+        "medianTurns": 4,
+        "minTurns": 2,
+        "maxTurns": 7,
+        "avgSurvivors": 1.8560885608856088,
+        "avgHPLeft": 42.7110152504053,
+        "medianHPLeft": 41.68297455968689,
+        "survivorShares": [
+          28.04428044280443,
+          58.30258302583026,
+          13.653136531365314
+        ],
+        "avgBossPhaseHP": 46.98250391618539,
+        "effectiveHP": 187.24,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 187.24,
+      "phaseMaxHP": [
+        191,
+        191
+      ],
+      "phaseBudgets": [
+        95,
+        96
+      ]
+    },
+    {
+      "bossId": "zamazenta",
+      "boss": "Zamazenta",
+      "hpMode": "threshold-v1",
+      "before": 1.2,
+      "after": 60,
+      "delta": 58.8,
+      "summary": {
+        "battles": 500,
+        "playerWins": 300,
+        "bossWins": 200,
+        "winRate": 60,
+        "avgTurns": 4.308,
+        "medianTurns": 4,
+        "minTurns": 2,
+        "maxTurns": 7,
+        "avgSurvivors": 1.5033333333333334,
+        "avgHPLeft": 31.64268990725873,
+        "medianHPLeft": 26.61596958174905,
+        "survivorShares": [
+          51,
+          35.666666666666664,
+          9.333333333333334
+        ],
+        "avgBossPhaseHP": 55.48571428571429,
+        "effectiveHP": 175,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 175,
+      "phaseMaxHP": [
+        175,
+        175
+      ],
+      "phaseBudgets": [
+        87,
+        88
+      ]
+    },
+    {
+      "bossId": "metagross",
+      "boss": "Metagross",
+      "hpMode": "threshold-v1",
+      "before": 26.8,
+      "after": 60.4,
+      "delta": 33.599999999999994,
+      "summary": {
+        "battles": 500,
+        "playerWins": 302,
+        "bossWins": 198,
+        "winRate": 60.4,
+        "avgTurns": 4.484,
+        "medianTurns": 5,
+        "minTurns": 2,
+        "maxTurns": 7,
+        "avgSurvivors": 1.8476821192052981,
+        "avgHPLeft": 43.22035082402472,
+        "medianHPLeft": 40.41758380472257,
+        "survivorShares": [
+          31.125827814569536,
+          52.980132450331126,
+          15.894039735099337
+        ],
+        "avgBossPhaseHP": 32.394497118423594,
+        "effectiveHP": 163,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 163,
+      "phaseMaxHP": [
+        163,
+        163
+      ],
+      "phaseBudgets": [
+        81,
+        82
+      ]
+    },
+    {
+      "bossId": "volcarona",
+      "boss": "Volcarona",
+      "hpMode": "replacement-v1",
+      "before": 56.4,
+      "after": 61,
+      "delta": 4.600000000000001,
+      "summary": {
+        "battles": 500,
+        "playerWins": 305,
+        "bossWins": 195,
+        "winRate": 61,
+        "avgTurns": 5.036,
+        "medianTurns": 5,
+        "minTurns": 2,
+        "maxTurns": 12,
+        "avgSurvivors": 1.8032786885245902,
+        "avgHPLeft": 45.18238467676682,
+        "medianHPLeft": 40.60324825986079,
+        "survivorShares": [
+          33.442622950819676,
+          40,
+          22.295081967213115
+        ],
+        "avgBossPhaseHP": 60.871555166033694,
+        "effectiveHP": 333.59,
+        "effectiveMultiplier": 1.9856547619047549
+      },
+      "baseHP": 168,
+      "phaseMaxHP": [
+        168,
+        163
+      ],
+      "phaseBudgets": [
+        168,
+        163
+      ]
+    },
+    {
+      "bossId": "diancie",
+      "boss": "Diancie",
+      "hpMode": "threshold-v1",
+      "before": 44.2,
+      "after": 62.2,
+      "delta": 18,
+      "summary": {
+        "battles": 500,
+        "playerWins": 311,
+        "bossWins": 189,
+        "winRate": 62.2,
+        "avgTurns": 4.172,
+        "medianTurns": 3,
+        "minTurns": 2,
+        "maxTurns": 10,
+        "avgSurvivors": 1.8006430868167203,
+        "avgHPLeft": 40.61629659059127,
+        "medianHPLeft": 41.96242171189979,
+        "survivorShares": [
+          27.009646302250804,
+          63.02250803858521,
+          9.003215434083602
+        ],
+        "avgBossPhaseHP": 35.77594780602297,
+        "effectiveHP": 133,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 133,
+      "phaseMaxHP": [
+        133,
+        133
+      ],
+      "phaseBudgets": [
+        66,
+        67
+      ]
+    },
+    {
+      "bossId": "snorlax",
+      "boss": "Snorlax",
+      "hpMode": "threshold-v1",
+      "before": 1.4,
+      "after": 63.6,
+      "delta": 62.2,
+      "summary": {
+        "battles": 500,
+        "playerWins": 318,
+        "bossWins": 182,
+        "winRate": 63.6,
+        "avgTurns": 4.738,
+        "medianTurns": 5,
+        "minTurns": 2,
+        "maxTurns": 13,
+        "avgSurvivors": 1.5031446540880504,
+        "avgHPLeft": 40.63391703311307,
+        "medianHPLeft": 36.467632380000936,
+        "survivorShares": [
+          51.57232704402516,
+          46.540880503144656,
+          1.8867924528301887
+        ],
+        "avgBossPhaseHP": 25.828698050920263,
+        "effectiveHP": 365,
+        "effectiveMultiplier": 1.5020576131687369
+      },
+      "baseHP": 243,
+      "phaseMaxHP": [
+        243,
+        486
+      ],
+      "phaseBudgets": [
+        121,
+        244
+      ]
+    },
+    {
+      "bossId": "hoopa",
+      "boss": "Hoopa",
+      "hpMode": "threshold-v1",
+      "before": 61.2,
+      "after": 82.4,
+      "delta": 21.200000000000003,
+      "summary": {
+        "battles": 500,
+        "playerWins": 412,
+        "bossWins": 88,
+        "winRate": 82.4,
+        "avgTurns": 3.2,
+        "medianTurns": 3,
+        "minTurns": 2,
+        "maxTurns": 6,
+        "avgSurvivors": 2.2402912621359223,
+        "avgHPLeft": 58.3016929497457,
+        "medianHPLeft": 67.72823779193206,
+        "survivorShares": [
+          16.990291262135923,
+          41.262135922330096,
+          41.50485436893204
+        ],
+        "avgBossPhaseHP": 68.22364751812607,
+        "effectiveHP": 163,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 163,
+      "phaseMaxHP": [
+        163,
+        163
+      ],
+      "phaseBudgets": [
+        81,
+        82
+      ]
+    },
+    {
+      "bossId": "palafin",
+      "boss": "Palafin",
+      "hpMode": "threshold-v1",
+      "before": 38,
+      "after": 82.4,
+      "delta": 44.400000000000006,
+      "summary": {
+        "battles": 500,
+        "playerWins": 412,
+        "bossWins": 88,
+        "winRate": 82.4,
+        "avgTurns": 3.744,
+        "medianTurns": 3,
+        "minTurns": 2,
+        "maxTurns": 7,
+        "avgSurvivors": 1.4029126213592233,
+        "avgHPLeft": 33.90267589558164,
+        "medianHPLeft": 32.016632016632016,
+        "survivorShares": [
+          62.62135922330097,
+          34.46601941747573,
+          2.912621359223301
+        ],
+        "avgBossPhaseHP": 21.26800794833583,
+        "effectiveHP": 183,
+        "effectiveMultiplier": 1
+      },
+      "baseHP": 183,
+      "phaseMaxHP": [
+        183,
+        183
+      ],
+      "phaseBudgets": [
+        91,
+        92
+      ]
+    }
+  ],
+  "branches": [
+    {
+      "boss": "Mewtwo",
+      "bossId": "mewtwo",
+      "branch": "x",
+      "kind": "route",
+      "before": 0,
+      "summary": {
+        "battles": 249,
+        "playerWins": 17,
+        "bossWins": 232,
+        "winRate": 6.827309236947791,
+        "avgTurns": 5.6305220883534135,
+        "medianTurns": 6,
+        "minTurns": 3,
+        "maxTurns": 9,
+        "avgSurvivors": 1.2941176470588236,
+        "avgHPLeft": 30.59725645454598,
+        "medianHPLeft": 12.547528517110266,
+        "survivorShares": [
+          70.58823529411765,
+          29.41176470588235,
+          0
+        ],
+        "avgBossPhaseHP": 66.42492245940522,
+        "effectiveHP": 189,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Mewtwo",
+      "bossId": "mewtwo",
+      "branch": "y",
+      "kind": "route",
+      "before": 0,
+      "summary": {
+        "battles": 251,
+        "playerWins": 8,
+        "bossWins": 243,
+        "winRate": 3.187250996015936,
+        "avgTurns": 5.243027888446215,
+        "medianTurns": 5,
+        "minTurns": 3,
+        "maxTurns": 8,
+        "avgSurvivors": 1,
+        "avgHPLeft": 5.973683937434519,
+        "medianHPLeft": 3.811059200280757,
+        "survivorShares": [
+          100,
+          0,
+          0
+        ],
+        "avgBossPhaseHP": 48.666361835086114,
+        "effectiveHP": 189,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Bug",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 62,
+        "playerWins": 13,
+        "bossWins": 49,
+        "winRate": 20.967741935483872,
+        "avgTurns": 5.838709677419355,
+        "medianTurns": 5.5,
+        "minTurns": 4,
+        "maxTurns": 9,
+        "avgSurvivors": 1.2307692307692308,
+        "avgHPLeft": 26.13913030782228,
+        "medianHPLeft": 20.939334637964777,
+        "survivorShares": [
+          76.92307692307692,
+          23.076923076923077,
+          0
+        ],
+        "avgBossPhaseHP": 44.576254146979004,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Dark",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 56,
+        "playerWins": 18,
+        "bossWins": 38,
+        "winRate": 32.142857142857146,
+        "avgTurns": 5.803571428571429,
+        "medianTurns": 6,
+        "minTurns": 4,
+        "maxTurns": 9,
+        "avgSurvivors": 1.3888888888888888,
+        "avgHPLeft": 27.76322873417318,
+        "medianHPLeft": 25.792247964143677,
+        "survivorShares": [
+          66.66666666666667,
+          27.77777777777778,
+          5.555555555555555
+        ],
+        "avgBossPhaseHP": 44.33497536945813,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Dragon",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 46,
+        "playerWins": 11,
+        "bossWins": 35,
+        "winRate": 23.91304347826087,
+        "avgTurns": 6.021739130434782,
+        "medianTurns": 6,
+        "minTurns": 4,
+        "maxTurns": 8,
+        "avgSurvivors": 1.0909090909090908,
+        "avgHPLeft": 11.300062668516714,
+        "medianHPLeft": 7.770961145194274,
+        "survivorShares": [
+          90.9090909090909,
+          9.090909090909092,
+          0
+        ],
+        "avgBossPhaseHP": 38.47994370161859,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Electric",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 61,
+        "playerWins": 8,
+        "bossWins": 53,
+        "winRate": 13.114754098360656,
+        "avgTurns": 5.737704918032787,
+        "medianTurns": 5,
+        "minTurns": 4,
+        "maxTurns": 9,
+        "avgSurvivors": 1.25,
+        "avgHPLeft": 23.56568062579045,
+        "medianHPLeft": 28.326612903225808,
+        "survivorShares": [
+          75,
+          25,
+          0
+        ],
+        "avgBossPhaseHP": 47.92266939306626,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Fairy",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 52,
+        "playerWins": 15,
+        "bossWins": 37,
+        "winRate": 28.846153846153847,
+        "avgTurns": 5.8076923076923075,
+        "medianTurns": 6,
+        "minTurns": 4,
+        "maxTurns": 8,
+        "avgSurvivors": 1.2,
+        "avgHPLeft": 19.102366272329057,
+        "medianHPLeft": 13.709677419354838,
+        "survivorShares": [
+          80,
+          20,
+          0
+        ],
+        "avgBossPhaseHP": 39.78165357475702,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Fighting",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 56,
+        "playerWins": 21,
+        "bossWins": 35,
+        "winRate": 37.5,
+        "avgTurns": 5.875,
+        "medianTurns": 6,
+        "minTurns": 4,
+        "maxTurns": 8,
+        "avgSurvivors": 1.2380952380952381,
+        "avgHPLeft": 22.36783285108366,
+        "medianHPLeft": 10.836501901140684,
+        "survivorShares": [
+          76.19047619047619,
+          23.80952380952381,
+          0
+        ],
+        "avgBossPhaseHP": 41.08374384236454,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Fire",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 61,
+        "playerWins": 20,
+        "bossWins": 41,
+        "winRate": 32.78688524590164,
+        "avgTurns": 6.131147540983607,
+        "medianTurns": 6,
+        "minTurns": 4,
+        "maxTurns": 9,
+        "avgSurvivors": 1.3,
+        "avgHPLeft": 18.327157893508044,
+        "medianHPLeft": 15.990152136860047,
+        "survivorShares": [
+          75,
+          20,
+          5
+        ],
+        "avgBossPhaseHP": 43.986543313709,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Flying",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 73,
+        "playerWins": 25,
+        "bossWins": 48,
+        "winRate": 34.24657534246575,
+        "avgTurns": 5.904109589041096,
+        "medianTurns": 6,
+        "minTurns": 3,
+        "maxTurns": 8,
+        "avgSurvivors": 1.32,
+        "avgHPLeft": 24.681595513726226,
+        "medianHPLeft": 15.524193548387096,
+        "survivorShares": [
+          68,
+          32,
+          0
+        ],
+        "avgBossPhaseHP": 40.476190476190474,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Ghost",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 63,
+        "playerWins": 23,
+        "bossWins": 40,
+        "winRate": 36.507936507936506,
+        "avgTurns": 5.984126984126984,
+        "medianTurns": 6,
+        "minTurns": 4,
+        "maxTurns": 8,
+        "avgSurvivors": 1.2608695652173914,
+        "avgHPLeft": 23.014277085676618,
+        "medianHPLeft": 10.276679841897232,
+        "survivorShares": [
+          73.91304347826087,
+          26.08695652173913,
+          0
+        ],
+        "avgBossPhaseHP": 41.514778325123146,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Grass",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 56,
+        "playerWins": 14,
+        "bossWins": 42,
+        "winRate": 25,
+        "avgTurns": 5.803571428571429,
+        "medianTurns": 5,
+        "minTurns": 4,
+        "maxTurns": 8,
+        "avgSurvivors": 1.5,
+        "avgHPLeft": 27.197998289785506,
+        "medianHPLeft": 19.718071772544363,
+        "survivorShares": [
+          57.142857142857146,
+          35.714285714285715,
+          7.142857142857143
+        ],
+        "avgBossPhaseHP": 44.62819610602862,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Ground",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 57,
+        "playerWins": 19,
+        "bossWins": 38,
+        "winRate": 33.333333333333336,
+        "avgTurns": 5.43859649122807,
+        "medianTurns": 5,
+        "minTurns": 3,
+        "maxTurns": 11,
+        "avgSurvivors": 1.368421052631579,
+        "avgHPLeft": 22.946573429131405,
+        "medianHPLeft": 15.32258064516129,
+        "survivorShares": [
+          63.1578947368421,
+          36.8421052631579,
+          0
+        ],
+        "avgBossPhaseHP": 43.92014519056262,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Ice",
+      "kind": "typePresence",
+      "before": 1.9607843137254901,
+      "summary": {
+        "battles": 51,
+        "playerWins": 14,
+        "bossWins": 37,
+        "winRate": 27.45098039215686,
+        "avgTurns": 6.078431372549019,
+        "medianTurns": 6,
+        "minTurns": 3,
+        "maxTurns": 9,
+        "avgSurvivors": 1,
+        "avgHPLeft": 9.339146329029465,
+        "medianHPLeft": 8.856844123028665,
+        "survivorShares": [
+          100,
+          0,
+          0
+        ],
+        "avgBossPhaseHP": 43.416322726667566,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Poison",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 59,
+        "playerWins": 20,
+        "bossWins": 39,
+        "winRate": 33.898305084745765,
+        "avgTurns": 5.728813559322034,
+        "medianTurns": 6,
+        "minTurns": 4,
+        "maxTurns": 8,
+        "avgSurvivors": 1.35,
+        "avgHPLeft": 27.244392975142393,
+        "medianHPLeft": 24.782040104620748,
+        "survivorShares": [
+          70,
+          25,
+          5
+        ],
+        "avgBossPhaseHP": 42.983453328280916,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Psychic",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 62,
+        "playerWins": 19,
+        "bossWins": 43,
+        "winRate": 30.64516129032258,
+        "avgTurns": 6.129032258064516,
+        "medianTurns": 6,
+        "minTurns": 4,
+        "maxTurns": 10,
+        "avgSurvivors": 1.2105263157894737,
+        "avgHPLeft": 23.482286833745523,
+        "medianHPLeft": 13.688212927756654,
+        "survivorShares": [
+          78.94736842105263,
+          21.05263157894737,
+          0
+        ],
+        "avgBossPhaseHP": 46.56890823691145,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Rock",
+      "kind": "typePresence",
+      "before": 3.1746031746031744,
+      "summary": {
+        "battles": 63,
+        "playerWins": 19,
+        "bossWins": 44,
+        "winRate": 30.158730158730158,
+        "avgTurns": 6.126984126984127,
+        "medianTurns": 6,
+        "minTurns": 4,
+        "maxTurns": 9,
+        "avgSurvivors": 1.368421052631579,
+        "avgHPLeft": 24.21904513309161,
+        "medianHPLeft": 14.829659318637274,
+        "survivorShares": [
+          63.1578947368421,
+          36.8421052631579,
+          0
+        ],
+        "avgBossPhaseHP": 40.562024182713834,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Steel",
+      "kind": "typePresence",
+      "before": 1.492537313432836,
+      "summary": {
+        "battles": 67,
+        "playerWins": 18,
+        "bossWins": 49,
+        "winRate": 26.865671641791046,
+        "avgTurns": 6.432835820895522,
+        "medianTurns": 6,
+        "minTurns": 5,
+        "maxTurns": 9,
+        "avgSurvivors": 1.2222222222222223,
+        "avgHPLeft": 18.7199593428709,
+        "medianHPLeft": 15.880147391557308,
+        "survivorShares": [
+          77.77777777777777,
+          22.22222222222222,
+          0
+        ],
+        "avgBossPhaseHP": 40.80627324821553,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Arceus",
+      "bossId": "arceus",
+      "branch": "Arceus-Water",
+      "kind": "typePresence",
+      "before": 0,
+      "summary": {
+        "battles": 55,
+        "playerWins": 17,
+        "bossWins": 38,
+        "winRate": 30.90909090909091,
+        "avgTurns": 6.454545454545454,
+        "medianTurns": 6,
+        "minTurns": 4,
+        "maxTurns": 11,
+        "avgSurvivors": 1.5294117647058822,
+        "avgHPLeft": 28.847614555910454,
+        "medianHPLeft": 19.126819126819125,
+        "survivorShares": [
+          47.05882352941177,
+          52.94117647058823,
+          0
+        ],
+        "avgBossPhaseHP": 42.37749546279493,
+        "effectiveHP": 203,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Kyurem",
+      "bossId": "kyurem",
+      "branch": "black",
+      "kind": "route",
+      "before": 9.448818897637794,
+      "summary": {
+        "battles": 254,
+        "playerWins": 124,
+        "bossWins": 130,
+        "winRate": 48.818897637795274,
+        "avgTurns": 5.106299212598425,
+        "medianTurns": 5,
+        "minTurns": 2,
+        "maxTurns": 12,
+        "avgSurvivors": 1.8306451612903225,
+        "avgHPLeft": 47.02415853652754,
+        "medianHPLeft": 38.97037102682263,
+        "survivorShares": [
+          44.354838709677416,
+          28.225806451612904,
+          27.419354838709676
+        ],
+        "avgBossPhaseHP": 38.002958579881664,
+        "effectiveHP": 208,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Kyurem",
+      "bossId": "kyurem",
+      "branch": "white",
+      "kind": "route",
+      "before": 3.252032520325203,
+      "summary": {
+        "battles": 246,
+        "playerWins": 85,
+        "bossWins": 161,
+        "winRate": 34.552845528455286,
+        "avgTurns": 4.443089430894309,
+        "medianTurns": 4,
+        "minTurns": 2,
+        "maxTurns": 8,
+        "avgSurvivors": 1.8941176470588235,
+        "avgHPLeft": 43.92682698845529,
+        "medianHPLeft": 41.544885177453025,
+        "survivorShares": [
+          27.058823529411764,
+          52.94117647058823,
+          18.823529411764707
+        ],
+        "avgBossPhaseHP": 44.03666985188725,
+        "effectiveHP": 208,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Necrozma",
+      "bossId": "necrozma",
+      "branch": "dawn-wings",
+      "kind": "route",
+      "before": 8.633093525179856,
+      "summary": {
+        "battles": 278,
+        "playerWins": 135,
+        "bossWins": 143,
+        "winRate": 48.56115107913669,
+        "avgTurns": 5.057553956834532,
+        "medianTurns": 5,
+        "minTurns": 3,
+        "maxTurns": 10,
+        "avgSurvivors": 1.5555555555555556,
+        "avgHPLeft": 34.10544829479746,
+        "medianHPLeft": 38.827838827838825,
+        "survivorShares": [
+          52.592592592592595,
+          39.25925925925926,
+          8.148148148148149
+        ],
+        "avgBossPhaseHP": 30.376845376845388,
+        "effectiveHP": 180,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Necrozma",
+      "bossId": "necrozma",
+      "branch": "dusk-mane",
+      "kind": "route",
+      "before": 9.90990990990991,
+      "summary": {
+        "battles": 222,
+        "playerWins": 106,
+        "bossWins": 116,
+        "winRate": 47.747747747747745,
+        "avgTurns": 5.436936936936937,
+        "medianTurns": 5,
+        "minTurns": 3,
+        "maxTurns": 9,
+        "avgSurvivors": 1.7830188679245282,
+        "avgHPLeft": 36.527711553390375,
+        "medianHPLeft": 39.669386204217204,
+        "survivorShares": [
+          21.69811320754717,
+          78.30188679245283,
+          0
+        ],
+        "avgBossPhaseHP": 30.838122605364006,
+        "effectiveHP": 180,
+        "effectiveMultiplier": 1
+      }
+    },
+    {
+      "boss": "Volcarona",
+      "bossId": "volcarona",
+      "branch": "iron-moth",
+      "kind": "route",
+      "before": 39.41908713692946,
+      "summary": {
+        "battles": 241,
+        "playerWins": 109,
+        "bossWins": 132,
+        "winRate": 45.22821576763486,
+        "avgTurns": 4.8879668049792535,
+        "medianTurns": 5,
+        "minTurns": 2,
+        "maxTurns": 10,
+        "avgSurvivors": 1.5321100917431192,
+        "avgHPLeft": 31.556929177143246,
+        "medianHPLeft": 34.106728538283065,
+        "survivorShares": [
+          35.77981651376147,
+          39.44954128440367,
+          12.844036697247706
+        ],
+        "avgBossPhaseHP": 65.96555498012553,
+        "effectiveHP": 331,
+        "effectiveMultiplier": 1.970238095238088
+      }
+    },
+    {
+      "boss": "Volcarona",
+      "bossId": "volcarona",
+      "branch": "slither-wing",
+      "kind": "route",
+      "before": 72.2007722007722,
+      "summary": {
+        "battles": 259,
+        "playerWins": 196,
+        "bossWins": 63,
+        "winRate": 75.67567567567568,
+        "avgTurns": 5.173745173745174,
+        "medianTurns": 5,
+        "minTurns": 2,
+        "maxTurns": 12,
+        "avgSurvivors": 1.9540816326530612,
+        "avgHPLeft": 52.75980635767991,
+        "medianHPLeft": 51.49700598802395,
+        "survivorShares": [
+          32.142857142857146,
+          40.30612244897959,
+          27.551020408163264
+        ],
+        "avgBossPhaseHP": 50.19841269841268,
+        "effectiveHP": 336,
+        "effectiveMultiplier": 2
+      }
+    }
+  ],
+  "phases": [
+    {
+      "boss": "Mewtwo",
+      "phase": 1,
+      "losses": 47,
+      "lossShare": 9.894736842105264
+    },
+    {
+      "boss": "Mewtwo",
+      "phase": 2,
+      "losses": 200,
+      "lossShare": 42.10526315789474
+    },
+    {
+      "boss": "Mewtwo",
+      "phase": 3,
+      "losses": 228,
+      "lossShare": 48
+    },
+    {
+      "boss": "Zacian",
+      "phase": 1,
+      "losses": 245,
+      "lossShare": 54.93273542600897
+    },
+    {
+      "boss": "Zacian",
+      "phase": 2,
+      "losses": 201,
+      "lossShare": 45.06726457399103
+    },
+    {
+      "boss": "Kyogre",
+      "phase": 1,
+      "losses": 132,
+      "lossShare": 30.62645011600928
+    },
+    {
+      "boss": "Kyogre",
+      "phase": 2,
+      "losses": 299,
+      "lossShare": 69.37354988399072
+    },
+    {
+      "boss": "Rayquaza",
+      "phase": 1,
+      "losses": 133,
+      "lossShare": 33.002481389578165
+    },
+    {
+      "boss": "Rayquaza",
+      "phase": 2,
+      "losses": 270,
+      "lossShare": 66.99751861042184
+    },
+    {
+      "boss": "Groudon",
+      "phase": 1,
+      "losses": 155,
+      "lossShare": 39.24050632911393
+    },
+    {
+      "boss": "Groudon",
+      "phase": 2,
+      "losses": 240,
+      "lossShare": 60.75949367088607
+    },
+    {
+      "boss": "Arceus",
+      "phase": 1,
+      "losses": 33,
+      "lossShare": 9.34844192634561
+    },
+    {
+      "boss": "Arceus",
+      "phase": 2,
+      "losses": 154,
+      "lossShare": 43.626062322946176
+    },
+    {
+      "boss": "Arceus",
+      "phase": 3,
+      "losses": 166,
+      "lossShare": 47.02549575070822
+    },
+    {
+      "boss": "Terapagos",
+      "phase": 1,
+      "losses": 95,
+      "lossShare": 27.142857142857142
+    },
+    {
+      "boss": "Terapagos",
+      "phase": 2,
+      "losses": 255,
+      "lossShare": 72.85714285714286
+    },
+    {
+      "boss": "Shaymin",
+      "phase": 1,
+      "losses": 19,
+      "lossShare": 5.9375
+    },
+    {
+      "boss": "Shaymin",
+      "phase": 2,
+      "losses": 301,
+      "lossShare": 94.0625
+    },
+    {
+      "boss": "Kyurem",
+      "phase": 1,
+      "losses": 54,
+      "lossShare": 18.556701030927837
+    },
+    {
+      "boss": "Kyurem",
+      "phase": 2,
+      "losses": 237,
+      "lossShare": 81.44329896907216
+    },
+    {
+      "boss": "Ogerpon",
+      "phase": 1,
+      "losses": 48,
+      "lossShare": 17.32851985559567
+    },
+    {
+      "boss": "Ogerpon",
+      "phase": 2,
+      "losses": 34,
+      "lossShare": 12.274368231046932
+    },
+    {
+      "boss": "Ogerpon",
+      "phase": 3,
+      "losses": 118,
+      "lossShare": 42.59927797833935
+    },
+    {
+      "boss": "Ogerpon",
+      "phase": 4,
+      "losses": 77,
+      "lossShare": 27.79783393501805
+    },
+    {
+      "boss": "Zygarde",
+      "phase": 1,
+      "losses": 41,
+      "lossShare": 15.530303030303031
+    },
+    {
+      "boss": "Zygarde",
+      "phase": 2,
+      "losses": 19,
+      "lossShare": 7.196969696969697
+    },
+    {
+      "boss": "Zygarde",
+      "phase": 3,
+      "losses": 204,
+      "lossShare": 77.27272727272727
+    },
+    {
+      "boss": "Necrozma",
+      "phase": 1,
+      "losses": 0,
+      "lossShare": 0
+    },
+    {
+      "boss": "Necrozma",
+      "phase": 2,
+      "losses": 19,
+      "lossShare": 7.335907335907336
+    },
+    {
+      "boss": "Necrozma",
+      "phase": 3,
+      "losses": 240,
+      "lossShare": 92.66409266409266
+    },
+    {
+      "boss": "Garchomp",
+      "phase": 1,
+      "losses": 71,
+      "lossShare": 31.004366812227076
+    },
+    {
+      "boss": "Garchomp",
+      "phase": 2,
+      "losses": 158,
+      "lossShare": 68.99563318777292
+    },
+    {
+      "boss": "Zamazenta",
+      "phase": 1,
+      "losses": 86,
+      "lossShare": 43
+    },
+    {
+      "boss": "Zamazenta",
+      "phase": 2,
+      "losses": 114,
+      "lossShare": 57
+    },
+    {
+      "boss": "Metagross",
+      "phase": 1,
+      "losses": 4,
+      "lossShare": 2.0202020202020203
+    },
+    {
+      "boss": "Metagross",
+      "phase": 2,
+      "losses": 194,
+      "lossShare": 97.97979797979798
+    },
+    {
+      "boss": "Volcarona",
+      "phase": 1,
+      "losses": 63,
+      "lossShare": 32.30769230769231
+    },
+    {
+      "boss": "Volcarona",
+      "phase": 2,
+      "losses": 132,
+      "lossShare": 67.6923076923077
+    },
+    {
+      "boss": "Diancie",
+      "phase": 1,
+      "losses": 1,
+      "lossShare": 0.5291005291005291
+    },
+    {
+      "boss": "Diancie",
+      "phase": 2,
+      "losses": 188,
+      "lossShare": 99.47089947089947
+    },
+    {
+      "boss": "Snorlax",
+      "phase": 1,
+      "losses": 36,
+      "lossShare": 19.78021978021978
+    },
+    {
+      "boss": "Snorlax",
+      "phase": 2,
+      "losses": 146,
+      "lossShare": 80.21978021978022
+    },
+    {
+      "boss": "Hoopa",
+      "phase": 1,
+      "losses": 1,
+      "lossShare": 1.1363636363636365
+    },
+    {
+      "boss": "Hoopa",
+      "phase": 2,
+      "losses": 87,
+      "lossShare": 98.86363636363636
+    },
+    {
+      "boss": "Palafin",
+      "phase": 1,
+      "losses": 0,
+      "lossShare": 0
+    },
+    {
+      "boss": "Palafin",
+      "phase": 2,
+      "losses": 88,
+      "lossShare": 100
+    }
+  ],
+  "outliers": {
+    "easy": [],
+    "hard": [
+      "Mewtwo",
+      "Zacian",
+      "Kyogre",
+      "Rayquaza",
+      "Groudon",
+      "Arceus",
+      "Terapagos",
+      "Shaymin"
+    ],
+    "branchGaps": [
+      {
+        "boss": "Volcarona",
+        "gap": 30.44745990804082
+      }
+    ]
+  }
+}

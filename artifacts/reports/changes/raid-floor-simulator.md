@@ -63,6 +63,6 @@ Endgame은 Hoopa 61.2%, Volcarona 56.4%, Diancie 44.2%이며 나머지 17종은 
 
 Endgame에서 초기 팀 5,000회·수집 팀 5,000회(50:50), 20팀 모두 사용했다. IV25·포인트50·일반 아이템 3개라는 기존 모델을 유지했다. Late와 Endgame의 플레이어 육성 수치는 같으며, 현재 모델의 낮은 전체 승률을 초반 표본만의 영향으로 설명하기 어렵다. 실제 사람 승률이나 다른 육성·룰 조건에 대한 추정은 하지 않았다.
 
-측정 결과와 개별 파일 검증은 [전체 보고서](../raid-winrate-by-floor.md), [상세 CSV](../raid-winrate-by-floor.csv), [Overall 비교 CSV](../raid-winrate-by-floor.comparison.csv), [manifest](../raid-winrate-by-floor.json), [최종 검증 기록](../raid-winrate-by-floor.validation.json)에 정리한다.
+측정 결과와 개별 파일 검증은 [전체 보고서](../../experiments/balance/raid-winrate-by-floor.md), [상세 CSV](../../experiments/balance/raid-winrate-by-floor.csv), [Overall 비교 CSV](../../experiments/balance/raid-winrate-by-floor.comparison.csv), [manifest](../../experiments/balance/raid-winrate-by-floor.json), [최종 검증 기록](../../experiments/balance/raid-winrate-by-floor.validation.json)에 정리한다.
 
 원시 로그: `.data/raid-floor-run.log`, `.data/raid-floor-tests.log`, `.data/raid-floor-final-tests.log`. Endgame 라벨과 이상치 표시는 분석용이며 등장층·등장 가중치·HP·보상 조정에는 사용하지 않는다.

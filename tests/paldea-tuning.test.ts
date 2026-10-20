@@ -1,38 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readPrePaldeaRound2 as readFileSync} from './pre-paldea-round2';
-import {createHash} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
-import baseline from './fixtures/paldea-tuning-baseline.json' with {type:'json'};
 import {PaldeaPolicy} from '../src/battle/paldea-policy';
 import {DamagePolicy,type Observation,type OwnPokemon} from '../src/battle/policy';
 import {packTeam} from '../src/data/teams';
 import {FORMAT} from '../src/battle/run';
-
-const digest=(s:string)=>createHash('sha256').update(s).digest('hex');
-test('only the four requested items and Poppy middle change; all other data and common AI stay frozen',()=>{
- for(const [path,reference]of Object.entries(baseline.paths)){
-  const d=JSON.parse(readFileSync(path,'utf8')),rows=d.trainers??d.samples??d;
-  assert.equal(digest(JSON.stringify(rows.filter((r:{id:string})=>!baseline.ids.includes(r.id)))),reference.otherHash,path);
-  const expected:any[]=structuredClone(reference.rows);
-  for(const r of expected){
-   for(const p of r.team){if(r.id==='named-iono'&&p.species==='Kilowattrel'||r.id==='named-tulip'&&p.species==='Espathra'||r.id==='named-hassel'&&p.species==='Noivern'||r.id==='named-rika'&&p.species==='Camerupt')p.item='';}
-   if(r.id!=='named-poppy')continue;
-   if(r.entries)r.entries=r.entries.map((n:string)=>n==='Corviknight'?'Magnezone':n);
-   if(r.required)r.required=r.required.map((n:string)=>n==='Corviknight'?'Magnezone':n);
-   if(r.concept)r.concept='설치 + 빛의장막 특수 압박 + 거대해머';
-   const p=r.team[1];p.species='Magnezone';p.item='Light Clay';
-   const build=p.profile??p;build.ability='Sturdy';build.nature='Modest';build.moves=['Light Screen','Tri Attack','Flash Cannon','Discharge'];
-   if(build.evs)build.evs={hp:32,atk:0,def:0,spa:32,spd:2,spe:0};
-  }
-  assert.deepEqual(rows.filter((r:{id:string})=>baseline.ids.includes(r.id)),expected,path);
- }
- for(const [path,hash]of Object.entries(baseline.hashes)){
-  let text=readFileSync(path,'utf8').replaceAll('\r\n','\n');
-  if(path==='src/battle/paldea-policy.ts')text=text.replace(/   \/\/ Poppy Light Screen begin:[\s\S]*?   \/\/ Poppy Light Screen end\.\n/,'');
-  assert.equal(digest(text),hash,path);
- }
-});
 
 const magnezone=():OwnPokemon=>({ident:'p2: Magnezone',details:'Magnezone, L50',active:true,condition:'200/200',stats:{atk:70,def:140,spa:130,spd:110,spe:80},ability:'Sturdy',item:'Light Clay',moves:['Light Screen','Tri Attack','Flash Cannon','Discharge']});
 const observation=():Observation=>({turn:4,ownTeam:[magnezone(),{...magnezone(),ident:'p2: Tinkaton',details:'Tinkaton, L50',active:false}],opponent:{species:'Lapras',condition:'100/100'},lastOpponentMove:'Surf',legalActions:[{command:'move 1',label:'Light Screen',estimatedDamage:0},{command:'move 2',label:'Tri Attack',estimatedDamage:30},{command:'move 3',label:'Flash Cannon',estimatedDamage:20},{command:'move 4',label:'Discharge',estimatedDamage:70}],switching:{hazards:{spikes:0,toxicSpikes:0,stealthRock:false,stickyWeb:false},boosts:{},dynamax:false,opponentTypes:[]}});

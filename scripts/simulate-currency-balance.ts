@@ -27,7 +27,7 @@ function rng(seed:number){let x=seed>>>0;return()=>{x+=0x6d2b79f5;let t=x;t=Math
 const mean=(xs:number[])=>xs.reduce((a,b)=>a+b,0)/Math.max(1,xs.length);
 const quantile=(xs:number[],p:number)=>[...xs].sort((a,b)=>a-b)[Math.floor((xs.length-1)*p)]??0;
 type Variant={id:string;startingCoins?:number;reward:(floor:number)=>number;egg:number;trainingMultiplier:number;eliteEggMax:number;masterEggs:number;masterGrowth:number;eliteGrowth:number;merchant:number;chestScale:number;giftWeight:number;hiddenQuantityPrice:boolean};
-const baselinePath='artifacts/reports/currency-balance-baseline.json';
+const baselinePath='artifacts/experiments/balance/currency-balance-baseline.json';
 const store=new TowerStore(':memory:');store.ensurePlayer('sim');const runId=store.battle(store.start('sim',starters)).run_id;
 const liveProducts=hiddenShopProducts(store.db,runId);store.close();
 const base=defaultProfile('Charizard'),trained=structuredClone(base);trained.evs.spa=32;trained.evs.spe=32;trained.evs.hp=2;trained.nature='Modest';trained.ability='Solar Power';
@@ -122,6 +122,6 @@ const report={samples,trajectories:rows.length*samples,notes:[
  'Demand: survival/balanced/collector buy 10/6/2 battle consumables per checkpoint, with 600/600/300 reserve. Collector prioritizes event eggs; others choose master GP. GP shown net of modeled hidden-shop purchases.',
  'Current is the frozen pre-change baseline; candidate-15 is the selected economy. Max-allowance adds the approved 450 starting coins. New upgrades are implemented separately; this script does not mutate player saves.',
 ],variants:variants.map(({reward,...v})=>({...v,floorRewards:floors.map(f=>reward(f.number))})),hiddenShopBaseline:baseline.hiddenPool,rows};
-writeFileSync('artifacts/reports/currency-balance-simulation.json',JSON.stringify(report,null,2));
+writeFileSync('artifacts/experiments/balance/currency-balance-simulation.json',JSON.stringify(report,null,2));
 for(const row of rows as {depth:number;eventWinChance:number;policy:string}[])if(row.eventWinChance===.75&&row.policy==='balanced')console.log(JSON.stringify(row));
-console.log(`Wrote ${report.trajectories} trajectories to artifacts/reports/currency-balance-simulation.json`);
+console.log(`Wrote ${report.trajectories} trajectories to artifacts/experiments/balance/currency-balance-simulation.json`);

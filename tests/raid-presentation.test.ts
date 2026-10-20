@@ -45,6 +45,6 @@ test('Raid discovery renders only for an unchallenged choice, rewards use a vict
   assert.ok(render(base).includes('data-testid="raid-encounter"'));
   for(const event of [{...base,choiceId:'challenge'},{...base,phase:'battle' as const},{...base,phase:'reward' as const}])assert.ok(!render(event).includes('raid-silhouette'));
   const reward=render({...base,phase:'reward',choiceId:'challenge'});
-  assert.ok(reward.includes('data-testid="raid-victory"'));assert.ok(reward.includes('레이드 승리!'));assert.ok(!reward.includes('정체불명의 강적'));
+  assert.ok(reward.includes('data-testid="raid-victory"'));assert.ok(reward.includes('aria-label="레이드 승리"'));assert.ok(!reward.includes('정체불명의 강적'));
  }finally{hooks.deregister();}
 });

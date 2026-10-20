@@ -13,7 +13,7 @@ import {raidFloorBrackets,type RaidFloorBracketId} from './lib/raid-floor-bracke
 import {floorSimulationReport,type OverallBaseline} from './lib/raid-floor-report';
 
 export function parseSimulationArgs(args:string[]){
- const options={runs:1000,seedBase:'raid-winrate-v1',workers:Math.min(4,availableParallelism()),out:'artifacts/reports/raid-winrate-simulation',boss:undefined as string|undefined,worker:false,floorBrackets:false,brackets:undefined as RaidFloorBracketId[]|undefined};
+ const options={runs:1000,seedBase:'raid-winrate-v1',workers:Math.min(4,availableParallelism()),out:'artifacts/experiments/balance/raid-winrate-simulation',boss:undefined as string|undefined,worker:false,floorBrackets:false,brackets:undefined as RaidFloorBracketId[]|undefined};
  for(let i=0;i<args.length;i++){
   const flag=args[i];if(flag==='--worker'){options.worker=true;continue;}
   if(flag==='--floor-brackets'){options.floorBrackets=true;continue;}
@@ -25,8 +25,8 @@ export function parseSimulationArgs(args:string[]){
  }
  if(options.floorBrackets){
   if(!args.includes('--runs'))options.runs=500;
-  if(!args.includes('--out'))options.out='artifacts/reports/raid-winrate-by-floor';
-  if(resolve(options.out).toLowerCase()===resolve('artifacts/reports/raid-winrate-simulation').toLowerCase())throw Error('Floor report cannot overwrite original overall results');
+  if(!args.includes('--out'))options.out='artifacts/experiments/balance/raid-winrate-by-floor';
+  if(resolve(options.out).toLowerCase()===resolve('artifacts/experiments/balance/raid-winrate-simulation').toLowerCase())throw Error('Floor report cannot overwrite original overall results');
  }
  if(!Number.isSafeInteger(options.runs)||options.runs<1||!Number.isSafeInteger(options.workers)||options.workers<1||options.workers>32)throw Error('Positive integer runs/workers required (workers <=32)');
  if(options.boss&&!raidBossDefinitions.some(b=>b.id===options.boss))throw Error('Unknown boss');
@@ -69,8 +69,8 @@ async function main(){
   await new Promise<void>((accept,reject)=>process.send!({rows},error=>error?reject(error):accept()));process.disconnect!();return;
  }
  const sourceFiles=sourceManifest(),sourceHash=hash(JSON.stringify(sourceFiles));
- const baselineFiles=options.floorBrackets?Object.fromEntries(readdirSync('artifacts/reports').filter(name=>name.startsWith('raid-winrate-simulation.')).sort().map(name=>['artifacts/reports/'+name,hash(readFileSync('artifacts/reports/'+name))])):{};
- const baseline:OverallBaseline|undefined=options.floorBrackets?JSON.parse(readFileSync('artifacts/reports/raid-winrate-simulation.json','utf8')):undefined;
+ const baselineFiles=options.floorBrackets?Object.fromEntries(readdirSync('artifacts/experiments/balance').filter(name=>name.startsWith('raid-winrate-simulation.')).sort().map(name=>['artifacts/experiments/balance/'+name,hash(readFileSync('artifacts/experiments/balance/'+name))])):{};
+ const baseline:OverallBaseline|undefined=options.floorBrackets?JSON.parse(readFileSync('artifacts/experiments/balance/raid-winrate-simulation.json','utf8')):undefined;
  if(baseline&&(baseline.metadata.raidDefinitionsHash!==hash(JSON.stringify(raidBossDefinitions))||baseline.metadata.poolHash!==hash(JSON.stringify(simulationTeams))||baseline.metadata.sourceHash!==sourceHash))throw Error('Overall baseline gameplay data/pool differs from current source');
  const commit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
  const bosses=raidBossDefinitions.filter(b=>!options.boss||b.id===options.boss);let completed=0;

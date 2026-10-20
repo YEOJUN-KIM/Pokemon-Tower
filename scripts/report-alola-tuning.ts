@@ -104,10 +104,10 @@ md.push('## 5. Z·특성·도구 실제 발동','',
  '- **카일리: 유지 가능.** 수동적인 조합을 줄였으며 Beak Blast/Z와 루차불의 White Herb/Unburden/Acrobatics가 작동한다. 단, 학습·교체 AI 표본의 42.2→31.3% 회귀는 남아 있어 모든 환경의 성능 개선을 주장하지 않는다.',
  '- **키아웨: 유지 가능.** 캡틴 육성을 유지한 채 0–10%대를 벗어났고 실제 Gale Wings·회복·보존한 텅구리 도구 효과가 확인됐다.',
  '');
-writeFileSync('docs/gameplay/alola-npc-tuning.md',md.join('\n'));
+writeFileSync('artifacts/reports/npc/alola-npc-tuning.md',md.join('\n'));
 // Update only the three current team tables; all other NPC sections are intact.
-let teams=readFileSync('docs/gameplay/alola-team-data.md','utf8');
+let teams=readFileSync('artifacts/reports/npc/alola-team-data.md','utf8');
 for(const r of results){const heading=`## ${r.name} / ${r.id==='named-kiawe'?'captain':'elite'}`,block=[heading,'',`고정 순서: ${r.lineup.join(' → ')}. 3마리 모두 필수. [후속 조정 보고](alola-npc-tuning.md).`,'','|포켓몬|종족값 HP/공/방/특공/특방/속|성격|특성|도구|훈련 HP/공/방/특공/특방/속|기술|','|---|---|---|---|---|---|---|'];const dex=Showdown.Dex;for(const p of r.sets)block.push(`|${p.species}|${Object.values(dex.species.get(p.species).baseStats).join('/')}|${p.profile.nature}|${p.profile.ability}|${p.item}|${Object.values(p.profile.evs).join('/')}|${p.profile.moves.join(' / ')}|`);block.push('','');const start=teams.indexOf(heading),end=teams.indexOf('\n## ',start+1);assert.ok(start>=0);teams=teams.slice(0,start)+block.join('\n')+teams.slice(end<0?teams.length:end+1);}
-writeFileSync('docs/gameplay/alola-team-data.md',teams);
-const report='docs/gameplay/alola-named-trainers.md',notice='> 후속 조정: 라이치·카일리·키아웨는 [고정 3마리 조정 보고](alola-npc-tuning.md)에 따라 변경됐다. 아래 설계/승률은 알로라 최초 추가 시점의 기록이며 최신 세팅은 후속 보고와 최종 팀 표를 참고한다.\n\n';let original=readFileSync(report,'utf8');if(!original.includes('> 후속 조정:')){const i=original.indexOf('\n')+1;original=original.slice(0,i)+'\n'+notice+original.slice(i).replace(/^\s*\n/,'');writeFileSync(report,original);}
+writeFileSync('artifacts/reports/npc/alola-team-data.md',teams);
+const report='artifacts/reports/npc/alola-named-trainers.md',notice='> 후속 조정: 라이치·카일리·키아웨는 [고정 3마리 조정 보고](alola-npc-tuning.md)에 따라 변경됐다. 아래 설계/승률은 알로라 최초 추가 시점의 기록이며 최신 세팅은 후속 보고와 최종 팀 표를 참고한다.\n\n';let original=readFileSync(report,'utf8');if(!original.includes('> 후속 조정:')){const i=original.indexOf('\n')+1;original=original.slice(0,i)+'\n'+notice+original.slice(i).replace(/^\s*\n/,'');writeFileSync(report,original);}
 console.log(results.map(r=>({id:r.id,primary:pct(r.primary.after),holdout:pct(r.holdout.after),combined:pct(r.combined.after),conclusion:r.conclusion})));

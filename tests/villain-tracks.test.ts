@@ -18,7 +18,7 @@ import {canEquipGimmick} from '../src/data/gimmicks';
 import {starters} from '../src/data/teams';
 
 test('fixed organization order references complete reviewed samples/templates',()=>{
- assert.equal(eventEncounterSettings.encounterPercent,10);
+ assert.equal(eventEncounterSettings.encounterPercent,15);
  assert.deepEqual(Object.keys(villainCampaignTracks),['rocket','magma','aqua','galactic','plasma','flare','skull','macrocosmos']);
  for(const [org,track] of Object.entries(villainCampaignTracks)){
   assert.deepEqual(track.stages.slice(0,2).map(s=>s.key),['grunt-1','grunt-2']);

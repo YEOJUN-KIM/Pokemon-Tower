@@ -10,7 +10,7 @@ import {floorSimulationReport,type OverallBaseline} from '../scripts/lib/raid-fl
 import {simulationTeams,simulationPlayerTeam} from '../scripts/lib/raid-simulation-pool';
 import {simulateRaid} from '../scripts/lib/raid-simulation';
 
-function originalHashes(){return Object.fromEntries(readdirSync('artifacts/reports').filter(n=>n.startsWith('raid-winrate-simulation.')).map(n=>[n,createHash('sha256').update(readFileSync('artifacts/reports/'+n)).digest('hex')]));}
+function originalHashes(){return Object.fromEntries(readdirSync('artifacts/experiments/balance').filter(n=>n.startsWith('raid-winrate-simulation.')).map(n=>[n,createHash('sha256').update(readFileSync('artifacts/experiments/balance/'+n)).digest('hex')]));}
 test('two bosses × four brackets × three real runs: eligibility, balanced floors, determinism across workers, complete statistics',async()=>{
  const before=originalHashes(),options={bossIds:['volcarona','kyurem'],runs:3,seedBase:'raid-floor-test-v1',floorBrackets:true};
  const serial=await runRaidSimulationJobs({...options,workers:1}),parallel=await runRaidSimulationJobs({...options,workers:2});
@@ -21,7 +21,7 @@ test('two bosses × four brackets × three real runs: eligibility, balanced floo
   const counts=bracket.floors.map(f=>selected.filter(r=>r.floor===f).length);assert.ok(Math.max(...counts)-Math.min(...counts)<=1);
   for(const row of selected){assert.ok((bracket.floors as readonly number[]).includes(row.floor));assert.ok(row.floor>=bracket.min&&row.floor<=bracket.max);assert.ok(simulationTeams.find(t=>t.id===row.teamId)!.minFloor<=row.floor);}
  }
- const baseline=JSON.parse(readFileSync('artifacts/reports/raid-winrate-simulation.json','utf8')) as OverallBaseline;
+ const baseline=JSON.parse(readFileSync('artifacts/experiments/balance/raid-winrate-simulation.json','utf8')) as OverallBaseline;
  const root=join(mkdtempSync(join(tmpdir(),'raid-floor-')),'smoke'),metadata={runsPerBossBracket:3,commit:'test',seedBase:options.seedBase};
  const result=floorSimulationReport(serial,metadata,root,baseline),other=root+'-parallel';floorSimulationReport(parallel,metadata,other,baseline);
  for(const suffix of ['csv','comparison.csv','branches.csv','phases.csv','teams.csv','strength.csv','floors.csv','battles.csv'])assert.equal(readFileSync(root+'.'+suffix,'utf8'),readFileSync(other+'.'+suffix,'utf8'));
@@ -45,9 +45,9 @@ test('original overall mode keeps its seed domain despite the explicitly version
 
 test('bracket CLI defaults, explicit runs, protected output and label boundaries',()=>{
  assert.equal(parseSimulationArgs([]).runs,1000);
- const bracket=parseSimulationArgs(['--floor-brackets']);assert.equal(bracket.runs,500);assert.equal(bracket.out,'artifacts/reports/raid-winrate-by-floor');
+ const bracket=parseSimulationArgs(['--floor-brackets']);assert.equal(bracket.runs,500);assert.equal(bracket.out,'artifacts/experiments/balance/raid-winrate-by-floor');
  assert.equal(parseSimulationArgs(['--runs','3','--floor-brackets']).runs,3);assert.equal(parseSimulationArgs(['--floor-brackets','--runs','4']).runs,4);
- assert.throws(()=>parseSimulationArgs(['--floor-brackets','--out','artifacts/reports/raid-winrate-simulation']),/overwrite/);
+ assert.throws(()=>parseSimulationArgs(['--floor-brackets','--out','artifacts/experiments/balance/raid-winrate-simulation']),/overwrite/);
  assert.deepEqual([39.9,40,65,65.1,80,80.1].map(endgameDifficulty),['너무 강함','적당히 어려움','적당히 어려움','비교적 쉬움','비교적 쉬움','너무 쉬움']);
  const early=simulationPlayerTeam(simulationTeams[0],5),late=simulationPlayerTeam(simulationTeams[0],65),end=simulationPlayerTeam(simulationTeams[0],95);
  assert.equal(early.profiles.Charizard.ivs.hp,0);assert.deepEqual(late,end);

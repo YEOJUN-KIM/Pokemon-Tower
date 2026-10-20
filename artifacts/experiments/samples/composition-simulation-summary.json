@@ -14804,139 +14804,139 @@
   ],
   "datasetFiles": [
     {
-      "path": "artifacts/composition-matched-basic-legacy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-matched-basic-legacy-battles.jsonl",
       "battles": 6928,
       "decisions": 107224,
       "sha256": "d4e44e3b5be00c07404c9edd12049cd1aab2f89203f8ca0d39d01bc892da0c6b"
     },
     {
-      "path": "artifacts/composition-matched-basic-synergy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-matched-basic-synergy-battles.jsonl",
       "battles": 8864,
       "decisions": 140358,
       "sha256": "7b199e5eb5598ad67708c4fd11d4fda349ef72a6a55096a1056e1b6373d2bd60"
     },
     {
-      "path": "artifacts/composition-matched-mega-legacy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-matched-mega-legacy-battles.jsonl",
       "battles": 6970,
       "decisions": 107764,
       "sha256": "d38859490164022534867ca606e3c11d332df17a645e2b4fb245c2802a958c33"
     },
     {
-      "path": "artifacts/composition-matched-mega-synergy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-matched-mega-synergy-battles.jsonl",
       "battles": 8982,
       "decisions": 142405,
       "sha256": "6f94c42302bccf630477233f9bdfddbeb755ef7a7f46dec81f393a0352ed7843"
     },
     {
-      "path": "artifacts/composition-matched-dynamax-legacy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-matched-dynamax-legacy-battles.jsonl",
       "battles": 6616,
       "decisions": 101797,
       "sha256": "2b67d7ea0c52e860efb4faf76d5224357b82a046c5e0441d3eab4606560dc585"
     },
     {
-      "path": "artifacts/composition-matched-dynamax-synergy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-matched-dynamax-synergy-battles.jsonl",
       "battles": 8784,
       "decisions": 138675,
       "sha256": "d62c53b86b55a6686fd5e24d0229647a89882f5164edf54fd9c980f612a406f2"
     },
     {
-      "path": "artifacts/composition-matched-tera-legacy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-matched-tera-legacy-battles.jsonl",
       "battles": 6847,
       "decisions": 105217,
       "sha256": "702fc90f97c8bd8922eac50fdf94768bc641e258a4f9df43ceb0423caa323570"
     },
     {
-      "path": "artifacts/composition-matched-tera-synergy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-matched-tera-synergy-battles.jsonl",
       "battles": 8325,
       "decisions": 130964,
       "sha256": "88d8e7721fabdcba0753fc54c0e038a152571dca904810eb10a613ae325ef103"
     },
     {
-      "path": "artifacts/composition-matched-chaos-legacy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-matched-chaos-legacy-battles.jsonl",
       "battles": 6417,
       "decisions": 98291,
       "sha256": "8ff9941e390528b2d85b63cd6ff0f0daf01f3829d7181e03ca52d753130e7ef3"
     },
     {
-      "path": "artifacts/composition-matched-chaos-synergy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-matched-chaos-synergy-battles.jsonl",
       "battles": 8079,
       "decisions": 126906,
       "sha256": "c790c893ecd2836859847eda5ea5746ca2e3108092f625b11aa08e4f0b1e7846"
     },
     {
-      "path": "artifacts/composition-new-basic-legacy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-new-basic-legacy-battles.jsonl",
       "battles": 7124,
       "decisions": 107855,
       "sha256": "b9a9aca33b15b6c072aec52fe94e165611d6199c7fb97caf4c104e41ec056c1a"
     },
     {
-      "path": "artifacts/composition-new-basic-synergy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-new-basic-synergy-battles.jsonl",
       "battles": 9696,
       "decisions": 150408,
       "sha256": "640b92634c3ac633d6209f14e44fe3038505b24614320dcd7463b89768e214e3"
     },
     {
-      "path": "artifacts/composition-new-mega-legacy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-new-mega-legacy-battles.jsonl",
       "battles": 7222,
       "decisions": 109267,
       "sha256": "ee6a04fcc6d565c811fc3079925d560d6386cb705be8a30a67fca844a17e72b1"
     },
     {
-      "path": "artifacts/composition-new-mega-synergy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-new-mega-synergy-battles.jsonl",
       "battles": 9605,
       "decisions": 148939,
       "sha256": "cfb27d1f5b75a4844765752a0942403f092aceca1d40e7f3c58604f4ab84cf2f"
     },
     {
-      "path": "artifacts/composition-new-dynamax-legacy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-new-dynamax-legacy-battles.jsonl",
       "battles": 7033,
       "decisions": 106117,
       "sha256": "76a310ccd840d27e49247b9eda247aabf57ff1ec9e641e8409f17c15dcf09a32"
     },
     {
-      "path": "artifacts/composition-new-dynamax-synergy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-new-dynamax-synergy-battles.jsonl",
       "battles": 9748,
       "decisions": 151590,
       "sha256": "6e43ee67b3e525c0d8f1f263144473c7569dc0fab409b1849b78ac553e2ee30b"
     },
     {
-      "path": "artifacts/composition-new-tera-legacy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-new-tera-legacy-battles.jsonl",
       "battles": 6758,
       "decisions": 101948,
       "sha256": "d6ab6b5e95dbd967f230a4f8d1fefde5f190d5a631e5bbaae13f8933e5dd04f0"
     },
     {
-      "path": "artifacts/composition-new-tera-synergy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-new-tera-synergy-battles.jsonl",
       "battles": 8949,
       "decisions": 136667,
       "sha256": "6beb4d57a47caafbe616d396609a29a4da8f7cf778a0ce78cddd694b5ea5be1b"
     },
     {
-      "path": "artifacts/composition-new-chaos-legacy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-new-chaos-legacy-battles.jsonl",
       "battles": 6713,
       "decisions": 100811,
       "sha256": "21dbdb2dd864be4a731d5ee28341bac5ced01f524b31c1c4a27061a313059597"
     },
     {
-      "path": "artifacts/composition-new-chaos-synergy-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-new-chaos-synergy-battles.jsonl",
       "battles": 8917,
       "decisions": 135864,
       "sha256": "8ac0efab04e0a436ca33631ad92a01261dfeb8490e171e467e9c784c4fbc93e8"
     },
     {
-      "path": "artifacts/composition-legacy-v7-check-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-legacy-v7-check-battles.jsonl",
       "battles": 412,
       "decisions": 6257,
       "sha256": "e00674af00163a59ea815c966fea3950a739013842b313f9eb0b223f5b085e18"
     },
     {
-      "path": "artifacts/composition-support-v7-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-support-v7-battles.jsonl",
       "battles": 571,
       "decisions": 10017,
       "sha256": "626cda9932f27a0091a27b5f4b97a8c6cdd9a4da0003d46ab2298eef776400bc"
     },
     {
-      "path": "artifacts/composition-support-v8-battles.jsonl",
+      "path": "artifacts/experiments/samples/raw/composition-support-v8-battles.jsonl",
       "battles": 618,
       "decisions": 11675,
       "sha256": "cd67986276d8c7011c2066ab4c29991551d13cc52080b0bcf6f5d91b0e804395"

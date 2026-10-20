@@ -34,4 +34,4 @@ Mewtwo >=25%, Zacian >=30%의 종료 후보 기준을 모두 충족한다. 추�
 - 다른18종 정의 전체가 Tune2와 동일하다. 전투는 재실행하지 않았다. 같은9,000개 seed의 스냅샷 IV/포인트/HP/분기/reward signature가 Tune2 SimulationRow와 모두 일치한다. 공용 engine/AI/player 소스가 동일함도 검사했다. 실제9,000전 SimulationRow 전체 hash의 재측정 비교를 했다는 의미는 아니다.
 - TypeScript와 production build 통과. 이번에는 전체 프로젝트 테스트를 다시 실행하지 않았다. 직전 Tune2 전체 실행에 기록된 기존 실패15건은 별도 범위이며, 이번 Raid 관련 테스트는 모두 통과했다.
 
-최종 표와 Phase loss는 [측정 보고서](../raid-final-endgame.md), source 및 이전 보고서 해시는 [실행 JSON](../raid-final-endgame.json), 검증 요약은 [validation JSON](../raid-final-endgame.validation.json)에 있다. 재현 명령은 `npm run raid:simulate:final`이다.
+최종 표와 Phase loss는 [측정 보고서](../../experiments/balance/raid-final-endgame.md), source 및 이전 보고서 해시는 [실행 JSON](../../experiments/balance/raid-final-endgame.json), 검증 요약은 [validation JSON](../../experiments/balance/raid-final-endgame.validation.json)에 있다. 재현 명령은 `npm run raid:simulate:final`이다.

@@ -1,6 +1,6 @@
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {BattleCommands} from '../src/web/battle-commands';
+import {registerHooks} from 'node:module';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
@@ -152,7 +152,12 @@ test('Garchomp Tera and Blaziken Mega leave Gengar G-Max available and its spent
  try{
   let view=await session.ready();assert.equal(view.error,null);assert.equal(view.team.find(p=>p.active)?.species,'Gengar');
   assert.ok(view.actions.some(a=>a.command.endsWith(' dynamax')));assert.ok(!view.actions.some(a=>/ (mega|terastallize)$/.test(a.command)));
-  const html=renderToStaticMarkup(createElement(BattleCommands,{battle:view,equipment:options.trainerEquipment,rule:'chaos',mode:'moves',busy:false,forceSwitch:false,focused:'move 1',gimmick:null,onGimmick:()=>{},onMode:()=>{},onFocus:()=>{},onSend:()=>{}}));
+  const hooks=registerHooks({load(url,context,next){return url.endsWith('.css')?{format:'module',source:'export default {}',shortCircuit:true}:next(url,context);}});
+  let html:string;
+  try{
+   const {BattleCommands}=await import('../src/web/battle-commands');
+   html=renderToStaticMarkup(createElement(BattleCommands,{battle:view,equipment:options.trainerEquipment,rule:'chaos',mode:'moves',busy:false,forceSwitch:false,focused:'move 1',gimmick:null,onGimmick:()=>{},onMode:()=>{},onFocus:()=>{},onSend:()=>{}}));
+  }finally{hooks.deregister();}
   const buttons=html.match(/<button[^>]*>/g)!;assert.match(buttons.find(b=>b.includes('data-gimmick="mega"'))!,/disabled/);assert.doesNotMatch(buttons.find(b=>b.includes('data-gimmick="dynamax"'))!,/disabled/);
   view=await session.submit(view.id,view.requestId,'move 1 dynamax');assert.equal(view.error,null);assert.equal(view.team.find(p=>p.active)?.displaySpecies,'Gengar-Gmax');
  }finally{await session.dispose();}

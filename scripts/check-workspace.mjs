@@ -2,6 +2,21 @@ import {existsSync,readFileSync,readdirSync} from 'node:fs';
 import path from 'node:path';
 
 const failures=[];
+const rootDocs=new Set(['README.md','STATUS.md','SESSION_HANDOFF.md']);
+for(const entry of readdirSync('docs',{withFileTypes:true})){
+  if(entry.isFile()&&entry.name.endsWith('.md')&&!rootDocs.has(entry.name))failures.push(`docs/${entry.name}: place current guides by topic and change reports in artifacts`);
+}
+const packageScripts=JSON.parse(readFileSync('package.json','utf8')).scripts;
+for(const [name,command]of Object.entries(packageScripts)){
+  for(const match of command.matchAll(/scripts\/[\w./-]+\.(?:mjs|cjs|ts|ps1)\b/g))if(!existsSync(match[0]))failures.push(`package.json ${name}: missing script ${match[0]}`);
+}
+const schemaVersion=readFileSync('src/server/schema.ts','utf8').match(/PRAGMA user_version\s*=\s*(\d+)/)?.[1];
+const aiVersion=readFileSync('src/server/tower-store.ts','utf8').match(/AI_VERSION\s*=\s*'([^']+)'/)?.[1];
+for(const file of ['docs/STATUS.md','docs/engineering/DATABASE.md']){
+  const source=readFileSync(file,'utf8');
+  if(!schemaVersion||!source.includes(`schema ${schemaVersion}`))failures.push(`${file}: update current DB schema`);
+}
+if(!aiVersion||!readFileSync('docs/engineering/ARCHITECTURE.md','utf8').includes(aiVersion))failures.push('docs/engineering/ARCHITECTURE.md: update current AI version');
 const walk=dir=>existsSync(dir)?readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(dir+'/'+e.name):e.isFile()?[dir+'/'+e.name]:[]):[];
 const markdown=[...walk('docs'),...walk('artifacts'),'README.md','scripts/README.md'].filter(f=>f.endsWith('.md'));
 let links=0;

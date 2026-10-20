@@ -1338,12 +1338,12 @@
       "originalSha256": "8ed3321fcd06bb0284c0c1ccdbf685756fb3b685b727601b08bb3b02eee16700"
     },
     {
-      "from": "artifacts/composition-diagnostics-20261010-basic-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/composition-diagnostics-20261010-basic-trace.jsonl",
       "to": "artifacts/experiments/samples/composition-diagnostics-20261010-basic-trace.jsonl",
       "originalSha256": "7ad93818743038e1f211c9917cd97dde0b6127ea33ceb669f157bd58039fec35"
     },
     {
-      "from": "artifacts/composition-diagnostics-20261010-chaos-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/composition-diagnostics-20261010-chaos-trace.jsonl",
       "to": "artifacts/experiments/samples/composition-diagnostics-20261010-chaos-trace.jsonl",
       "originalSha256": "ed138e562c56e48b75e5bfd891eb40aebd545287585dd0b887222c9aef4656e9"
     },
@@ -1363,7 +1363,7 @@
       "originalSha256": "82e4a25ca37360ef160f6684f29f4e03a60c858af72e1e78f02691fd4da2154d"
     },
     {
-      "from": "artifacts/composition-diagnostics-20261010-tera-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/composition-diagnostics-20261010-tera-trace.jsonl",
       "to": "artifacts/experiments/samples/composition-diagnostics-20261010-tera-trace.jsonl",
       "originalSha256": "697865c7586e9463ab1a64cdadcc9663a48a0cb38e9246a18f0156d228dfc4ae"
     },
@@ -1623,37 +1623,37 @@
       "originalSha256": "cd814dab93690aac81447b55811ac411ffdd29ab4f2dff1c7fd175528281da16"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-audit.json",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-audit.json",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-audit.json",
       "originalSha256": "312c94e15def61b8955db02b097c30f24840d908318e8e68fca7a27c2d05aa65"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-basic-v7-trace.jsonl",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-basic-v7-trace.jsonl",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-basic-v7-trace.jsonl",
       "originalSha256": "e700e7e11ae2f67a62273e0e0102dc5a78df709bc73a63749d7e7b9477ba00ad"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-basic-v8-trace.jsonl",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-basic-v8-trace.jsonl",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-basic-v8-trace.jsonl",
       "originalSha256": "6528000d5f784a8b300e28ec3fdf3e3f60c90588026caf631ecdf160a0892cd6"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-chaos-v7-trace.jsonl",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-chaos-v7-trace.jsonl",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-chaos-v7-trace.jsonl",
       "originalSha256": "9d6cc924964a58489812dc23488d49a3c899fc148baacf31578c1e6e50a39bc4"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-chaos-v8-trace.jsonl",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-chaos-v8-trace.jsonl",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-chaos-v8-trace.jsonl",
       "originalSha256": "85c0570e4128583e2a4f81ade7a0b21b9185771d855cc0c8efdc4454fb83c72d"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-dynamax-v7-trace.jsonl",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-dynamax-v7-trace.jsonl",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-dynamax-v7-trace.jsonl",
       "originalSha256": "6b3cf7f0ff3ac581d01f1fa24bea1cd4cc4a8516ab0ed8cdf7479ec629d47230"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-dynamax-v8-trace.jsonl",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-dynamax-v8-trace.jsonl",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-dynamax-v8-trace.jsonl",
       "originalSha256": "4ac1304f0cad2d7ce2815cad1133dc0888e724af9e94d630e940609bd485480c"
     },
@@ -1663,17 +1663,17 @@
       "originalSha256": "2ffb47433a31962b347813aafae43e173c479bf9de600df01681afd6a5d95d05"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-mega-v7-trace.jsonl",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-mega-v7-trace.jsonl",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-mega-v7-trace.jsonl",
       "originalSha256": "afc2b5d07cbd0dd662adb46655825a5775acea880220d56d4266458a1bc17983"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-mega-v8-trace.jsonl",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-mega-v8-trace.jsonl",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-mega-v8-trace.jsonl",
       "originalSha256": "faeffcea1d9144c5447881d767b2081ad8d163e7a25eefcd9b7f701237038657"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-pilot-trace.jsonl",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-pilot-trace.jsonl",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-pilot-trace.jsonl",
       "originalSha256": "898d0b923a9856c82fb861afaf35df4468d4f40147f6463387b7de52e929f1bc"
     },
@@ -1688,12 +1688,12 @@
       "originalSha256": "a2dd9a5530e28a1d292b61f99225c5bb22a0f97f4e3a07fc79cb6ef2c2aa5927"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-tera-v7-trace.jsonl",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-tera-v7-trace.jsonl",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-tera-v7-trace.jsonl",
       "originalSha256": "f1767b1059991e0ff56eeed171444500085b344b30f2731354dfcf83d14eedd9"
     },
     {
-      "from": "artifacts/opponent-learning-20261011-tera-v8-trace.jsonl",
+      "from": "artifacts/experiments/ai/raw/opponent-learning-20261011-tera-v8-trace.jsonl",
       "to": "artifacts/experiments/ai/opponent-learning-20261011-tera-v8-trace.jsonl",
       "originalSha256": "c98585428aa99e8c66fb450b1215b7db16abf3a6e94da7366001ac3117867d05"
     },
@@ -1743,22 +1743,22 @@
       "originalSha256": "8a271a4206e973eb7c933ff770317ae6cebcb795b78daefd400b1804217034a9"
     },
     {
-      "from": "artifacts/room-sample-20261011-basic-baseline-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-basic-baseline-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-basic-baseline-trace.jsonl",
       "originalSha256": "66fe2bb4b94a6b172d3a89eca806441afa895f64d6bbef0257784c8c248b0a2d"
     },
     {
-      "from": "artifacts/room-sample-20261011-basic-both-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-basic-both-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-basic-both-trace.jsonl",
       "originalSha256": "40ab8a3d05263ecb59e8e8fc24dec716a93271e51c93c16a04fab208c747e960"
     },
     {
-      "from": "artifacts/room-sample-20261011-basic-psychic-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-basic-psychic-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-basic-psychic-trace.jsonl",
       "originalSha256": "3c1c8e3eaca07098ea59718dfe05726c12fb5b2f6c054d84a3be3cd9eda6f88c"
     },
     {
-      "from": "artifacts/room-sample-20261011-basic-steel-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-basic-steel-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-basic-steel-trace.jsonl",
       "originalSha256": "6e5ee20a4c582d46adbaaa0a4218e8c430177b3179b293801654a9e2d2ea3544"
     },
@@ -1773,42 +1773,42 @@
       "originalSha256": "1cd03a536dbd1513b767c833bcdab0b07c32a174bd8a418df4d0011176689d17"
     },
     {
-      "from": "artifacts/room-sample-20261011-chaos-baseline-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-chaos-baseline-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-chaos-baseline-trace.jsonl",
       "originalSha256": "10671c79ac0fea61fe9e9077cb986e3ec01b4c308ec2a90187fda1ac22196cd1"
     },
     {
-      "from": "artifacts/room-sample-20261011-chaos-both-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-chaos-both-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-chaos-both-trace.jsonl",
       "originalSha256": "540b922bf7a25e121c7b3597035ccf79be0219fdd1c7bb42b6353216c4cc65d4"
     },
     {
-      "from": "artifacts/room-sample-20261011-chaos-psychic-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-chaos-psychic-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-chaos-psychic-trace.jsonl",
       "originalSha256": "b8ea49c1dfd6cd4e55e21fe4e9fd60716c8685d18152759744989e2c713f513f"
     },
     {
-      "from": "artifacts/room-sample-20261011-chaos-steel-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-chaos-steel-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-chaos-steel-trace.jsonl",
       "originalSha256": "e28aab5b0b15b90b56088130f476245fc5700b070ca1aa7d33f1232e8b0c9736"
     },
     {
-      "from": "artifacts/room-sample-20261011-dynamax-baseline-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-dynamax-baseline-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-dynamax-baseline-trace.jsonl",
       "originalSha256": "d5de32e6c812d5e1d414a7968bee4f4cb14f60dc9d2189bab04a425ae58b39e2"
     },
     {
-      "from": "artifacts/room-sample-20261011-dynamax-both-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-dynamax-both-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-dynamax-both-trace.jsonl",
       "originalSha256": "101e5b442d4968fdb376c166e73cc307f79f5fccc770c1f39a10d9f240e7d972"
     },
     {
-      "from": "artifacts/room-sample-20261011-dynamax-psychic-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-dynamax-psychic-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-dynamax-psychic-trace.jsonl",
       "originalSha256": "c40a3f395419f2e9cd63773197a0bc6f081fb142585e9fbfb6a6b5721af81ef6"
     },
     {
-      "from": "artifacts/room-sample-20261011-dynamax-steel-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-dynamax-steel-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-dynamax-steel-trace.jsonl",
       "originalSha256": "0ed66abba40d43d40a81b2493412f4f7347b174e3a1ea92e6a469e9ac2f66fc6"
     },
@@ -1818,22 +1818,22 @@
       "originalSha256": "cf612e02f5718354c2a9168c77f918598f1f4a07abd4923ec6de6a1cc52364c9"
     },
     {
-      "from": "artifacts/room-sample-20261011-mega-baseline-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-mega-baseline-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-mega-baseline-trace.jsonl",
       "originalSha256": "dd46cb2ac4f17dc5a31b911feaee46772b287e42d22e1972d91803f8ef06ce37"
     },
     {
-      "from": "artifacts/room-sample-20261011-mega-both-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-mega-both-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-mega-both-trace.jsonl",
       "originalSha256": "a4c08c27c9ea38eb42b993fc726f43ef3c533f240fa6fb3167c9ec747e7cc31e"
     },
     {
-      "from": "artifacts/room-sample-20261011-mega-psychic-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-mega-psychic-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-mega-psychic-trace.jsonl",
       "originalSha256": "f11c7b101317db99d95c624dec6dbd537e4e415fd74365bb418161490114270a"
     },
     {
-      "from": "artifacts/room-sample-20261011-mega-steel-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-mega-steel-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-mega-steel-trace.jsonl",
       "originalSha256": "5db89e042366f843a821897d7d7208d2ce08c3ada3687060c4854bc2956a7765"
     },
@@ -1858,22 +1858,22 @@
       "originalSha256": "10a0ca08482200e4bce76b24a24b3e1e7d49f5a0c206698b82fa47724dbbcd40"
     },
     {
-      "from": "artifacts/room-sample-20261011-tera-baseline-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-tera-baseline-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-tera-baseline-trace.jsonl",
       "originalSha256": "ff2d7af88d85fa945852f3f9365031d0a0cd266d78bcb5ff0e2bbd207065f0f4"
     },
     {
-      "from": "artifacts/room-sample-20261011-tera-both-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-tera-both-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-tera-both-trace.jsonl",
       "originalSha256": "7f51f00c51adbf5752afb95f553543bfbdc5c79ef2bacf136473ffc14bee4c0e"
     },
     {
-      "from": "artifacts/room-sample-20261011-tera-psychic-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-tera-psychic-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-tera-psychic-trace.jsonl",
       "originalSha256": "2106c950e3871bbb2619efcc9a2e14ac9207ea7d66cb7b3c5476f5c5c96c7c91"
     },
     {
-      "from": "artifacts/room-sample-20261011-tera-steel-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/room-sample-20261011-tera-steel-trace.jsonl",
       "to": "artifacts/experiments/samples/room-sample-20261011-tera-steel-trace.jsonl",
       "originalSha256": "808ee78e1aebd77110ed1c4f1d42c050fd0e833a8af6cca046a3683bfd856dae"
     },
@@ -1888,22 +1888,22 @@
       "originalSha256": "101c774ccb01c7e3be8a5efb07b6f215b5b51524b9f9edca7d67af4ca7f584f1"
     },
     {
-      "from": "artifacts/sample-holdout-20261011-basic-baseline-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-holdout-20261011-basic-baseline-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-holdout-20261011-basic-baseline-trace.jsonl",
       "originalSha256": "e1b788b9390ca7dd010a9a1a237b4f156ae4222e81960232e39380fec26fdc2d"
     },
     {
-      "from": "artifacts/sample-holdout-20261011-basic-samples-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-holdout-20261011-basic-samples-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-holdout-20261011-basic-samples-trace.jsonl",
       "originalSha256": "e700e7e11ae2f67a62273e0e0102dc5a78df709bc73a63749d7e7b9477ba00ad"
     },
     {
-      "from": "artifacts/sample-holdout-20261011-chaos-baseline-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-holdout-20261011-chaos-baseline-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-holdout-20261011-chaos-baseline-trace.jsonl",
       "originalSha256": "d66d9fdc1fd1ca6b0fe2186cb2fb5947865781d7cb43f4bc1531c8632de806c9"
     },
     {
-      "from": "artifacts/sample-holdout-20261011-chaos-samples-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-holdout-20261011-chaos-samples-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-holdout-20261011-chaos-samples-trace.jsonl",
       "originalSha256": "9d6cc924964a58489812dc23488d49a3c899fc148baacf31578c1e6e50a39bc4"
     },
@@ -1933,12 +1933,12 @@
       "originalSha256": "e8282cc1979e56bda2caace6fcd7de6cd590e528bed92c658362256e13fe515b"
     },
     {
-      "from": "artifacts/sample-holdout-20261011-tera-baseline-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-holdout-20261011-tera-baseline-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-holdout-20261011-tera-baseline-trace.jsonl",
       "originalSha256": "21b94e846a88f74cf57e6b9e2ea5510825ee3bd724bc0e39dde97ca6346fd86c"
     },
     {
-      "from": "artifacts/sample-holdout-20261011-tera-samples-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-holdout-20261011-tera-samples-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-holdout-20261011-tera-samples-trace.jsonl",
       "originalSha256": "f1767b1059991e0ff56eeed171444500085b344b30f2731354dfcf83d14eedd9"
     },
@@ -1953,42 +1953,42 @@
       "originalSha256": "96ce1a1f08bbcd0b9765db7b6a1aec414f5348fab0e9a65163a67ae991671d6f"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-basic-baseline-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-basic-baseline-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-basic-baseline-trace.jsonl",
       "originalSha256": "7ad93818743038e1f211c9917cd97dde0b6127ea33ceb669f157bd58039fec35"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-basic-both-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-basic-both-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-basic-both-trace.jsonl",
       "originalSha256": "ef8abb5ead09ed4f0473320538d8dda33617eb82125e6524abd81caa41a6e269"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-basic-samples-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-basic-samples-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-basic-samples-trace.jsonl",
       "originalSha256": "8d2ab7ad56d5c95d59f44d6a312f97f6881575b29d25203e97b3f66daa9049b3"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-basic-walls-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-basic-walls-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-basic-walls-trace.jsonl",
       "originalSha256": "39ab65fd783e64f37eec764f6cc609703640a03e9da2e0445ffce37bcefe2103"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-chaos-baseline-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-chaos-baseline-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-chaos-baseline-trace.jsonl",
       "originalSha256": "ed138e562c56e48b75e5bfd891eb40aebd545287585dd0b887222c9aef4656e9"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-chaos-both-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-chaos-both-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-chaos-both-trace.jsonl",
       "originalSha256": "5765cbf612f4fa7638c8d90d249a0ea1c888acab65025f376cd8919addea038f"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-chaos-samples-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-chaos-samples-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-chaos-samples-trace.jsonl",
       "originalSha256": "2878fb0eb75ce03c6d7d8f6ee66d469520e48ee6490aea827e5a5b4830239b63"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-chaos-walls-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-chaos-walls-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-chaos-walls-trace.jsonl",
       "originalSha256": "2c48fe9debf09c65d64bd61c236e0a95e40377615c0fc220e55f1bb4a1329cff"
     },
@@ -2003,22 +2003,22 @@
       "originalSha256": "dcf7626d2a26940e2cb7d25934a77c5ad4f482e977b17c80119223a0a0362fff"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-tera-baseline-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-tera-baseline-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-tera-baseline-trace.jsonl",
       "originalSha256": "697865c7586e9463ab1a64cdadcc9663a48a0cb38e9246a18f0156d228dfc4ae"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-tera-both-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-tera-both-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-tera-both-trace.jsonl",
       "originalSha256": "2e3eff87c2c21eb28ca87906a74686fa88e875dbf27edea8d69521cc40fa6a83"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-tera-samples-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-tera-samples-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-tera-samples-trace.jsonl",
       "originalSha256": "60509f50b384a57f5d4e0115e2270d4b9519c58fcfff8781ad7429a32654b8f3"
     },
     {
-      "from": "artifacts/sample-wall-factors-20261010-tera-walls-trace.jsonl",
+      "from": "artifacts/experiments/samples/raw/sample-wall-factors-20261010-tera-walls-trace.jsonl",
       "to": "artifacts/experiments/samples/sample-wall-factors-20261010-tera-walls-trace.jsonl",
       "originalSha256": "d19b98223c610ad2fb9325622d38af23eed2e2ff678728f331b5987db207881a"
     },

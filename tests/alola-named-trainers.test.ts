@@ -1,8 +1,6 @@
-import {readPreHauGuzmaFile as readFileSync} from './hau-guzma-preservation';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync} from 'node:fs';
-import {createHash} from 'node:crypto';
+import {existsSync,readFileSync} from 'node:fs';
 import Showdown from 'pokemon-showdown';
 import {alolaTrainers,alolaSample,alolaScopeIds,alolaVillainSequence} from '../src/data/alola-trainers';
 import {namedTrainerSamples,trainerCatalog} from '../src/data/trainer-catalog';
@@ -18,14 +16,6 @@ import {FORMAT,runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
 import {createNpcPolicy} from '../src/battle/npc-policy';
 import {packedNpcRule} from '../src/data/npc-gimmicks';
-import preservation from './fixtures/alola-preservation.json' with {type:'json'};
-
-test('Alola preserves every out-of-scope source/runtime entry, including tuned Kalos and legacy Hau baseline',()=>{
- const digest=(rows:{id:string;stage:string}[])=>{const kept=rows.filter(r=>!preservation.excludedAlola.includes(r.id)).sort((a,b)=>(a.id+a.stage).localeCompare(b.id+b.stage));assert.equal(kept.length,preservation.alola.count);return createHash('sha256').update(JSON.stringify(kept)).digest('hex');};
- assert.equal(digest(JSON.parse(readFileSync('src/data/normal-npc-templates.json','utf8'))),preservation.alola.runtime);
- assert.equal(digest(JSON.parse(readFileSync('scripts/data/npc/normal-npc-samples.json','utf8')).samples),preservation.alola.source);
- for(const [path,hash] of Object.entries(preservation.common))assert.equal(createHash('sha256').update(readFileSync(path,'utf8').replace(/\r\n/g,'\n')).digest('hex'),hash,path);
-});
 
 test('20 identities, unique higher roles, route candidates, deferred villain sequence and portraits',()=>{
  assert.equal(alolaTrainers.length,20);assert.equal(new Set(alolaTrainers.map(t=>t.id)).size,20);

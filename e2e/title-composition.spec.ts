@@ -17,8 +17,8 @@ for(const [width,height] of [[1920,1080],[1280,900],[390,844],[360,640]])test(`t
   const settings=await page.getByRole('link',{name:'설정',exact:true}).boundingBox();expect(settings!.y+settings!.height).toBeLessThanOrEqual(height);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await page.screenshot({path:`artifacts/qa/screenshots/title-crop/title-${width}x${height}.png`,fullPage:true});
-  await page.getByRole('link',{name:'알뽑기',exact:true}).click();await expect(page).toHaveURL(/\/eggs$/);await expect(page.getByRole('heading',{name:'알뽑기',exact:true})).toBeVisible();await expect(page.locator('.egg-station')).toBeVisible();await expect(page.locator('.permanent-products')).toHaveCount(0);await expect(page.getByRole('tablist')).toHaveCount(1);
+  await page.getByRole('link',{name:'알뽑기',exact:true}).click();await expect(page).toHaveURL(/\/eggs$/);await expect(page.getByRole('heading',{name:'알뽑기',exact:true})).toBeVisible();await expect(page.locator('.egg-station')).toBeVisible();await expect(page.locator('.permanent-products')).toHaveCount(0);await expect(page.getByRole('tablist')).toHaveCount(0);
   await page.reload();await expect(page.locator('.egg-station')).toBeVisible();
-  await page.keyboard.press('x');await expect(page).toHaveURL(/\/$/);await page.getByRole('link',{name:'업그레이드',exact:true}).click();await expect(page).toHaveURL(/\/upgrades$/);await expect(page.locator('.permanent-products section')).toHaveCount(4);await expect(page.locator('.egg-station')).toHaveCount(0);
+  await page.keyboard.press('x');await expect(page).toHaveURL(/\/$/);await page.getByRole('link',{name:'업그레이드',exact:true}).click();await expect(page).toHaveURL(/\/upgrades$/);await expect(page.locator('.permanent-products section')).toHaveCount(3);await expect(page.locator('.egg-station')).toHaveCount(0);
  }finally{store.close();}
 });

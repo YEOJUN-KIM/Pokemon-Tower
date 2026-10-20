@@ -55,7 +55,7 @@ for(const width of [1280,390])test(`title, dex return and move zone keyboard nav
   await page.keyboard.press('ArrowDown');await page.keyboard.press('z');await expect(page).toHaveURL(/\/$/);
   await page.keyboard.press('ArrowDown');await page.keyboard.press('ArrowDown');await page.keyboard.press('Enter');
   await expect(page).toHaveURL(/\/upgrades$/);
-  await expect(page.locator('.permanent-products section')).toHaveCount(4);
+  await expect(page.locator('.permanent-products section')).toHaveCount(3);
   await expect(page.locator('.egg-station')).toHaveCount(0);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });

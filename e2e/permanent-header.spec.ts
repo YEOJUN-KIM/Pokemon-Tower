@@ -16,7 +16,7 @@ for(const width of [1280,390])for(const pageName of ['eggs','upgrades'])test(`ti
   for(let n=0;n<8;n++){await page.keyboard.press('Tab');await expect(back).not.toBeFocused();}
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await page.screenshot({path:`artifacts/qa/screenshots/permanent-header/${pageName}-${width}.png`,fullPage:true});
-  if(pageName==='eggs')await page.locator('[data-egg-target]').focus();else await page.locator('[data-permanent-product="allowance"]').focus();
+  if(pageName==='eggs')await page.locator('[data-egg-draw="1"]').focus();else await page.locator('[data-permanent-product="allowance"]').focus();
   await page.keyboard.press('x');await expect(page).toHaveURL(/\/$/);
   await page.goto(`/${pageName}`);await back.click();await expect(page).toHaveURL(/\/$/);
  }finally{store.close();}

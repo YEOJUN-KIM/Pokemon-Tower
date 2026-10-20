@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {revealedRare,strongerRare,trainerMusic,arenaTheme} from '../src/web/encounter-presentation';
+import {revealedRare,strongerRare,trainerMusic,arenaTheme,sceneTheme} from '../src/web/encounter-presentation';
 import {prototypeTrainers} from '../src/data/tower-trainers';
 import {musicScores,musicFiles,musicNames,musicTrackLevels} from '../src/web/music-score';
 import {readFileSync} from 'node:fs';
@@ -28,4 +28,17 @@ test('six distinct CC0 recordings and two original result cues, with shared gym/
   const sources=JSON.parse(readFileSync('public/audio/music-sources.json','utf8'));assert.equal(sources.length,7);const hashes=new Set<string>();
   for(const source of sources){assert.equal(source.license,'CC0-1.0');const bytes=readFileSync(source.path);assert.equal(bytes.length,source.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),source.sha256);hashes.add(source.sha256);assert.equal(musicFiles[source.id as keyof typeof musicFiles],source.path.replace('public',''));}assert.equal(hashes.size,6);
   for(const score of scores){if(!score)throw Error('Missing score');assert.equal(score.melody.length%32,0);assert.equal(score.chords.length,4);assert.ok(score.bpm>0);}
+});
+
+test('villain event snapshots keep the same place through encounter, battle and results',()=>{
+ const boss={...prototypeTrainers[10].boss,role:'champion' as const};
+ for(const stage of ['rocket-intro','rocket-officer','rocket-boss','officer','boss','rocket-ambush','grunt-1','grunt-2'] as const){
+  const villain={stage,afterFloor:64},run={floor:66,totalFloors:100,boss,trainer:null};
+  const expected=['rocket-ambush','grunt-1','grunt-2'].includes(stage)?'hall':'facility';
+  const event={id:'scene',kind:'villain-campaign',afterFloor:64,phase:'choice' as const,reward:null,villain:{stage,organization:'flare',name:'NPC',portrait:'xerosic'}};
+  assert.equal(sceneTheme({...run,event}),expected);
+  assert.equal(sceneTheme({...run,event:null,villainEncounter:villain}),expected);
+  assert.equal(sceneTheme({...run,event:{...event,phase:'reward'},villainEncounter:villain}),expected);
+ }
+ assert.equal(sceneTheme({floor:66,totalFloors:100,boss:null,trainer:null}),'night');
 });

@@ -1,7 +1,6 @@
 'use client';
 import {GameMenuBar,GameMenuProvider} from './game-menu-context';
 import {BattleStage} from './battle-stage';
-import {isVillainAmbush} from '../data/villain-tracks';
 import {Ball,SendOut,PokemonFeedback,ShinySparkles,Sprite,HealthCard} from './battle-pokemon';
 import {RunEventScene,RunEventPanel} from './run-event';
 import {hiddenShopAvailability} from './hidden-shop';
@@ -39,7 +38,7 @@ import {PokedexDialog} from './pokedex-dialog';
 import type {PokedexEntry} from './pokedex-data';
 import {FieldInspection} from './battle-field-overlay';
 import {emptyField} from './battle-field';
-import {arenaTheme,arenaNames,trainerMusic,revealedRare,strongerRare} from './encounter-presentation';
+import {sceneTheme,arenaNames,trainerMusic,revealedRare,strongerRare} from './encounter-presentation';
 import type {MusicTrack} from './music-score';
 import {BattleCommands,type CommandMode} from './battle-commands';
 import {readPlaybackSpeed,playbackDuration,type PlaybackSpeed} from './playback-settings';
@@ -126,9 +125,7 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
   const gimmickHint=({mega:'메가진화',dynamax:'다이맥스',tera:'테라스탈',z:'Z기술',chaos:'변신 선택',basic:''} as const)[run?.rule ?? 'chaos'];
   const active = battle?.team.find(p => p.active);
   const encounterMusic=trainerMusic(run?.boss ?? run?.trainer);
-  const scenery=run?.villainEncounter&&isVillainAmbush(run.villainEncounter.stage)
-    ?arenaTheme(run.villainEncounter.afterFloor,run.totalFloors,'trainer')
-    :arenaTheme(run?.floor ?? 1,run?.totalFloors ?? 10,encounterMusic);
+  const scenery=sceneTheme(run);
   const rareEncounter=useRef<{id:string;track:MusicTrack|null}>({id:'',track:null});
 
   async function refresh() {

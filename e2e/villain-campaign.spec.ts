@@ -31,17 +31,18 @@ for(const width of [1280,390])for(const reducedMotion of ['no-preference','reduc
     await expect(page.getByRole('group',{name:'이벤트 선택',exact:true})).toHaveCount(0);
     expect(await page.locator('[data-villain=true].battle-messages').evaluate(el=>el.scrollHeight<=el.clientHeight+1)).toBe(true);
     await page.screenshot({path:`${capture}/${index}-${stage}-${width}-${reducedMotion}.png`,fullPage:true,animations:'disabled'});
-    if(stage==='rocket-ambush')await expect(page.locator('.arena')).toHaveAttribute('data-scenery',arenaTheme(event.afterFloor,100,'trainer'));
+    const theme=arenaTheme(event.afterFloor,100,stage==='rocket-ambush'?'trainer':'villain');await expect(page.locator('.arena')).toHaveAttribute('data-scenery',theme);
+    const background=()=>page.locator('.arena,.stadium-backdrop,.stadium-lights,.field-horizon,.stadium-field,.stadium-details i').evaluateAll(elements=>elements.map(el=>{const style=getComputedStyle(el);return [style.backgroundImage,style.backgroundColor,style.clipPath];}));const encounterBackground=await background();
     if(stage==='rocket-officer'){await expect(page.locator('[data-villain=true] .latest')).toHaveCSS('white-space','pre-line');await expect(page.locator('[data-villain=true] .latest')).toHaveText('폐쇄된 보안 구역.\n로켓단 간부를 발견했다.');}
     const snapshot=new VillainCampaigns(store.db).row(event.id)!.snapshot_json;
     await expect(page.getByRole('log',{name:'이벤트 안내'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();
     await expect.poll(()=>store.currentBattle(owner)?.id).toBeTruthy();
-    const battle=store.currentBattle(owner)!;if(stage==='rocket-ambush')await expect(page.locator('.arena')).toHaveAttribute('data-scenery',arenaTheme(event.afterFloor,100,'trainer'));await page.reload();expect(store.currentBattle(owner)!.opponent_team).toBe(battle.opponent_team);
+    const battle=store.currentBattle(owner)!;await expect(page.getByTestId('trainer-entrance')).toHaveAttribute('data-phase','enter');await expect(page.locator('.arena')).toHaveAttribute('data-scenery',theme);expect(await background()).toEqual(encounterBackground);await expect(page.getByRole('log',{name:'현재 배틀 상황'})).toHaveAttribute('data-typing','false');await page.keyboard.press('Enter');await expect(page.locator('.arena')).toHaveAttribute('data-playing','false',{timeout:15000});expect(await background()).toEqual(encounterBackground);await page.reload();await expect(page.locator('.arena')).toHaveAttribute('data-scenery',theme);expect(await background()).toEqual(encounterBackground);expect(store.currentBattle(owner)!.opponent_team).toBe(battle.opponent_team);
     expect(new VillainCampaigns(store.db).row(event.id)!.snapshot_json).toBe(snapshot);
     finishChallengerBattle(store,battle.id);await page.reload();
     await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await expect(page.getByRole('log',{name:'이벤트 결과'})).toContainText(index===0?'로켓단의 아지트에서 물품을 발견했다.':index===1?'단서 1 / 2':index===2?'단서 2 / 2':index===3?'비주기의 위치':'캠페인 완료');await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('reward-modal')).toBeVisible();
     await expect(page.locator('[data-event-player]')).toBeVisible();await expect(page.locator('[data-event-target] img')).toBeVisible();
-    if(stage==='rocket-ambush')await expect(page.locator('.arena')).toHaveAttribute('data-scenery',arenaTheme(event.afterFloor,100,'trainer'));
+    await expect(page.locator('.arena')).toHaveAttribute('data-scenery',theme);expect(await background()).toEqual(encounterBackground);
     expect(store.view(owner).run!.state).toBe('select');expect(store.view(owner).run!.candidates).toEqual([]);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
    }

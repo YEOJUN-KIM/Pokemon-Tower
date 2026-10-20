@@ -1,5 +1,6 @@
 import rarity from '../data/music-rarity.json' with {type:'json'};
-import type {BossView} from './contracts';
+import type {BossView,RunView} from './contracts';
+import {isVillainAmbush} from '../data/villain-tracks';
 import type {MusicTrack} from './music-score';
 
 export function trainerMusic(boss?:BossView|null):MusicTrack {
@@ -23,3 +24,10 @@ export function arenaTheme(floor:number,total:number,role?:MusicTrack) {
   return progress<.3 ? 'meadow' : progress<.65 ? 'hall' : 'night';
 }
 export const arenaNames:Record<string,string>={meadow:'야외 경기장',hall:'타워 실내 경기장',night:'야간 전망 경기장',summit:'정상 챔피언 경기장',facility:'조직 시설 경기장'};
+
+// Resolve the place from the event snapshot in both dialogue and battle states.
+export function sceneTheme(run:Pick<RunView,'floor'|'totalFloors'|'event'|'villainEncounter'|'boss'|'trainer'>|null|undefined){
+  const encounter=run?.event?.villain?{stage:run.event.villain.stage,afterFloor:run.event.afterFloor}:run?.villainEncounter;
+  if(encounter)return arenaTheme(encounter.afterFloor,run!.totalFloors,isVillainAmbush(encounter.stage)?'trainer':'villain');
+  return arenaTheme(run?.floor??1,run?.totalFloors??10,trainerMusic(run?.boss??run?.trainer));
+}

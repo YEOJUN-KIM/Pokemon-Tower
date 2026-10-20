@@ -61,7 +61,6 @@
 .managementDoor span {display:block;padding:8px;text-align:center;background:#283b45;color:#d7e3e8;font-size:14px;}
 .managementDoor i {position:absolute;inset:42px 22px 0 0;background:linear-gradient(100deg,#687a81,#293d49);transform:skewY(-7deg);transform-origin:left;}
 
-.scope.facility {position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 119px,#92a8ae1a 120px 122px),linear-gradient(#263c49 0 68%,#789096 68% 69%,#33464d 69%);box-shadow:inset 0 0 70px #07141b99;}
 
 /* Rocket choices share one compact row, without a second nested scroll area. */
 .scope.bottom[data-villain=true] {gap:4px;}

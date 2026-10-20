@@ -77,3 +77,26 @@ test('v27 migration retains original teams, actions and foreign keys; retry prep
   assert.equal(s.view('p').run!.retries!.preparing,true);assert.equal(s.view('p').run!.retries!.used,1);assert.ok(s.enter('p',run,1,starters));
  }finally{s.close();}
 });
+
+test('retry retains unused purchases, held tools, TMs and remaining consumables through disk reload and the new snapshot',()=>{
+ mkdirSync('.data/tests',{recursive:true});const path=`.data/tests/retry-bag-${randomUUID()}.sqlite`;
+ let s=new TowerStore(path);try{
+  s.ensurePlayer('p');s.db.prepare('UPDATE players SET growth_points=1000 WHERE id=?').run('p');s.permanentAction('p',randomUUID(),'buy','retry',1,null);
+  const first=s.start('p',starters),run=s.battle(first).run_id;
+  s.db.prepare("UPDATE runs SET state='select',floor=11 WHERE id=?").run(run);
+  s.db.prepare("INSERT INTO run_item_bag VALUES (?,'Leftovers',1)").run(run);
+  s.db.prepare("INSERT INTO run_held_items VALUES (?,'Charizard','Focus Sash')").run(run);
+  s.db.prepare('INSERT INTO run_reward_inventory VALUES (?,?,?,?)').run(randomUUID(),run,JSON.stringify({kind:'machine',move:'Earthquake',amount:1}),1);
+  s.db.prepare('INSERT INTO run_reward_inventory VALUES (?,?,?,?)').run(randomUUID(),run,JSON.stringify({kind:'vitamin',stat:'atk',amount:2}),2);
+  s.db.prepare("INSERT INTO run_battle_items VALUES (?,'attack',2)").run(run);
+  s.db.prepare("INSERT INTO run_battle_items VALUES (?,'guard',1)").run(run);
+  const id=s.enter('p',run,11,starters);s.input('p',id,1,'item attack');lose(s,id);
+  s.retry('p',run,id);
+  const before=s.view('p').run!;assert.equal(before.heldItems!.Charizard,'Focus Sash');assert.equal(before.itemBag!.Leftovers,1);assert.equal(before.battleItems!.attack,1);
+  assert.ok(before.bag!.entries.some(e=>e.pocket==='machines'&&e.name));assert.equal(before.bag!.entries.find(e=>e.action==='vitamin')!.quantity,2);
+  s.close();s=new TowerStore(path);assert.deepEqual(s.view('p').run!.bag,before.bag);
+  const next=s.enter('p',run,11,starters),snapshot=s.battle(next);
+  assert.deepEqual(JSON.parse(snapshot.battle_items),{attack:1,guard:1});assert.equal(Showdown.Teams.unpack(snapshot.player_team)![0].item,'Focus Sash');
+  assert.equal(s.view('p').run!.itemBag!.Leftovers,1);assert.equal(s.db.prepare("SELECT quantity FROM run_reward_inventory WHERE run_id=? AND json_extract(effect_json,'$.kind')='machine'").get(run)!.quantity,1);
+ }finally{s.close();}
+});

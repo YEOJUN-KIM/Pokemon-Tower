@@ -263,7 +263,7 @@ export class TowerStore {
       itemBag:Object.fromEntries((this.db.prepare('SELECT item,quantity FROM run_item_bag WHERE run_id=? AND quantity>0').all(row.id) as {item:string;quantity:number}[]).map(entry=>[entry.item,entry.quantity])),
       itemPurchases:this.itemPurchases(row),
       battleItems:this.battleItemBag(row.id),
-      adjustment:row.state==='select' && (isShopFloor(row.floor,row.total_floors)||!!retryBattle)?{entries:this.trainingCollection(owner).filter(entry=>this.roster(row.id).includes(entry.species)).map(entry=>{const profile=this.runProfiles(row.id)[entry.species]??entry.profile;return {...entry,profile,...trainingOptions(entry.species,profile.forme),selfMoves:profileLearnset(entry.species,profile.forme).selfMoves,unlockedMoves:[...new Set([...entry.unlockedMoves,...profileLearnset(entry.species,profile.forme).selfMoves])]} ;}),snapshot:createHash('sha256').update(JSON.stringify(this.runProfiles(row.id))).digest('hex')}:null,
+      adjustment:row.state==='select' && (retryBattle||!this.events.view(row.id))?{entries:this.trainingCollection(owner).filter(entry=>this.roster(row.id).includes(entry.species)).map(entry=>{const profile=this.runProfiles(row.id)[entry.species]??entry.profile;return {...entry,profile,...trainingOptions(entry.species,profile.forme),selfMoves:profileLearnset(entry.species,profile.forme).selfMoves,unlockedMoves:[...new Set([...entry.unlockedMoves,...profileLearnset(entry.species,profile.forme).selfMoves])]} ;}),snapshot:createHash('sha256').update(JSON.stringify(this.runProfiles(row.id))).digest('hex')}:null,
       consumableOffers:row.state==='select' && isShopFloor(row.floor,row.total_floors)?this.consumableOffers(row):[],
       shopRerolls:Object.fromEntries(['items','machines'].map(kind=>{const count=this.shopRevision(row,kind);return [kind,{count,limit:this.permanentView(owner).rerollLimit,price:rerollPrice(count)}];})) as RunView['shopRerolls'],
       vitaminShop:null,vitaminUsage:readVitaminUsage(this.db,row.id,row.floor),
@@ -828,7 +828,7 @@ export class TowerStore {
       if(!isCollectibleSpecies(name))throw new BattleRequestError('현재 수집 목록에서 제외된 포켓몬입니다.',400);
       if(!this.db.prepare('SELECT 1 FROM unlocks WHERE player_id=? AND species=?').get(owner,name))throw new BattleRequestError('해금한 포켓몬만 설정할 수 있습니다.',403);
       const run=adjustment?this.ownedRun(owner,adjustment.id):null;
-      if(run && (run.state!=='select'||run.floor!==adjustment!.floor||(!isShopFloor(run.floor,run.total_floors)&&!this.retryState(run.id).pending_battle_id)||!this.roster(run.id).includes(name)))throw new BattleRequestError('정비 구간에서 보유 포켓몬만 조정할 수 있습니다.',409);
+      if(run && (run.state!=='select'||run.floor!==adjustment!.floor||(!this.retryState(run.id).pending_battle_id&&!!this.events.view(run.id))||!this.roster(run.id).includes(name)))throw new BattleRequestError('정비 구간에서 보유 포켓몬만 조정할 수 있습니다.',409);
       if(run && adjustment!.snapshot!==createHash('sha256').update(JSON.stringify(this.runProfiles(run.id))).digest('hex'))throw new BattleRequestError('파티 설정이 변경됐습니다. 다시 확인하세요.',409);
       const before=this.trainingCollection(owner).find(entry=>entry.species===name)!;
       if(revision!==before.revision)throw new BattleRequestError('설정이 이미 변경됐습니다. 도감을 다시 불러오세요.',409);

@@ -5,7 +5,7 @@ import {hiddenBossFixture} from '../tests/hidden-boss-fixture';
 import {TowerService} from '../src/server/tower-service';
 import {Accounts} from '../src/server/accounts';
 
-for(const [theme,floor,width] of [['johto',50,1280],['johto',100,390],['kanto',50,1280],['kanto',100,390]] as const)test(`${theme} champion ${floor} → surprise event → automatic hidden battle at ${width}px`,async({page,context})=>{
+for(const [theme,floor,width] of [['johto',50,1280],['johto',100,390],['kanto',50,1280],['kanto',100,390]] as const)test(`${theme} champion ${floor} → surprise event → confirmed hidden battle at ${width}px`,async({page,context})=>{
  const owner='hidden_'+randomBytes(7).toString('hex'),f=hiddenBossFixture(theme,floor,'.data/e2e.sqlite',owner),s=f.store,service=new TowerService(s);
  try{
   const player=Showdown.Teams.pack(Showdown.Teams.import('Charizard\nAbility: Blaze\nLevel: 50\nEVs: 1 HP\n- Flamethrower\n\nBlastoise\nAbility: Torrent\nLevel: 50\nEVs: 1 HP\n- Surf\n\nVenusaur\nAbility: Overgrow\nLevel: 50\nEVs: 1 HP\n- Vine Whip')!);
@@ -23,7 +23,7 @@ for(const [theme,floor,width] of [['johto',50,1280],['johto',100,390],['kanto',5
   await page.getByRole('button',{name:'싸운다',exact:true}).click();await page.locator('[data-command="move 1"]').click();
   await expect(page.locator('.enemy-position .motion-faint')).toBeAttached();
   await expect(page.getByTestId('rocket-ambush-notice')).toBeVisible();
-  await expect(page.getByLabel('이벤트 상황')).toContainText('HP와 PP가 회복');
+  await expect(page.getByLabel('이벤트 상황')).toContainText('HP와 PP가 회복');await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('trainer-entrance')).toHaveAttribute('data-phase','enter');await page.keyboard.press('Enter');
   await expect.poll(()=>s.currentBattle(owner)?.id).not.toBe(f.champion);
   await expect.poll(()=>s.view(owner).run!.state).toBe('battle');
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');

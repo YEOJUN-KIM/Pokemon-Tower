@@ -88,7 +88,7 @@ test('24th floor preparation exposes equipment, transfers a held item and allows
     store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(row.run_id,'Urshifu','Mystic Water');
     store.db.prepare('INSERT INTO run_held_items VALUES (?,?,?)').run(row.run_id,'Gengar','Leftovers');
     const tower=store.view('prep');
-    const html=renderToStaticMarkup(createElement(TowerControls,{tower,selected:['Urshifu','Gengar','Ogerpon'],setSelected:()=>{},busy:false,submit:async()=>{}}));
+    const html=renderToStaticMarkup(createElement(TowerControls,{tower,entries:[],selected:['Urshifu','Gengar','Ogerpon'],setSelected:()=>{},busy:false,submit:async()=>{}}));
     assert.match(html,/data-open-bag="true"/);
     assert.match(html,/24층/);
     assert.ok(html.includes(pokemonName('Urshifu-Rapid-Strike')));

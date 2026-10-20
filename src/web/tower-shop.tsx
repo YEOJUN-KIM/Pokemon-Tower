@@ -1,6 +1,5 @@
 'use client';
-import {GameMenuFooter,GameStatus} from './game-menu';
-import {BagButton} from './bag';
+import {GameStatus} from './game-menu';
 import headingStyles from './styles/shop-heading.module.css';
 
 import {battleItemDescription} from '../data/battle-items';
@@ -21,7 +20,7 @@ export function TowerShop({run,coins,busy,submit,error,onContinue}:{run:RunView;
   const [category,setCategory]=useState<'machines'|'items'|'battle'>('items');
   if(run.state!=='select' || !isShopFloor(run.floor,run.totalFloors)) return null;
   return <section className="tower-shop" data-tab-scope data-keyboard-tab-scope aria-labelledby="shop-title" data-testid="tower-shop">
-    <div className={`shop-heading ${headingStyles.heading}`}><div><h2 id="shop-title" className="sr-only">정비 상점</h2></div><div className={`shop-heading-actions ${headingStyles.actions}`}><BagButton run={run} busy={busy} submit={submit} error={error}/><div className="shop-wallet" role="status" aria-label="상점 보유 코인"><span>보유 코인</span><strong data-testid="shop-wallet">{coins.toLocaleString()}코인</strong></div></div></div>
+    <div className={`shop-heading ${headingStyles.heading}`}><div><h2 id="shop-title" className="sr-only">정비 상점</h2></div><div className={`shop-heading-actions ${headingStyles.actions}`}><div className="shop-wallet" role="status" aria-label="상점 보유 코인"><span>보유 코인</span><strong data-testid="shop-wallet">{coins.toLocaleString()}코인</strong></div></div></div>
     <div className="shop-categories" data-game-tabs role="group" aria-label="상점 상품 종류">{([['items','지닌 도구'],['battle','배틀 아이템'],['machines','기술머신']] as const).map(([id,label])=><button key={id} data-keyboard-tab data-initial-focus={category===id || undefined} className="secondary-button" aria-pressed={category===id} onClick={()=>setCategory(id)}>{label}</button>)}</div>
     <div data-keyboard-tab-panel key={category}>
     {category==='items' && <HeldItemShop run={run} coins={coins} busy={busy} submit={submit} error={error}/>}
@@ -38,6 +37,6 @@ export function TowerShop({run,coins,busy,submit,error,onContinue}:{run:RunView;
     {(category==='machines'||category==='items') && <div className="shop-reroll"><button className="secondary-button" data-keyboard-tab-utility data-testid="shop-reroll" disabled={busy||(run.shopRerolls?.[category].count??0)>=(run.shopRerolls?.[category].limit??SHOP_REROLL_LIMIT)||coins<(run.shopRerolls?.[category].price??0)||(category==='machines'&&!run.machineShop?.offers.length)} onClick={()=>{void submit({type:'reroll-shop',runId:run.id,floor:run.floor,kind:category,revision:run.shopRerolls?.[category].count??0});}}>{(run.shopRerolls?.[category].count??0)>=(run.shopRerolls?.[category].limit??SHOP_REROLL_LIMIT)?'리롤 완료':'리롤'}</button><small>종류별 상점당 {run.shopRerolls?.[category==='machines'?'machines':'items'].limit??1}회 · 지닌 도구 또는 기술머신을 다시 뽑습니다 · 소모품은 고정</small></div>}
     {category==='machines' && !run.machineShop?.offers.length && <p>판매 가능한 미보유 기술머신이 없습니다.</p>}
     </div>
-    <GameMenuFooter controls={[{key:'← / → · Q / E',label:'탭'},{key:'Enter / Z',label:'구매'},{key:'B',label:'배낭'},{key:'X',label:'뒤로'}]}/>
+
   </section>;
 }

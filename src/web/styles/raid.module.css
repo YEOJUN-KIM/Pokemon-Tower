@@ -10,3 +10,8 @@
 @keyframes pulse{50%{opacity:.9;transform:scale(1.08);}}
 @media(max-width:760px){.scene{gap:8px;padding:12px;}.art{width:170px;height:160px;}.silhouette{transform:scale(.85);}}
 @media(prefers-reduced-motion:reduce){.aura{animation:none;}}
+
+.encounter.encounter{inset:auto;left:var(--far-x,75%);bottom:var(--far-ground,36%);width:240px;max-width:45%;padding:0;transform:translateX(-50%);gap:5px;pointer-events:none;}
+.encounter.encounter h2{font-size:16px;}
+.encounter.encounter p,.encounter.encounter strong{font-size:12px;}
+@media(max-width:760px){.encounter.encounter{width:170px;gap:3px;}.encounter.encounter h2{font-size:12px;}.encounter.encounter p,.encounter.encounter strong{font-size:10px;}}

@@ -455,58 +455,6 @@
   margin-left: 5px;
   border-radius: 2px;
 }
-:where(.scope[data-ui-screen="battle"]) :global(.arena-preview) {
-  height: 100%;
-  position: relative;
-  z-index: 2;
-}
-:where(.scope) :global(.preview-number) {
-  position: absolute;
-  font-size: 220px;
-  line-height: 1;
-  right: 25px;
-  top: 10px;
-  color: #a6bd9626;
-  font-weight: 900;
-  letter-spacing: -16px;
-}
-:where(.scope) :global(.preview-sprites) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 250px;
-  padding-top: 25px;
-  position: relative;
-}
-:where(.scope) :global(.preview-sprites .sprite) {
-  width: 160px;
-  height: 160px;
-}
-:where(.scope) :global(.preview-sprites .sprite:nth-child(2)) {
-  width: 210px;
-  height: 210px;
-  margin: 0 -28px;
-  z-index: 1;
-  transform: translateY(-9px);
-}
-:where(.scope) :global(.preview-caption) {
-  position: absolute;
-  bottom: 35px;
-  width: 100%;
-  text-align: center;
-}
-:where(.scope) :global(.preview-caption>span) {
-  font-size: 8px;
-  color: #7c9271;
-  letter-spacing: 2px;
-  display: block;
-  margin-bottom: 10px;
-}
-:where(.scope) :global(.preview-caption strong) {
-  font-size: 17px;
-  letter-spacing: -.5px;
-  color: #567346;
-}
 :where(.scope[data-ui-screen="battle"]) :global(.command-area) {
   padding: 25px 24px 23px;
   min-height: 208px;
@@ -921,20 +869,6 @@
     left: 10%;
     bottom: 17px;
   }
-  :where(.scope) :global(.preview-sprites) {
-    height: 285px;
-  }
-  :where(.scope) :global(.preview-sprites .sprite) {
-    width: 180px;
-    height: 180px;
-  }
-  :where(.scope) :global(.preview-sprites .sprite:nth-child(2)) {
-    width: 235px;
-    height: 235px;
-  }
-  :where(.scope) :global(.preview-caption) {
-    bottom: 44px;
-  }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-log) {
     height: 244px;
   }
@@ -1021,14 +955,6 @@
     font-size: 9px;
     padding: 8px 10px;
   }
-  :where(.scope) :global(.preview-sprites .sprite) {
-    width: 115px;
-    height: 140px;
-  }
-  :where(.scope) :global(.preview-sprites .sprite:nth-child(2)) {
-    width: 170px;
-    height: 185px;
-  }
   :where(.scope[data-ui-screen="battle"]) :global(.player-position) {
     left: 0;
   }
@@ -1102,14 +1028,6 @@
     flex-direction: row;
     align-items: center;
     min-height: 90px;
-  }
-  :where(.scope) :global(.preview-sprites .sprite) {
-    width: 155px;
-    height: 155px;
-  }
-  :where(.scope) :global(.preview-sprites .sprite:nth-child(2)) {
-    width: 200px;
-    height: 200px;
   }
   :where(.scope) :global(.page-heading) {
     align-items: flex-start;
@@ -1284,27 +1202,6 @@
   :where(.scope[data-ui-screen="battle"]) :global(.battle-log) {
     height: 180px;
   }
-  :where(.scope) :global(.preview-sprites .sprite) {
-    width: 120px;
-    height: 140px;
-  }
-  :where(.scope) :global(.preview-sprites .sprite:nth-child(2)) {
-    width: 170px;
-    height: 190px;
-  }
-  :where(.scope) :global(.preview-caption) {
-    bottom: 24px;
-  }
-  :where(.scope) :global(.preview-caption strong) {
-    font-size: 15px;
-  }
-  :where(.scope) :global(.preview-sprites) {
-    padding-top: 10px;
-    height: 236px;
-  }
-  :where(.scope) :global(.preview-number) {
-    font-size: 195px;
-  }
   :where(.scope) :global(.result-overlay>span) {
     font-size: 32px;
   }
@@ -1321,37 +1218,6 @@
     transition: none!important;
     scroll-behavior: auto!important;
   }
-}
-/* Tower progression and persistent collection */
-:where(.scope) :global(.tower-summary) {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 18px 23px;
-  margin-bottom: 22px;
-  flex-wrap: wrap;
-}
-:where(.scope) :global(.tower-summary>div) {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-:where(.scope) :global(.tower-summary>div:first-child) {
-  margin-right: auto;
-}
-:where(.scope) :global(.tower-summary span) {
-  font-size: 10px;
-  color: #7b8976;
-}
-:where(.scope) :global(.tower-summary strong) {
-  font-size: 17px;
-}
-:where(.scope) :global(.tower-summary small) {
-  font-size: 10px;
-  color: #849078;
 }
 :where(.scope) :global(.text-button) {
   border: 0;
@@ -1461,17 +1327,6 @@
   color: var(--ink);
 }
 @media(max-width:540px) {
-  :where(.scope) :global(.tower-summary) {
-    gap: 16px;
-    padding: 15px;
-  }
-  :where(.scope) :global(.tower-summary>div:first-child) {
-    width: 100%;
-    margin-right: 0;
-  }
-  :where(.scope) :global(.tower-summary strong) {
-    font-size: 15px;
-  }
   :where(.scope) :global(.text-button) {
     margin-left: auto;
   }
@@ -1635,159 +1490,6 @@
   font-size: 11px;
   color: #748267;
   margin: 0 0 15px;
-}
-:where(.scope) :global(.result-banner) {
-  --result-color: #27634e;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  border: 1px solid #a6c6b1;
-  background: #e8f3e8;
-  border-radius: 10px;
-  padding: 20px 24px;
-  margin-bottom: 22px;
-  color: var(--result-color);
-}
-:where(.scope) :global(.result-banner strong) {
-  font-size: 27px;
-  white-space: nowrap;
-}
-:where(.scope) :global(.result-banner span) {
-  font-size: 12px;
-  line-height: 1.8;
-}
-:where(.scope) :global(.result-banner.loss) {
-  --result-color: #a44538;
-  background: #fff0ec;
-  border-color: #e2b3a8;
-}
-:where(.scope) :global(.result-banner.draw) {
-  --result-color: #686081;
-  background: #f2eff8;
-  border-color: #c4bbd8;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog) {
-  --result-color: #28684e;
-  width: min(460px,calc(100% - 32px));
-  max-height: calc(100svh - 40px);
-  overflow: auto;
-  border: 1px solid #c2d4ba;
-  border-radius: 20px;
-  padding: 35px;
-  text-align: center;
-  background: #f9fcf6;
-  color: var(--ink);
-  box-shadow: 0 30px 100px #102b3755;
-  animation: appear .25s ease;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog::backdrop) {
-  background: #152c32b3;
-  backdrop-filter: blur(5px);
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog.loss) {
-  --result-color: #ad493b;
-  background: #fff8f5;
-  border-color: #e4b8ac;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog.draw) {
-  --result-color: #72638d;
-  background: #faf8fe;
-}
-:where(.scope) :global(.result-emblem) {
-  font-size: 44px;
-  line-height: 1;
-  display: grid;
-  place-items: center;
-  width: 85px;
-  height: 85px;
-  border-radius: 50%;
-  background: #e1ecdb;
-  color: var(--result-color);
-  margin: 0 auto 20px;
-}
-:where(.scope) :global(.loss .result-emblem) {
-  background: #f8dfd8;
-}
-:where(.scope) :global(.draw .result-emblem) {
-  background: #e8e1f2;
-}
-:where(.scope) :global(.result-english) {
-  font-size: 12px;
-  letter-spacing: 5px;
-  font-weight: 800;
-  color: var(--result-color);
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog h2) {
-  font-size: 54px;
-  color: var(--result-color);
-  margin: 8px 0 18px;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog>p) {
-  font-size: 13px;
-  line-height: 1.9;
-  margin: 0 0 20px;
-  color: #6e7e70;
-}
-:where(.scope) :global(.result-stats) {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: 1px solid #dce3d7;
-  border-bottom: 1px solid #dce3d7;
-  padding: 16px 0;
-  font-size: 12px;
-}
-:where(.scope) :global(.result-stats strong) {
-  font-size: 16px;
-}
-:where(.scope) :global(.result-reward) {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 22px 0;
-}
-:where(.scope) :global(.result-reward>span) {
-  font-size: 12px;
-  color: #768771;
-}
-:where(.scope) :global(.result-reward strong) {
-  font-size: 32px;
-  color: var(--result-color);
-}
-:where(.scope) :global(.result-reward small) {
-  font-size: 11px;
-  line-height: 1.8;
-  color: #788772;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog .result-retained) {
-  margin: 20px 0;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog .primary-button) {
-  width: 100%;
-  justify-content: space-between;
-  background: var(--result-color);
-  border-color: var(--result-color);
-  font-size: 14px;
-  padding: 16px 20px;
-}
-@media(max-width:540px) {
-  :where(.scope) :global(.result-banner) {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 6px;
-    padding: 16px;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog) {
-    padding: 25px;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog h2) {
-    font-size: 46px;
-  }
-}
-@media(prefers-reduced-motion:reduce) {
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog) {
-    animation: none;
-  }
 }
 :where(.scope[data-ui-screen="title"]) :global(.title-screen) {
   min-height: 100svh;
@@ -3063,26 +2765,6 @@
   font-size: 14px;
   color: #786784;
 }
-:where(.scope) :global(.boss-result) {
-  display: flex;
-  text-align: left;
-  align-items: center;
-  gap: 14px;
-  background: #f3edf9;
-  border-radius: 16px;
-  padding: 12px;
-  margin: 16px 0;
-  color: #41314f;
-}
-:where(.scope) :global(.boss-result .boss-portrait) {
-  width: 70px;
-  height: 80px;
-}
-:where(.scope) :global(.boss-result p) {
-  font-size: 14px;
-  line-height: 1.6;
-  margin: 8px 0;
-}
 @media(max-width:540px) {
   :where(.scope) :global(.boss-dialog) {
     padding: 20px;
@@ -3397,21 +3079,6 @@
   margin-top: 7px;
   font-size: 12px;
   width: 100%;
-}
-:where(.scope) :global(.upgrade-status) {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 18px;
-}
-:where(.scope) :global(.upgrade-status span) {
-  border-radius: 8px;
-  border: 1px solid #d7dfbd;
-  background: #eef3de;
-  color: #657536;
-  padding: 9px 13px;
-  font-size: 12px;
-  font-weight: 600;
 }
 @media(max-width:540px) {
   :where(.scope) :global(.tower-shop) {

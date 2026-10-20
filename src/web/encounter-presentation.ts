@@ -1,4 +1,4 @@
-import rarity from '../data/music-rarity.json';
+import rarity from '../data/music-rarity.json' with {type:'json'};
 import type {BossView} from './contracts';
 import type {MusicTrack} from './music-score';
 

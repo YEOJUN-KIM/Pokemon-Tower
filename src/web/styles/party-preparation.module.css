@@ -22,3 +22,6 @@
 :where(.scope)[data-preparing] :global(.selection-title h2) {margin:4px 0 8px;}
 
 .count {margin-right:auto;}
+
+.retryMoves{display:grid;grid-template-columns:1fr 1fr;gap:4px;width:100%;}
+.retryMoves>span{padding:3px;background:#1b2837;border:1px solid #495d70;border-radius:3px;font-size:10px;overflow-wrap:anywhere;}

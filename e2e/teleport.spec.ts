@@ -56,7 +56,7 @@ for(const [width,origin,destination,speed,reduced,decline] of [[1280,48,50,1,fal
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   mkdirSync('artifacts/qa/screenshots/teleport',{recursive:true});await page.screenshot({path:`artifacts/qa/screenshots/teleport/arrival-${width}.png`});
   await page.reload();await expect(event).toContainText(`${destination}층에 도착했다!`);
-  await event.getByRole('button',{name:'계속하기',exact:true}).click();await expect(event).toHaveCount(0);
+  await expect(event.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await event.locator('[data-event-confirm]').click();await expect(event).toHaveCount(0);
   expect(store.view(owner).run!.floor).toBe(destination);expect(store.view(owner).run!.state).toBe('select');
   expect(store.db.prepare('SELECT COUNT(*) AS n FROM run_events WHERE run_id=?').get(run)!.n).toBe(1);
   await page.screenshot({path:`artifacts/qa/screenshots/teleport/preparation-${width}.png`});

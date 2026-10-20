@@ -1,5 +1,5 @@
 'use client';
-import {useEffect,useRef,useState,type ReactNode,type RefObject} from 'react';
+import {useEffect,useRef,useState,type ReactNode} from 'react';
 import {statKeys,statNames,natureLabel,trainedStat,trainingCost,type StatKey,type TrainingProfile,type TrainingView} from '../data/training';
 import {genderNames} from '../data/gender';
 import {teraTypesForSpecies,teraNames} from '../data/tera';
@@ -16,7 +16,7 @@ import {PokemonImage} from './pokemon-image';
 import {TypeBadge} from './type-badge';
 import {MoveCategoryBadge} from './move-category-badge';
 import {TeraTypeIcon} from './tera-type-icon';
-import {type GameMenuKey} from './game-keyboard';
+import {useGameMenuKeys as useMenuKeys} from './game-keyboard';
 import {settingsKeys,totalPoints,totalPointLimit,pointMaximum,withStatPoints,ownedSettingMoves,withSettingMove,settingForms} from './pokemon-settings-model';
 import styles from './styles/pokemon-settings.module.css';
 
@@ -24,12 +24,7 @@ type Picker={kind:'ev';stat:StatKey}|{kind:'move';slot:number}|{kind:'nature'|'a
 const mainControls:GameControl[]=[{key:'↑ / ↓',label:'항목 이동'},{key:'← / →',label:'영역 이동'},{key:'Enter / Z',label:'선택'},{key:'Esc / X',label:'닫기'}];
 const pickerControls=(direction='방향키',action='적용'):GameControl[]=>[{key:direction,label:'이동'},{key:'Enter / Z',label:action},{key:'Esc / X',label:'취소'}];
 
-function useMenuKeys(ref:RefObject<HTMLElement|null>,handle:(command:GameMenuKey)=>boolean){
- const callback=useRef(handle);callback.current=handle;
- useEffect(()=>{const dialog=ref.current?.closest('dialog');const listener=(event:Event)=>{if(callback.current((event as CustomEvent<GameMenuKey>).detail))event.preventDefault();};dialog?.addEventListener('game-menu-key',listener);return()=>dialog?.removeEventListener('game-menu-key',listener);},[ref]);
-}
-
-export function PokemonSettings({entry,pokemon,points,onSave,onClose,initial='stats',returnFocus='.dex-card[aria-pressed="true"]'}:{entry:TrainingView;pokemon:PokedexEntry;points:number;onSave:(entry:TrainingView,profile:TrainingProfile)=>Promise<void>;onClose:()=>void;initial?:'stats'|'moves';returnFocus?:string}){
+export function PokemonSettings({entry,pokemon,points,onSave,onClose,initial='stats',allowFormChange=true,inRun=false,returnFocus='.dex-card[aria-pressed="true"]'}:{allowFormChange?:boolean;inRun?:boolean;entry:TrainingView;pokemon:PokedexEntry;points:number;onSave:(entry:TrainingView,profile:TrainingProfile)=>Promise<void>;onClose:()=>void;initial?:'stats'|'moves';returnFocus?:string}){
  const [draft,setDraft]=useState(()=>structuredClone(entry.profile)),[picker,setPicker]=useState<Picker|null>(null),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
  const root=useRef<HTMLDivElement>(null),lock=useRef(false);
  const chosenForm=entry.formOptions?.find(form=>form.species===(draft.forme??entry.species));
@@ -67,10 +62,10 @@ export function PokemonSettings({entry,pokemon,points,onSave,onClose,initial='st
      {Array.from({length:4},(_,slot)=>{const name=draft.moves[slot],info=moveInfo[name];return row(`move-${slot}`,'right',`기술 ${slot+1} 선택`,<><small>기술 {slot+1}</small><strong>{moves[name]?.name??name??(slot>draft.moves.length?'앞 칸부터 배치':'빈 기술 칸')}</strong>{info&&<span className={styles.moveMeta}><TypeBadge type={info.type}/><MoveCategoryBadge category={info.category}/><small>위력 {info.power||'—'}</small></span>}</>,()=>open({kind:'move',slot}),slot>draft.moves.length||(!name&&!availableMoves.some(move=>!draft.moves.includes(move))));})}
      {row('ability','right','특성 선택',<><span>특성</span><strong>{abilityNames[draft.ability]??draft.ability}</strong></>,()=>open({kind:'ability'}))}
      {row('tera','right','테라스탈 선택',<><span>테라스탈</span><TeraTypeIcon type={draft.teraType??'Normal'} size={26}/><strong>{teraNames[draft.teraType??'Normal']}</strong></>,()=>open({kind:'tera'}))}
-     {settingForms(entry).length>1&&row('form','right','폼체인지',<><span>폼체인지</span><strong>{chosenForm?.name??pokemon.name}</strong></>,()=>open({kind:'form'}))}
+     {allowFormChange&&settingForms(entry).length>1&&row('form','right','폼체인지',<><span>폼체인지</span><strong>{chosenForm?.name??pokemon.name}</strong></>,()=>open({kind:'form'}))}
     </section>
    </div>
-   <div className={styles.save}><div><span>저장한 설정은 새 도전부터 적용</span><small>배분 +1당 1P · 성격 / 특성 변경 각각 50P · 감소 시 환불 없음</small></div><GameChoice data-settings-save className={styles.apply} disabled={busy||!changed||points<cost} onClick={()=>void save()}>{busy?'저장 중…':points<cost?`성장 ${cost}P 필요`:`${cost}P로 설정 저장`}</GameChoice></div>
+   <div className={styles.save}><div><span>{inRun?'저장한 설정은 이번 출전부터 적용':'저장한 설정은 새 도전부터 적용'}</span><small>배분 +1당 1P · 성격 / 특성 변경 각각 50P · 감소 시 환불 없음</small></div><GameChoice data-settings-save className={styles.apply} disabled={busy||!changed||points<cost} onClick={()=>void save()}>{busy?'저장 중…':points<cost?`성장 ${cost}P 필요`:`${cost}P로 설정 저장`}</GameChoice></div>
    <p className={styles.message} role="status">{message||(!changed?'저장된 설정':'변경 사항을 저장해 주세요.')}</p>
   </div>
   {picker&&<SettingsPicker picker={picker} entry={shown} draft={draft} pokemon={pokemon} onApply={profile=>{setDraft(profile);setMessage('');setPicker(null);}} onClose={()=>setPicker(null)} returnFocus={`[data-settings-row="${returnRow}"]`}/>}

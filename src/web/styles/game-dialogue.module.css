@@ -26,7 +26,7 @@
  word-break:keep-all;
  overflow-wrap:anywhere;
 }
-.dialogue .text::before {content:attr(data-full-text);visibility:hidden;grid-area:1 / 1;}
+
 .dialogue .text>span {grid-area:1 / 1;}
 :global(body) :where(.scope).dialogue:global(.game-dialogue.current-messages)[data-tone="critical"] :global(p.latest).text {color:#efd27a;}
 .dialogue .accessible {position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}

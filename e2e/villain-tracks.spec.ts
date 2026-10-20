@@ -26,22 +26,23 @@ for(const organization of ['rocket','skull'] as const)for(const width of [1280,3
    await page.goto('/battle');
    await expect(page.locator('[data-event-choice]')).toHaveCount(0);
    if(i<2)await expect(page.getByTestId('rocket-ambush-notice')).toBeAttached();
+   await expect(page.getByRole('log',{name:'이벤트 안내'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();
    await expect.poll(()=>s.currentBattle(owner)?.id).toBeTruthy();
    const b=s.currentBattle(owner)!;await page.reload();expect(s.currentBattle(owner)!.opponent_team).toBe(b.opponent_team);expect(new VillainCampaigns(s.db).row(event.id)!.snapshot_json).toBe(snapshot);
-   finishChallengerBattle(s,b.id);await page.reload();await expect(page.getByTestId('reward-modal')).toBeVisible();
+   finishChallengerBattle(s,b.id);await page.reload();await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('reward-modal')).toBeVisible();
    expect(s.view(owner).run!.floor).toBe(b.floor);expect(s.view(owner).run!.candidates).toEqual([]);
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
    await page.screenshot({path:`${capture}/${organization}-${stage}-${width}-${reducedMotion}.png`,animations:'disabled'});
-   await page.getByRole('button',{name:'확인',exact:true}).click();await expect(page.getByTestId('reward-modal')).toHaveCount(0);
+   await page.getByRole('button',{name:'받기',exact:true}).click();await expect(page.getByTestId('reward-modal')).toHaveCount(0);
   }
   expect(new VillainCampaigns(s.db).track(f.run)!.completed).toBe(1);
   grantStoredReward(s.db,f.run,{kind:'tool-voucher',rarity:'epic',choices:4,amount:1});
   const id=String(s.db.prepare("SELECT id FROM run_reward_inventory WHERE run_id=? AND json_extract(effect_json,'$.kind')='tool-voucher' ORDER BY rowid DESC LIMIT 1").get(f.run)!.id);
   await page.reload();await page.getByRole('button',{name:'배낭',exact:true}).click();
-  const voucher=page.locator(`[data-bag-entry="${id}"]`);await voucher.click();await page.getByRole('button',{name:'사용',exact:true}).click();
+  const voucher=page.locator(`[data-bag-entry="${id}"]`);await voucher.click();
   const candidates=page.getByTestId('tool-voucher-candidates');await expect(candidates.getByRole('button')).toHaveCount(4);await expect(candidates.locator('img')).toHaveCount(4);await expect.poll(()=>candidates.locator('img').evaluateAll(images=>images.every(image=>(image as HTMLImageElement).naturalWidth>0))).toBe(true);const first=new ToolVouchers(s.db,f.run).pending(id)!;
   await page.screenshot({path:`${capture}/${organization}-voucher-${width}-${reducedMotion}.png`,animations:'disabled'});
-  await page.reload();await page.getByRole('button',{name:'배낭',exact:true}).click();await page.locator(`[data-bag-entry="${id}"]`).click();await page.getByRole('button',{name:'사용',exact:true}).click();
+  await page.reload();await page.getByRole('button',{name:'배낭',exact:true}).click();await page.locator(`[data-bag-entry="${id}"]`).click();
   expect(new ToolVouchers(s.db,f.run).pending(id)).toEqual(first);await candidates.getByRole('button').first().click();
   await page.getByTestId('purchase-item-bag').click();await expect.poll(()=>s.db.prepare('SELECT quantity FROM run_reward_inventory WHERE id=?').get(id)!.quantity).toBe(0);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

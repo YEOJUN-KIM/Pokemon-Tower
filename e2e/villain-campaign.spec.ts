@@ -26,20 +26,20 @@ for(const width of [1280,390])for(const reducedMotion of ['no-preference','reduc
      const animation=await notice.evaluate(el=>({name:getComputedStyle(el).animationName,duration:getComputedStyle(el).animationDuration}));
      if(reducedMotion==='reduce')expect(animation.name).toBe('none');else{expect(animation.name).toContain('rocketNotice');expect(parseFloat(animation.duration)).toBeGreaterThanOrEqual(.8);expect(parseFloat(animation.duration)).toBeLessThanOrEqual(1.2);}
     }
-    await expect(page.getByRole('button',{name:stage==='rocket-intro'?'들어가 본다':'승부한다',exact:true})).toBeVisible();
+    await expect(page.locator('[data-event-confirm]')).toBeVisible();
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-    expect(await page.getByRole('group',{name:'이벤트 선택',exact:true}).evaluate(el=>el.scrollHeight<=el.clientHeight+1)).toBe(true);
+    await expect(page.getByRole('group',{name:'이벤트 선택',exact:true})).toHaveCount(0);
     expect(await page.locator('[data-villain=true].battle-messages').evaluate(el=>el.scrollHeight<=el.clientHeight+1)).toBe(true);
     await page.screenshot({path:`${capture}/${index}-${stage}-${width}-${reducedMotion}.png`,fullPage:true,animations:'disabled'});
     if(stage==='rocket-ambush')await expect(page.locator('.arena')).toHaveAttribute('data-scenery',arenaTheme(event.afterFloor,100,'trainer'));
     if(stage==='rocket-officer'){await expect(page.locator('[data-villain=true] .latest')).toHaveCSS('white-space','pre-line');await expect(page.locator('[data-villain=true] .latest')).toHaveAttribute('data-full-text','폐쇄된 보안 구역.\n로켓단 간부를 발견했다.');}
     const snapshot=new VillainCampaigns(store.db).row(event.id)!.snapshot_json;
-    await page.getByRole('button',{name:stage==='rocket-intro'?'들어가 본다':'승부한다',exact:true}).click();
+    await expect(page.getByRole('log',{name:'이벤트 안내'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();
     await expect.poll(()=>store.currentBattle(owner)?.id).toBeTruthy();
     const battle=store.currentBattle(owner)!;if(stage==='rocket-ambush')await expect(page.locator('.arena')).toHaveAttribute('data-scenery',arenaTheme(event.afterFloor,100,'trainer'));await page.reload();expect(store.currentBattle(owner)!.opponent_team).toBe(battle.opponent_team);
     expect(new VillainCampaigns(store.db).row(event.id)!.snapshot_json).toBe(snapshot);
     finishChallengerBattle(store,battle.id);await page.reload();
-    await expect(page.getByRole('dialog')).toBeVisible();await expect(page.getByRole('dialog')).toContainText(index===0?'로켓단의 아지트에서 물품을 발견했다.':index===1?'단서 1 / 2':index===2?'단서 2 / 2':index===3?'비주기의 위치':'캠페인 완료');
+    await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await expect(page.getByRole('log',{name:'이벤트 결과'})).toContainText(index===0?'로켓단의 아지트에서 물품을 발견했다.':index===1?'단서 1 / 2':index===2?'단서 2 / 2':index===3?'비주기의 위치':'캠페인 완료');await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('reward-modal')).toBeVisible();
     await expect(page.locator('[data-testid=event-artwork] img')).toHaveCount(0);
     if(stage==='rocket-ambush')await expect(page.locator('.arena')).toHaveAttribute('data-scenery',arenaTheme(event.afterFloor,100,'trainer'));
     expect(store.view(owner).run!.state).toBe('select');expect(store.view(owner).run!.candidates).toEqual([]);
@@ -71,7 +71,7 @@ for(const stage of ['rocket-officer','rocket-boss'])test(`${stage}: final hit an
   await expect(page.getByTestId('reward-modal')).toHaveCount(0);
   await expect(page.locator('.enemy-position .motion-faint')).toBeAttached();
   await expect(page.getByTestId('reward-modal')).toHaveCount(0);
-  await expect(page.getByTestId('reward-modal')).toBeVisible();
+  await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('reward-modal')).toBeVisible();
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
  }finally{await service.dispose();store.close();}
 });

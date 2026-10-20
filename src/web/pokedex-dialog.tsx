@@ -2,7 +2,7 @@
 import {PokemonGenderIcon} from './pokemon-gender-icon';
 import {GameChoice,GameChoiceList,GameMenuFooter,type GameControl} from './game-menu';
 import {selectGameCursor} from './game-keyboard';
-import {useEffect,useRef,type ReactNode} from 'react';
+import {useLayoutEffect,useRef,type ReactNode} from 'react';
 import {PokemonImage} from './pokemon-image';
 import {species} from './catalog';
 import {typeColors,type PokedexEntry} from './pokedex-data';
@@ -13,7 +13,7 @@ export function PokedexDialog({title,titleColor,onClose,children,large=false,ret
   const ref=useRef<HTMLDialogElement>(null);
   const managed=useManagedGameMenu();
   useDialogControls(context,controls===false?[]:controls??[{key:'방향키',label:'이동'},{key:'Enter / Z',label:'결정'},{key:'Esc / X',label:'뒤로'}]);
-  useEffect(()=>{const dialog=ref.current;dialog?.showModal();selectGameCursor(dialog?.querySelector<HTMLButtonElement>('[data-initial-focus]'));if(initialFocus)dialog?.querySelector<HTMLElement>(initialFocus)?.focus({preventScroll:true});return ()=>{const target=returnFocus ? document.querySelector<HTMLElement>(returnFocus) : null;dialog?.close();selectGameCursor(target);target?.focus({preventScroll:true});};},[]);
+  useLayoutEffect(()=>{const dialog=ref.current;dialog?.showModal();selectGameCursor(dialog?.querySelector<HTMLButtonElement>('[data-initial-focus]'));if(initialFocus)dialog?.querySelector<HTMLElement>(initialFocus)?.focus({preventScroll:true});return ()=>{const target=returnFocus ? document.querySelector<HTMLElement>(returnFocus) : null;dialog?.close();selectGameCursor(target);target?.focus({preventScroll:true});};},[]);
   return <dialog ref={ref} data-managed-menu={managed||undefined} data-testid={testId} className={`dex-dialog ${large ? 'dex-training-dialog' : 'dex-action-dialog'} ${managed?menuStyles.scopeDialog:''} ${className}`} aria-label={title} onCancel={e=>{e.preventDefault();e.stopPropagation();onClose();}}><div className="dex-dialog-heading"><h2 style={titleColor ? {color:titleColor} : undefined}>{title}</h2>{!hideClose&&<button onClick={onClose} aria-label={`${title} 닫기`}>×</button>}</div><div className="game-dialog-body">{children}</div>{controls!==false&&<GameMenuFooter controls={controls}/>}</dialog>;
 }
 export function PokemonActions({shiny=false,gender,entry,canChoose,canAdjust,chosen,full,onChoose,onAdjust,onInfo,onClose}:{shiny?:boolean;gender?:import('../data/gender').PokemonGender;entry:PokedexEntry;canChoose:boolean;canAdjust:boolean;chosen:boolean;full:boolean;onChoose:()=>void;onAdjust:()=>void;onInfo:()=>void;onClose:()=>void}) {

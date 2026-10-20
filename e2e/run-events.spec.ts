@@ -10,7 +10,7 @@ async function nextStage(page:import('@playwright/test').Page,store:TowerStore,o
  const next=store.view(owner).run!;
  if(next.state==='battle'||next.event){
   await expect(page.locator('.battle-panel')).toBeVisible();expect(next.floor).toBe(2);
-  expect(next.event?.villain||store.currentBattle(owner)?.trainer).toBeTruthy();
+  expect(next.event?.villain||store.currentBattle(owner)?.trainer).toBeTruthy();if(next.event)await expect(page.locator('[data-event-confirm]')).toBeVisible();
  }else await expect(page.getByRole('dialog',{name:'출전 준비',exact:true})).toBeVisible();
 }
 
@@ -33,7 +33,7 @@ for(const width of [1280,390])for(const choice of ['open','skip','resume-ticket'
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
   await page.addInitScript(()=>localStorage.setItem('tower-playback-speed-v1','4'));
   await page.setViewportSize({width,height:width===390?844:900});await page.goto('/battle');
-  const dialog=page.getByTestId('run-event');await expect(dialog).toBeVisible();await expect(dialog.getByRole('log',{name:'이벤트 안내'})).toBeVisible();
+  const dialog=page.getByTestId('run-event');await expect(dialog).toBeVisible();await expect(dialog.getByRole('log',{name:choice==='resume-ticket'?'이벤트 결과':'이벤트 안내'})).toBeVisible();
   expect(store.view(owner).run!.floor).toBe(2);await expect(page.getByTestId('run-maintenance')).toHaveCount(0);
   await expect(page.locator('dialog[open]')).toHaveCount(0);await expect(dialog).toHaveAttribute('data-event','true');
   await expect(dialog.getByTestId('event-info').locator('img,svg')).toHaveCount(0);await expect(dialog.getByTestId('event-artwork').getByRole('img',{name:'보물 상자'})).toBeVisible();
@@ -90,15 +90,15 @@ for(const width of [1280,390])for(const choice of ['open','skip','resume-ticket'
    const duplicate=await Promise.all([1,2].map(()=>page.request.post('/api/battle',{headers:{origin:'http://127.0.0.1:3001'},data:{type:'event-choice',runId,eventId:event.id,choice:'open'}})));expect(duplicate.every(response=>response.ok())).toBe(true);
    expect(store.view(owner).coins).toBe(saved.coins);expect(store.permanentView(owner).eggTickets).toBe(saved.permanent!.eggTickets);
    if(choice==='resume-ticket')expect(store.permanentView(owner).eggTickets).toBe(1);
-   await expect(dialog.getByRole('log',{name:'이벤트 안내'})).toHaveAttribute('data-typing','false');
-   const rewardPanel=(await dialog.locator('.battle-messages').boundingBox())!,continueBox=(await dialog.getByRole('button',{name:'계속하기',exact:true}).boundingBox())!;
+   await expect(dialog.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');
+   const rewardPanel=(await dialog.locator('.battle-messages').boundingBox())!,continueBox=(await dialog.locator('[data-event-confirm]').boundingBox())!;
    expect(continueBox.y+continueBox.height).toBeLessThanOrEqual(rewardPanel.y+rewardPanel.height+1);
    await dialog.screenshot({path:`artifacts/qa/screenshots/events/chest-${choice}-${width}.png`});
-   await dialog.getByRole('button',{name:'계속하기',exact:true}).click();
+   await dialog.locator('[data-event-confirm]').click();await page.getByTestId('reward-modal').getByRole('button',{name:'받기',exact:true}).click();
   }
-  await expect(dialog).toHaveCount(0);await nextStage(page,store,owner);
-  expect(store.view(owner).run!.floor).toBe(2);expect(store.view(owner).run!.event).toBeNull();
-  await page.reload();await expect(dialog).toHaveCount(0);await nextStage(page,store,owner);
+  await expect.poll(()=>store.view(owner).run!.event?.id).not.toBe(event.id);await nextStage(page,store,owner);
+  expect(store.view(owner).run!.floor).toBe(2);if(store.view(owner).run!.event)expect(store.view(owner).run!.event!.villain).toBeTruthy();
+  await page.reload();await nextStage(page,store,owner);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  }finally{store.close();}
 });
@@ -120,7 +120,7 @@ for(const width of [1280,390])for(const kind of ['breeder-gift','traveling-merch
   const auth=await new Accounts(store.db).register('meet_'+suffix,'event-meet-password',owner,undefined);store.ensurePlayer(owner);
   const battle=store.start(owner,starters,'basic',{events:true}),runId=store.battle(battle).run_id;
   store.db.prepare("UPDATE battles SET status='complete' WHERE id=?").run(battle);store.db.prepare("UPDATE runs SET state='recruit' WHERE id=?").run(runId);store.recruit(owner,runId,battle,null,null);
-  store.db.prepare('UPDATE run_events SET kind=? WHERE run_id=?').run(kind,runId);store.db.prepare('UPDATE players SET coins=300 WHERE id=?').run(owner);
+  store.db.prepare('UPDATE run_events SET kind=? WHERE run_id=?').run(kind,runId);store.db.prepare('UPDATE players SET coins=300 WHERE id=?').run(owner);const originalEventId=store.view(owner).run!.event!.id;
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
   await page.setViewportSize({width,height:width===390?844:900});await page.goto('/battle');
   const event=page.getByTestId('run-event'),info=event.getByTestId('event-info');
@@ -136,8 +136,8 @@ for(const width of [1280,390])for(const kind of ['breeder-gift','traveling-merch
    await expect(event.getByTestId('event-reward')).toHaveText('알 뽑기권 1장');
    await page.reload();await expect(info).toHaveCount(0);await expect(event).toHaveAttribute('data-phase','reward');
    expect(store.permanentView(owner).eggTickets).toBe(1);expect(store.view(owner).coins).toBe(kind==='traveling-merchant'?0:300);
-   await event.getByRole('button',{name:'계속하기',exact:true}).click();
+   await expect(event.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await event.locator('[data-event-confirm]').click();await page.getByTestId('reward-modal').getByRole('button',{name:'받기',exact:true}).click();
   }else{expect(store.permanentView(owner).eggTickets).toBe(0);expect(store.view(owner).coins).toBe(300);}
-  await expect(event).toHaveCount(0);await nextStage(page,store,owner);expect(store.view(owner).run!.floor).toBe(2);
+  await expect.poll(()=>store.view(owner).run!.event?.id).not.toBe(originalEventId);await nextStage(page,store,owner);expect(store.view(owner).run!.floor).toBe(2);
  }finally{store.close();}
 });

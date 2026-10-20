@@ -1,10 +1,14 @@
 
 'use client';
-import {useEffect,useRef} from 'react';
+import {useEffect,useRef,type RefObject} from 'react';
 import {effect} from './game-audio';
 
 type Select=(element:HTMLElement|null|undefined)=>void;
 export type GameMenuKey={key:string;event:KeyboardEvent;cursor:HTMLButtonElement|null;select:Select};
+export function useGameMenuKeys(ref:RefObject<HTMLElement|null>,handle:(command:GameMenuKey)=>boolean,scope?:unknown){
+ const callback=useRef(handle);callback.current=handle;
+ useEffect(()=>{const dialog=ref.current?.closest('dialog');const listener=(event:Event)=>{if(callback.current((event as CustomEvent<GameMenuKey>).detail))event.preventDefault();};dialog?.addEventListener('game-menu-key',listener);return()=>dialog?.removeEventListener('game-menu-key',listener);},[ref,scope]);
+}
 function directionalButton(cursor:HTMLButtonElement,items:HTMLButtonElement[],key:string){
   const origin=cursor.getBoundingClientRect(),x=origin.x+origin.width/2,y=origin.y+origin.height/2,horizontal=['arrowleft','arrowright'].includes(key),positive=['arrowright','arrowdown'].includes(key);
   return items.filter(item=>item!==cursor).map(item=>{const rect=item.getBoundingClientRect(),dx=rect.x+rect.width/2-x,dy=rect.y+rect.height/2-y,along=horizontal?dx:dy,cross=horizontal?dy:dx,aligned=horizontal?rect.top<origin.bottom&&rect.bottom>origin.top:rect.left<origin.right&&rect.right>origin.left;
@@ -139,7 +143,8 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
       if(key==='enter'||key==='z'){event.preventDefault();cursor?.click();return;}
       if(!event.key.startsWith('Arrow') || !cursor)return;
       event.preventDefault();const items=buttons(scope),index=items.indexOf(cursor);
-      const horizontalGroup=cursor.closest<HTMLElement>('[data-keyboard-horizontal]');
+      const candidateHorizontalGroup=cursor.closest<HTMLElement>('[data-keyboard-horizontal]');
+      const horizontalGroup=candidateHorizontalGroup&&(typeof scope==='string'||scope.contains(candidateHorizontalGroup))?candidateHorizontalGroup:null;
       if(horizontalGroup){
         const entries=items.filter(item=>item.closest('[data-keyboard-horizontal]')===horizontalGroup),position=entries.indexOf(cursor);
         const delta=event.key==='ArrowRight'?1:event.key==='ArrowLeft'?-1:0;
@@ -148,7 +153,8 @@ export function useGameKeyboard(selector:string,columns:number,enabled:boolean,s
       if(cursor.matches('[data-keyboard-list-next]') && event.key==='ArrowUp'){
         const previous=items.filter(item=>item.closest('[data-keyboard-list]')).at(-1);select(previous);previous?.scrollIntoView({block:'nearest'});return;
       }
-      const list=cursor.closest<HTMLElement>('[data-keyboard-list]');
+      const candidateList=cursor.closest<HTMLElement>('[data-keyboard-list]');
+      const list=candidateList&&(typeof scope==='string'||scope.contains(candidateList))?candidateList:null;
       const directionalGrid=cursor.closest<HTMLElement>('[data-keyboard-grid=directional]');
       if(typeof scope==='string' && directionalGrid){
         const entries=items.filter(item=>item.closest('[data-keyboard-grid=directional]')===directionalGrid);

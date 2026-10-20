@@ -10,17 +10,15 @@ import {ItemAcquisitionDialog} from './item-acquisition-dialog';
 import {TrainerEquipment} from './trainer-equipment';
 import {collectionSpecies} from '../data/selectable-forms';
 import {battleRules} from '../data/run-rules';
-import {themeLabel} from '../data/tower-themes';
-import {progressionLabel} from '../data/tower-progression';
 import {teraColors} from '../data/tera';
 import {megaStones,type Gimmick} from '../data/gimmicks';
 
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { BattleResponse, BattleView, PokemonView, TowerView, BossView } from './contracts';
 import {BossPortrait,PlayerPortrait,trainerAppearance} from './boss-dialog';
 import {battleTrainer,trainerLabel} from './trainer-samples';
-import {BattleResultDialog, ResultBanner} from './battle-result';
+import {BattleResultDialog} from './battle-result';
 import {TowerClear} from './tower-clear';
 import {useRouter} from 'next/navigation';
 import { health, pokemonName, battlePokemonName, species } from './catalog';
@@ -72,7 +70,6 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
   const introContinue=useRef<(()=>void)|null>(null);
   const [recruitMessage,setRecruitMessage]=useState('');
   function skipPlayback(){skip.current=true;introContinue.current?.();playbackWait.current?.();stopCry();stopEffects();}
-  useEffect(()=>{if(trainerIntro?.phase!=='enter'&&!recruitMessage)return;const confirm=(event:KeyboardEvent)=>{if(document.querySelector('dialog[open]'))return;if(!['enter','z'].includes(event.key.toLowerCase()) || event.ctrlKey || event.altKey || event.metaKey)return;event.preventDefault();event.stopImmediatePropagation();if(!event.repeat){if(recruitMessage)setRecruitMessage('');else introContinue.current?.();}};document.addEventListener('keydown',confirm,true);return ()=>document.removeEventListener('keydown',confirm,true);},[trainerIntro?.phase,recruitMessage]);
   const playbackSpeed=useRef<PlaybackSpeed>(1);
   useEffect(()=>{if(!playing)return;const frame=requestAnimationFrame(()=>{document.querySelector('.arena')?.getAnimations({subtree:true}).forEach(animation=>{const target=(animation.effect as KeyframeEffect|null)?.target;animation.updatePlaybackRate(target instanceof Element && (target.closest('.effect-notice,.health-card'))?1:motion?.raidPhase?Math.min(2,playbackSpeed.current):playbackSpeed.current);});});return ()=>cancelAnimationFrame(frame);},[playing,frameNumber]);
   const waitPlayback=(duration:number,notice=false,dialogue='',timing:import('./playback-settings').PlaybackTiming={})=>new Promise<void>(resolve=>{const done=()=>{clearTimeout(timer);playbackWait.current=null;resolve();};const timer=setTimeout(done,playbackDuration(duration,playbackSpeed.current,notice,dialogue,timing));playbackWait.current=done;});
@@ -178,7 +175,7 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
     }
   }, [run?.id, run?.floor, run?.state, run?.suggestedTeam.join(','), tower?.unlocked.join(',')]);
 
-  async function playBattle(data:BattleResponse,isAction:boolean,automaticIntro=false) {
+  async function playBattle(data:BattleResponse,isAction:boolean) {
     if(!data.battle)return;
     if(!isAction)setTower(data.tower);
     const initialView={...data.battle,field:emptyField(),messages:[],opponent:null,team:data.battle.team.map(p=>({...p,active:false})),turn:0};
@@ -187,8 +184,7 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
     if(!isAction && !data.tower.run?.raid) {
       const boss=battleTrainer(data.battle.id,data.tower.run?.boss ?? data.tower.run?.trainer);
       setStageOpen(false);setBattle(initialView);setTrainerIntro({boss,phase:'enter'});setAnnouncement(boss.role==='villain'?trainerAppearance(boss):boss.introduction||trainerAppearance(boss));
-      if(automaticIntro)await waitPlayback(1000,false,'',{minimumDuration:500});
-      else await new Promise<void>(resolve=>{introContinue.current=()=>{introContinue.current=null;resolve();};});
+      await new Promise<void>(resolve=>{introContinue.current=()=>{introContinue.current=null;resolve();};});
       if(!skip.current && mounted.current){setTrainerIntro({boss,phase:'throw'});await waitPlayback(550);}
       setTrainerIntro(null);
     }
@@ -209,7 +205,7 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
       previousDialogue=dialogue;
     }
     if(skip.current)stopCry();
-    if(mounted.current){setMotion(null);setNotice(null);setAnnouncement(null);setPlaying(false);setBattle(data.battle);}
+    if(mounted.current){setTower(data.tower);setMotion(null);setNotice(null);setAnnouncement(null);setPlaying(false);setBattle(data.battle);}
   }
 
   async function submit(body: Record<string, unknown>) {
@@ -234,7 +230,7 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
       }
       if(data.battle && (body.type === 'action' || body.type === 'start' || body.type === 'enter' || body.type==='event-choice'&&body.choice==='challenge')) {
         setRecruitMessage('');
-        await playBattle(data,body.type==='action',body.type==='event-choice'&&currentEvent?.kind==='hidden-boss');
+        await playBattle(data,body.type==='action');
       }
       if(!mounted.current)return;
       setMotion(null);setNotice(null);setAnnouncement(null);setPlaying(false);setBattle(data.battle);
@@ -257,7 +253,7 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
   useEffect(()=>{if(acquireOffer?.purchased)setAcquireOfferId(null);},[acquireOffer?.purchased]);
   const requestHiddenPurchase=(id:string)=>{const offer=currentEvent?.hiddenShop?.offers.find(o=>o.id===id);if(!offer||busy||!currentEvent||hiddenShopAvailability(currentEvent.hiddenShop!,offer,tower!.coins,tower!.growthPoints)!=='구매 가능')return;if(offer.category==='held-item'||offer.category==='vitamin')setAcquireOfferId(id);else void submit({type:'hidden-shop-purchase',runId:run!.id,eventId:currentEvent.id,productId:id});};
   useEffect(()=>{if(run?.state==='battle' && !busy && !playing && battle?.status==='waiting')selectAction();},[battle?.requestId,busy,playing,tab,run?.state]);
-  useEffect(()=>{if(run && ['recruit','select'].includes(run.state) && !run.event && !playing && !recruitMessage && (!hasResult || acknowledgedResult===battle?.id))setStageOpen(true);else setStageOpen(false);},[run?.state,run?.floor,run?.event?.id,acknowledgedResult,battle?.id,playing,recruitMessage]);
+  useLayoutEffect(()=>{if(run && ['recruit','select'].includes(run.state) && !run.event && !playing && !recruitMessage && (!hasResult || acknowledgedResult===battle?.id))setStageOpen(true);else setStageOpen(false);},[run?.state,run?.floor,run?.event?.id,acknowledgedResult,battle?.id,playing,recruitMessage]);
   useGameKeyboard('.battle-room .event-choices button,.battle-room .action-grid button,.battle-room .battle-command-back,.battle-room .gimmick-toggle,.battle-room .tera-toggle,.battle-room .command-area>.primary-button',2,!!tower && !!run && (['battle','select','recruit'].includes(run.state) || (!!hasResult && acknowledgedResult!==battle?.id && run.state!=='cleared')),(event,cursor)=>{
     const key=event.key.toLowerCase();
     if(recruitMessage)return true;
@@ -298,18 +294,15 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
     return <Pokedex entries={entries} initialTower={tower} startError={error} onStart={(names,rule)=>submit({type:'start',selected:names,rule})}/>;
   }
 
-  return <div className={`app-shell battle-room ${run && (['battle','recruit','select'].includes(run.state)||!!recruitMessage) ? 'battle-live' : 'battle-between'}`}>
+  return <div className="app-shell battle-room battle-live">
     <div className="workspace">
-      <nav className="battle-nav" aria-label="메인 메뉴"><a href="/" aria-label="포켓몬 타워 홈"><Ball /><strong>POKÉMON TOWER</strong></a><div><a href="/pokedex">포켓몬 도감</a><a href="/settings">설정</a><a href="/">타이틀</a></div></nav>
       <main>
         {acquireOffer&&currentEvent&&run&&<ItemAcquisitionDialog run={run} name={acquireOffer.name} item={acquireOffer.category==='held-item'?acquireOffer.id.replace(/^item-/,''):undefined} vitamin={acquireOffer.category==='vitamin'} busy={busy} error={error} onClose={()=>setAcquireOfferId(null)} onAcquire={(destination,species)=>void submit({type:'hidden-shop-purchase',runId:run.id,eventId:currentEvent.id,productId:acquireOffer.id,destination,species})}/>}
-        {tower && <section className="tower-summary" aria-label="타워 진행"><div><span>{themeLabel(run?.theme)}</span><strong>{run ? `${run.floor} / ${run.totalFloors}층` : '출발 준비'}</strong><small>{run?.boss ? `${run.boss.title} ${run.boss.name}` : run ? (progressionLabel(run.floor,run.totalFloors) ?? '다음 층을 향해 도전하세요.') : '팀을 선택하고 타워에 도전하세요.'}</small></div><div><span>타워 코인</span><strong data-testid="wallet">{tower.coins.toLocaleString()}코인</strong></div><div><span>성장 포인트</span><strong data-testid="growth-wallet">{tower.growthPoints.toLocaleString()}P</strong></div><div><span>영구 도감</span><strong>{tower.unlocked.length}종 해금</strong></div>{run && ['battle','recruit','select'].includes(run.state) && <button className="text-button" disabled={busy} onClick={() => { if (window.confirm(restartNotice(tower))) void submit({type: 'abandon', runId: run.id}); }}>도전 종료</button>}</section>}
         {error && <div className="error-banner" role="alert">{error}<button onClick={() => { setLoading(true); refresh().then(() => setError('')).catch(e => setError(e.message)).finally(() => setLoading(false)); }}>다시 연결</button></div>}
-        {run && ['select','battle','recruit'].includes(run.state) && run.upgrades.length>0 && <div className="upgrade-status" aria-label="구매한 강화">{run.upgrades.map(upgrade=><span key={upgrade.kind}>{upgrades[upgrade.kind].name} · {upgrade.remainingFloors>0 ? `${upgrade.remainingFloors}개 층 남음${run.state==='battle' ? ' (현재 층 포함)' : ''}` : '사용 완료'}</span>)}</div>}
-        {hasResult && <ResultBanner battle={battle!} tower={tower} />}
+
         {hasResult && acknowledgedResult !== battle!.id && <BattleResultDialog key={battle!.id} battle={battle!} tower={tower} busy={busy} onRetry={()=>void submit({type:'retry',runId:run!.id,battleId:battle!.id})} onContinue={() => {if(run?.retries?.canRetry)void submit({type:'finish-loss',runId:run.id});else setAcknowledgedResult(battle!.id);}} />}
 
-        {stageOpen && !recruitMessage && tower && run && !run.event && ['recruit','select'].includes(run.state) && <BattleStage key={`${run.id}-${run.floor}-${run.state}`} tower={tower} selected={selected} setSelected={setSelected} busy={busy} submit={submit} error={error}/>}
+        {stageOpen && !recruitMessage && tower && run && !run.event && ['recruit','select'].includes(run.state) && <BattleStage entries={entries} key={`${run.id}-${run.floor}-${run.state}`} tower={tower} selected={selected} setSelected={setSelected} busy={busy} submit={submit} error={error}/>}
         {battleMenu && <PokedexDialog title="배틀 메뉴" onClose={()=>{setBattleMenu(false);}}><div className="dex-action-options"><button data-initial-focus onClick={()=>{setBattleMenu(false);}}>계속하기</button><button disabled={busy} onClick={()=>{setBattleMenu(false);setAbandonConfirm(true);}}>도전 포기</button><button onClick={()=>router.push('/pokedex?from=battle')}>포켓몬 도감</button><button onClick={()=>router.push('/settings')}>설정</button><button onClick={()=>router.push('/')}>타이틀</button></div></PokedexDialog>}
         {abandonConfirm && tower && run && <PokedexDialog title="도전을 포기할까요?" onClose={()=>setAbandonConfirm(false)}><p>{restartNotice(tower)}</p><div className="dex-action-options"><button onClick={()=>setAbandonConfirm(false)}>계속 도전</button><button disabled={busy} onClick={()=>{setAbandonConfirm(false);void submit({type:'abandon',runId:run.id});}}>포기하기</button></div></PokedexDialog>}
         {showLog && <PokedexDialog title="배틀 기록" large onClose={()=>{setShowLog(false);}}><BattleMessages messages={battle?.messages ?? []} playing={false} turn={battle?.turn ?? 0} historyOnly/></PokedexDialog>}
@@ -344,14 +337,12 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
                 <HealthCard pokemon={active} percentage={playing} team={battle.team} faintPending={battle.pendingFaints?.includes('player')} />
                 {notice && <div key={`notice-${frameNumber}`} className={`effect-notice notice-${notice.side} notice-${notice.kind}`} role="status" data-testid="effect-notice"><span>{notice.kind === 'ability' ? '특성' : '도구'}</span><p>{notice.side === 'enemy' ? '상대 ' : ''}{pokemonName(notice.actor.split(': ')[1])}의<strong>{notice.label}</strong></p></div>}
 
-              </> : run && ['battle','recruit','select'].includes(run.state) ? null : <div className="arena-preview"><span className="preview-number">{String(run?.floor ?? 1).padStart(2, '0')}</span><div className="preview-sprites" data-testid="team-preview" role="group" aria-label="선택한 출전 팀">
-                {[0, 1, 2].map(slot => selected[slot] ? <Sprite key={slot} name={selected[slot]} /> : <span key={slot} className="sprite preview-empty" aria-label={`${slot + 1}번 미선택`}><span><Ball /><small>{slot + 1}번 미선택</small></span></span>)}
-              </div><div className="preview-caption"><span>YOUR SELECTED THREE</span><strong>준비됐나요, 트레이너?</strong></div></div>}
+              </> : null}
               {trainerIntro && <div className="trainer-entrance" data-testid="trainer-entrance" data-phase={trainerIntro.phase}><div className="intro-trainer intro-enemy"><BossPortrait boss={trainerIntro.boss}/><span className="trainer-thrown-ball"><Ball/></span></div><div className="intro-trainer intro-player"><PlayerPortrait/><span className="trainer-thrown-ball"><Ball/></span></div></div>}
 
             </div>
-            {currentEvent && run ? <RunEventPanel key={currentEvent.id} event={currentEvent} runId={run.id} busy={busy} challengerId={challengerId} onHiddenPurchase={requestHiddenPurchase} bagButton={<BagButton run={run} busy={busy} submit={submit} error={error}/>} onChallengerFocus={focusChallenger} shopOfferId={shopOfferId} coins={tower.coins} growthPoints={tower.growthPoints} selecting={eventSelection===currentEvent.id} onChoose={()=>setEventSelection(currentEvent.id)} submit={submit}/> : <BattleMessages confirmation={recruitMessage?'recruit':'intro'} dialogueLabel={recruitMessage?'영입 결과':undefined} onConfirm={recruitMessage?()=>setRecruitMessage(''):trainerIntro?.phase==='enter'?()=>introContinue.current?.():undefined} onSkip={skipPlayback} key={battle?.id ?? 'preparing'} messages={battle?.messages ?? []} playing={playing} turn={battle?.turn ?? 0} announcement={preparationMessage || recruitMessage || (announcement ?? (!playing&&done&&battle?.winner==='Player'?'배틀에서 승리했다!':null) ?? (!busy && !done && tab==='root' && active ? `${pokemonName(active.species)}, 무엇을 할까요?` : null))} />}
-            {!currentEvent && !floorPreparation && !recruitMessage && !(busy || playing) && <div className="command-area">
+            {currentEvent && run ? <RunEventPanel key={currentEvent.id} event={currentEvent} runId={run.id} busy={busy} challengerId={challengerId} onHiddenPurchase={requestHiddenPurchase} bagButton={<BagButton run={run} busy={busy} submit={submit} error={error}/>} onChallengerFocus={focusChallenger} shopOfferId={shopOfferId} coins={tower.coins} growthPoints={tower.growthPoints} selecting={eventSelection===currentEvent.id} onChoose={()=>setEventSelection(currentEvent.id)} submit={submit}/> : <BattleMessages confirmation={recruitMessage?'recruit':'intro'} dialogueLabel={recruitMessage?'영입 결과':undefined} onConfirm={recruitMessage?()=>setRecruitMessage(''):trainerIntro?.phase==='enter'?()=>introContinue.current?.():undefined} onSkip={skipPlayback} key={`${run?.id}-${run?.floor}-${run?.state}-${battle?.id ?? 'preparing'}`} messages={battle?.messages ?? []} playing={playing} turn={battle?.turn ?? 0} announcement={preparationMessage || recruitMessage || (announcement ?? (!playing&&done&&battle?.winner==='Player'?'배틀에서 승리했다!':null) ?? (!busy && !done && tab==='root' && active ? `${pokemonName(active.species)}, 무엇을 할까요?` : null))} />}
+            {!currentEvent && !floorPreparation && !recruitMessage && !hasResult && !(busy || playing) && <div className="command-area">
               {!battle || done || broken ? loading || !tower ? <p>저장된 도전을 불러오는 중…</p> : broken ? <div><p role="alert">{battle?.error}</p><button className="secondary-button" onClick={() => refresh().catch(e => setError(e.message))}>배틀 다시 불러오기</button></div> : <button className="primary-button" onClick={()=>setStageOpen(true)}>{run?.state==='recruit' ? '영입 선택' : '다음 층 준비'}</button>
               : <BattleCommands equipment={run?.trainerEquipment??[]} rule={run?.rule} itemBag={run?.battleItems} battle={battle} mode={tab} busy={busy} forceSwitch={forceSwitch} focused={focusedCommand} gimmick={gimmick} onGimmick={setGimmick} onMode={mode=>{setGimmick(null);setTab(mode);}} onFocus={setFocusedCommand} onSend={send}/>}
             </div>}
@@ -359,7 +350,7 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
 
 
         </div>
-        <GameMenuBar context={recruitMessage?'recruit-result':currentEvent?'run-event':trainerIntro?.phase==='enter'?'battle-intro':'battle'} controls={recruitMessage||trainerIntro?.phase==='enter'?[{key:'Enter / Z',label:'계속'}]:currentEvent?[{key:'방향키',label:'선택'},{key:'Enter / Z',label:'결정'},...(currentEvent.challengers&&currentEvent.phase==='choice'?[{key:'X',label:'돌아가기'}]:[])]:[{key:'방향키',label:'이동'},{key:'Enter / Z',label:'결정'},{key:'X',label:'취소/메뉴'},...(gimmickHint?[{key:'A',label:gimmickHint}]:[]),{key:'S',label:'로그'},{key:'C',label:'필드'},{key:'Shift',label:'건너뛰기'}]}/><footer><span>Fan-made · <a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noreferrer">Sprites: PokéAPI</a> / <a href="https://play.pokemonshowdown.com/sprites/" target="_blank" rel="noreferrer">Smogon</a> · <a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noreferrer">Battle: Showdown</a></span></footer>
+        <GameMenuBar context={recruitMessage?'recruit-result':currentEvent?'run-event':trainerIntro?.phase==='enter'?'battle-intro':'battle'} controls={recruitMessage||trainerIntro?.phase==='enter'||currentEvent?.phase==='reward'||currentEvent?.phase==='choice'&&!currentEvent.choiceId&&!!(currentEvent.villain||currentEvent.hiddenBoss||currentEvent.raid)?[{key:'Enter / Z',label:'계속'}]:currentEvent?[{key:'방향키',label:'선택'},{key:'Enter / Z',label:'결정'},...(currentEvent.challengers&&currentEvent.phase==='choice'?[{key:'X',label:'돌아가기'}]:[])]:[{key:'방향키',label:'이동'},{key:'Enter / Z',label:'결정'},{key:'X',label:'취소/메뉴'},...(gimmickHint?[{key:'A',label:gimmickHint}]:[]),{key:'S',label:'로그'},{key:'C',label:'필드'},{key:'Shift',label:'건너뛰기'}]}/><footer><span>Fan-made · <a href="https://github.com/PokeAPI/sprites" target="_blank" rel="noreferrer">Sprites: PokéAPI</a> / <a href="https://play.pokemonshowdown.com/sprites/" target="_blank" rel="noreferrer">Smogon</a> · <a href="https://github.com/smogon/pokemon-showdown" target="_blank" rel="noreferrer">Battle: Showdown</a></span></footer>
       </main>
     </div>
   </div>;

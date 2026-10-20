@@ -19,7 +19,7 @@
 :where(.scope) :global(.app-shell),:where(.scope) :global(.dex-screen),:where(.scope[data-ui-screen="settings"]) :global(.settings-page) {
   background: var(--game-bg);
 }
-:global(body) :where(.scope) :global(:is(.dex-header,.page-heading,.title-hero,.title-panel,.dex-toolbar,.dex-catalog,.dex-right-panel,.dex-party-panel,.dex-pagination,.tower-summary,.team-panel,.command-area,.battle-messages,.tower-shop,.shop-product,.settings-card,.result-dialog,.boss-dialog,.recruit-dialog,.dex-dialog)) {
+:global(body) :where(.scope) :global(:is(.dex-header,.page-heading,.title-hero,.title-panel,.dex-toolbar,.dex-catalog,.dex-right-panel,.dex-party-panel,.dex-pagination,.team-panel,.command-area,.battle-messages,.tower-shop,.shop-product,.settings-card,.result-dialog,.boss-dialog,.recruit-dialog,.dex-dialog)) {
   border-radius: 0;
   box-shadow: none;
 }
@@ -408,14 +408,6 @@
   background: #a84552;
   border-color: #d77870;
 }
-:global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog) {
-  background: #393347;
-  color: #fff7df;
-  border: 4px solid #d0c6ae;
-  outline: 3px solid #563948;
-  box-shadow: inset 0 0 0 3px #74647d;
-  border-radius: 0;
-}
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .panel-top button) {
   color: #fff0ca;
 }
@@ -443,7 +435,7 @@
 :global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-favorite-toggle), :global(body) :where(.scope:is([data-ui-screen="battle"], [data-ui-screen="pokedex"])) :global(.dex-console .dex-reset-filters) {
   border-radius: 0;
 }
-:global(body) :where(.scope) :global(:is(.dex-dialog,.battle-result-dialog,.recruit-dialog,.boss-dialog)::backdrop) {
+:global(body) :where(.scope) :global(:is(.dex-dialog,.recruit-dialog,.boss-dialog)::backdrop) {
   background: #151322c9;
   backdrop-filter: none;
 }

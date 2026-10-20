@@ -43,12 +43,12 @@
   border-color: #e39da744;
   color: #f5d4da;
 }
-:where(.scope) :global(.app-shell :is(.tower-summary,.battle-panel,.team-panel,.log-panel,.tower-shop)) {
+:where(.scope) :global(.app-shell :is(.battle-panel,.team-panel,.log-panel,.tower-shop)) {
   background: var(--game-panel);
   border-color: var(--game-line);
   box-shadow: 0 8px 25px #090f1820;
 }
-:where(.scope) :global(.app-shell :is(.eyebrow,.turn-counter,.section-subtitle,.tower-summary span,.tower-summary small,.selection-title p,.selection-note,.selection-count,.tip p,.tip>span,.team-status,.team-index,.team-details>div span,footer)) {
+:where(.scope) :global(.app-shell :is(.eyebrow,.turn-counter,.section-subtitle,.selection-title p,.selection-note,.selection-count,.tip p,.tip>span,.team-status,.team-index,.team-details>div span,footer)) {
   color: var(--game-muted);
 }
 :where(.scope) :global(.app-shell .panel-top) {
@@ -74,7 +74,7 @@
   border-color: #9ab5c84d;
   box-shadow: 0 0 0 9px #5b78852a;
 }
-:where(.scope) :global(.app-shell :is(.arena-label,.enemy-trainer,.preview-caption>span)) {
+:where(.scope) :global(.app-shell :is(.arena-label,.enemy-trainer)) {
   color: #a1bbcb;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.app-shell .enemy-trainer span) {
@@ -170,12 +170,6 @@
   padding: 10px;
   font: inherit;
 }
-:where(.scope) :global(.app-shell .preview-caption strong) {
-  color: #d1e4ee;
-}
-:where(.scope) :global(.app-shell .preview-number) {
-  color: #7f9caf20;
-}
 :where(.scope) :global(.app-shell .preview-empty>span) {
   background: #25354566;
   border-color: #688398;
@@ -191,21 +185,6 @@
 :where(.scope) :global(.app-shell .shop-icon) {
   color: #f3c589;
 }
-:where(.scope) :global(.app-shell .upgrade-status span) {
-  background: #3b3540;
-  border-color: #756075;
-  color: #eed0ad;
-}
-:where(.scope) :global(.app-shell .result-banner) {
-  background: #264542;
-  border-color: #5a8e82;
-  color: #bbebd7;
-}
-:where(.scope) :global(.app-shell .result-banner.loss) {
-  background: #4d2f39;
-  border-color: #b3616d;
-  color: #ffb7bf;
-}
 :where(.scope) :global(.app-shell .result-overlay) {
   background: #162431e8;
 }
@@ -220,17 +199,17 @@
   color: #dce9f3;
   border-color: #627b92;
 }
-:where(.scope) :global(:is(.recruit-dialog,.battle-result-dialog,.battle-result-dialog.loss,.battle-result-dialog.draw,.boss-dialog)) {
+:where(.scope) :global(:is(.recruit-dialog,.boss-dialog)) {
   background: var(--game-panel);
   color: var(--game-text);
   border-color: #526579;
   box-shadow: 0 25px 100px #0008;
 }
-:where(.scope) :global(:is(.recruit-dialog,.battle-result-dialog,.boss-dialog)::backdrop) {
+:where(.scope) :global(:is(.recruit-dialog,.boss-dialog)::backdrop) {
   background: #09131fcc;
   backdrop-filter: blur(5px);
 }
-:where(.scope) :global(:is(.recruit-dialog>p,.recruit-confirm-partners small,.iv-comparison-note,.battle-result-dialog>p,.result-reward>span,.result-reward small,.boss-dialog>p)) {
+:where(.scope) :global(:is(.recruit-dialog>p,.recruit-confirm-partners small,.iv-comparison-note,.boss-dialog>p)) {
   color: #b1c3d3;
 }
 :where(.scope) :global(.recruit-scene) {
@@ -262,27 +241,7 @@
   background: #294e49;
   color: #b4e7cf;
 }
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog) {
-  --result-color: #a3dfc7;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog.loss) {
-  --result-color: #ffabb5;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog.draw) {
-  --result-color: #d1b4f1;
-}
-:where(.scope) :global(.result-emblem),:where(.scope) :global(.loss .result-emblem),:where(.scope) :global(.draw .result-emblem) {
-  background: #34475b;
-}
-:where(.scope) :global(.result-stats) {
-  border-color: #485a6a;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-result-dialog .primary-button) {
-  background: #efa57c;
-  border-color: #fbcaa7;
-  color: #243341;
-}
-:where(.scope) :global(.boss-dialog blockquote),:where(.scope) :global(.boss-preview),:where(.scope) :global(.boss-result) {
+:where(.scope) :global(.boss-dialog blockquote),:where(.scope) :global(.boss-preview){
   background: #342e47;
   border-color: #695573;
   color: #e4d4ef;
@@ -507,66 +466,11 @@
   flex-direction: column;
   min-width: 0;
 }
-:where(.scope[data-ui-screen="battle"]) :global(.battle-nav) {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 8px;
-  min-height: 32px;
-  font-size: 11px;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-nav>a),:where(.scope[data-ui-screen="battle"]) :global(.battle-nav>div) {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-nav .pokeball) {
-  width: 22px;
-  height: 22px;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-nav strong) {
-  letter-spacing: 1px;
-  font-size: 11px;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-nav>div a) {
-  padding: 6px 10px;
-  border: 1px solid var(--game-line);
-  border-radius: 6px;
-  background: var(--game-panel);
-}
 :where(.scope[data-ui-screen="battle"]) :global(.battle-room main) {
   max-width: none;
   width: 100%;
   margin: 0;
   padding: 0;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary) {
-  padding: 8px 14px;
-  margin: 0 0 8px;
-  gap: 22px;
-  min-height: 46px;
-  flex-wrap: nowrap;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary>div) {
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary>div:first-child) {
-  margin-right: auto;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary strong) {
-  font-size: 14px;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary small) {
-  display: none;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary span) {
-  font-size: 10px;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary .text-button) {
-  padding: 6px;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-room .game-grid) {
   display: flex;
@@ -746,8 +650,7 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-nav),:where(.scope[data-ui-screen="battle"]) :global(.battle-live .tower-summary),:where(.scope[data-ui-screen="battle"]) :global(.battle-live footer),:where(.scope[data-ui-screen="battle"]) :global(.battle-live .upgrade-status) {
+}:where(.scope[data-ui-screen="battle"]) :global(.battle-live footer){
   flex-shrink: 0;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-live .game-grid) {
@@ -763,16 +666,6 @@
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-live .arena) {
   min-height: 0;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-between .battle-panel) {
-  grid-template-rows: 34px 330px auto;
-  grid-template-areas: 'top top' 'arena arena' 'log log' 'command command';
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-between .command-area) {
-  border-left: 0;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-between .current-messages) {
-  height: 65px;
 }
 /* Every Pokémon and its platform share a center and ground baseline. */
 :where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena) {
@@ -890,42 +783,6 @@
   :where(.scope[data-ui-screen="battle"]) :global(.battle-room) {
     padding: 8px 10px;
   }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-nav) {
-    font-size: 9px;
-    gap: 8px;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-nav strong) {
-    font-size: 9px;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-nav>div) {
-    gap: 5px;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-nav>div a) {
-    padding: 5px 6px;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary) {
-    gap: 10px;
-    padding: 7px 9px;
-    flex-wrap: wrap;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary>div:first-child) {
-    width: auto;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary>div) {
-    gap: 4px;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary>div:nth-child(4)) {
-    display: none;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary span) {
-    font-size: 8px;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary strong) {
-    font-size: 11px;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .tower-summary .text-button) {
-    font-size: 9px;
-  }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-room .team-panel) {
     gap: 5px;
   }
@@ -1020,11 +877,6 @@
   :where(.scope[data-ui-screen="battle"]) :global(.battle-room .enemy-trainer),:where(.scope[data-ui-screen="battle"]) :global(.battle-room .arena-label) {
     font-size: 5px;
     letter-spacing: .5px;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-between .battle-panel) {
-    grid-template-columns: 1fr;
-    grid-template-rows: 30px 280px auto auto;
-    grid-template-areas: 'top' 'arena' 'log' 'command';
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-room footer>span:first-child) {
     display: none;
@@ -1440,9 +1292,6 @@
   max-width: none;
   padding: 8px 12px;
 }
-:where(.scope[data-ui-screen="battle"]) :global(.battle-live .battle-nav),:where(.scope[data-ui-screen="battle"]) :global(.battle-live main>.tower-summary),:where(.scope[data-ui-screen="battle"]) :global(.battle-live .result-banner) {
-  display: none;
-}
 :where(.scope[data-ui-screen="battle"]) :global(.battle-live .game-grid) {
   position: relative;
   gap: 0;
@@ -1519,15 +1368,6 @@
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-trainer) {
   top: 16px;
-}
-:where(.scope[data-ui-screen="battle"]) :global(.battle-live .upgrade-status) {
-  position: absolute;
-  top: 48px;
-  right: 20px;
-  z-index: 6;
-  max-width: 50%;
-  margin: 0;
-  font-size: 9px;
 }
 @media(max-width:760px) {
   :where(.scope[data-ui-screen="battle"]) :global(.battle-live) {
@@ -1685,11 +1525,6 @@
   max-height: calc(100dvh - 40px);
   padding: 32px;
 }
-:where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-result-dialog) {
-  width: min(720px,calc(100vw - 40px));
-  max-height: calc(100dvh - 40px);
-  padding: 40px;
-}
 :where(.scope[data-ui-screen="battle"]) :global(.battle-room .dex-action-dialog) {
   width: min(720px,calc(100vw - 40px));
   max-width: calc(100vw - 40px);
@@ -1710,19 +1545,13 @@
     width: 100px;
     height: 100px;
   }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-result-dialog h2) {
-    font-size: 64px;
-  }
 }
 @media(max-width:760px) {
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room :is(.dex-dialog:has(>.tower-controls),.dex-dialog:has(>.tower-shop),.dex-action-dialog,.recruit-dialog,.battle-result-dialog)) {
+  :where(.scope[data-ui-screen="battle"]) :global(.battle-room :is(.dex-dialog:has(>.tower-controls),.dex-dialog:has(>.tower-shop),.dex-action-dialog,.recruit-dialog)) {
     width: calc(100vw - 16px);
     max-width: calc(100vw - 16px);
     max-height: calc(100dvh - 16px);
     padding: 16px;
-  }
-  :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-result-dialog) {
-    padding: 24px 18px;
   }
 }
 /* Two-stage battle command bar and party selection. */
@@ -2812,16 +2641,6 @@
     font-size: 9px;
     padding: 7px 4px;
   }
-}
-:where(.scope) :global(.villain-outcome) {
-  font-size: 14px;
-  line-height: 1.7;
-  color: #f4d590;
-}
-:where(.scope) :global(.villain-outcome>small) {
-  display: block;
-  color: #c6b9d6;
-  font-size: 12px;
 }
 
 /* Compact shop prices sit beside metadata; descriptions keep the full row. */

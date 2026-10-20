@@ -15,8 +15,8 @@ test('reward content supports all tones and stable pending/selected candidate ID
    const result=resolveReward(option,1000),before=JSON.stringify(result);
    const html=renderToStaticMarkup(createElement(RewardPanel,{result,busy:false,onConfirm:()=>{throw Error('Rendering cannot confirm');}}));
    assert.ok(html.includes(`data-reward-tone="${result.tone}"`));
-   assert.ok(html.includes(result.title));assert.ok(!html.includes('game-dialogue'));
-   assert.equal((html.match(/<li /g)??[]).length,result.entries.length);
+   assert.ok(!html.includes(result.title));assert.ok(!html.includes('game-dialogue'));
+   assert.equal((html.match(/<li /g)??[]).length,result.entries.filter(e=>e.kind!=='message'&&e.kind!=='coin-loss').length);
    assert.equal(JSON.stringify(result),before);
   }
   const selection:RewardSelection={id:'epic-tool',title:'에픽 도구 선택',state:'pending',candidates:[
@@ -26,10 +26,10 @@ test('reward content supports all tones and stable pending/selected candidate ID
   const result:RewardResult={optionId:'fixture',title:'전투 보상',tone:'great',entries:[{kind:'coins',amount:500}],selections:[selection]};
   const pending=renderToStaticMarkup(createElement(RewardPanel,{result,busy:false,onConfirm:()=>{}}));
   assert.ok(pending.includes('data-selection-state="pending"'));
-  assert.ok(pending.includes('선택 기능 준비 중'));assert.ok(pending.includes('보상을 선택한 뒤'));
-  assert.equal((pending.match(/disabled=""/g)??[]).length,2);
+  assert.ok(!pending.includes('선택하기'));assert.ok(!pending.includes('보상을 선택한 뒤'));
+  assert.equal((pending.match(/disabled=""/g)??[]).length,5);
   const ready=renderToStaticMarkup(createElement(RewardChoiceList,{selections:[selection],busy:false,onSelect:()=>{}}));
-  assert.ok(ready.includes('선택하기'));assert.ok(!ready.includes('disabled=""'));
+  assert.ok(ready.includes('생명의구슬'));assert.ok(!ready.includes('disabled=""'));
   const selected:RewardResult={...result,selections:[{...selection,state:'selected',selectedId:'sash'}]};
   const completed=renderToStaticMarkup(createElement(RewardPanel,{result:selected,busy:false,onConfirm:()=>{}}));
   assert.ok(completed.includes('기합의띠'));assert.ok(completed.includes('선택 완료'));

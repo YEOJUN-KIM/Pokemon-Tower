@@ -1,12 +1,17 @@
 'use client';
-import {useEffect,useState} from 'react';
+import {useLayoutEffect,useRef,useState} from 'react';
 import styles from './styles/game-dialogue.module.css';
 
 // Text presentation only: it never delays or advances the parent game sequence.
 export function GameDialogue({text,animated=true,label='현재 배틀 상황',tone='normal'}:{text:string;animated?:boolean;label?:string;tone?:'normal'|'critical'}){
+ return <DialogueText key={text} text={text} animated={animated} label={label} tone={tone}/>;
+}
+
+function DialogueText({text,animated,label,tone}:{text:string;animated:boolean;label:string;tone:'normal'|'critical'}){
+ const root=useRef<HTMLDivElement>(null);
  const characters=Array.from(text);
  const [progress,setProgress]=useState({text,count:animated?0:characters.length});
- useEffect(()=>{
+ useLayoutEffect(()=>{
   const media=window.matchMedia('(prefers-reduced-motion: reduce)');
   let frame=0,cancelled=false;
   const reveal=()=>{cancelled=true;cancelAnimationFrame(frame);setProgress({text,count:characters.length});};
@@ -20,11 +25,15 @@ export function GameDialogue({text,animated=true,label='현재 배틀 상황',to
    if(count<characters.length)frame=requestAnimationFrame(tick);
   }
   frame=requestAnimationFrame(tick);
+  const node=root.current;
+  node?.addEventListener('game-dialogue-reveal',reveal);
+  const key=(event:KeyboardEvent)=>{if(node?.closest('[data-dialogue-confirm]')||document.querySelector('dialog[open]')||node?.dataset.typing!=='true'||event.repeat||event.ctrlKey||event.altKey||event.metaKey||!['z','enter'].includes(event.key.toLowerCase()))return;event.preventDefault();event.stopImmediatePropagation();reveal();};
+  document.addEventListener('keydown',key,true);
   const onMotionChange=()=>{if(media.matches)reveal();};media.addEventListener('change',onMotionChange);
-  return()=>{cancelled=true;cancelAnimationFrame(frame);media.removeEventListener('change',onMotionChange);};
+  return()=>{node?.removeEventListener('game-dialogue-reveal',reveal);document.removeEventListener('keydown',key,true);cancelled=true;cancelAnimationFrame(frame);media.removeEventListener('change',onMotionChange);};
  },[text,animated]);
  const count=progress.text===text?progress.count:0,typing=count<characters.length;
- return <div className={`current-messages game-dialogue ${styles.scope} ${styles.dialogue}`} data-tone={tone} data-typing={typing} role="log" aria-label={label} aria-live="polite" aria-atomic="true">
+ return <div ref={root} onClick={()=>{if(root.current?.dataset.typing==='true'&&!root.current.closest('[data-dialogue-confirm]'))root.current.dispatchEvent(new Event('game-dialogue-reveal'));}} className={`current-messages game-dialogue ${styles.scope} ${styles.dialogue}`} data-tone={tone} data-typing={typing} role="log" aria-label={label} aria-live="polite" aria-atomic="true">
   <span className={styles.accessible}>{text}</span>
   <p className={`latest ${styles.text}`} data-full-text={text} aria-hidden="true"><span data-dialogue-text>{characters.slice(0,count).join('')}</span></p>
   <span className={styles.caret} aria-hidden="true">{typing?'▍':'▾'}</span>

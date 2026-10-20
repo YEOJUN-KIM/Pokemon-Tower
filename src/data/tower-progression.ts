@@ -22,11 +22,6 @@ export function towerDifficulty(floor:number) {
   };
 }
 
-export function progressionLabel(floor:number,totalFloors:number){
-  if(totalFloors<100)return null;
-  return floor===50?'첫 번째 관문':floor===100?'최종 관문':floor>=51&&floor<=60?'숨 고르기 구간':floor<50?'첫 번째 등반':'두 번째 등반';
-}
-
 // Common early trainers do not all have a Tera Orb. The once-per-team rule is unchanged.
 export function opponentTeraTickets(floor:number,kind:'normal'|'elite'|'named'){
   return kind!=='normal' && floor>=20?1:0;

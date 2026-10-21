@@ -106,14 +106,7 @@ Egg Station에서 1개 또는 10개를 뽑습니다. 기계가 들썩이고 출�
 
 **포켓몬타워 로컬 실행.cmd**를 더블클릭하면 됩니다. 서버가 준비되면 브라우저에서 `http://127.0.0.1:3000`을 엽니다. 종료는 CMD 창에서 Ctrl+C를 누릅니다. **로컬 플레이에는 Docker가 필요 없습니다.**
 
-직접 명령어를 사용하려면 Node.js 24 이상과 pnpm 11.19.0을 준비한 뒤 프로젝트 폴더에서 실행합니다.
-
-```sh
-pnpm install --frozen-lockfile
-pnpm dev
-```
-
-개인용 EXE·Docker·임시 접속 터널은 별도의 선택적 실행 방식입니다. 개인 실행 파일·환경변수·저장 DB는 Git에 포함하지 않습니다.
+수동 실행은 Node.js 24 이상과 pnpm 11.19.0을 준비한 뒤 프로젝트 폴더에서 `pnpm install --frozen-lockfile`, `pnpm dev` 순서로 실행합니다.
 
 - [처음 설치하고 실행하기](docs/operations/SETUP.md)
 - [저장과 백업](docs/operations/BACKUPS.md) · [다른 PC로 옮기기](docs/operations/COMPUTER_MOVE.md)

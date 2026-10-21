@@ -1,6 +1,6 @@
 # 실행과 운영
 
-- [더블클릭 실행·설치·테스트](SETUP.md)
+- [Windows 설치와 실행](SETUP.md)
 - [계정과 저장 가져오기](ACCOUNTS.md)
 - [저장 위치·백업 검사·수동 백업](BACKUPS.md)
 - [배포와 복구](DEPLOYMENT.md)

@@ -15,7 +15,7 @@
 
 개발은 .env.local의 TOWER_DB_PATH, 통합 실행기는 Docker 볼륨 /data/tower.sqlite를 사용한다. 두 저장은 별개다. 실제 DB·WAL/SHM·환경변수·.data/backups·.data/transfers는 임시 파일이 아니다. [백업](operations/BACKUPS.md)·[PC 이전](operations/COMPUTER_MOVE.md)을 따른다.
 
-루트 포켓몬타워 실행.exe는 개인 PC용이며 Git에 포함하지 않는다. 재생성 소스와 명령은 [설치](operations/SETUP.md)에 있다. 이전 dist 배포본은 삭제했으므로 묶음이 필요하면 현재 코드에서 새로 만든다.
+루트 포켓몬타워 실행.exe는 개인 PC용이며 Git에 포함하지 않는다. 재생성 소스와 명령은 [개발 도구 안내](../scripts/README.md)에 있다. 이전 dist 배포본은 삭제했으므로 묶음이 필요하면 현재 코드에서 새로 만든다.
 
 ## 작업 전후
 

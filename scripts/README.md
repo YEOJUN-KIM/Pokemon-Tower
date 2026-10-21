@@ -9,6 +9,8 @@
 | 알려진 테스트·임시 출력 정리 | pnpm clean:temp |
 | 실제 DB 수동 백업 | node --env-file=.env.local scripts/backup-db.mjs ([저장·백업 안내](../docs/operations/BACKUPS.md)) |
 | 개인용 통합 실행기 | 루트 포켓몬타워 실행.exe → launcher-window.ps1 → launch-preview.mjs / preview.mjs |
+| Windows 최초 설치 | 루트 포켓몬타워 설치.cmd → pnpm 11.19.0 준비 → 의존성 설치 → 로컬 실행 CMD |
+| 설치 CMD 회귀 검사 | node --test tests/windows-setup.test.mjs (Windows CMD, 패키지 도구·게임 실행은 모의 처리) |
 | 외부 터널 없이 로컬 실행 | 범용 포켓몬타워 로컬 실행.cmd (Git 포함, PATH에 Node.js 24 이상 필요) 또는 node scripts/launch-local.mjs |
 | Windows 실행 파일 다시 만들기 | powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build-windows-launcher.ps1 |
 | 실행기 화면만 렌더링 (서버 연결 없음) | powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File scripts/launcher-window.ps1 -NodePath (Get-Command node).Source -Preview |

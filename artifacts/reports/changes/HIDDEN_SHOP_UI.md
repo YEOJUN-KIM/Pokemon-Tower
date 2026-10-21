@@ -1,5 +1,7 @@
 # 히든상점 UI 리팩터링
 
+공개 참조 안내: Git에서 제외한 로컬 캡처는 링크 대신 경로로 표기한다. 캡처 파일은 공개 저장소에 포함하지 않는다.
+
 이 문서는 이전 카드 UI의 구현 기록입니다. 현재 세로 목록/우측 상세/하단 상인 대화와 공통 배낭 규칙은 [BAG](../../../docs/engineering/BAG.md)을 따릅니다.
 
 기준: 2026-10-17. 기존 히든상점의 상품·가격·재화·구매 제한·snapshot·transaction·exact-once를 유지하고 Web UI와 입력 연결을 변경했습니다.
@@ -52,7 +54,7 @@ UI에서 보유 여부를 별도로 추정하지 않습니다. 유일 장비·�
 - 기존 Vitamin·Epic Held Item·Unique/Epic TM·일반/슈퍼레어 티켓·Trainer Equipment 서버 지급과 롤백 테스트.
 - 기존 도전자·Rank 보상·상자·정비 상품 구매 회귀.
 
-[입장 PC](../../qa/screenshots/hidden-shop/entry-1280.png) · [입장 모바일](../../qa/screenshots/hidden-shop/entry-390.png) · [구매 후 PC](../../qa/screenshots/hidden-shop/purchased-1280.png) · [구매 후 모바일](../../qa/screenshots/hidden-shop/purchased-390.png)
+입장 PC — `../../qa/screenshots/hidden-shop/entry-1280.png` (로컬 캡처, Git 미포함) · 입장 모바일 — `../../qa/screenshots/hidden-shop/entry-390.png` (로컬 캡처, Git 미포함) · 구매 후 PC — `../../qa/screenshots/hidden-shop/purchased-1280.png` (로컬 캡처, Git 미포함) · 구매 후 모바일 — `../../qa/screenshots/hidden-shop/purchased-390.png` (로컬 캡처, Git 미포함)
 
 ## 이번 작업 변경 파일
 

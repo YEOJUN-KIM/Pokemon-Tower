@@ -1,5 +1,7 @@
 # 미스터리 상자·공통 Reward 기반 검증
 
+공개 참조 안내: Git에서 제외한 로컬 캡처는 링크 대신 경로로 표기한다. 캡처 파일은 공개 저장소에 포함하지 않는다.
+
 작성: 2026-10-16. 현재 동작·테스트용 보상표는 [이벤트 규칙](../../../docs/gameplay/EVENTS.md), 책임과 재사용 방법은 [개발 안내](../../../docs/engineering/EVENT_SYSTEM.md)를 따릅니다. 이 기록은 이번 변경 범위와 검증 결과를 남깁니다.
 
 최신 UI 확장 내역은 하단의 **Reward Popup UI 확장**을 따릅니다. 앞부분은 최초 상자·보상 기반 구현 당시 기록입니다.
@@ -38,8 +40,8 @@
 ## 화면 자료
 
 - [현재 상자 진행 GIF](../../qa/previews/events/chest-event.gif)
-- [모바일 복합 보상](../../qa/screenshots/mystery-chest/treasure-390.png)
-- [PC 손실 결과](../../qa/screenshots/mystery-chest/trap-1280.png)
+- 모바일 복합 보상 — `../../qa/screenshots/mystery-chest/treasure-390.png` (로컬 캡처, Git 미포함)
+- PC 손실 결과 — `../../qa/screenshots/mystery-chest/trap-1280.png` (로컬 캡처, Git 미포함)
 
 기존 촬영 스크립트와 GIF 인코더를 재사용했습니다. 결과 6종의 스크린샷은 `artifacts/qa/screenshots/mystery-chest/`에 있습니다.
 
@@ -113,10 +115,10 @@
 
 ### 화면 자료
 
-- [PC 대박 팝업](../../qa/screenshots/mystery-chest/treasure-1280.png)
-- [PC 손실 팝업](../../qa/screenshots/mystery-chest/trap-1280.png)
-- [모바일 대박 팝업](../../qa/screenshots/mystery-chest/treasure-390.png)
-- [모바일 꽝 팝업](../../qa/screenshots/mystery-chest/empty-390.png)
+- PC 대박 팝업 — `../../qa/screenshots/mystery-chest/treasure-1280.png` (로컬 캡처, Git 미포함)
+- PC 손실 팝업 — `../../qa/screenshots/mystery-chest/trap-1280.png` (로컬 캡처, Git 미포함)
+- 모바일 대박 팝업 — `../../qa/screenshots/mystery-chest/treasure-390.png` (로컬 캡처, Git 미포함)
+- 모바일 꽝 팝업 — `../../qa/screenshots/mystery-chest/empty-390.png` (로컬 캡처, Git 미포함)
 - [갱신한 상자 진행 GIF](../../qa/previews/events/chest-event.gif)
 
 ### 검증

@@ -1,5 +1,7 @@
 # 도전자 선택전 1차 구현 보고
 
+공개 참조 안내: Git에서 제외한 로컬 캡처는 링크 대신 경로로 표기한다. 캡처 파일은 공개 저장소에 포함하지 않는다.
+
 기준: 2026-10-16, 시작 커밋 `ecef4e2026a2f66bb0e3f89f6c161940f212393c`.
 
 ## 1. 수정 파일
@@ -109,7 +111,7 @@ DB v36은 challenger_encounters와 event_reward_selections를 추가합니다. �
 
 UI 승리 결과는 테스트 전용 내부 완료 callback fixture를 사용해 결정론적으로 촬영했습니다. 실제 플레이 입력으로 모든 전투를 이긴 E2E라는 의미는 아닙니다.
 
-QA: [PC 후보](../../qa/screenshots/challengers/candidates-1280.png), [모바일 후보](../../qa/screenshots/challengers/candidates-390.png), [강한 후보 정보](../../qa/screenshots/challengers/hard-info-390.png), [쉬움 보상](../../qa/screenshots/challengers/reward-easy.png), [보통 보상](../../qa/screenshots/challengers/reward-medium.png), [어려움 보상](../../qa/screenshots/challengers/reward-hard.png), [선택 후보](../../qa/screenshots/challengers/reward-candidates-mobile.png).
+QA: PC 후보 — `../../qa/screenshots/challengers/candidates-1280.png` (로컬 캡처, Git 미포함), 모바일 후보 — `../../qa/screenshots/challengers/candidates-390.png` (로컬 캡처, Git 미포함), 강한 후보 정보 — `../../qa/screenshots/challengers/hard-info-390.png` (로컬 캡처, Git 미포함), 쉬움 보상 — `../../qa/screenshots/challengers/reward-easy.png` (로컬 캡처, Git 미포함), 보통 보상 — `../../qa/screenshots/challengers/reward-medium.png` (로컬 캡처, Git 미포함), 어려움 보상 — `../../qa/screenshots/challengers/reward-hard.png` (로컬 캡처, Git 미포함), 선택 후보 — `../../qa/screenshots/challengers/reward-candidates-mobile.png` (로컬 캡처, Git 미포함).
 
 ## 12. TODO
 

@@ -1,5 +1,7 @@
 # 도전자 보상과 공통 배낭 unique ownership
 
+공개 참조 안내: Git에서 제외한 로컬 캡처는 링크 대신 경로로 표기한다. 캡처 파일은 공개 저장소에 포함하지 않는다.
+
 2026-10-17. `0149828578017ad7c4c35b1444d523ce6d7c0b03` 이후 현재 코드에서 보상 지급만 정리했습니다.
 
 ## 구현 보고
@@ -49,4 +51,4 @@ ChallengerEvents의 후보 저장·승리 흐름, RewardModal, rankRewardProfile
 - TypeScript, Next 프로덕션 빌드, CSS 구조, 문서 링크, git diff --check 통과.
 - 테스트 전용 계정/SQLite 사용. 실제 사용자 진행 DB 변경 없음.
 
-[직접 도구 보상](../../qa/screenshots/rank-rewards/elite-epic.png) · [중복 도구의 코인 대체](../../qa/screenshots/rank-rewards/stale-epic-390.png) · [중복 TM의 코인 대체](../../qa/screenshots/rank-rewards/stale-machine-390.png)
+직접 도구 보상 — `../../qa/screenshots/rank-rewards/elite-epic.png` (로컬 캡처, Git 미포함) · 중복 도구의 코인 대체 — `../../qa/screenshots/rank-rewards/stale-epic-390.png` (로컬 캡처, Git 미포함) · 중복 TM의 코인 대체 — `../../qa/screenshots/rank-rewards/stale-machine-390.png` (로컬 캡처, Git 미포함)

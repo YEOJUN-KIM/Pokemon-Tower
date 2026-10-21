@@ -1,5 +1,7 @@
 # 일반상점 배낭 접근과 대상 선택 UX
 
+2026-10-21 참조 정리: 현재 보관되지 않은 임시 로그·화면 캡처는 링크 대신 당시 경로를 표시한다. 아래 검증 결과는 당시 기록이며 이번에 다시 측정한 결과가 아니다.
+
 2026-10-17. 기준 커밋 `0149828578017ad7c4c35b1444d523ce6d7c0b03` 이후의 UX 보완.
 
 ## 구현 보고
@@ -35,7 +37,7 @@
 - TypeScript, Next 프로덕션 빌드, CSS 구조, 문서 링크, git diff --check 통과.
 - UI 테스트는 별도의 테스트 SQLite 계정에서 실행. 실제 사용자 저장 데이터는 변경하지 않음.
 
-[일반상점 PC](../../qa/screenshots/bag/shop-utility-1280.png) · [일반상점 모바일](../../qa/screenshots/bag/shop-utility-390.png)
+일반상점 PC — `../../qa/screenshots/bag/shop-utility-1280.png` (현재 미보관) · 일반상점 모바일 — `../../qa/screenshots/bag/shop-utility-390.png` (현재 미보관)
 
 ## 상품 카드 가격 버튼 정리
 
@@ -43,4 +45,4 @@
 
 검증: 실제 Chrome 20/20 통과(PC1280/모바일390의 세 상품 카테고리 가격 전용 버튼·설명·옆 배치·가로 넘침, 구매/배낭/리롤/히든상점 회귀). TypeScript·빌드·CSS·문서 검사 통과.
 
-[TM 카드 PC](../../qa/screenshots/bag/shop-products-machine-1280.png) · [TM 카드 모바일](../../qa/screenshots/bag/shop-products-machine-390.png) · [도구 카드 모바일](../../qa/screenshots/bag/shop-products-held-390.png)
+TM 카드 PC — `../../qa/screenshots/bag/shop-products-machine-1280.png` (현재 미보관) · TM 카드 모바일 — `../../qa/screenshots/bag/shop-products-machine-390.png` (현재 미보관) · 도구 카드 모바일 — `../../qa/screenshots/bag/shop-products-held-390.png` (현재 미보관)

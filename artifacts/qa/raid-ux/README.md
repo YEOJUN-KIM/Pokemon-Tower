@@ -1,5 +1,9 @@
 # Raid v1 UX 수정 보고
 
+공개 참조 안내: Git에서 제외한 로컬 캡처는 링크 대신 경로로 표기한다. 캡처 파일은 공개 저장소에 포함하지 않는다.
+
+2026-10-21 참조 정리: 현재 보관되지 않은 임시 로그·화면 캡처는 링크 대신 당시 경로를 표시한다. 아래 검증 결과는 당시 기록이며 이번에 다시 측정한 결과가 아니다.
+
 기준: `2f9e842d2eecda5d2746e008e9da8e78c6bd0cc7`.
 
 이번 변경은 프레젠테이션과 발견/보상 화면 분기에 한정했다. 작업 시작 전에 이미 존재하던 `raidEventTestSettings`와 서버의 3층부터 Raid 강제 출현 변경은 그대로 보존했다. 이벤트/Boss 가중치, shiny/IV/EV, 보상 확률과 지급·영입·재도전·snapshot 트랜잭션은 수정하지 않았다.
@@ -80,14 +84,14 @@ node --import tsx --import ./artifacts/qa/raid-ux/standard-event-tests.mjs --tes
 node --import tsx node_modules/@playwright/test/cli.js test e2e/raid-events.spec.ts e2e/raid-transition-ux.spec.ts e2e/hidden-shop.spec.ts e2e/mystery-chest.spec.ts
 ```
 
-회귀 로그: [raid-ux-regression.log](../../experiments/balance/raw/raid-ux-regression.log).
+회귀 로그: raid-ux-regression.log — `../../experiments/balance/raw/raid-ux-regression.log` (현재 미보관).
 
 ## 화면
 
-- [PC Mega shell](../screenshots/raid-ux/garchomp-mega-1280/mega-shell.png)
-- [PC 새 form과 HP 재충전](../screenshots/raid-ux/garchomp-mega-1280/mega-reveal.png)
-- [Mobile Mewtwo X final aura](../screenshots/raid-ux/mewtwo-x-390/raid-aura-burst.png)
-- [Mobile Mewtwo Y HP 재충전](../screenshots/raid-ux/mewtwo-y-390/raid-aura-reveal.png)
-- [Mobile 승리 배경과 특별 보상](../screenshots/raids/reward-mewtwo-390.png)
+- PC Mega shell — `../screenshots/raid-ux/garchomp-mega-1280/mega-shell.png` (현재 미보관)
+- PC 새 form과 HP 재충전 — `../screenshots/raid-ux/garchomp-mega-1280/mega-reveal.png` (현재 미보관)
+- Mobile Mewtwo X final aura — `../screenshots/raid-ux/mewtwo-x-390/raid-aura-burst.png` (현재 미보관)
+- Mobile Mewtwo Y HP 재충전 — `../screenshots/raid-ux/mewtwo-y-390/raid-aura-reveal.png` (현재 미보관)
+- Mobile 승리 배경과 특별 보상 — `../screenshots/raids/reward-mewtwo-390.png` (로컬 캡처, Git 미포함)
 
-각 경로의 `frames.json`에는 실제 DOM 관측 시각, sprite 이름, HP 퍼센트와 fill animation 이름이 기록돼 있다.
+당시 각 경로의 `frames.json`에는 실제 DOM 관측 시각, sprite 이름, HP 퍼센트와 fill animation 이름을 기록했다. 현재 보관되지 않은 캡처 경로의 부속 자료를 이 문서에서 제공하지는 않는다.

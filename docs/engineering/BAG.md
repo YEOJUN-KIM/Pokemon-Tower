@@ -1,5 +1,7 @@
 # 공통 배낭(Bag)과 상점 통합
 
+공개 참조 안내: Git에서 제외한 로컬 캡처는 링크 대신 경로로 표기한다. 캡처 파일은 공개 저장소에 포함하지 않는다.
+
 기준: 2026-10-20. 현재 Run의 도구·영양제·TM·배틀 소모품·트레이너 장비·Z크리스탈을 하나의 배낭에서 관리합니다. 배낭의 소유권은 모두 run_id에 묶여 새 도전에 복사되지 않습니다. 성장 포인트·알 티켓 등 기존 영구재화와 수집 포켓몬의 기존 성장/기술 지식은 별도 시스템입니다.
 
 ## 현재 화면과 실행 방식
@@ -76,7 +78,7 @@ TM은 moveInfo의 type으로 18종 디스크를 선택합니다. `src/web/tm-ico
 - e2e/hidden-shop.spec.ts: 두 재화/취소/즉시 사용·가방 등록/중복·동시 API/2회 제한/4·5개 세로 목록/일반 정비 소모품·장비·TM 등록.
 - e2e/rank-rewards.spec.ts 및 기존 도전자/상자/Mirror 회귀.
 
-[Bag PC](../../artifacts/qa/screenshots/bag/bag-1280.png) · [Bag 모바일](../../artifacts/qa/screenshots/bag/bag-390.png) · [새 히든상점 PC](../../artifacts/qa/screenshots/bag/hidden-shop-1280.png) · [새 히든상점 모바일](../../artifacts/qa/screenshots/bag/hidden-shop-390.png)
+Bag PC — `../../artifacts/qa/screenshots/bag/bag-1280.png` (로컬 캡처, Git 미포함) · Bag 모바일 — `../../artifacts/qa/screenshots/bag/bag-390.png` (로컬 캡처, Git 미포함) · 새 히든상점 PC — `../../artifacts/qa/screenshots/bag/hidden-shop-1280.png` (로컬 캡처, Git 미포함) · 새 히든상점 모바일 — `../../artifacts/qa/screenshots/bag/hidden-shop-390.png` (로컬 캡처, Git 미포함)
 
 ## 변경 파일
 
@@ -96,7 +98,7 @@ TM은 moveInfo의 type으로 18종 디스크를 선택합니다. `src/web/tm-ico
 
 검증: 관련 단위·통합 14/14, Bag·일반/히든상점·Rank 보상 Chrome 회귀 22/22 통과. PC/모바일에서 세 가지 TM 상태, 장착 도구 아이콘, 미장착 빈 영역, 정비 메뉴 진입과 기존 버튼 제거를 확인했습니다. TypeScript·프로덕션 빌드·CSS 구조·문서 링크 검사도 통과했습니다.
 
-[TM 대상 PC](../../artifacts/qa/screenshots/bag/targets-machine-1280.png) · [TM 대상 모바일](../../artifacts/qa/screenshots/bag/targets-machine-390.png) · [도구 대상 PC](../../artifacts/qa/screenshots/bag/targets-held-1280.png) · [도구 대상 모바일](../../artifacts/qa/screenshots/bag/targets-held-390.png)
+TM 대상 PC — `../../artifacts/qa/screenshots/bag/targets-machine-1280.png` (로컬 캡처, Git 미포함) · TM 대상 모바일 — `../../artifacts/qa/screenshots/bag/targets-machine-390.png` (로컬 캡처, Git 미포함) · 도구 대상 PC — `../../artifacts/qa/screenshots/bag/targets-held-1280.png` (로컬 캡처, Git 미포함) · 도구 대상 모바일 — `../../artifacts/qa/screenshots/bag/targets-held-390.png` (로컬 캡처, Git 미포함)
 
 ## 일반상점 접근성 보완
 

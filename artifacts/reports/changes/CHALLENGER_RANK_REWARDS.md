@@ -1,5 +1,7 @@
 # Normal / Elite / Master 도전자 Reward 확장
 
+공개 참조 안내: Git에서 제외한 로컬 캡처는 링크 대신 경로로 표기한다. 캡처 파일은 공개 저장소에 포함하지 않는다.
+
 기준: 2026-10-16. 시작 커밋 `2ab9605`. NPC Sample·Rank·전투 난이도·팀 생성·AI는 유지하고 보상만 별도 확장했습니다. 추가 요청에 따라 10층 정비의 영양제 판매도 제거했습니다.
 
 ## 1. Normal 최종 풀
@@ -109,7 +111,7 @@ DB v39는 런 보관함·사용 영수증·플레이어별 전용 알 티켓 테
 - 배포 빌드·타입·CSS·워크스페이스·diff 검사를 통과했습니다.
 - 전체 테스트 1차 병렬 실행은 604개 중 603개 통과, trainer-catalog 파일 worker가 상세 assertion 없이 실패했습니다. 파일 단독 재실행 7개는 모두 통과했습니다. 동시 실행 2로 줄인 재검사는 보고된 602개 중 601개 통과, run-events 파일 worker가 같은 식으로 실패했고 파일 단독 13개는 모두 통과했습니다. 전체 묶음이 안정적으로 전부 통과했다고 보고하지 않습니다. worker 종료 원인은 이번 출력만으로 확정하지 못했습니다.
 
-QA 이미지는 [PC 기대 문구](../../qa/screenshots/rank-rewards/previews-1280.png), [모바일 기대 문구](../../qa/screenshots/rank-rewards/previews-390.png), [PC Master](../../qa/screenshots/rank-rewards/master-1280.png), [모바일 Master](../../qa/screenshots/rank-rewards/master-390.png), [Elite 영양제](../../qa/screenshots/rank-rewards/elite-vitamin.png), [Elite 교환권](../../qa/screenshots/rank-rewards/elite-epic.png), [Elite TM](../../qa/screenshots/rank-rewards/elite-machine.png)에 있습니다. UI 승리는 테스트 전용 내부 완료 callback fixture를 사용했으며 클라이언트 승패 입력 API는 없습니다.
+QA 이미지는 PC 기대 문구 — `../../qa/screenshots/rank-rewards/previews-1280.png` (로컬 캡처, Git 미포함), 모바일 기대 문구 — `../../qa/screenshots/rank-rewards/previews-390.png` (로컬 캡처, Git 미포함), PC Master — `../../qa/screenshots/rank-rewards/master-1280.png` (로컬 캡처, Git 미포함), 모바일 Master — `../../qa/screenshots/rank-rewards/master-390.png` (로컬 캡처, Git 미포함), Elite 영양제 — `../../qa/screenshots/rank-rewards/elite-vitamin.png` (로컬 캡처, Git 미포함), Elite 교환권 — `../../qa/screenshots/rank-rewards/elite-epic.png` (로컬 캡처, Git 미포함), Elite TM — `../../qa/screenshots/rank-rewards/elite-machine.png` (로컬 캡처, Git 미포함)에 있습니다. UI 승리는 테스트 전용 내부 완료 callback fixture를 사용했으며 클라이언트 승패 입력 API는 없습니다.
 
 ## 19. 변경 파일
 

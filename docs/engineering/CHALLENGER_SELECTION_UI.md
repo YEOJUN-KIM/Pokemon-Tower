@@ -1,5 +1,7 @@
 # 도전자 선택전 UI
 
+공개 참조 안내: Git에서 제외한 로컬 캡처는 링크 대신 경로로 표기한다. 캡처 파일은 공개 저장소에 포함하지 않는다.
+
 기준: 2026-10-17. 후보 생성·전투·Rank·보상·Mirror 확률을 유지하면서 선택 화면만 변경했습니다.
 
 ## 구조와 조작
@@ -44,7 +46,7 @@
 - `e2e/rank-rewards.spec.ts`: 범주별 미리보기, Master 실제 보상 선택, Elite 영양제·도구·TM 지급/사용.
 - `tests/run-event-ui.test.ts`: 일반 battleStyle 비노출, optional specialHint 및 미래 특별 후보 projection, 돌아가기 상세창 없음.
 
-[PC 화면](../../artifacts/qa/screenshots/challengers/candidates-1280.png) · [모바일 화면](../../artifacts/qa/screenshots/challengers/candidates-390.png) · [Mirror PC](../../artifacts/qa/screenshots/mirror/candidates-1280.png) · [Mirror 모바일](../../artifacts/qa/screenshots/mirror/candidates-390.png)
+PC 화면 — `../../artifacts/qa/screenshots/challengers/candidates-1280.png` (로컬 캡처, Git 미포함) · 모바일 화면 — `../../artifacts/qa/screenshots/challengers/candidates-390.png` (로컬 캡처, Git 미포함) · Mirror PC — `../../artifacts/qa/screenshots/mirror/candidates-1280.png` (로컬 캡처, Git 미포함) · Mirror 모바일 — `../../artifacts/qa/screenshots/mirror/candidates-390.png` (로컬 캡처, Git 미포함)
 
 ## 16. 이번 UI 변경 파일
 

@@ -16,7 +16,6 @@ playwright-report/
 # Personal Windows entry points stay on this PC.
 /포켓몬타워 실행.exe
 /포켓몬타워 실행.cmd
-/포켓몬타워 로컬 실행.cmd
 
 # Local conversation attachments and large reproducible experiment logs.
 .codex-remote-attachments/

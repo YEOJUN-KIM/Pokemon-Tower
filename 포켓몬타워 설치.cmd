@@ -1,69 +1,61 @@
 @echo off
 chcp 65001 >nul
-setlocal
+setlocal DisableDelayedExpansion
+set "TOWER_SETUP_STAGE=프로젝트 폴더 확인"
+set "TOWER_SETUP_EXIT=1"
 cd /d "%~dp0"
 if errorlevel 1 goto :failed
 set "TOWER_SETUP_NODE="
 set "TOWER_SETUP_NPM="
-set "TOWER_SETUP_PNPM="
+set "TOWER_SETUP_NPX="
 set "TOWER_SETUP_NODE_VERSION="
-set "TOWER_SETUP_PNPM_VERSION="
-set "TOWER_SETUP_NPM_PREFIX="
-set "TOWER_SETUP_PNPM_REQUIRED=11.19.0"
 
 echo ========================================
 echo  Pokémon Tower 설치
 echo ========================================
 echo.
-echo [1/4] Node.js와 npm 확인...
+set "TOWER_SETUP_STAGE=Node.js와 설치 도구 확인"
+echo [1/3] Node.js와 설치 도구 확인...
 for /f "delims=" %%N in ('where node.exe 2^>nul') do if not defined TOWER_SETUP_NODE set "TOWER_SETUP_NODE=%%N"
 if not defined TOWER_SETUP_NODE goto :node_missing
 for /f "delims=" %%V in ('""%TOWER_SETUP_NODE%" -p "process.versions.node""') do set "TOWER_SETUP_NODE_VERSION=%%V"
 "%TOWER_SETUP_NODE%" -e "process.exit(Number(process.versions.node.split('.')[0]) >= 24 ? 0 : 1)"
-if errorlevel 1 goto :node_old
+set "TOWER_SETUP_EXIT=%errorlevel%"
+if not "%TOWER_SETUP_EXIT%"=="0" goto :node_old
 echo Node.js v%TOWER_SETUP_NODE_VERSION% 확인 완료
+set "TOWER_SETUP_EXIT=1"
 for /f "delims=" %%N in ('where npm.cmd 2^>nul') do if not defined TOWER_SETUP_NPM set "TOWER_SETUP_NPM=%%N"
 if not defined TOWER_SETUP_NPM goto :npm_missing
-call "%TOWER_SETUP_NPM%" --version
-if errorlevel 1 goto :npm_missing
+call "%TOWER_SETUP_NPM%" --version >nul
+set "TOWER_SETUP_EXIT=%errorlevel%"
+if not "%TOWER_SETUP_EXIT%"=="0" goto :npm_missing
+set "TOWER_SETUP_EXIT=1"
+for /f "delims=" %%N in ('where npx.cmd 2^>nul') do if not defined TOWER_SETUP_NPX set "TOWER_SETUP_NPX=%%N"
+if not defined TOWER_SETUP_NPX goto :npx_missing
+call "%TOWER_SETUP_NPX%" --version >nul
+set "TOWER_SETUP_EXIT=%errorlevel%"
+if not "%TOWER_SETUP_EXIT%"=="0" goto :npx_missing
 
 echo.
-echo [2/4] pnpm 확인...
-for /f "delims=" %%P in ('where pnpm.cmd 2^>nul') do if not defined TOWER_SETUP_PNPM set "TOWER_SETUP_PNPM=%%P"
-for /f "delims=" %%P in ('where pnpm.exe 2^>nul') do if not defined TOWER_SETUP_PNPM set "TOWER_SETUP_PNPM=%%P"
-if not defined TOWER_SETUP_PNPM goto :install_pnpm
-for /f "delims=" %%V in ('call "%TOWER_SETUP_PNPM%" --version 2^>nul') do set "TOWER_SETUP_PNPM_VERSION=%%V"
-if "%TOWER_SETUP_PNPM_VERSION%"=="%TOWER_SETUP_PNPM_REQUIRED%" goto :install_dependencies
-
-:install_pnpm
-echo pnpm %TOWER_SETUP_PNPM_REQUIRED%을 준비합니다...
-call "%TOWER_SETUP_NPM%" install --global pnpm@%TOWER_SETUP_PNPM_REQUIRED%
-if errorlevel 1 goto :pnpm_failed
-rem The npm global bin directory may not be in this window's PATH yet.
-for /f "delims=" %%P in ('call "%TOWER_SETUP_NPM%" prefix --global') do set "TOWER_SETUP_NPM_PREFIX=%%P"
-if not defined TOWER_SETUP_NPM_PREFIX goto :pnpm_failed
-set "TOWER_SETUP_PNPM=%TOWER_SETUP_NPM_PREFIX%\pnpm.cmd"
-if not exist "%TOWER_SETUP_PNPM%" goto :pnpm_failed
-set "TOWER_SETUP_PNPM_VERSION="
-for /f "delims=" %%V in ('call "%TOWER_SETUP_PNPM%" --version 2^>nul') do set "TOWER_SETUP_PNPM_VERSION=%%V"
-if not "%TOWER_SETUP_PNPM_VERSION%"=="%TOWER_SETUP_PNPM_REQUIRED%" goto :pnpm_failed
-
-:install_dependencies
-echo pnpm %TOWER_SETUP_PNPM_REQUIRED% 확인 완료
+set "TOWER_SETUP_STAGE=프로젝트 파일 설치"
+echo [2/3] 프로젝트 파일 설치...
+call "%TOWER_SETUP_NPX%" --yes pnpm@11.19.0 install --frozen-lockfile
+set "TOWER_SETUP_EXIT=%errorlevel%"
+if not "%TOWER_SETUP_EXIT%"=="0" goto :failed
 echo.
-echo [3/4] 프로젝트 의존성 설치...
-call "%TOWER_SETUP_PNPM%" install --frozen-lockfile
-if errorlevel 1 goto :dependencies_failed
-echo.
-echo [4/4] Pokémon Tower 설치가 완료되었습니다.
+echo Pokémon Tower 설치가 완료되었습니다.
 echo 다음부터는 '포켓몬타워 로컬 실행.cmd'만 실행하면 됩니다.
-echo 이제 Pokémon Tower를 실행합니다.
+echo.
+set "TOWER_SETUP_STAGE=게임 실행"
+echo [3/3] 이제 Pokémon Tower를 실행합니다.
 call "%~dp0포켓몬타워 로컬 실행.cmd"
-exit /b %errorlevel%
+set "TOWER_SETUP_EXIT=%errorlevel%"
+if not "%TOWER_SETUP_EXIT%"=="0" goto :launch_failed
+exit /b 0
 
 :node_missing
 echo Node.js 24 이상이 필요합니다.
-echo Node.js를 설치한 뒤 이 파일을 다시 실행해 주세요.
+echo Node.js를 설치한 뒤 '포켓몬타워 설치.cmd'를 다시 실행해 주세요.
 echo https://nodejs.org/
 goto :failed
 
@@ -74,19 +66,28 @@ echo Node.js 24 이상으로 업데이트한 뒤 다시 실행해 주세요.
 goto :failed
 
 :npm_missing
-echo npm을 찾을 수 없습니다.
+echo npm을 찾을 수 없거나 실행할 수 없습니다.
 echo Node.js 공식 설치 프로그램으로 Node.js를 다시 설치해 주세요.
 goto :failed
 
-:pnpm_failed
-echo pnpm %TOWER_SETUP_PNPM_REQUIRED% 준비에 실패했습니다.
-echo 위 오류 내용을 확인해 주세요.
+:npx_missing
+echo npx를 찾을 수 없거나 실행할 수 없습니다.
+echo Node.js 공식 설치 프로그램으로 Node.js를 다시 설치해 주세요.
 goto :failed
 
-:dependencies_failed
-echo 프로젝트 의존성 설치에 실패했습니다.
-echo 위 오류 내용을 확인해 주세요.
-
 :failed
+echo.
+echo 프로젝트 설치에 실패했습니다.
+goto :error_details
+
+:launch_failed
+echo.
+echo 게임 실행에 실패했습니다.
+
+:error_details
+echo 실패 단계: %TOWER_SETUP_STAGE%
+echo 오류 코드: %TOWER_SETUP_EXIT%
+echo 위 오류 내용을 확인해 주세요.
+echo 창을 닫기 전에 오류 메시지를 복사하거나 캡처해 주세요.
 pause
-exit /b 1
+exit /b %TOWER_SETUP_EXIT%

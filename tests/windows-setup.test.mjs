@@ -10,14 +10,15 @@ const windows=process.platform==='win32';
 const cases=[
   {name:'missing Node',node:false,error:'Node.js 24 이상이 필요합니다.'},
   {name:'old Node',version:'22.0.0',error:'현재 Node.js 버전은 지원되지 않습니다.'},
-  {name:'missing npm',npm:false,error:'npm을 찾을 수 없습니다.'},
-  {name:'missing pnpm',pnpm:false,install:true},
-  {name:'matching pnpm',pnpm:'11.19.0'},
-  {name:'different pnpm',pnpm:'10.0.0',install:true},
-  {name:'pnpm install failure',pnpm:false,npmFailure:true,error:'준비에 실패했습니다.'},
-  {name:'incorrect pnpm after install',pnpm:false,installedVersion:'10.0.0',error:'준비에 실패했습니다.'},
-  {name:'dependency install failure',dependencyFailure:true,error:'프로젝트 의존성 설치에 실패했습니다.'},
-  {name:'repeat setup preserves saves',repeat:true},
+  {name:'missing npm',npm:false,error:'npm을 찾을 수 없거나 실행할 수 없습니다.'},
+  {name:'missing npx',npx:false,error:'npx를 찾을 수 없거나 실행할 수 없습니다.'},
+  {name:'unusable npx',npxFailure:true,code:9,error:'npx를 찾을 수 없거나 실행할 수 없습니다.'},
+  {name:'pnpm not installed',pnpm:false},
+  {name:'matching global pnpm is ignored',pnpm:'11.19.0'},
+  {name:'different global pnpm is ignored',pnpm:'10.0.0'},
+  {name:'network/install failure preserves exit code',dependencyFailure:true,code:17,error:'프로젝트 설치에 실패했습니다.'},
+  {name:'repeat setup with node_modules preserves saves',repeat:true},
+  {name:'launch failure preserves exit code',launchFailure:true,code:23,error:'게임 실행에 실패했습니다.'},
 ];
 
 for(const scenario of cases)test(`Windows setup: ${scenario.name}`,{skip:!windows},()=>{
@@ -31,16 +32,19 @@ for(const scenario of cases)test(`Windows setup: ${scenario.name}`,{skip:!window
   const cmd=(path,text)=>writeFileSync(path,text.replace(/\r?\n/g,'\r\n'),'utf8');
   try{
     copyFileSync('포켓몬타워 설치.cmd',join(root,'포켓몬타워 설치.cmd'));
-    cmd(join(root,'포켓몬타워 로컬 실행.cmd'),'@echo off\n>>"%SETUP_TEST_LOG%" echo launch\n>"launch-root.txt" cd\nexit /b 0\n');
+    cmd(join(root,'포켓몬타워 로컬 실행.cmd'),'@echo off\n>>"%SETUP_TEST_LOG%" echo launch\n>"launch-root.txt" cd\nexit /b %SETUP_TEST_LAUNCH_EXIT%\n');
     mkdirSync(join(root,'.data'));
+    mkdirSync(join(root,'node_modules'));
+    writeFileSync(join(root,'node_modules','sentinel.txt'),'existing dependencies');
     writeFileSync(join(root,'.data','tower.sqlite'),'save sentinel');
     writeFileSync(join(root,'.env.local'),'env sentinel');
     const preload=join(fixture,'node-version.cjs');
     writeFileSync(preload,`Object.defineProperty(process.versions,'node',{value:${JSON.stringify(scenario.version??'24.20.0')}});`);
     cmd(join(tools,'where.cmd'),`@echo off
+>>"%SETUP_TEST_LOG%" echo where %~1
 if "%~1"=="node.exe" goto node
 if "%~1"=="npm.cmd" goto npm
-if "%~1"=="pnpm.cmd" goto pnpm
+if "%~1"=="npx.cmd" goto npx
 exit /b 1
 :node
 if "%SETUP_TEST_NODE%"=="missing" exit /b 1
@@ -50,56 +54,59 @@ exit /b 0
 if "%SETUP_TEST_NPM%"=="missing" exit /b 1
 echo %SETUP_TEST_TOOLS%\\npm.cmd
 exit /b 0
-:pnpm
-if not exist "%SETUP_TEST_TOOLS%\\pnpm.cmd" exit /b 1
-echo %SETUP_TEST_TOOLS%\\pnpm.cmd
+:npx
+if "%SETUP_TEST_NPX%"=="missing" exit /b 1
+echo %SETUP_TEST_TOOLS%\\npx.cmd
 exit /b 0
 `);
     cmd(join(tools,'npm.cmd'),`@echo off
+>>"%SETUP_TEST_LOG%" echo npm %*
 if "%~1"=="--version" echo 11.0.0
 if "%~1"=="--version" exit /b 0
-if "%~1"=="prefix" echo %SETUP_TEST_TOOLS%
-if "%~1"=="prefix" exit /b 0
->>"%SETUP_TEST_LOG%" echo npm %*
-if "%SETUP_TEST_NPM_FAILURE%"=="1" exit /b 1
-copy /y "%SETUP_TEST_TOOLS%\\pnpm-ready.cmd" "%SETUP_TEST_TOOLS%\\pnpm.cmd" >nul
-exit /b 0
+exit /b 99
 `);
-    const pnpm=version=>`@echo off
-if "%~1"=="--version" echo ${version}
-if "%~1"=="--version" exit /b 0
->>"%SETUP_TEST_LOG%" echo pnpm %*
-if "%SETUP_TEST_DEP_FAILURE%"=="1" exit /b 1
-exit /b 0
-`;
-    cmd(join(tools,'pnpm-ready.cmd'),pnpm(scenario.installedVersion??'11.19.0'));
-    if(scenario.pnpm!==false)cmd(join(tools,'pnpm.cmd'),pnpm(scenario.pnpm??'11.19.0'));
+    cmd(join(tools,'npx.cmd'),`@echo off
+>>"%SETUP_TEST_LOG%" echo npx %*
+if "%~1"=="--version" echo 11.0.0
+if "%~1"=="--version" exit /b %SETUP_TEST_NPX_EXIT%
+>"install-root.txt" cd
+exit /b %SETUP_TEST_DEP_EXIT%
+`);
+    if(scenario.pnpm!==false)cmd(join(tools,'pnpm.cmd'),`@echo off
+>>"%SETUP_TEST_LOG%" echo GLOBAL PNPM CALLED
+exit /b 99
+`);
     const run=()=>spawnSync(process.env.ComSpec??'cmd.exe',['/d','/c',`call "${join(root,'포켓몬타워 설치.cmd')}"`],{
       cwd:fixture,encoding:'utf8',input:'\r\n',timeout:15000,windowsVerbatimArguments:true,
       env:{...process.env,PATH:`${tools};${join(process.env.SystemRoot,'System32')}`,NODE_OPTIONS:`--require="${preload.replaceAll('\\','/')}"`,SETUP_TEST_TOOLS:tools,
         SETUP_TEST_REAL_NODE:process.execPath,SETUP_TEST_LOG:log,
         SETUP_TEST_NODE:scenario.node===false?'missing':'present',SETUP_TEST_NPM:scenario.npm===false?'missing':'present',
-        SETUP_TEST_NPM_FAILURE:scenario.npmFailure?'1':'0',SETUP_TEST_DEP_FAILURE:scenario.dependencyFailure?'1':'0'},
+        SETUP_TEST_NPX:scenario.npx===false?'missing':'present',SETUP_TEST_NPX_EXIT:scenario.npxFailure?'9':'0',
+        SETUP_TEST_DEP_EXIT:scenario.dependencyFailure?'17':'0',SETUP_TEST_LAUNCH_EXIT:scenario.launchFailure?'23':'0'},
     });
     const result=run();
     const output=result.stdout+result.stderr;
     assert.equal(result.error,undefined,output);
-    assert.equal(result.status,scenario.error?1:0,output);
+    assert.equal(result.status,scenario.error?(scenario.code??1):0,output);
     const calls=existsSync(log)?readFileSync(log,'utf8'):'';
+    assert.ok(!/GLOBAL PNPM|where pnpm|npm install|prefix|--global/.test(calls),calls);
     if(scenario.error){
       assert.ok(output.includes(scenario.error),output);
-      assert.ok(!calls.includes('launch'),calls);
+      if(!scenario.launchFailure)assert.ok(!calls.includes('launch'),calls);
       assert.match(output,/Press any key|계속하려면/);
-      if(!scenario.dependencyFailure)assert.ok(!calls.includes('pnpm install --frozen-lockfile'),calls);
+      assert.ok(output.includes(`오류 코드: ${scenario.code??1}`),output);
+      assert.ok(output.includes('실패 단계:'),output);
+      if(!scenario.dependencyFailure&&!scenario.launchFailure)assert.ok(!calls.includes('npx --yes pnpm@11.19.0 install'),calls);
     }else{
-      assert.ok(output.includes('[4/4]'),output);
-      assert.ok(calls.includes('pnpm install --frozen-lockfile'),calls);
+      assert.ok(output.includes('[3/3]'),output);
+      assert.ok(calls.includes('npx --yes pnpm@11.19.0 install --frozen-lockfile'),calls);
       assert.ok(calls.includes('launch'),calls);
+      assert.equal(readFileSync(join(root,'install-root.txt'),'utf8').trim(),root);
       assert.equal(readFileSync(join(root,'launch-root.txt'),'utf8').trim(),root);
-      assert.equal(calls.includes('npm install --global pnpm@11.19.0'),Boolean(scenario.install),calls);
     }
     if(scenario.version)assert.ok(output.includes(scenario.version),output);
     if(scenario.repeat){assert.equal(run().status,0);assert.equal(readFileSync(log,'utf8').split('launch').length-1,2);}
+    assert.equal(readFileSync(join(root,'node_modules','sentinel.txt'),'utf8'),'existing dependencies');
     assert.equal(readFileSync(join(root,'.env.local'),'utf8'),'env sentinel');
     assert.equal(readFileSync(join(root,'.data','tower.sqlite'),'utf8'),'save sentinel');
   }finally{

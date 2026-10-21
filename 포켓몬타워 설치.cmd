@@ -1,93 +1,64 @@
 @echo off
-chcp 65001 >nul
 setlocal DisableDelayedExpansion
-set "TOWER_SETUP_STAGE=프로젝트 폴더 확인"
-set "TOWER_SETUP_EXIT=1"
-cd /d "%~dp0"
-if errorlevel 1 goto :failed
+set "TOWER_SETUP_LOG_DIR=%~dp0.data\setup-logs"
+if not exist "%TOWER_SETUP_LOG_DIR%\" mkdir "%TOWER_SETUP_LOG_DIR%" 2>nul
+:project_log_name
+set "TOWER_SETUP_LOG=%TOWER_SETUP_LOG_DIR%\setup-%RANDOM%-%RANDOM%.log"
+if exist "%TOWER_SETUP_LOG%" goto :project_log_name
+>"%TOWER_SETUP_LOG%" echo Pokemon Tower Windows Setup
+if exist "%TOWER_SETUP_LOG%" goto :log_ready
+set "TOWER_SETUP_LOG_DIR=%TEMP%\Pokemon-Tower"
+if not exist "%TOWER_SETUP_LOG_DIR%\" mkdir "%TOWER_SETUP_LOG_DIR%" 2>nul
+:temp_log_name
+set "TOWER_SETUP_LOG=%TOWER_SETUP_LOG_DIR%\setup-%RANDOM%-%RANDOM%.log"
+if exist "%TOWER_SETUP_LOG%" goto :temp_log_name
+>"%TOWER_SETUP_LOG%" echo Pokemon Tower Windows Setup
+if not exist "%TOWER_SETUP_LOG%" goto :no_log
+:log_ready
+>>"%TOWER_SETUP_LOG%" echo [STEP] bootstrap
+>>"%TOWER_SETUP_LOG%" echo Started: %DATE% %TIME%
+>>"%TOWER_SETUP_LOG%" echo Working directory: "%CD%"
+>>"%TOWER_SETUP_LOG%" echo Script directory: "%~dp0"
+>>"%TOWER_SETUP_LOG%" ver
+>>"%TOWER_SETUP_LOG%" echo ComSpec: "%ComSpec%"
+>>"%TOWER_SETUP_LOG%" echo PATH: omitted for privacy
+chcp 65001 >nul
 set "TOWER_SETUP_NODE="
-set "TOWER_SETUP_NPM="
-set "TOWER_SETUP_NPX="
-set "TOWER_SETUP_NODE_VERSION="
-
-echo ========================================
-echo  Pokémon Tower 설치
-echo ========================================
-echo.
-set "TOWER_SETUP_STAGE=Node.js와 설치 도구 확인"
-echo [1/3] Node.js와 설치 도구 확인...
 for /f "delims=" %%N in ('where node.exe 2^>nul') do if not defined TOWER_SETUP_NODE set "TOWER_SETUP_NODE=%%N"
 if not defined TOWER_SETUP_NODE goto :node_missing
-for /f "delims=" %%V in ('""%TOWER_SETUP_NODE%" -p "process.versions.node""') do set "TOWER_SETUP_NODE_VERSION=%%V"
-"%TOWER_SETUP_NODE%" -e "process.exit(Number(process.versions.node.split('.')[0]) >= 24 ? 0 : 1)"
+echo Pokemon Tower setup is starting...
+echo Setup log: "%TOWER_SETUP_LOG%"
+"%TOWER_SETUP_NODE%" "%~dp0scripts\setup-windows.mjs" "%TOWER_SETUP_LOG%" 2>"%TOWER_SETUP_LOG%.stderr"
 set "TOWER_SETUP_EXIT=%errorlevel%"
-if not "%TOWER_SETUP_EXIT%"=="0" goto :node_old
-echo Node.js v%TOWER_SETUP_NODE_VERSION% 확인 완료
-set "TOWER_SETUP_EXIT=1"
-for /f "delims=" %%N in ('where npm.cmd 2^>nul') do if not defined TOWER_SETUP_NPM set "TOWER_SETUP_NPM=%%N"
-if not defined TOWER_SETUP_NPM goto :npm_missing
-call "%TOWER_SETUP_NPM%" --version >nul
-set "TOWER_SETUP_EXIT=%errorlevel%"
-if not "%TOWER_SETUP_EXIT%"=="0" goto :npm_missing
-set "TOWER_SETUP_EXIT=1"
-for /f "delims=" %%N in ('where npx.cmd 2^>nul') do if not defined TOWER_SETUP_NPX set "TOWER_SETUP_NPX=%%N"
-if not defined TOWER_SETUP_NPX goto :npx_missing
-call "%TOWER_SETUP_NPX%" --version >nul
-set "TOWER_SETUP_EXIT=%errorlevel%"
-if not "%TOWER_SETUP_EXIT%"=="0" goto :npx_missing
-
-echo.
-set "TOWER_SETUP_STAGE=프로젝트 파일 설치"
-echo [2/3] 프로젝트 파일 설치...
-call "%TOWER_SETUP_NPX%" --yes pnpm@11.19.0 install --frozen-lockfile
-set "TOWER_SETUP_EXIT=%errorlevel%"
-if not "%TOWER_SETUP_EXIT%"=="0" goto :failed
-echo.
-echo Pokémon Tower 설치가 완료되었습니다.
-echo 다음부터는 '포켓몬타워 로컬 실행.cmd'만 실행하면 됩니다.
-echo.
-set "TOWER_SETUP_STAGE=게임 실행"
-echo [3/3] 이제 Pokémon Tower를 실행합니다.
-call "%~dp0포켓몬타워 로컬 실행.cmd"
-set "TOWER_SETUP_EXIT=%errorlevel%"
-if not "%TOWER_SETUP_EXIT%"=="0" goto :launch_failed
-exit /b 0
-
+type "%TOWER_SETUP_LOG%.stderr" >>"%TOWER_SETUP_LOG%"
+del /q "%TOWER_SETUP_LOG%.stderr" 2>nul
+if "%TOWER_SETUP_EXIT%"=="0" goto :finished
+findstr /c:"SETUP RESULT:" "%TOWER_SETUP_LOG%" >nul
+if not errorlevel 1 goto :show_error
+>>"%TOWER_SETUP_LOG%" echo SETUP RESULT: FAILED
+>>"%TOWER_SETUP_LOG%" echo Stage: bootstrap or Node setup; see preceding diagnostics
+>>"%TOWER_SETUP_LOG%" echo Exit code: %TOWER_SETUP_EXIT%
+>>"%TOWER_SETUP_LOG%" echo Reason: Node setup did not complete successfully
+:show_error
+type "%TOWER_SETUP_LOG%"
+goto :finished
 :node_missing
-echo Node.js 24 이상이 필요합니다.
-echo Node.js를 설치한 뒤 '포켓몬타워 설치.cmd'를 다시 실행해 주세요.
-echo https://nodejs.org/
-goto :failed
-
-:node_old
-echo 현재 Node.js 버전: v%TOWER_SETUP_NODE_VERSION%
-echo 현재 Node.js 버전은 지원되지 않습니다.
-echo Node.js 24 이상으로 업데이트한 뒤 다시 실행해 주세요.
-goto :failed
-
-:npm_missing
-echo npm을 찾을 수 없거나 실행할 수 없습니다.
-echo Node.js 공식 설치 프로그램으로 Node.js를 다시 설치해 주세요.
-goto :failed
-
-:npx_missing
-echo npx를 찾을 수 없거나 실행할 수 없습니다.
-echo Node.js 공식 설치 프로그램으로 Node.js를 다시 설치해 주세요.
-goto :failed
-
-:failed
+set "TOWER_SETUP_EXIT=1"
+type "%~dp0scripts\setup-node-required.txt" 2>nul
+echo Node.js 24 or later is required. https://nodejs.org/
+>>"%TOWER_SETUP_LOG%" echo Node path: not found
+>>"%TOWER_SETUP_LOG%" echo SETUP RESULT: FAILED
+>>"%TOWER_SETUP_LOG%" echo Stage: bootstrap
+>>"%TOWER_SETUP_LOG%" echo Exit code: 1
+>>"%TOWER_SETUP_LOG%" echo Reason: Node.js not found on PATH
+goto :finished
+:no_log
+echo Unable to create a setup log. Check folder and TEMP permissions.
+pause
+exit /b 1
+:finished
 echo.
-echo 프로젝트 설치에 실패했습니다.
-goto :error_details
-
-:launch_failed
-echo.
-echo 게임 실행에 실패했습니다.
-
-:error_details
-echo 실패 단계: %TOWER_SETUP_STAGE%
-echo 오류 코드: %TOWER_SETUP_EXIT%
-echo 위 오류 내용을 확인해 주세요.
-echo 창을 닫기 전에 오류 메시지를 복사하거나 캡처해 주세요.
+echo Setup log: "%TOWER_SETUP_LOG%"
+echo Please share this log when reporting a problem.
 pause
 exit /b %TOWER_SETUP_EXIT%

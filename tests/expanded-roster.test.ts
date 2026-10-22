@@ -55,7 +55,8 @@ test('a newly encountered species is recruitable, can be configured and carried 
 });
 test('old OU battles keep their original format and AI when resumed with the expanded roster',async()=>{
   const store=new TowerStore(':memory:');store.ensurePlayer('legacy');const id=store.start('legacy',starters);
-  store.db.prepare('UPDATE battles SET format=?,ai_version=?,opponent_team=? WHERE id=?').run(LEGACY_FORMAT,'damage-policy-v1',packTeam(['Pikachu','Golem','Cloyster']),id);
+  // A historical battle retains its original packed team, not today's NatDex starter defaults.
+  store.db.prepare('UPDATE battles SET format=?,ai_version=?,player_team=?,opponent_team=? WHERE id=?').run(LEGACY_FORMAT,'damage-policy-v1',packTeam(starters),packTeam(['Pikachu','Golem','Cloyster']),id);
   const service=new TowerService(store);try{const state=await service.state('legacy');assert.equal(state.battle!.status,'waiting');const view=await service.action('legacy',id,state.battle!.requestId,state.battle!.actions[0].command);assert.notEqual(view.battle!.status,'error');}finally{await service.dispose();store.close();}
   const log=await runBattle({format:LEGACY_FORMAT,player:new DamagePolicy(),opponent:new DamagePolicy()});await replayBattle(log);
 });

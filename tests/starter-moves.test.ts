@@ -1,22 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import Showdown from 'pokemon-showdown';
-import {initialPartners,starters,pokemonSets} from '../src/data/teams';
+import {initialPartners,starters,pokemonSets,packTeam} from '../src/data/teams';
 import {starterBonusMoves} from '../src/data/starter-moves';
 import {moveInfo} from '../src/data/move-info';
 import {moveLearnsets} from '../src/server/move-learnsets';
 import {defaultProfile} from '../src/server/training';
 import {TowerStore} from '../src/server/tower-store';
 import {TowerService} from '../src/server/tower-service';
+import {runBattle} from '../src/battle/run';
+import {DamagePolicy} from '../src/battle/policy';
 
-test('all initial partners retain self moves and can equip registered, beginner-friendly bonus moves for free',()=>{
+test('all 27 initial partners retain self moves and start with four registered, legal recommendations',()=>{
   assert.deepEqual(Object.keys(starterBonusMoves).sort(),[...initialPartners].sort());
   const store=new TowerStore(':memory:');
   try {
     store.ensurePlayer('new');
     for(const entry of store.trainingCollection('new')) {
       const bonus=starterBonusMoves[entry.species];
-      assert.ok(bonus.length>0 && bonus.length<=4);
+      assert.equal(bonus.length,4);
+      assert.equal(new Set(bonus).size,4);
       assert.deepEqual(entry.profile.moves,bonus);
       assert.equal(new Set(entry.unlockedMoves).size,entry.unlockedMoves.length);
       for(const move of [...moveLearnsets[entry.species].selfMoves,...bonus])assert.ok(entry.unlockedMoves.includes(move),`${entry.species}: ${move}`);
@@ -24,9 +27,18 @@ test('all initial partners retain self moves and can equip registered, beginner-
         assert.ok(moveInfo[move],move);
         assert.ok(entry.learnableMoves.includes(move),`${entry.species}: ${move}`);
         const info=Showdown.Dex.moves.get(move);
-        assert.ok(info.accuracy===true || info.accuracy>=90);
-        assert.ok(!info.recoil && !info.flags.recharge);
+        // The requested identity sets deliberately include Focus Blast and recoil attacks.
+        assert.ok(!info.flags.recharge);
       }
+      const types=Showdown.Dex.species.get(entry.species).types;
+      assert.equal(Showdown.Dex.moves.get(bonus[0]).type,types[0]);
+      assert.notEqual(Showdown.Dex.moves.get(bonus[0]).category,'Status');
+      if(types[1]){
+        assert.equal(Showdown.Dex.moves.get(bonus[1]).type,types[1]);
+        assert.notEqual(Showdown.Dex.moves.get(bonus[1]).category,'Status');
+      }
+      const firstStatus=bonus.findIndex(move=>Showdown.Dex.moves.get(move).category==='Status');
+      if(firstStatus>=0)assert.ok(bonus.slice(firstStatus).every(move=>Showdown.Dex.moves.get(move).category==='Status'));
       store.train('new',entry.species,entry.revision,{...entry.profile,moves:[...bonus]});
     }
     assert.equal(store.view('new').growthPoints,0);
@@ -34,6 +46,34 @@ test('all initial partners retain self moves and can equip registered, beginner-
     store.ensurePlayer('new');
     assert.deepEqual(store.trainingCollection('new'),before);
   } finally {store.close();}
+});
+
+test('ability-dependent starter identities remain legal with the unchanged base abilities',()=>{
+  const store=new TowerStore(':memory:');try{
+    store.ensurePlayer('abilities');
+    const entries=store.trainingCollection('abilities');
+    for(const [species,base,hidden] of [['Blaziken','Blaze','Speed Boost'],['Serperior','Overgrow','Contrary'],['Rillaboom','Overgrow','Grassy Surge']]){
+      const entry=entries.find(p=>p.species===species)!;
+      assert.equal(entry.profile.ability,base);
+      assert.ok(entry.abilities.includes(hidden));
+      store.train('abilities',species,entry.revision,entry.profile);
+    }
+    assert.equal(Showdown.Dex.moves.get('Grassy Glide').priority,0);
+    assert.ok(starterBonusMoves.Blaziken.includes('Protect'));
+    assert.ok(starterBonusMoves.Serperior.includes('Giga Drain'));
+  }finally{store.close();}
+});
+
+test('Blaziken Protect blocks an attack with Blaze and grants no Speed Boost ranks',async()=>{
+  let first=true;
+  const damage=new DamagePolicy();
+  const log=await runBattle({
+    teams:{p1:packTeam(['Blaziken','Charizard','Venusaur'],{Blaziken:{...defaultProfile('Blaziken'),moves:[...starterBonusMoves.Blaziken]}}),p2:packTeam(['Pikachu','Gyarados','Snorlax'])},
+    seed:[1,2,3,4],player:{choose:observation=>{if(first&&observation.legalActions.some(a=>a.command==='move 4')){first=false;return 'move 4';}return damage.choose(observation);}},opponent:new DamagePolicy(),
+  });
+  assert.ok(log.publicProtocol.some(line=>line.includes('|-singleturn|p1a: Blaziken|Protect')));
+  assert.ok(log.publicProtocol.some(line=>line.includes('|-activate|p1a: Blaziken|move: Protect')));
+  assert.ok(!log.publicProtocol.some(line=>line.includes('|-boost|p1a: Blaziken|spe|')));
 });
 
 test('existing saves and non-starter collection moves are unchanged',()=>{

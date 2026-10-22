@@ -3,7 +3,8 @@ import {randomBytes} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import {Accounts} from '../src/server/accounts';
 import {TowerStore} from '../src/server/tower-store';
-import {TutorialStep as S} from '../src/data/tutorial';
+import {TutorialStep as S,TUTORIAL_GROWTH_POINTS} from '../src/data/tutorial';
+import {TRAINING_POINT_PRICE} from '../src/data/training';
 import {packTeam} from '../src/data/teams';
 import {runBattle} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
@@ -21,7 +22,7 @@ const step=(page:Page,value:string)=>expect(page.getByTestId('tutorial-overlay')
 const collection=async(page:Page)=>(await (await page.request.get('/api/battle?view=collection')).json());
 async function choose(page:Page,name:string){await page.getByRole('button',{name:`${name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'포켓몬 선택하기',exact:true}).click();}
 
-test('new user follows real selection, information, 8P upgrade, battle and archive tutorial; reload resumes and completion persists',async({page,context})=>{
+test('new user spends the one-time 256P grant on 32 stat points and completes the tutorial',async({page,context})=>{
   test.setTimeout(120000);
   const {store,owner}=await fixture(context);
   try {
@@ -29,7 +30,10 @@ test('new user follows real selection, information, 8P upgrade, battle and archi
     await page.goto('/');await step(page,S.NotStarted);
     await page.getByRole('link',{name:'설정',exact:true}).click({force:true});await expect(page).toHaveURL('http://127.0.0.1:3001/');
     await page.getByRole('button',{name:'처음이에요',exact:true}).click();await step(page,S.Introduction);
-    expect((await collection(page)).tower.growthPoints).toBe(8);
+    const duplicates=await Promise.all([0,1].map(()=>page.request.post('/api/tutorial',{headers:{origin:'http://127.0.0.1:3001'},data:{event:'begin',expected:S.NotStarted}})));
+    for(const response of duplicates)expect(response.ok()).toBe(true);
+    await page.reload();await step(page,S.Introduction);
+    expect((await collection(page)).tower.growthPoints).toBe(TUTORIAL_GROWTH_POINTS);
     await page.getByRole('button',{name:'확인',exact:true}).click();await step(page,S.StartGame);
     await expect(page.locator('[data-tutorial="game-start"]')).toBeVisible();
     await page.screenshot({path:'test-results/tutorial-start.png'});
@@ -43,9 +47,9 @@ test('new user follows real selection, information, 8P upgrade, battle and archi
     await page.getByRole('button',{name:'리자몽 기본 정보 닫기',exact:true}).click();
     await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 설정',exact:true}).click();
     await page.locator('[data-settings-row="hp"]').click();
-    await page.getByRole('slider',{name:'HP 투자 포인트'}).focus();await page.keyboard.press('ArrowRight');await expect(page.getByTestId('ev-amount')).toHaveText('1');
-    await page.getByRole('button',{name:'적용',exact:true}).click();await page.getByRole('button',{name:'8P로 설정 저장',exact:true}).click();await step(page,S.CompleteTeam);
-    expect((await collection(page)).training.find((p:{species:string})=>p.species==='Charizard').profile.evs.hp).toBe(1);
+    await page.getByRole('button',{name:'MAX',exact:true}).click();await expect(page.getByTestId('ev-amount')).toHaveText('32');
+    await page.getByRole('button',{name:'적용',exact:true}).click();await page.getByRole('button',{name:`${TUTORIAL_GROWTH_POINTS}P로 설정 저장`,exact:true}).click();await step(page,S.CompleteTeam);
+    expect((await collection(page)).training.find((p:{species:string})=>p.species==='Charizard').profile.evs.hp).toBe(32);
     expect((await collection(page)).tower.growthPoints).toBe(0);
     await page.getByRole('button',{name:'리자몽 포켓몬 설정 닫기',exact:true}).click();
     for(const name of ['리자몽','거북왕','이상해꽃'])await choose(page,name);
@@ -94,7 +98,7 @@ test('initial skip and mid-tutorial skip persist without extra currency or lost 
       await choose(page,'리자몽');await step(page,S.RemovePokemon);
       await page.getByRole('button',{name:'튜토리얼 건너뛰기',exact:true}).click();await page.getByRole('button',{name:'건너뛰기 확정',exact:true}).click();
       await expect(page.getByTestId('tutorial-overlay')).toHaveCount(0);await expect(page.locator('[data-party-slot="0"]')).toContainText('리자몽');
-      expect(second.store.view(second.owner).growthPoints).toBe(8);
+      expect(second.store.view(second.owner).growthPoints).toBe(TUTORIAL_GROWTH_POINTS);
       await page.reload();await expect(page.getByTestId('tutorial-overlay')).toHaveCount(0);
     }finally{second.store.close();}
   }finally{store.close();}
@@ -105,7 +109,7 @@ test('existing progressed account has no tutorial interruption',async({page,cont
 });
 
 test('mobile spotlight and native modal guidance remain usable after resizing',async({page,context})=>{
-  const {store}=await fixture(context);try{
+  const {store,owner}=await fixture(context);try{
     await page.setViewportSize({width:390,height:844});await page.goto('/');await step(page,S.NotStarted);
     await expect(page.getByRole('button',{name:'처음이에요',exact:true})).toBeFocused();await page.keyboard.press('Enter');await step(page,S.Introduction);
     await expect(page.getByRole('button',{name:'확인',exact:true})).toBeFocused();await page.keyboard.press('Enter');await step(page,S.StartGame);
@@ -120,6 +124,7 @@ test('mobile spotlight and native modal guidance remain usable after resizing',a
     await page.setViewportSize({width:430,height:932});
     await page.screenshot({path:'test-results/tutorial-mobile-upgrade.png'});
     await page.getByRole('button',{name:'8P로 설정 저장',exact:true}).click();await step(page,S.CompleteTeam);
+    expect(store.view(owner).growthPoints).toBe(TUTORIAL_GROWTH_POINTS-TRAINING_POINT_PRICE);
     const bounds=await page.getByRole('region',{name:'튜토리얼 안내'}).boundingBox();expect(bounds!.x).toBeGreaterThanOrEqual(0);expect(bounds!.x+bounds!.width).toBeLessThanOrEqual(430);expect(bounds!.y+bounds!.height).toBeLessThanOrEqual(932);
   }finally{store.close();}
 });

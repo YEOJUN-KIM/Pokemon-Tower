@@ -6,6 +6,7 @@ import {TutorialService} from '../src/server/tutorial-service';
 import {TutorialStep as S,TUTORIAL_GROWTH_POINTS} from '../src/data/tutorial';
 import {transaction} from '../src/server/storage/transaction';
 import {initialPartners,starters} from '../src/data/teams';
+import {TRAINING_POINT_PRICE} from '../src/data/training';
 
 function setup(path=':memory:') {
   const store=new TowerStore(path),tutorial=new TutorialService(store.db),owner='tutorial';
@@ -21,10 +22,11 @@ test('new players choose onboarding or skip without changing the normal starting
     assert.deepEqual(f.store.view(f.owner).unlocked,initialPartners);
   }finally{f.store.close();}
 });
-test('onboarding currency grants exactly one real 8P upgrade, with stale and repeated requests idempotent',()=>{
+test('onboarding grants exactly 32 stat points once, with stale and repeated requests idempotent',()=>{
   const f=setup();try{
     f.event('begin');transaction(f.store.db,()=>f.tutorial.action(f.owner,'begin',S.NotStarted));
     assert.equal(f.store.view(f.owner).growthPoints,TUTORIAL_GROWTH_POINTS);
+    assert.equal(TUTORIAL_GROWTH_POINTS,TRAINING_POINT_PRICE*32);
     f.event('next');f.event('enter-selection');
     assert.throws(()=>f.event('party',['Charizard','Charizard']));
     f.event('party',['Charizard']);assert.equal(f.tutorial.view(f.owner).step,S.RemovePokemon);
@@ -35,9 +37,10 @@ test('onboarding currency grants exactly one real 8P upgrade, with stale and rep
     f.store.train(f.owner,entry.species,entry.revision,entry.profile);
     assert.equal(f.tutorial.view(f.owner).step,S.StatUpgrade);
     entry=f.store.trainingCollection(f.owner).find(p=>p.species==='Charizard')!;
-    assert.throws(()=>f.store.train(f.owner,entry.species,entry.revision,{...entry.profile,evs:{...entry.profile.evs,hp:2}}),/부족/);
+    assert.throws(()=>f.store.train(f.owner,entry.species,entry.revision,{...entry.profile,evs:{...entry.profile.evs,hp:32,atk:1}}),/부족/);
     assert.equal(f.tutorial.view(f.owner).step,S.StatUpgrade);
-    f.store.train(f.owner,entry.species,entry.revision,{...entry.profile,evs:{...entry.profile.evs,hp:1}});
+    f.store.train(f.owner,entry.species,entry.revision,{...entry.profile,evs:{...entry.profile.evs,hp:32}});
+    assert.equal(f.store.trainingCollection(f.owner).find(p=>p.species===entry.species)!.profile.evs.hp,32);
     assert.equal(f.store.view(f.owner).growthPoints,0);assert.equal(f.tutorial.view(f.owner).step,S.CompleteTeam);
     f.event('party',starters);assert.equal(f.tutorial.view(f.owner).step,S.StartBattle);
     const battle=f.store.start(f.owner,starters);f.tutorial.battleStarted(f.owner);
@@ -47,6 +50,18 @@ test('onboarding currency grants exactly one real 8P upgrade, with stale and rep
     assert.equal(f.tutorial.view(f.owner).step,S.RecruitmentGuide);
     f.event('next');f.tutorial.recruited(f.owner);assert.equal(f.tutorial.view(f.owner).step,S.Completion);
     f.event('next');assert.equal(f.tutorial.view(f.owner).step,S.Completed);
+  }finally{f.store.close();}
+});
+
+test('tutorial points can be distributed freely and old granted rewards are not topped up',()=>{
+  const f=setup();try{
+    f.event('begin');
+    const entry=f.store.trainingCollection(f.owner).find(p=>p.species==='Charizard')!;
+    f.store.train(f.owner,entry.species,entry.revision,{...entry.profile,evs:{...entry.profile.evs,hp:12,spa:20}});
+    assert.equal(f.store.view(f.owner).growthPoints,0);
+    f.event('begin');assert.equal(f.store.view(f.owner).growthPoints,0);
+    f.store.db.prepare('UPDATE players SET growth_points=? WHERE id=?').run(TRAINING_POINT_PRICE,f.owner);
+    f.event('begin');assert.equal(f.store.view(f.owner).growthPoints,TRAINING_POINT_PRICE);
   }finally{f.store.close();}
 });
 test('state, selected party and reward survive restart; skip keeps the actual run and roster',()=>{

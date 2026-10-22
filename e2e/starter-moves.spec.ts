@@ -68,7 +68,7 @@ test('starter enters its first battle with recommended moves without opening set
     const response=await page.request.post('/api/battle',{headers:{origin:'http://127.0.0.1:3001'},data:{type:'start',selected:['Venusaur','Charizard','Blastoise'],rule:'basic'}});
     expect(response.ok()).toBe(true);
     await page.goto('/battle');await page.getByRole('button',{name:'싸운다',exact:true}).click();
-    for(const name of ['기가드레인','오물폭탄','대지의힘','광합성'])await expect(page.getByRole('button',{name:new RegExp(name)})).toBeEnabled();
+    for(const name of ['기가드레인','오물폭탄','대지의힘','수면가루'])await expect(page.getByRole('button',{name:new RegExp(name)})).toBeEnabled();
     expect((store.db.prepare('SELECT COUNT(*) n FROM pokemon_training WHERE player_id=?').get(owner) as {n:number}).n).toBe(0);
     await page.screenshot({path:'test-results/starter-default-loadout.png'});
   }finally{store.close();}

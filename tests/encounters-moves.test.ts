@@ -10,6 +10,7 @@ import {defaultProfile} from '../src/server/training';
 import {runBattle,FORMAT,type Seed} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
 import {classicCollection} from './classic-team-fixture';
+import {starterBonusMoves} from '../src/data/starter-moves';
 
 test('random encounters vary their leader and team, keep useful legal moves, and reproduce boss teams',()=>{
   const leads=new Set<string>(),teams=new Set<string>();
@@ -34,11 +35,12 @@ test('random encounters vary their leader and team, keep useful legal moves, and
   assert.equal(generateOpponentTeam(100,[1,2,3,4]).length,3);
 });
 
-test('new accounts only equip self moves; locked legal moves cannot be bought or injected',()=>{
+test('new accounts equip starter recommendations and retain self moves; other locked moves cannot be injected',()=>{
   const store=new TowerStore(':memory:');try{
     store.ensurePlayer('new');store.db.prepare('UPDATE players SET growth_points=999 WHERE id=?').run('new');
     const entry=store.trainingCollection('new').find(entry=>entry.species==='Charizard')!;
-    assert.ok(entry.profile.moves.every(move=>entry.selfMoves.includes(move)));assert.ok(!entry.unlockedMoves.includes('Earthquake'));
+    assert.deepEqual(entry.profile.moves,starterBonusMoves.Charizard);
+    assert.ok(entry.selfMoves.every(move=>entry.unlockedMoves.includes(move)));assert.ok(!entry.unlockedMoves.includes('Earthquake'));
     const draft={...entry.profile,moves:[...entry.profile.moves]};draft.moves[3]='Earthquake';
     assert.throws(()=>store.train('new','Charizard',0,draft),/해금/);assert.equal(store.view('new').growthPoints,999);
     draft.moves[3]='Surf';assert.ok(!entry.learnableMoves.includes('Surf'));assert.throws(()=>store.train('new','Charizard',0,draft));

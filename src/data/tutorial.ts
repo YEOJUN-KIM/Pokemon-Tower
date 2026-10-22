@@ -10,9 +10,9 @@ export const TutorialStep = {
 } as const;
 export type TutorialStep=typeof TutorialStep[keyof typeof TutorialStep];
 export type TutorialState={step:TutorialStep;rewardGranted:boolean;party:string[]};
-export const TUTORIAL_GROWTH_POINTS=TRAINING_POINT_PRICE;
+export const TUTORIAL_GROWTH_POINTS=TRAINING_POINT_PRICE*32;
 export const tutorialHints={
-  statPicker:`방향키 → 또는 슬라이더로 원하는 능력치에 +1을 넣고 「적용」을 누르세요. 이후 설정 화면 아래에서 ${TRAINING_POINT_PRICE}P로 저장하면 실제로 성장합니다.`,
+  statPicker:`방향키 또는 슬라이더로 원하는 만큼 포인트를 배분한 뒤 「적용」을 누르세요. 이후 설정 화면 아래의 비용을 확인하고 저장하세요. 능력치 +1당 ${TRAINING_POINT_PRICE}P이며, 한 능력치에는 최대 32포인트까지 배분할 수 있어요.`,
   openMoves:'「싸운다」를 눌러 기술과 상대에게 주는 효과를 확인해보세요.',
   openRecruitment:'첫 승리를 축하해요! 「영입 선택」을 눌러 상대 포켓몬을 확인해보세요.',
 };
@@ -24,7 +24,7 @@ export const tutorialCopy:Record<TutorialStep,{title:string;text:string;next?:st
   RemovePokemon:{title:'편성에서 제외하기',text:'오른쪽 출발 파티에서 선택한 포켓몬을 누른 뒤 「파티에서 제외」를 골라보세요. 도감 해금은 그대로 유지됩니다.'},
   PokemonInfo:{title:'포켓몬 정보 살펴보기',text:'목록에서 보유 포켓몬을 누르고 「기본 정보」를 열어보세요. 타입, 종족값, 특성, 기술을 확인할 수 있어요.'},
   PokemonInfoViewed:{title:'파트너를 알아보세요',text:'타입과 능력치, 기술을 살펴보세요. 다음에는 포켓몬을 직접 성장시켜봅니다.',next:'확인했어요'},
-  StatUpgrade:{title:'첫 능력치 성장',text:`성장 포인트 ${TUTORIAL_GROWTH_POINTS}P를 지급했어요. 정보 화면을 닫고 보유 포켓몬의 「포켓몬 설정」을 여세요. 원하는 기본 능력치에 +1을 적용한 뒤 「${TUTORIAL_GROWTH_POINTS}P로 설정 저장」을 눌러보세요. 수치 증가 비용은 +1당 ${TRAINING_POINT_PRICE}P입니다.`},
+  StatUpgrade:{title:'첫 능력치 성장',text:`성장 포인트 ${TUTORIAL_GROWTH_POINTS}P를 지급했어요. 정보 화면을 닫고 보유 포켓몬의 「포켓몬 설정」을 여세요. 지급된 성장 포인트로 공격, 특수공격 등 원하는 능력치를 성장시켜보세요. 한 능력치를 0에서 32까지 올리거나 여러 능력치에 나눠 배분할 수 있어요. 「적용」 후 설정 화면에서 비용을 확인하고 저장하세요. 수치 증가 비용은 +1당 ${TRAINING_POINT_PRICE}P입니다.`},
   CompleteTeam:{title:'함께할 3마리',text:'성장을 완료했어요! 설정 화면을 닫고, 이번 등반에 함께할 포켓몬 3마리를 편성하세요.'},
   StartBattle:{title:'출발 준비 완료!',text:'좋아요! 이제 이 3마리와 함께 탑을 올라가봅시다. 도전 시작 확인창에서 「예」를 선택하세요.'},
   TypeGuide:{title:'타입 배율 확인',text:'기술과 상대 포켓몬의 타입에 따라 피해 배율이 달라집니다. ×2: 효과 좋음 · ×1: 보통 · ×0.5: 효과 적음 · ×0: 무효. 기술 버튼의 효과 표시를 확인하고 실제 기술 하나를 선택해보세요. 보통 효과는 별도 배지가 없으며, 공개된 특성에 따라 무효가 될 수도 있어요.'},

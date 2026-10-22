@@ -42,6 +42,8 @@ import {initializeTowerDatabase} from './storage/migrations';
 import {transaction} from './storage/transaction';
 import {formTrainingSettings,trainingFormProfile,saveTrainingForm} from './storage/form-training';
 import {moveLearnsets} from './move-learnsets';
+import {starterBonusMoves} from '../data/starter-moves';
+import {TutorialService} from './tutorial-service';
 import {profileLearnset} from './move-learnsets';
 import {familyForms,selectedForm,collectionSpecies,separateForms,baseFormName} from '../data/selectable-forms';
 import {pokemonName as importedPokemonName} from '../data/pokemon-catalog';
@@ -192,7 +194,12 @@ export class TowerStore {
   ensurePlayer(owner: string) {
     this.tx(() => {
       this.db.prepare('INSERT OR IGNORE INTO players(id) VALUES (?)').run(owner);
-      for (const name of initialPartners) this.db.prepare('INSERT OR IGNORE INTO unlocks VALUES (?, ?)').run(owner, name);
+      for (const name of initialPartners) {
+        const granted=this.db.prepare('INSERT OR IGNORE INTO unlocks VALUES (?, ?)').run(owner, name);
+        if(granted.changes)for(const move of starterBonusMoves[name] ?? []) {
+          this.db.prepare('INSERT OR IGNORE INTO move_unlocks VALUES (?,?,?)').run(owner,name,move);
+        }
+      }
     });
   }
   private latest(owner: string): RunRow | undefined {
@@ -821,6 +828,10 @@ export class TowerStore {
   private savedTraining(owner:string,species:string):{profile:TrainingProfile;revision:number} {
     const saved=this.db.prepare('SELECT profile,revision FROM pokemon_training WHERE player_id=? AND species=?').get(owner,species) as {profile:string;revision:number}|undefined;
     const profile:TrainingProfile=saved ? {...defaultProfile(species),...JSON.parse(saved.profile)} : defaultProfile(species);
+    // Only initial partners that received the bonus pool use its beginner loadout.
+    // A saved loadout, ordinary acquisition profile, or the shared self-move defaults stay intact.
+    const bonus=!saved?starterBonusMoves[species]:undefined;
+    if(bonus?.length && bonus.every(move=>this.db.prepare('SELECT 1 FROM move_unlocks WHERE player_id=? AND species=? AND move=?').get(owner,species,move)))profile.moves=[...bonus];
     profile.gender ??= saved ? pokemonSets[species].gender as import('../data/gender').PokemonGender : collectionGender(species,owner);
     return {profile:trainingFormProfile(this.db,owner,species,profile),revision:saved?.revision ?? 0};
   }
@@ -849,6 +860,7 @@ export class TowerStore {
       saveTrainingForm(this.db,owner,name,permanentProfile);
       this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,name,JSON.stringify(permanentProfile),revision+1);
       if(run){const snapshots=this.runProfiles(run.id);snapshots[name]=profile;this.db.prepare('UPDATE runs SET profiles=? WHERE id=?').run(JSON.stringify(snapshots),run.id);}
+      if(!run)new TutorialService(this.db).upgraded(owner,before.profile,profile);
     });
   }
   private settleGrowth(runId:string,outcome:'lost'|'cleared'|'abandoned') {

@@ -25,6 +25,12 @@ CREATE TABLE IF NOT EXISTS unlocks (
   species TEXT NOT NULL,
   PRIMARY KEY(player_id, species)
 ) STRICT;
+CREATE TABLE IF NOT EXISTS player_tutorial (
+  player_id TEXT PRIMARY KEY REFERENCES players(id),
+  step TEXT NOT NULL DEFAULT 'NotStarted' CHECK(step IN ('NotStarted','Introduction','StartGame','SelectPokemon','RemovePokemon','PokemonInfo','PokemonInfoViewed','StatUpgrade','CompleteTeam','StartBattle','TypeGuide','AwaitVictory','RecruitmentGuide','RecruitmentChoice','Completion','Completed')),
+  reward_granted INTEGER NOT NULL DEFAULT 0 CHECK(reward_granted IN (0,1)),
+  party TEXT NOT NULL DEFAULT '[]' CHECK(json_valid(party))
+) STRICT;
 CREATE TABLE IF NOT EXISTS runs (
   id TEXT PRIMARY KEY,
   player_id TEXT NOT NULL REFERENCES players(id),

@@ -3,6 +3,7 @@ import './globals.css';
 import {ScreenStyles} from '../web/styles/screen-styles';
 
 import {ClickSounds} from '../web/audio-settings';
+import {TutorialManager} from '../web/tutorial-manager';
 
 export const metadata: Metadata = {
   title: 'Pokémon Tower',
@@ -10,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({children}: Readonly<{children: React.ReactNode}>) {
-  return <html lang="ko"><body><ClickSounds /><ScreenStyles>{children}</ScreenStyles></body></html>;
+  return <html lang="ko"><body><ClickSounds /><ScreenStyles><TutorialManager>{children}</TutorialManager></ScreenStyles></body></html>;
 }

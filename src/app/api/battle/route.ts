@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { BattleRequestError } from '../../../server/request-error';
 import { getTowerService, playerKey } from '../../../server/tower-service';
 import {Accounts,authCookie} from '../../../server/accounts';
+import {TutorialService} from '../../../server/tutorial-service';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -98,6 +99,7 @@ export async function POST(request: NextRequest) {
     }
     if (body.type === 'start') {
       service.store.start(player, body.selected,body.rule ?? 'basic',{events:true});
+      new TutorialService(service.store.db).battleStarted(player);
       return NextResponse.json(await service.state(player), {headers});
     }
     if(body.type==='retry'&&typeof body.runId==='string'&&typeof body.battleId==='string'){
@@ -115,6 +117,7 @@ export async function POST(request: NextRequest) {
     if (body.type === 'recruit' && typeof body.runId === 'string' && typeof body.battleId === 'string' &&
       (body.chosen === null || typeof body.chosen === 'string') && (body.replaced === null || typeof body.replaced === 'string')) {
       service.store.recruit(player, body.runId, body.battleId, body.chosen, body.replaced, body.moveSwap, body.collectOnly ?? false);
+      if(body.chosen)new TutorialService(service.store.db).recruited(player);
       return NextResponse.json(await service.state(player), {headers});
     }
     if (body.type === 'abandon' && typeof body.runId === 'string') {
@@ -123,6 +126,8 @@ export async function POST(request: NextRequest) {
     if (body.type !== 'action' || typeof body.battleId !== 'string' || !Number.isSafeInteger(body.requestId) || typeof body.action !== 'string') {
       throw new BattleRequestError('행동 요청 형식이 올바르지 않습니다.', 400);
     }
-    return NextResponse.json(await service.action(player, body.battleId, body.requestId, body.action), {headers});
+    const result=await service.action(player, body.battleId, body.requestId, body.action);
+    if(/^move [1-4](?: |$)/.test(body.action))new TutorialService(service.store.db).moveUsed(player);
+    return NextResponse.json(result, {headers});
   } catch (error) { return failure(error); }
 }

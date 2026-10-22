@@ -1,4 +1,5 @@
 'use client';
+import {useTutorial} from './tutorial-manager';
 import {GameMenuBar,GameMenuProvider} from './game-menu-context';
 import {BattleStage} from './battle-stage';
 import {Ball,SendOut,PokemonFeedback,ShinySparkles,Sprite,HealthCard} from './battle-pokemon';
@@ -46,6 +47,7 @@ import {portalActivationDuration} from './portal-effects';
 import {useTouchHold} from './use-touch-hold';
 
 function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boolean;entries:PokedexEntry[]}) {
+  const tutorial=useTutorial();
   const [battle, setBattle] = useState<BattleView | null>(null);
   const [tower, setTower] = useState<TowerView | null>(null);
   const [selected, setSelected] = useState<string[]>([]);
@@ -232,6 +234,7 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
       if(!mounted.current)return;
       setMotion(null);setNotice(null);setAnnouncement(null);setPlaying(false);setBattle(data.battle);
       setTower(data.tower);
+      await tutorial.refresh();
       if(body.type==='finish-loss'&&data.battle)setAcknowledgedResult(data.battle.id);
       if(body.type === 'recruit' && typeof body.chosen === 'string' && data.tower.run && (body.collectOnly || data.tower.run.roster.includes(body.chosen))) {
         const display=run?.candidateDetails?.[body.chosen]?.forme??body.chosen;
@@ -340,7 +343,7 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
             </div>
             {currentEvent && run ? <RunEventPanel key={currentEvent.id} event={currentEvent} runId={run.id} busy={busy} challengerId={challengerId} onHiddenPurchase={requestHiddenPurchase} bagButton={<BagButton run={run} busy={busy} submit={submit} error={error}/>} onChallengerFocus={focusChallenger} shopOfferId={shopOfferId} coins={tower.coins} growthPoints={tower.growthPoints} selecting={eventSelection===currentEvent.id} onChoose={()=>setEventSelection(currentEvent.id)} submit={submit}/> : <BattleMessages messageKey={`${run?.id}:${run?.floor}:${run?.state}:${battle?.id}:${trainerIntro?'intro':playing?'playback':preparationMessage?'preparation':recruitMessage?'recruit':'idle'}`} confirmation={recruitMessage?'recruit':'intro'} dialogueLabel={recruitMessage?'영입 결과':undefined} onConfirm={recruitMessage?()=>setRecruitMessage(''):trainerIntro?.phase==='enter'?()=>introContinue.current?.():undefined} onSkip={skipPlayback} key={`${run?.id}-${run?.floor}-${run?.state}-${battle?.id ?? 'preparing'}`} messages={battle?.messages ?? []} playing={playing} turn={battle?.turn ?? 0} announcement={preparationMessage || recruitMessage || (announcement ?? (!playing&&done&&battle?.winner==='Player'?'배틀에서 승리했다!':null) ?? (!busy && !done && tab==='root' && active ? `${pokemonName(active.species)}, 무엇을 할까요?` : null))} />}
             {!currentEvent && !floorPreparation && !recruitMessage && !hasResult && !(busy || playing) && <div className="command-area">
-              {!battle || done || broken ? loading || !tower ? <p>저장된 도전을 불러오는 중…</p> : broken ? <div><p role="alert">{battle?.error}</p><button className="secondary-button" onClick={() => refresh().catch(e => setError(e.message))}>배틀 다시 불러오기</button></div> : <button className="primary-button" onClick={()=>setStageOpen(true)}>{run?.state==='recruit' ? '영입 선택' : '다음 층 준비'}</button>
+              {!battle || done || broken ? loading || !tower ? <p>저장된 도전을 불러오는 중…</p> : broken ? <div><p role="alert">{battle?.error}</p><button className="secondary-button" onClick={() => refresh().catch(e => setError(e.message))}>배틀 다시 불러오기</button></div> : <button className="primary-button" data-tutorial="recruit-open" onClick={()=>setStageOpen(true)}>{run?.state==='recruit' ? '영입 선택' : '다음 층 준비'}</button>
               : <BattleCommands equipment={run?.trainerEquipment??[]} rule={run?.rule} itemBag={run?.battleItems} battle={battle} mode={tab} busy={busy} forceSwitch={forceSwitch} focused={focusedCommand} gimmick={gimmick} onGimmick={setGimmick} onMode={mode=>{setGimmick(null);setTab(mode);}} onFocus={setFocusedCommand} onSend={send}/>}
             </div>}
           </section>

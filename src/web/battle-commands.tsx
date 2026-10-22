@@ -35,7 +35,7 @@ export function BattleCommands({equipment=[],rule='chaos',battle,mode,busy,force
   return <>
     {mode==='moves' ? <div className="battle-move-menu has-gimmick gimmicks-in-dock" data-testid="battle-move-menu">
       <button className="secondary-button mobile-command-back" disabled={busy} onClick={()=>onMode('root')}>돌아가기</button>
-      <div className="action-grid battle-move-grid" data-testid="action-grid">{Array.from({length:4},(_,slot)=>{
+      <div className="action-grid battle-move-grid" data-testid="action-grid" data-tutorial="battle-moves">{Array.from({length:4},(_,slot)=>{
         const move=slots[slot],command=`move ${slot+1}`,legal=battle.actions.some(a=>a.command===command+(gimmick ? ' '+gimmick : '')),details=move ? moveDetails(move) : undefined;
         const matchup=move?moveMatchup(battle,move,gimmick==='terastallize'):null;
         const matchupLabel=matchup ? matchup.kind==='strong'?'효과 좋음':matchup.kind==='weak'?'효과 적음':matchup.kind==='immune'?'효과 없음':'보통 효과' : '';

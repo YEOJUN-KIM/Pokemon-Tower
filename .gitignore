@@ -35,3 +35,11 @@ pokemon-backups/
 
 # Local conversation attachments and large reproducible experiment logs.
 .codex-remote-attachments/
+
+# Future optional external originals and generated runtime copies.
+# Existing public/vendor assets remain tracked until reproduction is verified.
+/external/pokemon-ip/*
+!/external/pokemon-ip/README.md
+/external/user-provided/unverified/*
+!/external/user-provided/unverified/README.md
+/public/assets/external-generated/

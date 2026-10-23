@@ -1,3 +1,4 @@
+import {assetRegistry} from '../assets/registry';
 import {moveInfo} from '../data/move-info';
 
 // Choreography adapted from Showdown's CC0 move definitions; rendering and
@@ -6,7 +7,7 @@ export const effectAssets=['blackwisp','bluefireball','bottombite','electroball'
 export type EffectAsset=typeof effectAssets[number];
 export type EffectPoint={anchor:'source'|'target';x:number;y:number};
 export type MoveParticle={asset:EffectAsset;start:number;end:number;from:EffectPoint;to:EffectPoint;size:number;grow:number;rotate:number;arc:number;opacity:number};
-export const flamethrowerBeam={asset:'flamethrower-beam',url:'/sprites/effects/flamethrower-beam.png',start:80,extended:480,fade:680,end:840,origin:{x:30,y:993},tip:{x:1280,y:330}} as const;
+export const flamethrowerBeam={asset:'flamethrower-beam',url:assetRegistry.moveEffect('flamethrower-beam'),start:80,extended:480,fade:680,end:840,origin:{x:30,y:993},tip:{x:1280,y:330}} as const;
 export type MoveAnimationPlan={style:string;duration:number;contact:boolean;offensive:boolean;particles:MoveParticle[];lightning:boolean;wash:string|null;beam?:typeof flamethrowerBeam};
 const point=(anchor:EffectPoint['anchor'],x=0,y=0):EffectPoint=>({anchor,x,y});
 const recipes:Record<string,string>={

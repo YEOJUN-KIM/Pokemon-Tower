@@ -1,7 +1,10 @@
 import {readFileSync,writeFileSync,mkdirSync,existsSync,unlinkSync} from 'node:fs';
 import Showdown from 'pokemon-showdown';
+import {cachedSourceText,pokeapiCsv} from './lib/source-cache.mjs';
+const pokemonCsv=await cachedSourceText(pokeapiCsv('pokemon'));
+if(process.argv.includes('--check-sources')){console.log('Mega importer sources ready; no runtime files written.');process.exit(0);}
 const dex=JSON.parse(readFileSync('src/data/pokedex.json','utf8'));
-const ids=new Map(readFileSync('.data/cache/import/pokemon.csv','utf8').trim().split(/\r?\n/).slice(1).map(l=>{const p=l.split(',');return [Showdown.Dex.species.get(p[1]).name,Number(p[0])];}));
+const ids=new Map(pokemonCsv.trim().split(/\r?\n/).slice(1).map(l=>{const p=l.split(',');return [Showdown.Dex.species.get(p[1]).name,Number(p[0])];}));
 const items={},forms={},sources=[],animated=new Set();
 for(const item of Showdown.Dex.items.all().filter(i=>i.megaStone)){
  for(const [base,name] of Object.entries(item.megaStone)){

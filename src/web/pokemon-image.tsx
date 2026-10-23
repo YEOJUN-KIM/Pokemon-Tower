@@ -1,33 +1,14 @@
 'use client';
-import megaSprites from '../data/mega-sprite-availability.json' with {type:'json'};
-
 import {useEffect,useMemo,useRef,useState,type ReactNode,type CSSProperties} from 'react';
-import {missingDotAnimation} from '../data/sprite-animation';
-import formAvailability from '../data/form-sprite-availability.json' with {type:'json'};
-import {pixelSpriteSources} from '../data/pixel-sprites';
 import {animationFraming} from './sprite-framing';
-import {localPokemonSources} from '../data/local-pokemon-sprites';
-import additionalAnimations from '../data/additional-animations.json' with {type:'json'};
-
+import {assetRegistry} from '../assets/registry';
+import {AssetImage} from './asset-image';
+// Keep existing callers compatible while the resolver itself is independent of React.
+export const pokemonImageSources=assetRegistry.pokemon;
 const posters=new Map<string,{png:string;style:CSSProperties;heightFraction?:number}>();
 const readyFrames=new Set<string>();
-export function pokemonImageSources(id:number,back=false,animated=false,spriteKey:string|number=id,shiny=false):string[] {
-  const view=shiny?(back?'shinyBack':'shinyFront'):(back?'back':'front');
-  const extra=(additionalAnimations as Record<string,Partial<Record<string,{gif:string;png:string}>>>)[spriteKey]?.[view];
-  if(animated && extra)return [extra.gif,extra.png];
-  const local=(paths:string[])=>{const sources=localPokemonSources(paths,id,spriteKey,back,shiny);return sources.length?sources:extra?[extra.png]:[];};
-  if(shiny){const pixel=pixelSpriteSources(spriteKey,back,animated,true);if(pixel.length)return pixel;const side=back?'back/':'';return local(id<650 ? [`versions/generation-v/black-white/animated/${side}shiny/${spriteKey}.gif`,`${side}shiny/${spriteKey}.png`] : [`${side}shiny/${spriteKey}.png`]);}
-  const mega=(megaSprites as Record<string,{key:string;animatedFront:boolean;animatedBack:boolean}>)[spriteKey];
-  if(mega){const base='/sprites/gimmicks/'+(back?'back/':'front/')+mega.key;return animated && (back?mega.animatedBack:mega.animatedFront) ? [base+'.gif',base+'.png'] : [base+'.png'];}
-  // Modern species use community pixel sprites, never the model-rendered GIF fallback.
-  if(id>=650 || String(spriteKey)!==String(id)){const pixel=pixelSpriteSources(spriteKey,back,animated);if(pixel.length)return pixel;}
-  const side=back ? 'back/' : '',png=`${side}${spriteKey}.png`;
-  const form=(formAvailability as Record<string,{dotBoth:boolean;showdownBoth:boolean}>)[spriteKey];
-  if(!animated || (form ? !form.dotBoth : missingDotAnimation.has(id)))return local([png]);
-  return local([`versions/generation-v/black-white/animated/${side}${spriteKey}.gif`,png]);
-}
 
-export function PokemonImage({shiny=false,id,spriteKey=id,name,back=false,animated=false,width=96,height=96,lazy=false,sizeScale=1,stableFrame=false,matchBaseHeight=false,maxPixelScale,onVisibleTop,fallback}:{shiny?:boolean;id:number;spriteKey?:string|number;name:string;back?:boolean;animated?:boolean;width?:number;height?:number;lazy?:boolean;sizeScale?:number;stableFrame?:boolean;matchBaseHeight?:boolean;maxPixelScale?:number;onVisibleTop?:(top:number)=>void;fallback:ReactNode}) {
+export function PokemonImage({shiny=false,id,spriteKey=id,name,back=false,animated=false,width=96,height=96,lazy=false,sizeScale=1,stableFrame=false,matchBaseHeight=false,maxPixelScale,onVisibleTop,fallback}:{shiny?:boolean;id:number;spriteKey?:string|number;name:string;back?:boolean;animated?:boolean;width?:number;height?:number;lazy?:boolean;sizeScale?:number;stableFrame?:boolean;matchBaseHeight?:boolean;maxPixelScale?:number;onVisibleTop?:(top:number)=>void;fallback?:ReactNode}) {
   const sources=useMemo(()=>pokemonImageSources(id,back,true,spriteKey,shiny),[id,back,spriteKey,shiny]);
   const [failed,setFailed]=useState<Set<string>>(()=>new Set());
   const frame=useRef<HTMLSpanElement>(null);
@@ -74,5 +55,5 @@ export function PokemonImage({shiny=false,id,spriteKey=id,name,back=false,animat
   useEffect(()=>{onVisibleTop?.(visibleTop);},[onVisibleTop,visibleTop]);
   const sizedStyle=effectiveScale===1 ? baseStyle : {width:`${parseFloat(String(baseStyle?.width ?? 100))*effectiveScale}%`,height:`${parseFloat(String(baseStyle?.height ?? 100))*effectiveScale}%`,left:`${50+(parseFloat(String(baseStyle?.left ?? 0))-50)*effectiveScale}%`,top:`${98+(parseFloat(String(baseStyle?.top ?? 0))-98)*effectiveScale}%`};
   const framingReady=!!url && readyFrames.has(url) && !!baseStyle && (!matchBaseHeight || heightMatch?.source===url);
-  return url ? <span ref={frame} className="pokemon-image-frame" style={{width,height}} data-framing-ready={framingReady} data-size-scale={sizeScale} data-animation-measured={measuredAnimation===url ? 'true' : undefined}><img ref={image} crossOrigin="anonymous" onLoad={e=>measure(e.currentTarget)} style={{...sizedStyle,...(maxPixelScale ? {imageRendering:'pixelated' as const} : {}),visibility:stableFrame && !framingReady ? 'hidden' : undefined}} src={shown} alt={name} width={width} height={height} loading={lazy ? 'lazy' : 'eager'} decoding="async" draggable={false} onError={()=>reject(url)}/></span> : fallback;
+  return url ? <span ref={frame} className="pokemon-image-frame" style={{width,height}} data-framing-ready={framingReady} data-size-scale={sizeScale} data-animation-measured={measuredAnimation===url ? 'true' : undefined}><img ref={image} crossOrigin="anonymous" onLoad={e=>measure(e.currentTarget)} style={{...sizedStyle,...(maxPixelScale ? {imageRendering:'pixelated' as const} : {}),visibility:stableFrame && !framingReady ? 'hidden' : undefined}} src={shown} alt={name} width={width} height={height} loading={lazy ? 'lazy' : 'eager'} decoding="async" draggable={false} onError={()=>reject(url)}/></span> : (fallback ?? <AssetImage src={assetRegistry.placeholders.pokemon} alt={name} width={width} height={height}/>);
 }

@@ -5,6 +5,10 @@ import {isCollectibleSpecies} from '../src/data/pokedex-roster';
 import {retainedUnevolvedOpponents} from '../src/data/opponent-species';
 import pixelInventory from '../src/data/pixel-sprites.json' with {type:'json'};
 import dex from '../src/data/pokedex.json' with {type:'json'};
+import {cachedSourceText,pokeapiCsv} from './lib/source-cache.mjs';
+
+const pokemonCsv=await cachedSourceText(pokeapiCsv('pokemon','forms'));
+if(process.argv.includes('--check-sources')){console.log('Pruning sources ready; no assets scanned or removed.');process.exit(0);}
 
 // Preserve actual NPC images, including Red's Pikachu and Galar's Gmax ace.
 const requiredNpc=new Set([...retainedUnevolvedOpponents,'Pikachu','Duraludon']);
@@ -15,7 +19,7 @@ const inspect=(id:string,name:string)=>{
  removedIds.add(id);removedKeys.add(species.spriteid);
 };
 for(const entry of dex)inspect(String(entry.id),entry.species);
-for(const line of (await readFile('.data/cache/forms/pokemon.csv','utf8')).trim().split(/\r?\n/).slice(1)){
+for(const line of pokemonCsv.trim().split(/\r?\n/).slice(1)){
  const [id,name]=line.split(',');inspect(id,name);
 }
 for(const [id,value] of Object.entries(pixelInventory))if(removedIds.has(id))removedKeys.add(value.key);

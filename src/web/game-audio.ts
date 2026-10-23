@@ -1,4 +1,5 @@
 import effectLevels from '../../public/audio/sfx/levels.json' with {type:'json'};
+import {assetRegistry} from '../assets/registry';
 import {scheduleEffect,type EffectOptions} from './sound-design';
 // CC0 battle recordings and original synthesized result cues/effects. No Pokémon soundtrack is bundled.
 import {musicScores,musicFiles,musicTrackLevels,type MusicTrack} from './music-score';
@@ -38,7 +39,7 @@ function connectMusicOutput(ctx:BaseAudioContext,master:GainNode,track:MusicTrac
 function disposeVoice(voice:MusicVoice) {
   if(voice.cleanup)clearTimeout(voice.cleanup);
   voice.player?.pause();
-  if(voice.player){voice.player.onplaying=null;voice.player.removeAttribute('src');voice.player.load();}
+  if(voice.player){voice.player.onplaying=null;voice.player.onerror=null;voice.player.removeAttribute('src');voice.player.load();}
   voice.source?.disconnect();voice.master.disconnect();voice.output.forEach(node=>node.disconnect());voices.delete(voice);
 }
 function retireVoice(voice:MusicVoice,duration:number) {
@@ -84,7 +85,8 @@ export function stopCry() {if(cry){cry.pause();cry.removeAttribute('src');cry.lo
 export function playCry(id:number) {
   stopCry();
   if(settings.muted || !settings.effectsVolume || document.hidden) return;
-  const candidate=new Audio(`/audio/cries/${id}.ogg`); cry=candidate;
+  const file=assetRegistry.cry(id);if(!file)return;
+  const candidate=new Audio(file); cry=candidate;
   candidate.volume=settings.effectsVolume/100;
   candidate.onerror=()=>{if(cry===candidate)stopCry();};
   candidate.onended=()=>{if(cry===candidate)stopCry();};
@@ -131,7 +133,15 @@ function startPlayback() {
     const player=new Audio(file);player.loop=true;player.preload='auto';recording=player;
     recordingSource=ctx.createMediaElementSource(player);recordingSource.connect(musicGain);
     voice.player=player;voice.source=recordingSource;player.onplaying=()=>beginTransition(voice);
-    void player.play().catch(()=>{});return;
+    const failed=()=>{
+      if(!voices.has(voice))return;
+      if(currentVoice===voice){detachPlayback();if(previousVoice){retireVoice(previousVoice,.18);previousVoice=undefined;}}
+      else if(previousVoice===voice)previousVoice=undefined;
+      disposeVoice(voice);
+    };
+    player.onerror=failed;
+    // Autoplay denial may be retried after a user gesture; a missing/invalid file cannot.
+    void player.play().catch(error=>{if(error?.name!=='NotAllowedError')failed();});return;
   }
   beginTransition(voice);
   const score=musicScores[track]!,beat=30/score.bpm;

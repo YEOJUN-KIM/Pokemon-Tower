@@ -1,6 +1,8 @@
 import {existsSync,readFileSync,writeFileSync} from 'node:fs';
+import {cachedSourceText,trainerSpriteIndex} from './lib/source-cache.mjs';
 const directory='public/sprites/trainers';
-const index=readFileSync('.data/cache/import/trainer-sprite-index.html','utf8');
+const index=await cachedSourceText(trainerSpriteIndex);
+if(process.argv.includes('--check-sources')){console.log('Trainer importer sources ready; no runtime files written.');process.exit(0);}
 const manifest=JSON.parse(readFileSync(`${directory}/sources.json`,'utf8'));
 for(const portrait of ['sada-ai','turo-ai']){
  const url=`https://play.pokemonshowdown.com/sprites/trainers/${portrait}.png`,path=`${directory}/${portrait}.png`;

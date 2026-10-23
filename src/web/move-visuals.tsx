@@ -2,15 +2,16 @@
 import {useEffect,useRef} from 'react';
 import type {Motion} from './battle-presentation';
 import {effectAssets,flamethrowerBeam,moveAnimationPlan,type EffectPoint} from './move-animation-plan';
+import {assetRegistry} from '../assets/registry';
+import {loadAssetImage} from '../assets/load-image';
 
 const images=new Map<string,HTMLImageElement>();
 let loading:Promise<void>|undefined;
 function preload(){
-  const assets=[...effectAssets.map(asset=>({asset,url:`/vendor/showdown/fx/${asset}.png`})),flamethrowerBeam];
-  return loading ??= Promise.all(assets.map(({asset,url})=>new Promise<void>(resolve=>{
-    const image=new Image();image.onload=()=>{images.set(asset,image);resolve();};image.onerror=()=>resolve();
-    image.src=url;
-  }))).then(()=>{});
+  const assets=[...effectAssets.map(asset=>({asset,url:assetRegistry.moveEffect(asset)})),flamethrowerBeam];
+  return loading ??= Promise.all(assets.map(async({asset,url})=>{
+    const image=await loadAssetImage(url);if(image)images.set(asset,image);
+  })).then(()=>{});
 }
 type Position={x:number;y:number};
 const interpolate=(a:number,b:number,t:number)=>a+(b-a)*t;

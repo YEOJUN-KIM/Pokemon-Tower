@@ -1,5 +1,7 @@
 # 자산과 데이터의 공식 출처 기록
 
+현재 provider별 파일 수·용량·사용처·Git 정책, resolver와 fallback 및 importer 캐시 복구는 [외부 자산 분리 기반](EXTERNAL_ASSETS.md)을 따른다. 기존 source record를 중복 생성하지 않는다.
+
 `manifests/`는 Git에 보존하는 검토 완료 출처 스냅샷이다. 원본 JSON의 날짜·URL·해시·버전·누락 항목은 그대로 보존했다. 과거 기록을 현재 상태나 새 이용 허가로 해석하지 않는다. 전체 이용 조건은 [THIRD_PARTY](../references/THIRD_PARTY.md), 현재 기능은 [STATUS](../STATUS.md)를 따른다.
 
 | 공식 manifest | 용도와 범위 | 자동 생성 원본 |

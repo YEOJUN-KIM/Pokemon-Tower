@@ -6,6 +6,10 @@ import roster from '../src/data/battle-roster.json' with {type:'json'};
 import moves from '../src/data/move-catalog.json' with {type:'json'};
 import {moveTypeNames} from '../src/data/move-info';
 import {isCollectibleSpecies} from '../src/data/pokedex-roster';
+import {cachedSourceText,pokeapiCsv} from './lib/source-cache.mjs';
+
+const source=(name:string)=>cachedSourceText(pokeapiCsv(name,'forms'));
+if(process.argv.includes('--check-sources')){await Promise.all(['pokemon','moves','move_names'].map(source));console.log('Form importer sources ready; no runtime files written.');process.exit(0);}
 const regions:Record<string,string>={Alola:'알로라',Galar:'가라르',Hisui:'히스이',Paldea:'팔데아'};
 const requested:Record<string,string>={
  'Rotom-Heat':'히트로토무','Rotom-Wash':'워시로토무','Rotom-Frost':'프로스트로토무','Rotom-Fan':'스핀로토무','Rotom-Mow':'커트로토무',
@@ -26,8 +30,6 @@ for(const species of Showdown.Dex.species.all()){
  const breed:Record<string,string>={Combat:'컴뱃종',Blaze:'블레이즈종',Aqua:'워터종'};
  requested[species.name]=`${regions[region]} ${base.name}${breed[species.forme.split('-')[1]]?' '+breed[species.forme.split('-')[1]]:''}`;
 }
-mkdirSync('.data/form-import-cache',{recursive:true});
-async function source(name:string){const path=`.data/cache/forms/${name}.csv`;if(existsSync(path))return readFileSync(path,'utf8');const response=await fetch(`https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/${name}.csv`);if(!response.ok)throw Error(name+': '+response.status);const text=await response.text();writeFileSync(path,text);return text;}
 const pokemon=(await source('pokemon')).trim().split('\n').slice(1).map(line=>line.split(','));
 const formIds=new Map<string,number>();for(const row of pokemon){const species=Showdown.Dex.species.get(row[1].replace(/-breed$/,'').replace(/-galar-standard$/,'-galar'));if(species.exists&&!formIds.has(species.name))formIds.set(species.name,Number(row[0]));}
 const koreanMoves=new Map<string,string>(),moveIds=new Map<number,string>();

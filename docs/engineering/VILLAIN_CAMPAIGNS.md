@@ -1,6 +1,6 @@
 # 빌런 캠페인 연계 트랙 — 2026-10-19
 
-현재 신규 런은 일반 Run Event와 빌런 캠페인을 독립 판정한다. 일반 이벤트 확률 15%와 쿨다운 2회는 유지한다. 과거 로켓단 v1 캠페인의 저장 상태·이미 생성된 전투는 그대로 재개한다. [이전 구현 문서](../../artifacts/reports/changes/rocket-campaign-implementation.md)는 v1 호환 동작의 기록이다.
+현재 신규 런은 일반 Run Event와 빌런 캠페인을 독립 판정한다. 일반 이벤트 확률 20%와 쿨다운 2회는 유지한다. 과거 로켓단 v1 캠페인의 저장 상태·이미 생성된 전투는 그대로 재개한다. [이전 구현 문서](../../artifacts/reports/changes/rocket-campaign-implementation.md)는 v1 호환 동작의 기록이다.
 
 ## 처리 순서와 저장
 
@@ -61,7 +61,7 @@ DB 45 → 46은 위 세 테이블 추가이다. 기존 전투·행동·보상 sn
 
 ## 전투·재접속·재도전
 
-기존 `snapshotTrainerEventBattle`, `TowerStore.createBattle`, `VillainCampaigns.win`, Tower retry/revival 흐름을 재사용한다. 새 battle engine이나 빌런 전용 부활 규칙은 없다. 조우 메시지와 트레이너 등장 메시지를 결정키/클릭으로 확인한 뒤 전투를 시작한다. 지나가기/도망 버튼은 없다. 기존 ! 표현과 reduced-motion 처리를 사용한다. 조무래기 기습은 현재 맵 배경을 유지한다.
+기존 `snapshotTrainerEventBattle`, `TowerStore.createBattle`, `VillainCampaigns.win`, Tower retry/revival 흐름을 재사용한다. 새 battle engine이나 빌런 전용 부활 규칙은 없다. 조우 메시지와 트레이너 등장 메시지를 결정키/클릭으로 확인한 뒤 전투를 시작한다. 이벤트 선택 단계에는 지나가기 버튼이 없다. 배틀 중 `도망치다!`는 선택할 수 있지만 안내 메시지만 표시하며 턴·서버 상태를 바꾸지 않는다. 기존 ! 표현과 reduced-motion 처리를 사용한다. 조무래기 기습은 현재 맵 배경을 유지한다.
 
 이벤트 생성 시 상대·팀·seed·AI 버전·보상·진행 결과를 저장한다. 패배에는 보상/단계 증가가 없고 기존 재도전에서 같은 snapshot으로 싸운다. 승리 처리와 지급 receipt·단계 증가는 하나의 기존 Tower transaction으로 커밋한다. 실패 시 전부 rollback하며, 중복 승리/지급을 허용하지 않는다. 일반 층 증가·영입·일반 보상을 발생시키지 않는다. 마지막 공격·기절 재생 후 보상이 나오는 기존 동작도 유지한다.
 

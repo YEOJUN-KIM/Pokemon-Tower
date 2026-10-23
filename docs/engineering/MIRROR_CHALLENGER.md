@@ -4,7 +4,7 @@
 
 ## 1–3. 등장 확률·Sample·삽입
 
-`src/data/mirror-challenger.ts`의 `mirrorChallengerSettings.mirrorCandidateChance` 초기값은 **0.03(3%)**입니다. 이는 도전자 이벤트 발생 후의 조건부 판정이며 전체 이벤트 발생률과 별개입니다. 전체 일반 이벤트 발생률은 15%이며 도전자 비중은 해당 층의 적격 종류 weight 합에 따라 달라진다. Mirror 슬롯 판정 3%를 전체 이벤트 발생률로 읽지 않는다. 원본 팀·적격 Sample 조건도 함께 적용한다.
+`src/data/mirror-challenger.ts`의 `mirrorChallengerSettings.mirrorCandidateChance` 초기값은 **0.03(3%)**입니다. 이는 도전자 이벤트 발생 후의 조건부 판정이며 전체 이벤트 발생률과 별개입니다. 전체 일반 이벤트 발생률은 20%이며 도전자 비중은 해당 층의 적격 종류 weight 합에 따라 달라진다. Mirror 슬롯 판정 3%를 전체 이벤트 발생률로 읽지 않는다. 원본 팀·적격 Sample 조건도 함께 적용한다.
 
 기존 `drawChallengers()`로 후보 3명과 각 팀/보상을 먼저 생성한 뒤 독립 난수로 판정합니다. 성공하면 무작위 슬롯 하나를 교체합니다. 한 만남에 최대 1명이며 다른 두 후보와 표시 클래스명/ID가 겹치지 않게 기존 Sample에서 고릅니다. 실패 시 기존 세 후보를 그대로 반환하고 NPC/Rank/팀의 기존 난수 순서를 늘리지 않습니다. Mirror 난수는 이벤트 ID의 별도 SHA-256 seed입니다.
 

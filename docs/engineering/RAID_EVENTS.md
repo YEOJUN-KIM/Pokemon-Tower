@@ -18,7 +18,7 @@
 | src/battle/raid-transformation.ts | 폼·메가·원시·다이맥스·테라 등 실제 변신 |
 | src/web/raid-scene.tsx·styles/raid.module.css | 장면·오라·phase 표시 |
 
-일반 이벤트 전체 발생률 **15%·쿨다운 2**는 eventEncounterSettings가 담당한다. Raid 자체의 weight 20·minFloor 1·minRulesVersion 2는 raidEventSettings다. 각 보스/route의 weight와 최소 층은 별도다. 강제 Raid QA 설정은 없다.
+일반 이벤트 전체 발생률 **20%·쿨다운 2**는 eventEncounterSettings가 담당한다. Raid 자체의 weight 20·minFloor 1·minRulesVersion 2는 raidEventSettings다. 각 보스/route의 weight와 최소 층은 별도다. 강제 Raid QA 설정은 없다.
 
 ## HP·변신·영입
 

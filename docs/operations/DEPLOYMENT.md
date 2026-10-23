@@ -8,7 +8,7 @@ Node.js 24 / 단일 서버 / 영구 저장 디스크를 기준으로 준비했�
 
 - 최신 코드를 `pnpm build` 후 패키징한다. 과거 dist 묶음은 현재 코드/데이터를 포함한다고 가정하지 않는다.
 - 코드 지원 DB schema는 46다. 실제 DB 버전은 별도 확인하고 업데이트 전 SQLite backup API로 백업한다.
-- 이벤트는 공통 15%·통과 순서 쿨다운 2이며, 선택·결제·보상·배틀 snapshot과 중복 요청 방지를 유지한다. 세부 종류/weight는 [이벤트 개발](../engineering/EVENT_SYSTEM.md)을 따른다.
+- 이벤트는 공통 20%·통과 순서 쿨다운 2이며, 선택·결제·보상·배틀 snapshot과 중복 요청 방지를 유지한다. 세부 종류/weight는 [이벤트 개발](../engineering/EVENT_SYSTEM.md)을 따른다.
 - 개인 DB·환경변수는 Git/배포 묶음에 포함하지 않는다. 개발 DB와 Docker 볼륨은 별개다.
 - 과거 패키지·검증 수치는 당시 artifacts/Git 기록이며 현재 빌드 검사를 대체하지 않는다.
 

@@ -29,17 +29,19 @@
 
 | 설정 | 수정 위치 |
 |---|---|
-| 전체 이벤트 15%·통과 횟수 쿨다운 2 | `data/run-events.ts`의 `eventEncounterSettings` |
+| 전체 이벤트 20%·통과 횟수 쿨다운 2 | `data/run-events.ts`의 `eventEncounterSettings` |
 | 이벤트 종류 weight·선택지·비용 | `data/run-events.ts` registry와 각 이벤트의 data 설정 |
 | v1/v2 상자 내부 결과 | 같은 파일의 `legacyChestRewards` / `mysteryChestResults` |
 | 독립 빌런 등장·간격·보상 | `data/villain-tracks.ts`의 villainTrackSettings·villainStageMinFloor·villainRewardSettings |
 | Raid 보스·HP·육성 | `data/raids.ts`·`raid-bosses.ts`·`raid-training.ts` |
+| 50층 주요 보스 최종 구성·낮춘 육성 | `server/npc-templates.ts`·`opponent-team.ts` (일반층 곡선과 구분) |
+| 층별 성장 지급·재접속 차액 정산 | `server/tower-store.ts`·`run_growth_progress` |
 | NPC stage/기믹 층 | `data/normal-mode-stages.ts`의 `normalNpcFloorRules`·선택 함수 |
 | 일반 상대 전설/환상·육성 곡선 | `data/tower-progression.ts`의 `towerDifficulty` |
 | NPC Rank/도구 슬롯·AI tier | `data/npc-ranks.ts` / `data/npc-ai.ts` |
 | 소모품·TM·지닌 도구 가격/희귀도 | `data/shop.ts`, `data/held-item-shop.ts`, `data/held-items.ts` |
 | 히든상점·도전자 보상 | `data/hidden-shop.ts`, `data/challenger-rewards.ts` |
-| 일반 승리 코인·영구 육성 비용 | `data/floors.ts`·`data/training.ts` |
+| 일반 승리 코인·Rank/핵심 도구 가격 배율·영구 육성 비용 | `data/floors.ts`·`data/economy.ts`·`data/training.ts` |
 | 영구 업그레이드·부화 가격·확률 | `data/permanent-upgrades.ts`, `data/egg-grades.ts`, `data/egg-kinds.ts` |
 
 실제 saved 팀·시드·AI 버전·선택 후보·보상은 재접속이나 콘텐츠 수정으로 다시 추첨하지 않는다. 기존 진행/정책 호환 분기를 단순 dead code로 삭제하지 않는다.

@@ -22,6 +22,8 @@
 
 ## 주요 현재 저장 구조
 
+- `run_growth_progress`: Run별 누적 지급액 `paid`. schema 47 초기화의 additive `CREATE TABLE IF NOT EXISTS`로 추가된다. 층 승리 영수증과 같은 트랜잭션에서 성장 포인트를 지급하고, 진행 중 기존 저장은 `TowerStore` 초기화에서 차액만 정산한다. `growth_rewards` 최종 정산 영수증이 있으면 다시 지급하지 않으며 종료 시 이미 지급한 기본분을 제외한다. 사용으로 줄어든 계정 잔액을 기준으로 다시 지급하지 않는다.
+
 - `run_events`: `kind`는 콘텐츠 문자열이며 특정 이벤트 목록을 DB CHECK로 고정하지 않는다. 서버 registry가 종류와 선택 ID를 검증한다. 이벤트당 `choice_id`, `result_json`, 지급 상태와 실제 보상을 보존하고 런당 진행 중 이벤트 하나를 고유 인덱스로 보장한다.
 - `challenger_encounters`, `raid_encounters`, `villain_event_encounters`, `hidden_boss_events`: 발생 시 팀·시드·보상 snapshot과 현재 시도 battle_id. 도전/승리/재도전 처리는 기존 snapshot을 사용한다.
 - `event_reward_selections`, `run_reward_inventory`, `reward_use_receipts`, `reward_egg_tickets`: 서버 보상 후보·소모·반복 요청·전용 알 티켓. 클라이언트가 보상 효과를 정하지 않는다.

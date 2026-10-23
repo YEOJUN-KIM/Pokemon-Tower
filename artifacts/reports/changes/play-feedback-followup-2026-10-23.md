@@ -77,4 +77,4 @@ PC 기준으로 반영했습니다. 기존 이벤트 확률·코인 배율·아�
 
 50층의 승률과 100층 대비 체감 차이, 층별 지급으로 바뀐 성장 포인트의 소비 시점, 느린 읽기 속도와 기믹 광원의 체감을 추가 플레이로 조정할 수 있습니다.
 
-![기믹 선택과 Z기술 설명](../artifacts/qa/play-feedback/followup-gimmick-selected.png)
+![기믹 선택과 Z기술 설명](../../qa/play-feedback/followup-gimmick-selected.png)

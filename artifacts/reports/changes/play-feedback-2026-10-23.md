@@ -45,9 +45,9 @@
 - 모바일 추가 검증은 마지막 요청에 따라 진행하지 않았습니다.
 - 최종 로그: `artifacts/qa/play-feedback/logs/artifacts-playtest-all.log`, `artifacts/qa/play-feedback/logs/artifacts-playtest-desktop-verified.log`, `artifacts/qa/play-feedback/logs/artifacts-playtest-build-final.log`.
 
-![PC 전투 화면](../artifacts/qa/play-feedback/battle-1280.png)
+![PC 전투 화면](../../qa/play-feedback/battle-1280.png)
 
-![발견·개봉 후 보상 공개](../artifacts/qa/play-feedback/reward-1280.png)
+![발견·개봉 후 보상 공개](../../qa/play-feedback/reward-1280.png)
 
 ## 파일별 변경
 

@@ -1,11 +1,14 @@
 # 개발 이어받기
 
-기준: 2026-10-20. **1차 완성 후 정리·유지보수 단계**다. 기능은 [STATUS](STATUS.md), 이후 방향은 [ROADMAP](current/ROADMAP.md), 파일 책임은 [WORKSPACE](engineering/WORKSPACE.md)를 따른다.
+기준: 2026-10-23. **1차 완성 후 정리·유지보수 단계**다. 기능은 [STATUS](STATUS.md), 이후 방향은 [ROADMAP](current/ROADMAP.md), 파일 책임은 [WORKSPACE](engineering/WORKSPACE.md)를 따른다.
 
 ## 유지할 기준
 
+- 개발 기준 beta.4(`e5dc2fa8`)와 공개 프리릴리즈 beta.3를 구분한다. 패키지 메타데이터는 beta.1이며 문서 정리를 이유로 바꾸지 않는다. 상세는 STATUS와 변경 기록 색인을 따른다.
+- 2026-10-23의 층별 성장 지급·누적 영수증, 50층 보스 예외, BeforeMove 연출·Reward Reveal·세로 이벤트 선택지, 기믹/설명 UI와 무상태 도망 안내를 유지한다. 현재 PC 우선이며 모바일 최적화는 별도 계획이다.
+
 - DB schema 47, 새 일반 전투 기본 정책 tower-policy-v13. 이벤트 rules v1/v2·NPC snapshot v1/v2·빌런 트랙 버전·AI 버전은 각각 별개다.
-- 일반 이벤트 발생률 15%·통과 순서 쿨다운 2. 신규 빌런 트랙은 독립 판정이다. [이벤트 설정과 추가 절차](engineering/EVENT_SYSTEM.md).
+- 일반 이벤트 발생률 20%·통과 순서 쿨다운 2. 신규 빌런 트랙은 독립 판정이다. [이벤트 설정과 추가 절차](engineering/EVENT_SYSTEM.md).
 - NPC 입력은 scripts/data/npc/normal-npc-samples.json, runtime은 export 생성물이다. 현재 180행·911마리 후보, allFloors 156행. 옛 전체 재생성 부트스트랩은 삭제했다. [NPC 데이터](engineering/NPC_DATA.md).
 - 알은 별도 기본 뽑기 페이지다. 지역/타입 선택·알 탐색 연구 UI를 다시 추가하지 않는다. 관련 서버 경로와 기존 영수증은 호환을 위해 유지한다. [알](gameplay/EGGS.md).
 - 팀·시드·기믹·보상·영수증·정책은 저장 당시 snapshot으로 복구한다. 옛 버전이라는 이유로 저장 호환 분기를 삭제하지 않는다.

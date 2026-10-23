@@ -4,7 +4,7 @@
 
 ## 발생과 가격의 기준
 
-일반 이벤트 15%·쿨다운 2와 체크포인트 제외를 통과한 뒤, 현재 적격 종류의 상대 weight로 선택한다. 히든상점 weight는 12이며 고정 분모 132나 층당 고정 확률로 계산하지 않는다. [세 단계 확률](EVENT_SYSTEM.md).
+일반 이벤트 20%·쿨다운 2와 체크포인트 제외를 통과한 뒤, 현재 적격 종류의 상대 weight로 선택한다. 히든상점 weight는 12이며 고정 분모 132나 층당 고정 확률로 계산하지 않는다. [세 단계 확률](EVENT_SYSTEM.md).
 
 설정은 src/data/hidden-shop.ts의 hiddenShopEventSettings·hiddenShopProductPool·hiddenShopProductOverrides다. 진열 4~5개, 전체 구매 한도 2개이며 상품 범주를 먼저 고른다. 같은 범주 반복에는 duplicateCategoryPenalty를 적용한다. 범주 weight와 개별 도구/TM 수는 별개다.
 

@@ -31,7 +31,7 @@ npc-team-samples.json은 별도의 최고 단계 참고 입력이다. 현재 검
 | 빌런 보스 일반 단계 기준 | normalNpcFloorRules.villainBoss; `VILLAIN_BOSS_MIN_FLOOR`는 같은 값을 참조 |
 | AI tier/전술/상한 | `src/data/npc-ai.ts`, `src/battle/npc-policy.ts` |
 
-50층 첫 챔피언 기믹, 55층 후반 관장/간부 기믹, 75층 단계별 빌런 보스, 100층 최종 stage를 유지한다. 단일 빌드는 allFloors로 단계별 행 선택을 생략하지만, 실제 기믹 개방과 층별 육성 제한은 유지한다. 이벤트 캠페인의 등장 조건과 일반 NPC stage 기준은 서로 다른 규칙이다.
+정확히 50층인 테마 champion/final 보스는 `normalNpcTemplate`의 gate50 예외로 최종 구성을 사용하고 IV 상한 24·능력 포인트 상한 46을 적용한다. JSON 검토 원본이나 100층 빌드를 다시 쓰는 변경은 아니다. 일반 단계 기준인 50층 첫 챔피언 기믹, 55층 후반 관장/간부 기믹, 75층 단계별 빌런 보스, 100층 최종 stage를 유지한다. 단일 빌드는 allFloors로 단계별 행 선택을 생략하지만, 실제 기믹 개방과 층별 육성 제한은 유지한다. 이벤트 캠페인의 등장 조건과 일반 NPC stage 기준은 서로 다른 규칙이다.
 
 새 팀은 발생 시 팀·폼·기믹·IV/EV·시드·AI tier/전술을 저장한다. 입력 변경은 기존 배틀·도전자·캠페인의 snapshot을 재작성하지 않는다. AI 정책 버전과 NPC encounter snapshot 버전도 구분한다.
 

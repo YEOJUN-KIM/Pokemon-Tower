@@ -2,14 +2,17 @@ import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
 import {once} from 'node:events';
 import {createServer} from 'node:net';
-import {readdir, mkdir, copyFile} from 'node:fs/promises';
+import {readdir, mkdir, copyFile,readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {randomUUID} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
 
 const packages = (await readdir('dist')).filter(name=>name.startsWith('tower-')).sort();
 const directory = resolve(process.argv[2] || `dist/${packages.at(-1)}`);
-const data = resolve(`.data/deploy-tests/${randomUUID()}`);
+const data = resolve(`artifacts/deploy-tests/${randomUUID()}`);
+const expectedSchema=Number((await readFile('src/server/schema.ts','utf8')).match(/PRAGMA user_version\s*=\s*(\d+)/)?.[1]);
+const merchantPrice=Number((await readFile('src/data/run-events.ts','utf8')).match(/merchantTicketPrice\s*=\s*(\d+)/)?.[1]);
+assert.ok(Number.isInteger(merchantPrice)&&merchantPrice>0,'Current merchant price must be available to the verifier');
 await mkdir(data, {recursive:true});
 const probe = createServer();
 probe.listen(0, '127.0.0.1');
@@ -75,8 +78,9 @@ try {
   const sprite=await fetch(`${address}/vendor/showdown/pokemon/gen5ani-back/zygarde.gif`);
   assert.equal(sprite.status,200);
   assert.ok((await sprite.arrayBuffer()).byteLength>100);
-  const initial=await state();
-  const setCookie=initial.response.headers.get('set-cookie');
+  const registered=await fetch(`${address}/api/account`,{method:'POST',headers:{Origin:publicOrigin,'Content-Type':'application/json'},body:JSON.stringify({action:'register',username:'deploy_'+randomUUID().slice(0,8),password:randomUUID()})});
+  assert.equal(registered.status,200,await registered.clone().text());
+  const setCookie=registered.headers.getSetCookie().find(value=>value.startsWith('tower_auth='));
   assert.match(setCookie,/; Secure/i);
   const cookie=setCookie.split(';')[0];
   assert.equal((await post(cookie,{type:'start',selected:['Charizard','Blastoise','Venusaur']},'https://wrong.example')).status,403);
@@ -107,19 +111,24 @@ try {
     const db=new DatabaseSync(environment.TOWER_DB_PATH),eventId=randomUUID();let run;
     try{
       run=db.prepare('SELECT id,player_id FROM runs LIMIT 1').get();
-      assert.equal(db.prepare('PRAGMA user_version').get().user_version,33);
+      assert.equal(db.prepare('PRAGMA user_version').get().user_version,expectedSchema);
       db.prepare("UPDATE runs SET state='select',floor=2 WHERE id=?").run(run.id);
       db.prepare("UPDATE battles SET status='complete' WHERE run_id=?").run(run.id);
       db.prepare('DELETE FROM run_events WHERE run_id=?').run(run.id);
+      // These two fixtures intentionally exercise the preserved v1 event flow.
+      db.prepare('UPDATE run_event_rules SET version=1 WHERE run_id=?').run(run.id);
       db.prepare("INSERT INTO run_events(id,run_id,after_floor,kind,status) VALUES (?,?,1,?,'choice')").run(eventId,run.id,kind);
-      db.prepare('UPDATE players SET coins=300 WHERE id=?').run(run.player_id);
+      db.prepare('UPDATE players SET coins=? WHERE id=?').run(merchantPrice,run.player_id);
     }finally{db.close();}
     await boot();
     const initialEvent=(await state(cookie)).body.tower;
     assert.equal(initialEvent.run.event.kind,kind);
-    for(let repeat=0;repeat<2;repeat++)assert.equal((await post(cookie,{type:'event-choice',runId:run.id,eventId,choice:'open'})).status,200);
+    for(let repeat=0;repeat<2;repeat++){
+      const chosen=await post(cookie,{type:'event-choice',runId:run.id,eventId,choice:'open'});
+      assert.equal(chosen.status,200,await chosen.clone().text());
+    }
     const paid=(await state(cookie)).body.tower;
-    assert.equal(paid.coins,kind==='traveling-merchant'?0:300);
+    assert.equal(paid.coins,kind==='traveling-merchant'?0:merchantPrice);
     assert.equal(paid.permanent.eggTickets,initialEvent.permanent.eggTickets+1);
     await stop();await boot();
     assert.deepEqual((await state(cookie)).body.tower.run.event,paid.run.event);

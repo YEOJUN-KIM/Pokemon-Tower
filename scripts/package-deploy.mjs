@@ -5,6 +5,14 @@ import {verifyOutput} from './assets/pokerogue/verify.mjs';
 import {loadDefinition as loadShowdown} from './assets/showdown-pokemon/common.mjs';
 import {loadDefinition as loadPokeapi} from './assets/pokeapi/common.mjs';
 import {loadDefinition as loadMixed,verifyGroup} from './assets/mixed/runtime.mjs';
+import {spawnSync} from 'node:child_process';
+const argumentsList=process.argv.slice(2);
+let explicitOutput;
+for(let i=0;i<argumentsList.length;i++){
+  if(argumentsList[i]==='--check')continue;
+  if(argumentsList[i]==='--output'&&argumentsList[i+1])explicitOutput=resolve(argumentsList[++i]);
+  else throw Error('Unknown packaging option: '+argumentsList[i]);
+}
 
 const {manifest} = await loadDefinition();
 const assets = await verifyOutput(resolve('public/vendor/pokerogue'), manifest);
@@ -40,8 +48,13 @@ if(process.argv.includes('--check')) {
   process.exit(0);
 }
 await access('.next/standalone/server.js');
-const target = resolve(`dist/tower-${new Date().toISOString().replace(/[:.]/g,'-')}`);
-await mkdir(target, {recursive:true});
+const target = explicitOutput ?? resolve(`dist/tower-${new Date().toISOString().replace(/[:.]/g,'-')}`);
+for(const protectedPath of ['.data','.git','src','node_modules','public','scripts','docs']){
+  const protectedRoot=resolve(protectedPath),suffix=relative(protectedRoot,target);
+  if(!suffix||(!suffix.startsWith('..')&&!suffix.startsWith('\\')&&!suffix.includes(':')))throw Error('Package output must not be inside a source/data directory');
+}
+await mkdir(dirname(target), {recursive:true});
+await mkdir(target); // A package is immutable: never overwrite an existing install.
 const standalone=resolve('.next/standalone');
 const links=[];
 async function inventory(directory) {
@@ -67,6 +80,15 @@ await cp('scripts/backup-db.mjs', `${target}/scripts/backup-db.mjs`);
 await cp('scripts/import-save.mjs', `${target}/scripts/import-save.mjs`);
 await cp('scripts/start-deploy.mjs', `${target}/scripts/start-deploy.mjs`);
 await writeFile(`${target}/scripts/dependency-links.json`,JSON.stringify(links));
+await cp('scripts/player',`${target}/scripts/player`,{recursive:true});
+await cp('scripts/player-launcher.mjs',`${target}/scripts/player-launcher.mjs`);
+await cp('scripts/assets',`${target}/scripts/assets`,{recursive:true});
+await mkdir(`${target}/docs/assets/manifests`,{recursive:true});
+for(const file of ['pokerogue-runtime-assets.json','showdown-pokemon-runtime-assets.json','pokeapi-runtime-assets.json','mixed-runtime-assets.json'])await cp(`docs/assets/manifests/${file}`,`${target}/docs/assets/manifests/${file}`);
+if(process.platform==='win32'){
+  const build=spawnSync('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File','scripts/build-player-launcher.ps1','-OutputPath',`${target}/PokemonTower.exe`],{encoding:'utf8',windowsHide:true});
+  if(build.error||build.status!==0)throw Error('Player EXE build failed: '+(build.error?.message??build.stderr??build.stdout));
+}
 const deploymentGuide=await readFile('docs/operations/DEPLOYMENT.md','utf8');
 await writeFile(`${target}/DEPLOYMENT.md`,deploymentGuide.replace('../releases/NONCOMBAT_EVENTS_RELEASE.md','RELEASE_NOTES.md'));
 await cp(releaseNotes, `${target}/RELEASE_NOTES.md`);

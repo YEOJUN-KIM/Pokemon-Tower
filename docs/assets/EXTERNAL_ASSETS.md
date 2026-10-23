@@ -18,7 +18,6 @@
 | 프로젝트 제작 | `public/sprites/eggs` | project-original PNG 5개 + historical JSON | 6 / 4.583 | 사용; egg-kinds / egg-station-menu | `public/sprites/eggs/sources.json` | 6/6 | 낮음; `project-original / Git 유지` |
 | 프로젝트 제작 | `public/sprites/effects` | project-original beam PNG와 변신 SVG | 4 / 0.419 | 사용; move-animation-plan / CSS | `docs/gameplay/MOVE_EFFECTS_PLAN.md; docs/references/THIRD_PARTY.md` | 4/4 | 낮음; `project-original / Git 유지` |
 | 프로젝트 제작 | `public/sprites/shop` | 과거 자체 SVG | 9 / 0.003 | 현재 직접 참조 없음; 이전 상점 미리보기 | `기존 THIRD_PARTY 직접 구현 기록` | 9/9 | 낮음; `현재 유지; 필요 시 project-original` |
-| 미확인 초안 | `public/sprites/tera` | 출처 미확인 초안 | 1 / 0.675 | 현재 직접 참조 없음; normal-crown-draft.png | `확정 source record 없음` | 1/1 | 낮음; `user-provided/unverified 후보` |
 | OpenGameArt | `public/audio/bgm` | project-original 5개 + CC0 8개(원곡 6종) | 13 / 45.874 | 현재 6개 파일 사용; music-score / game-audio / registry | `public/audio/music-sources.json` | 13/13 | 중간; `third-party/opengameart` |
 | 프로젝트 제작 | `public/audio/sfx` | 합성음 음량 설정 | 1 / 0.001 | 사용; sound-design / game-audio | `public/audio/sfx/levels.json` | 1/1 | 중간; `프로젝트 설정 유지` |
 | Neo둥근모 / NeoDGM | `public/fonts` | SIL OFL 1.1 | 3 / 0.667 | 사용; retro-theme CSS / Windows launcher | `public/fonts/NEODGM-LICENSE.txt` | 3/3 | 중간; `third-party/fonts` |
@@ -191,3 +190,7 @@ trainers/gimmicks/items/effects의 561파일 중 외부 535개는 provider별 �
 ### 최종 ownership 정책 (2026-10-23)
 
 [최종 파일별 audit와 정책](ASSET_OWNERSHIP.md), [단일 잔여 ownership manifest](manifests/runtime-ownership.json)를 기준으로 한다. eggs·TM·portal/event·BGM 5개·effects는 project-original이며 외부 restore 대상이 아니다. CC0 BGM 8개(원곡 6종), OFL 폰트 2개와 고지 1개, CC0 VFX 22개는 출처/해시를 확인해 Git에 유지한다. 새 Git 제거·새 restore readiness는 없으며 통합 assets:setup은 다음 단계다.
+
+### 통합 준비와 제목 자산 정정 (2026-10-24)
+
+제목 reference GIF/PNG와 branding PNG 3개는 소유자의 GPT 제작 확인으로 project-original/Git 유지다. 소유자가 삭제한 Tera draft는 현재 inventory에서 제외했다. 기존 외부 6개 aggregate는 이제 `pnpm assets:setup`으로 순차 복원하고 `pnpm assets:verify`로 한 번에 검사한다. 완성된 그룹은 skip하며 provider별 명령도 부분 복구용으로 유지한다. [개발자 명령](../development/DEVELOPER_COMMANDS.md), [플레이어용 설치 구조](../operations/WINDOWS_PLAYER.md)를 따른다.

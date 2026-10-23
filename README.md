@@ -86,21 +86,14 @@ Egg Station에서 1개 또는 10개를 뽑습니다. 기계가 들썩이고 출�
 
 ## 내 PC에서 실행하기
 
-### 처음 한 번 · Windows
+Windows 배포 폴더에서 **PokemonTower.exe**를 실행합니다. 처음에는 게임 파일을 준비하고, 완료되면 브라우저에서 게임이 열립니다. 이후에도 같은 EXE만 실행하면 됩니다. 종료는 Windows 알림 영역의 게임 아이콘에서 선택합니다. 로컬 플레이에는 Docker가 필요 없습니다.
 
-1. [Node.js 24 이상](https://nodejs.org/)을 설치합니다.
-2. 저장소를 다운로드해 압축을 풀거나 clone합니다.
-3. **포켓몬타워 설치.cmd**를 더블클릭합니다.
+- [일반 플레이어 처음 실행](docs/operations/SETUP.md)
+- [개발자 clone·명령·빌드](docs/development/DEVELOPER_COMMANDS.md)
+- [Windows standalone 설치 구조](docs/operations/WINDOWS_PLAYER.md)
+- [저장·백업](docs/operations/BACKUPS.md)
 
-설치 CMD가 필요한 파일을 준비한 뒤 게임을 실행합니다. 첫 설치에는 인터넷 연결이 필요합니다.
-
-### 그 다음부터
-
-**포켓몬타워 로컬 실행.cmd**를 더블클릭하면 됩니다. 서버가 준비되면 브라우저에서 `http://127.0.0.1:3000`을 엽니다. 종료는 CMD 창에서 Ctrl+C를 누릅니다. **로컬 플레이에는 Docker가 필요 없습니다.**
-
-- [처음 설치하고 실행하기](docs/operations/SETUP.md)
-- [저장과 백업](docs/operations/BACKUPS.md) · [다른 PC로 옮기기](docs/operations/COMPUTER_MOVE.md)
-- [현재 구현](docs/STATUS.md) · [게임 규칙과 조작](docs/gameplay/README.md) · [개발 문서](docs/engineering/README.md)
+Git clone은 소스 배포이므로 개발 도구 준비가 필요합니다. 완성된 Windows 패키지는 Python/pnpm 없이 사용할 수 있으며, 최초 실행용 Node가 없으면 설치 안내를 보여줍니다.
 
 ## 어떻게 만들었나요?
 

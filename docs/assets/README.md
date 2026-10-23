@@ -26,3 +26,5 @@
 혼합 자산의 현재 소유권과 파일별 golden은 [MIXED_RUNTIME_ASSETS](MIXED_RUNTIME_ASSETS.md)와 [단일 current manifest](manifests/mixed-runtime-assets.json)를 따른다. trainers 194개, gimmicks 146개, items 195개만 외부 복원 대상으로 추적 해제하며 플레이어·generated item PNG/SVG·neutral VFX·project-original beam과 historical source JSON은 유지한다.
 
 현재 잔여 자산의 공식 ownership은 [최종 정책](ASSET_OWNERSHIP.md)과 [runtime ownership manifest](manifests/runtime-ownership.json)에 기록한다. mixed golden의 project-original 20개는 참조로 재사용하며 해시를 중복 복제하지 않는다. historical eggs/music/resource source snapshot은 보존한다.
+
+전체 준비는 `pnpm assets:setup`, 전체 검사는 `pnpm assets:verify`다. [개발자 명령어](../development/DEVELOPER_COMMANDS.md)와 [Windows 플레이어 구조](../operations/WINDOWS_PLAYER.md)에 개발/production 흐름을 분리했다. 제목/branding 3개는 project-original이며 삭제된 Tera draft는 현재 inventory에 없다.

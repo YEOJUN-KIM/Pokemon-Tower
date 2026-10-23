@@ -1,6 +1,6 @@
 # 웹 배포 패키지
 
-다른 PC로 옮기는 최신 Windows 절차와 백업 파일은 [컴퓨터 이전 안내](COMPUTER_MOVE.md)에 있다. 현재 사용자는 유료 호스팅 없이 PC·Docker·Quick Tunnel 테스트를 유지한다. 과거 일부 휴대폰 동작은 확인했지만 장기 Run·전체 화면의 실제 기기 검증 완료를 뜻하지 않는다. 프로젝트 루트의 `포켓몬타워 실행.exe`로 서버·DB·터널을 함께 켜고 주소를 확인한다. 정기 백업과 PC 부팅 시 자동 시작은 미설정이며, 실행 전 DB 백업은 실행기가 처리한다. 실행기 소스와 재생성 명령은 [개발 도구 안내](../../scripts/README.md)를 따른다.
+다른 PC로 옮기는 최신 Windows 절차와 백업 파일은 [컴퓨터 이전 안내](COMPUTER_MOVE.md)에 있다. 현재 사용자는 유료 호스팅 없이 PC·Docker·Quick Tunnel 테스트를 유지한다. 과거 일부 휴대폰 동작은 확인했지만 장기 Run·전체 화면의 실제 기기 검증 완료를 뜻하지 않는다. 일반 로컬 플레이는 `PokemonTower.exe`로 standalone 게임을 실행한다. 기존 개인용 `포켓몬타워 실행.exe`는 서버·DB·터널용 별도 도구이며 일반 플레이어 진입점과 다르다. 정기 백업과 PC 부팅 시 자동 시작은 미설정이며, 실행 전 DB 백업은 실행기가 처리한다. 실행기 소스와 재생성 명령은 [개발 도구 안내](../../scripts/README.md)를 따른다.
 
 Node.js 24 / 단일 서버 / 영구 저장 디스크를 기준으로 준비했다. 서버 선택과 도메인·HTTPS 연결은 별도 단계다. 여러 서버에서 같은 DB를 동시에 사용하거나 서버리스 임시 디스크에 저장하지 않는다.
 
@@ -126,3 +126,7 @@ node scripts/package-deploy.mjs --check
 ### Git 동봉 자산의 최종 정책
 
 project-original(알·TM·포털/event·effects·제작 BGM 5개), 외부 CC0 BGM 8개, OFL 폰트 및 고지 3개, CC0 VFX 22개는 Git clone만으로 존재한다. 이번 단계 새 restore 팩이나 readiness 조건은 추가하지 않는다. 기존 3팩 + mixed 7 provider만 복원한다. 파일별 분류는 [ownership 정책](../assets/ASSET_OWNERSHIP.md)을 따른다. `pnpm assets:setup`은 다음 단계에서 통합하며 이번에는 만들지 않는다.
+
+### 통합 자산과 Windows 플레이어 (2026-10-24)
+
+호스트에서 `pnpm assets:setup` → `pnpm assets:verify` → `pnpm build` → `node scripts/package-deploy.mjs` 순서로 준비한다. `pnpm deploy:package`는 build도 포함한다. Windows package는 PokemonTower.exe와 standalone 시작 스크립트·player 엔진·외부 golden을 포함한다. source EXE는 `pnpm launcher:build`로 생성한다. 첫 실행/빠른 재실행/marker/저장 경로는 [플레이어 구조](WINDOWS_PLAYER.md), 개발은 [개발자 명령어](../development/DEVELOPER_COMMANDS.md)를 따른다. user save는 `%LOCALAPPDATA%/PokemonTower/saves/tower.sqlite`로 분리한다.

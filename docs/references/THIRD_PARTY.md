@@ -183,3 +183,5 @@ trainers/gimmicks/items/effects의 원작·커뮤니티·자체·사용자 제�
 ## 최종 소유권 정정 (2026-10-23)
 
 알 PNG 5개·TM PNG 18개·포털 GIF/PNG 2개·보존 BGM 5개·화염방사 beam은 소유자가 직접 만든 project-original이다. 과거 user-provided는 반입 경로를 기록한 말이며 현재 외부 저작자/미검증 판정으로 사용하지 않는다. historical source JSON의 원래 날짜·해시는 보존하고 현재 판정은 [ownership audit](../assets/ASSET_OWNERSHIP.md)에 기록했다. 외부 CC0 음원 8개는 공식 6개 원본과 해시 일치하는 복사본 2개이며 기존 저자·페이지·라이선스를 유지한다. NeoDGM v1.601 폰트 두 파일과 OFL 고지, 고정 Showdown client의 CC0 VFX 22개도 Git에 유지한다. VFX 개별 작가 이름은 upstream 고지에 명시되지 않아 임의 지정하지 않는다.
+
+2026-10-24 소유자가 제목 reference GIF/PNG 및 branding 원본 PNG를 GPT로 프로젝트용으로 생성했다고 확인했다. current ownership은 project-original/generated-for-pokemon-tower로 정정했다. branding PNG는 원본을 유지하고 Windows build에서 여러 크기의 ICO로 변환한다. 소유자가 삭제한 Tera draft는 현재 자산 목록에서 제외했다.

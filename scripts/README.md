@@ -10,9 +10,9 @@
 | 실제 DB 수동 백업 | node --env-file=.env.local scripts/backup-db.mjs ([저장·백업 안내](../docs/operations/BACKUPS.md)) |
 | 특정 로컬 계정 플레이 초기화 | 게임 서버를 종료한 뒤 node --env-file=.env.local --import tsx scripts/reset-local-player.ts 계정아이디. DB 자동 백업 후 해당 계정의 진행만 신규 기본값으로 복원하며 로그인 정보와 다른 플레이어는 유지합니다. |
 | 개인용 통합 실행기 | 루트 포켓몬타워 실행.exe → launcher-window.ps1 → launch-preview.mjs / preview.mjs |
-| Windows 최초 설치 | 루트 포켓몬타워 설치.cmd → setup-windows.mjs → npm exec로 pnpm 11.19.0 실행 → 로컬 실행 CMD. 로그: .data/setup-logs/ 또는 Windows TEMP/Pokemon-Tower/ |
+| Windows 최초 설치 | 일반 플레이어: PokemonTower.exe. 설치 CMD는 setup-windows.mjs → player 엔진 --repair 진단 fallback. 로그: 사용자 PokemonTower/logs |
 | 설치 CMD 회귀 검사 | node --test tests/windows-setup.test.mjs (Windows CMD, 패키지 도구·게임 실행은 모의 처리) |
-| 외부 터널 없이 로컬 실행 | 범용 포켓몬타워 로컬 실행.cmd (Git 포함, PATH에 Node.js 24 이상 필요) 또는 node scripts/launch-local.mjs |
+| 외부 터널 없이 로컬 실행 | PokemonTower.exe 또는 로컬 실행 CMD → player 엔진 → 설치된 standalone. 개발은 pnpm dev |
 | Windows 실행 파일 다시 만들기 | powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build-windows-launcher.ps1 |
 | 실행기 화면만 렌더링 (서버 연결 없음) | powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File scripts/launcher-window.ps1 -NodePath (Get-Command node).Source -Preview |
 | 터널 주소 선택 회귀 검사 | node --test tests/preview-origin.test.mjs |
@@ -35,3 +35,5 @@ CSS 화면 비교는 node scripts/css-snapshot.mjs before / after입니다. 실�
 옛 단계별 전체 NPC 부트스트랩과 일회성 Raid 튜닝 스크립트는 삭제했습니다. 현재 NPC는 검토 입력 → export → --check를 사용합니다. Raid 측정은 pnpm raid:simulate --out artifacts/temporary/raid-새실험 형식으로 출력 경로를 지정합니다. 이전 측정은 Git과 분류된 보고서로 확인합니다.
 
 공식 문서·출처는 [docs](../docs/README.md)가 기준입니다. `node scripts/package-deploy.mjs --check`는 artifacts 없이 배포 입력을 검사합니다. 과거 실험 입력을 요구하는 선택 도구와 출력 경로는 [의존성 목록](../docs/engineering/ARTIFACT_DEPENDENCIES.md)을 확인하세요. 자동 가져오기 결과는 artifacts에 쓰며 공식 manifest는 검토 후 별도로 갱신합니다.
+
+일반 플레이어 EXE는 `pnpm launcher:build`로 만들며 scripts/build-player-launcher.ps1과 player-launcher.cs를 사용한다. 기존 build-windows-launcher.ps1은 개인용 터널 실행기다. 전체 자산은 `pnpm assets:setup` / `pnpm assets:verify`, 자세한 명령은 [개발자 안내](../docs/development/DEVELOPER_COMMANDS.md)를 따른다.

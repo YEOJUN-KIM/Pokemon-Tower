@@ -54,7 +54,11 @@
     "assets:pokerogue-items": "node scripts/assets/mixed/runtime.mjs restore pokerogue-items",
     "assets:pokerogue-items:verify": "node scripts/assets/mixed/runtime.mjs verify pokerogue-items",
     "assets:mixed": "node scripts/assets/mixed/runtime.mjs restore all",
-    "assets:mixed:verify": "node scripts/assets/mixed/runtime.mjs verify all"
+    "assets:mixed:verify": "node scripts/assets/mixed/runtime.mjs verify all",
+    "assets:setup": "node scripts/assets/manage.mjs setup",
+    "assets:verify": "node scripts/assets/manage.mjs verify",
+    "launcher:build": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build-player-launcher.ps1",
+    "player:check": "node scripts/player-launcher.mjs --check"
   },
   "engines": {
     "node": ">=24"
@@ -72,5 +76,6 @@
     "@types/react-dom": "19.3.0",
     "tsx": "4.23.15",
     "typescript": "7.0.2"
-  }
+  },
+  "packageManager": "pnpm@11.19.0"
 }

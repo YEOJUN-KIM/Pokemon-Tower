@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "baseline": "a71393c671da0b1c6677d86d384bc340bc0f99ba",
-  "confirmedOn": "2026-10-23",
+  "confirmedOn": "2026-10-24",
   "scope": "Remaining standalone runtime files and project-original fallback/legacy SVG inventory; mixed assets referenced once",
   "references": [
     {
@@ -1574,23 +1574,6 @@
       "diskBytes": 328
     },
     {
-      "path": "public/sprites/tera/normal-crown-draft.png",
-      "category": "tera-draft",
-      "extension": ".png",
-      "bytes": 707713,
-      "sha256": "b41d25fb9fb8a41693428d80d0269c886d31e0aa7cfb3e4bfb10ac853035a448",
-      "text": false,
-      "tracked": true,
-      "runtimeUse": "not currently referenced",
-      "ownership": "unverified",
-      "owner": null,
-      "source": "Unconfirmed draft; excluded from user-confirmed eggs/TM/portal/effects categories",
-      "evidence": "No authorship evidence found in audited source records",
-      "restore": false,
-      "git": "kept",
-      "diskBytes": 707713
-    },
-    {
       "path": "public/audio/sfx/levels.json",
       "category": "audio-settings",
       "extension": ".json",
@@ -1617,12 +1600,13 @@
       "text": false,
       "tracked": true,
       "runtimeUse": "No current direct source reference found; retained image",
-      "ownership": "unverified",
-      "owner": null,
-      "source": "Outside explicitly user-confirmed categories; no authorship source record found",
-      "evidence": "Filename alone does not prove authorship; preserved without reclassification",
+      "ownership": "project-original",
+      "owner": "project",
+      "source": "generated-for-pokemon-tower",
+      "evidence": "Owner confirmed GPT generation for this project on 2026-10-24",
       "restore": false,
-      "git": "kept"
+      "git": "kept",
+      "notes": "Original PNG/GIF retained without alteration"
     },
     {
       "path": "public/art/title/title-reference-still.png",
@@ -1634,12 +1618,13 @@
       "text": false,
       "tracked": true,
       "runtimeUse": "No current direct source reference found; retained image",
-      "ownership": "unverified",
-      "owner": null,
-      "source": "Outside explicitly user-confirmed categories; no authorship source record found",
-      "evidence": "Filename alone does not prove authorship; preserved without reclassification",
+      "ownership": "project-original",
+      "owner": "project",
+      "source": "generated-for-pokemon-tower",
+      "evidence": "Owner confirmed GPT generation for this project on 2026-10-24",
       "restore": false,
-      "git": "kept"
+      "git": "kept",
+      "notes": "Original PNG/GIF retained without alteration"
     },
     {
       "path": "public/branding/pokemon-tower-original.png",
@@ -1651,12 +1636,13 @@
       "text": false,
       "tracked": true,
       "runtimeUse": "No current direct source reference found; retained image",
-      "ownership": "unverified",
-      "owner": null,
-      "source": "Outside explicitly user-confirmed categories; no authorship source record found",
-      "evidence": "Filename alone does not prove authorship; preserved without reclassification",
+      "ownership": "project-original",
+      "owner": "project",
+      "source": "generated-for-pokemon-tower",
+      "evidence": "Owner confirmed GPT generation for this project on 2026-10-24",
       "restore": false,
-      "git": "kept"
+      "git": "kept",
+      "notes": "Original PNG/GIF retained without alteration"
     }
   ]
 }

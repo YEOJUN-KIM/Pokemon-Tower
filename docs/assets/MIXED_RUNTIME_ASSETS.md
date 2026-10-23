@@ -121,3 +121,7 @@ audio/BGM, fonts는 공식 소스·파일별 고지를 먼저 조사하는 한 �
 ## 현재 ownership 정정 (2026-10-23)
 
 이전 조사에서 사용자 제공/미검증으로 기록한 beam은 프로젝트 소유자의 직접 제작 확인으로 project-original이다. 현재 mixed golden에는 자체 20개 + metadata 6개가 남고 외부 535개 복원 정의는 그대로다. 위 과거 검증 수치와 당시 후속 제안은 historical 기록이다. 알·TM·portal/event·자체 BGM의 현재 판정과 tracked permissive 자산 정책은 [최종 ownership](ASSET_OWNERSHIP.md)을 따른다.
+
+## 전체 설치/검사 통합 (2026-10-24)
+
+개별 명령은 유지하고 전체 순차 설치 `pnpm assets:setup`과 일괄 검증 `pnpm assets:verify`를 공식 진입점으로 추가했다. 기존 3팩 다음 trainers/gimmicks/items를 처리하며 기존 URL·golden·캐시 정책을 유지한다. [개발자 명령어](../development/DEVELOPER_COMMANDS.md)를 따른다.

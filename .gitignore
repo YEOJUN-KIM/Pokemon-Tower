@@ -585,3 +585,8 @@ pokemon-backups/
 /public/sprites/items/dynamax-band.png
 /public/sprites/items/tera-orb.png
 # END mixed external runtime
+
+# Generated standalone player launcher and installation state
+/PokemonTower.exe
+/.install-complete.json
+/.launcher.lock

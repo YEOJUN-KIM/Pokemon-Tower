@@ -1,13 +1,14 @@
 @echo off
+setlocal DisableDelayedExpansion
 chcp 65001 >nul
-setlocal
 cd /d "%~dp0"
-set "TOWER_LAUNCH_NODE="
-for /f "delims=" %%N in ('where node.exe 2^>nul') do if not defined TOWER_LAUNCH_NODE set "TOWER_LAUNCH_NODE=%%N"
-if not defined TOWER_LAUNCH_NODE (
-  echo Node.js 24 or later is required. Install Node.js, add it to PATH, and try again.
+where node.exe >nul 2>nul
+if errorlevel 1 (
+  echo Node.js 24 or later is required for this diagnostic CMD. https://nodejs.org/
   pause
   exit /b 1
 )
-"%TOWER_LAUNCH_NODE%" "%~dp0scripts\launch-local.mjs" %*
-if errorlevel 1 pause
+node.exe "%~dp0scripts\launch-local.mjs" %*
+set "TOWER_RESULT=%errorlevel%"
+if not "%TOWER_RESULT%"=="0" pause
+exit /b %TOWER_RESULT%

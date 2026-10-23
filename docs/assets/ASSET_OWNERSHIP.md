@@ -21,10 +21,9 @@
 | fonts | NeoDGM / OFL-1.1 | 2 fonts + notice 1 | 유지 | 없음 |
 | Showdown VFX | external / CC0 | 22 PNG | 유지 | 없음 |
 | original fallbacks / legacy shop SVG | project | 4 / 9 | 유지 | 없음 |
-| unused Tera draft | unverified | 1 | 유지 | 없음 |
-| title/reference/branding images | unverified | 3 | 유지 | 없음 |
+| title/reference/branding images | project (GPT generated) | 3 | 유지 | 없음 |
 
-현재 ownership/사용처/bytes/extension/tracked/출처는 단일 [remaining runtime inventory](manifests/runtime-ownership.json)에 파일별로 있다. `bytes`/SHA는 JSON·SVG·문서의 LF canonical 기준이며 실제 디스크 바이트는 `diskBytes`다. 기존 [mixed golden](manifests/mixed-runtime-assets.json)의 자체 제작 20개·metadata 6개는 reference로 재사용한다. 이번 inventory의 자체 제작 43개와 합해 **감사한 파일형 project-original 자산 63개**를 관리한다. CSS/TS 안의 inline SVG·합성음까지 별도 파일로 세지는 않는다. historical source JSON은 날짜·해시·반입 기록을 덮어쓰지 않았다.
+현재 ownership/사용처/bytes/extension/tracked/출처는 단일 [remaining runtime inventory](manifests/runtime-ownership.json)에 파일별로 있다. `bytes`/SHA는 JSON·SVG·문서의 LF canonical 기준이며 실제 디스크 바이트는 `diskBytes`다. 기존 [mixed golden](manifests/mixed-runtime-assets.json)의 자체 제작 20개·metadata 6개는 reference로 재사용한다. 이번 inventory의 자체 제작 46개와 합해 **감사한 파일형 project-original 자산 66개**를 관리한다. CSS/TS 안의 inline SVG·합성음까지 별도 파일로 세지는 않는다. historical source JSON은 날짜·해시·반입 기록을 덮어쓰지 않았다.
 
 ## 제작 확인에 따라 정정한 31파일
 
@@ -92,11 +91,11 @@ NeoDGM은 [공식 v1.601 release](https://github.com/neodgm/neodgm/releases/tag/
 
 VFX는 22 PNG / 179,347 bytes이며 `smogon/pokemon-showdown-client@c0f6bfc707a5e3bba4da3785e9cb06c8ae04f8d9`의 `play.pokemonshowdown.com/fx/` 고정 URL과 전부 해시가 일치했다. [해당 revision의 파일별 고지](https://github.com/smogon/pokemon-showdown-client/blob/c0f6bfc707a5e3bba4da3785e9cb06c8ae04f8d9/play.pokemonshowdown.com/src/battle-animations.ts)는 이 fx 이미지에 CC0를 명시하며 예외 이미지(icicle/lightning/bone/rocks/rock1/rock2)는 현재 22개에 없다. 개별 PNG 작가명은 고지에 명시되지 않아 upstream contributors로 출처를 기록하고 작가를 임의 추정하지 않았다. registry→move-animation-plan→MoveVisuals가 실제 22개를 preload/사용한다. 작고 재배포 고지가 명확하므로 Git 유지가 복원 시스템 추가보다 단순하다.
 
-## 남은 미확인과 보존 기록
+## 제목/브랜딩 확인과 삭제된 초안 (2026-10-24)
 
-`public/sprites/tera/normal-crown-draft.png`는 사용자가 이번에 명시한 eggs/TM/portal/effects 범주에 속하지 않고 별도 제작 근거를 찾지 못했다. 현재 미사용 초안이며 Git 유지, restore 없음이다. 이를 자체 제작이라고 확장 추정하지 않는다. Kenney reference pack과 Showdown reference code는 기존 고지와 함께 Git 유지하며 runtime pack이 아니다. 소유권 미확인 초안은 통합 restore의 필수 입력이 아니므로 다음 단계 준비를 막지 않는다.
+`public/art/title/title-reference.gif`, `title-reference-still.png`, `public/branding/pokemon-tower-original.png`는 소유자가 GPT로 프로젝트용으로 생성했다고 확인했다. ownership은 project-original, source는 generated-for-pokemon-tower다. 원본 파일을 유지하고 branding PNG는 EXE icon build 입력으로도 사용한다.
 
-추가 전수 검색에서 `public/art/title/title-reference.gif`, `title-reference-still.png`, `public/branding/pokemon-tower-original.png`도 확인했다. 세 파일 모두 tracked이나 현재 코드 직접 참조와 제작 출처 기록이 없어 unverified/kept로 명시했다. 파일명의 original만으로 저작자를 추정하지 않았다. 이 3개와 Tera 초안까지 미확인 4개를 보존하며, 확인된 알·TM·포털·BGM·beam과 섞지 않는다.
+`public/sprites/tera/normal-crown-draft.png`는 소유자가 삭제했으며 실제 파일이 없어 현재 inventory에서 제외했다. 다시 생성하거나 다운로드하지 않는다. 이전 미확인 판정은 historical 기록이며 현재 불명확 자산으로 남겨두지 않는다. Kenney/Showdown 참고 자료는 기존 고지와 함께 Git 유지다.
 
 ## 기존 명령과 통합 준비
 
@@ -111,7 +110,7 @@ pnpm assets:gimmicks
 pnpm assets:items
 ```
 
-각 명령의 `:verify`를 사용한다. mixed 하위 provider 7개 명령은 부분 복구용이며 aggregate와 동시에 중복 실행할 이유가 없다. `assets:mixed`/`:verify`는 trainers·gimmicks·items를 묶은 편의 명령이다. 효과/음악/폰트/자체 이미지는 동봉 자산이므로 새로운 restore 명령이 없다. 다음 통합에서 위 여섯 aggregate를 각 한 번만 호출하고 마지막 verify를 실행하면 된다. 기존 immutable source·golden·provider cache·offline·명시적 실패 처리·배포 guard가 갖춰져 있어 **assets:setup 통합과 최종 clean clone 검증을 진행할 준비가 됐다**. 이번에는 assets:setup을 만들지 않는다.
+각 명령의 `:verify`를 사용한다. mixed 하위 provider 7개 명령은 부분 복구용이며 aggregate와 동시에 중복 실행할 이유가 없다. `assets:mixed`/`:verify`는 trainers·gimmicks·items를 묶은 편의 명령이다. 효과/음악/폰트/자체 이미지는 동봉 자산이므로 새로운 restore 명령이 없다. 통합 setup은 위 여섯 aggregate를 순서대로 각 한 번 복원하고 최종 verify를 실행한다. 기존 immutable source·golden·provider cache·offline·명시적 실패 처리·배포 guard가 갖춰져 있어 **통합 setup과 verify를 사용할 수 있다**. 2026-10-24 통합 명령 assets:setup/ assets:verify를 구현했다. 현재 절차는 [개발자 명령어](../development/DEVELOPER_COMMANDS.md)를 따른다.
 
 Git clone에는 project-original·폰트·CC0 VFX/BGM이 즉시 존재한다. 대형 외부 팩은 기존 restore를 사용한다. 새 readiness 조건은 추가하지 않았고 Docker는 기존 host restore→COPY→guard 정책을 유지한다. 개인 .data와 Git history는 변경하지 않는다.
 
@@ -125,3 +124,5 @@ Git clone에는 project-original·폰트·CC0 VFX/BGM이 즉시 존재한다. �
 - 전체 대규모 unit/외부 팩 온라인 재다운로드/최종 clean clone 검증은 이번 문서 ownership 변경 때문에 반복하지 않았다. 기존 10 pack/provider readiness는 통과했고 최종 clean clone은 다음 assets:setup 단계에서 실행한다.
 - 빌드/E2E는 개인 DB와 분리된 `.local-backups/mixed-assets-final` 검증 복사본에서 실행했다. 원래 `.data`는 건드리지 않았다. 로그는 ignored `artifacts/ownership-final/`에 있다.
 - Git: 이번 추가 제거 0개, 기존 1,382 tracked 파일 유지 + 문서/manifest/unit/E2E 4개 신규로 1,386개. 커밋하지 않는다.
+
+2026-10-24 현재 standalone ownership inventory는 83파일이며 자체 46개 + 외부 32개 + metadata 5개다. mixed 자체 20개를 참조해 감사한 project-original은 66개다. 아래 이전 검증의 84개/미확인 분류/다음 단계 제안은 당시 기록이고, 이번 통합·clean 설치 검증은 [Windows 플레이어 구조](../operations/WINDOWS_PLAYER.md)에 기록한다.

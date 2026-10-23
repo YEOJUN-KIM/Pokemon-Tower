@@ -4,12 +4,12 @@
 
 ## 현재 파일과 사용처
 
-파일 수·용량에는 해당 그룹의 manifest·고지가 포함된다. 혼합 그룹은 provider별 권리를 하나로 취급하지 않는다. 아래 표는 기반 조사 결과에 현재 추적 상태를 반영한다. PokéRogue runtime은 독립 복원 검증 후 추적 해제했으며 다른 팩의 추적 정책은 유지한다.
+파일 수·용량에는 해당 그룹의 manifest·고지가 포함된다. 혼합 그룹은 provider별 권리를 하나로 취급하지 않는다. 아래 표는 기반 조사 결과에 현재 추적 상태를 반영한다. PokéRogue와 Showdown Pokémon runtime은 독립 복원 검증 후 추적 해제했으며 다른 팩의 추적 정책은 유지한다.
 
 | Provider | 현재 경로 | 분류 | 파일 / MiB | 실제 사용·코드 | source record | Git 추적 | 이동 위험 / 향후 external 위치 |
 |---|---|---|---|---|---|---|---|
 | PokeAPI | `public/vendor/pokeapi` | Pokémon IP | 4648 / 85.310 | 사용; pokemon-sprites / local-pokemon-sprites | `docs/assets/manifests/local-pokemon-sprites.json` | 4648/4648 | 높음; `pokemon-ip/pokeapi` |
-| Showdown sprites | `public/vendor/showdown/pokemon` | Pokémon IP / 커뮤니티 그림 | 1393 / 34.790 | 사용; pixel-sprites / registry | `docs/assets/manifests/pixel-sprite-assets.json` | 1393/1393 | 높음; `pokemon-ip/showdown/pokemon` |
+| Showdown sprites | `public/vendor/showdown/pokemon` | Pokémon IP / 커뮤니티 그림 | 1393 / 34.790 | 사용; pixel-sprites / registry | `docs/assets/manifests/pixel-sprite-assets.json` | 0/1393 (고정 snapshot 복원) | 독립 복원 READY; `pokemon-ip/showdown/pokemon` |
 | PokéRogue | `public/vendor/pokerogue` | Pokémon IP / 파일별 고지 | 2002 / 37.556 | 사용; additional-animations.json → pokemon-sprites | `public/vendor/pokerogue/sources.json` | 0/2002 (복원 필요) | 독립 복원 READY; `pokemon-ip/pokerogue` |
 | Showdown VFX | `public/vendor/showdown/fx` | 명시된 22개 CC0 파일 | 22 / 0.171 | 사용; move-visuals / registry | `docs/assets/manifests/move-effects-integration.json` | 22/22 | 중간; `third-party/showdown-fx` |
 | Showdown / 프로젝트 제작 | `public/sprites/trainers` | 외부 트레이너 + 자체 생성 플레이어 혼합 | 199 / 1.185 | 사용; TrainerPortrait / PlayerMirrorPortrait / CSS | `public/sprites/trainers/sources.json; player-front-source.json` | 199/199 | 높음; `pokemon-ip/showdown/trainers (플레이어 제외)` |
@@ -161,3 +161,14 @@ pnpm dev
 ```
 
 일반 unit test와 개발 빌드는 이 팩 없이 가능하다. 이미지 누락 시 기존 fallback을 사용한다. asset integration/E2E와 배포 전에는 복원·verify를 실행한다. package-deploy의 --check 및 실제 패키징, Docker build는 전체 팩 무결성을 요구한다. [상세 절차](POKEROGUE_RESTORE.md)를 따른다.
+
+### Showdown Pokémon 독립 복원
+
+기준 HEAD `171800c61af9d6b38b5f8b11c393e4ae865651dd`의 1,393개 전체를 별도 golden으로 고정했다. 과거 pixel-sprite-assets.json 1,201개 목록은 수정하지 않는다. 공식 원본 저장소의 현재 raw만으로 전체 동일 bytes를 보장할 수 없어, 이미 공개된 프로젝트 baseline의 고정 commit을 보존 snapshot으로 사용한다. 이는 upstream 재빌드가 아니며 원격 snapshot의 계속된 접근성에 의존한다. [상세 source·복원·검증 정책](SHOWDOWN_POKEMON_RESTORE.md)을 따른다.
+
+```sh
+pnpm assets:showdown-pokemon
+pnpm assets:showdown-pokemon:verify
+```
+
+source cache는 `external/pokemon-ip/showdown/pokemon/source/`, runtime은 기존 `public/vendor/showdown/pokemon/`이다. 일반 테스트에는 다운로드를 요구하지 않고 배포 준비 검사는 Showdown과 PokéRogue 전체 hash를 요구한다. 온라인·오프라인·clean 환경·fallback·build/test READY 검증 후 Showdown runtime 전체를 index에서 제거했다. 로컬 1,393개는 유지하고 `/public/vendor/showdown/pokemon/`을 ignore한다. PokeAPI·Showdown fx·다른 자산은 이번 범위에 포함하지 않는다.

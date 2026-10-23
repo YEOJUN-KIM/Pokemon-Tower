@@ -28,6 +28,7 @@ pokemon-backups/
 # Local environment settings
 .env*
 !.env.example
+/env.download
 
 # Personal Windows entry points stay on this PC.
 /포켓몬타워 실행.exe
@@ -39,6 +40,7 @@ pokemon-backups/
 # Future optional external originals and generated runtime copies.
 # Other public/vendor packs remain tracked until reproduction is verified.
 /public/vendor/pokerogue/
+/public/vendor/showdown/pokemon/
 /external/pokemon-ip/*
 !/external/pokemon-ip/README.md
 /external/user-provided/unverified/*

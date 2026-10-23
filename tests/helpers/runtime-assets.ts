@@ -1,10 +1,13 @@
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
 
-// A fresh clone may omit the entire PokéRogue pack. Partial installs and all
+// A fresh clone may omit an entire generated sprite pack. Partial installs and all
 // other tracked packs still receive the existing disk integrity assertions.
 export function inspectPublicAsset(url:string) {
-  return !url.startsWith('/vendor/pokerogue/')||existsSync('public/vendor/pokerogue');
+  for(const pack of ['pokerogue','showdown/pokemon']){
+    if(url.startsWith(`/vendor/${pack}/`)&&!existsSync(`public/vendor/${pack}`))return false;
+  }
+  return true;
 }
 
 export function assertSpriteFiles(sources:string[],message?:string) {

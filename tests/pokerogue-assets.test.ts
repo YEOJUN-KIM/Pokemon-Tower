@@ -20,6 +20,8 @@ test('deployment check and packaging fail before copying when the runtime pack i
       assert.equal(result.status,1,result.stderr);
       assert.match(result.stderr,/2002 missing/);
       assert.match(result.stderr,/pnpm assets:pokerogue/);
+      assert.match(result.stderr,/1393 missing/);
+      assert.match(result.stderr,/pnpm assets:showdown-pokemon/);
       assert.deepEqual(await readdir(dir),[]);
     }
   }finally{await rm(dir,{recursive:true,force:true});}

@@ -1,6 +1,6 @@
+import {assertSpriteFiles} from './helpers/runtime-assets';
 import test,{after} from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync} from 'node:fs';
 import {randomUUID} from 'node:crypto';
 import Showdown from 'pokemon-showdown';
 import {raidBossDefinitions,type RaidPhaseDefinition} from '../src/data/raids';
@@ -83,7 +83,7 @@ for(const boss of raidBossDefinitions)for(const route of boss.routes){
     assert.deepEqual(current.getTypes(),native.types);
     const shown=catalog[display];assert.ok(shown,display);assert.ok(pokemonName(display).length>0);
     assert.deepEqual(shown.types,native.types.map((t:string)=>moveTypeNames[t]));
-    for(const back of [true,false])for(const shiny of [false,true])assert.ok(pokemonImageSources(shown.id,back,false,shown.spriteKey,shiny).some(p=>existsSync('public'+p)),display+' sprite');
+    for(const back of [true,false])for(const shiny of [false,true])assertSpriteFiles(pokemonImageSources(shown.id,back,false,shown.spriteKey,shiny),display+' sprite');
     if(phase.species.startsWith('Ogerpon'))assert.equal(effectiveMove(battle,current,'Ivy Cudgel').type,({Ogerpon:'Grass','Ogerpon-Wellspring':'Water','Ogerpon-Cornerstone':'Rock','Ogerpon-Hearthflame':'Fire'} as Record<string,string>)[phase.species]);
     if(phase.species.startsWith('Arceus'))assert.equal(effectiveMove(battle,current,'Judgment').type,current.getTypes()[0]);
     if(phase.transformation==='stellar'){

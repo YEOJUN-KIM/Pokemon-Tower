@@ -5,14 +5,14 @@ import {TowerStore} from '../src/server/tower-store';
 import {Accounts} from '../src/server/accounts';
 import {packTeam} from '../src/data/teams';
 
-test('missing external images, VFX, audio and font do not block a real battle turn',async({page,context},info)=>{
+for(const lead of ['Meowscarada','Miraidon'])test(`missing external images, VFX, audio and font do not block a real battle turn (${lead})`,async({page,context},info)=>{
   const store=new TowerStore('.data/e2e.sqlite'),owner='asset-'+randomUUID();
   let token:string,battleId:string;
   try{
     store.ensurePlayer(owner);
     const auth=await new Accounts(store.db).register('asset_'+randomUUID().slice(0,8),randomUUID(),owner,undefined);token=auth.token;
-    store.db.prepare('INSERT OR IGNORE INTO unlocks VALUES (?,?)').run(owner,'Meowscarada');
-    const id=store.start(owner,['Meowscarada','Blastoise','Venusaur'],'chaos');battleId=id;
+    store.db.prepare('INSERT OR IGNORE INTO unlocks VALUES (?,?)').run(owner,lead);
+    const id=store.start(owner,[lead,'Blastoise','Venusaur'],'chaos');battleId=id;
     const team=Showdown.Teams.unpack(store.battle(id).player_team)!;team[0].item='Leftovers';
     store.db.prepare('UPDATE battles SET player_team=? WHERE id=?').run(Showdown.Teams.pack(team),id);
     // Keep this asset test independent of a random opponent knocking out the lead.
@@ -44,13 +44,13 @@ test('missing external images, VFX, audio and font do not block a real battle tu
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false',{timeout:20_000});
   await expect(page.getByRole('button',{name:'싸운다',exact:true})).toBeEnabled();
   expect(requested.some(url=>url.startsWith('/vendor/'))).toBe(true);
-  expect(requested.some(url=>url.startsWith('/vendor/pokerogue/'))).toBe(true);
+  expect(requested.some(url=>url.startsWith(lead==='Miraidon'?'/vendor/showdown/pokemon/':'/vendor/pokerogue/'))).toBe(true);
   expect(requested.some(url=>url.startsWith('/audio/bgm/'))).toBe(true);
   expect(requested.some(url=>url.startsWith('/audio/cries/'))).toBe(false);
   expect(errors).toEqual([]);
   await page.screenshot({path:info.outputPath('missing-assets-battle.png')});
   await page.goto('/pokedex');
   await expect(page.locator('img[src="/assets/original/gimmick-placeholder.svg"]').first()).toBeVisible();
-  await expect(page.locator('[data-testid="dex-progress"]')).toContainText('27 /');
+  await expect(page.locator('[data-testid="dex-progress"]')).toContainText(lead==='Miraidon'?'28 /':'27 /');
   expect(errors).toEqual([]);
 });

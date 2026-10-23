@@ -1,3 +1,4 @@
+import {assertSpriteFiles} from './helpers/runtime-assets';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
@@ -15,7 +16,6 @@ import {FORMAT,runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
 import {pokemonImageSources} from '../src/web/pokemon-image';
 import {species as catalog} from '../src/data/pokemon-catalog';
-import {existsSync} from 'node:fs';
 
 function fixture(species='Ogerpon',path=':memory:'){
  const store=new TowerStore(path),owner='form-shop';store.ensurePlayer(owner);store.db.prepare('INSERT OR IGNORE INTO unlocks VALUES (?,?)').run(owner,species);
@@ -67,7 +67,7 @@ test('all held forms reach real UI snapshots, typed signature moves and distinct
   const move=({Arceus:'Judgment',Silvally:'Multi-Attack',Genesect:'Techno Blast'} as Record<string,string>)[data.species],profile=defaultProfile(data.species);if(move)profile.moves=[move];
   const session=new BattleSession(async()=>{},[1,2,3,4],{teams:{p1:packTeam([data.species,'Blastoise','Venusaur'],{[data.species]:profile},{[data.species]:item}),p2:packTeam(['Luvdisc','Unown','Delibird'])}});
   try{const v=await session.ready();assert.equal(v.status,'waiting',item);assert.equal(v.team[0].displaySpecies,data.forme,item);assert.deepEqual(v.team[0].types,Showdown.Dex.species.get(data.forme).types,item);if(move){const native=Showdown.Dex.items.get(item);assert.equal(v.movePP![0].type,native.onPlate??native.onMemory??native.onDrive);}
-   const c=catalog[data.forme];assert.ok(c);for(const back of [false,true])assert.ok(pokemonImageSources(c.id,back,true,c.spriteKey).some(p=>existsSync('public'+p)),data.forme);
+   const c=catalog[data.forme];assert.ok(c);for(const back of [false,true])assertSpriteFiles(pokemonImageSources(c.id,back,true,c.spriteKey),data.forme);
   }finally{await session.dispose();}
  }
  const stale={...defaultProfile('Arceus'),forme:'Arceus-Fire',ability:'Multitype'};assert.equal(Showdown.Teams.unpack(packTeam(['Arceus','Blastoise','Venusaur'],{Arceus:stale}))![0].species,'Arceus');

@@ -38,7 +38,7 @@ for(const t of unovaTrainers)test(`${t.id}: legal fixed builds, varying triples,
  for(const floor of t.category==='hidden'?[5,50,95,100]:[5,45,55,95]){
   const template=normalNpcTemplate(t.id,floor,sample.role)!;assert.ok(template,t.id);
   assert.equal(template.signature,null);assert.equal(npcGimmick(sample.id,sample.generation,template.team.map(p=>p.species),template.ace),null);
-  assert.equal(template.team.length,t.category==='hidden'&&floor<100?5:6);
+  assert.equal(template.team.length,t.category==='hidden'&&floor<100&&floor!==50?5:6);
   for(const p of template.team){assert.ok(!p.profile.moves.includes('Trick Room'));assert.equal(validator.validateSet({...structuredClone(pokemonSets[p.species]),ability:p.profile.ability,item:p.item,moves:p.profile.moves},{}),null,t.id+'/'+p.species);}
   const combinations=new Set<string>();
   for(let n=1;n<=60;n++){
@@ -46,8 +46,8 @@ for(const t of unovaTrainers)test(`${t.id}: legal fixed builds, varying triples,
    assert.equal(names.length,3);assert.equal(new Set(names).size,3);assert.ok(satisfiesSelectionRules(names,template.selectionRules));
    if(template.ace)assert.ok(names.includes(template.ace));
    assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION));
-   for(const p of team)assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),Math.min(66,towerDifficulty(floor).points));
-   if(t.category==='hidden')assert.equal(names.includes('Zekrom'),floor===100);
+   for(const p of team)assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),Math.min(66,(floor===50?46:towerDifficulty(floor).points)));
+   if(t.category==='hidden')assert.equal(names.includes('Zekrom'),floor===50||floor===100);
    combinations.add([...names].sort().join(','));
   }
   assert.ok(combinations.size>=5,'Candidate pool must not collapse to a fixed triple');
@@ -98,7 +98,7 @@ for(const floor of [50,100])test(`N F${floor}: champion victory → event snapsh
   const snapshot=new HiddenBossEvents(store.db).row(event.id)!.snapshot_json;
   store.chooseEvent(f.owner,f.run,event.id,'challenge');let battle=store.currentBattle(f.owner)!;
   assert.equal(battle.stage,1);assert.equal(JSON.parse(battle.trainer!).id,'named-n');
-  assert.equal(Showdown.Teams.unpack(battle.opponent_team)!.some(p=>p.species==='Zekrom'),floor===100);
+  assert.equal(Showdown.Teams.unpack(battle.opponent_team)!.some(p=>p.species==='Zekrom'),floor===50||floor===100);
   assert.equal(JSON.parse(battle.trainer!).gimmick,undefined);
   const state=await service.state(f.owner);assert.ok(state.battle!.team.every(p=>p.condition.split('/')[0]===p.condition.split('/')[1]));assert.ok(state.battle!.movePP!.every(p=>p.pp===p.maxpp));
   await service.dispose();store.close();store=new TowerStore(path);service=new TowerService(store);

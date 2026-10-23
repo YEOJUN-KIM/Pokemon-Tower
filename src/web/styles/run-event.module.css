@@ -52,6 +52,20 @@
 :global(body) :where(.scope).bottom[data-teleport=true][data-event-step=choices] :global(.game-dialogue.current-messages) {min-height:0;flex:0 0 auto;margin-top:0;padding:6px 20px;}
 .bottom[data-teleport=true][data-event-step=choices] .actions {flex:0 0 auto;overflow:visible;}
 
+/* Choice prompts share space with their actions, rather than reserving the
+   battle dialogue's 110px minimum. Keep both decisions visible on desktop. */
+@media(min-width:761px) {
+ :global(body) :where(.scope).bottom[data-event-step=choices][data-villain=false][data-challenger-selection=false] :global(.game-dialogue.current-messages) {
+  min-height:0;flex:0 0 auto;margin:0;padding:4px 20px;
+ }
+ .bottom[data-event-step=choices][data-villain=false][data-challenger-selection=false] .actions {
+  flex:0 0 auto;flex-direction:column;gap:4px;overflow:visible;
+ }
+ .bottom[data-event-step=choices][data-villain=false][data-challenger-selection=false] .actions .choice {
+  padding:4px 20px 4px 12px;
+ }
+}
+
 /* Fixed overlay space avoids layout shifts on phones and desktops. */
 .scope .ambushNotice {position:absolute;z-index:2;top:0;left:calc(50% - 20px);width:40px;text-align:center;font-size:48px;font-weight:900;color:#fff;background:#b72335;border-radius:10px;line-height:1.2;animation:rocketNotice 450ms ease-out both;pointer-events:none;}
 @keyframes rocketNotice {0% {opacity:0;transform:translateY(12px) scale(.7);}20%,75% {opacity:1;transform:translateY(0) scale(1);}100% {opacity:0;transform:translateY(-8px);}}

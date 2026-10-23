@@ -7,21 +7,21 @@
     ],
     "from": "Thunderbolt",
     "move": "Stoked Sparksurfer",
-    "description": "Raichu-Alola의 10만볼트을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "10만볼트 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Buginium Z": {
     "name": "벌레Z",
     "type": "Bug",
-    "description": "벌레 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "벌레타입 기술을 지닌 포켓몬이 벌레 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Darkinium Z": {
     "name": "악Z",
     "type": "Dark",
-    "description": "악 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "악타입 기술을 지닌 포켓몬이 악 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -33,14 +33,14 @@
     ],
     "from": "Spirit Shackle",
     "move": "Sinister Arrow Raid",
-    "description": "모크나이퍼의 그림자꿰매기을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "그림자꿰매기 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Dragonium Z": {
     "name": "드래곤Z",
     "type": "Dragon",
-    "description": "드래곤 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "드래곤타입 기술을 지닌 포켓몬이 드래곤 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -52,70 +52,70 @@
     ],
     "from": "Last Resort",
     "move": "Extreme Evoboost",
-    "description": "이브이의 비장의무기을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "비장의무기 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Electrium Z": {
     "name": "전기Z",
     "type": "Electric",
-    "description": "전기 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "전기타입 기술을 지닌 포켓몬이 전기 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Fairium Z": {
     "name": "페어리Z",
     "type": "Fairy",
-    "description": "페어리 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "페어리타입 기술을 지닌 포켓몬이 페어리 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Fightinium Z": {
     "name": "격투Z",
     "type": "Fighting",
-    "description": "격투 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "격투타입 기술을 지닌 포켓몬이 격투 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Firium Z": {
     "name": "불꽃Z",
     "type": "Fire",
-    "description": "불꽃 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "불꽃타입 기술을 지닌 포켓몬이 불꽃 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Flyinium Z": {
     "name": "비행Z",
     "type": "Flying",
-    "description": "비행 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "비행타입 기술을 지닌 포켓몬이 비행 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Ghostium Z": {
     "name": "고스트Z",
     "type": "Ghost",
-    "description": "고스트 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "고스트타입 기술을 지닌 포켓몬이 고스트 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Grassium Z": {
     "name": "풀Z",
     "type": "Grass",
-    "description": "풀 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "풀타입 기술을 지닌 포켓몬이 풀 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Groundium Z": {
     "name": "땅Z",
     "type": "Ground",
-    "description": "땅 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "땅타입 기술을 지닌 포켓몬이 땅 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Icium Z": {
     "name": "얼음Z",
     "type": "Ice",
-    "description": "얼음 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "얼음타입 기술을 지닌 포켓몬이 얼음 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -127,7 +127,7 @@
     ],
     "from": "Darkest Lariat",
     "move": "Malicious Moonsault",
-    "description": "어흥염의 DD래리어트을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "DD래리어트 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -140,7 +140,7 @@
     ],
     "from": "Clanging Scales",
     "move": "Clangorous Soulblaze",
-    "description": "짜랑고우거 / Kommo-o-Totem의 스케일노이즈을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "스케일노이즈 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -153,7 +153,7 @@
     ],
     "from": "Moongeist Beam",
     "move": "Menacing Moonraze Maelstrom",
-    "description": "루나아라 / Necrozma-Dawn-Wings의 섀도레이을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "섀도레이 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -167,7 +167,7 @@
     ],
     "from": "Stone Edge",
     "move": "Splintered Stormshards",
-    "description": "루가루암 / Lycanroc-Midnight / Lycanroc-Dusk의 스톤에지을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "스톤에지 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -179,7 +179,7 @@
     ],
     "from": "Spectral Thief",
     "move": "Soul-Stealing 7-Star Strike",
-    "description": "마샤도의 섀도스틸을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "섀도스틸 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -191,7 +191,7 @@
     ],
     "from": "Psychic",
     "move": "Genesis Supernova",
-    "description": "뮤의 사이코키네시스을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "사이코키네시스 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -206,14 +206,14 @@
     ],
     "from": "Play Rough",
     "move": "Let's Snuggle Forever",
-    "description": "따라큐 / Mimikyu-Busted / Mimikyu-Totem / Mimikyu-Busted-Totem의 치근거리기을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "치근거리기 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Normalium Z": {
     "name": "노말Z",
     "type": "Normal",
-    "description": "노말 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "노말타입 기술을 지닌 포켓몬이 노말 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -225,7 +225,7 @@
     ],
     "from": "Volt Tackle",
     "move": "Catastropika",
-    "description": "피카츄의 볼트태클을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "볼트태클 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -243,14 +243,14 @@
     ],
     "from": "Thunderbolt",
     "move": "10,000,000 Volt Thunderbolt",
-    "description": "Pikachu-Original / Pikachu-Hoenn / Pikachu-Sinnoh / Pikachu-Unova / Pikachu-Kalos / Pikachu-Alola / Pikachu-Partner의 10만볼트을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "10만볼트 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Poisonium Z": {
     "name": "독Z",
     "type": "Poison",
-    "description": "독 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "독타입 기술을 지닌 포켓몬이 독 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -262,21 +262,21 @@
     ],
     "from": "Sparkling Aria",
     "move": "Oceanic Operetta",
-    "description": "누리레느의 물거품아리아을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "물거품아리아 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Psychium Z": {
     "name": "에스퍼Z",
     "type": "Psychic",
-    "description": "에스퍼 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "에스퍼타입 기술을 지닌 포켓몬이 에스퍼 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Rockium Z": {
     "name": "바위Z",
     "type": "Rock",
-    "description": "바위 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "바위타입 기술을 지닌 포켓몬이 바위 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -288,7 +288,7 @@
     ],
     "from": "Giga Impact",
     "move": "Pulverizing Pancake",
-    "description": "잠만보의 기가임팩트을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "기가임팩트 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -301,14 +301,14 @@
     ],
     "from": "Sunsteel Strike",
     "move": "Searing Sunraze Smash",
-    "description": "솔가레오 / Necrozma-Dusk-Mane의 메테오드라이브을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "메테오드라이브 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Steelium Z": {
     "name": "강철Z",
     "type": "Steel",
-    "description": "강철 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "강철타입 기술을 지닌 포켓몬이 강철 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
@@ -323,14 +323,14 @@
     ],
     "from": "Nature's Madness",
     "move": "Guardian of Alola",
-    "description": "카푸꼬꼬꼭 / 카푸나비나 / 카푸브루루 / 카푸느지느의 자연의분노을 전용 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "자연의분노 기술을 지닌 알맞은 포켓몬이 전용 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   },
   "Waterium Z": {
     "name": "물Z",
     "type": "Water",
-    "description": "물 타입 기술을 Z기술로 강화합니다. 팀당 배틀 1회. 크리스탈은 소모되지 않습니다.",
+    "description": "물타입 기술을 지닌 포켓몬이 물 Z기술을 사용할 수 있게 해주는 결정.",
     "price": 3000,
     "consumable": false
   }

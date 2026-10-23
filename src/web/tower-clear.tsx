@@ -21,7 +21,7 @@ export function TowerClear({tower,onNewRun}: {tower:TowerView;onNewRun:()=>void}
       <div className="clear-roster">{run.roster.map((name,index)=><div key={name}><span className="clear-partner-number">{String(index+1).padStart(2,'0')}</span><img src={spriteUrl(name)} alt={pokemonName(name)} width={110} height={110} onError={e=>{e.currentTarget.style.visibility='hidden';}}/><strong>{pokemonName(name)}</strong></div>)}</div>
     </section>
     <div className="clear-stats"><div><span>정복한 층</span><strong>{run.totalFloors}<small>층</small></strong></div><div><span>배틀 승리</span><strong>{run.victories}<small>회</small></strong></div><div><span>이번 도전에서 모은 보상</span><strong data-testid="clear-earned">{run.earnedCoins.toLocaleString()}<small>코인</small></strong></div></div>
-    <p className="clear-saved">성장 포인트 +{run.growthReward}P 지급 완료 · 보유 {tower.growthPoints.toLocaleString()}P<br/>정복 기록과 도감 해금이 저장됐어요. 다음 도전은 타워 코인 0부터 시작합니다.</p>
+    <p className="clear-saved">이번 도전 성장 포인트 총 {run.growthReward}P · 층별 지급분 포함 · 보유 {tower.growthPoints.toLocaleString()}P<br/>정복 기록과 도감 해금이 저장됐어요. 다음 도전은 타워 코인 0부터 시작합니다.</p>
     <div className="clear-actions"><a href="/" className="clear-home">타이틀로 돌아가기</a><button ref={retry} className="primary-button" onClick={onNewRun}>새로운 팀으로 다시 도전 ↗</button></div>
   </main>;
 }

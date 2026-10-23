@@ -38,7 +38,7 @@ for(const t of kalosTrainers)test(`${t.id}: fixed legal sets, varied triples, ac
    assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION));
    const enabled=normalNpcGimmicksEnabled(floor,normalNpcCategory(sample.role,sample.id,sample.kind));
    assert.equal(packedNpcRule(team.map(p=>({item:p.item??''})),0),enabled&&t.mega?'mega':'basic');
-   for(const p of team)assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),Math.min(66,towerDifficulty(floor).points));
+   for(const p of team)assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),Math.min(66,(template.gate50?46:towerDifficulty(floor).points)));
    combinations.add([...names].sort().join(','));
   }
   assert.ok(combinations.size>=4,'Pool collapsed');

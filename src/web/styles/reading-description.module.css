@@ -1,0 +1,4 @@
+.scope {position:relative;}
+:global(body) :where(.scope).description.description.description {display:block;min-height:0;flex:1 1 auto;overflow-y:auto;scrollbar-width:none;max-height:5.2em;line-height:1.6;overscroll-behavior:contain;-webkit-line-clamp:unset;}
+.description::-webkit-scrollbar {display:none;}
+.description:focus-visible {outline:1px dotted var(--menu-focus);outline-offset:3px;}

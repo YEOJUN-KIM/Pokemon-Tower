@@ -31,7 +31,7 @@ for(const id of ids){
    const seed:[number,number,number,number]=[n,2,3,4],team=generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION),names=team.map(p=>p.name);
    assert.equal(team.length,3);assert.equal(new Set(names).size,3);assert.ok(names.includes(source.ace));assert.ok(names.includes(source.signature!.species));assert.ok(satisfiesSelectionRules(names,source.selectionRules));
    assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION));
-   for(const p of team){assert.ok(source.team.some(s=>s.species===p.name));assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),towerDifficulty(floor).points);assert.equal(p.profile!.nature,'Serious');}
+   for(const p of team){assert.ok(source.team.some(s=>s.species===p.name));assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),(normalNpcTemplate(id,floor,sample.role)?.gate50?46:towerDifficulty(floor).points));assert.equal(p.profile!.nature,'Serious');}
    assert.equal(npcAi(floor,sample).tier,sample.role==='champion'||floor>=50?'expert':'tactical');
    combinations.add([...names].sort().join(','));orders.add(names.join(','));
   }

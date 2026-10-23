@@ -1,3 +1,4 @@
+import {namedOpponentIVs} from '../src/server/named-opponent-ivs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
@@ -8,7 +9,7 @@ import design from '../scripts/data/npc/alola-design.json' with {type:'json'};
 import {alolaTrainers,alolaSample} from '../src/data/alola-trainers';
 import {trainerCatalog} from '../src/data/trainer-catalog';
 import {towerThemes} from '../src/data/tower-themes';
-import {normalNpcTemplate} from '../src/server/npc-templates';
+import {normalNpcTemplate,templateProfile} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
 import {snapshotTrainerEventBattle} from '../src/server/trainer-event-battle';
 import {CURRENT_PROGRESSION} from '../src/data/tower-progression';
@@ -66,6 +67,12 @@ for(const [id,floor,seed] of [['named-hau',50,1],['named-guzma',45,6]] as const)
  // Pin the historical sequence to the configuration stored before advanced switching.
  const ai=npcAi(floor,sample(id));delete ai.advancedSwitch;
  const snapshot=snapshotTrainerEventBattle(`hau-guzma:physical:${seed}`,sample(id),floor,'basic',CURRENT_PROGRESSION),monitor=monitorEntryPolicy(createNpcPolicy(ai));
+ if(id==='named-hau'){
+  // Freeze the pre-feedback 50-floor build to retain the historical replay case.
+  const source=normalNpcTemplate(id,49,'champion')!;
+  const profiles=Object.fromEntries(snapshot.team.map(p=>{const profile=templateProfile(source.team.find(x=>x.species===p.name)!.profile,50);profile.ivs=namedOpponentIVs(p.name,p.moves,50,snapshot.seed,profile);return [p.name,{...profile,gender:'N' as const}];}));
+  snapshot.opponentTeam=packTeam(snapshot.team.map(p=>p.name),profiles,Object.fromEntries(snapshot.team.map(p=>[p.name,p.item??''])));
+ }
  const log=await runBattle({teams:{p1:physicalTeam(),p2:snapshot.opponentTeam},rule:'basic',opponentRule:packedNpcRule(snapshot.team.map(p=>({item:p.item??''})),0),seed:snapshot.seed,player:new DamagePolicy(),opponent:monitor.policy});
  const t=monitor.finish(log);
  if(id==='named-hau'){

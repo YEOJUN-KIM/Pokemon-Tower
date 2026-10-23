@@ -75,7 +75,7 @@ test('capture registers missing moves permanently, optionally swaps the run only
       const next=store.enter('collector',row.run_id,2,starters),active=Showdown.Teams.unpack(store.battle(next).player_team)![0];
       assert.equal(active.moves[3],equip ? 'Earthquake' : saved.profile.moves[3]);
       assert.throws(()=>store.recruit('collector',row.run_id,id,'Charizard',null),/이미 처리/);
-      assert.equal(store.view('collector').growthPoints,0);
+      assert.equal(store.view('collector').growthPoints,20);
     }finally{store.close();}
   }
 });

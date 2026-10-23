@@ -47,7 +47,7 @@ test('one hundred real battle results progress through every checkpoint and only
       }else if(savedBoss){const {npcAi,...identity}=savedBoss;assert.deepEqual(identity,boss);assert.ok(npcAi);}
       else assert.equal(savedBoss,boss);
       const rank=row.trainer?JSON.parse(row.trainer).npcRank:undefined;
-      const points=rank?npcRankTraining(floor,rank).evBudget:towerDifficulty(floor).points;
+      const points=rank?npcRankTraining(floor,rank).evBudget:floor===50?46:towerDifficulty(floor).points;
       assert.equal(original.reduce((sum,set)=>sum+Object.values((set.evs ?? {}) as Record<string,number>).reduce((s,n)=>s+n,0),0),3*points);
       // Weak deterministic opponents isolate progression from win-rate tuning. No winner is injected.
       const enemy=packTeam(['Unown','Luvdisc','Delibird']);

@@ -88,7 +88,7 @@ test('boss identities vary by run, preview agrees with battle, and saved identit
 test('saved normal trainer survives reload and never grants a boss reward',()=>{
   const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);try{store.ensurePlayer('trainer');let id='',row;do{id=store.start('trainer',starters);row=store.battle(id);if(JSON.parse(row.trainer!).role==='villain')store.abandon('trainer',row.run_id);}while(JSON.parse(row.trainer!).role==='villain');assert.equal(row.boss,null);assert.ok(row.trainer);const savedTrainer=JSON.parse(row.trainer!);const common=npcSamples.find(s=>s.id===savedTrainer.id);const sample=common?npcTrainerSample(common,savedTrainer.npcRank):trainerCatalog.find(s=>s.id===savedTrainer.id)!;assert.deepEqual(store.view('trainer').run!.trainer,{...trainerView(sample),npcAi:savedTrainer.npcAi,...(savedTrainer.gimmick?{gimmick:savedTrainer.gimmick}:{}),generation:towerThemes[store.view('trainer').run!.theme!].generation});assert.equal(store.view('trainer').run!.boss,null);
     store.db.prepare('INSERT INTO rewards VALUES (?,?,?)').run(id,'trainer',100);assert.equal(store.view('trainer').run!.restartReward,20);
-    const before=store.view('trainer');store.close();store=new TowerStore(path);assert.deepEqual(store.view('trainer'),before);assert.equal(store.battle(id).opponent_team,row.opponent_team);
+    const before=store.view('trainer');store.close();store=new TowerStore(path);assert.deepEqual(store.view('trainer'),{...before,growthPoints:before.growthPoints+20,run:{...before.run!,restartReward:0}});assert.equal(store.battle(id).opponent_team,row.opponent_team);
   }finally{store.close();}
 });
 test('version ten migration preserves existing parties and creates nullable trainer metadata',()=>{

@@ -21,13 +21,13 @@ test('live named teams use the reviewed three members and profiles, scaled to ac
   const team=generateOpponentTeam(floor,[1,2,3,4],[],null,sample,CURRENT_PROGRESSION);
   assert.equal(team.length,3);if(!source.select)assert.deepEqual(team.map(p=>p.name).sort(),source.team.map(p=>p.species).sort());else assert.ok(team.every(p=>source.team.some(s=>s.species===p.name)));
   for(const entry of team){const original:{species:string;profile:TrainingProfile}=source.team.find(p=>p.species===entry.name)!;
-   const expected=templateProfile(original.profile,floor);
-   expected.ivs=namedOpponentIVs(entry.name,entry.moves,floor,[1,2,3,4],expected);
+   const expected=templateProfile(original.profile,floor,source.gate50);
+   if(!source.gate50)expected.ivs=namedOpponentIVs(entry.name,entry.moves,floor,[1,2,3,4],expected);
    assert.deepEqual(entry.profile,expected);
    assert.deepEqual(entry.moves,original.profile.moves);
    assert.equal(entry.ability,original.profile.ability);
    assert.ok(Object.values(entry.profile!.ivs).every(v=>v>=0&&v<=31));
-   assert.equal(Object.values(entry.profile!.evs).reduce((a,b)=>a+b,0),Math.min(Object.values(original.profile.evs).reduce((a,b)=>a+b,0),towerDifficulty(floor).points));
+   assert.equal(Object.values(entry.profile!.evs).reduce((a,b)=>a+b,0),Math.min(Object.values(original.profile.evs).reduce((a,b)=>a+b,0),(source.gate50?46:towerDifficulty(floor).points)));
   }
  }
  const iris=normalNpcTemplate('named-iris',50,'champion')!;
@@ -46,8 +46,8 @@ test('stored champion teams retain template nature, ability, tools and stats acr
    const row=store.battle(store.enter('templates',first.run_id,floor,starters));
    const template=normalNpcTemplate('named-cynthia',floor,'champion')!,sets=Showdown.Teams.unpack(row.opponent_team)!;
    assert.equal(sets.length,3);assert.ok(sets.some(s=>s.species==='Garchomp'));assert.ok(sets.every(s=>template.team.some(p=>p.species===s.species)));
-   for(const set of sets){const source=template.team.find(p=>p.species===set.species)!,profile=templateProfile(source.profile,floor);
-    profile.ivs=namedOpponentIVs(set.species,source.profile.moves,floor,JSON.parse(row.seed),profile);
+   for(const set of sets){const source=template.team.find(p=>p.species===set.species)!,profile=templateProfile(source.profile,floor,template.gate50);
+    if(!template.gate50)profile.ivs=namedOpponentIVs(set.species,source.profile.moves,floor,JSON.parse(row.seed),profile);
     assert.equal(set.item,source.item);assert.equal(set.nature,profile.nature);assert.equal(set.ability,profile.ability);
     assert.deepEqual(set.ivs ?? {hp:31,atk:31,def:31,spa:31,spd:31,spe:31},profile.ivs);assert.deepEqual(set.evs,profile.evs);assert.deepEqual(set.moves,profile.moves);
    }

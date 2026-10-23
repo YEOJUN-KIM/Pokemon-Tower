@@ -600,3 +600,18 @@
     opacity: 0;
   }
 }
+
+/* Focus lifts the symbol; activation adds a slower, persistent aura. */
+
+:global(body) :where(.scope)[data-ui-screen="battle"] :global(button.gimmick-icon-button>:is(img,svg,.gimmick-item-visual)) {transition:transform .2s ease,filter .2s ease;transform-origin:center;}
+:global(body) :where(.scope)[data-ui-screen="battle"] :global(button.gimmick-icon-button:is([data-game-cursor=true],:focus-visible,:hover):not(:disabled)>:is(img,svg,.gimmick-item-visual)) {transform:scale(1.045);filter:brightness(1.15) drop-shadow(0 0 5px var(--gimmick-color));}
+:global(body) :where(.scope)[data-ui-screen="battle"] :global(button.gimmick-icon-button:is([data-game-cursor=true],:focus-visible,:hover):not(:disabled)>span:last-of-type) {color:#fff6c7;text-shadow:0 0 6px var(--gimmick-color);}
+:global(body) :where(.scope)[data-ui-screen="battle"] :global(button.gimmick-icon-button[aria-pressed=true]:not(:disabled)>:is(img,svg,.gimmick-item-visual)) {animation:selected-symbol-breathe 3.2s ease-in-out infinite;}
+:global(body) :where(.scope)[data-ui-screen="battle"] :global(button.gimmick-icon-button[aria-pressed=true]:not(:disabled):before) {opacity:1;animation:selected-aura-breathe 3.2s ease-in-out infinite;}
+:global(body) :where(.scope)[data-ui-screen="battle"] :global(button.gimmick-icon-button[aria-pressed=true]>span:last-of-type) {color:#ffe6a0;text-shadow:0 0 8px var(--gimmick-color);}
+@keyframes selected-symbol-breathe {0%,100%{transform:scale(1.07);filter:brightness(1.2) drop-shadow(0 0 8px var(--gimmick-color));}50%{transform:scale(1.12);filter:brightness(1.35) drop-shadow(0 0 13px var(--gimmick-color));}}
+@keyframes selected-aura-breathe {0%,100%{transform:scale(.95);opacity:.6;}50%{transform:scale(1.12);opacity:.9;}}
+@media(prefers-reduced-motion:reduce){
+ :global(body) :where(.scope)[data-ui-screen="battle"] :global(button.gimmick-icon-button[aria-pressed=true]:not(:disabled)>:is(img,svg,.gimmick-item-visual)) {animation:none;transform:scale(1.07);filter:brightness(1.2) drop-shadow(0 0 8px var(--gimmick-color));}
+ :global(body) :where(.scope)[data-ui-screen="battle"] :global(button.gimmick-icon-button[aria-pressed=true]:not(:disabled):before) {animation:none;opacity:.8;}
+}

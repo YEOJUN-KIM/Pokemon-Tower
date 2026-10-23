@@ -46,7 +46,7 @@ test('run point edits validate against run IVs and preserve distinct permanent I
    assert.throws(()=>store.train(owner,'Charizard',entry.revision,invalid,request),/개체값/);
    const draft=structuredClone(entry.profile);draft.evs.hp=7;store.train(owner,'Charizard',entry.revision,draft,request);
    const saved=store.view(owner),runProfile=saved.run!.adjustment!.entries.find(e=>e.species==='Charizard')!.profile;
-   assert.equal(saved.growthPoints,944);assert.equal(runProfile.evs.hp,7);assert.equal(runProfile.ivs.hp,runIV);
+   assert.equal(saved.growthPoints,964);assert.equal(runProfile.evs.hp,7);assert.equal(runProfile.ivs.hp,runIV);
    const collection=store.trainingCollection(owner).find(e=>e.species==='Charizard')!.profile;assert.equal(collection.evs.hp,7);assert.equal(collection.ivs.hp,permanentIV);
    assert.equal(store.battle(id).player_team,originalTeam);
    const next=store.enter(owner,battle.run_id,2,['Charizard','Blastoise','Venusaur']),team=Showdown.Teams.unpack(store.battle(next).player_team)!;

@@ -86,6 +86,9 @@ CREATE TABLE IF NOT EXISTS run_upgrades (
   start_floor INTEGER NOT NULL, end_floor INTEGER NOT NULL,
   PRIMARY KEY(run_id,kind)
 ) STRICT;
+CREATE TABLE IF NOT EXISTS run_growth_progress (
+ run_id TEXT PRIMARY KEY REFERENCES runs(id), paid INTEGER NOT NULL CHECK(paid>=0)
+) STRICT;
 CREATE TABLE IF NOT EXISTS growth_rewards (
   run_id TEXT PRIMARY KEY REFERENCES runs(id), amount INTEGER NOT NULL CHECK(amount>=0)
 ) STRICT;

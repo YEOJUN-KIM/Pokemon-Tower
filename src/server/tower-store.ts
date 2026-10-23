@@ -85,6 +85,8 @@ export class TowerStore {
     if (path !== ':memory:') mkdirSync(dirname(path), {recursive: true});
     this.db = new DatabaseSync(path);
     initializeTowerDatabase(this.db,()=>this.repairArchivedOwnership(),()=>this.repairFormHeldItems());
+    // Catch up old active runs once; cumulative receipts survive reconnects.
+    this.tx(()=>{for(const run of this.db.prepare("SELECT id FROM runs WHERE state IN ('battle','select','recruit','lost') AND NOT EXISTS(SELECT 1 FROM growth_rewards WHERE run_id=runs.id)").all() as {id:string}[])this.payFloorGrowth(run.id);});
   }
   private repairFormHeldItems(){
     // Preserve masks already granted by old selected-form saves exactly once.
@@ -263,7 +265,7 @@ export class TowerStore {
       event:row.state==='select'&&!retryBattle?this.events.view(row.id):null,
       earnedCoins: (earned?.coins ?? 0)+this.events.earnedCoins(row.id), victories: earned?.wins ?? 0,
       growthReward: (this.db.prepare('SELECT amount FROM growth_rewards WHERE run_id=?').get(row.id) as {amount:number}|undefined)?.amount ?? 0,
-      restartReward:this.growthBase(row.id),
+      restartReward:Math.max(0,this.growthBase(row.id)-this.paidFloorGrowth(row.id)),
       upgrades: this.activeUpgrades(row.id,row.floor).map(upgrade=>({kind:upgrade.kind,remainingFloors:['recruit','cleared'].includes(row.state) ? Math.max(0,upgrade.end_floor-row.floor) : upgrade.end_floor-row.floor+1})),
       heldItems:this.heldItems(row.id),trainerEquipment:this.trainerEquipment(row.id),
       teraTickets:this.teraQuantity(row.id),
@@ -692,6 +694,7 @@ export class TowerStore {
         if(event?.rank==='boss')this.db.prepare('UPDATE run_villain_campaigns SET defeated_battle_id=? WHERE run_id=? AND defeated_battle_id IS NULL').run(id,run.id);
         this.db.prepare('INSERT INTO rewards VALUES (?, ?, ?)').run(id, run.player_id, battle.reward);
         grantCoins(this.db,run.player_id,battle.reward);
+        this.payFloorGrowth(run.id);
         if(this.route(run.id)&&battle.stage===0&&hiddenBossEligible(this.runTheme(run.id),run.floor,battle.boss?JSON.parse(battle.boss).id:undefined)){
           this.scheduleHiddenBoss(run,battle);return;
         }
@@ -864,10 +867,18 @@ export class TowerStore {
       if(!run)new TutorialService(this.db).upgraded(owner,name,before.profile,profile);
     });
   }
+  private paidFloorGrowth(runId:string){return (this.db.prepare('SELECT paid FROM run_growth_progress WHERE run_id=?').get(runId) as {paid:number}|undefined)?.paid??0;}
+  private payFloorGrowth(runId:string){
+    if(this.db.prepare('SELECT 1 FROM growth_rewards WHERE run_id=?').get(runId))return;
+    const earned=this.growthBase(runId),delta=Math.max(0,earned-this.paidFloorGrowth(runId));
+    if(!delta)return;
+    this.db.prepare('INSERT INTO run_growth_progress VALUES (?,?) ON CONFLICT(run_id) DO UPDATE SET paid=excluded.paid').run(runId,earned);
+    this.db.prepare('UPDATE players SET growth_points=growth_points+? WHERE id=(SELECT player_id FROM runs WHERE id=?)').run(delta,runId);
+  }
   private settleGrowth(runId:string,outcome:'lost'|'cleared'|'abandoned') {
     const amount=this.growthBase(runId)+(outcome==='cleared' ? 100 : outcome==='lost' ? 10 : 0);
     const saved=this.db.prepare('INSERT OR IGNORE INTO growth_rewards VALUES (?,?)').run(runId,amount);
-    if(saved.changes) this.db.prepare('UPDATE players SET growth_points=growth_points+? WHERE id=(SELECT player_id FROM runs WHERE id=?)').run(amount,runId);
+    if(saved.changes) this.db.prepare('UPDATE players SET growth_points=growth_points+? WHERE id=(SELECT player_id FROM runs WHERE id=?)').run(Math.max(0,amount-this.paidFloorGrowth(runId)),runId);
   }
   close() { this.db.close(); }
 }

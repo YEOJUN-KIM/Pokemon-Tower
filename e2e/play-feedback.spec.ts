@@ -16,6 +16,22 @@ for(const width of [1280,1600]){
    await page.setViewportSize({width,height:width<400?740:900});await page.goto('/battle');
    await expect(page.locator('[data-event-choice="challenge"]')).toBeVisible();
    await expect(page.locator('[data-event-choice="skip"]')).toBeVisible();
+   for(const height of [900,720]){
+    await page.setViewportSize({width,height});
+    await expect(page.locator('[data-event-choice="challenge"]')).toBeInViewport({ratio:1});
+    await expect(page.locator('[data-event-choice="skip"]')).toBeInViewport({ratio:1});
+    const challengeBounds=await page.locator('[data-event-choice="challenge"]').boundingBox();
+    const skipBounds=await page.locator('[data-event-choice="skip"]').boundingBox();
+    expect(skipBounds!.y).toBeGreaterThanOrEqual(challengeBounds!.y+challengeBounds!.height);
+    expect(skipBounds!.x).toBeCloseTo(challengeBounds!.x,0);
+    const overflow=await page.locator('[aria-label="이벤트 상황"]').evaluate(el=>{
+     const actions=el.querySelector('.event-choices')!;
+     return {panel:el.scrollHeight>el.clientHeight+1,actions:actions.scrollHeight>actions.clientHeight+1};
+    });
+    expect(overflow).toEqual({panel:false,actions:false});
+   }
+   mkdirSync('artifacts/qa/play-feedback',{recursive:true});
+   await page.screenshot({path:`artifacts/qa/play-feedback/raid-choices-${width}.png`});
    expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
    await page.locator('[data-event-choice="skip"]').click();
    await expect(page.locator('[data-event-choice="skip"]')).toHaveCount(0);

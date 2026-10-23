@@ -41,6 +41,7 @@ pokemon-backups/
 # Other public/vendor packs remain tracked until reproduction is verified.
 /public/vendor/pokerogue/
 /public/vendor/showdown/pokemon/
+/public/vendor/pokeapi/
 /external/pokemon-ip/*
 !/external/pokemon-ip/README.md
 /external/user-provided/unverified/*

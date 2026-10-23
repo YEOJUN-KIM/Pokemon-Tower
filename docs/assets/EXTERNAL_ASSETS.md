@@ -4,11 +4,11 @@
 
 ## 현재 파일과 사용처
 
-파일 수·용량에는 해당 그룹의 manifest·고지가 포함된다. 혼합 그룹은 provider별 권리를 하나로 취급하지 않는다. 아래 표는 기반 조사 결과에 현재 추적 상태를 반영한다. PokéRogue와 Showdown Pokémon runtime은 독립 복원 검증 후 추적 해제했으며 다른 팩의 추적 정책은 유지한다.
+파일 수·용량에는 해당 그룹의 manifest·고지가 포함된다. 혼합 그룹은 provider별 권리를 하나로 취급하지 않는다. 아래 표는 기반 조사 결과에 현재 추적 상태를 반영한다. PokéRogue·Showdown Pokémon·PokeAPI runtime은 독립 복원 검증 후 추적 해제했으며 다른 자산의 추적 정책은 유지한다.
 
 | Provider | 현재 경로 | 분류 | 파일 / MiB | 실제 사용·코드 | source record | Git 추적 | 이동 위험 / 향후 external 위치 |
 |---|---|---|---|---|---|---|---|
-| PokeAPI | `public/vendor/pokeapi` | Pokémon IP | 4648 / 85.310 | 사용; pokemon-sprites / local-pokemon-sprites | `docs/assets/manifests/local-pokemon-sprites.json` | 4648/4648 | 높음; `pokemon-ip/pokeapi` |
+| PokeAPI | `public/vendor/pokeapi` | Pokémon IP | 4648 / 85.310 | 사용; pokemon-sprites / local-pokemon-sprites | `docs/assets/manifests/local-pokemon-sprites.json` | 0/4648 (공식 pinned 복원) | 독립 복원 READY; `pokemon-ip/pokeapi` |
 | Showdown sprites | `public/vendor/showdown/pokemon` | Pokémon IP / 커뮤니티 그림 | 1393 / 34.790 | 사용; pixel-sprites / registry | `docs/assets/manifests/pixel-sprite-assets.json` | 0/1393 (고정 snapshot 복원) | 독립 복원 READY; `pokemon-ip/showdown/pokemon` |
 | PokéRogue | `public/vendor/pokerogue` | Pokémon IP / 파일별 고지 | 2002 / 37.556 | 사용; additional-animations.json → pokemon-sprites | `public/vendor/pokerogue/sources.json` | 0/2002 (복원 필요) | 독립 복원 READY; `pokemon-ip/pokerogue` |
 | Showdown VFX | `public/vendor/showdown/fx` | 명시된 22개 CC0 파일 | 22 / 0.171 | 사용; move-visuals / registry | `docs/assets/manifests/move-effects-integration.json` | 22/22 | 중간; `third-party/showdown-fx` |
@@ -172,3 +172,14 @@ pnpm assets:showdown-pokemon:verify
 ```
 
 source cache는 `external/pokemon-ip/showdown/pokemon/source/`, runtime은 기존 `public/vendor/showdown/pokemon/`이다. 일반 테스트에는 다운로드를 요구하지 않고 배포 준비 검사는 Showdown과 PokéRogue 전체 hash를 요구한다. 온라인·오프라인·clean 환경·fallback·build/test READY 검증 후 Showdown runtime 전체를 index에서 제거했다. 로컬 1,393개는 유지하고 `/public/vendor/showdown/pokemon/`을 ignore한다. PokeAPI·Showdown fx·다른 자산은 이번 범위에 포함하지 않는다.
+
+### PokeAPI Pokémon 독립 복원
+
+기준 HEAD `42c6e5a254df9c768798f441df0dd6413aff40cf`의 4,648개 / 89,453,521 bytes 전체를 golden으로 고정했다. 공식 PokeAPI/sprites commit `a3a1432e688ea028f12c51371d5253037cb9f17b`에 동일 path·Git blob이 전부 있어 단일 공식 upstream 복원 방식을 사용한다. 프로젝트 snapshot fallback은 필요 없다. 역사 local-pokemon-sprites.json 7,370개 기록은 변경하지 않는다. [source·복원·검증 안내](POKEAPI_RESTORE.md)를 따른다.
+
+```sh
+pnpm assets:pokeapi
+pnpm assets:pokeapi:verify
+```
+
+source cache는 `external/pokemon-ip/pokeapi/source/`, runtime은 기존 `public/vendor/pokeapi/`이다. 일반 test/build는 팩 전체 부재와 fallback을 허용하고, partial pack의 verify와 배포는 실패한다. 배포 준비 검사는 이제 PokéRogue·Showdown Pokémon·PokeAPI 세 팩 전체를 요구한다. 모든 READY 검증 후 PokeAPI runtime 4,648개를 Git index에서 제거했다. 로컬 파일은 유지하고 `/public/vendor/pokeapi/`를 ignore한다. scripts·source lock·golden·문서는 Git에 보존한다.

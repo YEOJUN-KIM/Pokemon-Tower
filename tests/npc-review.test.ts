@@ -1,3 +1,4 @@
+import {assertSpriteFiles} from './helpers/runtime-assets';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import drafts from '../scripts/data/npc/npc-team-samples.json' with {type:'json'};
@@ -8,7 +9,6 @@ import {runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
 import {canEquipGimmick} from '../src/data/gimmicks';
 import {pokemonName,describeLine,species} from '../src/web/catalog';
-import {existsSync} from 'node:fs';
 
 test('reviewed replacements preserve the exact triples, including campaign boss aliases',()=>{
  const expected:Record<string,string[]>={
@@ -47,7 +47,7 @@ test('Primal Groudon automatically reverts in basic mode, shows its form and res
  }finally{await session.dispose();}
  assert.equal(pokemonName('Groudon-Primal'),'원시그란돈');assert.equal(describeLine('|-primal|p2a: Groudon'),'상대 그란돈 원시회귀!');
  assert.deepEqual(species['Groudon-Primal'].types,['땅','불꽃']);
- assert.ok(existsSync('public/vendor/pokeapi/pokemon/10078.png'));
+ assertSpriteFiles(['/vendor/pokeapi/pokemon/10078.png']);
  const log=await runBattle({rule:'basic',opponentRule:'basic',teams,seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
  assert.ok(log.publicProtocol.some(l=>l.startsWith('|-primal|p2')));
  assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));

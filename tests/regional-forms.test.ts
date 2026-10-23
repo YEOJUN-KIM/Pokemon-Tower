@@ -1,6 +1,6 @@
+import {assertSpriteFiles} from './helpers/runtime-assets';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync} from 'node:fs';
 import Showdown from 'pokemon-showdown';
 import {separateForms} from '../src/data/selectable-forms';
 import {pokedexEntries} from '../src/server/pokedex-entries';
@@ -21,7 +21,7 @@ test('30 regional entries and two family forms are playable beside their origina
   assert.ok(entry,name);assert.equal(entry.battleReady,true);assert.equal(entry.nationalId,native.num);
   assert.equal(entries[index-1].nationalId??entries[index-1].id,native.num,name+' adjacent number');
   assert.equal(entry.name,entries.find(p=>p.species===form.baseSpecies)!.name);assert.equal(entry.generation,{'알로라':7,'가라르':8,'히스이':8,'팔데아':9}[form.region!]);assert.deepEqual(entry.baseStats,native.baseStats);assert.deepEqual(entry.types,form.displayTypes);
-  assert.ok(existsSync(`public/vendor/pokeapi/pokemon/${form.id}.png`),name);
+  assertSpriteFiles([`/vendor/pokeapi/pokemon/${form.id}.png`],name);
   validateProfile(name,defaultProfile(name));
   assert.equal(new Showdown.TeamValidator(FORMAT).validateTeam(Showdown.Teams.unpack(packTeam([name,'Blastoise','Venusaur']))!),null,name);
  }

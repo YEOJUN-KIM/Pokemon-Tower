@@ -1,3 +1,4 @@
+import {assertSpriteFiles} from './helpers/runtime-assets';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import Showdown from 'pokemon-showdown';
@@ -12,7 +13,7 @@ test('the dex and egg collection retain four approved unevolved species, includi
  for(const name of ['Clefairy','Weepinbell','Golbat','Gligar','Chansey','Dusclops','Charmander'])assert.ok(!entries.some(entry=>entry.species===name));
  for(const name of ['Pikachu','Duraludon'])assert.ok(entries.find(entry=>entry.species===name)!.canGigantamax);
  for(const id of [4,35,42,70])for(const side of ['','shiny/','back/','back/shiny/'])assert.ok(!existsSync('public/vendor/pokeapi/pokemon/'+side+id+'.png'));
- for(const id of [123,233])assert.ok(existsSync('public/vendor/pokeapi/pokemon/'+id+'.png'));
+ for(const id of [123,233])assertSpriteFiles(['/vendor/pokeapi/pokemon/'+id+'.png']);
 });
 
 test('old ownership is preserved but excluded unevolved species cannot be selected for a new run',()=>{

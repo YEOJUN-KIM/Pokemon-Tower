@@ -1,7 +1,7 @@
+import {assertSpriteFiles} from './helpers/runtime-assets';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
-import {existsSync} from 'node:fs';
 import Showdown from 'pokemon-showdown';
 import {selectableForms,familyForms,separateForms} from '../src/data/selectable-forms';
 import {pokedexEntries} from '../src/server/pokedex-entries';
@@ -28,7 +28,7 @@ test('five Rotom forms are separate playable dex entries with the shared nationa
 test('26 family forms expose real dex stats and exclude automatic and all-type form lists',()=>{
  const dex=pokedexEntries();assert.equal(Object.values(selectableForms).filter(form=>form.collection==='family').length,26);
  for(const [name,form] of Object.entries(selectableForms)){
-  assert.ok(existsSync(`public/vendor/pokeapi/pokemon/${form.id}.png`),name);
+  assertSpriteFiles([`/vendor/pokeapi/pokemon/${form.id}.png`],name);
   if(form.collection==='separate')continue;
   const base=dex.find(p=>p.species===form.baseSpecies)!,preview=base.forms!.find(p=>p.species===name)!;
   assert.ok(preview,name);assert.equal(preview.kind,'selectable');assert.deepEqual(preview.baseStats,Showdown.Dex.species.get(name).baseStats);

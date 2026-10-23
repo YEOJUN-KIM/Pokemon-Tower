@@ -6,7 +6,7 @@ Node.js 24 / 단일 서버 / 영구 저장 디스크를 기준으로 준비했�
 
 ## 현재 패키징 기준
 
-PokéRogue·Showdown Pokémon runtime 전체 hash와 문서·스크립트 입력을 안전하게 검사하려면 `node scripts/package-deploy.mjs --check`를 실행한다. 빌드·복사·서버·DB 작업 없이 검사한다. PokéRogue가 없거나 손상됐으면 `pnpm assets:pokerogue`와 `pnpm assets:pokerogue:verify`를 안내하며 실패한다. Showdown은 `pnpm assets:showdown-pokemon`과 `pnpm assets:showdown-pokemon:verify`도 실행한다. 새 clone과 Docker build 전에 Python/Pillow 준비 및 [팩 복원](../assets/POKEROGUE_RESTORE.md)을 완료한다. 패키지의 `RELEASE_NOTES.md`는 Git 추적 [릴리스 기록](../releases/NONCOMBAT_EVENTS_RELEASE.md)에서 가져오며 artifacts는 필요 없다. 해당 기록의 옛 수치·schema는 현재 배포 설정이 아니다.
+PokéRogue·Showdown Pokémon·PokeAPI runtime 전체 hash와 문서·스크립트 입력을 안전하게 검사하려면 `node scripts/package-deploy.mjs --check`를 실행한다. 빌드·복사·서버·DB 작업 없이 검사한다. PokéRogue가 없거나 손상됐으면 `pnpm assets:pokerogue`와 `pnpm assets:pokerogue:verify`를 안내하며 실패한다. Showdown은 `pnpm assets:showdown-pokemon`과 `pnpm assets:showdown-pokemon:verify`, PokeAPI는 `pnpm assets:pokeapi`와 `pnpm assets:pokeapi:verify`도 실행한다. 새 clone과 Docker build 전에 Python/Pillow 준비 및 [팩 복원](../assets/POKEROGUE_RESTORE.md)을 완료한다. 패키지의 `RELEASE_NOTES.md`는 Git 추적 [릴리스 기록](../releases/NONCOMBAT_EVENTS_RELEASE.md)에서 가져오며 artifacts는 필요 없다. 해당 기록의 옛 수치·schema는 현재 배포 설정이 아니다.
 
 - 최신 코드를 `pnpm build` 후 패키징한다. 과거 dist 묶음은 현재 코드/데이터를 포함한다고 가정하지 않는다.
 - 코드 지원 DB schema는 46다. 실제 DB 버전은 별도 확인하고 업데이트 전 SQLite backup API로 백업한다.
@@ -104,3 +104,7 @@ docker compose up -d game
 - 같은 서버 DB의 계정으로 기기·주소 변경 후 다시 로그인해 이어간다. 과거 게스트 저장 연결과 복구 키 보관은 [ACCOUNTS](ACCOUNTS.md)를 참고한다.
 
 `deploy:verify`는 독립 실행 패키지에서 화면·이미지·API·한 턴·재시작·백업 복원을 확인한다. `deploy:verify:docker`는 Docker 이미지의 실행 및 컨테이너 교체 후 저장 유지도 확인한다. 이 검사 결과와 실제 임시 터널·휴대폰·장기 플레이 검증은 구분하며, 공유할 실제 주소에서 별도로 확인한다.
+
+### 새 clone의 Docker 자산 준비
+
+Dockerfile은 `COPY . .` 뒤에 package-deploy --check를 실행한다. 세 generated sprite pack은 Git에서 직접 받는 자산이 아니므로 [전체 복원 절차](../assets/POKEAPI_RESTORE.md#새-clone과-배포)에 따라 호스트에서 준비한 후 Docker build를 실행한다. 자산 없이 build context를 만들면 명확한 readiness 오류로 실패한다. 일반 개발 build와 달리 배포는 완전한 팩을 요구하며 Docker 내부 자동 다운로드는 하지 않는다.

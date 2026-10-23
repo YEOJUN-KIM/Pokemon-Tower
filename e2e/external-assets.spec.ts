@@ -5,7 +5,7 @@ import {TowerStore} from '../src/server/tower-store';
 import {Accounts} from '../src/server/accounts';
 import {packTeam} from '../src/data/teams';
 
-for(const lead of ['Meowscarada','Miraidon'])test(`missing external images, VFX, audio and font do not block a real battle turn (${lead})`,async({page,context},info)=>{
+for(const lead of ['Meowscarada','Miraidon','Charizard'])test(`missing external images, VFX, audio and font do not block a real battle turn (${lead})`,async({page,context},info)=>{
   const store=new TowerStore('.data/e2e.sqlite'),owner='asset-'+randomUUID();
   let token:string,battleId:string;
   try{
@@ -44,7 +44,8 @@ for(const lead of ['Meowscarada','Miraidon'])test(`missing external images, VFX,
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false',{timeout:20_000});
   await expect(page.getByRole('button',{name:'싸운다',exact:true})).toBeEnabled();
   expect(requested.some(url=>url.startsWith('/vendor/'))).toBe(true);
-  expect(requested.some(url=>url.startsWith(lead==='Miraidon'?'/vendor/showdown/pokemon/':'/vendor/pokerogue/'))).toBe(true);
+  const provider=lead==='Miraidon'?'showdown/pokemon':lead==='Charizard'?'pokeapi':'pokerogue';
+  expect(requested.some(url=>url.startsWith(`/vendor/${provider}/`))).toBe(true);
   expect(requested.some(url=>url.startsWith('/audio/bgm/'))).toBe(true);
   expect(requested.some(url=>url.startsWith('/audio/cries/'))).toBe(false);
   expect(errors).toEqual([]);

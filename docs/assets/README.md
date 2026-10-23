@@ -22,3 +22,5 @@
 자동 생성 원본은 각 스크립트가 `artifacts/qa/assets/reports/` 또는 `artifacts/reports/npc/`에 기록하는 개별 실행 결과다. 해당 결과는 로컬에 유지할 수 있지만 공식 기준으로 링크하거나 테스트 입력으로 사용하지 않는다. 재실행은 docs 공식본을 덮어쓰지 않는다. 스냅샷 갱신은 자산 변경·차이·권리 표기를 검토한 뒤 명시적으로 수행한다.
 
 음악·장비·알·트레이너 등 기존 게임 자산 옆의 `sources.json`은 계속 그 위치가 기준이다. 생성 sprite pack의 Git 정책과 새 clone 복원은 [PokéRogue](POKEROGUE_RESTORE.md)와 [Showdown Pokémon](SHOWDOWN_POKEMON_RESTORE.md) 및 [PokeAPI](POKEAPI_RESTORE.md) 안내를 따른다. runtime URL과 src/data는 유지한다.
+
+혼합 자산의 현재 소유권과 파일별 golden은 [MIXED_RUNTIME_ASSETS](MIXED_RUNTIME_ASSETS.md)와 [단일 current manifest](manifests/mixed-runtime-assets.json)를 따른다. trainers 194개, gimmicks 146개, items 195개만 외부 복원 대상으로 추적 해제하며 플레이어·generated item PNG/SVG·neutral VFX·사용자 제공 beam과 historical source JSON은 유지한다.

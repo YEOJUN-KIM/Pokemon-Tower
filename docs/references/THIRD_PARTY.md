@@ -175,3 +175,7 @@ PokéAPI item API에서 9종의 sprites.default 주소를 확인하고 PokeAPI/s
 일반·레어·슈퍼레어·이로치 알 PNG 네 장과 뽑기 기계 PNG는 사용자가 2026-10-14 제공한 이미지를 수정 없이 사용합니다. public/sprites/eggs/에 보관하며 [파일별 출처와 SHA-256](../../public/sprites/eggs/sources.json)을 함께 기록합니다. 레어 알 오라·슈퍼레어 후광·이로치 반짝임·부화·기계 들썩임과 알 배출 효과는 화면 CSS에서 추가합니다.
 
 참고 자료의 현재 보관 위치는 `external/third-party/kenney-impact-sounds/`와 `external/reference/showdown/`이다. 두 그룹은 runtime에서 사용하지 않으며 라이선스와 함께 Git에 보존한다. 2026-10-04 manifest는 당시 경로를 유지하며 [현재 위치 매핑](../assets/EXTERNAL_ASSETS.md#비런타임-자료-이동--2026-10-23)을 함께 참고한다.
+
+## 혼합 runtime 소유권과 재현 (2026-10-23)
+
+trainers/gimmicks/items/effects의 원작·커뮤니티·자체·사용자 제공 경계를 [혼합 자산 ownership](../assets/MIXED_RUNTIME_ASSETS.md)에 기록했다. 외부 535개만 고정 소스로 복원하고 자체 제작 19개, 사용자 제공 화염방사 1개, 기존 source JSON 6개는 Git에 유지한다. Showdown과 과거 PokeAPI 도구 2개는 공개 프로젝트 commit `43aa154688a1ef31e75f175ee6bde90198caa58a`를 보존 snapshot으로 사용하며 원래 제공원·크레딧 기록은 변경하지 않는다. PokeAPI 191개, PokeSprite 1개, PokéRogue 1개는 공식 고정 commit을 사용한다. 스냅샷 고정과 Git 추적 변경은 새 이용 허가나 이미지의 권리 이전을 뜻하지 않는다.

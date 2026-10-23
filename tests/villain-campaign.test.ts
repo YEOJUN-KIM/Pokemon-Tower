@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
@@ -30,7 +31,7 @@ test('all ten executive and boss teams retain their ace, distinct tools, legal m
   for(let i=0;i<2000&&!sample;i++)for(let floor=rank==='boss'?75:16;floor<100;floor++){
    const event=villainEncounter(`roster-${i}`,floor,group.id);if(event?.event.rank===rank){sample=event.sample;break;}
   }
-  assert.ok(sample);assert.ok(existsSync(`public/sprites/trainers/${sample.portrait}.png`));
+  assert.ok(sample);assert.ok(publicAssetExists(`public/sprites/trainers/${sample.portrait}.png`));
   const floor=rank==='boss'?75:16;assert.ok(sample.entries!.every(name=>encounterPool(floor).includes(name)));
   for(let seed=1;seed<=3;seed++){
    const team=generateOpponentTeam(floor,[seed,2,3,4],[],null,sample),sets=Showdown.Teams.unpack(packTeam(team.map(p=>p.name)))!;

@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
@@ -64,7 +65,7 @@ test('Flare selects both distinct officers, excludes other scientists and keeps 
  assert.deepEqual([...seen].sort(),['aliana','xerosic']);
  for(const t of kalosTrainers.filter(t=>['grunt','executive','boss'].includes(t.category))){
   const s=sampleFor(t.id),snap=snapshotTrainerEventBattle('kalos-snapshot',s,95,'basic',CURRENT_PROGRESSION);
-  assert.deepEqual(snap,snapshotTrainerEventBattle('kalos-snapshot',s,95,'basic',CURRENT_PROGRESSION));assert.ok(existsSync(`public/sprites/trainers/${s.portrait}.png`));
+  assert.deepEqual(snap,snapshotTrainerEventBattle('kalos-snapshot',s,95,'basic',CURRENT_PROGRESSION));assert.ok(publicAssetExists(`public/sprites/trainers/${s.portrait}.png`));
   const names=Showdown.Teams.unpack(snap.opponentTeam)!.map(p=>p.species);if(t.ace)assert.ok(names.includes(t.ace));assert.equal(snap.trainer.gimmick?.species??null,t.mega);
  }
  assert.deepEqual(normalNpcTemplate('named-lysandre',95,'villain'),{...normalNpcTemplate('flare-boss-lysandre',95,'villain')!,id:'named-lysandre'});

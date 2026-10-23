@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import {readPreHauGuzmaFile as readFileSync} from './hau-guzma-preservation';
 import {kalosTrainers} from '../src/data/kalos-trainers';
 import test from 'node:test';
@@ -68,7 +69,7 @@ test('both Hoenn officers are reachable and use their own portraits, eligibility
   const seen=new Set<string>();
   for(let n=0;n<5000;n++){const e=villainEncounter('hoenn-officers-'+n,56,org,false,false,{gruntWins:100,executiveWins:0});if(e?.event.rank==='executive')seen.add(e.sample.portrait);}
   const leaders=villainLeaders[org];assert.deepEqual([...seen].sort(),[leaders.executive,...leaders.executives!].map(s=>s.portrait).sort());
-  for(const officer of leaders.executives!)assert.ok(existsSync(`public/sprites/trainers/${officer.portrait}.png`));
+  for(const officer of leaders.executives!)assert.ok(publicAssetExists(`public/sprites/trainers/${officer.portrait}.png`));
   for(let n=0;n<100;n++){const e=villainEncounter('hoenn-eligible-'+n,56,org,false,false,{gruntWins:100,executiveWins:0},s=>s.portrait!==leaders.executive.portrait);if(e?.event.rank==='executive')assert.equal(e.sample.portrait,leaders.executives![0].portrait);}
  }
  const matt=normalNpcTemplate('aqua-executive-matt',95,'villain')!,shelly=normalNpcTemplate('aqua-executive-shelly',95,'villain')!;

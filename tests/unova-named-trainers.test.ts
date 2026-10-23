@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import {kalosTrainers} from '../src/data/kalos-trainers';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -65,7 +66,7 @@ test('Unova identities: Champion Iris, veteran Alder, Plasma officers and hidden
  const seen=new Set<string>();
  for(let seed=0;seed<5000;seed++){const e=villainEncounter('unova-officers-'+seed,56,'plasma',false,false,{gruntWins:100,executiveWins:0});if(e?.event.rank==='executive')seen.add(e.sample.portrait);}
  assert.deepEqual([...seen].sort(),['colress','zinzolin']);
- for(const s of [n,villainLeaders.plasma.executive,...villainLeaders.plasma.executives!])assert.ok(existsSync(`public/sprites/trainers/${s.portrait}.png`));
+ for(const s of [n,villainLeaders.plasma.executive,...villainLeaders.plasma.executives!])assert.ok(publicAssetExists(`public/sprites/trainers/${s.portrait}.png`));
  for(let seed=0;seed<200;seed++){const e=villainEncounter('unova-only-colress-'+seed,56,'plasma',false,false,{gruntWins:100,executiveWins:0},s=>s.portrait==='colress');if(e)assert.equal(e.sample.portrait,'colress');}
  assert.deepEqual(normalNpcTemplate('named-ghetsis',95,'villain'),{...normalNpcTemplate('plasma-boss-ghetsis',95,'villain')!,id:'named-ghetsis'});
  assert.ok(normalNpcTemplate('named-ghetsis',95,'villain')!.team.every(p=>p.species!=='Kyurem'));

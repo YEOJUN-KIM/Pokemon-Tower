@@ -1,10 +1,10 @@
 # 외부 자산 분리 기반 · 2026-10-23
 
-기준 HEAD: `f59ffba0b9f027bca0b141d65e4efb0327a265c7`. 이번 단계는 기존 runtime URL을 유지한 resolver·fallback·캐시 복구의 도입이다. 기존 자산 이동·복제·Git 추적 해제는 하지 않았다. 아래 분류는 동봉 고지와 기존 source record에 근거하며 새 이용 허가를 뜻하지 않는다.
+기준 HEAD: `f59ffba0b9f027bca0b141d65e4efb0327a265c7`. 이는 초기 resolver·fallback·캐시 복구 조사 기준이다. 현재 추적 상태는 아래 표와 독립 복원 절에 갱신하며, 혼합 자산의 최신 기준 HEAD와 검증은 MIXED_RUNTIME_ASSETS를 따른다. 아래 분류는 동봉 고지와 기존 source record에 근거하며 새 이용 허가를 뜻하지 않는다.
 
 ## 현재 파일과 사용처
 
-파일 수·용량에는 해당 그룹의 manifest·고지가 포함된다. 혼합 그룹은 provider별 권리를 하나로 취급하지 않는다. 아래 표는 기반 조사 결과에 현재 추적 상태를 반영한다. PokéRogue·Showdown Pokémon·PokeAPI runtime은 독립 복원 검증 후 추적 해제했으며 다른 자산의 추적 정책은 유지한다.
+파일 수·용량에는 해당 그룹의 manifest·고지가 포함된다. 혼합 그룹은 provider별 권리를 하나로 취급하지 않는다. 아래 표는 기반 조사 결과에 현재 추적 상태를 반영한다. PokéRogue·Showdown Pokémon·PokeAPI runtime은 독립 복원 검증 후 추적 해제했으며 혼합 자산은 아래 최신 ownership과 복원 정책을 따른다.
 
 | Provider | 현재 경로 | 분류 | 파일 / MiB | 실제 사용·코드 | source record | Git 추적 | 이동 위험 / 향후 external 위치 |
 |---|---|---|---|---|---|---|---|
@@ -12,9 +12,9 @@
 | Showdown sprites | `public/vendor/showdown/pokemon` | Pokémon IP / 커뮤니티 그림 | 1393 / 34.790 | 사용; pixel-sprites / registry | `docs/assets/manifests/pixel-sprite-assets.json` | 0/1393 (고정 snapshot 복원) | 독립 복원 READY; `pokemon-ip/showdown/pokemon` |
 | PokéRogue | `public/vendor/pokerogue` | Pokémon IP / 파일별 고지 | 2002 / 37.556 | 사용; additional-animations.json → pokemon-sprites | `public/vendor/pokerogue/sources.json` | 0/2002 (복원 필요) | 독립 복원 READY; `pokemon-ip/pokerogue` |
 | Showdown VFX | `public/vendor/showdown/fx` | 명시된 22개 CC0 파일 | 22 / 0.171 | 사용; move-visuals / registry | `docs/assets/manifests/move-effects-integration.json` | 22/22 | 중간; `third-party/showdown-fx` |
-| Showdown / 프로젝트 제작 | `public/sprites/trainers` | 외부 트레이너 + 자체 생성 플레이어 혼합 | 199 / 1.185 | 사용; TrainerPortrait / PlayerMirrorPortrait / CSS | `public/sprites/trainers/sources.json; player-front-source.json` | 199/199 | 높음; `pokemon-ip/showdown/trainers (플레이어 제외)` |
-| Showdown | `public/sprites/gimmicks` | Pokémon IP | 147 / 2.430 | 사용; pokemon-sprites / TeraTypeIcon / registry | `public/sprites/gimmicks/tera/sources.json; docs/assets/manifests/mega-sprite-sources.json` | 147/147 | 높음; `pokemon-ip/showdown/gimmicks` |
-| PokeAPI / PokeSprite / PokéRogue / 자체 SVG | `public/sprites/items` | 외부 IP와 자체 제작 혼합 | 211 / 1.903 | 사용; AssetImage / GimmickItemIcon / HeldItemLabel / 서버 DTO | `같은 폴더의 *sources.json` | 211/211 | 높음; `provider별 분류 후 이동` |
+| Showdown / 프로젝트 제작 | `public/sprites/trainers` | 외부 트레이너 + 자체 생성 플레이어 혼합 | 199 / 1.185 | 사용; TrainerPortrait / PlayerMirrorPortrait / CSS | `public/sprites/trainers/sources.json; player-front-source.json` | 5/199 (외부 194 독립 복원) | 높음; `pokemon-ip/showdown/trainers (플레이어 제외)` |
+| Showdown | `public/sprites/gimmicks` | Pokémon IP | 147 / 2.430 | 사용; pokemon-sprites / TeraTypeIcon / registry | `public/sprites/gimmicks/tera/sources.json; docs/assets/manifests/mega-sprite-sources.json` | 1/147 (외부 146 독립 복원) | 높음; `pokemon-ip/showdown/gimmicks` |
+| PokeAPI / PokeSprite / PokéRogue / 자체 SVG | `public/sprites/items` | 외부 IP와 자체 제작 혼합 | 211 / 1.903 | 사용; AssetImage / GimmickItemIcon / HeldItemLabel / 서버 DTO | `같은 폴더의 *sources.json` | 16/211 (외부 195 독립 복원) | 높음; `provider별 분류 후 이동` |
 | 사용자 제공 | `public/sprites/eggs` | 권리 미검증 입력 | 6 / 4.583 | 사용; egg-kinds / egg-station-menu | `public/sprites/eggs/sources.json` | 6/6 | 중간; `user-provided/unverified` |
 | 사용자 제공 / 자체 SVG | `public/sprites/effects` | beam PNG와 자체 변신 SVG 혼합 | 4 / 0.419 | 사용; move-animation-plan / CSS | `docs/gameplay/MOVE_EFFECTS_PLAN.md; docs/references/THIRD_PARTY.md` | 4/4 | 중간; `원본과 자체 제작을 분리한 뒤 결정` |
 | 프로젝트 제작 | `public/sprites/shop` | 과거 자체 SVG | 9 / 0.003 | 현재 직접 참조 없음; 이전 상점 미리보기 | `기존 THIRD_PARTY 직접 구현 기록` | 9/9 | 낮음; `현재 유지; 필요 시 project-original` |
@@ -26,7 +26,7 @@
 | Showdown client reference | `external/reference/showdown` | 파일별 MIT·CC0 고지 / 참고 코드 | 3 / 0.930 | 참고만 사용; 런타임 import 없음 | `원본 헤더; docs/assets/manifests/resource-manifest.json` | 3/3 | 낮음; `reference/showdown` |
 | 사용자 제공 | `public/assets/items/tm` | 권리 미검증 입력 | 19 / 1.845 | 사용; tm-icon adapter | `public/assets/items/tm/README.md` | 19/19 | 중간; `user-provided/unverified` |
 | 사용자 제공 | `public/images/events` | 권리 미검증 입력 | 3 / 0.554 | 사용; TeleportPortal | `public/images/events/README.md` | 3/3 | 중간; `user-provided/unverified` |
-| 프로젝트 제작 | `public/assets/original` | 이번 작업의 직접 작성 SVG | 4 / 0.001 | fallback 사용; registry / AssetImage / TrainerPortrait | `외부 파일·상표·원작 그림을 사용하지 않은 기하 SVG` | 0/4 | 낮음; `현재 유지` |
+| 프로젝트 제작 | `public/assets/original` | 이번 작업의 직접 작성 SVG | 4 / 0.001 | fallback 사용; registry / AssetImage / TrainerPortrait | `외부 파일·상표·원작 그림을 사용하지 않은 기하 SVG` | 4/4 | 낮음; `현재 유지` |
 
 PokeSprite는 trainer-equipment-sources.json의 다이맥스밴드 아이콘 제공원이다. PokéRogue 테라스탈오브와 제공원이 다르다. Pokémon 울음소리는 등록·배포한 파일이 없으며 registry는 null을 반환한다. 자체 제작 범위는 CSS/SVG·Web Audio 합성 및 source record에 생성 과정이 있는 플레이어 이미지다. 사용자 제공 알·TM·포탈·불꽃 PNG는 자체 제작물로 재분류하지 않는다.
 
@@ -183,3 +183,7 @@ pnpm assets:pokeapi:verify
 ```
 
 source cache는 `external/pokemon-ip/pokeapi/source/`, runtime은 기존 `public/vendor/pokeapi/`이다. 일반 test/build는 팩 전체 부재와 fallback을 허용하고, partial pack의 verify와 배포는 실패한다. 배포 준비 검사는 이제 PokéRogue·Showdown Pokémon·PokeAPI 세 팩 전체를 요구한다. 모든 READY 검증 후 PokeAPI runtime 4,648개를 Git index에서 제거했다. 로컬 파일은 유지하고 `/public/vendor/pokeapi/`를 ignore한다. scripts·source lock·golden·문서는 Git에 보존한다.
+
+### 혼합 runtime 독립 복원 (2026-10-23)
+
+trainers/gimmicks/items/effects의 561파일 중 외부 535개는 provider별 고정 source로 복원한다. 자체 제작 19개·미검증 1개·metadata 6개는 계속 추적하며 폴더 전체 ignore는 하지 않는다. 정확한 bytes·소유권·7개 provider의 revision·명령·검증 결과는 [혼합 자산 공식 ownership](MIXED_RUNTIME_ASSETS.md)에 있다. effects에는 restore 명령이 없다. `pnpm assets:trainers`, `pnpm assets:gimmicks`, `pnpm assets:items`와 각각의 `:verify`를 사용한다. 배포 guard는 이전 세 팩과 신규 7그룹을 모두 검사한다.

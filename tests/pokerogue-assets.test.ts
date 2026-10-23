@@ -23,6 +23,10 @@ test('deployment check and packaging fail before copying when the runtime pack i
       assert.match(result.stderr,/1393 missing/);
       assert.match(result.stderr,/pnpm assets:showdown-pokemon/);
       assert.match(result.stderr,/4648 missing/);
+      for(const [group,count] of [['showdown-trainers',194],['showdown-gimmicks',146],['pokeapi-gimmick-items',82],['pokeapi-items',109],['pokeapi-legacy-items',2],['pokesprite-items',1],['pokerogue-items',1]]){
+        assert.ok(result.stderr.includes(`${group} runtime is not ready: ${count} missing`));
+        assert.ok(result.stderr.includes(`pnpm assets:${group}`));
+      }
       assert.match(result.stderr,/pnpm assets:pokeapi/);
       assert.deepEqual(await readdir(dir),[]);
     }

@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import {readPreHauGuzmaFile as readFileSync} from './hau-guzma-preservation';
 import {kalosTrainers} from '../src/data/kalos-trainers';
 import test from 'node:test';
@@ -57,7 +58,7 @@ test('all three Galactic commanders are reachable, eligible and have distinct re
  const officers=[villainLeaders.galactic.executive,...villainLeaders.galactic.executives!],seen=new Set();
  for(let n=0;n<5000;n++){const e=villainEncounter('sinnoh-officers-'+n,56,'galactic',false,false,{gruntWins:100,executiveWins:0});if(e?.event.rank==='executive')seen.add(e.sample.portrait);}
  assert.deepEqual([...seen].sort(),['jupiter','mars','saturn']);
- for(const s of officers)assert.ok(existsSync(`public/sprites/trainers/${s.portrait}.png`));
+ for(const s of officers)assert.ok(publicAssetExists(`public/sprites/trainers/${s.portrait}.png`));
  for(let n=0;n<200;n++){const e=villainEncounter('sinnoh-eligibility-'+n,56,'galactic',false,false,{gruntWins:100,executiveWins:0},s=>s.portrait==='saturn');if(e)assert.equal(e.sample.portrait,'saturn');}
  const sets=officers.map(s=>normalNpcTemplate(`galactic-executive-${s.portrait}`,95,'villain')!.team.find(p=>p.species==='Crobat')!.profile.moves.join(','));assert.equal(new Set(sets).size,3);
 });

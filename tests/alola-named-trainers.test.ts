@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
@@ -24,7 +25,7 @@ test('20 identities, unique higher roles, route candidates, deferred villain seq
  for(const id of ['hala','olivia','acerola','molayne']){assert.ok(towerThemes.alola.elites.includes(`named-${id}`));assert.ok(!towerThemes.alola.gyms.includes(`named-${id}`));}
  assert.deepEqual(alolaVillainSequence,['skull-grunt','named-guzma','aether-grunt','named-faba','named-lusamine']);
  assert.equal(villainLeaders.skull.executive.portrait,'guzma');assert.equal(villainLeaders.aether.executive.portrait,'faba');
- for(const t of alolaTrainers){const sample=t.category==='grunt'?organizationGrunt(t.id.split('-')[0]):namedTrainerSamples.find(s=>s.id===t.id)!;assert.deepEqual(sample,alolaSample(t));assert.ok(existsSync(`public/sprites/trainers/${sample.portrait}.png`),sample.portrait);}
+ for(const t of alolaTrainers){const sample=t.category==='grunt'?organizationGrunt(t.id.split('-')[0]):namedTrainerSamples.find(s=>s.id===t.id)!;assert.deepEqual(sample,alolaSample(t));assert.ok(publicAssetExists(`public/sprites/trainers/${sample.portrait}.png`),sample.portrait);}
 });
 
 for(const t of alolaTrainers)test(`${t.id}: legal role-oriented builds, deterministic triples, required, difficulty and form packing`,()=>{

@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import Showdown from 'pokemon-showdown';
@@ -92,7 +93,7 @@ test('weighted sampling without ID/title replacement respects minFloor and is no
  const pool=challengers.filter(c=>['easy','medium','hard','traveler-special'].includes(c.id));
  assert.equal(drawChallengers(2,()=>0,pool)[0].id,'easy');
  assert.equal(drawChallengers(2,()=>.99,pool)[0].id,'traveler-special');
- for(const c of challengers)assert.ok(existsSync(`public/sprites/trainers/${c.portrait}.png`));
+ for(const c of challengers)assert.ok(publicAssetExists(`public/sprites/trainers/${c.portrait}.png`));
 });
 
 test('production draw persists exactly three full snapshots and restores them after DB reopen',()=>{

@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import Showdown from 'pokemon-showdown';
@@ -28,7 +29,7 @@ test('50 matching mega stones and a dynamax band have icons, legal forms and leg
   assert.ok(pokemonSets[info.species]);assert.equal(validator.validateSet({...structuredClone(pokemonSets[info.species]),...(item==='Zygardite'?{ability:'Power Construct'}:{}),item},{}),null,item);
   assert.ok(Showdown.Dex.species.get(info.forme).isMega);
   assert.equal(itemShopRule(item as keyof typeof heldItems).rarity,'legendary');
-  assert.ok(existsSync('public/sprites/items/'+itemIcon(item as keyof typeof heldItems)+'.'+itemIconExtension(item)));
+  assert.ok(publicAssetExists('public/sprites/items/'+itemIcon(item as keyof typeof heldItems)+'.'+itemIconExtension(item)));
  }
  assert.equal(itemShopRule(DYNAMAX_ITEM).rarity,'legendary');
 });

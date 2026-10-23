@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {createHash,randomUUID} from 'node:crypto';
@@ -21,7 +22,7 @@ import {trackFixture,trackRegistry,trackEncounter} from './villain-track-fixture
 test('Ariana is a fixed legal three-member tactical officer with Arbok lead and no gimmick at any floor',()=>{
  const sample=namedTrainerSamples.find(s=>s.id==='named-ariana')!;
  assert.equal(sample.name,'아테나');assert.equal(sample.role,'villain');assert.equal(sample.minFloor,25);assert.equal(sample.aiCeiling,'tactical');assert.equal(sample.ace,'Arbok');assert.equal(sample.generation,2);
- assert.deepEqual(sample.entries,['Arbok','Vileplume','Honchkrow']);assert.ok(existsSync(`public/sprites/trainers/${sample.portrait}.png`));
+ assert.deepEqual(sample.entries,['Arbok','Vileplume','Honchkrow']);assert.ok(publicAssetExists(`public/sprites/trainers/${sample.portrait}.png`));
  const template=normalNpcTemplate(sample.id,25,sample.role)!;
  assert.equal(template.team.length,3);assert.equal(template.signature,null);assert.equal(template.gimmickEnabled,false);assert.deepEqual(template.selectionRules,{preferredLead:['Arbok']});assert.deepEqual(template.required,[]);
  const builds=[['Intimidate','Black Sludge',['Gunk Shot','Crunch','Glare','Earthquake']],['Effect Spore','Leftovers',['Giga Drain','Sludge Bomb','Sleep Powder','Moonblast']],['Moxie','Life Orb',['Brave Bird','Sucker Punch','Night Slash','Roost']]];

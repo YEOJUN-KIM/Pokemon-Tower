@@ -4,6 +4,7 @@ import {loadDefinition} from './assets/pokerogue/common.mjs';
 import {verifyOutput} from './assets/pokerogue/verify.mjs';
 import {loadDefinition as loadShowdown} from './assets/showdown-pokemon/common.mjs';
 import {loadDefinition as loadPokeapi} from './assets/pokeapi/common.mjs';
+import {loadDefinition as loadMixed,verifyGroup} from './assets/mixed/runtime.mjs';
 
 const {manifest} = await loadDefinition();
 const assets = await verifyOutput(resolve('public/vendor/pokerogue'), manifest);
@@ -12,6 +13,11 @@ const showdownAssets = await verifyOutput(resolve('public/vendor/showdown/pokemo
 const {manifest:pokeapiManifest} = await loadPokeapi();
 const pokeapiAssets = await verifyOutput(resolve('public/vendor/pokeapi'), pokeapiManifest);
 const readinessErrors = [];
+const mixed = await loadMixed();
+for (const group of mixed.groups) {
+  const result = await verifyGroup(resolve('public/sprites'), group, mixed);
+  if (!result.ok) readinessErrors.push(`${group.id} runtime is not ready: ${result.missing.length} missing, ${result.extra.length} extra, ${result.mismatched.length} mismatched. Run pnpm assets:${group.id}, then pnpm assets:${group.id}:verify before deployment.`);
+}
 if (!pokeapiAssets.ok) {
   readinessErrors.push(`PokeAPI runtime pack is not ready: ${pokeapiAssets.missing.length} missing, ${pokeapiAssets.extra.length} extra, ${pokeapiAssets.mismatched.length} mismatched. Run pnpm assets:pokeapi, then pnpm assets:pokeapi:verify before deployment.`);
 }
@@ -30,7 +36,7 @@ const releaseNotes='docs/releases/NONCOMBAT_EVENTS_RELEASE.md';
 await access(releaseNotes);
 if(process.argv.includes('--check')) {
   await Promise.all(['docs/operations/DEPLOYMENT.md','docs/operations/ACCOUNTS.md','docs/references/THIRD_PARTY.md',releaseNotes,'scripts/backup-db.mjs','scripts/import-save.mjs','scripts/start-deploy.mjs'].map(file=>access(file)));
-  console.log(`Deployment sprite packs (PokéRogue ${assets.matching}, Showdown ${showdownAssets.matching}, PokeAPI ${pokeapiAssets.matching} hashes), document and script inputs OK; no build, copy, server or database changes.`);
+  console.log(`Deployment sprite packs (PokéRogue ${assets.matching}, Showdown ${showdownAssets.matching}, PokeAPI ${pokeapiAssets.matching}, mixed ${mixed.groups.reduce((n,g)=>n+g.fileCount,0)} hashes in ${mixed.groups.length} providers), document and script inputs OK; no build, copy, server or database changes.`);
   process.exit(0);
 }
 await access('.next/standalone/server.js');

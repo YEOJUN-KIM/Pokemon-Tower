@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import {snapshotRankReward} from '../src/server/challenger-rewards';
 import test from 'node:test';
 import assert from 'node:assert/strict';
@@ -28,7 +29,7 @@ test('common concepts have 20 distinct IDs, all tactics, both pools, ordinary na
  const manifest=JSON.parse(readFileSync('public/sprites/trainers/sources.json','utf8'));
  for(const sample of npcSamples){
   assert.ok(sample.pools.includes('normal')&&sample.pools.includes('challenger'));
-  assert.ok(existsSync(`public/sprites/trainers/${sample.portrait}.png`));
+  assert.ok(publicAssetExists(`public/sprites/trainers/${sample.portrait}.png`));
   assert.ok(manifest.portraits.some((p:{portrait:string;review?:string})=>p.portrait===sample.portrait&&p.review));
   assert.ok(!/전술|전문가|내구|속공|상태이상|랭크업/.test(sample.displayName));
   assert.ok(!('rewardProfile' in sample));assert.ok(!('trainingScale' in sample));

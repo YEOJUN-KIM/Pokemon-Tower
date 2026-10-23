@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
-import {inspectPublicAsset} from './helpers/runtime-assets';
+import {inspectPublicAsset,publicAssetExists} from './helpers/runtime-assets';
 import {assetRegistry} from '../src/assets/registry';
 import {loadAssetImage} from '../src/assets/load-image';
 import {TrainerPortrait} from '../src/web/trainer-portrait';
@@ -21,8 +21,8 @@ test('registry keeps existing runtime paths and independent project fallbacks',(
     assert.ok(!/vendor|sprites/.test(file));assert.match(readFileSync('public'+file,'utf8'),/<svg/);
   }
   assert.equal(assetRegistry.cry(6),null);assert.equal(assetRegistry.cry(-1),null);
-  assert.ok(existsSync('public'+assetRegistry.item('leftovers')));
-  assert.ok(existsSync('public'+assetRegistry.tera('Fire')));
+  assert.ok(publicAssetExists('public'+assetRegistry.item('leftovers')));
+  assert.ok(publicAssetExists('public'+assetRegistry.tera('Fire')));
   assert.ok(existsSync('public'+assetRegistry.moveEffect('impact')));
   const html=renderToStaticMarkup(createElement(TrainerPortrait,{sprite:'unknown-asset',alt:'Generic trainer'}));
   assert.ok(html.includes(assetRegistry.placeholders.trainer));assert.ok(!html.includes('/sprites/trainers/'));

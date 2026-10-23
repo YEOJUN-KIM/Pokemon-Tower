@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import {evolvedOpponentSpecies} from '../src/data/opponent-species';
 import {paldeaTrainer} from '../src/data/paldea-trainers';
 import {test} from 'node:test';
@@ -35,7 +36,7 @@ test('catalog covers all types and generations with supported, legal distinct pa
   const validator=new Showdown.TeamValidator(FORMAT);
   for(const sample of trainerCatalog){
     for(const name of sample.entries ?? [])assert.ok(pokemonSets[name],`${sample.id}: unsupported ${name}`);
-    assert.ok(existsSync(`public/sprites/trainers/${sample.portrait}.png`),sample.portrait);
+    assert.ok(publicAssetExists(`public/sprites/trainers/${sample.portrait}.png`),sample.portrait);
     const {encounter,packed}=teamFor(sample);assert.equal(new Set(encounter.map(p=>p.name)).size,3);const legal=Showdown.Teams.unpack(packed)!;for(const set of legal){set.pokeball='';set.evs={hp:1,atk:0,def:0,spa:0,spd:0,spe:0};set.ivs={hp:31,atk:31,def:31,spa:31,spd:31,spe:31};}assert.equal(validator.validateTeam(legal),null,sample.id);
     if(sample.specialty && sample.kind!=='named')for(const p of encounter)assert.ok(Showdown.Dex.species.get(p.name).types.includes(sample.specialty),`${sample.id}: ${p.name}`);
     assert.deepEqual(teamFor(sample),teamFor(sample));

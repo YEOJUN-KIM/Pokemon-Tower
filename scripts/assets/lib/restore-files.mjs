@@ -13,6 +13,7 @@ async function noSymlinkParents(target) {
 
 export async function restoreFiles({output, cache, offline = false}, definition, dependencies = {}) {
   const {lock, manifest} = definition;
+  const inspect = dependencies.verifyOutput ?? verifyOutput;
   output = path.resolve(output); cache = path.resolve(cache);
   const contains = (parent, child) => child === parent || child.startsWith(parent + path.sep);
   if (contains(output, cache) || contains(cache, output)) throw new Error('Output and cache must be separate directories');
@@ -20,7 +21,7 @@ export async function restoreFiles({output, cache, offline = false}, definition,
     if (target === projectRoot || ['src', '.data', '.git', 'scripts', 'docs'].some(dir => contains(path.join(projectRoot, dir), target))) throw new Error('Output/cache must be asset directories or separate temporary directories');
     await noSymlinkParents(target);
   }
-  const existing = await verifyOutput(output, manifest);
+  const existing = await inspect(output, manifest);
   if (existing.extra.length || existing.mismatched.length) throw new Error(`Existing output differs; move it aside before restore:\n${JSON.stringify(existing, null, 2)}`);
   await dependencies.downloadSources(lock, cache, {offline, fetcher: dependencies.fetcher});
   await mkdir(path.join(cache, 'work'), {recursive: true});
@@ -32,13 +33,13 @@ export async function restoreFiles({output, cache, offline = false}, definition,
       await mkdir(path.dirname(target), {recursive: true});
       await copyFile(path.join(cache, entry.path), target, 1);
     }
-    const result = dependencies.requireVerified(await verifyOutput(stage, manifest));
+    const result = dependencies.requireVerified(await inspect(stage, manifest));
     for (const file of existing.missing) {
       const target = path.join(output, file);
       await mkdir(path.dirname(target), {recursive: true});
       await copyFile(path.join(stage, file), target, 1);
     }
-    dependencies.requireVerified(await verifyOutput(output, manifest));
+    dependencies.requireVerified(await inspect(output, manifest));
     return {...result, output, offline, sources: lock.files.length};
   } finally { await rm(temporary, {recursive: true, force: true}); }
 }

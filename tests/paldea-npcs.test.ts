@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
@@ -36,7 +37,7 @@ test('exactly 14 reviewed triples, 12 live identities, 2 event-only identities',
 });
 for(const t of paldeaTrainers)test(`${t.id}: exact legal ordered builds and designated Tera, ordinary held items retained`,()=>{
  const sample=paldeaSample(t),validator=new Showdown.TeamValidator(FORMAT);
- assert.ok(existsSync(`public/sprites/trainers/${sample.portrait}.png`));
+ assert.ok(publicAssetExists(`public/sprites/trainers/${sample.portrait}.png`));
  for(const floor of [45,95]){
   const snap=snapshotTrainerEventBattle(`paldea:${t.id}:${floor}`,sample,floor,'basic',CURRENT_PROGRESSION),sets=Showdown.Teams.unpack(snap.opponentTeam)!;
   assert.deepEqual(sets.map(s=>s.species),t.entries);assert.ok(normalNpcTemplate(t.id,floor,sample.role));

@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
@@ -18,7 +19,7 @@ test('all standard shop tools are supported by the engine, have icons, and persi
   const store=new TowerStore(':memory:');try{
     store.ensurePlayer('catalog');const run=store.battle(store.start('catalog',starters)).run_id;
     store.db.prepare("UPDATE runs SET total_floors=50,floor=26,state='select' WHERE id=?").run(run);store.db.prepare('UPDATE players SET coins=100000 WHERE id=?').run('catalog');
-    for(const item of standardItems){assert.equal(Showdown.Dex.items.get(item).exists,true,item);const ext=itemIconExtension(item);assert.ok(existsSync(`public/sprites/items/${itemIcon(item)}.${ext}`),item);stock(store,run,26,[item,...heldItemKeys.filter(other=>other!==item).slice(0,3)]);store.purchaseItem('catalog',run,26,item,'Charizard');}
+    for(const item of standardItems){assert.equal(Showdown.Dex.items.get(item).exists,true,item);const ext=itemIconExtension(item);assert.ok(publicAssetExists(`public/sprites/items/${itemIcon(item)}.${ext}`),item);stock(store,run,26,[item,...heldItemKeys.filter(other=>other!==item).slice(0,3)]);store.purchaseItem('catalog',run,26,item,'Charizard');}
     const view=store.view('catalog');assert.equal(Object.keys(view.run!.itemBag!).length,standardItems.length-1);assert.equal(view.run!.heldItems!.Charizard,standardItems.at(-1));assert.equal(view.coins,100000-standardItems.reduce((sum,item)=>sum+baseHeldItems[item].price,0));
   }finally{store.close();}
 });

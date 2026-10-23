@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
@@ -38,7 +39,7 @@ test('audited NPC renderer never uses original artwork, sheets or unknown files'
  const references=[...trainerCatalog,...Object.values(villainLeaders).flatMap(group=>[group.executive,...group.executives??[],group.boss]),...villainOrganizations].map(person=>person.portrait);
  references.push(...Object.values(eventPresentation).flatMap(value=>value.artwork==='trainer'?[value.sprite]:[]));
  assert.deepEqual([...new Set(references.filter(key=>!assets[key]||assets[key].kind!=='battle-sprite'))],['aliana']);
- for(const [key,value] of Object.entries(assets) as [string,{kind:string}][])if(value.kind==='battle-sprite')assert.ok(existsSync(`public/sprites/trainers/${key}.png`));
+ for(const [key,value] of Object.entries(assets) as [string,{kind:string}][])if(value.kind==='battle-sprite')assert.ok(publicAssetExists(`public/sprites/trainers/${key}.png`));
  const {TrainerPortrait,trainerAsset}=await import('../src/web/trainer-portrait');
  assert.equal(trainerAsset('aliana'),null);assert.equal(trainerAsset('missing-person'),null);assert.equal(trainerAsset('player-back-sheet'),null);assert.equal(trainerAsset('hiker-gen4'),'hiker-gen4');
  const html=renderToStaticMarkup(createElement(TrainerPortrait,{sprite:'aliana',alt:'아케비'}));assert.ok(!html.includes('/aliana.png'));assert.ok(html.includes('pixel-silhouette'));assert.ok(html.includes('아케비'));

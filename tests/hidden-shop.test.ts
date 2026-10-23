@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import {grantStoredReward} from '../src/server/inventory-grants';
 import assert from 'node:assert/strict';
 import test from 'node:test';
@@ -23,7 +24,7 @@ test('generation: 4/5 distinct products, every currency/price permitted, both cu
   const single={...vitamin,allowedCurrencies:['growth-points'] as const};assert.equal(snapshotHiddenShop([single],()=>0).offers[0].currency,'growth-points');
   for(const snapshot of snapshots){assert.equal(new Set(snapshot.offers.map(o=>o.id)).size,snapshot.offers.length);for(const o of snapshot.offers){const p=f.products.find(p=>p.id===o.id)!;assert.ok(p.allowedCurrencies.includes(o.currency));const [min,max]=pool[o.category].prices[o.currency],quantity=o.category==='egg-tickets'?o.quantity:1;assert.ok(o.price>=min*quantity&&o.price<=max*quantity);}}
   assert.ok(!f.products.some(p=>p.effect.kind==='typed-egg-ticket'&&p.effect.eggKind==='shiny'));
-  for(const product of f.products)if(product.icon)assert.ok(existsSync(`public${product.icon}`),product.icon);
+  for(const product of f.products)if(product.icon)assert.ok(publicAssetExists(`public${product.icon}`),product.icon);
  }finally{f.store.close();}
 });
 

@@ -1,4 +1,5 @@
 'use client';
+import {AssetImage} from './asset-image';
 import {GameStatus} from './game-menu';
 import headingStyles from './styles/shop-heading.module.css';
 
@@ -27,7 +28,7 @@ export function TowerShop({run,coins,busy,submit,error,onContinue}:{run:RunView;
 
     {category==='battle' && <div className="shop-products consumable-products compact-shop-products" data-keyboard-tab-products>{(run.consumableOffers ?? []).map(kind=>{
       const item=upgrades[kind];
-      return <ShopProduct key={kind} price={item.price} aria-label={`${item.name} · ${item.price}코인 구매`} disabled={busy || coins<item.price} onClick={()=>void submit({type:'purchase',runId:run.id,floor:run.floor,kind})}><strong className="shop-product-title"><img className="shop-consumable-icon" src={`/sprites/items/${item.icon}.png`} width={24} height={24} alt=""/>{item.name}</strong><span className="shop-product-meta">배틀 도구 · 보유 {run.battleItems?.[kind]??0}개</span><p className="shop-product-description">{battleItemDescription(kind)}</p>{coins<item.price&&<GameStatus className="shop-product-status">자금 부족</GameStatus>}
+      return <ShopProduct key={kind} price={item.price} aria-label={`${item.name} · ${item.price}코인 구매`} disabled={busy || coins<item.price} onClick={()=>void submit({type:'purchase',runId:run.id,floor:run.floor,kind})}><strong className="shop-product-title"><AssetImage className="shop-consumable-icon" src={`/sprites/items/${item.icon}.png`} width={24} height={24} alt=""/>{item.name}</strong><span className="shop-product-meta">배틀 도구 · 보유 {run.battleItems?.[kind]??0}개</span><p className="shop-product-description">{battleItemDescription(kind)}</p>{coins<item.price&&<GameStatus className="shop-product-status">자금 부족</GameStatus>}
         </ShopProduct>;
     })}</div>}
     {category==='machines' && <div className="shop-products machine-products compact-shop-products" data-keyboard-tab-products data-testid="machine-products">{run.machineShop?.offers.map(item=>{const info=moveInfo[item.move];return <ShopProduct key={item.move} data-machine-offer={item.move} price={item.price} data-machine={item.move} aria-label={`${moves[item.move]?.name??item.move} · ${item.price}코인`} disabled={busy || item.purchased || coins<item.price} onClick={()=>void submit({type:'purchase-machine',revision:run.shopRerolls?.machines.count??0,runId:run.id,floor:run.floor,move:item.move})}>

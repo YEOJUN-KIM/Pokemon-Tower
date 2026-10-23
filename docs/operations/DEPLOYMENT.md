@@ -107,4 +107,18 @@ docker compose up -d game
 
 ### 새 clone의 Docker 자산 준비
 
-Dockerfile은 `COPY . .` 뒤에 package-deploy --check를 실행한다. 세 generated sprite pack은 Git에서 직접 받는 자산이 아니므로 [전체 복원 절차](../assets/POKEAPI_RESTORE.md#새-clone과-배포)에 따라 호스트에서 준비한 후 Docker build를 실행한다. 자산 없이 build context를 만들면 명확한 readiness 오류로 실패한다. 일반 개발 build와 달리 배포는 완전한 팩을 요구하며 Docker 내부 자동 다운로드는 하지 않는다.
+Dockerfile은 `COPY . .` 뒤에 package-deploy --check를 실행한다. 기존 세 generated sprite pack과 신규 혼합 외부 7그룹은 Git에서 직접 받는 자산이 아니므로 [전체 복원 절차](../assets/POKEAPI_RESTORE.md#새-clone과-배포)에 따라 호스트에서 준비한 후 Docker build를 실행한다. 자산 없이 build context를 만들면 명확한 readiness 오류로 실패한다. 일반 개발 build와 달리 배포는 완전한 팩을 요구하며 Docker 내부 자동 다운로드는 하지 않는다.
+
+### 혼합 provider 준비
+
+기존 세 팩 복원 후 [혼합 자산 복원](../assets/MIXED_RUNTIME_ASSETS.md)을 실행한다.
+
+```sh
+pnpm assets:trainers
+pnpm assets:gimmicks
+pnpm assets:items
+pnpm assets:mixed:verify
+node scripts/package-deploy.mjs --check
+```
+
+단일 제공원만 복구하려면 문서에 나열된 provider 명령을 사용한다. 각 명령의 `--offline`은 source cache가 완전할 때만 동작한다. effects·플레이어·자체 도구·historical metadata는 tracked이므로 별도 restore가 없다. 모든 신규 외부 provider도 배포 readiness의 필수 입력이며, 누락 시 guard가 해당 명령을 안내한다. 호스트에서 복원한 `public`을 Docker context에 포함하고 Docker 안에서는 다운로드하지 않는다.

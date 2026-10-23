@@ -1,4 +1,5 @@
 'use client';
+import {AssetImage} from './asset-image';
 import {GameMenuFooter,GameStatus} from './game-menu';
 import {useLayoutEffect,useRef} from 'react';
 import type {HiddenShopView} from '../data/hidden-shop';
@@ -14,7 +15,7 @@ export function hiddenShopAvailability(shop:HiddenShopView,offer:Offer,coins:num
  if((offer.currency==='growth-points'?growthPoints:coins)<offer.price)return `${offer.currency==='growth-points'?'성장 포인트가':'타워 코인이'} 부족합니다.`;
  return '구매 가능';
 }
-function ProductIcon({offer}:{offer:Offer}){return offer.category==='machine'?<svg width="60" height="60" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#bdd1e8" stroke="#536782" strokeWidth="3"/><path d="M9 13 16 8M24 32 32 24" stroke="#eef5fa" strokeWidth="3"/><circle cx="20" cy="20" r="5" fill="#263341" stroke="#7595ba" strokeWidth="2"/></svg>:<img src={offer.icon} width="60" height="60" alt=""/>;}
+function ProductIcon({offer}:{offer:Offer}){return offer.category==='machine'?<svg width="60" height="60" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="17" fill="#bdd1e8" stroke="#536782" strokeWidth="3"/><path d="M9 13 16 8M24 32 32 24" stroke="#eef5fa" strokeWidth="3"/><circle cx="20" cy="20" r="5" fill="#263341" stroke="#7595ba" strokeWidth="2"/></svg>:<AssetImage src={offer.icon} width="60" height="60" alt=""/>;}
 
 export function HiddenShop({shop,coins,growthPoints,busy,selectedId,onFocus}:{shop:HiddenShopView;coins:number;growthPoints:number;busy:boolean;selectedId?:string;onFocus:(id:string)=>void}){
  const ref=useRef<HTMLElement>(null);

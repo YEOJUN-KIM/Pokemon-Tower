@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import {assertSpriteFiles} from './helpers/runtime-assets';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
@@ -24,7 +25,7 @@ test('Groudon and Kyogre have distinct selectable Primal previews with real stat
   assert.equal(form.ability,info.species==='Groudon'?'Desolate Land':'Primordial Sea');
   assert.equal(heldItems[item as keyof typeof heldItems].price,3750);assert.equal(itemShopRule(item as keyof typeof heldItems).rarity,'legendary');
   assert.ok(canEquipGimmick(info.species,item));assert.equal(canEquipGimmick('Charizard',item),false);
-  assert.ok(existsSync('public/sprites/items/'+itemIcon(item as keyof typeof heldItems)+'.'+itemIconExtension(item)));
+  assert.ok(publicAssetExists('public/sprites/items/'+itemIcon(item as keyof typeof heldItems)+'.'+itemIconExtension(item)));
   assertSpriteFiles(['/vendor/pokeapi/pokemon/'+info.spriteKey+'.png']);assertSpriteFiles(['/vendor/pokeapi/pokemon/back/'+info.spriteKey+'.png']);
  }
 });

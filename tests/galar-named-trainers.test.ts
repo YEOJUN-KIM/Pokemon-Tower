@@ -1,3 +1,4 @@
+import {publicAssetExists} from './helpers/runtime-assets';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync} from 'node:fs';
@@ -34,7 +35,7 @@ test('exactly 13 Galar samples, deferred identities absent, campaign uses review
 });
 for(const t of galarTrainers)test(`${t.id}: deterministic ordered triples, legal builds and designated carrier`,()=>{
  const sample=galarSample(t),validator=new Showdown.TeamValidator(FORMAT);
- assert.ok(existsSync(`public/sprites/trainers/${sample.portrait}.png`));
+ assert.ok(publicAssetExists(`public/sprites/trainers/${sample.portrait}.png`));
  for(const floor of [5,45,50,54,55,75,95,100].filter(f=>f>=t.minFloor)){
   const template=normalNpcTemplate(t.id,floor,sample.role)!;assert.ok(template,t.id);
   for(let seed=1;seed<=20;seed++){

@@ -147,7 +147,7 @@ Git 추적 해제는 공식 source·online/offline 전수 일치·clean restore�
 1. trainers: 기존 source 기록과 자체 player portrait 경계를 먼저 확정하고 외부 trainer 팩만 recipe로 분리한다. 자체 제작 파일은 소스로 유지한다.
 2. gimmicks: 기존 메가/테라 source manifest와 실제 사용처를 바탕으로 provider별 고정 source와 결과 hash를 정리한다.
 3. items: PokeAPI·PokeSprite·PokéRogue·자체 SVG 등 제공원이 섞여 있어 provider별 recipe/source mapping을 먼저 완성한다.
-4. effects: 자체 SVG와 사용자 제공 PNG의 출처 경계가 있어 provenance와 보존 방법을 확정한 뒤 처리한다.
+4. effects: 2026-10-23 제작 확인으로 SVG 3개와 beam PNG 1개 모두 project-original/Git 유지다. restore가 필요 없다.
 
 각 팩은 복원 구축 → 빈 cache online/offline 전체 일치 → clean 환경·fallback·build/test·deploy → READY → 같은 작업에서 해당 generated 부분만 추적 해제 순서를 따른다. 이번에 위 혼합 자산은 수정하지 않았다.
 

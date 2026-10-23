@@ -3860,8 +3860,10 @@
       "bytes": 435015,
       "sha256": "7d3a2a7bce809218927ae313691c6d4ac66774619751e141b4a91756b5d8e211",
       "text": false,
-      "ownership": "user-provided/unverified",
-      "evidence": "docs/gameplay/MOVE_EFFECTS_PLAN.md:44"
+      "ownership": "project-original",
+      "evidence": "User confirmed personal authorship on 2026-10-23; historical MOVE_EFFECTS_PLAN.md supplied-image record retained",
+      "owner": "project",
+      "source": "created-for-pokemon-tower"
     },
     {
       "path": "effects/mega-orb.svg",

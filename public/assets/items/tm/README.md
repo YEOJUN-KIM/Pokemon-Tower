@@ -31,3 +31,7 @@ fairy.png
 
 Use transparent PNGs with consistent padding. List icons are 28×28 CSS pixels;
 detail icons are 64×64. Both use pixelated rendering.
+
+## Current ownership — 2026-10-23
+
+Owner: project. Source: project-original / created-for-pokemon-tower. The project owner confirmed personal authorship of these images. Earlier “user-supplied” wording records how the files arrived, not third-party authorship. These files remain Git tracked and require no external restore. Existing crop/frame conversion history remains unchanged.

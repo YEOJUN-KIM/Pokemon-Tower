@@ -13,12 +13,12 @@ const fixture=()=>{
  return {bytes,group,definition:{groups:[group],folders:['items'],retained:[retained]}};
 };
 
-test('mixed ownership inventory covers 561 files with originals, unverified beam and historical records retained',async()=>{
+test('mixed ownership inventory covers 561 files with originals, authored beam and historical records retained',async()=>{
  const d=await loadDefinition();assert.equal(d.groups.length,7);
  assert.equal(d.groups.reduce((n:any,g:any)=>n+g.fileCount,0),535);assert.equal(d.retained.length,26);
- assert.equal(d.retained.filter((f:any)=>f.ownership==='project-original').length,19);
+ assert.equal(d.retained.filter((f:any)=>f.ownership==='project-original').length,20);
  assert.equal(d.retained.filter((f:any)=>f.ownership==='metadata').length,6);
- assert.deepEqual(d.retained.filter((f:any)=>f.ownership==='user-provided/unverified').map((f:any)=>f.path),['effects/flamethrower-beam.png']);
+ assert.deepEqual(d.retained.filter((f:any)=>f.ownership==='user-provided/unverified').map((f:any)=>f.path),[]);
  const ignore=(await readFile('.gitignore','utf8')).replace(/\r\n/g,'\n'),block=ignore.split('# BEGIN mixed external runtime: exact audited paths; retain originals and records\n')[1].split('# END mixed external runtime')[0];
  assert.deepEqual(block.trim().split(/\r?\n/).sort(),d.groups.flatMap((g:any)=>g.files.map((f:any)=>'/public/sprites/'+f.path)).sort());
  for(const f of d.retained){let b=await readFile('public/sprites/'+f.path);if(f.text)b=Buffer.from(b.toString('utf8').replace(/\r\n/g,'\n'));assert.equal(sha256(b),f.sha256,f.path);}

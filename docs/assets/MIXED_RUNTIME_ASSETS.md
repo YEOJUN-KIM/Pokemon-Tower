@@ -1,6 +1,6 @@
 # 혼합 runtime 자산 소유권과 독립 복원
 
-기준 HEAD: `43aa154688a1ef31e75f175ee6bde90198caa58a`. 네 폴더의 실제 파일 561개를 조사했다. 외부 535개만 조건부 추적 해제하며 자체 제작 19개, 사용자 제공/미검증 1개, historical metadata 6개는 그대로 추적한다. runtime URL과 기존 source 기록은 변경하지 않는다.
+기준 HEAD: `43aa154688a1ef31e75f175ee6bde90198caa58a`. 네 폴더의 실제 파일 561개를 조사했다. 외부 535개만 조건부 추적 해제하며 자체 제작 20개(2026-10-23 beam 제작 확인 반영), historical metadata 6개는 그대로 추적한다. runtime URL과 기존 source 기록은 변경하지 않는다.
 
 ## 실제 파일 기준 조사
 
@@ -9,7 +9,7 @@
 | trainers | 199 | 1,242,442 | .json 2, .png 197 | 199 | 194 | 3 | 0 | 2 | 5 |
 | gimmicks | 147 | 2,548,123 | .gif 33, .json 1, .png 113 | 147 | 146 | 0 | 0 | 1 | 1 |
 | items | 211 | 1,996,666 | .json 3, .png 199, .svg 9 | 211 | 195 | 13 | 0 | 3 | 16 |
-| effects | 4 | 439,668 | .png 1, .svg 3 | 4 | 0 | 3 | 1 | 0 | 4 |
+| effects | 4 | 439,668 | .png 1, .svg 3 | 4 | 0 | 4 | 0 | 0 | 4 |
 
 JSON/SVG golden은 Git LF 바이트 기준이다. 위 로컬 bytes에는 Windows CRLF가 포함된다. 외부 PNG/GIF golden은 raw bytes 그대로다. 파일별 전체 경로·bytes·SHA-256·ownership·source revision은 단일 [current golden](manifests/mixed-runtime-assets.json)에 있으며 historical manifest를 덮어쓰지 않았다.
 
@@ -29,10 +29,9 @@ JSON/SVG golden은 Git LF 바이트 기준이다. 위 로컬 bytes에는 Windows
 | gimmicks/metadata | historical / user | 1 | metadata | n/a | kept |
 | items/project-original | project | 13 | project-original | n/a | kept |
 | items/metadata | historical / user | 3 | metadata | n/a | kept |
-| effects/project-original | project | 3 | project-original | n/a | kept |
-| effects/user-provided/unverified | historical / user | 1 | user-provided/unverified | n/a | kept |
+| effects/project-original | project | 4 | project-original | n/a | kept |
 
-플레이어 앞·뒤와 과거 Ash 뒷모습 시트 3개는 THIRD_PARTY의 이미지 생성 기록으로 자체 제작을 확인했다. items의 SVG 9개와 generated PNG 4개(booster-energy, 동일 bytes의 pixel-draft, loaded-dice, eject-pack)는 프로젝트 제작이다. 기존 로컬 `artifacts/reports/changes/PLAYTEST_2026_10_13.md`의 생성 기록을 확인했다. 이 기록은 Git clone에 의존하는 복원 입력으로 사용하지 않는다. effects의 neutral 변신 SVG 3개는 로컬 SVG 소스이며 `flamethrower-beam.png`는 MOVE_EFFECTS_PLAN에 명시된 사용자 제공 이미지다. 임의 다운로드 recipe를 만들지 않았다.
+플레이어 앞·뒤와 과거 Ash 뒷모습 시트 3개는 THIRD_PARTY의 이미지 생성 기록으로 자체 제작을 확인했다. items의 SVG 9개와 generated PNG 4개(booster-energy, 동일 bytes의 pixel-draft, loaded-dice, eject-pack)는 프로젝트 제작이다. 기존 로컬 `artifacts/reports/changes/PLAYTEST_2026_10_13.md`의 생성 기록을 확인했다. 이 기록은 Git clone에 의존하는 복원 입력으로 사용하지 않는다. effects의 neutral 변신 SVG 3개는 로컬 SVG 소스이며 `flamethrower-beam.png`는 당시 MOVE_EFFECTS_PLAN에서 사용자 제공으로 기록했지만, 2026-10-23 소유자가 직접 제작했다고 확인해 현재 project-original로 정정했다. 임의 다운로드 recipe를 만들지 않았다.
 
 ## 고정 소스
 
@@ -111,10 +110,14 @@ pnpm assets:pokerogue-items
 
 E2E는 실제 배틀 턴·트레이너 fallback·원본 플레이어 파일·Mega/Tera 실전 활성화·PC/모바일 배낭/상점·지닌 도구 장착·도감·상세·승리 보상·모집·VFX/reduced-motion·provider별 HTTP SHA를 검증했다. 기존 beam 가상 시계 오류가 사전 batch에서 1회 발생했으나 단독 및 최종 전체 E2E에서 통과했다. 게임 보상/시계 로직은 수정하지 않았다. 서버와 테스트 DB는 검증용 복사본 안에서만 실행했다. 로컬 로그는 `artifacts/mixed-assets/`에 있으며 Git clone/복원 입력이 아니다.
 
-Git index: 전체 tracked 1,912 → 1,382 (외부 535개 제거, recipe/golden/문서/단위/E2E 5개 신규). 네 혼합 폴더 tracked 561 → 26. project-original 19개, user-provided/unverified 1개, metadata 6개 유지. 로컬 외부 runtime 535개는 그대로 유지했고 `verify all`이 통과한다. 최종 상태는 staged 변경으로 남기며 커밋하지 않았다.
+이전 단계 완료 당시 기록(현재 ownership은 아래 정정 참조): 전체 tracked 1,912 → 1,382 (외부 535개 제거, recipe/golden/문서/단위/E2E 5개 신규). 네 혼합 폴더 tracked 561 → 26. project-original 19개, user-provided/unverified 1개, metadata 6개 유지. 로컬 외부 runtime 535개는 그대로 유지했고 `verify all`이 통과한다. 최종 상태는 staged 변경으로 남기며 커밋하지 않았다.
 
-## 다음 정리 범위
+## 당시 후속 조사 기록 (현재 정정은 아래 참조)
 
 audio/BGM, fonts는 공식 소스·파일별 고지를 먼저 조사하는 한 묶음으로 진행할 수 있다. eggs/TM/event/portal은 사용자 제공·프로젝트 제작이 섞일 수 있어 provenance 조사 묶음으로 분리하는 것이 적절하다. `public/vendor/showdown/fx`의 고정 sourceRevision과 CC0 22개는 재현 가능 소규모 후보이므로 다음 조사에 함께 넣을 수 있다. 출처 불명 파일은 Git에 남기며 외부 팩 성공을 이유로 일괄 제거하지 않는다. 이번 작업에서는 이 자산들과 개인 `.data`, Git history를 변경하지 않았다.
 
 다음 범위는 현재 디스크에서 읽기 전용으로 재확인했다. audio는 15파일 / 48,107,939 bytes(음악 기록과 sfx 설정 포함), fonts는 3파일 / 699,910 bytes, eggs는 6파일 / 4,805,699 bytes다. 기존 source 기록상 알은 사용자 제공이고 포털 README도 사용자 제공 GIF와 첫 프레임 변환 PNG라고 명시한다. TM 19개와 포털/event 3개, 미확인 Tera 초안 1개는 출처 확인 없이 자동 다운로드 대상으로 전환할 수 없다. 따라서 다음 작업은 (1) BGM·폰트·CC0 Showdown fx의 immutable source와 고지 검증 후 조건부 분리, (2) 알·TM·event/portal·초안의 사용자 제공 보존 목록 확정으로 묶는 것을 제안한다. 두 묶음을 한 작업에서 조사할 수 있지만 각 provider/ownership별 판정은 독립적으로 유지한다.
+
+## 현재 ownership 정정 (2026-10-23)
+
+이전 조사에서 사용자 제공/미검증으로 기록한 beam은 프로젝트 소유자의 직접 제작 확인으로 project-original이다. 현재 mixed golden에는 자체 20개 + metadata 6개가 남고 외부 535개 복원 정의는 그대로다. 위 과거 검증 수치와 당시 후속 제안은 historical 기록이다. 알·TM·portal/event·자체 BGM의 현재 판정과 tracked permissive 자산 정책은 [최종 ownership](ASSET_OWNERSHIP.md)을 따른다.

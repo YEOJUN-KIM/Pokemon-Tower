@@ -15,24 +15,24 @@
 | Showdown / 프로젝트 제작 | `public/sprites/trainers` | 외부 트레이너 + 자체 생성 플레이어 혼합 | 199 / 1.185 | 사용; TrainerPortrait / PlayerMirrorPortrait / CSS | `public/sprites/trainers/sources.json; player-front-source.json` | 5/199 (외부 194 독립 복원) | 높음; `pokemon-ip/showdown/trainers (플레이어 제외)` |
 | Showdown | `public/sprites/gimmicks` | Pokémon IP | 147 / 2.430 | 사용; pokemon-sprites / TeraTypeIcon / registry | `public/sprites/gimmicks/tera/sources.json; docs/assets/manifests/mega-sprite-sources.json` | 1/147 (외부 146 독립 복원) | 높음; `pokemon-ip/showdown/gimmicks` |
 | PokeAPI / PokeSprite / PokéRogue / 자체 SVG | `public/sprites/items` | 외부 IP와 자체 제작 혼합 | 211 / 1.903 | 사용; AssetImage / GimmickItemIcon / HeldItemLabel / 서버 DTO | `같은 폴더의 *sources.json` | 16/211 (외부 195 독립 복원) | 높음; `provider별 분류 후 이동` |
-| 사용자 제공 | `public/sprites/eggs` | 권리 미검증 입력 | 6 / 4.583 | 사용; egg-kinds / egg-station-menu | `public/sprites/eggs/sources.json` | 6/6 | 중간; `user-provided/unverified` |
-| 사용자 제공 / 자체 SVG | `public/sprites/effects` | beam PNG와 자체 변신 SVG 혼합 | 4 / 0.419 | 사용; move-animation-plan / CSS | `docs/gameplay/MOVE_EFFECTS_PLAN.md; docs/references/THIRD_PARTY.md` | 4/4 | 중간; `원본과 자체 제작을 분리한 뒤 결정` |
+| 프로젝트 제작 | `public/sprites/eggs` | project-original PNG 5개 + historical JSON | 6 / 4.583 | 사용; egg-kinds / egg-station-menu | `public/sprites/eggs/sources.json` | 6/6 | 낮음; `project-original / Git 유지` |
+| 프로젝트 제작 | `public/sprites/effects` | project-original beam PNG와 변신 SVG | 4 / 0.419 | 사용; move-animation-plan / CSS | `docs/gameplay/MOVE_EFFECTS_PLAN.md; docs/references/THIRD_PARTY.md` | 4/4 | 낮음; `project-original / Git 유지` |
 | 프로젝트 제작 | `public/sprites/shop` | 과거 자체 SVG | 9 / 0.003 | 현재 직접 참조 없음; 이전 상점 미리보기 | `기존 THIRD_PARTY 직접 구현 기록` | 9/9 | 낮음; `현재 유지; 필요 시 project-original` |
 | 미확인 초안 | `public/sprites/tera` | 출처 미확인 초안 | 1 / 0.675 | 현재 직접 참조 없음; normal-crown-draft.png | `확정 source record 없음` | 1/1 | 낮음; `user-provided/unverified 후보` |
-| OpenGameArt | `public/audio/bgm` | 현재 재생 6개 CC0; 나머지 파일 별도 검토 | 13 / 45.874 | 현재 6개 파일 사용; music-score / game-audio / registry | `public/audio/music-sources.json` | 13/13 | 중간; `third-party/opengameart` |
+| OpenGameArt | `public/audio/bgm` | project-original 5개 + CC0 8개(원곡 6종) | 13 / 45.874 | 현재 6개 파일 사용; music-score / game-audio / registry | `public/audio/music-sources.json` | 13/13 | 중간; `third-party/opengameart` |
 | 프로젝트 제작 | `public/audio/sfx` | 합성음 음량 설정 | 1 / 0.001 | 사용; sound-design / game-audio | `public/audio/sfx/levels.json` | 1/1 | 중간; `프로젝트 설정 유지` |
 | Neo둥근모 / NeoDGM | `public/fonts` | SIL OFL 1.1 | 3 / 0.667 | 사용; retro-theme CSS / Windows launcher | `public/fonts/NEODGM-LICENSE.txt` | 3/3 | 중간; `third-party/fonts` |
 | Kenney | `external/third-party/kenney-impact-sounds` | 동봉 CC0 | 134 / 1.751 | runtime 미사용; 참고 음원 팩 | `pack/License.txt; docs/assets/manifests/resource-manifest.json` | 134/134 | 낮음; `third-party/kenney-impact-sounds` |
 | Showdown client reference | `external/reference/showdown` | 파일별 MIT·CC0 고지 / 참고 코드 | 3 / 0.930 | 참고만 사용; 런타임 import 없음 | `원본 헤더; docs/assets/manifests/resource-manifest.json` | 3/3 | 낮음; `reference/showdown` |
-| 사용자 제공 | `public/assets/items/tm` | 권리 미검증 입력 | 19 / 1.845 | 사용; tm-icon adapter | `public/assets/items/tm/README.md` | 19/19 | 중간; `user-provided/unverified` |
-| 사용자 제공 | `public/images/events` | 권리 미검증 입력 | 3 / 0.554 | 사용; TeleportPortal | `public/images/events/README.md` | 3/3 | 중간; `user-provided/unverified` |
+| 프로젝트 제작 | `public/assets/items/tm` | project-original PNG 18개 + README | 19 / 1.845 | 사용; tm-icon adapter | `public/assets/items/tm/README.md` | 19/19 | 낮음; `project-original / Git 유지` |
+| 프로젝트 제작 | `public/images/events` | project-original GIF/PNG + README | 3 / 0.554 | 사용; TeleportPortal | `public/images/events/README.md` | 3/3 | 낮음; `project-original / Git 유지` |
 | 프로젝트 제작 | `public/assets/original` | 이번 작업의 직접 작성 SVG | 4 / 0.001 | fallback 사용; registry / AssetImage / TrainerPortrait | `외부 파일·상표·원작 그림을 사용하지 않은 기하 SVG` | 4/4 | 낮음; `현재 유지` |
 
-PokeSprite는 trainer-equipment-sources.json의 다이맥스밴드 아이콘 제공원이다. PokéRogue 테라스탈오브와 제공원이 다르다. Pokémon 울음소리는 등록·배포한 파일이 없으며 registry는 null을 반환한다. 자체 제작 범위는 CSS/SVG·Web Audio 합성 및 source record에 생성 과정이 있는 플레이어 이미지다. 사용자 제공 알·TM·포탈·불꽃 PNG는 자체 제작물로 재분류하지 않는다.
+PokeSprite는 trainer-equipment-sources.json의 다이맥스밴드 아이콘 제공원이다. PokéRogue 테라스탈오브와 제공원이 다르다. Pokémon 울음소리는 등록·배포한 파일이 없으며 registry는 null을 반환한다. 자체 제작 범위는 CSS/SVG·Web Audio 합성 및 source record에 생성 과정이 있는 플레이어 이미지다. 2026-10-23 소유자의 직접 제작 확인과 파일별 해시 대조로 알·TM·포털·화염방사 PNG 및 BGM 5개를 project-original로 확정했다.
 
 ## 사용하지 않는 음악의 출처 범위
 
-BGM 폴더는 13개 파일이지만 현재 registry가 재생하는 것은 서로 다른 6개다. 그 밖의 reward-victory.mp3·villain-rpg.mp3는 현재 source record의 파일과 SHA-256이 같다. champion-orchestra.mp3·elite-metal.wav·trainer-rock.mp3·trainer-rpg.mp3·villain-dark-rock.mp3 다섯 파일은 현재 music-sources.json의 해시와 일치하지 않는다. 이 다섯 파일의 권리·현재 용도를 CC0라고 일괄 확정하지 않으며 과거 반입 기록 재확인 대상으로 남긴다. 이번에는 삭제·이동·manifest 재작성하지 않았다.
+BGM 폴더는 13개 파일이지만 현재 registry가 재생하는 것은 서로 다른 6개다. 그 밖의 reward-victory.mp3·villain-rpg.mp3는 현재 source record의 파일과 SHA-256이 같다. champion-orchestra.mp3·elite-metal.wav·trainer-rock.mp3·trainer-rpg.mp3·villain-dark-rock.mp3 다섯 파일은 현재 music-sources.json의 해시와 일치하지 않는다. 2026-10-23 소유자가 직접 만든 다섯 곡으로 확인해 project-original로 정정했다. 현재는 재생되지 않는 보존곡이며 Git에 남긴다. 나머지 8파일은 공식 CC0 원본 6종과 동일 bytes 복사본 2개다.
 ## 원본·runtime·Git 경계
 
 `external/`은 향후 원본 보관, `public/assets/external-generated/`는 검증한 복사·변환 결과의 웹 제공 위치다. 실제 브라우저 URL은 public 아래에 있어야 한다. 현재 배포 스크립트는 기존 public 전체를 제공하므로 경로 이동을 먼저 실행하지 않는다.
@@ -42,7 +42,7 @@ BGM 폴더는 13개 파일이지만 현재 registry가 재생하는 것은 서�
 - 자체 제작: 일반 소스와 함께 추적. 이번 placeholder 네 개는 직접 작성한 SVG다.
 - 미검증: 새 user-provided/unverified 원본은 ignore. 현재 사용하는 파일을 이번에 제거하지 않으며 확인 전 권리를 추정하지 않는다.
 
-기존 [manifest](README.md)·[THIRD_PARTY](../references/THIRD_PARTY.md)·public 내부 sources.json이 기준이다. 새로운 provider manifest는 만들지 않았다. 원본 JSON의 과거 날짜·해시는 수정하지 않는다.
+기존 [manifest](README.md)·[THIRD_PARTY](../references/THIRD_PARTY.md)·public 내부 sources.json이 기준이다. 새로운 restore provider manifest는 만들지 않았다. 현재 ownership audit는 ASSET_OWNERSHIP과 runtime-ownership.json에 추가했다. 원본 JSON의 과거 날짜·해시는 수정하지 않는다.
 
 ## resolver와 누락 처리
 
@@ -81,7 +81,7 @@ scripts/lib/source-cache.mjs는 provider·URL·revision·cachePath를 명시한�
 1. runtime 미사용 Kenney·Showdown reference의 위치 정리를 완료했다. 두 그룹은 명시된 고지와 함께 Git 추적을 유지한다.
 2. pinned revision·709개 반입 기록과 변환기가 있는 PokéRogue를 작은 파일럿으로 검증한다. 개별 이용 고지·변환 도구·누락 처리·업데이트·오프라인/온라인 복구를 먼저 확인한다.
 3. Showdown/PokeAPI sprite를 각각 독립 pack으로 생성하는 명령과 해시 검증을 만든 뒤 대규모 runtime 경로를 전환한다. Showdown live 파일은 pinned snapshot 전략이 필요하다.
-4. CC0 VFX·음악·OFL 폰트는 추적 유지가 가능하므로 급히 제거하지 않는다. 사용자 제공 파일은 별도 provenance 검토를 우선한다.
+4. CC0 VFX·음악·OFL 폰트는 추적 유지가 가능하므로 급히 제거하지 않는다. 소유자가 직접 제작한 파일은 project-original로 추적 유지하고, 나머지 미확인 초안은 별도로 남긴다.
 
 pokemon-showdown@0.11.11은 Dex·BattleStream·TeamValidator·배틀 계산의 핵심 npm 의존성이다. external로 이동하거나 package.json·lockfile을 변경하지 않았다. 이 계층은 그림·소리 누락만 다루며 엔진·게임 콘텐츠 JSON까지 없어진 상태의 실행을 보장하는 것은 아니다.
 
@@ -186,4 +186,8 @@ source cache는 `external/pokemon-ip/pokeapi/source/`, runtime은 기존 `public
 
 ### 혼합 runtime 독립 복원 (2026-10-23)
 
-trainers/gimmicks/items/effects의 561파일 중 외부 535개는 provider별 고정 source로 복원한다. 자체 제작 19개·미검증 1개·metadata 6개는 계속 추적하며 폴더 전체 ignore는 하지 않는다. 정확한 bytes·소유권·7개 provider의 revision·명령·검증 결과는 [혼합 자산 공식 ownership](MIXED_RUNTIME_ASSETS.md)에 있다. effects에는 restore 명령이 없다. `pnpm assets:trainers`, `pnpm assets:gimmicks`, `pnpm assets:items`와 각각의 `:verify`를 사용한다. 배포 guard는 이전 세 팩과 신규 7그룹을 모두 검사한다.
+trainers/gimmicks/items/effects의 561파일 중 외부 535개는 provider별 고정 source로 복원한다. 자체 제작 20개·metadata 6개는 계속 추적하며 폴더 전체 ignore는 하지 않는다. 정확한 bytes·소유권·7개 provider의 revision·명령·검증 결과는 [혼합 자산 공식 ownership](MIXED_RUNTIME_ASSETS.md)에 있다. effects에는 restore 명령이 없다. `pnpm assets:trainers`, `pnpm assets:gimmicks`, `pnpm assets:items`와 각각의 `:verify`를 사용한다. 배포 guard는 이전 세 팩과 신규 7그룹을 모두 검사한다.
+
+### 최종 ownership 정책 (2026-10-23)
+
+[최종 파일별 audit와 정책](ASSET_OWNERSHIP.md), [단일 잔여 ownership manifest](manifests/runtime-ownership.json)를 기준으로 한다. eggs·TM·portal/event·BGM 5개·effects는 project-original이며 외부 restore 대상이 아니다. CC0 BGM 8개(원곡 6종), OFL 폰트 2개와 고지 1개, CC0 VFX 22개는 출처/해시를 확인해 Git에 유지한다. 새 Git 제거·새 restore readiness는 없으며 통합 assets:setup은 다음 단계다.

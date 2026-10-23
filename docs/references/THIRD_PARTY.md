@@ -170,7 +170,7 @@ PokéAPI item API에서 9종의 sprites.default 주소를 확인하고 PokeAPI/s
 
 다이맥스밴드 아이콘은 PokeSprite, 테라스탈오브 아이콘은 PokeRogue 원본 PNG를 사용합니다. URL·SHA-256·크레딧 경로는 [장비 아이콘 출처](../../public/sprites/items/trainer-equipment-sources.json)에 기록합니다. PokeRogue 크레딧과 권리 고지는 `public/vendor/pokerogue/`에 보존하며, 게임 엔진 라이선스와 이미지 권리는 별개입니다.
 
-## 사용자 제공 알 이미지
+## 프로젝트 제작 알 이미지 (2026-10-23 소유자 확인)
 
 일반·레어·슈퍼레어·이로치 알 PNG 네 장과 뽑기 기계 PNG는 사용자가 2026-10-14 제공한 이미지를 수정 없이 사용합니다. public/sprites/eggs/에 보관하며 [파일별 출처와 SHA-256](../../public/sprites/eggs/sources.json)을 함께 기록합니다. 레어 알 오라·슈퍼레어 후광·이로치 반짝임·부화·기계 들썩임과 알 배출 효과는 화면 CSS에서 추가합니다.
 
@@ -178,4 +178,8 @@ PokéAPI item API에서 9종의 sprites.default 주소를 확인하고 PokeAPI/s
 
 ## 혼합 runtime 소유권과 재현 (2026-10-23)
 
-trainers/gimmicks/items/effects의 원작·커뮤니티·자체·사용자 제공 경계를 [혼합 자산 ownership](../assets/MIXED_RUNTIME_ASSETS.md)에 기록했다. 외부 535개만 고정 소스로 복원하고 자체 제작 19개, 사용자 제공 화염방사 1개, 기존 source JSON 6개는 Git에 유지한다. Showdown과 과거 PokeAPI 도구 2개는 공개 프로젝트 commit `43aa154688a1ef31e75f175ee6bde90198caa58a`를 보존 snapshot으로 사용하며 원래 제공원·크레딧 기록은 변경하지 않는다. PokeAPI 191개, PokeSprite 1개, PokéRogue 1개는 공식 고정 commit을 사용한다. 스냅샷 고정과 Git 추적 변경은 새 이용 허가나 이미지의 권리 이전을 뜻하지 않는다.
+trainers/gimmicks/items/effects의 원작·커뮤니티·자체·사용자 제공 경계를 [혼합 자산 ownership](../assets/MIXED_RUNTIME_ASSETS.md)에 기록했다. 외부 535개만 고정 소스로 복원하고 자체 제작 20개(직접 제작 확인된 화염방사 포함), 기존 source JSON 6개는 Git에 유지한다. Showdown과 과거 PokeAPI 도구 2개는 공개 프로젝트 commit `43aa154688a1ef31e75f175ee6bde90198caa58a`를 보존 snapshot으로 사용하며 원래 제공원·크레딧 기록은 변경하지 않는다. PokeAPI 191개, PokeSprite 1개, PokéRogue 1개는 공식 고정 commit을 사용한다. 스냅샷 고정과 Git 추적 변경은 새 이용 허가나 이미지의 권리 이전을 뜻하지 않는다.
+
+## 최종 소유권 정정 (2026-10-23)
+
+알 PNG 5개·TM PNG 18개·포털 GIF/PNG 2개·보존 BGM 5개·화염방사 beam은 소유자가 직접 만든 project-original이다. 과거 user-provided는 반입 경로를 기록한 말이며 현재 외부 저작자/미검증 판정으로 사용하지 않는다. historical source JSON의 원래 날짜·해시는 보존하고 현재 판정은 [ownership audit](../assets/ASSET_OWNERSHIP.md)에 기록했다. 외부 CC0 음원 8개는 공식 6개 원본과 해시 일치하는 복사본 2개이며 기존 저자·페이지·라이선스를 유지한다. NeoDGM v1.601 폰트 두 파일과 OFL 고지, 고정 Showdown client의 CC0 VFX 22개도 Git에 유지한다. VFX 개별 작가 이름은 upstream 고지에 명시되지 않아 임의 지정하지 않는다.

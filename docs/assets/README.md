@@ -23,4 +23,6 @@
 
 음악·장비·알·트레이너 등 기존 게임 자산 옆의 `sources.json`은 계속 그 위치가 기준이다. 생성 sprite pack의 Git 정책과 새 clone 복원은 [PokéRogue](POKEROGUE_RESTORE.md)와 [Showdown Pokémon](SHOWDOWN_POKEMON_RESTORE.md) 및 [PokeAPI](POKEAPI_RESTORE.md) 안내를 따른다. runtime URL과 src/data는 유지한다.
 
-혼합 자산의 현재 소유권과 파일별 golden은 [MIXED_RUNTIME_ASSETS](MIXED_RUNTIME_ASSETS.md)와 [단일 current manifest](manifests/mixed-runtime-assets.json)를 따른다. trainers 194개, gimmicks 146개, items 195개만 외부 복원 대상으로 추적 해제하며 플레이어·generated item PNG/SVG·neutral VFX·사용자 제공 beam과 historical source JSON은 유지한다.
+혼합 자산의 현재 소유권과 파일별 golden은 [MIXED_RUNTIME_ASSETS](MIXED_RUNTIME_ASSETS.md)와 [단일 current manifest](manifests/mixed-runtime-assets.json)를 따른다. trainers 194개, gimmicks 146개, items 195개만 외부 복원 대상으로 추적 해제하며 플레이어·generated item PNG/SVG·neutral VFX·project-original beam과 historical source JSON은 유지한다.
+
+현재 잔여 자산의 공식 ownership은 [최종 정책](ASSET_OWNERSHIP.md)과 [runtime ownership manifest](manifests/runtime-ownership.json)에 기록한다. mixed golden의 project-original 20개는 참조로 재사용하며 해시를 중복 복제하지 않는다. historical eggs/music/resource source snapshot은 보존한다.

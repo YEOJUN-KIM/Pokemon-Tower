@@ -122,3 +122,7 @@ node scripts/package-deploy.mjs --check
 ```
 
 단일 제공원만 복구하려면 문서에 나열된 provider 명령을 사용한다. 각 명령의 `--offline`은 source cache가 완전할 때만 동작한다. effects·플레이어·자체 도구·historical metadata는 tracked이므로 별도 restore가 없다. 모든 신규 외부 provider도 배포 readiness의 필수 입력이며, 누락 시 guard가 해당 명령을 안내한다. 호스트에서 복원한 `public`을 Docker context에 포함하고 Docker 안에서는 다운로드하지 않는다.
+
+### Git 동봉 자산의 최종 정책
+
+project-original(알·TM·포털/event·effects·제작 BGM 5개), 외부 CC0 BGM 8개, OFL 폰트 및 고지 3개, CC0 VFX 22개는 Git clone만으로 존재한다. 이번 단계 새 restore 팩이나 readiness 조건은 추가하지 않는다. 기존 3팩 + mixed 7 provider만 복원한다. 파일별 분류는 [ownership 정책](../assets/ASSET_OWNERSHIP.md)을 따른다. `pnpm assets:setup`은 다음 단계에서 통합하며 이번에는 만들지 않는다.

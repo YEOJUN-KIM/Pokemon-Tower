@@ -14,7 +14,7 @@
 
 최종 확률은 `normalize(sample.rankWeights[rank] * encounterPrior[rank])`입니다. 일반층 prior는 층별 곡선, 도전자는 기존 50/42/8 가중치를 사용합니다. 곱과 정규화 과정에서 0을 유지합니다. 클래스 확률은 합계 1이어야 하며 유효한 Rank가 하나도 없으면 임의로 금지 Rank를 선택하지 않고 데이터 오류를 반환합니다. `generateNpcEncounter`의 명시적 Rank 인자는 QA 비교용이고 생략하면 클래스+층 분포로 추첨합니다.
 
-초기 공통 풀은 **20개 Sample / 17종 portrait**입니다. 7종 tactic을 여러 클래스에 분산했습니다. 표시명이 같은 연구원·에이스·베테랑도 각각 다른 내부 ID와 전술을 가집니다. 전체 ID/표시명/sprite/tactic/teamConcept/rankWeights/minFloor/weight/pool 표는 [생성 검증 보고서](../../artifacts/reports/npc/NPC_RANK_SAMPLES.md)에 있습니다. 현재 20개 모두 normal/challenger 양쪽 풀에 속합니다.
+초기 공통 풀은 **20개 Sample / 17종 portrait**입니다. 7종 tactic을 여러 클래스에 분산했습니다. 표시명이 같은 연구원·에이스·베테랑도 각각 다른 내부 ID와 전술을 가집니다. 전체 ID/표시명/sprite/tactic/teamConcept/rankWeights/minFloor/weight/pool 표는 생성 검증 보고서 (로컬 전용: `artifacts/reports/npc/NPC_RANK_SAMPLES.md`)에 있습니다. 현재 20개 모두 normal/challenger 양쪽 풀에 속합니다.
 
 ## Rank의 정확한 차이
 
@@ -114,13 +114,13 @@ DB v38은 `run_npc_rules(run_id,version=1)`만 추가합니다. 새 런에만 �
 
 [Showdown 원본 목록](https://play.pokemonshowdown.com/sprites/trainers/)과 [개별 크레딧 목록](https://play.pokemonshowdown.com/sprites/trainers/?filter=credited)을 확인했습니다. 목록은 게임 외 제작 자산도 포함하며 개별 아티스트 크레딧과 수정 허가 조건을 안내합니다. 게임 기반 클래스 중 개별 아티스트 표기가 없는 항목을 이번 반입 대상으로 한정했습니다. 이는 자산 권리를 별도로 부여한다는 의미가 아닙니다.
 
-새로 반입한 8종: lass-gen3, pokemonbreeder-gen3, gentleman-gen4, pokemonranger-gen3, veteran-gen4, backpacker, schoolkid-gen4, collector. 기존 자산과 합해 17종 portrait를 사용합니다. 출처 URL·확인일·SHA-256·검토 결과를 `public/sprites/trainers/sources.json` 및 [자산 검토 JSON](../../artifacts/reports/npc/npc-sprite-review.json)에 기록했습니다. 신규 이미지 제작·커스텀 이미지 편집은 없습니다.
+새로 반입한 8종: lass-gen3, pokemonbreeder-gen3, gentleman-gen4, pokemonranger-gen3, veteran-gen4, backpacker, schoolkid-gen4, collector. 기존 자산과 합해 17종 portrait를 사용합니다. 출처 URL·확인일·SHA-256·검토 결과를 `public/sprites/trainers/sources.json` 및 [자산 검토 JSON](../assets/manifests/npc-sprite-review.json)에 기록했습니다. 신규 이미지 제작·커스텀 이미지 편집은 없습니다.
 
 검토만 하고 반입하지 않은 후보: pokemonbreeder-gen7(Beliot419), pokemonranger-gen6/veteran-gen7/acetrainer-gen6(kyledove). 후속 도입 시 개별 크레딧·사용 조건을 다시 확인해야 합니다. `scripts/import-common-npc-sprites.ts`는 신규 자산에 아티스트 표기가 있으면 자동 다운로드를 건너뛰고 검토 대상으로 남깁니다. 기존 아티스트 크레딧도 유지합니다.
 
 ## QA와 확장 방법
 
-`pnpm exec tsx scripts/report-npc-training.ts --write`로 [5/20/40층 실제 팀 보고서](../../artifacts/reports/npc/NPC_RANK_SAMPLES.md)와 [원본 snapshot JSON](../../artifacts/reports/npc/npc-rank-samples.json)을 재생성합니다. 클래스별 비율·teamConcept·실제 타입 구성·IV 평균·스탯별 IV/EV·도구 개수·기술·fallback·전체 Sample 목록 및 일반층/도전자 최종 비율이 포함됩니다. 5/20/40층의 테마 Normal/Elite와 실력형 Elite/Master를 비교합니다. 실제 플레이 승률의 장기 밸런스 조정은 후속입니다.
+`pnpm exec tsx scripts/report-npc-training.ts --write`로 5/20/40층 실제 팀 보고서 (로컬 전용: `artifacts/reports/npc/NPC_RANK_SAMPLES.md`)와 원본 snapshot JSON (로컬 전용: `artifacts/reports/npc/npc-rank-samples.json`)을 재생성합니다. 클래스별 비율·teamConcept·실제 타입 구성·IV 평균·스탯별 IV/EV·도구 개수·기술·fallback·전체 Sample 목록 및 일반층/도전자 최종 비율이 포함됩니다. 5/20/40층의 테마 Normal/Elite와 실력형 Elite/Master를 비교합니다. 실제 플레이 승률의 장기 밸런스 조정은 후속입니다.
 
 새 Sample은 `src/data/npc-samples.ts` 배열에 id, displayName, portrait, tactic, specialty, rankWeights, teamConcept, minFloor, weight, pools만 추가합니다. 보상·IV/EV 숫자를 복사하지 않습니다. 외형이 없으면 먼저 위 자산 검토 절차를 따릅니다. 일반층/도전자 공통 Rank 조정은 npc-ranks.ts, 도전자 보상은 challenger-rewards.ts에서 합니다. 새 Sample을 기존 네임드 catalog에 중복 등록할 필요가 없습니다.
 

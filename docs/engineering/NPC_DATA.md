@@ -13,7 +13,7 @@ scripts/data/npc/normal-npc-samples.json (사람이 검토·수정하는 현재 
     → 배틀 팀 snapshot 저장
 ```
 
-allFloors 입력은 같은 후보 빌드를 층 전체에서 재사용하며, select/required·selectionRules가 실제 3마리 선출을 제어한다. 후보 수와 필수 멤버는 입력마다 다르다. 단계별 입력은 stage로 선택한다. 캐노니컬 ID/별칭은 data/npc-review-presets.ts에서 연결한다. 과거 [6종 파일럿](../../artifacts/reports/npc/named-trainer-sample-pilot.md)은 도입 당시 기록이며 현재 전체 후보 목록이 아니다.
+allFloors 입력은 같은 후보 빌드를 층 전체에서 재사용하며, select/required·selectionRules가 실제 3마리 선출을 제어한다. 후보 수와 필수 멤버는 입력마다 다르다. 단계별 입력은 stage로 선택한다. 캐노니컬 ID/별칭은 data/npc-review-presets.ts에서 연결한다. 과거 6종 파일럿 (로컬 전용: `artifacts/reports/npc/named-trainer-sample-pilot.md`)은 도입 당시 기록이며 현재 전체 후보 목록이 아니다.
 
 npc-team-samples.json은 별도의 최고 단계 참고 입력이다. 현재 검토 입력을 재현하지 못하는 옛 단계별 생성기는 삭제했다. 일상적인 수정은 normal-npc-samples.json → runtime export → --check 순서로 진행한다. 지역별 build 도구는 해당 지역을 수정하는 전용 도구이므로 쓰기 범위와 기존 입력 보존 검사를 먼저 확인한다.
 

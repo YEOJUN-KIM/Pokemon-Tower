@@ -15,4 +15,4 @@
 | 구현된 이벤트의 콘텐츠 보강·후순위 아이디어 | [이벤트 콘텐츠 설계](EVENT_CANDIDATES.md) |
 | 현재 알 뽑기·부화·등급별 뽑기 확장 방향 | [알 종류와 부화](EGGS.md) |
 
-[현재 상태](../STATUS.md) · [상세 보고서](../../artifacts/README.md)
+[현재 상태](../STATUS.md) · 상세 보고서 (로컬 전용: `artifacts/README.md`)

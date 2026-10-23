@@ -40,6 +40,7 @@ const entries=tables.pokemon_species.map(row=>{
 }).sort((a,b)=>a.id-b.id);
 if(entries.length<1025 || entries.some(entry=>!entry.types.length || entry.types.some(type=>!type)))throw new Error('Incomplete national dex metadata');
 await mkdir('src/data',{recursive:true});
+await mkdir('artifacts/qa/assets/reports',{recursive:true});
 await writeFile('src/data/pokedex.json',JSON.stringify(entries,null,2)+'\n');
 await writeFile('artifacts/qa/assets/reports/pokedex-source.json',JSON.stringify({importedAt:new Date().toISOString(),count:entries.length,files:files.map(name=>`${source}${name}.csv`),forms:'One default entry per species; Mega, Gigantamax and regional forms are excluded.'},null,2)+'\n');
 console.log(`Imported ${entries.length} species with Korean and English names, types, generation and default ability.`);

@@ -1,0 +1,150 @@
+{
+  "metadata": {
+    "commit": "955036ccc70aab737fd4a74bca6d57b201a095f9",
+    "raidDefinitionsHash": "ae069347192bbc99f6f675c8f1834f4ff23e6cec9c0ae43e6a1f6b0bf8d58b6f",
+    "poolHash": "5066eb2162dd9a3145d3fd2f957882d114448f54f8029dc0910f3d20d4c73795",
+    "sourceHash": "0c39645a19405fe64c9e8ad11899376d8ef204bfa8943a278850b050994762b0"
+  },
+  "groups": [
+    {
+      "id": "mewtwo",
+      "boss": "Mewtwo",
+      "summary": {
+        "winRate": 0
+      }
+    },
+    {
+      "id": "rayquaza",
+      "boss": "Rayquaza",
+      "summary": {
+        "winRate": 0
+      }
+    },
+    {
+      "id": "groudon",
+      "boss": "Groudon",
+      "summary": {
+        "winRate": 0.1
+      }
+    },
+    {
+      "id": "zamazenta",
+      "boss": "Zamazenta",
+      "summary": {
+        "winRate": 0.4
+      }
+    },
+    {
+      "id": "zygarde",
+      "boss": "Zygarde",
+      "summary": {
+        "winRate": 0.4
+      }
+    },
+    {
+      "id": "arceus",
+      "boss": "Arceus",
+      "summary": {
+        "winRate": 0.5
+      }
+    },
+    {
+      "id": "zacian",
+      "boss": "Zacian",
+      "summary": {
+        "winRate": 0.6
+      }
+    },
+    {
+      "id": "snorlax",
+      "boss": "Snorlax",
+      "summary": {
+        "winRate": 0.7
+      }
+    },
+    {
+      "id": "kyogre",
+      "boss": "Kyogre",
+      "summary": {
+        "winRate": 0.8
+      }
+    },
+    {
+      "id": "terapagos",
+      "boss": "Terapagos",
+      "summary": {
+        "winRate": 1.5
+      }
+    },
+    {
+      "id": "kyurem",
+      "boss": "Kyurem",
+      "summary": {
+        "winRate": 2.9
+      }
+    },
+    {
+      "id": "necrozma",
+      "boss": "Necrozma",
+      "summary": {
+        "winRate": 3.7
+      }
+    },
+    {
+      "id": "ogerpon",
+      "boss": "Ogerpon",
+      "summary": {
+        "winRate": 6.8
+      }
+    },
+    {
+      "id": "garchomp",
+      "boss": "Garchomp",
+      "summary": {
+        "winRate": 7
+      }
+    },
+    {
+      "id": "shaymin",
+      "boss": "Shaymin",
+      "summary": {
+        "winRate": 13.3
+      }
+    },
+    {
+      "id": "metagross",
+      "boss": "Metagross",
+      "summary": {
+        "winRate": 22.6
+      }
+    },
+    {
+      "id": "palafin",
+      "boss": "Palafin",
+      "summary": {
+        "winRate": 33.7
+      }
+    },
+    {
+      "id": "diancie",
+      "boss": "Diancie",
+      "summary": {
+        "winRate": 42.2
+      }
+    },
+    {
+      "id": "hoopa",
+      "boss": "Hoopa",
+      "summary": {
+        "winRate": 42.8
+      }
+    },
+    {
+      "id": "volcarona",
+      "boss": "Volcarona",
+      "summary": {
+        "winRate": 43.9
+      }
+    }
+  ]
+}

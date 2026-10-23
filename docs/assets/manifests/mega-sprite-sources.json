@@ -1,0 +1,641 @@
+{
+  "source": "Pokemon Showdown sprite collection",
+  "importedAt": "2026-10-09T12:53:09.405Z",
+  "sources": [
+    {
+      "name": "Abomasnow-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/abomasnow-mega.png",
+      "path": "public/sprites/gimmicks/front/abomasnow-mega.png"
+    },
+    {
+      "name": "Abomasnow-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/abomasnow-mega.png",
+      "path": "public/sprites/gimmicks/back/abomasnow-mega.png"
+    },
+    {
+      "name": "Absol-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/absol-mega.png",
+      "path": "public/sprites/gimmicks/front/absol-mega.png"
+    },
+    {
+      "name": "Absol-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/absol-mega.png",
+      "path": "public/sprites/gimmicks/back/absol-mega.png"
+    },
+    {
+      "name": "Aerodactyl-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/aerodactyl-mega.png",
+      "path": "public/sprites/gimmicks/front/aerodactyl-mega.png"
+    },
+    {
+      "name": "Aerodactyl-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/aerodactyl-mega.png",
+      "path": "public/sprites/gimmicks/back/aerodactyl-mega.png"
+    },
+    {
+      "name": "Absol-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani-back/absol-mega.gif",
+      "path": "public/sprites/gimmicks/back/absol-mega.gif"
+    },
+    {
+      "name": "Aggron-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/aggron-mega.png",
+      "path": "public/sprites/gimmicks/front/aggron-mega.png"
+    },
+    {
+      "name": "Aggron-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/aggron-mega.png",
+      "path": "public/sprites/gimmicks/back/aggron-mega.png"
+    },
+    {
+      "name": "Alakazam-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/alakazam-mega.png",
+      "path": "public/sprites/gimmicks/front/alakazam-mega.png"
+    },
+    {
+      "name": "Absol-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/absol-mega.gif",
+      "path": "public/sprites/gimmicks/front/absol-mega.gif"
+    },
+    {
+      "name": "Alakazam-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/alakazam-mega.png",
+      "path": "public/sprites/gimmicks/back/alakazam-mega.png"
+    },
+    {
+      "name": "Alakazam-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/alakazam-mega.gif",
+      "path": "public/sprites/gimmicks/front/alakazam-mega.gif"
+    },
+    {
+      "name": "Altaria-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/altaria-mega.png",
+      "path": "public/sprites/gimmicks/front/altaria-mega.png"
+    },
+    {
+      "name": "Abomasnow-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani-back/abomasnow-mega.gif",
+      "path": "public/sprites/gimmicks/back/abomasnow-mega.gif"
+    },
+    {
+      "name": "Altaria-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/altaria-mega.png",
+      "path": "public/sprites/gimmicks/back/altaria-mega.png"
+    },
+    {
+      "name": "Abomasnow-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/abomasnow-mega.gif",
+      "path": "public/sprites/gimmicks/front/abomasnow-mega.gif"
+    },
+    {
+      "name": "Ampharos-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/ampharos-mega.png",
+      "path": "public/sprites/gimmicks/front/ampharos-mega.png"
+    },
+    {
+      "name": "Ampharos-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/ampharos-mega.png",
+      "path": "public/sprites/gimmicks/back/ampharos-mega.png"
+    },
+    {
+      "name": "Audino-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/audino-mega.png",
+      "path": "public/sprites/gimmicks/front/audino-mega.png"
+    },
+    {
+      "name": "Audino-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/audino-mega.png",
+      "path": "public/sprites/gimmicks/back/audino-mega.png"
+    },
+    {
+      "name": "Banette-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/banette-mega.png",
+      "path": "public/sprites/gimmicks/front/banette-mega.png"
+    },
+    {
+      "name": "Banette-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/banette-mega.png",
+      "path": "public/sprites/gimmicks/back/banette-mega.png"
+    },
+    {
+      "name": "Ampharos-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/ampharos-mega.gif",
+      "path": "public/sprites/gimmicks/front/ampharos-mega.gif"
+    },
+    {
+      "name": "Beedrill-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/beedrill-mega.png",
+      "path": "public/sprites/gimmicks/front/beedrill-mega.png"
+    },
+    {
+      "name": "Banette-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/banette-mega.gif",
+      "path": "public/sprites/gimmicks/front/banette-mega.gif"
+    },
+    {
+      "name": "Beedrill-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/beedrill-mega.png",
+      "path": "public/sprites/gimmicks/back/beedrill-mega.png"
+    },
+    {
+      "name": "Blastoise-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/blastoise-mega.png",
+      "path": "public/sprites/gimmicks/front/blastoise-mega.png"
+    },
+    {
+      "name": "Ampharos-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani-back/ampharos-mega.gif",
+      "path": "public/sprites/gimmicks/back/ampharos-mega.gif"
+    },
+    {
+      "name": "Blastoise-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/blastoise-mega.png",
+      "path": "public/sprites/gimmicks/back/blastoise-mega.png"
+    },
+    {
+      "name": "Blaziken-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/blaziken-mega.png",
+      "path": "public/sprites/gimmicks/front/blaziken-mega.png"
+    },
+    {
+      "name": "Blaziken-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/blaziken-mega.gif",
+      "path": "public/sprites/gimmicks/front/blaziken-mega.gif"
+    },
+    {
+      "name": "Blaziken-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/blaziken-mega.png",
+      "path": "public/sprites/gimmicks/back/blaziken-mega.png"
+    },
+    {
+      "name": "Camerupt-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/camerupt-mega.png",
+      "path": "public/sprites/gimmicks/front/camerupt-mega.png"
+    },
+    {
+      "name": "Camerupt-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/camerupt-mega.png",
+      "path": "public/sprites/gimmicks/back/camerupt-mega.png"
+    },
+    {
+      "name": "Charizard-Mega-X",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/charizard-megax.png",
+      "path": "public/sprites/gimmicks/front/charizard-megax.png"
+    },
+    {
+      "name": "Beedrill-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/beedrill-mega.gif",
+      "path": "public/sprites/gimmicks/front/beedrill-mega.gif"
+    },
+    {
+      "name": "Charizard-Mega-X",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/charizard-megax.png",
+      "path": "public/sprites/gimmicks/back/charizard-megax.png"
+    },
+    {
+      "name": "Charizard-Mega-Y",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/charizard-megay.png",
+      "path": "public/sprites/gimmicks/front/charizard-megay.png"
+    },
+    {
+      "name": "Charizard-Mega-Y",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/charizard-megay.png",
+      "path": "public/sprites/gimmicks/back/charizard-megay.png"
+    },
+    {
+      "name": "Diancie-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/diancie-mega.png",
+      "path": "public/sprites/gimmicks/front/diancie-mega.png"
+    },
+    {
+      "name": "Diancie-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/diancie-mega.png",
+      "path": "public/sprites/gimmicks/back/diancie-mega.png"
+    },
+    {
+      "name": "Charizard-Mega-X",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/charizard-megax.gif",
+      "path": "public/sprites/gimmicks/front/charizard-megax.gif"
+    },
+    {
+      "name": "Gallade-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/gallade-mega.png",
+      "path": "public/sprites/gimmicks/front/gallade-mega.png"
+    },
+    {
+      "name": "Gallade-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/gallade-mega.png",
+      "path": "public/sprites/gimmicks/back/gallade-mega.png"
+    },
+    {
+      "name": "Garchomp-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/garchomp-mega.png",
+      "path": "public/sprites/gimmicks/front/garchomp-mega.png"
+    },
+    {
+      "name": "Garchomp-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/garchomp-mega.gif",
+      "path": "public/sprites/gimmicks/front/garchomp-mega.gif"
+    },
+    {
+      "name": "Garchomp-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/garchomp-mega.png",
+      "path": "public/sprites/gimmicks/back/garchomp-mega.png"
+    },
+    {
+      "name": "Gardevoir-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/gardevoir-mega.png",
+      "path": "public/sprites/gimmicks/front/gardevoir-mega.png"
+    },
+    {
+      "name": "Garchomp-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani-back/garchomp-mega.gif",
+      "path": "public/sprites/gimmicks/back/garchomp-mega.gif"
+    },
+    {
+      "name": "Gardevoir-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/gardevoir-mega.png",
+      "path": "public/sprites/gimmicks/back/gardevoir-mega.png"
+    },
+    {
+      "name": "Gengar-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/gengar-mega.png",
+      "path": "public/sprites/gimmicks/front/gengar-mega.png"
+    },
+    {
+      "name": "Gengar-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/gengar-mega.png",
+      "path": "public/sprites/gimmicks/back/gengar-mega.png"
+    },
+    {
+      "name": "Glalie-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/glalie-mega.png",
+      "path": "public/sprites/gimmicks/front/glalie-mega.png"
+    },
+    {
+      "name": "Glalie-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/glalie-mega.png",
+      "path": "public/sprites/gimmicks/back/glalie-mega.png"
+    },
+    {
+      "name": "Gardevoir-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/gardevoir-mega.gif",
+      "path": "public/sprites/gimmicks/front/gardevoir-mega.gif"
+    },
+    {
+      "name": "Gyarados-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/gyarados-mega.png",
+      "path": "public/sprites/gimmicks/front/gyarados-mega.png"
+    },
+    {
+      "name": "Gardevoir-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani-back/gardevoir-mega.gif",
+      "path": "public/sprites/gimmicks/back/gardevoir-mega.gif"
+    },
+    {
+      "name": "Gyarados-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/gyarados-mega.png",
+      "path": "public/sprites/gimmicks/back/gyarados-mega.png"
+    },
+    {
+      "name": "Heracross-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/heracross-mega.png",
+      "path": "public/sprites/gimmicks/front/heracross-mega.png"
+    },
+    {
+      "name": "Heracross-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/heracross-mega.png",
+      "path": "public/sprites/gimmicks/back/heracross-mega.png"
+    },
+    {
+      "name": "Glalie-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani-back/glalie-mega.gif",
+      "path": "public/sprites/gimmicks/back/glalie-mega.gif"
+    },
+    {
+      "name": "Houndoom-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/houndoom-mega.png",
+      "path": "public/sprites/gimmicks/front/houndoom-mega.png"
+    },
+    {
+      "name": "Houndoom-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/houndoom-mega.png",
+      "path": "public/sprites/gimmicks/back/houndoom-mega.png"
+    },
+    {
+      "name": "Kangaskhan-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/kangaskhan-mega.png",
+      "path": "public/sprites/gimmicks/front/kangaskhan-mega.png"
+    },
+    {
+      "name": "Kangaskhan-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/kangaskhan-mega.png",
+      "path": "public/sprites/gimmicks/back/kangaskhan-mega.png"
+    },
+    {
+      "name": "Glalie-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/glalie-mega.gif",
+      "path": "public/sprites/gimmicks/front/glalie-mega.gif"
+    },
+    {
+      "name": "Latias-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/latias-mega.png",
+      "path": "public/sprites/gimmicks/front/latias-mega.png"
+    },
+    {
+      "name": "Latias-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/latias-mega.png",
+      "path": "public/sprites/gimmicks/back/latias-mega.png"
+    },
+    {
+      "name": "Latios-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/latios-mega.png",
+      "path": "public/sprites/gimmicks/front/latios-mega.png"
+    },
+    {
+      "name": "Latias-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/latias-mega.gif",
+      "path": "public/sprites/gimmicks/front/latias-mega.gif"
+    },
+    {
+      "name": "Latios-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/latios-mega.png",
+      "path": "public/sprites/gimmicks/back/latios-mega.png"
+    },
+    {
+      "name": "Latios-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/latios-mega.gif",
+      "path": "public/sprites/gimmicks/front/latios-mega.gif"
+    },
+    {
+      "name": "Lopunny-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/lopunny-mega.png",
+      "path": "public/sprites/gimmicks/front/lopunny-mega.png"
+    },
+    {
+      "name": "Lopunny-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/lopunny-mega.png",
+      "path": "public/sprites/gimmicks/back/lopunny-mega.png"
+    },
+    {
+      "name": "Lucario-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/lucario-mega.png",
+      "path": "public/sprites/gimmicks/front/lucario-mega.png"
+    },
+    {
+      "name": "Lucario-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/lucario-mega.png",
+      "path": "public/sprites/gimmicks/back/lucario-mega.png"
+    },
+    {
+      "name": "Manectric-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/manectric-mega.png",
+      "path": "public/sprites/gimmicks/front/manectric-mega.png"
+    },
+    {
+      "name": "Manectric-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/manectric-mega.png",
+      "path": "public/sprites/gimmicks/back/manectric-mega.png"
+    },
+    {
+      "name": "Mawile-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/mawile-mega.png",
+      "path": "public/sprites/gimmicks/front/mawile-mega.png"
+    },
+    {
+      "name": "Mawile-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/mawile-mega.png",
+      "path": "public/sprites/gimmicks/back/mawile-mega.png"
+    },
+    {
+      "name": "Mawile-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani-back/mawile-mega.gif",
+      "path": "public/sprites/gimmicks/back/mawile-mega.gif"
+    },
+    {
+      "name": "Medicham-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/medicham-mega.png",
+      "path": "public/sprites/gimmicks/front/medicham-mega.png"
+    },
+    {
+      "name": "Lucario-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/lucario-mega.gif",
+      "path": "public/sprites/gimmicks/front/lucario-mega.gif"
+    },
+    {
+      "name": "Medicham-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/medicham-mega.png",
+      "path": "public/sprites/gimmicks/back/medicham-mega.png"
+    },
+    {
+      "name": "Lucario-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani-back/lucario-mega.gif",
+      "path": "public/sprites/gimmicks/back/lucario-mega.gif"
+    },
+    {
+      "name": "Metagross-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/metagross-mega.png",
+      "path": "public/sprites/gimmicks/front/metagross-mega.png"
+    },
+    {
+      "name": "Manectric-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/manectric-mega.gif",
+      "path": "public/sprites/gimmicks/front/manectric-mega.gif"
+    },
+    {
+      "name": "Metagross-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/metagross-mega.png",
+      "path": "public/sprites/gimmicks/back/metagross-mega.png"
+    },
+    {
+      "name": "Mewtwo-Mega-X",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/mewtwo-megax.png",
+      "path": "public/sprites/gimmicks/front/mewtwo-megax.png"
+    },
+    {
+      "name": "Mawile-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/mawile-mega.gif",
+      "path": "public/sprites/gimmicks/front/mawile-mega.gif"
+    },
+    {
+      "name": "Mewtwo-Mega-X",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/mewtwo-megax.png",
+      "path": "public/sprites/gimmicks/back/mewtwo-megax.png"
+    },
+    {
+      "name": "Mewtwo-Mega-X",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/mewtwo-megax.gif",
+      "path": "public/sprites/gimmicks/front/mewtwo-megax.gif"
+    },
+    {
+      "name": "Mewtwo-Mega-Y",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/mewtwo-megay.png",
+      "path": "public/sprites/gimmicks/front/mewtwo-megay.png"
+    },
+    {
+      "name": "Mewtwo-Mega-Y",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/mewtwo-megay.png",
+      "path": "public/sprites/gimmicks/back/mewtwo-megay.png"
+    },
+    {
+      "name": "Pidgeot-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/pidgeot-mega.png",
+      "path": "public/sprites/gimmicks/front/pidgeot-mega.png"
+    },
+    {
+      "name": "Medicham-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/medicham-mega.gif",
+      "path": "public/sprites/gimmicks/front/medicham-mega.gif"
+    },
+    {
+      "name": "Pidgeot-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/pidgeot-mega.png",
+      "path": "public/sprites/gimmicks/back/pidgeot-mega.png"
+    },
+    {
+      "name": "Pinsir-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/pinsir-mega.png",
+      "path": "public/sprites/gimmicks/front/pinsir-mega.png"
+    },
+    {
+      "name": "Pinsir-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/pinsir-mega.png",
+      "path": "public/sprites/gimmicks/back/pinsir-mega.png"
+    },
+    {
+      "name": "Mewtwo-Mega-Y",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/mewtwo-megay.gif",
+      "path": "public/sprites/gimmicks/front/mewtwo-megay.gif"
+    },
+    {
+      "name": "Sableye-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/sableye-mega.png",
+      "path": "public/sprites/gimmicks/front/sableye-mega.png"
+    },
+    {
+      "name": "Sableye-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/sableye-mega.png",
+      "path": "public/sprites/gimmicks/back/sableye-mega.png"
+    },
+    {
+      "name": "Salamence-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/salamence-mega.png",
+      "path": "public/sprites/gimmicks/front/salamence-mega.png"
+    },
+    {
+      "name": "Salamence-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/salamence-mega.png",
+      "path": "public/sprites/gimmicks/back/salamence-mega.png"
+    },
+    {
+      "name": "Salamence-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/salamence-mega.gif",
+      "path": "public/sprites/gimmicks/front/salamence-mega.gif"
+    },
+    {
+      "name": "Sceptile-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/sceptile-mega.png",
+      "path": "public/sprites/gimmicks/front/sceptile-mega.png"
+    },
+    {
+      "name": "Sceptile-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/sceptile-mega.png",
+      "path": "public/sprites/gimmicks/back/sceptile-mega.png"
+    },
+    {
+      "name": "Scizor-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/scizor-mega.png",
+      "path": "public/sprites/gimmicks/front/scizor-mega.png"
+    },
+    {
+      "name": "Scizor-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/scizor-mega.png",
+      "path": "public/sprites/gimmicks/back/scizor-mega.png"
+    },
+    {
+      "name": "Sharpedo-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/sharpedo-mega.png",
+      "path": "public/sprites/gimmicks/front/sharpedo-mega.png"
+    },
+    {
+      "name": "Sharpedo-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/sharpedo-mega.png",
+      "path": "public/sprites/gimmicks/back/sharpedo-mega.png"
+    },
+    {
+      "name": "Slowbro-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/slowbro-mega.png",
+      "path": "public/sprites/gimmicks/front/slowbro-mega.png"
+    },
+    {
+      "name": "Slowbro-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/slowbro-mega.png",
+      "path": "public/sprites/gimmicks/back/slowbro-mega.png"
+    },
+    {
+      "name": "Scizor-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/scizor-mega.gif",
+      "path": "public/sprites/gimmicks/front/scizor-mega.gif"
+    },
+    {
+      "name": "Steelix-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/steelix-mega.png",
+      "path": "public/sprites/gimmicks/front/steelix-mega.png"
+    },
+    {
+      "name": "Scizor-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani-back/scizor-mega.gif",
+      "path": "public/sprites/gimmicks/back/scizor-mega.gif"
+    },
+    {
+      "name": "Steelix-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/steelix-mega.png",
+      "path": "public/sprites/gimmicks/back/steelix-mega.png"
+    },
+    {
+      "name": "Swampert-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/swampert-mega.png",
+      "path": "public/sprites/gimmicks/front/swampert-mega.png"
+    },
+    {
+      "name": "Swampert-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/swampert-mega.png",
+      "path": "public/sprites/gimmicks/back/swampert-mega.png"
+    },
+    {
+      "name": "Tyranitar-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/tyranitar-mega.png",
+      "path": "public/sprites/gimmicks/front/tyranitar-mega.png"
+    },
+    {
+      "name": "Tyranitar-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/tyranitar-mega.png",
+      "path": "public/sprites/gimmicks/back/tyranitar-mega.png"
+    },
+    {
+      "name": "Tyranitar-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/tyranitar-mega.gif",
+      "path": "public/sprites/gimmicks/front/tyranitar-mega.gif"
+    },
+    {
+      "name": "Venusaur-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5/venusaur-mega.png",
+      "path": "public/sprites/gimmicks/front/venusaur-mega.png"
+    },
+    {
+      "name": "Steelix-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani/steelix-mega.gif",
+      "path": "public/sprites/gimmicks/front/steelix-mega.gif"
+    },
+    {
+      "name": "Venusaur-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5-back/venusaur-mega.png",
+      "path": "public/sprites/gimmicks/back/venusaur-mega.png"
+    },
+    {
+      "name": "Tyranitar-Mega",
+      "url": "https://play.pokemonshowdown.com/sprites/gen5ani-back/tyranitar-mega.gif",
+      "path": "public/sprites/gimmicks/back/tyranitar-mega.gif"
+    }
+  ]
+}

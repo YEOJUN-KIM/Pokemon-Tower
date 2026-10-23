@@ -9,12 +9,14 @@
 | 55~95층 | 후반 팀·대표 기믹 |
 | 100층 | 최종 팀·대표 기믹 |
 
-정확히 50층에서 `towerThemes`의 champion/final에 해당하는 보스만 기존 final-gate 또는 allFloors 최종 후보군을 사용한다. 대표 포켓몬·실전 기술·도구·고정 기믹과 선출 규칙을 유지하며, N의 최종 후보인 제크로무도 포함한다. 100층은 기존 높은 IV·능력 포인트 최적화를 유지한다. 일반 관장·다른 층·이미 저장된 전투에 이 50층 예외를 소급 적용하지 않는다. [보스별 대표 구성과 검증](../../artifacts/reports/changes/play-feedback-followup-2026-10-23.md#50층-보스와-주요-세팅).
+정확히 50층에서 `towerThemes`의 champion/final에 해당하는 보스만 기존 final-gate 또는 allFloors 최종 후보군을 사용한다. 대표 포켓몬·실전 기술·도구·고정 기믹과 선출 규칙을 유지하며, N의 최종 후보인 제크로무도 포함한다. 100층은 기존 높은 IV·능력 포인트 최적화를 유지한다. 일반 관장·다른 층·이미 저장된 전투에 이 50층 예외를 소급 적용하지 않는다. 현재 생성·검증 경로는 [NPC_DATA](../engineering/NPC_DATA.md)를 따른다.
 
 단일 allFloors 빌드는 같은 후보를 사용하지만 실제 층별 육성·기믹 해금은 별도로 적용한다. 지역별 고정 기믹·선출 제한도 해당 데이터가 기준이다. Normal/Elite/Master는 품질과 육성/기믹 비중의 내부 분류이며 상대 표시명 뒤에 붙이지 않는다.
+
+플레이어 룰별로 동일 NPC의 파티를 따로 만들지 않는다. 대표 기믹과 팀 컨셉은 NPC의 입력이 정하며 선출·배치 정책은 [NPC_SELECTION](../engineering/NPC_SELECTION.md)을 따른다. 초기 두 단계 샘플 계획의 고정 3마리·328팀 수치를 현재 allFloors 구조에 적용하지 않는다. 하드모드·상대 6마리 공개 방식은 현재 일반 100층의 확정 규칙이 아니다.
 
 새 일반 전투의 기본 정책은 tower-policy-v13이다. Basic/Tactical/Expert, 전술·지역별 동작은 능력치/팀 생성과 별개로 설정한다. AI는 공개 정보와 자신의 팀을 이용하며 플레이어의 비공개 후보 파티를 읽어 선출하지 않는다. 기존 전투는 저장된 정책으로 복구한다.
 
 빌런은 신규 런의 독립 조직 트랙으로 진행한다. 조직·단계·간격·최소 층과 실패 누적 확률을 사용하며 일반 이벤트 종류 확률과 구별한다. [빌런 캠페인](../engineering/VILLAIN_CAMPAIGNS.md)을 따른다.
 
-[현재 입력·생성·검증](../engineering/NPC_DATA.md) · [AI](../engineering/npc-ai.md) · [과거 검토 표/보고서](../../artifacts/reports/npc/README.md)
+[현재 입력·생성·검증](../engineering/NPC_DATA.md) · [AI](../engineering/npc-ai.md) · 과거 검토 표/보고서 (로컬 전용: `artifacts/reports/npc/README.md`)

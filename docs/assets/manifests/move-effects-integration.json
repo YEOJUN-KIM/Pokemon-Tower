@@ -1,0 +1,119 @@
+{
+  "integratedAt": "2026-10-12",
+  "sourceRevision": "c0f6bfc707a5e3bba4da3785e9cb06c8ae04f8d9",
+  "license": "CC0-1.0 file-specific assets; exceptions excluded",
+  "files": [
+    {
+      "bytes": 20204,
+      "sha256": "67386ed656053c716951ee9e0fc74d62b1bac650b4f25d7adcc055459ddef94e",
+      "path": "public/vendor/showdown/fx/blackwisp.png"
+    },
+    {
+      "bytes": 1360,
+      "sha256": "b3cac70933b333c2997142bba6069ebbb3b5f52d3facd73b1d83a62e4327dab2",
+      "path": "public/vendor/showdown/fx/bluefireball.png"
+    },
+    {
+      "bytes": 1184,
+      "sha256": "ba4ed6edb11460067c8cad139b280e7e1e0de4afb3fc98f68a59779bd30f55ac",
+      "path": "public/vendor/showdown/fx/bottombite.png"
+    },
+    {
+      "bytes": 7460,
+      "sha256": "860acbe504d59f4fa7987cc926761518cd1ad77430ad12685a7f1f41d7cd12a9",
+      "path": "public/vendor/showdown/fx/electroball.png"
+    },
+    {
+      "bytes": 3694,
+      "sha256": "3e69c9ef298a14a124242ae56ac4f54351b62e05269dcbc096df676c45744156",
+      "path": "public/vendor/showdown/fx/energyball.png"
+    },
+    {
+      "bytes": 1325,
+      "sha256": "6eb03a7bb5da44d3b8db50302593af47c0e2eda500b93ea9af4d009a4f7b6d73",
+      "path": "public/vendor/showdown/fx/fireball.png"
+    },
+    {
+      "bytes": 1680,
+      "sha256": "6f4d45f65e3ad9c3667a79b3bd9f5b2af837647de4e1479386886c88c150050a",
+      "path": "public/vendor/showdown/fx/fist.png"
+    },
+    {
+      "bytes": 59150,
+      "sha256": "ea594f5f29f78232038ea4b2e5de0f70ea96401569a6d6ad240a2189d65d2f7f",
+      "path": "public/vendor/showdown/fx/hitmarker.png"
+    },
+    {
+      "bytes": 6984,
+      "sha256": "6b66ab6fc33fbd06ad16afb77c23e7cda7ebb41a5075a0903143f4f9279a29d8",
+      "path": "public/vendor/showdown/fx/iceball.png"
+    },
+    {
+      "bytes": 18150,
+      "sha256": "efb5d795733d223456e023c21e5eab866bcf2ec417bf3903c10d30893e1ba3f8",
+      "path": "public/vendor/showdown/fx/impact.png"
+    },
+    {
+      "bytes": 1680,
+      "sha256": "608a387738675f34f9228be3e4f5a10089360c18a43f7df2809975657f34f15e",
+      "path": "public/vendor/showdown/fx/leaf1.png"
+    },
+    {
+      "bytes": 1737,
+      "sha256": "82a732a9e732f20e53578c34f1fb1dc3a1e6214c0c2e36c4598a4ef7a0b20057",
+      "path": "public/vendor/showdown/fx/leaf2.png"
+    },
+    {
+      "bytes": 356,
+      "sha256": "f1cb1f1f2c4d4a93acdcdb6003fcd433008c0080e59189422dbb340b6c7de8e1",
+      "path": "public/vendor/showdown/fx/leftclaw.png"
+    },
+    {
+      "bytes": 15836,
+      "sha256": "3b62427f76c08bd782d4c00da5814683d5b2192fab6895701f336296ba0873a4",
+      "path": "public/vendor/showdown/fx/leftslash.png"
+    },
+    {
+      "bytes": 18539,
+      "sha256": "1fd09f0213c7bbd3133ef6f989ecd41a7c9269fa86c38b3676278f151ecf1538",
+      "path": "public/vendor/showdown/fx/mudwisp.png"
+    },
+    {
+      "bytes": 4277,
+      "sha256": "eeff3b5c5fa35796e272f94aa066355a5c57bcd639131dd2b3dad6e671722a90",
+      "path": "public/vendor/showdown/fx/purplewisp.png"
+    },
+    {
+      "bytes": 357,
+      "sha256": "0d0351c4dd89d3f8b31275c45c39f9f75b9bb43d342f50f4537daa0253f6859d",
+      "path": "public/vendor/showdown/fx/rightclaw.png"
+    },
+    {
+      "bytes": 1482,
+      "sha256": "85a43788d247c8c4889cc4e2faa0974655e25b57a105aa89c959025ff21bf47a",
+      "path": "public/vendor/showdown/fx/rightslash.png"
+    },
+    {
+      "bytes": 4346,
+      "sha256": "095793124bd03f8fb03449b865f8b6dba95bb6325105510eed5f598367c997d5",
+      "path": "public/vendor/showdown/fx/shadowball.png"
+    },
+    {
+      "bytes": 1154,
+      "sha256": "c560ea6535e103d8983535a79f430a58f570ed5d906ac258d974c021f84fec3d",
+      "path": "public/vendor/showdown/fx/topbite.png"
+    },
+    {
+      "bytes": 4600,
+      "sha256": "264d200ffb493324c3b49b0e3802fc74c2c596a75d7ed5d8512da1dc68fd5ee7",
+      "path": "public/vendor/showdown/fx/waterwisp.png"
+    },
+    {
+      "bytes": 3792,
+      "sha256": "5418f62c9134de754fa2dcda890486ea7d14b7d0c3f2fedb895587a23c1ff42c",
+      "path": "public/vendor/showdown/fx/wisp.png"
+    }
+  ],
+  "renderer": "src/web/move-visuals.tsx",
+  "choreography": "src/web/move-animation-plan.ts"
+}

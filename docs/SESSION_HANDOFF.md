@@ -24,5 +24,5 @@
 
 1. Git 변경과 담당 문서를 확인한다. Next.js 수정 전 설치된 next/dist/docs의 관련 안내를 읽는다.
 2. 관련 테스트·타입·빌드·브라우저 검사를 선택한다. 실사용과 자동 검사를 구별한다.
-3. 현재 설명은 기존 담당 문서를 갱신한다. 날짜별 작업 보고서는 artifacts/reports/changes, 실험은 artifacts/experiments로 분류한다.
+3. 현재 설명은 기존 담당 문서를 갱신한다. 확정 정책·배포·장기 출처는 docs에 통합하고, 날짜별 QA 보고서·실험 출력만 Git 제외 artifacts에 둔다.
 4. pnpm check:workspace로 링크·설정 경로·폴더 경계를 확인한다. 임시 출력은 pnpm clean:temp로 지운다.

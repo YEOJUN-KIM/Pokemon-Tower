@@ -25,4 +25,4 @@
 
 통찰로 상대 도구를 공개하는 이벤트는 도구를 획득하거나 삭제하는 이벤트가 아닙니다. 실제 획득과 표시를 구분해 정산합니다.
 
-[다시하기](PROGRESSION.md) · [가격 데이터](../../src/data/permanent-upgrades.ts) · [도구 처리 근거](../../artifacts/reports/changes/FRISK_ITEM_SETTLEMENT.md)
+[다시하기](PROGRESSION.md) · [가격 데이터](../../src/data/permanent-upgrades.ts) · 도구 처리 근거 (로컬 전용: `artifacts/reports/changes/FRISK_ITEM_SETTLEMENT.md`)

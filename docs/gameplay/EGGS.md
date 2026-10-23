@@ -18,7 +18,7 @@
 
 등급을 고른 뒤 **별도 0.24%로 이로치**를 판정한다. 당첨되면 어느 등급이든 황금 이로치 알로 표시한다. 10회도 알마다 독립 추첨이다. 레어 내부 분류는 45:25:15, 슈퍼레어는 초전설:환상 5:1이며 분류 안에서 종을 균등하게 선택한다. 이로치가 아닌 알 외형의 실제 비중은 일반 84.796%, 레어 11.9712%, 슈퍼레어 2.9928%다.
 
-수집 가능한 배틀 도감 항목만 대상이다. 분류와 풀의 기준은 src/server/egg-pool.ts·src/data/egg-grades.ts·src/data/egg-kinds.ts이며, 과거 [등급 분류 보고](../../artifacts/reports/changes/EGG_POOL_CLASSIFICATION.md)의 개수를 새 데이터의 고정값으로 사용하지 않는다.
+수집 가능한 배틀 도감 항목만 대상이다. 분류와 풀의 기준은 src/server/egg-pool.ts·src/data/egg-grades.ts·src/data/egg-kinds.ts이며, 과거 등급 분류 보고 (로컬 전용: `artifacts/reports/changes/EGG_POOL_CLASSIFICATION.md`)의 개수를 새 데이터의 고정값으로 사용하지 않는다.
 
 ## 배출·부화
 
@@ -35,7 +35,7 @@
 | 환상 | 연분홍·후광·별빛 |
 | 이로치 | 선명한 금빛·반짝임, 원래 분류보다 우선 |
 
-동작 감소 설정은 회전·반짝임을 정지하고 전환을 단축한다. [색 비교](../../artifacts/qa/previews/egg-results/background-colors.png)·[효과 GIF](../../artifacts/qa/previews/egg-results/background-effects.gif)·[초전설 효과](../../artifacts/qa/previews/egg-results/legendary-effects.gif)는 해당 효과 도입 당시 비교 자료다.
+동작 감소 설정은 회전·반짝임을 정지하고 전환을 단축한다. 색 비교 (로컬 전용: `artifacts/qa/previews/egg-results/background-colors.png`)·효과 GIF (로컬 전용: `artifacts/qa/previews/egg-results/background-effects.gif`)·초전설 효과 (로컬 전용: `artifacts/qa/previews/egg-results/legendary-effects.gif`)는 해당 효과 도입 당시 비교 자료다.
 
 ## 전용 티켓과 저장
 

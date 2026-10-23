@@ -11,9 +11,13 @@
 | 조작 방법·게임 규칙 | [게임 안내](gameplay/README.md) |
 | 설치·실행·계정·배포 | [실행과 운영](operations/README.md) |
 | 코드·CSS·폴더를 수정하는 방법 | [개발 문서](engineering/README.md) |
-| 실험 결과나 변경 근거 | [유형별 보고서](../artifacts/README.md) |
+| 실험 결과나 변경 근거 | 유형별 보고서 (로컬 전용: `artifacts/README.md`) |
 | 이미지·음악의 출처 | [출처와 라이선스](references/README.md) |
+| 고정 출처 JSON·파일 해시 | [공식 자산 manifest](assets/README.md) |
+| 오래 유지할 결정·릴리스 근거 | [과거 결정](history/README.md) · [비전투 이벤트 릴리스](releases/NONCOMBAT_EVENTS_RELEASE.md) |
+
+`docs/`는 Git에 보존하는 설계·정책·확정 결정·배포 안내·장기 출처 기록의 공식 위치다. `artifacts/`는 Git에서 제외하는 QA·자동 생성·실험·시뮬레이션·일회성 분석 결과다. 새 clone의 실행·빌드·배포·일반 테스트·문서 검사는 artifacts 없이 동작해야 한다. 필수 입력은 `src/`, `scripts/data/`, `tests/fixtures/` 또는 검토한 공식 manifest에 둔다. 문서 승격과 중복 제거 판단은 [승격 기록](engineering/ARTIFACT_PROMOTION.md)을 따른다.
 
 처음부터 보고서 전체를 읽을 필요는 없습니다. 현재 규칙은 이곳에서 확인하고, 특정 변경의 근거가 필요할 때만 해당 보고서로 이동하세요.
 
-README는 외부 소개·실행·향후 방향, STATUS는 현재 구현·수치·버전, ROADMAP은 앞으로 할 작업을 맡습니다. 변경의 이유·범위·당시 검증은 [변경 기록 색인](../artifacts/reports/changes/README.md), 자동 테스트 로그·스크린샷은 [QA 산출물](../artifacts/qa)에 둡니다. 두 2026-10-23 플레이 피드백 보고서도 변경 기록 폴더에서 관리하며 당시 수치·검증 결과를 보존합니다.
+README는 외부 소개·실행·향후 방향, STATUS는 현재 구현·수치·버전, ROADMAP은 앞으로 할 작업을 맡습니다. 변경의 이유·범위·당시 검증은 변경 기록 색인 (로컬 전용: `artifacts/reports/changes/README.md`), 자동 테스트 로그·스크린샷은 QA 산출물 (로컬 전용: `artifacts/qa`)에 둡니다. 두 2026-10-23 플레이 피드백 보고서도 변경 기록 폴더에서 관리하며 당시 수치·검증 결과를 보존합니다.

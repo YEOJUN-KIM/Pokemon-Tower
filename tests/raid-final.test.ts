@@ -41,7 +41,7 @@ test('Zacian Intrepid Sword applies one entry boost, not another at Crowned/synt
 });
 
 for(const route of ['x','y'])test(`saved Tune2 Mewtwo ${route} still plays all three phases and its original Aura`,()=>{
- const baseline=JSON.parse(readFileSync('artifacts/experiments/balance/raid-final-baseline.json','utf8'));
+ const baseline=JSON.parse(readFileSync('tests/fixtures/raid/tune2-definitions.json','utf8'));
  const f=raidFixture(':memory:','saved-old','mewtwo',route),old=structuredClone(f.snapshot);
  old.phases=baseline.definitions.find((d:{id:string})=>d.id==='mewtwo').routes.find((r:{id:string})=>r.id===route).phases;
  const set=Showdown.Teams.unpack(old.opponentTeam)![0];
@@ -70,7 +70,7 @@ for(const [boss,route] of [['mewtwo','x'],['mewtwo','y'],['zacian','crowned']])t
 });
 
 test('only Mewtwo phases and Zacian battle IV/training differ from Tune2 definitions',()=>{
- const baseline=JSON.parse(readFileSync('artifacts/experiments/balance/raid-final-baseline.json','utf8'));
+ const baseline=JSON.parse(readFileSync('tests/fixtures/raid/tune2-definitions.json','utf8'));
  for(const boss of raidBossDefinitions){
   const before=baseline.definitions.find((b:{id:string})=>b.id===boss.id),after=structuredClone(boss);
   if(boss.id==='mewtwo'){

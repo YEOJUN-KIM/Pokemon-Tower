@@ -7,12 +7,16 @@
 | 실행·계정·복구 | `docs/operations/` |
 | 개발 구조·수정 담당 위치 | `docs/engineering/` |
 | 시뮬레이션·비교 보고서 | `artifacts/experiments/ai|balance|samples/` |
-| 변경 원인·검증 기록 | `artifacts/reports/changes/` |
+| 장기 결정·설계 근거·릴리스 | 해당 주제의 `docs/` 또는 `docs/history/`·`docs/releases/` |
+| 일회성 변경 검증·QA 기록 | Git 제외 `artifacts/reports/changes/` |
+| 장기 출처 URL·해시·버전 | `docs/assets/manifests/` 또는 자산 옆의 기존 sources.json |
 | NPC 리뷰 표·CSV | `artifacts/reports/npc/` |
 | 일시적인 확인 자료 | `artifacts/temporary/`, 확인 후 삭제 |
 | 개인 저장 묶음·검사 결과 | `.data/transfers/`, `.data/backups/` (Git 제외) |
 
 현재 설명에 날짜별 완료 로그·테스트 개수·옛 승률을 덧붙이지 않습니다. 같은 주제는 기존 담당 문서를 갱신하고 작은 수정마다 새 파일을 만들지 않습니다.
+
+전체 문서를 승격한 경우 새 공식본·참조·링크·Git 포함 여부를 먼저 검증한 뒤 artifacts의 같은 원본을 제거합니다. 일부 정책만 통합한 과거 보고서와 재현 원자료는 별도 가치가 있을 때 유지합니다. 자동 생성 manifest는 artifacts의 실행 결과와 docs의 검토 완료 스냅샷을 구분하며 생성기가 공식본을 자동 덮어쓰지 않습니다. 일반 개발·빌드·배포·테스트는 artifacts의 사전 존재에 의존하지 않습니다.
 
 현재 상태·인계·설치 문서는 역할별 기준 문서로 연결합니다. PC 이전 안내에 화면 변경 로그나 과거 접속 주소를 누적하지 않습니다. 코드가 지원하는 스키마와 개별 백업의 스키마는 구분해 적습니다.
 
@@ -22,7 +26,7 @@
 
 보고서 생성기는 결과물 폴더만 수정합니다. `STATUS`와 인계 문서에 실험 소식을 자동 삽입하지 않습니다. 중복 보고서는 고유한 해석을 기준 보고서에 통합한 뒤 삭제하고, 오래된 문서 백업은 Git 이력으로 대체합니다.
 
-[폴더별 역할과 삭제 기준](WORKSPACE.md) · [보고서 목록](../../artifacts/README.md)
+[폴더별 역할과 삭제 기준](WORKSPACE.md) · 보고서 목록 (로컬 전용: `artifacts/README.md`)
 
 ## 현재 계획과 검증 상태의 구분
 

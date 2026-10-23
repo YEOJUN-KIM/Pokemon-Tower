@@ -1,0 +1,2007 @@
+{
+  "definitions": [
+    {
+      "id": "garchomp",
+      "species": "Garchomp",
+      "category": "normal",
+      "weight": 80,
+      "minFloor": 1,
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2,
+      "ivRule": {
+        "perfect": 4,
+        "protected": [
+          "atk",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "mega",
+          "weight": 1,
+          "attack": "atk",
+          "recruit": {
+            "nature": "Jolly",
+            "ability": "Rough Skin",
+            "moves": [
+              "Earthquake",
+              "Dragon Claw",
+              "Swords Dance",
+              "Iron Head"
+            ]
+          },
+          "phases": [
+            {
+              "species": "Garchomp",
+              "ability": "Rough Skin",
+              "moves": [
+                "Earthquake",
+                "Dragon Claw",
+                "Swords Dance",
+                "Iron Head"
+              ],
+              "transformation": "none",
+              "hpRatio": 0.5
+            },
+            {
+              "species": "Garchomp-Mega",
+              "ability": "Sand Force",
+              "moves": [
+                "Earthquake",
+                "Dragon Claw",
+                "Swords Dance",
+                "Iron Head"
+              ],
+              "transformation": "mega",
+              "hpRatio": 0.5,
+              "messages": [
+                "강한 기운이 한카리아스를 감싼다...",
+                "한카리아스가 메가한카리아스로 변했다!"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mewtwo",
+      "species": "Mewtwo",
+      "category": "legendary",
+      "weight": 20,
+      "minFloor": 1,
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 3,
+      "ivRule": {
+        "perfect": 3,
+        "protected": [
+          "spa",
+          "spe"
+        ],
+        "protectedIv": 23
+      },
+      "shinyRule": "standard",
+      "battleTraining": "raid-mewtwo-2",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "x",
+          "weight": 50,
+          "attack": "atk",
+          "recruit": {
+            "nature": "Jolly",
+            "ability": "Pressure",
+            "moves": [
+              "Zen Headbutt",
+              "Drain Punch",
+              "Ice Punch",
+              "Bulk Up"
+            ]
+          },
+          "phases": [
+            {
+              "species": "Mewtwo",
+              "ability": "Pressure",
+              "moves": [
+                "Zen Headbutt",
+                "Drain Punch",
+                "Ice Punch",
+                "Bulk Up"
+              ],
+              "transformation": "none",
+              "hpRatio": 0.3333333333333333
+            },
+            {
+              "species": "Mewtwo-Mega-X",
+              "ability": "Steadfast",
+              "moves": [
+                "Zen Headbutt",
+                "Drain Punch",
+                "Ice Punch",
+                "Bulk Up"
+              ],
+              "transformation": "mega",
+              "hpRatio": 0.3333333333333333,
+              "messages": [
+                "강한 기운이 뮤츠를 감싼다...",
+                "뮤츠가 메가뮤츠X로 변했다!"
+              ]
+            },
+            {
+              "species": "Mewtwo-Mega-X",
+              "ability": "Steadfast",
+              "moves": [
+                "Zen Headbutt",
+                "Drain Punch",
+                "Ice Punch",
+                "Bulk Up"
+              ],
+              "transformation": "aura",
+              "hpRatio": 0.3333333333333333,
+              "messages": [
+                "메가뮤츠X가 엄청난 힘을 방출한다...",
+                "메가뮤츠X의 힘이 더욱 강해졌다!"
+              ],
+              "buffs": {
+                "atk": 1
+              }
+            }
+          ]
+        },
+        {
+          "id": "y",
+          "weight": 50,
+          "attack": "spa",
+          "recruit": {
+            "nature": "Timid",
+            "ability": "Pressure",
+            "moves": [
+              "Psystrike",
+              "Aura Sphere",
+              "Ice Beam",
+              "Calm Mind"
+            ]
+          },
+          "phases": [
+            {
+              "species": "Mewtwo",
+              "ability": "Pressure",
+              "moves": [
+                "Psystrike",
+                "Aura Sphere",
+                "Ice Beam",
+                "Calm Mind"
+              ],
+              "transformation": "none",
+              "hpRatio": 0.3333333333333333
+            },
+            {
+              "species": "Mewtwo-Mega-Y",
+              "ability": "Insomnia",
+              "moves": [
+                "Psystrike",
+                "Aura Sphere",
+                "Ice Beam",
+                "Calm Mind"
+              ],
+              "transformation": "mega",
+              "hpRatio": 0.3333333333333333,
+              "messages": [
+                "강한 기운이 뮤츠를 감싼다...",
+                "뮤츠가 메가뮤츠Y로 변했다!"
+              ]
+            },
+            {
+              "species": "Mewtwo-Mega-Y",
+              "ability": "Insomnia",
+              "moves": [
+                "Psystrike",
+                "Aura Sphere",
+                "Ice Beam",
+                "Calm Mind"
+              ],
+              "transformation": "aura",
+              "hpRatio": 0.3333333333333333,
+              "messages": [
+                "메가뮤츠Y가 엄청난 힘을 방출한다...",
+                "메가뮤츠Y의 힘이 더욱 강해졌다!"
+              ],
+              "buffs": {
+                "spa": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "metagross",
+      "species": "Metagross",
+      "category": "normal",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.2,
+      "weight": 80,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 4,
+        "protected": [
+          "hp",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "mega",
+          "weight": 1,
+          "attack": "atk",
+          "phases": [
+            {
+              "species": "Metagross",
+              "ability": "Clear Body",
+              "moves": [
+                "Meteor Mash",
+                "Zen Headbutt",
+                "Earthquake",
+                "Bullet Punch"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Metagross-Mega",
+              "ability": "Tough Claws",
+              "moves": [
+                "Meteor Mash",
+                "Zen Headbutt",
+                "Ice Punch",
+                "Bullet Punch"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "mega"
+            }
+          ],
+          "recruit": {
+            "nature": "Adamant",
+            "ability": "Clear Body",
+            "moves": [
+              "Meteor Mash",
+              "Zen Headbutt",
+              "Earthquake",
+              "Bullet Punch"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "palafin",
+      "species": "Palafin",
+      "category": "normal",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2,
+      "weight": 80,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 4,
+        "protected": [
+          "hp",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "hero",
+          "weight": 1,
+          "attack": "atk",
+          "phases": [
+            {
+              "species": "Palafin",
+              "ability": "Zero to Hero",
+              "moves": [
+                "Wave Crash",
+                "Jet Punch",
+                "Close Combat",
+                "Ice Punch"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Palafin-Hero",
+              "ability": "Zero to Hero",
+              "moves": [
+                "Wave Crash",
+                "Jet Punch",
+                "Close Combat",
+                "Ice Punch"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            }
+          ],
+          "recruit": {
+            "nature": "Adamant",
+            "ability": "Zero to Hero",
+            "moves": [
+              "Wave Crash",
+              "Jet Punch",
+              "Close Combat",
+              "Ice Punch"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "snorlax",
+      "species": "Snorlax",
+      "category": "normal",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.3,
+      "weight": 80,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 4,
+        "protected": [
+          "hp",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "gigantamax",
+          "weight": 1,
+          "attack": "atk",
+          "phases": [
+            {
+              "species": "Snorlax",
+              "ability": "Thick Fat",
+              "moves": [
+                "Body Slam",
+                "Crunch",
+                "High Horsepower",
+                "Heavy Slam"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Snorlax-Gmax",
+              "ability": "Thick Fat",
+              "moves": [
+                "Body Slam",
+                "Crunch",
+                "High Horsepower",
+                "Heavy Slam"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "gigantamax",
+              "persistent": true
+            }
+          ],
+          "recruit": {
+            "nature": "Adamant",
+            "ability": "Thick Fat",
+            "moves": [
+              "Body Slam",
+              "Crunch",
+              "High Horsepower",
+              "Heavy Slam"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "hoopa",
+      "species": "Hoopa",
+      "category": "mythical",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.2,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 6,
+        "protected": [
+          "hp",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "unbound",
+          "weight": 1,
+          "attack": "spa",
+          "phases": [
+            {
+              "species": "Hoopa",
+              "ability": "Magician",
+              "moves": [
+                "Psychic",
+                "Shadow Ball",
+                "Energy Ball",
+                "Thunderbolt"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Hoopa-Unbound",
+              "ability": "Magician",
+              "moves": [
+                "Hyperspace Fury",
+                "Psychic",
+                "Drain Punch",
+                "Thunderbolt"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            }
+          ],
+          "recruit": {
+            "nature": "Serious",
+            "ability": "Magician",
+            "moves": [
+              "Psychic",
+              "Shadow Ball",
+              "Energy Ball",
+              "Thunderbolt"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "shaymin",
+      "species": "Shaymin",
+      "category": "mythical",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 4,
+        "protected": [
+          "spa",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "raid-strong",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "sky",
+          "weight": 1,
+          "attack": "spa",
+          "phases": [
+            {
+              "species": "Shaymin",
+              "ability": "Natural Cure",
+              "moves": [
+                "Seed Flare",
+                "Earth Power",
+                "Psychic",
+                "Dazzling Gleam"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Shaymin-Sky",
+              "ability": "Serene Grace",
+              "moves": [
+                "Seed Flare",
+                "Air Slash",
+                "Earth Power",
+                "Dazzling Gleam"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            }
+          ],
+          "recruit": {
+            "nature": "Modest",
+            "ability": "Natural Cure",
+            "moves": [
+              "Seed Flare",
+              "Earth Power",
+              "Psychic",
+              "Dazzling Gleam"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "volcarona",
+      "species": "Volcarona",
+      "category": "normal",
+      "hpMode": "replacement-v1",
+      "raidHpMultiplier": 2.2,
+      "recruitment": {
+        "mode": "phaseSpecies",
+        "phase": 2
+      },
+      "weight": 80,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 4,
+        "protected": [
+          "hp",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "slither-wing",
+          "weight": 1,
+          "attack": "atk",
+          "phases": [
+            {
+              "species": "Volcarona",
+              "ability": "Flame Body",
+              "moves": [
+                "Fiery Dance",
+                "Bug Buzz",
+                "Giga Drain",
+                "Psychic"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Slither Wing",
+              "ability": "Protosynthesis",
+              "moves": [
+                "First Impression",
+                "Close Combat",
+                "Leech Life",
+                "Flare Blitz"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "replacement"
+            }
+          ],
+          "recruit": {
+            "nature": "Serious",
+            "ability": "Flame Body",
+            "moves": [
+              "Fiery Dance",
+              "Bug Buzz",
+              "Giga Drain",
+              "Psychic"
+            ]
+          }
+        },
+        {
+          "id": "iron-moth",
+          "weight": 1,
+          "attack": "spa",
+          "phases": [
+            {
+              "species": "Volcarona",
+              "ability": "Flame Body",
+              "moves": [
+                "Fiery Dance",
+                "Bug Buzz",
+                "Giga Drain",
+                "Psychic"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Iron Moth",
+              "ability": "Quark Drive",
+              "moves": [
+                "Fiery Dance",
+                "Sludge Wave",
+                "Energy Ball",
+                "Dazzling Gleam"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "replacement"
+            }
+          ],
+          "recruit": {
+            "nature": "Modest",
+            "ability": "Flame Body",
+            "moves": [
+              "Fiery Dance",
+              "Bug Buzz",
+              "Giga Drain",
+              "Psychic"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ogerpon",
+      "species": "Ogerpon",
+      "category": "sub-legendary",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.8,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 4,
+        "protected": [
+          "hp",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "masks",
+          "weight": 1,
+          "attack": "atk",
+          "phases": [
+            {
+              "species": "Ogerpon",
+              "ability": "Defiant",
+              "moves": [
+                "Ivy Cudgel",
+                "Horn Leech",
+                "Play Rough",
+                "Knock Off"
+              ],
+              "hpRatio": 0.25,
+              "transformation": "form"
+            },
+            {
+              "species": "Ogerpon-Wellspring",
+              "ability": "Water Absorb",
+              "moves": [
+                "Ivy Cudgel",
+                "Horn Leech",
+                "Play Rough",
+                "Stomping Tantrum"
+              ],
+              "hpRatio": 0.25,
+              "transformation": "form",
+              "item": "Wellspring Mask",
+              "teraType": "Water"
+            },
+            {
+              "species": "Ogerpon-Cornerstone",
+              "ability": "Sturdy",
+              "moves": [
+                "Ivy Cudgel",
+                "Horn Leech",
+                "Play Rough",
+                "Low Kick"
+              ],
+              "hpRatio": 0.25,
+              "transformation": "form",
+              "item": "Cornerstone Mask",
+              "teraType": "Rock"
+            },
+            {
+              "species": "Ogerpon-Hearthflame",
+              "ability": "Mold Breaker",
+              "moves": [
+                "Ivy Cudgel",
+                "Horn Leech",
+                "Play Rough",
+                "Stomping Tantrum"
+              ],
+              "hpRatio": 0.25,
+              "transformation": "form",
+              "item": "Hearthflame Mask",
+              "teraType": "Fire"
+            }
+          ],
+          "recruit": {
+            "nature": "Adamant",
+            "ability": "Defiant",
+            "moves": [
+              "Ivy Cudgel",
+              "Horn Leech",
+              "Play Rough",
+              "Knock Off"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "diancie",
+      "species": "Diancie",
+      "category": "mythical",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.2,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 6,
+        "protected": [
+          "hp",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "mega",
+          "weight": 1,
+          "attack": "spa",
+          "phases": [
+            {
+              "species": "Diancie",
+              "ability": "Clear Body",
+              "moves": [
+                "Diamond Storm",
+                "Moonblast",
+                "Earth Power",
+                "Psychic"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Diancie-Mega",
+              "ability": "Magic Bounce",
+              "moves": [
+                "Diamond Storm",
+                "Moonblast",
+                "Earth Power",
+                "Mystical Fire"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "mega"
+            }
+          ],
+          "recruit": {
+            "nature": "Serious",
+            "ability": "Clear Body",
+            "moves": [
+              "Diamond Storm",
+              "Moonblast",
+              "Earth Power",
+              "Psychic"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "groudon",
+      "species": "Groudon",
+      "category": "legendary",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.6,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 3,
+        "protected": [
+          "atk"
+        ],
+        "protectedIv": 25
+      },
+      "shinyRule": "standard",
+      "battleTraining": "raid-groudon-2",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "primal",
+          "weight": 1,
+          "attack": "atk",
+          "phases": [
+            {
+              "species": "Groudon",
+              "ability": "Drought",
+              "moves": [
+                "Precipice Blades",
+                "Heat Crash",
+                "Stone Edge",
+                "Thunder Punch"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Groudon-Primal",
+              "ability": "Desolate Land",
+              "moves": [
+                "Precipice Blades",
+                "Fire Punch",
+                "Stone Edge",
+                "Thunder Punch"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "primal"
+            }
+          ],
+          "recruit": {
+            "nature": "Adamant",
+            "ability": "Drought",
+            "moves": [
+              "Precipice Blades",
+              "Heat Crash",
+              "Stone Edge",
+              "Thunder Punch"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "kyogre",
+      "species": "Kyogre",
+      "category": "legendary",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.6,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 3,
+        "protected": [
+          "spa"
+        ],
+        "protectedIv": 24
+      },
+      "shinyRule": "standard",
+      "battleTraining": "raid-kyogre-2",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "primal",
+          "weight": 1,
+          "attack": "spa",
+          "phases": [
+            {
+              "species": "Kyogre",
+              "ability": "Drizzle",
+              "moves": [
+                "Origin Pulse",
+                "Thunder",
+                "Ice Beam",
+                "Ancient Power"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Kyogre-Primal",
+              "ability": "Primordial Sea",
+              "moves": [
+                "Origin Pulse",
+                "Thunder",
+                "Ice Beam",
+                "Ancient Power"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "primal"
+            }
+          ],
+          "recruit": {
+            "nature": "Modest",
+            "ability": "Drizzle",
+            "moves": [
+              "Origin Pulse",
+              "Thunder",
+              "Ice Beam",
+              "Ancient Power"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "rayquaza",
+      "species": "Rayquaza",
+      "category": "legendary",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.6,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 3,
+        "protected": [
+          "atk",
+          "spe"
+        ],
+        "protectedIv": 24
+      },
+      "shinyRule": "standard",
+      "battleTraining": "raid-rayquaza-2",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "mega",
+          "weight": 1,
+          "attack": "atk",
+          "phases": [
+            {
+              "species": "Rayquaza",
+              "ability": "Air Lock",
+              "moves": [
+                "Dragon Ascent",
+                "Dragon Claw",
+                "Earthquake",
+                "Extreme Speed"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Rayquaza-Mega",
+              "ability": "Delta Stream",
+              "moves": [
+                "Dragon Ascent",
+                "Dragon Claw",
+                "Earthquake",
+                "Extreme Speed"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "mega"
+            }
+          ],
+          "recruit": {
+            "nature": "Adamant",
+            "ability": "Air Lock",
+            "moves": [
+              "Dragon Ascent",
+              "Dragon Claw",
+              "Earthquake",
+              "Extreme Speed"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "arceus",
+      "species": "Arceus",
+      "category": "mythical",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 3,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 3,
+        "protected": [
+          "spa"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "raid-top",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "plates",
+          "weight": 1,
+          "attack": "spa",
+          "phases": [
+            {
+              "species": "Arceus",
+              "ability": "Multitype",
+              "moves": [
+                "Judgment",
+                "Earth Power",
+                "Ice Beam",
+                "Extreme Speed"
+              ],
+              "hpRatio": 0.34,
+              "transformation": "form"
+            },
+            {
+              "species": "Arceus",
+              "ability": "Multitype",
+              "moves": [
+                "Judgment",
+                "Earth Power",
+                "Ice Beam",
+                "Extreme Speed"
+              ],
+              "hpRatio": 0.33,
+              "transformation": "form",
+              "randomBranch": {
+                "id": "plate",
+                "options": [
+                  {
+                    "species": "Arceus-Fire",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Flame Plate"
+                  },
+                  {
+                    "species": "Arceus-Water",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Splash Plate"
+                  },
+                  {
+                    "species": "Arceus-Electric",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Zap Plate"
+                  },
+                  {
+                    "species": "Arceus-Grass",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Meadow Plate"
+                  },
+                  {
+                    "species": "Arceus-Ice",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Icicle Plate"
+                  },
+                  {
+                    "species": "Arceus-Fighting",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Fist Plate"
+                  },
+                  {
+                    "species": "Arceus-Poison",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Toxic Plate"
+                  },
+                  {
+                    "species": "Arceus-Ground",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Earth Plate"
+                  },
+                  {
+                    "species": "Arceus-Flying",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Sky Plate"
+                  },
+                  {
+                    "species": "Arceus-Psychic",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Mind Plate"
+                  },
+                  {
+                    "species": "Arceus-Bug",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Insect Plate"
+                  },
+                  {
+                    "species": "Arceus-Rock",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Stone Plate"
+                  },
+                  {
+                    "species": "Arceus-Ghost",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Spooky Plate"
+                  },
+                  {
+                    "species": "Arceus-Dragon",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Draco Plate"
+                  },
+                  {
+                    "species": "Arceus-Dark",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Dread Plate"
+                  },
+                  {
+                    "species": "Arceus-Steel",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Iron Plate"
+                  },
+                  {
+                    "species": "Arceus-Fairy",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Pixie Plate"
+                  }
+                ],
+                "excludePrevious": true
+              }
+            },
+            {
+              "species": "Arceus",
+              "ability": "Multitype",
+              "moves": [
+                "Judgment",
+                "Earth Power",
+                "Ice Beam",
+                "Extreme Speed"
+              ],
+              "hpRatio": 0.33,
+              "transformation": "form",
+              "randomBranch": {
+                "id": "plate",
+                "options": [
+                  {
+                    "species": "Arceus-Fire",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Flame Plate"
+                  },
+                  {
+                    "species": "Arceus-Water",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Splash Plate"
+                  },
+                  {
+                    "species": "Arceus-Electric",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Zap Plate"
+                  },
+                  {
+                    "species": "Arceus-Grass",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Meadow Plate"
+                  },
+                  {
+                    "species": "Arceus-Ice",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Icicle Plate"
+                  },
+                  {
+                    "species": "Arceus-Fighting",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Fist Plate"
+                  },
+                  {
+                    "species": "Arceus-Poison",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Toxic Plate"
+                  },
+                  {
+                    "species": "Arceus-Ground",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Earth Plate"
+                  },
+                  {
+                    "species": "Arceus-Flying",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Sky Plate"
+                  },
+                  {
+                    "species": "Arceus-Psychic",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Mind Plate"
+                  },
+                  {
+                    "species": "Arceus-Bug",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Insect Plate"
+                  },
+                  {
+                    "species": "Arceus-Rock",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Stone Plate"
+                  },
+                  {
+                    "species": "Arceus-Ghost",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Spooky Plate"
+                  },
+                  {
+                    "species": "Arceus-Dragon",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Draco Plate"
+                  },
+                  {
+                    "species": "Arceus-Dark",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Dread Plate"
+                  },
+                  {
+                    "species": "Arceus-Steel",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Iron Plate"
+                  },
+                  {
+                    "species": "Arceus-Fairy",
+                    "ability": "Multitype",
+                    "moves": [
+                      "Judgment",
+                      "Earth Power",
+                      "Ice Beam",
+                      "Extreme Speed"
+                    ],
+                    "hpRatio": 0.33,
+                    "transformation": "form",
+                    "item": "Pixie Plate"
+                  }
+                ],
+                "excludePrevious": true
+              }
+            }
+          ],
+          "recruit": {
+            "nature": "Serious",
+            "ability": "Multitype",
+            "moves": [
+              "Judgment",
+              "Earth Power",
+              "Ice Beam",
+              "Extreme Speed"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "kyurem",
+      "species": "Kyurem",
+      "category": "legendary",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.5,
+      "recruitment": {
+        "mode": "phaseSpecies",
+        "phase": 2
+      },
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 6,
+        "protected": [
+          "hp",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "black",
+          "weight": 1,
+          "attack": "atk",
+          "phases": [
+            {
+              "species": "Kyurem",
+              "ability": "Pressure",
+              "moves": [
+                "Ice Beam",
+                "Dragon Pulse",
+                "Earth Power",
+                "Flash Cannon"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Kyurem-Black",
+              "ability": "Teravolt",
+              "moves": [
+                "Fusion Bolt",
+                "Icicle Spear",
+                "Dragon Claw",
+                "Earth Power"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            }
+          ],
+          "recruit": {
+            "nature": "Serious",
+            "ability": "Pressure",
+            "moves": [
+              "Ice Beam",
+              "Dragon Pulse",
+              "Earth Power",
+              "Flash Cannon"
+            ]
+          }
+        },
+        {
+          "id": "white",
+          "weight": 1,
+          "attack": "spa",
+          "phases": [
+            {
+              "species": "Kyurem",
+              "ability": "Pressure",
+              "moves": [
+                "Ice Beam",
+                "Dragon Pulse",
+                "Earth Power",
+                "Flash Cannon"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Kyurem-White",
+              "ability": "Turboblaze",
+              "moves": [
+                "Fusion Flare",
+                "Ice Beam",
+                "Dragon Pulse",
+                "Earth Power"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            }
+          ],
+          "recruit": {
+            "nature": "Modest",
+            "ability": "Pressure",
+            "moves": [
+              "Ice Beam",
+              "Dragon Pulse",
+              "Earth Power",
+              "Flash Cannon"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "zygarde",
+      "species": "Zygarde",
+      "category": "legendary",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 3,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 6,
+        "protected": [
+          "hp",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "mega",
+          "weight": 1,
+          "attack": "spa",
+          "phases": [
+            {
+              "species": "Zygarde",
+              "ability": "Aura Break",
+              "moves": [
+                "Thousand Arrows",
+                "Dragon Tail",
+                "Crunch",
+                "Glare"
+              ],
+              "hpRatio": 0.34,
+              "transformation": "form"
+            },
+            {
+              "species": "Zygarde-Complete",
+              "ability": "Power Construct",
+              "moves": [
+                "Thousand Arrows",
+                "Core Enforcer",
+                "Extreme Speed",
+                "Glare"
+              ],
+              "hpRatio": 0.33,
+              "transformation": "form"
+            },
+            {
+              "species": "Zygarde-Mega",
+              "ability": "Aura Break",
+              "moves": [
+                "Thousand Arrows",
+                "Core Enforcer",
+                "Extreme Speed",
+                "Dragon Pulse"
+              ],
+              "hpRatio": 0.33,
+              "transformation": "mega",
+              "sourceSpecies": "Zygarde-Complete"
+            }
+          ],
+          "recruit": {
+            "nature": "Serious",
+            "ability": "Aura Break",
+            "moves": [
+              "Thousand Arrows",
+              "Dragon Tail",
+              "Crunch",
+              "Glare"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "necrozma",
+      "species": "Necrozma",
+      "category": "legendary",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 3,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 6,
+        "protected": [
+          "hp",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "dusk-mane",
+          "weight": 1,
+          "attack": "spa",
+          "phases": [
+            {
+              "species": "Necrozma",
+              "ability": "Prism Armor",
+              "moves": [
+                "Photon Geyser",
+                "Power Gem",
+                "Earth Power",
+                "Dark Pulse"
+              ],
+              "hpRatio": 0.34,
+              "transformation": "form"
+            },
+            {
+              "species": "Necrozma-Dusk-Mane",
+              "ability": "Prism Armor",
+              "moves": [
+                "Sunsteel Strike",
+                "Photon Geyser",
+                "Earthquake",
+                "Knock Off"
+              ],
+              "hpRatio": 0.33,
+              "transformation": "form"
+            },
+            {
+              "species": "Necrozma-Ultra",
+              "ability": "Neuroforce",
+              "moves": [
+                "Photon Geyser",
+                "Dragon Pulse",
+                "Earth Power",
+                "Power Gem"
+              ],
+              "hpRatio": 0.33,
+              "transformation": "ultraBurst",
+              "sourceSpecies": "Necrozma-Dusk-Mane"
+            }
+          ],
+          "recruit": {
+            "nature": "Serious",
+            "ability": "Prism Armor",
+            "moves": [
+              "Photon Geyser",
+              "Power Gem",
+              "Earth Power",
+              "Dark Pulse"
+            ]
+          }
+        },
+        {
+          "id": "dawn-wings",
+          "weight": 1,
+          "attack": "spa",
+          "phases": [
+            {
+              "species": "Necrozma",
+              "ability": "Prism Armor",
+              "moves": [
+                "Photon Geyser",
+                "Power Gem",
+                "Earth Power",
+                "Dark Pulse"
+              ],
+              "hpRatio": 0.34,
+              "transformation": "form"
+            },
+            {
+              "species": "Necrozma-Dawn-Wings",
+              "ability": "Prism Armor",
+              "moves": [
+                "Moongeist Beam",
+                "Photon Geyser",
+                "Power Gem",
+                "Heat Wave"
+              ],
+              "hpRatio": 0.33,
+              "transformation": "form"
+            },
+            {
+              "species": "Necrozma-Ultra",
+              "ability": "Neuroforce",
+              "moves": [
+                "Photon Geyser",
+                "Dragon Pulse",
+                "Earth Power",
+                "Power Gem"
+              ],
+              "hpRatio": 0.33,
+              "transformation": "ultraBurst",
+              "sourceSpecies": "Necrozma-Dawn-Wings"
+            }
+          ],
+          "recruit": {
+            "nature": "Serious",
+            "ability": "Prism Armor",
+            "moves": [
+              "Photon Geyser",
+              "Power Gem",
+              "Earth Power",
+              "Dark Pulse"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "zacian",
+      "species": "Zacian",
+      "category": "legendary",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.5,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 3,
+        "protected": [
+          "atk",
+          "spe"
+        ],
+        "protectedIv": 21
+      },
+      "shinyRule": "standard",
+      "battleTraining": "raid-zacian-2",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "crowned",
+          "weight": 1,
+          "attack": "atk",
+          "phases": [
+            {
+              "species": "Zacian",
+              "ability": "Intrepid Sword",
+              "moves": [
+                "Play Rough",
+                "Sacred Sword",
+                "Crunch",
+                "Wild Charge"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Zacian-Crowned",
+              "ability": "Intrepid Sword",
+              "moves": [
+                "Behemoth Blade",
+                "Play Rough",
+                "Sacred Sword",
+                "Wild Charge"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form",
+              "item": "Rusted Sword"
+            }
+          ],
+          "recruit": {
+            "nature": "Adamant",
+            "ability": "Intrepid Sword",
+            "moves": [
+              "Play Rough",
+              "Sacred Sword",
+              "Crunch",
+              "Wild Charge"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "zamazenta",
+      "species": "Zamazenta",
+      "category": "legendary",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.5,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 6,
+        "protected": [
+          "hp",
+          "spe"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "elite",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "crowned",
+          "weight": 1,
+          "attack": "atk",
+          "phases": [
+            {
+              "species": "Zamazenta",
+              "ability": "Dauntless Shield",
+              "moves": [
+                "Close Combat",
+                "Crunch",
+                "Stone Edge",
+                "Body Press"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form"
+            },
+            {
+              "species": "Zamazenta-Crowned",
+              "ability": "Dauntless Shield",
+              "moves": [
+                "Behemoth Bash",
+                "Body Press",
+                "Crunch",
+                "Stone Edge"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form",
+              "item": "Rusted Shield"
+            }
+          ],
+          "recruit": {
+            "nature": "Adamant",
+            "ability": "Dauntless Shield",
+            "moves": [
+              "Close Combat",
+              "Crunch",
+              "Stone Edge",
+              "Body Press"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "terapagos",
+      "species": "Terapagos",
+      "category": "legendary",
+      "hpMode": "threshold-v1",
+      "raidHpMultiplier": 2.8,
+      "weight": 20,
+      "minFloor": 1,
+      "ivRule": {
+        "perfect": 3,
+        "protected": [
+          "spa"
+        ]
+      },
+      "shinyRule": "standard",
+      "battleTraining": "raid-very-strong",
+      "rewardProfile": "raid-premium",
+      "routes": [
+        {
+          "id": "stellar",
+          "weight": 1,
+          "attack": "spa",
+          "phases": [
+            {
+              "species": "Terapagos-Terastal",
+              "ability": "Tera Shell",
+              "moves": [
+                "Tera Starstorm",
+                "Earth Power",
+                "Ice Beam",
+                "Flamethrower"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "form",
+              "sourceSpecies": "Terapagos",
+              "nativeEntry": true
+            },
+            {
+              "species": "Terapagos-Stellar",
+              "ability": "Teraform Zero",
+              "moves": [
+                "Tera Starstorm",
+                "Earth Power",
+                "Ice Beam",
+                "Flamethrower"
+              ],
+              "hpRatio": 0.5,
+              "transformation": "stellar"
+            }
+          ],
+          "recruit": {
+            "nature": "Modest",
+            "ability": "Tera Shift",
+            "moves": [
+              "Tera Starstorm",
+              "Earth Power",
+              "Ice Beam",
+              "Flamethrower"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

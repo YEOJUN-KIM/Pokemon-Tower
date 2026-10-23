@@ -61,7 +61,7 @@ TM은 moveInfo의 type으로 18종 디스크를 선택합니다. `src/web/tm-ico
 
 ## 도입 당시 검증 기록
 
-아래 숫자는 Bag 도입 당시 기록이며 현재 전체 테스트 개수/전체 화면의 사람 검증 완료를 뜻하지 않습니다. 최근 자동 검증 범위는 [중간점검](../../artifacts/reports/changes/REFACTORING-2026-10-18.md), 현재 남은 실사용 검증은 [ROADMAP](../current/ROADMAP.md)을 따릅니다. 브라우저는 실제 Chrome과 테스트 전용 SQLite를 사용합니다. 실제 사용자의 진행 DB에서 아이템 구매/사용 테스트를 하지 않습니다.
+아래 숫자는 Bag 도입 당시 기록이며 현재 전체 테스트 개수/전체 화면의 사람 검증 완료를 뜻하지 않습니다. 최근 자동 검증 범위는 [중간점검](../history/REFACTORING-2026-10-18.md), 현재 남은 실사용 검증은 [ROADMAP](../current/ROADMAP.md)을 따릅니다. 브라우저는 실제 Chrome과 테스트 전용 SQLite를 사용합니다. 실제 사용자의 진행 DB에서 아이템 구매/사용 테스트를 하지 않습니다.
 
 | 검증 | 결과 |
 |---|---|
@@ -102,8 +102,8 @@ TM 대상 PC — `../../artifacts/qa/screenshots/bag/targets-machine-1280.png` (
 
 ## 일반상점 접근성 보완
 
-현재 정비 상점 상단의 배낭 버튼과 B 안내는 제거했습니다. 정비 기본 메뉴·출전 준비·히든상점의 배낭 진입을 사용합니다. 첫 사용 가능 대상 커서와 영양제 제한 표시는 공통 적용합니다. 상세 변경·검증·제약은 [SHOP_BAG_UX](../../artifacts/reports/changes/SHOP_BAG_UX.md)를 참조하세요.
+현재 정비 상점 상단의 배낭 버튼과 B 안내는 제거했습니다. 정비 기본 메뉴·출전 준비·히든상점의 배낭 진입을 사용합니다. 첫 사용 가능 대상 커서와 영양제 제한 표시는 공통 적용합니다. 상세 변경·검증·제약은 SHOP_BAG_UX (로컬 전용: `artifacts/reports/changes/SHOP_BAG_UX.md`)를 참조하세요.
 
 ## 도전자 unique 보상
 
-신규 Elite 에픽 도구는 랜덤 단일 snapshot 후 교환권 없이 직접 Bag에 등록합니다. 신규 도구/TM은 지급 직전 중복이면 1,500코인으로 대체합니다. [상세 보고와 저장 호환](../../artifacts/reports/changes/CHALLENGER_UNIQUE_REWARDS.md).
+신규 Elite 에픽 도구는 랜덤 단일 snapshot 후 교환권 없이 직접 Bag에 등록합니다. 신규 도구/TM은 지급 직전 중복이면 1,500코인으로 대체합니다. 상세 보고와 저장 호환 (로컬 전용: `artifacts/reports/changes/CHALLENGER_UNIQUE_REWARDS.md`).

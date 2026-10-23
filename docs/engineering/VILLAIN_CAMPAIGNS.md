@@ -1,6 +1,6 @@
 # 빌런 캠페인 연계 트랙 — 2026-10-19
 
-현재 신규 런은 일반 Run Event와 빌런 캠페인을 독립 판정한다. 일반 이벤트 확률 20%와 쿨다운 2회는 유지한다. 과거 로켓단 v1 캠페인의 저장 상태·이미 생성된 전투는 그대로 재개한다. [이전 구현 문서](../../artifacts/reports/changes/rocket-campaign-implementation.md)는 v1 호환 동작의 기록이다.
+현재 신규 런은 일반 Run Event와 빌런 캠페인을 독립 판정한다. 일반 이벤트 확률 20%와 쿨다운 2회는 유지한다. 과거 로켓단 v1 캠페인의 저장 상태·이미 생성된 전투는 그대로 재개한다. 이전 구현 문서 (로컬 전용: `artifacts/reports/changes/rocket-campaign-implementation.md`)는 v1 호환 동작의 기록이다.
 
 ## 처리 순서와 저장
 
@@ -88,7 +88,7 @@ Elite는 기존 직접 에픽 보상, Master는 성장/알/장비 선택을 유�
 
 - 등장 분포: `node node_modules/tsx/dist/cli.mjs scripts/simulate-villain-campaigns.ts`.
 - 전투: `node node_modules/tsx/dist/cli.mjs scripts/simulate-villain-battles.ts`.
-- 결과: [분포 JSON](../../artifacts/reports/villain-campaigns/distribution.json), [480전 JSON](../../artifacts/reports/villain-campaigns/battles.json), [검증 보고서](../../artifacts/reports/villain-campaigns/README.md).
+- 결과: 분포 JSON (로컬 전용: `artifacts/reports/villain-campaigns/distribution.json`), 480전 JSON (로컬 전용: `artifacts/reports/villain-campaigns/battles.json`), 검증 보고서 (로컬 전용: `artifacts/reports/villain-campaigns/README.md`).
 
 8조직 × 10,000런. Teleport 없는 정상 진행, 모든 전투 승리 가정이며 구현과 같은 eligibility·pity 함수를 사용한다. 8조직 모두 완료 가능하다. 공통 5/+3/35%, 간격 3/보스 5를 유지했다.
 

@@ -12,6 +12,7 @@ const originals=new Set(['Charizard','Blastoise','Venusaur','Pikachu','Gyarados'
 const roster=dex.filter(entry=>originals.has(entry.species) || evioliteSpecies.has(entry.species) || namedReferenceSpecies.has(entry.species) || !Showdown.Dex.species.get(entry.aliases[0]).nfe);
 const root='https://raw.githubusercontent.com/PokeAPI/pokeapi/master/data/v2/csv/';
 const cache='.data/import-cache';await mkdir(cache,{recursive:true});
+await mkdir('artifacts/qa/assets/reports',{recursive:true});
 const sourceRecords:{url:string;sha256:string}[]=[];
 async function source(file:string) {
   let data:string;

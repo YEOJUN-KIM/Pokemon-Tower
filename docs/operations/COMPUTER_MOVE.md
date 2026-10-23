@@ -82,6 +82,6 @@ if ($LASTEXITCODE -ne 0) { throw 'Restore failed' }
 1. 루트 `AGENTS.md`와 [작업 인계](../SESSION_HANDOFF.md).
 2. [현재 상태](../STATUS.md)와 [다음 작업](../current/ROADMAP.md).
 3. [폴더 관리](../engineering/WORKSPACE.md), 수정할 영역의 개발 문서.
-4. 조작 변경은 [화면과 조작](../gameplay/CONTROLS.md), 실험 근거는 [보고서 목록](../../artifacts/README.md).
+4. 조작 변경은 [화면과 조작](../gameplay/CONTROLS.md), 실험 근거는 보고서 목록 (로컬 전용: `artifacts/README.md`).
 
 Next.js 코드 수정 전에는 설치된 `node_modules/next/dist/docs/`의 해당 가이드를 읽습니다. 과거 이전 기록은 Git 이력에서 확인하고, 현재 절차에 옛 백업명·접속 주소·로컬 Git 인덱스 설정을 다시 누적하지 않습니다.

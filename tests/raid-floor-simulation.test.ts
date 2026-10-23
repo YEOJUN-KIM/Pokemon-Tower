@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync,readdirSync,mkdtempSync} from 'node:fs';
-import {createHash} from 'node:crypto';
+import {readFileSync,mkdtempSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {parseSimulationArgs,runRaidSimulationJobs} from '../scripts/simulate-raids';
@@ -10,9 +9,8 @@ import {floorSimulationReport,type OverallBaseline} from '../scripts/lib/raid-fl
 import {simulationTeams,simulationPlayerTeam} from '../scripts/lib/raid-simulation-pool';
 import {simulateRaid} from '../scripts/lib/raid-simulation';
 
-function originalHashes(){return Object.fromEntries(readdirSync('artifacts/experiments/balance').filter(n=>n.startsWith('raid-winrate-simulation.')).map(n=>[n,createHash('sha256').update(readFileSync('artifacts/experiments/balance/'+n)).digest('hex')]));}
 test('two bosses × four brackets × three real runs: eligibility, balanced floors, determinism across workers, complete statistics',async()=>{
- const before=originalHashes(),options={bossIds:['volcarona','kyurem'],runs:3,seedBase:'raid-floor-test-v1',floorBrackets:true};
+ const options={bossIds:['volcarona','kyurem'],runs:3,seedBase:'raid-floor-test-v1',floorBrackets:true};
  const serial=await runRaidSimulationJobs({...options,workers:1}),parallel=await runRaidSimulationJobs({...options,workers:2});
  assert.equal(serial.length,24);assert.deepEqual(parallel,serial);
  for(const bossId of options.bossIds)for(const bracket of raidFloorBrackets){
@@ -21,7 +19,7 @@ test('two bosses × four brackets × three real runs: eligibility, balanced floo
   const counts=bracket.floors.map(f=>selected.filter(r=>r.floor===f).length);assert.ok(Math.max(...counts)-Math.min(...counts)<=1);
   for(const row of selected){assert.ok((bracket.floors as readonly number[]).includes(row.floor));assert.ok(row.floor>=bracket.min&&row.floor<=bracket.max);assert.ok(simulationTeams.find(t=>t.id===row.teamId)!.minFloor<=row.floor);}
  }
- const baseline=JSON.parse(readFileSync('artifacts/experiments/balance/raid-winrate-simulation.json','utf8')) as OverallBaseline;
+ const baseline=JSON.parse(readFileSync('tests/fixtures/raid/overall-comparison.json','utf8')) as OverallBaseline;
  const root=join(mkdtempSync(join(tmpdir(),'raid-floor-')),'smoke'),metadata={runsPerBossBracket:3,commit:'test',seedBase:options.seedBase};
  const result=floorSimulationReport(serial,metadata,root,baseline),other=root+'-parallel';floorSimulationReport(parallel,metadata,other,baseline);
  for(const suffix of ['csv','comparison.csv','branches.csv','phases.csv','teams.csv','strength.csv','floors.csv','battles.csv'])assert.equal(readFileSync(root+'.'+suffix,'utf8'),readFileSync(other+'.'+suffix,'utf8'));
@@ -32,7 +30,6 @@ test('two bosses × four brackets × three real runs: eligibility, balanced floo
  }
  assert.equal(result.teams.reduce((n,t)=>n+t.uses,0),24);assert.equal(result.floors.reduce((n,f)=>n+f.battles,0),24);
  for(const bracket of ['late','endgame']){const s=result.strength.find(s=>s.bracket===bracket)!;assert.equal(s.avgIV,25);assert.equal(s.avgTrainingPoints,50);assert.equal(s.avgHeldItems,3);assert.ok(s.eligibleTeams.every(f=>f.count===20));}
- assert.deepEqual(originalHashes(),before);
  assert.throws(()=>floorSimulationReport([{...serial[0],floor:95},...serial.slice(1)],metadata,root,baseline),/eligibility/);
  assert.throws(()=>floorSimulationReport([...serial,serial[0]],metadata,root,baseline),/Duplicate/);
 });

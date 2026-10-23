@@ -1,9 +1,10 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 const read=async path=>JSON.parse(await readFile(path,'utf8'));
 const roster=await read('src/data/battle-roster.json'),forms=await read('src/data/battle-forms.json');
-const source=await read('artifacts/qa/assets/reports/animated-sprite-coverage.json');
+const source=await read('docs/assets/manifests/local-pokemon-sprites.json');
 const url=`https://api.github.com/repos/PokeAPI/sprites/git/trees/${source.commit}?recursive=1`;
-await mkdir('.data/import-cache',{recursive:true});
+await mkdir('.data/cache/import',{recursive:true});
+await mkdir('artifacts/qa/assets/reports',{recursive:true});
 async function getTree(sha,recursive=false){const cache=`.data/cache/import/sprite-tree-${sha}-${recursive}.json`;try{return await read(cache);}catch{const response=await fetch(`https://api.github.com/repos/PokeAPI/sprites/git/trees/${sha}${recursive ? '?recursive=1' : ''}`,{headers:{'User-Agent':'pokemon-tower-asset-audit'},signal:AbortSignal.timeout(120000)});if(!response.ok)throw Error(`Sprite tree: ${response.status}`);const tree=await response.json();if(tree.truncated)throw Error(`Incomplete subtree ${sha}`);await writeFile(cache,JSON.stringify(tree));return tree;}}
 async function folder(path){let sha=source.commit;for(const name of path.split('/')){const tree=await getTree(sha),next=tree.tree.find(entry=>entry.path===name && entry.type==='tree');if(!next)throw Error(`Missing directory ${path}`);sha=next.sha;}return sha;}
 const files=new Set();

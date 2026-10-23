@@ -7,9 +7,9 @@
 | `scripts/` | 재사용하는 가져오기·생성·실험·검증·배포 도구 |
 | `scripts/data/` | 생성기에 필요한 입력 데이터. 결과물과 구분 |
 | `tests/`, `e2e/` | 코드·브라우저 자동 테스트 |
-| `docs/` | 현재 설명·계획·사용법·개발 지침 |
+| `docs/` | Git 추적하는 현재 설계·정책·확정 결정·배포 안내·장기 출처 기록 |
 | `artifacts/experiments/` | AI·밸런스·샘플별 실험 보고서와 입력/결과/manifest |
-| `artifacts/reports/` | 변경 근거·NPC 리뷰·유효한 후속 기획 |
+| `artifacts/reports/` | Git 제외 자동 보고서·NPC 리뷰·일회성 분석. 공식 정책은 docs로 승격 |
 | `artifacts/qa/` | 문서나 재검증에서 실제 사용하는 화면·자산 검사 자료 |
 | `artifacts/temporary/` | 일회성 검증 결과. 해결 후 삭제 |
 | `.data/` | 실제 로컬 저장·운영 설정·수동 DB 백업 |
@@ -24,13 +24,13 @@
 
 ## 작업을 마칠 때
 
-1. 필요한 고정 입력은 `scripts/data/` 또는 해당 실험 유형에 둡니다.
+1. 새 clone에서 필요한 고정 입력은 `scripts/data/`·`tests/fixtures/`·공식 출처 manifest에 둡니다. 과거 실험 원자료만 로컬 artifacts에 둡니다.
 2. 재사용할 도구는 `scripts/`, 테스트 코드는 `tests/`·`e2e/`에 둡니다.
 3. 완료된 문제의 일회성 캡처·확인 코드·폐기한 미리보기는 삭제합니다. QA 자료는 문서·재검증에서 사용하는 것만 보관합니다.
 4. 실제 DB·환경 설정·출처·라이선스와 코드/테스트 입력은 생성물 정리 대상에 포함하지 않습니다.
 5. `pnpm check:workspace`로 문서 링크·루트 문서 배치·스크립트 경로·DB/AI 기준·보고서 생성기를 검사합니다. `pnpm clean:temp`는 알려진 테스트/임시 출력만 제거합니다.
 
-파일 이동 시 Markdown 링크·스크립트 출력·테스트 입력·manifest 경로를 함께 갱신합니다. 과거 manifest의 소스 해시는 당시 측정 버전의 기록이며 경로 변경 후 현재 소스 해시로 바꾸어 새 실험처럼 보이게 하지 않습니다. [이동 기록](../../artifacts/reports/history/WORKSPACE_RELOCATION-2026-10-14.json)은 개발 검사 용도입니다.
+파일 이동 시 Markdown 링크·스크립트 출력·테스트 입력·manifest 경로를 함께 갱신합니다. 과거 manifest의 소스 해시는 당시 측정 버전의 기록이며 경로 변경 후 현재 소스 해시로 바꾸어 새 실험처럼 보이게 하지 않습니다. 이동 기록 (로컬 전용: `artifacts/reports/history/WORKSPACE_RELOCATION-2026-10-14.json`)은 개발 검사 용도입니다.
 
 
 구버전 코드/배포 묶음과 일회성 확인 스크립트는 Git 이력으로 대체합니다. 현재 NPC export와 공용 Raid 시뮬레이터를 사용하며 단계별 옛 bootstrap·Raid 튜닝 전용 명령은 유지하지 않습니다. 기능 테스트와 저장 재생용 버전 코드는 보존하고, 과거 특정 변경에서 파일이 한 바이트도 안 바뀌었는지만 검사하는 일회성 보존 검사는 지속 회귀 검사에서 제거합니다.

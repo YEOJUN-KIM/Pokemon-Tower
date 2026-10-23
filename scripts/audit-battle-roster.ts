@@ -1,4 +1,4 @@
-import {writeFile} from 'node:fs/promises';
+import {mkdir,writeFile} from 'node:fs/promises';
 import Showdown from 'pokemon-showdown';
 import {pokemonSets,packTeam,starters} from '../src/data/teams';
 import {pokedexEntries} from '../src/server/pokedex-entries';
@@ -10,7 +10,7 @@ import {TowerPolicy} from '../src/battle/tower-policy';
 import {species,moves} from '../src/web/catalog';
 import {abilityNames} from '../src/web/pokedex-data';
 import {missingAnimation} from '../src/data/sprite-animation';
-import spriteCoverage from '../artifacts/qa/assets/reports/sprite-coverage.json' with {type:'json'};
+import spriteCoverage from '../docs/assets/manifests/local-pokemon-sprites.json' with {type:'json'};
 
 const entries=pokedexEntries(),validator=new Showdown.TeamValidator(FORMAT),failures:{species:string;phase:string;error:string}[]=[],results:unknown[]=[];
 const baseline=packTeam(starters);
@@ -46,6 +46,7 @@ const samples=[1,4,9,20,30,100].map(floor=>{
 });
 const report={checkedAt:new Date().toISOString(),engineVersion,format:FORMAT,count:entries.length,battleCount:results.length*2,policy:'tower-policy-v2; neutral 6Z player profile and useful opponent moves. Seeded integration smoke tests, not win-rate balancing.',failures,
   spriteCoverage:{sourceCommit:spriteCoverage.commit,front:entries.length,back:entries.length,animatedBoth:entries.filter(entry=>!missingAnimation.has(entry.id)).length,staticOnly:entries.filter(entry=>missingAnimation.has(entry.id)).map(entry=>({id:entry.id,name:entry.name})),method:'Exact national IDs checked against the existing complete PokeAPI sprite-tree audit, not downloading 1,210 images.'},samples,results};
+await mkdir('artifacts/qa/assets/reports',{recursive:true});
 await writeFile('artifacts/qa/assets/reports/battle-roster-audit.json',JSON.stringify(report,null,2)+'\n');
 console.log(`Finished ${results.length} species / ${results.length*2} battles; failures ${failures.length}`);
 if(failures.length){console.log(JSON.stringify(failures,null,2));process.exitCode=1;}

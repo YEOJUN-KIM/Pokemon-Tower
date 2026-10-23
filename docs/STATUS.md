@@ -2,7 +2,7 @@
 
 기준: **2026-10-23**. 현재 개발 기준은 **v1.0.0-beta.4**(`e5dc2fa8`, 커밋명 `Beta.4수정`)이며, 확인된 최신 공개 프리릴리즈는 [v1.0.0-beta.3](https://github.com/YEOJUN-KIM/Pokemon-Tower/releases/tag/v1.0.0-beta.3)다. GitHub 공개 Release 목록에는 beta.4가 없다. `package.json`의 버전 문자열은 여전히 `1.0.0-beta.1`이며, 개발 기준·공개 Release·패키지 메타데이터를 구별한다.
 
-**Normal Mode 100층의 1차 완성** 기준은 `82c870ed`이며, `41b20ab0`의 UI·이벤트·경제 개선과 `e5dc2fa8`의 후속 플레이 피드백을 반영한 상태다. 음향·기술 이펙트와 추가 품질 개선은 [ROADMAP](current/ROADMAP.md), 적용 근거와 당시 검증은 [변경 기록 색인](../artifacts/reports/changes/README.md)에서 관리한다.
+**Normal Mode 100층의 1차 완성** 기준은 `82c870ed`이며, `41b20ab0`의 UI·이벤트·경제 개선과 `e5dc2fa8`의 후속 플레이 피드백을 반영한 상태다. 음향·기술 이펙트와 추가 품질 개선은 [ROADMAP](current/ROADMAP.md), 적용 근거와 당시 검증은 변경 기록 색인 (로컬 전용: `artifacts/reports/changes/README.md`)에서 관리한다.
 
 | 영역 | 현재 구현 |
 |---|---|

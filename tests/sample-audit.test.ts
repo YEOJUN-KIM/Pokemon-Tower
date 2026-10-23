@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {auditProfile,auditTeam,directAnswer} from '../scripts/lib/sample-audit';
 
-const original=JSON.parse(readFileSync('artifacts/experiments/ai/support-recheck-climb-cases.json','utf8'));
-const corrected=JSON.parse(readFileSync('artifacts/experiments/ai/support-corrected-climb-cases.json','utf8'));
+const original=JSON.parse(readFileSync('tests/fixtures/sample-audit/original.json','utf8'));
+const corrected=JSON.parse(readFileSync('tests/fixtures/sample-audit/corrected.json','utf8'));
 test('bulk audit detects real physical/special sample errors and keeps source immutable',()=>{
  const before=JSON.stringify(original);
  const az=original.find((c:any)=>c.id==='klefki-screen').profiles.Azumarill;

@@ -50,4 +50,4 @@
 
 이벤트 등록/outcome 저장/표시는 [이벤트 개발](EVENT_SYSTEM.md), NPC 입력→export→런타임 경로는 [NPC 데이터](NPC_DATA.md), 마이그레이션은 [DB](DATABASE.md)를 따른다. 신규 이벤트 ID를 추가할 때 기존 run_events 테이블을 재작성할 필요는 없다. 새로운 저장 구조가 필요한 경우에만 스키마·이전 경로를 함께 확장한다.
 
-TowerStore·BattleGame·Pokedex는 큰 편이나 현재 저장·연출·편집 경계가 있다. 파일 크기만으로 나누지 않으며, 실제 독립 책임을 확장할 때 해당 경계를 검증한다. 실험/시뮬레이션 도구와 과거 AI 정책도 참조가 있는 한 유지한다. 과거 중간점검의 분류와 검증은 [중간점검](../../artifacts/reports/changes/REFACTORING-2026-10-18.md)을 참고한다.
+TowerStore·BattleGame·Pokedex는 큰 편이나 현재 저장·연출·편집 경계가 있다. 파일 크기만으로 나누지 않으며, 실제 독립 책임을 확장할 때 해당 경계를 검증한다. 실험/시뮬레이션 도구와 과거 AI 정책도 참조가 있는 한 유지한다. 과거 중간점검의 분류와 검증은 [중간점검](../history/REFACTORING-2026-10-18.md)을 참고한다.

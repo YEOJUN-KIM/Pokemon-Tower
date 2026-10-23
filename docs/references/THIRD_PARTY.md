@@ -1,6 +1,6 @@
 # 출처와 재사용
 
-2026-10-16 공통 NPC 클래스 확장: Showdown 원본 목록과 개별 아티스트 표기를 확인한 뒤 게임 기반 클래스 PNG 8종(lass-gen3, pokemonbreeder-gen3, gentleman-gen4, pokemonranger-gen3, veteran-gen4, backpacker, schoolkid-gen4, collector)을 수정 없이 추가했다. 이번 선택 자산에는 개별 아티스트 표기가 없었다. 제공원의 식별자·URL·SHA-256·확인일은 [초상화 출처 목록](../../public/sprites/trainers/sources.json), 반입/보류 구분은 [검토 결과](../../artifacts/reports/npc/npc-sprite-review.json)에 기록한다. 개별 크레딧이 있는 pokemonbreeder-gen7(Beliot419), pokemonranger-gen6/veteran-gen7/acetrainer-gen6(kyledove)은 검토 후보로만 남기고 다운로드하지 않았다. 기존 원작 이미지 권리와 Showdown 엔진 라이선스의 구분을 유지한다.
+2026-10-16 공통 NPC 클래스 확장: Showdown 원본 목록과 개별 아티스트 표기를 확인한 뒤 게임 기반 클래스 PNG 8종(lass-gen3, pokemonbreeder-gen3, gentleman-gen4, pokemonranger-gen3, veteran-gen4, backpacker, schoolkid-gen4, collector)을 수정 없이 추가했다. 이번 선택 자산에는 개별 아티스트 표기가 없었다. 제공원의 식별자·URL·SHA-256·확인일은 [초상화 출처 목록](../../public/sprites/trainers/sources.json), 반입/보류 구분은 [검토 결과](../assets/manifests/npc-sprite-review.json)에 기록한다. 개별 크레딧이 있는 pokemonbreeder-gen7(Beliot419), pokemonranger-gen6/veteran-gen7/acetrainer-gen6(kyledove)은 검토 후보로만 남기고 다운로드하지 않았다. 기존 원작 이미지 권리와 Showdown 엔진 라이선스의 구분을 유지한다.
 
 2026-10-14 테라스탈 선택 아이콘: [Pokémon Showdown 타입 이미지](https://play.pokemonshowdown.com/sprites/types/)의 `Tera{Type}.png` 19종을 수정 없이 `public/sprites/gimmicks/tera/`에 저장했다. 테라스탈 버튼에서 현재 타입의 보석 아이콘을 표시한다. [개별 URL·해시](../../public/sprites/gimmicks/tera/sources.json)를 보존하며 재현은 `scripts/import-tera-type-icons.mjs`다. 기존 Pokémon 이미지의 원작 권리 구분을 따른다.
 
@@ -56,7 +56,7 @@ Windows 실행기의 안내에는 [Neo둥근모 공식 v1.601](https://github.co
 - PokéAPI: https://pokeapi.co/docs/v2
 - 이미지 출처 후보: https://github.com/PokeAPI/sprites
 - 실행 중 종마다 PokéAPI REST를 호출하지 않는다. 이름·학습 자료는 가져오기 단계에서 수집한다. 2026-10-12부터 기본·이로치 PNG와 기존 도트 애니메이션 GIF도 `public/vendor/pokeapi/pokemon/`에서 로컬 제공한다.
-- 가져온 원본은 기존 감사 버전 `a3a1432e688ea028f12c51371d5253037cb9f17b`에 고정했다. `node --import tsx scripts/import-local-pokemon-sprites.ts`로 재실행하며 파일별 SHA-256과 원본에 없는 변형은 `artifacts/qa/assets/reports/local-pokemon-sprites.json`에 기록한다. 없는 변형은 로컬 기본 종 이미지로 대체한다.
+- 가져온 원본은 기존 감사 버전 `a3a1432e688ea028f12c51371d5253037cb9f17b`에 고정했다. `node --import tsx scripts/import-local-pokemon-sprites.ts`로 재실행하며 파일별 SHA-256과 원본에 없는 변형은 `docs/assets/manifests/local-pokemon-sprites.json`에 기록한다. 없는 변형은 로컬 기본 종 이미지로 대체한다.
 - 현재 일반 도감 605종에 앞·뒷모습을 연결한다. 초기 7종/20종 ID 목록은 개발 이력이며 전체 지원 범위는 이미지 검사 JSON을 따른다.
 - [저장소 고지](https://github.com/PokeAPI/sprites/blob/master/LICENCE.txt)는 저장소 CC0 1.0 배포와 이미지 콘텐츠의 The Pokémon Company 저작권을 함께 명시한다. 캐릭터·이미지가 자유 이용으로 전환됐다고 해석하지 않는다.
 - 화면 하단에 이미지·엔진 출처를 표시한다. 1~5세대 포켓몬은 로컬에 저장한 기존 PokeAPI 도트 자료를 사용하며, 최신 세대는 아래의 로컬 Showdown 도트 자료를 사용한다. GIF의 도감 정지 프레임은 브라우저에서 만든다. 로컬 트레이너 PNG와 생성 플레이어 시트는 위 항목에 별도로 기록한다.
@@ -67,9 +67,9 @@ Windows 실행기의 안내에는 [Neo둥근모 공식 v1.601](https://github.co
 
 아래의 3층·7종·20종 설명은 초기 개발 이력이다. 현재 범위는 605종·10층·영구 성장·강화 상점·키보드 커서·트레이너 등장이며 README와 UI_FLOW를 기준으로 읽는다. 이후 데이터·스프라이트 확장 출처는 이 문서의 각 후속 항목에 기록한다.
 
-2026-10-04 추가 조사로 Showdown 연출 원본 2개·CC0 효과 이미지 22개 및 Kenney Impact Sounds CC0 공식 팩을 검토용으로 확보했다. 2026-10-12에는 CC0 효과 PNG 22개와 기술별 구성을 참고해 현재 배틀의 Canvas 연출에 연결했다. 별도 라이선스 이미지와 전체 클라이언트는 가져오지 않았고, Kenney 팩은 아직 연결하지 않았다. [현재 기술 연출](../../artifacts/reports/changes/MOVE_EFFECTS.md), 파일별 조건과 당시 조사 내용은 [RESOURCE_RESEARCH.md](THIRD_PARTY.md)를 참고한다. 기존 원본 출처와 해시는 `artifacts/qa/assets/reports/resource-manifest.json`, 현재 연결 목록은 `artifacts/qa/assets/reports/move-effects-integration.json`에 기록한다.
+2026-10-04 추가 조사로 Showdown 연출 원본 2개·CC0 효과 이미지 22개 및 Kenney Impact Sounds CC0 공식 팩을 검토용으로 확보했다. 2026-10-12에는 CC0 효과 PNG 22개와 기술별 구성을 참고해 현재 배틀의 Canvas 연출에 연결했다. 별도 라이선스 이미지와 전체 클라이언트는 가져오지 않았고, Kenney 팩은 아직 연결하지 않았다. [현재 기술 연출](../engineering/MOVE_EFFECTS.md), 파일별 조건과 당시 조사 내용은 [RESOURCE_RESEARCH.md](THIRD_PARTY.md)를 참고한다. 기존 원본 출처와 해시는 `docs/assets/manifests/resource-manifest.json`, 현재 연결 목록은 `docs/assets/manifests/move-effects-integration.json`에 기록한다.
 
-배틀 타입별 CSS 모션·공개 로그 순차 재생·Web Audio 임시 BGM/기술/승패 효과음은 직접 구현했다. 공식 음원이나 샘플을 포함하지 않았다. 2026-10-04 [Pokémon Game Sound Library 가이드라인](https://soundlibrary.pokemon.co.jp/en/download)은 게임·앱·소프트웨어 이용을 제외하므로 이 프로젝트의 음원 제공원으로 사용하지 않았다. 세부 확인과 음원 교체 방법은 [BATTLE_AUDIO.md](../../artifacts/reports/changes/BATTLE_AUDIO.md)를 참고한다.
+배틀 타입별 CSS 모션·공개 로그 순차 재생·Web Audio 임시 BGM/기술/승패 효과음은 직접 구현했다. 공식 음원이나 샘플을 포함하지 않았다. 2026-10-04 [Pokémon Game Sound Library 가이드라인](https://soundlibrary.pokemon.co.jp/en/download)은 게임·앱·소프트웨어 이용을 제외하므로 이 프로젝트의 음원 제공원으로 사용하지 않았다. 세부 확인과 음원 교체 방법은 [BATTLE_AUDIO.md](../history/BATTLE_AUDIO.md)를 참고한다.
 
 CLI 입력, Showdown 연결 어댑터, 관측 정보 제한, 합법 행동 목록과 검증,
 예상 데미지 규칙 AI, 재현 로그와 검증, 고정 팀 선정, 테스트와 프로젝트 문서.
@@ -85,7 +85,7 @@ PokéAPI docs의 cries.latest/legacy 및 https://github.com/PokeAPI/cries 를 �
 
 ### 일반 포켓몬 도감 확장
 
-PokéAPI의 공개 CSV 데이터로 1,025종의 한글·영문 이름, 공식 영문 식별자, 타입, 세대, 기본 특성 이름을 로컬 JSON에 저장했다. 출처 URL과 가져온 시각은 `artifacts/qa/assets/reports/pokedex-source.json`, 재생성 스크립트는 `scripts/import-pokedex.mjs`에 기록한다. https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv
+PokéAPI의 공개 CSV 데이터로 1,025종의 한글·영문 이름, 공식 영문 식별자, 타입, 세대, 기본 특성 이름을 로컬 JSON에 저장했다. 출처 URL과 가져온 시각은 `docs/assets/manifests/pokedex-source.json`, 재생성 스크립트는 `scripts/import-pokedex.mjs`에 기록한다. https://github.com/PokeAPI/pokeapi/tree/master/data/v2/csv
 
 최종 진화 여부·메가진화/거다이맥스 가능 여부는 설치된 Showdown 종 데이터로 판단한다. 진화의휘석 활용 후보는 별도 수동 목록이며, 대표적인 전략 자료를 참고했다: https://www.smogon.com/dex/sv/pokemon/chansey/ , https://www.smogon.com/dex/sv/pokemon/porygon2/ , https://www.smogon.com/dex/sv/pokemon/duraludon/ , https://www.smogon.com/dex/sv/pokemon/dipplin/zu/ . 이 목록은 공식 분류나 모든 미진화체의 채용률 순위가 아니다.
 
@@ -97,18 +97,18 @@ PokéAPI의 공개 CSV 데이터로 1,025종의 한글·영문 이름, 공식 �
 
 위 문단은 2026-10-05 연결 기록이다. 2026-10-09부터 6~9세대와 별도 최신 폼 이미지 키는 [Showdown gen5](https://play.pokemonshowdown.com/sprites/gen5/), [gen5-back](https://play.pokemonshowdown.com/sprites/gen5-back/), [gen5ani](https://play.pokemonshowdown.com/sprites/gen5ani/), [gen5ani-back](https://play.pokemonshowdown.com/sprites/gen5ani-back/)의 2D 도트 자료를 사용한다. `gen5`는 이 자료의 스타일 경로이며 최신 포켓몬도 포함한다.
 
-사용자가 요청한 2D 교체를 위해 앞·뒷모습 PNG와 각 방향에서 사용 가능한 GIF를 수정 없이 `public/vendor/showdown/pokemon/`에 저장했다. 1,201개 파일, 22,842,975바이트이며 외부 이미지 서버 접근 실패를 피하기 위한 게임 자산이다. 원본 URL·크기·SHA256은 `artifacts/qa/assets/reports/pixel-sprite-assets.json`, 파일 목록은 `artifacts/qa/assets/reports/pixel-sprite-coverage.json`에 기록한다. 현재 605종 도감 중 6~9세대 241종은 양방향 도트 애니메이션 93종·정면만 애니메이션 42종·양방향 정지 도트 106종으로 표시한다. 앞·뒷모습 지원 여부를 독립적으로 판단하며, GIF가 없거나 로드에 실패하면 같은 방향의 도트 PNG를 사용한다. 3D GIF로 대체하지 않는다. 1~5세대의 기존 표시 경로는 유지한다.
+사용자가 요청한 2D 교체를 위해 앞·뒷모습 PNG와 각 방향에서 사용 가능한 GIF를 수정 없이 `public/vendor/showdown/pokemon/`에 저장했다. 1,201개 파일, 22,842,975바이트이며 외부 이미지 서버 접근 실패를 피하기 위한 게임 자산이다. 원본 URL·크기·SHA256은 `docs/assets/manifests/pixel-sprite-assets.json`, 파일 목록은 `artifacts/qa/assets/reports/pixel-sprite-coverage.json`에 기록한다. 현재 605종 도감 중 6~9세대 241종은 양방향 도트 애니메이션 93종·정면만 애니메이션 42종·양방향 정지 도트 106종으로 표시한다. 앞·뒷모습 지원 여부를 독립적으로 판단하며, GIF가 없거나 로드에 실패하면 같은 방향의 도트 PNG를 사용한다. 3D GIF로 대체하지 않는다. 1~5세대의 기존 표시 경로는 유지한다.
 
 포켓몬 그림과 커뮤니티 제작 스프라이트는 직접 제작한 자료가 아니다. 기존 포켓몬 이미지와 같은 원작·제작자 권리 구분을 유지하며 Showdown 엔진 MIT 또는 별도로 확보한 기술 효과 이미지 CC0 고지를 이 그림에 적용하지 않는다. 이번 교체는 별도 상업 이용 허가를 확보했다는 의미가 아니다. 로컬 출처 안내는 `public/vendor/showdown/pokemon/README.md`에 둔다.
 
 
 ### 기술·자력기 데이터
 
-PokéAPI pokemon 엔드포인트의 version_group_details와 level-up 학습 방법을 사용하며, 지원 20종의 최신 가용 버전을 선택한다. move_names.csv와 move_flavor_text.csv의 한국어 항목을 기술명 및 설명에 사용한다. 엔진의 기술 세부 수치와 실제 배틀 규칙에 맞는 학습 가능 여부는 설치된 pokemon-showdown 0.11.11 데이터를 사용한다. 수집 출처와 버전은 artifacts/qa/assets/reports/move-data-source.json, 재생성 과정은 scripts/import-moves.ts에 기록한다. 도감 및 배틀 중 외부 API를 종마다 호출하지 않는다.
+PokéAPI pokemon 엔드포인트의 version_group_details와 level-up 학습 방법을 사용하며, 지원 20종의 최신 가용 버전을 선택한다. move_names.csv와 move_flavor_text.csv의 한국어 항목을 기술명 및 설명에 사용한다. 엔진의 기술 세부 수치와 실제 배틀 규칙에 맞는 학습 가능 여부는 설치된 pokemon-showdown 0.11.11 데이터를 사용한다. 수집 출처와 버전은 docs/assets/manifests/move-data-source.json, 재생성 과정은 scripts/import-moves.ts에 기록한다. 도감 및 배틀 중 외부 API를 종마다 호출하지 않는다.
 
 ### 605종 배틀 데이터 확장
 
-2026-10-05부터 일반 605종의 실제 배틀 세트를 지원한다. 자력기는 PokéAPI `pokemon_moves.csv`의 level-up 및 버전 그룹으로 수집하고, 한국어 기술·특성 이름은 공개 CSV에서 읽는다. 기술의 실수치와 종족값·특성·합법성·실제 처리는 설치된 Showdown 0.11.11을 사용한다. 새 통합 가져오기 명령은 `pnpm data:import`이며 이전 `scripts/import-moves.ts`도 같은 통합 가져오기로 연결한다. 각 원본 URL·SHA256·버전과 예외는 `artifacts/qa/assets/reports/battle-data-source.json`에 기록한다. 채용률 자료나 학습 모델을 가져온 것은 아니다.
+2026-10-05부터 일반 605종의 실제 배틀 세트를 지원한다. 자력기는 PokéAPI `pokemon_moves.csv`의 level-up 및 버전 그룹으로 수집하고, 한국어 기술·특성 이름은 공개 CSV에서 읽는다. 기술의 실수치와 종족값·특성·합법성·실제 처리는 설치된 Showdown 0.11.11을 사용한다. 새 통합 가져오기 명령은 `pnpm data:import`이며 이전 `scripts/import-moves.ts`도 같은 통합 가져오기로 연결한다. 각 원본 URL·SHA256·버전과 예외는 `docs/assets/manifests/battle-data-source.json`에 기록한다. 채용률 자료나 학습 모델을 가져온 것은 아니다.
 
 
 ## 2026-10-09 전투 BGM 교체
@@ -133,7 +133,7 @@ PokéAPI pokemon 엔드포인트의 version_group_details와 level-up 학습 방
 
 ## 메가 형태 2D 스프라이트
 
-2026-10-09 Pokémon Showdown sprite collection의 47종 앞·뒤 PNG/GIF 총 188개를 public/sprites/gimmicks에 저장했다. 개별 URL은 artifacts/qa/assets/reports/mega-sprite-sources.json에 기록한다. 메가스톤·다이맥스밴드의 공용 SVG 아이콘과 변신 연출 CSS는 직접 작성했다. 기존 포켓몬 자산의 권리·출처 안내를 동일하게 따른다.
+2026-10-09 Pokémon Showdown sprite collection의 47종 앞·뒤 PNG/GIF 총 188개를 public/sprites/gimmicks에 저장했다. 개별 URL은 docs/assets/manifests/mega-sprite-sources.json에 기록한다. 메가스톤·다이맥스밴드의 공용 SVG 아이콘과 변신 연출 CSS는 직접 작성했다. 기존 포켓몬 자산의 권리·출처 안내를 동일하게 따른다.
 
 ### 메가 GIF 출처 정정
 
@@ -158,7 +158,7 @@ PokéAPI item API에서 9종의 sprites.default 주소를 확인하고 PokeAPI/s
 소모품 8종 확장: 같은 PokeAPI/sprites 제공원의 x-defense, x-sp-atk, x-sp-def, x-accuracy, dire-hit 30×30 PNG 5종을 추가했다. 기존 import-shop-icons.mjs로 재현한다.
 
 
-테라스탈의 타입 색상·예약 버튼은 [PokéRogue 공식 명령 UI](https://github.com/pagefaultgames/pokerogue/blob/beta/src/ui/handlers/command-ui-handler.ts)를 참고했다. 이번 결정 아이콘과 연출은 직접 만든 SVG/CSS이며 해당 게임의 이미지나 코드를 포함하지 않는다. 실제 타입·STAB·전용 폼 효과는 기존 pokemon-showdown 엔진을 사용한다. 상세는 [테라스탈](../../artifacts/reports/changes/TERASTALLIZATION.md).
+테라스탈의 타입 색상·예약 버튼은 [PokéRogue 공식 명령 UI](https://github.com/pagefaultgames/pokerogue/blob/beta/src/ui/handlers/command-ui-handler.ts)를 참고했다. 이번 결정 아이콘과 연출은 직접 만든 SVG/CSS이며 해당 게임의 이미지나 코드를 포함하지 않는다. 실제 타입·STAB·전용 폼 효과는 기존 pokemon-showdown 엔진을 사용한다. 상세는 테라스탈 (로컬 전용: `artifacts/reports/changes/TERASTALLIZATION.md`).
 
 
 빌런 간부/보스용 tabitha, mars, zinzolin, xerosic, plumeria, guzma PNG를 [Pokémon Showdown 트레이너 제공원](https://play.pokemonshowdown.com/sprites/trainers/)에서 수정 없이 추가했다. 표기된 작가는 tabitha: kyledove, xerosic/guzma: Gnomowladny, plumeria: Beliot419이며 mars/zinzolin은 제공원에서 별도 작가 표기가 없다. URL·크레딧은 trainer-sprite-sources.json에 기록했다.

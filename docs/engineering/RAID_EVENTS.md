@@ -1,6 +1,6 @@
 # Raid 이벤트 개발
 
-기준: 2026-10-20. 현재 보스는 **20종**, route별 2~4 phase를 사용한다. 초기 한카리아스/뮤츠 두 종의 구현 보고와 과거 튜닝 수치는 [밸런스 보고서](../../artifacts/experiments/balance/README.md)에 분리했다.
+기준: 2026-10-20. 현재 보스는 **20종**, route별 2~4 phase를 사용한다. 초기 한카리아스/뮤츠 두 종의 구현 보고와 과거 튜닝 수치는 밸런스 보고서 (로컬 전용: `artifacts/experiments/balance/README.md`)에 분리했다.
 
 ## 설정과 처리 경로
 

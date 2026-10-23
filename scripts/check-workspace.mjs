@@ -18,7 +18,8 @@ for(const file of ['docs/STATUS.md','docs/engineering/DATABASE.md']){
 }
 if(!aiVersion||!readFileSync('docs/engineering/ARCHITECTURE.md','utf8').includes(aiVersion))failures.push('docs/engineering/ARCHITECTURE.md: update current AI version');
 const walk=dir=>existsSync(dir)?readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(dir+'/'+e.name):e.isFile()?[dir+'/'+e.name]:[]):[];
-const markdown=[...walk('docs'),...walk('artifacts'),'README.md','scripts/README.md'].filter(f=>f.endsWith('.md'));
+// Ignored local reports are optional. Official documentation must work in a fresh clone.
+const markdown=[...walk('docs'),'README.md','scripts/README.md',...walk('tests/fixtures')].filter(f=>f.endsWith('.md'));
 let links=0;
 for(const file of markdown){
   const text=readFileSync(file,'utf8').replace(/```[\s\S]*?```/g,'');
@@ -26,6 +27,7 @@ for(const file of markdown){
     const target=match[1];if(/^(https?:|mailto:|#|codex:|app:)/.test(target))continue;
     const raw=target.split('#')[0];let decoded;try{decoded=decodeURIComponent(raw)}catch{continue;}
     const resolved=path.resolve(path.dirname(file),decoded);
+    if(resolved===path.resolve('artifacts')||resolved.startsWith(path.resolve('artifacts')+path.sep))failures.push(`${file}: official link depends on ignored artifacts: ${target}`);
     links++;if(!existsSync(resolved))failures.push(`${file}: missing link ${target}`);
   }
 }

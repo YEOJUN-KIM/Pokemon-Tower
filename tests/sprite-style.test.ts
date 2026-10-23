@@ -1,6 +1,6 @@
+import {assertSpriteFiles} from './helpers/runtime-assets';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync} from 'node:fs';
 import {pokemonImageSources} from '../src/web/pokemon-image';
 import {pixelSpriteSources} from '../src/data/pixel-sprites';
 import nonPixelFronts from '../src/data/non-pixel-front-sprites.json' with {type:'json'};
@@ -13,11 +13,11 @@ test('illustration placeholders use real local pixel PNGs for animated and stati
    const sources=pokemonImageSources(Number(key),false,animated,key);
    const added=(additional as Record<string,{front?:{gif:string;png:string}}>)[key]?.front;
    assert.deepEqual(sources,animated&&added?[added.gif,added.png]:[`/vendor/pokeapi/pokemon/${key}.png`]);
-   assert.ok(existsSync('public'+sources[0]));
+   assertSpriteFiles([sources[0]]);
   }
   for(const back of [false,true])for(const shiny of [false,true]){
    const sources=pokemonImageSources(Number(key),back,true,key,shiny);
-   assert.ok(sources.length && sources.some(source=>existsSync('public'+source)));
+   assertSpriteFiles(sources);
   }
  }
  assert.match(pokemonImageSources(6,false,true)[0],/animated\/6\.gif$/);

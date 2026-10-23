@@ -1,6 +1,6 @@
+import {assertSpriteFiles} from './helpers/runtime-assets';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync} from 'node:fs';
 import {pokemonImageSources} from '../src/web/pokemon-image';
 import inventory from '../src/data/pixel-sprites.json' with {type:'json'};
 import frontOnlyBacks from '../src/data/front-only-back-sprites.json' with {type:'json'};
@@ -24,7 +24,7 @@ test('1x/2x retain existing popup pacing; 4x uses a readable shorter popup hold'
 test('every species/form has local normal and shiny backs, and copied fronts are excluded',()=>{
   for(const key of Object.keys(inventory))for(const shiny of [false,true]){
     const sources=pokemonImageSources(Number.parseInt(key,10),true,true,key,shiny);
-    assert.ok(sources.some(path=>existsSync('public'+path)),`${key} shiny=${shiny} missing back`);
+    assertSpriteFiles(sources,`${key} shiny=${shiny} missing back`);
     if(frontOnlyBacks.includes(key))assert.ok(sources.every(path=>!path.includes('/showdown/pokemon/gen5-back/')),`${key} copied front`);
   }
   assert.ok(!pokemonImageSources(925,true,true)[0].includes('/showdown/pokemon/gen5-back/'));

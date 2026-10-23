@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
 import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
+import {inspectPublicAsset} from './helpers/runtime-assets';
 import {assetRegistry} from '../src/assets/registry';
 import {loadAssetImage} from '../src/assets/load-image';
 import {TrainerPortrait} from '../src/web/trainer-portrait';
@@ -10,7 +11,11 @@ import {TrainerPortrait} from '../src/web/trainer-portrait';
 test('registry keeps existing runtime paths and independent project fallbacks',()=>{
   for(const species of [6,908,1008])for(const back of [false,true]){
     const urls=assetRegistry.pokemon(species,back,true);
-    assert.ok(urls.length);for(const url of urls)assert.ok(existsSync('public'+url),url);
+    assert.ok(urls.length);for(const url of urls){
+      assert.ok(url.startsWith('/'),url);
+      if(!inspectPublicAsset(url))continue;
+      assert.ok(existsSync('public'+url),url);
+    }
   }
   for(const file of Object.values(assetRegistry.placeholders)){
     assert.ok(!/vendor|sprites/.test(file));assert.match(readFileSync('public'+file,'utf8'),/<svg/);

@@ -6,7 +6,7 @@ Node.js 24 / 단일 서버 / 영구 저장 디스크를 기준으로 준비했�
 
 ## 현재 패키징 기준
 
-문서·스크립트 입력만 안전하게 검사하려면 `node scripts/package-deploy.mjs --check`를 실행한다. 빌드·복사·서버·DB 작업 없이 검사한다. 패키지의 `RELEASE_NOTES.md`는 Git 추적 [릴리스 기록](../releases/NONCOMBAT_EVENTS_RELEASE.md)에서 가져오며 artifacts는 필요 없다. 해당 기록의 옛 수치·schema는 현재 배포 설정이 아니다.
+PokéRogue runtime 전체 hash와 문서·스크립트 입력을 안전하게 검사하려면 `node scripts/package-deploy.mjs --check`를 실행한다. 빌드·복사·서버·DB 작업 없이 검사한다. PokéRogue가 없거나 손상됐으면 `pnpm assets:pokerogue`와 `pnpm assets:pokerogue:verify`를 안내하며 실패한다. 새 clone과 Docker build 전에 Python/Pillow 준비 및 [팩 복원](../assets/POKEROGUE_RESTORE.md)을 완료한다. 패키지의 `RELEASE_NOTES.md`는 Git 추적 [릴리스 기록](../releases/NONCOMBAT_EVENTS_RELEASE.md)에서 가져오며 artifacts는 필요 없다. 해당 기록의 옛 수치·schema는 현재 배포 설정이 아니다.
 
 - 최신 코드를 `pnpm build` 후 패키징한다. 과거 dist 묶음은 현재 코드/데이터를 포함한다고 가정하지 않는다.
 - 코드 지원 DB schema는 46다. 실제 DB 버전은 별도 확인하고 업데이트 전 SQLite backup API로 백업한다.

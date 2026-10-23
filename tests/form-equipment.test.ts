@@ -1,3 +1,4 @@
+import {assertSpriteFiles} from './helpers/runtime-assets';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import Showdown from 'pokemon-showdown';
@@ -14,7 +15,6 @@ import {registerHooks} from 'node:module';
 registerHooks({load(url,context,next){return url.endsWith('.css')?{format:'module',source:'export default {}',shortCircuit:true}:next(url,context);}});
 const {TowerControls}=await import('../src/web/tower-controls');
 import {species,pokemonName} from '../src/web/catalog';
-import {existsSync} from 'node:fs';
 import {pokemonImageSources} from '../src/web/pokemon-image';
 
 test('every playable Gigantamax species receives the player flag and has the matching form sprite',()=>{
@@ -27,7 +27,7 @@ test('every playable Gigantamax species receives the player flag and has the mat
     assert.equal(packed[0].gigantamax,true,gmax);
     assert.ok(species[gmax],gmax);
     assert.deepEqual(species[gmax].types,species[normal].types,gmax);
-    assert.ok(pokemonImageSources(species[gmax].id,false,true,species[gmax].spriteKey).some(path=>existsSync('public'+path)),gmax);
+    assertSpriteFiles(pokemonImageSources(species[gmax].id,false,true,species[gmax].spriteKey),gmax);
   }
 });
 

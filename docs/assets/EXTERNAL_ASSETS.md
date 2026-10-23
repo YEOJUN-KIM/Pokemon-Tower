@@ -4,13 +4,13 @@
 
 ## 현재 파일과 사용처
 
-파일 수·용량에는 해당 그룹의 manifest·고지가 포함된다. 혼합 그룹은 provider별 권리를 하나로 취급하지 않는다. 새 placeholder 외 기존 표의 자산은 모두 추적 상태다.
+파일 수·용량에는 해당 그룹의 manifest·고지가 포함된다. 혼합 그룹은 provider별 권리를 하나로 취급하지 않는다. 아래 표는 기반 조사 결과에 현재 추적 상태를 반영한다. PokéRogue runtime은 독립 복원 검증 후 추적 해제했으며 다른 팩의 추적 정책은 유지한다.
 
 | Provider | 현재 경로 | 분류 | 파일 / MiB | 실제 사용·코드 | source record | Git 추적 | 이동 위험 / 향후 external 위치 |
 |---|---|---|---|---|---|---|---|
 | PokeAPI | `public/vendor/pokeapi` | Pokémon IP | 4648 / 85.310 | 사용; pokemon-sprites / local-pokemon-sprites | `docs/assets/manifests/local-pokemon-sprites.json` | 4648/4648 | 높음; `pokemon-ip/pokeapi` |
 | Showdown sprites | `public/vendor/showdown/pokemon` | Pokémon IP / 커뮤니티 그림 | 1393 / 34.790 | 사용; pixel-sprites / registry | `docs/assets/manifests/pixel-sprite-assets.json` | 1393/1393 | 높음; `pokemon-ip/showdown/pokemon` |
-| PokéRogue | `public/vendor/pokerogue` | Pokémon IP / 파일별 고지 | 2002 / 37.556 | 사용; additional-animations.json → pokemon-sprites | `public/vendor/pokerogue/sources.json` | 2002/2002 | 높음; `pokemon-ip/pokerogue` |
+| PokéRogue | `public/vendor/pokerogue` | Pokémon IP / 파일별 고지 | 2002 / 37.556 | 사용; additional-animations.json → pokemon-sprites | `public/vendor/pokerogue/sources.json` | 0/2002 (복원 필요) | 독립 복원 READY; `pokemon-ip/pokerogue` |
 | Showdown VFX | `public/vendor/showdown/fx` | 명시된 22개 CC0 파일 | 22 / 0.171 | 사용; move-visuals / registry | `docs/assets/manifests/move-effects-integration.json` | 22/22 | 중간; `third-party/showdown-fx` |
 | Showdown / 프로젝트 제작 | `public/sprites/trainers` | 외부 트레이너 + 자체 생성 플레이어 혼합 | 199 / 1.185 | 사용; TrainerPortrait / PlayerMirrorPortrait / CSS | `public/sprites/trainers/sources.json; player-front-source.json` | 199/199 | 높음; `pokemon-ip/showdown/trainers (플레이어 제외)` |
 | Showdown | `public/sprites/gimmicks` | Pokémon IP | 147 / 2.430 | 사용; pokemon-sprites / TeraTypeIcon / registry | `public/sprites/gimmicks/tera/sources.json; docs/assets/manifests/mega-sprite-sources.json` | 147/147 | 높음; `pokemon-ip/showdown/gimmicks` |
@@ -113,7 +113,7 @@ pokemon-showdown@0.11.11은 Dex·BattleStream·TeamValidator·배틀 계산의 �
 
 ### PokéRogue 독립 복원
 
-후속 단계 기준 HEAD `ab7bb36347a3d5ac4261054e8f36036e116ae87e`의 전체 팩을 golden baseline으로 고정하고 [독립 복원 절차](POKEROGUE_RESTORE.md)를 추가했다. 기존 public/vendor/pokerogue의 파일·Git 추적·runtime URL은 그대로 유지한다. `pnpm assets:pokerogue`가 pinned source 다운로드와 변환·전체 검증을 담당하고 `pnpm assets:pokerogue:verify`는 읽기 전용 검증이다. 기존 통합 importer를 복원 명령으로 사용하지 않는다.
+후속 단계 기준 HEAD `ab7bb36347a3d5ac4261054e8f36036e116ae87e`의 전체 팩을 golden baseline으로 고정하고 [독립 복원 절차](POKEROGUE_RESTORE.md)를 추가했다. 후속 추적 해제 단계에서 public/vendor/pokerogue 전체를 ignore하고 Git index에서 제거했다. 로컬 파일과 runtime URL은 유지한다. `pnpm assets:pokerogue`가 pinned source 다운로드와 변환·전체 검증을 담당하고 `pnpm assets:pokerogue:verify`는 읽기 전용 검증이다. 기존 통합 importer를 복원 명령으로 사용하지 않는다.
 
 ## 직접 경로 검색 목록
 
@@ -147,3 +147,17 @@ pokemon-showdown@0.11.11은 Dex·BattleStream·TeamValidator·배틀 계산의 �
 | `src/web/tool-voucher-dialog.tsx` | 직접 참조/기존 adapter (점진적 후속 대상) |
 | `src/web/tower-shop.tsx` | 직접 참조/기존 adapter (점진적 후속 대상) |
 | `src/web/trainer-portrait.tsx` | 직접 참조/기존 adapter (점진적 후속 대상) |
+
+### 새 clone의 PokéRogue 준비
+
+PokéRogue runtime만 Git에서 제외했다. 위 기존 자산 조사표의 나머지 팩 정책은 그대로다. 복원 recipe·고정 source lock·snapshots·golden manifest는 Git에 남는다.
+
+```sh
+pnpm install
+python -m pip install Pillow==12.3.0
+pnpm assets:pokerogue
+pnpm assets:pokerogue:verify
+pnpm dev
+```
+
+일반 unit test와 개발 빌드는 이 팩 없이 가능하다. 이미지 누락 시 기존 fallback을 사용한다. asset integration/E2E와 배포 전에는 복원·verify를 실행한다. package-deploy의 --check 및 실제 패키징, Docker build는 전체 팩 무결성을 요구한다. [상세 절차](POKEROGUE_RESTORE.md)를 따른다.

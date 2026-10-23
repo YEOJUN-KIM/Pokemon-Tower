@@ -1,6 +1,6 @@
+import {assertSpriteFiles} from './helpers/runtime-assets';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync} from 'node:fs';
 import {pokedexEntries} from '../src/server/pokedex-entries';
 import {selectedPokedexEntry} from '../src/web/pokedex-data';
 import {familyForms,baseFormName} from '../src/data/selectable-forms';
@@ -13,7 +13,7 @@ test('every selectable family form keeps its collection name and renders its own
   assert.equal(shown.name,entry.name);assert.equal(shown.id,entry.id);
   assert.equal(shown.species,forme);assert.deepEqual(shown.types,data.displayTypes);assert.deepEqual(shown.baseStats,data.baseStats);
   const sources=pokemonImageSources(entry.id,false,true,species[shown.species].spriteKey??entry.id);
-  assert.ok(sources.some(path=>existsSync('public'+path)),forme);
+  assertSpriteFiles(sources,forme);
  }
 });
 
@@ -27,5 +27,5 @@ test('Urshifu is named generically in the dex but both styles have named normal 
  assert.equal(single.name,'거다이맥스 우라오스 일격의 태세');assert.deepEqual(single.types,['격투','악']);
  assert.equal(gmax.name,'거다이맥스 우라오스 연격의 태세');assert.deepEqual(gmax.types,['격투','물']);
  assert.notEqual(single.spriteKey,gmax.spriteKey);
- for(const preview of [single,gmax])assert.ok(pokemonImageSources(entry.id,false,false,preview.spriteKey).some(path=>existsSync('public'+path)));
+ for(const preview of [single,gmax])assertSpriteFiles(pokemonImageSources(entry.id,false,false,preview.spriteKey));
 });

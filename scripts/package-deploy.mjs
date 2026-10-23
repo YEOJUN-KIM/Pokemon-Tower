@@ -1,11 +1,20 @@
 import {cp, mkdir, access, readFile, writeFile, lstat, readdir, readlink} from 'node:fs/promises';
 import {resolve, basename, relative, dirname} from 'node:path';
+import {loadDefinition} from './assets/pokerogue/common.mjs';
+import {verifyOutput} from './assets/pokerogue/verify.mjs';
+
+const {manifest} = await loadDefinition();
+const assets = await verifyOutput(resolve('public/vendor/pokerogue'), manifest);
+if (!assets.ok) {
+  console.error(`PokéRogue runtime pack is not ready: ${assets.missing.length} missing, ${assets.extra.length} extra, ${assets.mismatched.length} mismatched. Run pnpm assets:pokerogue, then pnpm assets:pokerogue:verify before deployment.`);
+  process.exit(1);
+}
 
 const releaseNotes='docs/releases/NONCOMBAT_EVENTS_RELEASE.md';
 await access(releaseNotes);
 if(process.argv.includes('--check')) {
   await Promise.all(['docs/operations/DEPLOYMENT.md','docs/operations/ACCOUNTS.md','docs/references/THIRD_PARTY.md',releaseNotes,'scripts/backup-db.mjs','scripts/import-save.mjs','scripts/start-deploy.mjs'].map(file=>access(file)));
-  console.log('Deployment document and script inputs OK; no build, copy, server or database changes.');
+  console.log(`Deployment PokéRogue pack (${assets.matching} hashes), document and script inputs OK; no build, copy, server or database changes.`);
   process.exit(0);
 }
 await access('.next/standalone/server.js');

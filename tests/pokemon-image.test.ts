@@ -5,6 +5,7 @@ import {pokedexEntries} from '../src/server/pokedex-entries';
 import {species,spriteUrl} from '../src/web/catalog';
 import {pixelSprites,pixelSpriteSources} from '../src/data/pixel-sprites';
 import {readFileSync} from 'node:fs';
+import {inspectPublicAsset as inspectAsset} from './helpers/runtime-assets';
 import {resolve} from 'node:path';
 import additional from '../src/data/additional-animations.json' with {type:'json'};
 const extra=additional as Record<string,Partial<Record<'front'|'back'|'shinyFront'|'shinyBack',{gif:string;png:string}>>>;
@@ -52,6 +53,7 @@ test('every modern archive species uses available pixel animation independently 
 test('all modern dex orientations resolve to actual local PNG or GIF files',()=>{
   for(const entry of pokedexEntries().filter(entry=>entry.id>=650))for(const back of [false,true]) {
     for(const url of pokemonImageSources(entry.id,back,true)) {
+      if(!inspectAsset(url))continue;
       const bytes=readFileSync(resolve('public',url.slice(1)));
       if(url.endsWith('.gif'))assert.equal(bytes.subarray(0,4).toString(),'GIF8',url);
       else assert.equal(bytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a',url);
@@ -67,6 +69,7 @@ test('all playable, shiny and preview images resolve locally without external fa
       assert.ok(sources.length,`${entry.species}/${spriteKey}/${back}/${shiny}`);
       for(const url of sources) {
         assert.ok(url.startsWith('/'),url);
+        if(!inspectAsset(url))continue;
         const bytes=readFileSync(resolve('public',url.slice(1)));
         if(url.endsWith('.gif'))assert.equal(bytes.subarray(0,4).toString(),'GIF8',url);
         else assert.equal(bytes.subarray(0,8).toString('hex'),'89504e470d0a1a0a',url);
@@ -75,7 +78,7 @@ test('all playable, shiny and preview images resolve locally without external fa
     for(const back of [false,true]) {
       const url=spriteUrl(entry.species,back);
       assert.ok(url.startsWith('/'),url);
-      assert.ok(readFileSync(resolve('public',url.slice(1))).length>0,url);
+      if(inspectAsset(url))assert.ok(readFileSync(resolve('public',url.slice(1))).length>0,url);
     }
   }
 });
@@ -83,6 +86,6 @@ test('all playable, shiny and preview images resolve locally without external fa
  test('all battle species and mega forms avoid model-rendered GIF fallbacks',()=>{
  const forms=JSON.parse(readFileSync('src/data/mega-forms.json','utf8'));
  for(const entry of pokedexEntries())for(const back of [false,true])for(const url of pokemonImageSources(entry.id,back,true,species[entry.species]?.spriteKey ?? entry.id))assert.ok(!url.includes('other/showdown/'),url);
- for(const form of Object.values(forms) as {id:number;spriteKey:string}[])for(const back of [false,true])for(const url of pokemonImageSources(form.id,back,true,form.spriteKey)){assert.ok(!url.includes('other/showdown/'),url);assert.ok(url.startsWith('/sprites/gimmicks/')||url.startsWith('/vendor/pokerogue/pokemon/')||url.startsWith('/vendor/showdown/pokemon/gen5')||url.startsWith('/vendor/pokeapi/pokemon/'),url);const data=readFileSync(resolve('public',url.slice(1)));assert.ok(data.length>100);}
+ for(const form of Object.values(forms) as {id:number;spriteKey:string}[])for(const back of [false,true])for(const url of pokemonImageSources(form.id,back,true,form.spriteKey)){assert.ok(!url.includes('other/showdown/'),url);assert.ok(url.startsWith('/sprites/gimmicks/')||url.startsWith('/vendor/pokerogue/pokemon/')||url.startsWith('/vendor/showdown/pokemon/gen5')||url.startsWith('/vendor/pokeapi/pokemon/'),url);if(inspectAsset(url)){const data=readFileSync(resolve('public',url.slice(1)));assert.ok(data.length>100);}}
  const sources=JSON.parse(readFileSync('docs/assets/manifests/mega-sprite-sources.json','utf8')).sources;for(const row of sources)if(row.path.endsWith('.gif'))assert.match(row.url,/\/gen5ani(?:-back)?\//);
  });

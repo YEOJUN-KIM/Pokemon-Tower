@@ -37,7 +37,8 @@ pokemon-backups/
 .codex-remote-attachments/
 
 # Future optional external originals and generated runtime copies.
-# Existing public/vendor assets remain tracked until reproduction is verified.
+# Other public/vendor packs remain tracked until reproduction is verified.
+/public/vendor/pokerogue/
 /external/pokemon-ip/*
 !/external/pokemon-ip/README.md
 /external/user-provided/unverified/*

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp, writeFile, readFile, readdir, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
+import {spawnSync} from 'node:child_process';
 import {sha256, safeRelative, cliOptions, loadDefinition} from '../scripts/assets/pokerogue/common.mjs';
 import {sourceBytes} from '../scripts/assets/pokerogue/download.mjs';
 import {verifyOutput, requireVerified} from '../scripts/assets/pokerogue/verify.mjs';
@@ -10,6 +11,19 @@ import {restore, convert} from '../scripts/assets/pokerogue/restore.mjs';
 
 const temporary = () => mkdtemp(path.join(tmpdir(), 'tower-pokerogue-test-'));
 const entry = (file:string, value:Buffer, text=false) => ({path:file,bytes:value.length,sha256:sha256(value),...(text?{text:true}:{})});
+
+test('deployment check and packaging fail before copying when the runtime pack is absent',async()=>{
+  const dir=await temporary();
+  try{
+    for(const args of [[],['--check']]){
+      const result=spawnSync(process.execPath,[path.resolve('scripts/package-deploy.mjs'),...args],{cwd:dir,encoding:'utf8'});
+      assert.equal(result.status,1,result.stderr);
+      assert.match(result.stderr,/2002 missing/);
+      assert.match(result.stderr,/pnpm assets:pokerogue/);
+      assert.deepEqual(await readdir(dir),[]);
+    }
+  }finally{await rm(dir,{recursive:true,force:true});}
+});
 
 test('verifier reports missing, extra and damaged files; only text permits CRLF normalization',async()=>{
   const dir=await temporary();

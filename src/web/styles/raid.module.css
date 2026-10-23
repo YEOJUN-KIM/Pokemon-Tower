@@ -1,6 +1,6 @@
 .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;text-align:center;color:#eef6ff;z-index:4;}
 .scene h2{font-size:clamp(18px,3vw,25px);margin:0;text-shadow:0 2px 5px #091321;}
-.scene p{margin:0;}.scene strong{font-size:14px;color:#f3d897;}
+.scene p{margin:0;}.scene strong{font-size:var(--text-md);color:#f3d897;}
 .victory{background:radial-gradient(ellipse at center,#182a4580,transparent 70%);}
 .victoryMark{font-size:72px;color:#f3d897;filter:drop-shadow(0 0 16px #f3c55c70);line-height:1.3;}
 .art{position:relative;width:200px;height:190px;display:grid;place-items:center;isolation:isolate;}
@@ -12,6 +12,6 @@
 @media(prefers-reduced-motion:reduce){.aura{animation:none;}}
 
 .encounter.encounter{inset:auto;left:var(--far-x,75%);bottom:var(--far-ground,36%);width:240px;max-width:45%;padding:0;transform:translateX(-50%);gap:5px;pointer-events:none;}
-.encounter.encounter h2{font-size:16px;}
-.encounter.encounter p,.encounter.encounter strong{font-size:12px;}
-@media(max-width:760px){.encounter.encounter{width:170px;gap:3px;}.encounter.encounter h2{font-size:12px;}.encounter.encounter p,.encounter.encounter strong{font-size:10px;}}
+.encounter.encounter h2{font-size:var(--text-lg);}
+.encounter.encounter p,.encounter.encounter strong{font-size:var(--text-sm);}
+@media(max-width:760px){.encounter.encounter{width:170px;gap:3px;}.encounter.encounter h2{font-size:var(--text-sm);}.encounter.encounter p,.encounter.encounter strong{font-size:var(--text-xs);}}

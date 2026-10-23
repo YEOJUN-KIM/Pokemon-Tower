@@ -2,49 +2,49 @@
 :global(html):has(:where(.scope).screen),:global(body):has(:where(.scope).screen) {overflow:hidden;overscroll-behavior:none;}
 .screen.screen.screen {box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:60px minmax(0,1fr) 48px;gap:12px 16px;width:min(1360px,100%);height:100dvh;min-height:0;margin:0 auto;padding:12px 24px 8px;overflow:hidden;}
 :where(.scope).screen :global(.permanent-page-header) {grid-row:1;grid-column:1;padding:8px 0;border:0;min-width:0;}
-:where(.scope).screen :global(.permanent-page-header h1) {font-size:24px;}
-:where(.scope).screen :global(.permanent-wallet) {grid-row:1;grid-column:2;padding:8px 0;gap:12px;white-space:nowrap;font-size:12px;}
-:where(.scope).screen :global(.permanent-wallet strong) {font-size:22px;}
+:where(.scope).screen :global(.permanent-page-header h1) {font-size:var(--text-3xl);}
+:where(.scope).screen :global(.permanent-wallet) {grid-row:1;grid-column:2;padding:8px 0;gap:12px;white-space:nowrap;font-size:var(--text-sm);}
+:where(.scope).screen :global(.permanent-wallet strong) {font-size:var(--text-title);}
 :where(.scope).screen :global(.permanent-error) {position:absolute;z-index:2;left:24px;right:24px;top:74px;padding:10px;border:1px solid #c98c7a;background:#352b34;color:#fff3dc;}
 .station.station {grid-row:2;grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto auto auto;align-items:stretch;justify-items:center;gap:14px;min-width:0;min-height:0;margin:0;padding:0 0 8px;border:0;border-radius:0;background:transparent;}
 .machineSide {position:relative;display:grid;place-items:center;container-type:size;width:100%;height:100%;min-width:0;min-height:0;}
 :where(.scope) .machine.machine.machine {width:min(500px,100cqw,calc(100cqh * 1122 / 1402));height:auto;aspect-ratio:1122/1402;max-width:100%;flex:none;margin:0;}
 :where(.scope) .machine :global(.egg-machine-art) {display:block;width:100%;height:100%;object-fit:contain;}
-.spinning {position:absolute;bottom:0;padding:6px 12px;background:#29353de6;color:#fff1ce;font-size:12px;}
-.priceInfo.priceInfo {margin:0;font-size:13px;line-height:1.5;color:#d1ded7;text-align:center;}
+.spinning {position:absolute;bottom:0;padding:6px 12px;background:#29353de6;color:#fff1ce;font-size:var(--text-sm);}
+.priceInfo.priceInfo {margin:0;font-size:var(--text-body);line-height:1.5;color:#d1ded7;text-align:center;}
 .draws {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;width:min(640px,100%);}
 .scope.screen .draws button {box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;min-height:80px!important;padding:12px!important;gap:10px!important;text-align:center;}
-.draws strong {font-size:20px;font-weight:400;}
-.draws span {font-size:13px;color:#e7dcbb;}
+.draws strong {font-size:var(--text-2xl);font-weight:400;}
+.draws span {font-size:var(--text-body);color:#e7dcbb;}
 .rewards {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:min(640px,100%);}
 .rewards:empty {display:none;}
 .rewards:has(>button:only-child) {grid-template-columns:minmax(0,1fr);}
-.scope.screen .rewards button {box-sizing:border-box;min-height:32px!important;padding:5px 8px!important;font-size:11px;text-align:center;line-height:1.5;word-break:keep-all;}
+.scope.screen .rewards button {box-sizing:border-box;min-height:32px!important;padding:5px 8px!important;font-size:var(--text-caption);text-align:center;line-height:1.5;word-break:keep-all;}
 .footerActions {display:flex;align-items:center;gap:10px;white-space:nowrap;}
-.scope .footerActions button,.scope .footerActions a {min-height:24px;margin:0;padding:3px 8px;color:#dce5d9;font:inherit;font-size:11px;text-decoration:none;}
+.scope .footerActions button,.scope .footerActions a {min-height:24px;margin:0;padding:3px 8px;color:#dce5d9;font:inherit;font-size:var(--text-caption);text-decoration:none;}
 .footerActions kbd {margin-right:6px;}
 .scope.screen .station {padding-bottom:44px;}
-.scope.screen .oddsButton.oddsButton.oddsButton {border:0!important;background:transparent!important;box-shadow:none!important;color:#e4ede4!important;position:fixed;right:max(24px,calc((100vw - 1360px)/2 + 24px));bottom:64px;min-height:32px;padding:6px 0;font-size:16px;}
+.scope.screen .oddsButton.oddsButton.oddsButton {border:0!important;background:transparent!important;box-shadow:none!important;color:#e4ede4!important;position:fixed;right:max(24px,calc((100vw - 1360px)/2 + 24px));bottom:64px;min-height:32px;padding:6px 0;font-size:var(--text-lg);}
 .oddsButton kbd {margin-right:8px;font:inherit;color:#a7c9b8;}
 .scope.screen .oddsButton.oddsButton.oddsButton:hover {color:#f4dfad!important;}
 :where(.scope).screen :global(footer.dex-bottom .game-menu-footer) {min-height:0;padding:0!important;margin:0!important;border:0!important;}
 @media(max-width:600px) {
  .screen.screen.screen {grid-template-rows:48px minmax(0,1fr) 68px;gap:8px 12px;padding:8px 12px;}
- :where(.scope).screen :global(.permanent-page-header h1) {font-size:20px;}
- :where(.scope).screen :global(.permanent-wallet) {font-size:10px;gap:7px;}
- :where(.scope).screen :global(.permanent-wallet strong) {font-size:19px;}
+ :where(.scope).screen :global(.permanent-page-header h1) {font-size:var(--text-2xl);}
+ :where(.scope).screen :global(.permanent-wallet) {font-size:var(--text-xs);gap:7px;}
+ :where(.scope).screen :global(.permanent-wallet strong) {font-size:var(--text-title-sm);}
  .station.station {gap:10px;padding-bottom:4px;}
- .priceInfo.priceInfo {font-size:11px;}
- .draws {gap:10px;}.scope.screen .draws button {min-height:68px!important;padding:8px!important;gap:8px!important;}.draws strong {font-size:17px;}.draws span {font-size:11px;}
- .scope.screen .rewards button {font-size:10px;padding:4px!important;}
+ .priceInfo.priceInfo {font-size:var(--text-caption);}
+ .draws {gap:10px;}.scope.screen .draws button {min-height:68px!important;padding:8px!important;gap:8px!important;}.draws strong {font-size:var(--text-subtitle);}.draws span {font-size:var(--text-caption);}
+ .scope.screen .rewards button {font-size:var(--text-xs);padding:4px!important;}
  :where(.scope).screen :global(footer.dex-bottom) {height:68px!important;display:grid!important;grid-template-columns:1fr;grid-template-rows:24px minmax(0,1fr);gap:2px!important;}
- .footerActions {justify-content:center;gap:5px;}.scope .footerActions button,.scope .footerActions a {font-size:10px;padding:2px 4px;}
- .scope.screen .oddsButton.oddsButton.oddsButton {right:12px;bottom:84px;font-size:14px;}
+ .footerActions {justify-content:center;gap:5px;}.scope .footerActions button,.scope .footerActions a {font-size:var(--text-xs);padding:2px 4px;}
+ .scope.screen .oddsButton.oddsButton.oddsButton {right:12px;bottom:84px;font-size:var(--text-md);}
 }
 @media(max-height:600px) {
  .screen.screen.screen {grid-template-rows:40px minmax(0,1fr) 48px;gap:6px 12px;padding:6px 12px;}
- .station.station {gap:6px;padding:0;}.priceInfo.priceInfo {font-size:11px;}
- .scope.screen .draws button {min-height:50px!important;padding:5px!important;gap:5px!important;}.draws strong {font-size:16px;}.draws span {font-size:11px;}
- .scope.screen .rewards button {min-height:26px!important;padding:3px!important;font-size:10px;}
+ .station.station {gap:6px;padding:0;}.priceInfo.priceInfo {font-size:var(--text-caption);}
+ .scope.screen .draws button {min-height:50px!important;padding:5px!important;gap:5px!important;}.draws strong {font-size:var(--text-lg);}.draws span {font-size:var(--text-caption);}
+ .scope.screen .rewards button {min-height:26px!important;padding:3px!important;font-size:var(--text-xs);}
 }
 @media(max-width:600px) and (max-height:600px) {.screen.screen.screen {grid-template-rows:40px minmax(0,1fr) 68px;}}

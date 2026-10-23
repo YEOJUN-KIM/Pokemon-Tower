@@ -9,21 +9,21 @@
 .glow {position:absolute;inset:0;background:radial-gradient(ellipse,#b3dbd81c,transparent 70%);}
 .artwork[data-opened=true] .glow {background:radial-gradient(ellipse,#ffeab066,transparent 70%);animation:chest-glow .9s ease-out;}
 .stars {position:absolute;inset:0;z-index:2;}
-.stars i {position:absolute;font-style:normal;color:#fce4a4;font-size:25px;animation:chest-star 1.4s ease-out both;}
+.stars i {position:absolute;font-style:normal;color:#fce4a4;font-size:var(--text-3xl);animation:chest-star 1.4s ease-out both;}
 .stars i:nth-child(1) {left:20%;top:10%;}
 .stars i:nth-child(2) {right:20%;top:24%;animation-delay:.1s;}
 .stars i:nth-child(3) {left:15%;top:50%;animation-delay:.2s;}
 .stars i:nth-child(4) {right:17%;top:65%;animation-delay:.3s;}
-.scene small {color:#aec5cf;font-size:11px;}
-.scene h2 {margin:8px 0 10px;font-size:18px;line-height:1.5;}
-.description {margin:0;color:#c7d7dc;font-size:14px;line-height:1.8;word-break:keep-all;overflow-wrap:anywhere;}
-.reward {position:absolute;z-index:3;bottom:-8px;padding:8px 16px;border:1px solid #d7b86b;border-radius:6px;background:#2d3f41;color:#ffe5a3;font-size:16px;}
+.scene small {color:#aec5cf;font-size:var(--text-caption);}
+.scene h2 {margin:8px 0 10px;font-size:var(--text-xl);line-height:1.5;}
+.description {margin:0;color:#c7d7dc;font-size:var(--text-md);line-height:1.8;word-break:keep-all;overflow-wrap:anywhere;}
+.reward {position:absolute;z-index:3;bottom:-8px;padding:8px 16px;border:1px solid #d7b86b;border-radius:6px;background:#2d3f41;color:#ffe5a3;font-size:var(--text-lg);}
 .scope.bottom {min-height:0;overflow:auto;display:flex;flex-direction:column;gap:8px;}
 .bottom .actions {height:auto;flex:1;}
 .bottom[data-event-step=choices] .actions {justify-content:flex-start;overflow:auto;}
 .bottom:not([data-event-step=choices]) .actions {flex:0 0 auto;align-self:flex-end;min-width:190px;}
 .scope.actions {height:auto;display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:8px;}
-.scope.actions .choice {display:flex;align-items:center;gap:12px;flex:0 0 auto;min-height:44px;padding:6px 64px 6px 12px;border:0!important;border-radius:0;background:transparent!important;outline:none!important;box-shadow:none!important;filter:none!important;transform:none!important;color:#bdd1d5;font:inherit;font-size:22px;font-weight:700;line-height:1.4;text-align:left;cursor:pointer;}
+.scope.actions .choice {display:flex;align-items:center;gap:12px;flex:0 0 auto;min-height:44px;padding:6px 64px 6px 12px;border:0!important;border-radius:0;background:transparent!important;outline:none!important;box-shadow:none!important;filter:none!important;transform:none!important;color:#bdd1d5;font:inherit;font-size:var(--text-title);font-weight:700;line-height:1.4;text-align:left;cursor:pointer;}
 .pointer {display:inline-block;flex:0 0 20px;font-family:monospace;color:#f4e5ac;opacity:0;transform:translateX(-4px);transition:opacity .12s ease,transform .12s ease;}
 .label {display:inline-block;min-width:0;white-space:normal;word-break:keep-all;overflow-wrap:anywhere;transform-origin:left center;transition:transform .12s ease,color .12s ease;}
 .scope.actions .choice:is([data-game-cursor=true],:active) .pointer {opacity:1;}
@@ -37,10 +37,10 @@
  .artwork {inset:0 0 154px;}
  .object {width:200px;height:175px;}
  .chest {width:180px;height:155px;}
- .scene h2 {font-size:16px;margin:6px 0 8px;}
- .description {font-size:12px;}
+ .scene h2 {font-size:var(--text-lg);margin:6px 0 8px;}
+ .description {font-size:var(--text-sm);}
  .scope.actions {gap:4px;}
- .scope.actions .choice {min-height:40px;padding:4px 28px 4px 10px;font-size:18px;}
+ .scope.actions .choice {min-height:40px;padding:4px 28px 4px 10px;font-size:var(--text-xl);}
 }
 @keyframes chest-glow {from {opacity:0;transform:scale(.5);} to {opacity:1;transform:scale(1);}}
 @keyframes chest-star {0%,100% {opacity:0;transform:translateY(8px) scale(.3);} 35% {opacity:1;transform:translateY(-8px) scale(1);}}
@@ -58,16 +58,16 @@
 @media (prefers-reduced-motion: reduce) {.scope .ambushNotice {animation:none;opacity:1;transform:none;}}
 
 .scope .managementDoor {position:relative;width:130px;height:190px;border:8px solid #51616b;background:linear-gradient(105deg,#07141b 70%,#aa916666);box-shadow:10px 10px 0 #07141b66;}
-.managementDoor span {display:block;padding:8px;text-align:center;background:#283b45;color:#d7e3e8;font-size:14px;}
+.managementDoor span {display:block;padding:8px;text-align:center;background:#283b45;color:#d7e3e8;font-size:var(--text-md);}
 .managementDoor i {position:absolute;inset:42px 22px 0 0;background:linear-gradient(100deg,#687a81,#293d49);transform:skewY(-7deg);transform-origin:left;}
 
 
 /* Rocket choices share one compact row, without a second nested scroll area. */
 .scope.bottom[data-villain=true] {gap:4px;}
 .bottom[data-villain=true][data-event-step=choices] .actions {flex:0 0 auto;flex-direction:row;flex-wrap:wrap;gap:4px;overflow:visible;}
-.bottom[data-villain=true] .actions .choice {min-height:44px;padding:4px 14px 4px 8px;font-size:18px;}
+.bottom[data-villain=true] .actions .choice {min-height:44px;padding:4px 14px 4px 8px;font-size:var(--text-xl);}
 :global(body) :where(.scope).bottom[data-villain=true] :global(.game-dialogue.current-messages) {min-height:0;flex:0 0 auto;margin:0;padding:4px 12px 12px;}
-:global(body) :where(.scope).bottom[data-villain=true] :global(.game-dialogue.current-messages p.latest) {font-size:20px;line-height:1.5;}
+:global(body) :where(.scope).bottom[data-villain=true] :global(.game-dialogue.current-messages p.latest) {font-size:var(--text-2xl);line-height:1.5;}
 
 /* Event choices already use a pointer; preserve that paint above the shared hover/cursor rules. */
 :global(body) :where(.scope).actions.actions.actions .choice.choice {border:0!important;background:transparent!important;outline:none!important;box-shadow:none!important;}
@@ -79,7 +79,7 @@
 @media(max-width:760px){
  :global(body) :where(.scope).artwork.artwork {width:180px;height:175px;}
  :where(.scope).scene.scene {top:8px;left:8px;width:43%;padding:10px;max-height:48%;}
- :where(.scope).scene.scene h2 {font-size:13px;line-height:1.4;}
- :where(.scope).scene.scene .description {font-size:10px;line-height:1.5;}
+ :where(.scope).scene.scene h2 {font-size:var(--text-body);line-height:1.4;}
+ :where(.scope).scene.scene .description {font-size:var(--text-xs);line-height:1.5;}
  .npc {width:135px;height:155px;}
 }

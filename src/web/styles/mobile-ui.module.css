@@ -34,7 +34,7 @@
     overflow: auto;
   }
   :global(body) :where(.scope) :global(.recruit-dialog[data-testid=recruit-confirmation]>h2) {
-    font-size: 21px;
+    font-size: var(--text-2xl);
     margin: 10px 0 14px;
     word-break: keep-all;
   }
@@ -47,7 +47,7 @@
     height: 88px;
   }
   :global(body) :where(.scope) :global(.recruit-dialog[data-testid=recruit-confirmation]>p) {
-    font-size: 14px;
+    font-size: var(--text-md);
     line-height: 1.6;
     margin: 12px 0;
     word-break: keep-all;
@@ -57,7 +57,7 @@
     padding: 12px;
   }
   :global(body) :where(.scope) :global(.recruit-dialog[data-testid=recruit-confirmation] .recruit-moves-summary h3) {
-    font-size: 14px;
+    font-size: var(--text-md);
     margin: 0 0 10px;
     text-align: left;
   }
@@ -67,7 +67,7 @@
   }
   :global(body) :where(.scope) :global(.recruit-dialog[data-testid=recruit-confirmation] .collected-moves>span) {
     padding: 6px 8px;
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   :global(body) :where(.scope) :global(:is(.dex-control-hints,.battle-keyboard-hints,.skip-motion,.keyboard-shortcut)) {
     display: none!important;
@@ -99,7 +99,7 @@
     z-index: 8;
     min-height: 28px;
     padding: 4px 10px;
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-grid) {
     width: 100%;
@@ -141,10 +141,10 @@
   }
   :global(body) :where(.scope) :global(.mobile-move-tooltip h2) {
     margin: 0 0 14px;
-    font-size: 18px;
+    font-size: var(--text-xl);
   }
   :global(body) :where(.scope) :global(.mobile-move-tooltip p) {
-    font-size: 14px;
+    font-size: var(--text-md);
     line-height: 1.7;
     word-break: keep-all;
   }

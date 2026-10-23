@@ -1,3 +1,4 @@
+import {orderBattlePresentationEvents,isBeforeMoveAbility} from './battle-event-order';
 import {applyPublicTypes} from './battle-types';
 import {dynamaxDisplaySpecies} from '../data/selectable-forms';
 import {genderFromDetails} from '../data/gender';
@@ -50,22 +51,11 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
   let lastNotice = '';
   let impact:Motion['impact'];
   const consumed=new Set<number>();
-  const lines=[...newLines(before.messages,after.messages)];
+  const lines=orderBattlePresentationEvents(newLines(before.messages,after.messages));
   // Presentation only: critical feedback precedes effectiveness; stored logs stay intact.
   for(let index=0;index<lines.length-1;index++){
     const first=lines[index].split('|'),next=lines[index+1].split('|');
     if(['-supereffective','-resisted'].includes(first[1])&&next[1]==='-crit'&&first[2]===next[2])[lines[index],lines[index+1]]=[lines[index+1],lines[index]];
-  }
-  // Show pre-attack activation before the attack animation, even though the
-  // engine announces the move first. Battle mechanics and saved logs stay intact.
-  for(let index=0;index<lines.length;index++){
-    const [,event,actor]=lines[index].split('|');
-    if(event!=='move')continue;
-    const change=lines[index+1];
-    if(change?.startsWith(`|-start|${actor}|typechange|`) && /\[from\] ability: (Protean|Libero)(\||$)/.test(change)){
-      [lines[index],lines[index+1]]=[change,lines[index]];
-      index++;
-    }
   }
   for (const [index,line] of lines.entries()) {
     if(consumed.has(index))continue;
@@ -112,9 +102,10 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
     const absorbs = event === '-heal' && candidate && ['Water Absorb','Volt Absorb'].includes(candidate.name);
     const changesState=['-damage','-heal','-boost','-unboost','-setboost','-status','-curestatus','-cureteam','-start','-end','-weather','-fieldstart','-fieldend'].includes(event);
     const activationFirst=!!notice && (changesState||['-immune','-fail','-block'].includes(event)) && !absorbs;
-    if(activationFirst)frames.push({view:structuredClone(view),motion:null,notice,duration:1200});
+    const activationAnnouncement=notice&&notice.kind==='ability'&&isBeforeMoveAbility(notice.name)?`${notice.side==='enemy'?'상대 ':''}${pokemonName(notice.actor.split(': ')[1])}의 ${notice.label}!`:undefined;
+    if(activationFirst)frames.push({view:structuredClone(view),motion:null,notice,announcement:activationAnnouncement,duration:1200});
     if(absorbs && notice) {
-      frames.push({view:structuredClone(view),motion:null,notice,duration:1200});
+      frames.push({view:structuredClone(view),motion:null,notice,announcement:activationAnnouncement,duration:1200});
     }
     view.messages = [...view.messages, line].slice(-300);
     view.field=advanceField(view.field ?? emptyField(),line);
@@ -206,7 +197,7 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
     const motionDuration = motion?.kind === 'dynamax-grow' ? 1150 : motion?.kind === 'dynamax-end' ? 600 : motion?.kind === 'switch' ? (motion.sendOut && (view.opponent?.shiny || view.team.find(p=>p.active)?.shiny) ? 1400 : 800) : motion?.kind === 'move' ? moveAnimationPlan(motion.move ?? '',motion.color).duration : motion?.kind === 'hit' ? 360 : motion ? 220 : 0;
     const dialogue=dialogueTextForLine(line,describeLine(line)??'');
     const messageDuration=candidate ? dialogue?750:0 : describeLine(line)||dialogue?750:0;
-    frames.push({view, motion, notice:absorbs || activationFirst ? undefined : notice, announcement:typeAnnouncement,important:importantBattleLine(line), duration:Math.max(motionDuration, typeAnnouncement ? 750 : notice && !absorbs && !activationFirst ? 1200 : messageDuration)});
+    frames.push({view, motion, notice:absorbs || activationFirst ? undefined : notice, announcement:typeAnnouncement??(notice&&!activationFirst&&!absorbs&&!dialogue?activationAnnouncement:undefined),important:importantBattleLine(line), duration:Math.max(motionDuration, typeAnnouncement ? 750 : notice && !absorbs && !activationFirst ? 1200 : messageDuration)});
   }
   return frames;
 }

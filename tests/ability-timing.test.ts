@@ -67,6 +67,7 @@ test(`${ability}: real engine activation plays before attack and persists across
     assert.deepEqual(changed.messages,protocol);
     const activation=frames.findIndex(f=>f.notice?.name===ability),attack=frames.findIndex(f=>f.motion?.move===move);
     assert.ok(activation>=0 && attack>activation);
+    assert.match(frames[activation].announcement??'',ability==='Libero'?/리베로/:/변환자재/);
     assert.deepEqual(currentTypes(frames[activation].view.team.find(p=>p.active)!),species==='Meowscarada'?['Grass','Dark']:['Fire']);
     assert.deepEqual(currentTypes(frames[activation+1].view.team.find(p=>p.active)!),[type]);
     assert.deepEqual(currentTypes(frames[attack].view.team.find(p=>p.active)!),[type]);

@@ -17,14 +17,14 @@
   gap: 18px;
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card h1) {
-  font-size: 22px;
+  font-size: var(--text-title);
   margin: 0;
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card h2) {
-  font-size: 15px;
+  font-size: var(--text-button);
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card p) {
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.8;
   margin: 0;
   word-break: keep-all;
@@ -46,19 +46,19 @@
   gap: 16px;
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card label) {
-  font-size: 13px;
+  font-size: var(--text-body);
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card input) {
   width: 100%;
   padding: 12px;
-  font: 16px Arial,sans-serif;
+  font: var(--text-lg) Arial,sans-serif;
   color: #243e31;
   background: #fff;
   border: 1px solid #93ac9b;
   border-radius: 6px;
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card small),:where(.scope[data-ui-screen="account"]) :global(.account-note) {
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card .primary-button),:where(.scope[data-ui-screen="account"]) :global(.account-card>a) {
   text-align: center;
@@ -72,7 +72,7 @@
   border-radius: 8px;
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-recovery code) {
-  font: 15px monospace;
+  font: var(--text-button) monospace;
   overflow-wrap: anywhere;
   user-select: all;
 }
@@ -87,6 +87,6 @@
     padding: 20px;
   }
   :where(.scope[data-ui-screen="account"]) :global(.account-card h1) {
-    font-size: 19px;
+    font-size: var(--text-title-sm);
   }
 }

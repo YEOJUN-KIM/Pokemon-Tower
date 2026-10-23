@@ -17,7 +17,7 @@
  display:grid;
  margin:0;
  padding:0;
- font-size:26px;
+ font-size:var(--text-dialogue);
  font-weight:700;
  line-height:1.5;
  color:#edf8fa;
@@ -29,8 +29,8 @@
 
 .dialogue .text>span {grid-area:1 / 1;}
 :global(body) :where(.scope).dialogue:global(.game-dialogue.current-messages)[data-tone="critical"] :global(p.latest).text {color:#efd27a;}
-.dialogue .caret {position:absolute;right:12px;bottom:9px;color:#91c9c4;font-size:13px;line-height:1;pointer-events:none;}
+.dialogue .caret {position:absolute;right:12px;bottom:9px;color:#91c9c4;font-size:var(--text-body);line-height:1;pointer-events:none;}
 @media(max-width:760px) {
  :global(body) :where(.scope).dialogue:global(.game-dialogue.current-messages) {min-height:82px;padding:12px 23px 12px 14px;margin-top:7px;}
- :global(body) :where(.scope).dialogue:global(.game-dialogue.current-messages) :global(p.latest).text {font-size:20px;}
+ :global(body) :where(.scope).dialogue:global(.game-dialogue.current-messages) :global(p.latest).text {font-size:var(--text-2xl);}
 }

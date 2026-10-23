@@ -1,3 +1,4 @@
+import {battleCoinReward} from '../data/economy';
 import {npcAi} from '../data/npc-ai';
 import {HiddenBossEvents,hiddenBossEligible,hasHiddenBoss} from './hidden-boss-events';
 import {VillainCampaigns} from './villain-campaigns';
@@ -448,7 +449,7 @@ export class TowerStore {
     // Pending snapshots without an AI version predate tiers and retain their old policy.
     const aiVersion=special?.aiVersion??(progression==='legacy'?'tower-policy-v9':special?'tower-policy-v10':rankedChallenger?(rankedChallenger.aiVersion??'tower-policy-v10'):AI_VERSION);
     this.db.prepare(`INSERT INTO battles(id, run_id, floor, player_team, opponent_team, seed, engine_version, format, ai_version, status, reward, candidates, boss, stage,attempt,encounter_order)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, (SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id, runId, floor, packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band')), packTeam(opponents,opponentProfiles,Object.fromEntries(encounter.map(entry=>[entry.name,entry.item && (progression!=='legacy' || allowsRuleItem(rule,entry.item))?entry.item:''])),encounter.filter(p=>p.gigantamax).map(p=>p.name)), JSON.stringify(seed), engineVersion, FORMAT, aiVersion, config.reward, JSON.stringify(opponents), trainer ? JSON.stringify(trainer.boss) : null,this.route(runId)?.pending_boss===floor?1:0,0,runId);
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, (SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id, runId, floor, packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band')), packTeam(opponents,opponentProfiles,Object.fromEntries(encounter.map(entry=>[entry.name,entry.item && (progression!=='legacy' || allowsRuleItem(rule,entry.item))?entry.item:''])),encounter.filter(p=>p.gigantamax).map(p=>p.name)), JSON.stringify(seed), engineVersion, FORMAT, aiVersion, trainer||sample?.kind==='named'?config.reward:battleCoinReward(config.reward,sample?.npcRank??(sample?.kind==='elite'?'elite':'normal')), JSON.stringify(opponents), trainer ? JSON.stringify(trainer.boss) : null,this.route(runId)?.pending_boss===floor?1:0,0,runId);
 
     this.db.prepare('UPDATE battles SET rule=? WHERE id=?').run(rule,id);
     if(rankedChallenger?.mirror)this.db.prepare('UPDATE battles SET opponent_team=? WHERE id=?').run(rankedChallenger.mirror.opponentTeam,id);

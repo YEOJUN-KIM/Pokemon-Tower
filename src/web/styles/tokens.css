@@ -1,5 +1,21 @@
 /* Shared palette: one authoritative value per token. */
 :root {
+  /* Pixel-font sizes: most text grows 12–18%; captions never fall below 12px. */
+  --text-xs: 12px;
+  --text-caption: 13px;
+  --text-sm: 14px;
+  --text-body: 15px;
+  --text-md: 16px;
+  --text-button: 17px;
+  --text-lg: 18px;
+  --text-subtitle: 20px;
+  --text-xl: 21px;
+  --text-title-sm: 22px;
+  --text-2xl: 23px;
+  --text-title: 25px;
+  --text-3xl: 28px;
+  --text-dialogue: 30px;
+  --text-display: 36px;
   --ink: var(--game-text);
   --muted: #7b8988;
   --line: var(--game-line);
@@ -16,7 +32,7 @@
   --menu-focus: #98efd1;
   --menu-selected-bg: #405d59;
   --menu-surface: #302e40;
-  --menu-row-height: 48px;
+  --menu-row-height: 52px;
   --menu-padding: 12px;
   --menu-gap: 6px;
   color-scheme: dark;

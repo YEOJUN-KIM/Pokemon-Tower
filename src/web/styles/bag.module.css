@@ -9,26 +9,26 @@ dialog[open].dialog {display:flex;flex-direction:column;}
 .layout {display:grid;grid-template-columns:minmax(220px,330px) minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:18px;height:100%;min-height:0;}
 .list {display:flex;flex-direction:column;gap:3px;min-height:0;overflow:auto;overscroll-behavior:contain;}
 .list button {flex-shrink:0;display:flex;justify-content:space-between;align-items:center;gap:8px;}
-.list small {color:#b4d4db;font-size:11px;}
+.list small {color:#b4d4db;font-size:var(--text-caption);}
 .detail {padding:14px;border:1px solid #597784;line-height:1.6;min-width:0;min-height:0;overflow:auto;overscroll-behavior:contain;overflow-wrap:anywhere;}
 .detail img {object-fit:contain;image-rendering:pixelated;}
-.detail p {font-size:13px;}.detail h3 {font-size:18px;}
+.detail p {font-size:var(--text-body);}.detail h3 {font-size:var(--text-xl);}
 .targets {display:flex;flex-direction:column;gap:4px;}
-@media(max-width:760px){dialog.dialog {width:calc(100vw - 24px);height:min(740px,calc(100dvh - 24px));max-height:calc(100dvh - 24px);}.layout {grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(72px,.4fr) minmax(0,1fr);gap:10px;}.detail {padding:10px;}.pockets button {font-size:12px;padding:6px;}}
+@media(max-width:760px){dialog.dialog {width:calc(100vw - 24px);height:min(740px,calc(100dvh - 24px));max-height:calc(100dvh - 24px);}.layout {grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(72px,.4fr) minmax(0,1fr);gap:10px;}.detail {padding:10px;}.pockets button {font-size:var(--text-sm);padding:6px;}}
 
 .moveLabels {display:flex;align-items:center;flex-wrap:wrap;gap:10px;}
 .moveStats {display:flex;flex-wrap:wrap;gap:12px;margin:16px 0;}
 .moveStats>div {display:flex;align-items:center;gap:12px;padding:8px 12px;background:#293d49;border:1px solid #597784;}
-.moveStats dt {font-size:12px;color:#b4d4db;}
+.moveStats dt {font-size:var(--text-sm);color:#b4d4db;}
 .moveStats dd {margin:0;font-weight:bold;}
 
 .entryName {display:flex;align-items:center;gap:10px;min-width:0;overflow-wrap:anywhere;}
 .entryName>span:last-child {min-width:0;}
-.learnableHeading {margin:18px 0 10px;font-size:13px;}
+.learnableHeading {margin:18px 0 10px;font-size:var(--text-body);}
 .learnablePokemon {display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0;}
-.learnablePokemonChip {display:flex;flex:0 1 calc((100% - 16px)/3);align-items:center;gap:8px;box-sizing:border-box;min-width:0;max-width:100%;padding:4px 10px;border:1px solid #597784;background:#293d49;font-size:13px;}
+.learnablePokemonChip {display:flex;flex:0 1 calc((100% - 16px)/3);align-items:center;gap:8px;box-sizing:border-box;min-width:0;max-width:100%;padding:4px 10px;border:1px solid #597784;background:#293d49;font-size:var(--text-body);}
 .learnablePokemonChip>span:first-child {flex-shrink:0;}
 
 @media(max-width:760px){.learnablePokemonChip {flex-basis:calc((100% - 8px)/2);}}
 
-.trigger.trigger.trigger {min-height:48px!important;min-width:120px;padding:10px 22px!important;font-size:15px!important;border-radius:5px!important;}
+.trigger.trigger.trigger {min-height:48px!important;min-width:120px;padding:10px 22px!important;font-size:var(--text-button)!important;border-radius:5px!important;}

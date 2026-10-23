@@ -42,10 +42,10 @@
   box-shadow: inset 0 0 0 2px #302c40;
 }
 :global(body) :where(.scope) :global(.dex-card>strong) {
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :global(body) :where(.scope) :global(.dex-card .dex-number) {
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 :global(body) :where(.scope) :global(:is(.dex-toolbar button,.dex-catalog-actions button,.dex-pagination button,.secondary-button,.command-tabs button)) {
   background: #4b4258;
@@ -74,7 +74,7 @@
   border-color: #bd665d;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .type-row) {
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .action-button) {
   background: #494051;
@@ -83,16 +83,16 @@
   box-shadow: inset 0 -3px #2b2536;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .action-button strong) {
-  font-size: 16px;
+  font-size: var(--text-lg);
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .action-button small) {
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .current-messages p) {
-  font-size: 16px;
+  font-size: var(--text-lg);
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .current-messages p.latest) {
-  font-size: 18px;
+  font-size: var(--text-xl);
 }
 :global(body) :where(.scope) :global(.dex-dialog),:global(body) :where(.scope) :global(.result-dialog),:global(body) :where(.scope) :global(.boss-dialog),:global(body) :where(.scope) :global(.recruit-dialog) {
   background: #393347;
@@ -467,7 +467,7 @@
   opacity: .38;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection),:where(.scope) :global(.field-inspection) {
-  font-size: 16px;
+  font-size: var(--text-lg);
   line-height: 1.7;
 }
 :where(.scope) :global(.inspection-stats) {
@@ -484,10 +484,10 @@
 :where(.scope) :global(.inspection-stats span) {
   display: block;
   color: #cbbdcf;
-  font-size: 14px;
+  font-size: var(--text-md);
 }
 :where(.scope) :global(.inspection-stats strong) {
-  font-size: 20px;
+  font-size: var(--text-2xl);
 }
 :where(.scope) :global(.inspection-description) {
   background: #292334;
@@ -516,7 +516,7 @@
 :where(.scope) :global(.field-inspection h3) {
   margin: 0 0 8px;
   color: #ffe0a1;
-  font-size: 16px;
+  font-size: var(--text-lg);
 }
 :where(.scope) :global(.field-effect-row) {
   display: flex;
@@ -528,24 +528,24 @@
 }
 :where(.scope) :global(.field-empty) {
   color: #bfb2c9;
-  font-size: 14px;
+  font-size: var(--text-md);
   margin: 0;
 }
 @media(max-width:760px) {
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .type-row) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .action-button strong) {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .action-button small) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .current-messages p) {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .current-messages p.latest) {
-    font-size: 14px;
+    font-size: var(--text-md);
   }
   :where(.scope) :global(.opponent-balls) {
     margin-top: 3px;
@@ -557,7 +557,7 @@
     height: 14px;
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection),:where(.scope) :global(.field-inspection) {
-    font-size: 14px;
+    font-size: var(--text-md);
   }
   :where(.scope) :global(.field-effect-row) {
     flex-wrap: wrap;
@@ -623,10 +623,10 @@
   padding-bottom: 9px;
 }
 :where(.scope) :global(.inspection-heading>strong) {
-  font-size: 17px;
+  font-size: var(--text-subtitle);
 }
 :where(.scope) :global(.inspection-heading>small) {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: #c1b9c9;
 }
 :where(.scope) :global(.inspection-heading>button) {
@@ -636,7 +636,7 @@
   border: 2px solid #9b879a;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .battle-inspection) {
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.6;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .battle-inspection>p) {
@@ -655,20 +655,20 @@
   border: 1px solid #8b7990;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-stats span) {
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-stats strong) {
-  font-size: 15px;
+  font-size: var(--text-button);
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-description) {
   margin: 0;
   border: 0;
   background: transparent;
   padding: 0;
-  font-size: 14px;
+  font-size: var(--text-md);
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover h3) {
-  font-size: 14px;
+  font-size: var(--text-md);
   margin: 9px 0;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-moves) {
@@ -677,7 +677,7 @@
 :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-moves p) {
   padding: 4px;
   border-width: 1px;
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :where(.scope) :global(.field-sections) {
   display: grid;
@@ -700,7 +700,7 @@
 :where(.scope) :global(.field-ranks>span:not(.field-empty)) {
   padding: 3px 6px;
   border: 1px solid currentColor;
-  font-size: 13px;
+  font-size: var(--text-body);
 }
 :where(.scope) :global(.rank-up) {
   color: #ffb18a;
@@ -712,7 +712,7 @@
   display: block;
   color: #c1b9c9;
   margin-top: 3px;
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-inspection-popover .inspection-stats strong) {
   white-space: nowrap;
@@ -728,10 +728,10 @@
     bottom: calc(100% - 38px);
   }
   :where(.scope) :global(.inspection-heading>strong) {
-    font-size: 15px;
+    font-size: var(--text-button);
   }
   :where(.scope) :global(.inspection-heading>small) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
   :where(.scope) :global(.field-sections) {
     grid-template-columns: 1fr;
@@ -762,14 +762,14 @@
   color: #fff0b0;
   border: 3px solid #ffe36c;
   box-shadow: inset 0 0 0 2px #655269;
-  font-size: 16px;
+  font-size: var(--text-lg);
 }
 @media(max-width:760px) {
   :where(.scope) :global(.trainer-intro-confirm) {
     bottom: 8px;
     right: 8px;
     padding: 8px;
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
 }
 :where(.scope) :global(.intro-trainer) {
@@ -942,7 +942,7 @@
   background: #493b21;
   border: 1px solid #e8bf65;
   color: #ffe9a0;
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 :where(.scope) :global(.recruit-mode-buttons),:where(.scope) :global(.recruit-move-options) {
   display: grid;
@@ -957,11 +957,11 @@
 :where(.scope) :global(.recruit-move-options small) {
   display: block;
   margin-top: 6px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: #ffe9a0;
 }
 :where(.scope) :global(.recruit-moves h4) {
-  font-size: 14px;
+  font-size: var(--text-md);
   margin: 18px 0 10px;
 }
 :where(.scope) :global(.recruit-move-comparison) {
@@ -985,7 +985,7 @@
   margin-bottom: 8px;
 }
 :where(.scope) :global(.recruit-move-detail>strong) {
-  font-size: 18px;
+  font-size: var(--text-xl);
   color: #fff0be;
 }
 :where(.scope) :global(.recruit-move-detail dl) {
@@ -995,19 +995,19 @@
   margin: 10px 0;
 }
 :where(.scope) :global(.recruit-move-detail dt) {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: #c3b8d0;
 }
 :where(.scope) :global(.recruit-move-detail dd) {
   margin: 4px 0 0;
-  font-size: 15px;
+  font-size: var(--text-button);
 }
 @media(max-width:480px) {
   :where(.scope) :global(.recruit-move-detail) {
     padding: 8px;
   }
   :where(.scope) :global(.recruit-move-detail>strong) {
-    font-size: 15px;
+    font-size: var(--text-button);
   }
   :where(.scope) :global(.recruit-mode-buttons) {
     grid-template-columns: 1fr;

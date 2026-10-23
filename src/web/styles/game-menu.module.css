@@ -83,7 +83,7 @@
 }
 :global(body) :where(.scope)[data-ui-screen] :global(:is(.game-choice-list,.held-item-options,.training-ability-options)>button small) {
   display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
-  color:var(--game-muted)!important;font-size:11px;line-height:16px;
+  color:var(--game-muted)!important;font-size:var(--text-caption);line-height:16px;
 }
 :global(body) :where(.scope)[data-ui-screen] :global(dialog.dex-dialog[open]) {
   display:flex!important;flex-direction:column;
@@ -101,7 +101,7 @@
   border-radius:0!important;
 }
 :global(body) :where(.scope)[data-ui-screen] :global(.dex-dialog-heading h2) {
-  color:var(--game-text)!important;font-size:16px!important;margin:0;
+  color:var(--game-text)!important;font-size:var(--text-lg)!important;margin:0;
 }
 :global(body) :where(.scope)[data-ui-screen] :global(.dex-dialog-heading>button) {
   min-width:36px;min-height:36px;padding:4px!important;flex-shrink:0;
@@ -123,7 +123,7 @@
   display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--menu-gap)!important;
 }
 :global(body) :where(.scope)[data-ui-screen] :global(.tower-shop>.shop-categories button) {
-  min-width:0!important;width:100%;font-size:11px!important;padding:6px!important;
+  min-width:0!important;width:100%;font-size:var(--text-caption)!important;padding:6px!important;
 }
 :global(body) :where(.scope)[data-ui-screen] :global(.dex-dialog:has(.training-editor,.move-editor)) {
   height:min(780px,calc(100dvh - 24px))!important;
@@ -144,7 +144,7 @@
   display:grid!important;grid-template-columns:minmax(52px,1fr) 42px 58px 76px 44px!important;gap:6px!important;
 }
 :global(body) :where(.scope)[data-ui-screen] :global(.training-stat-select.training-stat) {
-  width:100%;min-height:40px!important;padding:4px 8px!important;font-size:12px!important;
+  width:100%;min-height:40px!important;padding:4px 8px!important;font-size:var(--text-sm)!important;
 }
 :global(body) :where(.scope)[data-ui-screen] :global(.training-point-value) {
   display:flex;align-items:center;justify-content:space-between;gap:6px;color:var(--game-text);
@@ -155,7 +155,7 @@
 :global(body) :where(.scope)[data-ui-screen] :global(:is(.training-base-value,.training-iv-value,.training-stat-value,.training-budget strong)) {color:var(--game-text)!important;}
 :global(body) :where(.scope)[data-ui-screen] :global(.training-iv-value) {background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;}
 :global(body) :where(.scope)[data-ui-screen] :global(.training-editor :is(h3,.training-section-title>span,.training-budget span)) {color:var(--game-muted)!important;}
-:global(body) :where(.scope)[data-ui-screen] :global(.training-help) {font-size:11px;margin:4px 0;}
+:global(body) :where(.scope)[data-ui-screen] :global(.training-help) {font-size:var(--text-caption);margin:4px 0;}
 :global(body) :where(.scope)[data-ui-screen] :global(.training-help[open]) {max-height:110px;overflow:auto;}
 :global(body) :where(.scope)[data-ui-screen] :global(.training-save-bar) {position:static!important;padding:8px!important;margin-top:auto;}
 :global(body) :where(.scope)[data-ui-screen] :global(.training-editor #training-panel-traits) {padding:8px 0;}
@@ -165,14 +165,14 @@
 :global(body) :where(.scope)[data-ui-screen] :global(:is(.game-status,.shop-product-status,.dex-menu-picked,.recruit-known-species,.recruit-new-species)) {
   display:inline-block;min-height:0!important;padding:0!important;border:0!important;border-radius:0!important;
   background:transparent!important;box-shadow:none!important;color:var(--game-muted)!important;
-  font-size:11px!important;line-height:1.5;
+  font-size:var(--text-caption)!important;line-height:1.5;
 }
 :global(body) :where(.scope)[data-ui-screen] :global(.game-price) {
   display:inline-flex;align-items:baseline;justify-content:flex-end;gap:4px;align-self:center;
-  color:var(--game-accent);font-size:16px;white-space:nowrap;font-variant-numeric:tabular-nums;
+  color:var(--game-accent);font-size:var(--text-lg);white-space:nowrap;font-variant-numeric:tabular-nums;
   border:0;background:transparent;padding:0;
 }
-:global(body) :where(.scope)[data-ui-screen] :global(.game-price small) {font-size:11px;color:var(--game-muted);}
+:global(body) :where(.scope)[data-ui-screen] :global(.game-price small) {font-size:var(--text-caption);color:var(--game-muted);}
 :global(body) :where(.scope)[data-ui-screen] :global(button.shop-product) {
   display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center;
   width:100%;height:auto;min-height:88px!important;gap:12px!important;text-align:left;
@@ -181,12 +181,12 @@
 :global(body) :where(.scope)[data-ui-screen] :global(.shop-product :is(.shop-product-title,.shop-product-meta,.shop-product-description,.shop-product-status)) {
   position:static!important;max-width:none!important;width:auto!important;margin:0!important;
 }
-:global(body) :where(.scope)[data-ui-screen] :global(.shop-product-description) {font-size:11px!important;line-height:1.5!important;}
+:global(body) :where(.scope)[data-ui-screen] :global(.shop-product-description) {font-size:var(--text-caption)!important;line-height:1.5!important;}
 :global(body) :where(.scope)[data-ui-screen] :global(.shop-product-title) {color:var(--game-text)!important;}
 :global(body) :where(.scope)[data-ui-screen] :global(.game-menu-footer) {
   display:flex!important;flex-wrap:wrap;align-items:center;gap:6px 14px!important;
   flex-shrink:0;margin-top:auto;padding:8px 0 0!important;border-top:1px solid var(--game-line);
-  color:var(--game-muted)!important;font:inherit;font-size:11px!important;line-height:1.5;
+  color:var(--game-muted)!important;font:inherit;font-size:var(--text-caption)!important;line-height:1.5;
 }
 :global(body) :where(.scope)[data-ui-screen] :global(.game-menu-footer>span) {display:inline-flex;align-items:center;gap:5px;white-space:nowrap;}
 :global(body) :where(.scope)[data-ui-screen] :global(.game-menu-footer kbd) {
@@ -199,7 +199,7 @@
   :global(body) :where(.scope)[data-ui-screen] :global(.training-top-layout) {display:block!important;}
   :global(body) :where(.scope)[data-ui-screen] :global(.training-top-layout>.stat-radar) {display:none;}
   :global(body) :where(.scope)[data-ui-screen] :global(:is(.training-stat,.training-stat-labels)) {grid-template-columns:minmax(46px,1fr) 34px 45px 64px 36px!important;gap:3px!important;}
-  :global(body) :where(.scope)[data-ui-screen] :global(.game-menu-footer) {font-size:10px!important;gap:4px 8px!important;}
+  :global(body) :where(.scope)[data-ui-screen] :global(.game-menu-footer) {font-size:var(--text-xs)!important;gap:4px 8px!important;}
   :global(body) :where(.scope)[data-ui-screen] :global(.training-tera-options) {grid-template-columns:repeat(3,minmax(0,1fr))!important;}
   :global(body) :where(.scope)[data-ui-screen] :global(button.shop-product) {min-height:96px!important;gap:8px!important;}
 }

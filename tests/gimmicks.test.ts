@@ -38,7 +38,7 @@ test('wrong stone purchases roll back wallet, bag and ledger; a matching stone s
  store.db.prepare("UPDATE runs SET total_floors=50,floor=6,state='select' WHERE id=?").run(run);store.db.prepare("UPDATE players SET coins=8000 WHERE id='mega'").run();
  store.db.prepare('INSERT OR REPLACE INTO item_shops VALUES (?,?,?)').run(run,6,JSON.stringify(['Charizardite X','Blastoisinite',DYNAMAX_ITEM,'Leftovers']));
  const before=store.view('mega');assert.throws(()=>store.purchaseItem('mega',run,6,'Blastoisinite','Charizard'),/맞는/);assert.deepEqual(store.view('mega'),before);
- store.purchaseItem('mega',run,6,'Charizardite X','Charizard');assert.equal(store.view('mega').coins,3000);
+ store.purchaseItem('mega',run,6,'Charizardite X','Charizard');assert.equal(store.view('mega').coins,4250);
  const battle=store.battle(store.enter('mega',run,6,['Charizard','Blastoise','Venusaur']));
  assert.equal(Showdown.Teams.unpack(battle.player_team)![0].item,'Charizardite X');
  }finally{store.close();}

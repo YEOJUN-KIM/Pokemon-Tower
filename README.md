@@ -84,14 +84,6 @@ Egg Station에서 1개 또는 10개를 뽑습니다. 기계가 들썩이고 출�
 
 ![최신 알뽑기 화면](docs/images/overview-eggs.png)
 
-## PC에서도, 휴대폰에서도
-
-키보드·마우스·터치와 게임패드 입력을 지원합니다. PC에서는 방향키와 결정·취소 키로 메뉴를 고르고, 휴대폰에서는 화면을 눌러 진행합니다. 배틀 기록·상세 정보·재생 속도·연출 스킵·음량 설정으로 플레이 방식을 조정할 수 있습니다.
-
-같은 서버의 같은 계정으로 로그인하면 도감·육성·재화와 진행 중인 도전을 다른 기기에서도 이어갈 수 있습니다.
-
-<p align="center"><img src="docs/images/overview-mobile.png" alt="최신 모바일 배틀 화면" width="320"></p>
-
 ## 내 PC에서 실행하기
 
 ### 처음 한 번 · Windows
@@ -127,6 +119,7 @@ Next.js 16.3.8·React 19.3.0·TypeScript 7.0.2로 만들고, Pokémon Showdown 0
 - 기술 이펙트·효과음·BGM 개선
 - 플레이 피드백 기반 난이도와 보상 밸런스 조정
 - Normal Mode와 별도로 설계할 Hard Mode 검토
+- 멀티 디바이스 플레이 지원 개선
 
 ML 기반 AI는 충분한 플레이 데이터를 확보한 뒤 장기 연구 대상으로 검토합니다. 구체적인 방향은 [ROADMAP](docs/current/ROADMAP.md)에서 확인할 수 있습니다.
 

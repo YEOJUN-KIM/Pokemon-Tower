@@ -155,7 +155,7 @@ test('cooldown counts cleared encounters after backward travel; repeated floor e
 });
 test('real v42 parent-table migration preserves saved battle/actions/event and reopens idempotently',()=>{
  const path=`.data/tests/teleport-v42-${randomUUID()}.sqlite`,old=new DatabaseSync(path);
- const oldSchema=schema.replaceAll(/\s*encounter_order INTEGER NOT NULL DEFAULT 0 CHECK\(encounter_order>=0\),/g,'').replace('UNIQUE(run_id, encounter_order, stage, attempt)','UNIQUE(run_id, floor, stage, attempt)').replace('amount>=0),\n CHECK','amount>=0),UNIQUE(run_id,after_floor),\n CHECK').replace('user_version = 46','user_version = 42');
+ const oldSchema=schema.replaceAll(/\s*encounter_order INTEGER NOT NULL DEFAULT 0 CHECK\(encounter_order>=0\),/g,'').replace('UNIQUE(run_id, encounter_order, stage, attempt)','UNIQUE(run_id, floor, stage, attempt)').replace('amount>=0),\n CHECK','amount>=0),UNIQUE(run_id,after_floor),\n CHECK').replace(/user_version = \d+/,'user_version = 42');
  old.exec(oldSchema);old.exec("INSERT INTO players(id) VALUES ('p'); INSERT INTO runs(id,player_id,floor,state,created_at) VALUES ('run','p',12,'battle',1)");
  old.prepare("INSERT INTO battles(id,run_id,floor,player_team,opponent_team,seed,engine_version,format,ai_version,status,reward,candidates) VALUES ('battle','run',12,?,?,'[1,2,3,4]','old','old','old','active',100,'[]')").run(packTeam(starters),packTeam(starters));
  old.exec("INSERT INTO actions VALUES ('battle',1,'move 1'); INSERT INTO run_events(id,run_id,after_floor,status) VALUES ('event','run',8,'complete')");old.close();

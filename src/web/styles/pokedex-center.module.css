@@ -20,12 +20,12 @@
 }
 :global(body) :where(.scope) :global(.dex-center .dex-heading .eyebrow) {
   color: #c6d6cf;
-  font-size: 11px;
+  font-size: var(--text-caption);
   letter-spacing: 2px;
 }
 :global(body) :where(.scope) :global(.dex-center .dex-heading h1) {
   margin: 5px 0;
-  font-size: 24px;
+  font-size: var(--text-3xl);
 }
 :global(body) :where(.scope) :global(.dex-center .dex-heading p) {
   color: #c5c9c5;
@@ -61,7 +61,7 @@
   border: 1px solid #d58a8e;
   border-radius: 6px;
   box-shadow: none;
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 :global(body) :where(.scope) :global(.dex-center .dex-search) {
   width: 260px;
@@ -78,7 +78,7 @@
   flex-shrink: 0;
   padding: 0 8px;
   width: auto;
-  font-size: 10px;
+  font-size: var(--text-xs);
 }
 :global(body) :where(.scope) :global(.dex-center .dex-search>button[data-dex-filter=search]>span) {
   overflow: hidden;
@@ -95,7 +95,7 @@
   border: 1px solid #d58a8e;
   border-radius: 6px;
   font: inherit;
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 :global(body) :where(.scope) :global(.dex-center .dex-search>input::placeholder) {
   color: #dddde2;
@@ -104,7 +104,7 @@
 @media(max-width:760px) {
   :global(body) :where(.scope) :global(.dex-center .dex-search>input) {
     height: 30px;
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
 }
 :global(body) :where(.scope) :global(.dex-center .dex-toolbar :is(input[type=search],button)) {
@@ -150,7 +150,7 @@
   color: #304c43;
 }
 :global(body) :where(.scope) :global(.dex-center .dex-catalog-heading h2) {
-  font-size: 13px;
+  font-size: var(--text-body);
 }
 :global(body) :where(.scope) :global(.dex-center .dex-catalog-heading h2 span) {
   background: #c4d4cc;
@@ -203,7 +203,7 @@
   border: 1px solid #cd858b;
   border-radius: 5px;
   padding: 6px 10px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   text-align: left;
 }
 :global(body) :where(.scope) :global(.dex-center .dex-nav) {
@@ -211,7 +211,7 @@
 }
 @media(max-width:760px) {
   :global(body) :where(.scope) :global(.dex-center .dex-rule-settings) {
-    font-size: 9px;
+    font-size: var(--text-xs);
     padding: 5px;
   }
   :global(body) :where(.scope) :global(.dex-center .dex-nav) {
@@ -230,7 +230,7 @@
     height: 32px!important;
   }
   :global(body) :where(.scope) :global(.dex-center .dex-party-slot>strong) {
-    font-size: 8px;
+    font-size: var(--text-xs);
     overflow-wrap: anywhere;
   }
 }
@@ -280,7 +280,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: #738679;
 }
 :where(.scope) :global(.dex-partner-stage) {
@@ -297,7 +297,7 @@
   max-height: 100%;
 }
 :where(.scope) :global(.dex-partner-display>h2) {
-  font-size: 23px;
+  font-size: var(--text-title);
   margin: 0;
 }
 :where(.scope) :global(.dex-partner-display .dex-type-pills) {
@@ -306,7 +306,7 @@
 :where(.scope) :global(.dex-partner-stats) {
   width: 100%;
   margin-top: auto;
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 :where(.scope) :global(.dex-partner-stats>span) {
   color: #758b7e;
@@ -327,7 +327,7 @@
 }
 :where(.scope) :global(.dex-partner-stats dd) {
   margin: 0;
-  font-size: 13px;
+  font-size: var(--text-body);
   font-variant-numeric: tabular-nums;
 }
 :global(body) :where(.scope) :global(.dex-center .dex-partner-display) {
@@ -365,11 +365,11 @@
 }
 :where(.scope) :global(.dex-partner-stats .summary-radar-label) {
   fill: #52745f;
-  font-size: 14px;
+  font-size: var(--text-md);
 }
 :where(.scope) :global(.dex-partner-stats .summary-radar-value) {
   fill: #304f3e;
-  font-size: 20px;
+  font-size: var(--text-2xl);
   font-weight: 700;
 }
 @container(max-height:560px) {
@@ -386,7 +386,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: var(--text-sm);
   padding: 5px 0;
   align-items: center;
 }
@@ -419,7 +419,7 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 15px;
+  font-size: var(--text-button);
   color: #f1f5e9;
 }
 :where(.scope) :global(.dex-partner-dialog .dex-dialog-heading h2:before) {
@@ -468,10 +468,10 @@
 }
 :where(.scope) :global(.dex-menu-identity>small) {
   color: #718477;
-  font-size: 10px;
+  font-size: var(--text-xs);
 }
 :where(.scope) :global(.dex-menu-identity>strong) {
-  font-size: 21px;
+  font-size: var(--text-2xl);
   color: #355744;
 }
 :where(.scope) :global(.dex-menu-types) {
@@ -483,16 +483,16 @@
   padding: 4px 9px;
   color: #fff;
   border-radius: 5px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-style: normal;
 }
 :where(.scope) :global(.dex-menu-picked) {
-  font-size: 10px;
+  font-size: var(--text-xs);
   color: #376e51;
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-partner-dialog .dex-action-menu-label) {
   color: #becdc6;
-  font-size: 10px;
+  font-size: var(--text-xs);
   margin: 12px 0;
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-partner-dialog .dex-action-options) {
@@ -512,15 +512,15 @@
   color: #3a6950;
   border-radius: 5px;
   padding: 6px;
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-partner-dialog .dex-action-options strong) {
   color: inherit;
-  font-size: 13px;
+  font-size: var(--text-body);
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-partner-dialog .dex-action-options small) {
   color: #697f71;
-  font-size: 10px;
+  font-size: var(--text-xs);
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-partner-dialog .dex-action-options>button:last-child) {
   background: #8b303a;
@@ -535,7 +535,7 @@
     padding: 12px;
   }
   :where(.scope) :global(.dex-menu-identity>strong) {
-    font-size: 21px;
+    font-size: var(--text-2xl);
   }
   :global(body:has(.dex-center)) :where(.scope) :global(.dex-partner-dialog .dex-action-partner) {
     grid-template-columns: 100px minmax(0,1fr);
@@ -584,7 +584,7 @@
 }
 :global(body) :where(.scope) :global(.dex-center footer) {
   color: #b8b7c5;
-  font-size: 9px;
+  font-size: var(--text-xs);
 }
 @media(max-width:1100px) {
   :global(body) :where(.scope) :global(.dex-center) {
@@ -600,7 +600,7 @@
     width: 150px;
   }
   :where(.scope) :global(.dex-partner-display>h2) {
-    font-size: 20px;
+    font-size: var(--text-2xl);
   }
 }
 @media(max-width:760px) {
@@ -613,7 +613,7 @@
     gap: 8px;
   }
   :global(body) :where(.scope) :global(.dex-center .dex-heading h1) {
-    font-size: 18px;
+    font-size: var(--text-xl);
   }
   :global(body) :where(.scope) :global(.dex-center .dex-toolbar) {
     padding: 6px;
@@ -621,11 +621,11 @@
   }
   :global(body) :where(.scope) :global(.dex-center .dex-filter-control>button) {
     height: 30px;
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
   :global(body) :where(.scope) :global(.dex-center .dex-form-filters button) {
     height: 27px;
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
   :global(body) :where(.scope) :global(.dex-center .dex-search) {
     width: 100%;
@@ -650,7 +650,7 @@
   :where(.scope) :global(.dex-partner-display>header) {
     grid-column: 2;
     grid-row: 1;
-    font-size: 9px;
+    font-size: var(--text-xs);
     justify-content: flex-start;
     gap: 12px;
   }
@@ -668,7 +668,7 @@
   :where(.scope) :global(.dex-partner-display>h2) {
     grid-column: 2;
     grid-row: 2;
-    font-size: 17px;
+    font-size: var(--text-subtitle);
   }
   :where(.scope) :global(.dex-partner-display>.dex-type-pills) {
     grid-column: 2;
@@ -676,7 +676,7 @@
     justify-content: flex-start;
   }
   :where(.scope) :global(.dex-partner-display .dex-type-pill) {
-    font-size: 9px;
+    font-size: var(--text-xs);
     padding: 2px 7px;
   }
   :where(.scope) :global(.dex-partner-stats) {
@@ -688,7 +688,7 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
-    font-size: 10px;
+    font-size: var(--text-xs);
     width: auto;
   }
   :global(body) :where(.scope) :global(.dex-center .dex-inspect-button) {
@@ -696,14 +696,14 @@
     grid-row: 3;
     padding: 4px 6px;
     width: auto;
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
   :global(body) :where(.scope) :global(.dex-center .dex-start-party) {
     padding: 8px;
     gap: 5px;
   }
   :global(body) :where(.scope) :global(.dex-center .dex-party-slot strong) {
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
   :global(body) :where(.scope) :global(.dex-center .dex-list) {
     gap: 4px;
@@ -724,7 +724,7 @@
   gap: 12px;
 }
 :global(body) :where(.scope) :global(.dex-center .dex-heading h1) {
-  font-size: 20px;
+  font-size: var(--text-2xl);
   margin: 0;
 }
 :global(body) :where(.scope) :global(.dex-center .dex-device-light) {
@@ -736,10 +736,10 @@
   gap: 18px;
 }
 :global(body) :where(.scope) :global(.dex-center .dex-progress strong),:global(body) :where(.scope) :global(.dex-center .dex-wallet strong) {
-  font-size: 17px;
+  font-size: var(--text-subtitle);
 }
 :global(body) :where(.scope) :global(.dex-center .dex-heading-counters :is(span,small)) {
-  font-size: 10px;
+  font-size: var(--text-xs);
 }
 :global(body) :where(.scope) :global(.dex-center .dex-nav a) {
   display: inline-flex;
@@ -749,7 +749,7 @@
   background: #8b303a;
   border: 1px solid #d99196;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :global(body) :where(.scope) :global(.dex-center .dex-partner-stage) {
   flex: 0 1 160px;
@@ -772,7 +772,7 @@
   display: grid;
   gap: 6px;
   margin: 0;
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :where(.scope) :global(.dex-partner-traits>div) {
   display: flex;
@@ -790,7 +790,7 @@
 :where(.scope) :global(.dex-partner-traits dd) {
   margin: 0;
   text-align: right;
-  font-size: 12px;
+  font-size: var(--text-sm);
   line-height: 1.5;
   color: #355342;
 }
@@ -805,7 +805,7 @@
   background: #812b35;
   border: 1px solid #c16d76;
   border-radius: 6px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   line-height: 1.6;
   color: #e3e7dc;
 }
@@ -830,26 +830,26 @@
     padding: 7px 9px;
   }
   :global(body) :where(.scope) :global(.dex-center .dex-heading h1) {
-    font-size: 16px;
+    font-size: var(--text-lg);
   }
   :global(body) :where(.scope) :global(.dex-center .dex-heading-counters) {
     gap: 8px;
   }
   :global(body) :where(.scope) :global(.dex-center .dex-progress strong),:global(body) :where(.scope) :global(.dex-center .dex-wallet strong) {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   :global(body) :where(.scope) :global(.dex-center .dex-heading-counters :is(span,small)) {
-    font-size: 8px;
+    font-size: var(--text-xs);
   }
   :global(body) :where(.scope) :global(.dex-center .dex-nav a) {
-    font-size: 10px;
+    font-size: var(--text-xs);
     padding: 5px 7px;
   }
   :global(body) :where(.scope) :global(.dex-center .dex-partner-traits) {
     display: none;
   }
   :global(body) :where(.scope) :global(.dex-center footer) {
-    font-size: 10px;
+    font-size: var(--text-xs);
     padding: 7px;
     gap: 5px;
   }
@@ -857,7 +857,7 @@
     gap: 6px 10px;
   }
   :global(body) :where(.scope) :global(.dex-center footer>span) {
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
 }
 :global(body) :where(.scope) :global(.dex-center .dex-nav) {
@@ -1009,7 +1009,7 @@
   padding: 4px;
 }
 :where(.scope) :global(.summary-form-preview>span) {
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :where(.scope) :global(.summary-form-preview>div) {
   display: flex;
@@ -1056,7 +1056,7 @@
     max-width: 250px;
   }
   :where(.scope) :global(.pokemon-summary .summary-hero h2) {
-    font-size: 26px;
+    font-size: var(--text-dialogue);
   }
   :where(.scope) :global(.pokemon-summary :is(.summary-types,.summary-badges,.summary-tera)) {
     margin-top: 8px;
@@ -1086,7 +1086,7 @@
   border-radius: 8px;
   background: #203c36;
   color: #f2fff9;
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.7;
   word-break: keep-all;
   box-shadow: 0 5px 16px #10251f40;
@@ -1109,7 +1109,7 @@
 }
 :where(.scope) :global(.summary-move-metrics) {
   margin-top: 8px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   line-height: 1.6;
 }
 :where(.scope) :global(.dex-region-label) {

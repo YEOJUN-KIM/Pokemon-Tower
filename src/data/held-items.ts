@@ -1,13 +1,14 @@
+import {systemItemPrice} from './economy';
 import zItems from './z-crystals.json' with {type:'json'};
 import megaData from './mega-items.json' with {type:'json'};
 import {pokemonName} from './pokemon-catalog';
 const removalProtection='대응 포켓몬이 지니면 빼앗기거나 교환·제거되지 않는다.';
-const megaItems=Object.fromEntries(Object.entries(megaData).map(([key,item])=>[key,{...item,description:`${pokemonName(item.species)}의 ${pokemonName(item.forme)} 메가진화를 가능하게 한다. ${removalProtection}`} ]));
+const megaItems=Object.fromEntries(Object.entries(megaData).map(([key,item])=>[key,{...item,price:systemItemPrice(item.price),description:`${pokemonName(item.species)}의 ${pokemonName(item.forme)} 메가진화를 가능하게 한다. ${removalProtection}`} ]));
 import {formItems} from './form-items';
 import {additionalHeldItems} from './additional-held-items';
 export const baseHeldItems={
-  'Red Orb':{name:'주홍구슬',description:'그란돈에게 지니게 하면 등장할 때 원시그란돈으로 원시회귀합니다. 대응 포켓몬이 지니면 빼앗기거나 교환·제거되지 않으며, 금제·매직룸으로 원시회귀가 무효화되지 않습니다.',price:5000,consumable:false},
-  'Blue Orb':{name:'쪽빛구슬',description:'가이오가에게 지니게 하면 등장할 때 원시가이오가로 원시회귀합니다. 대응 포켓몬이 지니면 빼앗기거나 교환·제거되지 않으며, 금제·매직룸으로 원시회귀가 무효화되지 않습니다.',price:5000,consumable:false},
+  'Red Orb':{name:'주홍구슬',description:'그란돈에게 지니게 하면 등장할 때 원시그란돈으로 원시회귀합니다. 대응 포켓몬이 지니면 빼앗기거나 교환·제거되지 않으며, 금제·매직룸으로 원시회귀가 무효화되지 않습니다.',price:systemItemPrice(5000),consumable:false},
+  'Blue Orb':{name:'쪽빛구슬',description:'가이오가에게 지니게 하면 등장할 때 원시가이오가로 원시회귀합니다. 대응 포켓몬이 지니면 빼앗기거나 교환·제거되지 않으며, 금제·매직룸으로 원시회귀가 무효화되지 않습니다.',price:systemItemPrice(5000),consumable:false},
   'Sitrus Berry':{name:'자뭉열매',description:'배틀마다 1회, HP가 절반 이하가 되면 최대 HP의 1/4을 회복합니다.',price:225,consumable:false},
   Leftovers:{name:'먹다남은음식',description:'매 턴 종료 시 최대 HP의 1/16을 회복합니다.',price:600,consumable:false},
   Charcoal:{name:'목탄',description:'불꽃 타입 공격 기술의 위력이 20% 증가합니다.',price:300,consumable:false},
@@ -45,7 +46,7 @@ export const baseHeldItems={
   'Light Clay':{name:'빛의점토',description:'리플렉터·빛의장막·오로라베일의 지속 시간을 5턴에서 8턴으로 늘립니다.',price:900,consumable:false},
   ...additionalHeldItems,
 } as const;
-export const heldItems:Record<string,{name:string;description:string;price:number;consumable:boolean}>={...baseHeldItems,...megaItems,...zItems,...formItems,'Dynamax Band':{name:'다이맥스밴드',description:'트레이너가 보유하면 팀의 포켓몬 한 마리가 배틀당 한 번, 3턴 동안 다이맥스할 수 있습니다.',price:5000,consumable:false},'Tera Orb':{name:'테라스탈오브',description:'트레이너가 보유하면 팀의 포켓몬 한 마리가 배틀당 한 번 테라스탈할 수 있습니다.',price:5000,consumable:false}} as const;
+export const heldItems:Record<string,{name:string;description:string;price:number;consumable:boolean}>={...baseHeldItems,...megaItems,...Object.fromEntries(Object.entries(zItems).map(([id,item])=>[id,{...item,price:systemItemPrice(item.price)}])),...formItems,'Dynamax Band':{name:'다이맥스밴드',description:'트레이너가 보유하면 팀의 포켓몬 한 마리가 배틀당 한 번, 3턴 동안 다이맥스할 수 있습니다.',price:systemItemPrice(5000),consumable:false},'Tera Orb':{name:'테라스탈오브',description:'트레이너가 보유하면 팀의 포켓몬 한 마리가 배틀당 한 번 테라스탈할 수 있습니다.',price:systemItemPrice(5000),consumable:false}} as const;
 export type HeldItem=keyof typeof heldItems;
 export const heldItemKeys=Object.keys(heldItems) as HeldItem[];
 const heldItemsById=new Map(heldItemKeys.map(item=>[item.toLowerCase().replace(/[^a-z0-9]/g,''),item]));

@@ -6,7 +6,7 @@ body {
   background: #272335;
   color: var(--game-text);
   font-family: 'Noto Sans KR',Arial,sans-serif;
-  font-size: 14px;
+  font-size: var(--text-md);
 }
 
 html body {

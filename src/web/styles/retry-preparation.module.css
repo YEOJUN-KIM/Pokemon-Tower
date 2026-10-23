@@ -3,16 +3,16 @@
 .card{min-width:0;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px;border:1px solid #627381;border-radius:6px;background:#273342;color:#edf8fa;}
 .types{display:flex;justify-content:center;flex-wrap:wrap;gap:4px;}
 .moves{display:grid;grid-template-columns:1fr 1fr;gap:5px;width:100%;}
-.moves span{padding:5px;background:#192633;border:1px solid #405867;border-radius:4px;font-size:12px;text-align:center;overflow-wrap:anywhere;}
-@media(max-width:760px){.opponents{gap:6px;}.card{padding:6px 3px;font-size:12px;}.moves{grid-template-columns:1fr;}.moves span{font-size:10px;padding:3px;}.types{zoom:.7;}}
+.moves span{padding:5px;background:#192633;border:1px solid #405867;border-radius:4px;font-size:var(--text-sm);text-align:center;overflow-wrap:anywhere;}
+@media(max-width:760px){.opponents{gap:6px;}.card{padding:6px 3px;font-size:var(--text-sm);}.moves{grid-template-columns:1fr;}.moves span{font-size:var(--text-xs);padding:3px;}.types{zoom:.7;}}
 
 .retry{display:flex;flex-direction:column;gap:10px;min-width:0;}
-.heading{margin:2px 0 0;font-size:15px;line-height:1.5;color:#edf8fa;}
+.heading{margin:2px 0 0;font-size:var(--text-button);line-height:1.5;color:#edf8fa;}
 .retry .opponents{margin:0;}
 :global(body) :where(.scope).retry.retry :global(.maintenance-menu){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:2px;margin:0;}
-:global(body) :where(.scope).retry.retry :global(.maintenance-menu>button){min-width:0;min-height:44px;margin:0;padding:8px 12px;font-size:14px;}
-@media(max-width:760px){.retry{gap:8px;}:global(body) :where(.scope).retry.retry :global(.maintenance-menu){gap:6px;}:global(body) :where(.scope).retry.retry :global(.maintenance-menu>button){padding:6px;font-size:12px;}}
+:global(body) :where(.scope).retry.retry :global(.maintenance-menu>button){min-width:0;min-height:44px;margin:0;padding:8px 12px;font-size:var(--text-md);}
+@media(max-width:760px){.retry{gap:8px;}:global(body) :where(.scope).retry.retry :global(.maintenance-menu){gap:6px;}:global(body) :where(.scope).retry.retry :global(.maintenance-menu>button){padding:6px;font-size:var(--text-sm);}}
 
 :global(body) :where(.scope).retry.retry :global(.maintenance-menu>button){display:flex;align-items:center;justify-content:center;gap:4px;text-align:center;white-space:nowrap;}
 :global(body) :where(.scope).retry.retry :global(.maintenance-menu>button>span){display:none;}
-@media(max-width:760px){:global(body) :where(.scope).retry.retry :global(.maintenance-menu>button){font-size:11px;}}
+@media(max-width:760px){:global(body) :where(.scope).retry.retry :global(.maintenance-menu>button){font-size:var(--text-caption);}}

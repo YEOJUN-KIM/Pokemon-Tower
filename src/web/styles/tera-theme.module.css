@@ -1,4 +1,12 @@
 /* src/web/tera-theme.css. Screen boundary is local; existing DOM classes remain available to keyboard controls. */
+/* Symbol controls sit on the field; shared menu fills must never paint a card. */
+:global(body) :where(.scope)[data-ui-screen="battle"] :global(:is(.gimmick-dock,.tera-command-side) button.gimmick-icon-button),
+:global(body) :where(.scope)[data-ui-screen="battle"] :global(:is(.gimmick-dock,.tera-command-side) button.gimmick-icon-button:is(:hover,:focus-visible,:disabled,[data-game-cursor=true],[aria-pressed=true])) {
+ background:transparent!important;
+ border:0!important;
+ box-shadow:none!important;
+ outline-offset:3px;
+}
 :where(.scope) :global(.tera-command-side) {
   grid-area: tera;
   display: flex;
@@ -125,7 +133,7 @@
   filter: drop-shadow(0 0 5px var(--gimmick-color));
 }
 :where(.scope) :global(:is(.gimmick-dock,.tera-command-side) .gimmick-icon-button>span) {
-  font-size: 13px;
+  font-size: var(--text-body);
   font-weight: 700;
   line-height: 1.4;
   text-shadow: 0 2px 3px #101324,0 0 5px #101324;
@@ -134,7 +142,7 @@
   position: absolute;
   right: 4px;
   top: 5px;
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-style: normal;
   color: #e9e3f5;
   text-shadow: 0 1px 3px #101324;
@@ -191,7 +199,7 @@
 }
 :where(.scope) :global(.tera-type-icon) {display:inline-block;object-fit:contain;vertical-align:middle;flex-shrink:0;}
 :where(.scope) :global(.training-tera>small) {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: #b7abc6;
   grid-column: 1/-1;
 }
@@ -214,7 +222,7 @@
   margin: 0;
 }
 :where(.scope) :global(.tera-stock) {
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: #c7b2df;
 }
 :where(.scope) :global(.sprite.terastallized>.pokemon-image-frame) {
@@ -364,18 +372,18 @@
     height: 66px;
   }
   :where(.scope) :global(:is(.gimmick-dock,.tera-command-side) .gimmick-icon-button>span) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
   :where(.scope) :global(.gimmick-icon-button>i) {
-    font-size: 8px;
+    font-size: var(--text-xs);
     right: 0;
     top: 0;
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-button strong) {
-    font-size: 14px;
+    font-size: var(--text-md);
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-button small) {
-    font-size: 9px;
+    font-size: var(--text-xs);
     gap: 3px;
     flex-wrap: wrap;
   }
@@ -442,15 +450,15 @@
   gap: 3px;
   margin: 0;
   text-align: center;
-  font-size: 11px;
+  font-size: var(--text-caption);
   white-space: normal;
   line-height: 1.3;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-move-matchup-slot .move-matchup i) {
-  font-size: 22px;
+  font-size: var(--text-title);
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-move-matchup-slot .move-matchup b) {
-  font-size: 13px;
+  font-size: var(--text-body);
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-move-matchup-slot .move-matchup.is-immune) {
   padding: 5px 6px;
@@ -461,7 +469,7 @@
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-row .battle-move-button .battle-move-meta) {
   margin-top: 8px;
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :where(.scope) :global(.tera-command-side .gimmick-icon-button) {
   width: 140px;
@@ -473,7 +481,7 @@
   height: 118px;
 }
 :where(.scope) :global(.tera-type-label .move-type-badge) {
-  font-size: 14px;
+  font-size: var(--text-md);
   padding: 4px 8px;
 }
 :where(.scope) :global(.tera-type-label .move-type-badge svg) {
@@ -496,7 +504,7 @@
     gap: 4px;
   }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .battle-move-row .battle-move-button strong) {
-    font-size: 16px;
+    font-size: var(--text-lg);
     line-height: 1.4;
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-move-matchup-slot) {
@@ -504,13 +512,13 @@
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-move-matchup-slot .move-matchup) {
     gap: 2px;
-    font-size: 8px;
+    font-size: var(--text-xs);
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-move-matchup-slot .move-matchup i) {
-    font-size: 17px;
+    font-size: var(--text-subtitle);
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-move-matchup-slot .move-matchup b) {
-    font-size: 8px;
+    font-size: var(--text-xs);
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-move-matchup-slot .move-matchup.is-immune) {
     padding: 3px;
@@ -535,7 +543,7 @@
     height: 78px;
   }
   :where(.scope) :global(.tera-type-label .move-type-badge) {
-    font-size: 10px;
+    font-size: var(--text-xs);
     padding: 2px 4px;
   }
   :where(.scope) :global(.tera-type-label .move-type-badge svg) {
@@ -562,10 +570,10 @@
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-move-details dl>div) {
     gap: 4px;
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-move-details p) {
-    font-size: 10px;
+    font-size: var(--text-xs);
     flex-basis: 100%;
     -webkit-line-clamp: 2;
     order: 3;
@@ -573,7 +581,7 @@
   :where(.scope[data-ui-screen="battle"]) :global(.battle-move-details .battle-command-back) {
     margin: 0 0 0 auto;
     padding: 4px!important;
-    font-size: 9px!important;
+    font-size: var(--text-xs)!important;
   }
 }
 @keyframes mega-darken {

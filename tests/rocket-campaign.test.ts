@@ -39,12 +39,12 @@ test('normal random draws exclude villains in legacy and common pools; ordinary 
  }finally{s.close();}
 });
 
-test('intro decline preserves eligibility, cooldown, global chance and single weighted selection',()=>{
+test('forced intro rejects decline and preserves eligibility, cooldown, global chance and single weighted selection',()=>{
  const f=rocketFixture();try{
   assert.equal(f.event.kind,'rocket-intro');assert.equal(campaignEligible('rocket-intro',emptyCampaign,31),false);
-  f.store.chooseEvent(f.owner,f.run,f.event.id,'skip');assert.deepEqual(new VillainCampaigns(f.store.db).state(f.run),emptyCampaign);
-  const events=new RunEvents(f.store.db,()=>0,rocketRegistry);events.encounter(f.run,2);assert.equal(events.view(f.run),null);
-  assert.equal(nextRocketEvent(f.store,f.run).kind,'rocket-intro');
+  assert.throws(()=>f.store.chooseEvent(f.owner,f.run,f.event.id,'skip'),/유효하지/);assert.deepEqual(new VillainCampaigns(f.store.db).state(f.run),emptyCampaign);
+  const events=new RunEvents(f.store.db,()=>0,rocketRegistry);events.encounter(f.run,2);assert.equal(events.view(f.run)?.id,f.event.id);
+  assert.equal(f.store.view(f.owner).run!.event?.id,f.event.id);
   assert.equal(f.store.db.prepare("SELECT COUNT(*) AS n FROM run_events WHERE run_id=? AND status!='complete'").get(f.run)!.n,1);
   assert.equal(selectRunEvent(1,null,()=>eventEncounterSettings.encounterPercent,rocketRegistry,2),null);
   assert.equal(selectRunEvent(4,3,()=>0,rocketRegistry,2,4),null);
@@ -53,7 +53,8 @@ test('intro decline preserves eligibility, cooldown, global chance and single we
 
 test('live registry keeps ordinary candidates before and after a campaign, with cooldown and injected registries',()=>{
  const f=rocketFixture(),s=f.store;try{
-  s.chooseEvent(f.owner,f.run,f.event.id,'skip');
+  // Fixture: completed historical encounter, before testing later registry draws.
+  s.db.prepare("UPDATE run_events SET status='complete' WHERE id=?").run(f.event.id);
   const live=new RunEvents(s.db,()=>0);
   s.db.prepare('UPDATE run_encounter_progress SET cleared_count=2 WHERE run_id=?').run(f.run);
   live.encounter(f.run,2);assert.equal(live.view(f.run),null);
@@ -116,7 +117,7 @@ test('failed victory receipt rolls back campaign, wallet and battle together',()
  const f=rocketFixture(),s=f.store;try{
   s.chooseEvent(f.owner,f.run,f.event.id,'challenge');const b=s.currentBattle(f.owner)!;
   s.db.exec("CREATE TRIGGER fail_rocket BEFORE UPDATE OF claimed ON villain_event_encounters BEGIN SELECT RAISE(ABORT,'receipt failure'); END");
-  assert.throws(()=>finishChallengerBattle(s,b.id),/receipt failure/);assert.equal(s.battle(b.id).status,'active');assert.equal(s.view(f.owner).coins,180);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),emptyCampaign);
+  assert.throws(()=>finishChallengerBattle(s,b.id),/receipt failure/);assert.equal(s.battle(b.id).status,'active');assert.equal(s.view(f.owner).coins,225);assert.deepEqual(new VillainCampaigns(s.db).state(f.run),emptyCampaign);
   s.db.exec('DROP TRIGGER fail_rocket');finishChallengerBattle(s,b.id);assert.equal(new VillainCampaigns(s.db).state(f.run).started,1);
  }finally{s.close();}
 });

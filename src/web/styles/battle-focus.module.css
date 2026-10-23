@@ -11,7 +11,7 @@
   display: flex!important;
   flex-wrap: wrap;
   gap: 8px 20px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: #e3edf6;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-keyboard-hints>span) {
@@ -27,13 +27,13 @@
   background: #233648;
   color: #fff;
   padding: 2px 6px;
-  font: 700 11px monospace;
+  font: 700 var(--text-caption) monospace;
 }
 :where(.scope) :global(.gimmick-cycle-hint) {
   position: absolute;
   left: 12px;
   bottom: calc(100% + 4px);
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: #edf4ff;
   white-space: nowrap;
   text-shadow: 0 1px 3px #101324;
@@ -50,7 +50,7 @@
   display: block;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-panel h2) {
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: #e5eef8;
   white-space: nowrap;
   background: #233648e6;
@@ -77,7 +77,7 @@
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-status) {
   display: block;
-  font-size: 10px;
+  font-size: var(--text-xs);
   line-height: 18px;
   margin: 0;
   color: #e1ecf7;
@@ -99,10 +99,10 @@
   height: 46px;
   width: 50px;
   color: #8393a4;
-  font-size: 22px;
+  font-size: var(--text-title);
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-trainer) {
-  font-size: 12px;
+  font-size: var(--text-sm);
   letter-spacing: .3px;
   top: 18px;
   right: 20px;
@@ -129,17 +129,17 @@
     height: 34px;
   }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .team-status) {
-    font-size: 8px;
+    font-size: var(--text-xs);
     line-height: 15px;
     padding: 0 2px;
   }
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .enemy-trainer) {
-    font-size: 10px;
+    font-size: var(--text-xs);
     top: 62px;
     right: 12px;
   }
   :where(.scope) :global(.gimmick-cycle-hint) {
-    font-size: 9px;
+    font-size: var(--text-xs);
   }
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice) {
@@ -150,15 +150,15 @@
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice p) {
   min-width: 0;
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.5;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice strong) {
-  font-size: 24px;
+  font-size: var(--text-3xl);
   overflow-wrap: anywhere;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice>span) {
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 @media(max-width:760px) {
   :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice) {
@@ -167,13 +167,13 @@
     max-width: calc(50% - 18px);
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice p) {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice strong) {
-    font-size: 20px;
+    font-size: var(--text-2xl);
   }
   :where(.scope[data-ui-screen="battle"]) :global(.battle-live .effect-notice>span) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
 }
 @keyframes notice-enter {

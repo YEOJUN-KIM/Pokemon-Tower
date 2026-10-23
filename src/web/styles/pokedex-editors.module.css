@@ -75,7 +75,7 @@
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .dex-dialog-heading h2) {
   color: #f1f5e9;
-  font-size: 16px;
+  font-size: var(--text-lg);
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .dex-dialog-heading>button) {
   border: 1px solid #d99196;
@@ -254,7 +254,7 @@
     padding: 10px;
   }
   :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .dex-dialog-heading h2) {
-    font-size: 14px;
+    font-size: var(--text-md);
   }
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog button) {
@@ -264,7 +264,7 @@
   width: min(520px,calc(100% - 24px));
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-start-dialog :is(>p,.rule-picker p)) {
-  font-size: 12px;
+  font-size: var(--text-sm);
   line-height: 1.8;
   color: #4d6959;
 }
@@ -298,7 +298,7 @@
 }
 :where(.scope) :global(.training-base-value),:where(.scope) :global(.training-iv-value) {
   text-align: center;
-  font-size: 13px;
+  font-size: var(--text-body);
   font-variant-numeric: tabular-nums;
 }
 :where(.scope) :global(.training-iv-value) {
@@ -308,7 +308,7 @@
   background: #829c7c18;
 }
 :where(.scope) :global(.training-iv-value small) {
-  font-size: 9px;
+  font-size: var(--text-xs);
   font-weight: 400;
   white-space: nowrap;
 }
@@ -334,18 +334,18 @@
   margin-bottom: 10px;
 }
 :where(.scope) :global(.stat-details h3) {
-  font-size: 14px;
+  font-size: var(--text-md);
   margin: 0;
   flex: 1;
 }
 :where(.scope) :global(.stat-details header>strong),:where(.scope) :global(.stat-details header>span) {
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 :where(.scope) :global(.stat-details table) {
   width: 100%;
   border-collapse: collapse;
   text-align: center;
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-variant-numeric: tabular-nums;
 }
 :where(.scope) :global(.stat-details th),:where(.scope) :global(.stat-details td) {
@@ -360,13 +360,13 @@
   font-weight: 500;
 }
 :where(.scope) :global(.stat-details td small) {
-  font-size: 9px;
+  font-size: var(--text-xs);
   white-space: nowrap;
   opacity: .75;
 }
 :where(.scope) :global(.stat-details th small) {
   display: block;
-  font-size: 8px;
+  font-size: var(--text-xs);
   opacity: .75;
 }
 :where(.scope) :global(.stat-details .iv-perfect) {
@@ -384,12 +384,12 @@
 :where(.scope) :global(.stat-details-note) {
   display: block;
   margin-top: 10px;
-  font-size: 10px;
+  font-size: var(--text-xs);
   line-height: 1.6;
   word-break: keep-all;
 }
 :where(.scope) :global(.dex-partner-ivs) {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: #537b61;
   background: #dce8d8;
   padding: 5px 9px;
@@ -403,16 +403,16 @@
   font-synthesis: weight;
 }
 :global(body) :where(.scope) :global(.training-editor :is(.training-base-value,.training-iv-value,.training-stepper input)) {
-  font-size: 18px;
+  font-size: var(--text-xl);
 }
 :global(body) :where(.scope) :global(.training-editor .training-stat-value) {
-  font-size: 20px;
+  font-size: var(--text-2xl);
 }
 :global(body) :where(.scope) :global(.training-editor .radar-value) {
-  font-size: 22px;
+  font-size: var(--text-title);
 }
 :global(body) :where(.scope) :global(.training-editor .training-iv-value small) {
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: 400;
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog :is(.training-base-value,.training-iv-value)) {
@@ -422,7 +422,7 @@
   color: #526459;
 }
 :global(body) :where(.scope) :global(.training-editor .training-stat-labels) {
-  font-size: 11px;
+  font-size: var(--text-caption);
 }
 :global(body:has(.dex-center)) :where(.scope) :global(.dex-settings-dialog .training-stat-labels) {
   color: #405d49;
@@ -442,19 +442,19 @@
     width: 36px;
   }
   :where(.scope) :global(.training-base-value),:where(.scope) :global(.training-iv-value) {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
   :where(.scope) :global(.training-iv-value small) {
-    font-size: 8px;
+    font-size: var(--text-xs);
   }
   :where(.scope) :global(.stat-details) {
     padding: 9px;
   }
   :where(.scope) :global(.stat-details table) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
   :where(.scope) :global(.stat-details td small) {
-    font-size: 8px;
+    font-size: var(--text-xs);
   }
   :where(.scope) :global(.stat-details th),:where(.scope) :global(.stat-details td) {
     padding: 8px 2px;
@@ -462,13 +462,13 @@
 }
 @media(max-width:540px) {
   :global(body) :where(.scope) :global(.training-editor :is(.training-base-value,.training-iv-value,.training-stepper input)) {
-    font-size: 16px;
+    font-size: var(--text-lg);
   }
   :global(body) :where(.scope) :global(.training-editor .training-iv-value small) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
   :global(body) :where(.scope) :global(.training-editor .training-stat-labels) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
 }
 :global(body) :where(.scope) :global(.training-editor .training-iv-value),:where(.scope) :global(.stat-details .stat-iv-value) {
@@ -515,7 +515,7 @@
 }
 :global(body) :where(.scope) :global(.training-editor .radar-max-star) {
   fill: #a4770b;
-  font-size: 15px;
+  font-size: var(--text-button);
 }
 :global(body) :where(.scope) :global(.training-editor .radar-max-point) {
   fill: #ffdc66;
@@ -532,7 +532,7 @@
   background: transparent;
   box-shadow: none;
   color: inherit;
-  font-size: 12px;
+  font-size: var(--text-sm);
   text-align: left;
   padding: 4px 2px;
   min-height: 24px;
@@ -549,11 +549,11 @@
   border: 1px solid #a8bea9;
   border-radius: 6px;
   color: #355342;
-  font-size: 14px;
+  font-size: var(--text-md);
   text-align: left;
 }
 :where(.scope) :global(.training-trait-button>span) {
-  font-size: 11px;
+  font-size: var(--text-caption);
   opacity: .75;
 }
 :where(.scope) :global(.training-editor .training-choice) {
@@ -593,10 +593,10 @@
   color: #355342;
 }
 :where(.scope) :global(.training-ability-options strong) {
-  font-size: 16px;
+  font-size: var(--text-lg);
 }
 :where(.scope) :global(.training-ability-options small) {
-  font-size: 13px;
+  font-size: var(--text-body);
   line-height: 1.7;
   word-break: keep-all;
   color: inherit;
@@ -627,6 +627,6 @@
     grid-template-columns: repeat(3,minmax(0,1fr));
   }
   :where(.scope) :global(.training-ability-options small) {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
 }

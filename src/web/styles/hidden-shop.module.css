@@ -1,21 +1,21 @@
 .scope {box-sizing:border-box;color:#edf5ed;}
 .shop {position:absolute;inset:12px;z-index:21;padding:16px;display:flex;flex-direction:column;min-height:0;background:#263341f5;border:2px solid #9e6273;}
 .heading {display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
-.heading h2 {margin:0;font-size:18px;}.heading p {font-size:13px;margin:4px 0;}
-.wallets {display:flex;gap:8px 18px;flex-wrap:wrap;font-size:12px;}
+.heading h2 {margin:0;font-size:var(--text-xl);}.heading p {font-size:var(--text-body);margin:4px 0;}
+.wallets {display:flex;gap:8px 18px;flex-wrap:wrap;font-size:var(--text-sm);}
 .layout {display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;flex:1;min-height:0;margin-top:16px;}
 .products {display:flex;flex-direction:column;gap:5px;overflow:auto;min-height:0;}
 .scope button {font:inherit;color:inherit;background:#293d49;border:1px solid #597784;border-radius:0;min-height:42px;padding:8px 12px;}
-.products button {display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:center;gap:8px;text-align:left;font-size:14px;flex:none;}
+.products button {display:grid;grid-template-columns:32px minmax(0,1fr) auto;align-items:center;gap:8px;text-align:left;font-size:var(--text-md);flex:none;}
 .products img,.products svg {width:32px;height:32px;object-fit:contain;image-rendering:pixelated;}
-.products small {white-space:nowrap;font-size:12px;}
+.products small {white-space:nowrap;font-size:var(--text-sm);}
 .scope button[data-purchased=true] {color:#aebdc2;}
 .productDetail {display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:0;overflow:auto;padding:18px;border:1px solid #597784;text-align:center;line-height:1.6;}
 .productDetail img,.productDetail svg {width:72px;height:72px;object-fit:contain;image-rendering:pixelated;}
-.productDetail h3 {font-size:19px;margin:0;}.productDetail p {font-size:14px;margin:0;}
+.productDetail h3 {font-size:var(--text-title-sm);margin:0;}.productDetail p {font-size:var(--text-md);margin:0;}
 .growth {color:#b4e2ff;}.coins {color:#ffe5a3;}
 .dialogue {display:flex;flex-direction:column;gap:5px;min-height:0;overflow:auto;}
 :global(body) :where(.scope).dialogue :global(.game-dialogue.current-messages) {min-height:0;margin:0;padding:6px 4px;}
-.actions {display:flex;justify-content:flex-end;gap:8px;}.scope .actions button {min-height:38px;padding:6px 18px;font-size:14px;}
-.scope button:disabled {opacity:.45;}.keys {font-size:11px;color:#b3c9d1;}
-@media(max-width:760px){.shop {inset:6px;padding:10px;}.heading {gap:6px;}.heading h2 {font-size:15px;}.wallets {font-size:10px;}.layout {gap:8px;margin-top:8px;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);}.products button {min-height:40px;font-size:11px;grid-template-columns:24px minmax(0,1fr) auto;padding:5px;gap:5px;}.products img,.products svg {width:24px;height:24px;}.products small {font-size:10px;}.productDetail {padding:8px;gap:4px;}.productDetail img,.productDetail svg {width:44px;height:44px;}.productDetail h3 {font-size:14px;}.productDetail p {font-size:11px;}.keys {display:none;}}
+.actions {display:flex;justify-content:flex-end;gap:8px;}.scope .actions button {min-height:38px;padding:6px 18px;font-size:var(--text-md);}
+.scope button:disabled {opacity:.45;}.keys {font-size:var(--text-caption);color:#b3c9d1;}
+@media(max-width:760px){.shop {inset:6px;padding:10px;}.heading {gap:6px;}.heading h2 {font-size:var(--text-button);}.wallets {font-size:var(--text-xs);}.layout {gap:8px;margin-top:8px;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) minmax(0,1fr);}.products button {min-height:40px;font-size:var(--text-caption);grid-template-columns:24px minmax(0,1fr) auto;padding:5px;gap:5px;}.products img,.products svg {width:24px;height:24px;}.products small {font-size:var(--text-xs);}.productDetail {padding:8px;gap:4px;}.productDetail img,.productDetail svg {width:44px;height:44px;}.productDetail h3 {font-size:var(--text-md);}.productDetail p {font-size:var(--text-caption);}.keys {display:none;}}

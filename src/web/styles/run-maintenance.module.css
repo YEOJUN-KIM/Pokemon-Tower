@@ -6,11 +6,11 @@
 }
 :where(.scope) :global(.maintenance-heading h2) {
   margin: 0;
-  font-size: 22px;
+  font-size: var(--text-title);
 }
 :where(.scope) :global(.maintenance-heading>span:last-child) {
   color: #ffe4a2;
-  font-size: 14px;
+  font-size: var(--text-md);
 }
 :where(.scope) :global(.maintenance-menu) {
   display: grid;
@@ -133,15 +133,15 @@
   gap: 12px;
 }
 :where(.scope) :global(.run-partner-name strong) {
-  font-size: 16px;
+  font-size: var(--text-lg);
 }
 :where(.scope) :global(.run-partner-name small) {
-  font: 700 12px Arial,sans-serif;
+  font: 700 var(--text-sm) Arial,sans-serif;
   color: #c5d9dc;
   white-space: nowrap;
 }
 :where(.scope) :global(.run-partner-item),:where(.scope) :global(.run-partner-note) {
-  font-size: 11px;
+  font-size: var(--text-caption);
   line-height: 1.5;
   color: #ccdfda;
   word-break: keep-all;
@@ -184,13 +184,13 @@
     flex-basis: 56px;
   }
   :where(.scope) :global(.run-partner-name strong) {
-    font-size: 14px;
+    font-size: var(--text-md);
   }
   :where(.scope) :global(.run-partner-name) {
     gap: 6px;
   }
   :where(.scope) :global(.run-partner-item),:where(.scope) :global(.run-partner-note) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
 }
 /* Collection identity and move gains are separate rewards. */
@@ -199,7 +199,7 @@
   justify-content: center;
   padding: 5px 8px;
   border: 1px solid #779486;
-  font-size: 11px;
+  font-size: var(--text-caption);
   font-weight: 700;
   line-height: 1.5;
 }
@@ -221,7 +221,7 @@
   border: 1px solid #81dba4;
   background: #233d37;
   color: #edfff6;
-  font-size: 13px;
+  font-size: var(--text-body);
 }
 :where(.scope) :global(.shop-sold-out) {
   opacity: .65;

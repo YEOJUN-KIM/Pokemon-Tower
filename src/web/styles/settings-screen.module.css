@@ -12,7 +12,7 @@
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-heading h1) {
   margin: 0;
-  font-size: 30px;
+  font-size: var(--text-display);
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-back) {
   display: inline-flex;
@@ -22,7 +22,7 @@
   border: 2px solid #778b9d;
   background: #263a48;
   color: #e3edf3;
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-tabs) {
   display: grid;
@@ -35,7 +35,7 @@
   border: 2px solid #647489;
   background: #2b3545;
   color: #b7c9d5;
-  font-size: 14px;
+  font-size: var(--text-md);
 }
 :global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-panel) {
   padding: 18px 24px;
@@ -52,13 +52,13 @@
   line-height: 1.5;
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .setting-note) {
-  font-size: 11px;
+  font-size: var(--text-caption);
   line-height: 1.6;
   margin: 12px 0 0;
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .secondary-button) {
   padding: 9px 12px;
-  font-size: 12px;
+  font-size: var(--text-sm);
   margin-right: 10px;
   margin-top: 6px;
 }
@@ -66,7 +66,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px 22px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: #b7c9d5;
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed kbd) {
@@ -75,7 +75,7 @@
   border: 1px solid #607789;
   padding: 3px 5px;
   color: #dbf5ec;
-  font-size: 10px;
+  font-size: var(--text-xs);
   margin-right: 5px;
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-options) {
@@ -88,7 +88,7 @@
   border: 2px solid #718194;
   background: #2b3545;
   color: #cbdce6;
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-choice-trigger) {
   display: flex;
@@ -100,12 +100,12 @@
   background: #2b3545;
   border: 1px solid #718194;
   color: #dce9ed;
-  font-size: 12px;
+  font-size: var(--text-sm);
   text-align: left;
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .volume-control output) {
   min-width: 40px;
-  font-size: 11px;
+  font-size: var(--text-caption);
   text-align: right;
   color: #c4d1dc;
 }
@@ -123,7 +123,7 @@
   background: #2b3545;
   color: #dce9ed;
   text-align: left;
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-picker) {
   display: flex;
@@ -138,10 +138,10 @@
   border: 1px solid #718194;
   background: #2b3545;
   color: #dce9ed;
-  font-size: 24px;
+  font-size: var(--text-3xl);
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-picker output) {
-  font-size: 24px;
+  font-size: var(--text-3xl);
   min-width: 70px;
   text-align: center;
 }
@@ -156,7 +156,7 @@
 @media(max-width:760px) {
   :where(.scope[data-ui-screen="settings"]) :global(.settings-choice-trigger) {
     max-width: 170px;
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
   :where(.scope[data-ui-screen="settings"]) :global(.settings-options) {
     gap: 5px;
@@ -176,20 +176,20 @@
     padding: 18px 14px;
   }
   :where(.scope[data-ui-screen="settings"]) :global(.settings-heading h1) {
-    font-size: 25px;
+    font-size: var(--text-3xl);
   }
   :where(.scope[data-ui-screen="settings"]) :global(.settings-tabs) {
     gap: 7px;
   }
   :where(.scope[data-ui-screen="settings"]) :global(.settings-tabs button) {
-    font-size: 12px;
+    font-size: var(--text-sm);
     min-height: 42px;
   }
   :global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-panel) {
     padding: 14px;
   }
   :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .setting-row) {
-    font-size: 12px;
+    font-size: var(--text-sm);
     flex-wrap: nowrap;
   }
   :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .setting-row>span:first-child) {
@@ -206,7 +206,7 @@
   }
   :where(.scope[data-ui-screen="settings"]) :global(.settings-key-hints) {
     gap: 10px 14px;
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
 }
 :where(.scope[data-ui-screen="settings"]) :global(.settings-preview-actions) {
@@ -251,7 +251,7 @@
 }
 :global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed .dex-dialog-heading h2) {
   margin: 0;
-  font-size: 18px;
+  font-size: var(--text-xl);
 }
 :global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-tabbed .dex-dialog-heading>button) {
   width: 32px;
@@ -262,7 +262,7 @@
   border: 1px solid #718194;
   background: #2b3545;
   color: #cbdce6;
-  font-size: 18px;
+  font-size: var(--text-xl);
 }
 :global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-dialog .dex-action-options) {
   display: grid;
@@ -276,7 +276,7 @@
   border: 1px solid #718194;
   background: #2b3545;
   color: #e3edf3;
-  font-size: 14px;
+  font-size: var(--text-md);
 }
 :global(body) :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-dialog .dex-action-options button:first-child) {
   background: #29454a;
@@ -298,7 +298,7 @@
     max-width: none;
   }
   :where(.scope[data-ui-screen="settings"]) :global(.settings-panel .settings-preview-actions .secondary-button) {
-    font-size: 10px;
+    font-size: var(--text-xs);
     padding: 8px;
   }
   :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-picker) {
@@ -306,7 +306,7 @@
     padding: 16px 0;
   }
   :where(.scope[data-ui-screen="settings"]) :global(.settings-volume-dialog .setting-note) {
-    font-size: 11px;
+    font-size: var(--text-caption);
     line-height: 1.6;
   }
 }

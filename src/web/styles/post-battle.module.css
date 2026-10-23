@@ -4,12 +4,12 @@
 .candidates {display:flex;flex-direction:column;gap:16px;}
 .cards.cards.cards {display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px!important;}
 .card.card.card {display:flex;flex-direction:column;align-items:center;justify-content:center;height:auto!important;min-height:210px!important;padding:16px 8px!important;border-radius:6px!important;gap:12px!important;}
-.card strong {font-size:16px;white-space:normal;}
+.card strong {font-size:var(--text-lg);white-space:normal;}
 .card small {color:#f2dc8d;}
 .types {display:flex;justify-content:center;flex-wrap:wrap;gap:5px;}
 .candidateLabels {display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:5px;min-height:22px;}
 .ivBadge.ivBadge {color:#ffc0c0;background:#482f39;border-color:#a16b7a;}
-@media(max-width:600px){.cards.cards.cards {gap:5px!important;}.card.card.card {min-height:170px!important;padding:8px 3px!important;gap:7px!important;}.card strong {font-size:11px;}:where(.scope) .card :global(.pokemon-image-frame){width:70px!important;height:70px!important;}:where(.scope) .types :global(.move-type-badge){font-size:9px;padding:2px;}:where(.scope) .types :global(svg){width:12px;height:12px;}}
+@media(max-width:600px){.cards.cards.cards {gap:5px!important;}.card.card.card {min-height:170px!important;padding:8px 3px!important;gap:7px!important;}.card strong {font-size:var(--text-caption);}:where(.scope) .card :global(.pokemon-image-frame){width:70px!important;height:70px!important;}:where(.scope) .types :global(.move-type-badge){font-size:var(--text-xs);padding:2px;}:where(.scope) .types :global(svg){width:12px;height:12px;}}
 
 :where(.scope).panel.panel :global(.pokemon-choice) {border-radius:6px!important;}
 :where(.scope).panel.panel :global(.pokemon-summary),:where(.scope).panel.panel :global(.summary-body) {background:#1c2432;color:#e9eef5;}

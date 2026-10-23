@@ -21,7 +21,7 @@ test('Groudon and Kyogre have distinct selectable Primal previews with real stat
   assert.equal(form.name,info.species==='Groudon'?'원시그란돈':'원시가이오가');
   assert.equal(Object.values(form.baseStats).reduce((n,v)=>n+v,0),770);
   assert.equal(form.ability,info.species==='Groudon'?'Desolate Land':'Primordial Sea');
-  assert.equal(heldItems[item as keyof typeof heldItems].price,5000);assert.equal(itemShopRule(item as keyof typeof heldItems).rarity,'legendary');
+  assert.equal(heldItems[item as keyof typeof heldItems].price,3750);assert.equal(itemShopRule(item as keyof typeof heldItems).rarity,'legendary');
   assert.ok(canEquipGimmick(info.species,item));assert.equal(canEquipGimmick('Charizard',item),false);
   assert.ok(existsSync('public/sprites/items/'+itemIcon(item as keyof typeof heldItems)+'.'+itemIconExtension(item)));
   assert.ok(existsSync('public/vendor/pokeapi/pokemon/'+info.spriteKey+'.png'));assert.ok(existsSync('public/vendor/pokeapi/pokemon/back/'+info.spriteKey+'.png'));
@@ -45,7 +45,7 @@ test('purchases and equipment use normal inventory; Primal consumes the shared a
   store.db.prepare('INSERT INTO item_shops VALUES (?,?,?)').run(row.run_id,11,'["Red Orb","Blue Orb","Leftovers","Charcoal"]');
   assert.throws(()=>store.purchaseItem('primal',row!.run_id,11,'Red Orb','Charizard'),/기믹/);assert.equal(store.view('primal').coins,10000);
   store.purchaseItem('primal',row.run_id,11,'Red Orb','Groudon');store.purchaseItem('primal',row.run_id,11,'Blue Orb','Kyogre');
-  assert.equal(store.view('primal').coins,0);assert.equal(store.view('primal').run!.heldItems!.Groudon,'Red Orb');assert.equal(store.view('primal').run!.heldItems!.Kyogre,'Blue Orb');
+  assert.equal(store.view('primal').coins,2500);assert.equal(store.view('primal').run!.heldItems!.Groudon,'Red Orb');assert.equal(store.view('primal').run!.heldItems!.Kyogre,'Blue Orb');
   row=store.battle(store.enter('primal',row.run_id,11,['Groudon','Kyogre','Charizard']));
  }finally{store.close();}
  const options={rule:'chaos' as const,aiVersion:'damage-policy-v1',teams:{p1:row.player_team,p2:packTeam(['Snorlax','Shuckle','Blissey'])},teraTickets:{p1:1,p2:0}};

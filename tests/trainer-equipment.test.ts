@@ -36,7 +36,7 @@ test('equipment purchases occupy no Pokemon slot, coexist, persist, and reject d
   }
   assert.deepEqual(store.trainerEquipment(id),['Dynamax Band','Tera Orb']);
   assert.deepEqual(store.view('equipment').run!.heldItems,{});assert.deepEqual(store.view('equipment').run!.itemBag,{});
-  assert.equal(store.view('equipment').coins,10000);
+  assert.equal(store.view('equipment').coins,12500);
   const battle=store.battle(store.enter('equipment',id,11,starters));
   assert.deepEqual(JSON.parse(battle.trainer_equipment!),['Dynamax Band','Tera Orb']);
   assert.ok(Showdown.Teams.unpack(battle.player_team)!.every(p=>!p.item));

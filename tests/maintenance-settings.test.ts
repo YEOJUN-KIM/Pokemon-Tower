@@ -6,11 +6,11 @@ import {eventEncounterSettings,eventDefinitions,eventDefinition,type RunEventReg
 import {selectRunEvent} from '../src/game/run-events';
 import {normalNpcStage,normalNpcStageRange} from '../src/data/normal-mode-stages';
 
-test('production encounter gate stays at the reviewed 15 percent, without changing v1 weighted selection',()=>{
- assert.equal(eventEncounterSettings.encounterPercent,15);
+test('production encounter gate stays at the reviewed 20 percent, without changing v1 weighted selection',()=>{
+ assert.equal(eventEncounterSettings.encounterPercent,20);
  assert.ok(Number.isInteger(eventEncounterSettings.cooldownFloors)&&eventEncounterSettings.cooldownFloors>=0);
  const selected=Array.from({length:100},(_,roll)=>selectRunEvent(1,null,max=>max===100?roll:0));
- assert.equal(selected.filter(Boolean).length,15);
+ assert.equal(selected.filter(Boolean).length,20);
 });
 
 test('event definitions have valid gates, weights, distinct choices and internal result tables',()=>{

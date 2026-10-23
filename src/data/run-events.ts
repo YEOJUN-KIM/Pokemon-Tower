@@ -5,7 +5,7 @@ import {raidEventSettings,type RaidEventView} from './raids';
 import {hiddenShopEventSettings,type HiddenShopView} from './hidden-shop';
 import type {RewardResult,WeightedRewardOption} from './rewards';
 // Shared encounter gate. Event-kind weights and reward tables are separate below.
-export const eventEncounterSettings={encounterPercent:15,cooldownFloors:2} as const;
+export const eventEncounterSettings={encounterPercent:20,cooldownFloors:2} as const;
 // Frozen reward table for saved v1 runs; v2 uses mysteryChestResults.
 export const legacyChestRewards={coinsPercent:80,coins:150,eggTickets:1} as const;
 export type EventReward={kind:'coins'|'egg-ticket';amount:number};
@@ -29,7 +29,7 @@ const leave={id:'skip',label:'지나간다',outcome:'leave'} as const;
 function rocketDefinition(kind:RocketStage):EventDefinition{
  const stage=rocketCampaignSettings.stages[kind];
  return {title:stage.title,summary:stage.summary,intro:stage.intro,weight:stage.weight,minFloor:stage.minFloor,minRulesVersion:2,
- choices:kind==='rocket-intro'?[{id:'challenge',label:'들어가 본다',outcome:'villain'},leave]:[{id:'challenge',label:'승부한다',outcome:'villain'}]};
+ choices:[{id:'challenge',label:'승부한다',outcome:'villain'}]};
 }
 export const eventDefinitions={
  'villain-campaign':{title:'조직의 흔적',summary:'타워 내부에서 조직원을 마주쳤다.',intro:'조직원이 앞을 가로막았다.',weight:0,choices:[{id:'challenge',label:'배틀 시작',outcome:'villain'}]},

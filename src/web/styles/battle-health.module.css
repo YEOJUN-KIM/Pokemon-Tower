@@ -36,11 +36,11 @@
   align-items: center;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.health-heading strong) {
-  font-size: 15px;
+  font-size: var(--text-button);
   letter-spacing: -.4px;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.health-heading>span) {
-  font-size: 10px;
+  font-size: var(--text-xs);
   color: #8b9985;
   font-family: monospace;
 }
@@ -50,7 +50,7 @@
   gap: 7px;
 }
 :where(.scope[data-ui-screen="battle"]) :global(.hp-row>span) {
-  font-size: 8px;
+  font-size: var(--text-xs);
   letter-spacing: .5px;
   font-weight: 800;
   color: #899579;
@@ -70,7 +70,7 @@
 }
 :where(.scope[data-ui-screen="battle"]) :global(.hp-number) {
   text-align: right;
-  font-size: 9px;
+  font-size: var(--text-xs);
   color: #849278;
   margin-top: 5px;
   font-family: monospace;
@@ -134,7 +134,7 @@
 }
 @media(max-width:540px) {
   :where(.scope[data-ui-screen="battle"]) :global(.health-heading strong) {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
 }
 @media(max-width:540px) {
@@ -187,7 +187,7 @@
 }
 @media(max-width:760px) {
   :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading strong) {
-    font-size: 11px;
+    font-size: var(--text-caption);
   }
 }
 @media(max-width:760px) {
@@ -244,19 +244,19 @@
   color: #fff9e5;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading strong) {
-  font-size: 16px;
+  font-size: var(--text-lg);
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-number) {
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 @media(max-width:760px) {
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading strong) {
-    font-size: 12px;
+    font-size: var(--text-sm);
   }
 }
 @media(max-width:760px) {
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-number) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
 }
 :where(.scope) :global(.health-status) {
@@ -265,7 +265,7 @@
 :where(.scope) :global(.health-status b) {
   display: inline-block;
   padding: 3px 8px;
-  font-size: 14px;
+  font-size: var(--text-md);
   border: 2px solid currentColor;
   background: #242031;
 }
@@ -289,13 +289,13 @@
   padding: 13px 16px 10px;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading strong) {
-  font-size: 20px;
+  font-size: var(--text-2xl);
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading>span) {
-  font-size: 14px;
+  font-size: var(--text-md);
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-number) {
-  font-size: 16px;
+  font-size: var(--text-lg);
   margin-top: 6px;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-row) {
@@ -303,7 +303,7 @@
   gap: 8px;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-row>span) {
-  font-size: 12px;
+  font-size: var(--text-sm);
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-track) {
   height: 11px;
@@ -318,17 +318,17 @@
 }
 @media(max-width:760px) {
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading strong) {
-    font-size: 14px;
+    font-size: var(--text-md);
   }
 }
 @media(max-width:760px) {
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .health-heading>span) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
 }
 @media(max-width:760px) {
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-number) {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
 }
 @media(max-width:760px) {
@@ -344,7 +344,7 @@
 }
 @media(max-width:760px) {
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-room .hp-row>span) {
-    font-size: 10px;
+    font-size: var(--text-xs);
   }
 }
 @media(max-width:760px) {
@@ -354,7 +354,7 @@
 }
 @media(max-width:760px) {
   :where(.scope) :global(.health-status b) {
-    font-size: 11px;
+    font-size: var(--text-caption);
     padding: 2px 5px;
   }
 }
@@ -377,12 +377,12 @@
   bottom: 8%;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-heading strong) {
-  font-size: 18px;
+  font-size: var(--text-xl);
   color: #f4f5e9;
   line-height: 1.4;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-heading>span) {
-  font-size: 11px;
+  font-size: var(--text-caption);
   color: #dce2cf;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-row) {
@@ -394,7 +394,7 @@
   padding: 2px 3px;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-row>span) {
-  font: 700 11px monospace;
+  font: 700 var(--text-caption) monospace;
   color: #e8c96c;
   padding: 0 6px 0 2px;
 }
@@ -409,7 +409,7 @@
   box-shadow: inset 0 2px 0 #ffffff40;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-number) {
-  font-size: 12px;
+  font-size: var(--text-sm);
   color: #f0f1e3;
   margin-top: 4px;
 }
@@ -447,12 +447,12 @@
 }
 @media(max-width:760px) {
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-heading strong) {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
 }
 @media(max-width:760px) {
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-number) {
-    font-size: 10px;
+    font-size: var(--text-xs);
     margin-top: 4px;
   }
 }
@@ -463,7 +463,7 @@
 }
 @media(max-width:760px) {
   :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .hp-row>span) {
-    font-size: 9px;
+    font-size: var(--text-xs);
     padding-right: 5px;
   }
 }
@@ -487,7 +487,7 @@
   vertical-align: middle;
 }
 :global(body) :where(.scope[data-ui-screen="battle"]) :global(.battle-live .health-types .move-type-badge) {
-  font-size: 10px;
+  font-size: var(--text-xs);
   padding: 1px 3px;
   gap: 2px;
 }

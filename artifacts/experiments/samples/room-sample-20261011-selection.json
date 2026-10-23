@@ -1,9 +1,0 @@
-{
-  "selectedMode": "both",
-  "caseId": "auto-room-1",
-  "casesFile": "artifacts/reliable-samples-20261011-room-corrected-cases.json",
-  "sha256": "d6633f631b11f360f0d514141ae555b72592d034599efa4d121d4eb364240e31",
-  "sourceCases": "artifacts/room-sample-20261011-both-cases.json",
-  "audit": "artifacts/room-sample-20261011-audit.json",
-  "scope": "Experimental starting sample only; other 17 samples and live game untouched. Next baseline candidate, not global balance validation."
-}

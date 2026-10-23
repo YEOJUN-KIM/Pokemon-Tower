@@ -1,3 +1,0 @@
-# Keep previously versioned reference files; other generated outputs stay local.
-!height-check.json
-!timing.json

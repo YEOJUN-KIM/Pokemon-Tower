@@ -1,15 +1,31 @@
+# Dependencies
 node_modules/
 .pnpm-store/
-logs/
-dist/
+
+# Next.js build/cache
 .next/
-.data/
-pokemon-backups/
-.local-backups/
 next-env.d.ts
 *.tsbuildinfo
+
+# Generated QA / reports
+artifacts/
+
+# Local runtime/cache data
+.data/
+
+# Test outputs
 test-results/
 playwright-report/
+
+# Logs
+logs/
+
+# Deployment packages and local backups
+dist/
+pokemon-backups/
+.local-backups/
+
+# Local environment settings
 .env*
 !.env.example
 
@@ -19,21 +35,3 @@ playwright-report/
 
 # Local conversation attachments and large reproducible experiment logs.
 .codex-remote-attachments/
-# Experiment outputs stay local; tracked history is preserved.
-artifacts/**
-!artifacts/**/
-!artifacts/**/.gitignore
-!artifacts/**/*.md
-!artifacts/reports/**/*.json
-!artifacts/reports/npc/*.csv
-# Curated QA media referenced by current documentation.
-!artifacts/qa/previews/egg-results/background-colors.png
-!artifacts/qa/previews/egg-results/background-effects.gif
-!artifacts/qa/previews/egg-results/legendary-effects.gif
-!artifacts/qa/previews/events/chest-event.gif
-!artifacts/qa/screenshots/flamethrower-prototype/frame-09.png
-!artifacts/qa/screenshots/launcher/pocket-launcher.png
-# Raw logs and transient QA output stay local.
-artifacts/temporary/
-artifacts/**/*.jsonl
-artifacts/**/*.log

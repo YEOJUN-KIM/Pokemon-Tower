@@ -182,6 +182,6 @@ test('schema 39 migration adds storage while preserving old event snapshots',()=
  try{
   store.chooseEvent(f.owner,f.run,f.eventId,'leave');const old=store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId);
   store.db.exec('DROP TABLE hidden_shop_events; PRAGMA user_version=39');store.close();store=new TowerStore(path);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,46);assert.deepEqual(store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId),old);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,47);assert.deepEqual(store.db.prepare('SELECT * FROM run_events WHERE id=?').get(f.eventId),old);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
  }finally{store.close();}
 });

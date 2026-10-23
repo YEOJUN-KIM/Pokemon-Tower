@@ -76,7 +76,7 @@ test('TM rolls exclude owned moves, preserve original slot count, and ignore ros
 test('v40 semantic migration keeps purchased/consumed machines and clamps unique tools; reopen is stable',()=>{
  const path=`.data/tests/bag-${randomUUID()}.sqlite`,f=hiddenShopFixture(path);let store=f.store;try{
   grantStoredReward(store.db,f.run,{kind:'machine',move:'Earthquake',amount:1});store.db.prepare('UPDATE run_reward_inventory SET quantity=0 WHERE run_id=?').run(f.run);store.db.prepare('INSERT INTO run_item_bag VALUES (?,?,5)').run(f.run,'Focus Sash');store.db.exec('PRAGMA user_version=40');store.close();store=new TowerStore(path);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,46);assert.ok(ownsMachine(store.db,f.run,'Earthquake'));assert.equal(store.view(f.owner).run!.itemBag!['Focus Sash'],1);const before=store.view(f.owner);store.close();store=new TowerStore(path);assert.deepEqual(store.view(f.owner),before);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,47);assert.ok(ownsMachine(store.db,f.run,'Earthquake'));assert.equal(store.view(f.owner).run!.itemBag!['Focus Sash'],1);const before=store.view(f.owner);store.close();store=new TowerStore(path);assert.deepEqual(store.view(f.owner),before);
  }finally{store.close();}
 });
 

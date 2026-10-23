@@ -13,11 +13,17 @@ export function initializeTowerDatabase(db:DatabaseSync,repairArchivedOwnership:
     db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
     const version = db.prepare('PRAGMA user_version').get() as {user_version: number};
     const eventHadOrder=(db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(c=>c.name==='encounter_order');
-    if (version.user_version > 46) throw new Error('Unsupported database schema');
+    if (version.user_version > 47) throw new Error('Unsupported database schema');
     // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
     if(version.user_version<43)db.exec('PRAGMA foreign_keys=OFF');
     try {transaction(db,() => {
       db.exec(schema);
+      if(!(db.prepare('PRAGMA table_info(player_tutorial)').all() as {name:string}[]).some(column=>column.name==='selected_species')){
+        db.exec(`ALTER TABLE player_tutorial ADD COLUMN selected_species TEXT;
+          UPDATE player_tutorial SET selected_species=json_extract(party,'$[0]')
+          WHERE step='RemovePokemon' AND json_array_length(party)=1
+          AND EXISTS(SELECT 1 FROM unlocks WHERE player_id=player_tutorial.player_id AND species=json_extract(player_tutorial.party,'$[0]'));`);
+      }
       if(!(db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(column=>column.name==='kind'))db.exec("ALTER TABLE run_events ADD COLUMN kind TEXT NOT NULL DEFAULT 'mystery-chest' CHECK(kind IN ('mystery-chest','breeder-gift','traveling-merchant'))");
       // Event IDs are content, not schema. Rebuild only this leaf table; keep
       // receipts, pending rewards, completed rows and the one-pending index.

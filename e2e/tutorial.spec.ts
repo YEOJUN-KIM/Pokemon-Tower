@@ -22,7 +22,7 @@ const step=(page:Page,value:string)=>expect(page.getByTestId('tutorial-overlay')
 const collection=async(page:Page)=>(await (await page.request.get('/api/battle?view=collection')).json());
 async function choose(page:Page,name:string){await page.getByRole('button',{name:`${name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'포켓몬 선택하기',exact:true}).click();}
 
-test('new user spends the one-time 256P grant on 32 stat points and completes the tutorial',async({page,context})=>{
+for(const partner of [{species:'Blaziken',name:'번치코'},{species:'Venusaur',name:'이상해꽃'}])test(`new user completes onboarding with ${partner.species}, without selecting Skeledirge`,async({page,context})=>{
   test.setTimeout(120000);
   const {store,owner}=await fixture(context);
   try {
@@ -38,24 +38,30 @@ test('new user spends the one-time 256P grant on 32 stat points and completes th
     await expect(page.locator('[data-tutorial="game-start"]')).toBeVisible();
     await page.screenshot({path:'test-results/tutorial-start.png'});
     await page.getByRole('link',{name:'게임 시작',exact:true}).click();await step(page,S.SelectPokemon);
-    await choose(page,'리자몽');await step(page,S.RemovePokemon);
-    await page.reload();await step(page,S.RemovePokemon);await expect(page.locator('[data-party-slot="0"]')).toContainText('리자몽');
+    await choose(page,partner.name);await step(page,S.RemovePokemon);
+    await page.reload();await step(page,S.RemovePokemon);await expect(page.locator('[data-party-slot="0"]')).toContainText(partner.name);
     await page.locator('[data-party-slot="0"]').click();await page.getByRole('button',{name:'파티에서 제외',exact:true}).click();await step(page,S.PokemonInfo);
-    await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'기본 정보',exact:true}).click();await step(page,S.PokemonInfoViewed);
+    await page.reload();await step(page,S.PokemonInfo);
+    expect((await (await page.request.get('/api/tutorial')).json()).selectedSpecies).toBe(partner.species);
+    await expect(page.getByTestId('tutorial-overlay')).toHaveAttribute('data-tutorial-target-species',partner.species);
+    await page.getByRole('button',{name:'라우드본 상세 보기',exact:true}).click({force:true});
+    await expect(page.getByRole('dialog',{name:'라우드본 선택 메뉴'})).toHaveCount(0);
+    await page.getByRole('button',{name:`${partner.name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'기본 정보',exact:true}).click();await step(page,S.PokemonInfoViewed);
     await expect(page.locator('[data-tutorial="pokemon-info"]')).toBeVisible();
     await page.getByRole('button',{name:'확인했어요',exact:true}).click();await step(page,S.StatUpgrade);
-    await page.getByRole('button',{name:'리자몽 기본 정보 닫기',exact:true}).click();
-    await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 설정',exact:true}).click();
+    await page.reload();await step(page,S.StatUpgrade);
+    await expect(page.getByTestId('tutorial-overlay')).toHaveAttribute('data-tutorial-target-species',partner.species);
+    await page.getByRole('button',{name:`${partner.name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'포켓몬 설정',exact:true}).click();
     await page.locator('[data-settings-row="hp"]').click();
     await page.getByRole('button',{name:'MAX',exact:true}).click();await expect(page.getByTestId('ev-amount')).toHaveText('32');
     await page.getByRole('button',{name:'적용',exact:true}).click();await page.getByRole('button',{name:`${TUTORIAL_GROWTH_POINTS}P로 설정 저장`,exact:true}).click();await step(page,S.CompleteTeam);
-    expect((await collection(page)).training.find((p:{species:string})=>p.species==='Charizard').profile.evs.hp).toBe(32);
+    expect((await collection(page)).training.find((p:{species:string})=>p.species===partner.species).profile.evs.hp).toBe(32);
     expect((await collection(page)).tower.growthPoints).toBe(0);
-    await page.getByRole('button',{name:'리자몽 포켓몬 설정 닫기',exact:true}).click();
-    for(const name of ['리자몽','거북왕','이상해꽃'])await choose(page,name);
+    await page.getByRole('button',{name:`${partner.name} 포켓몬 설정 닫기`,exact:true}).click();
+    for(const name of [partner.name,'리자몽','거북왕'])await choose(page,name);
     await step(page,S.StartBattle);
     await page.reload();await step(page,S.StartBattle);
-    await expect(page.getByTestId('team-preview')).toContainText('이상해꽃');
+    await expect(page.getByTestId('team-preview')).toContainText(partner.name);
     await page.locator('[data-tutorial="start-battle"]').click();await page.getByRole('button',{name:'예',exact:true}).click();
     await expect(page.getByRole('button',{name:'연출 건너뛰기',exact:true})).toBeVisible({timeout:15000});await page.getByRole('button',{name:'연출 건너뛰기',exact:true}).click();
     await step(page,S.TypeGuide);await page.getByRole('button',{name:'싸운다',exact:true}).click();

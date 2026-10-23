@@ -6,7 +6,7 @@ import {TutorialStep,tutorialCopy,tutorialHints,type TutorialState} from '../dat
 import {selectGameCursor} from './game-keyboard';
 import styles from './styles/tutorial.module.css';
 
-type TutorialContextValue={state:TutorialState|null;report:(event:string,party?:string[])=>Promise<void>;refresh:()=>Promise<void>};
+type TutorialContextValue={state:TutorialState|null;report:(event:string,party?:string[],species?:string)=>Promise<void>;refresh:()=>Promise<void>};
 const TutorialContext=createContext<TutorialContextValue>({state:null,report:async()=>{},refresh:async()=>{}});
 export const useTutorial=()=>useContext(TutorialContext);
 
@@ -15,7 +15,8 @@ function guideFor(state:TutorialState,path:string):Guide {
   const dialog=Array.from(document.querySelectorAll<HTMLDialogElement>('dialog[open]')).at(-1);
   const host=dialog??document.body,scope=dialog??document;
   const find=(selector:string)=>scope.querySelector<HTMLElement>(selector);
-  const card=()=>find('.dex-card.selected:not(.locked)')??find('.dex-card:not(.locked)');
+  const card=()=>state.selectedSpecies?find(`.dex-card[data-species="${CSS.escape(state.selectedSpecies)}"]:not(.locked)`):find('[data-tutorial="starter-list"]');
+  const matchesTarget=!state.selectedSpecies||dialog?.dataset.pokemonSpecies===state.selectedSpecies;
   const close=()=>find('.dex-dialog-heading>button');
   const copy=tutorialCopy[state.step];
   let target:HTMLElement|null=null,next=copy.next,text=copy.text,resume:string|undefined;
@@ -26,11 +27,11 @@ function guideFor(state:TutorialState,path:string):Guide {
     case TutorialStep.RemovePokemon:
       target=find('[aria-label="파티에서 제외"], [aria-label="포켓몬 제외하기"]')??find('[data-party-slot]:not([data-empty])');break;
     case TutorialStep.PokemonInfo:
-      target=find('[aria-label="기본 정보"]')??card();break;
+      target=dialog?(matchesTarget?find('[aria-label="기본 정보"]')??close():close()):card();break;
     case TutorialStep.PokemonInfoViewed:
-      target=find('[data-tutorial="pokemon-info"]');break;
+      target=matchesTarget?find('[data-tutorial="pokemon-info"]'):close();break;
     case TutorialStep.StatUpgrade:
-      target=find('[data-testid="ev-picker"] .game-dialog-body')??find('[data-settings-save]:not(:disabled)')??find('[data-tutorial="stat-training"]')??find('[aria-label="포켓몬 설정"]')??(dialog?close():card());
+      target=dialog&&!matchesTarget?close():find('[data-testid="ev-picker"] .game-dialog-body')??find('[data-settings-save]:not(:disabled)')??find('[data-tutorial="stat-training"]')??find('[aria-label="포켓몬 설정"]')??(dialog?close():card());
       if(find('[data-testid="ev-amount"]'))text=tutorialHints.statPicker;
       break;
     case TutorialStep.CompleteTeam:
@@ -55,7 +56,7 @@ export function TutorialManager({children}:{children:ReactNode}) {
   const path=usePathname(),router=useRouter();
   const [state,setState]=useState<TutorialState|null>(null),[error,setError]=useState(''),[busy,setBusy]=useState(false),[confirmSkip,setConfirmSkip]=useState(false);
   const stateRef=useRef(state);stateRef.current=state;
-  const queue=useRef(Promise.resolve()),revision=useRef(0),failed=useRef<{event:string;party?:string[]}|null>(null),saving=useRef(false);
+  const queue=useRef(Promise.resolve()),revision=useRef(0),failed=useRef<{event:string;party?:string[];species?:string}|null>(null),saving=useRef(false);
   const refresh=useCallback(async()=>{
     if(saving.current||failed.current)return;
     const version=++revision.current;
@@ -66,15 +67,15 @@ export function TutorialManager({children}:{children:ReactNode}) {
       const data:TutorialState=await response.json();if(version===revision.current){setState(data);setError('');}
     }catch(e){setError(e instanceof Error?e.message:'서버에 연결할 수 없습니다.');}
   },[]);
-  const report=useCallback((event:string,party?:string[])=>{
+  const report=useCallback((event:string,party?:string[],species?:string)=>{
     const work=async()=>{
       if(!stateRef.current||stateRef.current.step===TutorialStep.Completed)return;
       ++revision.current;setBusy(true);saving.current=true;
       try {
-        const response=await fetch('/api/tutorial',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event,expected:stateRef.current.step,party})});
+        const response=await fetch('/api/tutorial',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event,expected:stateRef.current.step,party,species})});
         const data=await response.json();if(!response.ok)throw Error(data.error??'안내 진행을 저장하지 못했습니다.');
         stateRef.current=data;setState(data);setError('');failed.current=null;
-      }catch(e){failed.current={event,party};setError(e instanceof Error?e.message:'서버에 연결할 수 없습니다.');}
+      }catch(e){failed.current={event,party,species};setError(e instanceof Error?e.message:'서버에 연결할 수 없습니다.');}
       finally{setBusy(false);saving.current=false;}
     };
     queue.current=queue.current.then(work,work);return queue.current;
@@ -90,7 +91,7 @@ export function TutorialManager({children}:{children:ReactNode}) {
     if(state?.step===TutorialStep.StartGame&&['/battle','/pokedex'].includes(path))void report('enter-selection');
   },[state?.step,path,report]);
   return <TutorialContext.Provider value={{state,report,refresh}}>{children}
-    {state&&state.step!==TutorialStep.Completed&&path!=='/account'&&<TutorialOverlay state={state} path={path} busy={busy} error={error} confirmSkip={confirmSkip} onSkip={()=>setConfirmSkip(true)} onCancelSkip={()=>setConfirmSkip(false)} onConfirmSkip={()=>{void report('skip').then(()=>setConfirmSkip(false));}} onNext={()=>void report('next')} onBegin={()=>void report('begin')} onResume={url=>router.push(url)} onRetry={()=>{const retry=failed.current;if(retry)void report(retry.event,retry.party);else void refresh();}}/>}
+    {state&&state.step!==TutorialStep.Completed&&path!=='/account'&&<TutorialOverlay state={state} path={path} busy={busy} error={error} confirmSkip={confirmSkip} onSkip={()=>setConfirmSkip(true)} onCancelSkip={()=>setConfirmSkip(false)} onConfirmSkip={()=>{void report('skip').then(()=>setConfirmSkip(false));}} onNext={()=>void report('next')} onBegin={()=>void report('begin')} onResume={url=>router.push(url)} onRetry={()=>{const retry=failed.current;if(retry)void report(retry.event,retry.party,retry.species);else void refresh();}}/>}
   </TutorialContext.Provider>;
 }
 
@@ -110,7 +111,7 @@ function TutorialOverlay({state,path,busy,error,confirmSkip,onSkip,onCancelSkip,
     const resize=new ResizeObserver(schedule);resize.observe(document.documentElement);
     window.addEventListener('resize',schedule);document.addEventListener('scroll',schedule,true);measure();
     return()=>{observer.disconnect();resize.disconnect();cancelAnimationFrame(pending);window.removeEventListener('resize',schedule);document.removeEventListener('scroll',schedule,true);};
-  },[state.step,path]);
+  },[state.step,state.selectedSpecies,path]);
   const host=frame?.guide.host;
   useEffect(()=>{
     if(!(host instanceof HTMLDialogElement))return;
@@ -167,7 +168,8 @@ function TutorialOverlay({state,path,busy,error,confirmSkip,onSkip,onCancelSkip,
     else {left=Math.max(12,Math.min(w-width-12,rect.left));top=rect.top>=boxHeight+24?rect.top-boxHeight-12:Math.min(h-boxHeight-12,rect.top+rect.height+12);}
   }
   const copy=tutorialCopy[state.step];
-  return createPortal(<div ref={root} className={styles.layer} data-testid="tutorial-overlay" data-tutorial-step={state.step}>
+  const targetSpecies=frame.guide.target?.dataset.species??frame.guide.target?.closest<HTMLElement>('[data-pokemon-species]')?.dataset.pokemonSpecies;
+  return createPortal(<div ref={root} className={styles.layer} data-testid="tutorial-overlay" data-tutorial-step={state.step} data-tutorial-target-species={targetSpecies}>
     {visible&&<>
       {rect?<><div className={styles.shade} style={{left:0,top:0,width:w,height:rect.top}}/><div className={styles.shade} style={{left:0,top:rect.top,width:rect.left,height:rect.height}}/><div className={styles.shade} style={{left:rect.left+rect.width,top:rect.top,width:Math.max(0,w-rect.left-rect.width),height:rect.height}}/><div className={styles.shade} style={{left:0,top:rect.top+rect.height,width:w,height:Math.max(0,h-rect.top-rect.height)}}/><div className={styles.spotlight} style={rect}/></>:<div className={styles.shade} style={{inset:0}}/>}
       <section data-tutorial-message className={styles.message} role="region" aria-label="튜토리얼 안내" aria-live="polite" style={{left,top,width,maxHeight:h-24}}>

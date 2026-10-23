@@ -38,6 +38,8 @@ function Picture({entry,animated=false,shiny=false,forme}: {entry:PokedexEntry;a
 
 function PokedexContent({entries,initialTower,onStart,startError='',returnToBattle=false}: {entries:PokedexEntry[];initialTower?:TowerView;onStart?:(selected:string[],rule:BattleRule)=>Promise<void>;startError?:string;returnToBattle?:boolean}) {
   const tutorial=useTutorial();
+  const tutorialTarget=tutorial.state?.selectedSpecies;
+  const followingTarget=!!tutorial.state&&[TutorialStep.PokemonInfo,TutorialStep.PokemonInfoViewed,TutorialStep.StatUpgrade].includes(tutorial.state.step as never);
   const partyLoaded=useRef(false);
   useEffect(()=>{if(tutorial.state&&!partyLoaded.current){partyLoaded.current=true;if(tutorial.state.step!==TutorialStep.Completed)setParty(tutorial.state.party);}},[tutorial.state]);
   useEffect(()=>{if(tutorial.state?.step===TutorialStep.SelectPokemon)setFilter('owned');},[tutorial.state?.step]);
@@ -78,6 +80,11 @@ function PokedexContent({entries,initialTower,onStart,startError='',returnToBatt
   useEffect(()=>{setPage(0);},[filter,query,type,generation,specialForm,favoritesOnly]);
 
   const [selected,setSelected] = useState(entries[0].species);
+  useEffect(()=>{
+    if(!followingTarget)return;
+    setFilter('owned');setQuery('');setType('all');setGeneration('all');setSpecialForm('all');setFavoritesOnly(false);
+    if(tutorialTarget)setSelected(tutorialTarget);
+  },[followingTarget,tutorialTarget,tutorial.state?.step]);
   const detail = useRef<HTMLElement>(null);
   async function refresh() {
     setBusy(true); setError('');
@@ -124,6 +131,8 @@ function PokedexContent({entries,initialTower,onStart,startError='',returnToBatt
     && matchesSpecialForm(entry,specialForm)).map(({entry})=>entry);
   const pageSize=grid.columns*grid.rows,pageCount=Math.max(1,Math.ceil(visible.length/pageSize)),currentPage=Math.min(page,pageCount-1);
   const pageEntries=visible.slice(currentPage*pageSize,(currentPage+1)*pageSize);
+  const tutorialTargetIndex=followingTarget&&tutorialTarget?visible.findIndex(entry=>entry.species===tutorialTarget):-1;
+  useEffect(()=>{if(tutorialTargetIndex>=0)setPage(Math.floor(tutorialTargetIndex/pageSize));},[tutorialTargetIndex,pageSize,tutorial.state?.step]);
   // Filter shortcuts preserve the current interaction region across list replacement.
   useLayoutEffect(()=>{
     const previous=shortcutCursor.current;if(!previous)return;shortcutCursor.current=null;
@@ -179,7 +188,7 @@ function PokedexContent({entries,initialTower,onStart,startError='',returnToBatt
   const hasFilters=filter!=='all' || type!=='all' || generation!=='all' || specialForm!=='all' || !!query || favoritesOnly;
   function resetFilters(){setPage(0);setFavoritesOnly(false);setFilter('all');setType('all');setGeneration('all');setSpecialForm('all');setQuery('');}
   function choose(name:string) {
-
+    if(followingTarget&&!tutorialTarget&&unlocked.includes(name))void tutorial.report('select-target',undefined,name);
     setSelected(name);
     setMenu(true);
   }
@@ -223,9 +232,9 @@ function PokedexContent({entries,initialTower,onStart,startError='',returnToBatt
     <PokedexParty party={party} entries={entries} training={training} disabled={starting} onOpen={name=>{setSelected(name);setPartyMenu(name);}} onBrowse={focusList}/></div>
     {confirmStart&&<PokedexDialog title="도전을 시작하시겠습니까?" className="dex-start-dialog" returnFocus=".dex-card.selected" initialFocus="[data-confirm-no]" onClose={()=>setConfirmStart(false)}><p>{party.map(name=>entries.find(entry=>entry.species===name)?.name??name).join(' · ')} · {battleRules[challengeRule(rule)].name}</p><GameChoiceList><GameChoice data-tutorial="start-battle" data-confirm-yes disabled={busy||starting||!!activeRun} onClick={()=>void start()}>예</GameChoice><GameChoice data-confirm-no data-initial-focus onClick={()=>setConfirmStart(false)}>아니요</GameChoice></GameChoiceList></PokedexDialog>}
     {returnToTitle && <PokedexDialog title="타이틀 화면으로 돌아가시겠습니까?" onClose={()=>setReturnToTitle(false)}><div className="dex-action-options"><button data-initial-focus onClick={()=>setReturnToTitle(false)}>계속하기</button><button onClick={()=>router.push('/')}>타이틀로 돌아가기</button></div></PokedexDialog>}
-    {inspecting && <PokedexDialog title={`${current.name} 기본 정보`} large onClose={()=>setInspecting(false)}><div data-tutorial="pokemon-info"><PokemonSummary key={`${current.species}:${saved?.revision??'loading'}`} entry={current} profile={saved?.profile} formOptions={saved?.formOptions}/></div></PokedexDialog>}
+    {inspecting && <PokedexDialog pokemonSpecies={current.species} title={`${current.name} 기본 정보`} large onClose={()=>setInspecting(false)}><div data-tutorial="pokemon-info"><PokemonSummary key={`${current.species}:${saved?.revision??'loading'}`} entry={current} profile={saved?.profile} formOptions={saved?.formOptions}/></div></PokedexDialog>}
     {partyMenu && <PokedexDialog title={`${current.name} 파티 메뉴`} onClose={()=>setPartyMenu(null)}><div className="dex-action-options"><button aria-label="파티에서 제외" data-initial-focus onClick={()=>{changeParty(party.filter(name=>name!==partyMenu));setPartyMenu(null);}}><b>01</b><span><strong>파티에서 제외</strong></span></button><button aria-label="포켓몬 설정" onClick={()=>{setPartyMenu(null);setSettingsMenu(true);}}><b>02</b><span><strong>포켓몬 설정</strong></span></button><button aria-label="취소" onClick={()=>setPartyMenu(null)}><b>03</b><span><strong>취소</strong></span></button></div></PokedexDialog>}
-    {menu && <PokemonActions gender={saved?.profile.gender} shiny={saved?.profile.shiny} entry={shownCurrent} canChoose={!!saved && party.length<3 && !party.includes(current.species)} canAdjust={!!saved} chosen={party.includes(current.species)} full={party.length>=3} onChoose={()=>{if(party.includes(current.species))changeParty(party.filter(name=>name!==current.species));else if(party.length<3){changeParty([...party,current.species]);if(party.length===2&&!activeRun)setConfirmStart(true);}setMenu(false);}} onAdjust={()=>{setMenu(false);setAdjusting(true);}} onInfo={()=>{setMenu(false);setInspecting(true);void tutorial.report('info-open');}} onClose={()=>setMenu(false)}/>}
+    {menu && <PokemonActions pokemonSpecies={current.species} gender={saved?.profile.gender} shiny={saved?.profile.shiny} entry={shownCurrent} canChoose={!!saved && party.length<3 && !party.includes(current.species)} canAdjust={!!saved} chosen={party.includes(current.species)} full={party.length>=3} onChoose={()=>{if(party.includes(current.species))changeParty(party.filter(name=>name!==current.species));else if(party.length<3){changeParty([...party,current.species]);if(party.length===2&&!activeRun)setConfirmStart(true);}setMenu(false);}} onAdjust={()=>{setMenu(false);setAdjusting(true);}} onInfo={()=>{setMenu(false);setInspecting(true);void tutorial.report('info-open',undefined,current.species);}} onClose={()=>setMenu(false)}/>}
 
     {(settingsMenu||adjusting)&&saved&&tower&&<PokemonSettings key={saved.species} entry={saved} pokemon={current} points={tower.growthPoints} onSave={saveTraining} returnFocus={settingsMenu?`[data-party-slot="${party.indexOf(current.species)}"]`:'.dex-card[aria-pressed="true"]'} onClose={()=>{setSettingsMenu(false);setAdjusting(false);}}/>}
     <GameMenuBar controls={focusZone==='filters'?[{key:'← / →',label:'항목 이동'},{key:'Enter / Z',label:'선택'},{key:'↓',label:'목록'}]:focusZone==='rule'?[{key:'Enter / Z',label:'룰 선택'},{key:'↓',label:'검색'}]:party.length===3&&!activeRun?[{key:'Enter',label:'도전 시작'},{key:'Z',label:'선택·해제'},{key:'X',label:'뒤로'}]:[{key:'Enter / Z',label:'선택'},{key:'X',label:'뒤로'}]}>{tutorial.state?.step===TutorialStep.StartBattle&&party.length===3&&!confirmStart&&<button data-tutorial="start-battle" onClick={openStart}>도전 시작</button>}<button className="dex-footer-favorite" data-dex-favorite-toggle disabled={busy||starting||favoriteBusy!==null} aria-pressed={favorites.includes(selected)} onClick={()=>void toggleFavorite(selected)}>★ {favorites.includes(selected)?'등록 해제':'즐겨찾기'} <kbd>F</kbd></button></GameMenuBar>

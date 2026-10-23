@@ -126,7 +126,7 @@ test('v38 old challenger reward JSON remains byte-for-byte intact and pays its o
  try{
   const original=store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(f.event.id)!.candidates_json;
   store.db.exec('PRAGMA user_version=38');store.close();store=new TowerStore(path);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,46);assert.equal(store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(f.event.id)!.candidates_json,original);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,47);assert.equal(store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(f.event.id)!.candidates_json,original);
   const before=store.view(f.owner).coins;store.chooseEvent(f.owner,f.run,f.event.id,'medium');finishChallengerBattle(store,store.currentBattle(f.owner)!.id);assert.equal(store.view(f.owner).coins,before+700);assert.equal(store.permanentView(f.owner).eggTickets,1);
  }finally{store.close();}
 });

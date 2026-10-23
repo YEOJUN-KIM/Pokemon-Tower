@@ -22,6 +22,6 @@ export async function POST(request:NextRequest){try{
   if(!request.headers.get('content-type')?.startsWith('application/json'))throw new BattleRequestError('JSON 요청이 필요합니다.',400);
   const text=await request.text();if(text.length>2048)throw new BattleRequestError('요청이 너무 큽니다.',413);
   const body=JSON.parse(text),{db,owner,tutorial}=context(request);
-  const state=transaction(db,()=>{tutorial.action(owner,body.event,body.expected,body.party);return tutorial.view(owner);});
+  const state=transaction(db,()=>{tutorial.action(owner,body.event,body.expected,body.party,body.species);return tutorial.view(owner);});
   return NextResponse.json(state,{headers});
 }catch(error){return failure(error);}}

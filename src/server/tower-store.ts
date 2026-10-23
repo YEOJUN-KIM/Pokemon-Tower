@@ -860,7 +860,7 @@ export class TowerStore {
       saveTrainingForm(this.db,owner,name,permanentProfile);
       this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,name,JSON.stringify(permanentProfile),revision+1);
       if(run){const snapshots=this.runProfiles(run.id);snapshots[name]=profile;this.db.prepare('UPDATE runs SET profiles=? WHERE id=?').run(JSON.stringify(snapshots),run.id);}
-      if(!run)new TutorialService(this.db).upgraded(owner,before.profile,profile);
+      if(!run)new TutorialService(this.db).upgraded(owner,name,before.profile,profile);
     });
   }
   private settleGrowth(runId:string,outcome:'lost'|'cleared'|'abandoned') {

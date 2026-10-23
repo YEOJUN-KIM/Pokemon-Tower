@@ -4,7 +4,7 @@
 
 ## 유지할 기준
 
-- DB schema 46, 새 일반 전투 기본 정책 tower-policy-v13. 이벤트 rules v1/v2·NPC snapshot v1/v2·빌런 트랙 버전·AI 버전은 각각 별개다.
+- DB schema 47, 새 일반 전투 기본 정책 tower-policy-v13. 이벤트 rules v1/v2·NPC snapshot v1/v2·빌런 트랙 버전·AI 버전은 각각 별개다.
 - 일반 이벤트 발생률 15%·통과 순서 쿨다운 2. 신규 빌런 트랙은 독립 판정이다. [이벤트 설정과 추가 절차](engineering/EVENT_SYSTEM.md).
 - NPC 입력은 scripts/data/npc/normal-npc-samples.json, runtime은 export 생성물이다. 현재 180행·911마리 후보, allFloors 156행. 옛 전체 재생성 부트스트랩은 삭제했다. [NPC 데이터](engineering/NPC_DATA.md).
 - 알은 별도 기본 뽑기 페이지다. 지역/타입 선택·알 탐색 연구 UI를 다시 추가하지 않는다. 관련 서버 경로와 기존 영수증은 호환을 위해 유지한다. [알](gameplay/EGGS.md).

@@ -127,7 +127,7 @@ test('rank rewards: coins, automatic vitamins/voucher, usable missing gimmick/fa
 test('v45 additive migration preserves active snapshot, receipts, pity and foreign keys on repeated reopen',()=>{
  const path=`.data/tests/migrate-track-${randomUUID()}.sqlite`,f=trackFixture(path);let s=f.store;try{
   const before=s.view(f.owner);s.db.exec('DROP TABLE tool_voucher_draws; DROP TABLE run_event_followups; DROP TABLE run_villain_tracks; PRAGMA user_version=45');
-  s.close();s=new TowerStore(path,()=>0,trackRegistry);assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,46);assert.deepEqual(s.view(f.owner),before);assert.deepEqual(s.db.prepare('PRAGMA foreign_key_check').all(),[]);
+  s.close();s=new TowerStore(path,()=>0,trackRegistry);assert.equal(s.db.prepare('PRAGMA user_version').get()!.user_version,47);assert.deepEqual(s.view(f.owner),before);assert.deepEqual(s.db.prepare('PRAGMA foreign_key_check').all(),[]);
   const state=s.view(f.owner);s.close();s=new TowerStore(path,()=>0,trackRegistry);assert.deepEqual(s.view(f.owner),state);
  }finally{s.close();}
 });

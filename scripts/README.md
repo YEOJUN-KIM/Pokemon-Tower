@@ -20,6 +20,7 @@
 | NPC 입력·런타임 생성 | 현재 검토 입력 수정 → node scripts/export-normal-npc-runtime.mjs; 원본 일치 검사에는 --check |
 | NPC 리뷰 CSV 내보내기 | node scripts/export-npc-review-csv.mjs 또는 normal-npc-samples.json normal-npc 인자 (summary v2는 후보 최대 6마리) |
 | 자산·데이터 가져오기 | import-*.ts/mjs |
+| PokéRogue만 독립 복원·검증 | pnpm assets:pokerogue / pnpm assets:pokerogue:verify ([요구 사항·offline 복원](../docs/assets/POKEROGUE_RESTORE.md)) |
 | 시뮬레이션 실행 | run-*.mjs → simulate-*.ts |
 | 실험 검증·보고서 | audit-* / summarize-* / write-*-report.mjs |
 

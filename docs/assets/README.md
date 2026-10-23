@@ -6,6 +6,7 @@
 
 | 공식 manifest | 용도와 범위 | 자동 생성 원본 |
 |---|---|---|
+| [pokerogue-runtime-assets.json](manifests/pokerogue-runtime-assets.json) | 기준 HEAD의 전체 2,002개 runtime 결과·크기·SHA-256. [독립 복원](POKEROGUE_RESTORE.md)에서 읽기 전용 비교 | 검토한 golden baseline; 복원 실행은 갱신하지 않음 |
 | [resource-manifest.json](manifests/resource-manifest.json) | 2026-10-04 Showdown/Kenney 자료의 버전·파일 해시. `integrated:false`와 경로는 당시 상태이며 전체 현재 자산 목록이 아님. [현재 위치 매핑](EXTERNAL_ASSETS.md#비런타임-자료-이동--2026-10-23) | 공식본으로 이동; 같은 artifacts 사본 제거 |
 | [pokedex-source.json](manifests/pokedex-source.json) | 1,025종 도감 데이터의 CSV URL·가져오기 시각 | `scripts/import-pokedex.mjs` |
 | [battle-data-source.json](manifests/battle-data-source.json) | 612종 배틀 데이터 가져오기 시점의 URL·SHA-256·엔진 버전·예외 | `scripts/import-battle-roster.ts` |

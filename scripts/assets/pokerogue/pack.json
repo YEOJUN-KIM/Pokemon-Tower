@@ -1,0 +1,5041 @@
+{
+  "version": 1,
+  "revision": "325c7de68e6c323e12243271ea510c6b0e1b992e",
+  "repository": "pagefaultgames/pokerogue-assets",
+  "upstream": "https://raw.githubusercontent.com/pagefaultgames/pokerogue-assets/325c7de68e6c323e12243271ea510c6b0e1b992e/",
+  "credits": {
+    "revision": "9a63ce6e66709e02d15f0dca62b3a247d6878fce",
+    "url": "https://raw.githubusercontent.com/pagefaultgames/pokerogue/9a63ce6e66709e02d15f0dca62b3a247d6878fce/CREDITS.md",
+    "sha256": "7eff2419be245d6a13d60e5efb035f834e3efd1e470914658932337abf7a6770"
+  },
+  "pillow": "12.3.0",
+  "recipes": [
+    {
+      "gif": "pokemon/back/1.gif",
+      "png": "pokemon/back/1.png",
+      "atlas": "assets/images/pokemon/back/1.json"
+    },
+    {
+      "gif": "pokemon/back/10.gif",
+      "png": "pokemon/back/10.png",
+      "atlas": "assets/images/pokemon/back/10.json"
+    },
+    {
+      "gif": "pokemon/back/100.gif",
+      "png": "pokemon/back/100.png",
+      "atlas": "assets/images/pokemon/back/100.json"
+    },
+    {
+      "gif": "pokemon/back/1000.gif",
+      "png": "pokemon/back/1000.png",
+      "atlas": "assets/images/pokemon/exp/back/1000.json"
+    },
+    {
+      "gif": "pokemon/back/1001.gif",
+      "png": "pokemon/back/1001.png",
+      "atlas": "assets/images/pokemon/exp/back/1001.json"
+    },
+    {
+      "gif": "pokemon/back/1002.gif",
+      "png": "pokemon/back/1002.png",
+      "atlas": "assets/images/pokemon/exp/back/1002.json"
+    },
+    {
+      "gif": "pokemon/back/1003.gif",
+      "png": "pokemon/back/1003.png",
+      "atlas": "assets/images/pokemon/exp/back/1003.json"
+    },
+    {
+      "gif": "pokemon/back/10039.gif",
+      "png": "pokemon/back/10039.png",
+      "atlas": "assets/images/pokemon/exp/back/115-mega.json"
+    },
+    {
+      "gif": "pokemon/back/1004.gif",
+      "png": "pokemon/back/1004.png",
+      "atlas": "assets/images/pokemon/exp/back/1004.json"
+    },
+    {
+      "gif": "pokemon/back/1005.gif",
+      "png": "pokemon/back/1005.png",
+      "atlas": "assets/images/pokemon/exp/back/1005.json"
+    },
+    {
+      "gif": "pokemon/back/1006.gif",
+      "png": "pokemon/back/1006.png",
+      "atlas": "assets/images/pokemon/exp/back/1006.json"
+    },
+    {
+      "gif": "pokemon/back/10075.gif",
+      "png": "pokemon/back/10075.png",
+      "atlas": "assets/images/pokemon/exp/back/719-mega.json"
+    },
+    {
+      "gif": "pokemon/back/10086.gif",
+      "png": "pokemon/back/10086.png",
+      "atlas": "assets/images/pokemon/exp/back/720-unbound.json"
+    },
+    {
+      "gif": "pokemon/back/10163.gif",
+      "png": "pokemon/back/10163.png",
+      "atlas": "assets/images/pokemon/exp/back/4078.json"
+    },
+    {
+      "gif": "pokemon/back/10165.gif",
+      "png": "pokemon/back/10165.png",
+      "atlas": "assets/images/pokemon/exp/back/4080.json"
+    },
+    {
+      "gif": "pokemon/back/10167.gif",
+      "png": "pokemon/back/10167.png",
+      "atlas": "assets/images/pokemon/exp/back/4110.json"
+    },
+    {
+      "gif": "pokemon/back/10169.gif",
+      "png": "pokemon/back/10169.png",
+      "atlas": "assets/images/pokemon/exp/back/4144.json"
+    },
+    {
+      "gif": "pokemon/back/10171.gif",
+      "png": "pokemon/back/10171.png",
+      "atlas": "assets/images/pokemon/exp/back/4146.json"
+    },
+    {
+      "gif": "pokemon/back/10172.gif",
+      "png": "pokemon/back/10172.png",
+      "atlas": "assets/images/pokemon/exp/back/4199.json"
+    },
+    {
+      "gif": "pokemon/back/10177.gif",
+      "png": "pokemon/back/10177.png",
+      "atlas": "assets/images/pokemon/exp/back/4555.json"
+    },
+    {
+      "gif": "pokemon/back/10180.gif",
+      "png": "pokemon/back/10180.png",
+      "atlas": "assets/images/pokemon/exp/back/4618.json"
+    },
+    {
+      "gif": "pokemon/back/10182.gif",
+      "png": "pokemon/back/10182.png",
+      "atlas": "assets/images/pokemon/exp/back/845-gulping.json"
+    },
+    {
+      "gif": "pokemon/back/10183.gif",
+      "png": "pokemon/back/10183.png",
+      "atlas": "assets/images/pokemon/exp/back/845-gorging.json"
+    },
+    {
+      "gif": "pokemon/back/10191.gif",
+      "png": "pokemon/back/10191.png",
+      "atlas": "assets/images/pokemon/exp/back/892-rapid-strike.json"
+    },
+    {
+      "gif": "pokemon/back/10194.gif",
+      "png": "pokemon/back/10194.png",
+      "atlas": "assets/images/pokemon/exp/back/898-shadow.json"
+    },
+    {
+      "gif": "pokemon/back/102.gif",
+      "png": "pokemon/back/102.png",
+      "atlas": "assets/images/pokemon/back/102.json"
+    },
+    {
+      "gif": "pokemon/back/10210.gif",
+      "png": "pokemon/back/10210.png",
+      "atlas": "assets/images/pokemon/back/815-gigantamax.json"
+    },
+    {
+      "gif": "pokemon/back/10230.gif",
+      "png": "pokemon/back/10230.png",
+      "atlas": "assets/images/pokemon/exp/back/6059.json"
+    },
+    {
+      "gif": "pokemon/back/10232.gif",
+      "png": "pokemon/back/10232.png",
+      "atlas": "assets/images/pokemon/exp/back/6101.json"
+    },
+    {
+      "gif": "pokemon/back/10233.gif",
+      "png": "pokemon/back/10233.png",
+      "atlas": "assets/images/pokemon/exp/back/6157.json"
+    },
+    {
+      "gif": "pokemon/back/10237.gif",
+      "png": "pokemon/back/10237.png",
+      "atlas": "assets/images/pokemon/exp/back/6549.json"
+    },
+    {
+      "gif": "pokemon/back/10239.gif",
+      "png": "pokemon/back/10239.png",
+      "atlas": "assets/images/pokemon/exp/back/6571.json"
+    },
+    {
+      "gif": "pokemon/back/10240.gif",
+      "png": "pokemon/back/10240.png",
+      "atlas": "assets/images/pokemon/exp/back/6628.json"
+    },
+    {
+      "gif": "pokemon/back/10243.gif",
+      "png": "pokemon/back/10243.png",
+      "atlas": "assets/images/pokemon/exp/back/6713.json"
+    },
+    {
+      "gif": "pokemon/back/10244.gif",
+      "png": "pokemon/back/10244.png",
+      "atlas": "assets/images/pokemon/exp/back/6724.json"
+    },
+    {
+      "gif": "pokemon/back/10246.gif",
+      "png": "pokemon/back/10246.png",
+      "atlas": "assets/images/pokemon/exp/back/484-origin.json"
+    },
+    {
+      "gif": "pokemon/back/10250.gif",
+      "png": "pokemon/back/10250.png",
+      "atlas": "assets/images/pokemon/exp/back/8128.json"
+    },
+    {
+      "gif": "pokemon/back/10251.gif",
+      "png": "pokemon/back/10251.png",
+      "atlas": "assets/images/pokemon/exp/back/8128-blaze.json"
+    },
+    {
+      "gif": "pokemon/back/10252.gif",
+      "png": "pokemon/back/10252.png",
+      "atlas": "assets/images/pokemon/exp/back/8128-aqua.json"
+    },
+    {
+      "gif": "pokemon/back/10256.gif",
+      "png": "pokemon/back/10256.png",
+      "atlas": "assets/images/pokemon/exp/back/964-hero.json"
+    },
+    {
+      "gif": "pokemon/back/104.gif",
+      "png": "pokemon/back/104.png",
+      "atlas": "assets/images/pokemon/back/104.json"
+    },
+    {
+      "gif": "pokemon/back/108.gif",
+      "png": "pokemon/back/108.png",
+      "atlas": "assets/images/pokemon/back/108.json"
+    },
+    {
+      "gif": "pokemon/back/109.gif",
+      "png": "pokemon/back/109.png",
+      "atlas": "assets/images/pokemon/back/109.json"
+    },
+    {
+      "gif": "pokemon/back/11.gif",
+      "png": "pokemon/back/11.png",
+      "atlas": "assets/images/pokemon/back/11.json"
+    },
+    {
+      "gif": "pokemon/back/111.gif",
+      "png": "pokemon/back/111.png",
+      "atlas": "assets/images/pokemon/back/111.json"
+    },
+    {
+      "gif": "pokemon/back/112.gif",
+      "png": "pokemon/back/112.png",
+      "atlas": "assets/images/pokemon/back/112.json"
+    },
+    {
+      "gif": "pokemon/back/114.gif",
+      "png": "pokemon/back/114.png",
+      "atlas": "assets/images/pokemon/back/114.json"
+    },
+    {
+      "gif": "pokemon/back/116.gif",
+      "png": "pokemon/back/116.png",
+      "atlas": "assets/images/pokemon/back/116.json"
+    },
+    {
+      "gif": "pokemon/back/117.gif",
+      "png": "pokemon/back/117.png",
+      "atlas": "assets/images/pokemon/back/117.json"
+    },
+    {
+      "gif": "pokemon/back/118.gif",
+      "png": "pokemon/back/118.png",
+      "atlas": "assets/images/pokemon/back/118.json"
+    },
+    {
+      "gif": "pokemon/back/120.gif",
+      "png": "pokemon/back/120.png",
+      "atlas": "assets/images/pokemon/back/120.json"
+    },
+    {
+      "gif": "pokemon/back/125.gif",
+      "png": "pokemon/back/125.png",
+      "atlas": "assets/images/pokemon/back/125.json"
+    },
+    {
+      "gif": "pokemon/back/126.gif",
+      "png": "pokemon/back/126.png",
+      "atlas": "assets/images/pokemon/back/126.json"
+    },
+    {
+      "gif": "pokemon/back/129.gif",
+      "png": "pokemon/back/129.png",
+      "atlas": "assets/images/pokemon/back/129.json"
+    },
+    {
+      "gif": "pokemon/back/13.gif",
+      "png": "pokemon/back/13.png",
+      "atlas": "assets/images/pokemon/back/13.json"
+    },
+    {
+      "gif": "pokemon/back/133.gif",
+      "png": "pokemon/back/133.png",
+      "atlas": "assets/images/pokemon/back/133.json"
+    },
+    {
+      "gif": "pokemon/back/137.gif",
+      "png": "pokemon/back/137.png",
+      "atlas": "assets/images/pokemon/back/137.json"
+    },
+    {
+      "gif": "pokemon/back/138.gif",
+      "png": "pokemon/back/138.png",
+      "atlas": "assets/images/pokemon/back/138.json"
+    },
+    {
+      "gif": "pokemon/back/14.gif",
+      "png": "pokemon/back/14.png",
+      "atlas": "assets/images/pokemon/back/14.json"
+    },
+    {
+      "gif": "pokemon/back/140.gif",
+      "png": "pokemon/back/140.png",
+      "atlas": "assets/images/pokemon/back/140.json"
+    },
+    {
+      "gif": "pokemon/back/148.gif",
+      "png": "pokemon/back/148.png",
+      "atlas": "assets/images/pokemon/back/148.json"
+    },
+    {
+      "gif": "pokemon/back/16.gif",
+      "png": "pokemon/back/16.png",
+      "atlas": "assets/images/pokemon/back/16.json"
+    },
+    {
+      "gif": "pokemon/back/17.gif",
+      "png": "pokemon/back/17.png",
+      "atlas": "assets/images/pokemon/back/17.json"
+    },
+    {
+      "gif": "pokemon/back/19.gif",
+      "png": "pokemon/back/19.png",
+      "atlas": "assets/images/pokemon/back/19.json"
+    },
+    {
+      "gif": "pokemon/back/2.gif",
+      "png": "pokemon/back/2.png",
+      "atlas": "assets/images/pokemon/back/2.json"
+    },
+    {
+      "gif": "pokemon/back/203.gif",
+      "png": "pokemon/back/203.png",
+      "atlas": "assets/images/pokemon/back/203.json"
+    },
+    {
+      "gif": "pokemon/back/21.gif",
+      "png": "pokemon/back/21.png",
+      "atlas": "assets/images/pokemon/back/21.json"
+    },
+    {
+      "gif": "pokemon/back/217.gif",
+      "png": "pokemon/back/217.png",
+      "atlas": "assets/images/pokemon/back/217.json"
+    },
+    {
+      "gif": "pokemon/back/23.gif",
+      "png": "pokemon/back/23.png",
+      "atlas": "assets/images/pokemon/back/23.json"
+    },
+    {
+      "gif": "pokemon/back/27.gif",
+      "png": "pokemon/back/27.png",
+      "atlas": "assets/images/pokemon/back/27.json"
+    },
+    {
+      "gif": "pokemon/back/29.gif",
+      "png": "pokemon/back/29.png",
+      "atlas": "assets/images/pokemon/back/29.json"
+    },
+    {
+      "gif": "pokemon/back/30.gif",
+      "png": "pokemon/back/30.png",
+      "atlas": "assets/images/pokemon/back/30.json"
+    },
+    {
+      "gif": "pokemon/back/32.gif",
+      "png": "pokemon/back/32.png",
+      "atlas": "assets/images/pokemon/back/32.json"
+    },
+    {
+      "gif": "pokemon/back/33.gif",
+      "png": "pokemon/back/33.png",
+      "atlas": "assets/images/pokemon/back/33.json"
+    },
+    {
+      "gif": "pokemon/back/35.gif",
+      "png": "pokemon/back/35.png",
+      "atlas": "assets/images/pokemon/back/35.json"
+    },
+    {
+      "gif": "pokemon/back/364.gif",
+      "png": "pokemon/back/364.png",
+      "atlas": "assets/images/pokemon/back/364.json"
+    },
+    {
+      "gif": "pokemon/back/37.gif",
+      "png": "pokemon/back/37.png",
+      "atlas": "assets/images/pokemon/back/37.json"
+    },
+    {
+      "gif": "pokemon/back/39.gif",
+      "png": "pokemon/back/39.png",
+      "atlas": "assets/images/pokemon/back/39.json"
+    },
+    {
+      "gif": "pokemon/back/4.gif",
+      "png": "pokemon/back/4.png",
+      "atlas": "assets/images/pokemon/back/4.json"
+    },
+    {
+      "gif": "pokemon/back/41.gif",
+      "png": "pokemon/back/41.png",
+      "atlas": "assets/images/pokemon/back/41.json"
+    },
+    {
+      "gif": "pokemon/back/42.gif",
+      "png": "pokemon/back/42.png",
+      "atlas": "assets/images/pokemon/back/42.json"
+    },
+    {
+      "gif": "pokemon/back/43.gif",
+      "png": "pokemon/back/43.png",
+      "atlas": "assets/images/pokemon/back/43.json"
+    },
+    {
+      "gif": "pokemon/back/44.gif",
+      "png": "pokemon/back/44.png",
+      "atlas": "assets/images/pokemon/back/44.json"
+    },
+    {
+      "gif": "pokemon/back/46.gif",
+      "png": "pokemon/back/46.png",
+      "atlas": "assets/images/pokemon/back/46.json"
+    },
+    {
+      "gif": "pokemon/back/48.gif",
+      "png": "pokemon/back/48.png",
+      "atlas": "assets/images/pokemon/back/48.json"
+    },
+    {
+      "gif": "pokemon/back/5.gif",
+      "png": "pokemon/back/5.png",
+      "atlas": "assets/images/pokemon/back/5.json"
+    },
+    {
+      "gif": "pokemon/back/50.gif",
+      "png": "pokemon/back/50.png",
+      "atlas": "assets/images/pokemon/back/50.json"
+    },
+    {
+      "gif": "pokemon/back/52.gif",
+      "png": "pokemon/back/52.png",
+      "atlas": "assets/images/pokemon/back/52.json"
+    },
+    {
+      "gif": "pokemon/back/54.gif",
+      "png": "pokemon/back/54.png",
+      "atlas": "assets/images/pokemon/back/54.json"
+    },
+    {
+      "gif": "pokemon/back/56.gif",
+      "png": "pokemon/back/56.png",
+      "atlas": "assets/images/pokemon/back/56.json"
+    },
+    {
+      "gif": "pokemon/back/57.gif",
+      "png": "pokemon/back/57.png",
+      "atlas": "assets/images/pokemon/back/57.json"
+    },
+    {
+      "gif": "pokemon/back/58.gif",
+      "png": "pokemon/back/58.png",
+      "atlas": "assets/images/pokemon/back/58.json"
+    },
+    {
+      "gif": "pokemon/back/60.gif",
+      "png": "pokemon/back/60.png",
+      "atlas": "assets/images/pokemon/back/60.json"
+    },
+    {
+      "gif": "pokemon/back/61.gif",
+      "png": "pokemon/back/61.png",
+      "atlas": "assets/images/pokemon/back/61.json"
+    },
+    {
+      "gif": "pokemon/back/63.gif",
+      "png": "pokemon/back/63.png",
+      "atlas": "assets/images/pokemon/back/63.json"
+    },
+    {
+      "gif": "pokemon/back/64.gif",
+      "png": "pokemon/back/64.png",
+      "atlas": "assets/images/pokemon/back/64.json"
+    },
+    {
+      "gif": "pokemon/back/66.gif",
+      "png": "pokemon/back/66.png",
+      "atlas": "assets/images/pokemon/back/66.json"
+    },
+    {
+      "gif": "pokemon/back/660.gif",
+      "png": "pokemon/back/660.png",
+      "atlas": "assets/images/pokemon/exp/back/660.json"
+    },
+    {
+      "gif": "pokemon/back/67.gif",
+      "png": "pokemon/back/67.png",
+      "atlas": "assets/images/pokemon/back/67.json"
+    },
+    {
+      "gif": "pokemon/back/673.gif",
+      "png": "pokemon/back/673.png",
+      "atlas": "assets/images/pokemon/exp/back/673.json"
+    },
+    {
+      "gif": "pokemon/back/676.gif",
+      "png": "pokemon/back/676.png",
+      "atlas": "assets/images/pokemon/exp/back/676.json"
+    },
+    {
+      "gif": "pokemon/back/683.gif",
+      "png": "pokemon/back/683.png",
+      "atlas": "assets/images/pokemon/exp/back/683.json"
+    },
+    {
+      "gif": "pokemon/back/685.gif",
+      "png": "pokemon/back/685.png",
+      "atlas": "assets/images/pokemon/exp/back/685.json"
+    },
+    {
+      "gif": "pokemon/back/69.gif",
+      "png": "pokemon/back/69.png",
+      "atlas": "assets/images/pokemon/back/69.json"
+    },
+    {
+      "gif": "pokemon/back/695.gif",
+      "png": "pokemon/back/695.png",
+      "atlas": "assets/images/pokemon/exp/back/695.json"
+    },
+    {
+      "gif": "pokemon/back/699.gif",
+      "png": "pokemon/back/699.png",
+      "atlas": "assets/images/pokemon/exp/back/699.json"
+    },
+    {
+      "gif": "pokemon/back/7.gif",
+      "png": "pokemon/back/7.png",
+      "atlas": "assets/images/pokemon/back/7.json"
+    },
+    {
+      "gif": "pokemon/back/70.gif",
+      "png": "pokemon/back/70.png",
+      "atlas": "assets/images/pokemon/back/70.json"
+    },
+    {
+      "gif": "pokemon/back/706.gif",
+      "png": "pokemon/back/706.png",
+      "atlas": "assets/images/pokemon/exp/back/706.json"
+    },
+    {
+      "gif": "pokemon/back/711.gif",
+      "png": "pokemon/back/711.png",
+      "atlas": "assets/images/pokemon/exp/back/711.json"
+    },
+    {
+      "gif": "pokemon/back/715.gif",
+      "png": "pokemon/back/715.png",
+      "atlas": "assets/images/pokemon/exp/back/715.json"
+    },
+    {
+      "gif": "pokemon/back/716.gif",
+      "png": "pokemon/back/716.png",
+      "atlas": "assets/images/pokemon/exp/back/716-active.json"
+    },
+    {
+      "gif": "pokemon/back/717.gif",
+      "png": "pokemon/back/717.png",
+      "atlas": "assets/images/pokemon/exp/back/717.json"
+    },
+    {
+      "gif": "pokemon/back/72.gif",
+      "png": "pokemon/back/72.png",
+      "atlas": "assets/images/pokemon/back/72.json"
+    },
+    {
+      "gif": "pokemon/back/720.gif",
+      "png": "pokemon/back/720.png",
+      "atlas": "assets/images/pokemon/exp/back/720.json"
+    },
+    {
+      "gif": "pokemon/back/721.gif",
+      "png": "pokemon/back/721.png",
+      "atlas": "assets/images/pokemon/exp/back/721.json"
+    },
+    {
+      "gif": "pokemon/back/724.gif",
+      "png": "pokemon/back/724.png",
+      "atlas": "assets/images/pokemon/exp/back/724.json"
+    },
+    {
+      "gif": "pokemon/back/74.gif",
+      "png": "pokemon/back/74.png",
+      "atlas": "assets/images/pokemon/back/74.json"
+    },
+    {
+      "gif": "pokemon/back/741.gif",
+      "png": "pokemon/back/741.png",
+      "atlas": "assets/images/pokemon/exp/back/741.json"
+    },
+    {
+      "gif": "pokemon/back/75.gif",
+      "png": "pokemon/back/75.png",
+      "atlas": "assets/images/pokemon/back/75.json"
+    },
+    {
+      "gif": "pokemon/back/763.gif",
+      "png": "pokemon/back/763.png",
+      "atlas": "assets/images/pokemon/exp/back/763.json"
+    },
+    {
+      "gif": "pokemon/back/765.gif",
+      "png": "pokemon/back/765.png",
+      "atlas": "assets/images/pokemon/exp/back/765.json"
+    },
+    {
+      "gif": "pokemon/back/766.gif",
+      "png": "pokemon/back/766.png",
+      "atlas": "assets/images/pokemon/exp/back/766.json"
+    },
+    {
+      "gif": "pokemon/back/77.gif",
+      "png": "pokemon/back/77.png",
+      "atlas": "assets/images/pokemon/back/77.json"
+    },
+    {
+      "gif": "pokemon/back/779.gif",
+      "png": "pokemon/back/779.png",
+      "atlas": "assets/images/pokemon/exp/back/779.json"
+    },
+    {
+      "gif": "pokemon/back/788.gif",
+      "png": "pokemon/back/788.png",
+      "atlas": "assets/images/pokemon/exp/back/788.json"
+    },
+    {
+      "gif": "pokemon/back/79.gif",
+      "png": "pokemon/back/79.png",
+      "atlas": "assets/images/pokemon/back/79.json"
+    },
+    {
+      "gif": "pokemon/back/793.gif",
+      "png": "pokemon/back/793.png",
+      "atlas": "assets/images/pokemon/exp/back/793.json"
+    },
+    {
+      "gif": "pokemon/back/794.gif",
+      "png": "pokemon/back/794.png",
+      "atlas": "assets/images/pokemon/exp/back/794.json"
+    },
+    {
+      "gif": "pokemon/back/799.gif",
+      "png": "pokemon/back/799.png",
+      "atlas": "assets/images/pokemon/exp/back/799.json"
+    },
+    {
+      "gif": "pokemon/back/8.gif",
+      "png": "pokemon/back/8.png",
+      "atlas": "assets/images/pokemon/back/8.json"
+    },
+    {
+      "gif": "pokemon/back/802.gif",
+      "png": "pokemon/back/802.png",
+      "atlas": "assets/images/pokemon/exp/back/802.json"
+    },
+    {
+      "gif": "pokemon/back/805.gif",
+      "png": "pokemon/back/805.png",
+      "atlas": "assets/images/pokemon/exp/back/805.json"
+    },
+    {
+      "gif": "pokemon/back/808.gif",
+      "png": "pokemon/back/808.png",
+      "atlas": "assets/images/pokemon/exp/back/808.json"
+    },
+    {
+      "gif": "pokemon/back/809.gif",
+      "png": "pokemon/back/809.png",
+      "atlas": "assets/images/pokemon/exp/back/809.json"
+    },
+    {
+      "gif": "pokemon/back/81.gif",
+      "png": "pokemon/back/81.png",
+      "atlas": "assets/images/pokemon/back/81.json"
+    },
+    {
+      "gif": "pokemon/back/812.gif",
+      "png": "pokemon/back/812.png",
+      "atlas": "assets/images/pokemon/exp/back/812.json"
+    },
+    {
+      "gif": "pokemon/back/815.gif",
+      "png": "pokemon/back/815.png",
+      "atlas": "assets/images/pokemon/exp/back/815.json"
+    },
+    {
+      "gif": "pokemon/back/82.gif",
+      "png": "pokemon/back/82.png",
+      "atlas": "assets/images/pokemon/back/82.json"
+    },
+    {
+      "gif": "pokemon/back/820.gif",
+      "png": "pokemon/back/820.png",
+      "atlas": "assets/images/pokemon/exp/back/820.json"
+    },
+    {
+      "gif": "pokemon/back/826.gif",
+      "png": "pokemon/back/826.png",
+      "atlas": "assets/images/pokemon/exp/back/826.json"
+    },
+    {
+      "gif": "pokemon/back/828.gif",
+      "png": "pokemon/back/828.png",
+      "atlas": "assets/images/pokemon/exp/back/828.json"
+    },
+    {
+      "gif": "pokemon/back/836.gif",
+      "png": "pokemon/back/836.png",
+      "atlas": "assets/images/pokemon/exp/back/836.json"
+    },
+    {
+      "gif": "pokemon/back/84.gif",
+      "png": "pokemon/back/84.png",
+      "atlas": "assets/images/pokemon/back/84.json"
+    },
+    {
+      "gif": "pokemon/back/841.gif",
+      "png": "pokemon/back/841.png",
+      "atlas": "assets/images/pokemon/exp/back/841.json"
+    },
+    {
+      "gif": "pokemon/back/842.gif",
+      "png": "pokemon/back/842.png",
+      "atlas": "assets/images/pokemon/exp/back/842.json"
+    },
+    {
+      "gif": "pokemon/back/845.gif",
+      "png": "pokemon/back/845.png",
+      "atlas": "assets/images/pokemon/exp/back/845.json"
+    },
+    {
+      "gif": "pokemon/back/847.gif",
+      "png": "pokemon/back/847.png",
+      "atlas": "assets/images/pokemon/exp/back/847.json"
+    },
+    {
+      "gif": "pokemon/back/851.gif",
+      "png": "pokemon/back/851.png",
+      "atlas": "assets/images/pokemon/exp/back/851.json"
+    },
+    {
+      "gif": "pokemon/back/853.gif",
+      "png": "pokemon/back/853.png",
+      "atlas": "assets/images/pokemon/exp/back/853.json"
+    },
+    {
+      "gif": "pokemon/back/855.gif",
+      "png": "pokemon/back/855.png",
+      "atlas": "assets/images/pokemon/exp/back/855.json"
+    },
+    {
+      "gif": "pokemon/back/858.gif",
+      "png": "pokemon/back/858.png",
+      "atlas": "assets/images/pokemon/exp/back/858.json"
+    },
+    {
+      "gif": "pokemon/back/86.gif",
+      "png": "pokemon/back/86.png",
+      "atlas": "assets/images/pokemon/back/86.json"
+    },
+    {
+      "gif": "pokemon/back/865.gif",
+      "png": "pokemon/back/865.png",
+      "atlas": "assets/images/pokemon/exp/back/865.json"
+    },
+    {
+      "gif": "pokemon/back/867.gif",
+      "png": "pokemon/back/867.png",
+      "atlas": "assets/images/pokemon/exp/back/867.json"
+    },
+    {
+      "gif": "pokemon/back/879.gif",
+      "png": "pokemon/back/879.png",
+      "atlas": "assets/images/pokemon/exp/back/879.json"
+    },
+    {
+      "gif": "pokemon/back/88.gif",
+      "png": "pokemon/back/88.png",
+      "atlas": "assets/images/pokemon/back/88.json"
+    },
+    {
+      "gif": "pokemon/back/880.gif",
+      "png": "pokemon/back/880.png",
+      "atlas": "assets/images/pokemon/exp/back/880.json"
+    },
+    {
+      "gif": "pokemon/back/881.gif",
+      "png": "pokemon/back/881.png",
+      "atlas": "assets/images/pokemon/exp/back/881.json"
+    },
+    {
+      "gif": "pokemon/back/892.gif",
+      "png": "pokemon/back/892.png",
+      "atlas": "assets/images/pokemon/exp/back/892.json"
+    },
+    {
+      "gif": "pokemon/back/893.gif",
+      "png": "pokemon/back/893.png",
+      "atlas": "assets/images/pokemon/exp/back/893.json"
+    },
+    {
+      "gif": "pokemon/back/894.gif",
+      "png": "pokemon/back/894.png",
+      "atlas": "assets/images/pokemon/exp/back/894.json"
+    },
+    {
+      "gif": "pokemon/back/897.gif",
+      "png": "pokemon/back/897.png",
+      "atlas": "assets/images/pokemon/exp/back/897.json"
+    },
+    {
+      "gif": "pokemon/back/899.gif",
+      "png": "pokemon/back/899.png",
+      "atlas": "assets/images/pokemon/exp/back/899.json"
+    },
+    {
+      "gif": "pokemon/back/90.gif",
+      "png": "pokemon/back/90.png",
+      "atlas": "assets/images/pokemon/back/90.json"
+    },
+    {
+      "gif": "pokemon/back/900.gif",
+      "png": "pokemon/back/900.png",
+      "atlas": "assets/images/pokemon/exp/back/900.json"
+    },
+    {
+      "gif": "pokemon/back/901.gif",
+      "png": "pokemon/back/901.png",
+      "atlas": "assets/images/pokemon/exp/back/901.json"
+    },
+    {
+      "gif": "pokemon/back/903.gif",
+      "png": "pokemon/back/903.png",
+      "atlas": "assets/images/pokemon/exp/back/903.json"
+    },
+    {
+      "gif": "pokemon/back/908.gif",
+      "png": "pokemon/back/908.png",
+      "atlas": "assets/images/pokemon/exp/back/908.json"
+    },
+    {
+      "gif": "pokemon/back/911.gif",
+      "png": "pokemon/back/911.png",
+      "atlas": "assets/images/pokemon/exp/back/911.json"
+    },
+    {
+      "gif": "pokemon/back/914.gif",
+      "png": "pokemon/back/914.png",
+      "atlas": "assets/images/pokemon/exp/back/914.json"
+    },
+    {
+      "gif": "pokemon/back/916.gif",
+      "png": "pokemon/back/916.png",
+      "atlas": "assets/images/pokemon/exp/back/916.json"
+    },
+    {
+      "gif": "pokemon/back/918.gif",
+      "png": "pokemon/back/918.png",
+      "atlas": "assets/images/pokemon/exp/back/918.json"
+    },
+    {
+      "gif": "pokemon/back/92.gif",
+      "png": "pokemon/back/92.png",
+      "atlas": "assets/images/pokemon/back/92.json"
+    },
+    {
+      "gif": "pokemon/back/920.gif",
+      "png": "pokemon/back/920.png",
+      "atlas": "assets/images/pokemon/exp/back/920.json"
+    },
+    {
+      "gif": "pokemon/back/923.gif",
+      "png": "pokemon/back/923.png",
+      "atlas": "assets/images/pokemon/exp/back/923.json"
+    },
+    {
+      "gif": "pokemon/back/925.gif",
+      "png": "pokemon/back/925.png",
+      "atlas": "assets/images/pokemon/exp/back/925-four.json"
+    },
+    {
+      "gif": "pokemon/back/927.gif",
+      "png": "pokemon/back/927.png",
+      "atlas": "assets/images/pokemon/exp/back/927.json"
+    },
+    {
+      "gif": "pokemon/back/93.gif",
+      "png": "pokemon/back/93.png",
+      "atlas": "assets/images/pokemon/back/93.json"
+    },
+    {
+      "gif": "pokemon/back/930.gif",
+      "png": "pokemon/back/930.png",
+      "atlas": "assets/images/pokemon/exp/back/930.json"
+    },
+    {
+      "gif": "pokemon/back/934.gif",
+      "png": "pokemon/back/934.png",
+      "atlas": "assets/images/pokemon/exp/back/934.json"
+    },
+    {
+      "gif": "pokemon/back/939.gif",
+      "png": "pokemon/back/939.png",
+      "atlas": "assets/images/pokemon/exp/back/939.json"
+    },
+    {
+      "gif": "pokemon/back/941.gif",
+      "png": "pokemon/back/941.png",
+      "atlas": "assets/images/pokemon/exp/back/941.json"
+    },
+    {
+      "gif": "pokemon/back/943.gif",
+      "png": "pokemon/back/943.png",
+      "atlas": "assets/images/pokemon/exp/back/943.json"
+    },
+    {
+      "gif": "pokemon/back/945.gif",
+      "png": "pokemon/back/945.png",
+      "atlas": "assets/images/pokemon/exp/back/945.json"
+    },
+    {
+      "gif": "pokemon/back/947.gif",
+      "png": "pokemon/back/947.png",
+      "atlas": "assets/images/pokemon/exp/back/947.json"
+    },
+    {
+      "gif": "pokemon/back/949.gif",
+      "png": "pokemon/back/949.png",
+      "atlas": "assets/images/pokemon/exp/back/949.json"
+    },
+    {
+      "gif": "pokemon/back/95.gif",
+      "png": "pokemon/back/95.png",
+      "atlas": "assets/images/pokemon/back/95.json"
+    },
+    {
+      "gif": "pokemon/back/950.gif",
+      "png": "pokemon/back/950.png",
+      "atlas": "assets/images/pokemon/exp/back/950.json"
+    },
+    {
+      "gif": "pokemon/back/954.gif",
+      "png": "pokemon/back/954.png",
+      "atlas": "assets/images/pokemon/exp/back/954.json"
+    },
+    {
+      "gif": "pokemon/back/956.gif",
+      "png": "pokemon/back/956.png",
+      "atlas": "assets/images/pokemon/exp/back/956.json"
+    },
+    {
+      "gif": "pokemon/back/959.gif",
+      "png": "pokemon/back/959.png",
+      "atlas": "assets/images/pokemon/exp/back/959.json"
+    },
+    {
+      "gif": "pokemon/back/96.gif",
+      "png": "pokemon/back/96.png",
+      "atlas": "assets/images/pokemon/back/96.json"
+    },
+    {
+      "gif": "pokemon/back/961.gif",
+      "png": "pokemon/back/961.png",
+      "atlas": "assets/images/pokemon/exp/back/961.json"
+    },
+    {
+      "gif": "pokemon/back/962.gif",
+      "png": "pokemon/back/962.png",
+      "atlas": "assets/images/pokemon/exp/back/962.json"
+    },
+    {
+      "gif": "pokemon/back/964.gif",
+      "png": "pokemon/back/964.png",
+      "atlas": "assets/images/pokemon/exp/back/964-zero.json"
+    },
+    {
+      "gif": "pokemon/back/966.gif",
+      "png": "pokemon/back/966.png",
+      "atlas": "assets/images/pokemon/exp/back/966.json"
+    },
+    {
+      "gif": "pokemon/back/967.gif",
+      "png": "pokemon/back/967.png",
+      "atlas": "assets/images/pokemon/exp/back/967.json"
+    },
+    {
+      "gif": "pokemon/back/972.gif",
+      "png": "pokemon/back/972.png",
+      "atlas": "assets/images/pokemon/exp/back/972.json"
+    },
+    {
+      "gif": "pokemon/back/973.gif",
+      "png": "pokemon/back/973.png",
+      "atlas": "assets/images/pokemon/exp/back/973.json"
+    },
+    {
+      "gif": "pokemon/back/975.gif",
+      "png": "pokemon/back/975.png",
+      "atlas": "assets/images/pokemon/exp/back/975.json"
+    },
+    {
+      "gif": "pokemon/back/98.gif",
+      "png": "pokemon/back/98.png",
+      "atlas": "assets/images/pokemon/back/98.json"
+    },
+    {
+      "gif": "pokemon/back/980.gif",
+      "png": "pokemon/back/980.png",
+      "atlas": "assets/images/pokemon/exp/back/980.json"
+    },
+    {
+      "gif": "pokemon/back/981.gif",
+      "png": "pokemon/back/981.png",
+      "atlas": "assets/images/pokemon/exp/back/981.json"
+    },
+    {
+      "gif": "pokemon/back/982.gif",
+      "png": "pokemon/back/982.png",
+      "atlas": "assets/images/pokemon/exp/back/982.json"
+    },
+    {
+      "gif": "pokemon/back/983.gif",
+      "png": "pokemon/back/983.png",
+      "atlas": "assets/images/pokemon/exp/back/983.json"
+    },
+    {
+      "gif": "pokemon/back/984.gif",
+      "png": "pokemon/back/984.png",
+      "atlas": "assets/images/pokemon/exp/back/984.json"
+    },
+    {
+      "gif": "pokemon/back/986.gif",
+      "png": "pokemon/back/986.png",
+      "atlas": "assets/images/pokemon/exp/back/986.json"
+    },
+    {
+      "gif": "pokemon/back/989.gif",
+      "png": "pokemon/back/989.png",
+      "atlas": "assets/images/pokemon/exp/back/989.json"
+    },
+    {
+      "gif": "pokemon/back/990.gif",
+      "png": "pokemon/back/990.png",
+      "atlas": "assets/images/pokemon/exp/back/990.json"
+    },
+    {
+      "gif": "pokemon/back/993.gif",
+      "png": "pokemon/back/993.png",
+      "atlas": "assets/images/pokemon/exp/back/993.json"
+    },
+    {
+      "gif": "pokemon/back/994.gif",
+      "png": "pokemon/back/994.png",
+      "atlas": "assets/images/pokemon/exp/back/994.json"
+    },
+    {
+      "gif": "pokemon/back/995.gif",
+      "png": "pokemon/back/995.png",
+      "atlas": "assets/images/pokemon/exp/back/995.json"
+    },
+    {
+      "gif": "pokemon/front/1.gif",
+      "png": "pokemon/front/1.png",
+      "atlas": "assets/images/pokemon/1.json"
+    },
+    {
+      "gif": "pokemon/front/10.gif",
+      "png": "pokemon/front/10.png",
+      "atlas": "assets/images/pokemon/10.json"
+    },
+    {
+      "gif": "pokemon/front/100.gif",
+      "png": "pokemon/front/100.png",
+      "atlas": "assets/images/pokemon/100.json"
+    },
+    {
+      "gif": "pokemon/front/10039.gif",
+      "png": "pokemon/front/10039.png",
+      "atlas": "assets/images/pokemon/exp/115-mega.json"
+    },
+    {
+      "gif": "pokemon/front/1005.gif",
+      "png": "pokemon/front/1005.png",
+      "atlas": "assets/images/pokemon/exp/1005.json"
+    },
+    {
+      "gif": "pokemon/front/10075.gif",
+      "png": "pokemon/front/10075.png",
+      "atlas": "assets/images/pokemon/exp/719-mega.json"
+    },
+    {
+      "gif": "pokemon/front/10163.gif",
+      "png": "pokemon/front/10163.png",
+      "atlas": "assets/images/pokemon/exp/4078.json"
+    },
+    {
+      "gif": "pokemon/front/10171.gif",
+      "png": "pokemon/front/10171.png",
+      "atlas": "assets/images/pokemon/exp/4146.json"
+    },
+    {
+      "gif": "pokemon/front/10177.gif",
+      "png": "pokemon/front/10177.png",
+      "atlas": "assets/images/pokemon/exp/4555.json"
+    },
+    {
+      "gif": "pokemon/front/10180.gif",
+      "png": "pokemon/front/10180.png",
+      "atlas": "assets/images/pokemon/exp/4618.json"
+    },
+    {
+      "gif": "pokemon/front/10182.gif",
+      "png": "pokemon/front/10182.png",
+      "atlas": "assets/images/pokemon/exp/845-gulping.json"
+    },
+    {
+      "gif": "pokemon/front/10183.gif",
+      "png": "pokemon/front/10183.png",
+      "atlas": "assets/images/pokemon/exp/845-gorging.json"
+    },
+    {
+      "gif": "pokemon/front/10191.gif",
+      "png": "pokemon/front/10191.png",
+      "atlas": "assets/images/pokemon/exp/892-rapid-strike.json"
+    },
+    {
+      "gif": "pokemon/front/10194.gif",
+      "png": "pokemon/front/10194.png",
+      "atlas": "assets/images/pokemon/exp/898-shadow.json"
+    },
+    {
+      "gif": "pokemon/front/102.gif",
+      "png": "pokemon/front/102.png",
+      "atlas": "assets/images/pokemon/102.json"
+    },
+    {
+      "gif": "pokemon/front/10210.gif",
+      "png": "pokemon/front/10210.png",
+      "atlas": "assets/images/pokemon/815-gigantamax.json"
+    },
+    {
+      "gif": "pokemon/front/10230.gif",
+      "png": "pokemon/front/10230.png",
+      "atlas": "assets/images/pokemon/exp/6059.json"
+    },
+    {
+      "gif": "pokemon/front/10232.gif",
+      "png": "pokemon/front/10232.png",
+      "atlas": "assets/images/pokemon/exp/6101.json"
+    },
+    {
+      "gif": "pokemon/front/10233.gif",
+      "png": "pokemon/front/10233.png",
+      "atlas": "assets/images/pokemon/exp/6157.json"
+    },
+    {
+      "gif": "pokemon/front/10240.gif",
+      "png": "pokemon/front/10240.png",
+      "atlas": "assets/images/pokemon/exp/6628.json"
+    },
+    {
+      "gif": "pokemon/front/10243.gif",
+      "png": "pokemon/front/10243.png",
+      "atlas": "assets/images/pokemon/exp/6713.json"
+    },
+    {
+      "gif": "pokemon/front/10244.gif",
+      "png": "pokemon/front/10244.png",
+      "atlas": "assets/images/pokemon/exp/6724.json"
+    },
+    {
+      "gif": "pokemon/front/10246.gif",
+      "png": "pokemon/front/10246.png",
+      "atlas": "assets/images/pokemon/exp/484-origin.json"
+    },
+    {
+      "gif": "pokemon/front/10250.gif",
+      "png": "pokemon/front/10250.png",
+      "atlas": "assets/images/pokemon/exp/8128.json"
+    },
+    {
+      "gif": "pokemon/front/10251.gif",
+      "png": "pokemon/front/10251.png",
+      "atlas": "assets/images/pokemon/exp/8128-blaze.json"
+    },
+    {
+      "gif": "pokemon/front/10252.gif",
+      "png": "pokemon/front/10252.png",
+      "atlas": "assets/images/pokemon/exp/8128-aqua.json"
+    },
+    {
+      "gif": "pokemon/front/10256.gif",
+      "png": "pokemon/front/10256.png",
+      "atlas": "assets/images/pokemon/exp/964-hero.json"
+    },
+    {
+      "gif": "pokemon/front/104.gif",
+      "png": "pokemon/front/104.png",
+      "atlas": "assets/images/pokemon/104.json"
+    },
+    {
+      "gif": "pokemon/front/108.gif",
+      "png": "pokemon/front/108.png",
+      "atlas": "assets/images/pokemon/108.json"
+    },
+    {
+      "gif": "pokemon/front/109.gif",
+      "png": "pokemon/front/109.png",
+      "atlas": "assets/images/pokemon/109.json"
+    },
+    {
+      "gif": "pokemon/front/11.gif",
+      "png": "pokemon/front/11.png",
+      "atlas": "assets/images/pokemon/11.json"
+    },
+    {
+      "gif": "pokemon/front/111.gif",
+      "png": "pokemon/front/111.png",
+      "atlas": "assets/images/pokemon/111.json"
+    },
+    {
+      "gif": "pokemon/front/112.gif",
+      "png": "pokemon/front/112.png",
+      "atlas": "assets/images/pokemon/112.json"
+    },
+    {
+      "gif": "pokemon/front/114.gif",
+      "png": "pokemon/front/114.png",
+      "atlas": "assets/images/pokemon/114.json"
+    },
+    {
+      "gif": "pokemon/front/116.gif",
+      "png": "pokemon/front/116.png",
+      "atlas": "assets/images/pokemon/116.json"
+    },
+    {
+      "gif": "pokemon/front/117.gif",
+      "png": "pokemon/front/117.png",
+      "atlas": "assets/images/pokemon/117.json"
+    },
+    {
+      "gif": "pokemon/front/118.gif",
+      "png": "pokemon/front/118.png",
+      "atlas": "assets/images/pokemon/118.json"
+    },
+    {
+      "gif": "pokemon/front/120.gif",
+      "png": "pokemon/front/120.png",
+      "atlas": "assets/images/pokemon/120.json"
+    },
+    {
+      "gif": "pokemon/front/125.gif",
+      "png": "pokemon/front/125.png",
+      "atlas": "assets/images/pokemon/125.json"
+    },
+    {
+      "gif": "pokemon/front/126.gif",
+      "png": "pokemon/front/126.png",
+      "atlas": "assets/images/pokemon/126.json"
+    },
+    {
+      "gif": "pokemon/front/129.gif",
+      "png": "pokemon/front/129.png",
+      "atlas": "assets/images/pokemon/129.json"
+    },
+    {
+      "gif": "pokemon/front/13.gif",
+      "png": "pokemon/front/13.png",
+      "atlas": "assets/images/pokemon/13.json"
+    },
+    {
+      "gif": "pokemon/front/133.gif",
+      "png": "pokemon/front/133.png",
+      "atlas": "assets/images/pokemon/133.json"
+    },
+    {
+      "gif": "pokemon/front/137.gif",
+      "png": "pokemon/front/137.png",
+      "atlas": "assets/images/pokemon/137.json"
+    },
+    {
+      "gif": "pokemon/front/138.gif",
+      "png": "pokemon/front/138.png",
+      "atlas": "assets/images/pokemon/138.json"
+    },
+    {
+      "gif": "pokemon/front/14.gif",
+      "png": "pokemon/front/14.png",
+      "atlas": "assets/images/pokemon/14.json"
+    },
+    {
+      "gif": "pokemon/front/140.gif",
+      "png": "pokemon/front/140.png",
+      "atlas": "assets/images/pokemon/140.json"
+    },
+    {
+      "gif": "pokemon/front/148.gif",
+      "png": "pokemon/front/148.png",
+      "atlas": "assets/images/pokemon/148.json"
+    },
+    {
+      "gif": "pokemon/front/16.gif",
+      "png": "pokemon/front/16.png",
+      "atlas": "assets/images/pokemon/16.json"
+    },
+    {
+      "gif": "pokemon/front/17.gif",
+      "png": "pokemon/front/17.png",
+      "atlas": "assets/images/pokemon/17.json"
+    },
+    {
+      "gif": "pokemon/front/19.gif",
+      "png": "pokemon/front/19.png",
+      "atlas": "assets/images/pokemon/19.json"
+    },
+    {
+      "gif": "pokemon/front/2.gif",
+      "png": "pokemon/front/2.png",
+      "atlas": "assets/images/pokemon/2.json"
+    },
+    {
+      "gif": "pokemon/front/203.gif",
+      "png": "pokemon/front/203.png",
+      "atlas": "assets/images/pokemon/203.json"
+    },
+    {
+      "gif": "pokemon/front/21.gif",
+      "png": "pokemon/front/21.png",
+      "atlas": "assets/images/pokemon/21.json"
+    },
+    {
+      "gif": "pokemon/front/217.gif",
+      "png": "pokemon/front/217.png",
+      "atlas": "assets/images/pokemon/217.json"
+    },
+    {
+      "gif": "pokemon/front/23.gif",
+      "png": "pokemon/front/23.png",
+      "atlas": "assets/images/pokemon/23.json"
+    },
+    {
+      "gif": "pokemon/front/27.gif",
+      "png": "pokemon/front/27.png",
+      "atlas": "assets/images/pokemon/27.json"
+    },
+    {
+      "gif": "pokemon/front/29.gif",
+      "png": "pokemon/front/29.png",
+      "atlas": "assets/images/pokemon/29.json"
+    },
+    {
+      "gif": "pokemon/front/30.gif",
+      "png": "pokemon/front/30.png",
+      "atlas": "assets/images/pokemon/30.json"
+    },
+    {
+      "gif": "pokemon/front/32.gif",
+      "png": "pokemon/front/32.png",
+      "atlas": "assets/images/pokemon/32.json"
+    },
+    {
+      "gif": "pokemon/front/33.gif",
+      "png": "pokemon/front/33.png",
+      "atlas": "assets/images/pokemon/33.json"
+    },
+    {
+      "gif": "pokemon/front/35.gif",
+      "png": "pokemon/front/35.png",
+      "atlas": "assets/images/pokemon/35.json"
+    },
+    {
+      "gif": "pokemon/front/364.gif",
+      "png": "pokemon/front/364.png",
+      "atlas": "assets/images/pokemon/364.json"
+    },
+    {
+      "gif": "pokemon/front/37.gif",
+      "png": "pokemon/front/37.png",
+      "atlas": "assets/images/pokemon/37.json"
+    },
+    {
+      "gif": "pokemon/front/39.gif",
+      "png": "pokemon/front/39.png",
+      "atlas": "assets/images/pokemon/39.json"
+    },
+    {
+      "gif": "pokemon/front/4.gif",
+      "png": "pokemon/front/4.png",
+      "atlas": "assets/images/pokemon/4.json"
+    },
+    {
+      "gif": "pokemon/front/41.gif",
+      "png": "pokemon/front/41.png",
+      "atlas": "assets/images/pokemon/41.json"
+    },
+    {
+      "gif": "pokemon/front/42.gif",
+      "png": "pokemon/front/42.png",
+      "atlas": "assets/images/pokemon/42.json"
+    },
+    {
+      "gif": "pokemon/front/43.gif",
+      "png": "pokemon/front/43.png",
+      "atlas": "assets/images/pokemon/43.json"
+    },
+    {
+      "gif": "pokemon/front/44.gif",
+      "png": "pokemon/front/44.png",
+      "atlas": "assets/images/pokemon/44.json"
+    },
+    {
+      "gif": "pokemon/front/46.gif",
+      "png": "pokemon/front/46.png",
+      "atlas": "assets/images/pokemon/46.json"
+    },
+    {
+      "gif": "pokemon/front/48.gif",
+      "png": "pokemon/front/48.png",
+      "atlas": "assets/images/pokemon/48.json"
+    },
+    {
+      "gif": "pokemon/front/5.gif",
+      "png": "pokemon/front/5.png",
+      "atlas": "assets/images/pokemon/5.json"
+    },
+    {
+      "gif": "pokemon/front/50.gif",
+      "png": "pokemon/front/50.png",
+      "atlas": "assets/images/pokemon/50.json"
+    },
+    {
+      "gif": "pokemon/front/52.gif",
+      "png": "pokemon/front/52.png",
+      "atlas": "assets/images/pokemon/52.json"
+    },
+    {
+      "gif": "pokemon/front/54.gif",
+      "png": "pokemon/front/54.png",
+      "atlas": "assets/images/pokemon/54.json"
+    },
+    {
+      "gif": "pokemon/front/56.gif",
+      "png": "pokemon/front/56.png",
+      "atlas": "assets/images/pokemon/56.json"
+    },
+    {
+      "gif": "pokemon/front/57.gif",
+      "png": "pokemon/front/57.png",
+      "atlas": "assets/images/pokemon/57.json"
+    },
+    {
+      "gif": "pokemon/front/58.gif",
+      "png": "pokemon/front/58.png",
+      "atlas": "assets/images/pokemon/58.json"
+    },
+    {
+      "gif": "pokemon/front/60.gif",
+      "png": "pokemon/front/60.png",
+      "atlas": "assets/images/pokemon/60.json"
+    },
+    {
+      "gif": "pokemon/front/61.gif",
+      "png": "pokemon/front/61.png",
+      "atlas": "assets/images/pokemon/61.json"
+    },
+    {
+      "gif": "pokemon/front/63.gif",
+      "png": "pokemon/front/63.png",
+      "atlas": "assets/images/pokemon/63.json"
+    },
+    {
+      "gif": "pokemon/front/64.gif",
+      "png": "pokemon/front/64.png",
+      "atlas": "assets/images/pokemon/64.json"
+    },
+    {
+      "gif": "pokemon/front/66.gif",
+      "png": "pokemon/front/66.png",
+      "atlas": "assets/images/pokemon/66.json"
+    },
+    {
+      "gif": "pokemon/front/660.gif",
+      "png": "pokemon/front/660.png",
+      "atlas": "assets/images/pokemon/exp/660.json"
+    },
+    {
+      "gif": "pokemon/front/67.gif",
+      "png": "pokemon/front/67.png",
+      "atlas": "assets/images/pokemon/67.json"
+    },
+    {
+      "gif": "pokemon/front/673.gif",
+      "png": "pokemon/front/673.png",
+      "atlas": "assets/images/pokemon/exp/673.json"
+    },
+    {
+      "gif": "pokemon/front/676.gif",
+      "png": "pokemon/front/676.png",
+      "atlas": "assets/images/pokemon/exp/676.json"
+    },
+    {
+      "gif": "pokemon/front/683.gif",
+      "png": "pokemon/front/683.png",
+      "atlas": "assets/images/pokemon/exp/683.json"
+    },
+    {
+      "gif": "pokemon/front/69.gif",
+      "png": "pokemon/front/69.png",
+      "atlas": "assets/images/pokemon/69.json"
+    },
+    {
+      "gif": "pokemon/front/695.gif",
+      "png": "pokemon/front/695.png",
+      "atlas": "assets/images/pokemon/exp/695.json"
+    },
+    {
+      "gif": "pokemon/front/699.gif",
+      "png": "pokemon/front/699.png",
+      "atlas": "assets/images/pokemon/exp/699.json"
+    },
+    {
+      "gif": "pokemon/front/7.gif",
+      "png": "pokemon/front/7.png",
+      "atlas": "assets/images/pokemon/7.json"
+    },
+    {
+      "gif": "pokemon/front/70.gif",
+      "png": "pokemon/front/70.png",
+      "atlas": "assets/images/pokemon/70.json"
+    },
+    {
+      "gif": "pokemon/front/711.gif",
+      "png": "pokemon/front/711.png",
+      "atlas": "assets/images/pokemon/exp/711.json"
+    },
+    {
+      "gif": "pokemon/front/72.gif",
+      "png": "pokemon/front/72.png",
+      "atlas": "assets/images/pokemon/72.json"
+    },
+    {
+      "gif": "pokemon/front/724.gif",
+      "png": "pokemon/front/724.png",
+      "atlas": "assets/images/pokemon/exp/724.json"
+    },
+    {
+      "gif": "pokemon/front/74.gif",
+      "png": "pokemon/front/74.png",
+      "atlas": "assets/images/pokemon/74.json"
+    },
+    {
+      "gif": "pokemon/front/741.gif",
+      "png": "pokemon/front/741.png",
+      "atlas": "assets/images/pokemon/exp/741.json"
+    },
+    {
+      "gif": "pokemon/front/75.gif",
+      "png": "pokemon/front/75.png",
+      "atlas": "assets/images/pokemon/75.json"
+    },
+    {
+      "gif": "pokemon/front/763.gif",
+      "png": "pokemon/front/763.png",
+      "atlas": "assets/images/pokemon/exp/763.json"
+    },
+    {
+      "gif": "pokemon/front/765.gif",
+      "png": "pokemon/front/765.png",
+      "atlas": "assets/images/pokemon/exp/765.json"
+    },
+    {
+      "gif": "pokemon/front/766.gif",
+      "png": "pokemon/front/766.png",
+      "atlas": "assets/images/pokemon/exp/766.json"
+    },
+    {
+      "gif": "pokemon/front/77.gif",
+      "png": "pokemon/front/77.png",
+      "atlas": "assets/images/pokemon/77.json"
+    },
+    {
+      "gif": "pokemon/front/788.gif",
+      "png": "pokemon/front/788.png",
+      "atlas": "assets/images/pokemon/exp/788.json"
+    },
+    {
+      "gif": "pokemon/front/79.gif",
+      "png": "pokemon/front/79.png",
+      "atlas": "assets/images/pokemon/79.json"
+    },
+    {
+      "gif": "pokemon/front/799.gif",
+      "png": "pokemon/front/799.png",
+      "atlas": "assets/images/pokemon/exp/799.json"
+    },
+    {
+      "gif": "pokemon/front/8.gif",
+      "png": "pokemon/front/8.png",
+      "atlas": "assets/images/pokemon/8.json"
+    },
+    {
+      "gif": "pokemon/front/81.gif",
+      "png": "pokemon/front/81.png",
+      "atlas": "assets/images/pokemon/81.json"
+    },
+    {
+      "gif": "pokemon/front/812.gif",
+      "png": "pokemon/front/812.png",
+      "atlas": "assets/images/pokemon/exp/812.json"
+    },
+    {
+      "gif": "pokemon/front/815.gif",
+      "png": "pokemon/front/815.png",
+      "atlas": "assets/images/pokemon/exp/815.json"
+    },
+    {
+      "gif": "pokemon/front/82.gif",
+      "png": "pokemon/front/82.png",
+      "atlas": "assets/images/pokemon/82.json"
+    },
+    {
+      "gif": "pokemon/front/820.gif",
+      "png": "pokemon/front/820.png",
+      "atlas": "assets/images/pokemon/exp/820.json"
+    },
+    {
+      "gif": "pokemon/front/826.gif",
+      "png": "pokemon/front/826.png",
+      "atlas": "assets/images/pokemon/exp/826.json"
+    },
+    {
+      "gif": "pokemon/front/828.gif",
+      "png": "pokemon/front/828.png",
+      "atlas": "assets/images/pokemon/exp/828.json"
+    },
+    {
+      "gif": "pokemon/front/836.gif",
+      "png": "pokemon/front/836.png",
+      "atlas": "assets/images/pokemon/exp/836.json"
+    },
+    {
+      "gif": "pokemon/front/84.gif",
+      "png": "pokemon/front/84.png",
+      "atlas": "assets/images/pokemon/84.json"
+    },
+    {
+      "gif": "pokemon/front/841.gif",
+      "png": "pokemon/front/841.png",
+      "atlas": "assets/images/pokemon/exp/841.json"
+    },
+    {
+      "gif": "pokemon/front/842.gif",
+      "png": "pokemon/front/842.png",
+      "atlas": "assets/images/pokemon/exp/842.json"
+    },
+    {
+      "gif": "pokemon/front/851.gif",
+      "png": "pokemon/front/851.png",
+      "atlas": "assets/images/pokemon/exp/851.json"
+    },
+    {
+      "gif": "pokemon/front/853.gif",
+      "png": "pokemon/front/853.png",
+      "atlas": "assets/images/pokemon/exp/853.json"
+    },
+    {
+      "gif": "pokemon/front/855.gif",
+      "png": "pokemon/front/855.png",
+      "atlas": "assets/images/pokemon/exp/855.json"
+    },
+    {
+      "gif": "pokemon/front/86.gif",
+      "png": "pokemon/front/86.png",
+      "atlas": "assets/images/pokemon/86.json"
+    },
+    {
+      "gif": "pokemon/front/865.gif",
+      "png": "pokemon/front/865.png",
+      "atlas": "assets/images/pokemon/exp/865.json"
+    },
+    {
+      "gif": "pokemon/front/879.gif",
+      "png": "pokemon/front/879.png",
+      "atlas": "assets/images/pokemon/exp/879.json"
+    },
+    {
+      "gif": "pokemon/front/88.gif",
+      "png": "pokemon/front/88.png",
+      "atlas": "assets/images/pokemon/88.json"
+    },
+    {
+      "gif": "pokemon/front/881.gif",
+      "png": "pokemon/front/881.png",
+      "atlas": "assets/images/pokemon/exp/881.json"
+    },
+    {
+      "gif": "pokemon/front/892.gif",
+      "png": "pokemon/front/892.png",
+      "atlas": "assets/images/pokemon/exp/892.json"
+    },
+    {
+      "gif": "pokemon/front/893.gif",
+      "png": "pokemon/front/893.png",
+      "atlas": "assets/images/pokemon/exp/893.json"
+    },
+    {
+      "gif": "pokemon/front/894.gif",
+      "png": "pokemon/front/894.png",
+      "atlas": "assets/images/pokemon/exp/894.json"
+    },
+    {
+      "gif": "pokemon/front/897.gif",
+      "png": "pokemon/front/897.png",
+      "atlas": "assets/images/pokemon/exp/897.json"
+    },
+    {
+      "gif": "pokemon/front/90.gif",
+      "png": "pokemon/front/90.png",
+      "atlas": "assets/images/pokemon/90.json"
+    },
+    {
+      "gif": "pokemon/front/900.gif",
+      "png": "pokemon/front/900.png",
+      "atlas": "assets/images/pokemon/exp/900.json"
+    },
+    {
+      "gif": "pokemon/front/903.gif",
+      "png": "pokemon/front/903.png",
+      "atlas": "assets/images/pokemon/exp/903.json"
+    },
+    {
+      "gif": "pokemon/front/908.gif",
+      "png": "pokemon/front/908.png",
+      "atlas": "assets/images/pokemon/exp/908.json"
+    },
+    {
+      "gif": "pokemon/front/911.gif",
+      "png": "pokemon/front/911.png",
+      "atlas": "assets/images/pokemon/exp/911.json"
+    },
+    {
+      "gif": "pokemon/front/914.gif",
+      "png": "pokemon/front/914.png",
+      "atlas": "assets/images/pokemon/exp/914.json"
+    },
+    {
+      "gif": "pokemon/front/916.gif",
+      "png": "pokemon/front/916.png",
+      "atlas": "assets/images/pokemon/exp/916.json"
+    },
+    {
+      "gif": "pokemon/front/918.gif",
+      "png": "pokemon/front/918.png",
+      "atlas": "assets/images/pokemon/exp/918.json"
+    },
+    {
+      "gif": "pokemon/front/92.gif",
+      "png": "pokemon/front/92.png",
+      "atlas": "assets/images/pokemon/92.json"
+    },
+    {
+      "gif": "pokemon/front/920.gif",
+      "png": "pokemon/front/920.png",
+      "atlas": "assets/images/pokemon/exp/920.json"
+    },
+    {
+      "gif": "pokemon/front/923.gif",
+      "png": "pokemon/front/923.png",
+      "atlas": "assets/images/pokemon/exp/923.json"
+    },
+    {
+      "gif": "pokemon/front/927.gif",
+      "png": "pokemon/front/927.png",
+      "atlas": "assets/images/pokemon/exp/927.json"
+    },
+    {
+      "gif": "pokemon/front/93.gif",
+      "png": "pokemon/front/93.png",
+      "atlas": "assets/images/pokemon/93.json"
+    },
+    {
+      "gif": "pokemon/front/930.gif",
+      "png": "pokemon/front/930.png",
+      "atlas": "assets/images/pokemon/exp/930.json"
+    },
+    {
+      "gif": "pokemon/front/934.gif",
+      "png": "pokemon/front/934.png",
+      "atlas": "assets/images/pokemon/exp/934.json"
+    },
+    {
+      "gif": "pokemon/front/939.gif",
+      "png": "pokemon/front/939.png",
+      "atlas": "assets/images/pokemon/exp/939.json"
+    },
+    {
+      "gif": "pokemon/front/941.gif",
+      "png": "pokemon/front/941.png",
+      "atlas": "assets/images/pokemon/exp/941.json"
+    },
+    {
+      "gif": "pokemon/front/943.gif",
+      "png": "pokemon/front/943.png",
+      "atlas": "assets/images/pokemon/exp/943.json"
+    },
+    {
+      "gif": "pokemon/front/945.gif",
+      "png": "pokemon/front/945.png",
+      "atlas": "assets/images/pokemon/exp/945.json"
+    },
+    {
+      "gif": "pokemon/front/947.gif",
+      "png": "pokemon/front/947.png",
+      "atlas": "assets/images/pokemon/exp/947.json"
+    },
+    {
+      "gif": "pokemon/front/949.gif",
+      "png": "pokemon/front/949.png",
+      "atlas": "assets/images/pokemon/exp/949.json"
+    },
+    {
+      "gif": "pokemon/front/95.gif",
+      "png": "pokemon/front/95.png",
+      "atlas": "assets/images/pokemon/95.json"
+    },
+    {
+      "gif": "pokemon/front/950.gif",
+      "png": "pokemon/front/950.png",
+      "atlas": "assets/images/pokemon/exp/950.json"
+    },
+    {
+      "gif": "pokemon/front/954.gif",
+      "png": "pokemon/front/954.png",
+      "atlas": "assets/images/pokemon/exp/954.json"
+    },
+    {
+      "gif": "pokemon/front/956.gif",
+      "png": "pokemon/front/956.png",
+      "atlas": "assets/images/pokemon/exp/956.json"
+    },
+    {
+      "gif": "pokemon/front/959.gif",
+      "png": "pokemon/front/959.png",
+      "atlas": "assets/images/pokemon/exp/959.json"
+    },
+    {
+      "gif": "pokemon/front/96.gif",
+      "png": "pokemon/front/96.png",
+      "atlas": "assets/images/pokemon/96.json"
+    },
+    {
+      "gif": "pokemon/front/961.gif",
+      "png": "pokemon/front/961.png",
+      "atlas": "assets/images/pokemon/exp/961.json"
+    },
+    {
+      "gif": "pokemon/front/962.gif",
+      "png": "pokemon/front/962.png",
+      "atlas": "assets/images/pokemon/exp/962.json"
+    },
+    {
+      "gif": "pokemon/front/964.gif",
+      "png": "pokemon/front/964.png",
+      "atlas": "assets/images/pokemon/exp/964-zero.json"
+    },
+    {
+      "gif": "pokemon/front/966.gif",
+      "png": "pokemon/front/966.png",
+      "atlas": "assets/images/pokemon/exp/966.json"
+    },
+    {
+      "gif": "pokemon/front/967.gif",
+      "png": "pokemon/front/967.png",
+      "atlas": "assets/images/pokemon/exp/967.json"
+    },
+    {
+      "gif": "pokemon/front/968.gif",
+      "png": "pokemon/front/968.png",
+      "atlas": "assets/images/pokemon/exp/968.json"
+    },
+    {
+      "gif": "pokemon/front/972.gif",
+      "png": "pokemon/front/972.png",
+      "atlas": "assets/images/pokemon/exp/972.json"
+    },
+    {
+      "gif": "pokemon/front/973.gif",
+      "png": "pokemon/front/973.png",
+      "atlas": "assets/images/pokemon/exp/973.json"
+    },
+    {
+      "gif": "pokemon/front/975.gif",
+      "png": "pokemon/front/975.png",
+      "atlas": "assets/images/pokemon/exp/975.json"
+    },
+    {
+      "gif": "pokemon/front/977.gif",
+      "png": "pokemon/front/977.png",
+      "atlas": "assets/images/pokemon/exp/977.json"
+    },
+    {
+      "gif": "pokemon/front/98.gif",
+      "png": "pokemon/front/98.png",
+      "atlas": "assets/images/pokemon/98.json"
+    },
+    {
+      "gif": "pokemon/front/981.gif",
+      "png": "pokemon/front/981.png",
+      "atlas": "assets/images/pokemon/exp/981.json"
+    },
+    {
+      "gif": "pokemon/front/982.gif",
+      "png": "pokemon/front/982.png",
+      "atlas": "assets/images/pokemon/exp/982.json"
+    },
+    {
+      "gif": "pokemon/front/983.gif",
+      "png": "pokemon/front/983.png",
+      "atlas": "assets/images/pokemon/exp/983.json"
+    },
+    {
+      "gif": "pokemon/front/986.gif",
+      "png": "pokemon/front/986.png",
+      "atlas": "assets/images/pokemon/exp/986.json"
+    },
+    {
+      "gif": "pokemon/front/989.gif",
+      "png": "pokemon/front/989.png",
+      "atlas": "assets/images/pokemon/exp/989.json"
+    },
+    {
+      "gif": "pokemon/front/990.gif",
+      "png": "pokemon/front/990.png",
+      "atlas": "assets/images/pokemon/exp/990.json"
+    },
+    {
+      "gif": "pokemon/front/991.gif",
+      "png": "pokemon/front/991.png",
+      "atlas": "assets/images/pokemon/exp/991.json"
+    },
+    {
+      "gif": "pokemon/front/993.gif",
+      "png": "pokemon/front/993.png",
+      "atlas": "assets/images/pokemon/exp/993.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/1.gif",
+      "png": "pokemon/shinyBack/1.png",
+      "atlas": "assets/images/pokemon/back/shiny/1.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10.gif",
+      "png": "pokemon/shinyBack/10.png",
+      "atlas": "assets/images/pokemon/back/shiny/10.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/100.gif",
+      "png": "pokemon/shinyBack/100.png",
+      "atlas": "assets/images/pokemon/back/shiny/100.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/1000.gif",
+      "png": "pokemon/shinyBack/1000.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/1000.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/1001.gif",
+      "png": "pokemon/shinyBack/1001.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/1001.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/1002.gif",
+      "png": "pokemon/shinyBack/1002.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/1002.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/1003.gif",
+      "png": "pokemon/shinyBack/1003.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/1003.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10039.gif",
+      "png": "pokemon/shinyBack/10039.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/115-mega.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/1004.gif",
+      "png": "pokemon/shinyBack/1004.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/1004.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/1005.gif",
+      "png": "pokemon/shinyBack/1005.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/1005.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/1006.gif",
+      "png": "pokemon/shinyBack/1006.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/1006.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10075.gif",
+      "png": "pokemon/shinyBack/10075.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/719-mega.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10086.gif",
+      "png": "pokemon/shinyBack/10086.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/720-unbound.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10136.gif",
+      "png": "pokemon/shinyBack/10136.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/774-red.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10143.gif",
+      "png": "pokemon/shinyBack/10143.png",
+      "atlas": "assets/images/pokemon/back/shiny/778-busted.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10163.gif",
+      "png": "pokemon/shinyBack/10163.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/4078.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10165.gif",
+      "png": "pokemon/shinyBack/10165.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/4080.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10167.gif",
+      "png": "pokemon/shinyBack/10167.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/4110.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10169.gif",
+      "png": "pokemon/shinyBack/10169.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/4144.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10171.gif",
+      "png": "pokemon/shinyBack/10171.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/4146.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10172.gif",
+      "png": "pokemon/shinyBack/10172.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/4199.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10177.gif",
+      "png": "pokemon/shinyBack/10177.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/4555.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10180.gif",
+      "png": "pokemon/shinyBack/10180.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/4618.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10182.gif",
+      "png": "pokemon/shinyBack/10182.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/845-gulping.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10183.gif",
+      "png": "pokemon/shinyBack/10183.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/845-gorging.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10187.gif",
+      "png": "pokemon/shinyBack/10187.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/877-hangry.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10191.gif",
+      "png": "pokemon/shinyBack/10191.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/892-rapid-strike.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10194.gif",
+      "png": "pokemon/shinyBack/10194.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/898-shadow.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/102.gif",
+      "png": "pokemon/shinyBack/102.png",
+      "atlas": "assets/images/pokemon/back/shiny/102.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10210.gif",
+      "png": "pokemon/shinyBack/10210.png",
+      "atlas": "assets/images/pokemon/back/shiny/815-gigantamax.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10215.gif",
+      "png": "pokemon/shinyBack/10215.png",
+      "atlas": "assets/images/pokemon/back/shiny/839-gigantamax.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10230.gif",
+      "png": "pokemon/shinyBack/10230.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/6059.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10232.gif",
+      "png": "pokemon/shinyBack/10232.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/6101.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10233.gif",
+      "png": "pokemon/shinyBack/10233.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/6157.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10237.gif",
+      "png": "pokemon/shinyBack/10237.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/6549.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10239.gif",
+      "png": "pokemon/shinyBack/10239.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/6571.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10240.gif",
+      "png": "pokemon/shinyBack/10240.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/6628.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10243.gif",
+      "png": "pokemon/shinyBack/10243.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/6713.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10244.gif",
+      "png": "pokemon/shinyBack/10244.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/6724.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10246.gif",
+      "png": "pokemon/shinyBack/10246.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/484-origin.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10250.gif",
+      "png": "pokemon/shinyBack/10250.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/8128.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10251.gif",
+      "png": "pokemon/shinyBack/10251.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/8128-blaze.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10252.gif",
+      "png": "pokemon/shinyBack/10252.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/8128-aqua.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/10256.gif",
+      "png": "pokemon/shinyBack/10256.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/964-hero.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/104.gif",
+      "png": "pokemon/shinyBack/104.png",
+      "atlas": "assets/images/pokemon/back/shiny/104.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/108.gif",
+      "png": "pokemon/shinyBack/108.png",
+      "atlas": "assets/images/pokemon/back/shiny/108.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/109.gif",
+      "png": "pokemon/shinyBack/109.png",
+      "atlas": "assets/images/pokemon/back/shiny/109.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/11.gif",
+      "png": "pokemon/shinyBack/11.png",
+      "atlas": "assets/images/pokemon/back/shiny/11.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/111.gif",
+      "png": "pokemon/shinyBack/111.png",
+      "atlas": "assets/images/pokemon/back/shiny/111.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/112.gif",
+      "png": "pokemon/shinyBack/112.png",
+      "atlas": "assets/images/pokemon/back/shiny/112.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/114.gif",
+      "png": "pokemon/shinyBack/114.png",
+      "atlas": "assets/images/pokemon/back/shiny/114.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/116.gif",
+      "png": "pokemon/shinyBack/116.png",
+      "atlas": "assets/images/pokemon/back/shiny/116.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/117.gif",
+      "png": "pokemon/shinyBack/117.png",
+      "atlas": "assets/images/pokemon/back/shiny/117.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/118.gif",
+      "png": "pokemon/shinyBack/118.png",
+      "atlas": "assets/images/pokemon/back/shiny/118.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/120.gif",
+      "png": "pokemon/shinyBack/120.png",
+      "atlas": "assets/images/pokemon/back/shiny/120.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/125.gif",
+      "png": "pokemon/shinyBack/125.png",
+      "atlas": "assets/images/pokemon/back/shiny/125.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/126.gif",
+      "png": "pokemon/shinyBack/126.png",
+      "atlas": "assets/images/pokemon/back/shiny/126.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/129.gif",
+      "png": "pokemon/shinyBack/129.png",
+      "atlas": "assets/images/pokemon/back/shiny/129.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/13.gif",
+      "png": "pokemon/shinyBack/13.png",
+      "atlas": "assets/images/pokemon/back/shiny/13.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/133.gif",
+      "png": "pokemon/shinyBack/133.png",
+      "atlas": "assets/images/pokemon/back/shiny/133.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/137.gif",
+      "png": "pokemon/shinyBack/137.png",
+      "atlas": "assets/images/pokemon/back/shiny/137.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/138.gif",
+      "png": "pokemon/shinyBack/138.png",
+      "atlas": "assets/images/pokemon/back/shiny/138.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/14.gif",
+      "png": "pokemon/shinyBack/14.png",
+      "atlas": "assets/images/pokemon/back/shiny/14.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/140.gif",
+      "png": "pokemon/shinyBack/140.png",
+      "atlas": "assets/images/pokemon/back/shiny/140.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/148.gif",
+      "png": "pokemon/shinyBack/148.png",
+      "atlas": "assets/images/pokemon/back/shiny/148.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/16.gif",
+      "png": "pokemon/shinyBack/16.png",
+      "atlas": "assets/images/pokemon/back/shiny/16.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/17.gif",
+      "png": "pokemon/shinyBack/17.png",
+      "atlas": "assets/images/pokemon/back/shiny/17.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/19.gif",
+      "png": "pokemon/shinyBack/19.png",
+      "atlas": "assets/images/pokemon/back/shiny/19.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/2.gif",
+      "png": "pokemon/shinyBack/2.png",
+      "atlas": "assets/images/pokemon/back/shiny/2.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/203.gif",
+      "png": "pokemon/shinyBack/203.png",
+      "atlas": "assets/images/pokemon/back/shiny/203.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/21.gif",
+      "png": "pokemon/shinyBack/21.png",
+      "atlas": "assets/images/pokemon/back/shiny/21.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/217.gif",
+      "png": "pokemon/shinyBack/217.png",
+      "atlas": "assets/images/pokemon/back/shiny/217.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/23.gif",
+      "png": "pokemon/shinyBack/23.png",
+      "atlas": "assets/images/pokemon/back/shiny/23.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/27.gif",
+      "png": "pokemon/shinyBack/27.png",
+      "atlas": "assets/images/pokemon/back/shiny/27.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/29.gif",
+      "png": "pokemon/shinyBack/29.png",
+      "atlas": "assets/images/pokemon/back/shiny/29.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/30.gif",
+      "png": "pokemon/shinyBack/30.png",
+      "atlas": "assets/images/pokemon/back/shiny/30.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/32.gif",
+      "png": "pokemon/shinyBack/32.png",
+      "atlas": "assets/images/pokemon/back/shiny/32.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/33.gif",
+      "png": "pokemon/shinyBack/33.png",
+      "atlas": "assets/images/pokemon/back/shiny/33.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/35.gif",
+      "png": "pokemon/shinyBack/35.png",
+      "atlas": "assets/images/pokemon/back/shiny/35.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/364.gif",
+      "png": "pokemon/shinyBack/364.png",
+      "atlas": "assets/images/pokemon/back/shiny/364.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/37.gif",
+      "png": "pokemon/shinyBack/37.png",
+      "atlas": "assets/images/pokemon/back/shiny/37.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/39.gif",
+      "png": "pokemon/shinyBack/39.png",
+      "atlas": "assets/images/pokemon/back/shiny/39.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/4.gif",
+      "png": "pokemon/shinyBack/4.png",
+      "atlas": "assets/images/pokemon/back/shiny/4.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/41.gif",
+      "png": "pokemon/shinyBack/41.png",
+      "atlas": "assets/images/pokemon/back/shiny/41.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/42.gif",
+      "png": "pokemon/shinyBack/42.png",
+      "atlas": "assets/images/pokemon/back/shiny/42.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/43.gif",
+      "png": "pokemon/shinyBack/43.png",
+      "atlas": "assets/images/pokemon/back/shiny/43.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/44.gif",
+      "png": "pokemon/shinyBack/44.png",
+      "atlas": "assets/images/pokemon/back/shiny/44.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/46.gif",
+      "png": "pokemon/shinyBack/46.png",
+      "atlas": "assets/images/pokemon/back/shiny/46.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/48.gif",
+      "png": "pokemon/shinyBack/48.png",
+      "atlas": "assets/images/pokemon/back/shiny/48.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/5.gif",
+      "png": "pokemon/shinyBack/5.png",
+      "atlas": "assets/images/pokemon/back/shiny/5.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/50.gif",
+      "png": "pokemon/shinyBack/50.png",
+      "atlas": "assets/images/pokemon/back/shiny/50.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/52.gif",
+      "png": "pokemon/shinyBack/52.png",
+      "atlas": "assets/images/pokemon/back/shiny/52.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/54.gif",
+      "png": "pokemon/shinyBack/54.png",
+      "atlas": "assets/images/pokemon/back/shiny/54.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/56.gif",
+      "png": "pokemon/shinyBack/56.png",
+      "atlas": "assets/images/pokemon/back/shiny/56.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/57.gif",
+      "png": "pokemon/shinyBack/57.png",
+      "atlas": "assets/images/pokemon/back/shiny/57.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/58.gif",
+      "png": "pokemon/shinyBack/58.png",
+      "atlas": "assets/images/pokemon/back/shiny/58.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/60.gif",
+      "png": "pokemon/shinyBack/60.png",
+      "atlas": "assets/images/pokemon/back/shiny/60.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/61.gif",
+      "png": "pokemon/shinyBack/61.png",
+      "atlas": "assets/images/pokemon/back/shiny/61.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/63.gif",
+      "png": "pokemon/shinyBack/63.png",
+      "atlas": "assets/images/pokemon/back/shiny/63.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/64.gif",
+      "png": "pokemon/shinyBack/64.png",
+      "atlas": "assets/images/pokemon/back/shiny/64.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/66.gif",
+      "png": "pokemon/shinyBack/66.png",
+      "atlas": "assets/images/pokemon/back/shiny/66.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/660.gif",
+      "png": "pokemon/shinyBack/660.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/660.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/663.gif",
+      "png": "pokemon/shinyBack/663.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/663.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/666.gif",
+      "png": "pokemon/shinyBack/666.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/666-meadow.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/668.gif",
+      "png": "pokemon/shinyBack/668.png",
+      "atlas": "assets/images/pokemon/back/shiny/668.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/67.gif",
+      "png": "pokemon/shinyBack/67.png",
+      "atlas": "assets/images/pokemon/back/shiny/67.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/671.gif",
+      "png": "pokemon/shinyBack/671.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/671-red.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/673.gif",
+      "png": "pokemon/shinyBack/673.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/673.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/675.gif",
+      "png": "pokemon/shinyBack/675.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/675.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/676.gif",
+      "png": "pokemon/shinyBack/676.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/676.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/681.gif",
+      "png": "pokemon/shinyBack/681.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/681.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/683.gif",
+      "png": "pokemon/shinyBack/683.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/683.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/685.gif",
+      "png": "pokemon/shinyBack/685.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/685.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/69.gif",
+      "png": "pokemon/shinyBack/69.png",
+      "atlas": "assets/images/pokemon/back/shiny/69.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/693.gif",
+      "png": "pokemon/shinyBack/693.png",
+      "atlas": "assets/images/pokemon/back/shiny/693.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/695.gif",
+      "png": "pokemon/shinyBack/695.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/695.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/697.gif",
+      "png": "pokemon/shinyBack/697.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/697.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/699.gif",
+      "png": "pokemon/shinyBack/699.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/699.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/7.gif",
+      "png": "pokemon/shinyBack/7.png",
+      "atlas": "assets/images/pokemon/back/shiny/7.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/70.gif",
+      "png": "pokemon/shinyBack/70.png",
+      "atlas": "assets/images/pokemon/back/shiny/70.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/700.gif",
+      "png": "pokemon/shinyBack/700.png",
+      "atlas": "assets/images/pokemon/back/shiny/700.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/702.gif",
+      "png": "pokemon/shinyBack/702.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/702.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/703.gif",
+      "png": "pokemon/shinyBack/703.png",
+      "atlas": "assets/images/pokemon/back/shiny/703.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/706.gif",
+      "png": "pokemon/shinyBack/706.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/706.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/707.gif",
+      "png": "pokemon/shinyBack/707.png",
+      "atlas": "assets/images/pokemon/back/shiny/707.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/709.gif",
+      "png": "pokemon/shinyBack/709.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/709.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/711.gif",
+      "png": "pokemon/shinyBack/711.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/711.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/713.gif",
+      "png": "pokemon/shinyBack/713.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/713.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/715.gif",
+      "png": "pokemon/shinyBack/715.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/715.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/716.gif",
+      "png": "pokemon/shinyBack/716.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/716-active.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/717.gif",
+      "png": "pokemon/shinyBack/717.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/717.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/718.gif",
+      "png": "pokemon/shinyBack/718.png",
+      "atlas": "assets/images/pokemon/back/shiny/718.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/719.gif",
+      "png": "pokemon/shinyBack/719.png",
+      "atlas": "assets/images/pokemon/back/shiny/719.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/72.gif",
+      "png": "pokemon/shinyBack/72.png",
+      "atlas": "assets/images/pokemon/back/shiny/72.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/720.gif",
+      "png": "pokemon/shinyBack/720.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/720.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/721.gif",
+      "png": "pokemon/shinyBack/721.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/721.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/724.gif",
+      "png": "pokemon/shinyBack/724.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/724.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/727.gif",
+      "png": "pokemon/shinyBack/727.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/727.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/730.gif",
+      "png": "pokemon/shinyBack/730.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/730.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/733.gif",
+      "png": "pokemon/shinyBack/733.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/733.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/735.gif",
+      "png": "pokemon/shinyBack/735.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/735.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/738.gif",
+      "png": "pokemon/shinyBack/738.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/738.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/74.gif",
+      "png": "pokemon/shinyBack/74.png",
+      "atlas": "assets/images/pokemon/back/shiny/74.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/740.gif",
+      "png": "pokemon/shinyBack/740.png",
+      "atlas": "assets/images/pokemon/back/shiny/740.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/741.gif",
+      "png": "pokemon/shinyBack/741.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/741.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/743.gif",
+      "png": "pokemon/shinyBack/743.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/743.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/745.gif",
+      "png": "pokemon/shinyBack/745.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/745.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/746.gif",
+      "png": "pokemon/shinyBack/746.png",
+      "atlas": "assets/images/pokemon/back/shiny/746.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/748.gif",
+      "png": "pokemon/shinyBack/748.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/748.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/75.gif",
+      "png": "pokemon/shinyBack/75.png",
+      "atlas": "assets/images/pokemon/back/shiny/75.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/750.gif",
+      "png": "pokemon/shinyBack/750.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/750.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/752.gif",
+      "png": "pokemon/shinyBack/752.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/752.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/754.gif",
+      "png": "pokemon/shinyBack/754.png",
+      "atlas": "assets/images/pokemon/back/shiny/754.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/756.gif",
+      "png": "pokemon/shinyBack/756.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/756.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/760.gif",
+      "png": "pokemon/shinyBack/760.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/760.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/763.gif",
+      "png": "pokemon/shinyBack/763.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/763.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/764.gif",
+      "png": "pokemon/shinyBack/764.png",
+      "atlas": "assets/images/pokemon/back/shiny/764.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/765.gif",
+      "png": "pokemon/shinyBack/765.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/765.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/766.gif",
+      "png": "pokemon/shinyBack/766.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/766.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/77.gif",
+      "png": "pokemon/shinyBack/77.png",
+      "atlas": "assets/images/pokemon/back/shiny/77.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/770.gif",
+      "png": "pokemon/shinyBack/770.png",
+      "atlas": "assets/images/pokemon/back/shiny/770.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/771.gif",
+      "png": "pokemon/shinyBack/771.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/771.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/773.gif",
+      "png": "pokemon/shinyBack/773.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/773.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/775.gif",
+      "png": "pokemon/shinyBack/775.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/775.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/776.gif",
+      "png": "pokemon/shinyBack/776.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/776.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/777.gif",
+      "png": "pokemon/shinyBack/777.png",
+      "atlas": "assets/images/pokemon/back/shiny/777.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/778.gif",
+      "png": "pokemon/shinyBack/778.png",
+      "atlas": "assets/images/pokemon/back/shiny/778-disguised.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/779.gif",
+      "png": "pokemon/shinyBack/779.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/779.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/780.gif",
+      "png": "pokemon/shinyBack/780.png",
+      "atlas": "assets/images/pokemon/back/shiny/780.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/781.gif",
+      "png": "pokemon/shinyBack/781.png",
+      "atlas": "assets/images/pokemon/back/shiny/781.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/784.gif",
+      "png": "pokemon/shinyBack/784.png",
+      "atlas": "assets/images/pokemon/back/shiny/784.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/785.gif",
+      "png": "pokemon/shinyBack/785.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/785.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/786.gif",
+      "png": "pokemon/shinyBack/786.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/786.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/787.gif",
+      "png": "pokemon/shinyBack/787.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/787.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/788.gif",
+      "png": "pokemon/shinyBack/788.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/788.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/79.gif",
+      "png": "pokemon/shinyBack/79.png",
+      "atlas": "assets/images/pokemon/back/shiny/79.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/791.gif",
+      "png": "pokemon/shinyBack/791.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/791.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/792.gif",
+      "png": "pokemon/shinyBack/792.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/792.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/793.gif",
+      "png": "pokemon/shinyBack/793.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/793.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/794.gif",
+      "png": "pokemon/shinyBack/794.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/794.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/795.gif",
+      "png": "pokemon/shinyBack/795.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/795.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/796.gif",
+      "png": "pokemon/shinyBack/796.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/796.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/797.gif",
+      "png": "pokemon/shinyBack/797.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/797.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/798.gif",
+      "png": "pokemon/shinyBack/798.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/798.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/799.gif",
+      "png": "pokemon/shinyBack/799.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/799.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/8.gif",
+      "png": "pokemon/shinyBack/8.png",
+      "atlas": "assets/images/pokemon/back/shiny/8.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/800.gif",
+      "png": "pokemon/shinyBack/800.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/800.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/801.gif",
+      "png": "pokemon/shinyBack/801.png",
+      "atlas": "assets/images/pokemon/back/shiny/801.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/802.gif",
+      "png": "pokemon/shinyBack/802.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/802.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/804.gif",
+      "png": "pokemon/shinyBack/804.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/804.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/805.gif",
+      "png": "pokemon/shinyBack/805.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/805.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/806.gif",
+      "png": "pokemon/shinyBack/806.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/806.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/807.gif",
+      "png": "pokemon/shinyBack/807.png",
+      "atlas": "assets/images/pokemon/back/shiny/807.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/808.gif",
+      "png": "pokemon/shinyBack/808.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/808.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/809.gif",
+      "png": "pokemon/shinyBack/809.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/809.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/81.gif",
+      "png": "pokemon/shinyBack/81.png",
+      "atlas": "assets/images/pokemon/back/shiny/81.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/812.gif",
+      "png": "pokemon/shinyBack/812.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/812.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/815.gif",
+      "png": "pokemon/shinyBack/815.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/815.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/818.gif",
+      "png": "pokemon/shinyBack/818.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/818.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/82.gif",
+      "png": "pokemon/shinyBack/82.png",
+      "atlas": "assets/images/pokemon/back/shiny/82.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/820.gif",
+      "png": "pokemon/shinyBack/820.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/820.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/823.gif",
+      "png": "pokemon/shinyBack/823.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/823.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/826.gif",
+      "png": "pokemon/shinyBack/826.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/826.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/828.gif",
+      "png": "pokemon/shinyBack/828.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/828.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/830.gif",
+      "png": "pokemon/shinyBack/830.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/830.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/832.gif",
+      "png": "pokemon/shinyBack/832.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/832.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/834.gif",
+      "png": "pokemon/shinyBack/834.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/834.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/836.gif",
+      "png": "pokemon/shinyBack/836.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/836.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/839.gif",
+      "png": "pokemon/shinyBack/839.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/839.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/84.gif",
+      "png": "pokemon/shinyBack/84.png",
+      "atlas": "assets/images/pokemon/back/shiny/84.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/841.gif",
+      "png": "pokemon/shinyBack/841.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/841.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/842.gif",
+      "png": "pokemon/shinyBack/842.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/842.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/844.gif",
+      "png": "pokemon/shinyBack/844.png",
+      "atlas": "assets/images/pokemon/back/shiny/844.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/845.gif",
+      "png": "pokemon/shinyBack/845.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/845.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/847.gif",
+      "png": "pokemon/shinyBack/847.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/847.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/849.gif",
+      "png": "pokemon/shinyBack/849.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/849.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/851.gif",
+      "png": "pokemon/shinyBack/851.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/851.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/853.gif",
+      "png": "pokemon/shinyBack/853.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/853.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/855.gif",
+      "png": "pokemon/shinyBack/855.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/855.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/858.gif",
+      "png": "pokemon/shinyBack/858.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/858.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/86.gif",
+      "png": "pokemon/shinyBack/86.png",
+      "atlas": "assets/images/pokemon/back/shiny/86.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/861.gif",
+      "png": "pokemon/shinyBack/861.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/861.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/862.gif",
+      "png": "pokemon/shinyBack/862.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/862.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/863.gif",
+      "png": "pokemon/shinyBack/863.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/863.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/864.gif",
+      "png": "pokemon/shinyBack/864.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/864.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/865.gif",
+      "png": "pokemon/shinyBack/865.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/865.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/866.gif",
+      "png": "pokemon/shinyBack/866.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/866.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/867.gif",
+      "png": "pokemon/shinyBack/867.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/867.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/869.gif",
+      "png": "pokemon/shinyBack/869.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/869.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/871.gif",
+      "png": "pokemon/shinyBack/871.png",
+      "atlas": "assets/images/pokemon/back/shiny/871.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/873.gif",
+      "png": "pokemon/shinyBack/873.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/873.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/874.gif",
+      "png": "pokemon/shinyBack/874.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/874.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/875.gif",
+      "png": "pokemon/shinyBack/875.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/875.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/876.gif",
+      "png": "pokemon/shinyBack/876.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/876.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/877.gif",
+      "png": "pokemon/shinyBack/877.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/877.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/879.gif",
+      "png": "pokemon/shinyBack/879.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/879.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/88.gif",
+      "png": "pokemon/shinyBack/88.png",
+      "atlas": "assets/images/pokemon/back/shiny/88.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/880.gif",
+      "png": "pokemon/shinyBack/880.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/880.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/881.gif",
+      "png": "pokemon/shinyBack/881.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/881.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/882.gif",
+      "png": "pokemon/shinyBack/882.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/882.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/883.gif",
+      "png": "pokemon/shinyBack/883.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/883.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/884.gif",
+      "png": "pokemon/shinyBack/884.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/884.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/887.gif",
+      "png": "pokemon/shinyBack/887.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/887.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/888.gif",
+      "png": "pokemon/shinyBack/888.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/888.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/889.gif",
+      "png": "pokemon/shinyBack/889.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/889.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/890.gif",
+      "png": "pokemon/shinyBack/890.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/890.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/892.gif",
+      "png": "pokemon/shinyBack/892.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/892.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/893.gif",
+      "png": "pokemon/shinyBack/893.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/893.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/894.gif",
+      "png": "pokemon/shinyBack/894.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/894.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/895.gif",
+      "png": "pokemon/shinyBack/895.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/895.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/896.gif",
+      "png": "pokemon/shinyBack/896.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/896.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/897.gif",
+      "png": "pokemon/shinyBack/897.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/897.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/898.gif",
+      "png": "pokemon/shinyBack/898.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/898.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/899.gif",
+      "png": "pokemon/shinyBack/899.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/899.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/90.gif",
+      "png": "pokemon/shinyBack/90.png",
+      "atlas": "assets/images/pokemon/back/shiny/90.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/900.gif",
+      "png": "pokemon/shinyBack/900.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/900.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/901.gif",
+      "png": "pokemon/shinyBack/901.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/901.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/902.gif",
+      "png": "pokemon/shinyBack/902.png",
+      "atlas": "assets/images/pokemon/back/shiny/902.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/903.gif",
+      "png": "pokemon/shinyBack/903.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/903.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/904.gif",
+      "png": "pokemon/shinyBack/904.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/904.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/908.gif",
+      "png": "pokemon/shinyBack/908.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/908.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/911.gif",
+      "png": "pokemon/shinyBack/911.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/911.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/914.gif",
+      "png": "pokemon/shinyBack/914.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/914.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/916.gif",
+      "png": "pokemon/shinyBack/916.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/916.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/918.gif",
+      "png": "pokemon/shinyBack/918.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/918.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/92.gif",
+      "png": "pokemon/shinyBack/92.png",
+      "atlas": "assets/images/pokemon/back/shiny/92.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/920.gif",
+      "png": "pokemon/shinyBack/920.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/920.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/923.gif",
+      "png": "pokemon/shinyBack/923.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/923.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/925.gif",
+      "png": "pokemon/shinyBack/925.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/925-four.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/927.gif",
+      "png": "pokemon/shinyBack/927.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/927.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/93.gif",
+      "png": "pokemon/shinyBack/93.png",
+      "atlas": "assets/images/pokemon/back/shiny/93.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/930.gif",
+      "png": "pokemon/shinyBack/930.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/930.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/934.gif",
+      "png": "pokemon/shinyBack/934.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/934.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/939.gif",
+      "png": "pokemon/shinyBack/939.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/939.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/941.gif",
+      "png": "pokemon/shinyBack/941.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/941.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/943.gif",
+      "png": "pokemon/shinyBack/943.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/943.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/945.gif",
+      "png": "pokemon/shinyBack/945.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/945.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/947.gif",
+      "png": "pokemon/shinyBack/947.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/947.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/949.gif",
+      "png": "pokemon/shinyBack/949.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/949.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/95.gif",
+      "png": "pokemon/shinyBack/95.png",
+      "atlas": "assets/images/pokemon/back/shiny/95.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/950.gif",
+      "png": "pokemon/shinyBack/950.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/950.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/954.gif",
+      "png": "pokemon/shinyBack/954.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/954.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/956.gif",
+      "png": "pokemon/shinyBack/956.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/956.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/959.gif",
+      "png": "pokemon/shinyBack/959.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/959.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/96.gif",
+      "png": "pokemon/shinyBack/96.png",
+      "atlas": "assets/images/pokemon/back/shiny/96.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/961.gif",
+      "png": "pokemon/shinyBack/961.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/961.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/962.gif",
+      "png": "pokemon/shinyBack/962.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/962.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/964.gif",
+      "png": "pokemon/shinyBack/964.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/964-zero.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/966.gif",
+      "png": "pokemon/shinyBack/966.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/966.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/967.gif",
+      "png": "pokemon/shinyBack/967.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/967.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/972.gif",
+      "png": "pokemon/shinyBack/972.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/972.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/973.gif",
+      "png": "pokemon/shinyBack/973.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/973.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/975.gif",
+      "png": "pokemon/shinyBack/975.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/975.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/98.gif",
+      "png": "pokemon/shinyBack/98.png",
+      "atlas": "assets/images/pokemon/back/shiny/98.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/980.gif",
+      "png": "pokemon/shinyBack/980.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/980.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/981.gif",
+      "png": "pokemon/shinyBack/981.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/981.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/982.gif",
+      "png": "pokemon/shinyBack/982.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/982.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/983.gif",
+      "png": "pokemon/shinyBack/983.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/983.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/984.gif",
+      "png": "pokemon/shinyBack/984.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/984.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/986.gif",
+      "png": "pokemon/shinyBack/986.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/986.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/989.gif",
+      "png": "pokemon/shinyBack/989.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/989.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/990.gif",
+      "png": "pokemon/shinyBack/990.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/990.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/993.gif",
+      "png": "pokemon/shinyBack/993.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/993.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/994.gif",
+      "png": "pokemon/shinyBack/994.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/994.json"
+    },
+    {
+      "gif": "pokemon/shinyBack/995.gif",
+      "png": "pokemon/shinyBack/995.png",
+      "atlas": "assets/images/pokemon/exp/back/shiny/995.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/1.gif",
+      "png": "pokemon/shinyFront/1.png",
+      "atlas": "assets/images/pokemon/shiny/1.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10.gif",
+      "png": "pokemon/shinyFront/10.png",
+      "atlas": "assets/images/pokemon/shiny/10.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/100.gif",
+      "png": "pokemon/shinyFront/100.png",
+      "atlas": "assets/images/pokemon/shiny/100.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/1000.gif",
+      "png": "pokemon/shinyFront/1000.png",
+      "atlas": "assets/images/pokemon/exp/shiny/1000.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/1001.gif",
+      "png": "pokemon/shinyFront/1001.png",
+      "atlas": "assets/images/pokemon/exp/shiny/1001.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/1002.gif",
+      "png": "pokemon/shinyFront/1002.png",
+      "atlas": "assets/images/pokemon/exp/shiny/1002.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/1003.gif",
+      "png": "pokemon/shinyFront/1003.png",
+      "atlas": "assets/images/pokemon/exp/shiny/1003.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10039.gif",
+      "png": "pokemon/shinyFront/10039.png",
+      "atlas": "assets/images/pokemon/exp/shiny/115-mega.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/1004.gif",
+      "png": "pokemon/shinyFront/1004.png",
+      "atlas": "assets/images/pokemon/exp/shiny/1004.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/1005.gif",
+      "png": "pokemon/shinyFront/1005.png",
+      "atlas": "assets/images/pokemon/exp/shiny/1005.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/1006.gif",
+      "png": "pokemon/shinyFront/1006.png",
+      "atlas": "assets/images/pokemon/exp/shiny/1006.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10075.gif",
+      "png": "pokemon/shinyFront/10075.png",
+      "atlas": "assets/images/pokemon/exp/shiny/719-mega.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10136.gif",
+      "png": "pokemon/shinyFront/10136.png",
+      "atlas": "assets/images/pokemon/exp/shiny/774-red.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10143.gif",
+      "png": "pokemon/shinyFront/10143.png",
+      "atlas": "assets/images/pokemon/shiny/778-busted.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10163.gif",
+      "png": "pokemon/shinyFront/10163.png",
+      "atlas": "assets/images/pokemon/exp/shiny/4078.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10171.gif",
+      "png": "pokemon/shinyFront/10171.png",
+      "atlas": "assets/images/pokemon/exp/shiny/4146.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10177.gif",
+      "png": "pokemon/shinyFront/10177.png",
+      "atlas": "assets/images/pokemon/exp/shiny/4555.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10180.gif",
+      "png": "pokemon/shinyFront/10180.png",
+      "atlas": "assets/images/pokemon/exp/shiny/4618.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10182.gif",
+      "png": "pokemon/shinyFront/10182.png",
+      "atlas": "assets/images/pokemon/exp/shiny/845-gulping.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10183.gif",
+      "png": "pokemon/shinyFront/10183.png",
+      "atlas": "assets/images/pokemon/exp/shiny/845-gorging.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10187.gif",
+      "png": "pokemon/shinyFront/10187.png",
+      "atlas": "assets/images/pokemon/exp/shiny/877-hangry.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10191.gif",
+      "png": "pokemon/shinyFront/10191.png",
+      "atlas": "assets/images/pokemon/exp/shiny/892-rapid-strike.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10194.gif",
+      "png": "pokemon/shinyFront/10194.png",
+      "atlas": "assets/images/pokemon/exp/shiny/898-shadow.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/102.gif",
+      "png": "pokemon/shinyFront/102.png",
+      "atlas": "assets/images/pokemon/shiny/102.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10210.gif",
+      "png": "pokemon/shinyFront/10210.png",
+      "atlas": "assets/images/pokemon/shiny/815-gigantamax.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10215.gif",
+      "png": "pokemon/shinyFront/10215.png",
+      "atlas": "assets/images/pokemon/shiny/839-gigantamax.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10230.gif",
+      "png": "pokemon/shinyFront/10230.png",
+      "atlas": "assets/images/pokemon/exp/shiny/6059.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10232.gif",
+      "png": "pokemon/shinyFront/10232.png",
+      "atlas": "assets/images/pokemon/exp/shiny/6101.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10233.gif",
+      "png": "pokemon/shinyFront/10233.png",
+      "atlas": "assets/images/pokemon/exp/shiny/6157.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10240.gif",
+      "png": "pokemon/shinyFront/10240.png",
+      "atlas": "assets/images/pokemon/exp/shiny/6628.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10243.gif",
+      "png": "pokemon/shinyFront/10243.png",
+      "atlas": "assets/images/pokemon/exp/shiny/6713.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10244.gif",
+      "png": "pokemon/shinyFront/10244.png",
+      "atlas": "assets/images/pokemon/exp/shiny/6724.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10246.gif",
+      "png": "pokemon/shinyFront/10246.png",
+      "atlas": "assets/images/pokemon/exp/shiny/484-origin.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10250.gif",
+      "png": "pokemon/shinyFront/10250.png",
+      "atlas": "assets/images/pokemon/exp/shiny/8128.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10251.gif",
+      "png": "pokemon/shinyFront/10251.png",
+      "atlas": "assets/images/pokemon/exp/shiny/8128-blaze.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10252.gif",
+      "png": "pokemon/shinyFront/10252.png",
+      "atlas": "assets/images/pokemon/exp/shiny/8128-aqua.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/10256.gif",
+      "png": "pokemon/shinyFront/10256.png",
+      "atlas": "assets/images/pokemon/exp/shiny/964-hero.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/104.gif",
+      "png": "pokemon/shinyFront/104.png",
+      "atlas": "assets/images/pokemon/shiny/104.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/108.gif",
+      "png": "pokemon/shinyFront/108.png",
+      "atlas": "assets/images/pokemon/shiny/108.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/109.gif",
+      "png": "pokemon/shinyFront/109.png",
+      "atlas": "assets/images/pokemon/shiny/109.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/11.gif",
+      "png": "pokemon/shinyFront/11.png",
+      "atlas": "assets/images/pokemon/shiny/11.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/111.gif",
+      "png": "pokemon/shinyFront/111.png",
+      "atlas": "assets/images/pokemon/shiny/111.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/112.gif",
+      "png": "pokemon/shinyFront/112.png",
+      "atlas": "assets/images/pokemon/shiny/112.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/114.gif",
+      "png": "pokemon/shinyFront/114.png",
+      "atlas": "assets/images/pokemon/shiny/114.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/116.gif",
+      "png": "pokemon/shinyFront/116.png",
+      "atlas": "assets/images/pokemon/shiny/116.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/117.gif",
+      "png": "pokemon/shinyFront/117.png",
+      "atlas": "assets/images/pokemon/shiny/117.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/118.gif",
+      "png": "pokemon/shinyFront/118.png",
+      "atlas": "assets/images/pokemon/shiny/118.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/120.gif",
+      "png": "pokemon/shinyFront/120.png",
+      "atlas": "assets/images/pokemon/shiny/120.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/125.gif",
+      "png": "pokemon/shinyFront/125.png",
+      "atlas": "assets/images/pokemon/shiny/125.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/126.gif",
+      "png": "pokemon/shinyFront/126.png",
+      "atlas": "assets/images/pokemon/shiny/126.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/129.gif",
+      "png": "pokemon/shinyFront/129.png",
+      "atlas": "assets/images/pokemon/shiny/129.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/13.gif",
+      "png": "pokemon/shinyFront/13.png",
+      "atlas": "assets/images/pokemon/shiny/13.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/133.gif",
+      "png": "pokemon/shinyFront/133.png",
+      "atlas": "assets/images/pokemon/shiny/133.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/137.gif",
+      "png": "pokemon/shinyFront/137.png",
+      "atlas": "assets/images/pokemon/shiny/137.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/138.gif",
+      "png": "pokemon/shinyFront/138.png",
+      "atlas": "assets/images/pokemon/shiny/138.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/14.gif",
+      "png": "pokemon/shinyFront/14.png",
+      "atlas": "assets/images/pokemon/shiny/14.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/140.gif",
+      "png": "pokemon/shinyFront/140.png",
+      "atlas": "assets/images/pokemon/shiny/140.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/148.gif",
+      "png": "pokemon/shinyFront/148.png",
+      "atlas": "assets/images/pokemon/shiny/148.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/16.gif",
+      "png": "pokemon/shinyFront/16.png",
+      "atlas": "assets/images/pokemon/shiny/16.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/17.gif",
+      "png": "pokemon/shinyFront/17.png",
+      "atlas": "assets/images/pokemon/shiny/17.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/19.gif",
+      "png": "pokemon/shinyFront/19.png",
+      "atlas": "assets/images/pokemon/shiny/19.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/2.gif",
+      "png": "pokemon/shinyFront/2.png",
+      "atlas": "assets/images/pokemon/shiny/2.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/203.gif",
+      "png": "pokemon/shinyFront/203.png",
+      "atlas": "assets/images/pokemon/shiny/203.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/21.gif",
+      "png": "pokemon/shinyFront/21.png",
+      "atlas": "assets/images/pokemon/shiny/21.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/217.gif",
+      "png": "pokemon/shinyFront/217.png",
+      "atlas": "assets/images/pokemon/shiny/217.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/23.gif",
+      "png": "pokemon/shinyFront/23.png",
+      "atlas": "assets/images/pokemon/shiny/23.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/27.gif",
+      "png": "pokemon/shinyFront/27.png",
+      "atlas": "assets/images/pokemon/shiny/27.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/29.gif",
+      "png": "pokemon/shinyFront/29.png",
+      "atlas": "assets/images/pokemon/shiny/29.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/30.gif",
+      "png": "pokemon/shinyFront/30.png",
+      "atlas": "assets/images/pokemon/shiny/30.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/32.gif",
+      "png": "pokemon/shinyFront/32.png",
+      "atlas": "assets/images/pokemon/shiny/32.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/33.gif",
+      "png": "pokemon/shinyFront/33.png",
+      "atlas": "assets/images/pokemon/shiny/33.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/35.gif",
+      "png": "pokemon/shinyFront/35.png",
+      "atlas": "assets/images/pokemon/shiny/35.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/364.gif",
+      "png": "pokemon/shinyFront/364.png",
+      "atlas": "assets/images/pokemon/shiny/364.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/37.gif",
+      "png": "pokemon/shinyFront/37.png",
+      "atlas": "assets/images/pokemon/shiny/37.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/39.gif",
+      "png": "pokemon/shinyFront/39.png",
+      "atlas": "assets/images/pokemon/shiny/39.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/4.gif",
+      "png": "pokemon/shinyFront/4.png",
+      "atlas": "assets/images/pokemon/shiny/4.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/41.gif",
+      "png": "pokemon/shinyFront/41.png",
+      "atlas": "assets/images/pokemon/shiny/41.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/42.gif",
+      "png": "pokemon/shinyFront/42.png",
+      "atlas": "assets/images/pokemon/shiny/42.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/43.gif",
+      "png": "pokemon/shinyFront/43.png",
+      "atlas": "assets/images/pokemon/shiny/43.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/44.gif",
+      "png": "pokemon/shinyFront/44.png",
+      "atlas": "assets/images/pokemon/shiny/44.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/46.gif",
+      "png": "pokemon/shinyFront/46.png",
+      "atlas": "assets/images/pokemon/shiny/46.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/48.gif",
+      "png": "pokemon/shinyFront/48.png",
+      "atlas": "assets/images/pokemon/shiny/48.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/5.gif",
+      "png": "pokemon/shinyFront/5.png",
+      "atlas": "assets/images/pokemon/shiny/5.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/50.gif",
+      "png": "pokemon/shinyFront/50.png",
+      "atlas": "assets/images/pokemon/shiny/50.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/52.gif",
+      "png": "pokemon/shinyFront/52.png",
+      "atlas": "assets/images/pokemon/shiny/52.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/54.gif",
+      "png": "pokemon/shinyFront/54.png",
+      "atlas": "assets/images/pokemon/shiny/54.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/56.gif",
+      "png": "pokemon/shinyFront/56.png",
+      "atlas": "assets/images/pokemon/shiny/56.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/57.gif",
+      "png": "pokemon/shinyFront/57.png",
+      "atlas": "assets/images/pokemon/shiny/57.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/58.gif",
+      "png": "pokemon/shinyFront/58.png",
+      "atlas": "assets/images/pokemon/shiny/58.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/60.gif",
+      "png": "pokemon/shinyFront/60.png",
+      "atlas": "assets/images/pokemon/shiny/60.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/61.gif",
+      "png": "pokemon/shinyFront/61.png",
+      "atlas": "assets/images/pokemon/shiny/61.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/63.gif",
+      "png": "pokemon/shinyFront/63.png",
+      "atlas": "assets/images/pokemon/shiny/63.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/64.gif",
+      "png": "pokemon/shinyFront/64.png",
+      "atlas": "assets/images/pokemon/shiny/64.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/66.gif",
+      "png": "pokemon/shinyFront/66.png",
+      "atlas": "assets/images/pokemon/shiny/66.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/660.gif",
+      "png": "pokemon/shinyFront/660.png",
+      "atlas": "assets/images/pokemon/exp/shiny/660.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/663.gif",
+      "png": "pokemon/shinyFront/663.png",
+      "atlas": "assets/images/pokemon/exp/shiny/663.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/666.gif",
+      "png": "pokemon/shinyFront/666.png",
+      "atlas": "assets/images/pokemon/exp/shiny/666-meadow.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/668.gif",
+      "png": "pokemon/shinyFront/668.png",
+      "atlas": "assets/images/pokemon/shiny/668.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/67.gif",
+      "png": "pokemon/shinyFront/67.png",
+      "atlas": "assets/images/pokemon/shiny/67.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/671.gif",
+      "png": "pokemon/shinyFront/671.png",
+      "atlas": "assets/images/pokemon/exp/shiny/671-red.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/673.gif",
+      "png": "pokemon/shinyFront/673.png",
+      "atlas": "assets/images/pokemon/exp/shiny/673.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/675.gif",
+      "png": "pokemon/shinyFront/675.png",
+      "atlas": "assets/images/pokemon/exp/shiny/675.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/676.gif",
+      "png": "pokemon/shinyFront/676.png",
+      "atlas": "assets/images/pokemon/exp/shiny/676.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/681.gif",
+      "png": "pokemon/shinyFront/681.png",
+      "atlas": "assets/images/pokemon/exp/shiny/681.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/683.gif",
+      "png": "pokemon/shinyFront/683.png",
+      "atlas": "assets/images/pokemon/exp/shiny/683.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/685.gif",
+      "png": "pokemon/shinyFront/685.png",
+      "atlas": "assets/images/pokemon/exp/shiny/685.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/69.gif",
+      "png": "pokemon/shinyFront/69.png",
+      "atlas": "assets/images/pokemon/shiny/69.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/691.gif",
+      "png": "pokemon/shinyFront/691.png",
+      "atlas": "assets/images/pokemon/shiny/691.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/693.gif",
+      "png": "pokemon/shinyFront/693.png",
+      "atlas": "assets/images/pokemon/shiny/693.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/695.gif",
+      "png": "pokemon/shinyFront/695.png",
+      "atlas": "assets/images/pokemon/exp/shiny/695.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/697.gif",
+      "png": "pokemon/shinyFront/697.png",
+      "atlas": "assets/images/pokemon/exp/shiny/697.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/699.gif",
+      "png": "pokemon/shinyFront/699.png",
+      "atlas": "assets/images/pokemon/exp/shiny/699.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/7.gif",
+      "png": "pokemon/shinyFront/7.png",
+      "atlas": "assets/images/pokemon/shiny/7.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/70.gif",
+      "png": "pokemon/shinyFront/70.png",
+      "atlas": "assets/images/pokemon/shiny/70.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/700.gif",
+      "png": "pokemon/shinyFront/700.png",
+      "atlas": "assets/images/pokemon/shiny/700.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/702.gif",
+      "png": "pokemon/shinyFront/702.png",
+      "atlas": "assets/images/pokemon/exp/shiny/702.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/703.gif",
+      "png": "pokemon/shinyFront/703.png",
+      "atlas": "assets/images/pokemon/shiny/703.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/706.gif",
+      "png": "pokemon/shinyFront/706.png",
+      "atlas": "assets/images/pokemon/exp/shiny/706.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/707.gif",
+      "png": "pokemon/shinyFront/707.png",
+      "atlas": "assets/images/pokemon/shiny/707.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/709.gif",
+      "png": "pokemon/shinyFront/709.png",
+      "atlas": "assets/images/pokemon/exp/shiny/709.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/711.gif",
+      "png": "pokemon/shinyFront/711.png",
+      "atlas": "assets/images/pokemon/exp/shiny/711.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/713.gif",
+      "png": "pokemon/shinyFront/713.png",
+      "atlas": "assets/images/pokemon/exp/shiny/713.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/715.gif",
+      "png": "pokemon/shinyFront/715.png",
+      "atlas": "assets/images/pokemon/exp/shiny/715.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/716.gif",
+      "png": "pokemon/shinyFront/716.png",
+      "atlas": "assets/images/pokemon/exp/shiny/716-active.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/717.gif",
+      "png": "pokemon/shinyFront/717.png",
+      "atlas": "assets/images/pokemon/exp/shiny/717.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/718.gif",
+      "png": "pokemon/shinyFront/718.png",
+      "atlas": "assets/images/pokemon/shiny/718.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/719.gif",
+      "png": "pokemon/shinyFront/719.png",
+      "atlas": "assets/images/pokemon/shiny/719.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/72.gif",
+      "png": "pokemon/shinyFront/72.png",
+      "atlas": "assets/images/pokemon/shiny/72.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/720.gif",
+      "png": "pokemon/shinyFront/720.png",
+      "atlas": "assets/images/pokemon/exp/shiny/720.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/721.gif",
+      "png": "pokemon/shinyFront/721.png",
+      "atlas": "assets/images/pokemon/exp/shiny/721.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/724.gif",
+      "png": "pokemon/shinyFront/724.png",
+      "atlas": "assets/images/pokemon/exp/shiny/724.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/727.gif",
+      "png": "pokemon/shinyFront/727.png",
+      "atlas": "assets/images/pokemon/exp/shiny/727.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/730.gif",
+      "png": "pokemon/shinyFront/730.png",
+      "atlas": "assets/images/pokemon/exp/shiny/730.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/733.gif",
+      "png": "pokemon/shinyFront/733.png",
+      "atlas": "assets/images/pokemon/exp/shiny/733.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/735.gif",
+      "png": "pokemon/shinyFront/735.png",
+      "atlas": "assets/images/pokemon/exp/shiny/735.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/738.gif",
+      "png": "pokemon/shinyFront/738.png",
+      "atlas": "assets/images/pokemon/exp/shiny/738.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/74.gif",
+      "png": "pokemon/shinyFront/74.png",
+      "atlas": "assets/images/pokemon/shiny/74.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/740.gif",
+      "png": "pokemon/shinyFront/740.png",
+      "atlas": "assets/images/pokemon/shiny/740.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/741.gif",
+      "png": "pokemon/shinyFront/741.png",
+      "atlas": "assets/images/pokemon/exp/shiny/741.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/743.gif",
+      "png": "pokemon/shinyFront/743.png",
+      "atlas": "assets/images/pokemon/exp/shiny/743.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/745.gif",
+      "png": "pokemon/shinyFront/745.png",
+      "atlas": "assets/images/pokemon/exp/shiny/745.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/746.gif",
+      "png": "pokemon/shinyFront/746.png",
+      "atlas": "assets/images/pokemon/shiny/746.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/748.gif",
+      "png": "pokemon/shinyFront/748.png",
+      "atlas": "assets/images/pokemon/exp/shiny/748.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/75.gif",
+      "png": "pokemon/shinyFront/75.png",
+      "atlas": "assets/images/pokemon/shiny/75.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/750.gif",
+      "png": "pokemon/shinyFront/750.png",
+      "atlas": "assets/images/pokemon/exp/shiny/750.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/752.gif",
+      "png": "pokemon/shinyFront/752.png",
+      "atlas": "assets/images/pokemon/exp/shiny/752.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/754.gif",
+      "png": "pokemon/shinyFront/754.png",
+      "atlas": "assets/images/pokemon/shiny/754.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/756.gif",
+      "png": "pokemon/shinyFront/756.png",
+      "atlas": "assets/images/pokemon/exp/shiny/756.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/760.gif",
+      "png": "pokemon/shinyFront/760.png",
+      "atlas": "assets/images/pokemon/exp/shiny/760.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/763.gif",
+      "png": "pokemon/shinyFront/763.png",
+      "atlas": "assets/images/pokemon/exp/shiny/763.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/764.gif",
+      "png": "pokemon/shinyFront/764.png",
+      "atlas": "assets/images/pokemon/shiny/764.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/765.gif",
+      "png": "pokemon/shinyFront/765.png",
+      "atlas": "assets/images/pokemon/exp/shiny/765.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/766.gif",
+      "png": "pokemon/shinyFront/766.png",
+      "atlas": "assets/images/pokemon/exp/shiny/766.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/77.gif",
+      "png": "pokemon/shinyFront/77.png",
+      "atlas": "assets/images/pokemon/shiny/77.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/770.gif",
+      "png": "pokemon/shinyFront/770.png",
+      "atlas": "assets/images/pokemon/shiny/770.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/771.gif",
+      "png": "pokemon/shinyFront/771.png",
+      "atlas": "assets/images/pokemon/exp/shiny/771.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/773.gif",
+      "png": "pokemon/shinyFront/773.png",
+      "atlas": "assets/images/pokemon/exp/shiny/773.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/775.gif",
+      "png": "pokemon/shinyFront/775.png",
+      "atlas": "assets/images/pokemon/exp/shiny/775.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/776.gif",
+      "png": "pokemon/shinyFront/776.png",
+      "atlas": "assets/images/pokemon/exp/shiny/776.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/777.gif",
+      "png": "pokemon/shinyFront/777.png",
+      "atlas": "assets/images/pokemon/shiny/777.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/778.gif",
+      "png": "pokemon/shinyFront/778.png",
+      "atlas": "assets/images/pokemon/shiny/778-disguised.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/779.gif",
+      "png": "pokemon/shinyFront/779.png",
+      "atlas": "assets/images/pokemon/exp/shiny/779.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/780.gif",
+      "png": "pokemon/shinyFront/780.png",
+      "atlas": "assets/images/pokemon/shiny/780.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/781.gif",
+      "png": "pokemon/shinyFront/781.png",
+      "atlas": "assets/images/pokemon/shiny/781.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/784.gif",
+      "png": "pokemon/shinyFront/784.png",
+      "atlas": "assets/images/pokemon/shiny/784.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/785.gif",
+      "png": "pokemon/shinyFront/785.png",
+      "atlas": "assets/images/pokemon/exp/shiny/785.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/786.gif",
+      "png": "pokemon/shinyFront/786.png",
+      "atlas": "assets/images/pokemon/exp/shiny/786.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/787.gif",
+      "png": "pokemon/shinyFront/787.png",
+      "atlas": "assets/images/pokemon/exp/shiny/787.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/788.gif",
+      "png": "pokemon/shinyFront/788.png",
+      "atlas": "assets/images/pokemon/exp/shiny/788.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/79.gif",
+      "png": "pokemon/shinyFront/79.png",
+      "atlas": "assets/images/pokemon/shiny/79.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/791.gif",
+      "png": "pokemon/shinyFront/791.png",
+      "atlas": "assets/images/pokemon/exp/shiny/791.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/792.gif",
+      "png": "pokemon/shinyFront/792.png",
+      "atlas": "assets/images/pokemon/exp/shiny/792.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/793.gif",
+      "png": "pokemon/shinyFront/793.png",
+      "atlas": "assets/images/pokemon/exp/shiny/793.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/794.gif",
+      "png": "pokemon/shinyFront/794.png",
+      "atlas": "assets/images/pokemon/exp/shiny/794.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/795.gif",
+      "png": "pokemon/shinyFront/795.png",
+      "atlas": "assets/images/pokemon/exp/shiny/795.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/796.gif",
+      "png": "pokemon/shinyFront/796.png",
+      "atlas": "assets/images/pokemon/exp/shiny/796.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/797.gif",
+      "png": "pokemon/shinyFront/797.png",
+      "atlas": "assets/images/pokemon/exp/shiny/797.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/798.gif",
+      "png": "pokemon/shinyFront/798.png",
+      "atlas": "assets/images/pokemon/exp/shiny/798.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/799.gif",
+      "png": "pokemon/shinyFront/799.png",
+      "atlas": "assets/images/pokemon/exp/shiny/799.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/8.gif",
+      "png": "pokemon/shinyFront/8.png",
+      "atlas": "assets/images/pokemon/shiny/8.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/800.gif",
+      "png": "pokemon/shinyFront/800.png",
+      "atlas": "assets/images/pokemon/exp/shiny/800.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/801.gif",
+      "png": "pokemon/shinyFront/801.png",
+      "atlas": "assets/images/pokemon/shiny/801.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/802.gif",
+      "png": "pokemon/shinyFront/802.png",
+      "atlas": "assets/images/pokemon/exp/shiny/802.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/804.gif",
+      "png": "pokemon/shinyFront/804.png",
+      "atlas": "assets/images/pokemon/exp/shiny/804.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/805.gif",
+      "png": "pokemon/shinyFront/805.png",
+      "atlas": "assets/images/pokemon/exp/shiny/805.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/806.gif",
+      "png": "pokemon/shinyFront/806.png",
+      "atlas": "assets/images/pokemon/exp/shiny/806.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/807.gif",
+      "png": "pokemon/shinyFront/807.png",
+      "atlas": "assets/images/pokemon/shiny/807.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/808.gif",
+      "png": "pokemon/shinyFront/808.png",
+      "atlas": "assets/images/pokemon/exp/shiny/808.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/809.gif",
+      "png": "pokemon/shinyFront/809.png",
+      "atlas": "assets/images/pokemon/exp/shiny/809.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/81.gif",
+      "png": "pokemon/shinyFront/81.png",
+      "atlas": "assets/images/pokemon/shiny/81.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/812.gif",
+      "png": "pokemon/shinyFront/812.png",
+      "atlas": "assets/images/pokemon/exp/shiny/812.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/815.gif",
+      "png": "pokemon/shinyFront/815.png",
+      "atlas": "assets/images/pokemon/exp/shiny/815.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/818.gif",
+      "png": "pokemon/shinyFront/818.png",
+      "atlas": "assets/images/pokemon/exp/shiny/818.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/82.gif",
+      "png": "pokemon/shinyFront/82.png",
+      "atlas": "assets/images/pokemon/shiny/82.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/820.gif",
+      "png": "pokemon/shinyFront/820.png",
+      "atlas": "assets/images/pokemon/exp/shiny/820.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/823.gif",
+      "png": "pokemon/shinyFront/823.png",
+      "atlas": "assets/images/pokemon/exp/shiny/823.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/826.gif",
+      "png": "pokemon/shinyFront/826.png",
+      "atlas": "assets/images/pokemon/exp/shiny/826.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/828.gif",
+      "png": "pokemon/shinyFront/828.png",
+      "atlas": "assets/images/pokemon/exp/shiny/828.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/830.gif",
+      "png": "pokemon/shinyFront/830.png",
+      "atlas": "assets/images/pokemon/exp/shiny/830.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/832.gif",
+      "png": "pokemon/shinyFront/832.png",
+      "atlas": "assets/images/pokemon/exp/shiny/832.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/834.gif",
+      "png": "pokemon/shinyFront/834.png",
+      "atlas": "assets/images/pokemon/exp/shiny/834.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/836.gif",
+      "png": "pokemon/shinyFront/836.png",
+      "atlas": "assets/images/pokemon/exp/shiny/836.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/839.gif",
+      "png": "pokemon/shinyFront/839.png",
+      "atlas": "assets/images/pokemon/exp/shiny/839.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/84.gif",
+      "png": "pokemon/shinyFront/84.png",
+      "atlas": "assets/images/pokemon/shiny/84.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/841.gif",
+      "png": "pokemon/shinyFront/841.png",
+      "atlas": "assets/images/pokemon/exp/shiny/841.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/842.gif",
+      "png": "pokemon/shinyFront/842.png",
+      "atlas": "assets/images/pokemon/exp/shiny/842.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/844.gif",
+      "png": "pokemon/shinyFront/844.png",
+      "atlas": "assets/images/pokemon/shiny/844.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/845.gif",
+      "png": "pokemon/shinyFront/845.png",
+      "atlas": "assets/images/pokemon/exp/shiny/845.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/847.gif",
+      "png": "pokemon/shinyFront/847.png",
+      "atlas": "assets/images/pokemon/exp/shiny/847.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/849.gif",
+      "png": "pokemon/shinyFront/849.png",
+      "atlas": "assets/images/pokemon/exp/shiny/849.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/851.gif",
+      "png": "pokemon/shinyFront/851.png",
+      "atlas": "assets/images/pokemon/exp/shiny/851.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/853.gif",
+      "png": "pokemon/shinyFront/853.png",
+      "atlas": "assets/images/pokemon/exp/shiny/853.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/855.gif",
+      "png": "pokemon/shinyFront/855.png",
+      "atlas": "assets/images/pokemon/exp/shiny/855.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/858.gif",
+      "png": "pokemon/shinyFront/858.png",
+      "atlas": "assets/images/pokemon/exp/shiny/858.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/86.gif",
+      "png": "pokemon/shinyFront/86.png",
+      "atlas": "assets/images/pokemon/shiny/86.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/861.gif",
+      "png": "pokemon/shinyFront/861.png",
+      "atlas": "assets/images/pokemon/exp/shiny/861.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/862.gif",
+      "png": "pokemon/shinyFront/862.png",
+      "atlas": "assets/images/pokemon/exp/shiny/862.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/863.gif",
+      "png": "pokemon/shinyFront/863.png",
+      "atlas": "assets/images/pokemon/exp/shiny/863.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/864.gif",
+      "png": "pokemon/shinyFront/864.png",
+      "atlas": "assets/images/pokemon/exp/shiny/864.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/865.gif",
+      "png": "pokemon/shinyFront/865.png",
+      "atlas": "assets/images/pokemon/exp/shiny/865.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/866.gif",
+      "png": "pokemon/shinyFront/866.png",
+      "atlas": "assets/images/pokemon/exp/shiny/866.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/867.gif",
+      "png": "pokemon/shinyFront/867.png",
+      "atlas": "assets/images/pokemon/exp/shiny/867.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/869.gif",
+      "png": "pokemon/shinyFront/869.png",
+      "atlas": "assets/images/pokemon/exp/shiny/869.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/871.gif",
+      "png": "pokemon/shinyFront/871.png",
+      "atlas": "assets/images/pokemon/shiny/871.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/873.gif",
+      "png": "pokemon/shinyFront/873.png",
+      "atlas": "assets/images/pokemon/exp/shiny/873.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/874.gif",
+      "png": "pokemon/shinyFront/874.png",
+      "atlas": "assets/images/pokemon/exp/shiny/874.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/875.gif",
+      "png": "pokemon/shinyFront/875.png",
+      "atlas": "assets/images/pokemon/exp/shiny/875.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/876.gif",
+      "png": "pokemon/shinyFront/876.png",
+      "atlas": "assets/images/pokemon/exp/shiny/876.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/877.gif",
+      "png": "pokemon/shinyFront/877.png",
+      "atlas": "assets/images/pokemon/exp/shiny/877.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/879.gif",
+      "png": "pokemon/shinyFront/879.png",
+      "atlas": "assets/images/pokemon/exp/shiny/879.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/88.gif",
+      "png": "pokemon/shinyFront/88.png",
+      "atlas": "assets/images/pokemon/shiny/88.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/880.gif",
+      "png": "pokemon/shinyFront/880.png",
+      "atlas": "assets/images/pokemon/exp/shiny/880.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/881.gif",
+      "png": "pokemon/shinyFront/881.png",
+      "atlas": "assets/images/pokemon/exp/shiny/881.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/882.gif",
+      "png": "pokemon/shinyFront/882.png",
+      "atlas": "assets/images/pokemon/exp/shiny/882.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/883.gif",
+      "png": "pokemon/shinyFront/883.png",
+      "atlas": "assets/images/pokemon/exp/shiny/883.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/884.gif",
+      "png": "pokemon/shinyFront/884.png",
+      "atlas": "assets/images/pokemon/exp/shiny/884.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/887.gif",
+      "png": "pokemon/shinyFront/887.png",
+      "atlas": "assets/images/pokemon/exp/shiny/887.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/888.gif",
+      "png": "pokemon/shinyFront/888.png",
+      "atlas": "assets/images/pokemon/exp/shiny/888.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/889.gif",
+      "png": "pokemon/shinyFront/889.png",
+      "atlas": "assets/images/pokemon/exp/shiny/889.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/890.gif",
+      "png": "pokemon/shinyFront/890.png",
+      "atlas": "assets/images/pokemon/shiny/890.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/892.gif",
+      "png": "pokemon/shinyFront/892.png",
+      "atlas": "assets/images/pokemon/exp/shiny/892.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/893.gif",
+      "png": "pokemon/shinyFront/893.png",
+      "atlas": "assets/images/pokemon/exp/shiny/893.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/894.gif",
+      "png": "pokemon/shinyFront/894.png",
+      "atlas": "assets/images/pokemon/exp/shiny/894.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/895.gif",
+      "png": "pokemon/shinyFront/895.png",
+      "atlas": "assets/images/pokemon/exp/shiny/895.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/896.gif",
+      "png": "pokemon/shinyFront/896.png",
+      "atlas": "assets/images/pokemon/exp/shiny/896.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/897.gif",
+      "png": "pokemon/shinyFront/897.png",
+      "atlas": "assets/images/pokemon/exp/shiny/897.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/898.gif",
+      "png": "pokemon/shinyFront/898.png",
+      "atlas": "assets/images/pokemon/exp/shiny/898.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/899.gif",
+      "png": "pokemon/shinyFront/899.png",
+      "atlas": "assets/images/pokemon/exp/shiny/899.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/90.gif",
+      "png": "pokemon/shinyFront/90.png",
+      "atlas": "assets/images/pokemon/shiny/90.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/900.gif",
+      "png": "pokemon/shinyFront/900.png",
+      "atlas": "assets/images/pokemon/exp/shiny/900.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/901.gif",
+      "png": "pokemon/shinyFront/901.png",
+      "atlas": "assets/images/pokemon/exp/shiny/901.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/902.gif",
+      "png": "pokemon/shinyFront/902.png",
+      "atlas": "assets/images/pokemon/shiny/902.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/903.gif",
+      "png": "pokemon/shinyFront/903.png",
+      "atlas": "assets/images/pokemon/exp/shiny/903.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/904.gif",
+      "png": "pokemon/shinyFront/904.png",
+      "atlas": "assets/images/pokemon/exp/shiny/904.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/908.gif",
+      "png": "pokemon/shinyFront/908.png",
+      "atlas": "assets/images/pokemon/exp/shiny/908.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/911.gif",
+      "png": "pokemon/shinyFront/911.png",
+      "atlas": "assets/images/pokemon/exp/shiny/911.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/914.gif",
+      "png": "pokemon/shinyFront/914.png",
+      "atlas": "assets/images/pokemon/exp/shiny/914.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/916.gif",
+      "png": "pokemon/shinyFront/916.png",
+      "atlas": "assets/images/pokemon/exp/shiny/916.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/918.gif",
+      "png": "pokemon/shinyFront/918.png",
+      "atlas": "assets/images/pokemon/exp/shiny/918.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/92.gif",
+      "png": "pokemon/shinyFront/92.png",
+      "atlas": "assets/images/pokemon/shiny/92.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/920.gif",
+      "png": "pokemon/shinyFront/920.png",
+      "atlas": "assets/images/pokemon/exp/shiny/920.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/923.gif",
+      "png": "pokemon/shinyFront/923.png",
+      "atlas": "assets/images/pokemon/exp/shiny/923.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/925.gif",
+      "png": "pokemon/shinyFront/925.png",
+      "atlas": "assets/images/pokemon/exp/shiny/925-four.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/927.gif",
+      "png": "pokemon/shinyFront/927.png",
+      "atlas": "assets/images/pokemon/exp/shiny/927.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/93.gif",
+      "png": "pokemon/shinyFront/93.png",
+      "atlas": "assets/images/pokemon/shiny/93.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/930.gif",
+      "png": "pokemon/shinyFront/930.png",
+      "atlas": "assets/images/pokemon/exp/shiny/930.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/934.gif",
+      "png": "pokemon/shinyFront/934.png",
+      "atlas": "assets/images/pokemon/exp/shiny/934.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/939.gif",
+      "png": "pokemon/shinyFront/939.png",
+      "atlas": "assets/images/pokemon/exp/shiny/939.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/941.gif",
+      "png": "pokemon/shinyFront/941.png",
+      "atlas": "assets/images/pokemon/exp/shiny/941.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/943.gif",
+      "png": "pokemon/shinyFront/943.png",
+      "atlas": "assets/images/pokemon/exp/shiny/943.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/945.gif",
+      "png": "pokemon/shinyFront/945.png",
+      "atlas": "assets/images/pokemon/exp/shiny/945.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/947.gif",
+      "png": "pokemon/shinyFront/947.png",
+      "atlas": "assets/images/pokemon/exp/shiny/947.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/949.gif",
+      "png": "pokemon/shinyFront/949.png",
+      "atlas": "assets/images/pokemon/exp/shiny/949.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/95.gif",
+      "png": "pokemon/shinyFront/95.png",
+      "atlas": "assets/images/pokemon/shiny/95.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/950.gif",
+      "png": "pokemon/shinyFront/950.png",
+      "atlas": "assets/images/pokemon/exp/shiny/950.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/954.gif",
+      "png": "pokemon/shinyFront/954.png",
+      "atlas": "assets/images/pokemon/exp/shiny/954.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/956.gif",
+      "png": "pokemon/shinyFront/956.png",
+      "atlas": "assets/images/pokemon/exp/shiny/956.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/959.gif",
+      "png": "pokemon/shinyFront/959.png",
+      "atlas": "assets/images/pokemon/exp/shiny/959.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/96.gif",
+      "png": "pokemon/shinyFront/96.png",
+      "atlas": "assets/images/pokemon/shiny/96.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/961.gif",
+      "png": "pokemon/shinyFront/961.png",
+      "atlas": "assets/images/pokemon/exp/shiny/961.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/962.gif",
+      "png": "pokemon/shinyFront/962.png",
+      "atlas": "assets/images/pokemon/exp/shiny/962.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/964.gif",
+      "png": "pokemon/shinyFront/964.png",
+      "atlas": "assets/images/pokemon/exp/shiny/964-zero.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/966.gif",
+      "png": "pokemon/shinyFront/966.png",
+      "atlas": "assets/images/pokemon/exp/shiny/966.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/967.gif",
+      "png": "pokemon/shinyFront/967.png",
+      "atlas": "assets/images/pokemon/exp/shiny/967.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/968.gif",
+      "png": "pokemon/shinyFront/968.png",
+      "atlas": "assets/images/pokemon/exp/shiny/968.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/972.gif",
+      "png": "pokemon/shinyFront/972.png",
+      "atlas": "assets/images/pokemon/exp/shiny/972.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/973.gif",
+      "png": "pokemon/shinyFront/973.png",
+      "atlas": "assets/images/pokemon/exp/shiny/973.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/975.gif",
+      "png": "pokemon/shinyFront/975.png",
+      "atlas": "assets/images/pokemon/exp/shiny/975.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/977.gif",
+      "png": "pokemon/shinyFront/977.png",
+      "atlas": "assets/images/pokemon/exp/shiny/977.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/98.gif",
+      "png": "pokemon/shinyFront/98.png",
+      "atlas": "assets/images/pokemon/shiny/98.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/980.gif",
+      "png": "pokemon/shinyFront/980.png",
+      "atlas": "assets/images/pokemon/exp/shiny/980.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/981.gif",
+      "png": "pokemon/shinyFront/981.png",
+      "atlas": "assets/images/pokemon/exp/shiny/981.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/982.gif",
+      "png": "pokemon/shinyFront/982.png",
+      "atlas": "assets/images/pokemon/exp/shiny/982.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/983.gif",
+      "png": "pokemon/shinyFront/983.png",
+      "atlas": "assets/images/pokemon/exp/shiny/983.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/984.gif",
+      "png": "pokemon/shinyFront/984.png",
+      "atlas": "assets/images/pokemon/exp/shiny/984.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/986.gif",
+      "png": "pokemon/shinyFront/986.png",
+      "atlas": "assets/images/pokemon/exp/shiny/986.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/989.gif",
+      "png": "pokemon/shinyFront/989.png",
+      "atlas": "assets/images/pokemon/exp/shiny/989.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/990.gif",
+      "png": "pokemon/shinyFront/990.png",
+      "atlas": "assets/images/pokemon/exp/shiny/990.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/991.gif",
+      "png": "pokemon/shinyFront/991.png",
+      "atlas": "assets/images/pokemon/exp/shiny/991.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/993.gif",
+      "png": "pokemon/shinyFront/993.png",
+      "atlas": "assets/images/pokemon/exp/shiny/993.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/994.gif",
+      "png": "pokemon/shinyFront/994.png",
+      "atlas": "assets/images/pokemon/exp/shiny/994.json"
+    },
+    {
+      "gif": "pokemon/shinyFront/995.gif",
+      "png": "pokemon/shinyFront/995.png",
+      "atlas": "assets/images/pokemon/exp/shiny/995.json"
+    }
+  ],
+  "metadata": [
+    {
+      "path": "CREDITS.md",
+      "source": "credits/CREDITS.md",
+      "text": true
+    },
+    {
+      "path": "README.md",
+      "snapshot": "snapshots/README.md",
+      "text": true
+    },
+    {
+      "path": "source-LICENSES-CC-BY-NC-SA-4.0.txt",
+      "source": "assets/LICENSES/CC-BY-NC-SA-4.0.txt",
+      "text": true
+    },
+    {
+      "path": "source-LICENSES-LicenseRef-FAIR-USE.txt",
+      "source": "assets/LICENSES/LicenseRef-FAIR-USE.txt",
+      "text": true
+    },
+    {
+      "path": "source-README.md",
+      "source": "assets/README.md",
+      "text": true
+    },
+    {
+      "path": "source-REUSE.toml",
+      "source": "assets/REUSE.toml",
+      "text": true
+    },
+    {
+      "path": "source-images-REUSE.toml",
+      "source": "assets/images/REUSE.toml",
+      "text": true
+    },
+    {
+      "path": "sources.json",
+      "snapshot": "snapshots/sources.json",
+      "text": true
+    }
+  ]
+}

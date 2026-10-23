@@ -20,6 +20,8 @@
     "tower:audit": "tsx src/tower-audit.ts",
     "raid:simulate": "tsx scripts/simulate-raids.ts",
     "data:import": "tsx scripts/import-battle-roster.ts",
+    "assets:pokerogue": "node scripts/assets/pokerogue/restore.mjs",
+    "assets:pokerogue:verify": "node scripts/assets/pokerogue/verify.mjs",
     "battle:audit": "tsx scripts/audit-battle-roster.ts",
     "sprites:audit": "node scripts/audit-sprite-assets.mjs",
     "test": "tsx --test tests/*.test.ts",

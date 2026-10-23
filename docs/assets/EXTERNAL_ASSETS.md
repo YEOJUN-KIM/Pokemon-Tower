@@ -111,14 +111,9 @@ pokemon-showdown@0.11.11은 Dex·BattleStream·TeamValidator·배틀 계산의 �
 
 이동 후 검증: Git 추적 목록만 복사한 격리 사본에서 기존 vendor와 사용자 .data 없이 시작했다. 의존성은 기존 node_modules 설치를 공유했으므로 의존성 재설치까지 검증한 것은 아니다. TypeScript, 전체 단위 테스트 1,495개(0 실패), asset registry 검사, workspace 65개 Markdown/338개 링크, CSS 검사, 기본 Turbopack production build, package-deploy --check, Chrome E2E 3개(외부 자산 누락·PC/모바일 전투 연출)가 통과했다. external README의 상대 링크 8개도 별도 확인했다. Windows junction/브라우저 실행은 확장 권한으로 검증했다. 원본 .data는 검증에 사용하지 않았으며 별도 비교했다. 이동 원본 137개 중 README를 제외한 136개는 이동 전 로컬 SHA-256과 일치한다.
 
-### 다음 PokéRogue 단계의 진입 조건
+### PokéRogue 독립 복원
 
-- 고정 assets revision `325c7de68e6c323e12243271ea510c6b0e1b992e`와 sources.json의 원본 URL·atlas hash·결과 GIF hash가 있다. PNG 및 원본 texture 전체를 포괄하는 검증 목록은 추가로 필요하다.
-- 기존 import-additional-animations.ts는 다운로드·atlas 변환을 구현했지만 현재 resolver가 정적 이미지로 판단한 view만 처리한다. 따라서 기존 애니메이션이 메타데이터에 남고 파일만 없는 새 clone을 완전히 복원하는 명령으로는 부족하다.
-- importer는 Showdown 조회·src/data 수정·QA 출력도 함께 하며 credits는 가변 beta를 참조한다. provider 단독 복원, 변환기/Pillow 버전, credits 고정, 네트워크 재다운로드와 오프라인 재복원 검증을 먼저 준비해야 한다.
-- public/vendor/pokerogue URL은 현재 유지 중이다. external 원본에서 runtime public 경로를 생성하는 전용 명령·빌드/패키징 연동은 아직 없다.
-
-다음 작업 대상으로는 적절하나 **즉시 이동하거나 Git 추적을 해제할 준비가 끝난 상태는 아니다**. 단독 복원·전체 파일 해시·새 clone 생성/배포 검증을 먼저 구현한다. 이번에는 네트워크 원본 생존 여부를 직접 재검증하거나 PokéRogue 파일을 변경하지 않았다.
+후속 단계 기준 HEAD `ab7bb36347a3d5ac4261054e8f36036e116ae87e`의 전체 팩을 golden baseline으로 고정하고 [독립 복원 절차](POKEROGUE_RESTORE.md)를 추가했다. 기존 public/vendor/pokerogue의 파일·Git 추적·runtime URL은 그대로 유지한다. `pnpm assets:pokerogue`가 pinned source 다운로드와 변환·전체 검증을 담당하고 `pnpm assets:pokerogue:verify`는 읽기 전용 검증이다. 기존 통합 importer를 복원 명령으로 사용하지 않는다.
 
 ## 직접 경로 검색 목록
 

@@ -15,7 +15,7 @@
 
 ## 출처
 
-파일별 라이선스는 [보관한 원본](../../vendor/showdown-reference/battle-animations.ts)과 [기술 코드](../../vendor/showdown-reference/battle-animations-moves.ts)의 고지를 따른다. 참고 버전은 `c0f6bfc707a5e3bba4da3785e9cb06c8ae04f8d9`. `icicle`, `lightning`, `bone`, `rocks`, `rock1`, `rock2` 등 별도 조건의 이미지는 사용하지 않는다. 코드의 궤적·시간 구성을 참고하고 현재 화면에 맞는 렌더러를 직접 구현했다. [출처와 재사용](../references/THIRD_PARTY.md).
+파일별 라이선스는 [보관한 원본](../../external/reference/showdown/battle-animations.ts)과 [기술 코드](../../external/reference/showdown/battle-animations-moves.ts)의 고지를 따른다. 참고 버전은 `c0f6bfc707a5e3bba4da3785e9cb06c8ae04f8d9`. `icicle`, `lightning`, `bone`, `rocks`, `rock1`, `rock2` 등 별도 조건의 이미지는 사용하지 않는다. 코드의 궤적·시간 구성을 참고하고 현재 화면에 맞는 렌더러를 직접 구현했다. [출처와 재사용](../references/THIRD_PARTY.md).
 
 기존 원자료 manifest는 당시 `integrated:false` 기록을 보존한다. 현재 연결 목록은 `docs/assets/manifests/move-effects-integration.json`에 기록한다.
 

@@ -1,6 +1,6 @@
 # 외부 자료 보관 경계
 
-장기 구조의 기반만 만든 상태다. 기존 public/vendor·sprites·audio와 vendor 자료는 이번에 이동하거나 복제하지 않았다. [분류·사용처·Git 정책](../docs/assets/EXTERNAL_ASSETS.md)을 따른다.
+runtime 미사용 Kenney 팩은 [third-party/kenney-impact-sounds](third-party/kenney-impact-sounds/pack/License.txt), Showdown 참고 코드는 [reference/showdown](reference/showdown/README.md)에 보관한다. 두 그룹은 라이선스·출처 기록과 함께 Git 추적한다. 기존 public/vendor·sprites·audio는 그대로 유지한다. [분류·사용처·Git 정책](../docs/assets/EXTERNAL_ASSETS.md)을 따른다.
 
 - pokemon-ip/: 향후 Pokémon IP 기반 원본. 로컬 전용이며 README만 Git에 보존한다.
 - third-party/: 파일별 이용 조건이 명시된 제3자 원본과 고지. 허용 범위가 확인된 파일만 Git 추적 가능.

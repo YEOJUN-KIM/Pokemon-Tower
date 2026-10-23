@@ -22,8 +22,8 @@
 | OpenGameArt | `public/audio/bgm` | 현재 재생 6개 CC0; 나머지 파일 별도 검토 | 13 / 45.874 | 현재 6개 파일 사용; music-score / game-audio / registry | `public/audio/music-sources.json` | 13/13 | 중간; `third-party/opengameart` |
 | 프로젝트 제작 | `public/audio/sfx` | 합성음 음량 설정 | 1 / 0.001 | 사용; sound-design / game-audio | `public/audio/sfx/levels.json` | 1/1 | 중간; `프로젝트 설정 유지` |
 | Neo둥근모 / NeoDGM | `public/fonts` | SIL OFL 1.1 | 3 / 0.667 | 사용; retro-theme CSS / Windows launcher | `public/fonts/NEODGM-LICENSE.txt` | 3/3 | 중간; `third-party/fonts` |
-| Kenney | `vendor/kenney-impact-sounds` | 동봉 CC0 | 134 / 1.751 | runtime 미사용; 참고 음원 팩 | `pack/License.txt; docs/assets/manifests/resource-manifest.json` | 134/134 | 낮음; `third-party/kenney` |
-| Showdown client reference | `vendor/showdown-reference` | 파일별 MIT·CC0 고지 / 참고 코드 | 3 / 0.930 | 참고만 사용; 런타임 import 없음 | `원본 헤더; docs/assets/manifests/resource-manifest.json` | 3/3 | 낮음; `reference/showdown` |
+| Kenney | `external/third-party/kenney-impact-sounds` | 동봉 CC0 | 134 / 1.751 | runtime 미사용; 참고 음원 팩 | `pack/License.txt; docs/assets/manifests/resource-manifest.json` | 134/134 | 낮음; `third-party/kenney-impact-sounds` |
+| Showdown client reference | `external/reference/showdown` | 파일별 MIT·CC0 고지 / 참고 코드 | 3 / 0.930 | 참고만 사용; 런타임 import 없음 | `원본 헤더; docs/assets/manifests/resource-manifest.json` | 3/3 | 낮음; `reference/showdown` |
 | 사용자 제공 | `public/assets/items/tm` | 권리 미검증 입력 | 19 / 1.845 | 사용; tm-icon adapter | `public/assets/items/tm/README.md` | 19/19 | 중간; `user-provided/unverified` |
 | 사용자 제공 | `public/images/events` | 권리 미검증 입력 | 3 / 0.554 | 사용; TeleportPortal | `public/images/events/README.md` | 3/3 | 중간; `user-provided/unverified` |
 | 프로젝트 제작 | `public/assets/original` | 이번 작업의 직접 작성 SVG | 4 / 0.001 | fallback 사용; registry / AssetImage / TrainerPortrait | `외부 파일·상표·원작 그림을 사용하지 않은 기하 SVG` | 0/4 | 낮음; `현재 유지` |
@@ -76,9 +76,9 @@ scripts/lib/source-cache.mjs는 provider·URL·revision·cachePath를 명시한�
 
 ## 이동 판단과 다음 순서
 
-실제 이동 파일은 없다. vendor의 작은 Kenney·Showdown 참고 자료도 공식 resource-manifest가 과거 vendor 경로를 기록하므로 먼저 정책·참조를 명시하고 유지했다. 필요하면 다음 단계에서 역사 manifest는 보존한 채 현 경로 매핑과 문서 링크를 함께 변경한다.
+기반 도입 단계에서는 이동하지 않았으며, 후속 비런타임 자료 이동 결과는 아래에 기록한다. 역사 manifest는 다운로드 당시 경로를 그대로 보존한다.
 
-1. runtime 미사용 Kenney·Showdown reference부터 원본 위치를 정리한다. 이들은 용량 절감보다 역할 분리 목적이며 명시적 라이선스 자료를 반드시 Git에서 제거할 필요는 없다.
+1. runtime 미사용 Kenney·Showdown reference의 위치 정리를 완료했다. 두 그룹은 명시된 고지와 함께 Git 추적을 유지한다.
 2. pinned revision·709개 반입 기록과 변환기가 있는 PokéRogue를 작은 파일럿으로 검증한다. 개별 이용 고지·변환 도구·누락 처리·업데이트·오프라인/온라인 복구를 먼저 확인한다.
 3. Showdown/PokeAPI sprite를 각각 독립 pack으로 생성하는 명령과 해시 검증을 만든 뒤 대규모 runtime 경로를 전환한다. Showdown live 파일은 pinned snapshot 전략이 필요하다.
 4. CC0 VFX·음악·OFL 폰트는 추적 유지가 가능하므로 급히 제거하지 않는다. 사용자 제공 파일은 별도 provenance 검토를 우선한다.
@@ -93,6 +93,32 @@ pokemon-showdown@0.11.11은 Dex·BattleStream·TeamValidator·배틀 계산의 �
 - hydration 전에 끝난 이미지 오류도 onError만 기다리지 않고 complete/naturalWidth를 확인해 복구한다. 게임 소스의 기존 custom Pokémon fallback은 그대로 유지한다.
 - importer 5개는 실제 --check-sources 진입점을 임시 빈 cwd에서 실행해 캐시 생성 후 네트워크 금지 재실행까지 통과했다. HTTP 404·빈 응답은 캐시에 기록하지 않는 검사도 통과했다. 전체 실제 upstream 재다운로드는 실행하지 않았다.
 - 원래 .data 파일 13,971개의 크기·수정시각·존재가 그대로다. 기존 public·vendor 자산, 공식 manifest, package.json·lockfile·스키마·migration의 diff는 없다. 기존 자산 추적 해제·파일 이동·커밋·푸시는 하지 않았다.
+
+## 비런타임 자료 이동 · 2026-10-23
+
+이동 기준 HEAD: `beacecfb1d04abe60395632ffb07eae6a17f5b5a`.
+
+| 다운로드 당시 경로 | 현재 기준 위치 | 보존 정책 |
+|---|---|---|
+| `vendor/kenney-impact-sounds/` | `external/third-party/kenney-impact-sounds/` | 134개 파일 전체 보존; 원본 ZIP·130개 OGG·CC0 License.txt·URL 바로가기 포함; Git 유지 |
+| `vendor/showdown-reference/` | `external/reference/showdown/` | 원본 TS 2개와 README 보존; MIT·CC0 헤더 및 고정 revision 유지; Git 유지 |
+
+`manifests/resource-manifest.json`은 2026-10-04의 역사 스냅샷이므로 경로·bytes·sha256·integrated를 덮어쓰지 않았다. 기록을 현재 파일에 대조하려면 위 접두사 매핑을 적용한다. Showdown TS의 Git 원본 bytes/hash는 이 스냅샷과 일치한다. Windows checkout의 CRLF로 로컬 bytes/hash는 다를 수 있어, 이번 이동 무결성은 **이동 직전 로컬 파일의 SHA-256**과 비교하고 Git 원본 해시도 별도로 대조했다. Showdown README는 이동에 맞춰 상대 경로만 수정했다.
+
+프로젝트 전체 검색에서 두 그룹의 runtime import·빌드 입력·scripts·tests 참조는 없었다. tsconfig는 src/tests/e2e만 포함하고, Next standalone 및 package-deploy는 실행 의존성과 public을 배포한다. Docker builder의 COPY . .에는 포함되지만 runner에는 이 참고 자료를 복사하지 않는다. 두 그룹 외에 vendor의 내용은 없어서 이동 후 빈 루트 vendor 폴더를 제거했다. public/vendor는 별개이며 변경하지 않았다. ignore 규칙 수정은 필요 없다.
+
+현재 안내는 이 문서·MOVE_EFFECTS·THIRD_PARTY·assets README·external README들로 갱신했다. importer·tests·역사 manifest의 경로 수정은 필요하지 않았다.
+
+이동 후 검증: Git 추적 목록만 복사한 격리 사본에서 기존 vendor와 사용자 .data 없이 시작했다. 의존성은 기존 node_modules 설치를 공유했으므로 의존성 재설치까지 검증한 것은 아니다. TypeScript, 전체 단위 테스트 1,495개(0 실패), asset registry 검사, workspace 65개 Markdown/338개 링크, CSS 검사, 기본 Turbopack production build, package-deploy --check, Chrome E2E 3개(외부 자산 누락·PC/모바일 전투 연출)가 통과했다. external README의 상대 링크 8개도 별도 확인했다. Windows junction/브라우저 실행은 확장 권한으로 검증했다. 원본 .data는 검증에 사용하지 않았으며 별도 비교했다. 이동 원본 137개 중 README를 제외한 136개는 이동 전 로컬 SHA-256과 일치한다.
+
+### 다음 PokéRogue 단계의 진입 조건
+
+- 고정 assets revision `325c7de68e6c323e12243271ea510c6b0e1b992e`와 sources.json의 원본 URL·atlas hash·결과 GIF hash가 있다. PNG 및 원본 texture 전체를 포괄하는 검증 목록은 추가로 필요하다.
+- 기존 import-additional-animations.ts는 다운로드·atlas 변환을 구현했지만 현재 resolver가 정적 이미지로 판단한 view만 처리한다. 따라서 기존 애니메이션이 메타데이터에 남고 파일만 없는 새 clone을 완전히 복원하는 명령으로는 부족하다.
+- importer는 Showdown 조회·src/data 수정·QA 출력도 함께 하며 credits는 가변 beta를 참조한다. provider 단독 복원, 변환기/Pillow 버전, credits 고정, 네트워크 재다운로드와 오프라인 재복원 검증을 먼저 준비해야 한다.
+- public/vendor/pokerogue URL은 현재 유지 중이다. external 원본에서 runtime public 경로를 생성하는 전용 명령·빌드/패키징 연동은 아직 없다.
+
+다음 작업 대상으로는 적절하나 **즉시 이동하거나 Git 추적을 해제할 준비가 끝난 상태는 아니다**. 단독 복원·전체 파일 해시·새 clone 생성/배포 검증을 먼저 구현한다. 이번에는 네트워크 원본 생존 여부를 직접 재검증하거나 PokéRogue 파일을 변경하지 않았다.
 
 ## 직접 경로 검색 목록
 

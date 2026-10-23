@@ -6,7 +6,7 @@
 
 | 공식 manifest | 용도와 범위 | 자동 생성 원본 |
 |---|---|---|
-| [resource-manifest.json](manifests/resource-manifest.json) | 2026-10-04 Showdown/Kenney 자료의 버전·파일 해시. `integrated:false`는 당시 상태이며 전체 현재 자산 목록이 아님 | 공식본으로 이동; 같은 artifacts 사본 제거 |
+| [resource-manifest.json](manifests/resource-manifest.json) | 2026-10-04 Showdown/Kenney 자료의 버전·파일 해시. `integrated:false`와 경로는 당시 상태이며 전체 현재 자산 목록이 아님. [현재 위치 매핑](EXTERNAL_ASSETS.md#비런타임-자료-이동--2026-10-23) | 공식본으로 이동; 같은 artifacts 사본 제거 |
 | [pokedex-source.json](manifests/pokedex-source.json) | 1,025종 도감 데이터의 CSV URL·가져오기 시각 | `scripts/import-pokedex.mjs` |
 | [battle-data-source.json](manifests/battle-data-source.json) | 612종 배틀 데이터 가져오기 시점의 URL·SHA-256·엔진 버전·예외 | `scripts/import-battle-roster.ts` |
 | [move-data-source.json](manifests/move-data-source.json) | 초기 20종 기술 데이터 출처. 현재 통합 가져오기 기록은 battle-data-source가 우선 | 과거 출처로 이동; 같은 artifacts 사본 제거 |

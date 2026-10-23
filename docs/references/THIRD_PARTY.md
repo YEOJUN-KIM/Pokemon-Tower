@@ -173,3 +173,5 @@ PokéAPI item API에서 9종의 sprites.default 주소를 확인하고 PokeAPI/s
 ## 사용자 제공 알 이미지
 
 일반·레어·슈퍼레어·이로치 알 PNG 네 장과 뽑기 기계 PNG는 사용자가 2026-10-14 제공한 이미지를 수정 없이 사용합니다. public/sprites/eggs/에 보관하며 [파일별 출처와 SHA-256](../../public/sprites/eggs/sources.json)을 함께 기록합니다. 레어 알 오라·슈퍼레어 후광·이로치 반짝임·부화·기계 들썩임과 알 배출 효과는 화면 CSS에서 추가합니다.
+
+참고 자료의 현재 보관 위치는 `external/third-party/kenney-impact-sounds/`와 `external/reference/showdown/`이다. 두 그룹은 runtime에서 사용하지 않으며 라이선스와 함께 Git에 보존한다. 2026-10-04 manifest는 당시 경로를 유지하며 [현재 위치 매핑](../assets/EXTERNAL_ASSETS.md#비런타임-자료-이동--2026-10-23)을 함께 참고한다.

@@ -37,7 +37,7 @@
 <table>
   <tr>
     <td align="center" width="50%">
-      <img src="public/sprites/items/mega-stone.svg" width="64" height="64" alt="메가스톤"><br>
+      <img src="docs/images/gimmicks/charizardite-y.png" width="64" height="64" alt="리자몽나이트Y"><br>
       <strong>메가진화</strong><br>
       메가스톤으로 에이스의 모습과 능력을 바꿉니다. 원시회귀도 지원합니다.
     </td>
@@ -49,12 +49,12 @@
   </tr>
   <tr>
     <td align="center">
-      <img src="public/assets/original/gimmick-placeholder.svg" width="64" height="64" alt="테라스탈을 소개하는 공통 기믹 아이콘"><br>
+      <img src="docs/images/gimmicks/tera-orb.png" width="64" height="64" alt="테라스탈오브"><br>
       <strong>테라스탈</strong><br>
       테라 타입으로 상성을 바꿉니다. 불리한 순간을 버티거나 결정적인 공격을 준비하세요.
     </td>
     <td align="center">
-      <img src="public/sprites/items/z-crystal.svg" width="64" height="64" alt="Z크리스탈"><br>
+      <img src="docs/images/gimmicks/normalium-z.png" width="64" height="64" alt="노말Z"><br>
       <strong>Z기술</strong><br>
       알맞은 Z크리스탈로 기술을 강화합니다. 한 번의 강력한 승부수를 노려 보세요.
     </td>

@@ -16,7 +16,7 @@ Python은 PokéRogue 변환이 필요할 때만 3.10+/Pillow 12.3.0을 검사하
 
 ## 트레이와 한국어 출력
 
-현재 입력 가독성/인증 이동/타이틀 표시/도감·편성 분리/종료 보강 빌드는 launcherVersion `1.0.2`, buildVersion `1.0.0-beta.1-player.6`다. 이전 설치 marker와 다르면 최초 한 번 새 standalone 묶음을 준비하므로, 소스 옆 EXE를 실행해도 이전 게임 UI를 계속 사용하는 일이 없도록 한다. 저장 DB는 그대로 보존하며 다음 실행부터 빠른 경로를 사용한다.
+현재 beta.5 배포 빌드는 launcherVersion `1.0.2`, appVersion `1.0.0-beta.5`, buildVersion `1.0.0-beta.5-player.1`이다. 이전 설치 marker와 다르면 최초 한 번 새 standalone 묶음을 준비하므로, 소스 옆 EXE를 실행해도 이전 게임 UI를 계속 사용하는 일이 없도록 한다. 저장 DB는 그대로 보존하며 다음 실행부터 빠른 경로를 사용한다.
 
 ## 프로세스 소유와 종료
 
@@ -60,6 +60,12 @@ C# source는 UTF-8이고 compiler의 `/codepage:65001`을 유지한다. 이 지�
 개발 `.data`·`.env.local`을 플레이어 저장으로 재사용하지 않는다. production 자식 환경에 HOSTNAME=127.0.0.1, PORT=3000, TOWER_ORIGIN, TOWER_DB_PATH를 명시하고 NODE_OPTIONS를 제거한다. logs는 token/password 등 민감한 환경 값과 URL 자격증명을 redact한다.
 
 ## 패키징과 실행
+
+일반 사용자 배포는 `pnpm player:package`로 생성하고 `pnpm player:package:verify`로 재검사한다. Windows x64에서 자산 전체 검증 → production build → 기존 package-deploy의 `--player` 경로 → EXE 컴파일 → 사용자 README/파일별 SHA256 manifest → ZIP → 압축 내부 전체 SHA 검증을 수행한다. `dist/PokemonTower-Windows-v1.0.0-beta.5/`와 같은 이름의 ZIP 및 `.zip.sha256`이 결과다. 출력은 덮어쓰지 않는다. 재생성이 필요하면 기존 결과를 먼저 별도 보관한다.
+
+EXE 단독 배포는 불가능하다. 추적된 production 의존성, public/.next/static, 서버/실행기, 자산 검증 recipe/lock/manifest, 라이선스를 함께 배포한다. 개발 소스·테스트·전체 개발 node_modules·서버 운영 문서·환경 파일·Python 변환기는 player 묶음에서 제외한다. Next가 기록한 빌드 PC 절대 경로는 상대 경로로 바꾸고 source map은 제외한다. 파일 구조/해시 검사에서 DB·설치 기록·로그·비밀값 혼입을 거부한다. 자산 8,578개는 동봉하며 첫 실행에 다운로드/변환/빌드를 하지 않는다.
+
+검증 대상은 Windows 11 x64 + Node.js 24 이상이다. C#은 Windows 기본 .NET Framework 4.x WinForms를 사용하므로 이 환경에서 별도 SDK/Visual Studio 설치가 필요 없다. [Microsoft Windows별 .NET Framework 안내](https://learn.microsoft.com/en-us/dotnet/framework/install/on-windows-10)에 Windows 11 포함 버전이 명시되어 있다. 제거·손상된 Windows 구성이나 Windows 10/ARM은 이번 배포의 별도 실기 검증 대상이 아니다. [Release 안내와 다른 PC 확인](../releases/WINDOWS_BETA_5.md)을 따른다.
 
 Next `output: standalone`과 기존 의존성 junction 복구 로직을 유지한다. package-deploy는 신규 `--output <새 디렉터리>`를 받아 설치기가 지정한 immutable package를 생성할 수 있다. 기존 디렉터리는 덮어쓰지 않고 source/data 경로를 출력으로 사용하지 않는다. public/.next/static, 서버, 필요한 의존성, 크레딧, 검사용 recipe/golden, player 엔진을 포함한다. Windows는 package 안에 새 EXE를 컴파일하므로 현재 실행 중인 source EXE를 덮어쓰지 않는다.
 

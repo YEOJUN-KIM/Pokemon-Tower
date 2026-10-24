@@ -7,9 +7,10 @@ import {loadDefinition as loadPokeapi} from './assets/pokeapi/common.mjs';
 import {loadDefinition as loadMixed,verifyGroup} from './assets/mixed/runtime.mjs';
 import {spawnSync} from 'node:child_process';
 const argumentsList=process.argv.slice(2);
+const player=argumentsList.includes('--player');
 let explicitOutput;
 for(let i=0;i<argumentsList.length;i++){
-  if(argumentsList[i]==='--check')continue;
+  if(['--check','--player'].includes(argumentsList[i]))continue;
   if(argumentsList[i]==='--output'&&argumentsList[i+1])explicitOutput=resolve(argumentsList[++i]);
   else throw Error('Unknown packaging option: '+argumentsList[i]);
 }
@@ -72,29 +73,33 @@ async function inventory(directory) {
   }
 }
 await inventory(standalone);
-await cp(standalone, target, {recursive:true, filter:async source=> !basename(source).startsWith('.env') && !['.data','logs','test-results'].includes(basename(source)) && !(await lstat(source)).isSymbolicLink()});
+await cp(standalone, target, {recursive:true, filter:async source=> !basename(source).startsWith('.env') && !['.data','logs','test-results'].includes(basename(source)) && !(await lstat(source)).isSymbolicLink() && (!player||!(/\.(?:map|nft\.json|d\.ts)$/.test(source)||['cache','.git'].includes(basename(source))))});
 await cp('.next/static', `${target}/.next/static`, {recursive:true});
 await cp('public', `${target}/public`, {recursive:true});
 await mkdir(`${target}/scripts`, {recursive:true});
+if(!player){
 await cp('scripts/backup-db.mjs', `${target}/scripts/backup-db.mjs`);
 await cp('scripts/import-save.mjs', `${target}/scripts/import-save.mjs`);
+}
 await cp('scripts/start-deploy.mjs', `${target}/scripts/start-deploy.mjs`);
 await writeFile(`${target}/scripts/dependency-links.json`,JSON.stringify(links));
 await cp('scripts/player',`${target}/scripts/player`,{recursive:true});
 await cp('scripts/player-launcher.mjs',`${target}/scripts/player-launcher.mjs`);
-await cp('scripts/assets',`${target}/scripts/assets`,{recursive:true});
+await cp('scripts/assets',`${target}/scripts/assets`,{recursive:true,filter:source=>!player||!(/\.(?:md|py)$/.test(source))});
 await mkdir(`${target}/docs/assets/manifests`,{recursive:true});
 for(const file of ['pokerogue-runtime-assets.json','showdown-pokemon-runtime-assets.json','pokeapi-runtime-assets.json','mixed-runtime-assets.json'])await cp(`docs/assets/manifests/${file}`,`${target}/docs/assets/manifests/${file}`);
 if(process.platform==='win32'){
   const build=spawnSync('powershell.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File','scripts/build-player-launcher.ps1','-OutputPath',`${target}/PokemonTower.exe`],{encoding:'utf8',windowsHide:true});
   if(build.error||build.status!==0)throw Error('Player EXE build failed: '+(build.error?.message??build.stderr??build.stdout));
 }
+if(!player){
 const deploymentGuide=await readFile('docs/operations/DEPLOYMENT.md','utf8');
 await writeFile(`${target}/DEPLOYMENT.md`,deploymentGuide.replace('../releases/NONCOMBAT_EVENTS_RELEASE.md','RELEASE_NOTES.md'));
 await cp(releaseNotes, `${target}/RELEASE_NOTES.md`);
 await cp('docs/operations/ACCOUNTS.md',`${target}/ACCOUNTS.md`);
+}
 await mkdir(`${target}/licenses`,{recursive:true});
 await cp('docs/references/THIRD_PARTY.md',`${target}/licenses/THIRD_PARTY.md`);
 await cp('node_modules/pokemon-showdown/LICENSE',`${target}/licenses/pokemon-showdown.txt`);
-await writeFile(`${target}/.env.example`, 'HOSTNAME=127.0.0.1\nPORT=3000\nTOWER_DB_PATH=/absolute/path/to/tower.sqlite\nTOWER_ORIGIN=http://127.0.0.1:3000\n');
+if(!player)await writeFile(`${target}/.env.example`, 'HOSTNAME=127.0.0.1\nPORT=3000\nTOWER_DB_PATH=/absolute/path/to/tower.sqlite\nTOWER_ORIGIN=http://127.0.0.1:3000\n');
 console.log(`Deployment package: ${target}\nNode.js 24 required. Built dependencies target this OS/architecture; build Docker on Linux for Linux hosting.`);

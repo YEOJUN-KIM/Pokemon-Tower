@@ -2,9 +2,12 @@
 
 ## 처음 실행
 
-1. 배포 폴더의 압축을 풉니다. 폴더 안의 파일을 함께 보관해 주세요.
-2. **PokemonTower.exe**를 실행합니다.
-3. 처음에는 게임 파일을 준비하는 창이 나타납니다. 준비가 끝나면 브라우저에서 게임이 열립니다.
+1. Windows 11 x64에서 Node.js 24 이상을 설치합니다. Windows 기본 .NET Framework를 사용하며 .NET SDK 설치는 필요 없습니다.
+2. GitHub Release의 `PokemonTower-Windows-v1.0.0-beta.5.zip`을 다운로드하고 완전히 압축 해제합니다. 폴더 안의 파일을 함께 보관해 주세요. EXE 단독으로 실행할 수 없습니다.
+3. **PokemonTower.exe**를 실행합니다.
+4. 처음에는 동봉 파일을 검증하고 사용자 폴더에 복사합니다. 준비가 끝나면 브라우저에서 게임이 열립니다. pnpm/Python/Pillow/Git/Visual Studio/빌드 도구는 필요 없습니다.
+
+beta.5 ZIP의 업로드는 별도 작업입니다. [배포 준비·다른 PC 체크리스트](../releases/WINDOWS_BETA_5.md)를 참고하세요. 소스로 개발하려면 [개발자 절차](../development/DEVELOPER_COMMANDS.md)를 사용합니다.
 
 ## 다음부터
 
@@ -16,7 +19,7 @@
 
 종료하려면 아이콘을 오른쪽 클릭하고 **종료**를 선택합니다. 브라우저만 닫으면 게임 서버는 계속 실행될 수 있습니다.
 
-저장은 Windows 사용자 폴더 안의 `PokemonTower/saves`에 남습니다. 게임 파일을 다시 준비해도 저장을 삭제하지 않습니다. 이전 개발용 저장을 자동으로 옮기지는 않습니다.
+저장은 `%LOCALAPPDATA%/PokemonTower/saves/tower.sqlite`, 로그는 `%LOCALAPPDATA%/PokemonTower/logs`에 남습니다. ZIP/배포 폴더 삭제·교체와 버전 갱신은 이 저장을 삭제하지 않습니다. 새 버전은 한 번 파일을 준비하고 다음부터 빠르게 실행합니다. 이전 개발용 저장을 자동으로 옮기지는 않습니다.
 
 ## 문제가 생겼다면
 

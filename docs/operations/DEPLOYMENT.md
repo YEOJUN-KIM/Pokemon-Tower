@@ -1,5 +1,7 @@
 # 웹 배포 패키지
 
+일반 Windows 플레이어용 ZIP은 웹 서버 운영 패키지와 구분한다. `pnpm player:package` / `pnpm player:package:verify`로 [beta.5 Release asset](../releases/WINDOWS_BETA_5.md)을 준비한다. GitHub Release 생성·업로드는 자동 수행하지 않는다.
+
 다른 PC로 옮기는 최신 Windows 절차와 백업 파일은 [컴퓨터 이전 안내](COMPUTER_MOVE.md)에 있다. 현재 사용자는 유료 호스팅 없이 PC·Docker·Quick Tunnel 테스트를 유지한다. 과거 일부 휴대폰 동작은 확인했지만 장기 Run·전체 화면의 실제 기기 검증 완료를 뜻하지 않는다. 일반 로컬 플레이는 `PokemonTower.exe`로 standalone 게임을 실행한다. 기존 개인용 `포켓몬타워 실행.exe`는 서버·DB·터널용 별도 도구이며 일반 플레이어 진입점과 다르다. 정기 백업과 PC 부팅 시 자동 시작은 미설정이며, 실행 전 DB 백업은 실행기가 처리한다. 실행기 소스와 재생성 명령은 [개발 도구 안내](../../scripts/README.md)를 따른다.
 
 Node.js 24 / 단일 서버 / 영구 저장 디스크를 기준으로 준비했다. 서버 선택과 도메인·HTTPS 연결은 별도 단계다. 여러 서버에서 같은 DB를 동시에 사용하거나 서버리스 임시 디스크에 저장하지 않는다.
@@ -9,7 +11,7 @@ Node.js 24 / 단일 서버 / 영구 저장 디스크를 기준으로 준비했�
 PokéRogue·Showdown Pokémon·PokeAPI runtime 전체 hash와 문서·스크립트 입력을 안전하게 검사하려면 `node scripts/package-deploy.mjs --check`를 실행한다. 빌드·복사·서버·DB 작업 없이 검사한다. PokéRogue가 없거나 손상됐으면 `pnpm assets:pokerogue`와 `pnpm assets:pokerogue:verify`를 안내하며 실패한다. Showdown은 `pnpm assets:showdown-pokemon`과 `pnpm assets:showdown-pokemon:verify`, PokeAPI는 `pnpm assets:pokeapi`와 `pnpm assets:pokeapi:verify`도 실행한다. 새 clone과 Docker build 전에 Python/Pillow 준비 및 [팩 복원](../assets/POKEROGUE_RESTORE.md)을 완료한다. 패키지의 `RELEASE_NOTES.md`는 Git 추적 [릴리스 기록](../releases/NONCOMBAT_EVENTS_RELEASE.md)에서 가져오며 artifacts는 필요 없다. 해당 기록의 옛 수치·schema는 현재 배포 설정이 아니다.
 
 - 최신 코드를 `pnpm build` 후 패키징한다. 과거 dist 묶음은 현재 코드/데이터를 포함한다고 가정하지 않는다.
-- 코드 지원 DB schema는 46다. 실제 DB 버전은 별도 확인하고 업데이트 전 SQLite backup API로 백업한다.
+- 코드 지원 DB schema는 47다. 실제 DB 버전은 별도 확인하고 업데이트 전 SQLite backup API로 백업한다.
 - 이벤트는 공통 20%·통과 순서 쿨다운 2이며, 선택·결제·보상·배틀 snapshot과 중복 요청 방지를 유지한다. 세부 종류/weight는 [이벤트 개발](../engineering/EVENT_SYSTEM.md)을 따른다.
 - 개인 DB·환경변수는 Git/배포 묶음에 포함하지 않는다. 개발 DB와 Docker 볼륨은 별개다.
 - 과거 패키지·검증 수치는 당시 artifacts/Git 기록이며 현재 빌드 검사를 대체하지 않는다.

@@ -16,7 +16,7 @@
 
 ![Pokémon Tower 최신 타이틀 화면](docs/images/overview-title.png)
 
-**현재 개발 기준은 v1.0.0-beta.4입니다.** 최신 공개 프리릴리즈는 [v1.0.0-beta.3](https://github.com/YEOJUN-KIM/Pokemon-Tower/releases/tag/v1.0.0-beta.3)입니다. Normal Mode 100층 기준 1차 완성을 마쳤으며, 음향과 기술 이펙트 보강이 남아 있어 베타 단계로 다듬고 있습니다. 앞으로는 UI/UX와 비주얼 디자인, 추가 이벤트와 콘텐츠, 기술 연출과 사운드를 업데이트하고 플레이 피드백을 바탕으로 밸런스를 다듬어 갑니다.
+**현재 배포 준비 기준은 v1.0.0-beta.5입니다.** beta.5 Windows ZIP은 로컬에서 생성·검증하며, GitHub 공개는 별도로 진행합니다. Normal Mode 100층 기준 1차 완성을 마쳤으며, 음향과 기술 이펙트 보강이 남아 있어 베타 단계로 다듬고 있습니다. 앞으로는 UI/UX와 비주얼 디자인, 추가 이벤트와 콘텐츠, 기술 연출과 사운드를 업데이트하고 플레이 피드백을 바탕으로 밸런스를 다듬어 갑니다.
 
 ## 100층을 향한 도전
 
@@ -86,11 +86,12 @@ Egg Station에서 1개 또는 10개를 뽑습니다. 기계가 들썩이고 출�
 
 ## 내 PC에서 실행하기
 
-Windows 배포 폴더에서 **PokemonTower.exe**를 실행합니다. 처음에는 게임 파일을 준비하고, 완료되면 브라우저에서 게임이 열립니다. 이후에도 같은 EXE만 실행하면 됩니다. 종료는 Windows 알림 영역의 게임 아이콘에서 선택합니다. 로컬 플레이에는 Docker가 필요 없습니다.
+일반 사용자는 Node.js 24 이상을 설치한 뒤 [GitHub Releases](https://github.com/YEOJUN-KIM/Pokemon-Tower/releases)에서 Windows ZIP을 받아 완전히 압축 해제하고 **PokemonTower.exe**를 실행합니다. beta.5 업로드용 파일명은 `PokemonTower-Windows-v1.0.0-beta.5.zip`입니다. EXE만 따로 옮기지 마세요. 처음에는 동봉 게임 파일을 준비하고, 완료되면 브라우저에서 게임이 열립니다. 이후에도 같은 EXE만 실행하면 됩니다. 종료는 Windows 알림 영역의 게임 아이콘에서 선택합니다. 로컬 플레이에는 Docker가 필요 없습니다.
 
 - [일반 플레이어 처음 실행](docs/operations/SETUP.md)
 - [개발자 clone·명령·빌드](docs/development/DEVELOPER_COMMANDS.md)
 - [Windows standalone 설치 구조](docs/operations/WINDOWS_PLAYER.md)
+- [beta.5 배포·다른 PC 확인](docs/releases/WINDOWS_BETA_5.md)
 - [저장·백업](docs/operations/BACKUPS.md)
 
 Git clone은 소스 배포이므로 개발 도구 준비가 필요합니다. 완성된 Windows 패키지는 Python/pnpm 없이 사용할 수 있으며, 최초 실행용 Node가 없으면 설치 안내를 보여줍니다.

@@ -1,6 +1,6 @@
 {
   "name": "pokemon-tower",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.5",
   "private": true,
   "type": "module",
   "scripts": {
@@ -58,7 +58,10 @@
     "assets:setup": "node scripts/assets/manage.mjs setup",
     "assets:verify": "node scripts/assets/manage.mjs verify",
     "launcher:build": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build-player-launcher.ps1",
-    "player:check": "node scripts/player-launcher.mjs --check"
+    "player:check": "node scripts/player-launcher.mjs --check",
+    "player:package": "node scripts/package-windows-player.mjs",
+    "player:package:verify": "node scripts/verify-windows-player.mjs",
+    "player:package:test": "node --test tests/windows-player-release.test.mjs"
   },
   "engines": {
     "node": ">=24"

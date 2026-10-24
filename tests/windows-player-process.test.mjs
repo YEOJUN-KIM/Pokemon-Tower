@@ -13,8 +13,9 @@ async function until(predicate,label){for(let i=0;i<200;i++){if(await predicate(
 test('Windows EXE owns its entire Node tree through repeated stops, forced exit and child failures',{skip:process.platform!=='win32',timeout:60000},async()=>{
  const root=process.cwd(),directory=await mkdtemp(path.join(tmpdir(),'tower-job-test-'));
  try{
-  await access(path.join(root,'PokemonTower.exe')); // Run pnpm launcher:build first.
-  await copyFile(path.join(root,'PokemonTower.exe'),path.join(directory,'PokemonTower.exe'));
+  const executable=process.env.TOWER_TEST_EXE??path.join(root,'PokemonTower.exe');
+  await access(executable); // Run pnpm launcher:build first, or choose a release EXE.
+  await copyFile(executable,path.join(directory,'PokemonTower.exe'));
   await mkdir(path.join(directory,'home/runtime'),{recursive:true});await mkdir(path.join(directory,'scripts'));
   await copyFile(process.execPath,path.join(directory,'home/runtime/node.exe'));
   const managed=pathToFileURL(path.join(root,'scripts/player/managed-start.mjs')).href;

@@ -17,6 +17,10 @@ Python 3.10 이상과 정확한 Pillow 12.3.0은 PokéRogue 원본→runtime 변
 
 ## 개발 실행
 
+Windows 사용자용 완성 ZIP은 자산 복원 후 `pnpm player:package`로 만든다. production build·launcher 컴파일·배포 파일 수집·README·ZIP·무결성 검증을 포함한다. `pnpm player:package:verify`는 현재 버전의 폴더/ZIP을 다시 검사한다. 출력은 `dist/PokemonTower-Windows-v<package.json version>/` 및 `.zip`, `.zip.sha256`이며 기존 출력은 덮어쓰지 않는다. 일반 사용자에게는 이 ZIP만 전달하고 Git/pnpm/Python 설치를 요구하지 않는다. [beta.5 배포 절차](../releases/WINDOWS_BETA_5.md) 참조.
+
+`pnpm player:package:test`는 생성된 실제 EXE를 `artifacts/windows-release`의 별도 home에서 실행한다. 첫 설치·빠른 재실행·임시 회원가입/256P·중복 실행·EXE 강제 종료·stale lock 복구·beta.4 marker에서 갱신/저장 보존을 확인한다. 포트 3000이 이미 사용 중이면 기존 게임을 건드리지 않고 실패한다. `TOWER_RELEASE_DIRECTORY`로 압축 해제한 배포 폴더를 선택할 수 있다. `TOWER_TEST_EXE`는 `node --test tests/windows-player-process.test.mjs`가 검사할 EXE를 지정한다.
+
 ```sh
 pnpm dev
 ```

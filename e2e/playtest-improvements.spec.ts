@@ -4,12 +4,13 @@ import {TowerStore} from '../src/server/tower-store';
 import {Accounts} from '../src/server/accounts';
 import {starters} from '../src/data/teams';
 let token='';
-test.beforeAll(async()=>{const id=randomBytes(7).toString('hex'),store=new TowerStore('.data/e2e.sqlite');try{token=(await new Accounts(store.db).register('playtest_'+id,'playtest-password','playtest-'+id,undefined)).token;}finally{store.close();}});
+const testDatabase=process.env.TOWER_E2E_DB_PATH??'.data/e2e.sqlite';
+test.beforeAll(async()=>{const id=randomBytes(7).toString('hex'),store=new TowerStore(testDatabase);try{const owner='playtest-'+id;token=(await new Accounts(store.db).register('playtest_'+id,'playtest-password',owner,undefined)).token;store.ensurePlayer(owner);store.db.prepare("INSERT INTO player_tutorial(player_id,step) VALUES (?,'Completed')").run(owner);}finally{store.close();}});
 test.beforeEach(async({context})=>{await context.addCookies([{name:'tower_auth',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);});
 
 for(const speed of [1,2,4])test(`${speed}x playback saves through settings and preserves the attack and final HP`,async({page})=>{
   await page.setViewportSize(speed===4?{width:390,height:844}:speed===2?{width:1920,height:1080}:{width:1280,height:844});
-  await page.goto('/settings');await page.getByRole('tab',{name:'배틀 설정',exact:true}).click();await expect(page.getByRole('link',{name:'포켓몬 도감으로 이동 ↗'})).toHaveAttribute('href','/pokedex');await page.getByRole('group',{name:'배틀 배속',exact:true}).getByRole('button',{name:speed+'배',exact:true}).click();await page.reload();await page.getByRole('tab',{name:'배틀 설정',exact:true}).click();await expect(page.getByRole('group',{name:'배틀 배속',exact:true}).getByRole('button',{name:speed+'배',exact:true})).toHaveAttribute('aria-pressed','true');
+  await page.goto('/settings');await page.getByRole('tab',{name:'배틀 설정',exact:true}).click();await expect(page.getByRole('link',{name:'포켓몬 도감으로 이동 ↗'})).toHaveCount(0);await page.getByRole('group',{name:'배틀 배속',exact:true}).getByRole('button',{name:speed+'배',exact:true}).click();await page.reload();await page.getByRole('tab',{name:'배틀 설정',exact:true}).click();await expect(page.getByRole('group',{name:'배틀 배속',exact:true}).getByRole('button',{name:speed+'배',exact:true})).toHaveAttribute('aria-pressed','true');
   const data={battle:{id:'playback',requestId:1,status:'waiting',turn:3,team:[{species:'Charizard',condition:'155/155',active:true}],opponent:{species:'Snorlax',condition:'100/100'},actions:[{command:'move 1',label:'Flamethrower'}],messages:['|turn|3'],winner:null,error:null,movePP:[{name:'Flamethrower',pp:14,maxpp:24}]},tower:{coins:0,growthPoints:0,unlocked:starters,run:{id:'run',floor:1,totalFloors:100,state:'battle',rule:'basic',roster:starters,suggestedTeam:starters,upgrades:[],boss:null}}};
   const after={...data,battle:{...data.battle,requestId:2,turn:4,opponent:{species:'Snorlax',condition:'50/100'},messages:[...data.battle.messages,'|move|p1a: Charizard|Flamethrower|p2a: Snorlax','|-ability|p2a: Snorlax|Thick Fat','|-damage|p2a: Snorlax|50/100','|turn|4']}};
   await page.route('**/api/battle',route=>route.fulfill({json:route.request().method()==='POST'?after:data}));
@@ -37,7 +38,7 @@ for(const width of [1280,390])test(`new species and new moves are separate label
 
 test('a saved three-item tool shop is filled to four real products',async({page})=>{
   const initial=await page.request.get('/api/battle').then(r=>r.json());
-  const store=new TowerStore('.data/e2e.sqlite');let state;
+  const store=new TowerStore(testDatabase);let state;
   try{const owner=new Accounts(store.db).session(token)!.player_id;store.ensurePlayer(owner);const battle=store.start(owner,starters);const run=store.battle(battle).run_id;store.db.prepare("UPDATE runs SET floor=11,state='select' WHERE id=?").run(run);store.db.prepare('INSERT INTO item_shops VALUES (?,?,?)').run(run,11,JSON.stringify(['Leftovers','Sitrus Berry','Focus Sash']));store.db.prepare('UPDATE players SET coins=100000 WHERE id=?').run(owner);state={...initial,battle:null,tower:store.view(owner)};}finally{store.close();}
   await page.route('**/api/battle',route=>route.fulfill({json:state}));await page.goto('/battle');await page.getByTestId('maintenance-shop').click();await page.getByRole('button',{name:'지닌 도구',exact:true}).click();
   const products=page.getByTestId('held-item-products');await expect(products.locator('.shop-product')).toHaveCount(4);await expect(products.getByLabel('품절 슬롯')).toHaveCount(0);await expect(products.locator('button[data-held-item]')).toHaveCount(4);
@@ -69,7 +70,8 @@ for(const width of [1280,390])test('settings tabs and keyboard return at '+width
   await page.keyboard.press('x');await expect(sound).toBeFocused();await page.keyboard.press('ArrowRight');await expect(battle).toHaveAttribute('aria-selected','true');
   await page.keyboard.press('z');const speeds=page.getByRole('group',{name:'배틀 배속',exact:true});await expect(speeds.getByRole('button',{name:'1배',exact:true})).toBeFocused();await page.keyboard.press('ArrowRight');await expect(speeds.getByRole('button',{name:'2배',exact:true})).toBeFocused();await expect(speeds.getByRole('button',{name:'2배',exact:true})).toHaveAttribute('aria-pressed','false');await page.keyboard.press('z');await expect(speeds.getByRole('button',{name:'2배',exact:true})).toHaveAttribute('aria-pressed','true');
   await page.keyboard.press('x');await expect(battle).toBeFocused();await page.keyboard.press('ArrowRight');await expect(page.getByRole('tab',{name:'계정',exact:true})).toHaveAttribute('aria-selected','true');
-  await page.keyboard.press('z');await expect(page.getByRole('link',{name:'계정 관리 ↗',exact:true})).toBeFocused();await page.keyboard.press('ArrowRight');await expect(page.getByRole('link',{name:'내 게임으로 돌아가기 ↗',exact:true})).toBeFocused();await page.keyboard.press('ArrowLeft');await expect(page.getByRole('link',{name:'계정 관리 ↗',exact:true})).toBeFocused();
+  await page.keyboard.press('z');await expect(page.getByRole('button',{name:'로그아웃',exact:true})).toBeFocused();
+  await expect(page.getByRole('link',{name:'계정 관리 ↗',exact:true})).toHaveCount(0);await expect(page.getByRole('link',{name:'내 게임으로 돌아가기 ↗',exact:true})).toHaveCount(0);
   await expect(page.getByRole('tabpanel')).toContainText('로그인 계정');await expect(page.getByRole('tabpanel')).not.toContainText('게스트');
   await page.getByRole('tab',{name:'소리',exact:true}).click();await page.screenshot({path:'test-results/settings-tabs-'+width+'.png',fullPage:true});
   await page.keyboard.press('x');await expect(page).toHaveURL('http://127.0.0.1:3001/pokedex');

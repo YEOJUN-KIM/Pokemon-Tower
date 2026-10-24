@@ -15,9 +15,12 @@ for(const width of [1280,390])test(`accounts preserve guest save and support ano
   await page.getByLabel('비밀번호',{exact:true}).fill('testing-password-123');
   await page.getByLabel('비밀번호 확인',{exact:true}).fill('testing-password-123');
   await page.getByRole('button',{name:'회원가입',exact:true}).last().click();
-  await expect(page.getByText(`${username}님으로 로그인했습니다.`)).toBeVisible();
+  await expect(page.getByRole('heading',{name:'회원가입이 완료되었습니다!'})).toBeVisible();
+  await expect(page.getByText(`${username}님, 환영합니다.`)).toBeVisible();
+  await expect(page.locator('.account-card button')).toHaveCount(1);
   await expect(page.getByRole('heading',{name:'계정 복구 키'})).toBeVisible();
   const key=await page.locator('.account-recovery code').textContent();
+  await page.request.post('/api/tutorial',{headers:{Origin:'http://127.0.0.1:3001'},data:{event:'skip'}});
   const before=await page.request.get('/api/battle?view=collection').then(r=>r.json());
   expect(before.tower.favorites).toContain('Greninja');
   const audio={muted:false,musicVolume:27,effectsVolume:54};
@@ -32,6 +35,7 @@ for(const width of [1280,390])test(`accounts preserve guest save and support ano
     await expect(second.locator('.title-screen')).toBeVisible();
     expect((await device.request.get('/api/battle?view=collection').then(r=>r.json())).tower).toEqual(before.tower);
     expect((await device.request.get('/api/account').then(r=>r.json())).audio).toEqual(audio);
+    await page.goto('/settings');await page.getByRole('tab',{name:'계정',exact:true}).click();
     await page.getByRole('button',{name:'로그아웃',exact:true}).click();
     await expect(page.getByLabel('아이디',{exact:true})).toBeVisible();
     expect((await page.request.get('/api/battle?view=collection').then(r=>r.json())).tower.favorites).not.toContain('Greninja');
@@ -44,10 +48,11 @@ for(const width of [1280,390])test(`accounts preserve guest save and support ano
     await page.getByRole('button',{name:'비밀번호 찾기'}).click();
     await page.getByLabel('아이디',{exact:true}).fill(username);
     await page.getByLabel('계정 복구 키',{exact:true}).fill(key!);
+    await page.getByRole('button',{name:'계정 확인',exact:true}).click();
     await page.getByLabel('새 비밀번호',{exact:true}).fill('new-password-123');
     await page.getByLabel('비밀번호 확인',{exact:true}).fill('new-password-123');
-    await page.getByRole('button',{name:'비밀번호 재설정'}).click();
-    await expect(page.getByText(`${username}님으로 로그인했습니다.`)).toBeVisible();
+    await page.getByRole('button',{name:'비밀번호 변경',exact:true}).click();
+    await expect(page.getByRole('heading',{name:'비밀번호가 변경되었습니다!'})).toBeVisible();
     expect((await device.request.get('/api/account').then(r=>r.json())).username).toBeNull();
   }finally{await device.close();}
 });

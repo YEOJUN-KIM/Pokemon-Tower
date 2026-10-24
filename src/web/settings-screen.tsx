@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import {useEffect,useRef,useState} from 'react';
 import {useRouter} from 'next/navigation';
 import {PlaybackControls} from './playback-settings';
@@ -10,6 +9,15 @@ const tabs=['소리','배틀 설정','계정'];
 export default function SettingsScreen({username}:{username:string}) {
   const router=useRouter(),root=useRef<HTMLElement>(null);
   const [tab,setTab]=useState(0);
+  const [loggingOut,setLoggingOut]=useState(false),[error,setError]=useState('');
+  async function logout(){
+    if(loggingOut)return;setLoggingOut(true);setError('');
+    try{
+      const response=await fetch('/api/account',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'logout'})});
+      if(!response.ok){const data=await response.json();throw Error(data.error??'로그아웃하지 못했습니다.');}
+      router.replace('/account');router.refresh();
+    }catch(error){setError(error instanceof Error?error.message:'서버에 연결할 수 없습니다.');setLoggingOut(false);}
+  }
   const back=()=>{if(window.history.length>1)router.back();else router.push('/');};
   const tabButton=()=>root.current?.querySelector<HTMLButtonElement>('[role=tab][aria-selected=true]');
   const controls=()=>Array.from(root.current?.querySelectorAll<HTMLElement>('[role=tabpanel] button:not(:disabled),[role=tabpanel] input:not(:disabled),[role=tabpanel] select:not(:disabled),[role=tabpanel] a[href]')??[]);
@@ -45,9 +53,9 @@ export default function SettingsScreen({username}:{username:string}) {
     <header className="settings-heading"><h1>설정<span className="brand-dot">.</span></h1><button className="settings-back" onClick={back}>← 뒤로가기 <kbd>X</kbd></button></header>
     <nav className="settings-tabs" role="tablist" aria-label="설정 분류">{tabs.map((label,index)=><button key={label} id={`settings-tab-${index}`} role="tab" aria-selected={tab===index} aria-controls={`settings-panel-${index}`} tabIndex={tab===index?0:-1} onClick={()=>setTab(index)}>{label}</button>)}</nav>
     <section className="settings-card settings-panel" role="tabpanel" id={`settings-panel-${tab}`} aria-labelledby={`settings-tab-${tab}`}>
-      {tab===0?<SoundControls/>:tab===1?<><PlaybackControls/><Link className="secondary-button" href="/pokedex">포켓몬 도감으로 이동 ↗</Link></>:<>
-        <div className="setting-row"><span>로그인 계정<small>게임 진행과 도감이 계정에 저장됩니다.</small></span><strong>{username}</strong></div>
-        <div className="settings-account-actions" data-settings-options><Link className="secondary-button" href="/account">계정 관리 ↗</Link><Link className="secondary-button" href="/battle">내 게임으로 돌아가기 ↗</Link></div>
+      {tab===0?<SoundControls/>:tab===1?<PlaybackControls/>:<>
+        <div className="setting-row settings-account-row"><span>로그인 계정<strong>{username}</strong><small>게임 진행과 도감이 계정에 저장됩니다.</small></span><button className="secondary-button" disabled={loggingOut} onClick={()=>void logout()}>{loggingOut?'로그아웃 중…':'로그아웃'}</button></div>
+        {error&&<p role="alert">{error}</p>}
       </>}
     </section>
     <footer className="settings-key-hints"><span><kbd>← / →</kbd> 탭 선택</span><span><kbd>Z / Enter</kbd> 세부 설정·결정</span><span><kbd>↑ / ↓</kbd> 항목 이동</span><span><kbd>X</kbd> 탭·뒤로가기</span></footer>

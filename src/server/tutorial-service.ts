@@ -1,5 +1,6 @@
 import type {DatabaseSync} from 'node:sqlite';
-import {TutorialStep,TUTORIAL_GROWTH_POINTS,type TutorialState} from '../data/tutorial';
+import {TutorialStep,type TutorialState} from '../data/tutorial';
+import {initializeStartingGrowth} from './initial-growth';
 import {statKeys,type TrainingProfile} from '../data/training';
 import {BattleRequestError} from './request-error';
 import {initialPartners} from '../data/teams';
@@ -15,6 +16,7 @@ export class TutorialService {
       OR EXISTS(SELECT 1 FROM permanent_receipts WHERE player_id=players.id)
       OR EXISTS(SELECT 1 FROM unlocks WHERE player_id=players.id AND species NOT IN (SELECT value FROM json_each(?))))`).get(owner,JSON.stringify(initialPartners));
     this.db.prepare('INSERT OR IGNORE INTO player_tutorial(player_id,step) VALUES (?,?)').run(owner,progressed?TutorialStep.Completed:TutorialStep.NotStarted);
+    initializeStartingGrowth(this.db,owner);
   }
   view(owner:string):TutorialState {
     this.ensure(owner);
@@ -30,8 +32,6 @@ export class TutorialService {
     if(event==='skip') {this.db.prepare('UPDATE player_tutorial SET step=? WHERE player_id=?').run(TutorialStep.Completed,owner);return;}
     if(expected!==state.step)return; // Idempotent retries and stale browser tabs cannot rewind progress.
     if(event==='begin' && state.step===TutorialStep.NotStarted) {
-      const granted=this.db.prepare('UPDATE player_tutorial SET reward_granted=1 WHERE player_id=? AND reward_granted=0').run(owner);
-      if(granted.changes)this.db.prepare('UPDATE players SET growth_points=growth_points+? WHERE id=?').run(TUTORIAL_GROWTH_POINTS,owner);
       this.advance(owner,TutorialStep.NotStarted,TutorialStep.Introduction);return;
     }
     if(event==='next') {

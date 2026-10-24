@@ -97,7 +97,8 @@ function PokedexContent({entries,initialTower,onStart,startError='',returnToBatt
     } catch(e) {setError(e instanceof Error ? e.message : '서버에 연결할 수 없습니다.');}
     finally {setBusy(false);}
   }
-  useEffect(() => {void refresh();},[]);
+  // The first onboarding-state read may initialize the starting wallet after this screen's first fetch.
+  useEffect(() => {void refresh();},[tutorial.state?.rewardGranted]);
   const activeRun = tower?.run && ['select','battle','recruit'].includes(tower.run.state);
   const owned = activeRun ? tower!.run!.roster : [];
   const unlocked = tower?.unlocked ?? [];

@@ -49,6 +49,8 @@
   font-size: var(--text-body);
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card input) {
+  box-sizing: border-box;
+  min-height: 46px;
   width: 100%;
   padding: 12px;
   font: var(--text-lg) Arial,sans-serif;
@@ -62,6 +64,16 @@
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card .primary-button),:where(.scope[data-ui-screen="account"]) :global(.account-card>a) {
   text-align: center;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-card button) {
+  min-height: 46px;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-claim) {
+  display: grid;
+  gap: 10px;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-field-help) {
+  margin-top: -8px;
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-recovery) {
   display: grid;

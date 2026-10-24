@@ -1,4 +1,4 @@
-import {TRAINING_POINT_PRICE} from './training';
+import {INITIAL_GROWTH_POINTS,TRAINING_POINT_PRICE} from './training';
 
 export const TutorialStep = {
   NotStarted:'NotStarted', Introduction:'Introduction', StartGame:'StartGame',
@@ -10,9 +10,10 @@ export const TutorialStep = {
 } as const;
 export type TutorialStep=typeof TutorialStep[keyof typeof TutorialStep];
 export type TutorialState={step:TutorialStep;rewardGranted:boolean;party:string[];selectedSpecies:string|null};
-export const TUTORIAL_GROWTH_POINTS=TRAINING_POINT_PRICE*32;
+// Compatibility name for tutorial copy/tests; this is the new-game starting grant.
+export const TUTORIAL_GROWTH_POINTS=INITIAL_GROWTH_POINTS;
 export const tutorialHints={
-  statPicker:`방향키 또는 슬라이더로 원하는 만큼 포인트를 배분한 뒤 「적용」을 누르세요. 이후 설정 화면 아래의 비용을 확인하고 저장하세요. 능력치 +1당 ${TRAINING_POINT_PRICE}P이며, 한 능력치에는 최대 32포인트까지 배분할 수 있어요.`,
+  statPicker:`방향키나 슬라이더로 배분한 뒤 「적용」을 누르세요. 설정 화면에서 비용을 확인하고 저장하세요. +1당 ${TRAINING_POINT_PRICE}P, 능력치별 최대 32포인트입니다.`,
   openMoves:'「싸운다」를 눌러 기술과 상대에게 주는 효과를 확인해보세요.',
   openRecruitment:'첫 승리를 축하해요! 「영입 선택」을 눌러 상대 포켓몬을 확인해보세요.',
 };

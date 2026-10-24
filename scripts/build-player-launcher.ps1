@@ -42,6 +42,8 @@ try {
     }
     foreach ($towerImage in $towerImages) { $towerWriter.Write([byte[]]$towerImage) }
 } finally { $towerWriter.Dispose() }
+# C# source is UTF-8 without BOM. Explicit codepage also works under Windows PowerShell 5.1 / Korean ACP.
+# Pipe decoding is configured separately in ProcessStartInfo; compiler encoding does not affect Node output.
 & $towerCompiler /nologo /target:winexe /platform:anycpu /optimize+ /codepage:65001 /reference:System.Windows.Forms.dll /reference:System.Drawing.dll /reference:System.Web.Extensions.dll "/win32icon:$towerIconPath" "/out:$OutputPath" (Join-Path $PSScriptRoot 'player-launcher.cs')
 if ($LASTEXITCODE -ne 0) { throw 'Player launcher build failed.' }
 Write-Output "Built: $OutputPath"

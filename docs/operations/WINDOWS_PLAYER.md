@@ -14,6 +14,16 @@ C#은 Node를 찾고 버전을 검사한 뒤 콘솔 없는 자식으로 scripts/
 
 Python은 PokéRogue 변환이 필요할 때만 3.10+/Pillow 12.3.0을 검사하며 누락 시 안내한다. Node 자체가 없는 최초 PC에는 설치 안내가 나온다. Node/Python까지 포함하는 self-contained installer는 이번 구현이 아니다.
 
+## 트레이와 한국어 출력
+
+이번 UX/초기 지급 빌드는 launcherVersion `1.0.1`, buildVersion `1.0.0-beta.1-player.2`다. 이전 설치 marker와 다르면 최초 한 번 새 standalone 묶음을 준비하므로, 소스 옆 EXE를 실행해도 이전 게임 UI를 계속 사용하는 일이 없도록 한다. 저장 DB는 그대로 보존하며 다음 실행부터 빠른 경로를 사용한다.
+
+최종 standalone 묶음의 실제 EXE를 `artifacts/auth-ux/player-home`에 두 번 실행해 검증했다. 첫 설치의 외부 자산 검증·복사·marker 게시·production health와 종료 코드 0을 확인했다. 두 번째는 marker 원문과 setup 로그 수가 그대로였으며 재설치/전체 해시/build/package 없이 health와 종료 코드 0을 확인했다. 이 실행은 `--headless --no-browser --stop-after-health`를 사용한 무인 검증이며, 트레이 마우스 동작 검증과 구분한다.
+
+트레이 더블클릭과 우클릭 메뉴 `Pokemon Tower 열기`는 실행 중인 Node 엔진의 stdin에 `open` 한 줄을 보낸다. 엔진은 최초 실행과 같은 `/api/health` 검사 함수를 재사용한 뒤 기본 브라우저로 `http://127.0.0.1:3000/`을 연다. 이 명령에는 서버 생성/설치 경로가 없다. 검사 중 중복 요청은 합쳐 처리하며 실패하면 한국어 알림만 표시한다. 단일 클릭은 변경하지 않았다. 메뉴는 열기 → 구분선 → 종료이며, 종료는 기존 FormClosing → `stop` 경로를 유지한다.
+
+C# source는 UTF-8이고 compiler의 `/codepage:65001`을 유지한다. 이 지정이 있으므로 source BOM은 필수가 아니다. Node는 JSON stdout과 stderr를 UTF-8로 보내지만 .NET Framework의 redirected stream은 인코딩을 생략하면 Windows 기본 코드페이지로 읽는다. `ProcessStartInfo.StandardOutputEncoding`과 `StandardErrorEncoding`을 UTF-8로 명시해 한글 안내/오류가 JSON 파싱 이후에도 보존되도록 했다. stdin 명령은 ASCII인 `open`/`stop`이며 콘솔 코드페이지 변경이나 source 문자열 재인코딩은 필요 없다.
+
 ## 설치·저장·로그
 
 기본 home은 `%LOCALAPPDATA%/PokemonTower`다.
@@ -75,3 +85,12 @@ Next `output: standalone`과 기존 의존성 junction 복구 로직을 유지�
 clean build 중 중첩 QA 폴더가 tracing root에 포함되는 문제가 발견되어 Next의 outputFileTracingRoot와 Turbopack root를 프로젝트 자체 경로로 고정했다. 실패 시 marker가 생성되지 않았으며 수정 후 build/EXE 재시도가 성공했다. production 검증 스크립트의 오래된 익명 인증/schema/상점 가격 fixture도 현재 소스 기준으로 정정했다.
 
 WinForms 창/트레이의 외관은 자동 시각 검사를 수행하지 않았다. 실제 EXE 설치·실행 검증은 창을 생략하는 headless 모드로 수행했고, Windows 브라우저 실행 요청은 별도로 확인했다. Node/Python 완전 번들 installer, 자동 업데이트와 복구 UI 버튼은 향후 개선 범위다. 현재 소스/패키지와 EXE를 함께 보관해야 한다.
+
+### 트레이/한글 UX 수정 검증 (2026-10-24, 기준 42429152)
+
+- `pnpm launcher:build` 성공. UTF-8 source와 `/codepage:65001` 조합으로 새 EXE 생성.
+- 새 EXE와 QA 전용 대기 wrapper로 실제 WinForms 창을 관찰했다. Node가 보낸 `Pokemon Tower를 준비하고 있습니다. 게임을 시작합니다.`와 진행률 65가 화면/접근성 텍스트에서 정상 표시됐다. stderr의 `Node.js 24 이상이 필요합니다.`도 bootstrap 로그에서 정상 확인했다. wrapper는 UI 관찰을 위한 대기만 추가하며 이후 실제 player main과 설치 완료 QA home을 실행한다.
+- 설치 완료 상태에서 실제 EXE → standalone `/api/health`의 `status: ok` → 브라우저 자동 실행을 확인했다. 개인 개발/플레이어 DB 대신 기존 격리 QA home만 사용했다.
+- 실제 production 엔진에 트레이와 동일한 `open` 명령을 세 번 보내 모두 health OK 및 기본 브라우저 실행 요청을 확인했다. 서버 PID 4816이 유지됐으며 `stop` 명령 후 launcher exit 0을 확인했다.
+- 플레이어 단위 테스트 8/8 통과. 분할된 stdin/CRLF, 반복 열기의 동일 서버 PID, health 실패 시 브라우저 미실행과 한국어 경고, 정상 종료를 포함한다. typecheck 통과.
+- Windows 자동화 도구의 창 목록에는 알림 영역/숨겨진 트레이 창이 노출되지 않아 실제 아이콘 더블클릭·우클릭 열기·종료 메뉴 클릭은 자동으로 확인하지 못했다. 해당 UI 연결은 구현됐으나 이 세 가지 실제 마우스 동작은 수동 확인이 남아 있다. 위 반복 열기/종료 결과는 엔진 명령 검증이며 트레이 클릭 검증과 구분한다.

@@ -61,7 +61,33 @@ test('an intentional game shutdown returns success rather than a startup error',
  try{
   await mkdir(path.join(directory,'scripts'));
   await writeFile(path.join(directory,'scripts/start-deploy.mjs'),"import http from 'node:http';http.createServer((req,res)=>{res.setHeader('Content-Type','application/json');res.end(JSON.stringify({status:'ok'}));}).listen(Number(process.env.PORT),'127.0.0.1');");
-  const code=await startProduction({directory,node:process.execPath,db:path.join(directory,'unused.sqlite'),log:{write:()=>{}},event:()=>{process.stdin.emit('data',Buffer.from('stop'));},noBrowser:true,port});
+  const code=await startProduction({directory,node:process.execPath,db:path.join(directory,'unused.sqlite'),log:{write:()=>{}},event:()=>{process.stdin.emit('data',Buffer.from('stop\n'));},noBrowser:true,port});
   assert.equal(code,0);
+ }finally{await rm(directory,{recursive:true,force:true});}
+});
+
+test('tray open commands reuse the healthy server, preserve UTF-8 messages and never restart it',async()=>{
+ const directory=await mkdtemp(path.join(tmpdir(),'tower-player-reopen-'));
+ const probe=createServer();await new Promise<void>(resolve=>probe.listen(0,'127.0.0.1',resolve));const port=(probe.address() as {port:number}).port;await new Promise<void>(resolve=>probe.close(()=>resolve()));
+ const opened:string[]=[],events:{type:string,message?:string}[]=[],logs:string[]=[];
+ const waitFor=async(predicate:()=>boolean)=>{for(let i=0;i<200&&!predicate();i++)await new Promise(r=>setTimeout(r,10));assert.ok(predicate(),'Expected launcher response');};
+ try{
+  await mkdir(path.join(directory,'scripts'));
+  await writeFile(path.join(directory,'scripts/start-deploy.mjs'),"import http from 'node:http';let healthy=true;http.createServer((req,res)=>{if(req.url==='/fail')healthy=false;res.setHeader('Content-Type','application/json');res.end(JSON.stringify({status:healthy?'ok':'failed',pid:process.pid}));}).listen(Number(process.env.PORT),'127.0.0.1');");
+  const running=startProduction({directory,node:process.execPath,db:path.join(directory,'unused.sqlite'),log:{write:(line:string)=>logs.push(line)},event:(item:{type:string,message?:string})=>events.push(item),noBrowser:true,port,browse:(url:string)=>opened.push(url)});
+  try{
+   await waitFor(()=>events.some(e=>e.type==='ready'));
+   const origin=`http://127.0.0.1:${port}`,before=await (await fetch(origin+'/api/health')).json();
+   assert.equal(events[0].message,'게임을 시작했습니다.');
+   // A partial pipe write is not a command until the newline arrives.
+   process.stdin.emit('data',Buffer.from('op'));await new Promise(r=>setTimeout(r,20));assert.equal(opened.length,0);
+   process.stdin.emit('data',Buffer.from('en\r\n'));await waitFor(()=>opened.length===1);
+   for(let i=2;i<=4;i++){process.stdin.emit('data',Buffer.from('open\n'));await waitFor(()=>opened.length===i);}
+   assert.deepEqual(opened,Array(4).fill(origin+'/'));
+   assert.equal((await (await fetch(origin+'/api/health')).json()).pid,before.pid);
+   assert.equal(logs.filter(line=>line.startsWith('Server start:')).length,1);
+   await fetch(origin+'/fail');process.stdin.emit('data',Buffer.from('open\n'));await waitFor(()=>events.some(e=>e.type==='warning'));
+   assert.equal(opened.length,4);assert.match(events.find(e=>e.type==='warning')!.message!,/게임 서버에 연결하지 못했습니다/);
+  }finally{process.stdin.emit('data',Buffer.from('stop\n'));assert.equal(await running,0);}
  }finally{await rm(directory,{recursive:true,force:true});}
 });

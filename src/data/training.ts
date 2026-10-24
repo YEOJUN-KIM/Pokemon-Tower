@@ -36,6 +36,7 @@ export type IVGain={species:string;changes:{stat:StatKey;from:number;to:number}[
 export type MoveSwap={move:string;slot:number};
 export type MoveGain={species:string;moves:string[];equipped?:{move:string;replaced:string;slot:number}};
 export const TRAINING_POINT_PRICE=8;
+export const INITIAL_GROWTH_POINTS=TRAINING_POINT_PRICE*32;
 export function trainingCost(before:TrainingProfile,after:TrainingProfile) {
   return statKeys.reduce((cost,key)=>cost+Math.max(0,after.evs[key]-before.evs[key])*TRAINING_POINT_PRICE,0)
     +(after.ability!==before.ability ? 50 : 0)

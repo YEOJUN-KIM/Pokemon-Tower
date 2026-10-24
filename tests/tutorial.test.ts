@@ -7,6 +7,7 @@ import {TutorialStep as S,TUTORIAL_GROWTH_POINTS} from '../src/data/tutorial';
 import {transaction} from '../src/server/storage/transaction';
 import {initialPartners,starters} from '../src/data/teams';
 import {TRAINING_POINT_PRICE} from '../src/data/training';
+import {Accounts,hashToken} from '../src/server/accounts';
 
 function setup(path=':memory:') {
   const store=new TowerStore(path),tutorial=new TutorialService(store.db),owner='tutorial';
@@ -14,14 +15,54 @@ function setup(path=':memory:') {
   const event=(event:string,party?:string[],species?:string)=>transaction(store.db,()=>tutorial.action(owner,event,tutorial.view(owner).step,party,species));
   return {store,tutorial,owner,event};
 }
-test('new players choose onboarding or skip without changing the normal starting wallet',()=>{
+test('new players receive the same starting grant before choosing onboarding or skip',()=>{
   const f=setup();try{
-    assert.equal(f.tutorial.view(f.owner).step,S.NotStarted);assert.equal(f.store.view(f.owner).growthPoints,0);
+    assert.equal(f.tutorial.view(f.owner).step,S.NotStarted);assert.equal(f.store.view(f.owner).growthPoints,TUTORIAL_GROWTH_POINTS);
     f.event('skip');assert.equal(f.tutorial.view(f.owner).step,S.Completed);
-    f.event('begin');assert.equal(f.store.view(f.owner).growthPoints,0);
+    f.event('begin');assert.equal(f.store.view(f.owner).growthPoints,TUTORIAL_GROWTH_POINTS);
     assert.deepEqual(f.store.view(f.owner).unlocked,initialPartners);
   }finally{f.store.close();}
 });
+test('skip and begin have equal initial resources; retries and spending never refill them',()=>{
+  const guided=setup(),skipped=setup();try{
+    guided.event('begin');skipped.event('skip');
+    assert.equal(guided.store.view(guided.owner).growthPoints,TUTORIAL_GROWTH_POINTS);
+    assert.equal(skipped.store.view(skipped.owner).growthPoints,guided.store.view(guided.owner).growthPoints);
+    guided.store.db.prepare("UPDATE player_tutorial SET step='Completion' WHERE player_id=?").run(guided.owner);
+    guided.event('next');guided.event('next');guided.event('skip');
+    assert.equal(guided.store.view(guided.owner).growthPoints,TUTORIAL_GROWTH_POINTS);
+    for(let i=0;i<3;i++){skipped.event('skip');skipped.event('begin');skipped.tutorial.view(skipped.owner);}
+    const entry=skipped.store.trainingCollection(skipped.owner).find(p=>p.species==='Charizard')!;
+    skipped.store.train(skipped.owner,entry.species,entry.revision,{...entry.profile,evs:{...entry.profile.evs,hp:32}});
+    assert.equal(skipped.store.view(skipped.owner).growthPoints,0);
+    skipped.event('skip');skipped.event('next');skipped.event('begin');
+    assert.equal(skipped.store.view(skipped.owner).growthPoints,0);
+    assert.equal(skipped.store.trainingCollection(skipped.owner).find(p=>p.species==='Charizard')!.profile.evs.hp,32);
+  }finally{guided.store.close();skipped.store.close();}
+});
+
+test('guest, direct signup and claimed saves initialize once; completed and already-paid saves are unchanged',async()=>{
+  const store=new TowerStore(':memory:'),tutorial=new TutorialService(store.db),accounts=new Accounts(store.db);
+  try{
+    store.ensurePlayer('guest');tutorial.view('guest');
+    assert.equal(store.view('guest').growthPoints,TUTORIAL_GROWTH_POINTS);
+    await accounts.register('guest_signup','testing-password','guest','');store.ensurePlayer('guest');tutorial.view('guest');
+    assert.equal(store.view('guest').growthPoints,TUTORIAL_GROWTH_POINTS);
+    await accounts.register('direct_signup','testing-password','direct','');store.ensurePlayer('direct');tutorial.view('direct');
+    assert.equal(store.view('direct').growthPoints,TUTORIAL_GROWTH_POINTS);
+    store.ensurePlayer('claimed');tutorial.view('claimed');
+    store.db.prepare('INSERT INTO save_claims VALUES (?,?,?)').run(hashToken('initial-claim'),'claimed',Date.now()+60000);
+    await accounts.register('claim_signup','testing-password','unused','initial-claim');store.ensurePlayer('claimed');tutorial.view('claimed');
+    assert.equal(store.view('claimed').growthPoints,TUTORIAL_GROWTH_POINTS);
+    store.ensurePlayer('legacy');store.db.prepare("INSERT INTO player_tutorial(player_id,step,reward_granted) VALUES (?,'Completed',0)").run('legacy');
+    store.db.prepare('UPDATE players SET growth_points=19 WHERE id=?').run('legacy');
+    tutorial.view('legacy');transaction(store.db,()=>tutorial.action('legacy','skip',S.Completed));
+    assert.equal(store.view('legacy').growthPoints,19);
+    store.ensurePlayer('paid');store.db.prepare("INSERT INTO player_tutorial(player_id,step,reward_granted) VALUES (?,'NotStarted',1)").run('paid');
+    tutorial.view('paid');assert.equal(store.view('paid').growthPoints,0);
+  }finally{store.close();}
+});
+
 test('onboarding grants exactly 32 stat points once, with stale and repeated requests idempotent',()=>{
   const f=setup();try{
     f.event('begin');transaction(f.store.db,()=>f.tutorial.action(f.owner,'begin',S.NotStarted));

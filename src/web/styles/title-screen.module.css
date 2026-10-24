@@ -81,6 +81,7 @@
 :where(.scope[data-ui-screen="title"]) :global(.title-screen .title-arrow) {color:#8dacae;font-size:var(--text-xl);line-height:1;}
 :where(.scope[data-ui-screen="title"]) :global(.title-screen [data-game-cursor="true"] :is(.title-menu-icon,.title-arrow)) {color:#e8c899;}
 :where(.scope[data-ui-screen="title"]) :global(.title-utilities) {position:absolute;bottom:34px;right:max(48px,calc((100vw - 1040px)/2));display:flex;align-items:center;justify-content:flex-end;gap:24px;max-width:85%;}
+:where(.scope[data-ui-screen="title"]) :global(.title-account) {color:#aeb8c4;font-size:var(--text-sm);overflow-wrap:anywhere;text-shadow:1px 2px #090f21;}
 :global(body) :where(.scope[data-ui-screen="title"]) :global(.title-screen .title-utilities :is(a,button)) {display:inline-block;box-sizing:border-box;min-height:36px;max-width:100%;margin:0;padding:8px 4px;border:0;border-radius:0;background:transparent;color:#aeb8c4;box-shadow:none;font:inherit;font-size:var(--text-sm);text-decoration:none;text-shadow:1px 2px #090f21;overflow-wrap:anywhere;}
 :global(body) :where(.scope[data-ui-screen="title"]) :global(.title-screen .title-utilities :is([data-game-cursor="true"],:focus-visible,:hover)) {color:#eee4df!important;outline:1px solid #a9b9ca!important;outline-offset:3px;}
 :where(.scope[data-ui-screen="title"]) :global(.title-error) {padding:12px;background:#161b31e6;color:#ffd5ba;line-height:1.6;font-size:var(--text-sm);}

@@ -71,7 +71,7 @@ export default function TitleScreen() {
     </div>
     <div className="title-utilities">
       {continuing && <button className="title-new-game" disabled={busy} onClick={() => {setError('');setRestartOpen(true);}}>{busy ? '새 도전 준비 중…' : '새로하기'}</button>}
-      <Link href="/account">{username?`계정 · ${username}`:'로그인 · 회원가입'}</Link>
+      <span className="title-account">{username?`트레이너: ${username}`:'계정 확인 중…'}</span>
     </div>
     {restartOpen && continuing && <PokedexDialog title="새로하기" className="title-restart-dialog" returnFocus=".title-new-game" initialFocus=".restart-cancel" onClose={()=>{if(!busy)setRestartOpen(false);}}>
       <p>현재 도전을 종료하고 새로 시작할까요?</p>

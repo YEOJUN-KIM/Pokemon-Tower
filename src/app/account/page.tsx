@@ -7,6 +7,6 @@ export default async function Page({searchParams}:{searchParams:Promise<{next?:s
   const params=await searchParams,destination=accountDestination(params.next);
   const account=await pageAccount();
   if(!account&&localAccountUsername(await headers()))redirect(`/api/account/local?next=${encodeURIComponent(destination)}`);
-  if(params.next&&account)redirect(destination);
-  return <AccountScreen destination={destination}/>;
+  if(account)redirect(destination);
+  return <AccountScreen/>;
 }

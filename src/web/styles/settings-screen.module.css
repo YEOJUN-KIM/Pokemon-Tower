@@ -145,12 +145,13 @@
   min-width: 70px;
   text-align: center;
 }
-:where(.scope[data-ui-screen="settings"]) :global(.settings-account-actions) {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+:where(.scope[data-ui-screen="settings"]) :global(.settings-account-row strong) {
+  display: block;
+  overflow-wrap: anywhere;
 }
-:where(.scope[data-ui-screen="settings"]) :global(.settings-panel .settings-account-actions .secondary-button) {
+:where(.scope[data-ui-screen="settings"]) :global(.settings-panel .settings-account-row .secondary-button) {
+  flex: 0 0 auto;
+  margin-left: auto;
   margin-right: 0;
 }
 @media(max-width:760px) {

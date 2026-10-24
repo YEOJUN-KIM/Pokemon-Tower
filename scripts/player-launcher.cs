@@ -35,7 +35,8 @@ internal static class PokemonTowerPlayer {
    using(Process version=Process.Start(versionInfo)){string value=version.StandardOutput.ReadToEnd().Trim().TrimStart('v');version.WaitForExit();int major;if(!Int32.TryParse(value.Split('.')[0],out major)||major<24)throw new Exception("게임 실행 도구 업데이트가 필요합니다. Node.js 24 이상을 설치해 주세요. https://nodejs.org/");}
    File.AppendAllText(bootstrapLog,"Launcher bootstrap started "+DateTime.UtcNow.ToString("o")+Environment.NewLine);
    string arguments=Quote(script);foreach(string arg in args)arguments+=" "+Quote(arg);
-   ProcessStartInfo start=new ProcessStartInfo(node,arguments){WorkingDirectory=root,UseShellExecute=false,CreateNoWindow=true,WindowStyle=ProcessWindowStyle.Hidden,RedirectStandardOutput=true,RedirectStandardError=true,RedirectStandardInput=true};
+   // Node writes UTF-8 to pipes; .NET Framework otherwise decodes using the Windows ANSI code page.
+   ProcessStartInfo start=new ProcessStartInfo(node,arguments){WorkingDirectory=root,UseShellExecute=false,CreateNoWindow=true,WindowStyle=ProcessWindowStyle.Hidden,RedirectStandardOutput=true,RedirectStandardError=true,RedirectStandardInput=true,StandardOutputEncoding=System.Text.Encoding.UTF8,StandardErrorEncoding=System.Text.Encoding.UTF8};
    using(Process child=new Process()) {
     child.StartInfo=start;child.EnableRaisingEvents=true;int exitCode=1;string lastError=null;
     Form window=null;Label status=null;ProgressBar progress=null;NotifyIcon tray=null;
@@ -44,7 +45,10 @@ internal static class PokemonTowerPlayer {
      Application.EnableVisualStyles();window=new Form(){Text="Pokémon Tower",Width=470,Height=210,StartPosition=FormStartPosition.CenterScreen,FormBorderStyle=FormBorderStyle.FixedDialog,MaximizeBox=false};
      try{window.Icon=Icon.ExtractAssociatedIcon(Application.ExecutablePath);}catch{}
      status=new Label(){Left=24,Top=25,Width=410,Height=65,Text="게임 실행을 준비하고 있습니다."};progress=new ProgressBar(){Left=24,Top=105,Width=410,Height=22,Style=ProgressBarStyle.Marquee};window.Controls.Add(status);window.Controls.Add(progress);
-     tray=new NotifyIcon(){Icon=window.Icon,Text="Pokémon Tower",Visible=false};ContextMenuStrip menu=new ContextMenuStrip();menu.Items.Add("게임 종료",null,(s,e)=>window.Close());tray.ContextMenuStrip=menu;
+     tray=new NotifyIcon(){Icon=window.Icon,Text="Pokémon Tower",Visible=false};
+     Action openGame=()=>{try{if(!child.HasExited)child.StandardInput.WriteLine("open");}catch(Exception error){tray.ShowBalloonTip(5000,"Pokémon Tower","게임 화면을 열지 못했습니다. "+error.Message,ToolTipIcon.Warning);}};
+     tray.DoubleClick+=(s,e)=>openGame();
+     ContextMenuStrip menu=new ContextMenuStrip();menu.Items.Add("Pokemon Tower 열기",null,(s,e)=>openGame());menu.Items.Add(new ToolStripSeparator());menu.Items.Add("종료",null,(s,e)=>window.Close());tray.ContextMenuStrip=menu;
      window.FormClosing+=(s,e)=>{try{if(!child.HasExited)child.StandardInput.WriteLine("stop");}catch{};};
     }
     child.OutputDataReceived+=(sender,e)=>{
@@ -55,6 +59,7 @@ internal static class PokemonTowerPlayer {
       dispatch(()=>{
        if(kind=="install"){window.Show();status.Text=Convert.ToString(item["message"]);progress.Style=ProgressBarStyle.Continuous;progress.Value=Convert.ToInt32(item["progress"]);}
        if(kind=="ready"){window.Hide();tray.Visible=true;tray.Text="Pokémon Tower 실행 중";}
+       if(kind=="warning")tray.ShowBalloonTip(5000,"Pokémon Tower",Convert.ToString(item["message"]),ToolTipIcon.Warning);
       });
      } catch { /* Detail is already captured by the Node launcher log. */ }
     };

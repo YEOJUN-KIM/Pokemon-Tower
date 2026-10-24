@@ -12,7 +12,7 @@ import type {BattleView} from '../src/shared/contracts';
 test.use({actionTimeout:10000});
 
 async function fixture(context:BrowserContext){
-  const owner='tutorial-'+randomBytes(10).toString('hex'),store=new TowerStore('.data/e2e.sqlite');
+  const owner='tutorial-'+randomBytes(10).toString('hex'),store=new TowerStore(process.env.TOWER_E2E_DB_PATH??'.data/e2e.sqlite');
   store.ensurePlayer(owner);
   const auth=await new Accounts(store.db).register('tut_'+randomBytes(8).toString('hex'),randomBytes(16).toString('hex'),owner,undefined);
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001'}]);
@@ -93,14 +93,18 @@ for(const partner of [{species:'Blaziken',name:'번치코'},{species:'Venusaur',
   }finally{store.close();}
 });
 
-test('initial skip and mid-tutorial skip persist without extra currency or lost party',async({page,context})=>{
+test('initial skip grants usable starting points once; mid-tutorial skip preserves points and party',async({page,context})=>{
   const {store,owner}=await fixture(context);try{
     await page.goto('/');await page.getByRole('button',{name:'알고 있어요 / 건너뛰기',exact:true}).click();
-    await expect(page.getByTestId('tutorial-overlay')).toHaveCount(0);expect(store.view(owner).growthPoints).toBe(0);
+    await expect(page.getByTestId('tutorial-overlay')).toHaveCount(0);expect(store.view(owner).growthPoints).toBe(TUTORIAL_GROWTH_POINTS);
     await page.reload();await expect(page.getByTestId('tutorial-overlay')).toHaveCount(0);
+    await page.goto('/battle?prepare=1');await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 설정',exact:true}).click();
+    await page.locator('[data-settings-row="hp"]').click();await page.getByRole('button',{name:'MAX',exact:true}).click();await page.getByRole('button',{name:'적용',exact:true}).click();
+    await page.getByRole('button',{name:`${TUTORIAL_GROWTH_POINTS}P로 설정 저장`,exact:true}).click();expect(store.view(owner).growthPoints).toBe(0);
+    await page.request.post('/api/tutorial',{headers:{Origin:'http://127.0.0.1:3001'},data:{event:'skip'}});expect(store.view(owner).growthPoints).toBe(0);
     // A separate fresh player exercises skip during actual selection.
     const second=await fixture(context);try{
-      await page.reload();await page.getByRole('button',{name:'처음이에요',exact:true}).click();await page.getByRole('button',{name:'확인',exact:true}).click();await page.getByRole('link',{name:'게임 시작',exact:true}).click();await step(page,S.SelectPokemon);
+      await page.goto('/');await page.getByRole('button',{name:'처음이에요',exact:true}).click();await page.getByRole('button',{name:'확인',exact:true}).click();await page.getByRole('link',{name:'게임 시작',exact:true}).click();await step(page,S.SelectPokemon);
       await choose(page,'리자몽');await step(page,S.RemovePokemon);
       await page.getByRole('button',{name:'튜토리얼 건너뛰기',exact:true}).click();await page.getByRole('button',{name:'건너뛰기 확정',exact:true}).click();
       await expect(page.getByTestId('tutorial-overlay')).toHaveCount(0);await expect(page.locator('[data-party-slot="0"]')).toContainText('리자몽');

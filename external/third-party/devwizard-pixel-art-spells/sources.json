@@ -980,5 +980,18 @@
       "Black And White Sparks.png",
       "Magic Sparks.png"
     ]
+  },
+  "review": {
+    "status": "Reviewed / Rejected for primary battle VFX",
+    "reviewedOn": "2026-10-24",
+    "primaryBattleAdopted": false,
+    "battleIntegrationRemoved": true,
+    "licenseSuitable": true,
+    "structureSuitable": true,
+    "battleStyleSuitability": "low",
+    "reason": "Visual style mismatch with current Pokemon battle scene: detail density, shading, enlarged pixel size and icon-like appearance. Not a license or implementation failure.",
+    "evidence": "Project owner reviewed the actual desktop battle prototype; this is a valid visual evaluation outcome.",
+    "retention": "Original selected PNG/ASE, role catalog and provenance retained as reviewed external reference only.",
+    "priority": "Existing project/Showdown effects; simple variations; code-only effects; external search only for remaining gaps."
   }
 }

@@ -4,7 +4,7 @@
 
 `manifests/`는 Git에 보존하는 검토 완료 출처 스냅샷이다. 원본 JSON의 날짜·URL·해시·버전·누락 항목은 그대로 보존했다. 과거 기록을 현재 상태나 새 이용 허가로 해석하지 않는다. 전체 이용 조건은 [THIRD_PARTY](../references/THIRD_PARTY.md), 현재 기능은 [STATUS](../STATUS.md)를 따른다.
 
-2026-10-24 Projectile 후보: [Pixel Art Spells 조사](../engineering/MOVE_EFFECTS.md#pixel-art-spells--projectile-후보-8종), [선정 원본·단일 source record](../../external/third-party/devwizard-pixel-art-spells/README.md). CC0 원본 8종만 보존하며 `node scripts/assets/pixel-art-spells/runtime.mjs prepare` / `verify`로 기존 generated 경계에 PNG 8개를 재현·검증한다. 아직 전투에 연결하지 않은 선택 팩이므로 전체 필수 `assets:setup`/`verify` 대상 수와 과거 runtime ownership snapshot은 바꾸지 않는다.
+2026-10-24 Projectile 검토: Pixel Art Spells는 **Reviewed / Rejected for primary battle VFX**다. [실제 화면 스타일 판단과 기존 VFX 재사용 조사](../engineering/MOVE_EFFECTS.md#existing-vfx-inventory--projectile-재검토), [선정 원본·source record](../../external/third-party/devwizard-pixel-art-spells/README.md)를 보존한다. CC0·구조는 적합하지만 시각 스타일이 맞지 않아 대표 기술 연결을 제거했다. prepare/verify는 참고용 오프라인 명령으로만 유지하며 필수 자산 목록·historical ownership은 바꾸지 않는다.
 
 | 공식 manifest | 용도와 범위 | 자동 생성 원본 |
 |---|---|---|

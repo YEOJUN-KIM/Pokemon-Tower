@@ -20,7 +20,7 @@
 | NPC 입력·런타임 생성 | 현재 검토 입력 수정 → node scripts/export-normal-npc-runtime.mjs; 원본 일치 검사에는 --check |
 | NPC 리뷰 CSV 내보내기 | node scripts/export-npc-review-csv.mjs 또는 normal-npc-samples.json normal-npc 인자 (summary v2는 후보 최대 6마리) |
 | 자산·데이터 가져오기 | import-*.ts/mjs |
-| 선택 Projectile 후보 8종 준비·검증 | node scripts/assets/pixel-art-spells/runtime.mjs prepare / verify. 추적 원본에서 오프라인 복사하며 아직 전투에 연결하지 않은 선택 팩이다. |
+| 미채택 Projectile 후보 8종 참고 사본 준비·검증 | node scripts/assets/pixel-art-spells/runtime.mjs prepare / verify. Pixel Art Spells는 스타일 부적합으로 주력 배틀 VFX 미채택이며 원본·라이선스 보존용 명령이다. |
 | 현재 기술 연출 설계·공용 VFX 사용처 재생성 | pnpm exec tsx scripts/document-move-presentations.ts. 수동 지정한 런타임 매핑으로 확정 설계표와 공식 manifest를 갱신한다. 일회성 실험 보고서 생성기와 구분한다. |
 | PokéRogue만 독립 복원·검증 | pnpm assets:pokerogue / pnpm assets:pokerogue:verify ([요구 사항·offline 복원](../docs/assets/POKEROGUE_RESTORE.md)) |
 | 시뮬레이션 실행 | run-*.mjs → simulate-*.ts |

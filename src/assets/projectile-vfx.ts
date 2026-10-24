@@ -2,6 +2,9 @@ import {assetPaths} from './paths';
 
 // Roles describe reusable shapes, never Pokemon move names. Original filenames
 // remain unchanged; source/license/hash evidence lives beside the source pack.
+// Reviewed / Rejected for primary battle VFX: style mismatch with the Pokemon
+// battle scene, not a licensing or implementation defect. Candidate catalog
+// only; no move plan or battle preload may select this pack.
 export const projectileVfxCatalog={
  Projectile_Energy_Small:{file:'Arcane Bolt.png',frames:6,category:'Energy',small:true,direction:'right',sourceFrameDurationMs:null},
  Projectile_Energy_Orb:{file:'Magic Orb.png',frames:6,category:'Energy',small:false,direction:'radial',sourceFrameDurationMs:100},
@@ -14,8 +17,7 @@ export const projectileVfxCatalog={
 } as const;
 export type ProjectileVfxRole=keyof typeof projectileVfxCatalog;
 
-// Optional catalog only: no preload, fetch or battle fallback changes. Existing
-// moveEffect/MoveVisuals keep their current paths and behavior until integration.
+// Reference lookup only: no preload, fetch or battle fallback changes.
 export function projectileVfx(role:string){
  if(!Object.hasOwn(projectileVfxCatalog,role))return null;
  const asset=projectileVfxCatalog[role as ProjectileVfxRole];

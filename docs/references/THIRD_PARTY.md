@@ -2,6 +2,8 @@
 
 ## Pixel Art Spells · DevWizard · 2026-10-24
 
+**Reviewed / Rejected for primary battle VFX.** 라이선스는 적합하지만 실제 Pokémon 배틀 화면의 디테일·명암·픽셀 크기와 맞지 않아 실전 연결을 제거했다. 원본과 카탈로그는 외부 후보로 보존한다. 구현 실패가 아닌 유효한 스타일 검증 결과이며 [기존 VFX 우선 재사용 조사](../engineering/MOVE_EFFECTS.md#existing-vfx-inventory--projectile-재검토)를 후속 기준으로 삼는다.
+
 [공식 배포 페이지](https://opengameart.org/content/pixel-art-spells)에서 제작자 DevWizard와 CC0 1.0 표시 및 크레딧 선택 조건을 재확인했다. CC0는 상업/비상업 사용·수정·복제·재배포를 허용하며 저작권상 출처 표기·동일조건 배포·소스 공개를 요구하지 않는다. 특허·상표 권리의 허락이나 제작자의 보증을 뜻하지 않는다. 프로젝트에서는 자발적으로 `Pixel Art Spells by DevWizard (CC0 1.0, OpenGameArt)`를 기록한다. [공식 CC0 설명](https://creativecommons.org/publicdomain/zero/1.0/), [법률문](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
 
 선정 원본은 [external/third-party/devwizard-pixel-art-spells](../../external/third-party/devwizard-pixel-art-spells/README.md)에 원래 파일명으로 보존했다. PNG 8종과 대응 ASE 7개이며 전투에는 아직 연결하지 않았다. 전체 ZIP은 조사용으로만 확보했다. ZIP에는 라이선스 파일이 없어 [LICENSE.txt](../../external/third-party/devwizard-pixel-art-spells/LICENSE.txt)는 배포자 표시를 기록한 프로젝트 작성 고지다. 별도 공식 `legalcode.txt` 다운로드는 HTTP 403으로 중단하고 우회하지 않았다. [파일별 해시·원본 ZIP 주소·검토일](../../external/third-party/devwizard-pixel-art-spells/sources.json), [조사와 선정 결과](../engineering/MOVE_EFFECTS.md#pixel-art-spells--projectile-후보-8종)를 따른다. 이 CC0를 Pokémon 그림 등 다른 제공원의 파일에 확대 적용하지 않는다.

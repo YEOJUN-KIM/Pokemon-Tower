@@ -13,6 +13,8 @@ test('eight selected original projectiles match reviewed hashes, frame evidence 
  assert.equal(definition.archiveInventory.filter((a:any)=>a.aseFile).length,21);
  assert.equal(definition.selected.filter((a:any)=>a.sourceAse).length,7);
  assert.equal(definition.license.spdx,'CC0-1.0');assert.equal(definition.license.attributionRequired,false);
+ assert.equal(definition.review.status,'Reviewed / Rejected for primary battle VFX');
+ assert.equal(definition.review.primaryBattleAdopted,false);assert.equal(definition.review.battleIntegrationRemoved,true);
  assert.deepEqual(Object.keys(projectileVfxCatalog).sort(),definition.selected.map((a:any)=>a.role).sort());
  for(const {asset,filename} of assets){
   const runtime=assetRegistry.projectileVfx(asset.role)!;

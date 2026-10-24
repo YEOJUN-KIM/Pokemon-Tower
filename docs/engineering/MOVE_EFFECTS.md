@@ -69,6 +69,8 @@
 
 ## Pixel Art Spells · Projectile 후보 8종
 
+**최종 상태: Reviewed / Rejected for primary battle VFX (2026-10-24).** 라이선스 적합, 원본/카탈로그 관리 구조 적합, 실제 Pokémon 배틀 스타일 적합성 낮음. 소유자가 실제 데스크톱 화면에서 확인한 디테일 밀도·확대 픽셀·명암·아이콘 같은 인상을 근거로 주력 배틀 VFX로 채택하지 않는다. 라이선스 문제나 구현 오류가 아닌 유효한 시각 검증 결과다. 대표 8기술의 시험 연결과 이 팩용 렌더러/스케일/방향 처리·프로토타입 테스트를 제거하고 기존 VFX로 복원했다. 원본·ASE·역할 카탈로그·라이선스는 외부 후보/참고 자료로 보존한다. 이하 수급 단계 기록은 채택 상태를 뜻하지 않으며, 현재 후속 방향은 아래 Existing VFX Inventory를 따른다. 모바일 보정과 검증은 이번 작업 범위에서 제외했다.
+
 확인일: 2026-10-24. 이번 단계는 외부 공용 Projectile 원본 수급·분류와 선택 카탈로그 제공까지다. 전체 기술 매핑, 기존 Showdown 효과, 전투 재생·피해·랭크 로직은 바꾸지 않았다. 카탈로그 등록이 전투 적용을 뜻하지 않는다.
 
 ### 출처와 라이선스
@@ -151,7 +153,9 @@ PNG는 한 행의 가로 Sprite Sheet다. Rock Sling만 단일 프레임 PNG다.
 
 현재 Canvas 2D 방식에서는 이미지를 한 번 읽어 원본 RGB→목표 팔레트를 치환한 offscreen canvas를 만들고 `asset ID + palette ID`별로 캐시하는 방식을 권장한다. 중립 Ray/Sparks를 채택하면 luminance 기반 shadow/base/highlight 매핑에 베이지 예외를 포함하고 alpha를 그대로 보존한다. `source-in` 단색 채우기는 명암을 없애고 단순 multiply는 기존 보라/파랑을 남길 수 있으므로 기본값으로 삼지 않는다. `imageSmoothingEnabled=false`와 정수 배율을 유지하고 이동 중 매 프레임 `getImageData`를 호출하지 않는다. Unity에서도 같은 팔레트/밝기 기반 shader 접근이 가능하나 이번에는 Unity 파일이나 shader를 만들지 않는다.
 
-### 향후 Projectile 시스템 연결
+### 수급 당시 연결 검토안 (실전 적용 중단)
+
+아래는 재현 가능한 후보 관리 구조를 설명하는 수급 당시 검토안이다. Pixel Art Spells를 실전 기술에 다시 연결하라는 현재 계획이 아니다.
 
 1. 저장소 루트에서 `node scripts/assets/pixel-art-spells/runtime.mjs prepare`, `verify`를 실행한다. 인터넷·Aseprite 설치 없이 추적 원본에서 8개 PNG를 복사한다. 해시·PNG 크기·ASE 프레임 시간을 검사하고 기존 파일이 다르면 덮어쓰지 않는다. 현재 선택 팩이므로 필수 전체 assets 명령에 넣지 않는다.
 2. `assetRegistry.projectileVfx('Projectile_Energy_Small')`에서 URL·프레임 크기·columns·프레임 수·원본 시간·권장 시간을 얻는다. 원본 파일명이 아닌 역할 ID로 요청한다. 존재하지 않는 역할은 null이며 이미지 로딩은 기존 `loadAssetImage`의 실패/시간초과 처리를 사용한다.
@@ -161,13 +165,132 @@ PNG는 한 행의 가로 Sprite Sheet다. Rock Sling만 단일 프레임 PNG다.
 
 ### Coverage와 판단
 
-Energy Small/Orb, Solid Rock/Ice, Liquid Small/Blast와 Fire/Wind의 기본 비행 본체는 확보했다. Small Projectile은 Arcane Bolt·Ice Lance·Water Bolt·Wind Bolt가 겹쳐 담당한다. 기본 팩으로 계속 쓰기 적합하지만 16×16의 단순한 소형 표현이라는 한계가 있다.
+수급 당시 Energy Small/Orb, Solid Rock/Ice, Liquid Small/Blast와 Fire/Wind의 후보 본체를 확보했다. Small Projectile은 Arcane Bolt·Ice Lance·Water Bolt·Wind Bolt가 겹쳐 담당한다. 그러나 실제 화면 검토에서 현재 Pokémon 배틀과 스타일이 맞지 않는 것으로 확인했으므로 기본 팩으로 사용하지 않는다. 단순 scale 증가나 라이선스 적합성을 채택 근거로 삼지 않는다.
 
 부족한 것은 금속·바늘·씨앗·파편 등 Solid 변형, 더 큰 해상도의 대형 Projectile, 점성/독 액체의 고유 형태, 공용 에너지/암석/얼음 착탄이다. Splash·중립 Sparks·Ray는 같은 팩에서 다음으로 검토할 수 있으므로 먼저 다른 팩 전체를 들일 필요는 없다. 큰 효과와 재질별 착탄이 필요해지면 그 범위만 다른 팩으로 보완하는 것이 적절하다. Firebomb의 이름이나 Water Blast의 상대적 크기만으로 대형 연출 요구를 충족했다고 판단하지 않는다.
 
 ### 이번 에셋 조사 검증
 
 선정 PNG 총 3,122 bytes, ASE 원본 총 7,412 bytes다. 생성 PNG 8개는 원본과 bytes/SHA-256이 일치하며 미선정 파일·ASE를 public에 복사하지 않았다. 원본 8종 외에 기존 ownership·registry·기술 재생·피해/메시지 회귀를 포함한 관련 테스트 **35개 통과**, 프로덕션 빌드와 내장 TypeScript, CSS·문서/작업공간 구조 검사도 통과했다. 오프라인 새 출력 생성·재실행, 수정된 출력 덮어쓰기 거부, 미선정 Splash 혼입 검출을 확인했다. 기존 기술에 연결하지 않았으므로 새 팩의 전투상 크기·리컬러·착탄·배속 품질은 후속 연결 단계의 검증 대상이다.
+
+## Existing VFX Inventory · Projectile 재검토
+
+확인일 2026-10-24. 기준 커밋 `de7877bef00400c75e6ffb3b830aa6a2cdc3ba3f`. **이 단계는 기존 자산 조사·설계와 미채택 팩 연결 제거만 수행한다.** 새 외부 파일 다운로드, 전체 기술 매핑 변경, Impact/Beam/Stream 신규 구현, 데미지·AI·밸런스 변경을 하지 않는다. 모바일은 제외한다.
+
+### 복원과 정리
+
+어시스트파워·섀도볼·불꽃세례·돌떨구기·얼음뭉치·물대포·물의파동·바람일으키기의 Pixel Art Spells opt-in을 모두 제거했다. `move-animation-plan.ts`와 `move-visuals.tsx`는 기준 커밋의 내용으로 복원했다. 임시 `projectile-renderer.ts`, 해당 팩의 프로토타입 E2E·단위 테스트도 제거했다. 이 모듈은 팩 전용 Role/파일·대표 기술 매핑에 결합돼 있었으며 기존의 공용 MoveParticle 궤적 엔진과 기능이 중복되므로 별도 보존하지 않았다. 기존 범용 입자 엔진·Sprite clone·화면 효과는 유지한다.
+
+원본 `external/third-party/devwizard-pixel-art-spells/`, `src/assets/projectile-vfx.ts`, 조회용 registry·paths, 오프라인 참고 사본 도구·해시 검사는 보존한다. 어느 기술도 이 카탈로그를 선택하거나 배틀 preload에서 불러오지 않는다. `sources.json.review`에 미채택 판단·이유·날짜를 기록하며 이전 원본 URL·해시·라이선스 근거는 그대로 유지한다. generated 사본이 로컬에 남아 있어도 채택된 실전 자산이 아니다.
+
+### 조사 범위와 판별
+
+ignore된 generated/runtime 경로까지 포함해 `public/`, `public/assets/`, `public/sprites/effects/`, `public/vendor/showdown/fx/`, external 원본과 현재 registry/Canvas/CSS 사용처를 대조했다. 저장소 루트의 독립 `assets/`나 `fx/` 폴더는 없으며 `src/assets/`는 resolver 코드다.
+
+- **현재 기술 효과:** `public/vendor/showdown/fx/` PNG 22개. 모두 실제 PNG를 열어 크기·투명도·명암 정보를 확인했다. 모두 **단일 프레임**이며 sprite sheet가 아니다. 프레임 열을 잘라 쓰지 않고 `MoveParticle`의 위치/크기/회전/alpha와 반복 배치로 움직임을 만든다.
+- **자체 제작:** `public/sprites/effects/flamethrower-beam.png` 1개, 1448×1086, 단일 프레임. 현재 화염방사에서만 사용하며 Projectile 후보가 아닌 기존 Stream/Hybrid로 유지한다.
+- **기믹 전용:** 같은 폴더의 `mega-orb.svg`, `mega-shards.svg`는 240×240 viewBox, `dynamax-ball.svg`는 160×160 viewBox다. CSS 메가/다이맥스 연출용이며 구체라는 이유로 기술 Projectile에 전용하지 않는다.
+- **기타:** `public/images/events/teleport-portal.png`는 512×512·1프레임, `.gif`는 512×512·6프레임이며 비전투 포털/이벤트 자료다. TM·도구·상점 아이콘(예: spell-tag, effect-guard), Pokémon 스프라이트·fallback 아이콘과 `public/audio/sfx/`의 음량 설정은 기술 비행 VFX에서 제외했다.
+- **미채택 참고:** Pixel Art Spells의 원본 8 PNG/7 ASE와 선택 generated 8 PNG는 후보 보존 상태이며 아래 기존 실전 자산 수에 합치지 않는다.
+
+### 현재 이미지 전수 목록
+
+아래 PNG는 `flamethrower-beam.png`만 `public/sprites/effects/`, 나머지는 모두 `public/vendor/showdown/fx/`에 있다. RGB는 불투명/반투명 픽셀의 고유 RGB 수, alpha는 투명 0을 포함한 alpha 단계 수다. **alpha 단계가 많은 단색 glow를 수백 RGB 색이라고 세지 않는다.** 참조 수는 등록 934개 기술의 현재 `moveAnimationPlan`에서 해당 PNG를 한 번 이상 참조하는 구성 수이며, 그 수만큼 모두 Projectile이라는 뜻은 아니다. 예시는 현재 코드에서 역산한 실제 사용처다.
+
+| 파일 | 원본 크기 | 프레임 | RGB / alpha 단계 | 구성 참조 수 | 현재 사용 예 |
+|---|---|---:|---|---:|---|
+| `blackwisp.png` | 100×100 | 1 | 1 / 256 | 22 | Twister · Sand Tomb · Whirlpool |
+| `bluefireball.png` | 32×32 | 1 | 316 / 102 | 22 | Rock Slide · Dragon Breath · Rock Tomb |
+| `bottombite.png` | 108×64 | 1 | 18 / 2 | 13 | Bite · Crunch · Thunder Fang |
+| `electroball.png` | 100×100 | 1 | 207 / 243 | 24 | Thunder Fang · Thunder Punch · Thunder Shock |
+| `energyball.png` | 100×100 | 1 | 125 / 188 | 20 | Solar Beam · Draining Kiss · Leech Seed |
+| `fireball.png` | 32×32 | 1 | 317 / 100 | 34 | Flamethrower · Fire Blast · Fire Fang |
+| `fist.png` | 55×49 | 1 | 61 / 7 | 41 | Ice Punch · Thunder Punch · Focus Punch |
+| `hitmarker.png` | 100×100 | 1 | 8 / 11 | 253 | Tackle · Body Slam · Take Down |
+| `iceball.png` | 100×100 | 1 | 87 / 243 | 31 | Ice Beam · Blizzard · Aurora Beam |
+| `impact.png` | 127×119 | 1 | 1 / 189 | 296 | Tackle · Body Slam · Take Down |
+| `leaf1.png` | 32×26 | 1 | 408 / 99 | 8 | Magical Leaf · Razor Leaf · Petal Dance |
+| `leaf2.png` | 40×26 | 1 | 485 / 102 | 7 | Magical Leaf · Razor Leaf · Petal Dance |
+| `leftclaw.png` | 44×60 | 1 | 5 / 2 | 4 | Metal Claw · Dragon Claw · Shadow Claw |
+| `leftslash.png` | 57×56 | 1 | 33 / 115 | 43 | Slash · False Swipe · Aerial Ace |
+| `mudwisp.png` | 100×100 | 1 | 1391 / 240 | 56 | Sand Attack · Earthquake · Mud Shot |
+| `purplewisp.png` | 100×100 | 1 | 1 / 252 | 75 | Confusion · Psychic · Sludge Bomb |
+| `rightclaw.png` | 44×60 | 1 | 5 / 2 | 4 | Metal Claw · Dragon Claw · Shadow Claw |
+| `rightslash.png` | 57×56 | 1 | 33 / 115 | 43 | Slash · False Swipe · Aerial Ace |
+| `shadowball.png` | 100×100 | 1 | 181 / 248 | 4 | Shadow Ball · Max Phantasm · Astral Barrage |
+| `topbite.png` | 108×64 | 1 | 18 / 2 | 13 | Bite · Crunch · Thunder Fang |
+| `waterwisp.png` | 100×100 | 1 | 1 / 256 | 25 | Surf · Water Gun · Hydro Pump |
+| `wisp.png` | 100×100 | 1 | 1 / 251 | 287 | Swords Dance · Hyper Beam · Swift |
+| `flamethrower-beam.png` | 1448×1086 | 1 | 28657 / 256 | 1 | Flamethrower |
+
+파일별 기존 권리/해시는 [move-effects-integration](../assets/manifests/move-effects-integration.json)과 [runtime ownership](../assets/manifests/runtime-ownership.json)이 기준이다. 이번에 같은 해시 manifest를 중복 만들지 않았다. 원시 이미지 실측·934개 구성의 전체 역산 사용처·contact sheet는 로컬 QA `artifacts/qa/assets/existing-vfx/`에 보관한다. Showdown 참고 코드에 등장하는 `rocks/rock1/rock2`, `icicle`, `lightning`, `bone` 등은 현재 디스크에 없으며 파일별 별도 라이선스 예외가 있으므로 확보한 후보처럼 표기하지 않는다.
+
+### 역할별 후보 비교와 추천
+
+경로는 위 전수 목록을 따른다. 후보는 역할마다 최대 3개다. 적합성은 실제 이미지의 형태·기존 배틀 재생과 소유자의 화면 검토를 함께 반영한 상대 평가다. 같은 물리/특수/타입이라고 자동 배정하지 않는다.
+
+| 역할 | 후보 파일 / 크기·프레임 | 현재 사용 기술 | 스타일 적합성 / 재사용 | 필요 변형 | 추천 |
+|---|---|---|---|---|---|
+| Energy Small | `wisp.png` 100×100·1f; `purplewisp.png` 100×100·1f; `bluefireball.png` 32×32·1f | Swift/Hyper Beam; Stored Power/Psychic; Dragon Pulse/Dragon Breath | 높음. 부드러운 alpha를 유지한 작은 빛·에너지 전달에 재사용 가능 | 크기·색·비행 시간; bluefireball은 불꽃 형태임을 고려 | Keep: wisp/purplewisp 우선 |
+| Energy Orb | `energyball.png`, `shadowball.png`, `electroball.png` 각 100×100·1f | Energy Ball; Shadow Ball; Electro Ball/Volt Switch | 높음. 기존 구체의 명암·외곽 glow를 그대로 활용 가능 | 크기·충전 시간·material/palette 선택 | Keep |
+| Fire Projectile | `fireball.png`, `bluefireball.png` 각 32×32·1f | Ember/Fire Blast; Will-O-Wisp | 높음. 실제 불씨 모양과 명암이 기존 화면과 일관됨 | 회전·이동·짧은 반복 trail·필요 시 청염 | Keep |
+| Water Projectile | `waterwisp.png` 100×100·1f; `wisp.png` 100×100·1f | Water Gun/Water Pulse/Surf; 공용 빛/지원 효과 | waterwisp 높음, wisp는 중립 대체. 물 덩어리/분사 조합에 재사용 가능 | 폭·alpha·발사 간격; wisp 사용 시 물 재질 변형 필요 | Keep waterwisp / Adjust neutral |
+| Ice Projectile | `iceball.png` 100×100·1f; `wisp.png` 100×100·1f | Ice Beam/Blizzard/Freeze-Dry; 공용 빛 | 냉기 glow는 높음. 고체 얼음침 형태는 현재 없음 | 축소·늘이기·차가운 색/짧은 코드 궤적 | Keep 냉기 / 고드름 형태는 gap |
+| Rock / Solid Projectile | `mudwisp.png` 100×100·1f; `impact.png` 127×119·1f | Rock Throw/Rock Blast/Mud Shot; 공용 타격/Earthquake | 먼지·진흙은 어울리지만 **실제 바위/고체 본체가 아니다**. impact는 착탄용 | 먼지 scale/arc, 필요 시 단순 코드 고체와 조합 | Adjust, 진짜 바위 형태는 부족 |
+| Wind / Air Projectile | `wisp.png` 100×100·1f; `leftslash.png`, `rightslash.png` 각 57×56·1f | 공용 빛; Air Slash/Air Cutter | 중간~높음. 중립 빛·얇은 공기 베기 후보이며 전용 Wind 이미지라고 단정하지 않음 | 낮은 alpha·길쭉한 scale·회전·코드 trail | Hybrid 우선 |
+| Dark / Ghost Projectile | `shadowball.png`, `blackwisp.png`, `purplewisp.png` 각 100×100·1f | Shadow Ball; Dark Pulse/Whirlpool/Shadow Ball; Psychic/Shadow Ball 준비 | 높음. 그림자 구체·어두운 연기·오라를 역할별로 재사용 | 크기·어둡기·확산·pulse 빈도 | Keep |
+| Electric Projectile | `electroball.png`, `wisp.png` 각 100×100·1f | Thunder Shock/Electro Ball/Thunderbolt; 공용 빛 | 높음. 전기 구체와 코드 bolt 조합에 적합 | 노란/청색 팔레트·짧은 flash·코드 지그재그 | Keep / Hybrid |
+| Psychic Projectile | `purplewisp.png`, `wisp.png` 각 100×100·1f | Stored Power/Psychic/Psyshock; 공용 빛 | 높음. 압박/pulse와 작은 에너지탄에 적합 | alpha·보라/분홍 색·pulse/선형 이동 구분 | Keep |
+| Poison Projectile | `purplewisp.png`, `blackwisp.png` 각 100×100·1f | Sludge Bomb/Acid Spray/Sludge Wave; 어둠·연기 효과 | 자주색 안개/탄은 높음. 점성 덩어리·독방울 전용 형태는 부족 | 보라/녹색 색, 구체 비율·낮은 arc·가스 alpha | Keep 안개 / Adjust 점성 |
+| Grass / Seed / Leaf Projectile | `leaf1.png` 32×26·1f; `leaf2.png` 40×26·1f; `energyball.png` 100×100·1f | Razor Leaf/Magical Leaf/Leaf Storm; Energy Ball/Seed Bomb/Bullet Seed | 잎·생명력 구체는 높음. 실제 씨앗 알갱이 형태는 없음 | 두 잎의 회전/교차 arc·구체 축소·발사 개수 | Keep 잎/구체, 씨앗 형태는 gap |
+
+현재 대체의 의미상 한계도 그대로 기록한다. **Ice Shard는 mudwisp**, **Gust는 iceball**, **Rock Slide는 bluefireball 낙하** 구성을 쓰고 있다. 파일 이름만 보고 얼음침·바람·암석 전용 텍스처를 이미 갖췄다고 판단하면 안 된다. 이 조사에서 해당 기술을 바꾸지는 않았으며, 다음 소수 대표군 구현 때 의미에 맞는 기존 재질/코드 조합을 선택한다.
+
+### 실제 화면 스타일 비교
+
+| 기준 | Pixel Art Spells | 기존 프로젝트 / Showdown |
+|---|---|---|
+| 해상도·디테일 밀도 | 반입 8종은 프레임 16×16. 대부분 2~3 RGB 색, 넓은 단색 면 | 불씨 32×32, 구체·wisp 100×100, 잎 32×26/40×26 등. 형태별 디테일·빛 표현이 현재 배틀에 이미 사용됨 |
+| 명암 단계 | 단색/소수 단계와 hard alpha. 확대 시 면과 계단이 크게 보임 | wisp는 1 RGB라도 alpha 251~256단계로 배경과 섞임. shadowball 181 RGB/248 alpha, fireball 317 RGB/100 alpha 등 |
+| 픽셀 크기 | 3×/4× 확대 시 한 원본 픽셀이 큰 블록이 되어 포켓몬 스프라이트와 밀도 차이가 두드러짐 | 현재 화면 크기에 맞춰 축소/스케일하는 glow·입자 조합. 기존 포켓몬의 정보 밀도를 과도하게 단순화하지 않음 |
+| 윤곽·배경 조화 | 두꺼운 계단 윤곽과 평면적 중심부가 떠 있는 아이콘처럼 보임 | 반투명 외곽·빛/연기가 배경과 자연스럽게 섞임. 잎·발톱·물기 등 명시적 윤곽은 해당 동작에만 사용 |
+| 색상 채도 | 소수 고채도 색이 넓은 면적을 차지 | 기존 재질의 하이라이트/alpha/확산과 조합. 기존 자산도 채도가 높을 수 있으므로 채도 수치만으로 적합성을 판정하지 않음 |
+| 애니메이션 | 6프레임/100ms(Arcane 시간 미확인), Ice 4f, Rock 1f | 22개 모두 1f. 화면의 연속 이동·크기·회전·alpha·여러 입자 배치가 실제 애니메이션이며, 프레임 수가 적다는 이유로 열등하지 않음 |
+| 화면 크기 | 단순 확대는 디테일을 늘리지 않아 작은 아이콘을 띄운 인상이 남음 | 기존 unit 기반 크기와 충전·비행·확산 구성이 현재 씬에 맞음. 역할별 개별 조정은 여전히 필요 |
+| 최종 판단 | 라이선스/구조 적합, **primary battle VFX 미채택** | 우선 재사용. 모든 기존 fallback이 기술 의미까지 완벽하다는 뜻은 아님 |
+
+이는 실제 화면 검토로 사용 가능 범위를 좁힌 유효한 프로토타입 결과다. 라이선스 적합성은 반입 조건이며, 최종 채택은 게임 화면의 통일감으로 결정한다. 고해상도 파일이라는 이유만으로 항상 더 좋다고 일반화하지 않는다.
+
+### 자산과 연출의 분리·재사용 우선순위
+
+1. 기존 프로젝트/Showdown 효과를 그대로 재사용한다.
+2. 기존 자산의 색·크기·회전·속도·alpha를 간단히 변형한다. 중립 wisp·purplewisp는 원본 alpha 보존 tint 캐시, fireball/leaf는 원재질 유지와 scale/rotation부터 검토한다. 새로운 타입별 PNG 복제는 우선하지 않는다.
+3. 별도 파일 없이 Sprite 복제·잔상·opacity·scale·rotation·flash·Canvas 선/링·trail·화면 흔들림을 사용한다.
+4. 그래도 표현할 수 없는 구체적 역할이 남을 때만 그 역할의 외부 VFX를 검토한다. 이번 조사에서 다운로드는 0건이다.
+
+구조는 계속 **기술 → 연출 방식 → 공용 VFX 역할 → 실제 자산**이다. 예를 들어 `Shadow Ball → shadoworb 구성 → ShadowOrb(Energy Orb/Dark 재질) → adapter의 shadowball + blackwisp`, `Rock Throw → mudorb 구성 → Projectile(Solid 의도) → 현재 mudwisp 대체`로 읽는다. `src/data/move-presentations.json`은 프리셋만 지정하고 실제 파일 선택은 `move-animation-plan`/`assetRegistry` 경계에 남긴다. 이번에 기술 데이터에 파일명을 삽입하거나 새로운 외부 팩 종속 renderer를 만들지 않는다.
+
+### 이미지가 필요한 역할과 코드 연출 분류
+
+| 분류 | 기술/역할 예 | 현재 또는 다음 표현 | 판단 |
+|---|---|---|---|
+| Asset Reusable | 섀도볼·에너지볼·불꽃세례·잎 투사체 | 기존 구체·불씨·잎을 현재 입자 엔진으로 이동/확산 | 우선 재사용 |
+| Code Only | 그림자분신·울음소리 | 현재 Sprite 실루엣 복제/합침, Canvas 음파와 사운드 | 외부 Projectile 파일 후보에서 제외 |
+| Code Only 후보 | 순간 이동·opacity 전환 | 기존 상태/교체 메시지와 연결할 fade/순간 위치 전환 | 현재 전용 Teleport 시퀀스가 구현됐다는 뜻은 아님 |
+| Hybrid | 전광석화·지진·번개·바람 베기 | 잔상+기존 Hit, 화면/참가자 흔들림+먼지, 코드 bolt+electroball, 코드 trail+slash | 기존 VFX+코드 조합부터 개선 |
+| Asset Required / gap | 재질이 분명한 바위·씨앗·금속/바늘·독성 점액 | 현재 먼지/빛 대체와 구별되는 본체가 필요할 수 있음 | 코드로 충족 가능한지 먼저 판단; 외부 다운로드 확정 아님 |
+| Dedicated Later | 상징적 전용기·복잡한 다단 변신/필살기 | 현재 공용 설계를 유지 | 이번 구현/반입 대상 아님 |
+
+### 다음 단계
+
+**2. 기존 VFX + 코드 연출 조합부터 구현**을 추천한다. 섀도볼/불꽃세례처럼 바로 재사용 가능한 대표와, 돌떨구기/얼음뭉치/바람처럼 의미상 대체를 점검할 대표를 소수 선정한다. 먼저 기존 질감·타격 시점·배속·양방향을 맞추고, 실제 고체/점액 등 구체적 gap만 남으면 해당 역할만 추가 조사한다. 전체 Projectile 교체나 새 팩 수집을 선행하지 않는다.
+
+### 이번 복원 검증과 변경 범위
+
+- 기존 기술 VFX·배틀 메시지·피해/상태·랭크·교체·필드·자산 lookup 관련 단위/회귀 **44개 통과**. 원본 PNG·ASE와 라이선스·역할별 프레임 메타데이터 보존 검사도 유지했다.
+- 데스크톱 Chrome **8개 E2E 통과**. 복원한 8기술 × 양방향 16회에서 실제 Canvas 효과가 표시되고, Pixel Art Spells 요청이 **0건**이며 스킵 후 Canvas가 비워지는 것을 확인했다. 기존 1/2/4배속 랭크·공통 모션, 일반 기술, 화염방사, HP 반영 순서, 동작 감소 회귀도 통과했다. 모바일은 실행 대상에서 제외했다.
+- 복원된 프로덕션 빌드(내장 TypeScript), 별도 타입 검사, CSS·문서 구조 검사 통과. 실제 복원 화면은 로컬 QA `artifacts/qa/screenshots/existing-vfx-restored/`, 로그·전수 실측·역산 사용처는 `artifacts/qa/assets/existing-vfx/`에 보존한다.
+- 추가: `e2e/existing-vfx-restoration.spec.ts`. 수정: 이 문서와 기존 계획/자산/출처/외부 원본 안내, 후보 카탈로그 설명, `sources.json.review`, 기존 후보 보존 테스트. 제거: 이번 작업 중 만든 미커밋 `src/web/projectile-renderer.ts`, `e2e/projectile-prototype.spec.ts`, `tests/projectile-renderer.test.ts`. 두 전투 렌더링 파일은 기준 커밋으로 복원되어 최종 코드 diff가 없다. 원본 이미지·기존 자산·전체 기술 매핑 데이터는 변경하지 않았다.
 
 ## 과거 검증 (2026-10-12)
 

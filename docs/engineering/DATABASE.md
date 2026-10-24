@@ -1,6 +1,6 @@
 # 저장 데이터
 
-기준: 2026-10-23. Node.js `node:sqlite`를 사용하며 현재 코드가 지원하는 DB 스키마는 **47**다. `src/server/schema.ts`의 `PRAGMA user_version`과 `src/server/storage/migrations.ts`가 기준이다. 개별 저장·백업 버전은 `PRAGMA user_version`으로 별도 확인한다. 코드보다 새로운 DB는 열지 않는다.
+기준: 2026-10-24. Node.js `node:sqlite`를 사용하며 현재 코드가 지원하는 DB 스키마는 **47**다. `src/server/schema.ts`의 `PRAGMA user_version`과 `src/server/storage/migrations.ts`가 기준이다. 개별 저장·백업 버전은 `PRAGMA user_version`으로 별도 확인한다. 코드보다 새로운 DB는 열지 않는다.
 
 ## 서로 다른 버전
 
@@ -13,6 +13,8 @@
 | tower-policy-v13 및 이전 버전 | 배틀 행동 정책. 배틀 행의 버전을 그대로 복구 |
 
 규칙 버전을 올리거나 현재 상수 값을 바꿨다는 이유로 기존 결과 JSON/팀/시드/영수증을 재작성하지 않는다. schema 46은 run_villain_tracks·run_event_followups·tool_voucher_draws를 포함한다. schema 47은 `player_tutorial.selected_species`를 추가하여 첫 선택 대상을 파티에서 제외한 뒤에도 보존한다. 기존 안내의 첫 선택이 파티에 남아 있으면 복구하며, 이미 사라진 대상은 임의의 스타터로 채우지 않는다.
+
+Windows 사용자·개발·Docker의 실제 DB 위치와 백업은 [BACKUPS](../operations/BACKUPS.md)를 따른다. 같은 계정 이름이라도 서로 다른 로컬 DB가 자동으로 동기화되지는 않는다.
 
 ## 저장 책임과 트랜잭션
 

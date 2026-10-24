@@ -1,12 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
-// The old dependency-only CMD scenarios were superseded by the standalone engine.
-// Runtime/error behavior lives in player-launcher.test.ts and EXE integration QA.
-for(const name of ['포켓몬타워 설치.cmd','포켓몬타워 로컬 실행.cmd'])test(name+' is a quoted diagnostic wrapper without dev-server or personal-data work',()=>{
- const source=readFileSync(name,'utf8');assert.ok(source.includes('"%~dp0scripts\\'));assert.ok(source.includes('%*'));assert.ok(!source.includes('.data'));assert.ok(!source.includes('next dev'));assert.ok(source.includes('pause'));
-});
-test('setup and legacy launch reuse the production player engine',()=>{
- for(const file of ['scripts/setup-windows.mjs','scripts/launch-local.mjs'])assert.ok(readFileSync(file,'utf8').includes('./player-launcher.mjs'));
- assert.ok(!readFileSync('scripts/launch-local.mjs','utf8').includes("'dev'"));
+import {mkdtemp,readFile,writeFile,rm} from 'node:fs/promises';
+import path from 'node:path';
+import {tmpdir} from 'node:os';
+import {spawnSync} from 'node:child_process';
+
+// Test the retained CLI contract, rather than requiring retired CMD files.
+// Full installation/server/process behavior is covered by player and EXE tests.
+for(const [file,repair]of [['launch-local.mjs',false],['setup-windows.mjs',true]])test(file+' forwards diagnostic arguments and engine exit status',async()=>{
+ const directory=await mkdtemp(path.join(tmpdir(),'tower-cli-'));
+ try{
+  await writeFile(path.join(directory,file),await readFile(new URL('../scripts/'+file,import.meta.url)));
+  await writeFile(path.join(directory,'player-launcher.mjs'),`export async function main(args=process.argv.slice(2)){process.stdout.write(JSON.stringify(args));return 17;}`);
+  const args=['--home',path.join(directory,'한글 & (QA)'),'--check','--no-browser'];
+  const result=spawnSync(process.execPath,[path.join(directory,file),...args],{cwd:directory,encoding:'utf8',windowsHide:true});
+  assert.ifError(result.error);assert.equal(result.status,17,result.stderr);
+  assert.deepEqual(JSON.parse(result.stdout),repair?['--repair',...args]:args);
+ }finally{await rm(directory,{recursive:true,force:true});}
 });

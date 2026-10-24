@@ -104,7 +104,7 @@ Normal/Elite/Master의 보상 프로필은 [이벤트 규칙](../gameplay/EVENTS
 
 ## 저장 호환
 
-새 `NpcEncounterSnapshot`은 v2이며 sample의 rankWeights/teamConcept, 슬롯 범위와 실제 슬롯 수, composition/fallback을 저장합니다. v1은 legacy sample의 defaultRank와 기존 training/team을 읽는 별도 타입으로 유지합니다. 저장된 상대는 현행 클래스 데이터나 슬롯 규칙으로 다시 해석하지 않습니다. `f35b612`의 실제 20층 v1 반바지 소년 snapshot을 fixture로 보존해, 현재는 Bug 3마리·Normal 무도구여도 당시의 혼합 팀·도구 3개·육성값을 재접속/전투/재도전에서 유지하는지 검증합니다. 공통 NPC 표식은 v38에서 도입했으며 현재 지원 DB 스키마는 45입니다. NPC snapshot 버전과 DB 버전은 별개입니다.
+새 `NpcEncounterSnapshot`은 v2이며 sample의 rankWeights/teamConcept, 슬롯 범위와 실제 슬롯 수, composition/fallback을 저장합니다. v1은 legacy sample의 defaultRank와 기존 training/team을 읽는 별도 타입으로 유지합니다. 저장된 상대는 현행 클래스 데이터나 슬롯 규칙으로 다시 해석하지 않습니다. `f35b612`의 실제 20층 v1 반바지 소년 snapshot을 fixture로 보존해, 현재는 Bug 3마리·Normal 무도구여도 당시의 혼합 팀·도구 3개·육성값을 재접속/전투/재도전에서 유지하는지 검증합니다. 공통 NPC 표식은 v38에서 도입했으며 현재 지원 DB 스키마는 47입니다. NPC snapshot 버전과 DB 버전은 별개입니다.
 
 DB v38은 `run_npc_rules(run_id,version=1)`만 추가합니다. 새 런에만 표식을 저장하고 이전 런에는 소급 부여하지 않습니다. 구 런의 미래 일반 NPC와 미래 도전자 이벤트도 구 경로를 유지합니다. 이미 생성된 모든 배틀은 기존 패킹 결과로 복구합니다.
 
@@ -126,7 +126,7 @@ DB v38은 `run_npc_rules(run_id,version=1)`만 추가합니다. 새 런에만 �
 
 관장·사천왕·챔피언·빌런 보스는 별도 catalog/템플릿을 유지합니다. 공통 Rank Training 할당기는 재사용 가능하지만 이번에 그 팀들을 재육성하거나 캠페인 단계를 추가하지 않았습니다.
 
-## 최종 검증 결과
+## 구현 당시 검증 결과 (현재 전체 테스트 수와 구분)
 
 - 전체 회귀: `pnpm exec tsx --test --test-concurrency=2 tests/*.test.ts` — 564개 통과.
 - 컨셉/Rank 집중 검사 19개 통과. 20개 Sample의 0 확률 보존, 추첨 빈도, 테마 수, 부족 fallback, 품질 선호, 슬롯·도구 중복, f35 실제 v1 스냅샷 재접속/재도전을 포함합니다.

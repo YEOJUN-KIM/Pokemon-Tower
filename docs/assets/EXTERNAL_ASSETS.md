@@ -1,5 +1,7 @@
 # 외부 자산 분리 기반 · 2026-10-23
 
+> 2026-10-23의 자산 조사와 단계별 분리 기록을 보존한다. 특정 단계의 작업 범위·다음 단계 설명을 전체 현재 상태로 해석하지 않는다. 현재 전체 준비는 `pnpm assets:setup` / `pnpm assets:verify`, 팩별 정책은 [자산 색인](README.md), Windows 공개 배포는 [beta.5 완료 기록](../releases/WINDOWS_BETA_5.md)을 따른다.
+
 기준 HEAD: `f59ffba0b9f027bca0b141d65e4efb0327a265c7`. 이는 초기 resolver·fallback·캐시 복구 조사 기준이다. 현재 추적 상태는 아래 표와 독립 복원 절에 갱신하며, 혼합 자산의 최신 기준 HEAD와 검증은 MIXED_RUNTIME_ASSETS를 따른다. 아래 분류는 동봉 고지와 기존 source record에 근거하며 새 이용 허가를 뜻하지 않는다.
 
 ## 현재 파일과 사용처

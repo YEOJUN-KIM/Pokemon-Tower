@@ -71,7 +71,7 @@ pnpm assets:pokerogue --offline --output .local-backups/pokerogue-check/offline 
 pnpm assets:pokerogue:verify --output .local-backups/pokerogue-check/offline
 ```
 
-모든 경로 옵션은 현재 cwd 기준이며 기본값은 저장소 기준이다. 미래 `assets:setup`에서 assets:pokerogue를 호출할 수 있지만 이번에는 전체 setup이나 build 자동 호출을 추가하지 않는다. Git 추적 해제 이후 새 clone 절차는 의존성 설치 → Python/Pillow 준비 → assets:pokerogue → verify → build/test 순서가 된다. 배포 패키징은 기존 public을 포함하므로 URL이나 배포 복사 규칙을 바꿀 필요가 없다.
+모든 경로 옵션은 현재 cwd 기준이며 기본값은 저장소 기준이다. 현재 `pnpm assets:setup`이 이 팩을 포함한 6개 aggregate를 복원하며 `pnpm assets:verify`로 전체를 검사한다. 새 clone 절차는 [개발자 명령어](../development/DEVELOPER_COMMANDS.md#처음-clone한-pc)를 따른다. 배포 패키징은 기존 public을 포함하므로 URL이나 배포 복사 규칙을 바꿀 필요가 없다.
 
 ## 실패와 검증 규칙
 
@@ -101,11 +101,11 @@ manifest는 상대 경로·파일 수·크기·SHA-256을 모두 비교하며 �
 
 현재 GitHub Actions workflow는 없다. 일반 `pnpm test`는 PokéRogue 없이 실행 가능하며 resolver·fallback 및 다른 추적 자산 검사는 계속 수행한다. 자산 통합 검증과 `e2e/pokerogue-assets.spec.ts` 앞에서는 `pnpm assets:pokerogue` → `pnpm assets:pokerogue:verify`를 실행한다. 다른 테스트 전체에 다운로드를 강제하지 않는다.
 
-배포는 팩이 필수다. `node scripts/package-deploy.mjs --check`와 실제 패키징 모두 golden manifest의 전체 경로·크기·SHA-256을 읽기 전용 검사한다. 누락·추가·불일치가 있으면 복원 명령을 안내하고 복사 전에 실패한다. Dockerfile도 build 전에 같은 검사를 실행하므로 Docker build context에 호스트에서 복원한 public 폴더를 포함해야 한다. 일반 production build는 fallback 개발을 허용하지만 배포 준비 검사는 팩 전체를 요구한다.
+배포에는 이 팩을 포함한 외부 runtime 6개 aggregate가 모두 필수다. `node scripts/package-deploy.mjs --check`와 실제 패키징 모두 golden manifest의 전체 경로·크기·SHA-256을 읽기 전용 검사한다. 누락·추가·불일치가 있으면 복원 명령을 안내하고 복사 전에 실패한다. Dockerfile도 build 전에 같은 검사를 실행하므로 Docker build context에 호스트에서 복원한 public 폴더를 포함해야 한다. 일반 production build는 fallback 개발을 허용하지만 배포 준비 검사는 팩 전체를 요구한다.
 
 ```sh
-pnpm assets:pokerogue
-pnpm assets:pokerogue:verify
+pnpm assets:setup
+pnpm assets:verify
 node scripts/package-deploy.mjs --check
 pnpm deploy:package
 # Docker도 위 복원 후 docker compose build 실행

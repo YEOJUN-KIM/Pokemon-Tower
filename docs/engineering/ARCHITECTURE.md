@@ -1,6 +1,6 @@
 # 코드 구조
 
-기준: 2026-10-20. 현재 지원 DB 스키마는 **46**, 기본 새 전투 정책은 **tower-policy-v13**이다. 이벤트 규칙은 새 런 v2/기존 런 v1, 공통 NPC 생성 표식은 run_npc_rules v1이며 서로 다른 버전 체계다.
+기준: 2026-10-24. 현재 지원 DB 스키마는 **47**, 기본 새 전투 정책은 **tower-policy-v13**이다. 이벤트 규칙은 새 런 v2/기존 런 v1, 공통 NPC 생성 표식은 run_npc_rules v1이며 서로 다른 버전 체계다.
 
 | 위치 | 현재 책임 |
 |---|---|
@@ -25,6 +25,8 @@
 
 게임/데이터/서버/공유 타입은 web 구현을 import하지 않는다. 일부 data의 server 타입 참조와 기존 기술 합법성 조회는 남아 있으나 UI 의존은 아니다. `tests/architecture-boundaries.test.ts`가 게임→UI 역참조를 검사한다. `web/contracts.ts` 등 기존 재수출 경로는 호환용으로 유지한다.
 
+인증 진입과 계정 UX는 [ACCOUNTS](../operations/ACCOUNTS.md)를 따른다. `Pokedex`의 collection/selection mode는 각각 도감 관리와 출전 편성 UI를 제공하며 계정 저장은 공유한다. 신규 게임 초기 자원은 `server/initial-growth.ts`가 기존 `reward_granted` 영수증과 savepoint로 한 번 지급하며 튜토리얼 진행/스킵에 종속시키지 않는다. Windows EXE/Node/standalone의 프로세스 소유권과 사용자 DB 경계는 [WINDOWS_PLAYER](../operations/WINDOWS_PLAYER.md)를 따른다.
+
 ## 자주 바꾸는 설정의 기준
 
 | 설정 | 수정 위치 |
@@ -35,6 +37,7 @@
 | 독립 빌런 등장·간격·보상 | `data/villain-tracks.ts`의 villainTrackSettings·villainStageMinFloor·villainRewardSettings |
 | Raid 보스·HP·육성 | `data/raids.ts`·`raid-bosses.ts`·`raid-training.ts` |
 | 50층 주요 보스 최종 구성·낮춘 육성 | `server/npc-templates.ts`·`opponent-team.ts` (일반층 곡선과 구분) |
+| 신규 게임 초기 성장포인트 256P | `data/training.ts`의 INITIAL_GROWTH_POINTS·`server/initial-growth.ts` |
 | 층별 성장 지급·재접속 차액 정산 | `server/tower-store.ts`·`run_growth_progress` |
 | NPC stage/기믹 층 | `data/normal-mode-stages.ts`의 `normalNpcFloorRules`·선택 함수 |
 | 일반 상대 전설/환상·육성 곡선 | `data/tower-progression.ts`의 `towerDifficulty` |

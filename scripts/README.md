@@ -10,9 +10,9 @@
 | 실제 DB 수동 백업 | node --env-file=.env.local scripts/backup-db.mjs ([저장·백업 안내](../docs/operations/BACKUPS.md)) |
 | 특정 로컬 계정 플레이 초기화 | 게임 서버를 종료한 뒤 node --env-file=.env.local --import tsx scripts/reset-local-player.ts 계정아이디. DB 자동 백업 후 해당 계정의 진행만 신규 기본값으로 복원하며 로그인 정보와 다른 플레이어는 유지합니다. |
 | 개인용 통합 실행기 | 루트 포켓몬타워 실행.exe → launcher-window.ps1 → launch-preview.mjs / preview.mjs |
-| Windows 최초 설치 | 일반 플레이어: PokemonTower.exe. 설치 CMD는 setup-windows.mjs → player 엔진 --repair 진단 fallback. 로그: 사용자 PokemonTower/logs |
-| 설치 CMD 회귀 검사 | node --test tests/windows-setup.test.mjs (Windows CMD, 패키지 도구·게임 실행은 모의 처리) |
-| 외부 터널 없이 로컬 실행 | PokemonTower.exe 또는 로컬 실행 CMD → player 엔진 → 설치된 standalone. 개발은 pnpm dev |
+| Windows 최초 설치 | 일반 플레이어: Release ZIP → PokemonTower.exe. 개발자 복구 진단: node scripts/setup-windows.mjs --home <별도 경로> (공통 player 엔진 repair) |
+| 개발자 진단 CLI 회귀 검사 | node --test tests/windows-setup.test.mjs (실제 Node 진입점의 인자 전달·repair·종료 코드 확인) |
+| 외부 터널 없이 로컬 실행 | 일반 사용자: PokemonTower.exe. 개발자 진단: node scripts/launch-local.mjs --home <별도 경로>. 개발 서버: pnpm dev |
 | Windows 실행 파일 다시 만들기 | powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/build-windows-launcher.ps1 |
 | 실행기 화면만 렌더링 (서버 연결 없음) | powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File scripts/launcher-window.ps1 -NodePath (Get-Command node).Source -Preview |
 | 터널 주소 선택 회귀 검사 | node --test tests/preview-origin.test.mjs |

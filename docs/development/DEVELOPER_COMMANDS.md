@@ -17,17 +17,21 @@ Python 3.10 이상과 정확한 Pillow 12.3.0은 PokéRogue 원본→runtime 변
 
 ## 개발 실행
 
-Windows 사용자용 완성 ZIP은 자산 복원 후 `pnpm player:package`로 만든다. production build·launcher 컴파일·배포 파일 수집·README·ZIP·무결성 검증을 포함한다. `pnpm player:package:verify`는 현재 버전의 폴더/ZIP을 다시 검사한다. 출력은 `dist/PokemonTower-Windows-v<package.json version>/` 및 `.zip`, `.zip.sha256`이며 기존 출력은 덮어쓰지 않는다. 일반 사용자에게는 이 ZIP만 전달하고 Git/pnpm/Python 설치를 요구하지 않는다. [beta.5 배포 절차](../releases/WINDOWS_BETA_5.md) 참조.
-
-`pnpm player:package:test`는 생성된 실제 EXE를 `artifacts/windows-release`의 별도 home에서 실행한다. 첫 설치·빠른 재실행·임시 회원가입/256P·중복 실행·EXE 강제 종료·stale lock 복구·beta.4 marker에서 갱신/저장 보존을 확인한다. 포트 3000이 이미 사용 중이면 기존 게임을 건드리지 않고 실패한다. `TOWER_RELEASE_DIRECTORY`로 압축 해제한 배포 폴더를 선택할 수 있다. `TOWER_TEST_EXE`는 `node --test tests/windows-player-process.test.mjs`가 검사할 EXE를 지정한다.
-
 ```sh
 pnpm dev
 ```
 
 개발 소스와 `.data`/`.env.local`은 개인 개발 환경이다. 플레이어 EXE는 이 개발 서버를 사용하지 않으며, 별도의 저장 경로를 사용한다.
 
-## 빌드와 배포
+## Windows 플레이어 ZIP
+
+Windows 사용자용 완성 ZIP은 자산 복원 후 `pnpm player:package`로 만든다. production build·launcher 컴파일·배포 파일 수집·README·ZIP·무결성 검증을 포함한다. `pnpm player:package:verify`는 현재 버전의 폴더/ZIP을 다시 검사한다. 출력은 `dist/PokemonTower-Windows-v<package.json version>/` 및 `.zip`, `.zip.sha256`이며 기존 출력은 덮어쓰지 않는다. 일반 사용자에게는 이 ZIP만 전달하고 Git/pnpm/Python 설치를 요구하지 않는다. [beta.5 배포 절차](../releases/WINDOWS_BETA_5.md) 참조.
+
+`pnpm player:package:test`는 생성된 실제 EXE를 `artifacts/windows-release`의 별도 home에서 실행한다. 첫 설치·빠른 재실행·임시 회원가입/256P·중복 실행·EXE 강제 종료·stale lock 복구·beta.4 marker에서 갱신/저장 보존을 확인한다. 포트 3000이 이미 사용 중이면 기존 게임을 건드리지 않고 실패한다. `TOWER_RELEASE_DIRECTORY`로 압축 해제한 배포 폴더를 선택할 수 있다. `TOWER_TEST_EXE`는 `node --test tests/windows-player-process.test.mjs`가 검사할 EXE를 지정한다.
+
+일반 사용자에게 CMD 파일을 요구하지 않는다. 유지하는 CLI는 `node scripts/launch-local.mjs`(production 실행), `node scripts/setup-windows.mjs`(repair)이며 진단 시 `--home <별도 경로>`로 격리한다.
+
+## 서버/웹 빌드와 배포
 
 ```sh
 pnpm build
@@ -46,7 +50,7 @@ EXE는 초기 실행 도구가 필요하다. 현재 Node는 첫 설치에 사전
 | 외부 자산 전체 SHA 확인 | pnpm assets:verify |
 | TypeScript | pnpm typecheck |
 | unit/battle | pnpm test |
-| Windows CMD wrappers | node --test tests/windows-setup.test.mjs |
+| 개발자 진단 CLI 인자·repair·종료 코드 | node --test tests/windows-setup.test.mjs |
 | Windows EXE 프로세스 트리 (launcher:build 후) | node --test tests/windows-player-process.test.mjs |
 | player/aggregate 단위 회귀 | node --import tsx --test tests/player-launcher.test.ts |
 | E2E (production build 후, 별도 검증 DB) | pnpm test:e2e |

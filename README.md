@@ -14,9 +14,9 @@
 
 </div>
 
-![Pokémon Tower 최신 타이틀 화면](docs/images/overview-title.png)
+![Pokémon Tower 타이틀 화면](docs/images/overview-title.png)
 
-**현재 배포 준비 기준은 v1.0.0-beta.5입니다.** beta.5 Windows ZIP은 로컬에서 생성·검증하며, GitHub 공개는 별도로 진행합니다. Normal Mode 100층 기준 1차 완성을 마쳤으며, 음향과 기술 이펙트 보강이 남아 있어 베타 단계로 다듬고 있습니다. 앞으로는 UI/UX와 비주얼 디자인, 추가 이벤트와 콘텐츠, 기술 연출과 사운드를 업데이트하고 플레이 피드백을 바탕으로 밸런스를 다듬어 갑니다.
+**현재 최신 공개 베타는 [v1.0.0-beta.5](https://github.com/YEOJUN-KIM/Pokemon-Tower/releases/tag/v1.0.0-beta.5)입니다.** Normal Mode 100층의 1차 완성을 마쳤으며, 플레이 피드백을 바탕으로 화면과 콘텐츠, 기술 연출과 사운드를 다듬고 있습니다.
 
 ## 100층을 향한 도전
 
@@ -34,14 +34,34 @@
 
 거대한 포켓몬의 한 방, 에이스의 메가진화, 상성을 바꾸는 테라스탈까지. 선택한 룰과 포켓몬·도구·트레이너 장비에 맞춰 기믹을 활용합니다.
 
-| 기믹 | 배틀의 변화 |
-|---|---|
-| **메가진화** | 메가스톤으로 에이스의 모습·능력치·특성을 바꿉니다. 원시회귀도 지원합니다. |
-| **다이맥스·거다이맥스** | 거대한 모습과 다이맥스 기술을 활용합니다. 지원 종은 거다이맥스 모습으로 등장합니다. |
-| **테라스탈** | 테라 타입으로 상성과 공격 전략을 바꿉니다. 타입별 테라 아이콘과 변신 연출을 제공합니다. |
-| **Z기술** | 알맞은 Z크리스탈로 기술을 강화해 한 번의 결정적인 기회를 노립니다. |
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="public/sprites/items/mega-stone.svg" width="64" height="64" alt="메가스톤"><br>
+      <strong>메가진화</strong><br>
+      메가스톤으로 에이스의 모습과 능력을 바꿉니다. 원시회귀도 지원합니다.
+    </td>
+    <td align="center" width="50%">
+      <img src="public/sprites/items/dynamax-band.svg" width="64" height="64" alt="다이맥스밴드"><br>
+      <strong>다이맥스 / 거다이맥스</strong><br>
+      거대한 모습과 다이맥스 기술로 흐름을 바꿉니다. 지원 포켓몬은 거다이맥스 모습으로 등장합니다.
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="public/assets/original/gimmick-placeholder.svg" width="64" height="64" alt="테라스탈을 소개하는 공통 기믹 아이콘"><br>
+      <strong>테라스탈</strong><br>
+      테라 타입으로 상성을 바꿉니다. 불리한 순간을 버티거나 결정적인 공격을 준비하세요.
+    </td>
+    <td align="center">
+      <img src="public/sprites/items/z-crystal.svg" width="64" height="64" alt="Z크리스탈"><br>
+      <strong>Z기술</strong><br>
+      알맞은 Z크리스탈로 기술을 강화합니다. 한 번의 강력한 승부수를 노려 보세요.
+    </td>
+  </tr>
+</table>
 
-**기본·메가진화·다이맥스·테라스탈·혼합·Z기술**, 여섯 가지 룰로 도전할 수 있습니다. 혼합룰에서는 사용할 기믹과 담당 포켓몬을 나누는 선택도 중요합니다. 사용권과 중첩 제한은 실제 배틀 규칙을 따릅니다.
+**기본 · 메가진화 · 다이맥스 · 테라스탈 · Z기술 · 혼합**, 여섯 가지 룰로 도전할 수 있습니다. 혼합룰에서는 사용할 기믹과 담당 포켓몬을 나누는 선택도 중요합니다.
 
 ## 익숙한 이름, 새로운 승부
 
@@ -72,7 +92,7 @@
 
 도전 중에는 코인으로 지닌 도구·기술머신·배틀 아이템을 준비하고, 배낭에서 파티에 맞게 배분합니다. 층을 이길 때마다 바로 받는 영구 성장 포인트로 도전 중 능력치를 조정하거나 **리롤 확장·재도전 확장·출발 지원금**을 준비합니다.
 
-![최신 포켓몬 도감과 파티 준비 화면](docs/images/overview-pokedex.png)
+도감에서는 정보·성장·기술을 관리하고, 게임 시작의 출전 파티 편성 화면에서 배틀에 나갈 세 마리를 고릅니다.
 
 ### 알 하나를 여는 즐거움
 
@@ -82,19 +102,21 @@ Egg Station에서 1개 또는 10개를 뽑습니다. 기계가 들썩이고 출�
 
 새 포켓몬을 처음 만났을 때도, 이미 가진 파트너의 개체값이나 기술이 좋아졌을 때도 결과를 확인할 수 있습니다.
 
-![최신 알뽑기 화면](docs/images/overview-eggs.png)
+![알뽑기 화면](docs/images/overview-eggs.png)
 
 ## 내 PC에서 실행하기
 
-일반 사용자는 Node.js 24 이상을 설치한 뒤 [GitHub Releases](https://github.com/YEOJUN-KIM/Pokemon-Tower/releases)에서 Windows ZIP을 받아 완전히 압축 해제하고 **PokemonTower.exe**를 실행합니다. beta.5 업로드용 파일명은 `PokemonTower-Windows-v1.0.0-beta.5.zip`입니다. EXE만 따로 옮기지 마세요. 처음에는 동봉 게임 파일을 준비하고, 완료되면 브라우저에서 게임이 열립니다. 이후에도 같은 EXE만 실행하면 됩니다. 종료는 Windows 알림 영역의 게임 아이콘에서 선택합니다. 로컬 플레이에는 Docker가 필요 없습니다.
+Windows에서는 GitHub Release에서 최신 배포본을 내려받아 실행할 수 있습니다.
 
-- [일반 플레이어 처음 실행](docs/operations/SETUP.md)
-- [개발자 clone·명령·빌드](docs/development/DEVELOPER_COMMANDS.md)
-- [Windows standalone 설치 구조](docs/operations/WINDOWS_PLAYER.md)
-- [beta.5 배포·다른 PC 확인](docs/releases/WINDOWS_BETA_5.md)
-- [저장·백업](docs/operations/BACKUPS.md)
+1. **Node.js 24 이상**을 설치합니다.
+2. [GitHub Releases](https://github.com/YEOJUN-KIM/Pokemon-Tower/releases)에서 최신 Windows 배포본을 다운로드합니다.
+3. ZIP 파일을 완전히 압축 해제합니다.
+4. 폴더 안의 **PokemonTower.exe**를 실행합니다.
+5. 준비가 끝나면 브라우저에서 게임이 자동으로 열립니다.
 
-Git clone은 소스 배포이므로 개발 도구 준비가 필요합니다. 완성된 Windows 패키지는 Python/pnpm 없이 사용할 수 있으며, 최초 실행용 Node가 없으면 설치 안내를 보여줍니다.
+게임 종료는 Windows 알림 영역의 Pokémon Tower 아이콘에서 할 수 있습니다.
+
+> 저장 데이터는 배포 폴더와 별도로 보관되므로 새 버전으로 교체해도 기존 진행 상황을 유지할 수 있습니다.
 
 ## 어떻게 만들었나요?
 
@@ -102,7 +124,7 @@ Next.js 16.3.8·React 19.3.0·TypeScript 7.0.2로 만들고, Pokémon Showdown 0
 
 상대별 Tactical·Expert 계열 AI를 사용하며, 과거 AI 정책도 보존해 진행 중인 배틀을 이어갑니다. 대량 전투 시뮬레이션과 전투 로그로 NPC·기믹·밸런스를 검증하고, Playwright 1.63.0으로 화면과 입력을 검사합니다. 데이터는 원본 입력 → 검증 → 게임용 내보내기 과정을 거칩니다. Docker를 이용한 실행도 지원합니다.
 
-구조와 검증 도구에 관한 자세한 내용은 [개발 문서](docs/engineering/README.md)에 정리했습니다.
+구조와 개발·실행 안내는 [개발 문서](docs/README.md)에 정리했습니다.
 
 현재는 **PC 환경을 중심으로 개발·검증**합니다. 모바일 화면과 터치 입력 경로는 있지만, 모바일 전용 최적화와 여러 기기에서의 플레이 경험 개선은 후속 작업입니다.
 
@@ -117,7 +139,7 @@ Next.js 16.3.8·React 19.3.0·TypeScript 7.0.2로 만들고, Pokémon Showdown 0
 - Normal Mode와 별도로 설계할 Hard Mode 검토
 - 모바일 환경 최적화·멀티 디바이스 플레이 지원 개선
 
-ML 기반 AI는 충분한 플레이 데이터를 확보한 뒤 장기 연구 대상으로 검토합니다. 구체적인 방향은 [ROADMAP](docs/current/ROADMAP.md)에서 확인할 수 있습니다.
+ML 기반 AI는 충분한 플레이 데이터를 확보한 뒤 장기 연구 대상으로 검토합니다.
 
 ## 이 프로젝트에 대해
 

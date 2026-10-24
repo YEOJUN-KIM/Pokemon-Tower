@@ -77,24 +77,15 @@ pnpm assets:showdown-pokemon:verify --output .local-backups/showdown-check/offli
 
 ## 새 clone·일반 테스트·배포
 
-```sh
-pnpm install
-pnpm assets:showdown-pokemon
-pnpm assets:showdown-pokemon:verify
-# 배포에는 이미 분리한 PokéRogue도 필요
-python -m pip install Pillow==12.3.0
-pnpm assets:pokerogue
-pnpm assets:pokerogue:verify
-pnpm dev
-```
+개발 clone의 전체 설치·복원 명령은 [DEVELOPER_COMMANDS](../development/DEVELOPER_COMMANDS.md#처음-clone한-pc)를 따른다. 이 문서의 provider별 명령은 해당 팩의 독립 복구용이다. 일반 Windows 사용자는 [동봉 자산이 있는 Release ZIP](../operations/SETUP.md)을 사용한다.
 
 일반 unit test와 기본 build는 팩 전체가 없는 상태를 허용한다. 테스트는 resolver·폼·방향·이로치 계약을 항상 검사하고, 팩 디렉터리가 전혀 없을 때만 그 팩의 디스크 검사를 제외한다. 부분 설치와 다른 추적 자산의 누락은 계속 검사하며 전체 pack 무결성은 verify로 확인한다. 이미지 후보가 모두 실패하면 기존 fallback/placeholder로 넘어가며 게임 전투는 계속 진행한다. dev에 자동 다운로드나 별도 의존성 설치는 추가하지 않는다.
 
-asset integration/E2E 전에는 필요한 팩을 복원한다. 현재 GitHub Actions workflow는 없다. `package-deploy.mjs --check`와 실제 패키징은 두 팩 전체 hash를 읽기 전용 검사하고, 누락·추가·불일치가 있으면 해당 복원 명령을 안내하며 복사 전에 실패한다. 기존 Dockerfile의 --check도 같은 정책을 사용한다. Docker context는 호스트에서 복원한 public을 포함해야 한다. 일반 build의 fallback 허용과 완전한 자산을 요구하는 배포 검사는 구분한다.
+asset integration/E2E 전에는 필요한 팩을 복원한다. 현재 GitHub Actions workflow는 없다. `package-deploy.mjs --check`와 실제 패키징은 이 팩을 포함한 외부 runtime 6개 aggregate 전체 hash를 읽기 전용 검사하고, 누락·추가·불일치가 있으면 해당 복원 명령을 안내하며 복사 전에 실패한다. 기존 Dockerfile의 --check도 같은 정책을 사용한다. Docker context는 호스트에서 복원한 public을 포함해야 한다. 일반 build의 fallback 허용과 완전한 자산을 요구하는 배포 검사는 구분한다.
 
 Git 추적 해제는 온라인·오프라인 전체 일치와 clean 환경·fallback·build/test 검증이 모두 통과한 뒤에만 수행한다. runtime만 ignore하고 scripts·source lock·golden·문서는 Git에 유지한다. 기존 역사 manifest와 다른 자산 pack은 변경하지 않는다.
 
-## READY 및 추적 해제 · 2026-10-23
+## 구축 당시 READY 및 추적 해제 기록 · 2026-10-23
 
 모든 READY 조건 통과 후 `git rm -r --cached public/vendor/showdown/pokemon`으로 추적을 해제했다. ignore는 `/public/vendor/showdown/pokemon/`이다. scripts·source lock·golden·문서는 Git에 보존하고 로컬 원본 1,393개는 유지한다. 작업 전후 raw 총량은 36,480,210 bytes(README의 Windows CRLF 포함)이며 모든 raw SHA-256이 동일하다. Git LF golden·복원 결과 총량은 36,480,199 bytes다.
 
@@ -118,6 +109,6 @@ E2E는 고유 검사 10개가 최종적으로 모두 통과했다. 신규 자산
 
 배포 전제인 PokéRogue는 격리 환경에 별도로 기존 검증된 source cache에서 offline 재생성했다. Showdown 복원은 이 팩이나 .data/cache를 입력으로 사용하지 않는다. 실제 Docker 이미지 빌드는 이번 검사에 포함하지 않으며 기존 Dockerfile의 --check가 새 두 팩 guard를 실행한다.
 
-다음 단계는 `public/vendor/pokeapi`의 복원 구축 → 검증 → 성공 시 같은 작업에서 추적 해제다. 기존 고정 source manifest를 조사하고 현재 전체 팩과의 coverage·byte 일치를 먼저 확인한다. 이번 작업에서 PokeAPI와 다른 자산 pack은 변경하지 않았다. 커밋·push·history rewrite는 하지 않았다.
+당시 후속 계획은 PokeAPI 복원·검증·추적 해제였으며 현재는 [PokeAPI 복원](POKEAPI_RESTORE.md)으로 완료했다. 기존 고정 source manifest를 조사하고 현재 전체 팩과의 coverage·byte 일치를 먼저 확인한다. 이번 작업에서 PokeAPI와 다른 자산 pack은 변경하지 않았다. 커밋·push·history rewrite는 하지 않았다.
 
 추적 해제 후에는 최종 Git index의 6,549개 파일만 두 번째 새 사본으로 복사했다. Showdown runtime·source cache·.data/cache·env.download·node_modules가 없음을 확인한 뒤 `pnpm install --frozen-lockfile` → `pnpm assets:showdown-pokemon` → `pnpm assets:showdown-pokemon:verify` → workspace → 기본 Turbopack production build를 다시 모두 통과했다. 이 두 번째 온라인 복원도 1,393개 / 36,480,199 bytes / missing·extra·mismatch 0이었다. 원본 폴더의 추적 해제 후 verify와 두 팩의 package-deploy --check도 통과했다. 최종 원본 tracked 0개·local 1,393개·raw hash 불변을 확인했다.

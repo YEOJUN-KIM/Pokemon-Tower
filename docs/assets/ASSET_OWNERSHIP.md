@@ -125,4 +125,4 @@ Git clone에는 project-original·폰트·CC0 VFX/BGM이 즉시 존재한다. �
 - 빌드/E2E는 개인 DB와 분리된 `.local-backups/mixed-assets-final` 검증 복사본에서 실행했다. 원래 `.data`는 건드리지 않았다. 로그는 ignored `artifacts/ownership-final/`에 있다.
 - Git: 이번 추가 제거 0개, 기존 1,382 tracked 파일 유지 + 문서/manifest/unit/E2E 4개 신규로 1,386개. 커밋하지 않는다.
 
-2026-10-24 현재 standalone ownership inventory는 83파일이며 자체 46개 + 외부 32개 + metadata 5개다. mixed 자체 20개를 참조해 감사한 project-original은 66개다. 아래 이전 검증의 84개/미확인 분류/다음 단계 제안은 당시 기록이고, 이번 통합·clean 설치 검증은 [Windows 플레이어 구조](../operations/WINDOWS_PLAYER.md)에 기록한다.
+2026-10-24 현재 standalone ownership inventory는 83파일이며 자체 46개 + 외부 32개 + metadata 5개다. mixed 자체 20개를 참조해 감사한 project-original은 66개다. 아래 이전 검증의 84개/미확인 분류/다음 단계 제안은 당시 기록이고, 당시 통합·clean 설치 검증은 [beta.5 기준 문서 이력](https://github.com/YEOJUN-KIM/Pokemon-Tower/blob/54e10401a14ce2525581adf8bfe900abdad99b14/docs/operations/WINDOWS_PLAYER.md)에 보존한다. 현재 설치 구조는 [Windows 플레이어 구조](../operations/WINDOWS_PLAYER.md), 공개 배포 결과는 [beta.5 완료 기록](../releases/WINDOWS_BETA_5.md)을 따른다.

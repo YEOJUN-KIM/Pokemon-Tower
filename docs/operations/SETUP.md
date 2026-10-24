@@ -2,32 +2,29 @@
 
 ## 처음 실행
 
-1. Windows 11 x64에서 Node.js 24 이상을 설치합니다. Windows 기본 .NET Framework를 사용하며 .NET SDK 설치는 필요 없습니다.
-2. GitHub Release의 `PokemonTower-Windows-v1.0.0-beta.5.zip`을 다운로드하고 완전히 압축 해제합니다. 폴더 안의 파일을 함께 보관해 주세요. EXE 단독으로 실행할 수 없습니다.
-3. **PokemonTower.exe**를 실행합니다.
-4. 처음에는 동봉 파일을 검증하고 사용자 폴더에 복사합니다. 준비가 끝나면 브라우저에서 게임이 열립니다. pnpm/Python/Pillow/Git/Visual Studio/빌드 도구는 필요 없습니다.
+1. **Node.js 24 이상**을 설치합니다. 검증 환경은 Windows 11 x64이며 Windows 기본 .NET Framework를 사용합니다. 별도 SDK·개발 도구는 필요 없습니다.
+2. [GitHub Releases](https://github.com/YEOJUN-KIM/Pokemon-Tower/releases)에서 Windows ZIP을 다운로드합니다. 현재 공개본은 **v1.0.0-beta.5**입니다.
+3. ZIP을 완전히 압축 해제합니다. GitHub의 자동 Source code ZIP 대신 Windows 배포 asset을 사용합니다.
+4. 폴더 안의 **PokemonTower.exe**를 실행합니다. EXE만 따로 옮기지 마세요.
+5. 최초 파일 준비가 끝나면 브라우저에서 게임이 자동으로 열립니다.
 
-beta.5 ZIP의 업로드는 별도 작업입니다. [배포 준비·다른 PC 체크리스트](../releases/WINDOWS_BETA_5.md)를 참고하세요. 소스로 개발하려면 [개발자 절차](../development/DEVELOPER_COMMANDS.md)를 사용합니다.
+다른 Windows PC에서 Release ZIP 다운로드 후 정상 실행·플레이를 확인했습니다. 구체적인 검증 범위는 [beta.5 완료 기록](../releases/WINDOWS_BETA_5.md)에 있습니다.
 
-## 다음부터
+## 다시 열기와 종료
 
-**PokemonTower.exe만 실행하면 됩니다.** 준비된 게임을 바로 시작하며, 매번 다시 설치하거나 게임 파일 전체를 검사하지 않습니다. 로컬 플레이에는 Docker가 필요 없습니다.
+다음부터는 같은 EXE를 실행하면 됩니다. 준비된 설치를 재사용하며 매번 전체 재설치하지 않습니다. 브라우저만 닫았다면 알림 영역의 Pokémon Tower 아이콘을 **더블클릭**하거나 우클릭 → **Pokemon Tower 열기**로 다시 엽니다.
 
-## 종료와 저장
+종료하려면 아이콘 우클릭 → **종료**를 선택합니다. 브라우저만 닫으면 게임 서버는 계속 실행될 수 있습니다. 실행기가 이미 열려 있다는 안내가 나오면 기존 트레이 아이콘을 사용하세요.
 
-브라우저를 닫았다면 Windows 알림 영역의 Pokémon Tower 아이콘을 **더블클릭**해 게임을 다시 엽니다. 오른쪽 클릭 메뉴의 **Pokemon Tower 열기**도 같은 동작입니다. 실행 중인 서버를 그대로 사용합니다.
+## 저장과 새 버전
 
-종료하려면 아이콘을 오른쪽 클릭하고 **종료**를 선택합니다. 브라우저만 닫으면 게임 서버는 계속 실행될 수 있습니다.
-
-저장은 `%LOCALAPPDATA%/PokemonTower/saves/tower.sqlite`, 로그는 `%LOCALAPPDATA%/PokemonTower/logs`에 남습니다. ZIP/배포 폴더 삭제·교체와 버전 갱신은 이 저장을 삭제하지 않습니다. 새 버전은 한 번 파일을 준비하고 다음부터 빠르게 실행합니다. 이전 개발용 저장을 자동으로 옮기지는 않습니다.
+저장은 배포 폴더 밖에 보관하므로 ZIP·배포 폴더를 새 버전으로 교체해도 유지됩니다. 저장 위치·백업은 [BACKUPS](BACKUPS.md)를 따릅니다. 로그는 `%LOCALAPPDATA%/PokemonTower/logs`에 있습니다.
 
 ## 문제가 생겼다면
 
-- 실행 도구 설치 안내가 나오면 안내된 설치를 완료한 뒤 다시 실행합니다.
-- 준비 중 실패하면 표시된 단계·오류 코드·로그 파일 위치를 함께 알려 주세요.
-- 이미 게임이 실행 중이거나 3000번 포트를 사용 중이라고 나오면 기존 실행기를 종료한 뒤 다시 실행합니다. 다른 프로그램의 페이지를 대신 열지는 않습니다.
-- 브라우저가 열리지 않으면 직접 [게임 주소](http://127.0.0.1:3000)를 엽니다.
+- 실행 도구 안내가 나오면 Node.js 24 이상 설치를 확인합니다.
+- 파일 누락 안내가 나오면 Release ZIP을 다시 받아 완전히 압축 해제합니다.
+- 3000번 포트 사용 중 안내가 나오면 기존 게임 또는 해당 프로그램을 확인합니다.
+- 실패 화면의 단계·오류 코드·로그 위치를 함께 알려 주세요.
 
-설치·실행 로그는 `%LOCALAPPDATA%/PokemonTower/logs`에 있습니다. 파일 복구가 필요하면 개발/진단 담당자에게 로그를 전달해 주세요.
-
-저장소를 직접 clone한 개발자는 [개발자 명령어](../development/DEVELOPER_COMMANDS.md)를 따릅니다. 기존 설치/로컬 실행 CMD는 진단용 fallback으로 남겨 두며, 일반 플레이어의 공식 진입점은 PokemonTower.exe입니다.
+계정·복구 키는 [ACCOUNTS](ACCOUNTS.md), 소스 개발은 [개발자 명령어](../development/DEVELOPER_COMMANDS.md)를 따릅니다.

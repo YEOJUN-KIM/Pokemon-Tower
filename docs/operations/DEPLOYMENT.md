@@ -1,14 +1,16 @@
 # 웹 배포 패키지
 
-일반 Windows 플레이어용 ZIP은 웹 서버 운영 패키지와 구분한다. `pnpm player:package` / `pnpm player:package:verify`로 [beta.5 Release asset](../releases/WINDOWS_BETA_5.md)을 준비한다. GitHub Release 생성·업로드는 자동 수행하지 않는다.
+이 문서는 운영자용 서버/웹 배포와 개인 Docker·Quick Tunnel 환경을 설명한다. 일반 Windows 사용자는 [SETUP](SETUP.md), 공개 ZIP과 검증 기록은 [beta.5 완료 기록](../releases/WINDOWS_BETA_5.md), Windows 패키지 재생성은 [개발자 명령어](../development/DEVELOPER_COMMANDS.md)를 따른다.
 
-다른 PC로 옮기는 최신 Windows 절차와 백업 파일은 [컴퓨터 이전 안내](COMPUTER_MOVE.md)에 있다. 현재 사용자는 유료 호스팅 없이 PC·Docker·Quick Tunnel 테스트를 유지한다. 과거 일부 휴대폰 동작은 확인했지만 장기 Run·전체 화면의 실제 기기 검증 완료를 뜻하지 않는다. 일반 로컬 플레이는 `PokemonTower.exe`로 standalone 게임을 실행한다. 기존 개인용 `포켓몬타워 실행.exe`는 서버·DB·터널용 별도 도구이며 일반 플레이어 진입점과 다르다. 정기 백업과 PC 부팅 시 자동 시작은 미설정이며, 실행 전 DB 백업은 실행기가 처리한다. 실행기 소스와 재생성 명령은 [개발 도구 안내](../../scripts/README.md)를 따른다.
+공개 Release 배포와 상시 호스팅 운영은 별개다. 현재 개인 테스트 서버·임시 터널을 유지하며 상시 공개 서비스 운영은 계획하지 않는다.
 
 Node.js 24 / 단일 서버 / 영구 저장 디스크를 기준으로 준비했다. 서버 선택과 도메인·HTTPS 연결은 별도 단계다. 여러 서버에서 같은 DB를 동시에 사용하거나 서버리스 임시 디스크에 저장하지 않는다.
 
 ## 현재 패키징 기준
 
-PokéRogue·Showdown Pokémon·PokeAPI runtime 전체 hash와 문서·스크립트 입력을 안전하게 검사하려면 `node scripts/package-deploy.mjs --check`를 실행한다. 빌드·복사·서버·DB 작업 없이 검사한다. PokéRogue가 없거나 손상됐으면 `pnpm assets:pokerogue`와 `pnpm assets:pokerogue:verify`를 안내하며 실패한다. Showdown은 `pnpm assets:showdown-pokemon`과 `pnpm assets:showdown-pokemon:verify`, PokeAPI는 `pnpm assets:pokeapi`와 `pnpm assets:pokeapi:verify`도 실행한다. 새 clone과 Docker build 전에 Python/Pillow 준비 및 [팩 복원](../assets/POKEROGUE_RESTORE.md)을 완료한다. 패키지의 `RELEASE_NOTES.md`는 Git 추적 [릴리스 기록](../releases/NONCOMBAT_EVENTS_RELEASE.md)에서 가져오며 artifacts는 필요 없다. 해당 기록의 옛 수치·schema는 현재 배포 설정이 아니다.
+개발 호스트에서 [자산 준비](../development/DEVELOPER_COMMANDS.md#처음-clone한-pc)를 완료한다. `pnpm assets:setup` → `pnpm assets:verify`는 6개 aggregate의 전체 외부 runtime을 준비·검사한다. `node scripts/package-deploy.mjs --check`는 빌드·서버·DB 변경 없이 배포 입력을 검사한다. 누락·추가·해시 불일치 시 복원 안내와 함께 복사 전에 실패한다.
+
+서버 패키지의 RELEASE_NOTES.md는 과거 [비전투 이벤트 기록](../releases/NONCOMBAT_EVENTS_RELEASE.md)을 동봉한다. 파일 이름만으로 현재 공개 beta.5 릴리스 노트로 간주하지 않는다. assets 없이 Docker build를 시작하지 않으며 호스트에서 복원한 public을 context에 넣는다.
 
 - 최신 코드를 `pnpm build` 후 패키징한다. 과거 dist 묶음은 현재 코드/데이터를 포함한다고 가정하지 않는다.
 - 코드 지원 DB schema는 47다. 실제 DB 버전은 별도 확인하고 업데이트 전 SQLite backup API로 백업한다.
@@ -79,24 +81,7 @@ node scripts/start-deploy.mjs
 
 ## 백업과 복원
 
-실행 중에도 SQLite backup API로 일관된 백업을 생성한다. 원본 DB를 직접 복사하지 않는다.
-
-```sh
-docker compose exec game node scripts/backup-db.mjs /data/backups/tower-before-update.sqlite
-docker compose cp game:/data/backups/tower-before-update.sqlite ./tower-before-update.sqlite
-```
-
-같은 파일명은 덮어쓰지 않는다. 백업은 서버 외부에도 보관한다. 독립 실행 패키지는 `TOWER_DB_PATH`를 지정하고 `node scripts/backup-db.mjs 백업경로`를 실행한다.
-
-복원은 서비스를 중지한 상태에서만 진행한다. 먼저 현재 DB도 백업한다. Docker 예시(Linux 서버, 현재 폴더에 복원 파일을 준비):
-
-```sh
-docker compose stop game
-docker compose run --rm --no-deps -v "$(pwd):/restore:ro" --entrypoint node game -e "const fs=require('node:fs');const src='/restore/tower-before-update.sqlite';fs.accessSync(src);fs.copyFileSync(src,'/data/tower.sqlite');for(const suffix of ['-wal','-shm'])fs.rmSync('/data/tower.sqlite'+suffix,{force:true});"
-docker compose up -d game
-```
-
-독립 실행도 서버를 중지하고 DB를 교체한 뒤 이전 `-wal`·`-shm` 파일을 제거하고 재시작한다. 엔진 버전이 변경된 업데이트는 진행 중인 전투 복구가 거부될 수 있으므로 이전 이미지/패키지도 보관한다. DB 마이그레이션 후 구버전으로 되돌리려면 당시 백업도 함께 복원한다.
+[BACKUPS](BACKUPS.md)를 단일 절차로 사용한다. 실행 중 백업은 SQLite backup API로 만들고 서버 외부에도 보관한다. 복원은 서비스 중지·현재 저장 백업 후 수행하며, 개발·Docker의 새 대상 복원은 [COMPUTER_MOVE](COMPUTER_MOVE.md#4-새-pc의-docker-저장-복원)를 따른다. DB 마이그레이션 뒤 구버전으로 돌아갈 때는 당시 백업도 함께 복원해야 한다.
 
 ## 개인 접속·공유 실사용 확인
 
@@ -107,28 +92,8 @@ docker compose up -d game
 
 `deploy:verify`는 독립 실행 패키지에서 화면·이미지·API·한 턴·재시작·백업 복원을 확인한다. `deploy:verify:docker`는 Docker 이미지의 실행 및 컨테이너 교체 후 저장 유지도 확인한다. 이 검사 결과와 실제 임시 터널·휴대폰·장기 플레이 검증은 구분하며, 공유할 실제 주소에서 별도로 확인한다.
 
-### 새 clone의 Docker 자산 준비
+## 자산·플랫폼 경계
 
-Dockerfile은 `COPY . .` 뒤에 package-deploy --check를 실행한다. 기존 세 generated sprite pack과 신규 혼합 외부 7그룹은 Git에서 직접 받는 자산이 아니므로 [전체 복원 절차](../assets/POKEAPI_RESTORE.md#새-clone과-배포)에 따라 호스트에서 준비한 후 Docker build를 실행한다. 자산 없이 build context를 만들면 명확한 readiness 오류로 실패한다. 일반 개발 build와 달리 배포는 완전한 팩을 요구하며 Docker 내부 자동 다운로드는 하지 않는다.
+Docker는 호스트에서 `pnpm assets:setup` / `pnpm assets:verify`를 마친 public을 사용하며 내부 대량 다운로드를 하지 않는다. provider별 복구·offline 조건은 [자산 안내](../assets/README.md), project-original/Git 유지 정책은 [소유권](../assets/ASSET_OWNERSHIP.md)을 따른다. 자산 복원 범위를 이 문서에서 별도 목록으로 중복 관리하지 않는다.
 
-### 혼합 provider 준비
-
-기존 세 팩 복원 후 [혼합 자산 복원](../assets/MIXED_RUNTIME_ASSETS.md)을 실행한다.
-
-```sh
-pnpm assets:trainers
-pnpm assets:gimmicks
-pnpm assets:items
-pnpm assets:mixed:verify
-node scripts/package-deploy.mjs --check
-```
-
-단일 제공원만 복구하려면 문서에 나열된 provider 명령을 사용한다. 각 명령의 `--offline`은 source cache가 완전할 때만 동작한다. effects·플레이어·자체 도구·historical metadata는 tracked이므로 별도 restore가 없다. 모든 신규 외부 provider도 배포 readiness의 필수 입력이며, 누락 시 guard가 해당 명령을 안내한다. 호스트에서 복원한 `public`을 Docker context에 포함하고 Docker 안에서는 다운로드하지 않는다.
-
-### Git 동봉 자산의 최종 정책
-
-project-original(알·TM·포털/event·effects·제작 BGM 5개), 외부 CC0 BGM 8개, OFL 폰트 및 고지 3개, CC0 VFX 22개는 Git clone만으로 존재한다. 이번 단계 새 restore 팩이나 readiness 조건은 추가하지 않는다. 기존 3팩 + mixed 7 provider만 복원한다. 파일별 분류는 [ownership 정책](../assets/ASSET_OWNERSHIP.md)을 따른다. `pnpm assets:setup`은 다음 단계에서 통합하며 이번에는 만들지 않는다.
-
-### 통합 자산과 Windows 플레이어 (2026-10-24)
-
-호스트에서 `pnpm assets:setup` → `pnpm assets:verify` → `pnpm build` → `node scripts/package-deploy.mjs` 순서로 준비한다. `pnpm deploy:package`는 build도 포함한다. Windows package는 PokemonTower.exe와 standalone 시작 스크립트·player 엔진·외부 golden을 포함한다. source EXE는 `pnpm launcher:build`로 생성한다. 첫 실행/빠른 재실행/marker/저장 경로는 [플레이어 구조](WINDOWS_PLAYER.md), 개발은 [개발자 명령어](../development/DEVELOPER_COMMANDS.md)를 따른다. user save는 `%LOCALAPPDATA%/PokemonTower/saves/tower.sqlite`로 분리한다.
+Windows 플레이어 ZIP과 서버 패키지는 같은 production 기반이지만 사용자 진입점·문서·저장 위치가 다르다. 웹 서버 배포 패키지의 운영용 스크립트를 일반 Windows ZIP에도 포함한다고 가정하지 않는다.

@@ -96,26 +96,15 @@ resolver·종/폼/방향/이로치 계약은 자산이 없어도 계속 검사�
 
 ## 새 clone과 배포
 
-```sh
-pnpm install
-# PokéRogue 변환 요구 사항. PokeAPI/Showdown 자체에는 Python이 필요 없다.
-python -m pip install Pillow==12.3.0
-pnpm assets:pokerogue
-pnpm assets:showdown-pokemon
-pnpm assets:pokeapi
-pnpm assets:pokerogue:verify
-pnpm assets:showdown-pokemon:verify
-pnpm assets:pokeapi:verify
-pnpm dev
-```
+개발 clone의 전체 설치·복원 명령은 [DEVELOPER_COMMANDS](../development/DEVELOPER_COMMANDS.md#처음-clone한-pc)를 따른다. 이 문서의 provider별 명령은 해당 팩의 독립 복구용이다. 일반 Windows 사용자는 [동봉 자산이 있는 Release ZIP](../operations/SETUP.md)을 사용한다.
 
-`package-deploy.mjs --check`와 실제 패키징은 PokéRogue·Showdown Pokémon·PokeAPI 3개 팩의 전체 path·bytes·SHA-256을 읽기 전용 검사한다. 누락·추가·불일치는 해당 팩 이름과 복원 명령을 안내하며 public 복사 전에 실패한다. 일반 production build는 팩이 없는 fallback 개발을 허용한다.
+`package-deploy.mjs --check`와 실제 패키징은 생성 3팩과 혼합 trainers/gimmicks/items를 포함한 6개 aggregate의 전체 path·bytes·SHA-256을 읽기 전용 검사한다. 누락·추가·불일치는 해당 팩 이름과 복원 명령을 안내하며 public 복사 전에 실패한다. 일반 production build는 팩이 없는 fallback 개발을 허용한다.
 
-Dockerfile은 COPY 이후 build 전에 같은 --check를 실행한다. **Docker build 전에 호스트에서 세 팩을 복원해 public을 context에 포함**해야 한다. fresh clone에서 자산 없이 곧바로 Docker build하면 readiness가 실패하는 것이 의도다. Docker 내부 자동 대량 다운로드는 추가하지 않는다. 실제 Docker 이미지 빌드는 이번 검증과 구분한다.
+Dockerfile은 COPY 이후 build 전에 같은 --check를 실행한다. **Docker build 전에 호스트에서 전체 외부 자산을 복원해 public을 context에 포함**해야 한다. fresh clone에서 자산 없이 곧바로 Docker build하면 readiness가 실패하는 것이 의도다. Docker 내부 자동 대량 다운로드는 추가하지 않는다. 실제 Docker 이미지 빌드는 이번 검증과 구분한다.
 
 Git 추적 해제는 공식 source·online/offline 전수 일치·clean restore·fallback·tests·build·deploy readiness가 모두 통과한 뒤에만 수행한다. runtime만 ignore하고 scripts·source lock·golden·문서는 Git에 보존한다. history rewrite나 과거 Git blob 삭제는 하지 않는다.
 
-## READY와 검증 결과 · 2026-10-23
+## 구축 당시 READY와 검증 결과 · 2026-10-23
 
 모든 필수 조건 통과 후 runtime 4,648개를 `git rm -r --cached public/vendor/pokeapi`로 index에서만 제거했다. `/public/vendor/pokeapi/`를 ignore하고 로컬 파일 4,648개 / 89,453,521 bytes를 그대로 유지했다. 작업 전후 모든 raw SHA-256이 동일하다. 추적 해제 직후 원본 폴더의 `pnpm assets:pokeapi:verify`도 통과했다.
 

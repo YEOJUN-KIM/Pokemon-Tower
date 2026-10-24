@@ -12,6 +12,7 @@
 | `artifacts/reports/` | Git 제외 자동 보고서·NPC 리뷰·일회성 분석. 공식 정책은 docs로 승격 |
 | `artifacts/qa/` | 문서나 재검증에서 실제 사용하는 화면·자산 검사 자료 |
 | `artifacts/temporary/` | 일회성 검증 결과. 해결 후 삭제 |
+| `%LOCALAPPDATA%/PokemonTower/` | Windows 사용자 설치·저장·로그. 프로젝트 폴더 밖이며 정리 대상에서 제외 |
 | `.data/` | 실제 로컬 저장·운영 설정·수동 DB 백업 |
 | `.data/backups/` | 과거 실제 DB 스냅샷과 개인 검사 기록. 테스트 출력과 구분하여 보존 |
 | `.data/transfers/` | 받은 개인 저장 묶음·manifest·검사 결과. 실행 중인 DB와 분리 |
@@ -35,4 +36,4 @@
 
 구버전 코드/배포 묶음과 일회성 확인 스크립트는 Git 이력으로 대체합니다. 현재 NPC export와 공용 Raid 시뮬레이터를 사용하며 단계별 옛 bootstrap·Raid 튜닝 전용 명령은 유지하지 않습니다. 기능 테스트와 저장 재생용 버전 코드는 보존하고, 과거 특정 변경에서 파일이 한 바이트도 안 바뀌었는지만 검사하는 일회성 보존 검사는 지속 회귀 검사에서 제거합니다.
 
-Git에 있던 JSON/CSV를 이동할 때는 새 위치의 .gitignore 예외도 확인합니다. 대용량 로컬 원자료를 함께 올리는 넓은 예외를 추가하지 않습니다. docs/images는 현재 README 소개 화면이며 과거 UI 캡처는 Git에서 확인합니다.
+Git에 있던 JSON/CSV를 이동할 때는 새 위치의 .gitignore 예외도 확인합니다. 대용량 로컬 원자료를 함께 올리는 넓은 예외를 추가하지 않습니다. docs/images의 촬영 시점과 현행 README 사용 여부는 images/README를 따릅니다. 역할이 바뀐 이전 UI를 최신 화면으로 표기하지 않습니다.

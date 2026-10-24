@@ -1,23 +1,23 @@
-# 프로젝트 안내
+# 문서 안내
 
-현재 게임을 이해할 때는 아래 문서부터 읽으면 됩니다. 변경 로그와 시뮬레이션 숫자는 이 안내에 누적하지 않습니다.
+게임 소개와 다운로드는 [프로젝트 README](../README.md), 현재 공개 버전과 검증 범위는 [STATUS](STATUS.md)에서 확인합니다.
 
-| 찾는 정보 | 문서 |
+| 찾는 정보 | 시작할 문서 |
 |---|---|
-| 지금 구현된 기능 | [현재 상태](STATUS.md) |
-| 다음에 할 일 | [개발 계획](current/ROADMAP.md) |
-| 다른 PC에서 작업 이어받기 | [작업 인계](SESSION_HANDOFF.md) · [컴퓨터 이전](operations/COMPUTER_MOVE.md) |
-| 개인 저장·백업 확인 | [저장과 백업](operations/BACKUPS.md) |
-| 조작 방법·게임 규칙 | [게임 안내](gameplay/README.md) |
-| 설치·실행·계정·배포 | [실행과 운영](operations/README.md) |
-| 코드·CSS·폴더를 수정하는 방법 | [개발 문서](engineering/README.md) |
-| 실험 결과나 변경 근거 | 유형별 보고서 (로컬 전용: `artifacts/README.md`) |
-| 이미지·음악의 출처 | [출처와 라이선스](references/README.md) |
-| 고정 출처 JSON·파일 해시 | [공식 자산 manifest](assets/README.md) |
-| 오래 유지할 결정·릴리스 근거 | [과거 결정](history/README.md) · [비전투 이벤트 릴리스](releases/NONCOMBAT_EVENTS_RELEASE.md) |
+| 게임 | [조작·규칙](gameplay/README.md) · [도감과 출전 편성](gameplay/COLLECTION.md) · [튜토리얼·초기 지급](gameplay/TUTORIAL.md) |
+| 개발 | [개발 명령어](development/DEVELOPER_COMMANDS.md) · [구조·영역별 개발](engineering/README.md) · [작업 인계](SESSION_HANDOFF.md) |
+| 실행/배포 | [일반 사용자 실행](operations/SETUP.md) · [운영 문서 색인](operations/README.md) |
+| 자산 | [복원·검증·manifest](assets/README.md) · [출처·라이선스](references/README.md) |
+| 현재 상태 | [STATUS](STATUS.md) · [앞으로 할 일](current/ROADMAP.md) |
+| 과거 기록 | [결정·조사 기록](history/README.md) · [beta.5 공개·검증 완료 기록](releases/WINDOWS_BETA_5.md) · [beta.1](releases/v1.0.0-beta.1.md) · [비전투 이벤트 릴리스](releases/NONCOMBAT_EVENTS_RELEASE.md) |
 
-`docs/`는 Git에 보존하는 설계·정책·확정 결정·배포 안내·장기 출처 기록의 공식 위치다. `artifacts/`는 Git에서 제외하는 QA·자동 생성·실험·시뮬레이션·일회성 분석 결과다. 새 clone의 실행·빌드·배포·일반 테스트·문서 검사는 artifacts 없이 동작해야 한다. 필수 입력은 `src/`, `scripts/data/`, `tests/fixtures/` 또는 검토한 공식 manifest에 둔다. 문서 승격과 중복 제거 판단은 [승격 기록](engineering/ARTIFACT_PROMOTION.md)을 따른다.
+## 문서별 책임
 
-처음부터 보고서 전체를 읽을 필요는 없습니다. 현재 규칙은 이곳에서 확인하고, 특정 변경의 근거가 필요할 때만 해당 보고서로 이동하세요.
+- root README: 외부 게임 소개·특징·스크린샷·실행·기술 개요.
+- STATUS: 현재 구현·버전·공개/검증 상태. ROADMAP: 앞으로 할 작업.
+- gameplay: 플레이 규칙. engineering/development: 코드 구조와 개발 절차.
+- operations: 사용자 실행·런처 내부·서버 배포·저장/백업을 담당 문서로 구분.
+- assets/references: 현재 자산 복원 정책과 출처·권리·고정 조사 기록.
+- releases/history: 특정 시점의 변경과 검증 근거. 과거 수치를 현재 기준으로 덮어쓰지 않음.
 
-README는 외부 소개·실행·향후 방향, STATUS는 현재 구현·수치·버전, ROADMAP은 앞으로 할 작업을 맡습니다. 변경의 이유·범위·당시 검증은 변경 기록 색인 (로컬 전용: `artifacts/reports/changes/README.md`), 자동 테스트 로그·스크린샷은 QA 산출물 (로컬 전용: `artifacts/qa`)에 둡니다. 두 2026-10-23 플레이 피드백 보고서도 변경 기록 폴더에서 관리하며 당시 수치·검증 결과를 보존합니다.
+`docs/`는 Git에 보존하는 공식 안내·설계·정책·출처 기록입니다. `artifacts/`는 Git 제외 QA 로그·캡처·자동 보고서·실험 결과입니다. 새 clone의 일반 실행·빌드·테스트·문서 검사는 로컬 artifacts를 필수 입력으로 요구하지 않습니다. 필요한 고정 입력은 `src/`, `scripts/data/`, `tests/fixtures/` 또는 검토한 manifest에 둡니다. 자세한 경계는 [폴더 관리](engineering/WORKSPACE.md), 과거 정리 근거는 [문서 승격 기록](engineering/ARTIFACT_PROMOTION.md)을 따릅니다.

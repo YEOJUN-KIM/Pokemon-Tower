@@ -1,3 +1,3 @@
 import {main} from './player-launcher.mjs';
-// Legacy local CMD now launches the installed production package.
+// Developer diagnostic CLI; uses the same production engine as PokemonTower.exe.
 process.exitCode=await main();

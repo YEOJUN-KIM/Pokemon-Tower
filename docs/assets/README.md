@@ -4,6 +4,8 @@
 
 `manifests/`는 Git에 보존하는 검토 완료 출처 스냅샷이다. 원본 JSON의 날짜·URL·해시·버전·누락 항목은 그대로 보존했다. 과거 기록을 현재 상태나 새 이용 허가로 해석하지 않는다. 전체 이용 조건은 [THIRD_PARTY](../references/THIRD_PARTY.md), 현재 기능은 [STATUS](../STATUS.md)를 따른다.
 
+2026-10-24 Projectile 후보: [Pixel Art Spells 조사](../engineering/MOVE_EFFECTS.md#pixel-art-spells--projectile-후보-8종), [선정 원본·단일 source record](../../external/third-party/devwizard-pixel-art-spells/README.md). CC0 원본 8종만 보존하며 `node scripts/assets/pixel-art-spells/runtime.mjs prepare` / `verify`로 기존 generated 경계에 PNG 8개를 재현·검증한다. 아직 전투에 연결하지 않은 선택 팩이므로 전체 필수 `assets:setup`/`verify` 대상 수와 과거 runtime ownership snapshot은 바꾸지 않는다.
+
 | 공식 manifest | 용도와 범위 | 자동 생성 원본 |
 |---|---|---|
 | [pokeapi-runtime-assets.json](manifests/pokeapi-runtime-assets.json) | PokeAPI 현재 전체 4,648개 runtime의 path·bytes·SHA-256. [공식 pinned 복원](POKEAPI_RESTORE.md) | 기준 Git blob; restore는 갱신하지 않음 |

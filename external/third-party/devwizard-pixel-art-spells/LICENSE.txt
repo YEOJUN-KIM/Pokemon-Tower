@@ -1,0 +1,21 @@
+Pixel Art Spells by DevWizard
+Source: https://opengameart.org/content/pixel-art-spells
+Author: https://opengameart.org/users/devwizard
+License declared by the publisher: CC0 1.0 Universal (CC0-1.0)
+License: https://creativecommons.org/publicdomain/zero/1.0/
+Legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Verified on: 2026-10-24
+
+CC0 permits commercial and noncommercial use, modification, copying and
+redistribution without copyright-related conditions or mandatory attribution.
+No share-alike or source-disclosure requirement is imposed by CC0. Patent and
+trademark rights are not granted by CC0; do not imply author endorsement.
+
+The pack page explicitly makes credit optional. This project voluntarily credits:
+Pixel Art Spells by DevWizard (CC0 1.0, OpenGameArt).
+
+This is a project-maintained record of the publisher's license designation,
+not a license file supplied inside the ZIP or a copy of the CC0 legal code.
+The downloaded ZIP contains PNG and ASE files and no license text.
+The official deed and legal code were reviewed online; a separate direct
+legalcode.txt download returned HTTP 403 and was not retried by other means.

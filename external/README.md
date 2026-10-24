@@ -4,6 +4,8 @@ runtime 미사용 Kenney 팩은 [third-party/kenney-impact-sounds](third-party/k
 
 - pokemon-ip/: 향후 Pokémon IP 기반 원본. 로컬 전용이며 README만 Git에 보존한다.
 - third-party/: 파일별 이용 조건이 명시된 제3자 원본과 고지. 허용 범위가 확인된 파일만 Git 추적 가능.
+
+2026-10-24: DevWizard의 CC0 [Pixel Art Spells 선정 원본 8종](third-party/devwizard-pixel-art-spells/README.md)을 같은 third-party 경계에 추가했다. 전체 팩을 반입하지 않으며, 검증된 PNG 8개만 기존 generated 위치에 오프라인 복사한다. 현재 전투에서는 미사용이다.
 - reference/: 런타임과 분리된 참고 코드·자료. 파일별 고지 유지.
 - user-provided/unverified/: 출처/권리 확인 전 사용자 제공 원본. 로컬 전용이며 README만 추적한다.
 

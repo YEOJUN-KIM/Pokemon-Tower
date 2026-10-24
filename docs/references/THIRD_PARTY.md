@@ -1,5 +1,11 @@
 # 출처와 재사용
 
+## Pixel Art Spells · DevWizard · 2026-10-24
+
+[공식 배포 페이지](https://opengameart.org/content/pixel-art-spells)에서 제작자 DevWizard와 CC0 1.0 표시 및 크레딧 선택 조건을 재확인했다. CC0는 상업/비상업 사용·수정·복제·재배포를 허용하며 저작권상 출처 표기·동일조건 배포·소스 공개를 요구하지 않는다. 특허·상표 권리의 허락이나 제작자의 보증을 뜻하지 않는다. 프로젝트에서는 자발적으로 `Pixel Art Spells by DevWizard (CC0 1.0, OpenGameArt)`를 기록한다. [공식 CC0 설명](https://creativecommons.org/publicdomain/zero/1.0/), [법률문](https://creativecommons.org/publicdomain/zero/1.0/legalcode).
+
+선정 원본은 [external/third-party/devwizard-pixel-art-spells](../../external/third-party/devwizard-pixel-art-spells/README.md)에 원래 파일명으로 보존했다. PNG 8종과 대응 ASE 7개이며 전투에는 아직 연결하지 않았다. 전체 ZIP은 조사용으로만 확보했다. ZIP에는 라이선스 파일이 없어 [LICENSE.txt](../../external/third-party/devwizard-pixel-art-spells/LICENSE.txt)는 배포자 표시를 기록한 프로젝트 작성 고지다. 별도 공식 `legalcode.txt` 다운로드는 HTTP 403으로 중단하고 우회하지 않았다. [파일별 해시·원본 ZIP 주소·검토일](../../external/third-party/devwizard-pixel-art-spells/sources.json), [조사와 선정 결과](../engineering/MOVE_EFFECTS.md#pixel-art-spells--projectile-후보-8종)를 따른다. 이 CC0를 Pokémon 그림 등 다른 제공원의 파일에 확대 적용하지 않는다.
+
 2026-10-16 공통 NPC 클래스 확장: Showdown 원본 목록과 개별 아티스트 표기를 확인한 뒤 게임 기반 클래스 PNG 8종(lass-gen3, pokemonbreeder-gen3, gentleman-gen4, pokemonranger-gen3, veteran-gen4, backpacker, schoolkid-gen4, collector)을 수정 없이 추가했다. 이번 선택 자산에는 개별 아티스트 표기가 없었다. 제공원의 식별자·URL·SHA-256·확인일은 [초상화 출처 목록](../../public/sprites/trainers/sources.json), 반입/보류 구분은 [검토 결과](../assets/manifests/npc-sprite-review.json)에 기록한다. 개별 크레딧이 있는 pokemonbreeder-gen7(Beliot419), pokemonranger-gen6/veteran-gen7/acetrainer-gen6(kyledove)은 검토 후보로만 남기고 다운로드하지 않았다. 기존 원작 이미지 권리와 Showdown 엔진 라이선스의 구분을 유지한다.
 
 2026-10-14 테라스탈 선택 아이콘: [Pokémon Showdown 타입 이미지](https://play.pokemonshowdown.com/sprites/types/)의 `Tera{Type}.png` 19종을 수정 없이 `public/sprites/gimmicks/tera/`에 저장했다. 테라스탈 버튼에서 현재 타입의 보석 아이콘을 표시한다. [개별 URL·해시](../../public/sprites/gimmicks/tera/sources.json)를 보존하며 재현은 `scripts/import-tera-type-icons.mjs`다. 기존 Pokémon 이미지의 원작 권리 구분을 따른다.

@@ -1,0 +1,984 @@
+{
+  "schemaVersion": 1,
+  "pack": "Pixel Art Spells",
+  "author": "DevWizard",
+  "verifiedOn": "2026-10-24",
+  "sourcePage": "https://opengameart.org/content/pixel-art-spells",
+  "authorPage": "https://opengameart.org/users/devwizard",
+  "download": {
+    "url": "https://opengameart.org/sites/default/files/pixelart_spells_1.zip",
+    "filename": "pixelart_spells_1.zip",
+    "bytes": 32481,
+    "sha256": "bf6e751559942aad40a50359ab5ae8f9750054546de0b21b4519d39904e163cb",
+    "retainedInTrackedSource": false
+  },
+  "license": {
+    "spdx": "CC0-1.0",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "legalCodeUrl": "https://creativecommons.org/publicdomain/zero/1.0/legalcode.txt",
+    "localText": "LICENSE.txt",
+    "evidence": "OpenGameArt pack page License(s): CC0; separate copyright/attribution notice makes credit optional; ZIP contains no license file",
+    "commercialUse": true,
+    "noncommercialUse": true,
+    "modification": true,
+    "redistribution": true,
+    "attributionRequired": false,
+    "voluntaryCredit": "Pixel Art Spells by DevWizard (CC0 1.0, OpenGameArt)",
+    "legalCodeLocalCopy": false,
+    "legalCodeDownloadStatus": "HTTP 403; no bypass attempted"
+  },
+  "scope": {
+    "selectedEffects": 8,
+    "sourcePngFiles": 8,
+    "sourceAseFiles": 7,
+    "runtimePngFiles": 8,
+    "connectedToBattle": false,
+    "generatedDirectory": "public/assets/external-generated/devwizard-pixel-art-spells",
+    "sourcePolicy": "Track only selected original PNG/ASE and source/license evidence. Full archive is inspection-only, not a project runtime/source dependency."
+  },
+  "archiveInventory": [
+    {
+      "file": "Pixelart Spells/PNG Files/Arcane Bolt.png",
+      "bytes": 458,
+      "sha256": "1ef5fd0b85ad134db664dade0774a7554e8d55fabba016ed95d8afa12b9ac1c3",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": null,
+      "aseFile": null,
+      "aseSha256": null,
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": true
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Black And White Ray.png",
+      "bytes": 310,
+      "sha256": "6ab0677048b69c6420ea5eba09aba9eb0de5bf0a6f8b6c522f1ea193cfa0ce8d",
+      "width": 128,
+      "height": 16,
+      "frameCount": 8,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Black And White Ray.ase",
+      "aseSha256": "576365f04068f79ff6e226d56c0cfb1f4a2ec52e16eecb6129a54231a98c167b",
+      "transparent": true,
+      "grayscaleRatio": 0.7688,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Black And White Sparks.png",
+      "bytes": 242,
+      "sha256": "ef82cfa6f84a9b441356023d5ae0181ed55f473d35f39b83222234415bc30bac",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Black And White Sparks.ase",
+      "aseSha256": "f8ce15bf462d5c583f48456c7c0fb062a84a9ef731d7f917d1c5299046598b73",
+      "transparent": true,
+      "grayscaleRatio": 0.8276,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Bolt Of Purity.png",
+      "bytes": 359,
+      "sha256": "70c9cba7a44e72f7719b1db61fdbe7a6a04ce12763afa0f12e8378aa907eaee5",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Bolt Of Purity.ase",
+      "aseSha256": "a890436ae520ebc79392f53cd8ecbadba98ee1aa1ff5a60bb8e2e200716ddd99",
+      "transparent": true,
+      "grayscaleRatio": 0.9151,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Darkness Bolt.png",
+      "bytes": 422,
+      "sha256": "98f42005d9e3daf837986cc8a9939e4f585687bd1889ee55e5abd2c10d893d94",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Darkness Bolt.ase",
+      "aseSha256": "b43e39b63620ebd51e88281714e875835b1f4c3a2c40a9e2e546007de281f5f2",
+      "transparent": true,
+      "grayscaleRatio": 0.8491,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Darkness Orb.png",
+      "bytes": 282,
+      "sha256": "1c0841abd3c22972fd6d3fb82210214ad7d3a0526276d88aa8e45b62af1c4f64",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Darkness Orb.ase",
+      "aseSha256": "04be9409c82c89dea8652d2e801f6c78cb34acf9724c2d271e3293f3e2d76711",
+      "transparent": true,
+      "grayscaleRatio": 0.774,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Fireball.png",
+      "bytes": 436,
+      "sha256": "35f2ccc7e23ad18103ce6a48d515c4316c170e05eaa388189d8576793da0edf2",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Fireball.ase",
+      "aseSha256": "65faf2d5f4c541fce4209ab3329e05dd7ac62ff4c383c591a7041006a8a37330",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": true
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Firebomb.png",
+      "bytes": 423,
+      "sha256": "a59b3e5e80dea2572c72b11dd84ed9bf17578cf584f4d32719f67e215372e18b",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Firebomb.ase",
+      "aseSha256": "9a7350790aa044cab6aa9a8fa69acf038f0bd26db620eded1726e634b621a113",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Ice Lance.png",
+      "bytes": 173,
+      "sha256": "96368e4f3845fea74c5439c634f04bb13db660c9508b9948d6f39285b35c188a",
+      "width": 64,
+      "height": 16,
+      "frameCount": 4,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Ice Lance.ase",
+      "aseSha256": "d21614d2d61e01b8de2dd22b8f9de2ec9fab08cde606b2d86f5d5a9bb1753e49",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": true
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Light Bolt.png",
+      "bytes": 362,
+      "sha256": "38fe63a44f7e96694fb66217a42190539bc1ee4fe1f3b2792804bfe9196043ea",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Light Bolt.ase",
+      "aseSha256": "d8a50c0c71a205fda15cdf6250cbada9ac20d1931ace60eaa13702dd2571ce98",
+      "transparent": true,
+      "grayscaleRatio": 0.7645,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Magic Orb.png",
+      "bytes": 373,
+      "sha256": "a7b6f0efc91b6625a428854d1436305f4583947bee399a8cf5e833aad772a95d",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Magic Orb.ase",
+      "aseSha256": "f8a22e29703e6c0c8edb9e4b31d2093f64361cecc2bc7b3bc55d4d4924e66ca8",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": true
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Magic Ray.png",
+      "bytes": 323,
+      "sha256": "c497d50d1287d2ff7f6c9ffae616e7856e8a9147a4931c3d6d50383220faa988",
+      "width": 128,
+      "height": 16,
+      "frameCount": 8,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Magic Ray.ase",
+      "aseSha256": "f04d8e62b54fac302e631cca5209698017c2a2a80ada1ff8db75a3649dbfc261",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Magic Sparks.png",
+      "bytes": 216,
+      "sha256": "203c795346f695308371eb85ac57689be95e3b14bda1d0ddb17d79916bc51a49",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Magic Sparks.ase",
+      "aseSha256": "66713676c5a99a9447d7ca57e3b5de6359dbf5239d1e6988c8e3652b7157a29c",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Pixelart Shield.png",
+      "bytes": 1355,
+      "sha256": "da035602b6bf9a185ce89663e917a2309ffe61016d9e22c84e671dd81feecbc2",
+      "width": 288,
+      "height": 48,
+      "frameCount": 6,
+      "frameWidth": 48,
+      "frameHeight": 48,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Pixelart Shield.ase",
+      "aseSha256": "21d1586a5131ab1a3130e1a5140d106a9e7a9466e9582efffce5ffda5c423acb",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Plant Missle.png",
+      "bytes": 325,
+      "sha256": "4dd2bba0e660329d08559924442e54232e79f00fb2d7215c2d9f6f726545bf2f",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Plant Missle.ase",
+      "aseSha256": "1bb95b613569e3f943161362dbc18a30146dfb8d1205b33e47627437a913d787",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Pure Bolt 2.png",
+      "bytes": 332,
+      "sha256": "6dcdaabe18378531ed70b7874f354d3cb6ce4c0fd7a422a0feaa3b9ddbd2a989",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Pure Bolt 2.ase",
+      "aseSha256": "745393b947f14a8c68739dabb3a3e2ab700990be9938aa43d91843eac6dc197c",
+      "transparent": true,
+      "grayscaleRatio": 0.7741,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Rock Sling.png",
+      "bytes": 224,
+      "sha256": "19d858b0cd1bc38efbcfe63cf259ca297dd5ca28f91e3373ead42bb9b3685aae",
+      "width": 16,
+      "height": 16,
+      "frameCount": 1,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Rock Sling.ase",
+      "aseSha256": "ba650b73fe776ca48bbc94782a7a0e38fca01b5bb4cbdfdef9d5627ee05bca54",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": true
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Splash.png",
+      "bytes": 848,
+      "sha256": "cfd6a007dbbf15c9fdebc2fd347d5e3f71b73cc3839a8a428392008cbc151ddc",
+      "width": 192,
+      "height": 32,
+      "frameCount": 6,
+      "frameWidth": 32,
+      "frameHeight": 32,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Splash.ase",
+      "aseSha256": "130e8f877195be4e455ea264307061a5d7961572ad81d73ecea61342a475f620",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Water Blast.png",
+      "bytes": 494,
+      "sha256": "e41b86748ef386fd0a164b9952c2d0fdce94541633d080a6a320f75e3cd07238",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Water Blast.ase",
+      "aseSha256": "cd1c1aade8d6cf25ca748d1a6e418a5fa531b67f27008d152c4ea1ce73c73a4a",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": true
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Water Bolt.png",
+      "bytes": 517,
+      "sha256": "efc5ba0d9a2142e7ac109bdf8d1e16eb8ceb9a660cecf3ede652c36970754058",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Water Bolt.ase",
+      "aseSha256": "769eef84f42416b26de3168be2cb5f35385ae4b64f20ba16faf302e875f400a7",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": true
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Water Orb.png",
+      "bytes": 308,
+      "sha256": "b705ff3b3cd41bfb3ab8e537060b063feb9b4875e314b2e5c4297ffac16e33d6",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Water Orb.ase",
+      "aseSha256": "3097e3c56ca6329413d2242c9b10d5c893fe6cb4a7b297ed40ad2f1a42d6f26e",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": false
+    },
+    {
+      "file": "Pixelart Spells/PNG Files/Wind Bolt.png",
+      "bytes": 447,
+      "sha256": "19adb7e77df6c94eef4c23ba8c7713296a5ab08378a1406f4ba30a0b93692522",
+      "width": 96,
+      "height": 16,
+      "frameCount": 6,
+      "frameWidth": 16,
+      "frameHeight": 16,
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "aseFile": "Pixelart Spells/Asprite Files/Wind Bolt.ase",
+      "aseSha256": "fcd78646b18d55f12122fae4af4009ed0091866b1a80dc95cdecb7f9f3c19842",
+      "transparent": true,
+      "grayscaleRatio": 0.0,
+      "selected": true
+    }
+  ],
+  "selected": [
+    {
+      "originalName": "Arcane Bolt",
+      "role": "Projectile_Energy_Small",
+      "category": "Energy",
+      "variant": "Small",
+      "smallProjectile": true,
+      "sourcePng": "pack/PNG Files/Arcane Bolt.png",
+      "archivePng": "Pixelart Spells/PNG Files/Arcane Bolt.png",
+      "sourceAse": null,
+      "pngBytes": 458,
+      "pngSha256": "1ef5fd0b85ad134db664dade0774a7554e8d55fabba016ed95d8afa12b9ac1c3",
+      "aseSha256": null,
+      "sheet": {
+        "width": 96,
+        "height": 16,
+        "frameWidth": 16,
+        "frameHeight": 16,
+        "columns": 6,
+        "rows": 1,
+        "frameCount": 6
+      },
+      "frameCountEvidence": "png-grid-and-visual-inspection",
+      "sourceFrameDurationsMs": null,
+      "suggestedFrameDurationMs": 100,
+      "transparent": true,
+      "semiTransparent": false,
+      "sourceLoop": null,
+      "loopEvidence": "No Aseprite tag chunk; PNG does not encode looping",
+      "suggestedPlayback": "repeat-during-flight",
+      "direction": "right",
+      "separateImpactInSelectedAsset": false,
+      "recolor": {
+        "method": "palette-map",
+        "candidateTypes": [
+          "Electric",
+          "Psychic",
+          "Fairy",
+          "Poison",
+          "Dark",
+          "Dragon"
+        ],
+        "originalIsGrayscale": false,
+        "sourcePalette": [
+          "#5b6ee1",
+          "#76428a",
+          "#d77bba"
+        ]
+      },
+      "recommendedMoveGroups": "전기쇼크·작은 특수 에너지탄 계열",
+      "notes": "6칸 시트로 프레임 수 확인; 대응 .ase가 없어 원본 프레임 시간은 미확인",
+      "directionEvidence": "visual inspection of projectile head/trail; no animation tags in ASE"
+    },
+    {
+      "originalName": "Magic Orb",
+      "role": "Projectile_Energy_Orb",
+      "category": "Energy",
+      "variant": "Orb",
+      "smallProjectile": false,
+      "sourcePng": "pack/PNG Files/Magic Orb.png",
+      "archivePng": "Pixelart Spells/PNG Files/Magic Orb.png",
+      "sourceAse": "pack/Asprite Files/Magic Orb.ase",
+      "pngBytes": 373,
+      "pngSha256": "a7b6f0efc91b6625a428854d1436305f4583947bee399a8cf5e833aad772a95d",
+      "aseSha256": "f8a22e29703e6c0c8edb9e4b31d2093f64361cecc2bc7b3bc55d4d4924e66ca8",
+      "sheet": {
+        "width": 96,
+        "height": 16,
+        "frameWidth": 16,
+        "frameHeight": 16,
+        "columns": 6,
+        "rows": 1,
+        "frameCount": 6
+      },
+      "frameCountEvidence": "ase-header-and-png-strip",
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "suggestedFrameDurationMs": 100,
+      "transparent": true,
+      "semiTransparent": false,
+      "sourceLoop": null,
+      "loopEvidence": "No Aseprite tag chunk; PNG does not encode looping",
+      "suggestedPlayback": "repeat-during-flight",
+      "direction": "radial",
+      "separateImpactInSelectedAsset": false,
+      "recolor": {
+        "method": "palette-map",
+        "candidateTypes": [
+          "Electric",
+          "Psychic",
+          "Fairy",
+          "Poison",
+          "Dark",
+          "Dragon"
+        ],
+        "originalIsGrayscale": false,
+        "sourcePalette": [
+          "#76428a",
+          "#d77bba"
+        ]
+      },
+      "recommendedMoveGroups": "에너지볼·섀도볼·문포스 같은 구체 계열",
+      "notes": "방향 중립 구체; 보라 본체와 분홍 하이라이트를 각각 매핑",
+      "directionEvidence": "visual inspection of projectile head/trail; no animation tags in ASE"
+    },
+    {
+      "originalName": "Fireball",
+      "role": "Projectile_Elemental_Fire",
+      "category": "Energy",
+      "variant": "Elemental",
+      "smallProjectile": false,
+      "sourcePng": "pack/PNG Files/Fireball.png",
+      "archivePng": "Pixelart Spells/PNG Files/Fireball.png",
+      "sourceAse": "pack/Asprite Files/Fireball.ase",
+      "pngBytes": 436,
+      "pngSha256": "35f2ccc7e23ad18103ce6a48d515c4316c170e05eaa388189d8576793da0edf2",
+      "aseSha256": "65faf2d5f4c541fce4209ab3329e05dd7ac62ff4c383c591a7041006a8a37330",
+      "sheet": {
+        "width": 96,
+        "height": 16,
+        "frameWidth": 16,
+        "frameHeight": 16,
+        "columns": 6,
+        "rows": 1,
+        "frameCount": 6
+      },
+      "frameCountEvidence": "ase-header-and-png-strip",
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "suggestedFrameDurationMs": 100,
+      "transparent": true,
+      "semiTransparent": false,
+      "sourceLoop": null,
+      "loopEvidence": "No Aseprite tag chunk; PNG does not encode looping",
+      "suggestedPlayback": "repeat-during-flight",
+      "direction": "right",
+      "separateImpactInSelectedAsset": false,
+      "recolor": {
+        "method": "keep-material",
+        "candidateTypes": [],
+        "originalIsGrayscale": false,
+        "sourcePalette": [
+          "#df6026",
+          "#df7126",
+          "#f3a115"
+        ]
+      },
+      "recommendedMoveGroups": "불꽃세례·화염 구체 계열",
+      "notes": "화염방사 Stream과 구분",
+      "directionEvidence": "visual inspection of projectile head/trail; no animation tags in ASE"
+    },
+    {
+      "originalName": "Rock Sling",
+      "role": "Projectile_Solid_Rock",
+      "category": "Solid",
+      "variant": "Rock",
+      "smallProjectile": false,
+      "sourcePng": "pack/PNG Files/Rock Sling.png",
+      "archivePng": "Pixelart Spells/PNG Files/Rock Sling.png",
+      "sourceAse": "pack/Asprite Files/Rock Sling.ase",
+      "pngBytes": 224,
+      "pngSha256": "19d858b0cd1bc38efbcfe63cf259ca297dd5ca28f91e3373ead42bb9b3685aae",
+      "aseSha256": "ba650b73fe776ca48bbc94782a7a0e38fca01b5bb4cbdfdef9d5627ee05bca54",
+      "sheet": {
+        "width": 16,
+        "height": 16,
+        "frameWidth": 16,
+        "frameHeight": 16,
+        "columns": 1,
+        "rows": 1,
+        "frameCount": 1
+      },
+      "frameCountEvidence": "ase-header-and-png-strip",
+      "sourceFrameDurationsMs": [
+        100
+      ],
+      "suggestedFrameDurationMs": 100,
+      "transparent": true,
+      "semiTransparent": false,
+      "sourceLoop": null,
+      "loopEvidence": "No Aseprite tag chunk; PNG does not encode looping",
+      "suggestedPlayback": "hold",
+      "direction": "radial",
+      "separateImpactInSelectedAsset": false,
+      "recolor": {
+        "method": "keep-material",
+        "candidateTypes": [],
+        "originalIsGrayscale": false,
+        "sourcePalette": [
+          "#54322c",
+          "#663931"
+        ]
+      },
+      "recommendedMoveGroups": "돌떨구기·락블레스트 계열",
+      "notes": "정지 1프레임; 이동·회전·포물선은 렌더러 역할",
+      "directionEvidence": "visual inspection of projectile head/trail; no animation tags in ASE"
+    },
+    {
+      "originalName": "Ice Lance",
+      "role": "Projectile_Solid_Ice",
+      "category": "Solid",
+      "variant": "Ice",
+      "smallProjectile": true,
+      "sourcePng": "pack/PNG Files/Ice Lance.png",
+      "archivePng": "Pixelart Spells/PNG Files/Ice Lance.png",
+      "sourceAse": "pack/Asprite Files/Ice Lance.ase",
+      "pngBytes": 173,
+      "pngSha256": "96368e4f3845fea74c5439c634f04bb13db660c9508b9948d6f39285b35c188a",
+      "aseSha256": "d21614d2d61e01b8de2dd22b8f9de2ec9fab08cde606b2d86f5d5a9bb1753e49",
+      "sheet": {
+        "width": 64,
+        "height": 16,
+        "frameWidth": 16,
+        "frameHeight": 16,
+        "columns": 4,
+        "rows": 1,
+        "frameCount": 4
+      },
+      "frameCountEvidence": "ase-header-and-png-strip",
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "suggestedFrameDurationMs": 100,
+      "transparent": true,
+      "semiTransparent": false,
+      "sourceLoop": null,
+      "loopEvidence": "No Aseprite tag chunk; PNG does not encode looping",
+      "suggestedPlayback": "repeat-during-flight",
+      "direction": "right",
+      "separateImpactInSelectedAsset": false,
+      "recolor": {
+        "method": "keep-material",
+        "candidateTypes": [],
+        "originalIsGrayscale": false,
+        "sourcePalette": [
+          "#5fcde4",
+          "#a6f0ff"
+        ]
+      },
+      "recommendedMoveGroups": "얼음뭉치·고드름침·빙결 창 계열",
+      "notes": "1px 줄기는 4배속·작은 화면에서 별도 가독성 확인",
+      "directionEvidence": "visual inspection of projectile head/trail; no animation tags in ASE"
+    },
+    {
+      "originalName": "Water Bolt",
+      "role": "Projectile_Liquid_Small",
+      "category": "Liquid",
+      "variant": "Small",
+      "smallProjectile": true,
+      "sourcePng": "pack/PNG Files/Water Bolt.png",
+      "archivePng": "Pixelart Spells/PNG Files/Water Bolt.png",
+      "sourceAse": "pack/Asprite Files/Water Bolt.ase",
+      "pngBytes": 517,
+      "pngSha256": "efc5ba0d9a2142e7ac109bdf8d1e16eb8ceb9a660cecf3ede652c36970754058",
+      "aseSha256": "769eef84f42416b26de3168be2cb5f35385ae4b64f20ba16faf302e875f400a7",
+      "sheet": {
+        "width": 96,
+        "height": 16,
+        "frameWidth": 16,
+        "frameHeight": 16,
+        "columns": 6,
+        "rows": 1,
+        "frameCount": 6
+      },
+      "frameCountEvidence": "ase-header-and-png-strip",
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "suggestedFrameDurationMs": 100,
+      "transparent": true,
+      "semiTransparent": false,
+      "sourceLoop": null,
+      "loopEvidence": "No Aseprite tag chunk; PNG does not encode looping",
+      "suggestedPlayback": "repeat-during-flight",
+      "direction": "right",
+      "separateImpactInSelectedAsset": false,
+      "recolor": {
+        "method": "palette-map",
+        "candidateTypes": [
+          "Poison"
+        ],
+        "originalIsGrayscale": false,
+        "sourcePalette": [
+          "#5b6ee1",
+          "#5fcde4",
+          "#639bff"
+        ]
+      },
+      "recommendedMoveGroups": "작은 물탄·거품 계열",
+      "notes": "푸른 본체와 밝은 물결 하이라이트; 독 액체 변형은 색 대비 검토",
+      "directionEvidence": "visual inspection of projectile head/trail; no animation tags in ASE"
+    },
+    {
+      "originalName": "Water Blast",
+      "role": "Projectile_Liquid_Blast",
+      "category": "Liquid",
+      "variant": "Blast",
+      "smallProjectile": false,
+      "sourcePng": "pack/PNG Files/Water Blast.png",
+      "archivePng": "Pixelart Spells/PNG Files/Water Blast.png",
+      "sourceAse": "pack/Asprite Files/Water Blast.ase",
+      "pngBytes": 494,
+      "pngSha256": "e41b86748ef386fd0a164b9952c2d0fdce94541633d080a6a320f75e3cd07238",
+      "aseSha256": "cd1c1aade8d6cf25ca748d1a6e418a5fa531b67f27008d152c4ea1ce73c73a4a",
+      "sheet": {
+        "width": 96,
+        "height": 16,
+        "frameWidth": 16,
+        "frameHeight": 16,
+        "columns": 6,
+        "rows": 1,
+        "frameCount": 6
+      },
+      "frameCountEvidence": "ase-header-and-png-strip",
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "suggestedFrameDurationMs": 100,
+      "transparent": true,
+      "semiTransparent": false,
+      "sourceLoop": null,
+      "loopEvidence": "No Aseprite tag chunk; PNG does not encode looping",
+      "suggestedPlayback": "repeat-during-flight",
+      "direction": "right",
+      "separateImpactInSelectedAsset": false,
+      "recolor": {
+        "method": "palette-map",
+        "candidateTypes": [
+          "Poison"
+        ],
+        "originalIsGrayscale": false,
+        "sourcePalette": [
+          "#5b6ee1",
+          "#5fcde4",
+          "#639bff"
+        ]
+      },
+      "recommendedMoveGroups": "큰 물탄·물의파동 계열",
+      "notes": "Large 역할의 상대적 부피; 원본 캔버스는 여전히 16×16",
+      "directionEvidence": "visual inspection of projectile head/trail; no animation tags in ASE"
+    },
+    {
+      "originalName": "Wind Bolt",
+      "role": "Projectile_Elemental_Wind",
+      "category": "Energy",
+      "variant": "Elemental",
+      "smallProjectile": true,
+      "sourcePng": "pack/PNG Files/Wind Bolt.png",
+      "archivePng": "Pixelart Spells/PNG Files/Wind Bolt.png",
+      "sourceAse": "pack/Asprite Files/Wind Bolt.ase",
+      "pngBytes": 447,
+      "pngSha256": "19adb7e77df6c94eef4c23ba8c7713296a5ab08378a1406f4ba30a0b93692522",
+      "aseSha256": "fcd78646b18d55f12122fae4af4009ed0091866b1a80dc95cdecb7f9f3c19842",
+      "sheet": {
+        "width": 96,
+        "height": 16,
+        "frameWidth": 16,
+        "frameHeight": 16,
+        "columns": 6,
+        "rows": 1,
+        "frameCount": 6
+      },
+      "frameCountEvidence": "ase-header-and-png-strip",
+      "sourceFrameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "suggestedFrameDurationMs": 100,
+      "transparent": true,
+      "semiTransparent": false,
+      "sourceLoop": null,
+      "loopEvidence": "No Aseprite tag chunk; PNG does not encode looping",
+      "suggestedPlayback": "repeat-during-flight",
+      "direction": "right",
+      "separateImpactInSelectedAsset": false,
+      "recolor": {
+        "method": "luminance-tint",
+        "candidateTypes": [
+          "Electric",
+          "Psychic",
+          "Fairy",
+          "Dragon"
+        ],
+        "originalIsGrayscale": false,
+        "sourcePalette": [
+          "#94ffd8",
+          "#94fff9",
+          "#d2fffd"
+        ]
+      },
+      "recommendedMoveGroups": "바람탄·작은 공기파 계열",
+      "notes": "민트 3색; 단순 multiply보다 밝기 보존 Tint 우선",
+      "directionEvidence": "visual inspection of projectile head/trail; no animation tags in ASE"
+    }
+  ],
+  "notImportedCandidates": {
+    "recolor": [
+      "Black And White Ray.png",
+      "Black And White Sparks.png",
+      "Bolt Of Purity.png",
+      "Light Bolt.png",
+      "Pure Bolt 2.png"
+    ],
+    "largeProjectile": [
+      "Firebomb.png"
+    ],
+    "impact": [
+      "Splash.png"
+    ],
+    "beam": [
+      "Black And White Ray.png",
+      "Magic Ray.png"
+    ],
+    "burst": [
+      "Black And White Sparks.png",
+      "Magic Sparks.png"
+    ]
+  }
+}

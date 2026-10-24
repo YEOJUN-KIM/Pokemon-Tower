@@ -17,5 +17,6 @@ export const assetPaths = {
   trainer:(key:string)=>`/sprites/trainers/${key}.png`,
   item:(key:string,extension='png')=>`/sprites/items/${key}.${extension}`,
   moveEffect:(key:string)=>key==='flamethrower-beam'?'/sprites/effects/flamethrower-beam.png':`/vendor/showdown/fx/${key}.png`,
+  projectileEffect:(filename:string)=>'/assets/external-generated/devwizard-pixel-art-spells/'+encodeURIComponent(filename),
   tera:(type:string)=>`/sprites/gimmicks/tera/Tera${type}.png`,
 };

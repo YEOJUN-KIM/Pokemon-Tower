@@ -23,7 +23,7 @@ export function SendOut() {
 export function PokemonFeedback({motion}: {motion:Motion | null}) {
   if(!motion || !['heal','stat-up','stat-down'].includes(motion.kind))return null;
   const glyph=motion.kind === 'heal' ? '+' : motion.kind === 'stat-down' ? '↓' : '↑';
-  return <span className={`pokemon-feedback feedback-${motion.kind}`} role="status"><span className="feedback-particles" aria-hidden="true"><i>{glyph}</i><i>{glyph}</i><i>{glyph}</i></span><strong>{motion.label}</strong></span>;
+  return <span className={`pokemon-feedback feedback-${motion.kind}`} role={motion.kind==='heal'?'status':undefined} aria-hidden={motion.kind!=='heal' || undefined}><span className="feedback-particles" aria-hidden="true"><i>{glyph}</i><i>{glyph}</i><i>{glyph}</i></span>{motion.kind==='heal'&&<strong>{motion.label}</strong>}</span>;
 }
 
 export function ShinySparkles(){return <span className={`shiny-sparkles shiny-sendout ${shinyStyles.scope}`} aria-label="이로치 등장"><b className={`shiny-light-ring ${shinyStyles.shinyLightRing}`}/><b className={`shiny-entry-flash ${shinyStyles.shinyEntryFlash}`}/>{Array.from({length:9},(_,i)=><i key={i}>✦</i>)}</span>;}

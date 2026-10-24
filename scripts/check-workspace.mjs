@@ -2,6 +2,9 @@ import {existsSync,readFileSync,readdirSync} from 'node:fs';
 import path from 'node:path';
 
 const failures=[];
+// This generator publishes the current authored move design, not a transient
+// run/QA report. Keep its tracked catalog and asset requirements reproducible.
+const currentDesignGenerators=new Set(['scripts/document-move-presentations.ts']);
 const rootDocs=new Set(['README.md','STATUS.md','SESSION_HANDOFF.md']);
 for(const entry of readdirSync('docs',{withFileTypes:true})){
   if(entry.isFile()&&entry.name.endsWith('.md')&&!rootDocs.has(entry.name))failures.push(`docs/${entry.name}: place current guides by topic and change reports in artifacts`);
@@ -36,7 +39,7 @@ for(const file of walk('scripts').filter(f=>/\.(mjs|ts|py)$/.test(f))){
   if(file==='scripts/check-workspace.mjs')continue;
   const source=readFileSync(file,'utf8');
   if(/write-.*-report/.test(file)&&source.includes("['docs/STATUS.md','docs/SESSION_HANDOFF.md']"))failures.push(`${file}: report generator edits current docs`);
-  if(/writeFile(?:Sync)?\(['"]docs\/(?!images\/)/.test(source))failures.push(`${file}: report output must stay outside docs`);
+  if(!currentDesignGenerators.has(file)&&/writeFile(?:Sync)?\(['"]docs\/(?!images\/)/.test(source))failures.push(`${file}: report output must stay outside docs`);
   if(source.includes('docs/gameplay/npc-team-samples.json')||source.includes('docs/gameplay/normal-npc-samples.json'))failures.push(`${file}: stale NPC input path`);
 }
 if(failures.length){console.error(failures.join('\n'));process.exitCode=1;}

@@ -4,7 +4,7 @@ import {dynamaxDisplaySpecies} from '../data/selectable-forms';
 import {genderFromDetails} from '../data/gender';
 import {teraNames} from '../data/tera';
 import type {BattleView} from './contracts';
-import {describeLine, health, moves, pokemonName, statNames} from './catalog';
+import {describeLine, health, moves, pokemonName} from './catalog';
 import {effectNotice, type EffectNotice} from './battle-effects';
 import {advanceField,emptyField} from './battle-field';
 import {itemName} from '../data/held-items';
@@ -51,6 +51,10 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
   let lastNotice = '';
   let impact:Motion['impact'];
   const consumed=new Set<number>();
+  // A contiguous protocol effect batch may change many stats, actors and both
+  // directions. Preserve every message but animate each actor/direction once.
+  const rankMotions=new Set<string>();
+  let rankCause:string|undefined;
   const lines=orderBattlePresentationEvents(newLines(before.messages,after.messages));
   // Presentation only: critical feedback precedes effectiveness; stored logs stay intact.
   for(let index=0;index<lines.length-1;index++){
@@ -61,6 +65,10 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
     if(consumed.has(index))continue;
     view = structuredClone(view);
     const [, event, actor, value, condition] = line.split('|');
+    const rankEvent=['-boost','-unboost'].includes(event);
+    const cause=line.split('|').slice(5).filter(tag=>tag!=='[silent]').join('|');
+    if(!rankEvent || rankCause!==cause)rankMotions.clear();
+    rankCause=rankEvent?cause:undefined;
     if(event==='faint'&&line.split('|').includes('[raid]')){view.messages=[...view.messages,line].slice(-300);continue;}
     if(event==='message'){
       if(lines[index+1]?.startsWith('|switch|p2')&&lines[index+1].split('|').includes('[raid]')){
@@ -183,9 +191,11 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
       if(!line.split('|').includes('[silent]'))motion = {kind:event === '-damage' ? 'hit' : 'heal',side:side!,color:'normal',label:event === '-heal' ? 'HP 회복' : undefined,impact:event==='-damage' ? impact : undefined};
       if(event==='-damage')impact=undefined;
     }
-    if(side && ['-boost','-unboost'].includes(event) && Number(condition) > 0) {
+    if(side && rankEvent && Number(condition) > 0 && !line.split('|').includes('[silent]')) {
       const increase=event === '-boost';
-      motion={kind:increase ? 'stat-up' : 'stat-down',side,color:'normal',label:`${statNames[value] ?? value} ${increase ? '상승' : '하락'}`};
+      const key=`${actor}:${event}`;
+      if(!rankMotions.has(key))motion={kind:increase ? 'stat-up' : 'stat-down',side,color:'normal'};
+      rankMotions.add(key);
     }
     if (pokemon && event === 'faint') {view.pendingFaints=view.pendingFaints?.filter(pending=>pending!==side);pokemon.condition = '0 fnt'; motion = {kind:'faint',side:side!,color:'normal'};}
     if (pokemon && event === '-status') pokemon.condition = `${pokemon.condition.split(' ')[0]} ${value}`;
@@ -197,7 +207,7 @@ export function presentationFrames(before: BattleView, after: BattleView): Frame
     const motionDuration = motion?.kind === 'dynamax-grow' ? 1150 : motion?.kind === 'dynamax-end' ? 600 : motion?.kind === 'switch' ? (motion.sendOut && (view.opponent?.shiny || view.team.find(p=>p.active)?.shiny) ? 1400 : 800) : motion?.kind === 'move' ? moveAnimationPlan(motion.move ?? '',motion.color).duration : motion?.kind === 'hit' ? 360 : motion ? 220 : 0;
     const dialogue=dialogueTextForLine(line,describeLine(line)??'');
     const messageDuration=candidate ? dialogue?750:0 : describeLine(line)||dialogue?750:0;
-    frames.push({view, motion, notice:absorbs || activationFirst ? undefined : notice, announcement:typeAnnouncement??(notice&&!activationFirst&&!absorbs&&!dialogue?activationAnnouncement:undefined),important:importantBattleLine(line), duration:Math.max(motionDuration, typeAnnouncement ? 750 : notice && !absorbs && !activationFirst ? 1200 : messageDuration)});
+    frames.push({view, motion, minimumDuration:motion?.kind==='stat-up'||motion?.kind==='stat-down'?220:undefined, notice:absorbs || activationFirst ? undefined : notice, announcement:typeAnnouncement??(notice&&!activationFirst&&!absorbs&&!dialogue?activationAnnouncement:undefined),important:rankEvent||importantBattleLine(line), duration:Math.max(motionDuration, typeAnnouncement ? 750 : notice && !absorbs && !activationFirst ? 1200 : messageDuration)});
   }
   return frames;
 }

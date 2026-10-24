@@ -1,4 +1,4 @@
-import {describeLine,pokemonName} from './catalog';
+import {describeLine,pokemonName,statNames} from './catalog';
 import {effectNotice} from './battle-effects';
 
 function subjectName(actor:string){return `${actor.startsWith('p2')?'상대 ':''}${pokemonName(actor.split(': ')[1]??actor)}`;}
@@ -8,6 +8,13 @@ export function dialogueTextForLine(line:string,fallback:string):string|null{
  if(line.split('|').includes('[raid]'))return null;
  const [,event,actor='',value='']=line.split('|'),name=subjectName(actor),who=topic(name),trigger=effectNotice(line);
  const metadata=line.split('|');
+ if(['-boost','-unboost'].includes(event)){
+  if(metadata.includes('[silent]')||Number(metadata[4])<=0)return null;
+  const stat=statNames[value]??value,code=stat.charCodeAt(stat.length-1);
+  const particle=code>=0xac00&&code<=0xd7a3&&(code-0xac00)%28!==0?'이':'가';
+  const stages=Number(metadata[4]),degree=stages>=3?'매우 크게 ':stages===2?'크게 ':'';
+  return `${name}의 ${stat}${particle} ${degree}${event==='-boost'?'올랐다':'떨어졌다'}!`;
+ }
  // Popup ownership comes from the same public event parser as presentation.
  // Keep results, but leave the cause exclusively in the popup and full log.
  if(trigger){

@@ -66,7 +66,7 @@ test('popup explanations are omitted while survival, stat and status results kee
   const entries=battleMessageEntries([line]);assert.match(currentBattleMessage(entries),/간신히 버텼다/);assert.doesNotMatch(currentBattleMessage(entries),/옹골참|기합의띠/);assert.match(entries[0].text,/옹골참|기합의띠/);
  }
  const stat=battleMessageEntries(['|-unboost|p1a: Gengar|atk|1|[from] ability: Intimidate|[of] p2a: Gyarados']);
- assert.match(currentBattleMessage(stat),/공격 하락/);assert.doesNotMatch(currentBattleMessage(stat),/위협/);assert.match(stat[0].text,/위협/);
+ assert.match(currentBattleMessage(stat),/공격이 떨어졌다/);assert.doesNotMatch(currentBattleMessage(stat),/위협/);assert.match(stat[0].text,/위협/);
  const status=battleMessageEntries(['|-status|p1a: Gengar|psn|[from] ability: Poison Point|[of] p2a: Nidoqueen']);assert.match(currentBattleMessage(status),/독이 퍼지기 시작/);
  for(const event of ['-immune','-fail','-miss','-crit','-supereffective','-resisted'])assert.ok(battleMessageEntries([`|${event}|p2a: Golem`])[0].dialogueText);
 });

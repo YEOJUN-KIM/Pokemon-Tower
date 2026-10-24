@@ -29,6 +29,7 @@ import {recruitResultMessage} from './recruit-dialog';
 import type {EffectNotice} from './battle-effects';
 import {presentationFrames, type Motion} from './battle-presentation';
 import {moveInfo} from '../data/move-info';
+import {movePresentation} from './move-presentation';
 import {effect,stopEffects, startMusic, stopMusic, updateAudio, playCry, stopCry} from './game-audio';
 import {readAudio} from './audio-settings';
 import {upgrades} from '../data/shop';
@@ -194,7 +195,7 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
       setBattle(frame.view);setMotion(frame.motion);setNotice(frame.notice ?? null);setAnnouncement(frame.announcement ?? null);setFrameNumber(n=>n+1);
       if(frame.motion) {
         const info=frame.motion.move ? moveInfo[frame.motion.move] : undefined;
-        effect(frame.motion.kind,frame.motion.color,{category:info?.category,power:info?.power,impact:frame.motion.impact});
+        effect(frame.motion.kind,frame.motion.color,{category:info?.category,power:info?.power,impact:frame.motion.impact,cue:frame.motion.move?movePresentation(frame.motion.move).sound:undefined,speed:playbackSpeed.current});
         if(['switch','faint'].includes(frame.motion.kind)) {
           const name=frame.motion.side==='enemy' ? frame.view.opponent?.species : frame.view.team.find(p=>p.active)?.species;
           if(name && species[name])playCry(species[name].id);

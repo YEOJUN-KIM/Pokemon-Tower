@@ -5,18 +5,22 @@ import Showdown from 'pokemon-showdown';
 import {TowerStore} from '../src/server/tower-store';
 import {playerKey} from '../src/server/tower-service';
 import {packTeam,pokemonSets,starters} from '../src/data/teams';
+import {Accounts,authCookie} from '../src/server/accounts';
 
 async function fixture(context:BrowserContext,player:string[],opponent:string[],sash=false) {
   const token=randomBytes(32).toString('hex');
+  let accountToken='';
   const store=new TowerStore('.data/e2e.sqlite');
   try {
     const owner=playerKey(token);store.ensurePlayer(owner);
+    accountToken=(await new Accounts(store.db).register('effects_'+randomBytes(6).toString('hex'),'effects-testing-password',owner,undefined)).token;
     const id=store.start(owner,starters);
     const enemy=opponent.map(name=>structuredClone(pokemonSets[name as keyof typeof pokemonSets]));
     if(sash){enemy[0].ability='Rock Head';enemy[0].item='Focus Sash';}
     store.db.prepare('UPDATE battles SET player_team = ?, opponent_team = ?, seed = ? WHERE id = ?').run(packTeam(player),Showdown.Teams.pack(enemy),'[1,2,3,4]',id);
   } finally {store.close();}
   await context.addCookies([{name:'tower_session',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
+  await context.addCookies([{name:authCookie,value:accountToken,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
 }
 
 for(const sash of [false,true])test(`${sash ? 'Focus Sash' : 'Sturdy'} popup and survival log from the real engine`,async({page,context})=>{
@@ -47,7 +51,8 @@ test('Intimidate popup is on its owner and blue drop feedback is on the opponent
   await page.locator('[data-command="switch 2"]').click();
   await expect(page.getByTestId('effect-notice')).toContainText('갸라도스의위협');
   await expect(page.getByTestId('effect-notice')).toHaveClass(/notice-player/);
-  await expect(page.locator('.enemy-position .feedback-stat-down')).toContainText('공격 하락');
+  await expect(page.locator('.enemy-position .feedback-stat-down')).toBeVisible();
+  await expect(page.locator('.enemy-position .feedback-stat-down strong')).toHaveCount(0);
   await expect(page.locator('.player-position .feedback-stat-down')).toHaveCount(0);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBe(true);
   await page.screenshot({path:'test-results/intimidate-feedback-mobile.png',fullPage:true});
@@ -62,8 +67,10 @@ test('Water Absorb blocks Surf at full HP and shows healing when damaged',async(
   await page.goto('/battle');
   await prepareBattleCommand(page,'move 1');await page.locator('[data-command="move 1"]').click();
   await expect(page.getByTestId('effect-notice')).toContainText('상대 라프라스의저수');
-  await expect(page.getByRole('log',{name:'현재 배틀 상황'})).toContainText('효과가 없다');
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
+  const absorbed=await page.request.get('/api/battle').then(r=>r.json());
+  expect(absorbed.battle.opponent.condition).toBe('100/100');
+  expect(absorbed.battle.messages.some((line:string)=>line.includes('[from] ability: Water Absorb'))).toBe(true);
   await prepareBattleCommand(page,'move 4');await page.locator('[data-command="move 4"]').click();
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');
   const damaged=await page.request.get('/api/battle').then(r=>r.json());
@@ -71,7 +78,7 @@ test('Water Absorb blocks Surf at full HP and shows healing when damaged',async(
   await prepareBattleCommand(page,'move 1');await page.locator('[data-command="move 1"]').click();
   await expect(page.getByTestId('effect-notice')).toContainText('상대 라프라스의저수');
   await expect(page.getByTestId('effect-notice')).toHaveClass(/notice-enemy/);
-  await expect(page.getByRole('log',{name:'현재 배틀 상황'})).toContainText('물 기술은 효과가 없다');
+  // Absorption ownership is in the popup; the result dialogue does not repeat it.
   await expect(page.locator('.enemy-position .feedback-heal')).toContainText('HP 회복');
   await page.screenshot({path:'test-results/water-absorb-heal.png',fullPage:true});
   await expect(page.locator('.arena')).toHaveAttribute('data-playing','false');

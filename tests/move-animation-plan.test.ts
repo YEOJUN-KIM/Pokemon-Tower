@@ -10,7 +10,7 @@ test('every move has bounded choreography using only the 22 licensed local effec
   const used=new Set<string>();
   for(const move of Object.keys(moveInfo)) {
     const plan=moveAnimationPlan(move);
-    assert.ok(plan.particles.length>0&&plan.particles.length<=12,move);
+    assert.ok((plan.particles.length>0||['clone','soundwave'].includes(plan.style))&&plan.particles.length<=12,move);
     assert.ok(plan.duration<=1100,move);
     for(const particle of plan.particles){
       assert.ok(effectAssets.includes(particle.asset),particle.asset);
@@ -23,7 +23,7 @@ test('every move has bounded choreography using only the 22 licensed local effec
 });
 
 test('recognizable techniques have distinct composition and support moves avoid offensive contact',()=>{
-  const expected={'Flamethrower':'flame','Surf':'wave','Thunderbolt':'thunder','Ice Beam':'icebeam','Shadow Ball':'shadoworb','Leaf Storm':'leaves','Dragon Claw':'claw','Crunch':'bite','Close Combat':'punches','Earthquake':'quake'};
+  const expected={'Flamethrower':'flame','Surf':'wave','Thunderbolt':'electricburst','Thunder':'thunder','Ice Beam':'icebeam','Shadow Ball':'shadoworb','Leaf Storm':'leaves','Dragon Claw':'claw','Crunch':'bite','Close Combat':'punches','Earthquake':'quake'};
   for(const [move,style] of Object.entries(expected))assert.equal(moveAnimationPlan(move).style,style);
   assert.equal(moveAnimationPlan('Roost').contact,false);
   assert.equal(moveAnimationPlan('Swords Dance').style,'support');

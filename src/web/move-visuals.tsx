@@ -41,15 +41,45 @@ export function MoveVisuals({motion,speed=1}:{motion:Motion|null;speed?:number})
     if(motion.missed){target.x+=unit*1.4;target.y-=unit*.4;}
     const locate=(p:EffectPoint)=>({x:(p.anchor==='source'?source:target).x+p.x*unit,y:(p.anchor==='source'?source:target).y+p.y*unit});
     const began=performance.now();
+    const sprite=arena.querySelector<HTMLImageElement>(`.${motion.side}-position .pokemon-image-frame img`);
+    const cloneImage=sprite;
     if(!reduced) {
       const attacker=arena.querySelector<HTMLElement>(`.${motion.side}-position .motion-wrap`);
       const dx=(target.x-source.x)*(plan.contact?.42:.035),dy=(target.y-source.y)*(plan.contact?.42:.035);
-      if(attacker&&plan.style!=='support')animations.push(attacker.animate([{transform:'translate(0,0)',offset:0},{transform:`translate(${dx}px,${dy}px)`,offset:.4},{transform:`translate(${dx}px,${dy}px)`,offset:.53},{transform:'translate(0,0)',offset:1}],{duration:plan.duration,easing:'ease-in-out'}));
+      const movement=plan.presentation.pokemonMotion;
+      if(attacker&&['Dash','FastDash','Jump','Spin','Disappear'].includes(movement)){
+        const action=movement==='Jump'?`translate(${dx}px,${dy-unit*.8}px)`:movement==='Spin'?`translate(${dx}px,${dy}px) rotate(360deg)`:`translate(${dx}px,${dy}px)`;
+        animations.push(attacker.animate([{transform:'translate(0,0)',opacity:1,offset:0},{transform:action,opacity:movement==='Disappear'?.15:1,offset:movement==='FastDash'?.2:.4},{transform:action,opacity:1,offset:.53},{transform:'translate(0,0)',opacity:1,offset:1}],{duration:plan.duration,easing:movement==='FastDash'?'ease-out':'ease-in-out'}));
+      }
+      const shake=plan.presentation.screenEffect;
+      if(shake==='ShakeSmall'||shake==='ShakeLarge'){
+        const distance=shake==='ShakeLarge'?unit*.12:unit*.045;
+        animations.push(arena.animate([{transform:'translate(0,0)'},{transform:`translate(${distance}px,2px)`},{transform:`translate(${-distance}px,-2px)`},{transform:'translate(0,0)'}],{delay:plan.presentation.impactAt,duration:280}));
+      }
+      if(plan.presentation.specialSequence==='Earthquake')for(const participant of arena.querySelectorAll<HTMLElement>('.motion-wrap'))animations.push(participant.animate([{transform:'translateY(0)'},{transform:'translateY(-4px)'},{transform:'translateY(3px)'},{transform:'translateY(0)'}],{delay:180,duration:450}));
       const defender=arena.querySelector<HTMLElement>(`.${motion.targetSide ?? (motion.side==='player'?'enemy':'player')}-position .motion-wrap`);
-      if(defender&&!motion.missed&&!motion.blocked&&plan.offensive)animations.push(defender.animate([{transform:'translateX(0)'},{transform:`translateX(${unit*.13}px)`},{transform:`translateX(${-unit*.13}px)`},{transform:'translateX(0)'}],{delay:plan.contact?430:600,duration:240}));
+      if(defender&&!motion.missed&&!motion.blocked&&plan.offensive&&plan.presentation.targetEffect!=='None'&&plan.presentation.specialSequence!=='Earthquake')animations.push(defender.animate([{transform:'translateX(0)'},{transform:`translateX(${unit*.13}px)`},{transform:`translateX(${-unit*.13}px)`},{transform:'translateX(0)'}],{delay:plan.presentation.impactAt,duration:240}));
+      // WAAPI animations created here may appear after the parent scheduler's
+      // effect. Set the rate here too so Canvas and sprite motion cannot drift.
+      animations.forEach(animation=>animation.updatePlaybackRate(speed));
     }
     function draw(elapsed:number){
       context!.clearRect(0,0,bounds.width,bounds.height);
+      if(plan.style==='clone'||plan.presentation.pokemonMotion==='FastDash'){
+        const spread=reduced?.65:Math.sin(Math.PI*Math.min(1,elapsed/plan.duration));
+        if(cloneImage?.complete&&cloneImage.naturalWidth>0){
+          const box=cloneImage.getBoundingClientRect();
+          for(const direction of [-1,1]){
+            context!.save();context!.globalAlpha=.32*spread;
+            context!.drawImage(cloneImage,source.x-box.width/2+direction*unit*spread,source.y-box.height*.55,box.width,box.height);context!.restore();
+          }
+        }
+      }
+      if(plan.style==='soundwave')for(let i=0;i<3;i++){
+        const t=reduced?.5:(elapsed/plan.duration-i*.16);if(t<0||t>1)continue;
+        context!.save();context!.strokeStyle='#e5f1ff';context!.globalAlpha=(1-t)*.7;context!.lineWidth=unit*.045;
+        context!.beginPath();context!.ellipse(interpolate(source.x,target.x,t),interpolate(source.y,target.y,t),unit*(.25+t*.8),unit*(.35+t),0,0,Math.PI*2);context!.stroke();context!.restore();
+      }
       if(plan.wash&&!reduced){context!.globalAlpha=.12*Math.sin(Math.PI*Math.min(1,elapsed/plan.duration));context!.fillStyle=plan.wash;context!.fillRect(0,0,bounds.width,bounds.height);context!.globalAlpha=1;}
       const beamImage=plan.beam?images.get(plan.beam.asset):undefined;
       if(plan.beam&&beamImage&&elapsed>=plan.beam.start&&elapsed<plan.beam.end){

@@ -1,5 +1,6 @@
 // Original procedural sound design: filtered noise, frequency sweeps and layered transients.
-export type EffectOptions={category?:string;power?:number;impact?:'weak'|'strong'|'critical'};
+import type {SoundCue} from './move-presentation';
+export type EffectOptions={category?:string;power?:number;impact?:'weak'|'strong'|'critical';cue?:SoundCue;speed?:1|2|4};
 type Layer={wave:OscillatorType|'noise';from:number;to:number;duration:number;volume:number;delay?:number;attack?:number;filter?:BiquadFilterType};
 const tone=(from:number,to:number,duration:number,volume=.14,wave:OscillatorType='sine',delay=0,attack=.004):Layer=>({wave,from,to,duration,volume,delay,attack});
 const hiss=(from:number,to:number,duration:number,volume=.16,delay=0,filter:BiquadFilterType='bandpass',attack=.006):Layer=>({wave:'noise',from,to,duration,volume,delay,filter,attack});
@@ -28,6 +29,11 @@ export function effectLayers(kind:string,color='normal',options:EffectOptions={}
  if(kind==='dynamax-release')return [hiss(2400,400,.4,.18),tone(120,35,.38,.18,'sine')];
  if(kind==='dynamax-grow')return [tone(65,28,1,.2,'triangle'),hiss(500,100,.8,.18,0,'lowpass'),tone(160,70,.7,.07,'sine',.12)];
  if(kind!=='move')return [];
+ if(options.cue==='Rumble')return [hiss(280,90,.5,.23,0,'lowpass'),tone(65,28,.42,.15,'triangle')];
+ if(options.cue==='Rush')return [hiss(2800,700,.18,.12),tone(200,70,.12,.08,'triangle',.1)];
+ if(options.cue==='Voice')return [tone(340,680,.32,.08,'triangle'),tone(510,1020,.3,.05,'sine',.06)];
+ if(options.cue==='Impact')return [hiss(1200,2800,.22,.12),tone(160,70,.15,.09,'triangle',.1)];
+ if(options.cue==='Support')return [tone(420,820,.28,.08),hiss(600,1600,.28,.08)];
  if(options.category==='Status')return [tone(420,820,.28,.08),hiss(600,1600,.28,.08)];
  const types:Record<string,Layer[]>={
  normal:[hiss(1200,2800,.22,.12),tone(160,70,.15,.09,'triangle',.1)],
@@ -54,7 +60,8 @@ export function effectLayers(kind:string,color='normal',options:EffectOptions={}
 }
 const buffers=new WeakMap<BaseAudioContext,AudioBuffer>();
 export function scheduleEffect(ctx:BaseAudioContext,output:AudioNode,kind:string,color='normal',options:EffectOptions={},at=ctx.currentTime){
- const layers=effectLayers(kind,color,options),group=ctx.createGain();group.connect(output);const sources:AudioScheduledSourceNode[]=[],nodes:AudioNode[]=[group];let remaining=layers.length;
+ const speed=options.speed??1;
+ const layers=effectLayers(kind,color,options).map(layer=>({...layer,duration:layer.duration/speed,delay:(layer.delay??0)/speed,attack:layer.attack===undefined?undefined:layer.attack/speed})),group=ctx.createGain();group.connect(output);const sources:AudioScheduledSourceNode[]=[],nodes:AudioNode[]=[group];let remaining=layers.length;
  const duration=Math.max(0,...layers.map(l=>(l.delay??0)+l.duration));
  const clean=()=>{if(--remaining<=0)nodes.forEach(n=>n.disconnect());};
  for(const l of layers){const start=at+(l.delay??0),envelope=ctx.createGain();nodes.push(envelope);envelope.connect(group);envelope.gain.setValueAtTime(.0001,start);envelope.gain.linearRampToValueAtTime(l.volume,start+Math.min(l.attack??.004,l.duration*.85));envelope.gain.exponentialRampToValueAtTime(.0001,start+l.duration);

@@ -1,5 +1,6 @@
 import {assetRegistry} from '../assets/registry';
 import {moveInfo} from '../data/move-info';
+import {movePresentation,type MovePresentation} from './move-presentation';
 
 // Choreography adapted from Showdown's CC0 move definitions; rendering and
 // responsive coordinates are independent of its jQuery scene implementation.
@@ -8,31 +9,20 @@ export type EffectAsset=typeof effectAssets[number];
 export type EffectPoint={anchor:'source'|'target';x:number;y:number};
 export type MoveParticle={asset:EffectAsset;start:number;end:number;from:EffectPoint;to:EffectPoint;size:number;grow:number;rotate:number;arc:number;opacity:number};
 export const flamethrowerBeam={asset:'flamethrower-beam',url:assetRegistry.moveEffect('flamethrower-beam'),start:80,extended:480,fade:680,end:840,origin:{x:30,y:993},tip:{x:1280,y:330}} as const;
-export type MoveAnimationPlan={style:string;duration:number;contact:boolean;offensive:boolean;particles:MoveParticle[];lightning:boolean;wash:string|null;beam?:typeof flamethrowerBeam};
+export type MoveAnimationPlan={style:string;duration:number;contact:boolean;offensive:boolean;particles:MoveParticle[];lightning:boolean;wash:string|null;presentation:MovePresentation;beam?:typeof flamethrowerBeam};
 const point=(anchor:EffectPoint['anchor'],x=0,y=0):EffectPoint=>({anchor,x,y});
-const recipes:Record<string,string>={
-  Flamethrower:'flame',FireBlast:'fireblast',HeatWave:'flame',Overheat:'fireblast',WillOWisp:'blueflame',
-  Surf:'wave',MuddyWater:'mudwave',HydroPump:'waterbeam',WaterGun:'waterbeam',Scald:'waterbeam',WaterPulse:'waterorb',
-  Thunderbolt:'thunder',Thunder:'thunder',Discharge:'thunder',VoltSwitch:'electricorb',ElectroBall:'electricorb',
-  IceBeam:'icebeam',Blizzard:'blizzard',IcyWind:'blizzard',ShadowBall:'shadoworb',DarkPulse:'darkpulse',
-  EnergyBall:'greenorb',SolarBeam:'greenbeam',LeafStorm:'leaves',RazorLeaf:'leaves',MagicalLeaf:'leaves',
-  LeafBlade:'leafslash',DragonClaw:'claw',MetalClaw:'claw',ShadowClaw:'claw',Slash:'slash',NightSlash:'slash',AirSlash:'airslash',XScissor:'crossslash',SacredSword:'slash',IronHead:'impact',
-  Crunch:'bite',Bite:'bite',PsychicFangs:'bite',IceFang:'icebite',FireFang:'firebite',ThunderFang:'electricbite',
-  CloseCombat:'punches',MachPunch:'punch',BulletPunch:'punch',DrainPunch:'punch',FirePunch:'firepunch',IcePunch:'icepunch',ThunderPunch:'electricpunch',MeteorMash:'punch',
-  Earthquake:'quake',EarthPower:'mudburst',MudShot:'mudorb',RockSlide:'mudburst',StoneEdge:'mudburst',
-  DragonPulse:'dragonorb',DragonBreath:'dragonbeam',DracoMeteor:'meteors',HyperBeam:'beam',FlashCannon:'beam',Moonblast:'fairyorb',DazzlingGleam:'fairypulse',Psychic:'psychicpulse',Psyshock:'psychicpulse',SludgeBomb:'poisonorb',SludgeWave:'poisonpulse',
-};
-const defaults:Record<string,string>={fire:'flame',water:'waterbeam',electric:'thunder',grass:'leaves',ice:'icebeam',ghost:'shadoworb',dark:'darkpulse',poison:'poisonorb',psychic:'psychicpulse',fairy:'fairyorb',dragon:'dragonorb',ground:'mudburst',rock:'mudburst',fighting:'punches',steel:'slash',bug:'crossslash',flying:'airslash',normal:'impact'};
-const physicalDefaults:Record<string,string>={fire:'firepunch',electric:'electricpunch',ice:'icepunch',grass:'leafslash',ghost:'claw',dark:'bite',dragon:'claw',fighting:'punches',steel:'slash',bug:'crossslash'};
-const statusRecipes:Record<string,string>={WillOWisp:'blueflame',Toxic:'poisonorb',PoisonPowder:'poisonpulse',ThunderWave:'electricorb',LeechSeed:'greenorb',SleepPowder:'leaves',Spore:'greenorb'};
-
 export function moveAnimationPlan(move:string,color?:string,override?:{category:string}):MoveAnimationPlan {
   const info=override?{...moveInfo[move],...override}:moveInfo[move],type=color ?? info?.type.toLowerCase() ?? 'normal';
   const key=move.replace(/[^a-zA-Z]/g,'');
-  const style=info?.category==='Status'?statusRecipes[key] ?? 'support':recipes[key] ?? (info?.category==='Physical'?physicalDefaults[type] ?? 'impact':defaults[type] ?? 'impact');
+  const presentation=movePresentation(move);
+  // Tera Blast is explicitly a dynamic-material beam, rather than a fallback
+  // assigning unrelated moves by type. Keep its historical water adapter.
+  const style=move==='Tera Blast'&&type==='water'?'waterbeam':presentation.rendererStyle;
   const particles:MoveParticle[]=[];
-  const contact=['punch','punches','firepunch','icepunch','electricpunch','claw','slash','leafslash','crossslash','bite','firebite','icebite','electricbite','impact'].includes(style);
-  const plan:MoveAnimationPlan={style,duration:style==='shadoworb'?1100:950,contact,offensive:info?.category!=='Status',particles,lightning:style==='thunder',wash:null};
+  const contact=['Dash','FastDash','Jump','Spin','Disappear'].includes(presentation.pokemonMotion);
+  const plan:MoveAnimationPlan={style,duration:presentation.duration,contact,offensive:info?.category!=='Status',particles,lightning:style==='thunder',wash:null,presentation};
+  if(presentation.screenEffect==='Darken')plan.wash='#20172d';
+  if(presentation.screenEffect==='Flash')plan.wash='#f8f2d0';
   const add=(asset:EffectAsset,start:number,end:number,from=point('target'),to=from,size=1,grow=1,rotate=0,arc=0,opacity=.9)=>particles.push({asset,start,end:Math.min(plan.duration,end),from,to,size,grow,rotate,arc,opacity});
   const burst=(asset:EffectAsset,start=540,size=1.5)=>add(asset,start,Math.min(plan.duration,start+300),point('target'),point('target'),size,2.2);
   const stream=(asset:EffectAsset,count=7,spread=.28)=>{const size=asset==='fireball'||asset==='bluefireball'?1.1:.65;for(let i=0;i<count;i++)add(asset,90+i*55,510+i*55,point('source',0,-.1),point('target',Math.sin(i*2.4)*spread,Math.cos(i*2.4)*spread),size,.75+i*.035,i*18,0,.8);};
@@ -40,6 +30,7 @@ export function moveAnimationPlan(move:string,color?:string,override?:{category:
     for(let i=0;i<5;i++){const angle=i*Math.PI*2/5;add(charge,i*35,300+i*25,point('source',Math.cos(angle)*1.4,Math.sin(angle)*1.4),point('source'),.5,.5,0,0,.65);}
     add(asset,230,680,point('source'),point('target'),1.2,1.15,0,-.45);burst(asset,650,1.5);
   };
+  if(['clone','soundwave'].includes(style))return plan;
   if(style==='support') {
     for(let i=0;i<8;i++){const a=i*Math.PI/4;add('wisp',i*30,750+i*20,point('target',Math.cos(a)*1.5,Math.sin(a)*.8),point('target',Math.cos(a)*.5,-1.8),.28,.65,0,0,.65);}
     return plan;
@@ -55,9 +46,12 @@ export function moveAnimationPlan(move:string,color?:string,override?:{category:
   else if(style==='waterbeam'){stream('waterwisp',10,.16);burst('waterwisp',680);}
   else if(style==='icebeam'||style==='greenbeam'||style==='dragonbeam'||style==='beam'){const asset=style==='icebeam'?'iceball':style==='greenbeam'?'energyball':style==='dragonbeam'?'bluefireball':'wisp';stream(asset,10,.08);burst(asset,660,1.7);}
   else if(style==='blizzard'){plan.wash='#b3e9ff';for(let i=0;i<12;i++)add('iceball',i*30,500+i*30,point('target',2+(i%3)*.2,-1.7+(i%4)),point('target',-2,-1+(i%4)*.6),.5,.9,i*30);}
+  else if(style==='electricburst'){for(let i=0;i<3;i++)burst('electroball',180+i*200,1.1);}
   else if(style==='thunder'){plan.wash='#142138';for(let i=0;i<3;i++)burst('electroball',180+i*200,1.1);}
   else if(style==='leaves') {for(let i=0;i<10;i++)add(i%2?'leaf1':'leaf2',i*45,460+i*45,point('source',0,(i%3-1)*.2),point('target',(i%3-1)*.5,(i%4-2)*.4),.4,.7,i*95,(i%2?1:-1)*1.5);}
   else if(style==='shadoworb'){plan.wash='#241732';orb('shadowball','purplewisp');for(let i=0;i<4;i++)add('blackwisp',620+i*40,1000+i*25,point('target'),point('target',(i-1.5)*.6,-.5),.65,1.8);}
+  else if(style==='projectile')orb('wisp');
+  else if(style==='fireorb')orb('fireball');
   else if(['electricorb','greenorb','waterorb','dragonorb','fairyorb','poisonorb','mudorb'].includes(style))orb(({electricorb:'electroball',greenorb:'energyball',waterorb:'waterwisp',dragonorb:'bluefireball',fairyorb:'wisp',poisonorb:'purplewisp',mudorb:'mudwisp'} as Record<string,EffectAsset>)[style]);
   else if(style.endsWith('pulse')) {const asset=style==='darkpulse'?'blackwisp':style==='poisonpulse'?'purplewisp':style==='psychicpulse'?'purplewisp':'wisp';plan.wash=style==='darkpulse'?'#201129':null;for(let i=0;i<5;i++)add(asset,160+i*105,490+i*105,point('target'),point('target'),.45,3.5);}
   else if(style==='claw'||style==='slash'||style==='leafslash'||style==='crossslash'||style==='airslash') {
@@ -75,5 +69,9 @@ export function moveAnimationPlan(move:string,color?:string,override?:{category:
     plan.wash='#6c5326';for(let i=0;i<9;i++)add('mudwisp',180+i*45,550+i*40,point('target',(i%3-1)*.65,.8),point('target',(i%3-1)*.95,-.6),.55,1.6,0,-.5);burst('impact',400);
   } else if(style==='meteors') {plan.wash='#231d40';for(let i=0;i<5;i++)add('bluefireball',i*100,430+i*100,point('target',-2.5+i*.6,-3),point('target',(i-2)*.3,.2),.6,1.3,-35);burst('impact',620);}
   else {add('hitmarker',340,650,point('target'),point('target'),.8,1.8);burst('impact',380,1.2);}
+  if(presentation.specialSequence==='Drain')for(const particle of particles){
+    particle.from={...particle.from,anchor:particle.from.anchor==='source'?'target':'source'};
+    particle.to={...particle.to,anchor:particle.to.anchor==='source'?'target':'source'};
+  }
   return plan;
 }

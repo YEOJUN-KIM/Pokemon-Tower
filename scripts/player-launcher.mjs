@@ -4,7 +4,8 @@ import {fileURLToPath,pathToFileURL} from 'node:url';
 import {readMarker,requireNode,ensureWritableSaves} from './player/state.mjs';
 import {logger,redact,execute} from './player/process.mjs';
 import {install} from './player/install.mjs';
-import {startProduction} from './player/server.mjs';
+import {startProduction,openBrowser} from './player/server.mjs';
+import {waitForManagedStart} from './player/managed-start.mjs';
 import {tmpdir} from 'node:os';
 export const root=fileURLToPath(new URL('../',import.meta.url));
 async function launch(argv){
@@ -26,7 +27,8 @@ async function launch(argv){
   if(!state.ok||argv.includes('--repair')){stage='install';const setupLog=logger(home,'setup');setupLog.write('Setup start: '+new Date().toISOString());try{state={ok:true,...await install({root,home,config,log:setupLog,event})};log.write('Setup succeeded; log '+setupLog.file);}catch(error){setupLog.write(error.stack??error);throw Object.assign(error,{setupLog:setupLog.file});}}
   else log.write('Fast launch: skip dependencies, full asset hash verification, build and packaging.');
   if(argv.includes('--install-only'))return 0;
-  stage='launch';return await startProduction({directory:state.directory,node:state.node,db,log,event,noBrowser:argv.includes('--no-browser'),stopAfterHealth:argv.includes('--stop-after-health')});
+  const browse=(origin,browserLog)=>{if(process.env.TOWER_LAUNCHER_MANAGED==='1'){browserLog.write('Browser launch requested: '+origin);event({type:'browser',origin});}else openBrowser(origin,browserLog);};
+  stage='launch';return await startProduction({directory:state.directory,node:state.node,db,log,event,browse,noBrowser:argv.includes('--no-browser'),stopAfterHealth:argv.includes('--stop-after-health')});
  }catch(error){log.write(`Error stage: ${stage}; exit code: ${error.exitCode??1}; ${error.stack??error}`);event({type:'error',stage,code:error.exitCode??1,message:redact(error.message),log:error.setupLog??log.file});return 1;}
  finally{if(lock){await lock.close();await unlink(path.join(home,'.launcher.lock')).catch(()=>{});}}
 }
@@ -37,4 +39,12 @@ export async function main(argv=process.argv.slice(2)){
   process.stdout.write(JSON.stringify({type:'error',stage:'bootstrap',code:1,message:redact('실행 준비를 완료하지 못했습니다. '+error.message),log:file})+'\n');return 1;
  }
 }
-if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href)process.exitCode=await main();
+if(process.argv[1]&&import.meta.url===pathToFileURL(path.resolve(process.argv[1])).href){
+ try{
+  if(process.env.TOWER_LAUNCHER_MANAGED==='1'&&!await waitForManagedStart())process.exitCode=1;
+  else process.exitCode=await main();
+ }finally{
+  // Readable-mode handshake can keep a Windows pipe referenced on an early check/error return.
+  if(process.env.TOWER_LAUNCHER_MANAGED==='1')process.stdin.destroy();
+ }
+}

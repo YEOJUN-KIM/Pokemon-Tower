@@ -49,6 +49,7 @@ for(const partner of [{species:'Blaziken',name:'번치코'},{species:'Venusaur',
     await page.getByRole('button',{name:`${partner.name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'기본 정보',exact:true}).click();await step(page,S.PokemonInfoViewed);
     await expect(page.locator('[data-tutorial="pokemon-info"]')).toBeVisible();
     await page.getByRole('button',{name:'확인했어요',exact:true}).click();await step(page,S.StatUpgrade);
+    await page.getByRole('button',{name:'도감 관리로 이동',exact:true}).click();await expect(page).toHaveURL(/\/pokedex$/);
     await page.reload();await step(page,S.StatUpgrade);
     await expect(page.getByTestId('tutorial-overlay')).toHaveAttribute('data-tutorial-target-species',partner.species);
     await page.getByRole('button',{name:`${partner.name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'포켓몬 설정',exact:true}).click();
@@ -58,6 +59,7 @@ for(const partner of [{species:'Blaziken',name:'번치코'},{species:'Venusaur',
     expect((await collection(page)).training.find((p:{species:string})=>p.species===partner.species).profile.evs.hp).toBe(32);
     expect((await collection(page)).tower.growthPoints).toBe(0);
     await page.getByRole('button',{name:`${partner.name} 포켓몬 설정 닫기`,exact:true}).click();
+    await page.getByRole('button',{name:'파티 편성으로 돌아가기',exact:true}).click();await expect(page).toHaveURL(/\/battle\?prepare=1$/);
     for(const name of [partner.name,'리자몽','거북왕'])await choose(page,name);
     await step(page,S.StartBattle);
     await page.reload();await step(page,S.StartBattle);
@@ -98,7 +100,7 @@ test('initial skip grants usable starting points once; mid-tutorial skip preserv
     await page.goto('/');await page.getByRole('button',{name:'알고 있어요 / 건너뛰기',exact:true}).click();
     await expect(page.getByTestId('tutorial-overlay')).toHaveCount(0);expect(store.view(owner).growthPoints).toBe(TUTORIAL_GROWTH_POINTS);
     await page.reload();await expect(page.getByTestId('tutorial-overlay')).toHaveCount(0);
-    await page.goto('/battle?prepare=1');await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 설정',exact:true}).click();
+    await page.goto('/pokedex');await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 설정',exact:true}).click();
     await page.locator('[data-settings-row="hp"]').click();await page.getByRole('button',{name:'MAX',exact:true}).click();await page.getByRole('button',{name:'적용',exact:true}).click();
     await page.getByRole('button',{name:`${TUTORIAL_GROWTH_POINTS}P로 설정 저장`,exact:true}).click();expect(store.view(owner).growthPoints).toBe(0);
     await page.request.post('/api/tutorial',{headers:{Origin:'http://127.0.0.1:3001'},data:{event:'skip'}});expect(store.view(owner).growthPoints).toBe(0);
@@ -128,7 +130,7 @@ test('mobile spotlight and native modal guidance remain usable after resizing',a
     await choose(page,'리자몽');await step(page,S.RemovePokemon);
     await page.locator('[data-party-slot="0"]').click();await page.getByRole('button',{name:'파티에서 제외',exact:true}).click();await step(page,S.PokemonInfo);
     await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'기본 정보',exact:true}).click();await step(page,S.PokemonInfoViewed);
-    await page.getByRole('button',{name:'확인했어요',exact:true}).click();await page.getByRole('button',{name:'리자몽 기본 정보 닫기',exact:true}).click();
+    await page.getByRole('button',{name:'확인했어요',exact:true}).click();await step(page,S.StatUpgrade);await page.getByRole('button',{name:'도감 관리로 이동',exact:true}).click();await expect(page).toHaveURL(/\/pokedex$/);
     await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 설정',exact:true}).click();
     await page.locator('[data-settings-row="hp"]').click();await page.getByRole('slider',{name:'HP 투자 포인트'}).focus();await page.keyboard.press('ArrowRight');await page.getByRole('button',{name:'적용',exact:true}).click();
     await page.setViewportSize({width:430,height:932});

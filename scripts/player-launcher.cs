@@ -5,6 +5,35 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Web.Script.Serialization;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+
+// Only the EXE owns this non-inheritable handle. Windows closes it even after a forced EXE exit.
+internal sealed class ManagedProcessJob : IDisposable {
+ [StructLayout(LayoutKind.Sequential)] struct BasicLimits {
+  public long PerProcessUserTimeLimit,PerJobUserTimeLimit;public uint LimitFlags;
+  public UIntPtr MinimumWorkingSetSize,MaximumWorkingSetSize;public uint ActiveProcessLimit;
+  public UIntPtr Affinity;public uint PriorityClass,SchedulingClass;
+ }
+ [StructLayout(LayoutKind.Sequential)] struct IoCounters {public ulong ReadOperationCount,WriteOperationCount,OtherOperationCount,ReadTransferCount,WriteTransferCount,OtherTransferCount;}
+ [StructLayout(LayoutKind.Sequential)] struct ExtendedLimits {
+  public BasicLimits BasicLimitInformation;public IoCounters IoInfo;
+  public UIntPtr ProcessMemoryLimit,JobMemoryLimit,PeakProcessMemoryUsed,PeakJobMemoryUsed;
+ }
+ [DllImport("kernel32.dll",CharSet=CharSet.Unicode,SetLastError=true)] static extern IntPtr CreateJobObject(IntPtr attributes,string name);
+ [DllImport("kernel32.dll",SetLastError=true)] static extern bool SetInformationJobObject(IntPtr job,int kind,IntPtr info,uint size);
+ [DllImport("kernel32.dll",SetLastError=true)] static extern bool AssignProcessToJobObject(IntPtr job,IntPtr process);
+ [DllImport("kernel32.dll")] static extern bool CloseHandle(IntPtr handle);
+ IntPtr handle;
+ public ManagedProcessJob(){
+  handle=CreateJobObject(IntPtr.Zero,null);if(handle==IntPtr.Zero)throw new System.ComponentModel.Win32Exception();
+  var limits=new ExtendedLimits();limits.BasicLimitInformation.LimitFlags=0x2000; // JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
+  int size=Marshal.SizeOf(limits);IntPtr buffer=Marshal.AllocHGlobal(size);
+  try{Marshal.StructureToPtr(limits,buffer,false);if(!SetInformationJobObject(handle,9,buffer,(uint)size))throw new System.ComponentModel.Win32Exception();}
+  catch{Dispose();throw;}finally{Marshal.FreeHGlobal(buffer);}
+ }
+ public void Assign(Process child){if(!AssignProcessToJobObject(handle,child.Handle))throw new System.ComponentModel.Win32Exception();}
+ public void Dispose(){if(handle!=IntPtr.Zero){CloseHandle(handle);handle=IntPtr.Zero;}}
+}
 
 internal static class PokemonTowerPlayer {
  static readonly string Home=Environment.GetEnvironmentVariable("LOCALAPPDATA")==null?Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),"PokemonTower"):Path.Combine(Environment.GetEnvironmentVariable("LOCALAPPDATA"),"PokemonTower");
@@ -26,7 +55,7 @@ internal static class PokemonTowerPlayer {
  }
  [STAThread] static int Main(string[] args) {
   bool headless=Array.IndexOf(args,"--headless")>=0||Array.IndexOf(args,"--check")>=0;string home=Home;for(int i=0;i<args.Length-1;i++)if(args[i]=="--home")home=Path.GetFullPath(args[++i]);
-  string bootstrapLog=Path.Combine(home,"logs","bootstrap-"+DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")+".log");
+  string bootstrapLog=Path.Combine(home,"logs","bootstrap-"+DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")+"-"+Process.GetCurrentProcess().Id+".log");
   try {
    Directory.CreateDirectory(Path.GetDirectoryName(bootstrapLog));
    string root=AppDomain.CurrentDomain.BaseDirectory,script=Path.Combine(root,"scripts","player-launcher.mjs"),node=FindNode(home);
@@ -37,7 +66,9 @@ internal static class PokemonTowerPlayer {
    string arguments=Quote(script);foreach(string arg in args)arguments+=" "+Quote(arg);
    // Node writes UTF-8 to pipes; .NET Framework otherwise decodes using the Windows ANSI code page.
    ProcessStartInfo start=new ProcessStartInfo(node,arguments){WorkingDirectory=root,UseShellExecute=false,CreateNoWindow=true,WindowStyle=ProcessWindowStyle.Hidden,RedirectStandardOutput=true,RedirectStandardError=true,RedirectStandardInput=true,StandardOutputEncoding=System.Text.Encoding.UTF8,StandardErrorEncoding=System.Text.Encoding.UTF8};
-   using(Process child=new Process()) {
+   start.EnvironmentVariables["TOWER_LAUNCHER_MANAGED"]="1";
+   start.EnvironmentVariables.Remove("NODE_OPTIONS");
+   using(ManagedProcessJob job=new ManagedProcessJob()) using(Process child=new Process()) {
     child.StartInfo=start;child.EnableRaisingEvents=true;int exitCode=1;string lastError=null;
     Form window=null;Label status=null;ProgressBar progress=null;NotifyIcon tray=null;
     Action<Action> dispatch=action=>{if(window!=null&&!window.IsDisposed&&window.IsHandleCreated){try{window.BeginInvoke(action);}catch(InvalidOperationException){}}};
@@ -56,6 +87,16 @@ internal static class PokemonTowerPlayer {
      try {
       Dictionary<string,object> item=new JavaScriptSerializer().Deserialize<Dictionary<string,object>>(e.Data);string kind=Convert.ToString(item["type"]);
       if(kind=="error")lastError=Convert.ToString(item["message"])+"\n\n단계: "+Convert.ToString(item["stage"])+"\n오류 코드: "+Convert.ToString(item["code"])+"\n로그: "+Convert.ToString(item["log"]);
+      if(kind=="browser"){
+       // Launch from the EXE, outside the game's job: closing the game must not kill the browser.
+       Action browse=()=>{try{
+        string origin=Convert.ToString(item["origin"]);
+        if(origin!="http://127.0.0.1:3000"&&origin!="http://127.0.0.1:3000/")throw new Exception("게임 주소가 올바르지 않습니다.");
+        using(Process browser=Process.Start(new ProcessStartInfo(origin){UseShellExecute=true})){}
+        File.AppendAllText(bootstrapLog,"Browser opened by EXE: "+origin+Environment.NewLine);
+       }catch(Exception error){File.AppendAllText(bootstrapLog,"Browser error: "+Sanitize(error.Message)+Environment.NewLine);if(tray!=null)tray.ShowBalloonTip(5000,"Pokémon Tower","게임 화면을 열지 못했습니다.",ToolTipIcon.Warning);}};
+       if(headless)browse();else dispatch(browse);
+      }
       dispatch(()=>{
        if(kind=="install"){window.Show();status.Text=Convert.ToString(item["message"]);progress.Style=ProgressBarStyle.Continuous;progress.Value=Convert.ToInt32(item["progress"]);}
        if(kind=="ready"){window.Hide();tray.Visible=true;tray.Text="Pokémon Tower 실행 중";}
@@ -65,12 +106,19 @@ internal static class PokemonTowerPlayer {
     };
     child.ErrorDataReceived+=(s,e)=>{if(e.Data!=null)File.AppendAllText(bootstrapLog,Sanitize(e.Data)+Environment.NewLine);};
     child.Exited+=(s,e)=>{exitCode=child.ExitCode;dispatch(()=>window.Close());};
-    child.Start();child.BeginOutputReadLine();child.BeginErrorReadLine();
+    child.Start();
+    try{job.Assign(child);}catch{if(!child.HasExited){child.Kill();child.WaitForExit();}throw;}
+    child.BeginOutputReadLine();child.BeginErrorReadLine();
+    // The Node entry point cannot spawn tools/server until job membership is established.
+    child.StandardInput.WriteLine("start");
     if(!headless){window.Shown+=(s,e)=>{if(child.HasExited)window.Close();};Application.Run(window);if(tray!=null)tray.Dispose();}
     if(!child.WaitForExit(headless?-1:8000)) {
-     ProcessStartInfo stop=new ProcessStartInfo("taskkill.exe","/PID "+child.Id+" /T /F"){UseShellExecute=false,CreateNoWindow=true,WindowStyle=ProcessWindowStyle.Hidden};using(Process killer=Process.Start(stop))killer.WaitForExit();child.WaitForExit();
+     File.AppendAllText(bootstrapLog,"Graceful stop timed out; closing owned process job."+Environment.NewLine);
+     job.Dispose();if(!child.WaitForExit(5000))throw new Exception("게임의 종료를 확인할 수 없습니다. 로그를 확인해 주세요.");
     }
     child.WaitForExit();exitCode=child.ExitCode;
+    // Reap any remaining descendants before an error dialog can keep the EXE open.
+    job.Dispose();
     File.AppendAllText(bootstrapLog,"Exit code: "+exitCode+Environment.NewLine);
     if(exitCode!=0&&!headless)MessageBox.Show(lastError??("게임을 실행하지 못했습니다. 로그를 확인해 주세요.\n"+bootstrapLog),"Pokémon Tower",MessageBoxButtons.OK,MessageBoxIcon.Error);
     return exitCode;

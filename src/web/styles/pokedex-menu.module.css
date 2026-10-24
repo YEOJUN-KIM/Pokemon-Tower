@@ -101,3 +101,12 @@
  :global(body) :where(.scope)[data-dex-reorganized][data-dex-reorganized] :global(.dex-party-slot[data-party-slot]) {grid-template-rows:18px minmax(0,1fr);}
  :global(body) :where(.scope)[data-dex-reorganized][data-dex-reorganized] :global(.dex-party-slot .pokemon-image-frame) {width:72px!important;height:64px!important;}
 }
+
+/* Collection management has no party column or challenge setup. */
+:global(body) :where(.scope)[data-dex-reorganized][data-dex-mode=collection] :global(.dex-layout) {grid-template-columns:minmax(0,1fr) 280px;}
+@media(min-width:761px) {
+ :global(body) :where(.scope)[data-dex-reorganized][data-dex-mode=collection] :global(.dex-partner-display) {display:flex;}
+}
+@media(max-width:760px) {
+ :global(body) :where(.scope)[data-dex-reorganized][data-dex-mode=collection] :global(.dex-layout) {grid-template-columns:minmax(0,1fr);}
+}

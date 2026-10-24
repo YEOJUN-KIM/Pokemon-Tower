@@ -43,6 +43,7 @@ EXE는 초기 실행 도구가 필요하다. 현재 Node는 첫 설치에 사전
 | TypeScript | pnpm typecheck |
 | unit/battle | pnpm test |
 | Windows CMD wrappers | node --test tests/windows-setup.test.mjs |
+| Windows EXE 프로세스 트리 (launcher:build 후) | node --test tests/windows-player-process.test.mjs |
 | player/aggregate 단위 회귀 | node --import tsx --test tests/player-launcher.test.ts |
 | E2E (production build 후, 별도 검증 DB) | pnpm test:e2e |
 | CSS 구조 | pnpm check:css |

@@ -23,20 +23,25 @@ function guideFor(state:TutorialState,path:string):Guide {
   switch(state.step) {
     case TutorialStep.StartGame: target=document.querySelector('[data-tutorial="game-start"]');if(!target)resume='/';break;
     case TutorialStep.SelectPokemon:
+      if(path!=='/battle'){resume='/battle?prepare=1';break;}
       target=find('[aria-label="포켓몬 선택하기"]')??find('[data-tutorial="starter-list"]');break;
     case TutorialStep.RemovePokemon:
+      if(path!=='/battle'){resume='/battle?prepare=1';break;}
       target=find('[aria-label="파티에서 제외"], [aria-label="포켓몬 제외하기"]')??find('[data-party-slot]:not([data-empty])');break;
     case TutorialStep.PokemonInfo:
       target=dialog?(matchesTarget?find('[aria-label="기본 정보"]')??close():close()):card();break;
     case TutorialStep.PokemonInfoViewed:
       target=matchesTarget?find('[data-tutorial="pokemon-info"]'):close();break;
     case TutorialStep.StatUpgrade:
+      if(path!=='/pokedex'){resume='/pokedex';break;}
       target=dialog&&!matchesTarget?close():find('[data-testid="ev-picker"] .game-dialog-body')??find('[data-settings-save]:not(:disabled)')??find('[data-tutorial="stat-training"]')??find('[aria-label="포켓몬 설정"]')??(dialog?close():card());
       if(find('[data-testid="ev-amount"]'))text=tutorialHints.statPicker;
       break;
     case TutorialStep.CompleteTeam:
+      if(path!=='/battle'){resume='/battle?prepare=1';target=dialog?close():null;break;}
       target=find('[aria-label="포켓몬 선택하기"]')??(dialog?close():find('[data-tutorial="starter-list"]'));break;
     case TutorialStep.StartBattle:
+      if(path!=='/battle'){resume='/battle?prepare=1';break;}
       target=find('[data-confirm-yes]')??find('[data-tutorial="start-battle"]');break;
     case TutorialStep.TypeGuide:
       target=find('[data-tutorial="battle-moves"]')??find('[data-mode="moves"]');
@@ -48,7 +53,7 @@ function guideFor(state:TutorialState,path:string):Guide {
       if(target?.matches('[data-tutorial="recruit-open"]')){text=tutorialHints.openRecruitment;next=undefined;}
       break;
   }
-  if(!target && [TutorialStep.SelectPokemon,TutorialStep.RemovePokemon,TutorialStep.PokemonInfo,TutorialStep.PokemonInfoViewed,TutorialStep.StatUpgrade,TutorialStep.CompleteTeam,TutorialStep.StartBattle].includes(state.step as never) && !['/battle','/pokedex'].includes(path))resume='/battle?prepare=1';
+  if(!resume&&!target && [TutorialStep.SelectPokemon,TutorialStep.RemovePokemon,TutorialStep.PokemonInfo,TutorialStep.PokemonInfoViewed,TutorialStep.StatUpgrade,TutorialStep.CompleteTeam,TutorialStep.StartBattle].includes(state.step as never) && !['/battle','/pokedex'].includes(path))resume='/battle?prepare=1';
   return {target,host,text,next,resume};
 }
 
@@ -88,7 +93,7 @@ export function TutorialManager({children}:{children:ReactNode}) {
     return()=>{clearInterval(timer);window.removeEventListener('focus',focus);};
   },[state?.step,path,refresh]);
   useEffect(()=>{
-    if(state?.step===TutorialStep.StartGame&&['/battle','/pokedex'].includes(path))void report('enter-selection');
+    if(state?.step===TutorialStep.StartGame&&path==='/battle')void report('enter-selection');
   },[state?.step,path,report]);
   return <TutorialContext.Provider value={{state,report,refresh}}>{children}
     {state&&state.step!==TutorialStep.Completed&&path!=='/account'&&<TutorialOverlay state={state} path={path} busy={busy} error={error} confirmSkip={confirmSkip} onSkip={()=>setConfirmSkip(true)} onCancelSkip={()=>setConfirmSkip(false)} onConfirmSkip={()=>{void report('skip').then(()=>setConfirmSkip(false));}} onNext={()=>void report('next')} onBegin={()=>void report('begin')} onResume={url=>router.push(url)} onRetry={()=>{const retry=failed.current;if(retry)void report(retry.event,retry.party,retry.species);else void refresh();}}/>}
@@ -180,7 +185,7 @@ function TutorialOverlay({state,path,busy,error,confirmSkip,onSkip,onCancelSkip,
         <div className={styles.actions}>
           {confirmSkip?<><button disabled={busy} onClick={onCancelSkip}>계속 안내받기</button><button disabled={busy} onClick={onConfirmSkip}>건너뛰기 확정</button></>:state.step===TutorialStep.NotStarted?<><button disabled={busy} onClick={onBegin}>처음이에요</button><button disabled={busy} onClick={onConfirmSkip}>알고 있어요 / 건너뛰기</button></>:<>
             {frame.guide.next&&<button disabled={busy} onClick={onNext}>{frame.guide.next}</button>}
-            {frame.guide.resume&&<button onClick={()=>onResume(frame.guide.resume!)}>안내 화면으로 이동</button>}
+            {frame.guide.resume&&<button onClick={()=>onResume(frame.guide.resume!)}>{state.step===TutorialStep.StatUpgrade?'도감 관리로 이동':state.step===TutorialStep.CompleteTeam?'파티 편성으로 돌아가기':'안내 화면으로 이동'}</button>}
             <button className={styles.skip} disabled={busy} onClick={onSkip}>튜토리얼 건너뛰기</button>
           </>}
         </div>

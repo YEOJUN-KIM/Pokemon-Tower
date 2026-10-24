@@ -27,6 +27,7 @@ export async function startProduction({directory,node,db,log,event,noBrowser=fal
  const interrupt=()=>stop();process.on('SIGINT',interrupt);process.on('SIGTERM',interrupt);
  // Newline-delimited commands preserve chunk boundaries and never restart the server.
  const input=createInterface({input:process.stdin});input.on('line',line=>{if(line==='stop')stop();else if(line==='open')void reopen();});
+ if(process.env.TOWER_LAUNCHER_MANAGED==='1'){input.once('close',stop);if(process.stdin.readableEnded)stop();}
  try{
   log.write('Server start: '+directory);
   for(let i=0;i<120;i++){

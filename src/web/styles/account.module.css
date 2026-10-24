@@ -7,6 +7,7 @@
   background: #26343b;
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card) {
+  --account-input-bg: #425661;
   width: min(100%,460px);
   padding: 28px;
   background: #eef2e8;
@@ -29,14 +30,22 @@
   margin: 0;
   word-break: keep-all;
 }
-:where(.scope[data-ui-screen="account"]) :global(.account-card nav) {
-  display: flex;
+:where(.scope[data-ui-screen="account"]) :global(.account-links) {
+  display: grid;
   gap: 8px;
-  flex-wrap: wrap;
+  font-size: var(--text-sm);
 }
-:where(.scope[data-ui-screen="account"]) :global(.account-card nav button) {
-  flex: 1;
-  white-space: nowrap;
+:where(.scope[data-ui-screen="account"]) :global(.account-links p) {
+  font-size: var(--text-sm);
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-mode-link) {
+  color: #215d51;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+:where(.scope[data-ui-screen="account"]) :global(.account-mode-link[aria-disabled=true]) {
+  opacity: .55;
+  pointer-events: none;
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card form),:where(.scope[data-ui-screen="account"]) :global(.account-card label) {
   display: grid;
@@ -58,6 +67,28 @@
   background: #fff;
   border: 1px solid #93ac9b;
   border-radius: 6px;
+}
+/* Authentication fields keep a separate role from the global purple button surface.
+   Match the shared menu's bounded priority rules without changing other screens. */
+:global(body) :where(.scope)[data-ui-screen="account"] :global(.account-card input:not([type=checkbox]):not([type=range])) {
+  background: var(--account-input-bg)!important;
+  color: var(--game-text)!important;
+  caret-color: var(--menu-focus);
+  border: 2px solid #738c98!important;
+  box-shadow: none!important;
+}
+:global(body) :where(.scope)[data-ui-screen="account"] :global(.account-card input:not([type=checkbox]):not([type=range]):focus-visible:not(:disabled)) {
+  background: var(--account-input-bg)!important;
+  border-color: var(--menu-focus)!important;
+  box-shadow: inset 0 0 0 1px var(--menu-focus)!important;
+  outline: none!important;
+}
+:global(body) :where(.scope)[data-ui-screen="account"] :global(.account-card input:not([type=checkbox]):not([type=range]):not(:disabled):is([aria-invalid=true],:user-invalid)) {
+  border-color: #ff9eae!important;
+}
+:global(body) :where(.scope)[data-ui-screen="account"] :global(.account-card input:disabled) {
+  opacity: .65;
+  cursor: not-allowed;
 }
 :where(.scope[data-ui-screen="account"]) :global(.account-card small),:where(.scope[data-ui-screen="account"]) :global(.account-note) {
   font-size: var(--text-caption);

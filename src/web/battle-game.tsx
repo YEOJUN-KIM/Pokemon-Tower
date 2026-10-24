@@ -292,7 +292,7 @@ function BattleGameContent({prepareNewRun = false,entries}: {prepareNewRun?: boo
   </main>;
   if(tower && run?.state === 'cleared'&&!recruitMessage) return <><TowerClear tower={tower} onNewRun={()=>{ignoredResult.current=battle?.id ?? null;setBattle(null);setTower({...tower,run:null});setSelected([]);setAcknowledgedResult(null);setRecruitMessage('');}}/></>;
   if(tower && !['battle','recruit','select','cleared'].includes(run?.state ?? '') && !(hasResult && acknowledgedResult!==battle?.id)) {
-    return <Pokedex entries={entries} initialTower={tower} startError={error} onStart={(names,rule)=>submit({type:'start',selected:names,rule})}/>;
+    return <Pokedex mode="selection" entries={entries} initialTower={tower} startError={error} onStart={(names,rule)=>submit({type:'start',selected:names,rule})}/>;
   }
 
   return <div className="app-shell battle-room battle-live">

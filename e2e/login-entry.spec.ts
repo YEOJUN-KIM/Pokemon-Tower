@@ -9,7 +9,8 @@ for(const width of [1280,390])test(`login first, persistent sign-in and return d
   await expect(page.getByRole('heading',{name:'트레이너 로그인'})).toBeVisible();
   await expect(page.locator('.title-screen')).toHaveCount(0);
   await page.goto('/pokedex');await expect(page).toHaveURL(/next=%2Fpokedex/);
-  await page.getByRole('button',{name:'회원가입',exact:true}).first().click();
+  await page.getByRole('link',{name:'회원가입',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'트레이너 회원가입',exact:true})).toBeVisible();
   const username=`entry_${randomUUID().slice(0,8)}`,password='entry-password-123';
   await page.getByLabel('아이디',{exact:true}).fill(username);
   await page.getByLabel('비밀번호',{exact:true}).fill(password);

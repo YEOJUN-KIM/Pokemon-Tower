@@ -8,8 +8,31 @@ import {readMarker,publishMarker,ensureWritableSaves,requireNode,sentinels,requi
 import {checkPython,install} from '../scripts/player/install.mjs';
 import {claimPort,startProduction} from '../scripts/player/server.mjs';
 import {createServer} from 'node:net';
+import {PassThrough} from 'node:stream';
+import {waitForManagedStart} from '../scripts/player/managed-start.mjs';
+import {spawn} from 'node:child_process';
 const config={schemaVersion:1,launcherVersion:'1',appVersion:'1',assetVersion:'1',buildVersion:'1'};
 const result=(ok:boolean)=>({ok,matching:ok?1:0,missing:ok?[]:['missing'],extra:[],mismatched:[]});
+
+test('managed entry waits for ownership before starting and preserves buffered stop commands',async()=>{
+ const input=new PassThrough();const ready=waitForManagedStart(input,1000);
+ input.write('sta');input.write('rt\r\nstop\n');assert.equal(await ready,true);assert.equal(input.read().toString(),'stop\n');input.destroy();
+ const closed=new PassThrough();const ended=waitForManagedStart(closed,1000);closed.end();assert.equal(await ended,false);
+ const wrong=new PassThrough();const rejected=waitForManagedStart(wrong,1000);wrong.end('other\n');assert.equal(await rejected,false);
+ const silent=new PassThrough();assert.equal(await waitForManagedStart(silent,10),false);silent.destroy();
+});
+
+test('managed early failure exits even while the EXE input pipe stays open',async()=>{
+ const home=await mkdtemp(path.join(tmpdir(),'tower-managed-failure-'));
+ const child=spawn(process.execPath,['scripts/player-launcher.mjs','--check','--home',home],{cwd:process.cwd(),env:{...process.env,TOWER_LAUNCHER_MANAGED:'1'},stdio:['pipe','pipe','pipe'],windowsHide:true});
+ let output='',timeout;child.stdout.on('data',data=>{output+=data;});child.stderr.resume();
+ try{
+  child.stdin.on('error',()=>{});child.stdin.write('start\n'); // Intentionally keep it open like the EXE.
+  const exit=new Promise<number|null>((resolve,reject)=>{child.once('error',reject);child.once('exit',resolve);});
+  const code=await Promise.race([exit,new Promise<never>((_,reject)=>{timeout=setTimeout(()=>reject(Error('Managed error left an input pipe alive')),3000);})]);
+  assert.equal(code,1);assert.match(output,/"type":"error"/);
+ }finally{clearTimeout(timeout);if(child.exitCode===null)child.kill();child.stdin.destroy();await rm(home,{recursive:true,force:true});}
+});
 
 test('asset setup restores the six aggregates once in order and skips complete packs',async()=>{
  const calls:string[][]=[],log:string[]=[];let inspected=0;

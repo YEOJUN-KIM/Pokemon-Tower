@@ -4,26 +4,26 @@
 
 ## 파일 구성
 
-신규 파일:
+진행 및 저장:
 
-- `src/data/tutorial.ts`: 단계 상수, 문구, TRAINING_POINT_PRICE × 32 지급 설정(현재 256P).
-- `src/server/tutorial-service.ts`: 저장 기본값, 단계 전환, 지급 중복 방지.
+- `src/data/tutorial.ts`: 단계 상수, 문구, 초기 지급액의 호환 이름 `TUTORIAL_GROWTH_POINTS`.
+- `src/server/tutorial-service.ts`: 저장 기본값, 단계 전환, 공통 초기 지급 처리 호출.
 - `src/server/initial-growth.ts`, `src/data/training.ts`: 튜토리얼 선택과 분리한 신규 게임 초기 성장포인트 및 영수증 처리.
 - `src/app/api/tutorial/route.ts`: 로그인 계정의 안내 조회·진행·건너뛰기.
 - `src/web/tutorial-manager.tsx`, `src/web/styles/tutorial.module.css`: 공통 오버레이, 대상 측정, 입력 제한, 서버 동기화.
 - `tests/tutorial.test.ts`, `e2e/tutorial.spec.ts`: 서버 및 실제 브라우저 검증.
 - `docs/gameplay/TUTORIAL.md`: 구조와 운영 안내.
 
-수정 파일:
+게임 화면과 연결:
 
-- `src/server/schema.ts`: 같은 세이브 DB에 튜토리얼 테이블 추가.
-- `src/server/tower-service.ts`: 개발 서버의 기존 싱글턴이 새 저장 구조를 적용하도록 갱신.
+- `src/server/schema.ts`: 같은 세이브 DB의 튜토리얼 테이블 정의.
+- `src/server/tower-service.ts`: 게임과 안내가 공유하는 저장 서비스.
 - `src/server/tower-store.ts`, `src/app/api/battle/route.ts`: 기존 강화·전투·영입 성공에 안내 단계 연결.
 - `src/app/layout.tsx`: 안내 관리자를 공통 레이아웃에 연결.
 - `src/web/title-screen.tsx`, `src/web/pokedex.tsx`, `src/web/battle-game.tsx`, `src/web/battle-commands.tsx`: 강조 대상 및 실제 화면 동작 연결.
-- `src/web/pokemon-settings.tsx`: 능력치 강조 대상 추가, 조절창 비용 표시를 기존 계산식의 +1당 8P와 일치시킴.
+- `src/web/pokemon-settings.tsx`: 능력치 강조 대상과 +1당 8P의 조절창 비용 표시.
 - `e2e/starter-moves.spec.ts`: 기존 스타팅 검증에서는 최초 안내를 명시적으로 건너뜀.
-- `e2e/pokemon-settings.spec.ts`: 기존 1P 기준의 오래된 잔액 기대값을 현행 8P 비용에 맞춤. 실제 강화 공식 변경 없음.
+- `e2e/pokemon-settings.spec.ts`: 현행 8P 비용과 저장 후 잔액 검사.
 - `docs/gameplay/README.md`: 이 문서로 연결.
 
 | 단계 | 화면 / 완료 조건 |
@@ -34,14 +34,16 @@
 | SelectPokemon | 도감 카드와 선택 버튼, 실제 파티에 1마리 추가 |
 | RemovePokemon | 출발 파티와 제외 버튼, 실제 제외 |
 | PokemonInfo / PokemonInfoViewed | 처음 파티에 넣었던 포켓몬 카드와 기본 정보 강조, 해당 포켓몬 정보 열기·설명 확인 |
-| StatUpgrade | 동일한 포켓몬의 정보 닫기 → 포켓몬 설정 → 능력치 배분·적용 → 해당 포켓몬의 실제 수치 증가 저장 성공 |
-| CompleteTeam / StartBattle | 설정 닫기, 3마리 편성, 도전 확인 후 실제 시작 성공 |
+| StatUpgrade | 도감 관리로 이동 → 동일한 포켓몬 설정 → 능력치 배분·적용 → 해당 포켓몬의 실제 수치 증가 저장 성공 |
+| CompleteTeam / StartBattle | 파티 편성으로 돌아가기, 3마리 편성, 도전 확인 후 실제 시작 성공 |
 | TypeGuide | 싸운다 → 기술의 효과 배지. 첫 기술 요청 성공 |
 | AwaitVictory | 일반 전투. 패배해도 안내는 건너뛰지 않고 이후 첫 승리를 기다림 |
 | RecruitmentGuide / RecruitmentChoice | 영입 선택과 상대 카드. 도감 등록 / 동료 영입 설명 후 실제 획득 성공 |
 | Completion / Completed | 마지막 메시지 확인, 이후 안내 없음 |
 
 ## 안내 대상 포켓몬
+
+편성과 도감 관리의 역할을 분리했습니다. 성장 단계에서는 **도감 관리로 이동**, 성장 저장 후에는 **파티 편성으로 돌아가기** 버튼으로 화면을 이동합니다. 출발 파티는 안내의 서버 저장 상태에서 복원하고 선택한 대상·지급 기록도 유지합니다. 일반 도감의 기본 표시는 모두 보기, 편성 화면은 보유 중이며 역할에 맞지 않는 화면에서는 해당 안내 화면으로 복귀하도록 안내합니다.
 
 첫 실제 파티 추가 요청에서 이전 파티에 없던 species를 `selected_species`에 한 번 저장합니다. API는 이를 `selectedSpecies`로 반환합니다. 현재 커서·첫 스타터·카드 순번을 대체 대상으로 사용하지 않으며, 파티에서 제외해도 값을 지우지 않습니다.
 
@@ -57,7 +59,7 @@
 
 기존 SQLite 세이브에 `player_tutorial` 테이블을 멱등 생성합니다. 플레이어당 `step`, `reward_granted`, `party`, `selected_species`를 저장합니다. 숫자 대신 의미 있는 단계 문자열을 사용하며, 선택 중 새로고침해도 파티를 복원합니다. 이미 진행·성장 설정·수집·재화 기록이 있는 기존 사용자는 필드가 없을 때 `Completed`, 진행 없는 사용자는 `NotStarted`로 초기화합니다. 지급은 기존 `players.growth_points`를 사용합니다. 지급량은 `TRAINING_POINT_PRICE * 32`이며 현재 256P입니다. 기본 강화 비용인 +1당 8P는 그대로 유지합니다. 한 능력치를 0 → 32로 올리거나 여러 능력치에 자유롭게 나눌 수 있으며, 다음 단계로 가기 위해 반드시 32를 올릴 필요는 없습니다. 이미 지급 완료된 저장에는 차액을 추가 지급하지 않습니다.
 
-단계 변경은 예상 현재 단계와 비교하고, 실제 강화·전투·영입은 기존 서버 동작 성공 후 갱신합니다. 보상 지급과 시작 단계 전환은 같은 트랜잭션이며 재요청으로 재화가 늘지 않습니다. 첫 질문에서 건너뛰면 지급하지 않습니다. 중도 건너뛰기는 진행 중인 편성과 세이브를 변경하지 않습니다.
+단계 변경은 예상 현재 단계와 비교하고, 실제 강화·전투·영입은 기존 서버 동작 성공 후 갱신합니다. 초기 지급 표시와 잔액 변경은 같은 savepoint에서 원자적으로 처리하며, 튜토리얼 시작 여부와 독립적입니다. 첫 질문에서 건너뛰어도 신규 게임 초기 256P를 받습니다. 정상 진행과 첫 스킵의 지급액은 같고, 반복 완료·스킵으로 재화가 늘지 않습니다. 중도 건너뛰기는 진행 중인 편성과 세이브를 변경하지 않습니다.
 
 진행 관리가 한곳에 있으므로 추후 도움말의 다시 보기 기능은 단계 재시작 API와 버튼을 연결하여 추가할 수 있습니다. 이 경우에도 `reward_granted`를 유지해야 반복 지급을 방지할 수 있습니다. 현재는 다시 보기 버튼을 추가하지 않습니다.
 
@@ -71,4 +73,4 @@
 
 2026-10-24 초기 지급 수정 검증: 진행/첫 스킵 모두 256P, 반복 완료/스킵/재진입/사용 후 재지급 없음, 게스트 연결·직접 가입·복구 저장에서 중복 없음, 기존 완료/기지급 저장 잔액 보존을 확인했습니다. 실제 Chrome에서는 정상 안내 두 포켓몬, 첫 스킵 후 256P 성장 저장 및 잔액 0 유지, 중간 스킵의 파티 보존, 기존 세이브와 모바일 성장 화면을 통과했습니다. 모바일 성장 설명이 적용 버튼을 가리는 경우도 확인해 문구를 간결하게 줄였습니다. 테스트 수와 범위는 [계정 UX 검증](../operations/ACCOUNTS.md)을 참고합니다.
 
-튜토리얼 지급량 변경은 신규 미지급 사용자부터 적용합니다. 기존 커스텀 기술배치·성장 공식·진행 중인 전투 스냅샷·플레이 진행은 변경하지 않습니다.
+신규 게임 초기 지급량 변경은 신규 미지급 사용자부터 적용합니다. 기존 커스텀 기술배치·성장 공식·진행 중인 전투 스냅샷·플레이 진행은 변경하지 않습니다.

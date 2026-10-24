@@ -9,7 +9,8 @@ for(const width of [1280,390])test(`accounts preserve guest save and support ano
   const initial=await page.request.get('/api/battle?view=collection').then(r=>r.json());
   expect(initial.tower.unlocked).toHaveLength(27);
   expect((await page.request.post('/api/battle',{headers:{Origin:'http://127.0.0.1:3001'},data:{type:'favorite',species:'Greninja',enabled:true}})).ok()).toBe(true);
-  await page.getByRole('button',{name:'회원가입',exact:true}).first().click();
+  await page.getByRole('link',{name:'회원가입',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'트레이너 회원가입',exact:true})).toBeVisible();
   const username=`t_${randomUUID().slice(0,8)}`;
   await page.getByLabel('아이디',{exact:true}).fill(username);
   await page.getByLabel('비밀번호',{exact:true}).fill('testing-password-123');
@@ -45,7 +46,8 @@ for(const width of [1280,390])test(`accounts preserve guest save and support ano
       await anonymous.addCookies(guest);
       expect((await anonymous.request.get('/api/battle?view=collection').then(r=>r.json())).tower.favorites).not.toContain('Greninja');
     }finally{await anonymous.close();}
-    await page.getByRole('button',{name:'비밀번호 찾기'}).click();
+    await page.getByRole('link',{name:'비밀번호 찾기',exact:true}).click();
+    await expect(page.getByRole('heading',{name:'비밀번호 찾기',exact:true})).toBeVisible();
     await page.getByLabel('아이디',{exact:true}).fill(username);
     await page.getByLabel('계정 복구 키',{exact:true}).fill(key!);
     await page.getByRole('button',{name:'계정 확인',exact:true}).click();

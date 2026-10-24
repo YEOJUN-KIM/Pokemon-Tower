@@ -16,13 +16,29 @@ Python은 PokéRogue 변환이 필요할 때만 3.10+/Pillow 12.3.0을 검사하
 
 ## 트레이와 한국어 출력
 
-이번 UX/초기 지급 빌드는 launcherVersion `1.0.1`, buildVersion `1.0.0-beta.1-player.2`다. 이전 설치 marker와 다르면 최초 한 번 새 standalone 묶음을 준비하므로, 소스 옆 EXE를 실행해도 이전 게임 UI를 계속 사용하는 일이 없도록 한다. 저장 DB는 그대로 보존하며 다음 실행부터 빠른 경로를 사용한다.
+현재 입력 가독성/인증 이동/타이틀 표시/도감·편성 분리/종료 보강 빌드는 launcherVersion `1.0.2`, buildVersion `1.0.0-beta.1-player.6`다. 이전 설치 marker와 다르면 최초 한 번 새 standalone 묶음을 준비하므로, 소스 옆 EXE를 실행해도 이전 게임 UI를 계속 사용하는 일이 없도록 한다. 저장 DB는 그대로 보존하며 다음 실행부터 빠른 경로를 사용한다.
+
+## 프로세스 소유와 종료
+
+일반 실행 트리는 EXE → Node 실행기 → `start-deploy.mjs`/standalone 서버다. start-deploy는 같은 Node 프로세스에서 server.js를 require하므로 이 둘 사이에 별도 Node 프로세스를 만들지 않는다. 의존성/빌드 도구나 서버가 추가 자식을 만들면 실행기 하위 트리에 포함된다. 버전 검사용 `node --version`은 출력을 읽고 종료를 기다린 뒤 핸들을 해제하는 짧은 별도 호출이다.
+
+트레이 종료는 기존 FormClosing → stdin `stop` → 서버 종료 요청·exit 대기 → Node 실행기 종료 → EXE의 child exit 확인 순서를 유지한다. 기존에도 서버 exit는 기다리고 있었지만, EXE 강제 종료와 child 시작 뒤 예외에서는 Process.Dispose만으로 자식 종료를 보장하지 못했다.
+
+이 위험을 보강하기 위해 EXE가 non-inheritable Windows Job Object 핸들을 독점하고 `KILL_ON_JOB_CLOSE`로 Node 실행기와 이후 자식을 묶는다. Node 진입점은 stdin의 `start`를 받을 때까지 도구/서버를 시작하지 않으며, EXE는 Job 할당 후에만 이를 보낸다. 따라서 Job 할당 이전 자식 생성 경합도 차단한다. 초기 연결 종료/timeout은 시작하지 않고 실패한다. 개발용 NODE_OPTIONS preload도 EXE 실행 경로에서 제거한다. 정상 child exit 후 오류 창을 표시하기 전에 Job 핸들을 닫아 잔여 자식을 정리한다. 창 종료 후 8초를 넘어도 Node 실행기가 끝나지 않으면 Job 전체를 종료하고 child exit를 최대 5초 더 확인한다. EXE를 강제로 죽여 finally가 실행되지 않아도 Windows가 마지막 Job 핸들을 닫는다. [Microsoft Job Object 문서](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects).
+
+브라우저는 게임의 Job 밖인 EXE에서 기본 앱으로 연다. Node는 기존 health 검사 뒤 허용된 localhost 주소의 browser 이벤트만 보내며 C#도 주소를 확인한다. 게임을 종료해도 브라우저는 유지한다. 직접 Node CLI를 실행하는 경우에는 기존 rundll32 경로를 유지한다. 중복 EXE는 기존 home lock과 포트 검사로 서버 생성을 거부하며, 강제 종료 뒤 남은 lock은 이전 PID 종료를 확인한 뒤 회수한다.
+
+Windows 전용 회귀 검사는 `pnpm launcher:build` 후 `node --test tests/windows-player-process.test.mjs`로 실행한다. 실제 EXE와 테스트용 서버/하위 worker를 사용해 정상 종료 3회, EXE 단독 강제 종료, Node 실행기 강제 종료, 서버 실패의 6가지 경우에서 기록한 전체 PID가 사라짐을 검사한다. 정상 stop 경로가 일부러 남긴 worker도 Job이 정리하는지 확인한다. 개인 DB는 사용하지 않는다. 트레이 마우스 조작과 별도로 종료 경로·강제 종료 보호를 검증한다.
+
+이번 보강 검증에서는 실제 standalone EXE로 ready→stop을 3회 반복해 매번 EXE/Node 실행기/서버 PID 잔여 0과 포트 해제를 확인했다. 실행 중 두 번째 EXE는 실패 코드로 종료했고 기존 서버 PID는 유지됐다. EXE만 강제 종료해도 Node 트리와 포트가 정리됐으며 다음 실행의 stale lock 회수도 통과했다. 기본 브라우저 자동 열기·health와 게임 종료 후 브라우저 유지도 실제 확인했다. 결과는 `artifacts/launcher-readability/process-results.json`에 기록한다. 추가한 시작 확인 절차의 오류/빠른 검사 반환 시에는 stdin을 닫아 열린 Windows pipe가 Node 종료를 붙잡지 않도록 했고 별도 회귀 테스트로 검증했다.
 
 최종 standalone 묶음의 실제 EXE를 `artifacts/auth-ux/player-home`에 두 번 실행해 검증했다. 첫 설치의 외부 자산 검증·복사·marker 게시·production health와 종료 코드 0을 확인했다. 두 번째는 marker 원문과 setup 로그 수가 그대로였으며 재설치/전체 해시/build/package 없이 health와 종료 코드 0을 확인했다. 이 실행은 `--headless --no-browser --stop-after-health`를 사용한 무인 검증이며, 트레이 마우스 동작 검증과 구분한다.
 
 트레이 더블클릭과 우클릭 메뉴 `Pokemon Tower 열기`는 실행 중인 Node 엔진의 stdin에 `open` 한 줄을 보낸다. 엔진은 최초 실행과 같은 `/api/health` 검사 함수를 재사용한 뒤 기본 브라우저로 `http://127.0.0.1:3000/`을 연다. 이 명령에는 서버 생성/설치 경로가 없다. 검사 중 중복 요청은 합쳐 처리하며 실패하면 한국어 알림만 표시한다. 단일 클릭은 변경하지 않았다. 메뉴는 열기 → 구분선 → 종료이며, 종료는 기존 FormClosing → `stop` 경로를 유지한다.
 
 C# source는 UTF-8이고 compiler의 `/codepage:65001`을 유지한다. 이 지정이 있으므로 source BOM은 필수가 아니다. Node는 JSON stdout과 stderr를 UTF-8로 보내지만 .NET Framework의 redirected stream은 인코딩을 생략하면 Windows 기본 코드페이지로 읽는다. `ProcessStartInfo.StandardOutputEncoding`과 `StandardErrorEncoding`을 UTF-8로 명시해 한글 안내/오류가 JSON 파싱 이후에도 보존되도록 했다. stdin 명령은 ASCII인 `open`/`stop`이며 콘솔 코드페이지 변경이나 source 문자열 재인코딩은 필요 없다.
+
+최종 `player.4` 묶음으로 기존 QA 설치를 업데이트해 production health, 플레이어 저장 행 보존을 확인했다. 이어 두 번째 EXE 실행에서 marker 원문과 setup 로그 수가 바뀌지 않았고, 재설치 없이 health와 정상 종료를 통과했다. 설치 위치는 `artifacts/launcher-readability/player-home`이며 개인 저장은 사용하지 않았다.
 
 ## 설치·저장·로그
 

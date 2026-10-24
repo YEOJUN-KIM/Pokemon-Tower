@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {useEffect,useState,type FormEvent} from 'react';
 import {useGameKeyboard} from './game-keyboard';
@@ -8,12 +9,12 @@ type Mode='login'|'register'|'reset';
 type ResetIdentity={username:string;recoveryKey:string};
 type Completion={kind:'register'|'reset';username:string;recoveryKey:string};
 
-export default function AccountScreen() {
+export default function AccountScreen({mode='login',destination='/'}:{mode?:Mode;destination?:string}) {
   const router=useRouter();
-  const [loading,setLoading]=useState(true),[mode,setMode]=useState<Mode>('login');
+  const [loading,setLoading]=useState(true);
   const [busy,setBusy]=useState(false),[error,setError]=useState(''),[showClaim,setShowClaim]=useState(false);
   const [resetIdentity,setResetIdentity]=useState<ResetIdentity|null>(null),[completion,setCompletion]=useState<Completion|null>(null);
-  useGameKeyboard('.account-screen button',1,true);
+  useGameKeyboard('.account-screen button,.account-screen a',1,true);
   useEffect(()=>{
     let alive=true;
     // Prepare the existing guest save before signup so account linking is unchanged.
@@ -22,7 +23,10 @@ export default function AccountScreen() {
       .catch(()=>{if(alive){setError('서버에 연결할 수 없습니다.');setLoading(false);}});
     return ()=>{alive=false;};
   },[router]);
-  function changeMode(value:Mode) {setMode(value);setResetIdentity(null);setShowClaim(false);setError('');}
+  function modeLink(value:Mode,label:string){
+    const query={...(destination!=='/'?{next:destination}:{}),...(value!=='login'?{mode:value}:{})};
+    return <Link className="account-mode-link" href={{pathname:'/account',query}} aria-disabled={busy||undefined} tabIndex={busy?-1:undefined} onClick={event=>{if(busy)event.preventDefault();}}>{label}</Link>;
+  }
   async function submit(event:FormEvent<HTMLFormElement>) {
     event.preventDefault();if(busy)return;setError('');
     const fields=new FormData(event.currentTarget);
@@ -50,7 +54,6 @@ export default function AccountScreen() {
       {completion.recoveryKey&&<div className="account-recovery"><h2>계정 복구 키</h2><p>비밀번호를 잊었을 때 필요합니다. 아래 키를 복사해 안전하게 보관해 주세요.{completion.kind==='reset'?' 이전 키는 더 이상 사용할 수 없습니다.':''}</p><code>{completion.recoveryKey}</code></div>}
       <button className="primary-button" onClick={()=>{router.replace('/');router.refresh();}}>게임 시작하기</button>
     </>:<>
-      <nav aria-label="계정 메뉴">{(['login','register','reset'] as const).map(value=><button type="button" className="secondary-button" aria-pressed={mode===value} key={value} disabled={busy} onClick={()=>changeMode(value)}>{value==='login'?'로그인':value==='register'?'회원가입':'비밀번호 찾기'}</button>)}</nav>
       <form key={mode+(resetIdentity?'password':'identity')} onSubmit={e=>void submit(e)}>
         {!resetIdentity&&<>
           <label>아이디<input name="username" autoComplete="username" required minLength={3} maxLength={24} pattern="[a-zA-Z0-9_]+" autoCapitalize="none" spellCheck={false}/></label>
@@ -65,7 +68,10 @@ export default function AccountScreen() {
         <button className="primary-button" disabled={busy}>{busy?'처리 중…':mode==='login'?'로그인':mode==='register'?'회원가입':resetIdentity?'비밀번호 변경':'계정 확인'}</button>
         {mode==='register'&&<><p className="account-note">현재 게스트 플레이 기록은 새 계정에 자동으로 연결됩니다.</p><div className="account-claim"><p className="account-note">기존 저장 데이터를 복구하시나요?</p><button type="button" className="secondary-button" aria-expanded={showClaim} aria-controls="account-claim-code" onClick={()=>setShowClaim(value=>!value)}>{showClaim?'복구 코드 입력 닫기':'복구 코드 입력하기'}</button>{showClaim&&<label id="account-claim-code">기존 저장 복구 코드 (선택)<input name="claimCode" autoComplete="off" maxLength={128}/></label>}</div></>}
       </form>
-      {mode!=='register'&&<p className="account-note">한 번 로그인하면 이 브라우저에서 30일 동안 유지됩니다.</p>}
+      <nav className="account-links" aria-label="인증 화면 이동">
+        {mode==='login'?<><p>계정이 없으신가요? {modeLink('register','회원가입')}</p><p>비밀번호를 잊으셨나요? {modeLink('reset','비밀번호 찾기')}</p></>:mode==='register'?<p>이미 계정이 있으신가요? {modeLink('login','로그인')}</p>:modeLink('login','로그인으로 돌아가기')}
+      </nav>
+      {mode==='login'&&<p className="account-note">한 번 로그인하면 이 브라우저에서 30일 동안 유지됩니다.</p>}
     </>}
     {error&&<p role="alert">{error}</p>}
   </section></main>;

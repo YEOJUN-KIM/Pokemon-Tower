@@ -3,7 +3,7 @@ import {randomUUID} from 'node:crypto';
 for(const width of [1280,390])test('basic info previews transformed appearance, types, abilities and stats at '+width,async({page})=>{
  await page.setViewportSize({width,height:width===1280?800:900});
  const registration=await page.request.post('/api/account',{headers:{origin:'http://127.0.0.1:3001'},data:{action:'register',username:'forms_'+randomUUID().slice(0,8),password:'preview-form-password'}});expect(registration.status()).toBe(200);
- await page.goto('/pokedex');await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'기본 정보',exact:true}).click();
+ await page.goto('/pokedex');await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 정보',exact:true}).click();
  const summary=page.getByTestId('dex-detail');
  await expect(summary.locator('.stat-details')).toHaveCount(0);
  await expect(summary).not.toContainText('모습 미리보기');

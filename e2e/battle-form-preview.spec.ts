@@ -11,7 +11,7 @@ for(const width of [1280,390])test('battle form previews show transformed stats 
   ['약어리','약어리 군집폼','Wishiwashi-School',620,140,'25%'],
   ['테라파고스','테라파고스 스텔라폼','Terapagos-Stellar',700,105,'테라스탈'],
  ] as const){
-  await page.goto('/pokedex');await page.getByRole('searchbox',{name:'검색',exact:true}).fill(name);await page.getByRole('button',{name:name+' 상세 보기',exact:true}).click();await page.getByRole('button',{name:'기본 정보',exact:true}).click();
+  await page.goto('/pokedex');await page.getByRole('searchbox',{name:'검색',exact:true}).fill(name);await page.getByRole('button',{name:name+' 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 정보',exact:true}).click();
   const summary=page.getByTestId('dex-detail');await summary.getByRole('button',{name:formName,exact:true}).click();
   await expect(summary).toHaveAttribute('data-preview-form',species);await expect(summary.locator('h2')).toHaveText(formName);
   await expect(summary.locator('.summary-section-heading strong')).toHaveText(String(total));

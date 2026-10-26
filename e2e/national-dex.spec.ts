@@ -23,7 +23,7 @@ test('archive pages through all 605 species without scrolling and resets pages f
   for(const query of ['마스카나','ㅁㅅㅋㄴ','aktmzksk','Meowscarada']) {
     await search.fill(query);await expect(list.getByRole('button',{name:'마스카나 상세 보기',exact:true})).toBeVisible();await expect(pager).toContainText('1 / 1');
   }
-  await list.getByRole('button',{name:'마스카나 상세 보기',exact:true}).click();await expect(page.getByRole('button',{name:'포켓몬 선택하기',exact:true})).toBeDisabled();await page.getByRole('button',{name:'취소',exact:true}).click();
+  await list.getByRole('button',{name:'마스카나 상세 보기',exact:true}).click();await expect(page.getByRole('button',{name:'포켓몬 넣기',exact:true})).toBeDisabled();await page.getByRole('button',{name:'취소',exact:true}).click();
   await page.locator('.dex-inspect-button').click();await expect(page.getByTestId('dex-detail')).toContainText('영입하면 영구 해금');await expect(page.getByTestId('dex-detail')).toContainText('심록');await page.getByRole('button',{name:'마스카나 기본 정보 닫기'}).click();
   await search.fill('');await next.click();await dexFilter(page,'세대').selectOption('9');await expect(pager.locator('strong')).toHaveText(/^1 \/ /);
   await page.getByRole('button',{name:'필터 초기화 · R',exact:true}).click();

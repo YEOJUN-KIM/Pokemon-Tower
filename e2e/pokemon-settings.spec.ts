@@ -13,7 +13,7 @@ async function fixture(context:BrowserContext){
  await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001'}]);return {store,owner};
 }
 async function open(page:Page,name='리자몽'){
- await page.getByRole('searchbox',{name:'이름 검색'}).fill(name);await page.getByRole('button',{name:`${name} 상세 보기`,exact:true}).click();const menu=page.getByRole('dialog',{name:`${name} 선택 메뉴`});await expect(menu.getByRole('button',{name:'기술배치',exact:true})).toHaveCount(0);await expect(menu.getByRole('button',{name:'기본 정보',exact:true})).toHaveAttribute('data-number-shortcut','3');await expect(menu.getByRole('button',{name:'취소',exact:true})).toHaveAttribute('data-number-shortcut','4');await page.keyboard.press('2');await expect(page.getByTestId('pokemon-settings')).toBeVisible();
+ await page.getByRole('searchbox',{name:'이름 검색'}).fill(name);await page.getByRole('button',{name:`${name} 상세 보기`,exact:true}).click();const selection=await page.locator('[data-dex-mode=selection]').count()>0;const menu=page.locator('.dex-partner-dialog');await expect(menu.getByRole('button',{name:'기술배치',exact:true})).toHaveCount(0);await expect(menu.getByRole('button',{name:'포켓몬 정보',exact:true})).toHaveAttribute('data-number-shortcut',selection?'3':'2');await expect(menu.getByRole('button',{name:'취소',exact:true})).toHaveAttribute('data-number-shortcut',selection?'4':'3');await page.keyboard.press(selection?'2':'1');await expect(page.getByTestId('pokemon-settings')).toBeVisible();
 }
 async function help(page:Page,context:string){
  await expect(page.locator('.game-menu-footer')).toHaveCount(1);await expect(page.locator('dialog .game-menu-footer')).toHaveCount(0);await expect(page.locator('[data-menu-context]')).toHaveAttribute('data-menu-context',context);
@@ -27,7 +27,7 @@ async function applyMax(page:Page,id:string,amount:string){
 }
 for(const width of [1280,390])test(`integrated settings, nested edits, limits, persistence and footer at ${width}`,async({page,context})=>{
  const {store,owner}=await fixture(context);try{
-  await page.setViewportSize({width,height:width===1280?900:740});await page.goto('/pokedex');await expect(page.getByTestId('dex-progress')).toContainText('27 /');
+  await page.setViewportSize({width,height:width===1280?900:740});await page.goto('/battle?prepare=1');await expect(page.getByTestId('dex-progress')).toContainText('27 /');
   const before=(await (await page.request.get('/api/battle?view=collection')).json()).training.find((entry:TrainingView)=>entry.species==='Charizard') as TrainingView;
   await help(page,'dex');const footerBox=(await page.locator('.dex-bottom').boundingBox())!;
   await open(page);await help(page,'pokemon-settings');await cursor(page,'hp');
@@ -54,7 +54,7 @@ for(const width of [1280,390])test(`integrated settings, nested edits, limits, p
   const dialogBox=(await page.getByTestId('pokemon-settings').boundingBox())!;expect(dialogBox.y).toBeGreaterThanOrEqual(0);expect(dialogBox.y+dialogBox.height).toBeLessThan(footerBox.y);for(const button of await page.locator('[data-settings-column],[data-settings-save]').all()){const box=(await button.boundingBox())!;expect(box.y).toBeGreaterThan(dialogBox.y);expect(box.y+box.height).toBeLessThan(dialogBox.y+dialogBox.height);}
   await page.screenshot({path:`test-results/pokemon-settings-${width}.png`});
   await row(page,'hp').click();await page.screenshot({path:`test-results/pokemon-settings-ev-${width}.png`});await page.keyboard.press('Escape');await page.keyboard.press('Escape');await help(page,'dex');await expect(page.locator('.dex-card.selected')).toHaveAttribute('data-game-cursor','true');
-  await open(page);await expect(page.getByTestId('pokemon-settings').locator('[data-pokemon-gender]')).toHaveAttribute('data-pokemon-gender',draftGender!);await expect(row(page,'hp')).toContainText('+32');await page.keyboard.press('Escape');await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.keyboard.press('1');await page.locator('[data-party-slot="0"]').click();await page.getByRole('button',{name:'포켓몬 설정',exact:true}).click();await expect(page.getByTestId('pokemon-settings')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('[data-party-slot="0"]')).toHaveAttribute('data-game-cursor','true');
+  await open(page);await expect(page.getByTestId('pokemon-settings').locator('[data-pokemon-gender]')).toHaveAttribute('data-pokemon-gender',draftGender!);await expect(row(page,'hp')).toContainText('+32');await page.keyboard.press('Escape');await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.keyboard.press('1');await page.locator('[data-party-slot="0"]').click();await expect(page.getByRole('button',{name:'파티에서 제외',exact:true})).toBeEnabled();await page.getByRole('button',{name:'취소',exact:true}).click();await expect(page.locator('[data-party-slot="0"]')).toHaveAttribute('data-game-cursor','true');
  }finally{store.close();}
 });
 

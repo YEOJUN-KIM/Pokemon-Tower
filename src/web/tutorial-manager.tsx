@@ -24,12 +24,12 @@ function guideFor(state:TutorialState,path:string):Guide {
     case TutorialStep.StartGame: target=document.querySelector('[data-tutorial="game-start"]');if(!target)resume='/';break;
     case TutorialStep.SelectPokemon:
       if(path!=='/battle'){resume='/battle?prepare=1';break;}
-      target=find('[aria-label="포켓몬 선택하기"]')??find('[data-tutorial="starter-list"]');break;
+      target=find('[aria-label="포켓몬 넣기"]')??find('[data-tutorial="starter-list"]');break;
     case TutorialStep.RemovePokemon:
       if(path!=='/battle'){resume='/battle?prepare=1';break;}
-      target=find('[aria-label="파티에서 제외"], [aria-label="포켓몬 제외하기"]')??find('[data-party-slot]:not([data-empty])');break;
+      target=find('[aria-label="파티에서 제외"], [aria-label="포켓몬 제외"]')??find('[data-party-slot]:not([data-empty])');break;
     case TutorialStep.PokemonInfo:
-      target=dialog?(matchesTarget?find('[aria-label="기본 정보"]')??close():close()):card();break;
+      target=dialog?(matchesTarget?find('[aria-label="포켓몬 정보"]')??close():close()):card();break;
     case TutorialStep.PokemonInfoViewed:
       target=matchesTarget?find('[data-tutorial="pokemon-info"]'):close();break;
     case TutorialStep.StatUpgrade:
@@ -39,7 +39,7 @@ function guideFor(state:TutorialState,path:string):Guide {
       break;
     case TutorialStep.CompleteTeam:
       if(path!=='/battle'){resume='/battle?prepare=1';target=dialog?close():null;break;}
-      target=find('[aria-label="포켓몬 선택하기"]')??(dialog?close():find('[data-tutorial="starter-list"]'));break;
+      target=find('[aria-label="포켓몬 넣기"]')??(dialog?close():find('[data-tutorial="starter-list"]'));break;
     case TutorialStep.StartBattle:
       if(path!=='/battle'){resume='/battle?prepare=1';break;}
       target=find('[data-confirm-yes]')??find('[data-tutorial="start-battle"]');break;

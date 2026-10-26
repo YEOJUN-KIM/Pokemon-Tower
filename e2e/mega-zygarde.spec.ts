@@ -7,7 +7,7 @@ test('Mega Zygarde uses its own artwork instead of the base sprite',async({page,
  try{token=(await new Accounts(store.db).register('mega_'+suffix,'test-password',owner,undefined)).token;store.ensurePlayer(owner);store.db.prepare('INSERT INTO unlocks VALUES (?,?)').run(owner,'Zygarde');}finally{store.close();}
  await context.addCookies([{name:'tower_auth',value:token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
  await page.goto('/pokedex');await page.getByRole('searchbox',{name:'검색',exact:true}).fill('지가르데');
- await page.getByRole('button',{name:'지가르데 상세 보기',exact:true}).click();await page.getByRole('button',{name:'기본 정보',exact:true}).click();
+ await page.getByRole('button',{name:'지가르데 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 정보',exact:true}).click();
  const summary=page.getByTestId('dex-detail');
  await summary.getByRole('button',{name:'메가지가르데',exact:true}).click();
  await expect(summary).toHaveAttribute('data-preview-form','Zygarde-Mega');

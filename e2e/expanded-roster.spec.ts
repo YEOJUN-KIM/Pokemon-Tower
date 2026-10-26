@@ -16,7 +16,7 @@ test('generation-nine partners have images, self moves, native abilities and key
   await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/pokedex');
   for(const name of ['마스카나','라우드본','웨이니발']) {
     await dexSearch(page).fill(name);await page.getByRole('button',{name:`${name} 상세 보기`,exact:true}).click();
-    await page.getByRole('button',{name:'포켓몬 선택하기',exact:true}).click();
+    await page.getByRole('button',{name:'포켓몬 넣기',exact:true}).click();
   }
   await page.getByRole('button',{name:/배틀 시작/}).click();await page.getByRole('button',{name:'포켓몬 내보내기',exact:true}).click();
   await expect(page.getByTestId('action-grid')).toBeVisible();await expect(page.locator('.arena')).toHaveAttribute('data-playing','false',{timeout:30000});

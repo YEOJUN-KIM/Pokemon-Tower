@@ -15,10 +15,10 @@ test('dense archive shares first-party selection, enforces three slots and start
     await page.getByRole('button',{name:'피카츄 상세 보기',exact:true}).click();
     await expect(page.getByRole('dialog',{name:'피카츄 선택 메뉴'})).toBeVisible();
     await page.getByRole('button',{name:'취소',exact:true}).click();await expect(page.getByTestId('team-preview').locator('.preview-empty')).toHaveCount(3);
-    for(const name of ['리자몽','거북왕','이상해꽃']){await page.getByRole('button',{name:`${name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'포켓몬 선택하기',exact:true}).click();}
-    await page.getByRole('button',{name:'피카츄 상세 보기',exact:true}).click();await expect(page.getByRole('button',{name:'포켓몬 선택하기',exact:true})).toBeDisabled();await page.keyboard.press('Escape');
+    for(const name of ['리자몽','거북왕','이상해꽃']){await page.getByRole('button',{name:`${name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'포켓몬 넣기',exact:true}).click();}
+    await page.getByRole('button',{name:'피카츄 상세 보기',exact:true}).click();await expect(page.getByRole('button',{name:'포켓몬 넣기',exact:true})).toBeDisabled();await page.keyboard.press('Escape');
     await page.getByRole('button',{name:'거북왕 파티 메뉴',exact:true}).click();await page.getByRole('button',{name:'파티에서 제외',exact:true}).click();await expect(page.getByRole('button',{name:'새 도전 시작'})).toBeDisabled();
-    await page.getByRole('button',{name:'거북왕 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 선택하기',exact:true}).click();
+    await page.getByRole('button',{name:'거북왕 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 넣기',exact:true}).click();
     await page.screenshot({path:'test-results/party-archive-desktop.png',fullPage:true});
     await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'능력치 조정',exact:true}).click();
     await expect(page.getByRole('button',{name:'성실 · 능력치 보정 없음',exact:true})).toHaveAttribute('aria-pressed','true');

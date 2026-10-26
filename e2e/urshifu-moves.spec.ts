@@ -25,7 +25,7 @@ for(const width of [1280,390])test(`Urshifu form roundtrip restores independent 
   }
   await editor.getByRole('tab',{name:'능력치',exact:true}).click();await expect(editor.getByRole('spinbutton',{name:'HP 능력 포인트',exact:true})).toHaveValue('1');
   await page.reload();expect(store.trainingCollection(owner).find(p=>p.species==='Urshifu')!.profile.moves).toEqual(custom);
-  await page.getByRole('searchbox',{name:'검색',exact:true}).fill('우라오스');await page.locator('.dex-card').first().click();await page.getByRole('button',{name:'기본 정보',exact:true}).click();
+  await page.getByRole('searchbox',{name:'검색',exact:true}).fill('우라오스');await page.locator('.dex-card').first().click();await page.getByRole('button',{name:'포켓몬 정보',exact:true}).click();
   const summary=page.getByTestId('dex-detail');await expect(summary).toHaveAttribute('data-preview-form','Urshifu-Rapid-Strike');await expect(summary.locator('.summary-moves')).toContainText('인파이트');
   await summary.locator('.summary-form-preview').getByRole('button',{name:'우라오스 일격의 태세',exact:true}).click();await expect(summary.locator('.summary-moves')).toContainText('기습');await expect(summary.locator('.summary-moves')).not.toContainText('인파이트');
   await summary.locator('.summary-form-preview').getByRole('button',{name:'우라오스 연격의 태세',exact:true}).click();await expect(summary.locator('.summary-moves')).toContainText('인파이트');

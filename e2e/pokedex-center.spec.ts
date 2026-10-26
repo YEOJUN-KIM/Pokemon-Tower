@@ -87,7 +87,7 @@ for(const size of [{width:1280,height:720},{width:390,height:844}])test(`party r
  await page.setViewportSize(size);await page.goto('/pokedex');await expect(page.getByTestId('dex-progress')).toHaveText('27 / 612');
  const party=page.getByTestId('team-selection');
  await page.getByRole('button',{name:'이상해꽃 상세 보기',exact:true}).click();await page.keyboard.press('1');await expect(party).toContainText('1 / 3');
- await page.keyboard.press('z');const remove=page.getByRole('button',{name:'포켓몬 제외하기',exact:true});await expect(remove).toBeEnabled();await page.keyboard.press('1');await expect(party).toContainText('0 / 3');
+ await page.keyboard.press('z');const remove=page.getByRole('button',{name:'포켓몬 제외',exact:true});await expect(remove).toBeEnabled();await page.keyboard.press('1');await expect(party).toContainText('0 / 3');
  for(const name of ['이상해꽃','리자몽','거북왕']){await page.getByRole('button',{name:name+' 상세 보기',exact:true}).click();await page.keyboard.press('1');}
  const start=page.getByRole('button',{name:'새 도전 시작 ↗',exact:true});await expect(start).toHaveAttribute('data-game-cursor','true');
  await page.keyboard.press('ArrowUp');

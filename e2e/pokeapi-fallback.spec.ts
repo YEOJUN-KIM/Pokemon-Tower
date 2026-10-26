@@ -23,11 +23,11 @@ test('missing PokeAPI images preserve dex, party, details, victory rewards and r
     await page.getByRole('searchbox',{name:'이름 검색',exact:true}).fill('리자몽');await page.keyboard.press('Enter');
     await expect(page.getByTestId('dex-partner-display').locator('.dex-image-fallback')).toBeVisible();
     await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();
-    await page.getByRole('button',{name:'포켓몬 선택하기',exact:true}).click();
+    await page.getByRole('button',{name:'포켓몬 넣기',exact:true}).click();
     await expect(page.locator('.dex-party-picture').first()).toContainText('◇');
     await page.screenshot({path:info.outputPath('missing-pokeapi-dex-party.png')});
     await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();
-    await page.getByRole('button',{name:'기본 정보',exact:true}).click();
+    await page.getByRole('button',{name:'포켓몬 정보',exact:true}).click();
     const detail=page.getByRole('dialog',{name:'리자몽 기본 정보'});
     await expect(detail.locator('.summary-sprite')).toContainText('◇');
     await expect(detail.getByRole('img',{name:'종족값 육각형 그래프'})).toBeVisible();

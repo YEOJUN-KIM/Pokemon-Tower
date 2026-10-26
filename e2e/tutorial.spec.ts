@@ -20,7 +20,7 @@ async function fixture(context:BrowserContext){
 }
 const step=(page:Page,value:string)=>expect(page.getByTestId('tutorial-overlay')).toHaveAttribute('data-tutorial-step',value,{timeout:15000});
 const collection=async(page:Page)=>(await (await page.request.get('/api/battle?view=collection')).json());
-async function choose(page:Page,name:string){await page.getByRole('button',{name:`${name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'포켓몬 선택하기',exact:true}).click();}
+async function choose(page:Page,name:string){await page.getByRole('button',{name:`${name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'포켓몬 넣기',exact:true}).click();}
 
 for(const partner of [{species:'Blaziken',name:'번치코'},{species:'Venusaur',name:'이상해꽃'}])test(`new user completes onboarding with ${partner.species}, without selecting Skeledirge`,async({page,context})=>{
   test.setTimeout(120000);
@@ -46,7 +46,7 @@ for(const partner of [{species:'Blaziken',name:'번치코'},{species:'Venusaur',
     await expect(page.getByTestId('tutorial-overlay')).toHaveAttribute('data-tutorial-target-species',partner.species);
     await page.getByRole('button',{name:'라우드본 상세 보기',exact:true}).click({force:true});
     await expect(page.getByRole('dialog',{name:'라우드본 선택 메뉴'})).toHaveCount(0);
-    await page.getByRole('button',{name:`${partner.name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'기본 정보',exact:true}).click();await step(page,S.PokemonInfoViewed);
+    await page.getByRole('button',{name:`${partner.name} 상세 보기`,exact:true}).click();await page.getByRole('button',{name:'포켓몬 정보',exact:true}).click();await step(page,S.PokemonInfoViewed);
     await expect(page.locator('[data-tutorial="pokemon-info"]')).toBeVisible();
     await page.getByRole('button',{name:'확인했어요',exact:true}).click();await step(page,S.StatUpgrade);
     await page.getByRole('button',{name:'도감 관리로 이동',exact:true}).click();await expect(page).toHaveURL(/\/pokedex$/);
@@ -102,7 +102,7 @@ test('initial skip grants usable starting points once; mid-tutorial skip preserv
     await page.reload();await expect(page.getByTestId('tutorial-overlay')).toHaveCount(0);
     await page.goto('/pokedex');await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 설정',exact:true}).click();
     await page.locator('[data-settings-row="hp"]').click();await page.getByRole('button',{name:'MAX',exact:true}).click();await page.getByRole('button',{name:'적용',exact:true}).click();
-    await page.getByRole('button',{name:`${TUTORIAL_GROWTH_POINTS}P로 설정 저장`,exact:true}).click();expect(store.view(owner).growthPoints).toBe(0);
+    await page.getByRole('button',{name:`${TUTORIAL_GROWTH_POINTS}P로 설정 저장`,exact:true}).click();await expect.poll(()=>store.view(owner).growthPoints).toBe(0);
     await page.request.post('/api/tutorial',{headers:{Origin:'http://127.0.0.1:3001'},data:{event:'skip'}});expect(store.view(owner).growthPoints).toBe(0);
     // A separate fresh player exercises skip during actual selection.
     const second=await fixture(context);try{
@@ -129,7 +129,7 @@ test('mobile spotlight and native modal guidance remain usable after resizing',a
     await page.getByRole('link',{name:'게임 시작',exact:true}).click();await step(page,S.SelectPokemon);
     await choose(page,'리자몽');await step(page,S.RemovePokemon);
     await page.locator('[data-party-slot="0"]').click();await page.getByRole('button',{name:'파티에서 제외',exact:true}).click();await step(page,S.PokemonInfo);
-    await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'기본 정보',exact:true}).click();await step(page,S.PokemonInfoViewed);
+    await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 정보',exact:true}).click();await step(page,S.PokemonInfoViewed);
     await page.getByRole('button',{name:'확인했어요',exact:true}).click();await step(page,S.StatUpgrade);await page.getByRole('button',{name:'도감 관리로 이동',exact:true}).click();await expect(page).toHaveURL(/\/pokedex$/);
     await page.getByRole('button',{name:'리자몽 상세 보기',exact:true}).click();await page.getByRole('button',{name:'포켓몬 설정',exact:true}).click();
     await page.locator('[data-settings-row="hp"]').click();await page.getByRole('slider',{name:'HP 투자 포인트'}).focus();await page.keyboard.press('ArrowRight');await page.getByRole('button',{name:'적용',exact:true}).click();

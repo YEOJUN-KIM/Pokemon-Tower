@@ -33,6 +33,17 @@ test('release EXE installs, relaunches, rejects duplicates, reaps children and u
   results.push({scenario:i?'fast-relaunch-'+i:'first-install',exit:0});
  }
  const installed=JSON.parse(await readFile(marker,'utf8'));assert.equal(installed.appVersion,version);
+ // A rebuilt ZIP with the same app version must replace the cached runtime too.
+ const previousBuild={...installed,buildVersion:version+'-player.previous-build'};
+ await writeFile(marker,JSON.stringify(previousBuild));
+ await finish(launch());await assertFree();
+ const rebuilt=JSON.parse(await readFile(marker,'utf8'));
+ assert.equal(rebuilt.appVersion,installed.appVersion);
+ assert.equal(rebuilt.buildVersion,installed.buildVersion);
+ assert.notEqual(rebuilt.package,installed.package);
+ const rebuiltCount=await setupCount();
+ await finish(launch());await assertFree();assert.equal(await setupCount(),rebuiltCount);
+ results.push({scenario:'same-version-rebuild',runtimeReplaced:true,fastRelaunch:true});
  for(const file of (await readdir(path.join(home,'logs'))).filter(f=>f.startsWith('setup-'))){
   const log=await readFile(path.join(home,'logs',file),'utf8');
   assert.ok(log.includes('Stage: verify')&&log.includes('Stage: package'));

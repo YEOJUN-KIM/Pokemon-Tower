@@ -54,6 +54,7 @@ test('marker validates versions and a constant-size sentinel set without full as
   for(const file of ['server.js','scripts/start-deploy.mjs','scripts/dependency-links.json','.next/BUILD_ID','package.json',...sentinels]){await mkdir(path.dirname(path.join(directory,file)),{recursive:true});await writeFile(path.join(directory,file),'fixture');}
   await publishMarker(home,config,directory,node);assert.equal((await readMarker(home,config)).ok,true);
   assert.equal((await readMarker(home,{...config,appVersion:'2'})).ok,false);
+  assert.equal((await readMarker(home,{...config,buildVersion:'rebuilt'})).ok,false);
   await unlink(path.join(directory,sentinels[0]));assert.equal((await readMarker(home,config)).ok,false);
   await writeFile(path.join(home,'.install-complete.json'),'broken');assert.equal((await readMarker(home,config)).ok,false);
   assert.throws(()=>childPath(home,'../outside'),/설치 경로/);

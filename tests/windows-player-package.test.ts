@@ -4,7 +4,26 @@ import {mkdtemp,mkdir,writeFile,readFile,rm} from 'node:fs/promises';
 import path from 'node:path';
 import {tmpdir} from 'node:os';
 import {spawnSync} from 'node:child_process';
-import {assertPlayerPath,assertPublicText,inventory,preparePublicFiles,hash,assertExplorerPaths,explorerPolicy} from '../scripts/windows-player-package.mjs';
+import {assertPlayerPath,assertPublicText,inventory,preparePublicFiles,hash,assertExplorerPaths,explorerPolicy,stampPlayerBuild} from '../scripts/windows-player-package.mjs';
+
+test('same-version player rebuilds have distinct stable installation identities',async()=>{
+ const directory=await mkdtemp(path.join(tmpdir(),'tower-build-'));
+ try{
+  await mkdir(path.join(directory,'scripts/player'),{recursive:true});
+  await mkdir(path.join(directory,'.next'));
+  const config={appVersion:'1.0.0-beta.5',buildVersion:'old',launcherVersion:'1',assetVersion:'1',schemaVersion:1};
+  await writeFile(path.join(directory,'scripts/player/config.json'),JSON.stringify(config));
+  await writeFile(path.join(directory,'.next/BUILD_ID'),'first\n');
+  const first=await stampPlayerBuild(directory);
+  assert.deepEqual(first,{...config,buildVersion:'1.0.0-beta.5-player.first'});
+  assert.deepEqual(await stampPlayerBuild(directory),first);
+  await writeFile(path.join(directory,'.next/BUILD_ID'),'second');
+  const second=await stampPlayerBuild(directory);
+  assert.equal(second.appVersion,first.appVersion);
+  assert.notEqual(second.buildVersion,first.buildVersion);
+  assert.deepEqual(JSON.parse(await readFile(path.join(directory,'scripts/player/config.json'),'utf8')),second);
+ }finally{await rm(directory,{recursive:true,force:true});}
+});
 
 test('Explorer extraction budget includes the ZIP root, UTF-16 names and download directory',()=>{
  const limit=explorerPolicy.maxFullPath-explorerPolicy.extractionRootBudget-1-explorerPolicy.archiveRoot.length-1;

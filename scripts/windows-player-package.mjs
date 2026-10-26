@@ -12,6 +12,16 @@ export function assertExplorerPaths(names){
  return {maxRelativePath:ranked[0]?.relativeLength??0,maxModeledPath:(ranked[0]?.relativeLength??0)+explorerPolicy.extractionRootBudget+1,policy:explorerPolicy,longest:ranked.slice(0,20)};
 }
 export const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
+export async function stampPlayerBuild(directory){
+ const file=path.join(directory,'scripts/player/config.json');
+ const config=JSON.parse(await readFile(file,'utf8'));
+ const build=(await readFile(path.join(directory,'.next/BUILD_ID'),'utf8')).trim();
+ if(!build)throw Error('Missing player build identity');
+ // Same-version rebuilds must invalidate the launcher's installed-package cache.
+ config.buildVersion=`${config.appVersion}-player.${build}`;
+ await writeFile(file,JSON.stringify(config,null,2)+'\n');
+ return config;
+}
 export async function files(root,prefix=''){
  const result=[];
  for(const entry of await readdir(path.join(root,prefix),{withFileTypes:true})){

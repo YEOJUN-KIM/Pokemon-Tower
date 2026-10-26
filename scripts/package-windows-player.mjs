@@ -3,11 +3,11 @@ import path from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {inventory,preparePublicFiles,verifyFolder,hash} from './windows-player-package.mjs';
 if(process.platform!=='win32'||process.arch!=='x64')throw Error('Build this release on Windows x64 with Node.js 24+.');
-if(process.argv.length>2)throw Error('No options supported. Output is immutable; move the previous release before rebuilding.');
+const args=process.argv.slice(2);if(args.length&&!(args.length===2&&args[0]==='--output-root'&&args[1]))throw Error('Expected --output-root <new directory>, or no options');
 const root=process.cwd(),pkg=JSON.parse(await readFile('package.json','utf8'));
 const config=JSON.parse(await readFile('scripts/player/config.json','utf8'));
 if(pkg.version!==config.appVersion||!/^\d+\.\d+\.\d+(?:-[\w.]+)?$/.test(pkg.version))throw Error('Align package and player versions first.');
-const name='PokemonTower-Windows-v'+pkg.version,directory=path.resolve('dist',name),zip=directory+'.zip';
+const name='PokemonTower-Windows-v'+pkg.version,directory=path.resolve(args[1]??'dist',name),zip=directory+'.zip';
 for(const file of [directory,zip]){try{await access(file);}catch(e){if(e.code==='ENOENT')continue;throw e;}throw Error('Output already exists: '+file);}
 function run(file,args){const r=spawnSync(file,args,{cwd:root,stdio:'inherit',windowsHide:true});if(r.error||r.status!==0)throw Error('Release step failed: '+file+' '+args.join(' '));}
 run(process.execPath,['scripts/assets/manage.mjs','verify']);

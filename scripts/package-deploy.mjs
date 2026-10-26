@@ -6,6 +6,7 @@ import {loadDefinition as loadShowdown} from './assets/showdown-pokemon/common.m
 import {loadDefinition as loadPokeapi} from './assets/pokeapi/common.mjs';
 import {loadDefinition as loadMixed,verifyGroup} from './assets/mixed/runtime.mjs';
 import {spawnSync} from 'node:child_process';
+import {copyCompactStandalone} from './compact-standalone.mjs';
 const argumentsList=process.argv.slice(2);
 const player=argumentsList.includes('--player');
 let explicitOutput;
@@ -72,8 +73,14 @@ async function inventory(directory) {
     } else if(info.isDirectory())await inventory(source);
   }
 }
-await inventory(standalone);
-await cp(standalone, target, {recursive:true, filter:async source=> !basename(source).startsWith('.env') && !['.data','logs','test-results'].includes(basename(source)) && !(await lstat(source)).isSymbolicLink() && (!player||!(/\.(?:map|nft\.json|d\.ts)$/.test(source)||['cache','.git'].includes(basename(source))))});
+if(player){
+ const compact=await copyCompactStandalone(standalone,target,resolve('.'));
+ links.push(...compact.links);
+ console.log(`Compact traced runtime: ${compact.copied} files, ${compact.slots} short dependency slots; ${compact.omitted} development/cache entries excluded.`);
+}else{
+ await inventory(standalone);
+ await cp(standalone, target, {recursive:true, filter:async source=> !basename(source).startsWith('.env') && !['.data','logs','test-results'].includes(basename(source)) && !(await lstat(source)).isSymbolicLink()});
+}
 await cp('.next/static', `${target}/.next/static`, {recursive:true});
 await cp('public', `${target}/public`, {recursive:true});
 await mkdir(`${target}/scripts`, {recursive:true});

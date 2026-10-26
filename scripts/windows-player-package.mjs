@@ -1,6 +1,16 @@
 import {readdir,readFile,writeFile,lstat} from 'node:fs/promises';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
+import {readFileSync} from 'node:fs';
+export const explorerPolicy=JSON.parse(readFileSync(new URL('./windows-player-path-policy.json',import.meta.url),'utf8'));
+export function assertExplorerPaths(names){
+ const ranked=names.map(name=>({path:explorerPolicy.archiveRoot+'/'+name,relativeLength:(explorerPolicy.archiveRoot+'/'+name).length})).sort((a,b)=>b.relativeLength-a.relativeLength);
+ for(const entry of ranked){
+  if(entry.relativeLength+explorerPolicy.extractionRootBudget+1>explorerPolicy.maxFullPath)throw Error(`Windows Explorer path budget exceeded (${entry.relativeLength}+${explorerPolicy.extractionRootBudget}+1 > ${explorerPolicy.maxFullPath}): ${entry.path}`);
+  if(entry.path.split('/').some(p=>p.length>255))throw Error('Windows filename component too long: '+entry.path);
+ }
+ return {maxRelativePath:ranked[0]?.relativeLength??0,maxModeledPath:(ranked[0]?.relativeLength??0)+explorerPolicy.extractionRootBudget+1,policy:explorerPolicy,longest:ranked.slice(0,20)};
+}
 export const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 export async function files(root,prefix=''){
  const result=[];
@@ -52,6 +62,7 @@ export async function verifyFolder(directory){
  const pkg=JSON.parse(await readFile(path.join(directory,'package.json'),'utf8'));
  if(manifest.version!==config.appVersion||manifest.version!==pkg.version||manifest.platform!=='win32'||manifest.arch!=='x64')throw Error('Release metadata mismatch');
  const actual=await inventory(directory);
+ const extraction=assertExplorerPaths([...actual.map(f=>f.path),'release-manifest.json']);
  if(JSON.stringify(actual)!==JSON.stringify(manifest.files))throw Error('Release inventory/hash mismatch');
  for(const required of ['PokemonTower.exe','README.txt','server.js','.next/BUILD_ID','scripts/start-deploy.mjs','scripts/dependency-links.json','scripts/player-launcher.mjs','scripts/player/managed-start.mjs','licenses/THIRD_PARTY.md'])if(!actual.some(f=>f.path===required))throw Error('Missing '+required);
  if(!(await readFile(path.join(directory,'PokemonTower.exe'))).subarray(0,2).equals(Buffer.from('MZ')))throw Error('Invalid Windows EXE');
@@ -61,5 +72,5 @@ export async function verifyFolder(directory){
   if(!relative||relative.startsWith('..')||path.isAbsolute(relative))throw Error('Dependency link escapes package');
   if(key==='target')await lstat(path.join(directory,link.target));
  }
- return manifest;
+ return {...manifest,extraction};
 }

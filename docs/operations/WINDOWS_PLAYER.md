@@ -55,6 +55,10 @@ C# source는 UTF-8이고 compiler의 `/codepage:65001`을 유지한다. 이 지�
 
 일반 사용자 배포는 `pnpm player:package`로 생성하고 `pnpm player:package:verify`로 재검사한다. Windows x64에서 자산 전체 검증 → production build → 기존 package-deploy의 `--player` 경로 → EXE 컴파일 → 사용자 README/파일별 SHA256 manifest → ZIP → 압축 내부 전체 SHA 검증을 수행한다. `dist/PokemonTower-Windows-v1.0.0-beta.5/`와 같은 이름의 ZIP 및 `.zip.sha256`이 결과다. 출력은 덮어쓰지 않는다. 재생성이 필요하면 기존 결과를 먼저 별도 보관한다.
 
+2026-10-26부터 ZIP 내부 최상위는 `PokemonTower/`이며 Release ZIP 파일명은 유지한다. Next standalone에 추적된 production 파일만 복사하고 pnpm의 긴 peer/version 저장 디렉터리를 `node_modules/.p/<짧은 슬롯>/`으로 바꾼다. dependency 내부 파일명과 버전별 연결 관계는 그대로다. 생성·folder verify·ZIP verify는 압축 해제 상위 경로 100자(UTF-16)를 예약하고, 최상위 폴더를 포함한 최종 파일 경로가 240자를 넘으면 실패한다. 세부 원인과 실기 범위는 [ZIP 경로 검증](WINDOWS_ZIP_PATHS.md)을 따른다.
+
+기존 결과와 나란히 검증할 때는 `pnpm player:package --output-root dist/explorer-fix`와 `pnpm player:package:verify dist/explorer-fix/PokemonTower-Windows-v1.0.0-beta.5`를 사용한다. 이 옵션도 기존 출력은 덮어쓰지 않는다. 일반 사용자 절차는 다운로드 → 압축 해제 → PokemonTower.exe 그대로이며 짧은 드라이브 경로·Long Paths 설정·추가 압축 도구를 요구하지 않는다.
+
 EXE 단독 배포는 불가능하다. 추적된 production 의존성, public/.next/static, 서버/실행기, 자산 검증 recipe/lock/manifest, 라이선스를 함께 배포한다. 개발 소스·테스트·전체 개발 node_modules·서버 운영 문서·환경 파일·Python 변환기는 player 묶음에서 제외한다. Next가 기록한 빌드 PC 절대 경로는 상대 경로로 바꾸고 source map은 제외한다. 파일 구조/해시 검사에서 DB·설치 기록·로그·비밀값 혼입을 거부한다. 자산 8,578개는 동봉하며 첫 실행에 다운로드/변환/빌드를 하지 않는다.
 
 검증 대상은 Windows 11 x64 + Node.js 24 이상이다. C#은 Windows 기본 .NET Framework 4.x WinForms를 사용하므로 이 환경에서 별도 SDK/Visual Studio 설치가 필요 없다. [Microsoft Windows별 .NET Framework 안내](https://learn.microsoft.com/en-us/dotnet/framework/install/on-windows-10)에 Windows 11 포함 버전이 명시되어 있다. 제거·손상된 Windows 구성이나 Windows 10/ARM은 이번 배포의 별도 실기 검증 대상이 아니다. [Release 안내와 다른 PC 확인](../releases/WINDOWS_BETA_5.md)을 따른다.

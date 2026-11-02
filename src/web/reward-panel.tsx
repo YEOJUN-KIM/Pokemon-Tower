@@ -6,6 +6,7 @@ import {pokemonName} from '../data/pokemon-catalog';
 import {useLayoutEffect,useRef,useState} from 'react';
 import type {RewardEntry,RewardResult,RewardSelection} from '../data/rewards';
 import {selectGameCursor} from './game-keyboard';
+import {RewardIcon,rewardEntryParts} from './reward-icons';
 import styles from './styles/reward-panel.module.css';
 
 export function rewardEntryText(entry:RewardEntry):string {
@@ -29,8 +30,20 @@ export function hasActualRewards(result:RewardResult){return result.entries.some
 
 export type RewardPanelProps={result:RewardResult;busy:boolean;onConfirm:()=>void;heading?:string;onSelect?:(selectionId:string,candidateId:string)=>void};
 
+// Reward-screen layout: one reward is shown large and centred, several become a
+// row of tiles. The full sentence stays as visually hidden text for screen readers.
 export function RewardEntryList({entries}:{entries:readonly RewardEntry[]}){
- return <ul className={styles.entries} aria-label="결과 항목">{entries.map((entry,index)=><li key={index} data-reward-kind={entry.kind}><span className={styles.entryMark} aria-hidden="true">{entry.kind==='coin-loss'?'!':entry.kind==='message'?'·':'◆'}</span><span>{rewardEntryText(entry)}</span></li>)}</ul>;
+ const single=entries.length===1;
+ return <ul className={styles.entries} data-count={single?'single':'multi'} aria-label="결과 항목">{entries.map((entry,index)=>{
+  if(entry.kind==='coin-loss'||entry.kind==='message')return <li key={index} data-reward-kind={entry.kind} className={styles.note}><span className={styles.entryMark} aria-hidden="true">{entry.kind==='coin-loss'?'!':'·'}</span><span>{rewardEntryText(entry)}</span></li>;
+  const parts=rewardEntryParts(entry,rewardEntryText(entry));
+  return <li key={index} data-reward-kind={entry.kind} className={styles.reward}>
+   <span className={styles.srOnly}>{rewardEntryText(entry)}</span>
+   <RewardIcon className={styles.rewardIcon} name={parts.icon}/>
+   <span className={styles.rewardLabel} aria-hidden="true">{parts.label}</span>
+   {parts.value&&<strong className={styles.rewardValue} aria-hidden="true">{parts.value}</strong>}
+  </li>;
+ })}</ul>;
 }
 
 export function RewardChoiceList({selections,busy,onSelect}:{selections:readonly RewardSelection[];busy:boolean;onSelect?:RewardPanelProps['onSelect']}){
@@ -54,13 +67,13 @@ export function RewardPanel({result,busy,onConfirm,onSelect}:RewardPanelProps){
  const pending=result.selections?.some(selection=>selection.state==='pending')??false;
  useLayoutEffect(()=>{selectGameCursor(pending?ref.current?.closest('[data-testid="reward-panel"]')?.querySelector<HTMLButtonElement>('button:not(:disabled)'):ref.current);},[result,busy]);
  return <div className={`${styles.scope} ${styles.panel} reward-panel`} data-reward-tone={result.tone} data-testid="reward-panel">
-  <header className={styles.heading}>보상</header>
+  <header className={styles.heading}>보상 획득</header>
   <div className={styles.contents}>
    <RewardEntryList entries={result.entries.filter(entry=>entry.kind!=='message'&&entry.kind!=='coin-loss')}/>
    {result.selections&&<RewardChoiceList selections={result.selections} busy={busy} onSelect={onSelect}/>}
   </div>
   <div className={styles.actions} role="group" aria-label="보상 확인">
-   <button ref={ref} data-initial-focus className={styles.confirm} disabled={busy||pending} onClick={onConfirm}><span className={styles.pointer} aria-hidden="true">{'>'}</span>{busy?'잠시만요…':'받기'}</button>
+   <button ref={ref} data-initial-focus className={`${styles.confirm} ${styles.gameButton}`} disabled={busy||pending} onClick={onConfirm}><span className={styles.pointer} aria-hidden="true">▶</span>{busy?'잠시만요…':'받기'}</button>
   </div>
  </div>;
 }

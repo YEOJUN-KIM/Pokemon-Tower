@@ -1,7 +1,7 @@
 'use client';
 import {useEffect,useLayoutEffect,useRef,useState} from 'react';
 import type {RewardRevealPresentation} from './event-presentation';
-import {RewardChest} from './reward-chest';
+import {RewardIcon,type RewardIconName} from './reward-icons';
 import {useDialogControls} from './game-menu-context';
 import type {RewardResult} from '../data/rewards';
 import {selectGameCursor} from './game-keyboard';
@@ -9,6 +9,7 @@ import {RewardPanel,type RewardPanelProps} from './reward-panel';
 import styles from './styles/reward-panel.module.css';
 
 export const rewardRevealDelay=650;
+const revealIcons:Record<RewardRevealPresentation['object'],RewardIconName>={chest:'chest',drop:'gem',gift:'gift',sparkle:'sparkle'};
 
 // A real top-layer dialog keeps all background controls inert, including those
 // outside the battle panel. The game keyboard already scopes to open dialogs.
@@ -25,7 +26,7 @@ export function RewardModal({result,reveal,...props}:RewardPanelProps & {result:
   button?.focus({preventScroll:true});selectGameCursor(button);
   return()=>{dialog.close();if(previous?.isConnected)previous.focus({preventScroll:true});};
  },[phase]);
- return <dialog ref={ref} className={`${styles.scope} ${styles.modal}`} data-testid="reward-modal" aria-label={props.heading??(result.tone==='good'||result.tone==='great'?'보상':'결과')} onCancel={event=>{event.preventDefault();event.stopPropagation();}} onKeyDown={event=>{
+ return <dialog ref={ref} className={`${styles.scope} ${styles.modal}`} data-testid="reward-modal" data-reveal-tone={reveal?.tone??'normal'} aria-label={props.heading??(result.tone==='good'||result.tone==='great'?'보상':'결과')} onCancel={event=>{event.preventDefault();event.stopPropagation();}} onKeyDown={event=>{
   if(event.key==='Escape'){event.preventDefault();event.stopPropagation();}
   if(event.key==='Tab'){
    event.preventDefault();event.stopPropagation();document.body.dataset.gameInput='native';
@@ -46,9 +47,13 @@ export function RewardModal({result,reveal,...props}:RewardPanelProps & {result:
   }
  }}>
   {phase==='reward'?<RewardPanel result={result} {...props}/>:<div className={styles.reveal} data-testid="reward-reveal" data-reveal-phase={phase}>
-   <p role="status">{phase==='opening'?'빛이 새어 나오고 있다...':reveal?.message}</p>
-   <div className={styles.revealObject} data-opened={phase==='opening'} aria-hidden="true">{reveal?.object==='chest'?<RewardChest/>:<span>{reveal?.object==='sparkle'?'✧':reveal?.object==='drop'?'◆':'✦'}</span>}</div>
-   <button data-initial-focus disabled={props.busy||phase==='opening'} onClick={()=>setPhase('opening')}>{phase==='opening'?'확인하는 중…':reveal?.action}</button>
+   <div className={styles.revealObject} data-opened={phase==='opening'} data-object={reveal?.object} aria-hidden="true">
+    <span className={styles.revealGlow}/>
+    <RewardIcon className={styles.revealIcon} name={revealIcons[reveal?.object??'sparkle']}/>
+    <i className={styles.revealSpark}>✦</i><i className={styles.revealSpark}>✧</i>
+   </div>
+   <p role="status" className={styles.revealMessage}>{phase==='opening'?'빛이 새어 나오고 있다...':reveal?.message}</p>
+   <button className={styles.gameButton} data-initial-focus disabled={props.busy||phase==='opening'} onClick={()=>setPhase('opening')}><span>{phase==='opening'?'확인하는 중…':reveal?.action}</span><span className={styles.pointer} aria-hidden="true">▶</span></button>
   </div>}
  </dialog>;
 }

@@ -3,7 +3,9 @@ import {randomBytes} from 'node:crypto';
 import {TowerStore} from '../src/server/tower-store';
 import {Accounts} from '../src/server/accounts';
 import {starters} from '../src/data/teams';
+import {merchantTicketPrice} from '../src/data/run-events';
 import {mkdirSync} from 'node:fs';
+import {claimEventReward} from './event-reward-flow';
 
 // A completed event can retain the game's existing villain follow-up instead of team selection.
 async function nextStage(page:import('@playwright/test').Page,store:TowerStore,owner:string){
@@ -46,7 +48,7 @@ for(const width of [1280,390])for(const choice of ['open','skip','resume-ticket'
   const info=dialog.getByTestId('event-info');
   if(choice==='resume-ticket')await expect(info).toHaveCount(0);
   else{
-   await expect(info).toContainText('코인이나 알 뽑기권');const infoBox=(await info.boundingBox())!;
+   await expect(info).toContainText('길에서 발견한 상자');const infoBox=(await info.boundingBox())!;
    expect(infoBox.width).toBeLessThanOrEqual(310);expect(infoBox.height).toBeLessThan(arena.height/2);
    expect(infoBox.y).toBeGreaterThanOrEqual(arena.y);expect(infoBox.y-arena.y).toBeLessThanOrEqual(16);
    expect(infoBox.y+infoBox.height).toBeLessThanOrEqual(messages.y);
@@ -68,7 +70,9 @@ for(const width of [1280,390])for(const choice of ['open','skip','resume-ticket'
    await expect(dialog.getByRole('log',{name:'이벤트 안내'})).toHaveCount(0);await expect(dialog.getByTestId('event-info')).toBeVisible();
    const options=dialog.getByRole('group',{name:'이벤트 선택'}).getByRole('button'),first=(await options.nth(0).boundingBox())!,second=(await options.nth(1).boundingBox())!;
    expect(second.y).toBeGreaterThanOrEqual(first.y+first.height);expect(second.x).toBe(first.x);
-   for(const option of await options.all()){await expect(option).toHaveCSS('border-top-width','0px');await expect(option).toHaveCSS('outline-style','none');await expect(option).toHaveCSS('box-shadow','none');await expect(option).toHaveCSS('background-color','rgba(0, 0, 0, 0)');}
+   for(const option of await options.all()){await expect(option).toHaveCSS('border-top-width','0px');await expect(option).toHaveCSS('outline-style','none');
+    // The shared game cursor highlights the selected row; only unselected rows stay transparent.
+    if(await option.getAttribute('data-game-cursor')!=='true'){await expect(option).toHaveCSS('box-shadow','none');await expect(option).toHaveCSS('background-color','rgba(0, 0, 0, 0)');}}
    if(width===1280){
     await options.nth(0).hover();await page.keyboard.press('ArrowDown');await expect(options.nth(0).locator('[aria-hidden=true]')).toHaveCSS('opacity','0');await expect(options.nth(1)).toHaveAttribute('data-game-cursor','true');await expect(options.nth(1).locator('[aria-hidden=true]')).toHaveCSS('opacity','1');await expect(options.nth(1)).toHaveCSS('outline-style','none');
     await page.keyboard.press('ArrowUp');await expect(options.nth(0)).toHaveAttribute('data-game-cursor','true');
@@ -84,7 +88,6 @@ for(const width of [1280,390])for(const choice of ['open','skip','resume-ticket'
   }
   if(choice!=='skip'){
    await expect(dialog).toHaveAttribute('data-phase','reward');await expect(info).toHaveCount(0);const saved=store.view(owner),reward=saved.run!.event!.reward!;
-   await expect(dialog.getByTestId('event-reward')).toHaveText(reward.kind==='coins'?`${reward.amount}코인`:`알 뽑기권 ${reward.amount}장`);
    await page.reload();await expect(dialog).toHaveAttribute('data-phase','reward');await expect(info).toHaveCount(0);
    // Simulate duplicate delivery from two clients after a lost response.
    const duplicate=await Promise.all([1,2].map(()=>page.request.post('/api/battle',{headers:{origin:'http://127.0.0.1:3001'},data:{type:'event-choice',runId,eventId:event.id,choice:'open'}})));expect(duplicate.every(response=>response.ok())).toBe(true);
@@ -94,7 +97,7 @@ for(const width of [1280,390])for(const choice of ['open','skip','resume-ticket'
    const rewardPanel=(await dialog.locator('.battle-messages').boundingBox())!,continueBox=(await dialog.locator('[data-event-confirm]').boundingBox())!;
    expect(continueBox.y+continueBox.height).toBeLessThanOrEqual(rewardPanel.y+rewardPanel.height+1);
    await dialog.screenshot({path:`artifacts/qa/screenshots/events/chest-${choice}-${width}.png`});
-   await dialog.locator('[data-event-confirm]').click();await page.getByTestId('reward-modal').getByRole('button',{name:'받기',exact:true}).click();
+   await dialog.locator('[data-event-confirm]').click();await claimEventReward(page,reward.kind==='coins'?`타워 코인 ${reward.amount.toLocaleString()}`:`알 뽑기권 ${reward.amount.toLocaleString()}장`);
   }
   await expect.poll(()=>store.view(owner).run!.event?.id).not.toBe(event.id);await nextStage(page,store,owner);
   expect(store.view(owner).run!.floor).toBe(2);if(store.view(owner).run!.event)expect(store.view(owner).run!.event!.villain).toBeTruthy();
@@ -120,7 +123,7 @@ for(const width of [1280,390])for(const kind of ['breeder-gift','traveling-merch
   const auth=await new Accounts(store.db).register('meet_'+suffix,'event-meet-password',owner,undefined);store.ensurePlayer(owner);
   const battle=store.start(owner,starters,'basic',{events:true}),runId=store.battle(battle).run_id;
   store.db.prepare("UPDATE battles SET status='complete' WHERE id=?").run(battle);store.db.prepare("UPDATE runs SET state='recruit' WHERE id=?").run(runId);store.recruit(owner,runId,battle,null,null);
-  store.db.prepare('UPDATE run_events SET kind=? WHERE run_id=?').run(kind,runId);store.db.prepare('UPDATE players SET coins=300 WHERE id=?').run(owner);const originalEventId=store.view(owner).run!.event!.id;
+  store.db.prepare('UPDATE run_events SET kind=? WHERE run_id=?').run(kind,runId);store.db.prepare('UPDATE players SET coins=? WHERE id=?').run(merchantTicketPrice,owner);const originalEventId=store.view(owner).run!.event!.id;
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
   await page.setViewportSize({width,height:width===390?844:900});await page.goto('/battle');
   const event=page.getByTestId('run-event'),info=event.getByTestId('event-info');
@@ -130,14 +133,13 @@ for(const width of [1280,390])for(const kind of ['breeder-gift','traveling-merch
   await page.reload();await expect(info).toBeVisible();
   await event.getByRole('button',{name:'선택지 보기',exact:true}).click();
   await event.screenshot({path:`artifacts/qa/screenshots/events/${kind}-${width}.png`});
-  await event.getByRole('button',{name:accept?(kind==='breeder-gift'?'선물을 받는다':'300코인으로 산다'):'지나간다',exact:true}).click();
+  await event.getByRole('button',{name:accept?(kind==='breeder-gift'?'선물을 받는다':`${merchantTicketPrice}코인으로 산다`):'지나간다',exact:true}).click();
   if(accept){
    await expect(event).toHaveAttribute('data-phase','reward');await expect(info).toHaveCount(0);
-   await expect(event.getByTestId('event-reward')).toHaveText('알 뽑기권 1장');
    await page.reload();await expect(info).toHaveCount(0);await expect(event).toHaveAttribute('data-phase','reward');
-   expect(store.permanentView(owner).eggTickets).toBe(1);expect(store.view(owner).coins).toBe(kind==='traveling-merchant'?0:300);
-   await expect(event.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await event.locator('[data-event-confirm]').click();await page.getByTestId('reward-modal').getByRole('button',{name:'받기',exact:true}).click();
-  }else{expect(store.permanentView(owner).eggTickets).toBe(0);expect(store.view(owner).coins).toBe(300);}
+   expect(store.permanentView(owner).eggTickets).toBe(1);expect(store.view(owner).coins).toBe(kind==='traveling-merchant'?0:merchantTicketPrice);
+   await expect(event.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await event.locator('[data-event-confirm]').click();await claimEventReward(page,'알 뽑기권 1장');
+  }else{expect(store.permanentView(owner).eggTickets).toBe(0);expect(store.view(owner).coins).toBe(merchantTicketPrice);}
   await expect.poll(()=>store.view(owner).run!.event?.id).not.toBe(originalEventId);await nextStage(page,store,owner);expect(store.view(owner).run!.floor).toBe(2);
  }finally{store.close();}
 });

@@ -3,6 +3,7 @@ import {randomBytes} from 'node:crypto';
 import {mkdirSync} from 'node:fs';
 import {raidFixture,finishRaidBattle} from '../tests/raid-fixture';
 import {Accounts} from '../src/server/accounts';
+import {claimEventReward,openEventReward} from './event-reward-flow';
 
 for(const width of [1280,390])for(const bossId of ['garchomp','mewtwo'])test(`raid ${bossId} silhouette, reveal, recruit and reward at ${width}`,async({page,context})=>{
  const owner='raid_'+randomBytes(8).toString('hex'),f=raidFixture('.data/e2e.sqlite',owner,bossId,bossId==='mewtwo'?'y':'mega');
@@ -20,13 +21,13 @@ for(const width of [1280,390])for(const bossId of ['garchomp','mewtwo'])test(`ra
   expect(await page.getByTestId('raid-silhouette').evaluate(el=>getComputedStyle(el).filter)).toBe('brightness(0)');
   const aura=await page.getByTestId('raid-aura').evaluate(el=>getComputedStyle(el).borderTopWidth);expect(aura).toBe(bossId==='mewtwo'?'2px':'0px');
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
-  const button=page.locator('[data-event-confirm]');await expect(button).toBeVisible();
+  const button=page.locator('[data-event-choice="challenge"]');await expect(button).toBeVisible();await expect(page.locator('[data-event-choice="skip"]')).toBeVisible();
   const bounds=await button.boundingBox();expect(bounds!.y+bounds!.height).toBeLessThanOrEqual(width===390?844:900);
   mkdirSync('artifacts/qa/screenshots/raids',{recursive:true});await page.screenshot({path:`artifacts/qa/screenshots/raids/${bossId}-${width}.png`});
   const raw=f.store.db.prepare('SELECT snapshot_json FROM raid_encounters WHERE event_id=?').get(f.event.id)!.snapshot_json;
   await page.reload();await expect(scene).toBeVisible();expect(f.store.db.prepare('SELECT snapshot_json FROM raid_encounters WHERE event_id=?').get(f.event.id)!.snapshot_json).toBe(raw);
   let confirms=0;page.on('dialog',async dialog=>{confirms++;await dialog.dismiss();});
-  await page.locator('[data-event-confirm]').click();
+  await page.locator('[data-event-choice="challenge"]').click();
   await expect.poll(()=>f.store.view(owner).run!.state).toBe('battle');await expect(scene).toHaveCount(0);expect(confirms).toBe(0);
   await expect(page.getByTestId('trainer-entrance')).toHaveCount(0);
   await expect(page.locator('.enemy-health')).toContainText(bossId==='mewtwo'?'뮤츠':'한카리아스');
@@ -40,11 +41,12 @@ for(const width of [1280,390])for(const bossId of ['garchomp','mewtwo'])test(`ra
   await expect(page.getByRole('log',{name:'영입 결과'})).toContainText('동료로 합류했다!');await expect(page.getByTestId('recruit-celebration')).toHaveCount(0);
   await expect(scene).toHaveCount(0);
   expect(f.store.view(owner).run!.roster).toContain(f.snapshot.species);expect(f.store.view(owner).run!.floor).toBe(2);
-  const reward=page.getByTestId('reward-modal');await expect(reward).toHaveCount(0);await page.locator('[data-recruit-continue]').click();await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();await expect(reward).toBeVisible();await expect(reward).toContainText('보상');await expect(reward).not.toContainText('Elite');
-  await expect(reward).toHaveAttribute('aria-label','보상');await expect(scene).toHaveCount(0);await expect(page.getByTestId('raid-victory')).toBeVisible();
-  await page.reload();await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();await expect(reward).toBeVisible();await expect(scene).toHaveCount(0);await expect(page.getByTestId('raid-victory')).toBeVisible();
+  const reward=page.getByTestId('reward-modal');await expect(reward).toHaveCount(0);await page.locator('[data-recruit-continue]').click();await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();
+  // Discovery first: the raid drop is concealed until the reveal action is used.
+  await expect(reward).toBeVisible();await expect(reward).toHaveAttribute('aria-label','보상');await expect(reward.getByTestId('reward-reveal')).toContainText('무언가를 떨어뜨렸다');await expect(reward.getByTestId('reward-panel')).toHaveCount(0);await expect(scene).toHaveCount(0);await expect(page.getByTestId('raid-victory')).toBeVisible();
+  await page.reload();await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();await expect(reward.getByTestId('reward-reveal')).toBeVisible();await expect(scene).toHaveCount(0);await expect(page.getByTestId('raid-victory')).toBeVisible();
   await page.screenshot({path:`artifacts/qa/screenshots/raids/reward-${bossId}-${width}.png`});
-  await reward.getByRole('button',{name:'받기',exact:true}).click();await expect(reward).toHaveCount(0);expect(f.store.view(owner).run!.event).toBeNull();expect(f.store.view(owner).run!.floor).toBe(2);
+  const panel=await openEventReward(page);await expect(panel).toContainText('보상');await expect(reward).not.toContainText('Elite');await panel.getByRole('button',{name:'받기',exact:true}).click();await expect(reward).toHaveCount(0);expect(f.store.view(owner).run!.event).toBeNull();expect(f.store.view(owner).run!.floor).toBe(2);
  }finally{f.store.close();}
 });
 for(const width of [1280,390])test(`declining Raid recruitment still opens special reward without discovery at ${width}`,async({page,context})=>{
@@ -58,11 +60,11 @@ for(const width of [1280,390])test(`declining Raid recruitment still opens speci
   await page.setViewportSize({width,height:width===390?844:900});await page.goto('/battle');
   await expect(page.getByTestId('raid-encounter')).toHaveCount(0);await expect(page.getByTestId('result-dialog')).toHaveCount(0);await expect(page.getByTestId('recruitment')).toBeVisible();
   await page.keyboard.press('x');await page.getByTestId('recruit-skip').getByRole('button',{name:'넘어가기',exact:true}).click();
-  const reward=page.getByTestId('reward-modal');await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();await expect(reward).toBeVisible();await expect(reward).toHaveAttribute('aria-label','보상');
+  const reward=page.getByTestId('reward-modal');await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();await expect(reward).toBeVisible();await expect(reward).toHaveAttribute('aria-label','보상');await expect(reward.getByTestId('reward-reveal')).toBeVisible();
   await expect(page.getByTestId('raid-encounter')).toHaveCount(0);await expect(page.getByTestId('raid-victory')).toBeVisible();
   expect(f.store.view(owner).coins).toBe(coins);expect(f.store.db.prepare('SELECT result_json FROM run_events WHERE id=?').get(f.event.id)!.result_json).toBe(result);
   expect(f.store.view(owner).run!.roster).not.toContain('Garchomp');
-  await reward.getByRole('button',{name:'받기',exact:true}).click();await expect(reward).toHaveCount(0);expect(f.store.view(owner).run!.event).toBeNull();
+  await claimEventReward(page);expect(f.store.view(owner).run!.event).toBeNull();
  }finally{f.store.close();}
 });
 test('raid skip completes event with no battle or reward',async({page,context})=>{
@@ -70,7 +72,7 @@ test('raid skip completes event with no battle or reward',async({page,context})=
  try{
   const auth=await new Accounts(f.store.db).register(owner,'raid-password',owner,undefined);
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
-  await page.goto('/battle');await expect(page.locator('[data-event-confirm]')).toBeVisible();await page.request.post('/api/battle',{headers:{origin:'http://127.0.0.1:3001'},data:{type:'event-choice',runId:f.run,eventId:f.event.id,choice:'skip'}});await page.reload();
+  await page.goto('/battle');await expect(page.locator('[data-event-choice="skip"]')).toBeVisible();await page.request.post('/api/battle',{headers:{origin:'http://127.0.0.1:3001'},data:{type:'event-choice',runId:f.run,eventId:f.event.id,choice:'skip'}});await page.reload();
   await expect(page.getByTestId('raid-encounter')).toHaveCount(0);expect(f.store.currentBattle(owner)).toBeNull();
   expect(f.store.db.prepare('SELECT result_json,status FROM run_events WHERE id=?').get(f.event.id)).toMatchObject({result_json:null,status:'complete'});
  }finally{f.store.close();}

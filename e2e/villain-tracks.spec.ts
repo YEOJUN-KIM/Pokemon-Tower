@@ -7,6 +7,7 @@ import {VillainCampaigns} from '../src/server/villain-campaigns';
 import {grantStoredReward} from '../src/server/inventory-grants';
 import {ToolVouchers} from '../src/server/tool-vouchers';
 import {mkdirSync} from 'node:fs';
+import {openEventReward} from './event-reward-flow';
 const capture='artifacts/qa/screenshots/villain-tracks';mkdirSync(capture,{recursive:true});
 for(const organization of ['rocket','skull'] as const)for(const width of [1280,390])for(const reducedMotion of ['no-preference','reduce'] as const)test(`${organization} completed chain and shared voucher ${width}px ${reducedMotion}`,async({page,context})=>{
  const owner='track_'+randomBytes(8).toString('hex'),f=trackFixture('.data/e2e.sqlite',organization,owner),s=f.store;
@@ -29,11 +30,12 @@ for(const organization of ['rocket','skull'] as const)for(const width of [1280,3
    await expect(page.getByRole('log',{name:'이벤트 안내'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();
    await expect.poll(()=>s.currentBattle(owner)?.id).toBeTruthy();
    const b=s.currentBattle(owner)!;await page.reload();expect(s.currentBattle(owner)!.opponent_team).toBe(b.opponent_team);expect(new VillainCampaigns(s.db).row(event.id)!.snapshot_json).toBe(snapshot);
-   finishChallengerBattle(s,b.id);await page.reload();await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('reward-modal')).toBeVisible();
+   finishChallengerBattle(s,b.id);await page.reload();await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('reward-modal').getByTestId('reward-reveal')).toBeVisible();
    expect(s.view(owner).run!.floor).toBe(b.floor);expect(s.view(owner).run!.candidates).toEqual([]);
+   const panel=await openEventReward(page);
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
    await page.screenshot({path:`${capture}/${organization}-${stage}-${width}-${reducedMotion}.png`,animations:'disabled'});
-   await page.getByRole('button',{name:'받기',exact:true}).click();await expect(page.getByTestId('reward-modal')).toHaveCount(0);
+   await panel.getByRole('button',{name:'받기',exact:true}).click();await expect(page.getByTestId('reward-modal')).toHaveCount(0);
   }
   expect(new VillainCampaigns(s.db).track(f.run)!.completed).toBe(1);
   grantStoredReward(s.db,f.run,{kind:'tool-voucher',rarity:'epic',choices:4,amount:1});

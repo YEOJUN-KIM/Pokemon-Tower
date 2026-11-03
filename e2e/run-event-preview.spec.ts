@@ -30,7 +30,7 @@ test('capture the real inline chest encounter and its reward for a GIF preview',
   await frames(20);await scene.getByRole('button',{name:'선택지 보기',exact:true}).click();await frames(10);await page.keyboard.press('ArrowDown');await frames(8);await page.keyboard.press('ArrowUp');await frames(8);
   await scene.getByRole('button',{name:'상자를 연다',exact:true}).click();await expect(scene).toHaveAttribute('data-phase','reward');
   await frames(26);
-  await expect(scene.getByRole('log',{name:'이벤트 안내'})).toHaveAttribute('data-typing','false');
+  await expect(scene.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');
   writeFileSync(`${output}/manifest.json`,JSON.stringify({frames:index,durationMs:100,reward:store.view(owner).run!.event?.reward,result:store.view(owner).run!.event?.result,viewport:{width:1100,height:760}}));
  }finally{store.close();}
 });

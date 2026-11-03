@@ -81,12 +81,12 @@ for(const width of [1280,390])test(`normal victory and recruitment retain their 
   const auth=await new Accounts(store.db).register(owner,'normal-password',owner,undefined);
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
   await page.setViewportSize({width,height:width===390?844:900});await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/battle');
-  const result=page.getByTestId('result-dialog');await expect(result).toContainText('타워 코인 지급 완료');await expect(result).not.toContainText('특별한 보상');
-  await page.getByRole('button',{name:'영입으로 계속'}).click();
+  // A normal win goes straight to recruitment, with the coin result in its dialogue; no result dialog or reward modal.
+  const recruitment=page.getByRole('dialog',{name:'동료 영입',exact:true});await expect(recruitment).toContainText('코인을 얻었다');await expect(recruitment).not.toContainText('특별한 보상');await expect(page.getByTestId('result-dialog')).toHaveCount(0);
   await page.getByRole('button',{name:'한카리아스 영입 선택',exact:true}).click();
-  await page.getByRole('button',{name:/동료로 데려가기 ↗/}).click();await page.getByTestId('recruit-confirmation').getByRole('button',{name:'동료로 데려가기',exact:true}).click();
-  await expect(page.getByTestId('recruit-celebration')).toBeVisible();await page.getByTestId('recruit-celebration').getByRole('button').last().click();
-  await expect(page.getByRole('dialog',{name:'2층 출전 준비',exact:true})).toBeVisible();
+  await page.getByTestId('recruit-menu').getByRole('button',{name:'동료로 데려가기',exact:true}).click();
+  await expect(page.getByRole('log',{name:'영입 결과'})).toContainText('동료로 합류했다!');await page.locator('[data-recruit-continue]').click();
+  await expect(page.getByRole('dialog',{name:'출전 준비',exact:true})).toBeVisible();
   await expect(page.getByTestId('reward-modal')).toHaveCount(0);await expect(page.getByTestId('raid-encounter')).toHaveCount(0);await expect(page.getByTestId('raid-victory')).toHaveCount(0);
   expect(store.view(owner).run!.floor).toBe(2);expect(store.view(owner).run!.roster).toContain('Garchomp');
  }finally{store.close();}

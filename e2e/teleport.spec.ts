@@ -50,7 +50,8 @@ for(const [width,origin,destination,speed,reduced,decline] of [[1280,48,50,1,fal
   await page.screenshot({path:`artifacts/qa/screenshots/teleport/activate-${width}-${speed}-${reduced}.png`,animations:'allow'});
   await page.clock.runFor(1);
   await expect(portal).toHaveAttribute('data-phase','arrived');await page.clock.runFor(50);
-  await expect(event).toContainText(`${destination}층에 도착했다!`);
+  // The arrival line types out on the mocked clock; advance it until the whole sentence is shown.
+  await expect(async()=>{await page.clock.runFor(250);await expect(event).toContainText(`${destination}층에 도착했다!`,{timeout:300});}).toPass({timeout:15000});
   expect(choices).toBe(1);await page.clock.resume();
   expect(store.view(owner).run!.state).toBe('select');expect(store.currentBattle(owner)).toBeNull();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);

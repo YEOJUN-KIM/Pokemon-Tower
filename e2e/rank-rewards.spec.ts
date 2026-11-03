@@ -10,8 +10,10 @@ import {npcSamples} from '../src/data/npc-samples';
 import {itemName} from '../src/data/held-items';
 import {grantRunItem,grantStoredReward} from '../src/server/inventory-grants';
 import {snapshotRankReward} from '../src/server/challenger-rewards';
+import {rankRewardProfiles} from '../src/data/challenger-rewards';
+import {openEventReward} from './event-reward-flow';
 
-async function revealReward(page:Page){await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await expect(page.getByTestId('reward-modal')).toHaveCount(0);await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('reward-modal')).toBeVisible();}
+async function revealReward(page:Page){await expect(page.getByRole('log',{name:'이벤트 결과'})).toHaveAttribute('data-typing','false');await expect(page.getByTestId('reward-modal')).toHaveCount(0);await page.locator('[data-event-confirm]').click();await expect(page.getByTestId('reward-modal')).toBeVisible();await openEventReward(page);}
 
 test.beforeEach(()=>{const s=new TowerStore('.data/e2e.sqlite');try{s.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();}finally{s.close();}});
 for(const width of [1280,390])for(const [kind,roll] of [['epic',.8],['machine',.9]] as const)test(`Elite stale ${kind} at ${width}: actual coin fallback, hidden preview and immutable snapshot`,async({page,context})=>{
@@ -38,7 +40,7 @@ for(const width of [1280,390])test(`rank previews hide rewards and Master expose
   await cards.locator(`[data-challenger=${defs[2].id}]`).click();await expect.poll(()=>store.view(owner).run!.state).toBe('battle');
   finishChallengerBattle(store,store.currentBattle(owner)!.id);await page.reload();await revealReward(page);const modal=page.getByTestId('reward-modal');await expect(modal).toBeVisible();
   await expect(modal.getByRole('button',{name:'슈퍼레어 알 티켓 1장',exact:true})).toBeVisible();await expect(modal.getByRole('button',{name:'받기',exact:true})).toBeDisabled();
-  await expect(modal).toContainText('성장 포인트 1,500P');await expect(modal).toContainText('다이맥스밴드');
+  await expect(modal).toContainText(`성장 포인트 ${rankRewardProfiles.master.growth.toLocaleString()}P`);await expect(modal).toContainText('다이맥스밴드');
   await page.screenshot({path:`artifacts/qa/screenshots/rank-rewards/master-${width}.png`});
   await modal.getByRole('button',{name:'슈퍼레어 알 티켓 1장',exact:true}).click();await expect(modal).toContainText('선택 완료');await page.reload();await revealReward(page);await expect(modal).toContainText('선택 완료');
   const payload={type:'event-reward-select',runId:run,eventId:event.id,selectionId:'master-reward',candidateId:'eggs',effects:[{kind:'growth-points',amount:999999}]};

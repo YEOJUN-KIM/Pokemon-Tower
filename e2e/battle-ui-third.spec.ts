@@ -6,12 +6,14 @@ import {raidFixture} from '../tests/raid-fixture';
 import {starters} from '../src/data/teams';
 import {finishChallengerBattle} from '../tests/challenger-fixture';
 import {eventDefinitions} from '../src/data/run-events';
+import {openEventReward} from './event-reward-flow';
 async function login(store:TowerStore,owner:string,context:BrowserContext){store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();const auth=await new Accounts(store.db).register(owner,'third-ui-password',owner,undefined);await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001'}]);}
 for(const width of [1280,390]){
- test(`raid shared confirmation, silhouette and anchors ${width}`,async({page,context})=>{
+ test(`raid direct choices, silhouette and anchors ${width}`,async({page,context})=>{
   const owner='thirdraid'+randomBytes(6).toString('hex'),f=raidFixture('.data/e2e.sqlite',owner);
   try{await login(f.store,owner,context);await page.setViewportSize({width,height:900});await page.goto('/battle');
-   const confirm=page.locator('[data-event-confirm]');await expect(confirm).toBeVisible();await expect(page.locator('[data-event-choice]')).toHaveCount(0);
+   // Raid encounters show their two choices directly; there is no separate confirmation step.
+   const confirm=page.locator('[data-event-choice="challenge"]');await expect(confirm).toBeVisible();await expect(page.locator('[data-event-choice="skip"]')).toBeVisible();await expect(page.locator('[data-event-confirm]')).toHaveCount(0);
    await page.waitForTimeout(1600);expect(f.store.view(owner).run!.state).toBe('select');
    const player=(await page.locator('[data-event-player]').boundingBox())!,target=(await page.locator('[data-event-target]').boundingBox())!;
    expect(player.x+player.width/2).toBeLessThan(target.x+target.width/2);expect(player.y+player.height).toBeGreaterThan(target.y+target.height);
@@ -32,25 +34,26 @@ for(const width of [1280,390]){
    if(kind==='empty')await expect(message).toContainText('아무것도 얻지 못했다.');
    await page.waitForTimeout(900);await expect(modal).toHaveCount(0);await page.keyboard.press('z');
    if(kind==='empty'){await expect(message).toHaveCount(0);await expect(modal).toHaveCount(0);await expect(page.getByTestId('team-selection')).toBeVisible();return;}
-   await expect(modal).toBeVisible();await expect(modal).not.toContainText(/전리품|상자를 열었다|선택해주세요/);await expect(modal.locator('li button')).toHaveCount(0);
+   await expect(modal).toBeVisible();await expect(modal.getByTestId('reward-panel')).toHaveCount(0);await openEventReward(page);await expect(modal).not.toContainText(/전리품|상자를 열었다|선택해주세요/);await expect(modal.locator('li button')).toHaveCount(0);
    const before=s.view(owner).growthPoints;
    if(kind==='choice'){await modal.getByRole('button',{name:'성장 포인트 10P',exact:true}).click();await expect(modal.getByRole('button',{name:'받기',exact:true})).toBeEnabled();expect(s.view(owner).growthPoints).toBe(before+10);}
    await page.reload();await expect(message).toBeVisible();await expect(modal).toHaveCount(0);await page.keyboard.press('z');await expect(modal).toBeVisible();
-   await page.screenshot({path:`test-results/third-reward-${kind}-${width}.png`});await modal.getByRole('button',{name:'받기',exact:true}).click();await expect(modal).toHaveCount(0);await expect(page.getByTestId('team-selection')).toBeVisible();
+   const panel=await openEventReward(page);await page.screenshot({path:`test-results/third-reward-${kind}-${width}.png`});await panel.getByRole('button',{name:'받기',exact:true}).click();await expect(modal).toHaveCount(0);await expect(page.getByTestId('team-selection')).toBeVisible();
    if(kind==='choice')expect(s.view(owner).growthPoints).toBe(before+10);
   }finally{s.close();}
  });
 }
 
 test('typing starts empty; first click reveals, second click alone advances',async({page,context})=>{
- const owner='thirdtype'+randomBytes(6).toString('hex'),f=raidFixture('.data/e2e.sqlite',owner);
- try{await login(f.store,owner,context);
+ const owner='thirdtype'+randomBytes(6).toString('hex'),s=new TowerStore('.data/e2e.sqlite',max=>max===100?0:max-1,{'mystery-chest':eventDefinitions['mystery-chest']});
+ try{s.ensurePlayer(owner);const first=s.start(owner,starters,'basic',{events:true}),run=s.battle(first).run_id;finishChallengerBattle(s,first);s.recruit(owner,run,first,null,null);s.db.prepare('UPDATE run_event_rules SET version=1 WHERE run_id=?').run(run);await login(s,owner,context);
   // Freeze animation frames before the first paint to inspect the initial text and reveal action.
   await page.addInitScript(()=>{const raf=window.requestAnimationFrame;window.requestAnimationFrame=(fn:FrameRequestCallback)=>String(fn).includes('Math.floor')?0:raf.call(window,fn);});
   await page.goto('/battle');const message=page.locator('[data-event-confirm] .game-dialogue');await expect(message).toHaveAttribute('data-typing','true');await expect(message.locator('[data-dialogue-text]')).toHaveText('');
-  await page.locator('[data-event-confirm]').click();await expect(message).toHaveAttribute('data-typing','false');await expect(message.locator('[data-dialogue-text]')).toHaveText('강한 기척이 느껴진다.');expect(f.store.view(owner).run!.state).toBe('select');
-  await page.keyboard.press('Enter');await expect.poll(()=>f.store.view(owner).run!.state).toBe('battle');
- }finally{f.store.close();}
+  await page.locator('[data-event-confirm]').click();await expect(message).toHaveAttribute('data-typing','false');await expect(message.locator('[data-dialogue-text]')).not.toHaveText('');expect(s.view(owner).run!.event!.phase).toBe('choice');
+  await expect(page.locator('[data-event-choice=open]')).toHaveCount(0);
+  await page.locator('[data-event-confirm]').click();await expect(page.locator('[data-event-choice=open]')).toBeVisible();expect(s.view(owner).run!.event!.phase).toBe('choice');
+ }finally{s.close();}
 });
 
 test('new event message replaces old text before paint; typing Enter reveals without claiming',async({page,context})=>{
@@ -70,6 +73,6 @@ test('defeat has two actions and ending uses the existing settlement once',async
  try{s.ensurePlayer(owner);s.db.prepare('UPDATE players SET growth_points=500 WHERE id=?').run(owner);s.permanentAction(owner,crypto.randomUUID(),'buy','retry',1,null);const id=s.start(owner,starters),run=s.battle(id).run_id;
   s.db.prepare("UPDATE battles SET status='complete',view=? WHERE id=?").run(JSON.stringify({id,status:'complete',requestId:1,turn:5,team:[],opponent:null,actions:[],messages:[],winner:'Tower AI',error:null}),id);s.db.prepare("UPDATE runs SET state='lost' WHERE id=?").run(run);
   await login(s,owner,context);await page.goto('/battle');const dialog=page.getByTestId('result-dialog');await expect(dialog.getByRole('button')).toHaveCount(2);await expect(dialog.getByRole('button',{name:'재도전 1/1'})).toBeEnabled();
-  await dialog.getByRole('button',{name:'도전 종료',exact:true}).click();await expect(dialog).toHaveCount(0);expect(s.view(owner).run!.growthReward).toBe(10);await page.reload();await expect(dialog).toHaveCount(0);expect(s.view(owner).run!.growthReward).toBe(10);
+  await dialog.getByRole('button',{name:'도전 종료',exact:true}).click();await expect(dialog).toHaveCount(0);await expect.poll(()=>s.view(owner).run?.growthReward).toBe(10);await page.reload();await expect(dialog).toHaveCount(0);expect(s.view(owner).run!.growthReward).toBe(10);
  }finally{s.close();}
 });

@@ -64,6 +64,6 @@ for(const [category,draw] of [['vitamin',.55],['epic',.8],['machine',.9]] as con
   if(entry.targets.length){await bag.locator('[data-bag-target="'+entry.targets[0]+'"]').click();if(category==='machine'){await bag.locator('[data-learning-slot="0"]').click();await expect(bag.locator('[data-learning-slot]')).toHaveCount(0);}await expect(bag.locator('[data-bag-target]')).toHaveCount(0);}
   if(category==='machine')expect(store.view(owner).run!.bag!.entries.some(e=>e.move===entry.move)).toBe(true);else expect(store.view(owner).run!.rewardInventory!.length).toBe(0);
   await page.getByRole('button',{name:'배낭 · 이번 도전 닫기',exact:true}).click();
-  store.db.prepare("UPDATE runs SET floor=21,state='select' WHERE id=?").run(run);await page.reload();await page.getByTestId('maintenance-shop').click();await expect(page.getByRole('button',{name:'육성',exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'지닌 도구',exact:true})).toBeVisible();await expect(page.getByRole('button',{name:'기술머신',exact:true})).toBeVisible();
+  store.db.prepare("UPDATE runs SET floor=21,state='select' WHERE id=?").run(run);await page.reload();await page.getByTestId('maintenance-shop').click();await expect(page.getByRole('button',{name:'육성',exact:true})).toHaveCount(0);await expect(page.getByRole('button',{name:'지닌 도구',exact:true})).toBeVisible();await expect(page.getByRole('button',{name:'서포트',exact:true})).toBeVisible();await expect(page.getByRole('button',{name:'포켓몬 스카우트',exact:true})).toBeVisible();
  }finally{store.close();}
 });

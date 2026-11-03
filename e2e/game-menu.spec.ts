@@ -47,11 +47,10 @@ for(const viewport of [{width:1280,height:900},{width:390,height:740}]){
    f.store.chooseEvent(owner,f.run,f.eventId,'leave');f.store.db.prepare('UPDATE runs SET floor=11 WHERE id=?').run(f.run);grantStoredReward(f.store.db,f.run,{kind:'machine',move:'Earthquake',amount:1});
    await login(context,f.store,owner);await page.setViewportSize(viewport);await page.goto('/battle');await page.getByTestId('maintenance-shop').click();
    const shop=page.getByTestId('tower-shop');await withinViewport(page);await expect(shop.locator('.game-menu-footer')).toBeInViewport();
-   await shop.getByRole('button',{name:'배틀 아이템',exact:true}).click();
+   await shop.getByRole('button',{name:'서포트',exact:true}).click();
    const product=shop.locator('button.shop-product').first();await expect(product.locator('button')).toHaveCount(0);await expect(product.locator('.game-price')).toBeVisible();
    const before=f.store.view(owner),cost=Number((await product.locator('.game-price').innerText()).replace(/\D/g,''));await product.click();await expect(shop.getByTestId('shop-wallet')).toHaveText(`${(before.coins-cost).toLocaleString()}코인`);
    expect(f.store.view(owner).run!.battleItems).not.toEqual(before.run!.battleItems);
-   await shop.getByRole('button',{name:'기술머신',exact:true}).click();const machine=shop.locator('[data-machine]').first(),move=await machine.getAttribute('data-machine');await machine.click();await expect(shop.locator(`[data-machine="${move}"]`)).toBeDisabled();await expect(shop.locator(`[data-machine="${move}"] .game-status`)).toHaveText('구매 완료');
    await page.keyboard.press('b');const bag=page.getByTestId('bag');await expect(bag).toBeVisible();await withinViewport(page);
    await bag.getByRole('button',{name:'기술머신',exact:true}).click();await bag.locator('[data-bag-entry]').filter({hasText:'지진'}).click();await bag.locator('[data-bag-target=Charizard]').click();await bag.locator('[data-learning-slot="0"]').click();await expect(bag.locator('[data-bag-entry]').first()).toBeVisible();
    await page.keyboard.press('x');await expect(bag).toHaveCount(0);await expect(shop.locator('[data-open-bag]')).toBeFocused();

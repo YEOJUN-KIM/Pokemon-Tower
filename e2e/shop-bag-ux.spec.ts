@@ -11,12 +11,11 @@ for(const width of [1280,390])test(`maintenance shop omits Bag and preserves pur
   f.store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();const auth=await new Accounts(f.store.db).register('u_'+randomUUID().replaceAll('-','').slice(0,12),'bag-test-password',owner,undefined);
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001'}]);await page.setViewportSize({width,height:900});await page.goto('/battle');await page.getByTestId('maintenance-shop').click();const shop=page.getByTestId('tower-shop');
   await expect(shop.locator('[data-open-bag]')).toHaveCount(0);await expect(shop.getByTestId('shop-wallet')).toBeVisible();await expect(shop.locator('.shop-categories button')).toHaveCount(3);
-  for(const category of ['지닌 도구','배틀 아이템','기술머신']){await shop.getByRole('button',{name:category,exact:true}).click();await expect(shop.locator('[data-keyboard-tab-products]')).toHaveCount(1);expect(await shop.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);}
-  const move=f.store.view(owner).run!.machineShop!.offers[0].move;await shop.locator(`[data-machine="${move}"]`).click();await expect(shop.locator(`[data-machine-offer="${move}"] .shop-product-status`)).toHaveText('구매 완료');
-  await shop.getByTestId('shop-reroll').click();await expect.poll(()=>f.store.view(owner).run!.machineShop!.offers.every(offer=>offer.move!==move)).toBe(true);const before=f.store.view(owner);
+  for(const category of ['지닌 도구','서포트','포켓몬 스카우트']){await shop.getByRole('button',{name:category,exact:true}).click();await expect(shop.locator('[data-keyboard-tab-products]')).toHaveCount(1);expect(await shop.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);}
+  await shop.getByRole('button',{name:'지닌 도구',exact:true}).click();await shop.getByTestId('shop-reroll').click();await expect.poll(()=>f.store.view(owner).run!.shopRerolls!.items.count).toBe(1);const before=f.store.view(owner);
   await page.getByRole('button',{name:'정비 상점 닫기',exact:true}).click();const trigger=page.getByTestId('run-maintenance').locator('[data-open-bag]');await trigger.click();const bag=page.getByTestId('bag');await expect(bag).toBeVisible();
   await bag.getByRole('button',{name:'기술머신',exact:true}).click();await expect(bag.locator('[data-bag-entry]').filter({hasText:'지진'})).toBeVisible();await page.keyboard.press('x');await expect(bag).toHaveCount(0);await expect(trigger).toBeFocused();
-  const after=f.store.view(owner);expect(after.coins).toBe(before.coins);expect(after.run!.machineShop!.offers).toEqual(before.run!.machineShop!.offers);expect(after.run!.shopRerolls).toEqual(before.run!.shopRerolls);
+  const after=f.store.view(owner);expect(after.coins).toBe(before.coins);expect(after.run!.itemOffers).toEqual(before.run!.itemOffers);expect(after.run!.shopRerolls).toEqual(before.run!.shopRerolls);
  }finally{f.store.close();}
 });
 

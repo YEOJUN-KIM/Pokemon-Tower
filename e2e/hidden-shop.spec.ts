@@ -49,19 +49,20 @@ test('concurrent purchase requests serialize both duplicate receipts and the las
  }finally{f.store.close();}
 });
 
-test('checkpoint regression: normal consumable, trainer equipment and TM still purchase through existing shop UI',async({page,context})=>{
+test('checkpoint regression: Support, trainer equipment and Pokemon Scout purchase through the shop UI',async({page,context})=>{
  const suffix=randomBytes(8).toString('hex'),owner=`hidden-checkpoint-${suffix}`,f=hiddenShopFixture('.data/e2e.sqlite',owner);
  try{
   f.store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();const auth=await new Accounts(f.store.db).register(`hc_${suffix}`,'hidden-shop-test-password',owner,undefined);
   f.store.chooseEvent(owner,f.run,f.eventId,'leave');f.store.db.prepare('UPDATE runs SET floor=11 WHERE id=?').run(f.run);
+  f.store.db.prepare('INSERT OR IGNORE INTO run_free_gimmick VALUES (?,?,?)').run(f.run,'x',51);
   f.store.db.prepare('INSERT OR REPLACE INTO item_shops VALUES (?,?,?)').run(f.run,11,JSON.stringify(['Dynamax Band','Tera Orb','Life Orb','Leftovers']));
   f.store.db.prepare('INSERT OR REPLACE INTO consumable_shops VALUES (?,?,?)').run(f.run,11,JSON.stringify(['attack','speed','guard']));
-  const machine=f.store.view(owner).run!.machineShop!.offers[0];
+  const scout=f.store.view(owner).run!.scoutShop!.offers[0];
   await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);await page.goto('/battle');await page.getByTestId('maintenance-shop').click();
   await page.locator('[data-held-item="Dynamax Band"]').click();await expect.poll(()=>f.store.trainerEquipment(f.run)).toContain('Dynamax Band');
-  await page.getByRole('button',{name:'배틀 아이템',exact:true}).click();await page.locator('.shop-product').filter({hasText:'플러스파워'}).click();await expect.poll(()=>f.store.view(owner).run!.battleItems?.attack).toBe(1);
-  await page.getByRole('button',{name:'기술머신',exact:true}).click();await page.locator(`[data-machine="${machine.move}"]`).click();
-  await expect.poll(()=>f.store.view(owner).run!.bag!.entries.some(e=>e.move===machine.move)).toBe(true);await expect(page.getByTestId('machine-confirmation')).toHaveCount(0);
+  await page.getByRole('button',{name:'서포트',exact:true}).click();await page.locator('.shop-product').filter({hasText:'플러스파워'}).click();await expect.poll(()=>f.store.view(owner).run!.battleItems?.attack).toBe(1);
+  await page.getByRole('button',{name:'포켓몬 스카우트',exact:true}).click();await page.locator(`[data-scout="${scout.species}"]`).click();
+  await expect.poll(()=>f.store.view(owner).run!.roster.includes(scout.species)).toBe(true);await expect(page.getByTestId('machine-confirmation')).toHaveCount(0);
   expect(f.store.view(owner).growthPoints).toBe(10000);await expect(page.getByText('영양제',{exact:true})).toHaveCount(0);
  }finally{f.store.close();}
 });

@@ -50,6 +50,6 @@
 
 ## 검증 상태
 
-beta.6 상점 개편 작업에서 전체 unit(`tests/*.test.ts`) 실행, 신규 `tests/run-economy.test.ts` 9건·TypeScript·production build 통과. E2E는 전체를 돌리지 않고 `e2e/run-shop.spec.ts`만 실행했다. TM·배틀 아이템 탭을 가정한 기존 E2E 여러 파일(bag, machine-shop, shop-reroll, shop-bag-ux, fifty-floor, thirty-floor 등)은 갱신·재실행하지 않았다. 관련 E2E와 명령은 [개발자 검증](development/DEVELOPER_COMMANDS.md#beta6-기준-검증)을 따른다. 전체 unit/E2E 또는 사람의 100층 완주가 모두 green이라는 뜻은 아니다.
+beta.6 상점 개편 작업에서 전체 unit(`tests/*.test.ts`) 실행, 신규 `tests/run-economy.test.ts` 9건·TypeScript·production build 통과. E2E는 전체를 돌리지 않고 `e2e/run-shop.spec.ts`만 실행했다. 이후 후속 작업에서 상점 개편으로 낡은 E2E(rank-rewards, maintenance-items, hidden-shop 체크포인트 회귀, bag 메뉴 Bag, shop-bag-ux 탭, shop-reroll, game-menu 상점 탭 명칭)를 현재 3탭에 맞췄고 TM 상점 전용 `machine-shop.spec.ts`는 제거했다. 해당 spec과 `run-shop.spec.ts`는 통과한다. 상점 개편 이전(`9fa576fd`)에도 실패하던 26건(hidden-shop fixture `egg-ticket-5`, game-menu, fifty/thirty-floor, usability, shop.spec, bag 공통 Bag 등)은 이번 범위 밖의 기존 stale 실패로 남아 있다. 관련 E2E와 명령은 [개발자 검증](development/DEVELOPER_COMMANDS.md#beta6-기준-검증)을 따른다. 전체 unit/E2E 또는 사람의 100층 완주가 모두 green이라는 뜻은 아니다.
 
 이전 상대 개편의 1,000 Run×100층 및 통제 전투는 해당 변경 당시 분석이다. 원자료는 Git 제외 `artifacts/build-progression-audit/`, `artifacts/progression-audit/`에 있으며 이번 HEAD에서 전체를 다시 생성하지 않았다. 인간의 생존곡선·구매 정책은 포함하지 않는다.

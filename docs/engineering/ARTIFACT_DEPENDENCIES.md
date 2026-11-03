@@ -1,5 +1,10 @@
 # artifacts 참조와 입력 경계
 
+- Status: Archive
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 과거 기록·검증·출처; 수치는 당시 기준
+
 2026-10-23 기준. 프로젝트 전체의 Git 대상 텍스트에서 `artifacts/`와 `artifacts\`를 검색하고, 무시된 artifacts 내부 Markdown의 이동 참조도 별도로 갱신했다. 아래 표는 참조 파일 전부와 행 번호다. 입력·출력이 섞인 실험 도구에는 동적 prefix/source 경로도 포함한다. 자세한 실행 조건·source hash는 해당 스크립트의 코드와 로컬 manifest를 따른다.
 
 ## 필수 의존성 해소

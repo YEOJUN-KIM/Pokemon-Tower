@@ -2,6 +2,11 @@
 
 # 기술 시각 연출
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 2026-10-12. 기존 배틀 로그 재생에 Showdown의 CC0 효과 PNG 22개를 연결했다. 원작 하트골드 애니메이션을 추출하거나 전체 Showdown 클라이언트를 가져온 구현은 아니다.
 
 ## 구성

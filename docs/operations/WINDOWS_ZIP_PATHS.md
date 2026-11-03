@@ -1,5 +1,10 @@
 # Windows Release ZIP 경로 검증
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 2026-10-26: 공개 beta.5를 다른 PC의 Windows 기본 압축 해제로 일반 다운로드 위치에 풀면 0x80010135가 발생하고 짧은 위치에서는 동작한다는 사용자 보고를 기준으로 수정했다. 원본 공개 asset은 dist/original-beta5에 별도로 보존했으며 업로드·교체·tag·commit은 수행하지 않았다.
 
 ## 원인과 수정

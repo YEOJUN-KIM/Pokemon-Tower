@@ -2,6 +2,11 @@
 
 # 2026-10-18 중간점검
 
+- Status: Archive
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 과거 기록·검증·출처; 수치는 당시 기준
+
 감사 기준 커밋: `296cbbb1`. 수정 전 작업 트리는 깨끗했다. 먼저 src 전체 244개 TS/TSX의 import 방향과 파일 책임, 최근 Git 이력, 이벤트/NPC 생성·저장 경로, 상점·재화·전투 버전·마이그레이션·테스트·기준 문서를 확인했다. 과거 리팩터링 보고는 Git history를 참고한다.
 
 ## Phase 1 분류 (구현 전)

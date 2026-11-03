@@ -1,5 +1,10 @@
 # 실행과 운영
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 일반 Windows 사용자는 [SETUP](SETUP.md)부터 읽습니다. 개발 clone·개인 서버 이전 절차와 섞지 않습니다.
 
 | 문서 | 담당 범위 |

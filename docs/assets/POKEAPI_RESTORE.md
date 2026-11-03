@@ -1,5 +1,10 @@
 # PokeAPI Pokémon sprite pack 독립 복원
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 기준 HEAD: `42c6e5a254df9c768798f441df0dd6413aff40cf`. 대상은 `public/vendor/pokeapi/` 전체다. Node.js 24 이상과 pnpm이 필요하며 이 팩에는 Python·Pillow·이미지 encoder가 필요 없다. runtime URL과 게임 데이터는 유지한다.
 
 ## 현재 pack

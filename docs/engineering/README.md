@@ -1,5 +1,10 @@
 # 개발 문서
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 | 수정·확인할 것 | 문서 |
 |---|---|
 | 폴더·파일 위치와 삭제 기준 | [작업 공간 관리](WORKSPACE.md) |
@@ -8,6 +13,9 @@
 | 사용하는 기술 | [기술 구성](TECH_STACK.md) |
 | CSS 담당 위치와 규칙 | [CSS 관리](CSS_STRUCTURE.md) |
 | NPC 생성기·JSON·CSV | [NPC 데이터](NPC_DATA.md) |
+| 현재 1–100층 빌드/Rank/기믹 진행 | [Opponent progression v2](opponent-progression.md) |
+| EV capacity·무료 재분배·특성/기술 영구 해금 | [영구 성장](../gameplay/COLLECTION.md#영구-성장-빌드-자유도와-해금) · [DB migration](DATABASE.md) |
+| 알/타워/Scout 부적 확률과 저장 | [빛나는 부적](../gameplay/EGGS.md#빛나는-부적과-공통-이로치-확률) |
 | 네임드 필수 후보·선봉·마지막 배치 | [NPC 선출 정책](NPC_SELECTION.md) |
 | 기술 시각 연출 구조·자산 | [기술 연출](MOVE_EFFECTS.md) |
 | 공식 문서 승격·로컬 입력 의존성 | [승격 기록](ARTIFACT_PROMOTION.md) |

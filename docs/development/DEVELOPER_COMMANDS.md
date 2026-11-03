@@ -1,5 +1,10 @@
 # 개발자 명령어
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 이 문서는 source tree에서 작업하는 개발자용이다. 일반 플레이어는 [Windows 실행 안내](../operations/SETUP.md)의 PokemonTower.exe를 사용한다. Node.js 24 이상과 pnpm 11.19.0(packageManager 고정)을 사용한다.
 
 ## 처음 clone한 PC
@@ -62,6 +67,25 @@ EXE는 초기 실행 도구가 필요하다. 현재 Node는 첫 설치에 사전
 | 플레이어 다시 준비 | node scripts/player-launcher.mjs --repair |
 
 실행기 QA는 `--home <별도 폴더>`로 저장·marker·로그를 개인 폴더와 분리한다. `--headless --no-browser --stop-after-health`는 실제 EXE 엔진을 무인 검증하고 health 확인 후 종료한다. 자동화에서 브라우저 열기를 생략했다면 보고서에서 실제 브라우저 렌더링과 구분한다.
+
+## beta.6 기준 검증
+
+기준 main HEAD `1c05b6f5079143ba4be7df3f3745155aee483ce7`, 확인일 2026-11-03. package/launcher는 beta.5이며 beta.6 공개본 검증으로 표기하지 않는다.
+
+| 범위 | 이번 HEAD 직접 실행 결과 |
+|---|---|
+| 영구 성장/부적 unit | `node --import tsx --test tests/permanent-growth.test.ts tests/shiny-odds.test.ts tests/permanent-research.test.ts tests/permanent-upgrades.test.ts` — 31/31 |
+| 타입 | `node node_modules/typescript/bin/tsc --noEmit` 통과 |
+| production build | package build와 같은 Windows wrapper·별도 TOWER_DB_PATH로 성공. sandbox junction 제한은 권한 검토 후 재실행으로 해결 |
+| 관련 Chrome E2E | `node node_modules/@playwright/test/cli.js test e2e/permanent-research.spec.ts e2e/egg-result-presentation.spec.ts e2e/permanent-upgrades.spec.ts --reporter=line --max-failures=1` — 7통과/1실패. runner 종료 요약에 test 외 error 1건도 표시 |
+
+E2E 통과 범위: 알 결과 1920/1280/390, 지원금/기본 알 1280/390, 업그레이드·1/10회 부화 1280/390. 실패는 기존 **`e2e/permanent-upgrades.spec.ts:26`**의 shiny 등장 연출 검사로 line33에서 ‘포켓몬 내보내기’ 버튼을 찾지 못했다. stale fixture/화면 전제 재검토 대상으로 남기며 이것만으로 beta.6 영구 성장 회귀라고 단정하지 않는다. 테스트/제품 코드는 이번에 수정하지 않았다.
+
+전체 unit/E2E는 이번에 실행하지 않았으며 **전체 E2E green이라고 쓰지 않는다**. `1c05b6f5`는 egg-result-presentation 튜토리얼 스킵·폐기된 recruit-compact 제거의 테스트 이력이다. 이전 상대 개편/공개 beta.5의 숫자는 당시 기록으로만 취급한다.
+
+Git 제외 로그: `artifacts/build-progression-audit/docs-baseline-tests.log`, `docs-baseline-build.log`, `docs-baseline-e2e.log`. 실패 캡처/trace는 `test-results/`다. 테스트/빌드는 임시 SQLite·캡처·빌드 출력을 생성하지만 source/test 파일을 수정하지 않는다.
+
+문서 변경 후 `node scripts/check-workspace.mjs`, `git diff --check`, 경로/기준 SHA 검사를 수행한다. 문서 외 변경은 문서 커밋에 포함하지 않는다.
 
 ## DB 백업
 

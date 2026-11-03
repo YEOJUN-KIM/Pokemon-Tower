@@ -1,5 +1,10 @@
 # PokéRogue 팩 독립 복원
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 추적 해제 기준 HEAD: `71a9f17480e8b82b9a4a9c52d38ed68e48d49bbb`. `public/vendor/pokerogue/` 전체는 Git index에서 제거하고 ignore한다. 기존 PC의 로컬 파일과 runtime URL은 유지한다. 새 clone에는 이 팩이 없으므로 아래 명령으로 복원한다. Node.js 24 이상이 필요하다.
 
 ## 팩과 사용처

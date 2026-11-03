@@ -1,5 +1,12 @@
 # Mirror 특수 도전자 구현
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
+현재 v2 신규 Run은 `src/server/mirror-challenger.ts`에서 50층 관문 이후에만 Mirror를 제시한다. 아래 기본 확률·최소 층과 함께 적용하며 기존 Run/생성된 후보는 보존한다. v2 후기 Mirror도 현재 훈련/AI를 전달받는다. [진행 정책](opponent-progression.md).
+
 기준: 2026-10-16. 기존 도전자 선택전 안에 희귀 후보를 추가합니다. `mirror-match` Run Event·전용 AI·별도 전체 화면은 없습니다. 외형은 사용자가 지정한 기존 플레이어 캐릭터의 정면입니다.
 
 ## 1–3. 등장 확률·Sample·삽입

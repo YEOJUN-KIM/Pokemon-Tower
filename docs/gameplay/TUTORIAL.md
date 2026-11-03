@@ -1,6 +1,13 @@
 # 신규 유저 튜토리얼
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 문구·단계는 `src/data/tutorial.ts`, 신규 게임 지급액은 `src/data/training.ts`의 `INITIAL_GROWTH_POINTS`, 서버 진행 관리는 `src/server/tutorial-service.ts`, 화면 대상과 공통 오버레이는 `src/web/tutorial-manager.tsx`에서 관리합니다. 실제 전투·성장·상성·영입 규칙은 기존 함수를 사용합니다.
+
+beta.6의 +1당 8P는 **기존 EV capacity를 넘어 확장하는 부분의 임시 가격**입니다. 이미 확보한 한도 내 재분배·성격·일반 특성은 무료입니다. 신규 capacity 0인 첫 성장의 +1 구매/256P 안내는 유지됩니다. [영구 성장 규칙](COLLECTION.md#영구-성장-빌드-자유도와-해금)을 따르며 아래 2026-10-24 검증 기록은 당시 결과입니다.
 
 ## 파일 구성
 

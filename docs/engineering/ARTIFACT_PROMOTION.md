@@ -1,5 +1,10 @@
 # 공식 문서 승격 판단 · 2026-10-23
 
+- Status: Archive
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 과거 기록·검증·출처; 수치는 당시 기준
+
 기준 HEAD: `853b1a223f82a0dd02564edab13a85a0f8853818`. 기존 docs의 gameplay/engineering/operations/references/releases 구조를 유지하고 assets/manifests와 history만 추가했다. 원문을 읽고 현재 안내 및 구현과 대조했다. 이 작업은 게임 규칙·런타임 데이터·외부 자산 구조를 변경하지 않는다.
 
 ## 후보 분류와 중복 판단

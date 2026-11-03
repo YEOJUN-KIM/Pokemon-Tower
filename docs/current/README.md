@@ -1,5 +1,10 @@
 # 현재 상태와 다음 작업
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 - [현재 게임 상태](../STATUS.md)
 - [다음 작업과 보류 항목](ROADMAP.md)
 

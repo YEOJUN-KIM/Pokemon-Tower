@@ -1,5 +1,10 @@
 # CSS 관리
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 화면 스타일은 `src/web/styles/*.module.css`에 있습니다. `ScreenStyles`가 로컬 경계와 `data-ui-screen`을 제공하므로 다른 화면이나 경계 밖의 동일 클래스에 스타일이 적용되지 않습니다. 기존 클래스 이름은 키보드 조작·초점 복귀에 계속 사용합니다.
 
 | 수정할 것 | 담당 파일 |

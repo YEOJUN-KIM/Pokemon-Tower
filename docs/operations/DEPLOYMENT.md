@@ -1,5 +1,10 @@
 # 웹 배포 패키지
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 이 문서는 운영자용 서버/웹 배포와 개인 Docker·Quick Tunnel 환경을 설명한다. 일반 Windows 사용자는 [SETUP](SETUP.md), 공개 ZIP과 검증 기록은 [beta.5 완료 기록](../releases/WINDOWS_BETA_5.md), Windows 패키지 재생성은 [개발자 명령어](../development/DEVELOPER_COMMANDS.md)를 따른다.
 
 공개 Release 배포와 상시 호스팅 운영은 별개다. 현재 개인 테스트 서버·임시 터널을 유지하며 상시 공개 서비스 운영은 계획하지 않는다.

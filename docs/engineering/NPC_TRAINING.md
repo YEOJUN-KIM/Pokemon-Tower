@@ -1,6 +1,20 @@
 # NPC Sample · Rank · Training
 
-기준: 2026-10-18. 새 일반층 랜덤 NPC와 도전자 선택전이 공통 Sample/Rank 생성 경로를 사용합니다. 기존 네임드·빌런의 정체성·템플릿·캠페인은 유지합니다.
+- Status: Active (partially superseded)
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 현행 연결 안내 + 날짜별 과거 기록; 본문 범위 구분
+- Superseded By: [현행 v2 정책](opponent-progression.md) (아래 v1 수치/확률)
+
+현재 신규 Run의 규칙은 [opponent-progression](opponent-progression.md)입니다. Sample/Rank/Encounter 구조는 재사용하지만 아래 고정 수치·곱셈 0 가중치·도구 슬롯·기믹·도전자 prior는 **v1 보존 참조**이며 신규 v2에는 적용하지 않습니다.
+
+## 현재 v2 연결
+
+`sampleRankWeights(..., progression)`는 v2에서 클래스 가중치를 `0.25 + 기존 값`으로 완화한 뒤 층 prior와 결합합니다. Master는 10층까지 0이고 도전자도 같은 층 prior를 씁니다. 41층 이후 모든 공통 Rank는 도구 3개, 51층 이후 Elite/Master만 확률적으로 기믹을 갖습니다. Normal 후기 빌드를 berry로 제한하지 않습니다. `npc-progression-builds.ts`가 실제 종/기술/역할을 평가하고 71층부터 전체 역할 배정, 81층부터 약점 보완을 적용합니다. 현재 DB는 schema 49이며 NPC snapshot 버전과 별개입니다.
+
+## Superseded: v1 설계와 당시 검증 (2026-10-18)
+
+아래 내용은 v1/legacy 동작과 당시 검증입니다. 신규 Run의 현행 설명으로 인용하지 않습니다. 기존 저장/재생 참조를 보존합니다.
 
 ## 책임 분리
 

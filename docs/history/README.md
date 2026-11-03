@@ -1,5 +1,10 @@
 # 과거 결정과 검증
 
+- Status: Archive
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 과거 기록·검증·출처; 수치는 당시 기준
+
 현재 규칙은 [게임 안내](../gameplay/README.md), 현재 수치·버전은 [STATUS](../STATUS.md)를 따른다. 이곳의 수치와 테스트 개수는 작성 당시 기록이다.
 
 - [2026-10-18 중간점검](REFACTORING-2026-10-18.md): 저장 호환·트랜잭션 경계·설정 복구·생성 입력 보존과 과도한 재분할을 피한 근거.

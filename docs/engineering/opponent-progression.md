@@ -1,6 +1,11 @@
 # Opponent progression v2
 
-New runs persist `hundred-floor-v2`; schema 48 widens the progression check without
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
+New runs persist `hundred-floor-v2`; current DB support is schema 49. Schema 48 widened the progression check without
 converting any existing row. v1 and legacy runs keep their generators. Packed
 battles, pending event snapshots, retries and reward snapshots are not rebuilt.
 Pure reference helpers default to v1; live callers explicitly pass the saved run
@@ -106,6 +111,16 @@ common filter and are preserved. A tag-list description alone is insufficient to
 infer the effective eligible pool.
 
 ## Verification and measurement
+
+### Known difficulty issue and deferred tuning
+
+The 49F-to-50F difficulty jump remains a known issue. Do not immediately nerf
+opponents based on the opponent-only audit. Re-measure after climb-coin income,
+player growth and shop changes; adjust 49F-to-50F and 100F then if necessary.
+The beta.6 target of a free first player gimmick after clearing 50F is **Planned**.
+Currently equipment can be purchased early and activated starting in the 50F
+battle. The current implementation has no free-selection reward at that clear.
+See [planned shop/economy](../current/ROADMAP.md).
 
 `tests/build-progression.test.ts` covers all-floor/rank legality, early gates,
 setup compatibility, item restrictions, late Normal variety, every region's gates,

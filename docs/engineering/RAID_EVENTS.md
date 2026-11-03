@@ -1,8 +1,15 @@
 # Raid 이벤트 개발
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 기준: 2026-10-20. 현재 보스는 **20종**, route별 2~4 phase를 사용한다. 초기 한카리아스/뮤츠 두 종의 구현 보고와 과거 튜닝 수치는 밸런스 보고서 (로컬 전용: `artifacts/experiments/balance/README.md`)에 분리했다.
 
 ## 설정과 처리 경로
+
+현재 hundred-floor-v2 신규 Run의 무작위 Raid 제시는 `src/server/run-events.ts`에서 50층 관문 이후로 제한한다. 아래 보스 정의의 minFloor만 보고 초반 Raid가 제시된다고 해석하지 않는다. 이미 저장된 pending/진행 Raid는 재개한다. Raid 자체 shiny 판정은 기본 1/8192이며 타워 부적 연결과 구분한다.
 
 | 위치 | 책임 |
 |---|---|

@@ -1,5 +1,10 @@
 # 게임 소개 화면
 
+- Status: Active (partially superseded)
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 현행 연결 안내 + 날짜별 과거 기록; 본문 범위 구분
+
 2026-10-20, 1차 완성 코드의 프로덕션 빌드를 Chrome에서 촬영했다. 별도 .data/readme-demo/tower.sqlite와 시연 계정을 사용했으며 실제 사용자 저장을 사용하지 않았다.
 
 | 파일 | 장면 |

@@ -1,6 +1,28 @@
 # 자산과 데이터의 공식 출처 기록
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 현재 provider별 파일 수·용량·사용처·Git 정책, resolver와 fallback 및 importer 캐시 복구는 [외부 자산 분리 기반](EXTERNAL_ASSETS.md)을 따른다. 기존 source record를 중복 생성하지 않는다.
+
+## Git / Drive 후속 정리 전 위치 안내
+
+이번 문서 갱신은 위치·역할만 확인한다. Drive 업로드·이동·삭제·ZIP 생성·권리 재분류는 하지 않는다. 저장소 내 별도 `ExternalAssets` 폴더는 현재 없다. 실제 아래 경로를 기준으로 후속 분리 범위를 정하며 Drive 경로를 추정하지 않는다.
+
+| 자료 | 실제 위치·역할 |
+|---|---|
+| 외부 원본·참고 | `external/pokemon-ip/`, `external/third-party/`, `external/reference/`, `external/user-provided/unverified/`. IP 원본·조건 명시 원본·코드 참고·미확인 제공물을 구분 |
+| sprite·복구 입력 | `public/vendor/pokerogue/`, `public/vendor/showdown/pokemon/`, `public/vendor/pokeapi/`, `public/sprites/`; `scripts/assets/` lock/recipe/snapshots와 `docs/assets/manifests/`로 복원 |
+| VFX | `public/vendor/showdown/fx/`, `public/sprites/effects/`, `external/third-party/devwizard-pixel-art-spells/`. DevWizard 팩은 주력 VFX 미채택·후보 원본 보존. [연출 구조](../engineering/MOVE_EFFECTS.md) |
+| audio | `public/audio/bgm/`, `public/audio/sfx/`, `public/audio/music-sources.json`; 참고 원본 `external/third-party/kenney-impact-sounds/` |
+| 외부 데이터 | `scripts/data/` 생성 입력, `src/data/` runtime, `docs/assets/manifests/` 출처·버전·해시. 그림의 권리와 엔진 코드 라이선스는 별개 |
+| license / REUSE / SPDX | [THIRD_PARTY](../references/THIRD_PARTY.md), `public/fonts/NEODGM-LICENSE.txt`, 팩별 License/sources.json, PokéRogue `scripts/assets/pokerogue/snapshots/` 및 복원 고지. 루트 통합 REUSE.toml/.reuse/dep5/완성 SPDX inventory는 현재 없음. upstream 고지를 전체 이용 허가로 확대하지 않음 |
+| 분석 | Git 제외 `artifacts/progression-audit/`, `artifacts/build-progression-audit/`, `artifacts/experiments/`, `artifacts/reports/`, `artifacts/qa/`. 생성 로그·시뮬레이션·캡처는 공식 정책과 분리 |
+| 복구·배포 | `.data/backups/`, `.data/transfers/`, Windows 사용자 saves, `dist/` 배포 출력. 개인 저장·환경값은 공개 자산과 분리. [백업 안내](../operations/BACKUPS.md) |
+
+파일별 source/license와 manifest는 기존 기록을 보존한다. 표가 모든 파일의 재배포 허가를 뜻하지 않는다. provider별 수·용량은 과거 고정 감사값이며 이번에 새 전수 해시 감사한 숫자가 아니다.
 
 `manifests/`는 Git에 보존하는 검토 완료 출처 스냅샷이다. 원본 JSON의 날짜·URL·해시·버전·누락 항목은 그대로 보존했다. 과거 기록을 현재 상태나 새 이용 허가로 해석하지 않는다. 전체 이용 조건은 [THIRD_PARTY](../references/THIRD_PARTY.md), 현재 기능은 [STATUS](../STATUS.md)를 따른다.
 

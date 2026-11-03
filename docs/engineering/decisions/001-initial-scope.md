@@ -1,5 +1,11 @@
 # ADR 001 — 첫 배틀 검증과 임시 규칙
 
+- Status: Legacy
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 초기 설계 기록; 현재 기능 설명 아님
+- Superseded By: [현재 상태](../../STATUS.md) · [현행 구조](../ARCHITECTURE.md)
+
 > 초기 의사결정의 과거 기록입니다. 아래 단계 수·제약·미구현 항목은 작성 당시 상태이며 현재 사용 안내가 아닙니다. 현재는 [STATUS](../../STATUS.md), [구조](../ARCHITECTURE.md), [DB](../DATABASE.md)를 따릅니다.
 
 날짜: 2026-10-04. 상태: 엔진 검증 단계에 채택, 제품 규칙은 임시.

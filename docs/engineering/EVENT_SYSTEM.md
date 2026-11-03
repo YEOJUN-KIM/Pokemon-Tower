@@ -1,5 +1,10 @@
 # 이벤트 확장 방법
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 기준: 2026-10-23. 일반 랜덤 이벤트는 전체 발생 판정, 종류 선택, 내부 결과 선택을 별도로 관리한다. 로켓단 전용 후보 제한·3층부터 강제 Raid 같은 수동 QA 우회는 제거했다.
 
 ## 세 단계 확률의 기준
@@ -30,7 +35,7 @@
 
 `currentEventRulesVersion=2`는 **새 런**의 이벤트 규칙이다. 서버가 run_event_rules의 저장 버전을 선택기와 선택지 조회에 넘긴다. 기본 pure 함수 인자는 과거 v1이며 임의로 v2로 바꾸지 않는다.
 
-v1 상자는 legacyChestRewards(80% 150코인 / 20% 티켓 1장), v2 상자는 mysteryChestResults(꽝/손실/보상 표)를 사용한다. minRulesVersion=2 종류는 v1에서 제외한다. DB schema 47과 이벤트 rules version 1/2는 별개다. 기존 대기·지급·완료 이벤트, 선택 ID·결과·영수증을 재작성하지 않는다.
+v1 상자는 legacyChestRewards(80% 150코인 / 20% 티켓 1장), v2 상자는 mysteryChestResults(꽝/손실/보상 표)를 사용한다. minRulesVersion=2 종류는 v1에서 제외한다. DB schema 49, 이벤트 rules 1/2, 상대 progression v1/v2는 별개다. v2 신규 Raid/Mirror 제시는 50층 관문 이후로 제한한다. 기존 대기·지급·완료 이벤트, 선택 ID·결과·영수증은 재작성하지 않는다.
 
 ## 처리 책임
 

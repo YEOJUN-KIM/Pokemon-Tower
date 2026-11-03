@@ -1,5 +1,10 @@
 # 이벤트 콘텐츠 보강과 후순위 후보
 
+- Status: Planned
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 후속 계획; 실제 구현은 STATUS 확인
+
 기준: 2026-10-20. 이벤트 시스템의 기반은 구현된 상태다. 이 문서는 **기존 콘텐츠를 무엇부터 보강할지**와 아직 채택하지 않은 아이디어를 구분한다. 새 엔진·공통 보상 시스템 재구현을 남은 작업으로 잡지 않는다. 현재 수치/규칙은 [EVENTS](EVENTS.md), 추가 절차는 [EVENT_SYSTEM](../engineering/EVENT_SYSTEM.md)을 따른다.
 
 ## 구현된 기반과 남은 콘텐츠

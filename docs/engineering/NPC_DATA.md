@@ -1,5 +1,10 @@
 # NPC 데이터와 생성 규약
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 기준: 2026-10-20. runtime JSON을 직접 편집하지 않는다. 현재 검토 입력은 **180행·911마리 후보**이며 **156행은 allFloors 단일 후보 빌드**, 나머지 24행은 단계별 입력이다. 고정 3마리·두 단계라는 가정을 전체 입력에 적용하지 않는다.
 
 ## 실제 source of truth
@@ -31,7 +36,7 @@ npc-team-samples.json은 별도의 최고 단계 참고 입력이다. 현재 검
 | 빌런 보스 일반 단계 기준 | normalNpcFloorRules.villainBoss; `VILLAIN_BOSS_MIN_FLOOR`는 같은 값을 참조 |
 | AI tier/전술/상한 | `src/data/npc-ai.ts`, `src/battle/npc-policy.ts` |
 
-정확히 50층인 테마 champion/final 보스는 `normalNpcTemplate`의 gate50 예외로 최종 구성을 사용하고 IV 상한 24·능력 포인트 상한 46을 적용한다. JSON 검토 원본이나 100층 빌드를 다시 쓰는 변경은 아니다. 일반 단계 기준인 50층 첫 챔피언 기믹, 55층 후반 관장/간부 기믹, 75층 단계별 빌런 보스, 100층 최종 stage를 유지한다. 단일 빌드는 allFloors로 단계별 행 선택을 생략하지만, 실제 기믹 개방과 층별 육성 제한은 유지한다. 이벤트 캠페인의 등장 조건과 일반 NPC stage 기준은 서로 다른 규칙이다.
+50층 테마 champion/final은 `normalNpcTemplate` gate50으로 최종 후보를 사용한다. v2 네임드는 50층 IV 상한16·포인트37, 100층 상한30·포인트50이며 기믹 없는 Champion은 기존 에이스 Tera로 보완한다. v1 50층 IV24/포인트46·55층 기믹 규칙은 legacy Run/명시적 v1 참조에만 유효하다. 검토 JSON·필수 멤버·에이스를 새 수치로 덮어쓰지 않는다. allFloors도 런타임 층 정책을 거치며 이벤트 등장 조건과 일반 NPC stage는 별개다. [현행 v2](opponent-progression.md).
 
 새 팀은 발생 시 팀·폼·기믹·IV/EV·시드·AI tier/전술을 저장한다. 입력 변경은 기존 배틀·도전자·캠페인의 snapshot을 재작성하지 않는다. AI 정책 버전과 NPC encounter snapshot 버전도 구분한다.
 

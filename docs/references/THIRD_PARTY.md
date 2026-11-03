@@ -1,5 +1,10 @@
 # 출처와 재사용
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 ## Pixel Art Spells · DevWizard · 2026-10-24
 
 **Reviewed / Rejected for primary battle VFX.** 라이선스는 적합하지만 실제 Pokémon 배틀 화면의 디테일·명암·픽셀 크기와 맞지 않아 실전 연결을 제거했다. 원본과 카탈로그는 외부 후보로 보존한다. 구현 실패가 아닌 유효한 스타일 검증 결과이며 [기존 VFX 우선 재사용 조사](../engineering/MOVE_EFFECTS.md#existing-vfx-inventory--projectile-재검토)를 후속 기준으로 삼는다.

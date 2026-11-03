@@ -1,5 +1,10 @@
 # 빌런 캠페인 연계 트랙 — 2026-10-19
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 현재 신규 런은 일반 Run Event와 빌런 캠페인을 독립 판정한다. 일반 이벤트 확률 20%와 쿨다운 2회는 유지한다. 과거 로켓단 v1 캠페인의 저장 상태·이미 생성된 전투는 그대로 재개한다. 이전 구현 문서 (로컬 전용: `artifacts/reports/changes/rocket-campaign-implementation.md`)는 v1 호환 동작의 기록이다.
 
 ## 처리 순서와 저장

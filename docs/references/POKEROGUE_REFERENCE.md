@@ -4,6 +4,11 @@
 
 # PokéRogue 참고 조사 · 2026-10-04
 
+- Status: Archive
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 과거 기록·검증·출처; 수치는 당시 기준
+
 사용자가 [PokéRogue](https://pokerogue.net/)를 배틀 연출/구현 방식의 참고 대상으로 지정했다. 사이트와 공개 코드/리소스 고지를 조사했고 브라우저에서 한국어 타이틀/로그인 화면을 확인했다. 실제 플레이·로컬 구동·우리 게임 연동은 아직 수행하지 않았다. 추가 참고작 「올라라! 포켓몬 타워!」와 우리 기획의 관계는 [REFERENCE_GAMES.md](REFERENCE_GAMES.md)에 기록했다.
 
 ## 확인한 구현과 출처

@@ -1,5 +1,10 @@
 # 히든보스 확정 이벤트와 전투 재생
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 히든보스가 있는 테마의 마지막 챔피언을 격파하면 정비·영입 화면을 거치지 않고
 `hidden-boss` Run Event → 회복 안내와 `!` → 조우·등장 메시지를 확인한 뒤 전투로 연결한다.
 현재 해당 테마는 관동·성도·하나·팔데아이며, `towerThemes`에 `hiddenBoss: true`로 명시했다.

@@ -1,6 +1,11 @@
 # 코드 구조
 
-기준: 2026-10-24. 현재 지원 DB 스키마는 **47**, 기본 새 전투 정책은 **tower-policy-v13**이다. 이벤트 규칙은 새 런 v2/기존 런 v1, 공통 NPC 생성 표식은 run_npc_rules v1이며 서로 다른 버전 체계다.
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
+현재 지원 DB는 **schema 49**, 기본 새 전투 정책은 **tower-policy-v13**, 신규 상대 진행은 **hundred-floor-v2**다. 이벤트 규칙 새 런 v2/기존 v1, 공통 NPC 표식 run_npc_rules v1은 각각 별도 버전 체계다. beta.6 개발 중이며 package/player 버전은 아직 beta.5다.
 
 | 위치 | 현재 책임 |
 |---|---|
@@ -42,6 +47,9 @@
 | NPC stage/기믹 층 | `data/normal-mode-stages.ts`의 `normalNpcFloorRules`·선택 함수 |
 | 일반 상대 전설/환상·육성 곡선 | `data/tower-progression.ts`의 `towerDifficulty` |
 | NPC Rank/도구 슬롯·AI tier | `data/npc-ranks.ts` / `data/npc-ai.ts` |
+| v2 층 정책·역할/기술·장비 | `data/opponent-progression.ts`·`server/npc-progression-builds.ts`·`server/npc-progression-team.ts` |
+| EV capacity·숨특/기술 해금 | `data/training.ts`·`data/growth-unlocks.ts`·`server/training.ts`·TowerStore |
+| 계정 공통 부적·콘텐츠별 shiny | `data/shiny-odds.ts`·`server/shiny.ts`·`server/permanent-shop.ts` |
 | 소모품·TM·지닌 도구 가격/희귀도 | `data/shop.ts`, `data/held-item-shop.ts`, `data/held-items.ts` |
 | 히든상점·도전자 보상 | `data/hidden-shop.ts`, `data/challenger-rewards.ts` |
 | 일반 승리 코인·Rank/핵심 도구 가격 배율·영구 육성 비용 | `data/floors.ts`·`data/economy.ts`·`data/training.ts` |

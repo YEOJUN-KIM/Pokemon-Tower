@@ -1,5 +1,10 @@
 # 네임드 선출·배치 정책
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 현재 정책은 `src/data/npc-selection-rules.ts`, 적용은 `src/server/npc-templates.ts`와 팀 생성 경로, 검토 입력은 `scripts/data/npc/normal-npc-samples.json`을 기준으로 한다. selectionRules 도입 보고서의 정책 부분을 통합했다. 당시 적용 표·전수 감사 결과는 로컬 보고서로 남기며 현재 입력 수·단계·50층 예외는 [NPC_DATA](NPC_DATA.md)를 따른다.
 
 ```ts

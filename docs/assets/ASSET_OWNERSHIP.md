@@ -1,5 +1,10 @@
 # 최종 자산 ownership과 Git 정책
 
+- Status: Active (partially superseded)
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 현행 연결 안내 + 날짜별 과거 기록; 본문 범위 구분
+
 기준 HEAD: `a71393c671da0b1c6677d86d384bc340bc0f99ba`. 확인일 2026-10-23. 소유자의 직접 제작 확인을 파일별 디스크·SHA-256·기존 provider 기록과 대조했다. 폴더 전체를 일괄 자체 제작으로 판정하지 않았다. 바이너리 파일·runtime URL·게임 동작은 변경하지 않는다. 이번 단계 추가 Git 제거는 0개다.
 
 ## 최종 정책

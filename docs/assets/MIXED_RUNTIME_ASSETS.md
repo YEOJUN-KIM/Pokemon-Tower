@@ -1,5 +1,10 @@
 # 혼합 runtime 자산 소유권과 독립 복원
 
+- Status: Active (partially superseded)
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 현행 연결 안내 + 날짜별 과거 기록; 본문 범위 구분
+
 기준 HEAD: `43aa154688a1ef31e75f175ee6bde90198caa58a`. 네 폴더의 실제 파일 561개를 조사했다. 외부 535개만 조건부 추적 해제하며 자체 제작 20개(2026-10-23 beam 제작 확인 반영), historical metadata 6개는 그대로 추적한다. runtime URL과 기존 source 기록은 변경하지 않는다.
 
 ## 실제 파일 기준 조사

@@ -1,5 +1,10 @@
 # 개발환경·개인 서버의 컴퓨터 이전
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 이 문서는 소스 개발환경과 개인 Docker/터널 서버의 이전을 다룹니다. 일반 플레이어는 [Release ZIP 실행](SETUP.md), Windows 사용자 저장 이전은 [백업 안내](BACKUPS.md#일반-windows-사용자-저장)를 따릅니다.
 
 코드는 Git으로, 개인 저장은 별도 백업으로 옮깁니다. 개발 DB·Windows 사용자 DB·Docker 볼륨은 독립적입니다.

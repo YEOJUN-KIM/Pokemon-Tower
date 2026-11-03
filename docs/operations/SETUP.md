@@ -1,5 +1,10 @@
 # Windows에서 게임 실행
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 ## 처음 실행
 
 1. **Node.js 24 이상**을 설치합니다. 검증 환경은 Windows 11 x64이며 Windows 기본 .NET Framework를 사용합니다. 별도 SDK·개발 도구는 필요 없습니다.

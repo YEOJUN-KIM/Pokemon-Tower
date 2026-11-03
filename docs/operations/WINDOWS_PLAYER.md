@@ -1,5 +1,10 @@
 # Windows standalone 플레이어 구조
 
+- Status: Active (partially superseded)
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 현행 연결 안내 + 날짜별 과거 기록; 본문 범위 구분
+
 기준: 2026-10-24 · beta.5 공개본. 일반 사용자 실행은 [SETUP](SETUP.md), 공개 asset·해시·검증 결과는 [완료 기록](../releases/WINDOWS_BETA_5.md)를 따른다. 이 문서는 런처 내부와 유지보수 경계를 설명한다.
 
 ## 진입점과 두 설치 경로

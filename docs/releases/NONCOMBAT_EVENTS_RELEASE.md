@@ -2,6 +2,11 @@
 
 # 비전투 이벤트와 배포 검증
 
+- Status: Archive
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 과거 기록·검증·출처; 수치는 당시 기준
+
 기준: 2026-10-16. 현재 규칙은 [이벤트 안내](../gameplay/EVENTS.md), 실행 절차는 [배포 안내](../operations/DEPLOYMENT.md)를 따른다.
 
 ## 적용 내용

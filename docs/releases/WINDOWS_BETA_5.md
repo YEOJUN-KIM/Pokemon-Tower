@@ -1,5 +1,10 @@
 # v1.0.0-beta.5 Windows 공개·검증 완료 기록
 
+- Status: Archive
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: 과거 기록·검증·출처; 수치는 당시 기준
+
 2026-10-24, [Pokémon Tower v1.0.0-beta.5](https://github.com/YEOJUN-KIM/Pokemon-Tower/releases/tag/v1.0.0-beta.5)를 GitHub **공개 prerelease**로 배포했다. 공개 기준 커밋은 `54e10401a14ce2525581adf8bfe900abdad99b14`, package 버전은 `1.0.0-beta.5`다.
 
 ## 공개 asset

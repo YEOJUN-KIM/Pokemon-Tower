@@ -1,5 +1,10 @@
 # NPC AI와 저장 정책
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 새 일반 전투의 기본 정책은 src/server/tower-store.ts의 AI_VERSION = tower-policy-v13이다. 저장된 전투는 해당 ai_version으로 복구하며 v12/v11 및 이전 정책 파일도 실제 재생에 사용한다. 이름에 버전이 있다는 이유로 삭제하지 않는다.
 
 ## 설정과 책임
@@ -13,7 +18,9 @@
 | src/server/battle-session.ts | 저장 버전별 실제 정책 선택 |
 | src/server/tower-service.ts | 지원 버전 확인·저장 전투 복구 |
 
-Basic/Tactical/Expert는 판단 능력이며 레벨·IV·능력 포인트·기술·도구와 별개다. 공통 층 기준은 1~19 Basic, 20~49 Tactical, 50+ Expert이지만 일반 NPC 상한, 네임드/보스/도전자와 지역별 설정이 우선한다. 명시한 aiCeiling도 보존한다.
+Basic/Tactical/Expert는 육성 수치와 별개다. 신규 v2는 1–10 basic, 11–30 tactical, 31–40 tactical(Master expert), 41층 이후 Normal tactical/강한 Rank expert, 81층 이후 공통 Normal도 expert다. 50/100 Champion은 expert이며 후기 네임드의 명시적 aiCeiling은 유지한다. v1의 1–19 basic/20–49 tactical/50+ expert 곡선은 보존 참조다.
+
+v2는 저장 descriptor의 `buildSupport:'v1'`로 `BuildSupportPolicy`를 선택한다. screen·설치기·상태이상·회복·날씨를 HP/위험/KO 가능성/이미 전개한 필드에 따라 사용하며 허용 tier에서는 advancedSwitch를 연결한다. 모든 팀에 설치/날씨를 강제하지 않는다. [층별 정책](opponent-progression.md).
 
 v13은 v12 기반에 등장 우선기 판단을 조합하고, 저장된 NpcAi 설정에 따라 가라르 운영·에이스 보존·팔데아 테라·피벗/교체 정책을 사용한다. 지역별 조건은 data/npc-ai.ts와 해당 지역 데이터, 실제 행동 점수와 제약은 battle의 정책 클래스가 기준이다. 모든 NPC가 모든 기능을 사용하는 것은 아니다.
 

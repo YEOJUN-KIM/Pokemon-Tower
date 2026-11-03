@@ -1,5 +1,10 @@
 # 히든상점
 
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
 기준: 2026-10-20. ID는 hidden-shop, 제목은 수상한 상인이다. v2 이벤트의 최소 통과 1층부터 후보가 되며 일반 전투를 대체하거나 층을 소모하지 않는다.
 
 ## 발생과 가격의 기준

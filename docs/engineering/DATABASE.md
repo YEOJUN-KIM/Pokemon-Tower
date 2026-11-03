@@ -1,18 +1,37 @@
 # 저장 데이터
 
-기준: 2026-10-24. Node.js `node:sqlite`를 사용하며 현재 코드가 지원하는 DB 스키마는 **47**다. `src/server/schema.ts`의 `PRAGMA user_version`과 `src/server/storage/migrations.ts`가 기준이다. 개별 저장·백업 버전은 `PRAGMA user_version`으로 별도 확인한다. 코드보다 새로운 DB는 열지 않는다.
+- Status: Active
+- Updated: 2026-11-03
+- Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
+- Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
+
+Node.js `node:sqlite`를 사용하며 현재 코드가 지원하는 DB는 **schema 49**다. `src/server/schema.ts`의 `PRAGMA user_version`과 `src/server/storage/migrations.ts`가 기준이다. 개별 저장·백업은 `PRAGMA user_version`으로 별도 확인한다. 코드보다 새로운 DB는 열지 않는다.
 
 ## 서로 다른 버전
 
 | 버전 | 의미·기준 |
 |---|---|
-| DB schema 47 | 테이블·제약·migration; 이벤트 종류 수나 AI 버전이 아님 |
+| DB schema 49 | 테이블·제약·migration; 이벤트 종류 수나 AI 버전이 아님 |
+| hundred-floor-v2 / hundred-floor-v1 / legacy | Run별 상대 생성·기믹 진행 규칙. CURRENT_PROGRESSION 변경으로 기존 Run을 변환하지 않음 |
 | run_event_rules 1/2 | 런의 이벤트 규칙. 새 런은 `currentEventRulesVersion=2`, 과거 v1은 유지 |
 | run_npc_rules 1 | 새 공통 Sample/Rank 생성 경로 표식. 기존 런에 소급 부여하지 않음 |
 | NPC encounter snapshot 1/2 | 저장한 팀 구성/Rank의 직렬화 구조 |
 | tower-policy-v13 및 이전 버전 | 배틀 행동 정책. 배틀 행의 버전을 그대로 복구 |
 
 규칙 버전을 올리거나 현재 상수 값을 바꿨다는 이유로 기존 결과 JSON/팀/시드/영수증을 재작성하지 않는다. schema 46은 run_villain_tracks·run_event_followups·tool_voucher_draws를 포함한다. schema 47은 `player_tutorial.selected_species`를 추가하여 첫 선택 대상을 파티에서 제외한 뒤에도 보존한다. 기존 안내의 첫 선택이 파티에 남아 있으면 복구하며, 이미 사라진 대상은 임의의 스타터로 채우지 않는다.
+
+## beta.6 migration과 영구 성장
+
+- **48:** run_progression의 CHECK에 hundred-floor-v2를 추가하는 테이블 재작성. 기존 값·행을 복사하며 v1/legacy·생성된 팀/시드/AI/이벤트 snapshot을 v2로 업그레이드하지 않는다.
+- **49:** `pokemon_growth(player_id,species,ev_capacity,hidden_ability)` 추가. 복합 PK는 포켓몬별이며 폼별 추가 과금 테이블이 아니다. capacity 0–66, 숨특 해금 0/1. 스탯별 32 제한은 profile 검증에서 적용한다.
+- 기존 `pokemon_training.profile.evs`의 투자 합계를 최대 66 범위로 capacity에 반영하며 `MAX`로 이미 확보한 capacity/해금을 낮추지 않는다. 신규 기본 capacity는 0이다. 저장된 profile의 선택 폼과 실제 H 특성을 확인해 사용 중인 숨특을 해금으로 이전한다. 읽기 경로 `growthState`도 기존 투자/사용 중 숨특을 보존한다.
+- `permanent_research`의 옛 product `eggFocus`를 `shinyCharm`으로 바꿔 레벨을 유지한다. 새 CHECK는 allowance/shinyCharm, 레벨 1–5다. 계정 공통 레벨을 확률 헬퍼에 전달하며, 영수증/이미 뽑힌 결과를 새 확률로 재추첨하지 않는다.
+- `move_unlocks(player_id,species,move)`를 그대로 재사용한다. 알/TM/영구 기술 해금에 별도 중복 ledger를 만들지 않는다. 기존 자력기·profile/폼에 저장된 기술도 소유 판정에 포함한다.
+- 일반/특수 특성 slot을 H 해금으로 잘못 과금하지 않는다. 실제 숨특 해금 이후 해당 종의 폼들과 공유한다. `tests/permanent-growth.test.ts`는 capacity·기술·기존 숨특 migration·S slot 분리를 검사한다.
+
+마이그레이션은 초기화 트랜잭션 안에서 실행하며 기존 profile·포인트·수집·move_unlocks를 초기화하지 않는다. 기존 폼별 설정은 `pokemon_form_training`에 그대로 둔다. 테스트는 복사본/격리 DB를 사용하고 실제 사용자 저장을 열어 실험하지 않는다.
+
+타워 shiny는 별도 매 전투 재추첨 필드가 아니라 `battles.opponent_team`의 shiny 값으로 고정한다. 재접속/재도전은 packed team을 재사용하고 후보 projection과 영입은 같은 값을 읽는다. 부적 변경은 이미 생성된 상대를 바꾸지 않는다. v2의 1–49층 유효 `battles.rule=basic`도 함께 저장해 완료 검증·재시작·리플레이를 일치시키며 `run_rules`의 원래 선택은 보존한다.
 
 Windows 사용자·개발·Docker의 실제 DB 위치와 백업은 [BACKUPS](../operations/BACKUPS.md)를 따른다. 같은 계정 이름이라도 서로 다른 로컬 DB가 자동으로 동기화되지는 않는다.
 

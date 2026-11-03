@@ -24,7 +24,7 @@ for(const width of [1920,1280,390])test(`hatch result size, category backgrounds
  try{
   const auth=await new Accounts(store.db).register('palette_'+suffix,'palette-test-password',owner,undefined);
   store.ensurePlayer(owner);
-  await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);
+  await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001',httpOnly:true,sameSite:'Strict'}]);await page.request.post('/api/tutorial',{headers:{Origin:'http://127.0.0.1:3001'},data:{event:'skip'}});
   await page.setViewportSize({width,height:width===1920?980:width===1280?900:844});await page.goto('/eggs');
   const state=await page.request.get('/api/battle?view=collection').then(response=>response.json());
   await page.route('**/api/battle*',route=>route.fulfill({json:{...state,tower:{...state.tower,growthPoints:20000},...(route.request().method()==='POST'?{permanentResult:{message:'10개의 알이 부화했어요!',eggs}}:{})}}));

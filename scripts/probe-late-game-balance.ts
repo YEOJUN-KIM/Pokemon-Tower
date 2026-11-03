@@ -1,0 +1,119 @@
+// Late-game balance probe (beta.6 second pass).
+// Usage: tsx scripts/probe-late-game-balance.ts [courses=100] [floors=40,49,50,60,70,80,90,95,100]
+// Real generated opponents (one encounter per floor per course, different seeds per course), paired across conditions.
+// Player side comes from the shared shopping model in scripts/lib/run-model.ts. This is a model player, not a human.
+import {existsSync,mkdirSync,readFileSync,writeFileSync} from 'node:fs';
+import Showdown from 'pokemon-showdown';
+import {TowerStore} from '../src/server/tower-store';
+import {starters,packTeam} from '../src/data/teams';
+import {defaultProfile} from '../src/server/training';
+import {statKeys,type StatBlock,type TrainingProfile} from '../src/data/training';
+import {runBattle,type Seed} from '../src/battle/run';
+import {GimmickPolicy} from '../src/battle/gimmick-policy';
+import type {Observation} from '../src/battle/policy';
+import {FIRST_GIMMICK_FLOOR,isAbilitySupport,supportCatalog} from '../src/data/run-economy';
+import {rewardCurve,shopRun,startRoster,topThree,mulberry,defaultOptions,bst,type ModelOptions,type PolicyName,type RunState} from './lib/run-model';
+
+const courseCount=Number(process.argv[2]??100),floors=(process.argv[3]??'40,49,50,60,70,80,90,95,100').split(',').map(Number);
+type Enemy={seed:Seed;enemy:string;trainer:string;role:string};
+type Course={id:string;enemies:Record<number,Enemy>};
+const courseFile=`artifacts/economy/late-game-courses-${courseCount}.json`;
+function buildCourses():Course[]{
+  if(existsSync(courseFile))return JSON.parse(readFileSync(courseFile,'utf8')).courses;
+  const result:Course[]=[];
+  for(let c=0;c<courseCount;c++){
+    const store=new TowerStore(':memory:');
+    try{
+      const owner='late'+c;store.ensurePlayer(owner);const first=store.start(owner,starters),id=store.battle(first).run_id,enemies:Record<number,Enemy>={};
+      for(const floor of floors){store.db.prepare("UPDATE runs SET floor=?,state='select' WHERE id=?").run(floor,id);const row=store.battle(store.enter(owner,id,floor,starters)),boss=JSON.parse(row.boss??row.trainer??'{}');enemies[floor]={seed:JSON.parse(row.seed),enemy:row.opponent_team,trainer:boss.id??'unknown',role:boss.role??boss.kind??'normal'};}
+      result.push({id,enemies});
+    }finally{store.close();}
+  }
+  mkdirSync('artifacts/economy',{recursive:true});writeFileSync(courseFile,JSON.stringify({courses:result}));return result;
+}
+function trained(name:string):TrainingProfile{
+  const p=defaultProfile(name),base=Showdown.Dex.species.get(name).baseStats;
+  p.ivs=Object.fromEntries(statKeys.map(k=>[k,31])) as StatBlock;p.evs=Object.fromEntries(statKeys.map(k=>[k,0])) as StatBlock;
+  p.evs[base.atk>=base.spa?'atk':'spa']=32;p.evs.spe=21;p.evs.hp=13;p.nature=base.atk>=base.spa?'Adamant':'Modest';return p;
+}
+const SETUP=new Set(['swordsdance','dragondance','nastyplot','calmmind','bulkup','quiverdance','shellsmash','coil','agility','bellydrum','workup']);
+// Chooses supports for one battle from the stock, like a cautious human would: only when the fight looks risky.
+function planSupport(state:RunState,policy:PolicyName,floor:number,role:string,enemy:string):string[]{
+  const stock={...state.support},have=(k:string)=>(stock[k]??0)>0,plan:string[]=[];
+  const boss=['champion','elite','gym','villain'].includes(role)||floor%50===0;
+  const cap=policy==='aggressive'?3:policy==='balanced'?(boss||floor>=60?2:0):policy==='conservative'?(floor>=80||floor%50===0?1:0):2;
+  if(!cap)return plan;
+  const team=topThree(state),lead=team[0],leadDex=Showdown.Dex.species.get(lead),sets=Showdown.Teams.unpack(enemy)??[];
+  const enemyMoves=sets.flatMap(s=>s.moves.map(m=>Showdown.toID(m)));
+  const hasGround=sets.some(s=>s.moves.some(m=>Showdown.Dex.moves.get(m).type==='Ground'&&Showdown.Dex.moves.get(m).category!=='Status'));
+  const add=(k:string)=>{if(plan.length<cap&&have(k)&&!plan.includes(k)){plan.push(k);}};
+  const abilityPick=()=>{
+    if(hasGround&&!leadDex.types.includes('Flying')&&leadDex.abilities[0]!=='Levitate')return 'abilityLevitate';
+    if(enemyMoves.some(m=>SETUP.has(m)))return 'abilityUnaware';
+    if(leadDex.baseStats.hp+leadDex.baseStats.def+leadDex.baseStats.spd>=280)return 'abilityMultiscale';
+    return 'abilityRegenerator';
+  };
+  const ab=abilityPick();if(have(ab))add(ab);else for(const k of ['abilityMultiscale','abilityRegenerator','abilityMagicGuard','abilityUnaware','abilityLevitate'])if(have(k)&&plan.length<cap){add(k);break;}
+  add(leadDex.baseStats.atk>=leadDex.baseStats.spa?'attack':'specialAttack');add('critical');
+  const slow=sets.filter(s=>Showdown.Dex.species.get(s.species).baseStats.spe>leadDex.baseStats.spe).length>=2;if(slow)add('speed');
+  add('defense');add('specialDefense');add('guard');
+  return plan.filter(k=>supportCatalog[k]||isAbilitySupport(k));
+}
+class SupportingPolicy extends GimmickPolicy{
+  constructor(private queue:string[]){super();}
+  override choose(observation:Observation){
+    const items=observation.legalActions.filter(a=>a.command.startsWith('item ')),rest=observation.legalActions.filter(a=>!a.command.startsWith('item '));
+    const next=this.queue[0];
+    if(next&&items.some(a=>a.command==='item '+next)){this.queue.shift();return 'item '+next;}
+    if(rest.some(a=>a.command.startsWith('move ')))this.queue.length=0;
+    return super.choose({...observation,legalActions:rest});
+  }
+}
+
+type Cond={id:string;label:string;shop:boolean;opts:ModelOptions;useSupport:boolean;policy:PolicyName};
+const bal=(o:Partial<ModelOptions>={})=>({...defaultOptions('balanced'),...o});
+const conditions:Cond[]=[
+  {id:'baseline',label:'baseline: starters only',shop:false,opts:bal(),useSupport:false,policy:'balanced'},
+  {id:'beta6-nosupport',label:'beta6 balanced, Support unused',shop:true,opts:bal(),useSupport:false,policy:'balanced'},
+  {id:'beta6-support',label:'beta6 balanced + Support',shop:true,opts:bal(),useSupport:true,policy:'balanced'},
+  {id:'noscout-support',label:'no Scout, Support used',shop:true,opts:bal({scout:false}),useSupport:true,policy:'balanced'},
+  {id:'beta6-nogimmick',label:'beta6 balanced + Support, no gimmick',shop:true,opts:bal({gimmick:false}),useSupport:true,policy:'balanced'},
+  {id:'conservative-support',label:'conservative + Support',shop:true,opts:{...defaultOptions('conservative')},useSupport:true,policy:'conservative'},
+  {id:'aggressive-support',label:'aggressive + Support',shop:true,opts:{...defaultOptions('aggressive')},useSupport:true,policy:'aggressive'},
+];
+const only=process.env.CONDITIONS?.split(',');
+const courses=buildCourses(),curve=rewardCurve();
+type Cell={wins:number;n:number;enemyBst:number;teamBst:number;supports:number;withRestricted:{w:number;n:number};byTrainer:Record<string,{w:number;n:number}>};
+const result:Record<string,Record<number,Cell>>={};
+for(const cond of conditions.filter(c=>!only||only.includes(c.id))){
+  result[cond.id]={};
+  for(const floor of floors){
+    const cell:Cell={wins:0,n:0,enemyBst:0,teamBst:0,supports:0,withRestricted:{w:0,n:0},byTrainer:{}};
+    for(let c=0;c<courses.length;c++){
+      const course=courses[c],enemy=course.enemies[floor],random=mulberry(1000+c*7919+floor);
+      const roster=startRoster(mulberry(5000+c));
+      const state=cond.shop?shopRun(curve,mulberry(31000+c*131+floor),cond.opts,roster,floor):{coins:0,roster,items:{},support:{},freeClaimed:false,ledger:null as never};
+      const team=topThree(state),profiles=Object.fromEntries(team.map(n=>[n,trained(n)])) as Record<string,TrainingProfile>;
+      const items=Object.fromEntries(Object.entries(state.items).filter(([n])=>team.includes(n)));
+      const plan=cond.useSupport?planSupport(state,cond.policy,floor,enemy.role,enemy.enemy):[];
+      const stock=Object.fromEntries(plan.map(k=>[k,plan.filter(x=>x===k).length]));
+      let win=false;
+      try{
+        const log=await runBattle({teams:{p1:packTeam(team,profiles,items),p2:enemy.enemy},seed:enemy.seed,player:new SupportingPolicy([...plan]),opponent:new GimmickPolicy(),battleItems:stock,...(floor<FIRST_GIMMICK_FLOOR?{rule:'basic' as const}:{})});
+        win=log.winner==='Player';
+      }catch(error){console.error('battle failed',cond.id,floor,c,(error as Error).message);continue;}
+      void random;
+      cell.n++;cell.wins+=Number(win);cell.supports+=plan.length;cell.teamBst+=team.reduce((s,n)=>s+bst(n),0);
+      cell.enemyBst+=(Showdown.Teams.unpack(enemy.enemy)??[]).reduce((s,x)=>s+bst(x.species),0);
+      const hasTop=team.some(n=>['restricted','mythical'].includes(scoutTier(n)));if(hasTop){cell.withRestricted.n++;cell.withRestricted.w+=Number(win);}
+      const t=cell.byTrainer[enemy.trainer]??={w:0,n:0};t.n++;t.w+=Number(win);
+    }
+    result[cond.id][floor]=cell;
+    console.log(cond.id,floor,`${cell.wins}/${cell.n}`,(cell.wins/Math.max(1,cell.n)*100).toFixed(0)+'%');
+  }
+}
+import {scoutGroup} from '../src/data/scout';
+function scoutTier(name:string){return scoutGroup(name);}
+const out=Object.fromEntries(Object.entries(result).map(([id,byFloor])=>[id,Object.fromEntries(Object.entries(byFloor).map(([f,c])=>[f,{wins:c.wins,battles:c.n,winRate:+(c.wins/Math.max(1,c.n)).toFixed(3),meanTeamBst:Math.round(c.teamBst/Math.max(1,c.n)),meanEnemyBst:Math.round(c.enemyBst/Math.max(1,c.n)),supportsPerBattle:+(c.supports/Math.max(1,c.n)).toFixed(2),withTopScout:c.withRestricted,worstTrainers:Object.entries(c.byTrainer).filter(([,v])=>v.n>=3).sort((a,b)=>a[1].w/a[1].n-b[1].w/b[1].n).slice(0,12).map(([k,v])=>`${k} ${v.w}/${v.n}`)}]))]));
+const file=process.env.LATE_GAME_OUT??'artifacts/economy/late-game-balance.json';
+writeFileSync(file,JSON.stringify({note:'model player; paired courses; see docs/STATUS',courses:courses.length,floors,conditions:conditions.map(c=>({id:c.id,label:c.label})),results:out},null,1));

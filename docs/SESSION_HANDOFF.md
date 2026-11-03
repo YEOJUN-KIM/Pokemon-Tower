@@ -5,7 +5,7 @@
 - Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
 - Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
 
-현재 beta.6 개발 상태는 [STATUS](STATUS.md), 다음 우선순위는 **상점 개편 구현 완료(provisional 가격·확률) → 시뮬레이션/플레이 기반 튜닝 → 49→50 본 측정**이다. 49→50 급상승은 알려진 이슈이며 상대는 아직 조정하지 않았다(12코스 1차 probe만 완료). 상세 계획은 [ROADMAP](current/ROADMAP.md), 파일 책임은 [WORKSPACE](engineering/WORKSPACE.md)를 따른다.
+현재 beta.6 개발 상태는 [STATUS](STATUS.md), 다음 우선순위는 **상점 개편 구현 완료(provisional 가격·확률) → 2차 시뮬레이션 완료(수치 변경 없음) → 인간 플레이 테스트**다. 49→50 격차는 −45%p→−33%p로 완화됐으나 남아 있고 상대는 조정하지 않았다. 결과·후속 후보는 [STATUS](STATUS.md#경제후반-난이도-2차-검증-simulation-result-provisional). 상세 계획은 [ROADMAP](current/ROADMAP.md), 파일 책임은 [WORKSPACE](engineering/WORKSPACE.md)를 따른다.
 
 ## 실행과 저장
 

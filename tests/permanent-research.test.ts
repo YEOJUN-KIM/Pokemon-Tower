@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {TowerStore} from '../src/server/tower-store';
 import {starters} from '../src/data/teams';
-import {shinyCharm} from '../src/data/permanent-upgrades';
+import {shinyOdds,eggShinyChance} from '../src/data/shiny-odds';
 import {machineShiny,MACHINE_SHINY_WEIGHT} from '../src/data/egg-kinds';
 import {hiddenShopProducts,snapshotHiddenShop} from '../src/server/hidden-shop';
 import {hiddenShopProductPool} from '../src/data/hidden-shop';
@@ -23,7 +23,7 @@ test('research migrates additively, survives restart, charges once, and caps ato
   assert.throws(()=>s.permanentAction('p',id,'buy','shinyCharm',1,null),/같은 요청/);
   for(let n=1;n<3;n++)s.permanentAction('p',randomUUID(),'buy','allowance',1,null);
   for(let n=0;n<5;n++)s.permanentAction('p',randomUUID(),'buy','shinyCharm',1,null);
-  assert.equal(s.view('p').growthPoints,5300);assert.equal(s.permanentView('p').startingCoins,450);assert.equal(s.permanentView('p').shinyWeight,54);
+  assert.equal(s.view('p').growthPoints,5300);assert.equal(s.permanentView('p').startingCoins,450);assert.equal(s.permanentView('p').shinyChance!.egg,eggShinyChance(5));
   for(const product of ['allowance','shinyCharm'])assert.throws(()=>s.permanentAction('p',randomUUID(),'buy',product,1,null),/최대/);
   s.close();s=new TowerStore(path);assert.equal(s.view('p').growthPoints,5300);assert.equal(s.permanentView('p').shinyCharmLevel,5);
   s.ensurePlayer('poor');assert.throws(()=>s.permanentAction('poor',randomUUID(),'buy','shinyCharm',1,null),/부족/);assert.equal(s.permanentView('poor').shinyCharmLevel,0);
@@ -54,8 +54,8 @@ test('research receipt failure rolls back both the upgrade and its payment',()=>
 });
 
 test('shiny charm raises the egg-machine shiny weight without changing any other draw',()=>{
- assert.equal(machineShiny(23),true);assert.equal(machineShiny(24),false);assert.equal(machineShiny(24,6),true);assert.equal(machineShiny(30,6),false);
- assert.deepEqual(shinyCharm.extraWeights.map(extra=>MACHINE_SHINY_WEIGHT+extra),[24,30,36,42,48,54]);
+ assert.equal(machineShiny(23),true);assert.equal(machineShiny(24),false);assert.equal(machineShiny(24,1),true);assert.equal(machineShiny(30,1),false);
+ assert.deepEqual(shinyOdds.egg.chances,[24,30,36,42,48,54]);assert.equal(MACHINE_SHINY_WEIGHT,24);
  // Every 10000-wide roll is 40: not shiny at level 0, shiny once the weight exceeds 40 (level 3+).
  const calls:number[]=[],s=new TowerStore(':memory:',max=>{calls.push(max);return max===10000?40:0;});
  try{
@@ -77,7 +77,7 @@ test('legacy eggFocus research migrates to shiny charm with the same level and c
   s.db.exec("DROP TABLE permanent_research; CREATE TABLE permanent_research(player_id TEXT NOT NULL REFERENCES players(id),product TEXT NOT NULL CHECK(product IN ('allowance','eggFocus')),level INTEGER NOT NULL CHECK(level BETWEEN 1 AND 3),PRIMARY KEY(player_id,product)) STRICT; INSERT INTO permanent_research VALUES ('p','eggFocus',2),('p','allowance',1),('q','eggFocus',3); PRAGMA user_version=48;");
   s.close();s=new TowerStore(path);
   assert.equal(s.permanentView('p').shinyCharmLevel,2);assert.equal(s.permanentView('p').allowanceLevel,1);assert.equal(s.permanentView('q').shinyCharmLevel,3);
-  assert.equal(s.permanentView('p').shinyWeight,24+12);assert.equal(s.view('p').growthPoints,9000);
+  assert.equal(s.permanentView('p').shinyChance!.egg,eggShinyChance(2));assert.equal(s.view('p').growthPoints,9000);
   assert.throws(()=>s.permanentAction('p',randomUUID(),'buy','eggFocus',1,null),/빛나는 부적/);
  }finally{s.close();}
 });

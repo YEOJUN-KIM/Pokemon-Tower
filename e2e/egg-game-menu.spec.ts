@@ -57,7 +57,7 @@ test('insufficient points disable paid draws but a remaining ticket still works'
  const {store,owner}=await fixture(context);
  try{
   store.db.prepare('UPDATE players SET growth_points=0 WHERE id=?').run(owner);store.db.prepare('UPDATE permanent_upgrades SET egg_tickets=1 WHERE player_id=?').run(owner);
-  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/eggs');await expect(page.getByTestId('permanent-wallet')).toHaveText('0P');
+  await page.emulateMedia({reducedMotion:'reduce'});await page.request.post('/api/tutorial',{headers:{Origin:'http://127.0.0.1:3001'},data:{event:'skip'}});store.db.prepare('UPDATE players SET growth_points=0 WHERE id=?').run(owner);await page.goto('/eggs');await expect(page.getByTestId('permanent-wallet')).toHaveText('0P');
   await expect(page.locator('[data-egg-draw="1"]')).toBeEnabled();await expect(page.locator('[data-egg-draw="10"]')).toBeDisabled();
   await page.locator('[data-egg-draw="1"]').click();await closeHatch(page);expect(store.view(owner).growthPoints).toBe(0);await expect(page.locator('[data-egg-draw="1"]')).toBeDisabled();
  }finally{store.close();}

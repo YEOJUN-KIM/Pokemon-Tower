@@ -22,11 +22,13 @@ export function trainingOptions(name:string,forme?:string) {
   const learnableMoves=moveLearnsets[name].legalMoves.filter(move=>!validator.validateSet({...structuredClone(base),moves:[move]},{}));
   const options={abilities,learnableMoves,baseStats:{...Showdown.Dex.species.get(name).baseStats}};optionsCache.set(key,options);return options;
 }
-// Ability slots 0/1 are ordinary; anything else (hidden/special slot) needs a per-Pokemon unlock.
+// Showdown slots: 0/1 ordinary, H hidden, S special (event / form-mechanic abilities such as Battle Bond or
+// Power Construct). Only the real Hidden Ability slot needs the per-Pokemon unlock; special-slot
+// abilities stay free and are never charged as hidden.
 export function hiddenAbilities(name:string,forme?:string):string[] {
   const species=Showdown.Dex.species.get(forme??name);if(!species.exists)return [];
-  const ordinary=new Set([species.abilities[0],species.abilities[1]]);
-  return trainingOptions(name,forme).abilities.filter(ability=>!ordinary.has(ability));
+  const hidden=species.abilities.H,ordinary=[species.abilities[0],species.abilities[1],species.abilities.S];
+  return hidden&&!ordinary.includes(hidden)&&trainingOptions(name,forme).abilities.includes(hidden)?[hidden]:[];
 }
 export function validateProfile(name:string,value:unknown):TrainingProfile {
   if(!Object.hasOwn(pokemonSets,name) || !value || typeof value!=='object')throw new BattleRequestError('포켓몬 설정이 올바르지 않습니다.',400);

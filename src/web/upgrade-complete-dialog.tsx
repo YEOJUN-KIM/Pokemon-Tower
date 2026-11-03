@@ -1,6 +1,6 @@
 'use client';
 import {shinyCharm,SHINY_CHARM_MAX,type PermanentProduct,type PermanentResult,type PermanentView} from '../data/permanent-upgrades';
-import {MACHINE_SHINY_WEIGHT} from '../data/egg-kinds';
+import {eggShinyChance} from '../data/shiny-odds';
 import {PokedexDialog} from './pokedex-dialog';
 import styles from './styles/upgrade-complete.module.css';
 
@@ -13,7 +13,7 @@ function UpgradeIcon({product}:{product:PermanentProduct}){
 export function UpgradeCompleteDialog({result,completion,onClose}:{result:PermanentResult;completion:UpgradeCompletion|null;onClose:()=>void}){
  const product=completion?.product;
  const info=completion&&product==='allowance'?{title:'출발 지원금',label:'도전 시작 자금',before:`${completion.before.startingCoins??0}`,after:`${completion.after.startingCoins??0}`,unit:'코인',level:completion.after.allowanceLevel??0,max:3,timing:'다음 도전부터 적용',description:'첫 구매를 위한 여유가 생겼어요. 새 도전을 시작할 때 자동으로 지급됩니다.'}
- :completion&&product==='shinyCharm'?{title:shinyCharm.name,label:'알 뽑기 이로치 확률',before:((completion.before.shinyWeight??MACHINE_SHINY_WEIGHT)/100).toFixed(2),after:((completion.after.shinyWeight??MACHINE_SHINY_WEIGHT)/100).toFixed(2),unit:'%',level:completion.after.shinyCharmLevel??0,max:SHINY_CHARM_MAX,timing:'지금부터 적용',description:'반짝이는 기운이 알에 깃들어요. 알 뽑기에서 이로치가 나올 확률이 올라갑니다.'}
+ :completion&&product==='shinyCharm'?{title:shinyCharm.name,label:'알 뽑기 이로치 확률',before:(((completion.before.shinyChance?.egg)??eggShinyChance(0))*100).toFixed(2),after:(((completion.after.shinyChance?.egg)??eggShinyChance(0))*100).toFixed(2),unit:'%',level:completion.after.shinyCharmLevel??0,max:SHINY_CHARM_MAX,timing:'지금부터 적용',description:'반짝이는 기운이 알에 깃들어요. 알 뽑기와 타워 상대 포켓몬의 이로치 확률이 올라갑니다.'}
  :completion&&product==='retry'?{title:'다시하기 확장',label:'도전당 다시하기',before:`${completion.before.retryLimit}`,after:`${completion.after.retryLimit}`,unit:'회',level:completion.after.retryLimit,max:3,timing:'다음 도전부터 적용',description:'한 번의 패배로 끝나지 않아요. 팀을 다시 준비하고 도전을 이어가세요.'}
  :completion&&product==='reroll'?{title:'리롤 확장권',label:'상점 종류별 무료 리롤',before:`${completion.before.rerollLimit}`,after:`${completion.after.rerollLimit}`,unit:'회',level:completion.after.rerollLevel,max:2,timing:'진행 중인 도전에도 즉시 적용',description:'더 넓어진 선택지에서 팀에 필요한 도구와 기술머신을 찾아보세요.'}:null;
  return <PokedexDialog title="업그레이드 완료" className={`${styles.scope} ${styles.dialog}`} onClose={onClose} returnFocus={product?`[data-permanent-product="${product}"]`:undefined} controls={[{key:'Enter / Z',label:'확인'},{key:'Esc / X',label:'닫기'}]}>

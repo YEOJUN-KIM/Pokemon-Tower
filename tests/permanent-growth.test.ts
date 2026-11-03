@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
+import Showdown from 'pokemon-showdown';
+import {pokemonSets} from '../src/data/teams';
 import {TowerStore} from '../src/server/tower-store';
 import {hiddenAbilities,trainingOptions} from '../src/server/training';
 import {natures,evTotal,EV_CAPACITY,TRAINING_POINT_PRICE,type TrainingProfile} from '../src/data/training';
@@ -129,5 +131,36 @@ test('moves: egg and machine unlocks share move_unlocks, so they cannot be bough
   const a=entry(s,'p','Charizard'),move=a.learnableMoves.find(m=>!a.unlockedMoves.includes(m))!;
   s.db.prepare('INSERT INTO move_unlocks VALUES (?,?,?)').run('p','Charizard',move);
   assert.throws(()=>s.unlockMove('p','Charizard',move),/이미/);assert.equal(wallet(s),9000);
+ }finally{s.close();}
+});
+
+test('ability slots: only the real Hidden Ability slot is paid; ordinary and special slots are free',()=>{
+ const slots=(name:string)=>Showdown.Dex.species.get(name).abilities as unknown as Record<string,string>;
+ assert.deepEqual(hiddenAbilities('Charizard'),['Solar Power']);                   // two slots? one ordinary + H
+ assert.deepEqual(hiddenAbilities('Greninja'),['Protean']);                        // H only; special Battle Bond stays free
+ assert.ok(trainingOptions('Greninja').abilities.includes('Battle Bond'));
+ assert.deepEqual(hiddenAbilities('Zygarde'),[]);                                  // special slot only
+ assert.ok(trainingOptions('Zygarde').abilities.includes('Power Construct'));
+ assert.deepEqual(hiddenAbilities('Golem-Alola'),['Galvanize']);                   // regional form
+ let ordinaryOnly=0,withHidden=0;
+ for(const name of Object.keys(pokemonSets)){
+  const s=slots(name),hidden=hiddenAbilities(name);
+  for(const ability of hidden){assert.equal(ability,s.H,name);assert.ok(![s[0],s[1],s.S].includes(ability),name);}
+  for(const ability of [s[0],s[1],s.S])if(ability&&trainingOptions(name).abilities.includes(ability))assert.ok(!hidden.includes(ability),`${name} ${ability}`);
+  if(hidden.length)withHidden++;else ordinaryOnly++;
+ }
+ assert.ok(withHidden>0&&ordinaryOnly>0);
+});
+
+test('ability slots: an unlocked-needed hidden ability follows the chosen form, special abilities never prompt an unlock',()=>{
+ const s=fixture(0);try{
+  s.db.prepare("INSERT OR IGNORE INTO unlocks VALUES ('p','Greninja')").run();
+  const view=entry(s,'p','Greninja');
+  assert.deepEqual(view.hiddenAbilities,['Protean']);
+  // Battle Bond is free to equip while Protean needs the unlock (no points here).
+  assert.equal(save(s,'p','Greninja',p=>{p.ability='Battle Bond';}).profile.ability,'Battle Bond');
+  const current=entry(s,'p','Greninja'),hidden=structuredClone(current.profile);hidden.ability='Protean';
+  assert.throws(()=>s.train('p','Greninja',current.revision,hidden),/숨겨진 특성/);
+  assert.throws(()=>s.unlockHiddenAbility('p','Zygarde'),/해금한 포켓몬|없습니다/);
  }finally{s.close();}
 });

@@ -7,7 +7,7 @@ import {recentEncounters} from './encounter-history';
 import {RewardInventory} from './reward-inventory';
 import {RaidEvents} from './raid-events';
 import type {RaidRecruitSet} from './raid-recruitment';
-import {rollEncounterShiny} from './shiny';
+import {rollTowerShiny} from './shiny';
 import {RunBag} from './run-bag';
 import {ownsRunItem,ownsMachine,runMachines} from './run-ownership';
 import {readVitaminUsage,grantRunItem,grantEquipment,grantStoredReward,applyVitamin} from './inventory-grants';
@@ -440,8 +440,10 @@ export class TowerStore {
       if(legacyChallenger.fallbackItem && !entry.item && allowsRuleItem(rule,legacyChallenger.fallbackItem))entry.item=legacyChallenger.fallbackItem;
     }
     const opponents=encounter.map(entry=>entry.name);
+    // Decided once here and stored in the battle's opponent team; retries and recruitment reuse it.
+    const charmLevel=(this.db.prepare("SELECT level FROM permanent_research WHERE product='shinyCharm' AND player_id=(SELECT player_id FROM runs WHERE id=?)").get(runId) as {level:number}|undefined)?.level??0;
     const opponentProfiles=Object.fromEntries(encounter.map(({name,moves,ability,profile})=>{
-      return [name,{shiny:rollEncounterShiny(this.roll),...(profile ?? opponentProfile(name,moves,encounterFloor,Object.fromEntries(statKeys.map(stat=>[stat,randomBytes(1)[0]%32])) as StatBlock,progression)),gender:speciesGender(name,this.roll(1000000)/1000000),...(ability ? {ability} : {})}];
+      return [name,{shiny:rollTowerShiny(this.roll,charmLevel),...(profile ?? opponentProfile(name,moves,encounterFloor,Object.fromEntries(statKeys.map(stat=>[stat,randomBytes(1)[0]%32])) as StatBlock,progression)),gender:speciesGender(name,this.roll(1000000)/1000000),...(ability ? {ability} : {})}];
     }));
     if(legacyChallenger)for(const profile of Object.values(opponentProfiles)){
       for(const stat of statKeys){profile.evs[stat]=Math.min(32,Math.floor(profile.evs[stat]*legacyChallenger.trainingScale));profile.ivs[stat]=Math.min(31,Math.floor(profile.ivs[stat]*legacyChallenger.trainingScale));}

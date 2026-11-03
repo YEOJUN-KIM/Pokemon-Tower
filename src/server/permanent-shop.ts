@@ -4,9 +4,10 @@ import {eggMachineTuningRules} from '../data/egg-machine-tuning';
 import type {DatabaseSync} from 'node:sqlite';
 import {pokemonRarity,eggRarity} from '../data/pokemon-rarity';
 import {eggGradeWeights,superRareSpeciesCategory,type EggGrade} from '../data/egg-grades';
-import {isEggKind,rareEggCategory,machinePokemonKind,machineShiny,MACHINE_SHINY_WEIGHT} from '../data/egg-kinds';
+import {isEggKind,rareEggCategory,machinePokemonKind,machineShiny} from '../data/egg-kinds';
+import {eggShinyChance,towerShinyChance,scoutShinyChance,eggShinyWeight,shinyPercent,SHINY_CHARM_MAX,shinyOdds} from '../data/shiny-odds';
 import {rareEggSpeciesCategory,eggSpeciesGrade} from './egg-pool';
-import {permanentPrices,permanentResearch,shinyCharm,SHINY_CHARM_MAX,EGG_SHINY_ODDS,type ResearchProduct,type PermanentView,type PermanentResult,type EggResult} from '../data/permanent-upgrades';
+import {permanentPrices,permanentResearch,shinyCharm,EGG_SHINY_ODDS,type ResearchProduct,type PermanentView,type PermanentResult,type EggResult} from '../data/permanent-upgrades';
 import {statKeys,type StatBlock,type IVGain,type TrainingProfile} from '../data/training';
 import {trainingOptions} from './training';
 import {pokedexEntries} from './pokedex-entries';
@@ -26,7 +27,7 @@ export class PermanentShop {
     const research=this.db.prepare('SELECT product,level FROM permanent_research WHERE player_id=?').all(owner) as {product:ResearchProduct;level:number}[];
     const levels=Object.fromEntries(research.map(r=>[r.product,r.level])),allowanceLevel=levels.allowance??0,shinyCharmLevel=levels.shinyCharm??0;
     const row=this.db.prepare('SELECT reroll_level,shiny_tickets,egg_tickets FROM permanent_upgrades WHERE player_id=?').get(owner) as {reroll_level:number;shiny_tickets:number;egg_tickets:number}|undefined;
-    return {allowanceLevel,startingCoins:permanentResearch.allowance.coins[allowanceLevel],shinyCharmLevel,shinyWeight:MACHINE_SHINY_WEIGHT+shinyCharm.extraWeights[shinyCharmLevel],...(this.db.prepare('SELECT 1 FROM reward_egg_tickets WHERE player_id=? AND quantity>0').get(owner)?{rewardEggTickets:Object.fromEntries((this.db.prepare('SELECT kind,quantity FROM reward_egg_tickets WHERE player_id=? AND quantity>0').all(owner) as {kind:string;quantity:number}[]).map(r=>[r.kind,r.quantity]))}:{}),retryLimit:(this.db.prepare('SELECT level FROM permanent_retry_upgrades WHERE player_id=?').get(owner) as {level:number}|undefined)?.level??0,rerollLevel:row?.reroll_level??0,rerollLimit:1+(row?.reroll_level??0),shinyTickets:row?.shiny_tickets??0,eggTickets:row?.egg_tickets??0};
+    return {allowanceLevel,startingCoins:permanentResearch.allowance.coins[allowanceLevel],shinyCharmLevel,shinyChance:{egg:eggShinyChance(shinyCharmLevel),tower:towerShinyChance(shinyCharmLevel),scout:scoutShinyChance(shinyCharmLevel)},...(this.db.prepare('SELECT 1 FROM reward_egg_tickets WHERE player_id=? AND quantity>0').get(owner)?{rewardEggTickets:Object.fromEntries((this.db.prepare('SELECT kind,quantity FROM reward_egg_tickets WHERE player_id=? AND quantity>0').all(owner) as {kind:string;quantity:number}[]).map(r=>[r.kind,r.quantity]))}:{}),retryLimit:(this.db.prepare('SELECT level FROM permanent_retry_upgrades WHERE player_id=?').get(owner) as {level:number}|undefined)?.level??0,rerollLevel:row?.reroll_level??0,rerollLimit:1+(row?.reroll_level??0),shinyTickets:row?.shiny_tickets??0,eggTickets:row?.egg_tickets??0};
   }
   action(owner:string,requestId:unknown,action:unknown,product:unknown,count:unknown,species:unknown,eggKind:unknown='normal',tuningInput:unknown=undefined,rewardTicket=false):PermanentResult {
     if(typeof requestId!=='string'||!/^[a-zA-Z0-9-]{16,80}$/.test(requestId))throw new BattleRequestError('구매 요청 번호가 올바르지 않습니다.',400);
@@ -62,7 +63,7 @@ export class PermanentShop {
           const cost=definition.prices[level];
           if(!this.db.prepare('UPDATE players SET growth_points=growth_points-? WHERE id=? AND growth_points>=?').run(cost,owner,cost).changes)throw new BattleRequestError('성장 포인트가 부족합니다.',400);
           this.db.prepare('INSERT INTO permanent_research VALUES (?,?,1) ON CONFLICT(player_id,product) DO UPDATE SET level=level+1').run(owner,researchProduct);
-          result={message:researchProduct==='allowance'?`다음 도전부터 ${permanentResearch.allowance.coins[level+1]}코인을 가지고 출발해요!`:`빛나는 부적 ${level+1}단계! 알 뽑기 이로치 확률이 ${((MACHINE_SHINY_WEIGHT+shinyCharm.extraWeights[level+1])/100).toFixed(2)}%로 올랐어요!`};
+          result={message:researchProduct==='allowance'?`다음 도전부터 ${permanentResearch.allowance.coins[level+1]}코인을 가지고 출발해요!`:`빛나는 부적 ${level+1}단계! 알 뽑기 이로치 확률이 ${shinyPercent(eggShinyChance(level+1))}로 올랐어요!`};
         }else{
         if(product==='retry'&&before.retryLimit>=3)throw new BattleRequestError('다시하기는 최대 3회까지 확장할 수 있습니다.',409);
         if(product==='reroll'&&before.rerollLevel>=2)throw new BattleRequestError('리롤은 최대 3회까지 확장할 수 있습니다.',409);
@@ -80,7 +81,7 @@ export class PermanentShop {
         if(rewardTicket&&!this.db.prepare('UPDATE reward_egg_tickets SET quantity=quantity-1 WHERE player_id=? AND kind=? AND quantity>0').run(owner,String(eggKind)).changes)throw new BattleRequestError('해당 보상 알 티켓이 없습니다.',409);
         if(!this.db.prepare('UPDATE players SET growth_points=growth_points-? WHERE id=? AND growth_points>=?').run(cost,owner,cost).changes)throw new BattleRequestError('티켓을 사용하고 남은 뽑기에 필요한 성장 포인트가 부족합니다.',400);
         this.db.prepare('UPDATE permanent_upgrades SET egg_tickets=egg_tickets-? WHERE player_id=?').run(tickets,owner);
-        const shinyExtra=shinyCharm.extraWeights[Math.min(SHINY_CHARM_MAX,before.shinyCharmLevel??0)],pool=pokedexEntries().filter(entry=>entry.battleReady!==false).map(entry=>entry.species),eggs:EggResult[]=[];
+        const charmLevel=Math.min(SHINY_CHARM_MAX,before.shinyCharmLevel??0),pool=pokedexEntries().filter(entry=>entry.battleReady!==false).map(entry=>entry.species),eggs:EggResult[]=[];
         const tuned=tuning.kind!=='none';
         for(let i=0;i<count;i++){
           const kind=eggKind==='machine'?machinePokemonKind(this.roll(10000)):eggKind;
@@ -95,7 +96,7 @@ export class PermanentShop {
           const improved=Object.fromEntries(statKeys.map(stat=>[stat,Math.max(saved.profile.ivs[stat],ivs[stat])])) as StatBlock;
           const ivGain:IVGain={species:name,changes:statKeys.filter(stat=>improved[stat]>saved.profile.ivs[stat]).map(stat=>({stat,from:saved.profile.ivs[stat],to:improved[stat]}))};
           const legal=trainingOptions(name).learnableMoves,known=this.unlockedMoves(owner,name),move=legal.length?legal[this.roll(legal.length)]:null,newMoves=move&&!known.includes(move)?[move]:[];
-          const shiny=eggKind==='machine'?machineShiny(this.roll(10000),shinyExtra):kind==='shiny'||this.roll(Math.max(1,Math.floor(EGG_SHINY_ODDS*MACHINE_SHINY_WEIGHT/(MACHINE_SHINY_WEIGHT+shinyExtra))))===0,newShiny=shiny&&!saved.profile.shiny;
+          const shiny=eggKind==='machine'?machineShiny(this.roll(10000),charmLevel):kind==='shiny'||this.roll(Math.max(1,Math.floor(EGG_SHINY_ODDS*shinyOdds.egg.chances[0]/eggShinyWeight(charmLevel))))===0,newShiny=shiny&&!saved.profile.shiny;
           this.db.prepare('INSERT OR IGNORE INTO unlocks VALUES (?,?)').run(owner,name);
           if(isNew||ivGain.changes.length||newShiny)this.db.prepare('INSERT INTO pokemon_training VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET profile=excluded.profile,revision=excluded.revision').run(owner,name,JSON.stringify({...saved.profile,ivs:improved,shiny:!!saved.profile.shiny||shiny}),saved.revision+1);
           for(const move of newMoves)this.db.prepare('INSERT OR IGNORE INTO move_unlocks VALUES (?,?,?)').run(owner,name,move);

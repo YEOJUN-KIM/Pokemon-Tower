@@ -12,6 +12,7 @@
 | 게임 | [조작·규칙](gameplay/README.md) · [도감과 출전 편성](gameplay/COLLECTION.md) · [튜토리얼·초기 지급](gameplay/TUTORIAL.md) |
 | 개발 | [개발 명령어](development/DEVELOPER_COMMANDS.md) · [구조·영역별 개발](engineering/README.md) · [작업 인계](SESSION_HANDOFF.md) |
 | 실행/배포 | [일반 사용자 실행](operations/SETUP.md) · [운영 문서 색인](operations/README.md) |
+| Git/Drive 보존 | [1차 기준선·복원·증분 운영](operations/PRESERVATION.md) |
 | 자산 | [복원·검증·manifest](assets/README.md) · [출처·라이선스](references/README.md) |
 | 현재 상태 | [STATUS](STATUS.md) · [앞으로 할 일](current/ROADMAP.md) |
 | 과거 기록 | [결정·조사 기록](history/README.md) · [beta.5 공개·검증 완료 기록](releases/WINDOWS_BETA_5.md) · [beta.1](releases/v1.0.0-beta.1.md) · [비전투 이벤트 릴리스](releases/NONCOMBAT_EVENTS_RELEASE.md) |

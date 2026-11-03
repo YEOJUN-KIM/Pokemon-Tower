@@ -13,6 +13,7 @@
 | [WINDOWS_PLAYER](WINDOWS_PLAYER.md) | EXE/Node/runtime, 설치 marker·health·트레이·프로세스 소유권과 패키징 구조 |
 | [ACCOUNTS](ACCOUNTS.md) | 로그인·가입·비밀번호/저장 복구, 계정 운영 정책 |
 | [BACKUPS](BACKUPS.md) | Windows/개발/Docker 저장 구분, 백업·검사·복원 |
+| [PRESERVATION](PRESERVATION.md) | Git/Drive 보존 기준선, 비Git 자산 복원·증분 검사 |
 | [DEPLOYMENT](DEPLOYMENT.md) | 서버/웹 패키지, Docker·HTTPS·임시 터널 운영 |
 | [COMPUTER_MOVE](COMPUTER_MOVE.md) | 개발환경·개인 서버를 다른 PC로 이전 |
 

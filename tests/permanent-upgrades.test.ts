@@ -42,7 +42,7 @@ test('retired shiny exchange rejects new actions, preserves existing shiny colle
 test('reroll extension applies to each shop, no fourth reroll; trainer shiny is saved in packed team',()=>{
  const s=setup(':memory:',()=>0);try{const id=s.start('p',starters),runId=s.battle(id).run_id;assert.ok(Showdown.Teams.unpack(s.battle(id).opponent_team)!.every(p=>p.shiny));s.db.prepare("UPDATE runs SET floor=11,state='select' WHERE id=?").run(runId);
  s.permanentAction('p',randomUUID(),'buy','reroll',1,null);s.permanentAction('p',randomUUID(),'buy','reroll',1,null);
- for(const kind of ['items','machines'] as const){for(let rev=0;rev<3;rev++)s.rerollShop('p',runId,11,kind,rev);assert.throws(()=>s.rerollShop('p',runId,11,kind,3),/모두/);assert.equal(s.view('p').run!.shopRerolls![kind].count,3);assert.equal(s.view('p').run!.shopRerolls![kind].limit,3);}
+ for(const kind of ['items'] as const){for(let rev=0;rev<3;rev++)s.rerollShop('p',runId,11,kind,rev);assert.throws(()=>s.rerollShop('p',runId,11,kind,3),/모두/);assert.equal(s.view('p').run!.shopRerolls![kind].count,3);assert.equal(s.view('p').run!.shopRerolls![kind].limit,3);}
  }finally{s.close();}
 });
 

@@ -5,7 +5,7 @@
 - Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
 - Applies To: beta.6 개발 / 문서 담당 영역 (공개 패키지 표기는 beta.5)
 
-현재 beta.6 개발 상태는 [STATUS](STATUS.md), 다음 우선순위는 **등반 코인·상점·첫 기믹 획득 → 난이도 재측정**이다. 49→50 급상승은 알려진 이슈지만 경제/상점 개편 전 즉시 너프하지 않는다. 상세 계획은 [ROADMAP](current/ROADMAP.md), 파일 책임은 [WORKSPACE](engineering/WORKSPACE.md)를 따른다.
+현재 beta.6 개발 상태는 [STATUS](STATUS.md), 다음 우선순위는 **상점 개편 구현 완료(provisional 가격·확률) → 시뮬레이션/플레이 기반 튜닝 → 49→50 본 측정**이다. 49→50 급상승은 알려진 이슈이며 상대는 아직 조정하지 않았다(12코스 1차 probe만 완료). 상세 계획은 [ROADMAP](current/ROADMAP.md), 파일 책임은 [WORKSPACE](engineering/WORKSPACE.md)를 따른다.
 
 ## 실행과 저장
 

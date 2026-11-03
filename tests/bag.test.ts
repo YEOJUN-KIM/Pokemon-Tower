@@ -64,14 +64,6 @@ test('Bag vitamin is quantity based, consumes only on success, deduplicates requ
  }finally{f.store.close();}
 });
 
-test('TM rolls exclude owned moves, preserve original slot count, and ignore roster compatibility for normal and hidden shops',()=>{
- const f=hiddenShopFixture();try{
-  for(const move of ['Earthquake','Ice Beam'])grantStoredReward(f.store.db,f.run,{kind:'machine',move,amount:1});f.store.chooseEvent(f.owner,f.run,f.eventId,'leave');f.store.db.prepare('UPDATE runs SET floor=11 WHERE id=?').run(f.run);
-  for(let revision=0;revision<2;revision++){const offers=f.store.view(f.owner).run!.machineShop!.offers;assert.equal(offers.length,MACHINE_COUNT);assert.equal(new Set(offers.map(o=>o.move)).size,MACHINE_COUNT);assert.ok(offers.every(o=>!['Earthquake','Ice Beam'].includes(o.move)));if(revision===0)f.store.rerollShop(f.owner,f.run,11,'machines',0);}
-  const missing=f.products.find(p=>p.effect.kind==='machine'&&!f.store.roster(f.run).some(s=>f.store.trainingCollection(f.owner).find(e=>e.species===s)!.learnableMoves.includes(p.effect.kind==='machine'?p.effect.move:'')));assert.ok(missing,'TM with no compatible current Pokemon must be available');
-  assert.ok(hiddenShopProducts(f.store.db,f.run).some(p=>p.id===missing.id));
- }finally{f.store.close();}
-});
 
 test('v40 semantic migration keeps purchased/consumed machines and clamps unique tools; reopen is stable',()=>{
  const path=`.data/tests/bag-${randomUUID()}.sqlite`,f=hiddenShopFixture(path);let store=f.store;try{

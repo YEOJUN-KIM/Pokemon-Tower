@@ -35,7 +35,7 @@ for(const width of [1280,390])test('tabbed training, Enter/Z confirm and X cance
   await page.keyboard.press('e');await expect(shop.getByRole('button',{name:'기술머신',exact:true})).toHaveAttribute('aria-pressed','true');
   await expect(page.getByTestId('shop-reroll')).toBeEnabled();await page.getByTestId('shop-reroll').click();await expect(page.getByTestId('shop-reroll')).toBeDisabled();
   await page.keyboard.press('e');await expect(page.locator('[data-vitamin]')).toHaveCount(4);await expect(page.getByTestId('shop-reroll')).toHaveCount(0);
-  await page.reload();expect(store.view(owner).run!.shopRerolls!.items.count).toBe(1);expect(store.view(owner).run!.shopRerolls!.machines.count).toBe(1);
+  await page.reload();expect(store.view(owner).run!.shopRerolls!.items.count).toBe(1);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  }finally{store.close();}
 });

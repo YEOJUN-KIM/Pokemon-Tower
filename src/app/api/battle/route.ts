@@ -90,6 +90,14 @@ export async function POST(request: NextRequest) {
       service.store.purchase(player,body.runId,body.floor,body.kind);
       return NextResponse.json(await service.state(player),{headers});
     }
+    if(body.type==='purchase-scout' && typeof body.runId==='string' && Number.isSafeInteger(body.floor)) {
+      service.store.purchaseScout(player,body.runId,body.floor,body.species,body.replaced??null,body.revision??0);
+      return NextResponse.json(await service.state(player),{headers});
+    }
+    if(body.type==='claim-free-gimmick' && typeof body.runId==='string' && Number.isSafeInteger(body.floor)) {
+      service.store.claimFreeGimmick(player,body.runId,body.floor,body.item,body.species??null);
+      return NextResponse.json(await service.state(player),{headers});
+    }
     if(body.type==='purchase-machine' && typeof body.runId==='string' && Number.isSafeInteger(body.floor)) {
       service.store.purchaseMachine(player,body.runId,body.floor,body.move,body.species,body.slot,body.revision??0);
       return NextResponse.json(await service.state(player),{headers});

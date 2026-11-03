@@ -32,8 +32,6 @@ test('bag purchase, duplicate protection, compatible stock, independent one-use 
     const coins=store.view('p').coins;
     assert.throws(()=>store.rerollShop('p',id,11,'items',1),/리롤/);
     assert.equal(store.view('p').coins,coins);
-    store.rerollShop('p',id,11,'machines',0);
-    assert.equal(store.view('p').run!.shopRerolls!.machines.count,1);
     store.db.prepare('UPDATE item_shops SET offers=? WHERE run_id=? AND floor=?').run(JSON.stringify(['Leftovers']),id,11);
     assert.throws(()=>store.purchaseItem('p',id,11,'Leftovers','Charizard',1),/보유/);
     store.equipItem('p',id,11,'Charizard','Leftovers');

@@ -26,7 +26,7 @@ test('equipment purchases occupy no Pokemon slot, coexist, persist, and reject d
   assert.deepEqual(store.trainerEquipment(id),[]);assert.equal(store.view('equipment').run!.teraShop,null);
   store.db.prepare("UPDATE runs SET state='select',floor=11 WHERE id=?").run(id);
   store.db.prepare('UPDATE players SET coins=20000 WHERE id=?').run('equipment');
-  store.db.prepare('INSERT OR REPLACE INTO item_shops VALUES (?,?,?)').run(id,11,JSON.stringify(['Dynamax Band','Tera Orb','Leftovers','Sitrus Berry']));
+  store.db.prepare("INSERT OR IGNORE INTO run_free_gimmick VALUES (?,?,?)").run(id,'x',51);store.db.prepare('INSERT OR REPLACE INTO item_shops VALUES (?,?,?)').run(id,11,JSON.stringify(['Dynamax Band','Tera Orb','Leftovers','Sitrus Berry']));
   for(const item of ['Dynamax Band','Tera Orb'] as const){
    assert.equal(itemShopRule(item).rarity,'legendary');
    assert.throws(()=>store.purchaseItem('equipment',id,11,item,'Charizard'),/트레이너/);

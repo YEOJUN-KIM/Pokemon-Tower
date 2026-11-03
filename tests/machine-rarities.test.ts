@@ -27,8 +27,6 @@ test('v14 migration preserves thirty-floor run, packed battle and saved offers w
   try{
     store.ensurePlayer('legacy');const battle=store.battle(store.start('legacy',starters)),run=battle.run_id;
     store.db.prepare("UPDATE runs SET total_floors=30,floor=6,state='select' WHERE id=?").run(run);
-    const stock=store.view('legacy').run!.machineShop!.offers.map(({rarity,...offer})=>({...offer,price:200}));
-    store.db.prepare('UPDATE machine_shops SET offers=? WHERE run_id=?').run(JSON.stringify(stock),run);
     store.view('legacy');const itemStock=store.db.prepare('SELECT offers FROM item_shops WHERE run_id=?').get(run);store.close();
     const legacy=new DatabaseSync(path);legacy.exec('PRAGMA foreign_keys=OFF; BEGIN;');
     const sql=(legacy.prepare("SELECT sql FROM sqlite_master WHERE name='runs'").get() as {sql:string}).sql;
@@ -36,11 +34,7 @@ test('v14 migration preserves thirty-floor run, packed battle and saved offers w
     legacy.exec("INSERT INTO legacy_runs SELECT * FROM runs; DROP TABLE runs; ALTER TABLE legacy_runs RENAME TO runs; CREATE UNIQUE INDEX one_active_run ON runs(player_id) WHERE state IN ('select','battle','recruit'); PRAGMA user_version=14; COMMIT;");legacy.close();
     store=new TowerStore(path);
     assert.equal(store.view('legacy').run!.totalFloors,30);assert.deepEqual(store.battle(battle.id),battle);
-    assert.deepEqual(store.view('legacy').run!.machineShop!.offers,stock);
     store.db.prepare('UPDATE players SET coins=1000 WHERE id=?').run('legacy');
-    store.purchaseMachine('legacy',run,6,stock[0].move,stock[0].targets[0]);
-    assert.equal(store.view('legacy').coins,800);
-    assert.equal(store.db.prepare('SELECT price FROM machine_purchases WHERE run_id=?').get(run)!.price,200);
     assert.deepEqual(store.db.prepare('SELECT offers FROM item_shops WHERE run_id=?').get(run),itemStock);
     assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
     store.ensurePlayer('fresh');store.start('fresh',starters);assert.equal(store.view('fresh').run!.totalFloors,100);

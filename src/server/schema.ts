@@ -158,6 +158,8 @@ CREATE TABLE IF NOT EXISTS consumable_shops(run_id TEXT NOT NULL REFERENCES runs
 CREATE TABLE IF NOT EXISTS run_tera_tickets(run_id TEXT PRIMARY KEY REFERENCES runs(id),quantity INTEGER NOT NULL CHECK(quantity>=0)) STRICT;
 CREATE TABLE IF NOT EXISTS tera_purchases(run_id TEXT NOT NULL REFERENCES runs(id),floor INTEGER NOT NULL,PRIMARY KEY(run_id,floor)) STRICT;
 CREATE TABLE IF NOT EXISTS run_villain_campaigns(run_id TEXT PRIMARY KEY REFERENCES runs(id),defeated_battle_id TEXT UNIQUE REFERENCES battles(id)) STRICT;
+CREATE TABLE IF NOT EXISTS scout_shops(run_id TEXT NOT NULL REFERENCES runs(id),floor INTEGER NOT NULL,revision INTEGER NOT NULL CHECK(revision>=0),offers TEXT NOT NULL,PRIMARY KEY(run_id,floor)) STRICT;
+CREATE TABLE IF NOT EXISTS run_free_gimmick(run_id TEXT PRIMARY KEY REFERENCES runs(id),item TEXT NOT NULL,floor INTEGER NOT NULL) STRICT;
 CREATE TABLE IF NOT EXISTS run_battle_items(run_id TEXT NOT NULL REFERENCES runs(id),kind TEXT NOT NULL,quantity INTEGER NOT NULL CHECK(quantity>=0),PRIMARY KEY(run_id,kind)) STRICT;
 CREATE TABLE IF NOT EXISTS run_rules(run_id TEXT PRIMARY KEY REFERENCES runs(id),rule TEXT NOT NULL CHECK(rule IN ('basic','mega','dynamax','tera','z','chaos'))) STRICT;
 CREATE TABLE IF NOT EXISTS permanent_upgrades(player_id TEXT PRIMARY KEY REFERENCES players(id),reroll_level INTEGER NOT NULL DEFAULT 0 CHECK(reroll_level BETWEEN 0 AND 2),shiny_tickets INTEGER NOT NULL DEFAULT 0 CHECK(shiny_tickets>=0),egg_tickets INTEGER NOT NULL DEFAULT 0 CHECK(egg_tickets>=0)) STRICT;

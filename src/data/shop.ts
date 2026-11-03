@@ -1,4 +1,6 @@
 import {statNames,type StatKey} from './training';
+import {abilitySupport,supportCatalog,type AbilitySupportKind} from './run-economy';
+const abilityItem=(kind:AbilitySupportKind)=>({name:abilitySupport[kind].name,icon:abilitySupport[kind].icon,description:abilitySupport[kind].description,price:supportCatalog[kind].price});
 export const upgrades = {
   attack: {name:'플러스파워',icon:'x-attack',description:'출전 팀의 공격·특수공격 20% 증가',price:300},
   speed: {name:'스피드업',icon:'x-speed',description:'출전 팀의 스피드 20% 증가',price:300},
@@ -8,6 +10,11 @@ export const upgrades = {
   specialDefense: {name:'스페셜가드',icon:'x-sp-def',description:'출전 팀의 특수방어 20% 증가',price:300},
   accuracy: {name:'잘맞히기',icon:'x-accuracy',description:'출전 팀의 기술 명중률 20% 증가',price:300},
   critical: {name:'크리티컬커터',icon:'dire-hit',description:'출전 팀의 급소율 1단계 증가',price:300},
+  abilityLevitate: abilityItem('abilityLevitate'),
+  abilityMagicGuard: abilityItem('abilityMagicGuard'),
+  abilityMultiscale: abilityItem('abilityMultiscale'),
+  abilityUnaware: abilityItem('abilityUnaware'),
+  abilityRegenerator: abilityItem('abilityRegenerator'),
 } as const;
 export type UpgradeKind = keyof typeof upgrades;
 export const UPGRADE_FLOORS = 5;

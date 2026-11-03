@@ -26,13 +26,11 @@ test('one hundred real battle results progress through every checkpoint and only
     for(let floor=1;floor<=100;floor++){
       if(floor>1){
         assert.equal(store.view('climb').run!.state,'select');
-        assert.equal(!!store.view('climb').run!.machineShop,isShopFloor(floor,100));
+        assert.equal(!!store.view('climb').run!.scoutShop,isShopFloor(floor,100));
         if(isShopFloor(floor,100)){
           store.db.prepare('INSERT OR REPLACE INTO consumable_shops VALUES (?,?,?)').run(run,floor,JSON.stringify(['attack','speed','guard']));
           store.purchase('climb',run,floor,'attack');
           assert.ok(store.view('climb').run!.battleItems!.attack!>0);
-          const offer=store.view('climb').run!.machineShop!.offers[0];
-          if(offer)store.purchaseMachine('climb',run,floor,offer.move,offer.targets[0],null);
         }
         id=store.enter('climb',run,floor,starters);
       }

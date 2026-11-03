@@ -59,7 +59,10 @@ export type RunView = {
   teraShop?:{price:number;purchased:boolean}|null;
   itemPurchases?:string[];
   itemOffers?:string[];
-  shopRerolls?:Record<'items'|'machines',{count:number;price:number;limit?:number}>;
+  shopRerolls?:Record<'items',{count:number;price:number;limit?:number}>;
+  scoutShop?:{revision:number;rerollPrice:number;offers:ScoutOfferView[]}|null;
+  // Build runs after floor 50: item -> party members that can hold it (empty for trainer equipment).
+  freeGimmick?:Record<string,string[]>|null;
   vitaminUsage?:import('./vitamin-eligibility').VitaminUsage;
   vitaminShop?:{offers:{stat:import('../data/training').StatKey;price:number;purchased:boolean}[];bonuses:Record<string,Partial<StatBlock>>;partners:Record<string,MachinePartner>;counts?:Record<string,number>;limit?:number}|null;
   candidateDetails?:Record<string,{gender?:import('../data/gender').PokemonGender;forme?:string;ability:string;nature:string;evs?:StatBlock;moves:string[];baseStats:StatBlock;types?:string[];teraType?:import('../data/tera').TeraType;shiny?:boolean}>;
@@ -67,6 +70,7 @@ export type RunView = {
   candidateMoves:Record<string,string[]>; collectionMoves:Record<string,string[]>; currentMoves:Record<string,string[]>; lastMoveGain:MoveGain|null;
   candidateIVs:Record<string,StatBlock>; collectionIVs:Record<string,StatBlock>; lastIVGain:IVGain|null;
 };
+export type ScoutOfferView={species:string;group:import('../data/run-economy').ScoutGroup;groupLabel:string;price:number;shiny:boolean;purchased:boolean;types:string[];bst:number};
 export type MachineOffer = {move:string;rarity?:ItemRarity;price:number;targets:string[];purchased:boolean;buyer?:string};
 export type MachinePartner={stats:StatBlock;level:number;ability:string;nature:string;knownMoves:string[]};
 export type TowerView = {permanent?:import('../data/permanent-upgrades').PermanentView;coins: number; growthPoints:number; unlocked: string[]; favorites:string[]; totalFloors: number; run: RunView | null};

@@ -8,10 +8,10 @@ import {upgrades,type UpgradeKind} from '../src/data/shop';
 import {runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
 
-test('three distinct consumables persist across restarts, vary between checkpoints and reject unlisted purchases',()=>{
+test('four distinct Support cards persist across restarts, vary between checkpoints and reject unlisted purchases',()=>{
  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);
  try{store.ensurePlayer('p');const id=store.battle(store.start('p',starters)).run_id;store.db.prepare("UPDATE runs SET total_floors=50,floor=6,state='select' WHERE id=?").run(id);store.db.prepare('UPDATE players SET coins=20000 WHERE id=?').run('p');
- const offered=store.view('p').run!.consumableOffers!;assert.equal(offered.length,3);assert.equal(new Set(offered).size,3);
+ const offered=store.view('p').run!.consumableOffers!;assert.equal(offered.length,4);assert.equal(new Set(offered).size,4);
  const missing=(Object.keys(upgrades) as UpgradeKind[]).find(x=>!offered.includes(x))!;assert.throws(()=>store.purchase('p',id,6,missing),/판매 중/);assert.equal(store.view('p').coins,20000);
  store.purchase('p',id,6,offered[0]);assert.equal(store.view('p').coins,19700);store.purchase('p',id,6,offered[0]);assert.equal(store.view('p').run!.battleItems![offered[0]],2);
  store.close();store=new TowerStore(path);assert.deepEqual(store.view('p').run!.consumableOffers,offered);

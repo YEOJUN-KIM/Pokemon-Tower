@@ -16,7 +16,7 @@ test('legacy five-floor upgrades retain snapshots and restore a healthy team',as
     store.db.prepare("UPDATE runs SET total_floors=50,floor=6,state='select' WHERE id=?").run(run);
     store.db.prepare('INSERT INTO consumable_shops VALUES (?,?,?)').run(run,6,JSON.stringify(['attack','speed','guard']));
     assert.throws(()=>store.purchase('other',run,6,'attack'),/찾을/);
-    assert.throws(()=>store.purchase('shop',run,6,'unknown'),/강화/);
+    assert.throws(()=>store.purchase('shop',run,6,'unknown'),/Support/);
     // Previously purchased five-floor upgrades remain compatible after migration.
     store.db.prepare('INSERT INTO run_upgrades VALUES (?,?,?,?)').run(run,'attack',6,10);
     store.db.prepare('INSERT INTO run_upgrades VALUES (?,?,?,?)').run(run,'speed',6,10);

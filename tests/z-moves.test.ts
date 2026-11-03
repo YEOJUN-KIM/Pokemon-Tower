@@ -76,7 +76,7 @@ test('crystal purchases/equipment persist; v26 rule migration preserves old save
   const file=`.data/tests/z-${randomUUID()}.sqlite`;let store=new TowerStore(file);
   try{
     store.ensurePlayer('z');const row=store.battle(store.start('z',starters,'z'));
-    store.db.prepare("UPDATE runs SET floor=11,state='select' WHERE id=?").run(row.run_id);store.db.prepare("UPDATE players SET coins=4000 WHERE id='z'").run();store.db.prepare('INSERT INTO item_shops VALUES (?,?,?)').run(row.run_id,11,'["Firium Z"]');
+    store.db.prepare("UPDATE runs SET floor=11,state='select' WHERE id=?").run(row.run_id);store.db.prepare("UPDATE players SET coins=4000 WHERE id='z'").run();store.db.prepare("INSERT OR IGNORE INTO run_free_gimmick VALUES (?,?,?)").run(row.run_id,'x',51);store.db.prepare('INSERT INTO item_shops VALUES (?,?,?)').run(row.run_id,11,'["Firium Z"]');
     store.purchaseItem('z',row.run_id,11,'Firium Z','Charizard');assert.equal(store.view('z').coins,1750);
     store.close();store=new TowerStore(file);assert.equal(store.view('z').run?.heldItems?.Charizard,'Firium Z');
     const packed=store.battle(store.enter('z',row.run_id,11,starters));assert.equal(packed.rule,'basic');assert.equal(store.view('z').run!.rule,'z');assert.equal(Showdown.Teams.unpack(packed.player_team)![0].item,'Firium Z');

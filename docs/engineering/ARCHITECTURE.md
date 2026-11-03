@@ -50,7 +50,7 @@
 | v2 층 정책·역할/기술·장비 | `data/opponent-progression.ts`·`server/npc-progression-builds.ts`·`server/npc-progression-team.ts` |
 | EV capacity·숨특/기술 해금 | `data/training.ts`·`data/growth-unlocks.ts`·`server/training.ts`·TowerStore |
 | 계정 공통 부적·콘텐츠별 shiny | `data/shiny-odds.ts`·`server/shiny.ts`·`server/permanent-shop.ts` |
-| 소모품·TM·지닌 도구 가격/희귀도 | `data/shop.ts`, `data/held-item-shop.ts`, `data/held-items.ts` |
+| 서포트·스카우트·지닌 도구 가격/희귀도/확률 | `data/run-economy.ts`(서포트·스카우트), `data/scout.ts`, `server/scout-shop.ts`, `data/shop.ts`, `data/held-item-shop.ts`, `data/held-items.ts` |
 | 히든상점·도전자 보상 | `data/hidden-shop.ts`, `data/challenger-rewards.ts` |
 | 일반 승리 코인·Rank/핵심 도구 가격 배율·영구 육성 비용 | `data/floors.ts`·`data/economy.ts`·`data/training.ts` |
 | 영구 업그레이드·부화 가격·확률 | `data/permanent-upgrades.ts`, `data/egg-grades.ts`, `data/egg-kinds.ts` |

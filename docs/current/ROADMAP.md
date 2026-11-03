@@ -30,7 +30,7 @@
 - 구현: 일반·고성능(BST≥500)·600족급(BST≥580)·Paradox·준전설(Ultra Beast 포함)·전설(Restricted)·환상 7군. 고층일수록 상위군 비중 상승, 초반 전설계는 0.
 - 측정(리롤 0, 100층 9회 상점 36슬롯, 4만 Run Monte Carlo): 전설(Restricted) 1회 이상 노출 **약 32%**(목표 30–35%), 환상 약 16%, 준전설 약 78%. `scripts/simulate-scout-rarity.ts`.
 - 이로치: `shiny-odds.ts`의 scout 표를 `shinyCharmLevel`로 연결.
-- Planned: 리롤 가격의 floor·진행도 scaling, 군별 가격·가중치 재조정.
+- Planned: 리롤 가격의 floor·진행도 scaling, 군별 가격·가중치 재조정. beta.6 최종 polish로 기본 Support만 400으로 조정했고(근거는 [STATUS](../STATUS.md#beta6-최종-밸런스-polish-simulation-result-provisional)) 남은 조정은 human playtest 이후에 한다.
 
 일반 영입 ‘승리한 상대 3마리 중 1마리 선택’은 Scout와 별개이며 그대로 유지한다.
 

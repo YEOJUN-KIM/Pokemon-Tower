@@ -5,6 +5,7 @@ import Showdown from 'pokemon-showdown';
 import {TowerStore} from '../src/server/tower-store';
 import {starters,packTeam} from '../src/data/teams';
 import {upgrades,type UpgradeKind} from '../src/data/shop';
+import {supportPrice} from '../src/data/run-economy';
 import {runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {DamagePolicy} from '../src/battle/policy';
 
@@ -13,7 +14,7 @@ test('four distinct Support cards persist across restarts, vary between checkpoi
  try{store.ensurePlayer('p');const id=store.battle(store.start('p',starters)).run_id;store.db.prepare("UPDATE runs SET total_floors=50,floor=6,state='select' WHERE id=?").run(id);store.db.prepare('UPDATE players SET coins=20000 WHERE id=?').run('p');
  const offered=store.view('p').run!.consumableOffers!;assert.equal(offered.length,4);assert.equal(new Set(offered).size,4);
  const missing=(Object.keys(upgrades) as UpgradeKind[]).find(x=>!offered.includes(x))!;assert.throws(()=>store.purchase('p',id,6,missing),/판매 중/);assert.equal(store.view('p').coins,20000);
- store.purchase('p',id,6,offered[0]);assert.equal(store.view('p').coins,19700);store.purchase('p',id,6,offered[0]);assert.equal(store.view('p').run!.battleItems![offered[0]],2);
+ store.purchase('p',id,6,offered[0]);assert.equal(store.view('p').coins,20000-supportPrice(offered[0]));store.purchase('p',id,6,offered[0]);assert.equal(store.view('p').run!.battleItems![offered[0]],2);
  store.close();store=new TowerStore(path);assert.deepEqual(store.view('p').run!.consumableOffers,offered);
  const combinations=new Set<string>();for(const floor of [11,16,21,26,31,36,41,46]){store.db.prepare('UPDATE runs SET floor=? WHERE id=?').run(floor,id);combinations.add(store.view('p').run!.consumableOffers!.join(','));}assert.ok(combinations.size>1);
  store.db.prepare('UPDATE runs SET floor=6 WHERE id=?').run(id);assert.deepEqual(store.view('p').run!.consumableOffers,offered);assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);

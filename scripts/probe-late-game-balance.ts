@@ -12,6 +12,9 @@ import {runBattle,type Seed} from '../src/battle/run';
 import {GimmickPolicy} from '../src/battle/gimmick-policy';
 import type {Observation} from '../src/battle/policy';
 import {FIRST_GIMMICK_FLOOR,isAbilitySupport,supportCatalog} from '../src/data/run-economy';
+import {planSupport,SupportingPolicy} from './lib/support-plan';
+import {pickGimmick} from './lib/run-model';
+import {canEquipGimmick as _unused,megaStones,DYNAMAX_ITEM} from '../src/data/gimmicks';
 import {rewardCurve,shopRun,startRoster,topThree,mulberry,defaultOptions,bst,type ModelOptions,type PolicyName,type RunState} from './lib/run-model';
 
 const courseCount=Number(process.argv[2]??100),floors=(process.argv[3]??'40,49,50,60,70,80,90,95,100').split(',').map(Number);
@@ -36,47 +39,14 @@ function trained(name:string):TrainingProfile{
   p.ivs=Object.fromEntries(statKeys.map(k=>[k,31])) as StatBlock;p.evs=Object.fromEntries(statKeys.map(k=>[k,0])) as StatBlock;
   p.evs[base.atk>=base.spa?'atk':'spa']=32;p.evs.spe=21;p.evs.hp=13;p.nature=base.atk>=base.spa?'Adamant':'Modest';return p;
 }
-const SETUP=new Set(['swordsdance','dragondance','nastyplot','calmmind','bulkup','quiverdance','shellsmash','coil','agility','bellydrum','workup']);
-// Chooses supports for one battle from the stock, like a cautious human would: only when the fight looks risky.
-function planSupport(state:RunState,policy:PolicyName,floor:number,role:string,enemy:string):string[]{
-  const stock={...state.support},have=(k:string)=>(stock[k]??0)>0,plan:string[]=[];
-  const boss=['champion','elite','gym','villain'].includes(role)||floor%50===0;
-  const cap=policy==='aggressive'?3:policy==='balanced'?(boss||floor>=60?2:0):policy==='conservative'?(floor>=80||floor%50===0?1:0):2;
-  if(!cap)return plan;
-  const team=topThree(state),lead=team[0],leadDex=Showdown.Dex.species.get(lead),sets=Showdown.Teams.unpack(enemy)??[];
-  const enemyMoves=sets.flatMap(s=>s.moves.map(m=>Showdown.toID(m)));
-  const hasGround=sets.some(s=>s.moves.some(m=>Showdown.Dex.moves.get(m).type==='Ground'&&Showdown.Dex.moves.get(m).category!=='Status'));
-  const add=(k:string)=>{if(plan.length<cap&&have(k)&&!plan.includes(k)){plan.push(k);}};
-  const abilityPick=()=>{
-    if(hasGround&&!leadDex.types.includes('Flying')&&leadDex.abilities[0]!=='Levitate')return 'abilityLevitate';
-    if(enemyMoves.some(m=>SETUP.has(m)))return 'abilityUnaware';
-    if(leadDex.baseStats.hp+leadDex.baseStats.def+leadDex.baseStats.spd>=280)return 'abilityMultiscale';
-    return 'abilityRegenerator';
-  };
-  const ab=abilityPick();if(have(ab))add(ab);else for(const k of ['abilityMultiscale','abilityRegenerator','abilityMagicGuard','abilityUnaware','abilityLevitate'])if(have(k)&&plan.length<cap){add(k);break;}
-  add(leadDex.baseStats.atk>=leadDex.baseStats.spa?'attack':'specialAttack');add('critical');
-  const slow=sets.filter(s=>Showdown.Dex.species.get(s.species).baseStats.spe>leadDex.baseStats.spe).length>=2;if(slow)add('speed');
-  add('defense');add('specialDefense');add('guard');
-  return plan.filter(k=>supportCatalog[k]||isAbilitySupport(k));
-}
-class SupportingPolicy extends GimmickPolicy{
-  constructor(private queue:string[]){super();}
-  override choose(observation:Observation){
-    const items=observation.legalActions.filter(a=>a.command.startsWith('item ')),rest=observation.legalActions.filter(a=>!a.command.startsWith('item '));
-    const next=this.queue[0];
-    if(next&&items.some(a=>a.command==='item '+next)){this.queue.shift();return 'item '+next;}
-    if(rest.some(a=>a.command.startsWith('move ')))this.queue.length=0;
-    return super.choose({...observation,legalActions:rest});
-  }
-}
-
-type Cond={id:string;label:string;shop:boolean;opts:ModelOptions;useSupport:boolean;policy:PolicyName};
+type Cond={id:string;label:string;extraGimmick?:boolean;shop:boolean;opts:ModelOptions;useSupport:boolean;policy:PolicyName};
 const bal=(o:Partial<ModelOptions>={})=>({...defaultOptions('balanced'),...o});
 const conditions:Cond[]=[
   {id:'baseline',label:'baseline: starters only',shop:false,opts:bal(),useSupport:false,policy:'balanced'},
   {id:'beta6-nosupport',label:'beta6 balanced, Support unused',shop:true,opts:bal(),useSupport:false,policy:'balanced'},
   {id:'beta6-support',label:'beta6 balanced + Support',shop:true,opts:bal(),useSupport:true,policy:'balanced'},
   {id:'noscout-support',label:'no Scout, Support used',shop:true,opts:bal({scout:false}),useSupport:true,policy:'balanced'},
+  {id:'second-gimmick',label:'beta6 + Support + forced second gimmick',extraGimmick:true,shop:true,opts:bal(),useSupport:true,policy:'balanced'},
   {id:'beta6-nogimmick',label:'beta6 balanced + Support, no gimmick',shop:true,opts:bal({gimmick:false}),useSupport:true,policy:'balanced'},
   {id:'conservative-support',label:'conservative + Support',shop:true,opts:{...defaultOptions('conservative')},useSupport:true,policy:'conservative'},
   {id:'aggressive-support',label:'aggressive + Support',shop:true,opts:{...defaultOptions('aggressive')},useSupport:true,policy:'aggressive'},
@@ -93,7 +63,14 @@ for(const cond of conditions.filter(c=>!only||only.includes(c.id))){
       const course=courses[c],enemy=course.enemies[floor],random=mulberry(1000+c*7919+floor);
       const roster=startRoster(mulberry(5000+c));
       const state=cond.shop?shopRun(curve,mulberry(31000+c*131+floor),cond.opts,roster,floor):{coins:0,roster,items:{},support:{},freeClaimed:false,ledger:null as never};
-      const team=topThree(state),profiles=Object.fromEntries(team.map(n=>[n,trained(n)])) as Record<string,TrainingProfile>;
+      let team=topThree(state);
+      // A player equips gimmick gear on members who actually fight: re-home gear held by benched members.
+      const isGimmick=(item?:string)=>!!item&&(item===DYNAMAX_ITEM||!!megaStones[item]);
+      const lost=Object.entries(state.items).filter(([n,item])=>isGimmick(item)&&!team.includes(n));
+      for(const [n] of lost)delete state.items[n];
+      for(let i=0;i<lost.length;i++){const free=team.filter(n=>!isGimmick(state.items[n]));const pick=pickGimmick(free,state.items,()=>true);if(pick)state.items[pick.holder]=pick.item;}
+      if(cond.extraGimmick&&floor>FIRST_GIMMICK_FLOOR){const free=team.filter(n=>!(state.items[n]&&(state.items[n]===DYNAMAX_ITEM||megaStones[state.items[n]])));const pick=pickGimmick(free,state.items,()=>true);if(pick)state.items[pick.holder]=pick.item;}
+      const profiles=Object.fromEntries(team.map(n=>[n,trained(n)])) as Record<string,TrainingProfile>;
       const items=Object.fromEntries(Object.entries(state.items).filter(([n])=>team.includes(n)));
       const plan=cond.useSupport?planSupport(state,cond.policy,floor,enemy.role,enemy.enemy):[];
       const stock=Object.fromEntries(plan.map(k=>[k,plan.filter(x=>x===k).length]));

@@ -22,7 +22,7 @@ export const abilitySupport={
 export type AbilitySupportKind=keyof typeof abilitySupport;
 export const isAbilitySupport=(kind:string):kind is AbilitySupportKind=>Object.hasOwn(abilitySupport,kind);
 
-const basic={tier:'basic',price:300,weight:20,minClearedFloor:0} as const;
+const basic={tier:'basic',price:400,weight:20,minClearedFloor:0} as const;
 const advanced={tier:'advanced',price:700,weight:8,minClearedFloor:10} as const;
 const special={tier:'special',price:1500,weight:4,minClearedFloor:20} as const;
 // Keys are battle item kinds (see data/shop.ts upgrades). Accuracy stays a legacy bag item and is not sold.

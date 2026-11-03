@@ -3,7 +3,7 @@
 - Status: Active
 - Updated: 2026-11-03
 - Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
-- Applies To: beta.6 release candidate / 문서 담당 영역
+- Applies To: beta.6 released / 문서 담당 영역
 
 - [현재 게임 상태](../STATUS.md)
 - [다음 작업과 보류 항목](ROADMAP.md)

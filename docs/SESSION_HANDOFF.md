@@ -3,7 +3,7 @@
 - Status: Active
 - Updated: 2026-11-03
 - Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7`
-- Applies To: beta.6 release candidate / 문서 담당 영역
+- Applies To: beta.6 released / 문서 담당 영역
 
 현재 beta.6 개발 상태는 [STATUS](STATUS.md), 다음 우선순위는 **상점 개편 구현 완료(provisional 가격·확률) → 2차 시뮬레이션 → 최종 polish 완료(기본 Support 300→400 한 가지) → 인간 플레이 테스트**다. beta.6은 새 밸런스 기능 없이 릴리즈 마감 단계로 넘어간다. 49→50 격차는 −45%p→−33%p로 완화됐으나 남아 있고 상대는 조정하지 않았다. 결과·후속 후보는 [STATUS](STATUS.md#경제후반-난이도-2차-검증-simulation-result-provisional). 상세 계획은 [ROADMAP](current/ROADMAP.md), 파일 책임은 [WORKSPACE](engineering/WORKSPACE.md)를 따른다.
 

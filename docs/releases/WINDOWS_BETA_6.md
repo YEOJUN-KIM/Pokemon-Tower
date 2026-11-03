@@ -1,6 +1,6 @@
 # Pokémon Tower v1.0.0-beta.6
 
-- Status: Release candidate (GitHub Release 공개 전; 공개 후 이 문서의 상태와 해시를 갱신)
+- Status: Released (GitHub prerelease, 2026-11-03)
 - Updated: 2026-11-03
 - Applies To: beta.6 Windows 배포본. 이전 공개본은 [beta.5 기록](WINDOWS_BETA_5.md)
 
@@ -34,4 +34,24 @@ Windows x64 · Node.js 24 이상 필요. ZIP을 풀고 `PokemonTower.exe`를 실
 - 49층에서 50층으로 넘어갈 때 챔피언 때문에 난이도가 크게 오르는 점은 의도된 관문이지만 체감은 플레이 테스트로 확인할 예정입니다. 일부 챔피언(Leon 등)이 특히 어렵다는 시뮬레이션 결과가 있어 조정 후보로 보류했습니다.
 - 개발용 E2E 중 beta.6 이전부터 실패하던 항목이 남아 있습니다(게임 실행에는 영향 없음).
 
-검증과 해시는 공개 후 이 문서에 기록합니다.
+## 공개 asset과 검증
+
+[Release v1.0.0-beta.6](https://github.com/YEOJUN-KIM/Pokemon-Tower/releases/tag/v1.0.0-beta.6)는 **prerelease**이며 Latest로 지정하지 않았다. annotated tag `v1.0.0-beta.6`은 release commit `0553a3da330a648be9a9b50e2b347ce98857ff1f`를 가리킨다(이후 이 기록만 갱신한 docs commit은 tag에 포함되지 않는다).
+
+| 파일 | 확인한 정보 |
+|---|---|
+| PokemonTower-Windows-v1.0.0-beta.6.zip | 160,381,046 bytes, 11,010개 항목(단일 최상위 `PokemonTower/`) |
+| PokemonTower-Windows-v1.0.0-beta.6.zip.sha256 | 검증용 sidecar |
+
+ZIP SHA256: `bd5aad721231cfb2794b83992fd11334bf670890f6c3083f430c013ad9e76ba2`. GitHub에서 다시 내려받은 파일의 SHA-256과 크기가 로컬 산출물과 일치함을 확인했다. EXE 단독 asset은 제공하지 않는다(beta.5와 동일).
+
+| 검증 | 결과 |
+|---|---|
+| unit | `tests/*.test.ts` 1,576/1,576 |
+| typecheck / production build | 통과 |
+| 배포본 | `player:package:verify` 통과(11,009 파일, ZIP 전체 해시), 금지 경로(.git/.env/DB/WAL/test-results/artifacts 등) 없음 |
+| 실제 배포 EXE | `player:package:test` 통과: 독립 home 최초 설치·빠른 재실행·중복 실행 차단·강제 종료 정리·이전 marker에서 갱신·초기 256P·저장 유지 |
+| focused E2E | run-shop, rank-rewards, maintenance-items, shop-reroll, shop-bag-ux(메뉴 Bag) 17/17 |
+| 기존 실패 | beta.6 이전 commit에서도 실패하던 E2E 26건은 이번 범위 밖(STATUS 참조) |
+
+beta.5 이전 저장·진행 중 Run 호환은 기존 migration unit test(schema 49, 기존 Run은 legacy 규칙, 신규 Run만 hundred-floor-v2)로 확인했고 실제 사용자 DB는 사용하지 않았다. 사람의 100층 완주와 다른 PC 실사용 확인은 아직 없다.

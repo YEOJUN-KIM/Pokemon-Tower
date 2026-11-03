@@ -1,4 +1,6 @@
 import type {NpcTrainingDefinition} from './npc-training';
+import type {TowerProgression} from './tower-progression';
+import {isBuildProgression,buildTraining,buildRankWeights} from './opponent-progression';
 
 export type NpcRank='normal'|'elite'|'master';
 export const npcRankNames:Record<NpcRank,string>={normal:'일반',elite:'엘리트',master:'마스터'};
@@ -15,9 +17,10 @@ export const npcItemSlotRules:Record<NpcRank,readonly {maxFloor:number;slots:rea
 };
 export const npcTeamQualityRules:Record<NpcRank,{candidates:number;bstBias:number}>={normal:{candidates:3,bstBias:0},elite:{candidates:8,bstBias:4},master:{candidates:12,bstBias:8}};
 export type NpcRankTraining=NpcTrainingDefinition&{rank:NpcRank;gimmickChance:number;itemSlots:readonly [number,number]};
-export function npcRankTraining(floor:number,rank:NpcRank):NpcRankTraining{
+export function npcRankTraining(floor:number,rank:NpcRank,progression:TowerProgression='hundred-floor-v1'):NpcRankTraining{
  if(!Number.isSafeInteger(floor)||floor<1||floor>100)throw Error('Unsupported NPC rank floor');
  const profile=npcRankProfiles[rank],progress=Math.max(0,(floor-5)/95);
+ if(isBuildProgression(progression))return {...profile,...buildTraining(floor,rank),rank,itemTier:floor<=10?'basic':floor<=20?'basic':floor<=40?'competitive':'premium',buildQuality:floor<=20?'balanced':'optimized'};
  return {rank,ivRange:profile.ivRange.map(v=>Math.floor(v+(31-v)*progress)) as [number,number],evBudget:Math.floor(profile.evBudget+(profile.lateBudget-profile.evBudget)*progress),itemTier:rank==='normal'&&floor<=20?'none':profile.itemTier,buildQuality:profile.buildQuality,gimmickChance:profile.gimmickChance,itemSlots:npcItemSlotRules[rank].find(rule=>floor<=rule.maxFloor)!.slots};
 }
 // Explicit interpolation anchors keep encounter balance independent of sample concepts.
@@ -43,7 +46,14 @@ export function combineNpcRankWeights(sample:NpcRankWeights,prior:NpcRankWeights
  if(total<=0)throw Error('NPC sample has no supported rank for this encounter');
  return Object.fromEntries(ranks.map(rank=>[rank,weights[rank]/total])) as NpcRankWeights;
 }
-export function sampleRankWeights(sample:{rankWeights:NpcRankWeights},floor:number,encounter:'normal'|'challenger'='normal'){
+export function sampleRankWeights(sample:{rankWeights:NpcRankWeights},floor:number,encounter:'normal'|'challenger'='normal',progression:TowerProgression='hundred-floor-v1'){
+ if(isBuildProgression(progression)){
+  const prior=buildRankWeights(floor);
+  // Soft class preference preserves the floor's gate even for ace/veteran classes.
+  const softened=Object.fromEntries((['normal','elite','master'] as const).map(k=>[k,.25+sample.rankWeights[k]])) as NpcRankWeights;
+  const total=softened.normal+softened.elite+softened.master;
+  return combineNpcRankWeights(Object.fromEntries(Object.entries(softened).map(([k,v])=>[k,v/total])) as NpcRankWeights,prior);
+ }
  return combineNpcRankWeights(sample.rankWeights,encounter==='challenger'?challengerRankWeights:rankWeights(floor));
 }
 export function drawNpcRank(weights:NpcRankWeights,random:()=>number):NpcRank{

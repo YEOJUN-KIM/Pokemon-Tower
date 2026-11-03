@@ -9,6 +9,8 @@ import {eventDefinitions} from '../src/data/run-events';
 export function raidFixture(path=':memory:',owner='raid-owner',bossId='garchomp',routeId?:string){
  const store=new TowerStore(path,max=>max===100?0:max-1,{'raid-encounter':eventDefinitions['raid-encounter']});store.ensurePlayer(owner);
  const first=store.start(owner,starters,'basic',{events:true}),run=store.battle(first).run_id;
+ // Phase/reward/retry fixtures retain the v1 early-event schedule.
+ store.db.prepare("UPDATE run_progression SET version='hundred-floor-v1' WHERE run_id=?").run(run);
  finishChallengerBattle(store,first);store.recruit(owner,run,first,null,null);
  const event=store.view(owner).run!.event!;
  if(event.kind!=='raid-encounter')throw Error('Raid fixture did not select raid');

@@ -7,7 +7,9 @@ import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
 import {namedTrainerSamples} from '../src/data/trainer-catalog';
 import {npcAi} from '../src/data/npc-ai';
-import {CURRENT_PROGRESSION,towerDifficulty} from '../src/data/tower-progression';
+import {towerDifficulty} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {FORMAT,runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {pokemonSets,packTeam,starters} from '../src/data/teams';
 import {createNpcPolicy} from '../src/battle/npc-policy';
@@ -32,9 +34,9 @@ for(const [id,ace] of Object.entries(aces)){
    assert.deepEqual(normalNpcTemplate(sample.id,floor,sample.role),source);
    assert.equal(npcAi(floor,sample).tier,floor<50?'tactical':'expert');
    for(let n=0;n<12;n++){
-    const seed:[number,number,number,number]=[n,2,3,4],team=generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION);
+    const seed:[number,number,number,number]=[n,2,3,4],team=generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION);
     assert.equal(team.length,3);assert.equal(new Set(team.map(p=>p.name)).size,3);assert.ok(team.some(p=>p.name===ace));
-    assert.deepEqual(generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION),team);
+    assert.deepEqual(generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION),team);
     for(const p of team){assert.ok(source.team.some(c=>c.species===p.name));assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),Math.min(66,towerDifficulty(floor).points));}
     combinations.add(team.map(p=>p.name).sort().join(','));
    }
@@ -42,7 +44,7 @@ for(const [id,ace] of Object.entries(aces)){
   assert.ok(combinations.size>1);
  });
  test(`${id}: actual v11 battle finishes with legal actions and deterministic replay`,async()=>{
-  const floor=55,seed:[number,number,number,number]=[1,2,3,4],team=generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION),signature=normalNpcTemplate(sample.id,floor,sample.role)!.signature;
+  const floor=55,seed:[number,number,number,number]=[1,2,3,4],team=generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION),signature=normalNpcTemplate(sample.id,floor,sample.role)!.signature;
   const p2=packTeam(team.map(p=>p.name),Object.fromEntries(team.map(p=>[p.name,p.profile!])),Object.fromEntries(team.map(p=>[p.name,p.item??''])),team.filter(p=>p.gigantamax).map(p=>p.name));
   const log=await runBattle({seed,rule:'chaos',teams:{p1:packTeam(starters),p2},player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(floor,sample)),opponentTeraSpecies:signature?.rule==='tera'?signature.species:undefined,teraTickets:{p1:0,p2:signature?.rule==='tera'?1:0}});
   assert.ok(log.winner);for(const d of log.decisions)assert.ok(d.observation.legalActions.some(a=>a.command===d.action));

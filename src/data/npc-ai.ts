@@ -1,13 +1,27 @@
 import type {TrainerSample,TrainerTactic} from './trainer-catalog';
 import {galarTrainer} from './galar-trainers';
 import {paldeaTrainer} from './paldea-trainers';
+import type {TowerProgression} from './tower-progression';
+import {isBuildProgression} from './opponent-progression';
 
 export const npcAiTiers=['basic','tactical','expert'] as const;
 export type NpcAiTier=typeof npcAiTiers[number];
-export type NpcAi={tier:NpcAiTier;tactic:TrainerTactic;galar?:'gym'|'brawler'|'elite'|'executive'|'phases'|'champion'|'grunt';pivot?:'v1';galarAce?:'v2';advancedSwitch?:'v1'|'aggressive-v1';paldea?:string};
+export type NpcAi={tier:NpcAiTier;tactic:TrainerTactic;galar?:'gym'|'brawler'|'elite'|'executive'|'phases'|'champion'|'grunt';pivot?:'v1';galarAce?:'v2';advancedSwitch?:'v1'|'aggressive-v1';paldea?:string;buildSupport?:'v1'};
 
 // Decision capability only. Never changes team generation or training values.
-export function npcAi(floor:number,sample:Pick<TrainerSample,'kind'|'role'|'tactic'|'npcRank'|'aiCeiling'>&{id?:string},options:{challenger?:boolean;boss?:boolean}={}):NpcAi{
+export function npcAi(floor:number,sample:Pick<TrainerSample,'kind'|'role'|'tactic'|'npcRank'|'aiCeiling'>&{id?:string},options:{challenger?:boolean;boss?:boolean;progression?:TowerProgression}={}):NpcAi{
+ const previous=legacyNpcAi(floor,sample,options);
+ if(!options.progression||!isBuildProgression(options.progression))return previous;
+ const rank=sample.npcRank??(sample.kind==='normal'?'normal':'elite');
+ if(floor<=10)return {tier:'basic',tactic:sample.tactic};
+ if(floor<=30)return {tier:'tactical',tactic:sample.tactic,buildSupport:'v1'};
+ if(floor<=40)return {tier:rank==='master'?'expert':'tactical',tactic:sample.tactic,buildSupport:'v1'};
+ let tier:NpcAiTier=rank==='normal'&&floor<81?'tactical':'expert';
+ if(sample.aiCeiling)tier=npcAiTiers[Math.min(npcAiTiers.indexOf(tier),npcAiTiers.indexOf(sample.aiCeiling))];
+ if(floor>=50&&options.boss&&sample.role==='champion')tier='expert';
+ return {...previous,tier,buildSupport:'v1',...(tier==='expert'&&(floor>=71||rank!=='normal')?{advancedSwitch:'v1' as const}:{})};
+}
+function legacyNpcAi(floor:number,sample:Pick<TrainerSample,'kind'|'role'|'tactic'|'npcRank'|'aiCeiling'>&{id?:string},options:{challenger?:boolean;boss?:boolean}={}):NpcAi{
  const paldea=sample.id?paldeaTrainer(sample.id):undefined;
  if(paldea)return {tier:paldea.aiCeiling as NpcAiTier,tactic:sample.tactic,paldea:paldea.id,...(paldea.category==='hidden'?{advancedSwitch:'aggressive-v1' as const}:paldea.category==='elite'?{advancedSwitch:'v1' as const}:{}),...(['named-iono','named-kofu'].includes(paldea.id)?{pivot:'v1' as const}:{})};
  const galar=sample.id?galarTrainer(sample.id):undefined;

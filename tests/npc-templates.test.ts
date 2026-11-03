@@ -5,7 +5,9 @@ import templates from '../src/data/normal-npc-templates.json' with {type:'json'}
 import {normalNpcTemplate,templateProfile} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
 import {namedTrainerSamples} from '../src/data/trainer-catalog';
-import {towerDifficulty,CURRENT_PROGRESSION} from '../src/data/tower-progression';
+import {towerDifficulty} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {TowerStore} from '../src/server/tower-store';
 import {villainEncounter,villainRankWeights,villainLeaders} from '../src/data/villain-organizations';
 import {packTeam,starters} from '../src/data/teams';
@@ -18,7 +20,7 @@ import {namedOpponentIVs} from '../src/server/named-opponent-ivs';
 test('live named teams use the reviewed three members and profiles, scaled to actual floors',()=>{
  for(const sample of namedTrainerSamples)for(const floor of [5,45,50,55,75,95,100].filter(f=>f>=sample.minFloor)){
   const source=normalNpcTemplate(sample.id,floor,sample.role);assert.ok(source,sample.id);
-  const team=generateOpponentTeam(floor,[1,2,3,4],[],null,sample,CURRENT_PROGRESSION);
+  const team=generateOpponentTeam(floor,[1,2,3,4],[],null,sample,REFERENCE_PROGRESSION);
   assert.equal(team.length,3);if(!source.select)assert.deepEqual(team.map(p=>p.name).sort(),source.team.map(p=>p.species).sort());else assert.ok(team.every(p=>source.team.some(s=>s.species===p.name)));
   for(const entry of team){const original:{species:string;profile:TrainingProfile}=source.team.find(p=>p.species===entry.name)!;
    const expected=templateProfile(original.profile,floor,source.gate50);
@@ -39,6 +41,7 @@ test('live named teams use the reviewed three members and profiles, scaled to ac
 test('stored champion teams retain template nature, ability, tools and stats across reopening',()=>{
  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);try{
   store.ensurePlayer('templates');const first=store.battle(store.start('templates',starters,'basic'));
+  store.db.prepare("UPDATE run_progression SET version='hundred-floor-v1' WHERE run_id=?").run(first.run_id);
   store.db.prepare("UPDATE run_themes SET theme='sinnoh' WHERE run_id=?").run(first.run_id);
   store.db.prepare("UPDATE run_routes SET second_theme='sinnoh' WHERE run_id=?").run(first.run_id);
   for(const floor of [50,100]){
@@ -60,7 +63,7 @@ test('boss rank is impossible before 75 even after many wins; late Maxie keeps G
  for(let floor=1;floor<75;floor++)assert.equal(villainRankWeights(floor,{gruntWins:100,executiveWins:100}).boss,0);
  // Villain teams remain available for scripts after removal from ordinary floors.
  const sample={...villainLeaders.magma.boss,id:'magma-boss-maxie'};
- const team=generateOpponentTeam(80,[1,2,3,4],[],null,sample,CURRENT_PROGRESSION);
+ const team=generateOpponentTeam(80,[1,2,3,4],[],null,sample,REFERENCE_PROGRESSION);
  assert.ok(team.some(p=>p.name==='Groudon'));assert.ok(team.some(p=>p.name==='Camerupt'));
  assert.equal(team.find(p=>p.name==='Camerupt')!.item,'Cameruptite');
  assert.equal(team.find(p=>p.name==='Groudon')!.item,'Assault Vest');

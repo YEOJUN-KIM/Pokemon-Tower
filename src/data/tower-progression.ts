@@ -1,5 +1,5 @@
-export const CURRENT_PROGRESSION='hundred-floor-v1' as const;
-export type TowerProgression=typeof CURRENT_PROGRESSION|'legacy';
+export const CURRENT_PROGRESSION='hundred-floor-v2' as const;
+export type TowerProgression=typeof CURRENT_PROGRESSION|'hundred-floor-v1'|'legacy';
 
 // Two fifty-floor climbs: the second opens below the first summit, then surpasses it.
 // Saved runs without a progression record keep the previous generation rules.

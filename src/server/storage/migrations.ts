@@ -13,11 +13,16 @@ export function initializeTowerDatabase(db:DatabaseSync,repairArchivedOwnership:
     db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
     const version = db.prepare('PRAGMA user_version').get() as {user_version: number};
     const eventHadOrder=(db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(c=>c.name==='encounter_order');
-    if (version.user_version > 47) throw new Error('Unsupported database schema');
+    if (version.user_version > 48) throw new Error('Unsupported database schema');
     // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
     if(version.user_version<43)db.exec('PRAGMA foreign_keys=OFF');
     try {transaction(db,() => {
       db.exec(schema);
+      if(version.user_version<48){
+        db.exec(`CREATE TABLE run_progression_v48(run_id TEXT PRIMARY KEY REFERENCES runs(id),version TEXT NOT NULL CHECK(version IN ('hundred-floor-v1','hundred-floor-v2'))) STRICT;
+          INSERT INTO run_progression_v48 SELECT * FROM run_progression;
+          DROP TABLE run_progression; ALTER TABLE run_progression_v48 RENAME TO run_progression;`);
+      }
       if(!(db.prepare('PRAGMA table_info(player_tutorial)').all() as {name:string}[]).some(column=>column.name==='selected_species')){
         db.exec(`ALTER TABLE player_tutorial ADD COLUMN selected_species TEXT;
           UPDATE player_tutorial SET selected_species=json_extract(party,'$[0]')

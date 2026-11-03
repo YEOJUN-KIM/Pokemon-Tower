@@ -4,14 +4,15 @@ import Showdown from 'pokemon-showdown';
 import {applyPaldeaAuditVariant} from '../scripts/lib/paldea-audit-variant';
 import {paldeaTrainers,paldeaSample} from '../src/data/paldea-trainers';
 import {snapshotTrainerEventBattle} from '../src/server/trainer-event-battle';
-import {CURRENT_PROGRESSION} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {packTeam} from '../src/data/teams';
 import {FORMAT,type BattleLog} from '../src/battle/run';
 import {paldeaRound2Telemetry} from '../scripts/lib/paldea-round2-telemetry';
 
 test('historical audit variants alter baseline copies without modifying current NPC snapshots',()=>{
  for(const [id,variant]of [['named-tulip','tulip-no-item'],['named-rika','rika-toxic-spikes']] as const){
-  const t=paldeaTrainers.find(t=>t.id===id)!,snap=snapshotTrainerEventBattle('audit-variant-test',paldeaSample(t),95,'basic',CURRENT_PROGRESSION),saved=snap.opponentTeam;
+  const t=paldeaTrainers.find(t=>t.id===id)!,snap=snapshotTrainerEventBattle('audit-variant-test',paldeaSample(t),95,'basic',REFERENCE_PROGRESSION),saved=snap.opponentTeam;
   const baseline=Showdown.Teams.unpack(saved)!;
   if(id==='named-tulip')baseline[1].item='Expert Belt';else baseline[2].moves[2]='Stone Edge';
   const original=Showdown.Teams.pack(baseline);
@@ -36,7 +37,7 @@ test('actual engine applies Expert Belt only to super-effective attacks while pr
  }finally{b.destroy();}
 });
 test('Toxic Spikes candidate really poisons a grounded entry and is removed by Poison entry',()=>{
- const t=paldeaTrainers.find(t=>t.id==='named-rika')!,snap=snapshotTrainerEventBattle('candidate-mechanics',paldeaSample(t),95,'basic',CURRENT_PROGRESSION);
+ const t=paldeaTrainers.find(t=>t.id==='named-rika')!,snap=snapshotTrainerEventBattle('candidate-mechanics',paldeaSample(t),95,'basic',REFERENCE_PROGRESSION);
  const own=Showdown.Teams.unpack(snap.opponentTeam)!,foe=Showdown.Teams.unpack(packTeam(['Blissey','Blastoise','Venusaur']))!;
  const clodsire=own.find(p=>p.species==='Clodsire')!;clodsire.moves[2]='Toxic Spikes';
  own.sort((a,b)=>Number(b.species==='Clodsire')-Number(a.species==='Clodsire'));foe.forEach(p=>p.moves=['Protect']);

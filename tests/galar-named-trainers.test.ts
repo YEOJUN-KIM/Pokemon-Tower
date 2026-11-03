@@ -10,7 +10,8 @@ import {trainerCatalog} from '../src/data/trainer-catalog';
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
 import {snapshotTrainerEventBattle} from '../src/server/trainer-event-battle';
-import {CURRENT_PROGRESSION} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {npcAi} from '../src/data/npc-ai';
 import {packTeam,pokemonSets,starters} from '../src/data/teams';
 import {FORMAT,runBattle,replayBattle,battleEvents} from '../src/battle/run';
@@ -39,9 +40,9 @@ for(const t of galarTrainers)test(`${t.id}: deterministic ordered triples, legal
  for(const floor of [5,45,50,54,55,75,95,100].filter(f=>f>=t.minFloor)){
   const template=normalNpcTemplate(t.id,floor,sample.role)!;assert.ok(template,t.id);
   for(let seed=1;seed<=20;seed++){
-   const team=generateOpponentTeam(floor,[seed,floor,29,43],[],null,sample,CURRENT_PROGRESSION);
+   const team=generateOpponentTeam(floor,[seed,floor,29,43],[],null,sample,REFERENCE_PROGRESSION);
    assert.deepEqual(team.map(p=>p.name),t.entries);
-   assert.deepEqual(team,generateOpponentTeam(floor,[seed,floor,29,43],[],null,sample,CURRENT_PROGRESSION));
+   assert.deepEqual(team,generateOpponentTeam(floor,[seed,floor,29,43],[],null,sample,REFERENCE_PROGRESSION));
    for(const p of team){
     assert.ok(pokemonSets[p.name]);assert.ok(Showdown.Dex.abilities.get(p.ability).exists);
     assert.ok(!p.item||Showdown.Dex.items.get(p.item).exists);
@@ -50,7 +51,7 @@ for(const t of galarTrainers)test(`${t.id}: deterministic ordered triples, legal
     assert.equal(validator.validateSet({...structuredClone(pokemonSets[p.name]),ability:p.ability,item:p.item,moves:p.moves,nature:p.profile!.nature},{}),null);
    }
   }
-  const snapshot=snapshotTrainerEventBattle(`galar:${t.id}`,sample,floor,'basic',CURRENT_PROGRESSION);
+  const snapshot=snapshotTrainerEventBattle(`galar:${t.id}`,sample,floor,'basic',REFERENCE_PROGRESSION);
   const sets=Showdown.Teams.unpack(snapshot.opponentTeam)!;
   assert.equal(packedNpcRule(sets,0),t.signature&&floor>=(sample.role==='champion'||sample.role==='villain'?50:55)?'dynamax':'basic');
   if(t.category==='grunt')assert.ok(sets.every(p=>!p.item&&!p.gigantamax));
@@ -58,7 +59,7 @@ for(const t of galarTrainers)test(`${t.id}: deterministic ordered triples, legal
  }
 });
 for(const t of galarTrainers)test(`${t.id}: real battle and deterministic replay`,async()=>{
- const sample=galarSample(t),snapshot=snapshotTrainerEventBattle(`galar-battle:${t.id}`,sample,95,'basic',CURRENT_PROGRESSION);
+ const sample=galarSample(t),snapshot=snapshotTrainerEventBattle(`galar-battle:${t.id}`,sample,95,'basic',REFERENCE_PROGRESSION);
  const log=await runBattle({teams:{p1:packTeam(starters),p2:snapshot.opponentTeam},seed:snapshot.seed,rule:'basic',opponentRule:packedNpcRule(Showdown.Teams.unpack(snapshot.opponentTeam)!,0),player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(95,sample))});
  assert.ok(log.winner);assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
  if(t.category==='boss'){
@@ -72,11 +73,11 @@ const force=(names:string[]):Policy=>({choose(o){
  return o.legalActions[0].command;
 }});
 function focusedTeam(id:string,lead:string){
- const snap=snapshotTrainerEventBattle('focus:'+id,galarSample(galarTrainers.find(t=>t.id===id)!),95,'basic',CURRENT_PROGRESSION);
+ const snap=snapshotTrainerEventBattle('focus:'+id,galarSample(galarTrainers.find(t=>t.id===id)!),95,'basic',REFERENCE_PROGRESSION);
  const sets=Showdown.Teams.unpack(snap.opponentTeam)!;sets.sort((a,b)=>Number(b.species===lead)-Number(a.species===lead));return Showdown.Teams.pack(sets);
 }
 for(const [id,weather] of [['nessa','RainDance'],['kabu','SunnyDay'],['gordie','Sandstorm'],['raihan','Sandstorm']])test(`${id}: entry weather`,async()=>{
- const snapshot=snapshotTrainerEventBattle('weather:'+id,galarSample(galarTrainers.find(t=>t.id===`named-${id}`)!),95,'basic',CURRENT_PROGRESSION);
+ const snapshot=snapshotTrainerEventBattle('weather:'+id,galarSample(galarTrainers.find(t=>t.id===`named-${id}`)!),95,'basic',REFERENCE_PROGRESSION);
  const log=await runBattle({teams:{p1:packTeam(starters),p2:snapshot.opponentTeam},rule:'basic',opponentRule:'basic',player:new DamagePolicy(),opponent:new DamagePolicy()});
  assert.ok(log.publicProtocol.some(l=>l.includes(`|-weather|${weather}|`)));
 });
@@ -96,7 +97,7 @@ test('normal Eternatus cannot Dynamax even before the NPC resource is spent',asy
  assert.ok(observed);assert.ok(!log.publicProtocol.some(l=>l.includes('Eternatus-Eternamax')));
 });
 test('Rose phases resist forced phazing and retain their rule during replay',async()=>{
- const t=galarTrainers.find(t=>t.id==='named-rose')!,sample=galarSample(t),snapshot=snapshotTrainerEventBattle('rose-roar',sample,95,'basic',CURRENT_PROGRESSION);
+ const t=galarTrainers.find(t=>t.id==='named-rose')!,sample=galarSample(t),snapshot=snapshotTrainerEventBattle('rose-roar',sample,95,'basic',REFERENCE_PROGRESSION);
  const player=Showdown.Teams.unpack(packTeam(['Blastoise','Charizard','Venusaur']))!;player[0].moves=['Roar','Surf','Ice Beam','Dark Pulse'];
  let roared=false;
  const log=await runBattle({teams:{p1:Showdown.Teams.pack(player),p2:snapshot.opponentTeam},rule:'basic',opponentRule:'dynamax',player:{choose(o){const roar=o.legalActions.find(a=>a.label==='Roar');if(roar&&!roared){roared=true;return roar.command;}return new DamagePolicy().choose(o);}},opponent:createNpcPolicy(npcAi(95,sample))});

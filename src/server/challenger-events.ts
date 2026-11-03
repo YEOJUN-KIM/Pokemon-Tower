@@ -20,7 +20,7 @@ export class ChallengerEvents{
   const digest=createHash('sha256').update(eventId).digest();
   const seed=[0,4,8,12].map(offset=>digest.readUInt32LE(offset)) as Seed;
   const random=encounterRandom(seed);
-  let candidates:SavedChallengerDefinition[]=common?drawChallengers(floor,random).map(candidate=>{
+  let candidates:SavedChallengerDefinition[]=common?drawChallengers(floor,random,undefined,progression).map(candidate=>{
    const teamSeed=[0,1,2,3].map(()=>Math.floor(random()*65536)) as Seed;
    return {...candidate,encounter:generateNpcEncounter(floor,teamSeed,candidate.sample,candidate.rank,rule,progression)};
   }):drawLegacyChallengers(floor,random);

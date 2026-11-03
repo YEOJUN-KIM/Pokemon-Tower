@@ -5,7 +5,8 @@ import design from '../scripts/data/npc/alola-design.json' with {type:'json'};
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
 import {alolaSample,alolaTrainers} from '../src/data/alola-trainers';
-import {CURRENT_PROGRESSION} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {FORMAT,runBattle,battleEvents,type BattleLog} from '../src/battle/run';
 import {packTeam,pokemonSets,starters} from '../src/data/teams';
 import {mechanicObserver,tuningTelemetry} from '../scripts/lib/alola-tuning-telemetry';
@@ -24,7 +25,7 @@ for(const [id,lineup]of Object.entries(lineups))test(`${id}: all floors and 100 
   const row=normalNpcTemplate(id,floor,sample.role)!;assert.equal(row.team.length,3);assert.deepEqual(row.required,lineup);
   assert.equal(sample.aiCeiling,id==='named-kiawe'?'tactical':'expert');
   for(const p of row.team){assert.equal(validator.validateSet({...structuredClone(pokemonSets[p.species]),moves:p.profile.moves,nature:p.profile.nature,ability:p.profile.ability,item:p.item},{}),null,p.species);assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),id==='named-kiawe'?48:66);}
-  for(let n=1;n<=100;n++)assert.deepEqual(generateOpponentTeam(floor,[n,floor,29,43],[],null,sample,CURRENT_PROGRESSION).map(p=>p.name),lineup);
+  for(let n=1;n<=100;n++)assert.deepEqual(generateOpponentTeam(floor,[n,floor,29,43],[],null,sample,REFERENCE_PROGRESSION).map(p=>p.name),lineup);
  }
 });
 

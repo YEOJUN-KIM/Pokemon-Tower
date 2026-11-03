@@ -46,7 +46,7 @@ test('class rank sampling follows final probabilities: youngsters stay mostly No
  assert.ok(sampleRankWeights(sample('youngster-balanced'),5,'challenger').elite>sampleRankWeights(sample('youngster-balanced'),5).elite);
  assert.ok(sampleRankWeights(sample('veteran-balanced'),40,'challenger').master>sampleRankWeights(sample('ace-setup'),40,'challenger').master);
  for(let i=0;i<500;i++){
-  const selected=selectTrainerSample(40,[i,29,43,71],[],CURRENT_PROGRESSION,{common:true});assert.ok(sample(selected.id).rankWeights[selected.npcRank!]>0);
+  const selected=selectTrainerSample(40,[i,29,43,71],[],'hundred-floor-v1',{common:true});assert.ok(sample(selected.id).rankWeights[selected.npcRank!]>0);
   for(const offer of drawChallengers(20,random))assert.ok(offer.sample.rankWeights[offer.rank]>0);
  }
 });

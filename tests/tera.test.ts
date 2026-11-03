@@ -94,6 +94,8 @@ test('both sides tera once and real STAB changes damage, replay stays identical;
 test('accepted tera spends a ticket atomically once, survives session reconstruction; retired ticket purchases cannot charge',async()=>{
  const store=new TowerStore(':memory:');let service=new TowerService(store);try{
  store.ensurePlayer('persist');const id=store.start('persist',['Charizard','Blastoise','Venusaur']),row=store.battle(id);
+ store.db.prepare("UPDATE run_progression SET version='hundred-floor-v1' WHERE run_id=?").run(row.run_id);
+ store.db.prepare("UPDATE battles SET rule='chaos' WHERE id=?").run(id);
  store.db.prepare('UPDATE battles SET trainer_equipment=NULL,player_team=?,opponent_team=?,tera_tickets=? WHERE id=?').run(teams().p1,teams().p2,'{"p1":1,"p2":0}',id);
  store.db.prepare('UPDATE run_tera_tickets SET quantity=1 WHERE run_id=?').run(row.run_id);
  const before=(await service.state('persist')).battle!;

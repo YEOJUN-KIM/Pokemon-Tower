@@ -7,7 +7,8 @@ import {allowsRuleItem,type BattleRule} from '../data/run-rules';
 import {defaultProfile} from './training';
 import {encounterRandom,opponentMoves,gentleMoves,type OpponentEntry} from './opponent-team';
 import type {Seed} from '../battle/run';
-import {improveNpcMoves,npcBuildAttackStat} from './npc-builds';
+import {improveNpcMoves,npcBuildAttackStat,npcAttackStyle} from './npc-builds';
+import {progressionMoves,progressionItemCandidates,progressionAbility,planNpcRoles,inferProgressionRole,type NpcBuildRole} from './npc-progression-builds';
 
 export function npcTrainingProfile(name:string,moves:string[],floor:number,tier:NpcTrainingTier,tactic:TrainerTactic,random:()=>number,frozenTarget?:NpcTrainingDefinition,buildAttack?:'atk'|'spa'){
  const target=frozenTarget??npcTrainingTargets(floor,tier),profile=defaultProfile(name);
@@ -45,9 +46,23 @@ export function npcItemCandidates(tier:NpcItemTier,tactic:TrainerTactic,moves:st
 }
 
 // Reusable by other NPC generators; each caller owns membership and saves the packed result.
-export function trainNpcTeam(team:OpponentEntry[],floor:number,tier:NpcTrainingTier,tactic:TrainerTactic,seed:Seed,rule:BattleRule,frozenTarget?:NpcTrainingDefinition,options:{itemSlots?:number;buildRank?:'elite'|'master'}={}):OpponentEntry[]{
+export function trainNpcTeam(team:OpponentEntry[],floor:number,tier:NpcTrainingTier,tactic:TrainerTactic,seed:Seed,rule:BattleRule,frozenTarget?:NpcTrainingDefinition,options:{itemSlots?:number;buildRank?:'elite'|'master';progressionRank?:import('../data/npc-ranks').NpcRank}={}):OpponentEntry[]{
  const random=encounterRandom(seed),target=frozenTarget??npcTrainingTargets(floor,tier),used=new Set<string>();
+ const roles:NpcBuildRole[]=[];
+ const planned=options.progressionRank&&floor>=71?planNpcRoles(team.map(p=>p.name),floor,random):undefined;
  return team.map((entry,index)=>{
+  if(options.progressionRank){
+   const build=progressionMoves(entry.name,floor,options.progressionRank,tactic,random,[],roles,planned?.[index]);roles.push(inferProgressionRole(entry.name,build.moves));
+   const candidates=progressionItemCandidates(entry.name,build.moves,floor,options.progressionRank,build.role).filter((item,i,a)=>a.indexOf(item)===i&&!used.has(item)&&isHeldItem(item)&&allowsRuleItem(rule,item));
+   // Vary equivalent role-compatible equipment; high ranks favour the top choice.
+   const alternate=floor>=41&&candidates.length>1&&random()<(options.progressionRank==='normal'?.4:options.progressionRank==='elite'?.25:.1);
+   const item=index<(options.itemSlots??team.length)?candidates[alternate?1:0]:undefined;
+   if(item)used.add(item);
+   const profile=npcTrainingProfile(entry.name,build.moves,floor,tier,tactic,random,target,npcBuildAttackStat(entry.name,build.moves));
+   profile.ability=progressionAbility(entry.name,build.moves,floor,profile.ability);
+   if(floor>=41&&npcAttackStyle(entry.name)!=='mixed'){const physical=npcBuildAttackStat(entry.name,build.moves)==='atk';profile.nature=['revenge','pivot'].includes(build.role)?physical?'Jolly':'Timid':build.role==='defensive'?physical?'Impish':'Bold':physical?'Adamant':'Modest';}
+   return {name:entry.name,moves:build.moves,item,profile};
+  }
   let moves=opponentMoves(entry.name,random,target.buildQuality==='simple'?undefined:tactic);
   if(target.buildQuality==='simple'){
    const attacks=moves.filter(move=>Showdown.Dex.moves.get(move).category!=='Status');

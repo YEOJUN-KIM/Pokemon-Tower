@@ -47,12 +47,12 @@ test('one hundred real battle results progress through every checkpoint and only
       }else if(savedBoss){const {npcAi,...identity}=savedBoss;assert.deepEqual(identity,boss);assert.ok(npcAi);}
       else assert.equal(savedBoss,boss);
       const rank=row.trainer?JSON.parse(row.trainer).npcRank:undefined;
-      const points=rank?npcRankTraining(floor,rank).evBudget:floor===50?46:towerDifficulty(floor).points;
+      const points=rank?npcRankTraining(floor,rank,'hundred-floor-v2').evBudget:buildTraining(floor,'elite').evBudget;
       assert.equal(original.reduce((sum,set)=>sum+Object.values((set.evs ?? {}) as Record<string,number>).reduce((s,n)=>s+n,0),0),3*points);
       // Weak deterministic opponents isolate progression from win-rate tuning. No winner is injected.
       const enemy=packTeam(['Unown','Luvdisc','Delibird']);
       store.db.prepare('UPDATE battles SET opponent_team=?,seed=? WHERE id=?').run(enemy,'[1,2,3,4]',id);
-      const log=await runBattle({trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:enemy},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),upgrades:JSON.parse(row.upgrades)});
+      const log=await runBattle({rule:row.rule,trainerEquipment:row.trainer_equipment==null?undefined:JSON.parse(row.trainer_equipment),teams:{p1:row.player_team,p2:enemy},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy(),upgrades:JSON.parse(row.upgrades)});
       assert.equal(log.winner,'Player');
       store.complete(id,log,{id,status:'complete',requestId:1,turn:log.turns,team:[],opponent:null,actions:[],messages:log.publicProtocol,winner:log.winner,error:null});
       store.recruit('climb',run,id,null,null);
@@ -103,3 +103,4 @@ test('villain grunts belong to one saved organization, avoid milestones and cons
   }
   const store=new TowerStore(':memory:');try{store.ensurePlayer('saved');const run=store.battle(store.start('saved',starters)).run_id;assert.equal((store.db.prepare('SELECT organization FROM run_villains WHERE run_id=?').get(run) as {organization:string}).organization,runOrganization(run));}finally{store.close();}
 });
+import {buildTraining} from '../src/data/opponent-progression';

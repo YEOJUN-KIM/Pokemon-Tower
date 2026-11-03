@@ -10,6 +10,7 @@ import type {NpcGimmick} from '../data/npc-gimmicks';
 import {encounterPool,normalOpponentSpecies,encounterRandom,selectNamedEntries,type OpponentEntry} from './opponent-team';
 import {trainNpcTeam} from './npc-training';
 import {statKeys} from '../data/training';
+import {isBuildProgression} from '../data/opponent-progression';
 
 type EncounterBase={rank:NpcRank;floor:number;seed:Seed;team:OpponentEntry[];gimmick:NpcGimmick|null};
 export type NpcEncounterSnapshotV1=EncounterBase&{version:1;sample:LegacyNpcSample;training:Omit<NpcRankTraining,'itemSlots'>};
@@ -17,7 +18,7 @@ export type NpcComposition={themeAvailable:number;themeRequired:number;themeUsed
 export type NpcEncounterSnapshotV2=EncounterBase&{version:2;sample:NpcSample;training:NpcRankTraining;composition:NpcComposition};
 export type NpcEncounterSnapshot=NpcEncounterSnapshotV1|NpcEncounterSnapshotV2;
 
-function equipRankGimmick(team:OpponentEntry[],rank:NpcRank,random:()=>number,rule:BattleRule,chance:number):NpcGimmick|null{
+function equipRankGimmick(team:OpponentEntry[],rank:NpcRank,random:()=>number,rule:BattleRule,chance:number,families=false):NpcGimmick|null{
  if(rank==='normal'||rule==='basic'||random()>=chance)return null;
  const options:NpcGimmick[]=[];
  for(const entry of team){
@@ -29,15 +30,17 @@ function equipRankGimmick(team:OpponentEntry[],rank:NpcRank,random:()=>number,ru
   }
  }
  if(!options.length)return null;
- const selected=options[Math.floor(random()*options.length)],carrier=team.find(e=>e.name===selected.species)!;
+ const kinds=[...new Set(options.map(o=>o.rule))],kind=families?kinds[Math.floor(random()*kinds.length)]:null;
+ const candidates=kind?options.filter(o=>o.rule===kind):options;
+ const selected=candidates[Math.floor(random()*candidates.length)],carrier=team.find(e=>e.name===selected.species)!;
  if(selected.item)carrier.item=selected.item;
  if(selected.rule==='tera')carrier.profile!.teraType=Showdown.Dex.species.get(carrier.name).types[0] as import('../data/tera').TeraType;
  if(selected.rule==='dynamax'&&Showdown.Dex.species.get(carrier.name).canGigantamax)carrier.gigantamax=true;
  return selected;
 }
 
-function weightedMembers(pool:readonly string[],count:number,rank:NpcRank,random:()=>number):string[]{
- let available=[...pool];const result:string[]=[],bias=npcTeamQualityRules[rank].bstBias;
+function weightedMembers(pool:readonly string[],count:number,rank:NpcRank,random:()=>number,modern=false):string[]{
+ let available=[...pool];const result:string[]=[],bias=modern?(rank==='master'?3:rank==='elite'?1.5:0):npcTeamQualityRules[rank].bstBias;
  while(result.length<count&&available.length){
   const weighted=available.map(name=>({name,weight:Math.pow(statKeys.reduce((sum,key)=>sum+Showdown.Dex.species.get(name).baseStats[key],0)/500,bias)}));
   let ticket=random()*weighted.reduce((sum,e)=>sum+e.weight,0);
@@ -48,39 +51,39 @@ function weightedMembers(pool:readonly string[],count:number,rank:NpcRank,random
 }
 
 // The pool is supplied explicitly so scarcity can be tested without widening the floor pool.
-export function selectNpcMembers(pool:readonly string[],sample:NpcSample,rank:NpcRank,random:()=>number,rule:BattleRule='basic'){
+export function selectNpcMembers(pool:readonly string[],sample:NpcSample,rank:NpcRank,random:()=>number,rule:BattleRule='basic',floor?:number){
  const ordinary=[...new Set(pool)];if(ordinary.length<3)throw Error('NPC floor pool requires three distinct species');
  const concept=sample.teamConcept;
  const matches=(name:string)=>concept.mode==='specialty'&&Showdown.Dex.species.get(name).types.some(type=>concept.types.includes(type));
  const themed=ordinary.filter(matches),requested=concept.mode==='specialty'?concept.requiredCount:0,required=Math.min(requested,themed.length);
  // A full specialty team never borrows a stronger off-theme partner, including for Mega.
  const allowed=required===3?themed:ordinary;
- const count=npcTeamQualityRules[rank].candidates;
- const candidates=weightedMembers(themed,Math.min(count,Math.max(required,rank==='normal'?required:count)),rank,random);
- const others=weightedMembers(allowed.filter(name=>!candidates.includes(name)),Math.max(0,count-candidates.length),rank,random);
+ const count=floor?rank==='normal'?(floor>=31?6:3):rank==='elite'?8:10:npcTeamQualityRules[rank].candidates;
+ const candidates=weightedMembers(themed,Math.min(count,Math.max(required,rank==='normal'?required:count)),rank,random,!!floor);
+ const others=weightedMembers(allowed.filter(name=>!candidates.includes(name)),Math.max(0,count-candidates.length),rank,random,!!floor);
  candidates.push(...others);
  let carrier:string|undefined;
  if(rank==='master'&&rule==='mega'){
   carrier=allowed.find(name=>Object.keys(megaStones).some(item=>canEquipGimmick(name,item)));
   if(carrier&&!candidates.includes(carrier))candidates.push(carrier);
  }
- const members=rank==='normal'&&concept.mode!=='competitive'?candidates.slice(0,3):selectNamedEntries(candidates,random,undefined,carrier,{accept:names=>names.filter(matches).length>=required,quality:rank==='normal'?undefined:rank,tactic:sample.tactic});
+ const members=rank==='normal'&&concept.mode!=='competitive'&&(!floor||floor<31)?candidates.slice(0,3):selectNamedEntries(candidates,random,undefined,carrier,{accept:names=>names.filter(matches).length>=required,quality:rank==='normal'?undefined:rank,tactic:sample.tactic,...(floor?{buildFloor:floor}:{})});
  // Shuffle the lead without changing the specialty count.
  if(rank==='normal')for(let i=members.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[members[i],members[j]]=[members[j],members[i]];}
  return {members,composition:{themeAvailable:themed.length,themeRequired:requested,themeUsed:members.filter(matches).length,fallback:themed.length<requested,candidateCount:candidates.length}};
 }
 
-export function generateNpcEncounter(floor:number,seed:Seed,sample:NpcSample,rank?:NpcRank,rule:BattleRule='basic',progression:TowerProgression=CURRENT_PROGRESSION):NpcEncounterSnapshotV2{
+export function generateNpcEncounter(floor:number,seed:Seed,sample:NpcSample,rank?:NpcRank,rule:BattleRule='basic',progression:TowerProgression='hundred-floor-v1'):NpcEncounterSnapshotV2{
  const random=encounterRandom(seed);
  // Explicit ranks are reserved for fixtures/QA; live encounter draws use class weights.
- rank??=drawNpcRank(sampleRankWeights(sample,floor),random);
- const training=npcRankTraining(floor,rank);
+ rank??=drawNpcRank(sampleRankWeights(sample,floor,'normal',progression),random);
+ const training=npcRankTraining(floor,rank,progression),modern=isBuildProgression(progression);
  const ordinary=encounterPool(floor,progression).filter(normalOpponentSpecies);
- const selected=selectNpcMembers(ordinary,sample,rank,random,rule);
+ const selected=selectNpcMembers(ordinary,sample,rank,random,modern?'chaos':rule,modern?floor:undefined);
  const [minItems,maxItems]=training.itemSlots,itemSlots=minItems+Math.floor(random()*(maxItems-minItems+1));
- const team=trainNpcTeam(selected.members.map(name=>({name,moves:[]})),floor,'standard',sample.tactic,seed,rule,training,{itemSlots,buildRank:rank==='normal'?undefined:rank});
+ const team=trainNpcTeam(selected.members.map(name=>({name,moves:[]})),floor,'standard',sample.tactic,seed,modern?'chaos':rule,training,{itemSlots,buildRank:rank==='normal'?undefined:rank,...(modern?{progressionRank:rank}:{})});
  // A gimmick replaces an equipped item's slot; Elite cannot gain a fourth budgeted slot.
  const equipped=team.filter(entry=>entry.item);
- const gimmick=equipRankGimmick(equipped,rank,random,rule,training.gimmickChance);
+ const gimmick=equipRankGimmick(equipped,rank,random,modern?'chaos':rule,training.gimmickChance,modern);
  return {version:2,sample:structuredClone(sample),rank,floor,seed:[...seed] as Seed,training,team,gimmick,composition:{...selected.composition,itemSlots}};
 }

@@ -8,7 +8,8 @@ import {paldeaTrainers,paldeaSample,paldeaEventSamples} from '../src/data/paldea
 import {trainerCatalog} from '../src/data/trainer-catalog';
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {snapshotTrainerEventBattle} from '../src/server/trainer-event-battle';
-import {CURRENT_PROGRESSION} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {npcAi} from '../src/data/npc-ai';
 import {npcGimmick} from '../src/data/npc-gimmicks';
 import {createNpcPolicy} from '../src/battle/npc-policy';
@@ -39,7 +40,7 @@ for(const t of paldeaTrainers)test(`${t.id}: exact legal ordered builds and desi
  const sample=paldeaSample(t),validator=new Showdown.TeamValidator(FORMAT);
  assert.ok(publicAssetExists(`public/sprites/trainers/${sample.portrait}.png`));
  for(const floor of [45,95]){
-  const snap=snapshotTrainerEventBattle(`paldea:${t.id}:${floor}`,sample,floor,'basic',CURRENT_PROGRESSION),sets=Showdown.Teams.unpack(snap.opponentTeam)!;
+  const snap=snapshotTrainerEventBattle(`paldea:${t.id}:${floor}`,sample,floor,'basic',REFERENCE_PROGRESSION),sets=Showdown.Teams.unpack(snap.opponentTeam)!;
   assert.deepEqual(sets.map(s=>s.species),t.entries);assert.ok(normalNpcTemplate(t.id,floor,sample.role));
   for(let i=0;i<3;i++){const p=sets[i],spec=t.team[i];assert.deepEqual(p.moves,spec.moves);assert.equal(p.ability,spec.ability);assert.equal(p.item,spec.item);assert.equal(validator.validateSet({...structuredClone(pokemonSets[p.species]),ability:p.ability,item:p.item,moves:p.moves,nature:p.nature},{}),null);}
   if(t.teraType){assert.equal(sets[2].teraType,t.teraType);assert.equal(npcGimmick(t.id,9,t.entries,t.ace)?.species,t.ace);assert.equal(snap.opponentTeraTickets,floor>= (sample.role==='champion'?50:55)?1:0);}
@@ -47,7 +48,7 @@ for(const t of paldeaTrainers)test(`${t.id}: exact legal ordered builds and desi
  }
 });
 for(const t of paldeaTrainers)test(`${t.id}: actual policy battle and deterministic replay`,async()=>{
- const sample=paldeaSample(t),snap=snapshotTrainerEventBattle('paldea-real:'+t.id,sample,95,'basic',CURRENT_PROGRESSION);
+ const sample=paldeaSample(t),snap=snapshotTrainerEventBattle('paldea-real:'+t.id,sample,95,'basic',REFERENCE_PROGRESSION);
  const log=await runBattle({teams:{p1:packTeam(starters),p2:snap.opponentTeam},seed:snap.seed,rule:'basic',opponentRule:snap.opponentTeraTickets?'tera':'basic',teraTickets:{p1:0,p2:snap.opponentTeraTickets},opponentTeraSpecies:t.teraType?t.ace:undefined,player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(95,sample))});
  assert.ok(log.winner);assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
  for(const l of log.publicProtocol.filter(l=>l.startsWith('|-terastallize|p2')))assert.ok(l.includes(t.ace+'|'+t.teraType));

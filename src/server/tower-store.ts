@@ -33,6 +33,7 @@ import { floors } from '../data/floors';
 import {towerTrainerEncounter,type TowerTheme} from '../data/tower-trainers';
 import {isTowerTheme,randomTowerTheme,secondTowerTheme,towerThemes} from '../data/tower-themes';
 import {CURRENT_PROGRESSION,opponentTeraTickets,type TowerProgression} from '../data/tower-progression';
+import {isBuildProgression} from '../data/opponent-progression';
 import { packTeam, packPlayerTeam, pokemonSets, initialPartners,trainedSet } from '../data/teams';
 import {equippedFormSet} from '../data/equipped-form';
 import {isCollectibleSpecies} from '../data/pokedex-roster';
@@ -257,7 +258,7 @@ export class TowerStore {
     const earned = row ? this.db.prepare('SELECT COALESCE(SUM(rewards.amount),0) AS coins, COUNT(*) AS wins FROM rewards JOIN battles ON battles.id = rewards.battle_id WHERE battles.run_id = ?').get(row.id) as {coins: number; wins: number} : null;
     const favorites=(this.db.prepare('SELECT species FROM favorites WHERE player_id=? ORDER BY rowid').all(owner) as {species:string}[]).map(entry=>entry.species);
     return {coins: row && ['select','battle','recruit'].includes(row.state) ? player.coins : 0, growthPoints:player.growth_points, permanent:this.permanentView(owner), unlocked, favorites, totalFloors: floors.length, run: row ? {
-      raid:raidBattle,villainEncounter,
+      raid:raidBattle,villainEncounter,...(isBuildProgression((this.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(row.id) as {version:TowerProgression}|undefined)?.version??'legacy')?{gimmickUnlockFloor:50}:{}),
       id: row.id, rule:this.runRule(row.id),theme:this.runTheme(row.id), hiddenBossPending:this.route(row.id)?.pending_boss===row.floor, hiddenBossNext:!raidBattle && !!this.route(row.id) && row.floor%50===0 && hasHiddenBoss(this.runTheme(row.id)) && this.route(row.id)?.pending_boss!==row.floor, floor: row.floor, totalFloors: row.total_floors, floorName: row.floor===row.total_floors ? row.total_floors===3 ? '작은 타워의 정상' : '타워의 정상' : floors[row.floor - 1]?.name ?? '타워', state: row.state,
       retries:{limit:retry!.retry_limit,used:retry!.used,remaining:Math.max(0,retry!.retry_limit-retry!.used),canRetry:row.state==='lost'&&retry!.used<retry!.retry_limit&&!this.db.prepare('SELECT 1 FROM growth_rewards WHERE run_id=?').get(row.id),preparing:row.state==='select'&&!!retryBattle,opponents:retryBattle?(Showdown.Teams.unpack(retryBattle.opponent_team)??[]).map(p=>({species:p.species,moves:p.moves,item:p.item})):[]},
       roster: this.roster(row.id), partnerForms:Object.fromEntries(Object.entries(this.runProfiles(row.id)).flatMap(([name,profile])=>{const form=equipmentFormSpecies.has(name)?heldForm(name,this.heldItems(row.id)[name]):profile.forme;return form&&form!==name?[[name,form]]:[];})), battleId: battle?.id ?? null,
@@ -409,7 +410,7 @@ export class TowerStore {
     const bytes = randomBytes(8);
     const seed: Seed = special?.seed??rankedChallenger?.encounter?.seed??[0, 2, 4, 6].map(i => bytes.readUInt16BE(i)) as Seed;
     const profiles=JSON.parse((this.db.prepare('SELECT profiles FROM runs WHERE id=?').get(runId) as {profiles:string}).profiles) as Record<string,TrainingProfile>;
-    const progression:TowerProgression=(this.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(runId) as {version:typeof CURRENT_PROGRESSION}|undefined)?.version ?? 'legacy';
+    const progression:TowerProgression=(this.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(runId) as {version:TowerProgression}|undefined)?.version ?? 'legacy';
     const previous=recentEncounters(this.db,runId);
     const trainer=challenger||special?null:this.encounter(runId,floor);
     const common=!!this.db.prepare('SELECT 1 FROM run_npc_rules WHERE run_id=?').get(runId);
@@ -423,9 +424,9 @@ export class TowerStore {
     const npcId=sample?.id ?? trainer?.boss.id ?? '';
     const npcGeneration=sample?.generation ?? trainer?.boss.generation ?? null;
     const npcAce=sample?.ace ?? trainer?.ace;
-    const template=progression!=='legacy'&&(trainer || sample?.kind==='named')?normalNpcTemplate(npcId,floor,sample?.role ?? trainer?.boss.role):null;
+    const template=progression!=='legacy'&&(trainer || sample?.kind==='named')?normalNpcTemplate(npcId,floor,sample?.role ?? trainer?.boss.role,progression):null;
     let signature:NpcGimmick|null=rankedEncounter?.gimmick??null;
-    const npcGimmicksAllowed=rankedEncounter?!!signature:normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'));
+    const npcGimmicksAllowed=rankedEncounter?!!signature:normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'),progression);
     if(progression!=='legacy' && npcGimmicksAllowed && (trainer || sample?.kind==='named')){
       const plan=template?.signature ?? npcGimmick(npcId,npcGeneration,encounter.map(p=>p.name),npcAce?npcSpecies(npcAce,npcId,npcGeneration):undefined);
       const carrier=encounter.find(p=>p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
@@ -453,7 +454,9 @@ export class TowerStore {
     this.db.prepare(`INSERT INTO battles(id, run_id, floor, player_team, opponent_team, seed, engine_version, format, ai_version, status, reward, candidates, boss, stage,attempt,encounter_order)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'active', ?, ?, ?, ?, ?, (SELECT COALESCE(MAX(encounter_order),0)+1 FROM battles WHERE run_id=?))`).run(id, runId, floor, packPlayerTeam(selected,this.boostedProfiles(runId,profiles),Object.fromEntries(Object.entries(this.heldItems(runId)).filter(([,item])=>allowsRuleItem(rule,item))),this.trainerEquipment(runId).includes('Dynamax Band')), packTeam(opponents,opponentProfiles,Object.fromEntries(encounter.map(entry=>[entry.name,entry.item && (progression!=='legacy' || allowsRuleItem(rule,entry.item))?entry.item:''])),encounter.filter(p=>p.gigantamax).map(p=>p.name)), JSON.stringify(seed), engineVersion, FORMAT, aiVersion, trainer||sample?.kind==='named'?config.reward:battleCoinReward(config.reward,sample?.npcRank??(sample?.kind==='elite'?'elite':'normal')), JSON.stringify(opponents), trainer ? JSON.stringify(trainer.boss) : null,this.route(runId)?.pending_boss===floor?1:0,0,runId);
 
-    this.db.prepare('UPDATE battles SET rule=? WHERE id=?').run(rule,id);
+    // Freeze the effective battle rule with the team so completion/replay/retry
+    // validate the same environment. The run's chosen rule/shop ownership stays intact.
+    this.db.prepare('UPDATE battles SET rule=? WHERE id=?').run(isBuildProgression(progression)&&floor<50?'basic':rule,id);
     if(rankedChallenger?.mirror)this.db.prepare('UPDATE battles SET opponent_team=? WHERE id=?').run(rankedChallenger.mirror.opponentTeam,id);
     this.db.prepare('UPDATE battles SET battle_items=? WHERE id=?').run(JSON.stringify(this.battleItemBag(runId)),id);
     const hasNpcItem=encounter.some(p=>p.item && (megaStones[p.item] || primalOrbs[p.item] || p.item===DYNAMAX_ITEM || zCrystals[p.item]));
@@ -466,7 +469,7 @@ export class TowerStore {
       const saved=JSON.parse(row.boss??row.trainer??'null');
       if(saved){
         const descriptor=sample??{...trainer!.boss,kind:'named' as const,tactic:trainer!.tactic};
-        saved.npcAi=rankedChallenger?.npcAi??npcAi(floor,descriptor,{challenger:!!challenger,boss:floor%50===0});
+        saved.npcAi=rankedChallenger?.npcAi??npcAi(floor,descriptor,{challenger:!!challenger,boss:floor%50===0,progression});
         this.db.prepare(`UPDATE battles SET ${column}=? WHERE id=?`).run(JSON.stringify(saved),id);
       }
     }

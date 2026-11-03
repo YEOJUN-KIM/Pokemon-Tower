@@ -8,7 +8,9 @@ import {trainerCatalog} from '../src/data/trainer-catalog';
 import {organizationGrunt,villainLeaders,villainEncounter} from '../src/data/villain-organizations';
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
-import {CURRENT_PROGRESSION,towerDifficulty} from '../src/data/tower-progression';
+import {towerDifficulty} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {normalNpcGimmicksEnabled,normalNpcCategory} from '../src/data/normal-mode-stages';
 import {npcAi} from '../src/data/npc-ai';
 import {createNpcPolicy} from '../src/battle/npc-policy';
@@ -34,9 +36,9 @@ for(const t of kalosTrainers)test(`${t.id}: fixed legal sets, varied triples, ac
   for(const p of template.team){assert.ok(!p.profile.moves.includes('Trick Room'));assert.equal(validator.validateSet({...structuredClone(pokemonSets[p.species]),ability:p.profile.ability,item:p.item,moves:p.profile.moves},{}),null,t.id+'/'+p.species);}
   const combinations=new Set<string>();
   for(let n=1;n<=80;n++){
-   const seed:[number,number,number,number]=[n,floor,29,43],team=generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION),names=team.map(p=>p.name);
+   const seed:[number,number,number,number]=[n,floor,29,43],team=generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION),names=team.map(p=>p.name);
    assert.equal(new Set(names).size,3);if(t.ace)assert.ok(names.includes(t.ace));if(t.mega)assert.ok(names.includes(t.mega));
-   assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION));
+   assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION));
    const enabled=normalNpcGimmicksEnabled(floor,normalNpcCategory(sample.role,sample.id,sample.kind));
    assert.equal(packedNpcRule(team.map(p=>({item:p.item??''})),0),enabled&&t.mega?'mega':'basic');
    for(const p of team)assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),Math.min(66,(template.gate50?46:towerDifficulty(floor).points)));
@@ -46,8 +48,8 @@ for(const t of kalosTrainers)test(`${t.id}: fixed legal sets, varied triples, ac
  }
 });
 for(const t of kalosTrainers.filter(t=>t.mega))test(`${t.id}: ${t.mega} actually Mega Evolves through v12 and deterministic replay`,async()=>{
- const sample=sampleFor(t.id);let n=1,team=generateOpponentTeam(95,[n,95,29,43],[],null,sample,CURRENT_PROGRESSION);
- while(team[0].name!==t.mega&&n<200){n++;team=generateOpponentTeam(95,[n,95,29,43],[],null,sample,CURRENT_PROGRESSION);}
+ const sample=sampleFor(t.id);let n=1,team=generateOpponentTeam(95,[n,95,29,43],[],null,sample,REFERENCE_PROGRESSION);
+ while(team[0].name!==t.mega&&n<200){n++;team=generateOpponentTeam(95,[n,95,29,43],[],null,sample,REFERENCE_PROGRESSION);}
  assert.equal(team[0].name,t.mega);
  const log=await runBattle({teams:{p1:packTeam(starters),p2:packed(team)},seed:[n,95,37,101],rule:'basic',opponentRule:'mega',player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(95,sample))});
  const telemetry=kalosBattleTelemetry(log);assert.equal(telemetry.telemetry.available.length,1);assert.equal(telemetry.mega.length,1);assert.equal(telemetry.mega[0].species,t.mega);assert.ok(telemetry.mega[0].activationTurn>=1);
@@ -64,8 +66,8 @@ test('Flare selects both distinct officers, excludes other scientists and keeps 
  const seen=new Set<string>();for(let n=0;n<5000;n++){const e=villainEncounter('kalos-officer-'+n,56,'flare',false,false,{gruntWins:100,executiveWins:0});if(e?.event.rank==='executive')seen.add(e.sample.portrait);}
  assert.deepEqual([...seen].sort(),['aliana','xerosic']);
  for(const t of kalosTrainers.filter(t=>['grunt','executive','boss'].includes(t.category))){
-  const s=sampleFor(t.id),snap=snapshotTrainerEventBattle('kalos-snapshot',s,95,'basic',CURRENT_PROGRESSION);
-  assert.deepEqual(snap,snapshotTrainerEventBattle('kalos-snapshot',s,95,'basic',CURRENT_PROGRESSION));assert.ok(publicAssetExists(`public/sprites/trainers/${s.portrait}.png`));
+  const s=sampleFor(t.id),snap=snapshotTrainerEventBattle('kalos-snapshot',s,95,'basic',REFERENCE_PROGRESSION);
+  assert.deepEqual(snap,snapshotTrainerEventBattle('kalos-snapshot',s,95,'basic',REFERENCE_PROGRESSION));assert.ok(publicAssetExists(`public/sprites/trainers/${s.portrait}.png`));
   const names=Showdown.Teams.unpack(snap.opponentTeam)!.map(p=>p.species);if(t.ace)assert.ok(names.includes(t.ace));assert.equal(snap.trainer.gimmick?.species??null,t.mega);
  }
  assert.deepEqual(normalNpcTemplate('named-lysandre',95,'villain'),{...normalNpcTemplate('flare-boss-lysandre',95,'villain')!,id:'named-lysandre'});

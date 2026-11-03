@@ -12,7 +12,9 @@ import {villainLeaders} from '../src/data/villain-organizations';
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
 import {snapshotTrainerEventBattle} from '../src/server/trainer-event-battle';
-import {CURRENT_PROGRESSION,towerDifficulty} from '../src/data/tower-progression';
+import {towerDifficulty} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {satisfiesSelectionRules} from '../src/data/npc-selection-rules';
 import {npcAi} from '../src/data/npc-ai';
 import {createNpcPolicy} from '../src/battle/npc-policy';
@@ -36,7 +38,7 @@ function sampleFor(id:string){const group=villainLeaders.magma;return {...[group
 for(const id of ids){
  test(`${id}: Tactical uses Shadow Ball coverage against Espeon where Trick Room stayed idle`,async()=>{
   const sample=sampleFor(id);
-  const snap=Array.from({length:128},(_,n)=>snapshotTrainerEventBattle(`claydol-slot:${id}:${n}`,sample,95,'basic',CURRENT_PROGRESSION)).find(s=>s.team[0].name==='Claydol')!;
+  const snap=Array.from({length:128},(_,n)=>snapshotTrainerEventBattle(`claydol-slot:${id}:${n}`,sample,95,'basic',REFERENCE_PROGRESSION)).find(s=>s.team[0].name==='Claydol')!;
   assert.ok(snap,'native selection must produce a Claydol lead');
   const current=Showdown.Teams.unpack(snap.opponentTeam)!;
   assert.deepEqual(current[0].moves.map(Showdown.toID),['earthpower','psychic','icebeam','shadowball']);
@@ -67,14 +69,14 @@ for(const id of ids){
   for(const floor of [16,45,54,55,95]){
    assert.equal(npcAi(floor,s).tier,'tactical');const combinations=new Set<string>();
    for(let n=1;n<=128;n++){
-    const seed:[number,number,number,number]=[n,floor,29,43],team=generateOpponentTeam(floor,seed,[],null,s,CURRENT_PROGRESSION),names=team.map(p=>p.name);
+    const seed:[number,number,number,number]=[n,floor,29,43],team=generateOpponentTeam(floor,seed,[],null,s,REFERENCE_PROGRESSION),names=team.map(p=>p.name);
     assert.equal(team.length,3);assert.equal(new Set(names).size,3);assert.ok(names.includes('Camerupt'));
     assert.ok(satisfiesSelectionRules(names,template.selectionRules));assert.ok(names.some(n=>['Crobat','Cacturne'].includes(n)));
     if(names.includes('Crobat'))assert.equal(names[0],'Crobat');else if(names.includes('Claydol'))assert.equal(names[0],'Claydol');
     if(floor<55||id.endsWith('tabitha'))assert.ok(team.every(p=>p.item!=='Cameruptite'));
     else assert.equal(team.find(p=>p.name==='Camerupt')!.item,'Cameruptite');
     for(const p of team)assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),towerDifficulty(floor).points);
-    assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,s,CURRENT_PROGRESSION));
+    assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,s,REFERENCE_PROGRESSION));
     combinations.add([...names].sort().join('/'));
    }
    assert.equal(combinations.size,7,'selection must not collapse to one fixed triple');
@@ -83,8 +85,8 @@ for(const id of ids){
  test(`${id}: event snapshots preserve new sets, identity, v12 and legal deterministic battle replay`,async()=>{
   const sample=sampleFor(id);
   for(const floor of [45,95]){
-   const snap=snapshotTrainerEventBattle('magma-executive-snapshot:'+id+':'+floor,sample,floor,'basic',CURRENT_PROGRESSION);
-   assert.deepEqual(JSON.parse(JSON.stringify(snap)),JSON.parse(JSON.stringify(snapshotTrainerEventBattle('magma-executive-snapshot:'+id+':'+floor,sample,floor,'basic',CURRENT_PROGRESSION))));
+   const snap=snapshotTrainerEventBattle('magma-executive-snapshot:'+id+':'+floor,sample,floor,'basic',REFERENCE_PROGRESSION);
+   assert.deepEqual(JSON.parse(JSON.stringify(snap)),JSON.parse(JSON.stringify(snapshotTrainerEventBattle('magma-executive-snapshot:'+id+':'+floor,sample,floor,'basic',REFERENCE_PROGRESSION))));
    assert.equal(snap.aiVersion,'tower-policy-v13');assert.equal(snap.trainer.npcAi!.tier,'tactical');
    const team=Showdown.Teams.unpack(snap.opponentTeam)!;assert.equal(team.length,3);assert.ok(team.some(p=>p.species==='Camerupt'));
    const log=await runBattle({teams:{p1:packTeam(starters),p2:snap.opponentTeam},seed:snap.seed,rule:'basic',opponentRule:packedNpcRule(snap.team.map(p=>({item:p.item??''})),0),player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(floor,sample))});

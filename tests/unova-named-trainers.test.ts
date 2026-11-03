@@ -12,7 +12,9 @@ import {organizationGrunt,villainLeaders,villainEncounter} from '../src/data/vil
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam,selectTrainerSample} from '../src/server/opponent-team';
 import {satisfiesSelectionRules} from '../src/data/npc-selection-rules';
-import {CURRENT_PROGRESSION,towerDifficulty} from '../src/data/tower-progression';
+import {towerDifficulty} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {npcAi} from '../src/data/npc-ai';
 import {npcGimmick} from '../src/data/npc-gimmicks';
 import {FORMAT,runBattle,replayBattle,battleEvents} from '../src/battle/run';
@@ -43,10 +45,10 @@ for(const t of unovaTrainers)test(`${t.id}: legal fixed builds, varying triples,
   for(const p of template.team){assert.ok(!p.profile.moves.includes('Trick Room'));assert.equal(validator.validateSet({...structuredClone(pokemonSets[p.species]),ability:p.profile.ability,item:p.item,moves:p.profile.moves},{}),null,t.id+'/'+p.species);}
   const combinations=new Set<string>();
   for(let n=1;n<=60;n++){
-   const seed:[number,number,number,number]=[n,floor,29,43],team=generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION),names=team.map(p=>p.name);
+   const seed:[number,number,number,number]=[n,floor,29,43],team=generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION),names=team.map(p=>p.name);
    assert.equal(names.length,3);assert.equal(new Set(names).size,3);assert.ok(satisfiesSelectionRules(names,template.selectionRules));
    if(template.ace)assert.ok(names.includes(template.ace));
-   assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION));
+   assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION));
    for(const p of team)assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),Math.min(66,(floor===50?46:towerDifficulty(floor).points)));
    if(t.category==='hidden')assert.equal(names.includes('Zekrom'),floor===50||floor===100);
    combinations.add([...names].sort().join(','));
@@ -61,7 +63,7 @@ test('Unova identities: Champion Iris, veteran Alder, Plasma officers and hidden
  assert.equal(towerTrainerEncounter(50,'unova','unova',true)!.boss.id,'named-iris');
  assert.equal(towerTrainerEncounter(100,'unova','unova',true,true)!.boss.id,'named-n');
  assert.ok(!legacyNamedTrainerSamples.some(s=>s.id===n.id));assert.equal(n.minFloor,50);
- for(let floor=1;floor<=100;floor++)assert.notEqual(selectTrainerSample(floor,[floor,2,3,4],[],CURRENT_PROGRESSION).id,'named-n');
+ for(let floor=1;floor<=100;floor++)assert.notEqual(selectTrainerSample(floor,[floor,2,3,4],[],REFERENCE_PROGRESSION).id,'named-n');
  assert.ok(![villainLeaders.plasma.executive,...villainLeaders.plasma.executives!,villainLeaders.plasma.boss].some(s=>s.id===n.id));
  const seen=new Set<string>();
  for(let seed=0;seed<5000;seed++){const e=villainEncounter('unova-officers-'+seed,56,'plasma',false,false,{gruntWins:100,executiveWins:0});if(e?.event.rank==='executive')seen.add(e.sample.portrait);}
@@ -72,8 +74,8 @@ test('Unova identities: Champion Iris, veteran Alder, Plasma officers and hidden
  assert.ok(normalNpcTemplate('named-ghetsis',95,'villain')!.team.every(p=>p.species!=='Kyurem'));
 });
 test('Elesa actually chooses Volt Switch and pivots in a real v12 battle',async()=>{
- const sample=sampleFor('named-elesa');let seed:[number,number,number,number]=[1,95,29,43],team=generateOpponentTeam(95,seed,[],null,sample,CURRENT_PROGRESSION);
- for(let n=1;team[0].name!=='Zebstrika'&&n<100;n++){seed=[n,95,29,43];team=generateOpponentTeam(95,seed,[],null,sample,CURRENT_PROGRESSION);}
+ const sample=sampleFor('named-elesa');let seed:[number,number,number,number]=[1,95,29,43],team=generateOpponentTeam(95,seed,[],null,sample,REFERENCE_PROGRESSION);
+ for(let n=1;team[0].name!=='Zebstrika'&&n<100;n++){seed=[n,95,29,43];team=generateOpponentTeam(95,seed,[],null,sample,REFERENCE_PROGRESSION);}
  assert.equal(team[0].name,'Zebstrika');
  const log=await runBattle({teams:{p1:packTeam(['Blastoise','Slowbro','Lapras']),p2:packTeam(team.map(p=>p.name),Object.fromEntries(team.map(p=>[p.name,p.profile!])),Object.fromEntries(team.map(p=>[p.name,p.item??''])))},seed,rule:'basic',player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(95,sample))});
  const index=log.publicProtocol.findIndex(l=>l.startsWith('|move|p2a: Zebstrika|Volt Switch|'));assert.ok(index>=0);
@@ -81,8 +83,8 @@ test('Elesa actually chooses Volt Switch and pivots in a real v12 battle',async(
  assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
 });
 test('Skyla Unfezant uses legal Facade against Flying-resistant Electric opponents',async()=>{
- const sample=sampleFor('named-skyla');let n=1,team=generateOpponentTeam(95,[n,95,29,43],[],null,sample,CURRENT_PROGRESSION);
- while(team[0].name!=='Unfezant'&&n<1000){n++;team=generateOpponentTeam(95,[n,95,29,43],[],null,sample,CURRENT_PROGRESSION);}
+ const sample=sampleFor('named-skyla');let n=1,team=generateOpponentTeam(95,[n,95,29,43],[],null,sample,REFERENCE_PROGRESSION);
+ while(team[0].name!=='Unfezant'&&n<1000){n++;team=generateOpponentTeam(95,[n,95,29,43],[],null,sample,REFERENCE_PROGRESSION);}
  assert.equal(team[0].name,'Unfezant');
  assert.deepEqual(team[0].profile!.moves,['Brave Bird','Facade','Night Slash','U-turn']);
  const log=await runBattle({teams:{p1:packTeam(['Ampharos','Luxray','Eelektross']),p2:packTeam(team.map(p=>p.name),Object.fromEntries(team.map(p=>[p.name,p.profile!])),Object.fromEntries(team.map(p=>[p.name,p.item??''])))},seed:[n,95,37,101],rule:'basic',player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(95,sample))});
@@ -100,7 +102,7 @@ for(const floor of [50,100])test(`N F${floor}: champion victory → event snapsh
   store.chooseEvent(f.owner,f.run,event.id,'challenge');let battle=store.currentBattle(f.owner)!;
   assert.equal(battle.stage,1);assert.equal(JSON.parse(battle.trainer!).id,'named-n');
   assert.equal(Showdown.Teams.unpack(battle.opponent_team)!.some(p=>p.species==='Zekrom'),floor===50||floor===100);
-  assert.equal(JSON.parse(battle.trainer!).gimmick,undefined);
+  assert.deepEqual(JSON.parse(battle.trainer!).gimmick,{rule:'tera',species:'Zekrom'});
   const state=await service.state(f.owner);assert.ok(state.battle!.team.every(p=>p.condition.split('/')[0]===p.condition.split('/')[1]));assert.ok(state.battle!.movePP!.every(p=>p.pp===p.maxpp));
   await service.dispose();store.close();store=new TowerStore(path);service=new TowerService(store);
   assert.equal(new HiddenBossEvents(store.db).row(event.id)!.snapshot_json,snapshot);assert.equal(store.currentBattle(f.owner)!.opponent_team,battle.opponent_team);

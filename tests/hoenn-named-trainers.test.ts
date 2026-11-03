@@ -16,7 +16,9 @@ import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
 import {satisfiesSelectionRules} from '../src/data/npc-selection-rules';
 import {npcAi} from '../src/data/npc-ai';
-import {CURRENT_PROGRESSION,towerDifficulty} from '../src/data/tower-progression';
+import {towerDifficulty} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {FORMAT,runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {pokemonSets,packTeam,starters} from '../src/data/teams';
 import {createNpcPolicy} from '../src/battle/npc-policy';
@@ -52,9 +54,9 @@ for(const t of hoennTrainers)test(`${t.id}: legal sets, deterministic triples, s
   assert.ok(template.team.length>=4&&template.team.length<=6);
   for(const p of template.team){assert.equal(validator.validateSet({...structuredClone(pokemonSets[p.species]),ability:p.profile.ability,item:p.item,moves:p.profile.moves},{}),null,t.id+'/'+p.species);}
   for(let n=1;n<=12;n++){
-   const seed:[number,number,number,number]=[n,floor,29,43],team=generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION),names=team.map(p=>p.name);
+   const seed:[number,number,number,number]=[n,floor,29,43],team=generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION),names=team.map(p=>p.name);
    assert.equal(team.length,3);assert.equal(new Set(names).size,3);assert.ok(satisfiesSelectionRules(names,template.selectionRules));
-   assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION));
+   assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION));
    for(const p of team){assert.equal(p.profile!.statSystem,'points');assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),Math.min(66,towerDifficulty(floor).points));assert.ok(p.profile!.moves.every(m=>m!=='Hidden Power Ice'));}
    if(t.category==='grunt'){assert.equal(npcAi(floor,sample).tier,floor<20?'basic':'tactical');assert.ok(team.every(p=>!p.item?.endsWith('ite')&&!p.item?.endsWith(' Z')));}
    if(t.id==='named-brawly')assert.ok(names.some(n=>['Medicham','Breloom','Heracross'].includes(n)));
@@ -77,7 +79,7 @@ test('both Hoenn officers are reachable and use their own portraits, eligibility
 });
 test('Hoenn Mega bosses produce legal v12 actions and deterministic replay',async()=>{
  for(const id of ['named-phoebe','named-glacia','named-steven','magma-boss-maxie','aqua-boss-archie']){
-  const sample=sampleFor(id),seed:[number,number,number,number]=[2,95,29,43],team=generateOpponentTeam(95,seed,[],null,sample,CURRENT_PROGRESSION);
+  const sample=sampleFor(id),seed:[number,number,number,number]=[2,95,29,43],team=generateOpponentTeam(95,seed,[],null,sample,REFERENCE_PROGRESSION);
   const p2=packTeam(team.map(p=>p.name),Object.fromEntries(team.map(p=>[p.name,p.profile!])),Object.fromEntries(team.map(p=>[p.name,p.item??''])));
   const log=await runBattle({teams:{p1:packTeam(starters),p2},seed,rule:'basic',opponentRule:packedNpcRule(team.map(p=>({item:p.item??''})),0),player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(95,sample))});
   assert.ok(log.winner);for(const d of log.decisions)assert.ok(d.observation.legalActions.some(a=>a.command===d.action));

@@ -15,6 +15,7 @@ import {eventDefinitions,currentEventRulesVersion,isRunEventKind,type RunEventRe
 import {BattleRequestError} from './request-error';
 import type {TowerProgression} from '../data/tower-progression';
 import type {BattleRule} from '../data/run-rules';
+import {isBuildProgression} from '../data/opponent-progression';
 
 type EventRow={id:string;kind:string;choice_id:string|null;result_json:string|null;run_id:string;after_floor:number;encounter_order:number;status:'choice'|'reward'|'complete';reward_kind:EventReward['kind']|null;amount:number};
 
@@ -32,6 +33,8 @@ export class RunEvents {
   const previous=this.db.prepare("SELECT MAX(encounter_order) AS position FROM run_events WHERE run_id=? AND kind!='villain-campaign'").get(runId) as {position:number|null};
   const segment=teleportSegment(afterFloor);
   const eligible=(kind:string)=>{
+   const progression=(this.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(runId) as {version:TowerProgression}|undefined)?.version??'legacy';
+   if(kind==='raid-encounter'&&isBuildProgression(progression)&&afterFloor<=50)return false;
    return isRocketStage(kind)?!campaigns.track(runId)&&campaigns.eligible(runId,kind,afterFloor):kind!=='random-teleport'||(segment!==null&&!this.db.prepare('SELECT 1 FROM teleport_events t JOIN run_events e ON e.id=t.event_id WHERE e.run_id=? AND t.segment=?').get(runId,segment));
   };
   const kind=selectRunEvent(afterFloor,previous.position,this.roll,this.registry,this.rulesVersion(runId),order,eligible);

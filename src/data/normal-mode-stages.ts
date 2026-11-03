@@ -19,7 +19,8 @@ export function normalNpcStage(floor:number,category:NormalNpcCategory):NormalMo
  if(category==='boss')return floor>=normalNpcFloorRules.finalGate?'final-gate':'first-gate';
  return floor>=normalNpcFloorRules.lateLeaders?'leaders-late':'leaders-early';
 }
-export function normalNpcGimmicksEnabled(floor:number,category:NormalNpcCategory){
+export function normalNpcGimmicksEnabled(floor:number,category:NormalNpcCategory,progression:TowerProgression='hundred-floor-v1'){
+ if(isBuildProgression(progression))return buildGimmicksEnabled(floor,category==='normal');
  // 50 is the first champion gate; 51–54 remain the breathing-space opening.
  return category!=='normal' && floor>=(category==='boss'?normalNpcFloorRules.firstGate:normalNpcFloorRules.lateLeaders);
 }
@@ -33,3 +34,5 @@ export function normalNpcStageRange(stage:NormalModeStage):readonly [number,numb
   case 'final-gate':return [normalNpcFloorRules.finalGate,normalNpcFloorRules.finalGate];
  }
 }
+import type {TowerProgression} from './tower-progression';
+import {isBuildProgression,buildGimmicksEnabled} from './opponent-progression';

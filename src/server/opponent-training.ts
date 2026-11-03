@@ -2,12 +2,14 @@ import Showdown from 'pokemon-showdown';
 import {defaultProfile} from './training';
 import {statKeys,type StatBlock} from '../data/training';
 import {towerDifficulty,type TowerProgression} from '../data/tower-progression';
+import {buildTraining,isBuildProgression} from '../data/opponent-progression';
 
 // New encounters ramp from low IVs to the full range; archived packed teams never change.
 export function opponentIVCap(floor:number){return Math.min(31,4+floor);}
 export function opponentProfile(name:string,moves:string[],floor:number,rawIVs:StatBlock,progression:TowerProgression='legacy'){
   const profile=defaultProfile(name);profile.moves=moves;
-  const difficulty=progression==='legacy'?null:towerDifficulty(floor);
+  const training=buildTraining(floor,'elite');
+  const difficulty=progression==='legacy'?null:isBuildProgression(progression)?{...towerDifficulty(floor),ivCap:training.ivRange[1],points:training.evBudget}:towerDifficulty(floor);
   const cap=difficulty?.ivCap ?? opponentIVCap(floor);
   profile.ivs=Object.fromEntries(statKeys.map(stat=>[stat,Math.floor(rawIVs[stat]*(cap+1)/32)])) as StatBlock;
   const points=difficulty?.points ?? Math.min(30,Math.max(0,floor-10)),base=Showdown.Dex.species.get(name).baseStats;

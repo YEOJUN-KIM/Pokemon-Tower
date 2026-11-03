@@ -22,6 +22,9 @@ import {namedOpponentIVs} from './named-opponent-ivs';
 import {opponentProfile} from './opponent-training';
 import {npcSamples,npcTrainerSample} from '../data/npc-samples';
 import {sampleRankWeights,drawNpcRank} from '../data/npc-ranks';
+import {isBuildProgression} from '../data/opponent-progression';
+import {npcRoleOptions,inferProgressionRole} from './npc-progression-builds';
+import {progressNamedTeam} from './npc-progression-team';
 
 export function encounterRandom(seed:Seed) {
   let state=seed.reduce((value,part)=>(Math.imul(value,31)+part)>>>0,2166136261);
@@ -66,6 +69,7 @@ export function encounterPool(floor:number,progression:TowerProgression='legacy'
   const difficulty=progression==='legacy'?null:towerDifficulty(floor);
   const ceiling=difficulty?.bstCeiling ?? Math.min(780,470+Math.max(0,floor-1)*15);
   return Object.keys(pokemonSets).filter(name=>data[name].bst<=ceiling
+    && (!isBuildProgression(progression)||!data[name].specialist||floor>=31)
     && (progression==='legacy' || allowedOpponentSpecies(name))
     && (!data[name].legendary || (difficulty?difficulty.legendary:floor>=20)) && (!data[name].mythical || (difficulty?difficulty.mythical:floor>=30))
     && (!data[name].specialist || floor>=(name==='Ditto' ? 4 : 8)));
@@ -79,7 +83,7 @@ export function selectTrainerSample(floor:number,seed:Seed,previous:{id:string;s
     if(!candidates.length)throw Error('No eligible common NPC sample');
     let ticket=random()*candidates.reduce((sum,s)=>sum+s.weight,0);
     const chosen=candidates.find(s=>(ticket-=s.weight)<0)??candidates.at(-1)!;
-    return npcTrainerSample(chosen,drawNpcRank(sampleRankWeights(chosen,floor),random));
+    return npcTrainerSample(chosen,drawNpcRank(sampleRankWeights(chosen,floor,'normal',progression),random));
   }
   const eligible=(sample:TrainerSample)=>sample.role!=='villain' && sample.minFloor<=floor && (!sample.specialty || pool.filter(name=>(progression==='legacy'||sample.kind==='elite'||normalOpponentSpecies(name)) && Showdown.Dex.species.get(name).types.includes(sample.specialty!)).length>=3);
   const elite=floor>=(progression==='legacy'?4:11) && random()<(progression==='legacy'?.25:eliteChance(floor)),mixed=random()<.2;
@@ -92,10 +96,10 @@ export function selectTrainerSample(floor:number,seed:Seed,previous:{id:string;s
   return candidates[Math.floor(random()*candidates.length)];
 }
 // Enumerate the small candidate pool, keeping the ace and favouring complementary partners.
-export function selectNamedEntries(entries:readonly string[],random:()=>number,ace?:string,carrier?:string,options:{accept?:(names:string[])=>boolean;quality?:'elite'|'master';tactic?:TrainerTactic}={}):string[] {
+export function selectNamedEntries(entries:readonly string[],random:()=>number,ace?:string,carrier?:string,options:{accept?:(names:string[])=>boolean;quality?:'elite'|'master';tactic?:TrainerTactic;buildFloor?:number;buildRoles?:(name:string)=>readonly string[]}={}):string[] {
   if(entries.length<3 || new Set(entries).size!==entries.length || entries.some(name=>!pokemonSets[name]))throw Error('Invalid named trainer entries');
   if(ace && !entries.includes(ace))throw Error('Trainer ace is missing from entries');
-  const combinations:{names:string[];weight:number;sharedWeaknesses:number}[]=[];
+  const combinations:{names:string[];weight:number;sharedWeaknesses:number;roleDiversity:number}[]=[];
   for(let a=0;a<entries.length-2;a++)for(let b=a+1;b<entries.length-1;b++)for(let c=b+1;c<entries.length;c++){
     const names=[entries[a],entries[b],entries[c]],species=names.map(name=>Showdown.Dex.species.get(name));
     if(ace && !names.includes(ace) || carrier && !names.includes(carrier))continue;
@@ -107,17 +111,25 @@ export function selectNamedEntries(entries:readonly string[],random:()=>number,a
     let weight=(1+coverage*.2)*(physical && special ? 1.5 : 1)*(speed && bulk ? 1.3 : 1)*Math.pow(.45,sharedWeaknesses);
     if(options.quality){
       const bst=species.reduce((sum,s)=>sum+statKeys.reduce((total,key)=>total+s.baseStats[key],0),0)/3;
-      weight*=Math.pow(bst/500,options.quality==='master'?8:4);
+      weight*=Math.pow(bst/500,options.buildFloor?(options.quality==='master'?3:1.5):options.quality==='master'?8:4);
       weight*=Math.pow(coverage/4,options.quality==='master'?4:2);
       const setup=names.some(name=>poolFor(name).subs.some(move=>['Dragon Dance','Swords Dance','Nasty Plot','Calm Mind','Quiver Dance','Bulk Up','Shell Smash'].includes(move)));
       if(options.tactic==='setup'&&setup)weight*=1.5;
       if(options.quality==='master')weight*=weight;
     }
-    combinations.push({names,weight,sharedWeaknesses});
+    let diversity=0;
+    if(options.buildFloor&&options.buildFloor>=31){
+      const roles=names.map(name=>options.buildRoles?.(name)??npcRoleOptions(name,options.buildFloor!));
+      diversity=Math.max(...roles[0].flatMap(a=>roles[1].flatMap(b=>roles[2].map(c=>new Set([a,b,c]).size))));
+      weight*=Math.pow(diversity,options.buildFloor>=71?3:1);
+      if(options.buildFloor>=81)weight*=Math.pow(.25,sharedWeaknesses)*(physical&&special?2:1);
+    }
+    combinations.push({names,weight,sharedWeaknesses,roleDiversity:diversity});
   }
   if(!combinations.length)throw Error('No team satisfies NPC composition constraints');
   const minimumWeakness=Math.min(...combinations.map(c=>c.sharedWeaknesses));
-  const eligible=options.quality==='master'?combinations.filter(c=>c.sharedWeaknesses===minimumWeakness):combinations;
+  let eligible=options.quality==='master'?combinations.filter(c=>c.sharedWeaknesses===minimumWeakness):combinations;
+  if(options.buildFloor&&options.buildFloor>=71){const maxRoles=Math.max(...eligible.map(c=>c.roleDiversity));eligible=eligible.filter(c=>c.roleDiversity===maxRoles);}
   let ticket=random()*eligible.reduce((sum,c)=>sum+c.weight,0);
   const selected=[...(eligible.find(c=>(ticket-=c.weight)<0) ?? eligible.at(-1)!).names];
   // The first entry should not always become the lead, either.
@@ -126,7 +138,7 @@ export function selectNamedEntries(entries:readonly string[],random:()=>number,a
 }
 export type OpponentEntry={name:string;moves:string[];item?:string;ability?:string;gigantamax?:boolean;special?:'hidden';profile?:TrainingProfile};
 function withNamedIVs(team:OpponentEntry[],floor:number,seed:Seed,progression:TowerProgression,named:boolean){
- if(!named||progression==='legacy')return team;
+ if(!named||progression==='legacy'||isBuildProgression(progression))return team;
  return team.map(entry=>{
   const profile=entry.profile??opponentProfile(entry.name,entry.moves,floor,{hp:0,atk:0,def:0,spa:0,spd:0,spe:0},progression);
   return {...entry,profile:{...profile,ivs:namedOpponentIVs(entry.name,entry.moves,floor,seed,profile)}};
@@ -154,13 +166,14 @@ export function generateOpponentTeam(floor:number,seed:Seed,previous:string[]=[]
   if(!Number.isSafeInteger(floor) || floor<1)throw Error('Invalid encounter floor');
   const random=encounterRandom(seed);
   if(options.templates!==false && progression!=='legacy' && (trainer || sample)){
-    const template=normalNpcTemplate(sample?.id ?? trainer!.boss.id,floor,sample?.role ?? trainer?.boss.role);
+    const template=normalNpcTemplate(sample?.id ?? trainer!.boss.id,floor,sample?.role ?? trainer?.boss.role,progression);
     if(template){
       const named=!!trainer||sample?.kind==='named';
-      const selected=template.select?selectNamedEntries(template.team.map(p=>p.species),random,template.ace||undefined,template.signature?.species,{accept:names=>(template.required??[]).every(name=>names.includes(name))&&satisfiesSelectionRules(names,template.selectionRules)}):template.team.map(p=>p.species);
+      const selected=template.select?selectNamedEntries(template.team.map(p=>p.species),random,template.ace||undefined,template.signature?.species,{accept:names=>(template.required??[]).every(name=>names.includes(name))&&satisfiesSelectionRules(names,template.selectionRules),...(isBuildProgression(progression)?{buildFloor:floor,...(floor>=41?{buildRoles:(name:string)=>[inferProgressionRole(name,template.team.find(p=>p.species===name)!.profile.moves)]}:{})}:{})}):template.team.map(p=>p.species);
       if(!satisfiesSelectionRules(selected,template.selectionRules))throw Error('NPC team does not satisfy selection rules');
-      const enabled=normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'));
-      let team=selected.map(name=>template.team.find(p=>p.species===name)!).map(p=>{const profile=templateProfile(p.profile,floor,template.gate50);return {name:p.species,moves:profile.moves,item:p.item,ability:profile.ability,gigantamax:p.gigantamax,...(p.special?{special:p.special}:{}),profile};});
+      const enabled=normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'),progression);
+      let team:OpponentEntry[]=selected.map(name=>template.team.find(p=>p.species===name)!).map(p=>{const profile=templateProfile(p.profile,floor,template.gate50,progression);return {name:p.species,moves:profile.moves,item:p.item,ability:profile.ability,gigantamax:p.gigantamax,...(p.special?{special:p.special}:{}),profile};});
+      team=progressNamedTeam(team,floor,seed,sample?.tactic??trainer!.tactic,progression);
       if((template.allFloors||template.gate50)&&enabled)team=equipNpcGimmick(team,template.signature) as typeof team;
       // Builds stay fixed; candidate membership and lead order use the saved seed.
       for(let i=team.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[team[i],team[j]]=[team[j],team[i]];}
@@ -186,8 +199,9 @@ export function generateOpponentTeam(floor:number,seed:Seed,previous:string[]=[]
     const team:OpponentEntry[]=selectNamedEntries(entries,random,ace,signature?.species).map(name=>({name,...(johtoOriginalBuild(sample?.id ?? trainer?.boss.id ?? '',name) ?? {moves:champion && championMoves[name] ? [...championMoves[name]] : opponentMoves(name,random,sample?.tactic ?? trainer?.tactic)})}));
     const equipped=named ? equipNamedTeam(equipBossGimmick(team,trainer?.boss.id ?? sample?.id ?? '',floor),ace,champion,!!team[0].ability) : team;
     const result=progression!=='legacy' && floor<=60?gentleMoves(equipped):equipped;
-    if(progression!=='legacy' && !normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named')))return stripNpcGimmicks(result);
-    return withNamedIVs(signature?equipNpcGimmick(result,signature):result,floor,seed,progression,named);
+    const adapted=progressNamedTeam(result,floor,seed,sample?.tactic??trainer!.tactic,progression);
+    if(progression!=='legacy' && !normalNpcGimmicksEnabled(floor,normalNpcCategory(sample?.role ?? trainer?.boss.role,sample?.id ?? trainer?.boss.id,sample?.kind ?? 'named'),progression))return stripNpcGimmicks(adapted);
+    return withNamedIVs(signature?equipNpcGimmick(adapted,signature):adapted,floor,seed,progression,named);
   }
   let pool=encounterPool(floor,progression);
   if(progression!=='legacy' && sample?.kind!=='elite')pool=pool.filter(normalOpponentSpecies);

@@ -12,7 +12,8 @@ import {towerThemes} from '../src/data/tower-themes';
 import {normalNpcTemplate,templateProfile} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
 import {snapshotTrainerEventBattle} from '../src/server/trainer-event-battle';
-import {CURRENT_PROGRESSION} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {npcAi} from '../src/data/npc-ai';
 import {packTeam,pokemonSets,starters} from '../src/data/teams';
 import {defaultProfile} from '../src/server/training';
@@ -47,7 +48,7 @@ test('Hau is one catalog identity beside Kukui; every floor/seed keeps all three
   assert.equal(row.allFloors,true);assert.equal(row.select,true);assert.deepEqual(row.required,['Noivern','Primarina','Raichu-Alola']);
   assert.deepEqual(row.selectionRules,{preferredLead:['Noivern'],preferredLast:['Raichu-Alola']});
   for(let n=1;n<=100;n++){
-   const team=generateOpponentTeam(floor,[n,floor,29,43],[],null,sample('named-hau'),CURRENT_PROGRESSION);
+   const team=generateOpponentTeam(floor,[n,floor,29,43],[],null,sample('named-hau'),REFERENCE_PROGRESSION);
    assert.deepEqual(team.map(p=>p.name),['Noivern','Primarina','Raichu-Alola']);
    assert.equal(team.find(p=>p.name==='Raichu-Alola')!.item??'',floor<50?'':'Aloraichium Z');
    assert.ok(team.filter(p=>p.name!=='Raichu-Alola').every(p=>p.item!=='Aloraichium Z'));
@@ -66,7 +67,7 @@ function physicalTeam(){const names=['Garchomp','Metagross','Gyarados'];return p
 for(const [id,floor,seed] of [['named-hau',50,1],['named-guzma',45,6]] as const)test(`${id}: actual signature sequence uses real v13 decisions and replays`,async()=>{
  // Pin the historical sequence to the configuration stored before advanced switching.
  const ai=npcAi(floor,sample(id));delete ai.advancedSwitch;
- const snapshot=snapshotTrainerEventBattle(`hau-guzma:physical:${seed}`,sample(id),floor,'basic',CURRENT_PROGRESSION),monitor=monitorEntryPolicy(createNpcPolicy(ai));
+ const snapshot=snapshotTrainerEventBattle(`hau-guzma:physical:${seed}`,sample(id),floor,'basic',REFERENCE_PROGRESSION),monitor=monitorEntryPolicy(createNpcPolicy(ai));
  if(id==='named-hau'){
   // Freeze the pre-feedback 50-floor build to retain the historical replay case.
   const source=normalNpcTemplate(id,49,'champion')!;
@@ -100,7 +101,7 @@ test('TowerService retains saved v12 records and restores the same public histor
 
 test('Guzma Mega is gated normally, all other candidates stay ordinary, and rendering identifies Bug/Steel Mega Golisopod',()=>{
  for(const floor of [5,45,49,50,54,55,95,100]){
-  const snapshot=snapshotTrainerEventBattle('mega-guzma-gate',sample('named-guzma'),floor,'basic',CURRENT_PROGRESSION),sets=Showdown.Teams.unpack(snapshot.opponentTeam)!;
+  const snapshot=snapshotTrainerEventBattle('mega-guzma-gate',sample('named-guzma'),floor,'basic',REFERENCE_PROGRESSION),sets=Showdown.Teams.unpack(snapshot.opponentTeam)!;
   assert.equal(sets.find(s=>s.species==='Golisopod')!.item,floor<50?'':'Golisopite');assert.equal(snapshot.trainer.gimmick?.rule,floor<50?undefined:'mega');
   assert.equal(sets.filter(s=>s.item==='Golisopite').length,floor<50?0:1);
  }
@@ -122,7 +123,7 @@ test('new format Mega really gains Tough Claws, boosts contact power and stops E
 test('actual late Guzma Mega battles keep First Impression legal and replay transformed ability/history',async()=>{
  let activations=0;
  for(let seed=1;seed<=6;seed++){
-  const snapshot=snapshotTrainerEventBattle(`hau-guzma:physical:${seed}`,sample('named-guzma'),95,'basic',CURRENT_PROGRESSION),monitor=monitorEntryPolicy(createNpcPolicy(npcAi(95,sample('named-guzma'))));
+  const snapshot=snapshotTrainerEventBattle(`hau-guzma:physical:${seed}`,sample('named-guzma'),95,'basic',REFERENCE_PROGRESSION),monitor=monitorEntryPolicy(createNpcPolicy(npcAi(95,sample('named-guzma'))));
   const log=await runBattle({teams:{p1:physicalTeam(),p2:snapshot.opponentTeam},rule:'basic',opponentRule:'mega',seed:snapshot.seed,player:new DamagePolicy(),opponent:monitor.policy}),t=monitor.finish(log);
   activations+=t.entry.golisopodMegaActivations;assert.equal(t.entry.firstImpressionInvalid,0);assert.equal(t.entry.firstImpressionFailed,0);assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
  }

@@ -30,6 +30,7 @@ export type BattleView = {
   teraTickets?:number;
 };
 export type RunView = {
+  gimmickUnlockFloor?:number;
   villainEncounter?:{stage:import('../data/villain-campaigns').RocketStage|import('../data/villain-tracks').VillainTrackStage;afterFloor:number}|null;
   raid?:boolean;
   bag?:import('../data/bag').BagView;

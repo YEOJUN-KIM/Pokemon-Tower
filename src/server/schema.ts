@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS run_themes (
 ) STRICT;
 CREATE TABLE IF NOT EXISTS run_progression (
   run_id TEXT PRIMARY KEY REFERENCES runs(id),
-  version TEXT NOT NULL CHECK(version IN ('hundred-floor-v1'))
+  version TEXT NOT NULL CHECK(version IN ('hundred-floor-v1','hundred-floor-v2'))
 ) STRICT;
 CREATE TABLE IF NOT EXISTS run_npc_rules(run_id TEXT PRIMARY KEY REFERENCES runs(id),version INTEGER NOT NULL CHECK(version=1)) STRICT;
 CREATE TABLE IF NOT EXISTS shop_rerolls(run_id TEXT NOT NULL REFERENCES runs(id),floor INTEGER NOT NULL,kind TEXT NOT NULL CHECK(kind IN ('items','machines')),count INTEGER NOT NULL CHECK(count>=0),PRIMARY KEY(run_id,floor,kind)) STRICT;
@@ -207,5 +207,5 @@ CREATE TABLE IF NOT EXISTS run_event_followups(run_id TEXT NOT NULL REFERENCES r
 CREATE TABLE IF NOT EXISTS tool_voucher_draws(voucher_id TEXT NOT NULL REFERENCES run_reward_inventory(id),draw_index INTEGER NOT NULL,candidates_json TEXT NOT NULL CHECK(json_valid(candidates_json)),selected_item TEXT,destination TEXT,target TEXT,PRIMARY KEY(voucher_id,draw_index)) STRICT;
 CREATE TABLE IF NOT EXISTS shop_choice_receipts(run_id TEXT NOT NULL REFERENCES runs(id),floor INTEGER NOT NULL,revision INTEGER NOT NULL,product TEXT NOT NULL,item TEXT NOT NULL,PRIMARY KEY(run_id,floor,revision,product)) STRICT;
 CREATE TABLE IF NOT EXISTS run_form_item_rules(run_id TEXT PRIMARY KEY REFERENCES runs(id),version INTEGER NOT NULL CHECK(version=1)) STRICT;
-  PRAGMA user_version = 47;
+  PRAGMA user_version = 48;
 `;

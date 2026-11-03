@@ -10,7 +10,8 @@ import {organizationGrunt,villainLeaders} from '../src/data/villain-organization
 import {normalNpcTemplate,templateProfile} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
 import {snapshotTrainerEventBattle} from '../src/server/trainer-event-battle';
-import {CURRENT_PROGRESSION} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {npcAi} from '../src/data/npc-ai';
 import {pokemonSets,packTeam,starters} from '../src/data/teams';
 import {FORMAT,runBattle,replayBattle,battleEvents} from '../src/battle/run';
@@ -47,9 +48,9 @@ for(const t of alolaTrainers)test(`${t.id}: legal role-oriented builds, determin
    assert.ok(Object.values(p.profile.evs).every(v=>v<=32));assert.equal(Object.values(p.profile.evs).reduce((a,b)=>a+b,0),t.points);
   }
   for(let seed=1;seed<=40;seed++){
-   const team=generateOpponentTeam(floor,[seed,floor,29,43],[],null,sample,CURRENT_PROGRESSION),names=team.map(p=>p.name);
+   const team=generateOpponentTeam(floor,[seed,floor,29,43],[],null,sample,REFERENCE_PROGRESSION),names=team.map(p=>p.name);
    assert.equal(new Set(names).size,3);assert.ok(names.every(n=>template.team.some(p=>p.species===n)));for(const n of template.required??[])assert.ok(names.includes(n));
-   assert.deepEqual(team,generateOpponentTeam(floor,[seed,floor,29,43],[],null,sample,CURRENT_PROGRESSION));
+   assert.deepEqual(team,generateOpponentTeam(floor,[seed,floor,29,43],[],null,sample,REFERENCE_PROGRESSION));
    if(t.category==='boss')assert.deepEqual(names,['Clefable','Lilligant','Necrozma']);
    if(t.category==='grunt'){assert.equal(npcAi(floor,sample).tier,'basic');for(const p of team){assert.ok(Object.values(p.profile!.ivs).every(v=>v<=12));assert.equal(p.item,'');}}
    if(['captain','kahuna','executive'].includes(t.category))assert.equal(npcAi(floor,sample).tier,t.aiCeiling);
@@ -57,8 +58,8 @@ for(const t of alolaTrainers)test(`${t.id}: legal role-oriented builds, determin
    lineups.add([...names].sort().join(','));
   }
   if(template.required?.length===3)assert.equal(lineups.size,1);else assert.ok(lineups.size>=3,t.id);
-  const snapshot=snapshotTrainerEventBattle(`alola:${t.id}`,sample,floor,'basic',CURRENT_PROGRESSION);
-  assert.deepEqual(snapshot,snapshotTrainerEventBattle(`alola:${t.id}`,sample,floor,'basic',CURRENT_PROGRESSION));
+  const snapshot=snapshotTrainerEventBattle(`alola:${t.id}`,sample,floor,'basic',REFERENCE_PROGRESSION);
+  assert.deepEqual(snapshot,snapshotTrainerEventBattle(`alola:${t.id}`,sample,floor,'basic',REFERENCE_PROGRESSION));
   const sets=Showdown.Teams.unpack(snapshot.opponentTeam)!;assert.equal(sets.length,3);
   if(t.category==='boss')assert.deepEqual(sets.map(s=>s.species),['Clefable','Lilligant','Necrozma-Dusk-Mane']);
   // Tower point budgets and role-budget IVs intentionally differ from cartridge
@@ -78,7 +79,7 @@ test('Lusamine has one source row, all three required, no early alternative, val
 });
 
 for(const t of alolaTrainers)test(`${t.id}: real battle completes and deterministic replay retains packed forms and Z items`,async()=>{
- const snapshot=snapshotTrainerEventBattle(`alola-battle:${t.id}`,alolaSample(t),95,'basic',CURRENT_PROGRESSION);
+ const snapshot=snapshotTrainerEventBattle(`alola-battle:${t.id}`,alolaSample(t),95,'basic',REFERENCE_PROGRESSION);
  const log=await runBattle({teams:{p1:packTeam(starters),p2:snapshot.opponentTeam},seed:snapshot.seed,rule:'basic',opponentRule:packedNpcRule(snapshot.team.map(p=>({item:p.item??''})),0),player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(95,alolaSample(t)))});
  assert.ok(log.winner);assert.deepEqual(battleEvents((await replayBattle(log)).publicProtocol),battleEvents(log.publicProtocol));
 });

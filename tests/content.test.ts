@@ -76,7 +76,7 @@ test('a saved ten-floor run completes real battles, replaces members, restores f
       let winning: {team: string[]; log: BattleLog} | undefined;
       // Offline integration search, not the in-game AI or a claim about human win rates.
       for (const team of index === 0 ? [starters] : orders(roster)) {
-        const log = await runBattle({trainerEquipment:store.trainerEquipment(runId),teams:{p1:packTeam(team,profiles),p2:packTeam([...floor.opponents])},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
+        const log = await runBattle({rule:store.battle(id).rule,trainerEquipment:store.trainerEquipment(runId),teams:{p1:packTeam(team,profiles),p2:packTeam([...floor.opponents])},seed:[1,2,3,4],player:new DamagePolicy(),opponent:new DamagePolicy()});
         if (log.winner === 'Player') {winning = {team,log}; break;}
       }
       assert.ok(winning,`No winning fixed-seed team on floor ${floor.number} with ${roster}`);

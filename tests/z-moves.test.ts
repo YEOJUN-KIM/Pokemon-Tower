@@ -79,10 +79,10 @@ test('crystal purchases/equipment persist; v26 rule migration preserves old save
     store.db.prepare("UPDATE runs SET floor=11,state='select' WHERE id=?").run(row.run_id);store.db.prepare("UPDATE players SET coins=4000 WHERE id='z'").run();store.db.prepare('INSERT INTO item_shops VALUES (?,?,?)').run(row.run_id,11,'["Firium Z"]');
     store.purchaseItem('z',row.run_id,11,'Firium Z','Charizard');assert.equal(store.view('z').coins,1750);
     store.close();store=new TowerStore(file);assert.equal(store.view('z').run?.heldItems?.Charizard,'Firium Z');
-    const packed=store.battle(store.enter('z',row.run_id,11,starters));assert.equal(packed.rule,'z');assert.equal(Showdown.Teams.unpack(packed.player_team)![0].item,'Firium Z');
+    const packed=store.battle(store.enter('z',row.run_id,11,starters));assert.equal(packed.rule,'basic');assert.equal(store.view('z').run!.rule,'z');assert.equal(Showdown.Teams.unpack(packed.player_team)![0].item,'Firium Z');
     store.db.prepare("UPDATE run_rules SET rule='basic'").run();store.close();
     const db=new DatabaseSync(file);db.exec("PRAGMA foreign_keys=OFF; CREATE TABLE old_rules(run_id TEXT PRIMARY KEY REFERENCES runs(id),rule TEXT NOT NULL CHECK(rule IN ('basic','mega','dynamax','tera','chaos'))) STRICT; INSERT INTO old_rules SELECT * FROM run_rules; DROP TABLE run_rules; ALTER TABLE old_rules RENAME TO run_rules; PRAGMA user_version=26;");db.close();
-    store=new TowerStore(file);assert.equal(store.view('z').run?.rule,'basic');assert.equal(store.db.prepare('PRAGMA integrity_check').get()!.integrity_check,'ok');assert.equal(store.db.prepare('PRAGMA foreign_key_check').all().length,0);store.ensurePlayer('new-z');assert.equal(store.battle(store.start('new-z',starters,'z')).rule,'z');
+    store=new TowerStore(file);assert.equal(store.view('z').run?.rule,'basic');assert.equal(store.db.prepare('PRAGMA integrity_check').get()!.integrity_check,'ok');assert.equal(store.db.prepare('PRAGMA foreign_key_check').all().length,0);store.ensurePlayer('new-z');const fresh=store.battle(store.start('new-z',starters,'z'));assert.equal(fresh.rule,'basic');assert.equal(store.view('new-z').run!.rule,'z');
   }finally{store.close();}
 });
 

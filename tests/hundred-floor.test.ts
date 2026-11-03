@@ -20,7 +20,7 @@ test('second climb opens below the fiftieth floor, surpasses it at one hundred a
  for(const key of ['bstCeiling','ivCap','points'] as const){assert.ok(rest[key]<first[key]);assert.ok(towerDifficulty(60)[key]<first[key]);assert.ok(end[key]>first[key]);}
  const ivs=Object.fromEntries(statKeys.map(k=>[k,31])) as StatBlock;
  for(let floor=1;floor<=100;floor++){
-  const profile=opponentProfile('Charizard',['Flamethrower','Air Slash','Dragon Pulse','Roost'],floor,ivs,CURRENT_PROGRESSION);
+  const profile=opponentProfile('Charizard',['Flamethrower','Air Slash','Dragon Pulse','Roost'],floor,ivs,'hundred-floor-v1');
   assert.equal(Object.values(profile.evs).reduce((s,n)=>s+n,0),towerDifficulty(floor).points);
   assert.ok(Object.values(profile.evs).every(n=>n>=0&&n<=32));
   assert.ok(Object.values(profile.ivs).every(n=>n<=towerDifficulty(floor).ivCap));
@@ -66,6 +66,7 @@ test('real v20 migration preserves fifty-floor saves and future old difficulty, 
  const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);
  try{
   store.ensurePlayer('old');const battle=store.battle(store.start('old',starters)),run=battle.run_id;
+  store.db.prepare("UPDATE run_progression SET version='hundred-floor-v1' WHERE run_id=?").run(run);
   store.db.prepare('UPDATE runs SET total_floors=50 WHERE id=?').run(run);
   const before=store.view('old');store.close();
   const legacy=new DatabaseSync(path);legacy.exec('PRAGMA foreign_keys=OFF; BEGIN; DROP TABLE run_progression; DROP TABLE run_npc_rules;');
@@ -81,7 +82,7 @@ test('real v20 migration preserves fifty-floor saves and future old difficulty, 
   assert.equal(store.view('new').run!.totalFloors,100);
   assert.equal(store.db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(fresh.run_id)!.version,CURRENT_PROGRESSION);
   assert.deepEqual(store.db.prepare('PRAGMA foreign_key_check').all(),[]);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,47);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,48);
  }finally{store.close();}
 });
 

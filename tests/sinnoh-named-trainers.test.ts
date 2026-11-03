@@ -14,7 +14,9 @@ import {organizationGrunt,villainLeaders,villainEncounter} from '../src/data/vil
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
 import {satisfiesSelectionRules} from '../src/data/npc-selection-rules';
-import {CURRENT_PROGRESSION,towerDifficulty} from '../src/data/tower-progression';
+import {towerDifficulty} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {npcAi} from '../src/data/npc-ai';
 import {FORMAT,runBattle,replayBattle,battleEvents} from '../src/battle/run';
 import {pokemonSets,packTeam,starters} from '../src/data/teams';
@@ -41,12 +43,12 @@ for(const t of sinnohTrainers)test(`${t.id}: legal sets, no Trick Room, floor cu
   for(const p of template.team){assert.ok(!p.profile.moves.includes('Trick Room'));assert.equal(validator.validateSet({...structuredClone(pokemonSets[p.species]),ability:p.profile.ability,item:p.item,moves:p.profile.moves},{}),null);}
   const combinations=new Set();
   for(let n=1;n<=100;n++){
-   const seed:[number,number,number,number]=[n,floor,29,43],team=generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION),names=team.map(p=>p.name);
+   const seed:[number,number,number,number]=[n,floor,29,43],team=generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION),names=team.map(p=>p.name);
    assert.equal(names.length,3);assert.equal(new Set(names).size,3);assert.ok(satisfiesSelectionRules(names,template.selectionRules));
    if(template.ace)assert.ok(names.includes(template.ace));
    if(t.id==='named-roark')assert.equal(names[0],'Rampardos');
    if(t.category==='boss')assert.equal(names.includes('Dialga'),floor>=75);
-   assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION));
+   assert.deepEqual(team,generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION));
    for(const p of team)assert.equal(Object.values(p.profile!.evs).reduce((a,b)=>a+b,0),Math.min(66,towerDifficulty(floor).points));
    combinations.add([...names].sort().join(','));
   }
@@ -65,8 +67,8 @@ test('all three Galactic commanders are reachable, eligible and have distinct re
 test('Snow Warning activates real snow and Sinnoh battles replay deterministically',async()=>{
  for(const id of ['named-candice','named-byron','named-lucian','named-cynthia','galactic-boss-cyrus']){
   const sample=sampleFor(id);let seed:[number,number,number,number]=[1,95,29,43];
-  let team=generateOpponentTeam(95,seed,[],null,sample,CURRENT_PROGRESSION);
-  if(id==='named-candice')for(let n=1;!team.some(p=>p.name==='Abomasnow')&&n<100;n++){seed=[n,95,29,43];team=generateOpponentTeam(95,seed,[],null,sample,CURRENT_PROGRESSION);}
+  let team=generateOpponentTeam(95,seed,[],null,sample,REFERENCE_PROGRESSION);
+  if(id==='named-candice')for(let n=1;!team.some(p=>p.name==='Abomasnow')&&n<100;n++){seed=[n,95,29,43];team=generateOpponentTeam(95,seed,[],null,sample,REFERENCE_PROGRESSION);}
   if(id==='named-candice')team.sort((a,b)=>Number(b.name==='Abomasnow')-Number(a.name==='Abomasnow'));
   const log=await runBattle({teams:{p1:packTeam(starters),p2:packTeam(team.map(p=>p.name),Object.fromEntries(team.map(p=>[p.name,p.profile!])),Object.fromEntries(team.map(p=>[p.name,p.item??''])))},seed,rule:'basic',player:new DamagePolicy(),opponent:createNpcPolicy(npcAi(95,sample))});
   assert.ok(log.winner);for(const d of log.decisions)assert.ok(d.observation.legalActions.some(a=>a.command===d.action));

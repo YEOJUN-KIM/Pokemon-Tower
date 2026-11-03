@@ -6,24 +6,25 @@ import {npcRankNames,sampleRankWeights,drawNpcRank,npcRankTraining,type NpcRank,
 import type {NpcEncounterSnapshot} from '../server/npc-encounters';
 import type {RewardOption,RewardSelectionDefinition} from './rewards';
 import type {MirrorTeamSnapshot} from './mirror-challenger';
+import type {TowerProgression} from './tower-progression';
 
 export type ChallengerDefinition=Omit<ChallengerCandidate,'mirror'>&{aiVersion?:string;npcAi?:NpcAi;mirror?:MirrorTeamSnapshot;rank:NpcRank;sample:NpcSample;training:NpcRankTraining;tactic:NpcSample['tactic'];specialty:string|null;kind:'normal';minFloor:number;weight:number;rewardProfile:NpcRank;rewardDefinition:RewardOption;selections?:readonly RewardSelectionDefinition[];rewardSnapshotVersion?:2;encounter?:NpcEncounterSnapshot};
 export type SavedRankedChallengerDefinition=Omit<ChallengerDefinition,'sample'|'training'|'rewardProfile'>&{rewardProfile:NpcRank|'low'|'medium'|'high';sample:NpcSample|LegacyNpcSample;training:NpcRankTraining|Omit<NpcRankTraining,'itemSlots'>};
 export type SavedChallengerDefinition=SavedRankedChallengerDefinition|LegacySavedChallenger;
 export type {ChallengerCandidate};
 export const challengerSettings={weight:20,minFloor:1} as const;
-export function challengerDefinition(sample:NpcSample,rank:NpcRank,floor:number):ChallengerDefinition{
+export function challengerDefinition(sample:NpcSample,rank:NpcRank,floor:number,progression:TowerProgression='hundred-floor-v1'):ChallengerDefinition{
  const rewardProfile=rank;
- return {aiVersion:'tower-policy-v13',npcAi:npcAi(floor,{...sample,kind:rank==='normal'?'normal':'elite',npcRank:rank},{challenger:true}),id:sample.id,trainerId:sample.id,title:sample.displayName,portrait:sample.portrait,difficulty:npcRankNames[rank],danger:rank==='normal'?1:rank==='elite'?2:3,battleStyle:npcTacticHints[sample.tactic],rewardPreview:rankRewardProfiles[rank].preview,rank,sample:structuredClone(sample),training:npcRankTraining(floor,rank),tactic:sample.tactic,specialty:sample.specialty,kind:'normal',minFloor:sample.minFloor,weight:sample.weight,rewardProfile,rewardDefinition:{id:'snapshot-pending',title:rankRewardProfiles[rank].preview,tone:rank==='master'?'great':'good',entries:[]}};
+ return {aiVersion:'tower-policy-v13',npcAi:npcAi(floor,{...sample,kind:rank==='normal'?'normal':'elite',npcRank:rank},{challenger:true,progression}),id:sample.id,trainerId:sample.id,title:sample.displayName,portrait:sample.portrait,difficulty:npcRankNames[rank],danger:rank==='normal'?1:rank==='elite'?2:3,battleStyle:npcTacticHints[sample.tactic],rewardPreview:rankRewardProfiles[rank].preview,rank,sample:structuredClone(sample),training:npcRankTraining(floor,rank,progression),tactic:sample.tactic,specialty:sample.specialty,kind:'normal',minFloor:sample.minFloor,weight:sample.weight,rewardProfile,rewardDefinition:{id:'snapshot-pending',title:rankRewardProfiles[rank].preview,tone:rank==='master'?'great':'good',entries:[]}};
 }
-export function drawChallengers(floor:number,random:()=>number,pool:readonly NpcSample[]=npcSamples):ChallengerDefinition[]{
+export function drawChallengers(floor:number,random:()=>number,pool:readonly NpcSample[]=npcSamples,progression:TowerProgression='hundred-floor-v1'):ChallengerDefinition[]{
  let eligible=pool.filter(s=>s.pools.includes('challenger')&&s.minFloor<=floor&&s.weight>0);
  const result:ChallengerDefinition[]=[];
  while(result.length<3){
   if(!eligible.length)throw Error('At least three distinct eligible challenger classes are required');
   let ticket=random()*eligible.reduce((sum,s)=>sum+s.weight,0);
   const sample=eligible.find(s=>(ticket-=s.weight)<0)??eligible.at(-1)!;
-  result.push(challengerDefinition(sample,drawNpcRank(sampleRankWeights(sample,floor,'challenger'),random),floor));
+  result.push(challengerDefinition(sample,drawNpcRank(sampleRankWeights(sample,floor,'challenger',progression),random),floor,progression));
   eligible=eligible.filter(s=>s.id!==sample.id&&s.displayName!==sample.displayName);
  }
  return result;

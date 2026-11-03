@@ -107,11 +107,11 @@ test('production snapshots every rank reward without changing the original sampl
  const f=challengerFixture(':memory:','owner',20,'random');try{
   const saved=JSON.parse(String(f.store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(f.event.id)!.candidates_json));
   const digest=createHash('sha256').update(f.event.id).digest(),random=encounterRandom([0,4,8,12].map(i=>digest.readUInt32LE(i)) as Seed);
-  const before=drawChallengers(20,random);
+  const before=drawChallengers(20,random,undefined,'hundred-floor-v2');
   for(let i=0;i<3;i++){
    assert.equal(saved[i].id,before[i].id);assert.equal(saved[i].rank,before[i].rank);assert.equal(saved[i].rewardSnapshotVersion,2);
    const seed=[0,1,2,3].map(()=>Math.floor(random()*65536)) as Seed;
-   assert.deepEqual(saved[i].encounter,JSON.parse(JSON.stringify(generateNpcEncounter(20,seed,before[i].sample,before[i].rank,'basic'))));
+   assert.deepEqual(saved[i].encounter,JSON.parse(JSON.stringify(generateNpcEncounter(20,seed,before[i].sample,before[i].rank,'basic','hundred-floor-v2'))));
    if(saved[i].rank==='master')assert.equal(saved[i].selections[0].candidates.length,3);else assert.equal(saved[i].selections,undefined);
   }
  }finally{f.store.close();}
@@ -126,7 +126,7 @@ test('v38 old challenger reward JSON remains byte-for-byte intact and pays its o
  try{
   const original=store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(f.event.id)!.candidates_json;
   store.db.exec('PRAGMA user_version=38');store.close();store=new TowerStore(path);
-  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,47);assert.equal(store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(f.event.id)!.candidates_json,original);
+  assert.equal(store.db.prepare('PRAGMA user_version').get()!.user_version,48);assert.equal(store.db.prepare('SELECT candidates_json FROM challenger_encounters WHERE event_id=?').get(f.event.id)!.candidates_json,original);
   const before=store.view(f.owner).coins;store.chooseEvent(f.owner,f.run,f.event.id,'medium');finishChallengerBattle(store,store.currentBattle(f.owner)!.id);assert.equal(store.view(f.owner).coins,before+700);assert.equal(store.permanentView(f.owner).eggTickets,1);
  }finally{store.close();}
 });

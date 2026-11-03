@@ -22,6 +22,8 @@ import {collectionSpecies} from '../data/selectable-forms';
 import {POINT_TEAM_MARKER} from '../data/teams';
 import type {Seed} from '../battle/run';
 import {FORMAT} from '../battle/run';
+import {isBuildProgression} from '../data/opponent-progression';
+import type {TowerProgression} from '../data/tower-progression';
 
 export function snapshotMirrorReward(db:DatabaseSync,runId:string,random:()=>number){
  const owner=(db.prepare('SELECT player_id FROM runs WHERE id=?').get(runId) as {player_id:string}).player_id;
@@ -46,6 +48,8 @@ export function snapshotMirrorReward(db:DatabaseSync,runId:string,random:()=>num
 // Existing candidates are generated first. This isolated pass replaces at most
 // one slot and never consumes the existing NPC/rank/reward random stream.
 export function addMirrorCandidate(db:DatabaseSync,eventId:string,runId:string,floor:number,rule:BattleRule,candidates:ChallengerDefinition[],random?:()=>number){
+ const progression=(db.prepare('SELECT version FROM run_progression WHERE run_id=?').get(runId) as {version:TowerProgression}|undefined)?.version??'legacy';
+ if(isBuildProgression(progression)&&floor<=50)return candidates;
  const digest=createHash('sha256').update(`${eventId}:mirror`).digest(),seed=[0,2,4,6].map(i=>digest.readUInt16LE(i)) as Seed;
  const roll=random??encounterRandom(seed);
  if(roll()>=settings.mirrorCandidateChance)return candidates;
@@ -57,7 +61,7 @@ export function addMirrorCandidate(db:DatabaseSync,eventId:string,runId:string,f
  const slot=Math.floor(roll()*candidates.length),others=candidates.filter((_,i)=>i!==slot);
  const eligible=npcSamples.filter(s=>(settings.sampleIds as readonly string[]).includes(s.id)&&s.minFloor<=floor&&s.pools.includes('challenger')&&!others.some(c=>c.title===s.displayName||c.id===s.id));
  if(!eligible.length)return candidates;
- const sample=eligible[Math.floor(roll()*eligible.length)],training=npcRankTraining(floor,'elite');
+ const sample=eligible[Math.floor(roll()*eligible.length)],training=npcRankTraining(floor,'elite',progression);
  const packed=structuredClone(original),team=[];
  for(const set of packed){
   const species=collectionSpecies(set.species);
@@ -80,6 +84,6 @@ export function addMirrorCandidate(db:DatabaseSync,eventId:string,runId:string,f
  if(!gimmick&&equipment.includes('Dynamax Band')&&allowsGimmick(rule,'dynamax'))gimmick={rule:'dynamax',species:packed[0].species};
  const reward=snapshotMirrorReward(db,runId,roll),opponentRule=gimmick?.rule==='primal'?'mega':gimmick?.rule??'basic';
  const mirror:MirrorTeamSnapshot={version:1,baseSampleId:sample.id,sourceBattleId:source.id,sourcePlayerTeam:source.player_team,opponentTeam:Showdown.Teams.pack(packed),opponentRule,gimmick,rewardKind:reward.rewardKind};
- const definition:ChallengerDefinition={...challengerDefinition(sample,'elite',floor),...reward,title:'???',danger:3,battleStyle:'어딘가 익숙한 기분이 든다.',rewardPreview:'특별한 보상',mirror,encounter:{version:2,rank:'elite',floor,seed,sample:structuredClone(sample),training,team,gimmick,composition:{themeAvailable:0,themeRequired:0,themeUsed:0,fallback:false,candidateCount:1,itemSlots:3}}};
+ const definition:ChallengerDefinition={...challengerDefinition(sample,'elite',floor,progression),...reward,title:'???',danger:3,battleStyle:'어딘가 익숙한 기분이 든다.',rewardPreview:'특별한 보상',mirror,encounter:{version:2,rank:'elite',floor,seed,sample:structuredClone(sample),training,team,gimmick,composition:{themeAvailable:0,themeRequired:0,themeUsed:0,fallback:false,candidateCount:1,itemSlots:3}}};
  return candidates.map((candidate,i)=>i===slot?definition:candidate);
 }

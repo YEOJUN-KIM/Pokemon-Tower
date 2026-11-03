@@ -22,6 +22,7 @@ export function TowerShop({run,coins,busy,submit,error,onContinue}:{run:RunView;
   if(run.state!=='select' || !isShopFloor(run.floor,run.totalFloors)) return null;
   return <section className="tower-shop" data-tab-scope data-keyboard-tab-scope aria-labelledby="shop-title" data-testid="tower-shop">
     <div className={`shop-heading ${headingStyles.heading}`}><div><h2 id="shop-title" className="sr-only">정비 상점</h2></div><div className={`shop-heading-actions ${headingStyles.actions}`}><div className="shop-wallet" role="status" aria-label="상점 보유 코인"><span>보유 코인</span><strong data-testid="shop-wallet">{coins.toLocaleString()}코인</strong></div></div></div>
+    {run.gimmickUnlockFloor&&run.floor<run.gimmickUnlockFloor&&<p role="note">특수기믹은 {run.gimmickUnlockFloor}층 전투부터 사용할 수 있습니다. 장비를 미리 구매해도 해금 전에는 발동하지 않습니다.</p>}
     <div className="shop-categories" data-game-tabs role="group" aria-label="상점 상품 종류">{([['items','지닌 도구'],['battle','배틀 아이템'],['machines','기술머신']] as const).map(([id,label])=><button key={id} data-keyboard-tab data-initial-focus={category===id || undefined} className="secondary-button" aria-pressed={category===id} onClick={()=>setCategory(id)}>{label}</button>)}</div>
     <div data-keyboard-tab-panel key={category}>
     {category==='items' && <HeldItemShop run={run} coins={coins} busy={busy} submit={submit} error={error}/>}

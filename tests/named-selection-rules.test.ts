@@ -7,7 +7,8 @@ import {validateSelectionRules,satisfiesSelectionRules,orderSelectedTeam,type Se
 import {normalNpcTemplate} from '../src/server/npc-templates';
 import {generateOpponentTeam} from '../src/server/opponent-team';
 import {namedTrainerSamples,trainerView} from '../src/data/trainer-catalog';
-import {CURRENT_PROGRESSION} from '../src/data/tower-progression';
+// Curated v1 reference builds stay frozen; v2 runtime is covered in build-progression.test.ts.
+const REFERENCE_PROGRESSION='hundred-floor-v1' as const;
 import {TowerStore} from '../src/server/tower-store';
 import {packTeam,starters} from '../src/data/teams';
 import type {BattleLog} from '../src/battle/run';
@@ -33,9 +34,9 @@ test('ordering only moves selected preferences, preserves random middle and reso
 test('Jasmine rules eliminate the passive trio while retaining seeded selection and order variation',()=>{
  const sample=namedTrainerSamples.find(s=>s.id==='named-jasmine')!,combinations=new Set<string>(),orders=new Set<string>();
  for(const floor of [5,45,55,95])for(let n=0;n<64;n++){
-  const seed:[number,number,number,number]=[n,2,3,4],team=generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION),names=team.map(p=>p.name);
+  const seed:[number,number,number,number]=[n,2,3,4],team=generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION),names=team.map(p=>p.name);
   assert.ok(names.includes('Steelix'));assert.ok(['Metagross','Empoleon','Magnezone'].some(name=>names.includes(name)));
-  assert.deepEqual(generateOpponentTeam(floor,seed,[],null,sample,CURRENT_PROGRESSION),team);
+  assert.deepEqual(generateOpponentTeam(floor,seed,[],null,sample,REFERENCE_PROGRESSION),team);
   combinations.add([...names].sort().join(','));orders.add(names.join(','));
  }
  assert.ok(combinations.size>3);assert.ok(orders.size>combinations.size);
@@ -46,7 +47,7 @@ test('every applied runtime rule holds after final shuffle, with ace/carrier and
   const template=normalNpcTemplate(sample.id,floor,sample.role);if(!template?.selectionRules)continue;
   validateSelectionRules(template.team.map(p=>p.species),template.selectionRules,[...template.required??[],template.ace,...template.signature?[template.signature.species]:[]]);
   for(let n=0;n<16;n++){
-   const team=generateOpponentTeam(floor,[n,2,3,4],[],null,sample,CURRENT_PROGRESSION),names=team.map(p=>p.name);
+   const team=generateOpponentTeam(floor,[n,2,3,4],[],null,sample,REFERENCE_PROGRESSION),names=team.map(p=>p.name);
    const rules:SelectionRules=template.selectionRules;
    assert.equal(names.length,3);assert.equal(new Set(names).size,3);assert.ok(names.includes(template.ace));assert.ok(satisfiesSelectionRules(names,rules));
    const lead=rules.preferredLead?.find(name=>names.includes(name)),last=rules.preferredLast?.find(name=>names.includes(name));

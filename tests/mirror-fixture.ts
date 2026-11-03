@@ -4,6 +4,8 @@ import {drawChallengers,type ChallengerDefinition} from '../src/data/challengers
 import type {BattleRule} from '../src/data/run-rules';
 export function mirrorFixture(path=':memory:',owner='owner',floor=20,rule:BattleRule='basic'){
  const f=challengerFixture(path,owner,floor,'random');
+ // Exercise archived mirror offers at their original early floors.
+ f.store.db.prepare("UPDATE run_progression SET version='hundred-floor-v1' WHERE run_id=?").run(f.run);
  f.store.db.prepare('UPDATE run_rules SET rule=? WHERE run_id=?').run(rule,f.run);
  f.store.db.prepare('UPDATE battles SET rule=? WHERE run_id=?').run(rule,f.run);
  const normal=drawChallengers(floor,()=>0),candidates=addMirrorCandidate(f.store.db,f.event.id,f.run,floor,rule,normal,()=>0);

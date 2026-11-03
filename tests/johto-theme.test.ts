@@ -26,6 +26,7 @@ test('new Johto preview and fixed template persist, while a v15 legacy run remai
   const path=`.data/tests/${randomUUID()}.sqlite`;let store=new TowerStore(path);
   try{
     store.ensurePlayer('johto');const run=store.battle(store.start('johto',starters)).run_id;
+    store.db.prepare("UPDATE run_progression SET version='hundred-floor-v1' WHERE run_id=?").run(run);
     store.db.prepare('UPDATE run_themes SET theme=? WHERE run_id=?').run('johto',run);
     for(const floor of [5,10,40,50]){
       store.db.prepare("UPDATE runs SET floor=?,state='select' WHERE id=?").run(floor,run);

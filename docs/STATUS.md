@@ -3,9 +3,9 @@
 - Status: Active
 - Updated: 2026-11-03
 - Baseline Commit: `1c05b6f5079143ba4be7df3f3745155aee483ce7` (`main`)
-- Applies To: beta.6 개발 상태; package/Windows launcher 버전 표기는 아직 `1.0.0-beta.5`
+- Applies To: beta.6 release candidate; package/Windows launcher 버전 표기 `1.0.0-beta.6` (GitHub Release 공개 전)
 
-위 HEAD의 구현 상태이며 beta.6 패키징·공개 완료를 뜻하지 않는다. beta.5 공개본의 파일·해시·당시 검증은 [릴리스 기록](releases/WINDOWS_BETA_5.md)에 보존한다.
+위 HEAD의 구현 상태이며 beta.6 공개 완료를 뜻하지 않는다. 배포 상태는 [beta.6 릴리즈 노트](releases/WINDOWS_BETA_6.md)를 따른다. beta.5 공개본의 파일·해시·당시 검증은 [릴리스 기록](releases/WINDOWS_BETA_5.md)에 보존한다.
 
 ## 구현 완료
 

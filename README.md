@@ -1,4 +1,4 @@
-<!-- Documentation baseline: main 1c05b6f5079143ba4be7df3f3745155aee483ce7; updated 2026-11-03; beta.6 development, package beta.5. -->
+<!-- Documentation baseline: main 1c05b6f5079143ba4be7df3f3745155aee483ce7; updated 2026-11-03; beta.6 release candidate. -->
 
 <div align="center">
 
@@ -18,7 +18,7 @@
 
 ![Pokémon Tower 타이틀 화면](docs/images/overview-title.png)
 
-**현재 소스는 beta.6 개발 단계입니다.** package/Windows launcher 버전 표기는 아직 `1.0.0-beta.5`이며, 기존 [beta.5 배포 기록](docs/releases/WINDOWS_BETA_5.md)과 개발 완료 상태를 구분합니다. 신규 Run의 100층 상대 빌드 진행, 영구 성장 capacity·기술/숨특 해금, 계정 공통 빛나는 부적이 구현됐습니다. 등반 코인·Support/Scout 상점·50층 클리어 첫 기믹 무료 선택은 [후속 계획](docs/current/ROADMAP.md)입니다. [현재 상태와 검증 범위](docs/STATUS.md).
+**현재 소스는 beta.6 release candidate입니다.** package/Windows launcher 버전 표기는 `1.0.0-beta.6`이며 GitHub Release 공개 전까지는 공개 완료로 보지 않습니다. 이전 [beta.5 배포 기록](docs/releases/WINDOWS_BETA_5.md)과 [beta.6 릴리즈 노트](docs/releases/WINDOWS_BETA_6.md)를 구분합니다. 신규 Run의 100층 상대 빌드 진행, 영구 성장 capacity·기술/숨특 해금, 빛나는 부적, 등반 코인 상점(Held Items / Support / Pokémon Scout), 50층 클리어 첫 기믹 무료 선택이 구현됐습니다. 가격·확률은 사람의 플레이 테스트 전 provisional입니다.
 
 ## 100층을 향한 도전
 

@@ -21,7 +21,7 @@ Python은 PokéRogue 변환이 필요할 때만 3.10+/Pillow 12.3.0을 검사하
 
 ## 트레이와 한국어 출력
 
-현재 beta.5 배포 빌드는 launcherVersion `1.0.2`, appVersion `1.0.0-beta.5`, buildVersion `1.0.0-beta.5-player.1`이다. 이전 설치 marker와 다르면 최초 한 번 새 standalone 묶음을 준비하므로, 소스 옆 EXE를 실행해도 이전 게임 UI를 계속 사용하는 일이 없도록 한다. 저장 DB는 그대로 보존하며 다음 실행부터 빠른 경로를 사용한다.
+현재 beta.6 배포 빌드는 launcherVersion `1.0.2`, appVersion `1.0.0-beta.6`, buildVersion `1.0.0-beta.6-player.1`이다(이전 공개본은 beta.5의 `1.0.0-beta.5-player.1`). 이전 설치 marker와 다르면 최초 한 번 새 standalone 묶음을 준비하므로, 소스 옆 EXE를 실행해도 이전 게임 UI를 계속 사용하는 일이 없도록 한다. 저장 DB는 그대로 보존하며 다음 실행부터 빠른 경로를 사용한다.
 
 ## 프로세스 소유와 종료
 

@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import {useEffect,useRef,useState} from 'react';
-import {permanentPrices,permanentResearch,type PermanentResult,type PermanentProduct} from '../data/permanent-upgrades';
+import {permanentPrices,permanentResearch,shinyCharm,SHINY_CHARM_MAX,type PermanentResult,type PermanentProduct} from '../data/permanent-upgrades';
 import {eggKinds,eggKindInfo,machinePokemonWeights,MACHINE_SHINY_WEIGHT,highestEggKind,type EggKind} from '../data/egg-kinds';
 import {EggVisual} from './egg-visual';
 import {EggHatchDialog} from './egg-hatch-dialog';
@@ -48,6 +48,7 @@ function PermanentShopContent({entries=[],page}:Props){
  const hatchLabel=(count:number)=>{const tickets=Math.min(count,permanent.eggTickets),cost=hatchCost(count);return `${count}회 뽑기 · ${[tickets?`${tickets}장`:null,cost?`${cost.toLocaleString()}P`:null].filter(Boolean).join(' + ')}`;};
  const rerollPrice=permanentPrices.reroll[permanent.rerollLevel];
  const retryPrice=permanentPrices.retry[permanent.retryLimit];
+ const charmLevel=permanent.shinyCharmLevel??0,charmPrice=shinyCharm.prices[charmLevel];
  const allowanceLevel=permanent.allowanceLevel??0,allowancePrice=permanentResearch.allowance.prices[allowanceLevel];
  return <main className={`permanent-shop ${page==='eggs'?`egg-game-screen ${eggStyles.scope} ${eggStyles.screen}`:''}`}><header className="permanent-page-header"><h1>{page==='eggs'?'알뽑기':'영구 업그레이드'}</h1></header><div className="permanent-wallet"><span>성장 포인트</span><strong data-testid="permanent-wallet">{points.toLocaleString()}P</strong></div>
  {error&&<div role="alert" className="permanent-error">{error}{pending.current?<button disabled={busy} onClick={()=>void send('buy','egg',1,undefined,true)}>같은 요청 다시 확인</button>:!tower?<button onClick={()=>window.location.reload()}>다시 불러오기</button>:null}</div>}
@@ -56,14 +57,14 @@ function PermanentShopContent({entries=[],page}:Props){
  <section><span className="permanent-ticket" aria-hidden="true">₽</span><h2>출발 지원금</h2><p>새 도전의 첫 구매를 위한 시작 자금</p><strong>시작 자금 {permanent.startingCoins??0}코인</strong><small>{allowanceLevel} / 3단계 · 다음 도전부터 적용 · 최대 450코인</small><button data-permanent-product="allowance" disabled={blocked||allowanceLevel>=3||points<(allowancePrice??Infinity)} onClick={()=>void send('buy','allowance')}>{allowanceLevel>=3?'최대 연구 완료':`${allowanceLevel+1}단계 연구 · ${allowancePrice.toLocaleString()}P`}</button></section>
  <section><span className="permanent-ticket reroll-ticket" aria-hidden="true">↶</span><h2>다시하기 확장</h2><p>패배한 상대에 맞춰 출전 팀과 기술을 다시 준비</p><strong>도전당 {permanent.retryLimit}회 / 최대 3회</strong><small>기본 0회 · 다음 도전부터 적용</small><button data-permanent-product="retry" disabled={blocked||permanent.retryLimit>=3||points<(retryPrice??Infinity)} onClick={()=>void send('buy','retry')}>{permanent.retryLimit>=3?'최대 확장 완료':`${permanent.retryLimit+1}회로 확장 · ${retryPrice.toLocaleString()}P`}</button></section>
  <section><span className="permanent-ticket reroll-ticket" aria-hidden="true">↻</span><h2>리롤 확장권</h2><p>일반 상점과 기술머신의 무료 리롤 횟수 증가</p><strong>현재 {permanent.rerollLimit}회 / 최대 3회</strong><small>구매 즉시 진행 중인 도전에도 적용</small><button data-permanent-product="reroll" disabled={blocked||permanent.rerollLevel>=2||points<(rerollPrice??Infinity)} onClick={()=>void send('buy','reroll')}>{permanent.rerollLevel>=2?'최대 확장 완료':`${permanent.rerollLimit+1}회로 확장 · ${rerollPrice.toLocaleString()}P`}</button></section>
-
+ <section data-shiny-charm>{shinyCharm.icon?<img className="permanent-ticket" src={shinyCharm.icon} alt="" aria-hidden="true"/>:<span className="permanent-ticket" aria-hidden="true">✦</span>}<h2>{shinyCharm.name}</h2><p>알 뽑기에서 이로치가 나올 확률 증가</p><strong>이로치 확률 {((permanent.shinyWeight??MACHINE_SHINY_WEIGHT)/100).toFixed(2)}%</strong><small>{charmLevel} / {SHINY_CHARM_MAX}단계 · 지금부터 적용</small><button data-permanent-product="shinyCharm" disabled={blocked||charmLevel>=SHINY_CHARM_MAX||points<(charmPrice??Infinity)} onClick={()=>void send('buy','shinyCharm')}>{charmLevel>=SHINY_CHARM_MAX?'최대 강화 완료':`${charmLevel+1}단계 강화 · ${charmPrice.toLocaleString()}P`}</button></section>
  </div>
  </section>}
  {page==='eggs'&&<EggStationMenu permanent={permanent} points={points} blocked={blocked} spinning={spinning} dispensedKind={dispensedKind} unitPrice={unitPrice} hatchCost={hatchCost} hatchLabel={hatchLabel} onHatch={count=>void send('hatch','egg',count)} onRewardHatch={kind=>void send('hatch-reward','egg',1,undefined,false,kind)} onOdds={()=>setEggOdds(true)}/>}
 
  {result?.eggs?<EggHatchDialog result={result} entries={entries} onClose={()=>setResult(null)}/>:result&&<UpgradeCompleteDialog result={result} completion={completion} onClose={()=>setResult(null)}/>}
  {eggOdds&&<PokedexDialog hideHeading title="알 확률" className="permanent-dialog egg-odds-dialog" large returnFocus="[data-egg-odds-button]" onClose={()=>setEggOdds(false)}>
- <div className="egg-odds-list">{eggKinds.map(kind=><article key={kind} className={kind==='shiny'?'egg-odds-shiny':undefined}><EggVisual kind={kind}/><h3>{eggKindInfo[kind].name}</h3><strong>{(kind==='shiny'?MACHINE_SHINY_WEIGHT:machinePokemonWeights[kind])/100}%</strong>{kind==='shiny'&&<small>모든 등급 공통 · 별도 판정</small>}<p>{kind==='normal'?'일반 포켓몬 · 스타팅 · 600족':eggKindInfo[kind].description}</p></article>)}</div>
+ <div className="egg-odds-list">{eggKinds.map(kind=><article key={kind} className={kind==='shiny'?'egg-odds-shiny':undefined}><EggVisual kind={kind}/><h3>{eggKindInfo[kind].name}</h3><strong>{(kind==='shiny'?permanent.shinyWeight??MACHINE_SHINY_WEIGHT:machinePokemonWeights[kind])/100}%</strong>{kind==='shiny'&&<small>모든 등급 공통 · 별도 판정</small>}<p>{kind==='normal'?'일반 포켓몬 · 스타팅 · 600족':eggKindInfo[kind].description}</p></article>)}</div>
  <button data-initial-focus onClick={()=>setEggOdds(false)}>확인</button></PokedexDialog>}
  {page==='eggs'&&<button className={eggStyles.oddsButton} data-egg-utility data-egg-odds-button tabIndex={-1} aria-label="알 확률" disabled={blocked} onClick={()=>setEggOdds(true)}><kbd>Y</kbd>알 확률</button>}
  {page==='eggs'?<GameMenuBar context="eggs" controls={eggMenuControls}><div className={eggStyles.footerActions}><Link href="/" tabIndex={-1}>돌아가기</Link></div></GameMenuBar>:<footer className="permanent-page-footer"><span><kbd>X</kbd> 타이틀로 돌아가기</span><Link href="/" tabIndex={-1}>돌아가기</Link></footer>}

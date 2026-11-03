@@ -68,8 +68,9 @@ import {npcGimmick,npcSpecies,type NpcGimmick} from '../data/npc-gimmicks';
 import {normalNpcCategory,normalNpcGimmicksEnabled} from '../data/normal-mode-stages';
 import {megaStones,DYNAMAX_ITEM} from '../data/gimmicks';
 import {zCrystals} from '../data/z-crystals';
-import {defaultProfile,trainingOptions,validateProfile} from './training';
-import {trainingCost,statKeys,trainedStat,natures,type StatBlock,type IVGain,type MoveGain,type MoveSwap,type TrainingProfile,type TrainingView} from '../data/training';
+import {defaultProfile,trainingOptions,validateProfile,hiddenAbilities} from './training';
+import {HIDDEN_ABILITY_UNLOCK_PRICE,moveUnlockPrice} from '../data/growth-unlocks';
+import {trainingCost,evTotal,EV_CAPACITY,statKeys,trainedStat,natures,type StatBlock,type IVGain,type MoveGain,type MoveSwap,type TrainingProfile,type TrainingView} from '../data/training';
 
 export const AI_VERSION = 'tower-policy-v13';
 const favoriteSpecies=new Set(pokedexEntries().map(entry=>entry.species));
@@ -810,8 +811,49 @@ export class TowerStore {
     const unlocked=this.db.prepare('SELECT species FROM unlocks WHERE player_id=? ORDER BY rowid').all(owner) as {species:string}[];
     return unlocked.filter(({species})=>isCollectibleSpecies(species)).map(({species})=>{
       const saved=this.savedTraining(owner,species),forms=familyForms(species),base=defaultProfile(species);
-      const formOptions=forms.length?[{species,name:baseFormName(species,importedPokemonName(species)),spriteKey:String(separateForms[species]?.id??Showdown.Dex.species.get(species).num),moves:base.moves,settings:formTrainingSettings(trainingFormProfile(this.db,owner,species,saved.profile,species)),ability:base.ability,learnableMoves:trainingOptions(species).learnableMoves,selfMoves:profileLearnset(species).selfMoves,abilities:trainingOptions(species).abilities,baseStats:trainingOptions(species).baseStats,teraType:base.teraType!},...forms.map(([name,form])=>({species:name,name:form.name,spriteKey:String(form.id),moves:form.moves,settings:formTrainingSettings(trainingFormProfile(this.db,owner,species,saved.profile,name)),ability:form.ability,learnableMoves:trainingOptions(species,name).learnableMoves,selfMoves:profileLearnset(species,name).selfMoves,abilities:form.abilities,baseStats:form.baseStats,teraType:defaultProfile(species,name).teraType!,requiredItem:form.requiredItem}))]:undefined;
-      return {species,genders:genderOptions(species),...saved,...trainingOptions(species,saved.profile.forme),selfMoves:profileLearnset(species,saved.profile.forme).selfMoves,unlockedMoves:this.unlockedMoves(owner,species),...(formOptions?{formOptions}:{})};
+      const formOptions=forms.length?[{species,name:baseFormName(species,importedPokemonName(species)),spriteKey:String(separateForms[species]?.id??Showdown.Dex.species.get(species).num),moves:base.moves,settings:formTrainingSettings(trainingFormProfile(this.db,owner,species,saved.profile,species)),ability:base.ability,learnableMoves:trainingOptions(species).learnableMoves,selfMoves:profileLearnset(species).selfMoves,abilities:trainingOptions(species).abilities,hiddenAbilities:hiddenAbilities(species),baseStats:trainingOptions(species).baseStats,teraType:base.teraType!},...forms.map(([name,form])=>({species:name,name:form.name,spriteKey:String(form.id),moves:form.moves,settings:formTrainingSettings(trainingFormProfile(this.db,owner,species,saved.profile,name)),ability:form.ability,learnableMoves:trainingOptions(species,name).learnableMoves,selfMoves:profileLearnset(species,name).selfMoves,abilities:form.abilities,hiddenAbilities:hiddenAbilities(species,name),baseStats:form.baseStats,teraType:defaultProfile(species,name).teraType!,requiredItem:form.requiredItem}))]:undefined;
+      const growth=this.growthState(owner,species,saved.profile);
+      return {species,genders:genderOptions(species),...saved,...trainingOptions(species,saved.profile.forme),evCapacity:growth.capacity,hiddenAbilities:hiddenAbilities(species,saved.profile.forme),hiddenAbilityUnlocked:growth.hidden,selfMoves:profileLearnset(species,saved.profile.forme).selfMoves,unlockedMoves:this.unlockedMoves(owner,species),...(formOptions?{formOptions}:{})};
+    });
+  }
+  // Capacity and the hidden-ability unlock are stored per Pokemon. Investment or an ability already
+  // in the saved profile always counts, so older data can never end up below what it already has.
+  private growthState(owner:string,species:string,profile:TrainingProfile):{capacity:number;hidden:boolean} {
+    const row=this.db.prepare('SELECT ev_capacity,hidden_ability FROM pokemon_growth WHERE player_id=? AND species=?').get(owner,species) as {ev_capacity:number;hidden_ability:number}|undefined;
+    return {capacity:Math.min(EV_CAPACITY.total,Math.max(EV_CAPACITY.start,row?.ev_capacity??0,evTotal(profile.evs))),hidden:!!row?.hidden_ability||hiddenAbilities(species,profile.forme).includes(profile.ability)};
+  }
+  private saveGrowth(owner:string,species:string,capacity:number,hidden:boolean){
+    this.db.prepare('INSERT INTO pokemon_growth VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET ev_capacity=MAX(ev_capacity,excluded.ev_capacity),hidden_ability=MAX(hidden_ability,excluded.hidden_ability)').run(owner,species,capacity,hidden?1:0);
+  }
+  private spendGrowth(owner:string,cost:number){
+    if(!this.db.prepare('UPDATE players SET growth_points=growth_points-? WHERE id=? AND growth_points>=?').run(cost,owner,cost).changes)throw new BattleRequestError('성장 포인트가 부족합니다.',400);
+  }
+  private ownedPokemon(owner:string,species:string){
+    if(!isCollectibleSpecies(species)||!this.db.prepare('SELECT 1 FROM unlocks WHERE player_id=? AND species=?').get(owner,species))throw new BattleRequestError('해금한 포켓몬만 설정할 수 있습니다.',403);
+  }
+  // Hidden abilities are unlocked once per Pokemon (all of its forms) with growth points.
+  unlockHiddenAbility(owner:string,species:string) {
+    this.tx(()=>{
+      this.ownedPokemon(owner,species);
+      const saved=this.savedTraining(owner,species),state=this.growthState(owner,species,saved.profile);
+      const available=[species,...familyForms(species).map(([name])=>name)].some(name=>hiddenAbilities(species,name===species?undefined:name).length);
+      if(!available)throw new BattleRequestError('이 포켓몬에게는 숨겨진 특성이 없습니다.',400);
+      if(state.hidden)throw new BattleRequestError('이미 해금한 숨겨진 특성입니다.',409);
+      this.spendGrowth(owner,HIDDEN_ABILITY_UNLOCK_PRICE);
+      this.saveGrowth(owner,species,state.capacity,true);
+    });
+  }
+  // Permanent per-Pokemon move unlock. Shares move_unlocks with eggs and machines; once a move is
+  // unlocked here, equipping it among the 4 slots is free.
+  unlockMove(owner:string,species:string,move:unknown,forme?:unknown) {
+    this.tx(()=>{
+      this.ownedPokemon(owner,species);
+      if(typeof move!=='string'||(forme!==undefined&&typeof forme!=='string'))throw new BattleRequestError('해금할 기술을 선택하세요.',400);
+      const options=[trainingOptions(species),...(forme?[trainingOptions(species,forme)]:[])];
+      if(!options.some(option=>option.learnableMoves.includes(move)))throw new BattleRequestError('이 포켓몬이 배울 수 없는 기술입니다.',400);
+      if(this.unlockedMoves(owner,species).includes(move)||profileLearnset(species,forme).selfMoves.includes(move))throw new BattleRequestError('이미 해금한 기술입니다.',409);
+      this.spendGrowth(owner,moveUnlockPrice(move));
+      this.db.prepare('INSERT INTO move_unlocks VALUES (?,?,?)').run(owner,species,move);
     });
   }
   private unlockedMoves(owner:string,species:string):string[] {
@@ -857,11 +899,14 @@ export class TowerStore {
       const formChanged=profile.forme!==baseline.forme;
       if(run&&formChanged)throw new BattleRequestError('모습은 출발 전에 설정하세요.',400);
       const target=trainingFormProfile(this.db,owner,name,before.profile,profile.forme??name);
-      const cost=trainingCost(formChanged?{...baseline,ability:target.ability}:baseline,profile);
+      const capacity=this.growthState(owner,name,before.profile),cost=trainingCost(profile,capacity.capacity);
+      // Nature and ordinary abilities are free; only hidden abilities need their one-time unlock.
+      if(!capacity.hidden&&profile.ability!==baseline.ability&&profile.ability!==target.ability&&hiddenAbilities(name,profile.forme).includes(profile.ability))throw new BattleRequestError(`숨겨진 특성은 먼저 ${HIDDEN_ABILITY_UNLOCK_PRICE}P로 해금해야 합니다.`,400);
       const known=new Set([...before.unlockedMoves,...profileLearnset(name,profile.forme).selfMoves,...(run?runMachines(this.db,run.id):[])]);
       if(profile.moves.some(move=>!known.has(move)))throw new BattleRequestError('아직 해금하지 않은 기술입니다. 상대 포켓몬을 영입해 기술을 모으세요.',400);
       if(statKeys.some(stat=>profile.ivs[stat]!==baseline.ivs[stat]))throw new BattleRequestError('개체값은 상대 포켓몬 영입으로만 높일 수 있습니다.',400);
-      if(!this.db.prepare('UPDATE players SET growth_points=growth_points-? WHERE id=? AND growth_points>=?').run(cost,owner,cost).changes)throw new BattleRequestError('성장 포인트가 부족합니다.',400);
+      this.spendGrowth(owner,cost);
+      this.saveGrowth(owner,name,Math.max(capacity.capacity,evTotal(profile.evs)),capacity.hidden||hiddenAbilities(name,profile.forme).includes(profile.ability));
       saveTrainingForm(this.db,owner,name,before.profile,false);
       const permanentProfile=run?{...profile,ivs:{...before.profile.ivs},shiny:before.profile.shiny??false,moves:profile.moves.every(move=>before.unlockedMoves.includes(move))?profile.moves:before.profile.moves}:profile;
       saveTrainingForm(this.db,owner,name,permanentProfile);

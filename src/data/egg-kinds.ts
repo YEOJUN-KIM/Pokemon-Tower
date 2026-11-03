@@ -10,9 +10,9 @@ export function machinePokemonKind(roll:number):EggGrade{
  if(!Number.isInteger(roll)||roll<0||roll>=10000)throw Error('Invalid egg machine roll');
  return roll<machinePokemonWeights.normal?'normal':roll<machinePokemonWeights.normal+machinePokemonWeights.rare?'rare':'superRare';
 }
-export function machineShiny(roll:number):boolean{
+export function machineShiny(roll:number,extraWeight=0):boolean{
  if(!Number.isInteger(roll)||roll<0||roll>=10000)throw Error('Invalid shiny roll');
- return roll<MACHINE_SHINY_WEIGHT;
+ return roll<MACHINE_SHINY_WEIGHT+extraWeight;
 }
 export const eggKindInfo={
  normal:{name:'일반 알',description:'다양한 포켓몬과 새로운 기술을 수집',image:'/sprites/eggs/normal.png'},

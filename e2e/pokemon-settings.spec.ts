@@ -7,7 +7,7 @@ import {TRAINING_POINT_PRICE,type TrainingView} from '../src/data/training';
 
 async function fixture(context:BrowserContext){
  const owner='settings-'+randomBytes(12).toString('hex'),store=new TowerStore('.data/e2e.sqlite');
- store.ensurePlayer(owner);classicCollection(store,owner);store.db.prepare('UPDATE players SET growth_points=1000 WHERE id=?').run(owner);
+ store.ensurePlayer(owner);classicCollection(store,owner);store.db.prepare('UPDATE players SET growth_points=2000 WHERE id=?').run(owner);store.unlockHiddenAbility(owner,'Charizard');store.db.prepare('UPDATE players SET growth_points=1000 WHERE id=?').run(owner);
  store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();
  const auth=await new Accounts(store.db).register('set_'+randomBytes(8).toString('hex'),randomBytes(16).toString('hex'),owner,undefined);
  await context.addCookies([{name:'tower_auth',value:auth.token,url:'http://127.0.0.1:3001'}]);return {store,owner};
@@ -49,7 +49,7 @@ for(const width of [1280,390])test(`integrated settings, nested edits, limits, p
   // Child apply is a draft transaction until the existing save endpoint succeeds.
   const notSaved=(await (await page.request.get('/api/battle?view=collection')).json()).training.find((entry:TrainingView)=>entry.species==='Charizard');expect(notSaved.profile.evs.hp).toBe(0);
   await page.locator('[data-settings-save]').click();await expect(page.getByTestId('pokemon-settings').getByRole('status')).toHaveText('설정 저장 완료');
-  const saved=(await (await page.request.get('/api/battle?view=collection')).json()).training.find((entry:TrainingView)=>entry.species==='Charizard');expect(saved.profile.evs).toMatchObject({hp:32,atk:32,def:2,spa:0});expect(saved.profile.nature).toBe('Adamant');expect(saved.profile.ability).toBe('Solar Power');expect(saved.profile.teraType).toBe('Water');expect(saved.profile.gender).toBe(draftGender);if(replacementName)expect(saved.profile.moves[1]).toBe(replacementName);expect(store.view(owner).growthPoints).toBe(1000-66*TRAINING_POINT_PRICE-50-50);
+  const saved=(await (await page.request.get('/api/battle?view=collection')).json()).training.find((entry:TrainingView)=>entry.species==='Charizard');expect(saved.profile.evs).toMatchObject({hp:32,atk:32,def:2,spa:0});expect(saved.profile.nature).toBe('Adamant');expect(saved.profile.ability).toBe('Solar Power');expect(saved.profile.teraType).toBe('Water');expect(saved.profile.gender).toBe(draftGender);if(replacementName)expect(saved.profile.moves[1]).toBe(replacementName);expect(store.view(owner).growthPoints).toBe(1000-66*TRAINING_POINT_PRICE);
   expect(await page.evaluate(()=>document.documentElement.scrollHeight<=innerHeight&&document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   const dialogBox=(await page.getByTestId('pokemon-settings').boundingBox())!;expect(dialogBox.y).toBeGreaterThanOrEqual(0);expect(dialogBox.y+dialogBox.height).toBeLessThan(footerBox.y);for(const button of await page.locator('[data-settings-column],[data-settings-save]').all()){const box=(await button.boundingBox())!;expect(box.y).toBeGreaterThan(dialogBox.y);expect(box.y+box.height).toBeLessThan(dialogBox.y+dialogBox.height);}
   await page.screenshot({path:`test-results/pokemon-settings-${width}.png`});

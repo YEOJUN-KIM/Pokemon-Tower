@@ -131,6 +131,12 @@ function PokedexContent({entries,mode='collection',initialTower,onStart,startErr
     if(!response.ok)throw new Error(data.error ?? '설정을 저장하지 못했습니다.');
     setTower(data.tower);setTraining(data.training ?? []);await tutorial.refresh();
   }
+  async function unlockGrowth(body:Record<string,unknown>) {
+    const response=await fetch('/api/battle',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const data:BattleResponse=await response.json();
+    if(!response.ok)throw new Error(data.error ?? '해금하지 못했습니다.');
+    setTower(data.tower);setTraining(data.training ?? []);
+  }
   const searchQuery=preparePokemonNameQuery(query);
   const visible = indexed.filter(({entry,index}) => matchesPokemonNameIndex(index,searchQuery)
     && (!favoritesOnly || favorites.includes(entry.species))
@@ -244,7 +250,7 @@ function PokedexContent({entries,mode='collection',initialTower,onStart,startErr
     {formation&&partyMenu && <PokedexDialog title={`${current.name} 파티 메뉴`} onClose={()=>setPartyMenu(null)}><div className="dex-action-options"><button aria-label="파티에서 제외" data-initial-focus onClick={()=>{changeParty(party.filter(name=>name!==partyMenu));setPartyMenu(null);}}><b>01</b><span><strong>파티에서 제외</strong></span></button><button aria-label="취소" onClick={()=>setPartyMenu(null)}><b>02</b><span><strong>취소</strong></span></button></div></PokedexDialog>}
     {menu && <PokemonActions mode={mode} pokemonSpecies={current.species} gender={saved?.profile.gender} shiny={saved?.profile.shiny} entry={shownCurrent} canChoose={!!saved && party.length<3 && !party.includes(current.species)} canAdjust={!!saved} chosen={party.includes(current.species)} full={party.length>=3} onChoose={()=>{if(party.includes(current.species))changeParty(party.filter(name=>name!==current.species));else if(party.length<3){changeParty([...party,current.species]);if(party.length===2&&!activeRun)setConfirmStart(true);}setMenu(false);}} onAdjust={()=>{setMenu(false);setAdjusting(true);}} onInfo={()=>{setMenu(false);setInspecting(true);void tutorial.report('info-open',undefined,current.species);}} onClose={()=>setMenu(false)}/>}
 
-    {adjusting&&saved&&tower&&<PokemonSettings key={saved.species} entry={saved} pokemon={current} points={tower.growthPoints} onSave={saveTraining} returnFocus='.dex-card[aria-pressed="true"]' onClose={()=>setAdjusting(false)}/>}
+    {adjusting&&saved&&tower&&<PokemonSettings key={saved.species} entry={saved} pokemon={current} points={tower.growthPoints} onSave={saveTraining} onUnlock={unlockGrowth} returnFocus='.dex-card[aria-pressed="true"]' onClose={()=>setAdjusting(false)}/>}
     <GameMenuBar controls={focusZone==='filters'?[{key:'← / →',label:'항목 이동'},{key:'Enter / Z',label:'선택'},{key:'↓',label:'목록'}]:focusZone==='rule'?[{key:'Enter / Z',label:'룰 선택'},{key:'↓',label:'검색'}]:formation&&party.length===3&&!activeRun?[{key:'Enter',label:'도전 시작'},{key:'Z',label:'선택·해제'},{key:'X',label:'뒤로'}]:[{key:'Enter / Z',label:'선택'},{key:'X',label:'뒤로'}]}>{formation&&tutorial.state?.step===TutorialStep.StartBattle&&party.length===3&&!confirmStart&&<button data-tutorial="start-battle" onClick={openStart}>도전 시작</button>}<span className="dex-footer-favorite" data-dex-favorite-guide><kbd>F</kbd> ★ 즐겨찾기</span></GameMenuBar>
   </main>;
 }

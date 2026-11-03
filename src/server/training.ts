@@ -1,7 +1,7 @@
 import Showdown from 'pokemon-showdown';
 import {isTeraType,teraTypesForSpecies} from '../data/tera';
 import {pokemonSets,trainedSet} from '../data/teams';
-import {statKeys,natures,type StatBlock,type TrainingProfile} from '../data/training';
+import {statKeys,natures,evTotal,EV_CAPACITY,type StatBlock,type TrainingProfile} from '../data/training';
 import {moveLearnsets,startingMoves} from './move-learnsets';
 import {selectedForm} from '../data/selectable-forms';
 import {FORMAT} from '../battle/run';
@@ -22,6 +22,12 @@ export function trainingOptions(name:string,forme?:string) {
   const learnableMoves=moveLearnsets[name].legalMoves.filter(move=>!validator.validateSet({...structuredClone(base),moves:[move]},{}));
   const options={abilities,learnableMoves,baseStats:{...Showdown.Dex.species.get(name).baseStats}};optionsCache.set(key,options);return options;
 }
+// Ability slots 0/1 are ordinary; anything else (hidden/special slot) needs a per-Pokemon unlock.
+export function hiddenAbilities(name:string,forme?:string):string[] {
+  const species=Showdown.Dex.species.get(forme??name);if(!species.exists)return [];
+  const ordinary=new Set([species.abilities[0],species.abilities[1]]);
+  return trainingOptions(name,forme).abilities.filter(ability=>!ordinary.has(ability));
+}
 export function validateProfile(name:string,value:unknown):TrainingProfile {
   if(!Object.hasOwn(pokemonSets,name) || !value || typeof value!=='object')throw new BattleRequestError('포켓몬 설정이 올바르지 않습니다.',400);
   const profile=value as TrainingProfile;
@@ -32,7 +38,7 @@ export function validateProfile(name:string,value:unknown):TrainingProfile {
   for(const [block,max] of [[profile.ivs,31],[profile.evs,32]] as const) {
     if(!block || statKeys.some(key=>!Number.isSafeInteger(block[key]) || block[key]<0 || block[key]>max))throw new BattleRequestError('개체값은 0~31, 능력 포인트는 각 0~32여야 합니다.',400);
   }
-  if(statKeys.reduce((sum,key)=>sum+profile.evs[key],0)>66)throw new BattleRequestError('능력 포인트는 총 66까지 배분할 수 있습니다.',400);
+  if(evTotal(profile.evs)>EV_CAPACITY.total)throw new BattleRequestError('능력 포인트는 총 66까지 배분할 수 있습니다.',400);
   if(!natures.some(nature=>nature.id===profile.nature))throw new BattleRequestError('올바른 성격을 선택하세요.',400);
   const options=trainingOptions(name,profile.forme);
   if(!Array.isArray(profile.moves) || profile.moves.length<1 || profile.moves.length>4 || new Set(profile.moves).size!==profile.moves.length || profile.moves.some(move=>!options.learnableMoves.includes(move)))throw new BattleRequestError('이 포켓몬이 배울 수 있는 서로 다른 기술을 1~4개를 선택하세요.',400);

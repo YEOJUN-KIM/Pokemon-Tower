@@ -48,11 +48,13 @@ test('Paldean Tauros has one dex entry and three shared training choices',()=>{
 test('regional training and ownership stay independent from the original, including in real battles',async()=>{
  const store=new TowerStore(':memory:');try{
   store.ensurePlayer('regional');store.db.prepare('INSERT INTO unlocks VALUES (?,?)').run('regional','Golem-Alola');
-  store.db.prepare('UPDATE players SET growth_points=100 WHERE id=?').run('regional');
+  store.db.prepare('UPDATE players SET growth_points=1100 WHERE id=?').run('regional');
   assert.ok(!store.view('regional').unlocked.includes('Golem'));
   store.db.prepare('INSERT INTO unlocks VALUES (?,?)').run('regional','Golem');
   const before=store.trainingCollection('regional').find(entry=>entry.species==='Golem')!.profile;
   const regional=store.trainingCollection('regional').find(entry=>entry.species==='Golem-Alola')!;
+  assert.throws(()=>store.train('regional','Golem-Alola',regional.revision,{...regional.profile,nature:'Adamant',ability:'Galvanize'}),/숨겨진 특성/);
+  store.unlockHiddenAbility('regional','Golem-Alola');
   store.train('regional','Golem-Alola',regional.revision,{...regional.profile,nature:'Adamant',ability:'Galvanize'});
   const after=store.trainingCollection('regional');
   assert.deepEqual(after.find(entry=>entry.species==='Golem')!.profile,before);

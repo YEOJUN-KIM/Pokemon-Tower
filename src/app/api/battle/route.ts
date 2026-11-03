@@ -78,6 +78,11 @@ export async function POST(request: NextRequest) {
       service.store.train(player,body.species,body.revision,body.profile);
       return NextResponse.json({battle:null,tower:service.store.view(player),training:service.store.trainingCollection(player)},{headers});
     }
+    if((body.type==='unlock-ability'||body.type==='unlock-move') && typeof body.species==='string') {
+      if(body.type==='unlock-ability')service.store.unlockHiddenAbility(player,body.species);
+      else service.store.unlockMove(player,body.species,body.move,body.forme);
+      return NextResponse.json({battle:null,tower:service.store.view(player),training:service.store.trainingCollection(player)},{headers});
+    }
     if(body.type==='reroll-shop' && typeof body.runId==='string' && Number.isSafeInteger(body.floor)) {service.store.rerollShop(player,body.runId,body.floor,body.kind,body.revision);return NextResponse.json(await service.state(player),{headers});}
     if(body.type==='purchase-tera' && typeof body.runId==='string' && Number.isSafeInteger(body.floor)){service.store.purchaseTera(player,body.runId,body.floor);return NextResponse.json(await service.state(player),{headers});}
     if(body.type==='purchase-vitamin' && typeof body.runId==='string' && Number.isSafeInteger(body.floor)) {service.store.purchaseVitamin(player,body.runId,body.floor,body.stat,body.species);return NextResponse.json(await service.state(player),{headers});}

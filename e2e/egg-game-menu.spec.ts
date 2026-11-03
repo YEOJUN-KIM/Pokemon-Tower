@@ -8,7 +8,7 @@ async function fixture(context:import('@playwright/test').BrowserContext){
  store.db.prepare("DELETE FROM auth_limits WHERE key='signup'").run();
  const auth=await new Accounts(store.db).register(`em_${id}`,'egg-menu-test-password',owner,undefined);
  store.ensurePlayer(owner);store.db.prepare('UPDATE players SET growth_points=20000 WHERE id=?').run(owner);
- store.db.prepare('INSERT INTO permanent_research VALUES (?,?,?)').run(owner,'eggFocus',1);
+ store.db.prepare('INSERT INTO permanent_research VALUES (?,?,?)').run(owner,'shinyCharm',1);
  store.db.prepare('INSERT INTO permanent_upgrades(player_id,egg_tickets) VALUES (?,?)').run(owner,2);
  store.db.prepare('INSERT INTO reward_egg_tickets VALUES (?,?,?)').run(owner,'superRare',1);
  store.db.prepare('INSERT INTO reward_egg_tickets VALUES (?,?,?)').run(owner,'shiny',1);
@@ -37,7 +37,7 @@ test('basic-only cursor, odds, tickets and 1/10 draws preserve payment and saved
   await page.keyboard.press('z');const response=await request;expect(response.ok()).toBe(true);expect(response.request().postDataJSON()).toMatchObject({action:'hatch',count:10});expect(response.request().postDataJSON()).not.toHaveProperty('tuning');
   await closeHatch(page);expect(store.view(owner).growthPoints).toBe(18400);expect(store.view(owner).permanent?.eggTickets).toBe(0);
   await page.keyboard.press('ArrowLeft');const single=page.waitForResponse(r=>r.url().includes('/api/battle')&&r.request().method()==='POST');await page.keyboard.press('Enter');expect((await single).ok()).toBe(true);await closeHatch(page);expect(store.view(owner).growthPoints).toBe(18200);
-  await page.reload();await expect(page.getByTestId('permanent-wallet')).toHaveText('18,200P');expect(store.view(owner).permanent?.eggFocusLevel).toBe(1);
+  await page.reload();await expect(page.getByTestId('permanent-wallet')).toHaveText('18,200P');expect(store.view(owner).permanent?.shinyCharmLevel).toBe(1);
   await page.keyboard.press('x');await expect(page).toHaveURL(/\/$/);
  }finally{store.close();}
 });

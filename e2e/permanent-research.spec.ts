@@ -19,7 +19,8 @@ for(const width of [1280,390])test(`allowance purchase and basic eggs at ${width
   await complete.getByRole('button',{name:'확인',exact:true}).click();await expect(allowance).toContainText('시작 자금 150코인');await expect(allowance.getByRole('button')).toBeFocused();
   await expect(page.getByRole('heading',{name:'알 탐색 연구',exact:true})).toHaveCount(0);
   await expect(page.locator('[data-permanent-product="eggFocus"]')).toHaveCount(0);
-  await expect(page.locator('.permanent-products section')).toHaveCount(3);
+  await expect(page.locator('.permanent-products section')).toHaveCount(4);
+  const charm=page.locator('[data-shiny-charm]');await expect(charm.getByRole('heading',{name:'빛나는 부적',exact:true})).toBeVisible();await expect(charm).toContainText('0.24%');
   await page.reload();await expect(page.getByTestId('permanent-wallet')).toHaveText('19,200P');
   await page.keyboard.press('x');await expect(page).toHaveURL(/\/$/);await page.getByRole('link',{name:'알뽑기',exact:true}).click();await expect(page).toHaveURL(/\/eggs$/);
   await expect(page.getByRole('button',{name:'1회 뽑기 · 200P',exact:true})).toBeEnabled();await expect(page.getByRole('tablist')).toHaveCount(0);

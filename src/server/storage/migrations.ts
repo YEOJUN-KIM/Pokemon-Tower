@@ -1,8 +1,8 @@
 import type {DatabaseSync} from 'node:sqlite';
 import {schema} from '../schema';
-import {statKeys,type StatBlock,type TrainingProfile} from '../../data/training';
+import {statKeys,evTotal,EV_CAPACITY,type StatBlock,type TrainingProfile} from '../../data/training';
 import {pokemonSets} from '../../data/teams';
-import {defaultProfile} from '../training';
+import {defaultProfile,hiddenAbilities} from '../training';
 import {transaction} from './transaction';
 import {saveTrainingForm} from './form-training';
 import {familyForms} from '../../data/selectable-forms';
@@ -13,7 +13,7 @@ export function initializeTowerDatabase(db:DatabaseSync,repairArchivedOwnership:
     db.exec('PRAGMA foreign_keys = ON; PRAGMA journal_mode = WAL; PRAGMA busy_timeout = 5000;');
     const version = db.prepare('PRAGMA user_version').get() as {user_version: number};
     const eventHadOrder=(db.prepare('PRAGMA table_info(run_events)').all() as {name:string}[]).some(c=>c.name==='encounter_order');
-    if (version.user_version > 48) throw new Error('Unsupported database schema');
+    if (version.user_version > 49) throw new Error('Unsupported database schema');
     // SQLite requires foreign keys disabled outside the transaction while rebuilding a parent table.
     if(version.user_version<43)db.exec('PRAGMA foreign_keys=OFF');
     try {transaction(db,() => {
@@ -182,6 +182,21 @@ export function initializeTowerDatabase(db:DatabaseSync,repairArchivedOwnership:
           );
           INSERT OR IGNORE INTO run_trainer_equipment
             SELECT run_id,product FROM shop_receipts WHERE kind='items' AND buyer IS NULL AND product IN ('Dynamax Band','Tera Orb');`);
+      }
+      if(version.user_version<49){
+        // Research: eggFocus becomes the shiny charm, keeping each player's level.
+        const research=(db.prepare("SELECT sql FROM sqlite_master WHERE name='permanent_research'").get() as {sql:string}).sql;
+        if(research.includes('eggFocus')){
+          db.exec(`CREATE TABLE permanent_research_v49(player_id TEXT NOT NULL REFERENCES players(id),product TEXT NOT NULL CHECK(product IN ('allowance','shinyCharm')),level INTEGER NOT NULL CHECK(level BETWEEN 1 AND 5),PRIMARY KEY(player_id,product)) STRICT;
+            INSERT INTO permanent_research_v49 SELECT player_id,CASE product WHEN 'eggFocus' THEN 'shinyCharm' ELSE product END,level FROM permanent_research;
+            DROP TABLE permanent_research; ALTER TABLE permanent_research_v49 RENAME TO permanent_research;`);
+        }
+        // Capacity never drops below what a Pokemon already has invested; a hidden ability in use stays unlocked.
+        for(const row of db.prepare('SELECT player_id,species,profile FROM pokemon_training').all() as {player_id:string;species:string;profile:string}[]){
+          const profile=JSON.parse(row.profile) as TrainingProfile,total=Math.min(EV_CAPACITY.total,evTotal(profile.evs??{} as StatBlock));
+          let hidden=0;try{hidden=hiddenAbilities(row.species,profile.forme).includes(profile.ability)?1:0;}catch{/* species removed from the roster: nothing to unlock */}
+          if(total||hidden)db.prepare('INSERT INTO pokemon_growth VALUES (?,?,?,?) ON CONFLICT(player_id,species) DO UPDATE SET ev_capacity=MAX(ev_capacity,excluded.ev_capacity),hidden_ability=MAX(hidden_ability,excluded.hidden_ability)').run(row.player_id,row.species,Math.max(total,EV_CAPACITY.start),hidden);
+        }
       }
     });} finally {db.exec('PRAGMA foreign_keys=ON');}
 }

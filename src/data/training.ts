@@ -24,8 +24,8 @@ export function natureLabel(id:string) {
 // evs stores stat points for new profiles; unmarked snapshots retain legacy EV rules.
 export type TrainingProfile={forme?:string;gender?:import('./gender').PokemonGender;shiny?:boolean;ivs:StatBlock;evs:StatBlock;moves:string[];ability:string;nature:string;teraType?:import('./tera').TeraType;statSystem?:'points';runBonuses?:Partial<StatBlock>};
 export type FormTrainingSettings={moves:string[];ability:string;teraType:import('./tera').TeraType};
-export type FormOption={species:string;name:string;spriteKey:string;moves:string[];ability:string;abilities:string[];baseStats:StatBlock;teraType:string;requiredItem?:string;settings?:FormTrainingSettings;learnableMoves?:string[];selfMoves?:string[]};
-export type TrainingView={formOptions?:FormOption[];genders?:import('./gender').PokemonGender[];species:string;profile:TrainingProfile;revision:number;abilities:string[];learnableMoves:string[];selfMoves:string[];unlockedMoves:string[];baseStats:StatBlock};
+export type FormOption={species:string;name:string;spriteKey:string;moves:string[];ability:string;abilities:string[];baseStats:StatBlock;teraType:string;requiredItem?:string;settings?:FormTrainingSettings;learnableMoves?:string[];selfMoves?:string[];hiddenAbilities?:string[]};
+export type TrainingView={formOptions?:FormOption[];genders?:import('./gender').PokemonGender[];species:string;profile:TrainingProfile;revision:number;abilities:string[];learnableMoves:string[];selfMoves:string[];unlockedMoves:string[];baseStats:StatBlock;evCapacity:number;hiddenAbilities:string[];hiddenAbilityUnlocked:boolean};
 export function trainedStat(base:number,iv:number,points:number,key:StatKey,natureId:string) {
   if(key==='hp' && base===1)return 1;
   const neutral=base+Math.floor(iv/2)+points+(key==='hp' ? 60 : 5);
@@ -37,8 +37,16 @@ export type MoveSwap={move:string;slot:number};
 export type MoveGain={species:string;moves:string[];equipped?:{move:string;replaced:string;slot:number}};
 export const TRAINING_POINT_PRICE=8;
 export const INITIAL_GROWTH_POINTS=TRAINING_POINT_PRICE*32;
-export function trainingCost(before:TrainingProfile,after:TrainingProfile) {
-  return statKeys.reduce((cost,key)=>cost+Math.max(0,after.evs[key]-before.evs[key])*TRAINING_POINT_PRICE,0)
-    +(after.ability!==before.ability ? 50 : 0)
-    +(after.nature!==before.nature ? 50 : 0);
+// Permanent growth points only raise a Pokemon's stat-point capacity. Moving points
+// between stats inside the capacity it already owns is free. Provisional values.
+export const EV_CAPACITY={start:0,perStat:32,total:66,tiers:[{upTo:66,price:TRAINING_POINT_PRICE}]} as const;
+export function evTotal(evs:StatBlock){return statKeys.reduce((sum,key)=>sum+evs[key],0);}
+export function evCapacityCost(from:number,to:number) {
+  let cost=0,floor=0;
+  for(const tier of EV_CAPACITY.tiers){cost+=Math.max(0,Math.min(to,tier.upTo)-Math.max(from,floor))*tier.price;floor=tier.upTo;}
+  return cost;
+}
+// Cost of saving `after` for a Pokemon that already owns `capacity` points.
+export function trainingCost(after:TrainingProfile,capacity:number) {
+  return evCapacityCost(capacity,evTotal(after.evs));
 }
